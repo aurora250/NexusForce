@@ -809,8 +809,8 @@ TEST(MemoryPoolAllocationExtended, OversizedRequestsAreRejectedWithoutMapping) {
     EXPECT_EQ(pool.try_allocate(limit + 4096), nullptr);
     EXPECT_EQ(pool.try_allocate(static_cast<size_t>(1) << 47), nullptr);
     EXPECT_EQ(pool.try_allocate(static_cast<size_t>(-1)), nullptr);
-    EXPECT_THROW(pool.allocate(limit + 1), allocate_exception);
-    EXPECT_THROW(pool.allocate(static_cast<size_t>(-1)), allocate_exception);
+    EXPECT_THROW((void) pool.allocate(limit + 1), allocate_exception);
+    EXPECT_THROW((void) pool.allocate(static_cast<size_t>(-1)), allocate_exception);
     EXPECT_EQ(pool.stats().mapped_bytes, 0U);
     EXPECT_EQ(pool.stats().os_map_calls, 0U);
     EXPECT_EQ(pool.stats().active_bytes, 0U);

@@ -379,20 +379,16 @@ install(EXPORT NexusForceTargets
         DESTINATION ${INSTALL_CONFIGDIR}
 )
 
-# Windows 上安装树必须自带运行时依赖：加载器不搜索其他安装目录，NFRS 与下游消费者的
-# 可执行文件都依赖这些 DLL 与被加载模块同目录。
 nexusforce_install_runtime_dependencies(NexusForce)
 
 install(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/docs/ai/api_index.jsonl
-        DESTINATION ${CMAKE_INSTALL_DATADIR}/ai
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/
 )
 
-# License texts must travel with binary distributions: the MIT LICENSE alone does
-# not satisfy the attribution terms of the ported and linked third-party code.
 install(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE
         ${CMAKE_CURRENT_SOURCE_DIR}/THIRD_PARTY_NOTICES.md
-        DESTINATION ${CMAKE_INSTALL_DATADIR}/NexusForce
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/
 )
 

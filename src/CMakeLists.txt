@@ -458,7 +458,10 @@ if(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE)
     add_library(NexusForceMemoryPoolOverrideStatic STATIC $<TARGET_OBJECTS:NexusForceMemoryPoolOverride>)
     target_link_libraries(NexusForceMemoryPoolOverrideStatic PUBLIC NexusForce::NexusForce)
     target_compile_definitions(NexusForceMemoryPoolOverrideStatic INTERFACE NEFORCE_USING_MEMORY_POOL_OVERRIDE)
-    set_target_properties(NexusForceMemoryPoolOverrideStatic PROPERTIES FOLDER "src")
+
+    set_target_properties(NexusForceMemoryPoolOverrideStatic PROPERTIES
+            FOLDER "src"
+            DEBUG_POSTFIX "d")
 endif()
 
 # 安装库文件

@@ -245,6 +245,18 @@ jobs:
             done
           fi
 
+          pool_override=$(sed -n 's/^set(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE \(.*\))$/\1/p' \
+                            "$NF_PREFIX/lib/cmake/NexusForce/NexusForceConfig.cmake")
+          if [ "$pool_override" = "ON" ]; then
+            if [ "$RUNNER_OS" = "Windows" ]; then
+              require "$NF_PREFIX/lib/NexusForceMemoryPoolOverrideStatic.lib"
+              require "$NF_PREFIX/lib/NexusForceMemoryPoolOverrideStaticd.lib"
+            else
+              require "$NF_PREFIX/lib/libNexusForceMemoryPoolOverrideStatic.a"
+              require "$NF_PREFIX/lib/libNexusForceMemoryPoolOverrideStaticd.a"
+            fi
+          fi
+
           if [ "$RUNNER_OS" = "Windows" ]; then
             require "$NF_PREFIX/bin/NFRS.exe"
             require "$NF_PREFIX/bin/NexusForce.dll"
