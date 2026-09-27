@@ -383,12 +383,11 @@ nexusforce_install_runtime_dependencies(NexusForce)
 
 install(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/docs/ai/api_index.jsonl
-        DESTINATION ${CMAKE_INSTALL_DATADIR}/
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/ai
 )
 
 install(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE
         ${CMAKE_CURRENT_SOURCE_DIR}/THIRD_PARTY_NOTICES.md
-        DESTINATION ${CMAKE_INSTALL_DATADIR}/
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/NexusForce
 )
-
