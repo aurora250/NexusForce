@@ -93,7 +93,7 @@ TEST(RangesTest, FilterViewBase) {
     namespace rv = ranges::views;
     vector<int> vec = {1, 2, 3, 4};
     auto fv = vec | rv::filter([](int x) { return x > 1; });
-    auto base = fv.base();
+    auto base = fv.base().base();
     ASSERT_EQ(base.size(), 4);
     ASSERT_EQ(base[0], 1);
     ASSERT_EQ(base[3], 4);
@@ -173,7 +173,7 @@ TEST(RangesTest, TransformViewBase) {
     namespace rv = ranges::views;
     vector<int> vec = {1, 2, 3};
     auto tv = vec | rv::transform([](int x) { return x * 10; });
-    auto base = tv.base();
+    auto base = tv.base().base();
     ASSERT_EQ(base.size(), 3);
     ASSERT_EQ(base[2], 3);
 }
@@ -231,7 +231,7 @@ TEST(RangesTest, TakeViewBase) {
     namespace rv = ranges::views;
     vector<int> vec = {1, 2, 3, 4, 5};
     auto tv = vec | rv::take(3);
-    auto base = tv.base();
+    auto base = tv.base().base();
     ASSERT_EQ(base.size(), 5);
 }
 
@@ -262,7 +262,7 @@ TEST(RangesTest, TakeWhileBase) {
     namespace rv = ranges::views;
     vector<int> vec = {1, 2, 3, 4, 5};
     auto twv = vec | rv::take_while([](int x) { return x < 4; });
-    auto base = twv.base();
+    auto base = twv.base().base();
     ASSERT_EQ(base.size(), 5);
 }
 
@@ -305,7 +305,7 @@ TEST(RangesTest, DropViewBase) {
     namespace rv = ranges::views;
     vector<int> vec = {1, 2, 3, 4, 5};
     auto dv = vec | rv::drop(2);
-    auto base = dv.base();
+    auto base = dv.base().base();
     ASSERT_EQ(base.size(), 5);
 }
 
@@ -348,7 +348,7 @@ TEST(RangesTest, DropWhileBase) {
     namespace rv = ranges::views;
     vector<int> vec = {1, 2, 3, 4, 5};
     auto dwv = vec | rv::drop_while([](int x) { return x < 3; });
-    auto base = dwv.base();
+    auto base = dwv.base().base();
     ASSERT_EQ(base.size(), 5);
 }
 
@@ -379,7 +379,7 @@ TEST(RangesTest, ReverseViewBase) {
     namespace rv = ranges::views;
     vector<int> vec = {1, 2, 3, 4};
     auto rv_view = vec | rv::reverse();
-    auto base = rv_view.base();
+    auto base = rv_view.base().base();
     ASSERT_EQ(base.size(), 4);
 }
 
@@ -500,7 +500,7 @@ TEST(RangesTest, JoinViewBase) {
     namespace rv = ranges::views;
     vector<vector<int>> nested = {{1}, {2, 3}};
     auto jv = nested | rv::join();
-    auto base = jv.base();
+    auto base = jv.base().base();
     ASSERT_EQ(base.size(), 2);
 }
 
@@ -582,7 +582,7 @@ TEST(RangesTest, CommonViewBase) {
     vector<int> vec = {1, 2, 3};
     auto fv = vec | rv::filter([](int x) { return x > 1; });
     auto cv = fv | rv::common();
-    auto base = cv.base();
+    auto base = cv.base().base();
     ASSERT_EQ(base.size(), 3);
 }
 
@@ -839,13 +839,20 @@ TEST(RangesTest, PipeSyntaxMultipleAdaptors) {
 }
 
 TEST(RangesTest, ViewDefaultConstruction) {
-    ranges::filter_view<vector<int>, function<bool(int)>> fv;
-    ranges::transform_view<vector<int>, function<int(int)>> tv;
-    ranges::take_view<vector<int>> tkv;
-    ranges::drop_view<vector<int>> dv;
-    ranges::reverse_view<vector<int>> rv;
-    ranges::join_view<vector<vector<int>>> jv;
+    using ref_t = ranges::ref_view<vector<int>>;
+    ranges::filter_view<ref_t, function<bool(int)>> fv;
+    ranges::transform_view<ref_t, function<int(int)>> tv;
+    ranges::take_view<ref_t> tkv;
+    ranges::drop_view<ref_t> dv;
+    ranges::reverse_view<ref_t> rv;
+    ranges::join_view<ranges::ref_view<vector<vector<int>>>> jv;
     SUCCEED();
+}
+
+TEST(RangesTest, ContainersAreNotViews) {
+    static_assert(!ranges::View<vector<int>>);
+    static_assert(ranges::View<ranges::ref_view<vector<int>>>);
+    static_assert(ranges::View<ranges::owning_view<vector<int>>>);
 }
 
 TEST(RangesTest, FilterIteratorEqualityWithDifferentSentinel) {
@@ -1260,6 +1267,523 @@ TEST(RangesTest, CountedAdaptorTwoArgs) {
     ASSERT_EQ(result.size(), 2);
     ASSERT_EQ(result[0], 10);
     ASSERT_EQ(result[1], 20);
+}
+
+TEST(RangesTest, AllSelectsReferenceOrOwningView) {
+    static_assert(is_same_v<decltype(ranges::all(declval<vector<int>&>())), ranges::ref_view<vector<int>>>);
+    static_assert(is_same_v<decltype(ranges::all(declval<const vector<int>&>())), ranges::ref_view<const vector<int>>>);
+    static_assert(is_same_v<decltype(ranges::all(declval<vector<int>&&>())), ranges::owning_view<vector<int>>>);
+}
+
+TEST(RangesTest, RefViewIsUsableForContainers) {
+    vector<int> vec = {1, 2, 3, 4};
+    ranges::ref_view<vector<int>> rv_view{vec};
+    ASSERT_EQ(rv_view.size(), 4U);
+    ASSERT_FALSE(rv_view.empty());
+    ASSERT_EQ(rv_view.base()[0], 1);
+    ASSERT_EQ(*rv_view.begin(), 1);
+}
+
+TEST(RangesTest, OwningViewIsMovable) {
+    static_assert(!is_copy_constructible_v<ranges::owning_view<vector<int>>>);
+    static_assert(is_move_constructible_v<ranges::owning_view<vector<int>>>);
+    static_assert(is_move_assignable_v<ranges::owning_view<vector<int>>>);
+
+    auto owned = ranges::all(vector<int>{1, 2, 3});
+    auto moved = _NEFORCE move(owned);
+    vector<int> result;
+    for (auto x: moved) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result.size(), 3);
+    ASSERT_EQ(result[2], 3);
+}
+
+TEST(RangesTest, LvaluePipeDoesNotOwnTheSource) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3};
+    auto v = vec | rv::filter([](int x) { return x > 0; });
+    vec[1] = 42;
+    vec.push_back(7);
+    vector<int> result;
+    for (auto x: v) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result.size(), 4);
+    ASSERT_EQ(result[1], 42);
+    ASSERT_EQ(result[3], 7);
+}
+
+TEST(RangesTest, RvaluePipeOwnsTheSource) {
+    namespace rv = ranges::views;
+    auto v = vector<int>{1, 2, 3} | rv::filter([](int x) { return x > 1; });
+    vector<int> result;
+    for (auto x: v) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result.size(), 2);
+    ASSERT_EQ(result[0], 2);
+    ASSERT_EQ(result[1], 3);
+}
+
+TEST(RangesTest, SizedViewProvidesExactSize) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    ASSERT_EQ((vec | rv::take(3)).size(), 3U);
+    ASSERT_EQ((vec | rv::take(9)).size(), 5U);
+    ASSERT_EQ((vec | rv::drop(2)).size(), 3U);
+    ASSERT_EQ((vec | rv::drop(9)).size(), 0U);
+    ASSERT_EQ((vec | rv::transform([](int x) { return x * 2; })).size(), 5U);
+    ASSERT_EQ((vec | rv::reverse()).size(), 5U);
+}
+
+TEST(RangesTest, SizedViewChainsRemainSized) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5, 6};
+    auto v = vec | rv::transform([](int x) { return x + 1; }) | rv::drop(1) | rv::take(3);
+    ASSERT_EQ(v.size(), 3U);
+    long sum = 0;
+    for (auto x: v) {
+        sum += x;
+    }
+    ASSERT_EQ(sum, 3 + 4 + 5);
+}
+TEST(RangesTest, DistinctAdaptorRemovesDuplicates) {
+    namespace rv = ranges::views;
+    vector<int> vec = {3, 1, 3, 2, 1};
+    vector<int> result;
+    for (auto x: vec | rv::distinct()) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result.size(), 3U);
+    ASSERT_EQ(result[0], 3);
+    ASSERT_EQ(result[2], 2);
+}
+
+TEST(RangesTest, DistinctByAdaptorUsesKey) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    size_t total = 0;
+    for (auto x: vec | rv::distinct_by([](int value) { return value % 2; })) {
+        (void) x;
+        ++total;
+    }
+    ASSERT_EQ(total, 2U);
+}
+
+TEST(RangesTest, OrderByAdaptorSorts) {
+    namespace rv = ranges::views;
+    vector<int> vec = {5, 3, 9, 1};
+    vector<int> result;
+    for (auto x: vec | rv::order_by([](int value) { return value; })) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result.size(), 4U);
+    ASSERT_EQ(result[0], 1);
+    ASSERT_EQ(result[3], 9);
+}
+
+TEST(RangesTest, OrderByDescendingAdaptorSorts) {
+    namespace rv = ranges::views;
+    vector<int> vec = {5, 3, 9, 1};
+    auto view = vec | rv::order_by_descending([](int value) { return value; });
+    ASSERT_EQ(view.size(), 4U);
+    ASSERT_EQ(*view.begin(), 9);
+}
+
+TEST(RangesTest, ThenByAdaptorKeepsPrimaryKeyDominant) {
+    namespace rv = ranges::views;
+    vector<int> vec = {12, 21, 11, 22};
+    vector<int> result;
+    for (auto x:
+         vec | rv::order_by([](int value) { return value / 10; }) | rv::then_by([](int value) { return value % 10; })) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result.size(), 4U);
+    ASSERT_EQ(result[0], 11);
+    ASSERT_EQ(result[1], 12);
+    ASSERT_EQ(result[2], 21);
+    ASSERT_EQ(result[3], 22);
+}
+
+TEST(RangesTest, ThenByDescendingAdaptorReversesSecondaryKey) {
+    namespace rv = ranges::views;
+    vector<int> vec = {12, 21, 11, 22};
+    vector<int> result;
+    for (auto x: vec | rv::order_by([](int value) { return value / 10; }) |
+                         rv::then_by_descending([](int value) { return value % 10; })) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result[0], 12);
+    ASSERT_EQ(result[1], 11);
+    ASSERT_EQ(result[2], 22);
+    ASSERT_EQ(result[3], 21);
+}
+
+TEST(RangesTest, GroupByAdaptorGroupsEqualKeys) {
+    namespace rv = ranges::views;
+    vector<int> vec = {3, 1, 3, 2, 1};
+    vector<int> keys;
+    vector<size_t> sizes;
+    for (auto group: vec | rv::group_by([](int value) { return value; })) {
+        keys.push_back(group.key());
+        size_t count = 0;
+        for (auto x: group) {
+            (void) x;
+            ++count;
+        }
+        sizes.push_back(count);
+    }
+    ASSERT_EQ(keys.size(), 3U);
+    ASSERT_EQ(keys[0], 1);
+    ASSERT_EQ(keys[2], 3);
+    ASSERT_EQ(sizes[0], 2U);
+    ASSERT_EQ(sizes[1], 1U);
+}
+
+TEST(RangesTest, GroupByAdaptorWithoutKeyUsesElement) {
+    namespace rv = ranges::views;
+    vector<int> vec = {2, 2, 5};
+    size_t groups = 0;
+    for (auto group: vec | rv::group_by()) {
+        (void) group;
+        ++groups;
+    }
+    ASSERT_EQ(groups, 2U);
+}
+
+TEST(RangesTest, ChunkAdaptorSplitsWithPartialTail) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    auto view = vec | rv::chunk(2);
+    ASSERT_EQ(view.size(), 3U);
+    vector<size_t> sizes;
+    for (auto piece: view) {
+        size_t count = 0;
+        for (auto x: piece) {
+            (void) x;
+            ++count;
+        }
+        sizes.push_back(count);
+    }
+    ASSERT_EQ(sizes.size(), 3U);
+    ASSERT_EQ(sizes[0], 2U);
+    ASSERT_EQ(sizes[2], 1U);
+}
+
+TEST(RangesTest, SlidingAdaptorDropsIncompleteTail) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    auto view = vec | rv::sliding(3);
+    ASSERT_EQ(view.size(), 3U);
+    size_t windows = 0;
+    for (auto window: view) {
+        size_t count = 0;
+        for (auto x: window) {
+            (void) x;
+            ++count;
+        }
+        ASSERT_EQ(count, 3U);
+        ++windows;
+    }
+    ASSERT_EQ(windows, 3U);
+}
+
+TEST(RangesTest, ZipAdaptorPairsToShorterLength) {
+    namespace rv = ranges::views;
+    vector<int> left = {1, 2, 3};
+    vector<int> right = {10, 20};
+    vector<pair<int, int>> result;
+    for (auto item: left | rv::zip(right)) {
+        result.push_back(item);
+    }
+    ASSERT_EQ(result.size(), 2U);
+    ASSERT_EQ(result[0].first, 1);
+    ASSERT_EQ(result[0].second, 10);
+    ASSERT_EQ(result[1].second, 20);
+}
+
+TEST(RangesTest, ZipAdaptorTwoArgs) {
+    namespace rv = ranges::views;
+    vector<int> left = {1, 2};
+    vector<int> right = {10, 20};
+    auto view = rv::zip(left, right);
+    ASSERT_EQ(view.size(), 2U);
+}
+
+TEST(RangesTest, EnumerateAdaptorAddsIndices) {
+    namespace rv = ranges::views;
+    vector<int> vec = {10, 20, 30};
+    vector<pair<size_t, int>> result;
+    for (auto item: vec | rv::enumerate()) {
+        result.push_back(item);
+    }
+    ASSERT_EQ(result.size(), 3U);
+    ASSERT_EQ(result[0].first, 0U);
+    ASSERT_EQ(result[2].first, 2U);
+    ASSERT_EQ(result[2].second, 30);
+}
+
+TEST(RangesTest, ScanAdaptorYieldsRunningTotals) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3};
+    vector<int> result;
+    for (auto x: vec | rv::scan(0, [](int acc, int value) { return acc + value; })) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result.size(), 4U);
+    ASSERT_EQ(result[0], 0);
+    ASSERT_EQ(result[3], 6);
+}
+
+TEST(RangesTest, ScanAdaptorOnEmptyRange) {
+    namespace rv = ranges::views;
+    vector<int> vec;
+    size_t total = 0;
+    for (auto x: vec | rv::scan(5, [](int acc, int value) { return acc + value; })) {
+        ASSERT_EQ(x, 5);
+        ++total;
+    }
+    ASSERT_EQ(total, 1U);
+}
+TEST(RangesTest, SliceClampsNegativeStart) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    auto view = vec | rv::slice(-2, 3);
+    ASSERT_EQ(view.size(), 3U);
+    size_t total = 0;
+    for (auto x: view) {
+        (void) x;
+        ++total;
+    }
+    ASSERT_EQ(total, 3U);
+}
+
+TEST(RangesTest, SliceClampsOutOfRangeBounds) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    ASSERT_EQ((vec | rv::slice(0, 99)).size(), 5U);
+    ASSERT_EQ((vec | rv::slice(3, 1)).size(), 0U);
+}
+
+TEST(RangesTest, SliceZeroBoundsIsEmpty) {
+    vector<int> vec = {1, 2, 3};
+    ranges::slice_view<ranges::ref_view<vector<int>>> view{ranges::ref_view<vector<int>>{vec}, 0, 0};
+    ASSERT_EQ(view.size(), 0U);
+    size_t total = 0;
+    for (auto x: view) {
+        (void) x;
+        ++total;
+    }
+    ASSERT_EQ(total, 0U);
+}
+
+TEST(RangesTest, SliceConstIterationWorks) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    const auto view = vec | rv::slice(1, 4);
+    size_t total = 0;
+    for (auto x: view) {
+        (void) x;
+        ++total;
+    }
+    ASSERT_EQ(total, 3U);
+}
+
+TEST(RangesTest, FilterDistanceCountsMatchingElements) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5, 6};
+    auto view = vec | rv::filter([](int x) { return x % 2 == 0; });
+    auto first = view.begin();
+    auto last = view.end();
+    ASSERT_EQ(last - first, 3);
+    ASSERT_EQ(first - last, -3);
+    ASSERT_EQ(std::ranges::distance(view), 3);
+}
+
+TEST(RangesTest, FilterIteratorStaysBidirectional) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5, 6};
+    auto view = vec | rv::filter([](int x) { return x % 2 == 0; });
+    static_assert(bidirectional_iterator<decltype(view.begin())>);
+    static_assert(ranges::common_range<decltype(view)>);
+}
+
+TEST(RangesTest, TakeIteratorEqualityRequiresSamePosition) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    auto view = vec | rv::take(2);
+    auto first = view.begin();
+    auto advanced = first;
+    ++advanced;
+    ++advanced;
+    ASSERT_NE(first, advanced);
+    auto same = first;
+    ASSERT_EQ(first, same);
+}
+
+TEST(RangesTest, TakeAndDropClampNegativeCounts) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3};
+    ASSERT_EQ((vec | rv::take(-1)).size(), 0U);
+    ASSERT_EQ((vec | rv::drop(-1)).size(), 3U);
+}
+
+TEST(RangesTest, RepeatNegativeCountIsEmpty) {
+    namespace rv = ranges::views;
+    size_t total = 0;
+    for (auto x: rv::repeat(7, -3)) {
+        (void) x;
+        ++total;
+    }
+    ASSERT_EQ(total, 0U);
+}
+
+TEST(RangesTest, RepeatIteratorEqualityComparesValue) {
+    namespace rv = ranges::views;
+    auto first_view = rv::repeat(1, 3);
+    auto second_view = rv::repeat(2, 3);
+    ASSERT_FALSE(first_view.begin() == second_view.begin());
+}
+
+TEST(RangesTest, CountedNegativeCountIsEmpty) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4};
+    auto view = rv::counted(vec.begin(), -2);
+    size_t total = 0;
+    for (auto x: view) {
+        (void) x;
+        ++total;
+    }
+    ASSERT_EQ(total, 0U);
+    ASSERT_EQ(view.size(), 0U);
+}
+
+TEST(RangesTest, CountedIteratorComparesBasePosition) {
+    vector<int> vec = {1, 2, 3, 4};
+    ranges::counted_iterator<vector<int>::iterator> first(vec.begin(), 2);
+    ranges::counted_iterator<vector<int>::iterator> shifted(vec.begin() + 2, 2);
+    ASSERT_FALSE(first == shifted);
+    ASSERT_EQ(*first, 1);
+    ASSERT_EQ(*shifted, 3);
+}
+
+TEST(RangesTest, CountedViewDefaultConstructedIsEmpty) {
+    ranges::counted_view<vector<int>::iterator> view{};
+    ASSERT_EQ(view.size(), 0U);
+}
+
+TEST(RangesTest, SubrangeViewDefaultConstructedSizeIsZero) {
+    ranges::subrange_view<const int*> view{};
+    ASSERT_EQ(view.size(), 0);
+}
+
+TEST(RangesTest, ElementsWorkWithStdPairAndTuple) {
+    namespace rv = ranges::views;
+    vector<pair<int, int>> pairs = {{1, 10}, {2, 20}};
+    int sum = 0;
+    for (auto key: pairs | rv::keys) {
+        sum += key;
+    }
+    for (auto value: pairs | rv::values) {
+        sum += value;
+    }
+    vector<tuple<int, int>> tuples = {{3, 30}};
+    for (auto key: tuples | rv::elements<0>) {
+        sum += key;
+    }
+    ASSERT_EQ(sum, 1 + 2 + 10 + 20 + 3);
+}
+
+TEST(RangesTest, KeysAndValuesAreComposableClosures) {
+    namespace rv = ranges::views;
+    vector<pair<int, int>> pairs = {{1, 10}, {2, 20}};
+    vector<int> doubled;
+    for (auto key: pairs | (rv::keys | rv::transform([](int x) { return x * 2; }))) {
+        doubled.push_back(key);
+    }
+    ASSERT_EQ(doubled.size(), 2U);
+    ASSERT_EQ(doubled[0], 2);
+    ASSERT_EQ(doubled[1], 4);
+    ASSERT_EQ(rv::keys(pairs).size(), 2U);
+}
+
+TEST(RangesTest, ClosureCompositionAppliesInOrder) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4, 5};
+    auto composed = rv::filter([](int x) { return x > 1; }) | rv::transform([](int x) { return x * 10; });
+    vector<int> result;
+    for (auto x: vec | composed) {
+        result.push_back(x);
+    }
+    ASSERT_EQ(result.size(), 4U);
+    ASSERT_EQ(result[0], 20);
+    ASSERT_EQ(result[3], 50);
+}
+
+TEST(RangesTest, IotaAcceptsDifferentBoundType) {
+    namespace rv = ranges::views;
+    auto view = rv::iota(0, 10LL);
+    size_t total = 0;
+    long sum = 0;
+    for (auto x: view) {
+        sum += x;
+        ++total;
+    }
+    ASSERT_EQ(total, 10U);
+    ASSERT_EQ(sum, 45);
+}
+
+TEST(RangesTest, ViewStaysUsableWithoutConstIteration) {
+    struct narrow_view : ranges::view_base<narrow_view> {
+        const int* first;
+        const int* last;
+        const int* begin() { return first; }
+        const int* end() { return last; }
+    };
+    static_assert(ranges::View<narrow_view>);
+    static_assert(!ranges::Range<const narrow_view>);
+    int raw[4] = {1, 2, 3, 4};
+    narrow_view left{{}, raw, raw + 2};
+    narrow_view right{{}, raw + 2, raw + 4};
+    auto concatenated = ranges::concat_view<narrow_view, narrow_view>{left, right};
+    size_t concat_total = 0;
+    for (auto x: concatenated) {
+        (void) x;
+        ++concat_total;
+    }
+    ASSERT_EQ(concat_total, 4U);
+    auto sliced = ranges::slice_view<narrow_view>{left, 0, 1};
+    size_t slice_total = 0;
+    for (auto x: sliced) {
+        (void) x;
+        ++slice_total;
+    }
+    ASSERT_EQ(slice_total, 1U);
+    auto split = ranges::split_view<narrow_view, int>{left, 2};
+    size_t group_total = 0;
+    for (auto group: split) {
+        for (auto x: group) {
+            (void) x;
+            ++group_total;
+        }
+    }
+    ASSERT_EQ(group_total, 1U);
+}
+
+TEST(RangesTest, FilterIteratorProvidesArrowForLvalueReference) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3, 4};
+    auto view = vec | rv::filter([](int x) { return x > 2; });
+    auto iter = view.begin();
+    ASSERT_EQ(*iter.operator->(), 3);
+}
+
+TEST(RangesTest, ReverseRequiresCommonRange) {
+    namespace rv = ranges::views;
+    vector<int> vec = {1, 2, 3};
+    ASSERT_EQ((vec | rv::reverse()).size(), 3U);
+    static_assert(requires(vector<int>& v) { v | rv::reverse(); });
 }
 
 #endif

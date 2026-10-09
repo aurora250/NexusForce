@@ -350,6 +350,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Numeric Algorithms** - Numerical computation and accumulation
 - **Heap Algorithms** - Heap operations and priority queues
 - **Range Operations** - Ranges library support
+- **Chain Query** - `query` provides LINQ / Stream style lazy chain operators (`ranges::from(container).filter(...).transform(...).take(...).to_vector()`), see [chain query example](examples/iterator/query_example.cpp)
 - **Hash Algorithms** - Multiple hash function implementations
 
 ### 📊 Math Library

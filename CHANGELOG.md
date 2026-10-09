@@ -4,6 +4,12 @@
 
 ### 🚀 New Features
 
+- 添加物化与顺序类惰性算子：`distinct` / `distinct_by` / `order_by` / `order_by_descending` / `then_by` / `then_by_descending` / `group_by` / `chunk` / `sliding` / `zip` / `enumerate` / `scan`，链式 API 与 `views` 管道适配器
+- 添加终端算子 `to_map`、与 `to_lookup`
+- 新增视图组件：`distinct_view`、`order_by_view`、`group_by_view` 与 `grouping`、`chunk_view`、`sliding_view`、`zip_view`、`enumerate_view`、`scan_view`
+- `order_by(...).then_by(...)` 采用复合键 + 逐级比较实现多级排序：主键始终优先、主键相等时按次级键，并保留前一级的升降序方向
+- 添加链式查询组件 `query`：`ranges::from` 得到惰性查询链
+- 添加链式查询 CRTP 接口 `iqueryable`：派生类型只需提供 `value_type` / `base_view_t` / `view()` / `make()` 即可获得全部链式算子
 - 添加 `thread_pool::post_task()`：投递不关心结果的任务，不分配 `task_info`、不创建 future/promise，单次投递开销约为 `submit_task()` 的三分之一（实测 447 ns/任务 vs 1325 ns/任务）
 - 添加 `thread_pool::set_task_tracking()` / `task_tracking()`：关闭后提交路径不再为每个任务分配 `task_info`（`submit_result::task_info` 返回共享占位对象）
 - 添加 `thread_pool::set_warmup_window()` / `warmup_window()`：定时任务到期前唤醒一个工作线程并保持自旋，把 `submit_after` 的冷唤醒变为热派发
@@ -141,6 +147,20 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `concat_view` / `split_view` / `slice_view` 等视图在类作用域无条件构成 `decltype(declval<const V&>().begin())`，导致底层不支持常量遍历时整个类型硬编译失败、`requires Range<const V>` 守卫形同失效的问题：新增 `const_range_traits` 与占位迭代器，此类视图现在仅常量成员函数不可用，类型本身仍可正常实例化与遍历
+- 修复 `range_adaptor_closure` 的友元 `operator|` 按值接收基类子对象后再向下转型的形式未定义行为，改为按派生闭包类型取值
+- 修复 `counted_iterator` 只比较剩余计数与负计数越界不终止的问题，`counted_view::end()` 现在推进到底层对应位置
+- 修复 `repeat_iterator` 相等比较忽略所指向值的问题
+- 修复 `subrange_view` / `counted_view` 默认构造后成员未初始化的问题，`subrange_view::size()` 对逆序区间不再返回巨大值
+- 修复 `transform_view` 移动赋值 `noexcept` 无条件为真、元素类型移动赋值可能抛异常时直接终止进程的问题
+- 修复迭代器 `operator->` 在元素以值返回时取临时对象地址或直接编译失败的问题，现仅在元素以左值引用返回时提供
+- 修复 `take` / `take_while` / `drop_while` 迭代器类别无条件声明为前向迭代器的问题，现按底层迭代器能力给出
+- 修复 `reverse` 适配器与 `join_view` 缺少 `common_range` 约束、非 common 范围下报深层硬错误的问题
+- 修复 `iota(start, bound)` 要求两参数同类型的问题，现允许可转换的不同类型
+- 修复 `owning_view` 的移动构造与移动赋值被删除的问题：右值范围进入视图链后无法传递，现恢复为可移动
+- 修复 `views::concat` 的两处缺陷：一是要求两侧范围均为 common 范围，`take` / `transform` 等非 common 视图作为任一操作数时无法编译，现由适配器统一套用 `common()`；二是右值范围作为第二操作数时闭包持有了不可拷贝的 `owning_view`，现以 `copy_constructible<view_type>` 约束给出明确诊断，改由两参数形式或查询链的 `concat()` 承担
+- 修复 `join_iterator` 在 const 外层范围上的编译失败：内层范围类型用 `remove_cvref_t` 丢弃了 const，导致常量迭代器无法赋值给非常量迭代器；现仅在元素引用为右值时衰减
+- 修复 `views::take` / `views::drop` 传入无符号计数时因列表初始化收窄而无法编译的问题，现按底层迭代器距离类型显式转换
 - 修复 `lock_free_queue` 隐式生产者哈希表探测链被截断导致任务静默丢失、调用者永久阻塞：线程退出时该槽位被写回空槽标记，同一哈希表中位于其后的表项便对其它线程不可见，会重复插入第二个生产者表项，而退出路径每层哈希只清理一个表项；新线程命中该表项时直接取得已停用的生产者对象，写入其中的任务被消费者按"生产者已停用"跳过。现按上游语义把退出槽位写为墓碑标记，并允许墓碑槽位在表项重定位与插入时复用，探测链不再被截断
 - 修复唤醒策略单靠空闲巡检线程数提示而可能漏唤醒、导致调用者永久阻塞的缺陷，改由存活巡检兜底
 - 修复 `string_builder` 的 `concatenate()` 在 C++14 下无法编译：`__concat_append` 的递归终止分支缺失，`Rest` 为空时调用不存在的零参重载

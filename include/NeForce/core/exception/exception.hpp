@@ -223,7 +223,7 @@ NEFORCE_ERROR_BUILD_DERIVED_CLASS(database_exception, thirdparty_exception, "Dat
  *
  * 该函数返回在当前线程中已经抛出但尚未被捕获的异常数量。
  */
-int NEFORCE_API uncaught_exceptions() noexcept;
+NEFORCE_PURE_FUNCTION int NEFORCE_API uncaught_exceptions() noexcept;
 
 /**
  * @brief 输出异常并打印堆栈信息

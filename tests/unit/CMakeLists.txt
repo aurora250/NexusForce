@@ -23,6 +23,7 @@ add_executable(NexusForceUnitTests
         test_nfrs.cpp
         test_numeric.cpp
         test_plugin.cpp
+        test_query.cpp
         test_random.cpp
         test_ranges.cpp
         test_reflect.cpp

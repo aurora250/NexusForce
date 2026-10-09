@@ -554,7 +554,7 @@ protected:
     }
 };
 
-TEST_F(OverflowPolicyTest, DiscardPolicy) {
+TEST_F(OverflowPolicyTest, DiscardPolicy) { // may block
     auto log = root();
     log->enable_async(nullptr, 4, overflow_policy::discard);
 

@@ -1,7 +1,5 @@
 #include <NeForce/core/string/format.hpp>
 #include <NeForce/core/string/to_string.hpp>
-#include <iomanip>
-#include <sstream>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -10,15 +8,11 @@ namespace {
     // ships its own snprintf, which does not implement the '*' width/precision
     // specifier and would silently return the format string itself.
     string reference_fixed(const double value, const int precision) {
-        std::ostringstream stream;
-        stream << std::fixed << std::setprecision(precision) << value;
-        return string{stream.str().c_str()};
+        return to_string_with_precision(value, precision);
     }
 
     string reference_scientific(const double value, const int precision) {
-        std::ostringstream stream;
-        stream << std::scientific << std::setprecision(precision) << value;
-        return string{stream.str().c_str()};
+        return to_string_scientific(value, precision);
     }
 
     double next_random(uint64_t& state) {

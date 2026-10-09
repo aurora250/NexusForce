@@ -18,9 +18,9 @@ namespace {
         return true;
     }
 
-    const byte_t* as_bytes(const std::string& s) { return reinterpret_cast<const byte_t*>(s.data()); }
+    const byte_t* as_bytes(const string& s) { return reinterpret_cast<const byte_t*>(s.data()); }
 
-    string reference_utf8_to_string(const std::string& input) {
+    string reference_utf8_to_string(const string& input) {
         string result;
         size_t i = 0;
         const size_t len = input.size();
@@ -30,7 +30,7 @@ namespace {
         return result;
     }
 
-    u16string reference_utf8_to_u16(const std::string& input) {
+    u16string reference_utf8_to_u16(const string& input) {
         u16string result;
         size_t i = 0;
         const size_t len = input.size();
@@ -40,7 +40,7 @@ namespace {
         return result;
     }
 
-    u32string reference_utf8_to_u32(const std::string& input) {
+    u32string reference_utf8_to_u32(const string& input) {
         u32string result;
         size_t i = 0;
         const size_t len = input.size();
@@ -50,7 +50,7 @@ namespace {
         return result;
     }
 
-    wstring reference_utf8_to_wstring(const std::string& input) {
+    wstring reference_utf8_to_wstring(const string& input) {
         wstring result;
         size_t i = 0;
         const size_t len = input.size();
@@ -147,8 +147,8 @@ namespace {
         return result;
     }
 
-    std::vector<std::string> utf8_corpus() {
-        std::vector<std::string> corpus;
+    vector<string> utf8_corpus() {
+        vector<string> corpus;
         corpus.emplace_back("");
         corpus.emplace_back("a");
         corpus.emplace_back("hello world");
@@ -217,8 +217,8 @@ namespace {
         return corpus;
     }
 
-    std::string boundary_input(const size_t offset, const std::string& unit) {
-        std::string input(offset, 'a');
+    string boundary_input(const size_t offset, const string& unit) {
+        string input(offset, 'a');
         input += unit;
         input += "tail\xE4\xB8\xAD";
         return input;
@@ -282,7 +282,7 @@ TEST(Utf8BulkDecodeTest, LengthSweepAcrossSimdBlocks) {
     const char* const units[] = {"a", "\xC3\xA9", "\xE4\xB8\xAD", "\xF0\x9F\x98\x80"};
     for (const char* unit: units) {
         for (size_t count = 0; count <= 40; ++count) {
-            std::string input;
+            string input;
             for (size_t i = 0; i < count; ++i) {
                 input += unit;
             }
@@ -295,7 +295,7 @@ TEST(Utf8BulkDecodeTest, LengthSweepAcrossSimdBlocks) {
 }
 
 TEST(Utf8BulkDecodeTest, MultipleChunksLongInput) {
-    std::string input;
+    string input;
     for (int i = 0; i < 400; ++i) {
         input += "a\xC3\xA9\xE4\xB8\xAD\xF0\x9F\x98\x80";
     }
@@ -308,18 +308,18 @@ TEST(Utf8BulkDecodeTest, MultipleChunksLongInput) {
 
 TEST(Utf8BulkDecodeTest, AppendsWithoutClearing) {
     string result = "prefix-";
-    codepoint::decode_utf8(as_bytes(std::string("\xE4\xB8\xAD")), 3, result);
+    codepoint::decode_utf8(as_bytes(string("\xE4\xB8\xAD")), 3, result);
     EXPECT_EQ(result, "prefix-\xE4\xB8\xAD");
 }
 
 TEST(Utf8BulkDecodeTest, EmptyInputKeepsTargetIntact) {
     string result = "keep";
-    codepoint::decode_utf8(as_bytes(std::string()), 0, result);
+    codepoint::decode_utf8(as_bytes(string()), 0, result);
     EXPECT_EQ(result, "keep");
 }
 
 TEST(Utf8BulkDecodeTest, AsciiFastPathEqualsInput) {
-    std::string input(1024, 'x');
+    string input(1024, 'x');
     for (size_t i = 0; i < input.size(); ++i) {
         input[i] = static_cast<char>('!' + (i % 90));
     }
@@ -420,7 +420,7 @@ TEST(Utf32BulkDecodeTest, MatchesScalarReference) {
 }
 
 TEST(Utf32BulkDecodeTest, LongValidRun) {
-    std::vector<char32_t> data(600);
+    vector<char32_t> data(600);
     for (size_t i = 0; i < data.size(); ++i) {
         data[i] = static_cast<char32_t>(0x4E00 + (i % 1000));
     }
@@ -504,12 +504,12 @@ TEST(UtfWrapperTest, WCharacterConversionsMatchScalarReference) {
 }
 
 TEST(UtfRoundTripTest, Utf8ToUtf16AndBack) {
-    const std::vector<std::string> cases = {"",
-                                            "ascii",
-                                            "\xC3\xA9",
-                                            "\xE4\xB8\xAD\xE6\x96\x87",
-                                            "\xF0\x9F\x98\x80",
-                                            "a\xC3\xA9\xE4\xB8\xAD\xF0\x9F\x98\x80z"};
+    const vector<string> cases = {"",
+                                  "ascii",
+                                  "\xC3\xA9",
+                                  "\xE4\xB8\xAD\xE6\x96\x87",
+                                  "\xF0\x9F\x98\x80",
+                                  "a\xC3\xA9\xE4\xB8\xAD\xF0\x9F\x98\x80z"};
     for (const auto& input: cases) {
         u16string utf16;
         codepoint::decode_utf8(as_bytes(input), input.size(), utf16);
@@ -521,7 +521,7 @@ TEST(UtfRoundTripTest, Utf8ToUtf16AndBack) {
 }
 
 TEST(UtfRoundTripTest, Utf8ToUtf32AndBack) {
-    const std::vector<std::string> cases = {
+    const vector<string> cases = {
             "", "ascii", "\xC3\xA9", "\xE4\xB8\xAD", "\xF0\x9F\x98\x80", "\xE4\xB8\xAD\xF0\x9F\x98\x80"};
     for (const auto& input: cases) {
         u32string utf32;
@@ -535,7 +535,7 @@ TEST(UtfRoundTripTest, Utf8ToUtf32AndBack) {
 
 TEST(UtfRoundTripTest, InvalidSequencesNormalizeToReplacement) {
     string result;
-    const std::string input = "\xED\xA0\x80";
+    const string input = "\xED\xA0\x80";
     codepoint::decode_utf8(as_bytes(input), input.size(), result);
     EXPECT_EQ(result, "\xEF\xBF\xBD");
 }
@@ -627,7 +627,7 @@ TEST(DisplayWidthTest, ZeroRangeEdges) {
 }
 
 TEST(CodepointBulkApiTest, SingleCodePointApiUnchanged) {
-    const std::string input = "a\xC3\xA9\xE4\xB8\xAD\xF0\x9F\x98\x80";
+    const string input = "a\xC3\xA9\xE4\xB8\xAD\xF0\x9F\x98\x80";
     size_t i = 0;
     const size_t len = input.size();
     u32string collected;

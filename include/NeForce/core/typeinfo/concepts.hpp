@@ -9,6 +9,7 @@
  */
 
 #include "NeForce/core/iterator/iterator_traits.hpp"
+#include <new>
 NEFORCE_BEGIN_NAMESPACE__
 
 #ifdef NEFORCE_STANDARD_20
