@@ -700,7 +700,7 @@ void* memory_pool::allocate_small(thread_cache& cache, const size_t class_index)
 
 
 memory_pool::span_header* memory_pool::create_span(const size_t class_index) noexcept {
-    class_state& state = classes_[class_index];
+    const class_state& state = classes_[class_index];
     const size_t block = g_block_sizes[class_index];
     void* base = os_map_aligned(state.span_size, g_slot_size);
     if (base == nullptr) {

@@ -105,8 +105,8 @@ public:
                 func_pair_.get_base()();
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 
@@ -191,8 +191,8 @@ public:
                 func_pair_.get_base()();
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 
@@ -277,8 +277,8 @@ public:
                 func_pair_.get_base()();
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 

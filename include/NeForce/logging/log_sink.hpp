@@ -64,7 +64,7 @@ public:
 
     /**
      * @brief 设置格式化器
-     * @param formatter 新的格式化器（unique_ptr，转移所有权）
+     * @param formatter 新的格式化器
      */
     void set_formatter(unique_ptr<log_formatter> formatter);
 
@@ -108,28 +108,26 @@ public:
 /**
  * @enum syslog_facility
  * @brief Syslog 设施类型
- *
- * 对应 Linux syslog(3) 的 facility 参数，用于标识消息来源。
  */
 enum class syslog_facility : int {
-    LOG_AUTH = 1 << 3,    ///< 安全/授权消息
-    LOG_CRON = 9 << 3,    ///< 定时任务守护进程
-    LOG_DAEMON = 3 << 3,  ///< 系统守护进程
-    LOG_KERN = 0 << 3,    ///< 内核消息
-    LOG_LOCAL0 = 16 << 3, ///< 本地自定义设施 0
-    LOG_LOCAL1 = 17 << 3, ///< 本地自定义设施 1
-    LOG_LOCAL2 = 18 << 3, ///< 本地自定义设施 2
-    LOG_LOCAL3 = 19 << 3, ///< 本地自定义设施 3
-    LOG_LOCAL4 = 20 << 3, ///< 本地自定义设施 4
-    LOG_LOCAL5 = 21 << 3, ///< 本地自定义设施 5
-    LOG_LOCAL6 = 22 << 3, ///< 本地自定义设施 6
-    LOG_LOCAL7 = 23 << 3, ///< 本地自定义设施 7
-    LOG_LPR = 6 << 3,     ///< 行式打印机子系统
-    LOG_MAIL = 2 << 3,    ///< 邮件系统
-    LOG_NEWS = 7 << 3,    ///< USENET 新闻
-    LOG_SYSLOG = 5 << 3,  ///< syslogd 内部消息
-    LOG_USER = 1 << 3,    ///< 通用用户级消息（默认）
-    LOG_UUCP = 8 << 3,    ///< UUCP 子系统
+    auth = 1 << 3,    ///< 安全/授权消息
+    cron = 9 << 3,    ///< 定时任务守护进程
+    daemon = 3 << 3,  ///< 系统守护进程
+    kernel = 0 << 3,  ///< 内核消息
+    local0 = 16 << 3, ///< 本地自定义设施 0
+    local1 = 17 << 3, ///< 本地自定义设施 1
+    local2 = 18 << 3, ///< 本地自定义设施 2
+    local3 = 19 << 3, ///< 本地自定义设施 3
+    local4 = 20 << 3, ///< 本地自定义设施 4
+    local5 = 21 << 3, ///< 本地自定义设施 5
+    local6 = 22 << 3, ///< 本地自定义设施 6
+    local7 = 23 << 3, ///< 本地自定义设施 7
+    lpr = 6 << 3,     ///< 行式打印机子系统
+    mail = 2 << 3,    ///< 邮件系统
+    news = 7 << 3,    ///< USENET 新闻
+    syslog = 5 << 3,  ///< syslogd 内部消息
+    user = 1 << 3,    ///< 通用用户级消息（默认）
+    uucp = 8 << 3,    ///< UUCP 子系统
 };
 
 /**
@@ -150,9 +148,9 @@ public:
     /**
      * @brief 构造 syslog 输出目标
      * @param ident 日志标识字符串，对应 syslog 的 ident 参数
-     * @param facility syslog 设施，默认为 LOG_USER
+     * @param facility syslog 设施，默认为 user
      */
-    explicit syslog_sink(string ident = "", syslog_facility facility = syslog_facility::LOG_USER);
+    explicit syslog_sink(string ident = "", syslog_facility facility = syslog_facility::user);
 
     ~syslog_sink() override;
 
@@ -165,7 +163,10 @@ public:
      */
     void log(const log_event& event) override;
 
-    /** @brief syslog 每次调用立即写入，无需显式刷新 */
+    /**
+     * @brief 刷新 syslog
+     * @note syslog 每次调用立即写入，无需显式刷新
+     */
     void flush() override;
 };
 

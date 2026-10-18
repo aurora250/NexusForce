@@ -5,7 +5,7 @@
 #include <NeForce/core/system/dynamic_library.hpp>
 #include <NeForce/core/system/dynamic_library_import.hpp>
 #include <NeForce/core/system/environment.hpp>
-#include <NeForce/core/system/locale.hpp>
+#include <NeForce/core/locale/locale.hpp>
 #include <NeForce/core/system/pipe.hpp>
 #include <NeForce/core/time/datetime.hpp>
 #include <NeForce/core/system/process.hpp>
@@ -1838,6 +1838,8 @@ TEST_F(EnvironmentTest, CurrentDirectory_AfterChangeDirectory_Success) {
 #endif
 }
 
+#ifdef NEFORCE_SUPPORT_LOCALE
+
 class LocaleTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -2545,6 +2547,271 @@ TEST_F(LocaleTest, CollateStrength_EnumValues) {
     EXPECT_EQ(static_cast<int32_t>(locale::collate_strength::quaternary), 3);
     EXPECT_EQ(static_cast<int32_t>(locale::collate_strength::identical), 15);
 }
+
+TEST_F(LocaleTest, FormatNumber_Int64_GroupsThousands) {
+    locale loc("en-US");
+    EXPECT_EQ(loc.format_number(static_cast<int64_t>(1234567)), "1,234,567");
+    EXPECT_EQ(loc.format_number(static_cast<int64_t>(-1234567)), "-1,234,567");
+    EXPECT_EQ(loc.format_number(static_cast<int64_t>(999)), "999");
+}
+
+TEST_F(LocaleTest, FormatNumber_ClassicLocaleHasNoGrouping) {
+    locale loc = locale::classic();
+    EXPECT_EQ(loc.format_number(static_cast<int64_t>(1234567)), "1234567");
+}
+
+TEST_F(LocaleTest, FormatNumber_Double_UsesRequestedFractionDigits) {
+    locale en("en-US");
+    locale de("de-DE");
+
+    EXPECT_EQ(en.format_number(1234.5, 2), "1,234.50");
+    EXPECT_EQ(de.format_number(1234.5, 2), "1.234,50");
+}
+
+TEST_F(LocaleTest, FormatNumber_DefaultFractionDigitsTrimTrailingZeros) {
+    locale loc("en-US");
+    EXPECT_EQ(loc.format_number(1234.5, -1), "1,234.5");
+    EXPECT_EQ(loc.format_number(1234.0, -1), "1,234");
+}
+
+TEST_F(LocaleTest, FormatNumber_IndianGrouping) {
+    locale loc("hi-IN");
+    EXPECT_EQ(loc.format_number(static_cast<int64_t>(12345678)), "1,23,45,678");
+}
+
+TEST_F(LocaleTest, FormatCurrency_SymbolsMatchTheLocale) {
+    EXPECT_EQ(locale("en-US").format_currency(1234.56, "USD"), "$1,234.56");
+    EXPECT_EQ(locale("zh-CN").format_currency(1234.56, "CNY"), "\xC2\xA5"
+                                                               "1,234.56");
+
+    const string de = locale("de-DE").format_currency(1234.56, "EUR");
+    EXPECT_EQ(de.substr(0, 8), "1.234,56");
+    EXPECT_TRUE(de.find("\xE2\x82\xAC") != string::npos);
+}
+
+TEST_F(LocaleTest, FormatCurrency_CurrencyWithoutFractionDigits) {
+    const string jpy = locale("en-US").format_currency(1234.56, "JPY");
+    EXPECT_TRUE(jpy.find("1,235") != string::npos);
+    EXPECT_TRUE(jpy.find(".") == string::npos);
+}
+
+TEST_F(LocaleTest, FormatCurrency_UnknownCodeFallsBackToTheCode) {
+    const string result = locale("en-US").format_currency(10.0, "XYZ");
+    EXPECT_TRUE(result.find("XYZ") != string::npos);
+    EXPECT_TRUE(result.find("10.00") != string::npos);
+}
+
+TEST_F(LocaleTest, Time_InfoSeparatesDateAndTimePatterns) {
+    for (const char* name: {"en-US", "de-DE", "zh-CN", "ja-JP", "ru-RU"}) {
+        const locale loc(name);
+        const auto info = loc.time();
+
+        EXPECT_TRUE(info.date_fmt.find('y') != string::npos) << name;
+        EXPECT_TRUE(info.time_fmt.find(':') != string::npos) << name;
+        EXPECT_TRUE(info.time_fmt.find('y') == string::npos) << name;
+        EXPECT_TRUE(info.datetime_fmt.find('y') != string::npos) << name;
+        EXPECT_TRUE(info.datetime_fmt.find(':') != string::npos) << name;
+    }
+}
+
+TEST_F(LocaleTest, Time_NamesCoverWholeWeekAndYear) {
+    for (const char* name: {"en-US", "de-DE", "fr-FR", "zh-CN", "ja-JP", "ar-SA"}) {
+        const locale loc(name);
+        const auto info = loc.time();
+
+        EXPECT_EQ(info.day_names.size(), 7u) << name;
+        EXPECT_EQ(info.abbr_day_names.size(), 7u) << name;
+        EXPECT_EQ(info.month_names.size(), 12u) << name;
+        EXPECT_EQ(info.abbr_month_names.size(), 12u) << name;
+        EXPECT_FALSE(info.day_names[0].empty()) << name;
+        EXPECT_FALSE(info.month_names[11].empty()) << name;
+    }
+}
+
+TEST_F(LocaleTest, Numeric_SymbolsAreFilled) {
+    for (const char* name: {"en-US", "de-DE", "zh-CN"}) {
+        const locale loc(name);
+        const auto info = loc.numeric();
+
+        EXPECT_EQ(info.decimal_point.size() > 0, true) << name;
+        EXPECT_EQ(info.thousands_sep.size() > 0, true) << name;
+        EXPECT_FALSE(info.grouping.empty()) << name;
+        EXPECT_FALSE(info.minus_sign.empty()) << name;
+        EXPECT_FALSE(info.plus_sign.empty()) << name;
+        EXPECT_FALSE(info.exponential.empty()) << name;
+        EXPECT_FALSE(info.nan_symbol.empty()) << name;
+        EXPECT_FALSE(info.infinity_symbol.empty()) << name;
+    }
+}
+
+TEST_F(LocaleTest, Numeric_ArabicPercentSign) {
+    const locale loc("ar-SA");
+    EXPECT_NE(loc.numeric().percent_sign, "%");
+}
+
+TEST_F(LocaleTest, Monetary_ReportsTheCurrencyOfTheRegion) {
+    EXPECT_EQ(locale("en-US").monetary().int_curr_symbol, "USD");
+    EXPECT_EQ(locale("de-DE").monetary().int_curr_symbol, "EUR");
+    EXPECT_EQ(locale("zh-CN").monetary().int_curr_symbol, "CNY");
+    EXPECT_EQ(locale("en-GB").monetary().int_curr_symbol, "GBP");
+    EXPECT_EQ(locale("ja-JP").monetary().frac_digits, 0);
+}
+
+TEST_F(LocaleTest, FormatDatetime_PatternKeepsYearComponent) {
+    const datetime fixed = datetime::parse("2024-06-15 12:00:00");
+    for (const char* name: {"en-US", "de-DE", "zh-CN", "ja-JP"}) {
+        const locale loc(name);
+        EXPECT_EQ(loc.format_datetime(fixed, "yyyy"), "2024") << name;
+        EXPECT_TRUE(loc.format_datetime(fixed, "yyyy-MM-dd").find('4') != string::npos) << name;
+    }
+}
+
+TEST_F(LocaleTest, FormatDatetime_PatternQuotesAreLiterals) {
+    const datetime fixed = datetime::parse("2024-06-15 12:00:00");
+    const locale loc("en-US");
+    EXPECT_EQ(loc.format_datetime(fixed, "'year' yyyy"), "year 2024");
+    EXPECT_EQ(loc.format_datetime(fixed, "yyyy 'o''clock'"), "2024 o'clock");
+}
+
+TEST_F(LocaleTest, FormatDatetime_StylesContainTheYear) {
+    const datetime fixed = datetime::parse("2024-06-15 12:00:00");
+    for (const char* name: {"en-US", "de-DE", "zh-CN"}) {
+        const locale loc(name);
+        const string text = loc.format_datetime(fixed, locale::date_style::medium, locale::time_style::medium);
+        EXPECT_TRUE(text.find("2024") != string::npos) << name;
+    }
+}
+
+TEST_F(LocaleTest, CollationKey_ByteOrderFollowsCompare) {
+    const locale loc("en-US");
+    const char* words[] = {"apple", "Banana", "cherry", "apple pie", "Apples"};
+
+    for (const char* left: words) {
+        for (const char* right: words) {
+            const int cmp = loc.compare(left, right);
+            const string left_key = loc.collation_key(left);
+            const string right_key = loc.collation_key(right);
+
+            EXPECT_EQ(cmp < 0, left_key < right_key) << left << " vs " << right;
+            EXPECT_EQ(cmp == 0, left_key == right_key) << left << " vs " << right;
+        }
+    }
+}
+
+TEST_F(LocaleTest, Compare_PrimaryStrengthIgnoresCaseAndAccents) {
+    const locale loc("en-US");
+    EXPECT_EQ(loc.compare("M\xC3\xBCller", "MULLER", locale::collate_strength::primary), 0);
+    EXPECT_EQ(loc.compare("caf\xC3\xA9", "CAFE", locale::collate_strength::primary), 0);
+    EXPECT_NE(loc.compare("caf\xC3\xA9", "CAFE", locale::collate_strength::tertiary), 0);
+}
+
+TEST_F(LocaleTest, FirstDayOfWeek_MatchesTheRegion) {
+    EXPECT_EQ(locale("en-US").first_day_of_week(), 1);
+    EXPECT_EQ(locale("de-DE").first_day_of_week(), 2);
+    EXPECT_EQ(locale("ar-SA").first_day_of_week(), 1);
+
+    for (const char* name: {"zh-CN", "ja-JP", "ru-RU", "fr-FR", "en-GB"}) {
+        const int32_t fdow = locale(name).first_day_of_week();
+        EXPECT_GE(fdow, 1) << name;
+        EXPECT_LE(fdow, 7) << name;
+    }
+}
+
+TEST_F(LocaleTest, Measurement_UnitedKingdomUsesImperial) {
+    EXPECT_EQ(locale("en-GB").measurement(), locale::measurement_system::UK);
+    EXPECT_EQ(locale("en-US").measurement(), locale::measurement_system::US);
+    EXPECT_EQ(locale("fr-FR").measurement(), locale::measurement_system::SI);
+}
+
+TEST_F(LocaleTest, DisplayName_ChineseUsesFullWidthBrackets) {
+    const locale zh("zh-CN");
+    EXPECT_EQ(zh.display_name(zh), "\xE4\xB8\xAD\xE6\x96\x87\xEF\xBC\x88\xE4\xB8\xAD\xE5\x9B\xBD\xEF\xBC\x89");
+    EXPECT_EQ(zh.display_name(locale("en-US")), "Chinese (China)");
+}
+
+TEST_F(LocaleTest, NativeNamesFollowTheDisplayForm) {
+    EXPECT_TRUE(locale("de-DE").native_language_name().find("Deutsch") != string::npos);
+    EXPECT_TRUE(locale("fr-FR").native_country_name().find("France") != string::npos);
+}
+
+TEST_F(LocaleTest, UiLanguages_DropVariantRegionAndScript) {
+    const locale loc("zh-Hans-CN");
+    const auto languages = loc.ui_languages();
+
+    EXPECT_GE(languages.size(), 2u);
+    EXPECT_EQ(languages[0], "zh-Hans-CN");
+    EXPECT_EQ(languages.back(), "zh");
+}
+
+TEST_F(LocaleTest, Conversion_UnicodeRoundTrip) {
+    const u32string original = U"h\xE9llo \x4E16\x754C 123";
+    for (const char* name: {"en-US", "zh-CN", "ja-JP", "ru-RU", "ar-SA"}) {
+        const locale loc(name);
+        const string encoded = loc.to_multibyte(original);
+
+        EXPECT_FALSE(encoded.empty()) << name;
+        EXPECT_EQ(loc.to_ucs4(encoded), original) << name;
+    }
+}
+
+TEST_F(LocaleTest, Conversion_MultibyteIsUtf8) {
+    const locale loc("zh-CN");
+    EXPECT_EQ(loc.to_multibyte(U"\x4E2D"), "\xE4\xB8\xAD");
+}
+
+TEST_F(LocaleTest, IsValidLocale_RejectsGarbage) {
+    EXPECT_FALSE(locale::is_valid_locale(""));
+    EXPECT_TRUE(locale::is_valid_locale("en-US"));
+    EXPECT_TRUE(locale::is_valid_locale("zh-Hans-CN"));
+    EXPECT_TRUE(locale::is_valid_locale("de"));
+#    ifdef NEFORCE_SUPPORT_ICU
+    EXPECT_TRUE(locale::is_valid_locale("1"));
+#    else
+    EXPECT_FALSE(locale::is_valid_locale("1"));
+    EXPECT_FALSE(locale::is_valid_locale("en US"));
+    EXPECT_FALSE(locale::is_valid_locale("xx-YY"));
+#    endif
+}
+
+TEST_F(LocaleTest, AvailableCountries_ContainWellKnownCodes) {
+    const auto countries = locale::available_countries("en");
+    bool has_cn = false;
+    bool has_us = false;
+    for (const auto& code: countries) {
+        has_cn = has_cn || code == "CN";
+        has_us = has_us || code == "US";
+    }
+    EXPECT_TRUE(has_cn);
+    EXPECT_TRUE(has_us);
+    EXPECT_GT(countries.size(), 200u);
+}
+
+TEST_F(LocaleTest, AvailableLocales_ContainCommonRegions) {
+    const auto locales = locale::available_locales();
+    EXPECT_GT(locales.size(), 20u);
+
+    bool has_english = false;
+    for (const auto& item: locales) {
+        has_english = has_english || item.find("en") == 0;
+    }
+    EXPECT_TRUE(has_english);
+}
+
+TEST_F(LocaleTest, RoundTripThroughCopyAndMoveKeepsFormatting) {
+    locale en("en-US");
+    locale de("de-DE");
+
+    locale copy(de);
+    locale assigned("fr-FR");
+    assigned = de;
+
+    EXPECT_EQ(copy.format_number(1234.5, 2), "1.234,50");
+    EXPECT_EQ(assigned.format_number(1234.5, 2), "1.234,50");
+    EXPECT_EQ(move(copy).format_number(1234.5, 2), "1.234,50");
+    EXPECT_EQ(en.format_number(1234.5, 2), "1,234.50");
+}
+
+#endif // NEFORCE_SUPPORT_LOCALE
 
 class PipeTest : public ::testing::Test {
 protected:
@@ -5177,7 +5444,7 @@ TEST_F(SysinfoTest, GetArchitecture_ReturnsKnownArchitecture) {
     sysinfo& inst = sysinfo::instance();
     auto arch = inst.get_architecture();
 
-    EXPECT_NE(arch, sysinfo::architecture::UNKNOWN);
+    EXPECT_NE(arch, sysinfo::architecture::unknown);
 }
 
 TEST_F(SysinfoTest, GetArchitecture_MatchesPlatform) {
@@ -5185,7 +5452,7 @@ TEST_F(SysinfoTest, GetArchitecture_MatchesPlatform) {
     auto arch = inst.get_architecture();
 
 #ifdef NEFORCE_ARCH_X86
-    EXPECT_TRUE(arch == sysinfo::architecture::X64 || arch == sysinfo::architecture::X86);
+    EXPECT_TRUE(arch == sysinfo::architecture::x64 || arch == sysinfo::architecture::x86);
 #endif
 }
 
@@ -5231,10 +5498,10 @@ TEST_F(SysinfoTest, SystemInfo_DefaultValues_AllZero) {
 }
 
 TEST_F(SysinfoTest, Architecture_EnumValues_Distinct) {
-    EXPECT_NE(static_cast<int>(sysinfo::architecture::UNKNOWN), static_cast<int>(sysinfo::architecture::X86));
-    EXPECT_NE(static_cast<int>(sysinfo::architecture::X86), static_cast<int>(sysinfo::architecture::X64));
-    EXPECT_NE(static_cast<int>(sysinfo::architecture::X64), static_cast<int>(sysinfo::architecture::ARM));
-    EXPECT_NE(static_cast<int>(sysinfo::architecture::ARM), static_cast<int>(sysinfo::architecture::ARM64));
+    EXPECT_NE(static_cast<int>(sysinfo::architecture::unknown), static_cast<int>(sysinfo::architecture::x86));
+    EXPECT_NE(static_cast<int>(sysinfo::architecture::x86), static_cast<int>(sysinfo::architecture::x64));
+    EXPECT_NE(static_cast<int>(sysinfo::architecture::x64), static_cast<int>(sysinfo::architecture::arm));
+    EXPECT_NE(static_cast<int>(sysinfo::architecture::arm), static_cast<int>(sysinfo::architecture::arm64));
 }
 
 TEST_F(SysinfoTest, IsInitialized_ReturnsTrue) {

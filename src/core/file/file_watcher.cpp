@@ -1,3 +1,4 @@
+#include <NeForce/core/exception/system_exception.hpp>
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/file_watcher.hpp>
 #include <NeForce/core/string/to_string.hpp>
@@ -120,16 +121,16 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
     }
 
     uint32_t mask = 0;
-    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::CREATED)) != 0U) {
+    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::created)) != 0U) {
         mask |= IN_CREATE | IN_MOVED_TO;
     }
-    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::DELETED)) != 0U) {
+    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::deleted)) != 0U) {
         mask |= IN_DELETE | IN_MOVED_FROM;
     }
-    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::MODIFIED)) != 0U) {
+    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::modified)) != 0U) {
         mask |= IN_MODIFY | IN_ATTRIB;
     }
-    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::ACCESSED)) != 0U) {
+    if ((static_cast<int>(events) & static_cast<int>(file_watch_event::accessed)) != 0U) {
         mask |= IN_ACCESS;
     }
 
@@ -242,17 +243,17 @@ void file_watcher::watch_thread_func() {
     ::DWORD notify_filter = 0;
     {
         const int ev = static_cast<int>(current_events_);
-        if ((ev & static_cast<int>(file_watch_event::CREATED)) != 0) {
+        if ((ev & static_cast<int>(file_watch_event::created)) != 0) {
             notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME | FILE_NOTIFY_CHANGE_CREATION;
         }
-        if ((ev & static_cast<int>(file_watch_event::DELETED)) != 0) {
+        if ((ev & static_cast<int>(file_watch_event::deleted)) != 0) {
             notify_filter |= FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME;
         }
-        if ((ev & static_cast<int>(file_watch_event::MODIFIED)) != 0) {
+        if ((ev & static_cast<int>(file_watch_event::modified)) != 0) {
             notify_filter |= FILE_NOTIFY_CHANGE_SIZE | FILE_NOTIFY_CHANGE_LAST_WRITE | FILE_NOTIFY_CHANGE_ATTRIBUTES |
                              FILE_NOTIFY_CHANGE_SECURITY;
         }
-        if ((ev & static_cast<int>(file_watch_event::ACCESSED)) != 0) {
+        if ((ev & static_cast<int>(file_watch_event::accessed)) != 0) {
             notify_filter |= FILE_NOTIFY_CHANGE_LAST_ACCESS;
         }
         if (notify_filter == 0) {
@@ -299,21 +300,21 @@ void file_watcher::watch_thread_func() {
                 const wstring wide_filename(fni->FileName, fni->FileNameLength / sizeof(wchar_t));
                 string utf8_name = to_string(wide_filename);
                 if (!utf8_name.empty()) {
-                    auto event_type = file_watch_event::ACCESSED;
+                    auto event_type = file_watch_event::accessed;
 
                     switch (fni->Action) {
                         case FILE_ACTION_ADDED:
                         case FILE_ACTION_RENAMED_NEW_NAME: {
-                            event_type = file_watch_event::CREATED;
+                            event_type = file_watch_event::created;
                             break;
                         }
                         case FILE_ACTION_MODIFIED: {
-                            event_type = file_watch_event::MODIFIED;
+                            event_type = file_watch_event::modified;
                             break;
                         }
                         case FILE_ACTION_REMOVED:
                         case FILE_ACTION_RENAMED_OLD_NAME: {
-                            event_type = file_watch_event::DELETED;
+                            event_type = file_watch_event::deleted;
                             break;
                         }
                         default: {
@@ -400,17 +401,17 @@ void file_watcher::watch_thread_func() {
             while (ptr < buffer_.data() + len) {
                 auto* event = reinterpret_cast<struct ::inotify_event*>(ptr);
 
-                auto evt = file_watch_event::ACCESSED;
+                auto evt = file_watch_event::accessed;
                 bool matched = true;
 
                 if ((event->mask & (IN_CREATE | IN_MOVED_TO)) != 0U) {
-                    evt = file_watch_event::CREATED;
+                    evt = file_watch_event::created;
                 } else if ((event->mask & (IN_DELETE | IN_MOVED_FROM)) != 0U) {
-                    evt = file_watch_event::DELETED;
+                    evt = file_watch_event::deleted;
                 } else if ((event->mask & (IN_MODIFY | IN_ATTRIB)) != 0U) {
-                    evt = file_watch_event::MODIFIED;
+                    evt = file_watch_event::modified;
                 } else if ((event->mask & IN_ACCESS) != 0U) {
-                    evt = file_watch_event::ACCESSED;
+                    evt = file_watch_event::accessed;
                 } else {
                     matched = false;
                 }
@@ -507,7 +508,7 @@ bool file_watcher::update_recursive(const bool recursive) {
     }
 
     callback_t saved_callback;
-    auto saved_events = file_watch_event::ALL;
+    auto saved_events = file_watch_event::all;
     {
         lock<mutex> lock(callback_mutex_);
         saved_callback = callback_;

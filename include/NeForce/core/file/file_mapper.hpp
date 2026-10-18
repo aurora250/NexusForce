@@ -44,12 +44,8 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API file_mapper {
 public:
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type = ::DWORD; ///< 大小类型
-#else
-    using size_type = size_t; ///< 大小类型
-#endif
-
+    using size_type = unsigned long;                        ///< 大小类型
+    using difference_type = int64_t;                        ///< 偏移量类型
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
     /**
@@ -62,7 +58,7 @@ public:
         void* address = nullptr;                ///< 映射起始地址
         size_type size = 0;                     ///< 映射大小（字节）
         size_type offset = 0;                   ///< 映射起始偏移
-        file_access access = file_access::READ; ///< 访问权限
+        file_access access = file_access::read; ///< 访问权限
         bool is_mapped = false;                 ///< 是否已映射
     };
 
@@ -71,7 +67,7 @@ private:
     void* ptr_ = nullptr;
     size_type size_ = 0;
     size_type offset_ = 0;
-    file_access access_ = file_access::READ;
+    file_access access_ = file_access::read;
     mutable mutex mutex_;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -126,8 +122,8 @@ public:
      * @note 映射后可以通过data()指针直接访问文件内容。
      * @note 写操作可能需要权限。
      */
-    bool map(size_type offset = 0, size_type size = 0, file_access access = file_access::READ,
-             file_map_hint hint = file_map_hint::SEQUENTIAL);
+    bool map(size_type offset = 0, size_type size = 0, file_access access = file_access::read,
+             file_map_hint hint = file_map_hint::sequential);
 
     /**
      * @brief 解除映射

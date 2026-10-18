@@ -367,7 +367,7 @@ http_client_response http_client::do_request(http_client_request request, int re
         if (client_.is_connected()) {
             client_.disconnect();
         }
-        ssl_context ctx(ssl_method::TLS_CLIENT);
+        ssl_context ctx(ssl_method::tls_client);
         client_.set_verify_peer(config_.verify_ssl);
         client_.set_ssl_context(move(ctx));
     }
@@ -738,7 +738,7 @@ bool http_client::download_file(const string& url, path output, const bool is_bi
             return false;
         }
 
-        file f(move(output), false, file_access::READ_WRITE, file_shared::SHARE_READ, file_creation::CREATE_FORCE);
+        file f(move(output), false, file_access::read_write, file_shared::share_read, file_creation::create_force);
 
         if (!f.is_opened()) {
             return false;

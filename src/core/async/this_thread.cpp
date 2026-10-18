@@ -1,6 +1,5 @@
 #include <NeForce/core/async/this_thread.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
-#include <algorithm>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <windef.h>
 #    include <WinBase.h>

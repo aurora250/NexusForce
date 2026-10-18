@@ -28,6 +28,14 @@ string(JSON CONFIG_ENABLE_SQLITE3    GET ${JSON_CONTENT} dependency sqlite3    s
 string(JSON CONFIG_ENABLE_HIREDIS    GET ${JSON_CONTENT} dependency hiredis    switch)
 string(JSON CONFIG_ENABLE_ZLIB       GET ${JSON_CONTENT} dependency zlib       switch)
 string(JSON CONFIG_ENABLE_LZ4        GET ${JSON_CONTENT} dependency lz4        switch)
+string(JSON CONFIG_ENABLE_ICU        GET ${JSON_CONTENT} dependency icu        switch)
+
+# The locale component can be dropped entirely, which is what small embedded builds want:
+# the key is optional so that an older config.json keeps the component enabled.
+string(JSON CONFIG_ENABLE_LOCALE ERROR_VARIABLE _config_locale_error GET ${JSON_CONTENT} feature locale)
+if(_config_locale_error)
+    set(CONFIG_ENABLE_LOCALE ON)
+endif()
 
 string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
 string(JSON CONFIG_USING_INTEL_TSX   GET ${JSON_CONTENT} feature intel-tsx)
@@ -178,6 +186,12 @@ option(NEXUSFORCE_ENABLE_SQLITE3    "Enable SQLite3 database support"    ${CONFI
 option(NEXUSFORCE_ENABLE_REDIS      "Enable Redis database support"      ${CONFIG_ENABLE_HIREDIS})
 option(NEXUSFORCE_ENABLE_ZLIB       "Enable zlib compression support"    ${CONFIG_ENABLE_ZLIB})
 option(NEXUSFORCE_ENABLE_LZ4        "Enable lz4 compression support"     ${CONFIG_ENABLE_LZ4})
+option(NEXUSFORCE_ENABLE_ICU        "Enable ICU4C locale support"        ${CONFIG_ENABLE_ICU})
+option(NEXUSFORCE_ENABLE_LOCALE     "Build the locale component"               ${CONFIG_ENABLE_LOCALE})
+
+if(NOT NEXUSFORCE_ENABLE_LOCALE AND NEXUSFORCE_ENABLE_ICU)
+    set(NEXUSFORCE_ENABLE_ICU OFF)
+endif()
 
 option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"                   ${CONFIG_USING_SSO})
 option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                          ${CONFIG_USING_INTEL_TSX})
@@ -255,9 +269,10 @@ message(STATUS "  NEXUSFORCE_ENABLE_SQLITE3:      ${NEXUSFORCE_ENABLE_SQLITE3}")
 message(STATUS "  NEXUSFORCE_ENABLE_REDIS:        ${NEXUSFORCE_ENABLE_REDIS}")
 message(STATUS "  NEXUSFORCE_ENABLE_ZLIB:         ${NEXUSFORCE_ENABLE_ZLIB}")
 message(STATUS "  NEXUSFORCE_ENABLE_LZ4:          ${NEXUSFORCE_ENABLE_LZ4}")
+message(STATUS "  NEXUSFORCE_ENABLE_LOCALE:       ${NEXUSFORCE_ENABLE_LOCALE}")
+message(STATUS "  NEXUSFORCE_ENABLE_ICU:          ${NEXUSFORCE_ENABLE_ICU}")
 message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ON (NECESSARY)")
 message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON (NECESSARY)")
-message(STATUS "  NEXUSFORCE_ENABLE_ICU:          ON (NECESSARY)")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
 message(STATUS "  NEXUSFORCE_USING_INTEL_TSX:     ${NEXUSFORCE_USING_INTEL_TSX}")
@@ -293,6 +308,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/lib/$<CONFIG>")
 
 set(NEXUSFORCE_SQLCIPHER_LINKED FALSE)
 set(NEXUSFORCE_URING_LINKED FALSE)
+set(NEXUSFORCE_ICU_LINKED FALSE)
 
 
 include(cmake/NexusForceReflectScanner.cmake)
@@ -333,6 +349,8 @@ set(PACKAGE_VERSION_VARS
         NEXUSFORCE_ENABLE_REDIS
         NEXUSFORCE_ENABLE_ZLIB
         NEXUSFORCE_ENABLE_LZ4
+        NEXUSFORCE_ENABLE_ICU
+        NEXUSFORCE_ENABLE_LOCALE
 
         NEXUSFORCE_USING_SSO
         NEXUSFORCE_USING_INTEL_TSX
@@ -343,6 +361,7 @@ set(PACKAGE_VERSION_VARS
 
         NEXUSFORCE_SQLCIPHER_LINKED
         NEXUSFORCE_URING_LINKED
+        NEXUSFORCE_ICU_LINKED
 )
 
 foreach(_var ${PACKAGE_VERSION_VARS})

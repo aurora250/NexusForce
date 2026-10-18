@@ -132,8 +132,8 @@ struct async_result<detached_t, void(Args...)> {
             try {
                 inner_(args...);
                 // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
             }
         }
     };

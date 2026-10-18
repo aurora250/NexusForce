@@ -28,27 +28,23 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @enum float_denorm_type
  * @brief 浮点数次正规化状态
- *
- * 描述浮点数类型是否支持次正规化（denormalized）值。
  */
 enum class float_denorm_type {
-    INDETERMINATE = -1, ///< 状态不确定
-    ABSENT,             ///< 不支持次正规化
-    PRESENT             ///< 支持次正规化
+    indeterminate = -1, ///< 状态不确定
+    absent,             ///< 不支持次正规化
+    present             ///< 支持次正规化
 };
 
 /**
  * @enum float_round_type
  * @brief 浮点数舍入模式
- *
- * 描述浮点数类型的舍入方式。
  */
 enum class float_round_type {
-    INDETERMINATE = -1, ///< 舍入方式不确定
-    TOWARD_ZERO,        ///< 向零舍入（截断）
-    TO_NEAREST,         ///< 向最近值舍入（四舍五入）
-    TOWARD_INFINITY,    ///< 向正无穷舍入（向上取整）
-    TOWARD_NEG_INFINITY ///< 向负无穷舍入（向下取整）
+    indeterminate = -1, ///< 舍入方式不确定
+    toward_zero,        ///< 向零舍入（截断）
+    to_nearest,         ///< 向最近值舍入（四舍五入）
+    toward_infinity,    ///< 向正无穷舍入（向上取整）
+    toward_neg_infinity ///< 向负无穷舍入（向下取整）
 };
 
 /// @cond
@@ -61,8 +57,8 @@ NEFORCE_BEGIN_INNER__
  * 提供数值类型的默认特性值，大多数特性初始化为false或0。
  */
 struct numeric_base {
-    static constexpr auto has_denorm = float_denorm_type::ABSENT;      ///< 是否支持次正规化值
-    static constexpr auto round_style = float_round_type::TOWARD_ZERO; ///< 舍入方式
+    static constexpr auto has_denorm = float_denorm_type::absent;      ///< 是否支持次正规化值
+    static constexpr auto round_style = float_round_type::toward_zero; ///< 舍入方式
     static constexpr bool has_denorm_loss = false;                     ///< 精度损失时是否可能产生次正规化值
     static constexpr bool has_infinity = false;                        ///< 是否有无穷大表示
     static constexpr bool has_quiet_nan = false;                       ///< 是否有安静NaN表示
@@ -112,8 +108,8 @@ struct numeric_int_base : numeric_base {
  * numeric_base，为浮点数类型设置适当的默认值。
  */
 struct numeric_float_base : numeric_base {
-    static constexpr auto has_denorm = float_denorm_type::PRESENT;    ///< 浮点数支持次正规化
-    static constexpr auto round_style = float_round_type::TO_NEAREST; ///< 浮点数通常向最近值舍入
+    static constexpr auto has_denorm = float_denorm_type::present;    ///< 浮点数支持次正规化
+    static constexpr auto round_style = float_round_type::to_nearest; ///< 浮点数通常向最近值舍入
     static constexpr bool has_infinity = true;                        ///< 浮点数有无穷大表示
     static constexpr bool has_quiet_nan = true;                       ///< 浮点数有安静nan表示
     static constexpr bool has_signaling_nan = true;                   ///< 浮点数有信号nan表示

@@ -111,7 +111,7 @@ int main() {
 
     // ---- 2. h2 (TLS + ALPN) ----
     println("\n[2/2] Starting h2 server on port 8443...");
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     optional<http_server> h2_server;
 
     // 自动生成自签名证书（如不存在）

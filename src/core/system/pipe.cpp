@@ -55,9 +55,9 @@ pipe::pipe(bool inheritable, bool nonblocking) {
     }
 
     if (nonblocking) {
-        int flags0 = ::fcntl(fds_[0], F_GETFL, 0);
+        const int flags0 = ::fcntl(fds_[0], F_GETFL, 0);
         ::fcntl(fds_[0], F_SETFL, flags0 | O_NONBLOCK);
-        int flags1 = ::fcntl(fds_[1], F_GETFL, 0);
+        const int flags1 = ::fcntl(fds_[1], F_GETFL, 0);
         ::fcntl(fds_[1], F_SETFL, flags1 | O_NONBLOCK);
         nonblocking_ = true;
     }
@@ -220,7 +220,7 @@ bool pipe::set_nonblocking(bool v) noexcept {
     return true;
 #else
     if (fds_[0] >= 0) {
-        int flags = ::fcntl(fds_[0], F_GETFL, 0);
+        const int flags = ::fcntl(fds_[0], F_GETFL, 0);
         if (flags < 0) {
             return false;
         }
@@ -229,7 +229,7 @@ bool pipe::set_nonblocking(bool v) noexcept {
         }
     }
     if (fds_[1] >= 0) {
-        int flags = ::fcntl(fds_[1], F_GETFL, 0);
+        const int flags = ::fcntl(fds_[1], F_GETFL, 0);
         if (flags < 0) {
             return false;
         }
@@ -575,7 +575,7 @@ bool named_pipe::set_nonblocking(bool v) noexcept {
     if (fd_ < 0) {
         return false;
     }
-    int flags = ::fcntl(fd_, F_GETFL, 0);
+    const int flags = ::fcntl(fd_, F_GETFL, 0);
     if (flags < 0) {
         return false;
     }

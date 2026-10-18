@@ -18,22 +18,22 @@ pool_cfg_(pool_config) {
 
     switch (type) {
 #ifdef NEFORCE_SUPPORT_MYSQL
-        case db_type::MYSQL:
+        case db_type::mysql:
             factory_ = make_unique<mysql_factory>(config);
             break;
 #endif
 #ifdef NEFORCE_SUPPORT_SQLITE3
-        case db_type::SQLITE3:
+        case db_type::sqlite3:
             factory_ = make_unique<sqlite_factory>(config);
             break;
 #endif
 #ifdef NEFORCE_SUPPORT_HIREDIS
-        case db_type::REDIS:
+        case db_type::redis:
             factory_ = make_unique<redis_factory>(config);
             break;
 #endif
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
-        case db_type::POSTGRESQL:
+        case db_type::postgresql:
             factory_ = make_unique<pgsql_factory>(config);
             break;
 #endif

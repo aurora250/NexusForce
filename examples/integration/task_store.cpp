@@ -18,7 +18,7 @@ bool TaskStore::initialize() {
     cfg.acquire_timeout = milliseconds{5000};
 
     db_config db_cfg = db_config::for_sqlite("task_server.db");
-    pool_ = make_unique<database_pool>(db_type::SQLITE3, db_cfg, cfg);
+    pool_ = make_unique<database_pool>(db_type::sqlite3, db_cfg, cfg);
     pool_->warm_up(3);
 
     auto conn = pool_->get_tb_connect();

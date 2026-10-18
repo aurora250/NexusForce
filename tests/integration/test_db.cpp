@@ -348,7 +348,7 @@ protected:
 };
 
 TEST_F(SqlitePoolTest, AcquireAndQuery) {
-    database_pool pool{db_type::SQLITE3, config, {2, 2, 8, seconds{60}, milliseconds{5000}}};
+    database_pool pool{db_type::sqlite3, config, {2, 2, 8, seconds{60}, milliseconds{5000}}};
     EXPECT_TRUE(pool.is_running());
     auto conn = pool.get_tb_connect();
     ASSERT_NE(conn, nullptr);
@@ -360,7 +360,7 @@ TEST_F(SqlitePoolTest, AcquireAndQuery) {
 }
 
 TEST_F(SqlitePoolTest, TotalCountAndIdleCount) {
-    database_pool pool{db_type::SQLITE3, config, {1, 1, 8, seconds{60}, milliseconds{5000}}};
+    database_pool pool{db_type::sqlite3, config, {1, 1, 8, seconds{60}, milliseconds{5000}}};
     EXPECT_GE(pool.total_count(), 1);
     auto c1 = pool.get_connect();
     auto c2 = pool.get_connect();
@@ -368,14 +368,14 @@ TEST_F(SqlitePoolTest, TotalCountAndIdleCount) {
 }
 
 TEST_F(SqlitePoolTest, StopDeniesFurtherAcquires) {
-    database_pool pool{db_type::SQLITE3, config, {2, 2, 8, seconds{60}, milliseconds{3000}}};
+    database_pool pool{db_type::sqlite3, config, {2, 2, 8, seconds{60}, milliseconds{3000}}};
     pool.stop();
     EXPECT_FALSE(pool.is_running());
     EXPECT_EQ(pool.get_connect(), nullptr);
 }
 
 TEST_F(SqlitePoolTest, ConnectionReturnAndReuse) {
-    database_pool pool{db_type::SQLITE3, config, {1, 1, 8, seconds{60}, milliseconds{5000}}};
+    database_pool pool{db_type::sqlite3, config, {1, 1, 8, seconds{60}, milliseconds{5000}}};
     {
         auto conn = pool.get_connect();
         ASSERT_NE(conn, nullptr);
@@ -534,7 +534,7 @@ protected:
 TEST_F(MysqlPoolTest, AcquireAndOperate) {
     database_pool* pool;
     try {
-        pool = new database_pool{db_type::MYSQL, config, {2, 2, 8, seconds{60}, milliseconds{5000}}};
+        pool = new database_pool{db_type::mysql, config, {2, 2, 8, seconds{60}, milliseconds{5000}}};
     } catch (const database_exception&) {
         GTEST_SKIP() << "MySQL pool unavailable";
     }
@@ -707,7 +707,7 @@ protected:
 TEST_F(PgsqlPoolTest, AcquireAndOperate) {
     database_pool* pool;
     try {
-        pool = new database_pool{db_type::POSTGRESQL, config, {2, 2, 8, seconds{60}, milliseconds{5000}}};
+        pool = new database_pool{db_type::postgresql, config, {2, 2, 8, seconds{60}, milliseconds{5000}}};
     } catch (const database_exception&) {
         GTEST_SKIP() << "PostgreSQL pool unavailable";
     }
@@ -865,7 +865,7 @@ protected:
 TEST_F(RedisPoolTest, AcquireAndOperate) {
     database_pool* pool;
     try {
-        pool = new database_pool{db_type::REDIS, config, {2, 2, 8, seconds{60}, milliseconds{5000}}};
+        pool = new database_pool{db_type::redis, config, {2, 2, 8, seconds{60}, milliseconds{5000}}};
     } catch (const database_exception&) {
         GTEST_SKIP() << "Redis pool unavailable";
     }

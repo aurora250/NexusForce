@@ -8,7 +8,6 @@
 #else
 #    include <cerrno>
 #    include <cstdio>
-#    include <cstdlib>
 #    include <fcntl.h>
 #    include <sys/file.h>
 #    include <sys/socket.h>
@@ -44,9 +43,19 @@ namespace {
 } // namespace
 #endif
 
+
+daemon::daemon() :
+#ifdef NEFORCE_PLATFORM_WINDOWS
+pid_handle_(nullptr)
+#else
+pid_handle_(-1)
+#endif
+{
+}
+
 daemon::~daemon() {
     try {
-        if (state_ != daemon_state::stopped) {
+        if (state_ != state::stopped) {
             request_shutdown();
         }
         remove_pid_file();
@@ -62,12 +71,7 @@ bool daemon::daemonize(const string& work_dir) {
     return true;
 #else
     work_dir_ = work_dir;
-    return daemonize_impl();
-#endif
-}
 
-#ifndef NEFORCE_PLATFORM_WINDOWS
-bool daemon::daemonize_impl() noexcept {
     const ::pid_t pid = ::fork();
     if (pid < 0) {
         return false;
@@ -105,8 +109,8 @@ bool daemon::daemonize_impl() noexcept {
     }
 
     return true;
-}
 #endif
+}
 
 bool daemon::write_pid_file(const string& path) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -146,7 +150,7 @@ bool daemon::write_pid_file(const string& path) {
     const int len = ::snprintf(buf, sizeof(buf), "%d\n", static_cast<int>(process::current_id()));
     ignore = ::write(fd, buf, static_cast<size_t>(len));
 
-    pid_fd_ = fd;
+    pid_handle_ = fd;
     pid_path_ = path;
     return true;
 #endif
@@ -164,10 +168,10 @@ void daemon::remove_pid_file() {
         pid_path_.clear();
     }
 #else
-    if (pid_fd_ >= 0) {
-        ::flock(pid_fd_, LOCK_UN);
-        ::close(pid_fd_);
-        pid_fd_ = -1;
+    if (pid_handle_ >= 0) {
+        ::flock(pid_handle_, LOCK_UN);
+        ::close(pid_handle_);
+        pid_handle_ = -1;
         ::unlink(pid_path_.data());
         pid_path_.clear();
     }
@@ -211,7 +215,7 @@ bool daemon::add_child(const child_config& cfg) {
 
     unique_lock<mutex> lock(children_mutex_);
 
-    if (children_.find(cfg.name) != children_.end()) {
+    if (children_.contains(cfg.name)) {
         return false;
     }
 
@@ -387,11 +391,11 @@ void daemon::setup_signal_handlers() {
 }
 
 int daemon::run() {
-    if (state_ != daemon_state::stopped) {
+    if (state_ != state::stopped) {
         NEFORCE_THROW_EXCEPTION(daemon_exception("Daemon is already running"));
     }
 
-    state_ = daemon_state::starting;
+    state_ = state::starting;
 
     setup_signal_handlers();
 
@@ -409,15 +413,15 @@ int daemon::run() {
 
     start_all_children();
 
-    state_ = daemon_state::running;
+    state_ = state::running;
 
     constexpr uint32_t check_interval_ms = 500;
-    while (state_ == daemon_state::running || state_ == daemon_state::reloading) {
-        if (state_ == daemon_state::reloading) {
-            state_ = daemon_state::running;
+    while (state_ == state::running || state_ == state::reloading) {
+        if (state_ == state::reloading) {
+            state_ = state::running;
             if (on_reload_) {
                 if (!on_reload_()) {
-                    state_ = daemon_state::stopping;
+                    state_ = state::stopping;
                     break;
                 }
             }
@@ -426,7 +430,7 @@ int daemon::run() {
         const bool should_stop = shutdown_event_.wait(check_interval_ms);
 
         if (should_stop) {
-            state_ = daemon_state::stopping;
+            state_ = state::stopping;
             break;
         }
 
@@ -450,15 +454,15 @@ int daemon::run() {
 
     signal_guard_.reset();
 
-    state_ = daemon_state::stopped;
+    state_ = state::stopped;
     return 0;
 }
 
 void daemon::request_shutdown() { shutdown_event_.set(); }
 
 void daemon::request_reload() {
-    if (state_ == daemon_state::running) {
-        state_ = daemon_state::reloading;
+    if (state_ == state::running) {
+        state_ = state::reloading;
     }
     reload_event_.set();
 }
@@ -490,14 +494,22 @@ void daemon::watchdog_loop() {
     }
 }
 
+void daemon::notify_ready() {
 #ifdef NEFORCE_PLATFORM_LINUX
-
-void daemon::notify_ready() { sd_notify_impl("READY=1"); }
-
-void daemon::notify_status(const string& status) { sd_notify_impl("STATUS=" + status); }
-
-void daemon::notify_watchdog() { sd_notify_impl("WATCHDOG=1"); }
-
+    sd_notify_impl("READY=1");
 #endif
+}
+
+void daemon::notify_status(const string& status) {
+#ifdef NEFORCE_PLATFORM_LINUX
+    sd_notify_impl("STATUS=" + status);
+#endif
+}
+
+void daemon::notify_watchdog() {
+#ifdef NEFORCE_PLATFORM_LINUX
+    sd_notify_impl("WATCHDOG=1");
+#endif
+}
 
 NEFORCE_END_NAMESPACE__

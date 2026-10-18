@@ -63,13 +63,12 @@ uint8_t screen::register_hyperlink(const string& link) {
     return static_cast<uint8_t>(hyperlinks_.size());
 }
 
-const string& screen::hyperlink(const uint8_t id) const {
-    static const string empty;
+string_view screen::hyperlink(const uint8_t id) const noexcept {
     const size_t idx = static_cast<size_t>(id) - 1;
     if (id == 0 || idx >= hyperlinks_.size()) {
-        return empty;
+        return {};
     }
-    return hyperlinks_[idx];
+    return hyperlinks_[idx].view();
 }
 
 void screen::clear() {

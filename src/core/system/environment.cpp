@@ -100,7 +100,7 @@ flat_unordered_map<string, string> environment::all_envs() {
 #else
     for (char** env = ::environ; *env != nullptr; env++) {
         const string_view env_str(*env);
-        size_t eq_pos = env_str.find('=');
+        const size_t eq_pos = env_str.find('=');
         if (eq_pos != string::npos) {
             const string name = env_str.head(eq_pos);
             const string value = (eq_pos + 1 < env_str.length()) ? env_str.tail(eq_pos + 1) : "";

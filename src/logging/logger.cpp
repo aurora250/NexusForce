@@ -10,7 +10,7 @@ void mdc::put(const string& key, string value) { storage()[key] = move(value); }
 
 string mdc::get(const string& key) {
     auto& m = storage();
-    auto it = m.find(key);
+    const auto it = m.find(key);
     return it != m.end() ? it->second : "";
 }
 
@@ -42,7 +42,7 @@ void logger::update_effective_level() {
         effective_level_ = explicit_level_;
     }
 
-    for (auto& child: children_) {
+    for (const auto& child: children_) {
         if (child->explicit_level_ == INHERIT) {
             child->propagate_effective_level(effective_level_);
         }
@@ -51,7 +51,7 @@ void logger::update_effective_level() {
 
 void logger::propagate_effective_level(const log_level new_effective) {
     effective_level_ = new_effective;
-    for (auto& child: children_) {
+    for (const auto& child: children_) {
         if (child->explicit_level_ == INHERIT) {
             child->propagate_effective_level(new_effective);
         }
@@ -145,7 +145,7 @@ void logger::disable_async() {
     lock<mutex> slk(sinks_mutex_);
     for (auto& ev: remaining) {
         try {
-            for (auto& sink: sinks_) {
+            for (const auto& sink: sinks_) {
                 sink->log(ev);
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
@@ -376,7 +376,7 @@ void logger::flush() {
             lock<mutex> slk(sinks_mutex_);
             for (auto& ev: remaining) {
                 try {
-                    for (auto& sink: sinks_) {
+                    for (const auto& sink: sinks_) {
                         sink->log(ev);
                     }
                     // NOLINTNEXTLINE(bugprone-empty-catch)
@@ -416,7 +416,7 @@ shared_ptr<logger> logger_registry::create_logger(const string& name) {
     const auto dot_pos = name.rfind('.');
     if (dot_pos != string::npos) {
         const string parent_name = name.substr(0, dot_pos);
-        auto it = loggers_.find(parent_name);
+        const auto it = loggers_.find(parent_name);
         if (it != loggers_.end()) {
             it->second->register_child(new_logger);
         } else {
@@ -437,7 +437,7 @@ shared_ptr<logger> logger_registry::get_logger(const string& name) {
 
     {
         lock<mutex> lock(mutex_);
-        auto it = loggers_.find(name);
+        const auto it = loggers_.find(name);
         if (it != loggers_.end()) {
             auto ptr = it->second;
             return ptr;
@@ -450,7 +450,7 @@ shared_ptr<logger> logger_registry::get_logger(const string& name) {
     }
 
     lock<mutex> lock(mutex_);
-    auto it = loggers_.find(name);
+    const auto it = loggers_.find(name);
     if (it != loggers_.end()) {
         return it->second;
     }

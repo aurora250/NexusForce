@@ -176,7 +176,7 @@ void syslog_sink::log(const log_event& event) {
 }
 
 void syslog_sink::flush() {
-    // syslog 每次调用立即写入，无需显式 flush
+    // no need to flush for syslog
 }
 
 #endif // NEFORCE_PLATFORM_LINUX

@@ -36,18 +36,14 @@ namespace {
 
     const ::SSL_METHOD* convert_method(const ssl_method method) {
         switch (method) {
-            case ssl_method::TLS_CLIENT:
+            case ssl_method::tls_client:
                 return ::TLS_client_method();
-            case ssl_method::TLS_SERVER:
+            case ssl_method::tls_server:
                 return ::TLS_server_method();
-#ifdef OPENSSL_NO_DTLS
-            case ssl_method::TLS_SERVER_DTLS:
-            case ssl_method::TLS_CLIENT_DTLS:
-                return ::TLS_method();
-#else
-            case ssl_method::TLS_SERVER_DTLS:
+#ifndef OPENSSL_NO_DTLS
+            case ssl_method::dtls_server:
                 return ::DTLS_server_method();
-            case ssl_method::TLS_CLIENT_DTLS:
+            case ssl_method::dtls_client:
                 return ::DTLS_client_method();
 #endif
             default:
@@ -244,7 +240,7 @@ method_(method) {
                                     "TLS_CHACHA20_POLY1305_SHA256");
 #endif
 
-    if (method == ssl_method::TLS_CLIENT || method == ssl_method::TLS_CLIENT_DTLS) {
+    if (method == ssl_method::tls_client || method == ssl_method::dtls_client) {
         const bool ca_loaded = (::SSL_CTX_set_default_verify_paths(ctx) == 1);
         if (!ca_loaded) {
             static constexpr const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs",

@@ -1283,7 +1283,8 @@ public:
         try {
             datetime tmp = datetime::parse_RFC3339(view);
             this->swap(tmp);
-        } catch (...) {
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
             return false;
         }
         return true;
@@ -1362,7 +1363,8 @@ public:
         try {
             datetime tmp = datetime::parse_RFC1123(view);
             this->swap(tmp);
-        } catch (...) {
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
             return false;
         }
         return true;
@@ -1404,7 +1406,8 @@ public:
         try {
             datetime tmp = datetime::parse_ISO8601(view);
             this->swap(tmp);
-        } catch (...) {
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
             return false;
         }
         return true;
@@ -1553,9 +1556,11 @@ public:
 template <>
 struct formatter<datetime> {
     string operator()(const datetime& value, const format_options& options) const {
+#ifdef NEFORCE_SUPPORT_LOCALE
         if (options.loc != nullptr) {
             return options.loc->format_datetime(value, locale::date_style::medium, locale::time_style::medium);
         }
+#endif
         return value.to_ISO8601();
     }
 };

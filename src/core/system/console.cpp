@@ -297,7 +297,7 @@ void sys_console::beep_unsafe() const noexcept {
 #endif
 }
 
-void sys_console::flash_screen_unsafe() const noexcept {
+void sys_console::flash_screen_unsafe() const {
     if (!is_interactive() || !supports_colors()) {
         return;
     }
@@ -726,22 +726,26 @@ void sys_console::reset_color() noexcept {
 
 void sys_console::set_bold(const bool enable) noexcept {
     lock<mutex> lock(mutex_);
-    print_string_unsafe(enable ? "\033[1m" : "\033[22m");
+    const string_view control = enable ? "\033[1m" : "\033[22m";
+    print_string_unsafe(control);
 }
 
 void sys_console::set_underline(const bool enable) noexcept {
     lock<mutex> lock(mutex_);
-    print_string_unsafe(enable ? "\033[4m" : "\033[24m");
+    const string_view control = enable ? "\033[4m" : "\033[24m";
+    print_string_unsafe(control);
 }
 
 void sys_console::set_blink(const bool enable) noexcept {
     lock<mutex> lock(mutex_);
-    print_string_unsafe(enable ? "\033[5m" : "\033[25m");
+    const string_view control = enable ? "\033[5m" : "\033[25m";
+    print_string_unsafe(control);
 }
 
 void sys_console::set_reverse(const bool enable) noexcept {
     lock<mutex> lock(mutex_);
-    print_string_unsafe(enable ? "\033[7m" : "\033[27m");
+    const string_view control = enable ? "\033[7m" : "\033[27m";
+    print_string_unsafe(control);
 }
 
 void sys_console::reset_text_attributes() noexcept {
@@ -759,7 +763,7 @@ void sys_console::enable_alternate_screen_buffer(const bool enable) noexcept {
     if (enable == alt_buffer_active_) {
         return;
     }
-    const char* control = enable ? "\033[?1049h" : "\033[?1049l";
+    const string_view control = enable ? "\033[?1049h" : "\033[?1049l";
     print_string_unsafe(control);
     alt_buffer_active_ = enable;
 }
@@ -801,7 +805,7 @@ void sys_console::enable_mouse(const bool enable) noexcept {
     if (enable == mouse_enabled_) {
         return;
     }
-    const char* control = enable ? "\033[?1000h\033[?1003h\033[?1006h" : "\033[?1006l\033[?1003l\033[?1000l";
+    const string_view control = enable ? "\033[?1000h\033[?1003h\033[?1006h" : "\033[?1006l\033[?1003l\033[?1000l";
     print_string_unsafe(control);
     mouse_enabled_ = enable;
 }
@@ -960,7 +964,7 @@ void sys_console::hide_cursor(const bool enable) noexcept {
     cursor_info.bVisible = static_cast<::BOOL>(enable);
     ::SetConsoleCursorInfo(out_, &cursor_info);
 #else
-    const char* control = enable ? "\033[?25l" : "\033[?25h";
+    const string_view control = enable ? "\033[?25l" : "\033[?25h";
     print_string_unsafe(control);
 #endif
 }
@@ -1032,7 +1036,7 @@ bool sys_console::is_interactive() const noexcept {
 #endif
 }
 
-string sys_console::console_type() const {
+string sys_console::console_type() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return "windows_console";
 #else
@@ -1057,7 +1061,7 @@ void sys_console::beep() noexcept {
     beep_unsafe();
 }
 
-void sys_console::flash_screen() noexcept {
+void sys_console::flash_screen() {
     lock<mutex> lock(mutex_);
     flash_screen_unsafe();
 }
@@ -1140,7 +1144,7 @@ sys_console::console_size sys_console::query_cursor_position() {
         response += ch;
     }
 
-    size_t semi = response.find(';');
+    const size_t semi = response.find(';');
     if (semi == string::npos) {
         return console_size(0, 0);
     }

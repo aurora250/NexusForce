@@ -16,24 +16,24 @@ protected:
 };
 
 TEST_F(SslContextTest, DefaultConstructTlsServer) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_TRUE(ctx.is_valid());
     EXPECT_NE(ctx.native_handle(), nullptr);
 }
 
 TEST_F(SslContextTest, DefaultConstructTlsClient) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     EXPECT_TRUE(ctx.is_valid());
     EXPECT_NE(ctx.native_handle(), nullptr);
 }
 
 TEST_F(SslContextTest, DefaultConstructDtlsServer) {
-    ssl_context ctx(ssl_method::TLS_SERVER_DTLS);
+    ssl_context ctx(ssl_method::dtls_server);
     EXPECT_TRUE(ctx.is_valid());
 }
 
 TEST_F(SslContextTest, DefaultConstructDtlsClient) {
-    ssl_context ctx(ssl_method::TLS_CLIENT_DTLS);
+    ssl_context ctx(ssl_method::dtls_client);
     EXPECT_TRUE(ctx.is_valid());
 }
 
@@ -43,7 +43,7 @@ TEST_F(SslContextTest, BooleanConversion) {
 }
 
 TEST_F(SslContextTest, MoveConstructedContextIsValid) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     EXPECT_TRUE(ctx.is_valid());
     ssl_context moved(move(ctx));
     EXPECT_TRUE(moved.is_valid());
@@ -51,28 +51,28 @@ TEST_F(SslContextTest, MoveConstructedContextIsValid) {
 }
 
 TEST_F(SslContextTest, MoveAssignmentTransfersOwnership) {
-    ssl_context ctx1(ssl_method::TLS_CLIENT);
-    ssl_context ctx2(ssl_method::TLS_SERVER);
+    ssl_context ctx1(ssl_method::tls_client);
+    ssl_context ctx2(ssl_method::tls_server);
     ctx2 = move(ctx1);
     EXPECT_TRUE(ctx2.is_valid());
     EXPECT_FALSE(ctx1.is_valid());
 }
 
 TEST_F(SslContextTest, CloneProducesValidContext) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     auto cloned = ctx.clone();
     EXPECT_TRUE(cloned.is_valid());
     EXPECT_NE(cloned.native_handle(), nullptr);
 }
 
 TEST_F(SslContextTest, ClonePreservesMethod) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     auto cloned = ctx.clone();
     EXPECT_TRUE(cloned.is_valid());
 }
 
 TEST_F(SslContextTest, CloneSharedProducesValidPointer) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     auto ptr = ctx.clone_shared();
     ASSERT_NE(ptr, nullptr);
     EXPECT_TRUE(ptr->is_valid());
@@ -100,8 +100,8 @@ TEST_F(SslContextTest, SetOptions) {
 
 TEST_F(SslContextTest, SetVerifyMode) {
     ssl_context ctx;
-    EXPECT_NO_THROW(ctx.set_verify_mode(ssl_verify::PEER));
-    EXPECT_NO_THROW(ctx.set_verify_mode(ssl_verify::NONE));
+    EXPECT_NO_THROW(ctx.set_verify_mode(ssl_verify::peer));
+    EXPECT_NO_THROW(ctx.set_verify_mode(ssl_verify::none));
 }
 
 TEST_F(SslContextTest, RequireClientCertificate) {
@@ -130,7 +130,7 @@ TEST_F(SslContextTest, AlpnProtosValidList) {
 }
 
 TEST_F(SslContextTest, ServerContextDoesNotVerifyPeerByDefault) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_NO_THROW(ctx.require_client_certificate());
 }
 
@@ -179,13 +179,13 @@ TEST_F(SslStreamTest, DefaultConstructorIsNotValid) {
 }
 
 TEST_F(SslStreamTest, ConstructFromContextIsValid) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_TRUE(stream.is_valid());
 }
 
 TEST_F(SslStreamTest, ResetMakesStreamValid) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream;
     stream.reset(ctx);
     EXPECT_TRUE(stream.is_valid());
@@ -193,7 +193,7 @@ TEST_F(SslStreamTest, ResetMakesStreamValid) {
 
 TEST_F(SslStreamTest, ResetWithInvalidContextThrows) {
     ssl_stream stream;
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_context moved_from = move(ctx);
     EXPECT_THROW(stream.reset(ctx), ssl_exception);
 }
@@ -211,33 +211,33 @@ TEST_F(SslStreamTest, WriteWithoutInitReturnsMinusOne) {
 }
 
 TEST_F(SslStreamTest, ReadWithNullBufferReturnsMinusOne) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_EQ(stream.read(nullptr, 16), -1);
 }
 
 TEST_F(SslStreamTest, WriteWithNullBufferReturnsMinusOne) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_EQ(stream.write(nullptr, 16), -1);
 }
 
 TEST_F(SslStreamTest, ReadWithZeroSizeReturnsZero) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     char buf[16];
     EXPECT_EQ(stream.read(buf, 0), 0);
 }
 
 TEST_F(SslStreamTest, WriteWithZeroSizeReturnsZero) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     const char* data = "test";
     EXPECT_EQ(stream.write(data, 0), 0);
 }
 
 TEST_F(SslStreamTest, WriteWithNullBufferAndZeroSizeReturnsZero) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_EQ(stream.write(nullptr, 0), 0);
 }
@@ -248,7 +248,7 @@ TEST_F(SslStreamTest, SetFdWithoutInitThrows) {
 }
 
 TEST_F(SslStreamTest, SetFdInvalidHandleThrows) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_THROW(stream.set_fd(socket_base::invalid_handle), value_exception);
 }
@@ -274,7 +274,7 @@ TEST_F(SslStreamTest, SetSniHostnameWithoutInitThrows) {
 }
 
 TEST_F(SslStreamTest, SetSniHostnameEmptyThrows) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_THROW(stream.set_sni_hostname(""), value_exception);
 }
@@ -306,13 +306,13 @@ TEST_F(SslStreamTest, LastErrorInitiallyEmpty) {
 }
 
 TEST_F(SslStreamTest, NativeHandleOnValidStreamIsNotNull) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_NE(stream.native_handle(), nullptr);
 }
 
 TEST_F(SslStreamTest, ReleaseReturnsHandleAndNullifies) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     void* ssl = stream.release();
     EXPECT_NE(ssl, nullptr);
@@ -326,14 +326,14 @@ TEST_F(SslStreamTest, CloseIsSafeOnDefaultConstructed) {
 }
 
 TEST_F(SslStreamTest, CloseIsSafeAfterReset) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_NO_THROW(stream.close());
     EXPECT_FALSE(stream.is_valid());
 }
 
 TEST_F(SslStreamTest, MoveConstructorTransfersOwnership) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream1(ctx);
     EXPECT_TRUE(stream1.is_valid());
     ssl_stream stream2(move(stream1));
@@ -342,7 +342,7 @@ TEST_F(SslStreamTest, MoveConstructorTransfersOwnership) {
 }
 
 TEST_F(SslStreamTest, MoveAssignmentTransfersOwnership) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream1(ctx);
     ssl_stream stream2;
     stream2 = move(stream1);
@@ -356,7 +356,7 @@ TEST_F(SslStreamTest, ReadAllWithoutInitThrows) {
 }
 
 TEST_F(SslStreamTest, ReadAllZeroMaxSizeReturnsEmpty) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     auto result = stream.read_all(0);
     EXPECT_TRUE(result.empty());
@@ -369,13 +369,13 @@ TEST_F(SslStreamTest, WriteAllWithoutInitReturnsFalse) {
 }
 
 TEST_F(SslStreamTest, WriteAllNullDataReturnsFalse) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_FALSE(stream.write_all(nullptr, 16));
 }
 
 TEST_F(SslStreamTest, WriteAllZeroSizeReturnsTrue) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_stream stream(ctx);
     EXPECT_TRUE(stream.write_all("test", 0));
 }
@@ -426,20 +426,20 @@ TEST_F(SslSocketTest, SslConstAccessorThrowsWhenNotInitialized) {
 
 TEST_F(SslSocketTest, InitServerSslWithoutOpenThrows) {
     ssl_socket sock;
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_THROW(sock.init_server_ssl(ctx), value_exception);
 }
 
 TEST_F(SslSocketTest, InitClientSslWithoutOpenThrows) {
     ssl_socket sock;
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     EXPECT_THROW(sock.init_client_ssl(ctx, "localhost"), value_exception);
 }
 
 TEST_F(SslSocketTest, InitServerSslWithInvalidContextThrows) {
     ssl_socket sock;
     sock.open(ip_family::INET4);
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ssl_context moved_from = move(ctx);
     EXPECT_THROW(sock.init_server_ssl(ctx), ssl_exception);
     sock.close();
@@ -507,34 +507,34 @@ TEST_F(SslAcceptorTest, DefaultConstructor) {
 
 TEST_F(SslAcceptorTest, SetSslContextValid) {
     ssl_acceptor acceptor;
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_NO_THROW(acceptor.set_ssl_context(move(ctx)));
 }
 
 TEST_F(SslAcceptorTest, SetSslContextInvalidThrows) {
     ssl_acceptor acceptor;
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ssl_context moved_from = move(ctx);
     EXPECT_THROW(acceptor.set_ssl_context(move(ctx)), ssl_exception);
 }
 
 TEST_F(SslAcceptorTest, ContextAccessorReturnsRef) {
     ssl_acceptor acceptor;
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     acceptor.set_ssl_context(move(ctx));
     EXPECT_TRUE(acceptor.context().is_valid());
 }
 
 TEST_F(SslAcceptorTest, AcceptSslWithoutOpenThrows) {
     ssl_acceptor acceptor;
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     acceptor.set_ssl_context(move(ctx));
     EXPECT_THROW(ignore = acceptor.accept_ssl(), value_exception);
 }
 
 TEST_F(SslAcceptorTest, AcceptSslNonblockWithoutOpenReturnsNone) {
     ssl_acceptor acceptor;
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     acceptor.set_ssl_context(move(ctx));
     auto result = acceptor.accept_ssl_nonblock();
     EXPECT_FALSE(result.has_value());
@@ -872,7 +872,7 @@ TEST_F(SslClientTest, HasSslContextInitiallyFalse) {
 }
 
 TEST_F(SslClientTest, ConstructorWithSslContext) {
-    ssl_context ssl_ctx(ssl_method::TLS_CLIENT);
+    ssl_context ssl_ctx(ssl_method::tls_client);
     ssl_client client(ctx_, move(ssl_ctx));
     EXPECT_TRUE(client.has_ssl_context());
 }
@@ -885,14 +885,14 @@ TEST_F(SslClientTest, LoadCaFileCreatesContext) {
 
 TEST_F(SslClientTest, SetSslContextValid) {
     ssl_client client(ctx_);
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     EXPECT_NO_THROW(client.set_ssl_context(move(ctx)));
     EXPECT_TRUE(client.has_ssl_context());
 }
 
 TEST_F(SslClientTest, SetSslContextInvalidThrows) {
     ssl_client client(ctx_);
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_context moved_from = move(ctx);
     EXPECT_THROW(client.set_ssl_context(move(ctx)), ssl_exception);
 }
@@ -967,14 +967,14 @@ TEST_F(SslAlpnNegotiateTest, StreamWithoutSslReturnsEmpty) {
 }
 
 TEST_F(SslAlpnNegotiateTest, StreamBeforeHandshakeReturnsEmpty) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ssl_stream stream(ctx);
     auto alpn = stream.alpn_negotiated();
     EXPECT_TRUE(alpn.empty());
 }
 
 TEST_F(SslAlpnNegotiateTest, StreamWithClientContextNoHandshake) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ctx.set_alpn_protos({"h2", "http/1.1"});
     ssl_stream stream(ctx);
     auto alpn = stream.alpn_negotiated();
@@ -987,28 +987,28 @@ TEST_F(SslAlpnNegotiateTest, SocketWithoutSslReturnsEmpty) {
 }
 
 TEST_F(SslAlpnNegotiateTest, SocketWithSslNoHandshakeReturnsEmpty) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ssl_socket sock;
     EXPECT_TRUE(sock.get_alpn_negotiated().empty());
 }
 
 TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosH2) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_NO_THROW(ctx.set_alpn_protos({"h2", "http/1.1"}));
 }
 
 TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosHttp11Only) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_NO_THROW(ctx.set_alpn_protos({"http/1.1"}));
 }
 
 TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosEmpty) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_NO_THROW(ctx.set_alpn_protos({}));
 }
 
 TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosTwiceKeepsContextValid) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_NO_THROW(ctx.set_alpn_protos({"h2", "http/1.1"}));
     EXPECT_NO_THROW(ctx.set_alpn_protos({"h2"}));
     EXPECT_TRUE(ctx.is_valid());
@@ -1016,7 +1016,7 @@ TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosTwiceKeepsContextValid) {
 }
 
 TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosEmptyKeepsContextValid) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ctx.set_alpn_protos({"h2"});
     EXPECT_NO_THROW(ctx.set_alpn_protos({}));
     EXPECT_TRUE(ctx.is_valid());
@@ -1025,20 +1025,20 @@ TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosEmptyKeepsContextValid) {
 
 TEST_F(SslSocketTest, PrepareServerSslWithoutOpenThrows) {
     ssl_socket sock;
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_THROW(sock.prepare_server_ssl(ctx), value_exception);
 }
 
 TEST_F(SslSocketTest, PrepareClientSslWithoutOpenThrows) {
     ssl_socket sock;
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     EXPECT_THROW(sock.prepare_client_ssl(ctx), value_exception);
 }
 
 TEST_F(SslSocketTest, PrepareServerSslInvalidContextThrows) {
     ssl_socket sock;
     sock.open(ip_family::INET4);
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ssl_context moved_from = move(ctx);
     (void) moved_from;
     EXPECT_THROW(sock.prepare_server_ssl(ctx), ssl_exception);
@@ -1048,7 +1048,7 @@ TEST_F(SslSocketTest, PrepareServerSslInvalidContextThrows) {
 TEST_F(SslSocketTest, PrepareClientSslInvalidContextThrows) {
     ssl_socket sock;
     sock.open(ip_family::INET4);
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ssl_context moved_from = move(ctx);
     (void) moved_from;
     EXPECT_THROW(sock.prepare_client_ssl(ctx), ssl_exception);
@@ -1058,7 +1058,7 @@ TEST_F(SslSocketTest, PrepareClientSslInvalidContextThrows) {
 TEST_F(SslSocketTest, PrepareServerSslMarksSslWithoutHandshake) {
     ssl_socket sock;
     sock.open(ip_family::INET4);
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     EXPECT_NO_THROW(sock.prepare_server_ssl(ctx));
     EXPECT_TRUE(sock.is_ssl());
     sock.close();
@@ -1067,7 +1067,7 @@ TEST_F(SslSocketTest, PrepareServerSslMarksSslWithoutHandshake) {
 TEST_F(SslSocketTest, PrepareClientSslWithHostnameMarksSsl) {
     ssl_socket sock;
     sock.open(ip_family::INET4);
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     EXPECT_NO_THROW(sock.prepare_client_ssl(ctx, "localhost"));
     EXPECT_TRUE(sock.is_ssl());
     sock.close();
@@ -1207,14 +1207,14 @@ TEST_F(SslContextTest, MoveIntoByValueSinkDoesNotDoubleFree) {
         EXPECT_TRUE(ctx.is_valid());
         return ctx;
     };
-    ssl_context result = sink(ssl_context(ssl_method::TLS_CLIENT));
+    ssl_context result = sink(ssl_context(ssl_method::tls_client));
     EXPECT_TRUE(result.is_valid());
     EXPECT_TRUE(static_cast<bool>(result));
 }
 
 TEST_F(SslContextTest, MoveAssignmentNullsSourceAndKeepsTarget) {
-    ssl_context a(ssl_method::TLS_CLIENT);
-    ssl_context b(ssl_method::TLS_SERVER);
+    ssl_context a(ssl_method::tls_client);
+    ssl_context b(ssl_method::tls_server);
     b = move(a);
     EXPECT_TRUE(b.is_valid());
     EXPECT_FALSE(a.is_valid());

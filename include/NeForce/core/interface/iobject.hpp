@@ -51,7 +51,8 @@ public:
         T tmp;
         try {
             tmp = T::parse(str);
-        } catch (...) {
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
             return false;
         }
         static_cast<T&>(*this) = _NEFORCE move(tmp);

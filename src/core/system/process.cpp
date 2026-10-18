@@ -146,36 +146,6 @@ namespace {
     }
 
     bool has_pkexec() noexcept { return ::access("/usr/bin/pkexec", X_OK) == 0; }
-    bool has_sudo() noexcept { return ::access("/usr/bin/sudo", X_OK) == 0; }
-
-    char** build_elevated_argv(const string& tool, const string& executable, const vector<string>& args) {
-        vector<string> all_args;
-        all_args.push_back(tool);
-        if (tool == "/usr/bin/sudo") {
-            all_args.push_back("--");
-        }
-        all_args.push_back(executable);
-        for (const auto& a: args) {
-            all_args.push_back(a);
-        }
-
-        auto** argv = new char*[all_args.size() + 1];
-        for (size_t i = 0; i < all_args.size(); ++i) {
-            argv[i] = new char[all_args[i].length() + 1];
-            string_copy(argv[i], all_args[i].data());
-        }
-        argv[all_args.size()] = nullptr;
-        return argv;
-    }
-
-    void free_elevated_argv(char** argv) noexcept {
-        if (argv != nullptr) {
-            for (int i = 0; argv[i] != nullptr; ++i) {
-                delete[] argv[i];
-            }
-            delete[] argv;
-        }
-    }
 #endif
 } // namespace
 
@@ -1245,7 +1215,7 @@ string process::name(native_id_type process_id) {
 #else
     const path path("/proc/" + to_string(process_id) + "/comm");
     // set file_access::READ to read readonly process file
-    const file comm_file(path, false, file_access::READ);
+    const file comm_file(path, false, file_access::read);
 
     if (!comm_file.is_opened()) {
         return "";

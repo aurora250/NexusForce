@@ -130,7 +130,7 @@ constexpr pair<Iterator, Iterator> equal_range(Iterator first, Iterator last, co
  * - 否则 a 较大
  */
 template <typename T, typename Compare>
-constexpr const T& max(const T& a, const T& b, Compare comp) noexcept(noexcept(comp(a, b))) {
+NEFORCE_ALWAYS_INLINE constexpr const T& max(const T& a, const T& b, Compare comp) noexcept(noexcept(comp(a, b))) {
     return comp(a, b) ? b : a;
 }
 
@@ -142,7 +142,7 @@ constexpr const T& max(const T& a, const T& b, Compare comp) noexcept(noexcept(c
  * @return a和b中的较大者
  */
 template <typename T>
-constexpr const T& max(const T& a, const T& b) noexcept(noexcept(a < b)) {
+NEFORCE_ALWAYS_INLINE constexpr const T& max(const T& a, const T& b) noexcept(noexcept(a < b)) {
     return a < b ? b : a;
 }
 
@@ -160,7 +160,7 @@ constexpr const T& max(const T& a, const T& b) noexcept(noexcept(a < b)) {
  * - 否则 a 较小
  */
 template <typename T, typename Compare>
-constexpr const T& min(const T& a, const T& b, Compare comp) noexcept(noexcept(comp(b, a))) {
+NEFORCE_ALWAYS_INLINE constexpr const T& min(const T& a, const T& b, Compare comp) noexcept(noexcept(comp(b, a))) {
     return comp(b, a) ? b : a;
 }
 
@@ -172,7 +172,7 @@ constexpr const T& min(const T& a, const T& b, Compare comp) noexcept(noexcept(c
  * @return a和b中的较小者
  */
 template <typename T>
-constexpr const T& min(const T& a, const T& b) noexcept(noexcept(b < a)) {
+NEFORCE_ALWAYS_INLINE constexpr const T& min(const T& a, const T& b) noexcept(noexcept(b < a)) {
     return b < a ? b : a;
 }
 
@@ -547,6 +547,48 @@ constexpr pair<Iterator1, Iterator2> mismatch(Iterator1 first1, Iterator1 last1,
 template <typename Iterator1, typename Iterator2>
 constexpr pair<Iterator1, Iterator2> mismatch(Iterator1 first1, Iterator1 last1, Iterator2 first2) {
     return _NEFORCE mismatch(first1, last1, first2, _NEFORCE equal_to<>());
+}
+
+template <typename T, typename U>
+NEFORCE_ALWAYS_INLINE constexpr bool compare_equal(T t, U u) noexcept {
+    static_assert(is_standard_integral_v<T>, "T must be standard integer type");
+    static_assert(is_standard_integral_v<U>, "U must be standard integer type");
+
+    NEFORCE_IF_CONSTEXPR(is_signed_v<T> == is_signed_v<U>)
+    return t == u;
+    else NEFORCE_IF_CONSTEXPR(is_signed_v<T>) return t >= 0 && make_unsigned_t<T>(t) == u;
+    else return u >= 0 && t == make_unsigned_t<U>(u);
+}
+
+template <typename T, typename U>
+NEFORCE_ALWAYS_INLINE constexpr bool compare_not_equal(T t, U u) noexcept {
+    return !_NEFORCE compare_equal(t, u);
+}
+
+template <typename T, typename U>
+NEFORCE_ALWAYS_INLINE constexpr bool compare_less(T t, U u) noexcept {
+    static_assert(is_standard_integral_v<T>, "T must be standard integer type");
+    static_assert(is_standard_integral_v<U>, "U must be standard integer type");
+
+    NEFORCE_IF_CONSTEXPR(is_signed_v<T> == is_signed_v<U>)
+    return t < u;
+    else NEFORCE_IF_CONSTEXPR(is_signed_v<T>) return t < 0 || make_unsigned_t<T>(t) < u;
+    else return u >= 0 && t < make_unsigned_t<U>(u);
+}
+
+template <typename T, typename U>
+NEFORCE_ALWAYS_INLINE constexpr bool compare_greater(T t, U u) noexcept {
+    return _NEFORCE compare_less(u, t);
+}
+
+template <typename T, typename U>
+NEFORCE_ALWAYS_INLINE constexpr bool compare_less_equal(T t, U u) noexcept {
+    return !_NEFORCE compare_less(u, t);
+}
+
+template <typename T, typename U>
+NEFORCE_ALWAYS_INLINE constexpr bool compare_greater_equal(T t, U u) noexcept {
+    return !_NEFORCE compare_less(t, u);
 }
 
 /** @} */ // CompareAlgorithms

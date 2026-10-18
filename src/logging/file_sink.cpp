@@ -17,7 +17,7 @@ void file_sink::open_new_file() {
 
     filesystem::create_directories(p.parent_path());
 
-    if (!file_.open(move(p), true, file_access::WRITE, file_shared::SHARE_WRITE, file_creation::OPEN_FORCE)) {
+    if (!file_.open(move(p), true, file_access::write, file_shared::share_write, file_creation::open_force)) {
         NEFORCE_THROW_EXCEPTION(file_exception("Failed to open log file"));
     }
     current_size_ = file_.size();

@@ -365,33 +365,33 @@ bool regex_iterator::operator==(const regex_iterator& other) const noexcept {
 }
 
 void regex_token_iterator::find_next() {
-    if (state_ == state::END) {
+    if (state_ == state::end) {
         current_ = "";
         return;
     }
-    if (state_ == state::AFTER_LAST) {
+    if (state_ == state::after_last) {
         current_ = "";
-        state_ = state::END;
+        state_ = state::end;
         return;
     }
 
     if (index_ < 0) {
         switch (state_) {
-            case state::BEFORE_FIRST: {
+            case state::before_first: {
                 if (match_iterator_ != end_iterator_) {
                     constexpr size_t start = 0;
                     const size_t end = match_iterator_->position();
                     current_ = (start < end) ? subject_.view(start, end - start) : "";
                     last_pos_ = match_iterator_->position() + match_iterator_->length();
                     ++match_iterator_;
-                    state_ = state::BETWEEN_MATCHES;
+                    state_ = state::between_matches;
                 } else {
                     current_ = subject_.view();
-                    state_ = state::AFTER_LAST;
+                    state_ = state::after_last;
                 }
                 break;
             }
-            case state::BETWEEN_MATCHES: {
+            case state::between_matches: {
                 if (match_iterator_ != end_iterator_) {
                     const size_t start = last_pos_;
                     const size_t end = match_iterator_->position();
@@ -404,12 +404,12 @@ void regex_token_iterator::find_next() {
                     } else {
                         current_ = "";
                     }
-                    state_ = state::AFTER_LAST;
+                    state_ = state::after_last;
                 }
                 break;
             }
             default: {
-                state_ = state::END;
+                state_ = state::end;
                 current_ = "";
                 break;
             }
@@ -418,7 +418,7 @@ void regex_token_iterator::find_next() {
     }
 
     switch (state_) {
-        case state::BEFORE_FIRST: {
+        case state::before_first: {
             if (match_iterator_ != end_iterator_) {
                 if (static_cast<size_t>(index_) < match_iterator_->size()) {
                     current_ = (*match_iterator_)[index_];
@@ -426,14 +426,14 @@ void regex_token_iterator::find_next() {
                     current_ = "";
                 }
                 ++match_iterator_;
-                state_ = state::BETWEEN_MATCHES;
+                state_ = state::between_matches;
             } else {
-                state_ = state::END;
+                state_ = state::end;
                 current_ = "";
             }
             break;
         }
-        case state::BETWEEN_MATCHES: {
+        case state::between_matches: {
             if (match_iterator_ != end_iterator_) {
                 if (static_cast<size_t>(index_) < match_iterator_->size()) {
                     current_ = (*match_iterator_)[index_];
@@ -442,12 +442,12 @@ void regex_token_iterator::find_next() {
                 }
                 ++match_iterator_;
             } else {
-                state_ = state::END;
+                state_ = state::end;
             }
             break;
         }
         default: {
-            state_ = state::END;
+            state_ = state::end;
             current_ = "";
             break;
         }
@@ -463,32 +463,32 @@ index_(index) {
         end_iterator_ = regex_->end(subject_);
 
         if (index_ >= 0) {
-            state_ = state::BEFORE_FIRST;
+            state_ = state::before_first;
             find_next();
         } else {
             if (match_iterator_ == end_iterator_) {
                 current_ = subject_.view();
-                state_ = state::AFTER_LAST;
+                state_ = state::after_last;
             } else {
-                state_ = state::BEFORE_FIRST;
+                state_ = state::before_first;
                 find_next();
             }
         }
     } else {
-        state_ = state::END;
+        state_ = state::end;
         current_ = "";
     }
 }
 
 regex_token_iterator& regex_token_iterator::operator++() {
-    if (state_ != state::END) {
+    if (state_ != state::end) {
         find_next();
     }
     return *this;
 }
 
 bool regex_token_iterator::operator==(const regex_token_iterator& other) const noexcept {
-    if (state_ == state::END && other.state_ == state::END) {
+    if (state_ == state::end && other.state_ == state::end) {
         return true;
     }
     if (state_ != other.state_) {

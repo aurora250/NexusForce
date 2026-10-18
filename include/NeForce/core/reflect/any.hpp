@@ -101,11 +101,11 @@ private:
      * @brief 管理器操作类型枚举
      */
     enum class operation : uint8_t {
-        ACCESS,      ///< 获取值指针
-        GET_TYPE_ID, ///< 获取类型 ID
-        COPY,        ///< 深拷贝到另一个 meta_any
-        DESTROY,     ///< 销毁存储的值
-        MOVE,        ///< 移动构造到另一个 meta_any
+        access,      ///< 获取值指针
+        get_type_id, ///< 获取类型 ID
+        copy,        ///< 深拷贝到另一个 meta_any
+        destroy,     ///< 销毁存储的值
+        move,        ///< 移动构造到另一个 meta_any
     };
 
     /**
@@ -166,23 +166,23 @@ private:
         static void manage(const operation op, const meta_any* self, arg_t* arg) {
             auto* ptr = access(self->storage_);
             switch (op) {
-                case operation::ACCESS: {
+                case operation::access: {
                     arg->obj_ptr_ = static_cast<void*>(ptr);
                     break;
                 }
-                case operation::GET_TYPE_ID: {
+                case operation::get_type_id: {
                     arg->type_id_val_ = type_id_val();
                     break;
                 }
-                case operation::COPY: {
+                case operation::copy: {
                     copy_op(self, arg);
                     break;
                 }
-                case operation::DESTROY: {
+                case operation::destroy: {
                     ptr->~T();
                     break;
                 }
-                case operation::MOVE: {
+                case operation::move: {
                     move_op(self, arg);
                     break;
                 }
@@ -220,23 +220,23 @@ private:
         static void manage(const operation op, const meta_any* self, arg_t* arg) {
             auto* ptr = access(self->storage_);
             switch (op) {
-                case operation::ACCESS: {
+                case operation::access: {
                     arg->obj_ptr_ = static_cast<void*>(ptr);
                     break;
                 }
-                case operation::GET_TYPE_ID: {
+                case operation::get_type_id: {
                     arg->type_id_val_ = type_id_val();
                     break;
                 }
-                case operation::COPY: {
+                case operation::copy: {
                     copy_op(self, arg);
                     break;
                 }
-                case operation::DESTROY: {
+                case operation::destroy: {
                     delete ptr;
                     break;
                 }
-                case operation::MOVE: {
+                case operation::move: {
                     arg->any_ptr_->storage_.ptr_ = self->storage_.ptr_;
                     arg->any_ptr_->manage_ = &manage;
                     arg->any_ptr_->type_id_ = type_id_val();
@@ -262,7 +262,7 @@ private:
 
     void reset_internal() noexcept {
         if (manage_ != nullptr) {
-            manage_(operation::DESTROY, this, nullptr);
+            manage_(operation::destroy, this, nullptr);
             manage_ = nullptr;
         }
         type_id_ = 0;
@@ -314,7 +314,7 @@ public:
         if (other.manage_ != nullptr) {
             arg_t arg;
             arg.any_ptr_ = this;
-            other.manage_(operation::COPY, &other, &arg);
+            other.manage_(operation::copy, &other, &arg);
         }
     }
 
@@ -326,7 +326,7 @@ public:
         if (other.manage_ != nullptr) {
             arg_t arg;
             arg.any_ptr_ = this;
-            other.manage_(operation::MOVE, &other, &arg);
+            other.manage_(operation::move, &other, &arg);
             other.manage_ = nullptr;
             other.type_id_ = 0;
         }
@@ -350,7 +350,7 @@ public:
         if (other.manage_ != nullptr) {
             arg_t arg;
             arg.any_ptr_ = this;
-            other.manage_(operation::COPY, &other, &arg);
+            other.manage_(operation::copy, &other, &arg);
         }
         return *this;
     }
@@ -368,7 +368,7 @@ public:
         if (other.manage_ != nullptr) {
             arg_t arg;
             arg.any_ptr_ = this;
-            other.manage_(operation::MOVE, &other, &arg);
+            other.manage_(operation::move, &other, &arg);
             other.manage_ = nullptr;
             other.type_id_ = 0;
         }
@@ -404,7 +404,7 @@ public:
             return nullptr;
         }
         arg_t arg;
-        manage_(operation::ACCESS, this, &arg);
+        manage_(operation::access, this, &arg);
         return static_cast<T*>(arg.obj_ptr_);
     }
 
@@ -419,7 +419,7 @@ public:
             return nullptr;
         }
         arg_t arg;
-        manage_(operation::ACCESS, this, &arg);
+        manage_(operation::access, this, &arg);
         return static_cast<const T*>(arg.obj_ptr_);
     }
 
@@ -487,7 +487,7 @@ public:
             return nullptr;
         }
         arg_t arg;
-        manage_(operation::ACCESS, this, &arg);
+        manage_(operation::access, this, &arg);
         return arg.obj_ptr_;
     }
 
@@ -499,7 +499,7 @@ public:
             return nullptr;
         }
         arg_t arg;
-        manage_(operation::ACCESS, this, &arg);
+        manage_(operation::access, this, &arg);
         return arg.obj_ptr_;
     }
 

@@ -307,7 +307,7 @@ void file_async::ensure_iocp(io_context& ctx) {
             }
 
             for (auto& entry: done) {
-                auto& op = entry.op;
+                const auto& op = entry.op;
                 op->magic = 0;
                 // Balance the work_started() issued at submission.
                 if (ctx_ != nullptr) {
@@ -489,7 +489,7 @@ void file_async::do_async_read(io_context& ctx, string& buffer, const size_type 
 #    endif
     // offload the blocking positioned read onto a worker thread.
     {
-        auto op = make_shared<sync_io_op>();
+        const auto op = make_shared<sync_io_op>();
         op->ctx = ctx_;
         op->fd = handle_;
         op->offset = static_cast<off_t>(offset >= 0 ? offset : ::lseek64(handle_, 0, SEEK_CUR));
@@ -652,7 +652,7 @@ void file_async::do_async_write(io_context& ctx, string data, size_type size, co
     }
 #    endif
     {
-        auto op = make_shared<sync_io_op>();
+        const auto op = make_shared<sync_io_op>();
         op->ctx = ctx_;
         op->fd = handle_;
         op->offset = static_cast<off_t>(offset >= 0 ? offset : ::lseek64(handle_, 0, SEEK_CUR));

@@ -54,13 +54,13 @@ TEST_F(SslEchoIntegration, SslEchoRoundtrip) {
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     thread server_thread([&]() { run_ssl_echo_server(acceptor, server_ctx); });
 
-    ssl_context client_ctx(ssl_method::TLS_CLIENT);
-    client_ctx.set_verify_mode(ssl_verify::NONE);
+    ssl_context client_ctx(ssl_method::tls_client);
+    client_ctx.set_verify_mode(ssl_verify::none);
 
     ssl_socket client;
     client.open();
@@ -88,7 +88,7 @@ TEST_F(SslEchoIntegration, SslMultipleMessages) {
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     thread server_thread([&]() {
@@ -110,8 +110,8 @@ TEST_F(SslEchoIntegration, SslMultipleMessages) {
         }
     });
 
-    ssl_context client_ctx(ssl_method::TLS_CLIENT);
-    client_ctx.set_verify_mode(ssl_verify::NONE);
+    ssl_context client_ctx(ssl_method::tls_client);
+    client_ctx.set_verify_mode(ssl_verify::none);
 
     ssl_socket client;
     client.open();
@@ -141,15 +141,15 @@ TEST_F(SslEchoIntegration, SslPeerCertificateInfo) {
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     latch ssl_ready(1);
 
     thread server_thread([&]() { run_ssl_echo_server(acceptor, server_ctx, &ssl_ready); });
 
-    ssl_context client_ctx(ssl_method::TLS_CLIENT);
-    client_ctx.set_verify_mode(ssl_verify::NONE);
+    ssl_context client_ctx(ssl_method::tls_client);
+    client_ctx.set_verify_mode(ssl_verify::none);
 
     ssl_socket client;
     client.open();
@@ -180,15 +180,15 @@ TEST_F(SslEchoIntegration, SslCipherAndProtocol) {
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     latch ssl_ready(1);
 
     thread server_thread([&]() { run_ssl_echo_server(acceptor, server_ctx, &ssl_ready); });
 
-    ssl_context client_ctx(ssl_method::TLS_CLIENT);
-    client_ctx.set_verify_mode(ssl_verify::NONE);
+    ssl_context client_ctx(ssl_method::tls_client);
+    client_ctx.set_verify_mode(ssl_verify::none);
 
     ssl_socket client;
     client.open();
@@ -216,7 +216,7 @@ protected:
 };
 
 TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ASSERT_TRUE(ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     ssl_acceptor acceptor;
@@ -230,8 +230,8 @@ TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
     latch server_done(1);
 
     thread client_thread([&]() {
-        ssl_context client_ctx(ssl_method::TLS_CLIENT);
-        client_ctx.set_verify_mode(ssl_verify::NONE);
+        ssl_context client_ctx(ssl_method::tls_client);
+        client_ctx.set_verify_mode(ssl_verify::none);
 
         ssl_socket client;
         client.open();
@@ -259,7 +259,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
 }
 
 TEST_F(SslAcceptorIntegration, AcceptSslNonblock) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ASSERT_TRUE(ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     ssl_acceptor acceptor;
@@ -274,8 +274,8 @@ TEST_F(SslAcceptorIntegration, AcceptSslNonblock) {
     latch server_done(1);
 
     thread client_thread([&]() {
-        ssl_context client_ctx(ssl_method::TLS_CLIENT);
-        client_ctx.set_verify_mode(ssl_verify::NONE);
+        ssl_context client_ctx(ssl_method::tls_client);
+        client_ctx.set_verify_mode(ssl_verify::none);
 
         ssl_socket client;
         client.open();
@@ -311,7 +311,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslNonblock) {
 }
 
 TEST_F(SslAcceptorIntegration, AcceptSslNonblockEmpty) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ASSERT_TRUE(ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     ssl_acceptor acceptor;
@@ -336,7 +336,7 @@ protected:
 };
 
 TEST_F(SslClientIntegration, ConnectWithSslContext) {
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     tcp_acceptor acceptor;
@@ -366,7 +366,7 @@ TEST_F(SslClientIntegration, ConnectWithSslContext) {
     });
 
     ssl_client client(ctx_);
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     client.set_verify_peer(false);
 
     ASSERT_TRUE(client.connect("127.0.0.1", bound->port()));
@@ -387,7 +387,7 @@ TEST_F(SslClientIntegration, ConnectWithSslContext) {
 }
 
 TEST_F(SslClientIntegration, PeerVerificationDisabled) {
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     tcp_acceptor acceptor;
@@ -411,7 +411,7 @@ TEST_F(SslClientIntegration, PeerVerificationDisabled) {
     ssl_client client(ctx_);
     EXPECT_TRUE(client.get_verify_peer());
 
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     client.set_verify_peer(false);
     EXPECT_FALSE(client.get_verify_peer());
 
@@ -439,7 +439,7 @@ TEST_F(SslClientIntegration, SniHostnameSetting) {
 }
 
 TEST_F(SslClientIntegration, CertificateInfoAfterConnect) {
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     tcp_acceptor acceptor;
@@ -460,7 +460,7 @@ TEST_F(SslClientIntegration, CertificateInfoAfterConnect) {
     });
 
     ssl_client client(ctx_);
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     client.set_verify_peer(false);
 
     ASSERT_TRUE(client.connect("127.0.0.1", bound->port()));
@@ -485,7 +485,7 @@ TEST_F(SslClientIntegration, HasSslContextCheck) {
     EXPECT_FALSE(client.has_ssl_context());
     EXPECT_FALSE(client.is_ssl_initialized());
 
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     EXPECT_TRUE(client.has_ssl_context());
 }
 
@@ -511,7 +511,7 @@ TEST_F(SslServerIntegration, StartWithCertificate) {
     EXPECT_TRUE(server.is_running());
 
     ssl_client client(ctx_);
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     client.set_verify_peer(false);
 
     ASSERT_TRUE(client.connect("127.0.0.1", server.port()));
@@ -560,7 +560,7 @@ TEST_F(SslServerIntegration, StopAndRestart) {
     EXPECT_TRUE(server.is_running());
 
     ssl_client client(ctx_);
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     client.set_verify_peer(false);
 
     ASSERT_TRUE(client.connect("127.0.0.1", server.port()));
@@ -579,7 +579,7 @@ TEST_F(SslServerIntegration, StopAndRestart) {
 TEST_F(SslServerIntegration, SetSslContextOverride) {
     ssl_server server(ports(0), ctx_, 2);
 
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ASSERT_TRUE(ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     server.set_ssl_context(move(ctx));
@@ -603,7 +603,7 @@ TEST_F(SslServerIntegration, CancelAsyncReadWrite) {
     ASSERT_TRUE(server.start());
 
     ssl_client client(ctx_);
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     client.set_verify_peer(false);
     ASSERT_TRUE(client.connect("127.0.0.1", server.port()));
 
@@ -635,7 +635,7 @@ TEST_F(SslEchoIntegration, AsyncHandshakeAndIoRoundtrip) {
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     latch server_ready(1);
@@ -687,8 +687,8 @@ TEST_F(SslEchoIntegration, AsyncHandshakeAndIoRoundtrip) {
         server_done.count_down();
     });
 
-    ssl_context client_ctx(ssl_method::TLS_CLIENT);
-    client_ctx.set_verify_mode(ssl_verify::NONE);
+    ssl_context client_ctx(ssl_method::tls_client);
+    client_ctx.set_verify_mode(ssl_verify::none);
 
     ssl_socket client;
     client.open();
@@ -746,7 +746,7 @@ TEST_F(SslEchoIntegration, AsyncHandshakeAndIoRoundtrip) {
 }
 
 TEST_F(SslAcceptorIntegration, AsyncAcceptCompletesHandshakeAndEcho) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ASSERT_TRUE(ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     ssl_acceptor acceptor;
@@ -766,8 +766,8 @@ TEST_F(SslAcceptorIntegration, AsyncAcceptCompletesHandshakeAndEcho) {
     });
 
     thread client_thread([&]() {
-        ssl_context client_ctx(ssl_method::TLS_CLIENT);
-        client_ctx.set_verify_mode(ssl_verify::NONE);
+        ssl_context client_ctx(ssl_method::tls_client);
+        client_ctx.set_verify_mode(ssl_verify::none);
 
         ssl_socket client;
         client.open();
@@ -812,7 +812,7 @@ TEST_F(SslAcceptorIntegration, AsyncAcceptCompletesHandshakeAndEcho) {
 }
 
 TEST_F(SslAcceptorIntegration, AsyncAcceptPreCancelledSlotAborts) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
     ASSERT_TRUE(ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     ssl_acceptor acceptor;
@@ -836,7 +836,7 @@ TEST_F(SslAcceptorIntegration, AsyncAcceptPreCancelledSlotAborts) {
 }
 
 TEST_F(SslClientIntegration, AsyncConnectEstablishesTls) {
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     tcp_acceptor acceptor;
@@ -865,7 +865,7 @@ TEST_F(SslClientIntegration, AsyncConnectEstablishesTls) {
     });
 
     ssl_client client(ctx_);
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     client.set_verify_peer(false);
 
     auto endpoint = ip_address::parse("127.0.0.1", bound->port());

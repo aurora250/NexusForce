@@ -1,7 +1,6 @@
 #include <NeForce/core/file/file_info.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <sys/stat.h>
-#    include <sys/time.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -41,13 +40,13 @@ file_attri file_info::attributes() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::BY_HANDLE_FILE_INFORMATION info{};
     if (::GetFileInformationByHandle(handle_, &info) == FALSE) {
-        return file_attri::OTHERS;
+        return file_attri::others;
     }
     return static_cast<file_attri>(info.dwFileAttributes);
 #else
     struct ::stat64 st{};
     if (::fstat64(handle_, &st) == -1) {
-        return file_attri::OTHERS;
+        return file_attri::others;
     }
     return static_cast<file_attri>(st.st_mode);
 #endif

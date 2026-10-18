@@ -31,7 +31,7 @@ namespace {
 
 int main() {
     // 创建SSL上下文（服务器模式）
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
 
     // 加载服务器证书和私钥
     if (!ctx.load_certificate(SERVER_CERT, SERVER_KEY)) {

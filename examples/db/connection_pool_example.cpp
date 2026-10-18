@@ -36,7 +36,7 @@ int main() {
     pool_cfg.acquire_timeout = milliseconds{5000};
 
     // 创建连接池
-    database_pool pool{db_type::SQLITE3, config, pool_cfg};
+    database_pool pool{db_type::sqlite3, config, pool_cfg};
     println("连接池已创建");
 
     auto print_stats = [&pool](const char* label) {

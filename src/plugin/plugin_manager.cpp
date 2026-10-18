@@ -42,7 +42,7 @@ size_t plugin_manager::load_plugins(const string& pth) {
 void plugin_manager::load_plugin(const string_view pth) {
     lock<mutex> lock(mutex_);
 
-    if (libraries_.count(pth) != 0U) {
+    if (libraries_.contains(pth)) {
         NEFORCE_THROW_EXCEPTION(system_exception("Plugin already loaded"));
     }
 
@@ -60,7 +60,7 @@ void plugin_manager::load_plugin(const string_view pth) {
     plugin_ptr plugin(raw_ptr, move(deleter));
 
     const string& name = plugin->get_info().name;
-    if (plugins_.count(name) != 0U) {
+    if (plugins_.contains(name)) {
         NEFORCE_THROW_EXCEPTION(system_exception("Plugin already exists"));
     }
 

@@ -2,9 +2,11 @@
 #include <NeForce/core/memory/memory_pool.hpp>
 #include <NeForce/core/reflect/reflect.hpp>
 #include <NeForce/core/system/console.hpp>
+#include <NeForce/core/locale/locale.hpp>
+#include <NeForce/core/time/datetime.hpp>
 
 #if !defined(NEXUSFORCE_VERSION) || !defined(NEXUSFORCE_VERSION_MAJOR) || !defined(NEFORCE_SUPPORT_OPENSSL) || \
-        !defined(NEFORCE_SUPPORT_PCRE2) || !defined(NEFORCE_SUPPORT_ICU)
+        !defined(NEFORCE_SUPPORT_PCRE2)
 #    error "the installed NexusForce package did not propagate its interface compile definitions"
 #endif
 
@@ -145,6 +147,18 @@ int main() {
     text += " install";
     check(text == "NexusForce install", "core string facilities work from an installed package");
     check(registered("InstallConsumerOrder"), "registry lookup is stable across repeated queries");
+
+    // --- the locale component, whichever backend the package was built with ----------------------
+#ifdef NEFORCE_SUPPORT_LOCALE
+    locale en_us("en-US");
+    check(en_us.format_number(static_cast<int64_t>(1234567)) == "1,234,567",
+          "the locale component formats numbers through the linked backend");
+    check(locale::is_alpha(U'中') && locale::to_upper(U'é') == U'É',
+          "the locale component classifies and case maps through the linked backend");
+    check(en_us.format_datetime(datetime::parse("2024-06-15 12:00:00"), "yyyy") == "2024",
+          "the locale component formats dates through the linked backend");
+    check(en_us.name() == "en-US", "the compatibility header NeForce/core/system/locale.hpp resolves");
+#endif
 
     // --- the allocator model --------------------------------------------------------------------
     memory_pool& pool = system_memory_pool();

@@ -75,6 +75,45 @@ if(NEXUSFORCE_USING_MEMORY_POOL AND NOT _nexusforce_interface_definitions MATCHE
             "while the library uses the pool")
 endif()
 
+# ICU is optional, so the package reports the option and whether ICU was actually linked separately.
+# The two must agree with what the target forwards: NEFORCE_SUPPORT_ICU present exactly when the
+# installed library contains the ICU locale backend, absent when it contains the built-in one.
+if(NOT DEFINED NEXUSFORCE_ICU_LINKED)
+    message(FATAL_ERROR "installed package does not report NEXUSFORCE_ICU_LINKED")
+endif()
+if(NEXUSFORCE_ICU_LINKED AND NOT _nexusforce_interface_definitions MATCHES "NEFORCE_SUPPORT_ICU")
+    message(FATAL_ERROR
+            "the installed package was built with ICU but does not forward NEFORCE_SUPPORT_ICU to "
+            "consumers: consumer code would compile against the built-in locale backend")
+endif()
+if(NOT NEXUSFORCE_ICU_LINKED AND _nexusforce_interface_definitions MATCHES "NEFORCE_SUPPORT_ICU")
+    message(FATAL_ERROR
+            "the installed package was built without ICU but still forwards NEFORCE_SUPPORT_ICU to "
+            "consumers: the consumer would expect the ICU locale backend that is not linked")
+endif()
+
+# The locale component itself can be dropped from the build, so the package reports that as well and
+# the forwarded definitions have to match: NEFORCE_SUPPORT_LOCALE exactly when it was compiled in.
+if(NOT DEFINED NEXUSFORCE_ENABLE_LOCALE)
+    message(FATAL_ERROR "installed package does not report NEXUSFORCE_ENABLE_LOCALE")
+endif()
+if(NEXUSFORCE_ENABLE_LOCALE AND NOT _nexusforce_interface_definitions MATCHES "NEFORCE_SUPPORT_LOCALE")
+    message(FATAL_ERROR
+            "the installed package reports the locale component as enabled but does not forward "
+            "NEFORCE_SUPPORT_LOCALE to consumers: consumer code would not see the component at all")
+endif()
+if(NOT NEXUSFORCE_ENABLE_LOCALE AND _nexusforce_interface_definitions MATCHES "NEFORCE_SUPPORT_LOCALE")
+    message(FATAL_ERROR
+            "the installed package was built without the locale component but still forwards "
+            "NEFORCE_SUPPORT_LOCALE to consumers: consumer code would expect a component that is "
+            "not part of the library")
+endif()
+if(NEXUSFORCE_ICU_LINKED AND NOT NEXUSFORCE_ENABLE_LOCALE)
+    message(FATAL_ERROR
+            "the installed package links ICU although the locale component is disabled: ICU is only "
+            "used by that component")
+endif()
+
 add_executable(install_consumer main.cpp)
 
 target_link_libraries(install_consumer PRIVATE NexusForce::NexusForce)

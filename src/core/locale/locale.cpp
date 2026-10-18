@@ -1,16 +1,18 @@
-#include <NeForce/core/system/locale.hpp>
+#include <NeForce/core/locale/locale.hpp>
 #include <NeForce/core/time/datetime.hpp>
-#include <unicode/uloc.h>
-#include <unicode/uchar.h>
-#include <unicode/ucol.h>
-#include <unicode/ucnv.h>
-#include <unicode/unum.h>
-#include <unicode/udat.h>
-#include <unicode/ulocdata.h>
-#include <unicode/ucal.h>
-#include <unicode/ustring.h>
-#include <unicode/uenum.h>
-#include <unicode/putil.h>
+#ifdef NEFORCE_SUPPORT_ICU
+#    include <unicode/uloc.h>
+#    include <unicode/uchar.h>
+#    include <unicode/ucol.h>
+#    include <unicode/ucnv.h>
+#    include <unicode/unum.h>
+#    include <unicode/udat.h>
+#    include <unicode/ucurr.h>
+#    include <unicode/ulocdata.h>
+#    include <unicode/ucal.h>
+#    include <unicode/ustring.h>
+#    include <unicode/uenum.h>
+#    include <unicode/putil.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -103,6 +105,16 @@ namespace {
         return result;
     }
 
+    string locale_currency(const char* locale_id) {
+        ::UErrorCode status = ::U_ZERO_ERROR;
+        ::UChar buffer[8] = {};
+        const int32_t length = ::ucurr_forLocale(locale_id, buffer, 8, &status);
+        if ((::U_FAILURE(status) != 0) || length <= 0) {
+            return "USD";
+        }
+        return icu_to_string(buffer, length);
+    }
+
     vector<string> enum_to_vector(::UEnumeration* en) {
         vector<string> result;
         if (en == nullptr) {
@@ -145,7 +157,12 @@ namespace {
         return static_cast<void*>(fmt);
     }
 
-    void* open_date_pattern_formatter(const char* locale_id, const char* pattern) {
+    const ::UChar* formatter_timezone(const datetime& dt) {
+        static const ::UChar utc_id[] = {0x45, 0x74, 0x63, 0x2F, 0x55, 0x54, 0x43, 0};
+        return dt.has_timezone() ? nullptr : utc_id;
+    }
+
+    void* open_date_pattern_formatter(const char* locale_id, const datetime& dt, const char* pattern) {
         ::UErrorCode status = U_ZERO_ERROR;
         const auto pattern_len = static_cast<int32_t>(string_length(pattern));
         vector<::UChar> upattern(static_cast<size_t>(pattern_len) + 1);
@@ -157,8 +174,8 @@ namespace {
             return nullptr;
         }
 
-        ::UDateFormat* fmt =
-                ::udat_open(::UDAT_IGNORE, ::UDAT_IGNORE, locale_id, nullptr, 0, upattern.data(), actual_len, &status);
+        ::UDateFormat* fmt = ::udat_open(::UDAT_IGNORE, ::UDAT_IGNORE, locale_id, formatter_timezone(dt), -1,
+                                         upattern.data(), actual_len, &status);
         if (::U_FAILURE(status) != 0) {
             return nullptr;
         }
@@ -420,11 +437,11 @@ int locale::compare(const string& a, const string& b, const collate_strength str
     }
 
     ::UErrorCode status = ::U_ZERO_ERROR;
-#if U_ICU_VERSION_MAJOR_NUM >= 71
+#    if U_ICU_VERSION_MAJOR_NUM >= 71
     ::UCollator* cloned = ::ucol_clone(col, &status);
-#else
+#    else
     ::UCollator* cloned = ::ucol_safeClone(col, nullptr, nullptr, &status);
-#endif
+#    endif
     if ((::U_FAILURE(status) != 0) || cloned == nullptr) {
         const int cmp = string_compare(a.data(), b.data());
         return (cmp < 0) ? -1 : (cmp > 0) ? 1 : 0;
@@ -665,8 +682,8 @@ string locale::format_currency(const double value, const string& iso_4217_code) 
 string locale::format_datetime(const datetime& dt, const date_style ds, const time_style ts) const {
     const ::UDate udate = datetime_to_udate(dt);
     ::UErrorCode status = ::U_ZERO_ERROR;
-    ::UDateFormat* fmt =
-            udat_open(to_udate_style(ds), to_utime_style(ts), name_.data(), nullptr, 0, nullptr, 0, &status);
+    ::UDateFormat* fmt = ::udat_open(to_utime_style(ts), to_udate_style(ds), name_.data(), formatter_timezone(dt), -1,
+                                     nullptr, 0, &status);
     if (::U_FAILURE(status) != 0) {
         return dt.to_string();
     }
@@ -688,7 +705,7 @@ string locale::format_datetime(const datetime& dt, const date_style ds, const ti
 
 string locale::format_datetime(const datetime& dt, const string& pattern) const {
     const ::UDate udate = datetime_to_udate(dt);
-    void* pat_fmt = open_date_pattern_formatter(name_.data(), pattern.data());
+    void* pat_fmt = open_date_pattern_formatter(name_.data(), dt, pattern.data());
     auto* fmt = static_cast<::UDateFormat*>(pat_fmt);
     if (fmt == nullptr) {
         return dt.to_string();
@@ -754,7 +771,20 @@ locale::numeric_info locale::numeric() const {
     ::unum_getSymbol(fmt, ::UNUM_PLUS_SIGN_SYMBOL, ubuf, 16, &status);
     info.plus_sign = icu_to_string(ubuf, -1);
 
-    info.grouping = "";
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_EXPONENTIAL_SYMBOL, ubuf, 16, &status);
+    info.exponential = icu_to_string(ubuf, -1);
+
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_NAN_SYMBOL, ubuf, 16, &status);
+    info.nan_symbol = icu_to_string(ubuf, -1);
+
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_INFINITY_SYMBOL, ubuf, 16, &status);
+    info.infinity_symbol = icu_to_string(ubuf, -1);
+
+    const int32_t grouping = ::unum_getAttribute(fmt, ::UNUM_GROUPING_SIZE);
+    info.grouping = (grouping > 0) ? to_string(static_cast<int64_t>(grouping)) : "";
 
     return info;
 }
@@ -763,7 +793,8 @@ locale::monetary_info locale::monetary() const {
     monetary_info info{};
     ::UErrorCode status = ::U_ZERO_ERROR;
 
-    auto* fmt = static_cast<::UNumberFormat*>(open_currency_formatter(icu_name_.data(), "USD"));
+    const string currency = locale_currency(name_.data());
+    auto* fmt = static_cast<::UNumberFormat*>(open_currency_formatter(icu_name_.data(), currency.data()));
     if (fmt == nullptr) {
         return info;
     }
@@ -785,6 +816,17 @@ locale::monetary_info locale::monetary() const {
     ::unum_getSymbol(fmt, ::UNUM_MONETARY_GROUPING_SEPARATOR_SYMBOL, ubuf, 16, &status);
     info.mon_thousands_sep = icu_to_string(ubuf, -1);
 
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_PLUS_SIGN_SYMBOL, ubuf, 16, &status);
+    info.positive_sign = icu_to_string(ubuf, -1);
+
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_MINUS_SIGN_SYMBOL, ubuf, 16, &status);
+    info.negative_sign = icu_to_string(ubuf, -1);
+
+    const int32_t monetary_grouping = ::unum_getAttribute(fmt, ::UNUM_GROUPING_SIZE);
+    info.mon_grouping = (monetary_grouping > 0) ? to_string(static_cast<int64_t>(monetary_grouping)) : "";
+
     info.frac_digits = ::unum_getAttribute(fmt, ::UNUM_MIN_FRACTION_DIGITS);
 
     ::unum_close(fmt);
@@ -795,7 +837,7 @@ locale::time_info locale::time() const {
     time_info info;
     ::UErrorCode status = ::U_ZERO_ERROR;
 
-    ::UDateFormat* dfmt = ::udat_open(::UDAT_MEDIUM, ::UDAT_NONE, name_.data(), nullptr, 0, nullptr, 0, &status);
+    ::UDateFormat* dfmt = ::udat_open(::UDAT_NONE, ::UDAT_MEDIUM, name_.data(), nullptr, 0, nullptr, 0, &status);
     if (::U_SUCCESS(status) != 0) {
         ::UChar ubuf[128] = {};
         const int32_t len = ::udat_toPattern(dfmt, 0, ubuf, 128, &status);
@@ -806,7 +848,7 @@ locale::time_info locale::time() const {
     }
 
     status = ::U_ZERO_ERROR;
-    ::UDateFormat* tfmt = ::udat_open(::UDAT_NONE, ::UDAT_MEDIUM, name_.data(), nullptr, 0, nullptr, 0, &status);
+    ::UDateFormat* tfmt = ::udat_open(::UDAT_MEDIUM, ::UDAT_NONE, name_.data(), nullptr, 0, nullptr, 0, &status);
     if (::U_SUCCESS(status) != 0) {
         UChar ubuf[128] = {};
         const int32_t len = ::udat_toPattern(tfmt, 0, ubuf, 128, &status);
@@ -831,14 +873,14 @@ locale::time_info locale::time() const {
     ::UDateFormat* sym_fmt = ::udat_open(::UDAT_FULL, ::UDAT_NONE, name_.data(), nullptr, 0, nullptr, 0, &status);
     if (::U_SUCCESS(status) != 0) {
         ::UChar ubuf[64] = {};
-        for (int i = 0; i < 7; ++i) {
+        for (int i = ::UCAL_SUNDAY; i <= ::UCAL_SATURDAY; ++i) {
             status = ::U_ZERO_ERROR;
             const int32_t len = ::udat_getSymbols(sym_fmt, ::UDAT_STANDALONE_WEEKDAYS, i, ubuf, 64, &status);
             if ((::U_SUCCESS(status) != 0) && len > 0) {
                 info.day_names.push_back(icu_to_string(ubuf, len));
             }
         }
-        for (int i = 0; i < 7; ++i) {
+        for (int i = ::UCAL_SUNDAY; i <= ::UCAL_SATURDAY; ++i) {
             status = ::U_ZERO_ERROR;
             const int32_t len = ::udat_getSymbols(sym_fmt, ::UDAT_STANDALONE_SHORT_WEEKDAYS, i, ubuf, 64, &status);
             if ((::U_SUCCESS(status) != 0) && len > 0) {
@@ -909,3 +951,4 @@ bool locale::is_valid_locale(const string& name) {
 }
 
 NEFORCE_END_NAMESPACE__
+#endif // NEFORCE_SUPPORT_ICU

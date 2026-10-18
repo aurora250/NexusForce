@@ -29,13 +29,9 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API file_info {
 public:
+    using size_type = unsigned long;                        ///< 大小类型
+    using difference_type = int64_t;                        ///< 偏移量类型
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type = ::DWORD; ///< 大小类型
-#else
-    using size_type = size_t; ///< 大小类型
-#endif
 
 private:
     native_handle_type handle_; ///< 文件句柄

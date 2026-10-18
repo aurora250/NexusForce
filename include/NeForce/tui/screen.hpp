@@ -89,18 +89,18 @@ struct cursor {
  * @brief 光标形状枚举
  */
     enum class shape : uint8_t {
-        Hidden,            ///< 隐藏光标
-        BlockBlinking,     ///< 闪烁块光标
-        Block,             ///< 块光标
-        UnderlineBlinking, ///< 闪烁下划线光标
-        Underline,         ///< 下划线光标
-        BarBlinking,       ///< 闪烁竖线光标
-        Bar,               ///< 竖线光标
+        hidden,             ///< 隐藏光标
+        block_blinking,     ///< 闪烁块光标
+        block,              ///< 块光标
+        underline_blinking, ///< 闪烁下划线光标
+        underline,          ///< 下划线光标
+        bar_blinking,       ///< 闪烁竖线光标
+        bar,                ///< 竖线光标
     };
 
     int x = 0;                   ///< 列坐标
     int y = 0;                   ///< 行坐标
-    shape shape = shape::Hidden; ///< 光标形状
+    shape shape = shape::hidden; ///< 光标形状
 };
 
 /**
@@ -212,7 +212,7 @@ public:
      * @param id 超链接句柄
      * @return URL 字符串
      */
-    NEFORCE_NODISCARD const string& hyperlink(uint8_t id) const;
+    NEFORCE_NODISCARD string_view hyperlink(uint8_t id) const noexcept;
 
     /**
      * @brief 生成 ANSI 转义序列

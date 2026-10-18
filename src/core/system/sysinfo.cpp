@@ -265,14 +265,14 @@ namespace {
         const auto* freq_key = "cpu MHz";
         const auto* cores_key = "cpu cores";
 
-        if (arch == sysinfo::architecture::RISCV32 || arch == sysinfo::architecture::RISCV64) {
+        if (arch == sysinfo::architecture::riscv32 || arch == sysinfo::architecture::riscv64) {
             vendor_key = "mvendorid";
             brand_key = "uarch";
             flags_key = "isa";
             features_key = nullptr;
             freq_key = nullptr;
             cores_key = nullptr;
-        } else if (arch == sysinfo::architecture::LOONGARCH64 || arch == sysinfo::architecture::LOONGARCH32) {
+        } else if (arch == sysinfo::architecture::loongarch64 || arch == sysinfo::architecture::loongarch32) {
             vendor_key = "CPU Family";
             brand_key = "Model Name";
             flags_key = "flags";
@@ -292,7 +292,7 @@ namespace {
             }
 
             if (line.starts_with("processor")) {
-                if (arch == sysinfo::architecture::RISCV32 || arch == sysinfo::architecture::RISCV64) {
+                if (arch == sysinfo::architecture::riscv32 || arch == sysinfo::architecture::riscv64) {
                     hart_count++;
                 }
                 continue;
@@ -365,7 +365,7 @@ namespace {
             }
         }
 
-        if (arch == sysinfo::architecture::RISCV32 || arch == sysinfo::architecture::RISCV64) {
+        if (arch == sysinfo::architecture::riscv32 || arch == sysinfo::architecture::riscv64) {
             cpu_info.logical_processors =
                     (hart_count > 0) ? hart_count : static_cast<uint32_t>(::sysconf(_SC_NPROCESSORS_ONLN));
         } else {
@@ -573,8 +573,9 @@ sysinfo::sysinfo() noexcept {
     try {
         lock<mutex> lock(sysinfo_mutex());
         init();
-    } catch (...) {
-        initialized_.store(false);
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
+        initialized_.store(false, memory_order_release);
     }
 }
 
@@ -599,23 +600,23 @@ void sysinfo::init() {
 
     switch (native_sys_info.wProcessorArchitecture) {
         case PROCESSOR_ARCHITECTURE_INTEL: {
-            architecture_ = architecture::X86;
+            architecture_ = architecture::x86;
             break;
         }
         case PROCESSOR_ARCHITECTURE_AMD64: {
-            architecture_ = architecture::X64;
+            architecture_ = architecture::x64;
             break;
         }
         case PROCESSOR_ARCHITECTURE_ARM: {
-            architecture_ = architecture::ARM;
+            architecture_ = architecture::arm;
             break;
         }
         case PROCESSOR_ARCHITECTURE_ARM64: {
-            architecture_ = architecture::ARM64;
+            architecture_ = architecture::arm64;
             break;
         }
         default: {
-            architecture_ = architecture::UNKNOWN;
+            architecture_ = architecture::unknown;
             break;
         }
     }
@@ -657,23 +658,23 @@ void sysinfo::init() {
     if (::uname(&uname_data) == 0) {
         const string& machine = uname_data.machine;
         if (machine == "x86_64") {
-            architecture_ = architecture::X64;
+            architecture_ = architecture::x64;
         } else if (machine == "i686" || machine == "i386") {
-            architecture_ = architecture::X86;
+            architecture_ = architecture::x86;
         } else if (machine == "arm" || machine == "armv7l") {
-            architecture_ = architecture::ARM;
+            architecture_ = architecture::arm;
         } else if (machine == "aarch64") {
-            architecture_ = architecture::ARM64;
+            architecture_ = architecture::arm64;
         } else if (machine == "riscv32") {
-            architecture_ = architecture::RISCV32;
+            architecture_ = architecture::riscv32;
         } else if (machine == "riscv64") {
-            architecture_ = architecture::RISCV64;
-        } else if (machine == "loongarch64") {
-            architecture_ = architecture::LOONGARCH64;
+            architecture_ = architecture::riscv64;
         } else if (machine == "loongarch32") {
-            architecture_ = architecture::LOONGARCH32;
+            architecture_ = architecture::loongarch32;
+        } else if (machine == "loongarch64") {
+            architecture_ = architecture::loongarch64;
         } else {
-            architecture_ = architecture::UNKNOWN;
+            architecture_ = architecture::unknown;
         }
     }
 
@@ -826,12 +827,17 @@ void sysinfo::init() {
 sysinfo& sysinfo::instance() noexcept {
     static sysinfo instance;
     return instance;
-};
+}
 
-void sysinfo::refresh() {
-    lock<mutex> lock(sysinfo_mutex());
-    initialized_.store(false, memory_order_release);
-    init();
+void sysinfo::refresh() noexcept {
+    try {
+        lock<mutex> lock(sysinfo_mutex());
+        initialized_.store(false, memory_order_release);
+        init();
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
+        initialized_.store(false, memory_order_release);
+    }
 }
 
 float64_t sysinfo::cpu_usage() {

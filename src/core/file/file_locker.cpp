@@ -34,10 +34,10 @@ bool file_locker::lock(const difference_type offset, difference_type length, con
     const ::DWORD len_hi = len_ul.HighPart;
 
     ::DWORD flags = 0;
-    if ((static_cast<fud_t>(mode) & LOCKFILE_EXCLUSIVE_LOCK) != 0) {
+    if ((static_cast<native_id_type>(mode) & LOCKFILE_EXCLUSIVE_LOCK) != 0) {
         flags |= LOCKFILE_EXCLUSIVE_LOCK;
     }
-    if ((static_cast<fud_t>(mode) & LOCKFILE_FAIL_IMMEDIATELY) != 0) {
+    if ((static_cast<native_id_type>(mode) & LOCKFILE_FAIL_IMMEDIATELY) != 0) {
         flags |= LOCKFILE_FAIL_IMMEDIATELY;
     }
 
@@ -49,13 +49,13 @@ bool file_locker::lock(const difference_type offset, difference_type length, con
     fl.l_start = offset;
     fl.l_len = length;
 
-    if ((static_cast<fud_t>(mode) & LOCK_EX) != 0) {
+    if ((static_cast<native_id_type>(mode) & LOCK_EX) != 0) {
         fl.l_type = F_WRLCK;
     } else {
         fl.l_type = F_RDLCK;
     }
 
-    const int cmd = ((static_cast<fud_t>(mode) & LOCK_NB) != 0) ? F_SETLK : F_SETLKW;
+    const int cmd = ((static_cast<native_id_type>(mode) & LOCK_NB) != 0) ? F_SETLK : F_SETLKW;
     return ::fcntl(handle_, cmd, &fl) == 0;
 #endif
 }
@@ -103,21 +103,21 @@ bool file_locker::unlock(const difference_type offset, difference_type length) c
 
 bool file_locker::try_lock(const difference_type offset, const difference_type length,
                            const file_lock mode) const noexcept {
-    return lock(offset, length, mode | file_lock::FAIL_IMMEDIATELY);
+    return lock(offset, length, mode | file_lock::fail_immediately);
 }
 
 bool file_locker::is_locked(const difference_type offset, const difference_type length,
                             file_lock* lock_out) const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (try_lock(offset, length, file_lock::EXCLUSIVE)) {
+    if (try_lock(offset, length, file_lock::exclusive)) {
         ignore = unlock(offset, length);
         if (lock_out != nullptr) {
-            *lock_out = file_lock::SHARED;
+            *lock_out = file_lock::shared;
         }
         return false;
     }
     if (lock_out != nullptr) {
-        *lock_out = file_lock::EXCLUSIVE;
+        *lock_out = file_lock::exclusive;
     }
     return true;
 
@@ -134,12 +134,12 @@ bool file_locker::is_locked(const difference_type offset, const difference_type 
 
     if (fl.l_type == F_UNLCK) {
         if (lock_out != nullptr) {
-            *lock_out = file_lock::SHARED;
+            *lock_out = file_lock::shared;
         }
         return false;
     }
     if (lock_out != nullptr) {
-        *lock_out = (fl.l_type == F_RDLCK) ? file_lock::SHARED : file_lock::EXCLUSIVE;
+        *lock_out = (fl.l_type == F_RDLCK) ? file_lock::shared : file_lock::exclusive;
     }
     return true;
 #endif

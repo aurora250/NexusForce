@@ -40,7 +40,7 @@ private:
     atomic<bool> watching_{false};                           ///< 是否正在监视
     atomic<bool> stopping_{false};                           ///< 是否正在停止
     callback_t callback_;                                    ///< 事件回调函数
-    file_watch_event current_events_{file_watch_event::ALL}; ///< 当前监视的事件类型
+    file_watch_event current_events_{file_watch_event::all}; ///< 当前监视的事件类型
     vector<char> buffer_;                                    ///< 事件数据缓冲区
     mutex callback_mutex_;                                   ///< 回调函数互斥锁
 
@@ -95,7 +95,7 @@ public:
      *
      * @note 重启 start() 存在短暂的事件窗口，重启期间发生的事件不会被补发。
      */
-    bool start(callback_t callback, file_watch_event events = file_watch_event::ALL);
+    bool start(callback_t callback, file_watch_event events = file_watch_event::all);
 
     /**
      * @brief 停止监视

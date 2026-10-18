@@ -68,14 +68,14 @@ public:
      * @brief 拷贝构造函数
      * @param ex 要包装的异常
      */
-    typed_exception_wrapper(const Ex& ex) :
+    explicit typed_exception_wrapper(const Ex& ex) :
     exception_(ex) {}
 
     /**
      * @brief 移动构造函数
      * @param ex 要包装的异常
      */
-    typed_exception_wrapper(Ex&& ex) noexcept :
+    explicit typed_exception_wrapper(Ex&& ex) noexcept :
     exception_(_NEFORCE move(ex)) {}
 
     /**

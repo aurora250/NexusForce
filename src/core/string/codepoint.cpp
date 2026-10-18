@@ -184,134 +184,138 @@ namespace {
 
 #if defined(NEFORCE_SIMD_SSE2)
     NEFORCE_ALWAYS_INLINE_INLINE void expand_ascii16(const simd::vec128_t v, char32_t* out) noexcept {
-        const __m128i zero = _mm_setzero_si128();
-        const __m128i low_half = _mm_unpacklo_epi8(v, zero);
-        const __m128i high_half = _mm_unpackhi_epi8(v, zero);
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out), _mm_unpacklo_epi16(low_half, zero));
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out + 4), _mm_unpackhi_epi16(low_half, zero));
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out + 8), _mm_unpacklo_epi16(high_half, zero));
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out + 12), _mm_unpackhi_epi16(high_half, zero));
+        const ::__m128i zero = ::_mm_setzero_si128();
+        const ::__m128i low_half = ::_mm_unpacklo_epi8(v, zero);
+        const ::__m128i high_half = ::_mm_unpackhi_epi8(v, zero);
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out), ::_mm_unpacklo_epi16(low_half, zero));
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out + 4), ::_mm_unpackhi_epi16(low_half, zero));
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out + 8), ::_mm_unpacklo_epi16(high_half, zero));
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out + 12), ::_mm_unpackhi_epi16(high_half, zero));
     }
 
     NEFORCE_ALWAYS_INLINE_INLINE bool block_len2_ok(const simd::vec128_t v) noexcept {
-        const __m128i byte_mask = _mm_set1_epi16(0x00FF);
-        const __m128i lead = _mm_and_si128(v, byte_mask);
-        const __m128i cont = _mm_and_si128(_mm_srli_epi16(v, 8), byte_mask);
-        const __m128i lead_low = _mm_cmpgt_epi16(lead, _mm_set1_epi16(0x00C1));
-        const __m128i lead_high = _mm_cmpgt_epi16(_mm_set1_epi16(0x00E0), lead);
-        const __m128i cont_ok = _mm_cmpeq_epi16(_mm_and_si128(cont, _mm_set1_epi16(0x00C0)), _mm_set1_epi16(0x0080));
-        const __m128i ok = _mm_and_si128(_mm_and_si128(lead_low, lead_high), cont_ok);
+        const ::__m128i byte_mask = ::_mm_set1_epi16(0x00FF);
+        const ::__m128i lead = ::_mm_and_si128(v, byte_mask);
+        const ::__m128i cont = ::_mm_and_si128(::_mm_srli_epi16(v, 8), byte_mask);
+        const ::__m128i lead_low = ::_mm_cmpgt_epi16(lead, ::_mm_set1_epi16(0x00C1));
+        const ::__m128i lead_high = ::_mm_cmpgt_epi16(::_mm_set1_epi16(0x00E0), lead);
+        const ::__m128i cont_ok =
+                ::_mm_cmpeq_epi16(::_mm_and_si128(cont, ::_mm_set1_epi16(0x00C0)), ::_mm_set1_epi16(0x0080));
+        const ::__m128i ok = ::_mm_and_si128(::_mm_and_si128(lead_low, lead_high), cont_ok);
         return simd::to_bitmask(ok) == 0xFFFF;
     }
 
     NEFORCE_ALWAYS_INLINE_INLINE void decode_len2_block(const simd::vec128_t v, char32_t* out) noexcept {
-        const __m128i lead = _mm_and_si128(v, _mm_set1_epi16(0x001F));
-        const __m128i cont = _mm_and_si128(_mm_srli_epi16(v, 8), _mm_set1_epi16(0x003F));
-        const __m128i packed = _mm_or_si128(_mm_slli_epi16(lead, 6), cont);
-        const __m128i zero = _mm_setzero_si128();
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out), _mm_unpacklo_epi16(packed, zero));
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out + 4), _mm_unpackhi_epi16(packed, zero));
+        const ::__m128i lead = ::_mm_and_si128(v, ::_mm_set1_epi16(0x001F));
+        const ::__m128i cont = ::_mm_and_si128(::_mm_srli_epi16(v, 8), ::_mm_set1_epi16(0x003F));
+        const ::__m128i packed = ::_mm_or_si128(::_mm_slli_epi16(lead, 6), cont);
+        const ::__m128i zero = ::_mm_setzero_si128();
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out), ::_mm_unpacklo_epi16(packed, zero));
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out + 4), ::_mm_unpackhi_epi16(packed, zero));
     }
 
     NEFORCE_ALWAYS_INLINE_INLINE bool block_len4_ok(const simd::vec128_t v) noexcept {
-        const __m128i byte_mask = _mm_set1_epi32(0x000000FF);
-        const __m128i b0 = _mm_and_si128(v, byte_mask);
-        const __m128i b1 = _mm_and_si128(_mm_srli_epi32(v, 8), byte_mask);
-        const __m128i b2 = _mm_and_si128(_mm_srli_epi32(v, 16), byte_mask);
-        const __m128i b3 = _mm_and_si128(_mm_srli_epi32(v, 24), byte_mask);
+        const ::__m128i byte_mask = ::_mm_set1_epi32(0x000000FF);
+        const ::__m128i b0 = ::_mm_and_si128(v, byte_mask);
+        const ::__m128i b1 = ::_mm_and_si128(::_mm_srli_epi32(v, 8), byte_mask);
+        const ::__m128i b2 = ::_mm_and_si128(::_mm_srli_epi32(v, 16), byte_mask);
+        const ::__m128i b3 = ::_mm_and_si128(::_mm_srli_epi32(v, 24), byte_mask);
 
-        const __m128i b0_low = _mm_cmpgt_epi32(b0, _mm_set1_epi32(0xEF));
-        const __m128i b0_high = _mm_cmpgt_epi32(_mm_set1_epi32(0xF5), b0);
-        const __m128i cont_mask = _mm_set1_epi32(0xC0);
-        const __m128i cont_value = _mm_set1_epi32(0x80);
-        const __m128i c1 = _mm_cmpeq_epi32(_mm_and_si128(b1, cont_mask), cont_value);
-        const __m128i c2 = _mm_cmpeq_epi32(_mm_and_si128(b2, cont_mask), cont_value);
-        const __m128i c3 = _mm_cmpeq_epi32(_mm_and_si128(b3, cont_mask), cont_value);
-        __m128i ok = _mm_and_si128(_mm_and_si128(b0_low, b0_high), _mm_and_si128(c1, _mm_and_si128(c2, c3)));
+        const ::__m128i b0_low = ::_mm_cmpgt_epi32(b0, ::_mm_set1_epi32(0xEF));
+        const ::__m128i b0_high = ::_mm_cmpgt_epi32(::_mm_set1_epi32(0xF5), b0);
+        const ::__m128i cont_mask = ::_mm_set1_epi32(0xC0);
+        const ::__m128i cont_value = ::_mm_set1_epi32(0x80);
+        const ::__m128i c1 = ::_mm_cmpeq_epi32(::_mm_and_si128(b1, cont_mask), cont_value);
+        const ::__m128i c2 = ::_mm_cmpeq_epi32(::_mm_and_si128(b2, cont_mask), cont_value);
+        const ::__m128i c3 = ::_mm_cmpeq_epi32(::_mm_and_si128(b3, cont_mask), cont_value);
+        ::__m128i ok = ::_mm_and_si128(::_mm_and_si128(b0_low, b0_high), ::_mm_and_si128(c1, ::_mm_and_si128(c2, c3)));
 
-        const __m128i is_f0 = _mm_cmpeq_epi32(b0, _mm_set1_epi32(0xF0));
-        const __m128i is_f4 = _mm_cmpeq_epi32(b0, _mm_set1_epi32(0xF4));
-        const __m128i f0_edge = _mm_and_si128(is_f0, _mm_cmpgt_epi32(_mm_set1_epi32(0x90), b1));
-        const __m128i f4_edge = _mm_and_si128(is_f4, _mm_cmpgt_epi32(b1, _mm_set1_epi32(0x8F)));
-        ok = _mm_andnot_si128(_mm_or_si128(f0_edge, f4_edge), ok);
+        const ::__m128i is_f0 = ::_mm_cmpeq_epi32(b0, ::_mm_set1_epi32(0xF0));
+        const ::__m128i is_f4 = ::_mm_cmpeq_epi32(b0, ::_mm_set1_epi32(0xF4));
+        const ::__m128i f0_edge = ::_mm_and_si128(is_f0, ::_mm_cmpgt_epi32(::_mm_set1_epi32(0x90), b1));
+        const ::__m128i f4_edge = ::_mm_and_si128(is_f4, ::_mm_cmpgt_epi32(b1, ::_mm_set1_epi32(0x8F)));
+        ok = ::_mm_andnot_si128(::_mm_or_si128(f0_edge, f4_edge), ok);
 
         return simd::to_bitmask(ok) == 0xFFFF;
     }
 
     NEFORCE_ALWAYS_INLINE_INLINE void decode_len4_block(const simd::vec128_t v, char32_t* out) noexcept {
-        const __m128i low_bits = _mm_set1_epi32(0x07);
-        const __m128i cont_bits = _mm_set1_epi32(0x3F);
-        const __m128i b0 = _mm_and_si128(v, low_bits);
-        const __m128i b1 = _mm_and_si128(_mm_srli_epi32(v, 8), cont_bits);
-        const __m128i b2 = _mm_and_si128(_mm_srli_epi32(v, 16), cont_bits);
-        const __m128i b3 = _mm_and_si128(_mm_srli_epi32(v, 24), cont_bits);
-        const __m128i packed = _mm_or_si128(_mm_or_si128(_mm_slli_epi32(b0, 18), _mm_slli_epi32(b1, 12)),
-                                            _mm_or_si128(_mm_slli_epi32(b2, 6), b3));
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out), packed);
+        const ::__m128i low_bits = ::_mm_set1_epi32(0x07);
+        const ::__m128i cont_bits = ::_mm_set1_epi32(0x3F);
+        const ::__m128i b0 = ::_mm_and_si128(v, low_bits);
+        const ::__m128i b1 = ::_mm_and_si128(::_mm_srli_epi32(v, 8), cont_bits);
+        const ::__m128i b2 = ::_mm_and_si128(::_mm_srli_epi32(v, 16), cont_bits);
+        const ::__m128i b3 = ::_mm_and_si128(::_mm_srli_epi32(v, 24), cont_bits);
+        const ::__m128i packed = ::_mm_or_si128(::_mm_or_si128(::_mm_slli_epi32(b0, 18), ::_mm_slli_epi32(b1, 12)),
+                                                ::_mm_or_si128(::_mm_slli_epi32(b2, 6), b3));
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out), packed);
     }
 
     NEFORCE_ALWAYS_INLINE_INLINE bool utf16_block_widenable(const simd::vec128_t v) noexcept {
-        const __m128i surrogate = _mm_cmpeq_epi16(_mm_and_si128(v, _mm_set1_epi16(static_cast<short>(0xF800))),
-                                                  _mm_set1_epi16(static_cast<short>(0xD800)));
+        const ::__m128i surrogate = ::_mm_cmpeq_epi16(::_mm_and_si128(v, ::_mm_set1_epi16(static_cast<short>(0xF800))),
+                                                      ::_mm_set1_epi16(static_cast<short>(0xD800)));
         return simd::to_bitmask(surrogate) == 0;
     }
 
     NEFORCE_ALWAYS_INLINE_INLINE void widen_utf16_block(const simd::vec128_t v, char32_t* out) noexcept {
-        const __m128i zero = _mm_setzero_si128();
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out), _mm_unpacklo_epi16(v, zero));
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out + 4), _mm_unpackhi_epi16(v, zero));
+        const ::__m128i zero = ::_mm_setzero_si128();
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out), ::_mm_unpacklo_epi16(v, zero));
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out + 4), ::_mm_unpackhi_epi16(v, zero));
     }
 #endif // NEFORCE_SIMD_SSE2
 
 #if defined(NEFORCE_SIMD_SSSE3)
     NEFORCE_ALWAYS_INLINE_INLINE bool block_len3_ok(const simd::vec128_t v) noexcept {
         constexpr char z = static_cast<char>(0x80);
-        const __m128i lead = _mm_shuffle_epi8(v, _mm_setr_epi8(0, 3, 6, 9, z, z, z, z, z, z, z, z, z, z, z, z));
-        const __m128i first = _mm_shuffle_epi8(v, _mm_setr_epi8(1, 4, 7, 10, z, z, z, z, z, z, z, z, z, z, z, z));
-        const __m128i second = _mm_shuffle_epi8(v, _mm_setr_epi8(2, 5, 8, 11, z, z, z, z, z, z, z, z, z, z, z, z));
+        const ::__m128i lead = ::_mm_shuffle_epi8(v, ::_mm_setr_epi8(0, 3, 6, 9, z, z, z, z, z, z, z, z, z, z, z, z));
+        const ::__m128i first = ::_mm_shuffle_epi8(v, ::_mm_setr_epi8(1, 4, 7, 10, z, z, z, z, z, z, z, z, z, z, z, z));
+        const ::__m128i second =
+                ::_mm_shuffle_epi8(v, ::_mm_setr_epi8(2, 5, 8, 11, z, z, z, z, z, z, z, z, z, z, z, z));
 
-        const __m128i lead_ok = _mm_cmpeq_epi8(_mm_and_si128(lead, _mm_set1_epi8(static_cast<char>(0xF0))),
-                                               _mm_set1_epi8(static_cast<char>(0xE0)));
-        const __m128i cont_mask = _mm_set1_epi8(static_cast<char>(0xC0));
-        const __m128i cont_value = _mm_set1_epi8(static_cast<char>(0x80));
-        const __m128i first_ok = _mm_cmpeq_epi8(_mm_and_si128(first, cont_mask), cont_value);
-        const __m128i second_ok = _mm_cmpeq_epi8(_mm_and_si128(second, cont_mask), cont_value);
-        const __m128i ok = _mm_and_si128(_mm_and_si128(lead_ok, first_ok), second_ok);
+        const ::__m128i lead_ok = ::_mm_cmpeq_epi8(::_mm_and_si128(lead, _mm_set1_epi8(static_cast<char>(0xF0))),
+                                                   ::_mm_set1_epi8(static_cast<char>(0xE0)));
+        const ::__m128i cont_mask = ::_mm_set1_epi8(static_cast<char>(0xC0));
+        const ::__m128i cont_value = ::_mm_set1_epi8(static_cast<char>(0x80));
+        const ::__m128i first_ok = ::_mm_cmpeq_epi8(::_mm_and_si128(first, cont_mask), cont_value);
+        const ::__m128i second_ok = ::_mm_cmpeq_epi8(::_mm_and_si128(second, cont_mask), cont_value);
+        const ::__m128i ok = ::_mm_and_si128(::_mm_and_si128(lead_ok, first_ok), second_ok);
 
         // first <= 0x9F  <=>  max(first, 0x9F) == 0x9F
-        const __m128i first_below_a0 = _mm_cmpeq_epi8(_mm_max_epu8(first, _mm_set1_epi8(static_cast<char>(0x9F))),
-                                                      _mm_set1_epi8(static_cast<char>(0x9F)));
-        const __m128i is_e0 = _mm_cmpeq_epi8(lead, _mm_set1_epi8(static_cast<char>(0xE0)));
-        const __m128i is_ed = _mm_cmpeq_epi8(lead, _mm_set1_epi8(static_cast<char>(0xED)));
-        const __m128i e0_edge = _mm_and_si128(is_e0, first_below_a0);
-        const __m128i ed_edge = _mm_and_si128(is_ed, _mm_cmpeq_epi8(first_below_a0, _mm_setzero_si128()));
+        const ::__m128i first_below_a0 =
+                ::_mm_cmpeq_epi8(::_mm_max_epu8(first, ::_mm_set1_epi8(static_cast<char>(0x9F))),
+                                 ::_mm_set1_epi8(static_cast<char>(0x9F)));
+        const ::__m128i is_e0 = ::_mm_cmpeq_epi8(lead, ::_mm_set1_epi8(static_cast<char>(0xE0)));
+        const ::__m128i is_ed = ::_mm_cmpeq_epi8(lead, ::_mm_set1_epi8(static_cast<char>(0xED)));
+        const ::__m128i e0_edge = ::_mm_and_si128(is_e0, first_below_a0);
+        const ::__m128i ed_edge = ::_mm_and_si128(is_ed, ::_mm_cmpeq_epi8(first_below_a0, _mm_setzero_si128()));
 
         const int ok_bits = simd::to_bitmask(ok) & 0x000F;
-        const int edge_bits = simd::to_bitmask(_mm_or_si128(e0_edge, ed_edge)) & 0x000F;
+        const int edge_bits = simd::to_bitmask(::_mm_or_si128(e0_edge, ed_edge)) & 0x000F;
         return ok_bits == 0x000F && edge_bits == 0;
     }
 
     NEFORCE_ALWAYS_INLINE_INLINE void decode_len3_block(const simd::vec128_t v, char32_t* out) noexcept {
         constexpr char z = static_cast<char>(0x80);
-        const __m128i gathered = _mm_shuffle_epi8(v, _mm_setr_epi8(0, 1, 2, z, 3, 4, 5, z, 6, 7, 8, z, 9, 10, 11, z));
-        const __m128i b0 = _mm_and_si128(gathered, _mm_set1_epi32(0x0F));
-        const __m128i b1 = _mm_and_si128(_mm_srli_epi32(gathered, 8), _mm_set1_epi32(0x3F));
-        const __m128i b2 = _mm_and_si128(_mm_srli_epi32(gathered, 16), _mm_set1_epi32(0x3F));
-        const __m128i packed = _mm_or_si128(_mm_slli_epi32(b0, 12), _mm_or_si128(_mm_slli_epi32(b1, 6), b2));
-        _mm_storeu_si128(reinterpret_cast<__m128i*>(out), packed);
+        const ::__m128i gathered =
+                ::_mm_shuffle_epi8(v, ::_mm_setr_epi8(0, 1, 2, z, 3, 4, 5, z, 6, 7, 8, z, 9, 10, 11, z));
+        const ::__m128i b0 = ::_mm_and_si128(gathered, ::_mm_set1_epi32(0x0F));
+        const ::__m128i b1 = ::_mm_and_si128(::_mm_srli_epi32(gathered, 8), ::_mm_set1_epi32(0x3F));
+        const ::__m128i b2 = ::_mm_and_si128(::_mm_srli_epi32(gathered, 16), ::_mm_set1_epi32(0x3F));
+        const ::__m128i packed = ::_mm_or_si128(::_mm_slli_epi32(b0, 12), ::_mm_or_si128(::_mm_slli_epi32(b1, 6), b2));
+        ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out), packed);
     }
 #endif // NEFORCE_SIMD_SSSE3
 
 #if defined(NEFORCE_SIMD_SSE2)
     NEFORCE_ALWAYS_INLINE_INLINE bool utf32_block_valid(const simd::vec128_t v) noexcept {
-        const __m128i bias = _mm_set1_epi32(static_cast<int>(0x80000000U));
-        const __m128i biased = _mm_xor_si128(v, bias);
-        const __m128i limit = _mm_xor_si128(_mm_set1_epi32(0x10FFFF), bias);
-        const __m128i too_large = _mm_cmpgt_epi32(biased, limit);
-        const __m128i above_surrogates = _mm_cmpgt_epi32(biased, _mm_xor_si128(_mm_set1_epi32(0xD7FF), bias));
-        const __m128i below_private = _mm_cmpgt_epi32(_mm_xor_si128(_mm_set1_epi32(0xE000), bias), biased);
-        const __m128i surrogate = _mm_and_si128(above_surrogates, below_private);
-        return simd::to_bitmask(_mm_or_si128(too_large, surrogate)) == 0;
+        const ::__m128i bias = ::_mm_set1_epi32(static_cast<int>(0x80000000U));
+        const ::__m128i biased = ::_mm_xor_si128(v, bias);
+        const ::__m128i limit = ::_mm_xor_si128(::_mm_set1_epi32(0x10FFFF), bias);
+        const ::__m128i too_large = ::_mm_cmpgt_epi32(biased, limit);
+        const ::__m128i above_surrogates = ::_mm_cmpgt_epi32(biased, ::_mm_xor_si128(::_mm_set1_epi32(0xD7FF), bias));
+        const ::__m128i below_private = ::_mm_cmpgt_epi32(::_mm_xor_si128(::_mm_set1_epi32(0xE000), bias), biased);
+        const ::__m128i surrogate = ::_mm_and_si128(above_surrogates, below_private);
+        return simd::to_bitmask(::_mm_or_si128(too_large, surrogate)) == 0;
     }
 #endif // NEFORCE_SIMD_SSE2
 } // namespace
@@ -327,7 +331,7 @@ size_t codepoint::decode_utf8_chunk(const byte_t* data, const size_t len, char32
 
 #if defined(NEFORCE_SIMD_AVX2)
         if (i + 32 <= len && n + 32 <= capacity &&
-            ::_mm256_movemask_epi8(::_mm256_loadu_si256(reinterpret_cast<const __m256i*>(data + i))) == 0) {
+            ::_mm256_movemask_epi8(::_mm256_loadu_si256(reinterpret_cast<const ::__m256i*>(data + i))) == 0) {
             expand_ascii16(simd::load_unaligned(data + i), out + n);
             expand_ascii16(simd::load_unaligned(data + i + 16), out + n + 16);
             i += 32;
@@ -433,7 +437,7 @@ size_t codepoint::decode_utf32_chunk(const Unit* data, const size_t len, char32_
         if (sizeof(Unit) == 4 && i + 4 <= len && n + 4 <= capacity) {
             const simd::vec128_t v = simd::load_unaligned(data + i);
             if (utf32_block_valid(v)) {
-                _mm_storeu_si128(reinterpret_cast<__m128i*>(out + n), v);
+                ::_mm_storeu_si128(reinterpret_cast<::__m128i*>(out + n), v);
                 i += 4;
                 n += 4;
                 handled = true;

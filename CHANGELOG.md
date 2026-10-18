@@ -34,9 +34,16 @@
 - 添加高性能内存池组件 `memory_pool`：小对象由零块头 span 承担，尺寸类与归属通过进程级 64 KiB 槽位地址映射表查询，大对象直接映射操作系统内存并记录区域头部
 - 添加分配器 `pool_allocator<T>`，可直接用于容器
 - 添加进程级全局覆盖选项 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE`：提供显式的 `NexusForceMemoryPoolOverride`（OBJECT）与 `NexusForceMemoryPoolOverrideStatic`（STATIC）目标，需要整个进程统一分配器的程序由自己把目标链接进每个模块
+- 添加内置区域设置后端 `src/core/system/locale_fallback.cpp`：字符分类与大小写转换使用自研 Unicode 表，数字、货币、日期时间格式化与区域名称查询使用自研精简区域数据
+- 添加内置后端的区域数据组件 `src/core/system/locale_data.{hpp,cpp}`：数字与货币风格、日期名称与模式、语言与地区名称、本币、可用区域与 ISO 3166 列表
+- 添加 Unicode 字符表生成脚本 `scripts/generate_locale_tables.py` 与生成结果 `src/core/system/locale_tables.{hpp,cpp}`：字符分类、大小写映射与规范分解表，按 Unicode 字符数据库生成，分类规则与 ICU4C 一致
 
 ### 🔧 Improvements
 
+- `locale::monetary()` 报告地区本币而非固定 USD，并补齐 `mon_grouping`、`positive_sign`、`negative_sign`
+- `locale::numeric()` 补齐 `exponential`、`nan_symbol`、`infinity_symbol` 与 `grouping`
+- 内置后端的一级比较忽略大小写与重音、二级区分重音、三级区分大小写；排序键按级编码，键的字节序与 `compare()` 的结果一致
+- 内置后端按地区选择英文日期格式，并区分 POSIX 区域）
 - 添加 `thread_pool::wait_for()` / `wait_for_all()`：等待任务结果期间代为出队、窃取并执行池内任务，父任务等待子任务时不再让工作线程空转，嵌套等待扇出随线程数正常扩展
 - `standard_allocator` 的分配与释放改由进程级内存池承担，库容器在库与消费者两侧共用同一个导出池单例，跨模块释放天然安全，不再依赖全局 `operator new` 是否被替换
 - 共享库不再替换全局 `operator new` / `delete`：第三方 C++ DLL 与消费者不再被隐式接管
@@ -147,6 +154,10 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `locale::format_datetime()` 把无时区的 datetime 当作 UTC 实例、再按系统时区偏移呈现，导致 `datetime::parse()` 得到的墙上时间被平移：现在无时区的 datetime 按自身字段格式化，带偏移的 datetime 才换算到系统时区
+- 修复 `locale::format_datetime(dt, date_style, time_style)` 把日期风格与时间风格传反：`udat_open` 的第一个参数是时间风格，`full` 与 `short` 组合时的结果因此相反
+- 修复 `locale::time()` 的 `date_fmt` 与 `time_fmt` 互换：实参顺序修正后分别返回日期模式与时间模式
+- 修复 `locale::time()` 的星期名缺少星期六：ICU 星期符号按 `UCAL_SUNDAY`(1) 起始索引，原来的 0..6 循环少取一个
 - 修复 `concat_view` / `split_view` / `slice_view` 等视图在类作用域无条件构成 `decltype(declval<const V&>().begin())`，导致底层不支持常量遍历时整个类型硬编译失败、`requires Range<const V>` 守卫形同失效的问题：新增 `const_range_traits` 与占位迭代器，此类视图现在仅常量成员函数不可用，类型本身仍可正常实例化与遍历
 - 修复 `range_adaptor_closure` 的友元 `operator|` 按值接收基类子对象后再向下转型的形式未定义行为，改为按派生闭包类型取值
 - 修复 `counted_iterator` 只比较剩余计数与负计数越界不终止的问题，`counted_view::end()` 现在推进到底层对应位置

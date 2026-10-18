@@ -3,6 +3,22 @@
 #include <NeForce/core/utility/hexadecimal.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    bool is_whitespace(const char ch) noexcept { return ch == ' ' || ch == '\t'; }
+    bool is_newline(const char ch) noexcept { return ch == '\n' || ch == '\r'; }
+
+    bool is_indicator(const char ch) noexcept {
+        return ch == '-' || ch == '?' || ch == ':' || ch == ',' || ch == '[' || ch == ']' || ch == '{' || ch == '}' ||
+               ch == '#' || ch == '&' || ch == '*' || ch == '!' || ch == '|' || ch == '>' || ch == '\'' || ch == '"' ||
+               ch == '%' || ch == '@' || ch == '`';
+    }
+
+    bool is_flow_indicator(const char ch) noexcept {
+        return ch == ',' || ch == '[' || ch == ']' || ch == '{' || ch == '}';
+    }
+} // namespace
+
+
 char yaml_parser::current() const noexcept { return eof() ? '\0' : yaml_[pos_]; }
 
 char yaml_parser::peek(const size_t offset) const noexcept {
@@ -83,10 +99,6 @@ bool yaml_parser::expect(const char ch) {
     }
     return true;
 }
-
-bool yaml_parser::is_whitespace(const char ch) const noexcept { return ch == ' ' || ch == '\t'; }
-
-bool yaml_parser::is_newline(const char ch) const noexcept { return ch == '\n' || ch == '\r'; }
 
 void yaml_parser::skip_whitespace_inline() noexcept {
 #ifdef NEFORCE_SIMD_AVX2
@@ -438,22 +450,6 @@ string yaml_parser::parse_tag() {
     return tag;
 }
 
-bool yaml_parser::is_plain_safe(const char ch) const noexcept {
-    return is_alpha_or_digit(ch) || ch == '_' || ch == '-' || ch == '.' || ch == '/' || ch == '+';
-}
-
-bool yaml_parser::is_key_char(const char ch) const noexcept { return is_plain_safe(ch) || ch == ' '; }
-
-bool yaml_parser::is_indicator(const char ch) const noexcept {
-    return ch == '-' || ch == '?' || ch == ':' || ch == ',' || ch == '[' || ch == ']' || ch == '{' || ch == '}' ||
-           ch == '#' || ch == '&' || ch == '*' || ch == '!' || ch == '|' || ch == '>' || ch == '\'' || ch == '"' ||
-           ch == '%' || ch == '@' || ch == '`';
-}
-
-bool yaml_parser::is_flow_indicator(const char ch) const noexcept {
-    return ch == ',' || ch == '[' || ch == ']' || ch == '{' || ch == '}';
-}
-
 bool yaml_parser::is_document_start() const noexcept {
     return current() == '-' && peek(1) == '-' && peek(2) == '-' &&
            (peek(3) == ' ' || peek(3) == '\n' || peek(3) == '\t' || peek(3) == '\0');
@@ -504,156 +500,6 @@ codepoint yaml_parser::parse_unicode_escape(const size_t digits) {
         throw_parse_error("Invalid unicode codepoint");
     }
     return codepoint{code_point};
-}
-
-string yaml_parser::unescape_string(const string& str) const {
-    string result;
-    result.reserve(str.size());
-
-    for (size_t i = 0; i < str.size(); ++i) {
-        if (str[i] == '\\' && i + 1 < str.size()) {
-            switch (str[++i]) {
-                case '0':
-                    result += '\0';
-                    break;
-                case 'a':
-                    result += '\a';
-                    break;
-                case 'b':
-                    result += '\b';
-                    break;
-                case 't':
-                case '\t':
-                    // case '\t' matches the escaped literal tab character, not the escape sequence \t.
-                    result += '\t';
-                    break;
-                case 'n':
-                    result += '\n';
-                    break;
-                case 'v':
-                    result += '\v';
-                    break;
-                case 'f':
-                    result += '\f';
-                    break;
-                case 'r':
-                    result += '\r';
-                    break;
-                case 'e':
-                    result += '\x1B';
-                    break;
-                case ' ':
-                    result += ' ';
-                    break;
-                case '"':
-                    result += '"';
-                    break;
-                case '/':
-                    result += '/';
-                    break;
-                case '\\':
-                    result += '\\';
-                    break;
-                case 'N':
-                    result += "\u0085";
-                    break;
-                case '_':
-                    result += "\u00A0";
-                    break;
-                case 'L':
-                    result += "\u2028";
-                    break;
-                case 'P':
-                    result += "\u2029";
-                    break;
-                case 'x': {
-                    if (i + 2 >= str.size()) {
-                        // At this time i points to 'x', not '\\'
-                        result += str[i];
-                        break;
-                    }
-                    const string_view hex2 = str.view(i + 1, 2);
-                    bool valid = true;
-                    for (const char c: hex2) {
-                        if (!is_xdigit(c)) {
-                            valid = false;
-                            break;
-                        }
-                    }
-                    if (valid) {
-                        const codepoint cp_val{static_cast<uint32_t>(hexadecimal(hex2).value())};
-                        cp_val.append_to(result);
-                        i += 2;
-                    } else {
-                        // No extra rollback of i here, switch has already consumed 'x'.
-                        result += str[i];
-                    }
-                    break;
-                }
-                case 'u': {
-                    if (i + 4 >= str.size()) {
-                        result += str[i];
-                        break;
-                    }
-                    const string_view hex4 = str.view(i + 1, 4);
-                    bool valid = true;
-                    for (const char c: hex4) {
-                        if (!is_xdigit(c)) {
-                            valid = false;
-                            break;
-                        }
-                    }
-                    if (valid) {
-                        const auto cp_val = static_cast<uint32_t>(hexadecimal(hex4).value());
-                        if (codepoint::is_valid_codepoint(cp_val)) {
-                            codepoint{cp_val}.append_to(result);
-                            i += 4;
-                        } else {
-                            result += str[i];
-                        }
-                    } else {
-                        result += str[i];
-                    }
-                    break;
-                }
-                case 'U': {
-                    if (i + 8 >= str.size()) {
-                        result += str[i];
-                        break;
-                    }
-                    const string_view hex8 = str.view(i + 1, 8);
-                    bool valid = true;
-                    for (const char c: hex8) {
-                        if (!is_xdigit(c)) {
-                            valid = false;
-                            break;
-                        }
-                    }
-                    if (valid) {
-                        const auto cp_val = static_cast<uint32_t>(hexadecimal(hex8).value());
-                        if (codepoint::is_valid_codepoint(cp_val)) {
-                            codepoint{cp_val}.append_to(result);
-                            i += 8;
-                        } else {
-                            result += str[i];
-                        }
-                    } else {
-                        result += str[i];
-                    }
-                    break;
-                }
-                default:
-                    //Unknown escape sequences (such as \q) preserve the backslash and the character itself
-                    result += '\\';
-                    result += str[i];
-                    break;
-            }
-        } else {
-            result += str[i];
-        }
-    }
-
-    return result;
 }
 
 shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
@@ -2322,7 +2168,7 @@ shared_ptr<yaml_value> yaml_parser::parse() {
     return result;
 }
 
-optional<shared_ptr<yaml_value>> yaml_parser::try_parse() {
+optional<shared_ptr<yaml_value>> yaml_parser::try_parse() noexcept {
     try {
         return parse();
     } catch (...) {
@@ -2366,7 +2212,7 @@ vector<shared_ptr<yaml_value>> yaml_parser::parse_documents() {
     return documents;
 }
 
-optional<vector<shared_ptr<yaml_value>>> yaml_parser::try_parse_documents() {
+optional<vector<shared_ptr<yaml_value>>> yaml_parser::try_parse_documents() noexcept {
     try {
         return parse_documents();
     } catch (...) {

@@ -165,15 +165,15 @@ public:
      * @brief 系统架构枚举
      */
     enum class architecture {
-        UNKNOWN,     ///< 未知架构
-        X86,         ///< 32位x86
-        X64,         ///< 64位x86_64
-        ARM,         ///< 32位ARM
-        ARM64,       ///< 64位ARM
-        RISCV32,     ///< 32位RISC-V
-        RISCV64,     ///< 64位RISC-V
-        LOONGARCH64, ///< 64位LoongArch
-        LOONGARCH32  ///< 32位LoongArch
+        unknown,     ///< 未知架构
+        x86,         ///< 32位x86
+        x64,         ///< 64位x86_64
+        arm,         ///< 32位ARM
+        arm64,       ///< 64位ARM
+        riscv32,     ///< 32位RISC-V
+        riscv64,     ///< 64位RISC-V
+        loongarch32, ///< 32位LoongArch
+        loongarch64  ///< 64位LoongArch
     };
 
     /**
@@ -195,7 +195,7 @@ private:
     memory_info memory_info_{};                        ///< 内存信息
     CPU_info cpu_info_{};                              ///< CPU信息
     os_version_info os_version_info_{};                ///< 操作系统信息
-    architecture architecture_{architecture::UNKNOWN}; ///< 系统架构
+    architecture architecture_{architecture::unknown}; ///< 系统架构
     vector<numa_node_info> numa_nodes_;                ///< NUMA 节点信息列表
     atomic<bool> initialized_{false};                  ///< 初始化标志
 
@@ -233,7 +233,7 @@ public:
      *
      * 重新收集所有系统信息，更新缓存的数据。
      */
-    void refresh();
+    void refresh() noexcept;
 
     /**
      * @brief 获取系统底层信息

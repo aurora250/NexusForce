@@ -506,7 +506,7 @@ TEST_F(ConditionalLogTest, LogFirstN) {
 #ifdef NEFORCE_PLATFORM_LINUX
 
 TEST(SyslogSinkTest, CreateAndLog) {
-    syslog_sink sink("test_app", syslog_facility::LOG_USER);
+    syslog_sink sink("test_app", syslog_facility::user);
     log_event ev;
     ev.dt = datetime::now();
     ev.level = log_level::INFO;
@@ -518,7 +518,7 @@ TEST(SyslogSinkTest, CreateAndLog) {
 }
 
 TEST(SyslogSinkTest, Formatting) {
-    syslog_sink sink("test_fmt", syslog_facility::LOG_DAEMON);
+    syslog_sink sink("test_fmt", syslog_facility::daemon);
     sink.set_formatter(make_unique<log_formatter>("[{level}] {message}"));
     log_event ev;
     ev.dt = datetime::now();

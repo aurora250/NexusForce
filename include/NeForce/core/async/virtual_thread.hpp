@@ -380,8 +380,8 @@ struct virtual_thread_task<void> {
                         try {
                             virtual_thread_scheduler::get_instance().schedule(cont);
                             // NOLINTNEXTLINE(bugprone-empty-catch)
-                        } catch (...) {
-                            // ignore
+                        } catch (const exception& e) {
+                            NEFORCE_REPORT_EXCEPTION(e);
                         }
                     }
                     return false;
@@ -711,8 +711,8 @@ struct virtual_thread_task {
                         try {
                             virtual_thread_scheduler::get_instance().schedule(cont);
                             // NOLINTNEXTLINE(bugprone-empty-catch)
-                        } catch (...) {
-                            // ignore
+                        } catch (const exception& e) {
+                            NEFORCE_REPORT_EXCEPTION(e);
                         }
                     }
                     return false;

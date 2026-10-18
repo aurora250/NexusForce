@@ -1,12 +1,11 @@
-#ifndef NEFORCE_CORE_SYSTEM_LOCALE_HPP__
-#define NEFORCE_CORE_SYSTEM_LOCALE_HPP__
+#ifndef NEFORCE_CORE_LOCALE_LOCALE_HPP__
+#define NEFORCE_CORE_LOCALE_LOCALE_HPP__
 
 /**
  * @file locale.hpp
  * @brief 区域设置
  *
- * 此文件提供了基于 ICU4C 的区域设置管理功能，
- * 包括数字、货币、日期时间格式化、字符分类、排序和编码转换。
+ * 此文件提供了区域设置管理功能，包括数字、货币、日期时间格式化、字符分类、排序和编码转换。
  */
 
 #include "NeForce/core/container/vector.hpp"
@@ -18,6 +17,7 @@ class time;
 class datetime;
 class timestamp;
 
+class NEFORCE_API locale;
 
 /**
  * @defgroup Exceptions 异常类集
@@ -33,6 +33,9 @@ NEFORCE_ERROR_BUILD_SYSTEM_CLASS(locale_exception, "Locale Operation Failed.")
 
 /** @} */ // Exceptions
 
+
+#ifdef NEFORCE_SUPPORT_LOCALE
+
 /**
  * @defgroup Locale 区域设置
  * @brief 区域设置实现
@@ -43,8 +46,7 @@ NEFORCE_ERROR_BUILD_SYSTEM_CLASS(locale_exception, "Locale Operation Failed.")
  * @class locale
  * @brief 区域设置管理类
  *
- * 基于 ICU4C 提供跨平台的区域设置信息查询和格式化功能。
- * 所有 locale 数据来自 CLDR（Unicode Common Locale Data Repository）。
+ * 提供跨平台的区域设置信息查询和格式化功能。
  *
  * 使用场景：
  * - 国际化/本地化应用程序
@@ -482,5 +484,6 @@ public:
 
 /** @} */ // Locale
 
+#endif // NEFORCE_SUPPORT_LOCALE
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_SYSTEM_LOCALE_HPP__
+#endif // NEFORCE_CORE_LOCALE_LOCALE_HPP__

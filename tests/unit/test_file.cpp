@@ -5,6 +5,7 @@
 #include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/async/thread.hpp>
 #include <NeForce/core/container/vector.hpp>
+#include <NeForce/core/exception/system_exception.hpp>
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/file_watcher.hpp>
 #include <NeForce/core/file/filesystem.hpp>
@@ -120,8 +121,8 @@ TEST_F(FileTest, DestructorClosesFile) {
     auto p = get_test_path("destructor_test.txt");
     {
         file f;
-        f.open(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-               file_attri::NORMAL);
+        f.open(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+               file_attri::normal);
         f.write("content", 7);
     }
     file f2(p);
@@ -132,8 +133,8 @@ TEST_F(FileTest, DestructorClosesFile) {
 TEST_F(FileTest, OpenCreatesNewFile) {
     auto p = get_test_path("open_create.txt");
     file f;
-    bool result = f.open(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-                         file_attri::NORMAL);
+    bool result = f.open(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+                         file_attri::normal);
     EXPECT_TRUE(result);
     EXPECT_TRUE(f.is_opened());
     EXPECT_TRUE(p.exists());
@@ -203,8 +204,8 @@ TEST_F(FileTest, CloseNotOpened) {
 
 TEST_F(FileTest, CloseFlushesBuffer) {
     auto p = get_test_path("close_flush.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
     f.write("buffered", 8);
     f.close();
 
@@ -215,8 +216,8 @@ TEST_F(FileTest, CloseFlushesBuffer) {
 TEST_F(FileTest, Flush) {
     auto p = get_test_path("flush_test.txt");
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-               file_attri::NORMAL);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+               file_attri::normal);
         EXPECT_EQ(f.write("before_flush"), 12);
         EXPECT_TRUE(f.flush());
     }
@@ -233,8 +234,8 @@ TEST_F(FileTest, FlushNotOpened) {
 
 TEST_F(FileTest, WriteStringWithSize) {
     auto p = get_test_path("write_str_size.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
 
     file::size_type written = f.write(string("hello world"), 5);
     EXPECT_EQ(written, 5);
@@ -246,8 +247,8 @@ TEST_F(FileTest, WriteStringWithSize) {
 
 TEST_F(FileTest, WriteFullString) {
     auto p = get_test_path("write_full_str.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
 
     file::size_type written = f.write(string("complete"));
     EXPECT_EQ(written, 8);
@@ -259,8 +260,8 @@ TEST_F(FileTest, WriteFullString) {
 
 TEST_F(FileTest, WriteVoidPointer) {
     auto p = get_test_path("write_void.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
 
     const char data[] = "raw data";
     file::size_type written = f.write(static_cast<const void*>(data), 8);
@@ -273,8 +274,8 @@ TEST_F(FileTest, WriteVoidPointer) {
 
 TEST_F(FileTest, WriteNullData) {
     auto p = get_test_path("write_null.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
 
     file::size_type written = f.write(static_cast<const void*>(nullptr), 10);
     EXPECT_EQ(written, 0);
@@ -282,8 +283,8 @@ TEST_F(FileTest, WriteNullData) {
 
 TEST_F(FileTest, WriteZeroSize) {
     auto p = get_test_path("write_zero.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
 
     file::size_type written = f.write(string("data"), 0);
     EXPECT_EQ(written, 0);
@@ -297,8 +298,8 @@ TEST_F(FileTest, WriteNotOpened) {
 
 TEST_F(FileTest, WriteLargeData) {
     auto p = get_test_path("write_large.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
 
     string large_data(10000, 'A');
     file::size_type written = f.write(large_data);
@@ -383,8 +384,8 @@ TEST_F(FileTest, ReadNotOpened) {
 TEST_F(FileTest, ReadBinaryToVoid) {
     auto p = get_test_path("read_bin_void.bin");
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-               file_attri::NORMAL);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+               file_attri::normal);
         byte_t data[] = {0x00, 0x01, 0x02, 0xFF};
         f.write(data, 4);
     }
@@ -402,8 +403,8 @@ TEST_F(FileTest, ReadBinaryToVoid) {
 TEST_F(FileTest, ReadBinaryToString) {
     auto p = get_test_path("read_bin_str.bin");
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-               file_attri::NORMAL);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+               file_attri::normal);
         const char data[] = {0x41, 0x00, 0x42, 0x00};
         f.write(data, 4);
     }
@@ -421,8 +422,8 @@ TEST_F(FileTest, ReadBinaryToString) {
 TEST_F(FileTest, ReadBinaryAutoSized) {
     auto p = get_test_path("read_bin_auto.bin");
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-               file_attri::NORMAL);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+               file_attri::normal);
         f.write("binary", 6);
     }
 
@@ -436,8 +437,8 @@ TEST_F(FileTest, ReadBinaryAutoSized) {
 TEST_F(FileTest, ReadBinaryWholeFile) {
     auto p = get_test_path("read_bin_all.bin");
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-               file_attri::NORMAL);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+               file_attri::normal);
         byte_t data[] = {0xDE, 0xAD, 0xBE, 0xEF};
         f.write(data, 4);
     }
@@ -476,8 +477,8 @@ TEST_F(FileTest, ReadLine) {
 TEST_F(FileTest, ReadLineCRLF) {
     auto p = get_test_path("readline_crlf.txt");
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-               file_attri::NORMAL);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+               file_attri::normal);
         f.write("first\r\nsecond\r\n", 15);
     }
 
@@ -554,8 +555,8 @@ TEST_F(FileTest, ReadChunksNotOpened) {
 
 TEST_F(FileTest, WriteChunks) {
     auto p = get_test_path("write_chunks.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
 
     vector<string> chunks = {"chunk1", "chunk2", "chunk3"};
     EXPECT_TRUE(f.write_chunks(chunks));
@@ -567,8 +568,8 @@ TEST_F(FileTest, WriteChunks) {
 
 TEST_F(FileTest, WriteChunksWithEmpty) {
     auto p = get_test_path("write_chunks_empty.txt");
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::NORMAL);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::normal);
 
     vector<string> chunks = {"", "data", ""};
     EXPECT_TRUE(f.write_chunks(chunks));
@@ -634,7 +635,7 @@ TEST_F(FileTest, SeekBegin) {
     filesystem::create_and_write(p, "0123456789");
 
     file f(p);
-    EXPECT_TRUE(f.seek(5, file_pointer::BEGIN));
+    EXPECT_TRUE(f.seek(5, file_pointer::begin));
     string out;
     f.read(out, 5);
     EXPECT_EQ(out, "56789");
@@ -645,7 +646,7 @@ TEST_F(FileTest, SeekEnd) {
     filesystem::create_and_write(p, "0123456789");
 
     file f(p);
-    EXPECT_TRUE(f.seek(-5, file_pointer::END));
+    EXPECT_TRUE(f.seek(-5, file_pointer::end));
     string out;
     f.read(out, 5);
     EXPECT_EQ(out, "56789");
@@ -658,7 +659,7 @@ TEST_F(FileTest, SeekCurrent) {
     file f(p);
     string out;
     f.read(out, 5);
-    EXPECT_TRUE(f.seek(2, file_pointer::CURRENT));
+    EXPECT_TRUE(f.seek(2, file_pointer::current));
     f.read(out, 3);
     EXPECT_EQ(out, "789");
 }
@@ -668,17 +669,17 @@ TEST_F(FileTest, SeekAppendModeAllowsReadPositioning) {
     filesystem::create_and_write(p, "data");
 
     file f(p, true);
-    EXPECT_TRUE(f.seek(0, file_pointer::BEGIN));
+    EXPECT_TRUE(f.seek(0, file_pointer::begin));
     string out;
     f.read(out, 4);
     EXPECT_EQ(out, "data");
-    EXPECT_TRUE(f.seek(0, file_pointer::END));
+    EXPECT_TRUE(f.seek(0, file_pointer::end));
     EXPECT_EQ(f.write("-more", 5), 5u);
     EXPECT_TRUE(f.flush());
     EXPECT_EQ(f.size64(), 9u);
     f.close();
 
-    file check(p, false, file_access::READ, file_shared::SHARE_READ);
+    file check(p, false, file_access::read, file_shared::share_read);
     EXPECT_TRUE(check.is_opened());
     EXPECT_EQ(check.read(), "data-more");
 }
@@ -687,7 +688,7 @@ TEST_F(FileTest, WholeFileReadOnAppendHandle) {
     auto p = get_test_path("append_whole_read.txt");
     filesystem::create_and_write(p, "hello world");
 
-    file f(p, true, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_EXIST);
+    file f(p, true, file_access::read_write, file_shared::share_read_write, file_creation::open_exist);
     ASSERT_TRUE(f.is_opened());
     EXPECT_EQ(f.read(), "hello world");
     EXPECT_EQ(f.write("!", 1), 1u);
@@ -695,14 +696,14 @@ TEST_F(FileTest, WholeFileReadOnAppendHandle) {
     EXPECT_EQ(f.size64(), 12u);
     f.close();
 
-    file check(p, false, file_access::READ, file_shared::SHARE_READ);
+    file check(p, false, file_access::read, file_shared::share_read);
     EXPECT_TRUE(check.is_opened());
     EXPECT_EQ(check.read(), "hello world!");
 }
 
 TEST_F(FileTest, SeekNotOpened) {
     file f;
-    EXPECT_FALSE(f.seek(10, file_pointer::BEGIN));
+    EXPECT_FALSE(f.seek(10, file_pointer::begin));
 }
 
 TEST_F(FileTest, Tell) {
@@ -727,7 +728,7 @@ TEST_F(FileTest, SystemTell) {
 
     file f(p);
     EXPECT_EQ(f.system_tell(), 0);
-    f.seek(5, file_pointer::BEGIN);
+    ignore = f.seek(5, file_pointer::begin);
     EXPECT_EQ(f.system_tell(), 5);
 }
 
@@ -966,13 +967,13 @@ TEST_F(FileTest, FlushAfterReadDoesNotTruncateFile) {
     const string content(10000, 'a');
     filesystem::create_and_write(p, content);
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_EXIST);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_exist);
         ASSERT_TRUE(f.is_opened());
         EXPECT_EQ(f.read(1000).size(), 1000u);
         EXPECT_TRUE(f.flush());
         EXPECT_EQ(f.size64(), 10000u);
     }
-    file check(p, false, file_access::READ, file_shared::SHARE_READ);
+    file check(p, false, file_access::read, file_shared::share_read);
     EXPECT_EQ(check.size64(), 10000u);
     EXPECT_EQ(check.read(1000).size(), 1000u);
 }
@@ -982,14 +983,14 @@ TEST_F(FileTest, FlushAfterMidFileWriteDoesNotTruncate) {
     const string content(10000, 'a');
     filesystem::create_and_write(p, content);
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_EXIST);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_exist);
         ASSERT_TRUE(f.is_opened());
-        EXPECT_TRUE(f.seek(4000, file_pointer::BEGIN));
+        EXPECT_TRUE(f.seek(4000, file_pointer::begin));
         EXPECT_EQ(f.write("XXXX", 4), 4u);
         EXPECT_TRUE(f.flush());
         EXPECT_EQ(f.size64(), 10000u);
     }
-    file check(p, false, file_access::READ, file_shared::SHARE_READ);
+    file check(p, false, file_access::read, file_shared::share_read);
     const string all = check.read();
     EXPECT_EQ(all.size(), 10000u);
     EXPECT_EQ(all.substr(4000, 4), "XXXX");
@@ -999,7 +1000,7 @@ TEST_F(FileTest, ReadThenWriteWithoutSeekWritesAtLogicalPosition) {
     const auto p = get_test_path("interleave_rw.bin");
     filesystem::create_and_write(p, "0123456789");
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_EXIST);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_exist);
         EXPECT_EQ(f.read(4), "0123");
         EXPECT_EQ(f.write("XY", 2), 2u);
         EXPECT_TRUE(f.flush());
@@ -1012,12 +1013,12 @@ TEST_F(FileTest, ReadThenWriteWithoutSeekWritesAtLogicalPosition) {
 TEST_F(FileTest, WriteThenReadWithoutSeekFlushesFirst) {
     const auto p = get_test_path("interleave_wr.bin");
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::CREATE_FORCE);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::create_force);
         ASSERT_TRUE(f.is_opened());
         EXPECT_EQ(f.write("hello", 5), 5u);
         EXPECT_EQ(f.tell(), 5);
         EXPECT_EQ(f.read(5), "");
-        EXPECT_TRUE(f.seek(0, file_pointer::BEGIN));
+        EXPECT_TRUE(f.seek(0, file_pointer::begin));
         EXPECT_EQ(f.read(5), "hello");
     }
 }
@@ -1043,19 +1044,19 @@ TEST_F(FileTest, SparseFileBeyond4GiB) {
     const auto p = get_test_path("sparse_4g.bin");
     constexpr uint64_t big = (uint64_t{1} << 32) + 4096;
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::CREATE_FORCE);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::create_force);
         ASSERT_TRUE(f.is_opened());
         EXPECT_EQ(f.write("HEAD", 4), 4u);
         EXPECT_TRUE(f.flush());
         EXPECT_TRUE(f.truncate(static_cast<file::difference_type>(big)));
         EXPECT_EQ(f.size64(), big);
     }
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     string head;
     EXPECT_EQ(f.read_binary(head, 4), 4u);
     EXPECT_EQ(head, "HEAD");
     string tail;
-    EXPECT_TRUE(f.seek(static_cast<file::difference_type>(big - 4), file_pointer::BEGIN));
+    EXPECT_TRUE(f.seek(static_cast<file::difference_type>(big - 4), file_pointer::begin));
     EXPECT_EQ(f.read_binary(tail, 4), 4u);
 }
 
@@ -1075,7 +1076,7 @@ TEST_F(FileTest, SizeBeyond4GiBReportsZero) {
     const auto p = get_test_path("size_4g.bin");
     constexpr uint64_t big = (uint64_t{1} << 32) + 4096;
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::CREATE_FORCE);
+        file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::create_force);
         ASSERT_TRUE(f.is_opened());
         EXPECT_TRUE(f.truncate(static_cast<file::difference_type>(big)));
         EXPECT_EQ(f.size64(), big);
@@ -2948,7 +2949,7 @@ TEST_F(TempFileTest, DefaultConstructor) {
     {
         temp_file tf;
         EXPECT_TRUE(tf.file().is_opened());
-        EXPECT_EQ(tf.policy(), temp_file::delete_policy::AUTO_DELETE);
+        EXPECT_EQ(tf.policy(), temp_file::delete_policy::auto_delete);
         created_path = tf.file().file_path();
         EXPECT_TRUE(created_path.exists());
         EXPECT_TRUE(created_path.is_file());
@@ -2972,7 +2973,7 @@ TEST_F(TempFileTest, ConstructorWithPrefixAndSuffix) {
 TEST_F(TempFileTest, ConstructorWithCreationMode) {
     path created_path;
     {
-        temp_file tf("test", ".txt", file_creation::CREATE_FORCE);
+        temp_file tf("test", ".txt", file_creation::create_force);
         EXPECT_TRUE(tf.file().is_opened());
         created_path = tf.file().file_path();
         EXPECT_TRUE(created_path.exists());
@@ -2998,7 +2999,7 @@ TEST_F(TempFileTest, ConstructorWithExistingPathManualDelete) {
     filesystem::create_and_write(existing, "keep me");
 
     {
-        temp_file tf(existing, temp_file::delete_policy::MANUAL_DELETE);
+        temp_file tf(existing, temp_file::delete_policy::manual_delete);
         EXPECT_TRUE(tf.file().is_opened());
     }
     EXPECT_TRUE(existing.exists());
@@ -3010,7 +3011,7 @@ TEST_F(TempFileTest, ConstructorWithExistingPathKeepOnExit) {
     filesystem::create_and_write(existing, "keep forever");
 
     {
-        temp_file tf(existing, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf(existing, temp_file::delete_policy::keep_on_exit);
         EXPECT_TRUE(tf.file().is_opened());
     }
     EXPECT_TRUE(existing.exists());
@@ -3020,7 +3021,7 @@ TEST_F(TempFileTest, ConstructorWithExistingPathKeepOnExit) {
 TEST_F(TempFileTest, AutoDeletePolicy) {
     path tf_path;
     {
-        temp_file tf("auto_del", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::AUTO_DELETE);
+        temp_file tf("auto_del", ".tmp", file_creation::create_force, temp_file::delete_policy::auto_delete);
         tf_path = tf.file().file_path();
         EXPECT_TRUE(tf_path.exists());
     }
@@ -3030,7 +3031,7 @@ TEST_F(TempFileTest, AutoDeletePolicy) {
 TEST_F(TempFileTest, ManualDeletePolicy) {
     path tf_path;
     {
-        temp_file tf("manual_del", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::MANUAL_DELETE);
+        temp_file tf("manual_del", ".tmp", file_creation::create_force, temp_file::delete_policy::manual_delete);
         tf_path = tf.file().file_path();
         EXPECT_TRUE(tf_path.exists());
     }
@@ -3041,7 +3042,7 @@ TEST_F(TempFileTest, ManualDeletePolicy) {
 TEST_F(TempFileTest, KeepOnExitPolicy) {
     path tf_path;
     {
-        temp_file tf("keep_exit", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf("keep_exit", ".tmp", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
         tf_path = tf.file().file_path();
         EXPECT_TRUE(tf_path.exists());
     }
@@ -3059,8 +3060,8 @@ TEST_F(TempFileTest, MoveConstructor) {
     temp_file tf2(move(tf1));
     EXPECT_TRUE(tf2.file().is_opened());
     EXPECT_EQ(tf2.file().file_path(), original_path);
-    EXPECT_EQ(tf2.policy(), temp_file::delete_policy::AUTO_DELETE);
-    EXPECT_EQ(tf1.policy(), temp_file::delete_policy::KEEP_ON_EXIT);
+    EXPECT_EQ(tf2.policy(), temp_file::delete_policy::auto_delete);
+    EXPECT_EQ(tf1.policy(), temp_file::delete_policy::keep_on_exit);
     EXPECT_FALSE(tf1.file().is_opened());
 
     tf2.cleanup();
@@ -3085,8 +3086,8 @@ TEST_F(TempFileTest, MoveAssignment) {
         EXPECT_FALSE(path1.exists());
         EXPECT_TRUE(path2.exists());
         EXPECT_EQ(tf1.file().file_path(), path2);
-        EXPECT_EQ(tf1.policy(), temp_file::delete_policy::AUTO_DELETE);
-        EXPECT_EQ(tf2.policy(), temp_file::delete_policy::KEEP_ON_EXIT);
+        EXPECT_EQ(tf1.policy(), temp_file::delete_policy::auto_delete);
+        EXPECT_EQ(tf2.policy(), temp_file::delete_policy::keep_on_exit);
     }
 }
 
@@ -3100,14 +3101,14 @@ TEST_F(TempFileTest, MoveAssignmentSelf) {
 
         EXPECT_TRUE(tf.file().is_opened());
         EXPECT_EQ(tf.file().file_path(), tf_path);
-        EXPECT_EQ(tf.policy(), temp_file::delete_policy::AUTO_DELETE);
+        EXPECT_EQ(tf.policy(), temp_file::delete_policy::auto_delete);
     }
 }
 
 TEST_F(TempFileTest, FileAccess) {
     path p;
     {
-        temp_file tf("access", ".txt", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf("access", ".txt", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
         auto& f = tf.file();
         f.write("test content");
         f.flush();
@@ -3130,7 +3131,7 @@ TEST_F(TempFileTest, ConstFileAccess) {
 TEST_F(TempFileTest, FileAccessWritable) {
     path p;
     {
-        temp_file tf("writable", ".txt", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf("writable", ".txt", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
         tf.file().write("data");
         tf.file().flush();
         p = tf.file().file_path();
@@ -3144,7 +3145,7 @@ TEST_F(TempFileTest, FileAccessWritable) {
 TEST_F(TempFileTest, FileAccessKeep) {
     path p;
     {
-        temp_file tf("keep", ".txt", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf("keep", ".txt", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
         auto& f = tf.file();
         f.write("keep content");
         f.flush();
@@ -3160,33 +3161,33 @@ TEST_F(TempFileTest, FileAccessKeep) {
 
 TEST_F(TempFileTest, SetDeletePolicy) {
     temp_file tf("change_policy", ".tmp");
-    EXPECT_EQ(tf.policy(), temp_file::delete_policy::AUTO_DELETE);
+    EXPECT_EQ(tf.policy(), temp_file::delete_policy::auto_delete);
 
-    tf.set_delete_policy(temp_file::delete_policy::MANUAL_DELETE);
-    EXPECT_EQ(tf.policy(), temp_file::delete_policy::MANUAL_DELETE);
+    tf.set_delete_policy(temp_file::delete_policy::manual_delete);
+    EXPECT_EQ(tf.policy(), temp_file::delete_policy::manual_delete);
 
-    tf.set_delete_policy(temp_file::delete_policy::KEEP_ON_EXIT);
-    EXPECT_EQ(tf.policy(), temp_file::delete_policy::KEEP_ON_EXIT);
+    tf.set_delete_policy(temp_file::delete_policy::keep_on_exit);
+    EXPECT_EQ(tf.policy(), temp_file::delete_policy::keep_on_exit);
 
-    tf.set_delete_policy(temp_file::delete_policy::AUTO_DELETE);
-    EXPECT_EQ(tf.policy(), temp_file::delete_policy::AUTO_DELETE);
+    tf.set_delete_policy(temp_file::delete_policy::auto_delete);
+    EXPECT_EQ(tf.policy(), temp_file::delete_policy::auto_delete);
 }
 
 TEST_F(TempFileTest, PolicyGetter) {
-    temp_file tf1("policy_auto", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::AUTO_DELETE);
-    EXPECT_EQ(tf1.policy(), temp_file::delete_policy::AUTO_DELETE);
+    temp_file tf1("policy_auto", ".tmp", file_creation::create_force, temp_file::delete_policy::auto_delete);
+    EXPECT_EQ(tf1.policy(), temp_file::delete_policy::auto_delete);
 
-    temp_file tf2("policy_manual", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::MANUAL_DELETE);
-    EXPECT_EQ(tf2.policy(), temp_file::delete_policy::MANUAL_DELETE);
+    temp_file tf2("policy_manual", ".tmp", file_creation::create_force, temp_file::delete_policy::manual_delete);
+    EXPECT_EQ(tf2.policy(), temp_file::delete_policy::manual_delete);
 
-    temp_file tf3("policy_keep", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
-    EXPECT_EQ(tf3.policy(), temp_file::delete_policy::KEEP_ON_EXIT);
+    temp_file tf3("policy_keep", ".tmp", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
+    EXPECT_EQ(tf3.policy(), temp_file::delete_policy::keep_on_exit);
 }
 
 TEST_F(TempFileTest, CleanupAutoDelete) {
     path tf_path;
     {
-        temp_file tf("cleanup_auto", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::AUTO_DELETE);
+        temp_file tf("cleanup_auto", ".tmp", file_creation::create_force, temp_file::delete_policy::auto_delete);
         tf_path = tf.file().file_path();
         EXPECT_TRUE(tf_path.exists());
 
@@ -3199,7 +3200,7 @@ TEST_F(TempFileTest, CleanupAutoDelete) {
 TEST_F(TempFileTest, CleanupManualDelete) {
     path tf_path;
     {
-        temp_file tf("cleanup_manual", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::MANUAL_DELETE);
+        temp_file tf("cleanup_manual", ".tmp", file_creation::create_force, temp_file::delete_policy::manual_delete);
         tf_path = tf.file().file_path();
         EXPECT_TRUE(tf_path.exists());
 
@@ -3213,7 +3214,7 @@ TEST_F(TempFileTest, CleanupManualDelete) {
 TEST_F(TempFileTest, CleanupKeepOnExit) {
     path tf_path;
     {
-        temp_file tf("cleanup_keep", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf("cleanup_keep", ".tmp", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
         tf_path = tf.file().file_path();
         EXPECT_TRUE(tf_path.exists());
 
@@ -3245,7 +3246,7 @@ TEST_F(TempFileTest, Release) {
         EXPECT_TRUE(tf_path.exists());
 
         tf.release();
-        EXPECT_EQ(tf.policy(), temp_file::delete_policy::MANUAL_DELETE);
+        EXPECT_EQ(tf.policy(), temp_file::delete_policy::manual_delete);
         EXPECT_TRUE(tf.file().is_opened());
     }
     EXPECT_TRUE(tf_path.exists());
@@ -3259,10 +3260,10 @@ TEST_F(TempFileTest, ReleaseThenModifyPolicy) {
         tf_path = tf.file().file_path();
 
         tf.release();
-        EXPECT_EQ(tf.policy(), temp_file::delete_policy::MANUAL_DELETE);
+        EXPECT_EQ(tf.policy(), temp_file::delete_policy::manual_delete);
 
-        tf.set_delete_policy(temp_file::delete_policy::AUTO_DELETE);
-        EXPECT_EQ(tf.policy(), temp_file::delete_policy::AUTO_DELETE);
+        tf.set_delete_policy(temp_file::delete_policy::auto_delete);
+        EXPECT_EQ(tf.policy(), temp_file::delete_policy::auto_delete);
     }
     EXPECT_FALSE(tf_path.exists());
 }
@@ -3270,9 +3271,9 @@ TEST_F(TempFileTest, ReleaseThenModifyPolicy) {
 TEST_F(TempFileTest, CreateTempFileFactory) {
     path created_path;
     {
-        auto tf = temp_file::create_temp_file("factory", ".dat");
+        auto tf = temp_file::create("factory", ".dat");
         EXPECT_TRUE(tf.file().is_opened());
-        EXPECT_EQ(tf.policy(), temp_file::delete_policy::AUTO_DELETE);
+        EXPECT_EQ(tf.policy(), temp_file::delete_policy::auto_delete);
         created_path = tf.file().file_path();
         auto fname = created_path.filename();
         EXPECT_NE(fname.find("factory"), string_view::npos);
@@ -3284,9 +3285,9 @@ TEST_F(TempFileTest, CreateTempFileFactory) {
 TEST_F(TempFileTest, CreateTempFileFactoryDefaultArgs) {
     path created_path;
     {
-        auto tf = temp_file::create_temp_file();
+        auto tf = temp_file::create();
         EXPECT_TRUE(tf.file().is_opened());
-        EXPECT_EQ(tf.policy(), temp_file::delete_policy::AUTO_DELETE);
+        EXPECT_EQ(tf.policy(), temp_file::delete_policy::auto_delete);
         created_path = tf.file().file_path();
     }
     EXPECT_FALSE(created_path.exists());
@@ -3297,9 +3298,9 @@ TEST_F(TempFileTest, CleanupAllTempFiles) {
     path path2;
     path path3;
     {
-        temp_file tf1("all_cleanup_1", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::AUTO_DELETE);
-        temp_file tf2("all_cleanup_2", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::AUTO_DELETE);
-        temp_file tf3("all_cleanup_3", ".tmp", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf1("all_cleanup_1", ".tmp", file_creation::create_force, temp_file::delete_policy::auto_delete);
+        temp_file tf2("all_cleanup_2", ".tmp", file_creation::create_force, temp_file::delete_policy::auto_delete);
+        temp_file tf3("all_cleanup_3", ".tmp", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
 
         path1 = tf1.file().file_path();
         path2 = tf2.file().file_path();
@@ -3311,7 +3312,7 @@ TEST_F(TempFileTest, CleanupAllTempFiles) {
 
         tf1.file().close();
         tf2.file().close();
-        temp_file::cleanup_all_temp_files();
+        temp_file::cleanup_all();
 
         EXPECT_FALSE(path1.exists());
         EXPECT_FALSE(path2.exists());
@@ -3345,7 +3346,7 @@ TEST_F(TempFileTest, RegisterForCleanup) {
     temp_file::register_for_cleanup(custom_path);
     EXPECT_TRUE(custom_path.exists());
 
-    temp_file::cleanup_all_temp_files();
+    temp_file::cleanup_all();
     EXPECT_FALSE(custom_path.exists());
 }
 
@@ -3356,7 +3357,7 @@ TEST_F(TempFileTest, RegisterForCleanupDuplicate) {
     temp_file::register_for_cleanup(custom_path);
     temp_file::register_for_cleanup(custom_path);
 
-    temp_file::cleanup_all_temp_files();
+    temp_file::cleanup_all();
     EXPECT_FALSE(custom_path.exists());
 }
 
@@ -3382,7 +3383,7 @@ TEST_F(TempFileTest, UniqueFileNames) {
 TEST_F(TempFileTest, FileOperationsOnTempFile) {
     path p;
     {
-        temp_file tf("fileops", ".txt", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf("fileops", ".txt", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
         tf.file().write("line1\n");
         tf.file().write("line2\n");
         tf.file().write("line3");
@@ -3390,7 +3391,7 @@ TEST_F(TempFileTest, FileOperationsOnTempFile) {
         p = tf.file().file_path();
     }
     {
-        file reader(p, false, file_access::READ, file_shared::SHARE_READ);
+        file reader(p, false, file_access::read, file_shared::share_read);
         auto lines = reader.read_lines();
         ASSERT_EQ(lines.size(), 3);
         EXPECT_EQ(lines[0], "line1");
@@ -3412,9 +3413,9 @@ TEST_F(TempFileTest, TempFileAppend) {
 TEST_F(TempFileTest, TempFileSeekAndWrite) {
     path p;
     {
-        temp_file tf("seek_write", ".txt", file_creation::CREATE_FORCE, temp_file::delete_policy::KEEP_ON_EXIT);
+        temp_file tf("seek_write", ".txt", file_creation::create_force, temp_file::delete_policy::keep_on_exit);
         tf.file().write("0123456789");
-        ignore = tf.file().seek(5, file_pointer::BEGIN);
+        ignore = tf.file().seek(5, file_pointer::begin);
         tf.file().write("ABCDE");
         tf.file().flush();
         p = tf.file().file_path();
@@ -3434,7 +3435,7 @@ TEST_F(TempFileTest, MoveConstructorPreservesContent) {
         tf_path = tf1.file().file_path();
 
         temp_file tf2(move(tf1));
-        tf2.file().seek(0, file_pointer::BEGIN);
+        tf2.file().seek(0, file_pointer::begin);
         EXPECT_EQ(tf2.file().read(), "preserved content");
     }
     EXPECT_FALSE(tf_path.exists());
@@ -3455,8 +3456,8 @@ TEST_F(TempFileTest, CleanupOnAlreadyDeletedFile) {
 TEST_F(TempFileTest, CleanupOnAlreadyDeletedFileManual) {
     path tf_path;
     {
-        temp_file tf("early_delete_manual", ".tmp", file_creation::CREATE_FORCE,
-                     temp_file::delete_policy::MANUAL_DELETE);
+        temp_file tf("early_delete_manual", ".tmp", file_creation::create_force,
+                     temp_file::delete_policy::manual_delete);
         tf_path = tf.file().file_path();
         filesystem::remove(tf_path);
     }
@@ -3470,7 +3471,7 @@ TEST_F(TempFileTest, CleanupAllTempFilesAfterManualDelete) {
         filesystem::remove(tf_path);
     }
 
-    temp_file::cleanup_all_temp_files();
+    temp_file::cleanup_all();
 }
 
 TEST_F(TempFileTest, TempFileInSubdirectory) {
@@ -3545,11 +3546,11 @@ TEST_F(FileDiffTest, CompareBinaryIdentical) {
 
     byte_t data[] = {0x00, 0x01, 0x02, 0xFF, 0xAA, 0x55};
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write(data, sizeof(data));
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write(data, sizeof(data));
     }
 
@@ -3565,11 +3566,11 @@ TEST_F(FileDiffTest, CompareBinaryDifferentContent) {
     byte_t data2[] = {0x00, 0x01, 0xFF};
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write(data1, sizeof(data1));
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write(data2, sizeof(data2));
     }
 
@@ -3581,11 +3582,11 @@ TEST_F(FileDiffTest, CompareBinaryDifferentSize) {
     auto f2 = get_path("size_b.bin");
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write("short", 5);
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write("longer", 6);
     }
 
@@ -3620,11 +3621,11 @@ TEST_F(FileDiffTest, CompareBinaryLargeFile) {
     large_content[19999] = 'Y';
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write(large_content);
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write(large_content);
     }
 
@@ -3633,7 +3634,7 @@ TEST_F(FileDiffTest, CompareBinaryLargeFile) {
     string different_content(20000, 'X');
     different_content[10000] = 'Z';
     {
-        file w3(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w3(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w3.write(different_content);
     }
 
@@ -3728,7 +3729,7 @@ TEST_F(FileDiffTest, CompareTextCRLFvsLF) {
     auto f2 = get_path("lf.txt");
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write("line1\r\nline2\r\n", 14);
     }
     create_file(f2, "line1\nline2\n");
@@ -3792,11 +3793,11 @@ TEST_F(FileDiffTest, BinaryDiffIdentical) {
 
     byte_t data[] = {0x41, 0x42, 0x43};
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write(data, sizeof(data));
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write(data, sizeof(data));
     }
 
@@ -3812,11 +3813,11 @@ TEST_F(FileDiffTest, BinaryDiffDifferentContent) {
     byte_t data2[] = {0x00, 0xFF, 0x02, 0xFE};
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write(data1, sizeof(data1));
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write(data2, sizeof(data2));
     }
 
@@ -3839,11 +3840,11 @@ TEST_F(FileDiffTest, BinaryDiffSizeDifference) {
     auto f2 = get_path("bdiff_size_b.bin");
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write("abcdef", 6);
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write("abcd", 4);
     }
 
@@ -3866,11 +3867,11 @@ TEST_F(FileDiffTest, BinaryDiffSizeDifferenceLargerFirst) {
     auto f2 = get_path("bdiff_larger_b.bin");
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write("xyz", 3);
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write("xyz123", 6);
     }
 
@@ -3895,11 +3896,11 @@ TEST_F(FileDiffTest, BinaryDiffMaxDiffs) {
     string data2(1000, 'B');
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write(data1);
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write(data2);
     }
 
@@ -3912,11 +3913,11 @@ TEST_F(FileDiffTest, BinaryDiffMaxDiffsZero) {
     auto f2 = get_path("bdiff_zero_b.bin");
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write("AAA", 3);
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write("BBB", 3);
     }
 
@@ -3941,7 +3942,7 @@ TEST_F(FileDiffTest, BinaryDiffOneEmpty) {
 
     create_file(f1, "");
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write("data", 4);
     }
 
@@ -3976,11 +3977,11 @@ TEST_F(FileDiffTest, BinaryDiffSizeTypeValue) {
     auto f2 = get_path("bdiff_sizetype_b.bin");
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write("0123456789", 10);
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write("01234ABCDE", 10);
     }
 
@@ -4002,11 +4003,11 @@ TEST_F(FileDiffTest, BinaryDiffLargeFileLimitDiffs) {
     string data2(50000, 'B');
 
     {
-        file w1(f1, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w1(f1, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w1.write(data1);
     }
     {
-        file w2(f2, false, file_access::WRITE, file_shared::SHARE_READ, file_creation::OPEN_FORCE);
+        file w2(f2, false, file_access::write, file_shared::share_read, file_creation::open_force);
         w2.write(data2);
     }
 
@@ -4041,7 +4042,7 @@ TEST_F(FileMapperTest, Constructor) {
     auto p = get_path("ctor_test.bin");
     create_file(p, "constructor test data");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
     EXPECT_FALSE(mapper.is_mapped());
@@ -4054,17 +4055,17 @@ TEST_F(FileMapperTest, MapReadOnly) {
     auto p = get_path("map_read.bin");
     create_file(p, "hello memory mapped file!");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read));
     EXPECT_TRUE(mapper.is_mapped());
     EXPECT_NE(mapper.data(), nullptr);
     EXPECT_GT(mapper.size(), 0);
 
     auto info = mapper.info();
     EXPECT_TRUE(info.is_mapped);
-    EXPECT_EQ(info.access, file_access::READ);
+    EXPECT_EQ(info.access, file_access::read);
     EXPECT_NE(info.address, nullptr);
 }
 
@@ -4072,10 +4073,10 @@ TEST_F(FileMapperTest, MapReadWrite) {
     auto p = get_path("map_readwrite.bin");
     create_file(p, string(100, 'A'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 100, file_access::READ_WRITE));
+    EXPECT_TRUE(mapper.map(0, 100, file_access::read_write));
     EXPECT_TRUE(mapper.is_mapped());
     EXPECT_EQ(mapper.size(), 100);
 
@@ -4089,10 +4090,10 @@ TEST_F(FileMapperTest, MapWithOffset) {
     auto p = get_path("map_offset.bin");
     create_file(p, "0123456789ABCDEF");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(5, 5, file_access::READ));
+    EXPECT_TRUE(mapper.map(5, 5, file_access::read));
     EXPECT_TRUE(mapper.is_mapped());
     EXPECT_EQ(mapper.size(), 5);
     EXPECT_EQ(mapper.offset(), 5);
@@ -4106,10 +4107,10 @@ TEST_F(FileMapperTest, MapWithSize) {
     auto p = get_path("map_size.bin");
     create_file(p, string(200, 'X'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 50, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 50, file_access::read));
     EXPECT_TRUE(mapper.is_mapped());
     EXPECT_EQ(mapper.size(), 50);
 
@@ -4123,10 +4124,10 @@ TEST_F(FileMapperTest, MapEntireFile) {
     string content(500, 'Y');
     create_file(p, content);
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read));
     EXPECT_TRUE(mapper.is_mapped());
     EXPECT_EQ(mapper.size(), 500);
 
@@ -4140,10 +4141,10 @@ TEST_F(FileMapperTest, MapSequentialHint) {
     auto p = get_path("map_seq.bin");
     create_file(p, string(100, 'S'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::READ, file_map_hint::SEQUENTIAL));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_map_hint::sequential));
     EXPECT_TRUE(mapper.is_mapped());
 }
 
@@ -4151,10 +4152,10 @@ TEST_F(FileMapperTest, MapRandomHint) {
     auto p = get_path("map_rand.bin");
     create_file(p, string(100, 'R'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::READ, file_map_hint::RANDOM));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_map_hint::random));
     EXPECT_TRUE(mapper.is_mapped());
 }
 
@@ -4162,10 +4163,10 @@ TEST_F(FileMapperTest, MapNormalHint) {
     auto p = get_path("map_norm.bin");
     create_file(p, string(100, 'N'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::READ, file_map_hint::NORMAL));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_map_hint::normal));
     EXPECT_TRUE(mapper.is_mapped());
 }
 
@@ -4173,7 +4174,7 @@ TEST_F(FileMapperTest, Unmap) {
     auto p = get_path("unmap_test.bin");
     create_file(p, "unmap test data");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
     EXPECT_TRUE(mapper.map());
@@ -4190,7 +4191,7 @@ TEST_F(FileMapperTest, UnmapNotMapped) {
     auto p = get_path("unmap_not.bin");
     create_file(p, "data");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
     EXPECT_NO_THROW(mapper.unmap());
@@ -4201,10 +4202,10 @@ TEST_F(FileMapperTest, Remap) {
     auto p = get_path("remap_test.bin");
     create_file(p, "0123456789ABCDEFGHIJ");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 5, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 5, file_access::read));
     EXPECT_EQ(mapper.size(), 5);
     auto* data1 = static_cast<char*>(mapper.data());
     EXPECT_EQ(data1[0], '0');
@@ -4221,24 +4222,24 @@ TEST_F(FileMapperTest, RemapKeepsAccess) {
     auto p = get_path("remap_access.bin");
     create_file(p, string(50, 'Z'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 10, file_access::READ));
-    EXPECT_EQ(mapper.access(), file_access::READ);
+    EXPECT_TRUE(mapper.map(0, 10, file_access::read));
+    EXPECT_EQ(mapper.access(), file_access::read);
 
     EXPECT_TRUE(mapper.remap(20, 10));
-    EXPECT_EQ(mapper.access(), file_access::READ);
+    EXPECT_EQ(mapper.access(), file_access::read);
 }
 
 TEST_F(FileMapperTest, FlushReadWrite) {
     auto p = get_path("flush_test.bin");
     create_file(p, string(100, 0));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 100, file_access::READ_WRITE));
+    EXPECT_TRUE(mapper.map(0, 100, file_access::read_write));
 
     auto* data = static_cast<char*>(mapper.data());
     for (size_t i = 0; i < 100; ++i) {
@@ -4252,10 +4253,10 @@ TEST_F(FileMapperTest, FlushAsync) {
     auto p = get_path("flush_async.bin");
     create_file(p, string(100, 0));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 100, file_access::READ_WRITE));
+    EXPECT_TRUE(mapper.map(0, 100, file_access::read_write));
 
     auto* data = static_cast<char*>(mapper.data());
     data[0] = 'X';
@@ -4268,7 +4269,7 @@ TEST_F(FileMapperTest, FlushNotMapped) {
     auto p = get_path("flush_not_mapped.bin");
     create_file(p, "data");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
     EXPECT_FALSE(mapper.flush(false));
@@ -4279,10 +4280,10 @@ TEST_F(FileMapperTest, FlushReadOnly) {
     auto p = get_path("flush_readonly.bin");
     create_file(p, "readonly data");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read));
     EXPECT_TRUE(mapper.flush(false));
 }
 
@@ -4290,10 +4291,10 @@ TEST_F(FileMapperTest, LockPages) {
     auto p = get_path("lock_pages.bin");
     create_file(p, string(100, 'L'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 100, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 100, file_access::read));
     EXPECT_TRUE(mapper.lock_pages(true));
 }
 
@@ -4301,10 +4302,10 @@ TEST_F(FileMapperTest, UnlockPages) {
     auto p = get_path("unlock_pages.bin");
     create_file(p, string(100, 'U'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 100, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 100, file_access::read));
 
     bool locked = mapper.lock_pages(true);
     if (locked) {
@@ -4316,7 +4317,7 @@ TEST_F(FileMapperTest, LockPagesNotMapped) {
     auto p = get_path("lock_not_mapped.bin");
     create_file(p, "data");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
     EXPECT_FALSE(mapper.lock_pages(true));
@@ -4327,7 +4328,7 @@ TEST_F(FileMapperTest, Data) {
     auto p = get_path("data_test.bin");
     create_file(p, "pointer access");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
     EXPECT_TRUE(mapper.map());
@@ -4342,10 +4343,10 @@ TEST_F(FileMapperTest, Size) {
     auto p = get_path("size_test.bin");
     create_file(p, string(42, 'S'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 42, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 42, file_access::read));
     EXPECT_EQ(mapper.size(), 42);
 }
 
@@ -4353,10 +4354,10 @@ TEST_F(FileMapperTest, Offset) {
     auto p = get_path("offset_test.bin");
     create_file(p, "0123456789");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(3, 4, file_access::READ));
+    EXPECT_TRUE(mapper.map(3, 4, file_access::read));
     EXPECT_EQ(mapper.offset(), 3);
 }
 
@@ -4364,18 +4365,18 @@ TEST_F(FileMapperTest, Access) {
     auto p = get_path("access_test.bin");
     create_file(p, "access mode test");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::READ));
-    EXPECT_EQ(mapper.access(), file_access::READ);
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read));
+    EXPECT_EQ(mapper.access(), file_access::read);
 }
 
 TEST_F(FileMapperTest, IsMapped) {
     auto p = get_path("is_mapped_test.bin");
     create_file(p, "mapped state");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
     EXPECT_FALSE(mapper.is_mapped());
@@ -4389,7 +4390,7 @@ TEST_F(FileMapperTest, Info) {
     auto p = get_path("info_test.bin");
     create_file(p, string(64, 'I'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
     auto info1 = mapper.info();
@@ -4398,20 +4399,20 @@ TEST_F(FileMapperTest, Info) {
     EXPECT_EQ(info1.size, 0);
     EXPECT_EQ(info1.offset, 0);
 
-    EXPECT_TRUE(mapper.map(8, 32, file_access::READ));
+    EXPECT_TRUE(mapper.map(8, 32, file_access::read));
     auto info2 = mapper.info();
     EXPECT_TRUE(info2.is_mapped);
     EXPECT_NE(info2.address, nullptr);
     EXPECT_EQ(info2.size, 32);
     EXPECT_EQ(info2.offset, 8);
-    EXPECT_EQ(info2.access, file_access::READ);
+    EXPECT_EQ(info2.access, file_access::read);
 }
 
 TEST_F(FileMapperTest, MoveConstructor) {
     auto p = get_path("move_ctor.bin");
     create_file(p, "move constructor test data");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper1(f.native_handle());
     EXPECT_TRUE(mapper1.map());
 
@@ -4435,14 +4436,14 @@ TEST_F(FileMapperTest, MoveAssignment) {
     create_file(p1, "first mapped data here");
     create_file(p2, "second mapped data here");
 
-    file f1(p1, false, file_access::READ, file_shared::SHARE_READ);
-    file f2(p2, false, file_access::READ, file_shared::SHARE_READ);
+    file f1(p1, false, file_access::read, file_shared::share_read);
+    file f2(p2, false, file_access::read, file_shared::share_read);
 
     file_mapper mapper1(f1.native_handle());
     file_mapper mapper2(f2.native_handle());
 
-    EXPECT_TRUE(mapper1.map(0, 5, file_access::READ));
-    EXPECT_TRUE(mapper2.map(0, 6, file_access::READ));
+    EXPECT_TRUE(mapper1.map(0, 5, file_access::read));
+    EXPECT_TRUE(mapper2.map(0, 6, file_access::read));
 
     auto* data2 = static_cast<char*>(mapper2.data());
 
@@ -4457,7 +4458,7 @@ TEST_F(FileMapperTest, MoveAssignmentSelf) {
     auto p = get_path("move_self.bin");
     create_file(p, "self assignment");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
     EXPECT_TRUE(mapper.map());
 
@@ -4473,9 +4474,9 @@ TEST_F(FileMapperTest, ReadAfterWriteThroughMap) {
     create_file(p, string(200, '\0'));
 
     {
-        file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+        file f(p, false, file_access::read_write, file_shared::share_read);
         file_mapper mapper(f.native_handle());
-        EXPECT_TRUE(mapper.map(0, 200, file_access::READ_WRITE));
+        EXPECT_TRUE(mapper.map(0, 200, file_access::read_write));
 
         auto* data = static_cast<char*>(mapper.data());
         for (size_t i = 0; i < 200; ++i) {
@@ -4496,10 +4497,10 @@ TEST_F(FileMapperTest, MapZeroSizeFileZeroSize) {
     auto p = get_path("zero_size.bin");
     create_file(p, "");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    bool result = mapper.map(0, 0, file_access::READ);
+    bool result = mapper.map(0, 0, file_access::read);
     EXPECT_FALSE(result);
 }
 
@@ -4507,10 +4508,10 @@ TEST_F(FileMapperTest, MapLargeOffset) {
     auto p = get_path("large_offset.bin");
     create_file(p, string(5000, 'L'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(4096, 100, file_access::READ));
+    EXPECT_TRUE(mapper.map(4096, 100, file_access::read));
     EXPECT_TRUE(mapper.is_mapped());
     EXPECT_EQ(mapper.size(), 100);
 
@@ -4523,10 +4524,10 @@ TEST_F(FileMapperTest, MapUnalignedOffset) {
     auto p = get_path("unaligned.bin");
     create_file(p, string(200, 'U'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(17, 50, file_access::READ));
+    EXPECT_TRUE(mapper.map(17, 50, file_access::read));
     EXPECT_TRUE(mapper.is_mapped());
 
     auto* data = static_cast<char*>(mapper.data());
@@ -4538,14 +4539,14 @@ TEST_F(FileMapperTest, DoubleMap) {
     auto p = get_path("double_map.bin");
     create_file(p, "0123456789ABCDEF");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 5, file_access::READ));
+    EXPECT_TRUE(mapper.map(0, 5, file_access::read));
     auto* data1 = static_cast<char*>(mapper.data());
     EXPECT_EQ(data1[0], '0');
 
-    EXPECT_TRUE(mapper.map(8, 5, file_access::READ));
+    EXPECT_TRUE(mapper.map(8, 5, file_access::read));
     auto* data2 = static_cast<char*>(mapper.data());
     EXPECT_EQ(data2[0], '8');
 
@@ -4577,7 +4578,7 @@ TEST_F(FileLockerTest, Constructor) {
     auto p = get_path("ctor_test.txt");
     filesystem::create_and_write(p, "locker constructor test");
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     SUCCEED();
@@ -4587,10 +4588,10 @@ TEST_F(FileLockerTest, LockRegion) {
     auto p = get_path("lock_region.txt");
     filesystem::create_and_write(p, string(200, 'X'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(0, 100, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(0, 100, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(0, 100));
 }
 
@@ -4598,10 +4599,10 @@ TEST_F(FileLockerTest, LockWholeFile) {
     auto p = get_path("lock_whole.txt");
     filesystem::create_and_write(p, "lock entire file test data");
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock_whole(file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock_whole(file_lock::exclusive));
     EXPECT_TRUE(locker.unlock_whole());
 }
 
@@ -4609,10 +4610,10 @@ TEST_F(FileLockerTest, LockZeroLength) {
     auto p = get_path("lock_zero.txt");
     filesystem::create_and_write(p, string(100, 'Z'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(50, 0, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(50, 0, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(50, 0));
 }
 
@@ -4620,10 +4621,10 @@ TEST_F(FileLockerTest, LockSharedMode) {
     auto p = get_path("lock_shared.txt");
     filesystem::create_and_write(p, string(100, 'S'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(0, 50, file_lock::SHARED));
+    EXPECT_TRUE(locker.lock(0, 50, file_lock::shared));
     EXPECT_TRUE(locker.unlock(0, 50));
 }
 
@@ -4631,10 +4632,10 @@ TEST_F(FileLockerTest, LockExclusiveMode) {
     auto p = get_path("lock_exclusive.txt");
     filesystem::create_and_write(p, string(100, 'E'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(0, 50, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(0, 50, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(0, 50));
 }
 
@@ -4642,10 +4643,10 @@ TEST_F(FileLockerTest, Unlock) {
     auto p = get_path("unlock_test.txt");
     filesystem::create_and_write(p, string(100, 'U'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(10, 80, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(10, 80, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(10, 80));
 }
 
@@ -4653,11 +4654,11 @@ TEST_F(FileLockerTest, LockMultipleRegions) {
     auto p = get_path("lock_multi.txt");
     filesystem::create_and_write(p, string(200, 'M'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(0, 50, file_lock::EXCLUSIVE));
-    EXPECT_TRUE(locker.lock(100, 50, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(0, 50, file_lock::exclusive));
+    EXPECT_TRUE(locker.lock(100, 50, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(0, 50));
     EXPECT_TRUE(locker.unlock(100, 50));
 }
@@ -4666,10 +4667,10 @@ TEST_F(FileLockerTest, TryLockSuccess) {
     auto p = get_path("try_lock_ok.txt");
     filesystem::create_and_write(p, string(100, 'T'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.try_lock(0, 100, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.try_lock(0, 100, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(0, 100));
 }
 
@@ -4677,10 +4678,10 @@ TEST_F(FileLockerTest, TryLockShared) {
     auto p = get_path("try_lock_shared.txt");
     filesystem::create_and_write(p, string(100, 'T'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.try_lock(0, 100, file_lock::SHARED));
+    EXPECT_TRUE(locker.try_lock(0, 100, file_lock::shared));
     EXPECT_TRUE(locker.unlock(0, 100));
 }
 
@@ -4688,10 +4689,10 @@ TEST_F(FileLockerTest, IsLockedFalse) {
     auto p = get_path("is_locked_false.txt");
     filesystem::create_and_write(p, string(100, 'I'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    file_lock lock_out = file_lock::EXCLUSIVE;
+    file_lock lock_out = file_lock::exclusive;
     EXPECT_FALSE(locker.is_locked(0, 100, &lock_out));
 }
 
@@ -4699,10 +4700,10 @@ TEST_F(FileLockerTest, IsLockedTrueExclusive) {
     auto p = get_path("is_locked_true.txt");
     filesystem::create_and_write(p, string(100, 'I'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(0, 100, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(0, 100, file_lock::exclusive));
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     bool is_locked = locker.is_locked(0, 100, nullptr);
@@ -4717,12 +4718,12 @@ TEST_F(FileLockerTest, IsLockedNullOutput) {
     auto p = get_path("is_locked_null.txt");
     filesystem::create_and_write(p, string(100, 'N'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     EXPECT_FALSE(locker.is_locked(0, 100, nullptr));
 
-    EXPECT_TRUE(locker.lock(0, 100, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(0, 100, file_lock::exclusive));
 #ifdef NEFORCE_PLATFORM_WINDOWS
     bool locked = locker.is_locked(0, 100, nullptr);
     EXPECT_TRUE(locker.unlock(0, 100));
@@ -4736,27 +4737,27 @@ TEST_F(FileLockerTest, LockNegativeOffset) {
     auto p = get_path("lock_neg_offset.txt");
     filesystem::create_and_write(p, "data");
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_FALSE(locker.lock(-1, 10, file_lock::EXCLUSIVE));
+    EXPECT_FALSE(locker.lock(-1, 10, file_lock::exclusive));
 }
 
 TEST_F(FileLockerTest, LockNegativeLength) {
     auto p = get_path("lock_neg_length.txt");
     filesystem::create_and_write(p, "data");
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_FALSE(locker.lock(0, -1, file_lock::EXCLUSIVE));
+    EXPECT_FALSE(locker.lock(0, -1, file_lock::exclusive));
 }
 
 TEST_F(FileLockerTest, UnlockNegativeOffset) {
     auto p = get_path("unlock_neg.txt");
     filesystem::create_and_write(p, "data");
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     EXPECT_FALSE(locker.unlock(-1, 10));
@@ -4766,7 +4767,7 @@ TEST_F(FileLockerTest, UnlockNegativeLength) {
     auto p = get_path("unlock_neg_len.txt");
     filesystem::create_and_write(p, "data");
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     EXPECT_FALSE(locker.unlock(0, -1));
@@ -4776,12 +4777,12 @@ TEST_F(FileLockerTest, LockThenRelockSameRegion) {
     auto p = get_path("relock_same.txt");
     filesystem::create_and_write(p, string(100, 'R'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(0, 50, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(0, 50, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(0, 50));
-    EXPECT_TRUE(locker.lock(0, 50, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(0, 50, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(0, 50));
 }
 
@@ -4789,10 +4790,10 @@ TEST_F(FileLockerTest, LockWholeFileShortcut) {
     auto p = get_path("lock_whole_shortcut.txt");
     filesystem::create_and_write(p, string(50, 'W'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock_whole(file_lock::SHARED));
+    EXPECT_TRUE(locker.lock_whole(file_lock::shared));
     EXPECT_TRUE(locker.unlock_whole());
 }
 
@@ -4800,10 +4801,10 @@ TEST_F(FileLockerTest, UnlockWholeFileShortcut) {
     auto p = get_path("unlock_whole_shortcut.txt");
     filesystem::create_and_write(p, string(50, 'U'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    EXPECT_TRUE(locker.lock(0, 50, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.lock(0, 50, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock_whole());
 }
 
@@ -4811,15 +4812,15 @@ TEST_F(FileLockerTest, TryLockContention) {
     auto p = get_path("try_lock_contention.txt");
     filesystem::create_and_write(p, string(100, 'C'));
 
-    file f1(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f1(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker1(f1.native_handle());
 
-    EXPECT_TRUE(locker1.lock(0, 100, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker1.lock(0, 100, file_lock::exclusive));
 
-    file f2(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f2(p, false, file_access::read, file_shared::share_read);
     file_locker locker2(f2.native_handle());
 
-    EXPECT_FALSE(locker2.try_lock(0, 100, file_lock::EXCLUSIVE));
+    EXPECT_FALSE(locker2.try_lock(0, 100, file_lock::exclusive));
 
     EXPECT_TRUE(locker1.unlock(0, 100));
 }
@@ -4849,11 +4850,11 @@ TEST_F(FileLockGuardTest, ConstructorLocks) {
     auto p = get_path("guard_ctor.txt");
     filesystem::create_and_write(p, string(100, 'G'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     {
-        file_lock_guard guard(locker, 0, 100, file_lock::EXCLUSIVE);
+        file_lock_guard guard(locker, 0, 100, file_lock::exclusive);
         EXPECT_TRUE(guard.is_locked());
     }
 }
@@ -4862,15 +4863,15 @@ TEST_F(FileLockGuardTest, DestructorUnlocks) {
     auto p = get_path("guard_dtor.txt");
     filesystem::create_and_write(p, string(100, 'D'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     {
-        file_lock_guard guard(locker, 0, 100, file_lock::EXCLUSIVE);
+        file_lock_guard guard(locker, 0, 100, file_lock::exclusive);
         EXPECT_TRUE(guard.is_locked());
     }
 
-    EXPECT_TRUE(locker.try_lock(0, 100, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.try_lock(0, 100, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(0, 100));
 }
 
@@ -4878,10 +4879,10 @@ TEST_F(FileLockGuardTest, ManualUnlock) {
     auto p = get_path("guard_manual_unlock.txt");
     filesystem::create_and_write(p, string(100, 'M'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    file_lock_guard guard(locker, 0, 100, file_lock::EXCLUSIVE);
+    file_lock_guard guard(locker, 0, 100, file_lock::exclusive);
     EXPECT_TRUE(guard.is_locked());
 
     EXPECT_TRUE(guard.unlock());
@@ -4892,10 +4893,10 @@ TEST_F(FileLockGuardTest, UnlockWhenNotLocked) {
     auto p = get_path("guard_unlock_not_locked.txt");
     filesystem::create_and_write(p, string(100, 'N'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    file_lock_guard guard(locker, 0, 100, file_lock::EXCLUSIVE);
+    file_lock_guard guard(locker, 0, 100, file_lock::exclusive);
     EXPECT_TRUE(guard.is_locked());
 
     EXPECT_TRUE(guard.unlock());
@@ -4906,11 +4907,11 @@ TEST_F(FileLockGuardTest, DoubleDestructorSafe) {
     auto p = get_path("guard_double_dtor.txt");
     filesystem::create_and_write(p, string(100, 'S'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     {
-        file_lock_guard guard(locker, 0, 100, file_lock::EXCLUSIVE);
+        file_lock_guard guard(locker, 0, 100, file_lock::exclusive);
         EXPECT_TRUE(guard.is_locked());
         guard.unlock();
     }
@@ -4922,11 +4923,11 @@ TEST_F(FileLockGuardTest, SharedLock) {
     auto p = get_path("guard_shared.txt");
     filesystem::create_and_write(p, string(100, 'S'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     {
-        file_lock_guard guard(locker, 0, 100, file_lock::SHARED);
+        file_lock_guard guard(locker, 0, 100, file_lock::shared);
         EXPECT_TRUE(guard.is_locked());
     }
 }
@@ -4935,10 +4936,10 @@ TEST_F(FileLockGuardTest, IsLocked) {
     auto p = get_path("guard_is_locked.txt");
     filesystem::create_and_write(p, string(100, 'I'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
-    file_lock_guard guard(locker, 0, 100, file_lock::EXCLUSIVE);
+    file_lock_guard guard(locker, 0, 100, file_lock::exclusive);
     EXPECT_TRUE(guard.is_locked());
 
     guard.unlock();
@@ -4949,15 +4950,15 @@ TEST_F(FileLockGuardTest, PartialFileLock) {
     auto p = get_path("guard_partial.txt");
     filesystem::create_and_write(p, string(200, 'P'));
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::read_write, file_shared::share_read);
     file_locker locker(f.native_handle());
 
     {
-        file_lock_guard guard(locker, 50, 100, file_lock::EXCLUSIVE);
+        file_lock_guard guard(locker, 50, 100, file_lock::exclusive);
         EXPECT_TRUE(guard.is_locked());
     }
 
-    EXPECT_TRUE(locker.try_lock(50, 100, file_lock::EXCLUSIVE));
+    EXPECT_TRUE(locker.try_lock(50, 100, file_lock::exclusive));
     EXPECT_TRUE(locker.unlock(50, 100));
 }
 
@@ -4987,7 +4988,7 @@ TEST_F(FileAsyncTest, Constructor) {
     auto p = get_path("ctor_test.bin");
     filesystem::create_and_write(p, "async constructor test");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     SUCCEED();
@@ -4996,7 +4997,7 @@ TEST_F(FileAsyncTest, Constructor) {
 TEST_F(FileAsyncTest, ReadImmediate) {
     auto p = get_path("read_immediate.bin");
     filesystem::create_and_write(p, "async read immediate test data here");
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5020,7 +5021,7 @@ TEST_F(FileAsyncTest, ReadWithOffset) {
     auto p = get_path("read_offset.bin");
     filesystem::create_and_write(p, "0123456789ABCDEFGHIJ");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5044,7 +5045,7 @@ TEST_F(FileAsyncTest, ReadZeroSize) {
     auto p = get_path("read_zero.bin");
     filesystem::create_and_write(p, "some data");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer = "original";
@@ -5066,7 +5067,7 @@ TEST_F(FileAsyncTest, ReadEntireFile) {
     content[999] = 'E';
     filesystem::create_and_write(p, content);
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5089,8 +5090,8 @@ TEST_F(FileAsyncTest, ReadCurrentFilePointer) {
     auto p = get_path("read_current_ptr.bin");
     filesystem::create_and_write(p, "ABCDEFGHIJKLMNOP");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
-    f.seek(5, file_pointer::BEGIN);
+    file f(p, false, file_access::read, file_shared::share_read);
+    f.seek(5, file_pointer::begin);
 
     file_async async(f.native_handle());
 
@@ -5112,7 +5113,7 @@ TEST_F(FileAsyncTest, WriteImmediate) {
     auto p = get_path("write_immediate.bin");
     filesystem::create_and_write(p, "");
 
-    file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::write, file_shared::share_read);
     file_async async(f.native_handle());
 
     latch done(1);
@@ -5136,7 +5137,7 @@ TEST_F(FileAsyncTest, WriteWithOffset) {
     auto p = get_path("write_offset.bin");
     filesystem::create_and_write(p, string(50, 'X'));
 
-    file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::write, file_shared::share_read);
     file_async async(f.native_handle());
 
     latch done(1);
@@ -5164,7 +5165,7 @@ TEST_F(FileAsyncTest, WriteMaxSize) {
     auto p = get_path("write_max_size.bin");
     filesystem::create_and_write(p, "");
 
-    file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::write, file_shared::share_read);
     file_async async(f.native_handle());
 
     string data = "write all of this string";
@@ -5189,7 +5190,7 @@ TEST_F(FileAsyncTest, WaitWithTimeout) {
     auto p = get_path("wait_timeout.bin");
     filesystem::create_and_write(p, string(10000, 'W'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5210,7 +5211,7 @@ TEST_F(FileAsyncTest, WaitAlreadyCompleted) {
     auto p = get_path("wait_completed.bin");
     filesystem::create_and_write(p, "done");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5232,7 +5233,7 @@ TEST_F(FileAsyncTest, WaitInfiniteTimeout) {
     auto p = get_path("wait_infinite.bin");
     filesystem::create_and_write(p, string(500, 'I'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5253,7 +5254,7 @@ TEST_F(FileAsyncTest, CancelRead) {
     auto p = get_path("cancel_read.bin");
     filesystem::create_and_write(p, string(50000, 'C'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5273,7 +5274,7 @@ TEST_F(FileAsyncTest, CancelWrite) {
     auto p = get_path("cancel_write.bin");
     filesystem::create_and_write(p, "");
 
-    file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::write, file_shared::share_read);
     file_async async(f.native_handle());
 
     latch done(1);
@@ -5286,7 +5287,7 @@ TEST_F(FileAsyncTest, CancelWrite) {
 TEST_F(FileAsyncTest, CancelAlreadyCompleted) {
     auto p = get_path("cancel_completed.bin");
     filesystem::create_and_write(p, "data");
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5306,7 +5307,7 @@ TEST_F(FileAsyncTest, MultipleReads) {
     auto p = get_path("multi_read.bin");
     filesystem::create_and_write(p, string(3000, 'M'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buf1, buf2, buf3;
@@ -5327,7 +5328,7 @@ TEST_F(FileAsyncTest, MultipleWrites) {
     auto p = get_path("multi_write.bin");
     filesystem::create_and_write(p, "");
 
-    file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::write, file_shared::share_read);
     file_async async(f.native_handle());
 
     latch done(3);
@@ -5358,7 +5359,7 @@ TEST_F(FileAsyncTest, ReadLargeBuffer) {
     content[large_size - 1] = 'T';
     filesystem::create_and_write(p, content);
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5379,7 +5380,7 @@ TEST_F(FileAsyncTest, WriteLargeData) {
     auto p = get_path("write_large.bin");
     filesystem::create_and_write(p, "");
 
-    file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
+    file f(p, false, file_access::write, file_shared::share_read);
     file_async async(f.native_handle());
 
     size_t large_size = 50000;
@@ -5407,7 +5408,7 @@ TEST_F(FileAsyncTest, WriteLargeData) {
 TEST_F(FileAsyncTest, MoveConstructor) {
     auto p = get_path("move_ctor_async.bin");
     filesystem::create_and_write(p, "move constructor async test");
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
 
     file_async async1(f.native_handle());
     file_async async2(move(async1));
@@ -5427,8 +5428,8 @@ TEST_F(FileAsyncTest, MoveAssignment) {
     filesystem::create_and_write(p1, "first async file data");
     filesystem::create_and_write(p2, "second async file data");
 
-    file f1(p1, false, file_access::READ, file_shared::SHARE_READ);
-    file f2(p2, false, file_access::READ, file_shared::SHARE_READ);
+    file f1(p1, false, file_access::read, file_shared::share_read);
+    file f2(p2, false, file_access::read, file_shared::share_read);
 
     file_async async1(f1.native_handle());
     file_async async2(f2.native_handle());
@@ -5448,7 +5449,7 @@ TEST_F(FileAsyncTest, MoveAssignmentSelf) {
     auto p = get_path("move_self_async.bin");
     filesystem::create_and_write(p, "self assignment async");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5472,7 +5473,7 @@ TEST_F(FileAsyncTest, DestructorCancelsOperations) {
     filesystem::create_and_write(p, string(20000, 'D'));
 
     {
-        file f(p, false, file_access::READ, file_shared::SHARE_READ);
+        file f(p, false, file_access::read, file_shared::share_read);
         file_async async(f.native_handle());
 
         string buffer;
@@ -5495,7 +5496,7 @@ TEST_F(FileAsyncTest, ReadBufferPreallocation) {
     auto p = get_path("read_prealloc.bin");
     filesystem::create_and_write(p, "preallocation test data here");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5523,7 +5524,7 @@ TEST_F(FileAsyncTest, PreCancelledSlotReadReportsAborted) {
     ss.request_stop();
     cancellation_slot slot(ss.get_token());
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer(256, '\0');
@@ -5546,7 +5547,7 @@ TEST_F(FileAsyncTest, CancelInFlightOverlappedReadCompletesExactlyOnce) {
     constexpr file_async::size_type read_size = 1u << 22;
     filesystem::create_and_write(p, string(static_cast<size_t>(read_size), 'C'));
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ, file_creation::OPEN_EXIST, file_attri::OVERLAPPED);
+    file f(p, false, file_access::read, file_shared::share_read, file_creation::open_exist, file_attri::overlapped);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5576,7 +5577,7 @@ TEST_F(FileAsyncTest, ConcurrentMixedReadsAndWritesOnSameHandle) {
     const string content(2048, 'M');
     filesystem::create_and_write(p, content);
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_EXIST);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_exist);
     file_async async(f.native_handle());
 
     constexpr int kOps = 8;
@@ -5609,7 +5610,7 @@ TEST_F(FileAsyncTest, ConcurrentMixedReadsAndWritesOnSameHandle) {
     }
     f.close();
 
-    file check(p, false, file_access::READ, file_shared::SHARE_READ);
+    file check(p, false, file_access::read, file_shared::share_read);
     const string after = check.read();
     for (int i = 0; i < 4; ++i) {
         EXPECT_EQ(after.substr(1024 + i * 64, 64), string(64, static_cast<char>('A' + i)));
@@ -5620,8 +5621,8 @@ TEST_F(FileAsyncTest, OverlappedHandleWriteThenReadBack) {
     const auto p = get_path("overlapped_rw.bin");
     filesystem::create_and_write(p, "");
 
-    file f(p, false, file_access::READ_WRITE, file_shared::SHARE_READ_WRITE, file_creation::OPEN_FORCE,
-           file_attri::OVERLAPPED);
+    file f(p, false, file_access::read_write, file_shared::share_read_write, file_creation::open_force,
+           file_attri::overlapped);
     ASSERT_TRUE(f.is_opened());
     file_async async(f.native_handle());
 
@@ -5656,7 +5657,7 @@ TEST_F(FileAsyncTest, RunOneDoesNotIdleAfterCompletion) {
     const auto p = get_path("runone_idle.bin");
     filesystem::create_and_write(p, "inline completion");
 
-    file f(p, false, file_access::READ, file_shared::SHARE_READ);
+    file f(p, false, file_access::read, file_shared::share_read);
     file_async async(f.native_handle());
 
     string buffer;
@@ -5737,7 +5738,7 @@ TEST_F(FileWatcherTest, FileCreatedEvent) {
     file_watcher watcher(test_dir_, false);
 
     path created_path;
-    file_watch_event captured_event = file_watch_event::ACCESSED;
+    file_watch_event captured_event = file_watch_event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
@@ -5750,7 +5751,7 @@ TEST_F(FileWatcherTest, FileCreatedEvent) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::CREATED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
 
     auto new_file = get_path("created.txt");
     wait_ms(100);
@@ -5765,7 +5766,7 @@ TEST_F(FileWatcherTest, FileCreatedEvent) {
     watcher.stop();
 
     if (event_received) {
-        EXPECT_EQ(captured_event, file_watch_event::CREATED);
+        EXPECT_EQ(captured_event, file_watch_event::created);
         EXPECT_EQ(created_path.filename(), "created.txt");
     }
 }
@@ -5777,7 +5778,7 @@ TEST_F(FileWatcherTest, FileDeletedEvent) {
     file_watcher watcher(test_dir_, false);
 
     path deleted_path;
-    file_watch_event captured_event = file_watch_event::ACCESSED;
+    file_watch_event captured_event = file_watch_event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
@@ -5790,7 +5791,7 @@ TEST_F(FileWatcherTest, FileDeletedEvent) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::DELETED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::deleted));
 
     wait_ms(100);
     filesystem::remove(delete_file);
@@ -5803,7 +5804,7 @@ TEST_F(FileWatcherTest, FileDeletedEvent) {
     watcher.stop();
 
     if (event_received) {
-        EXPECT_EQ(captured_event, file_watch_event::DELETED);
+        EXPECT_EQ(captured_event, file_watch_event::deleted);
         EXPECT_EQ(deleted_path.filename(), "to_delete.txt");
     }
 }
@@ -5815,7 +5816,7 @@ TEST_F(FileWatcherTest, FileModifiedEvent) {
     file_watcher watcher(test_dir_, false);
 
     path modified_path;
-    file_watch_event captured_event = file_watch_event::ACCESSED;
+    file_watch_event captured_event = file_watch_event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
@@ -5828,12 +5829,12 @@ TEST_F(FileWatcherTest, FileModifiedEvent) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::MODIFIED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::modified));
 
     wait_ms(100);
 
     {
-        file f(modify_file, true, file_access::WRITE, file_shared::SHARE_READ);
+        file f(modify_file, true, file_access::write, file_shared::share_read);
         f.write("modified content", 16);
     }
 
@@ -5845,7 +5846,7 @@ TEST_F(FileWatcherTest, FileModifiedEvent) {
     watcher.stop();
 
     if (event_received) {
-        EXPECT_EQ(captured_event, file_watch_event::MODIFIED);
+        EXPECT_EQ(captured_event, file_watch_event::modified);
     }
 }
 
@@ -5859,7 +5860,7 @@ TEST_F(FileWatcherTest, FileAccessedEvent) {
     file_watcher watcher(test_dir_, false);
 
     path accessed_path;
-    file_watch_event captured_event = file_watch_event::ACCESSED;
+    file_watch_event captured_event = file_watch_event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
@@ -5872,7 +5873,7 @@ TEST_F(FileWatcherTest, FileAccessedEvent) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::ACCESSED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::accessed));
 
     wait_ms(100);
 
@@ -5903,7 +5904,7 @@ TEST_F(FileWatcherTest, AllEvents) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::ALL));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::all));
 
     wait_ms(100);
 
@@ -5929,11 +5930,11 @@ TEST_F(FileWatcherTest, WatchPath) {
 TEST_F(FileWatcherTest, CurrentEvents) {
     file_watcher watcher(test_dir_, false);
 
-    EXPECT_EQ(watcher.current_events(), file_watch_event::ALL);
+    EXPECT_EQ(watcher.current_events(), file_watch_event::all);
 
     auto cb = [](const path&, file_watch_event) {};
-    watcher.start(cb, file_watch_event::CREATED);
-    EXPECT_EQ(watcher.current_events(), file_watch_event::CREATED);
+    watcher.start(cb, file_watch_event::created);
+    EXPECT_EQ(watcher.current_events(), file_watch_event::created);
     watcher.stop();
 }
 
@@ -5960,21 +5961,21 @@ TEST_F(FileWatcherTest, IsRecursive) {
 TEST_F(FileWatcherTest, UpdateWatchWhileStopped) {
     file_watcher watcher(test_dir_, false);
 
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::CREATED));
-    EXPECT_EQ(watcher.current_events(), file_watch_event::CREATED);
+    EXPECT_TRUE(watcher.update_watch(file_watch_event::created));
+    EXPECT_EQ(watcher.current_events(), file_watch_event::created);
 
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::MODIFIED));
-    EXPECT_EQ(watcher.current_events(), file_watch_event::MODIFIED);
+    EXPECT_TRUE(watcher.update_watch(file_watch_event::modified));
+    EXPECT_EQ(watcher.current_events(), file_watch_event::modified);
 }
 
 TEST_F(FileWatcherTest, UpdateWatchWhileWatching) {
     file_watcher watcher(test_dir_, false);
 
     auto cb = [](const path&, file_watch_event) {};
-    watcher.start(cb, file_watch_event::CREATED);
+    watcher.start(cb, file_watch_event::created);
 
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::DELETED));
-    EXPECT_EQ(watcher.current_events(), file_watch_event::DELETED);
+    EXPECT_TRUE(watcher.update_watch(file_watch_event::deleted));
+    EXPECT_EQ(watcher.current_events(), file_watch_event::deleted);
     EXPECT_TRUE(watcher.is_watching());
 
     watcher.stop();
@@ -5984,8 +5985,8 @@ TEST_F(FileWatcherTest, UpdateWatchSameValue) {
     file_watcher watcher(test_dir_, false);
 
     auto cb = [](const path&, file_watch_event) {};
-    watcher.start(cb, file_watch_event::CREATED);
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::CREATED));
+    watcher.start(cb, file_watch_event::created);
+    EXPECT_TRUE(watcher.update_watch(file_watch_event::created));
     EXPECT_TRUE(watcher.is_watching());
     watcher.stop();
 }
@@ -6033,8 +6034,8 @@ TEST_F(FileWatcherTest, UpdateRecursiveWithoutCallback) {
 TEST_F(FileWatcherTest, UpdateWatchWithoutCallback) {
     file_watcher watcher(test_dir_, false);
 
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::CREATED));
-    EXPECT_EQ(watcher.current_events(), file_watch_event::CREATED);
+    EXPECT_TRUE(watcher.update_watch(file_watch_event::created));
+    EXPECT_EQ(watcher.current_events(), file_watch_event::created);
 }
 
 TEST_F(FileWatcherTest, DestructorStopsWatching) {
@@ -6064,7 +6065,7 @@ TEST_F(FileWatcherTest, MultipleEventsReceived) {
         }
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::CREATED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
 
     wait_ms(100);
 
@@ -6096,7 +6097,7 @@ TEST_F(FileWatcherTest, SubdirectoryFileCreatedNonRecursive) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::CREATED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
 
     wait_ms(100);
 
@@ -6119,7 +6120,7 @@ TEST_F(FileWatcherTest, SubdirectoryFileCreatedRecursive) {
     file_watcher watcher(test_dir_, true);
 
     path created_path;
-    file_watch_event captured_event = file_watch_event::ACCESSED;
+    file_watch_event captured_event = file_watch_event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
@@ -6132,7 +6133,7 @@ TEST_F(FileWatcherTest, SubdirectoryFileCreatedRecursive) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::CREATED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
 
     wait_ms(100);
     filesystem::create_and_write(subdir / path("nested_rec.txt"), "recursive");
@@ -6150,11 +6151,11 @@ TEST_F(FileWatcherTest, StopThenRestart) {
 
     auto cb = [](const path&, file_watch_event) {};
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::CREATED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
     watcher.stop();
     EXPECT_FALSE(watcher.is_watching());
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::MODIFIED));
+    EXPECT_TRUE(watcher.start(cb, file_watch_event::modified));
     EXPECT_TRUE(watcher.is_watching());
     watcher.stop();
 }

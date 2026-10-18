@@ -43,7 +43,7 @@ int main() {
     // =========================================================================
     // 加载 SSL 证书
     // =========================================================================
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
 
     if (!ctx.load_certificate(SERVER_CERT, SERVER_KEY)) {
         println("Failed to load certificate (server.crt / server.key). Generate with:");

@@ -23,7 +23,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
             return;
         }
         case element::kind::text: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 render_text_block(rect.x, rect.y, rect.w, rect.h, el.text(), el.style(), el.wrap_mode());
                 ++idx;
@@ -31,7 +31,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
             return;
         }
         case element::kind::button: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 render_button(rect.x, rect.y, rect.w, rect.h, el.text(), el.style(), theme_, el.variant());
                 ++idx;
@@ -39,7 +39,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
             return;
         }
         case element::kind::checkbox: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 bool checked = false;
                 if (el.state_ref() != nullptr) {
@@ -52,7 +52,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
             return;
         }
         case element::kind::text_input: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
 
                 string display;
@@ -112,7 +112,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
             return;
         }
         case element::kind::separator: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 render_separator(rect.x, rect.y, rect.w);
                 ++idx;
@@ -124,7 +124,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
             return;
         }
         case element::kind::scroll_view: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
                 const style& sv_style = el.style();
@@ -228,7 +228,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
             return;
         }
         case element::kind::canvas: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 const auto& fn = el.draw_function();
                 if (fn) {
@@ -252,7 +252,7 @@ void renderer::clear_element_area(const element& el, const vector<layout_rect>& 
         case element::kind::text_input:
         case element::kind::separator:
         case element::kind::spacer: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 apply_clear(rect.x, rect.y, rect.w, rect.h);
                 ++idx;
@@ -260,7 +260,7 @@ void renderer::clear_element_area(const element& el, const vector<layout_rect>& 
             return;
         }
         case element::kind::scroll_view: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 apply_clear(rect.x, rect.y, rect.w, rect.h);
                 ++idx;
@@ -296,7 +296,7 @@ const element* find_element_at(const vector<layout_rect>& layout, const element&
         case element::kind::text_input:
         case element::kind::separator:
         case element::kind::spacer: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
                 if (mx >= rect.x && mx < rect.x + rect.w && my >= rect.y && my < rect.y + rect.h) {
@@ -306,7 +306,7 @@ const element* find_element_at(const vector<layout_rect>& layout, const element&
             return nullptr;
         }
         case element::kind::scroll_view: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
                 if (mx >= rect.x && mx < rect.x + rect.w && my >= rect.y && my < rect.y + rect.h) {
@@ -353,7 +353,7 @@ component_base* hit_test_at(const vector<layout_rect>& layout, const element& tr
         case element::kind::text_input:
         case element::kind::separator:
         case element::kind::spacer: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
                 if (mx >= rect.x && mx < rect.x + rect.w && my >= rect.y && my < rect.y + rect.h) {
@@ -364,7 +364,7 @@ component_base* hit_test_at(const vector<layout_rect>& layout, const element& tr
             return nullptr;
         }
         case element::kind::scroll_view: {
-            if (idx < static_cast<int>(layout.size())) {
+            if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
                 if (mx >= rect.x && mx < rect.x + rect.w && my >= rect.y && my < rect.y + rect.h) {

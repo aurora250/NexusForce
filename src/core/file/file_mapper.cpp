@@ -1,5 +1,4 @@
 #include <NeForce/core/file/file_mapper.hpp>
-#include <NeForce/core/async/call_once.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <memoryapi.h>
@@ -24,12 +23,7 @@ namespace {
             -1;
 #endif
 
-    const auto granularity =
-#ifdef NEFORCE_PLATFORM_LINUX
-            sysinfo::instance().get_system_info().page_size;
-#else
-            sysinfo::instance().get_system_info().allocation_granularity;
-#endif
+    const auto granularity = sysinfo::instance().get_system_info().allocation_granularity;
 
     void do_unmap(void*& ptr, file_mapper::size_type& size, file_mapper::size_type& offset
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -148,7 +142,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
     const uint64_t aligned_size = (size == 0) ? 0 : static_cast<uint64_t>(size) + offset_delta;
 
     ::DWORD protect = PAGE_READONLY, map_access = FILE_MAP_READ;
-    if ((static_cast<fud_t>(access) & static_cast<fud_t>(file_access::WRITE)) != 0U) {
+    if ((static_cast<native_id_type>(access) & static_cast<native_id_type>(file_access::write)) != 0U) {
         protect = PAGE_READWRITE;
         map_access = FILE_MAP_WRITE | FILE_MAP_READ;
     }
@@ -183,7 +177,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
         }
     }
 
-    if (pfn != nullptr && hint == file_map_hint::SEQUENTIAL) {
+    if (pfn != nullptr && hint == file_map_hint::sequential) {
         ::WIN32_MEMORY_RANGE_ENTRY range{ptr_, size};
         pfn(::GetCurrentProcess(), 1, &range, 0);
     }
@@ -211,7 +205,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
     const size_t aligned_size = static_cast<size_t>(size) + offset_delta;
 
     int prot = PROT_READ;
-    const auto af = static_cast<fud_t>(access);
+    const auto af = static_cast<native_id_type>(access);
     if ((af & O_RDWR) != 0) {
         prot = PROT_READ | PROT_WRITE;
     } else if ((af & O_WRONLY) != 0) {
@@ -225,11 +219,11 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
 
     int advice = MADV_NORMAL;
     switch (hint) {
-        case file_map_hint::SEQUENTIAL: {
+        case file_map_hint::sequential: {
             advice = MADV_SEQUENTIAL;
             break;
         }
-        case file_map_hint::RANDOM: {
+        case file_map_hint::random: {
             advice = MADV_RANDOM;
             break;
         }
@@ -269,7 +263,7 @@ bool file_mapper::flush(const bool async) noexcept {
     if (ptr_ == nullptr) {
         return false;
     }
-    if ((static_cast<fud_t>(access_) & static_cast<fud_t>(file_access::WRITE)) == 0U) {
+    if ((static_cast<native_id_type>(access_) & static_cast<native_id_type>(file_access::write)) == 0U) {
         return true;
     }
 

@@ -548,15 +548,15 @@ public:
 
     /**
      * @brief 解析待解析的基类名称
-     * @param registry 注册表指针
+     * @param reg 注册表指针
      */
-    void resolve_bases(registry* registry);
+    void resolve_bases(registry* reg);
 
     /**
-     * @brief 解析待解析的基类名称（无需加锁版本）
-     * @param registry 注册表指针
+     * @brief 无锁解析待解析的基类名称
+     * @param reg 注册表指针
      */
-    void resolve_bases_unlocked(registry* registry);
+    void resolve_bases_unlocked(registry* reg);
 
     /**
      * @brief 是否有待解析的基类

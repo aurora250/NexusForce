@@ -486,26 +486,25 @@ public:
  * 可以提取匹配的捕获组或分隔符之间的文本。
  */
 class NEFORCE_API regex_token_iterator {
-public:
+private:
     /**
      * @enum state
      * @brief 迭代器状态枚举
      */
     enum class state {
-        BEFORE_FIRST,    ///< 第一个匹配之前
-        BETWEEN_MATCHES, ///< 匹配之间
-        AFTER_LAST,      ///< 最后一个匹配之后
-        END              ///< 结束
+        before_first,    ///< 第一个匹配之前
+        between_matches, ///< 匹配之间
+        after_last,      ///< 最后一个匹配之后
+        end              ///< 结束
     };
 
-private:
     const regex* regex_ = nullptr;  ///< 关联的正则表达式
     string subject_;                ///< 待遍历的字符串
     regex_iterator match_iterator_; ///< 匹配迭代器
     regex_iterator end_iterator_;   ///< 结束迭代器
     string current_;                ///< 当前令牌
     int index_ = 0;                 ///< 捕获组索引（负数表示分隔符模式）
-    state state_ = state::END;      ///< 当前状态
+    state state_ = state::end;      ///< 当前状态
     size_t last_pos_ = 0;           ///< 最后处理位置
 
 private:

@@ -91,8 +91,8 @@ struct bracket {
         try {
             out_.compact()(")");
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 };
@@ -151,8 +151,8 @@ struct at_destruct {
         try {
             out_(str_);
             // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
         }
     }
 

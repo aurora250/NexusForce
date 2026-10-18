@@ -303,7 +303,7 @@ path path::current_executable_path() {
     return path{wcharacter::to_string({buf, len})};
 #else
     char buf[PATH_MAX];
-    ssize_t len = ::readlink("/proc/self/exe", buf, sizeof(buf) - 1);
+    const ssize_t len = ::readlink("/proc/self/exe", buf, sizeof(buf) - 1);
     if (len == -1) {
         return {};
     }

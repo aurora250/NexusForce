@@ -119,16 +119,6 @@ int futex_requeue(void* wait_addr, int wake_count, void* requeue_addr, int reque
     return 0;
 }
 
-int futex_cmp_requeue(void* wait_addr, int wake_count, void* requeue_addr, int requeue_count, int cmp_value) noexcept {
-    const long ret =
-            ::syscall(SYS_futex, wait_addr, static_cast<int>(futex_wait_flags::cmp_requeue) | FUTEX_PRIVATE_FLAG,
-                      wake_count, requeue_count, requeue_addr, cmp_value);
-    if (ret == -1) {
-        return -errno;
-    }
-    return 0;
-}
-
 int futex_wake_op(void* addr, int wake_count, void* op_addr, int op_arg, int op, int cmp, int cmp_arg) noexcept {
     const unsigned int val3 = (op << 28) | (cmp << 24) | (op_arg << 12) | cmp_arg;
     const long ret = ::syscall(SYS_futex, addr, static_cast<int>(futex_wait_flags::wake_op) | FUTEX_PRIVATE_FLAG,
@@ -170,16 +160,6 @@ int futex_wait_requeue_pi(void* wait_addr, int value, void* requeue_addr) noexce
     const long ret =
             ::syscall(SYS_futex, wait_addr, static_cast<int>(futex_wait_flags::wait_requeue_pi) | FUTEX_PRIVATE_FLAG,
                       value, requeue_addr, nullptr, 0);
-    if (ret == -1) {
-        return -errno;
-    }
-    return 0;
-}
-
-int futex_cmp_requeue_pi(void* wait_addr, int wake_count, void* requeue_addr, int cmp_value) noexcept {
-    const long ret =
-            ::syscall(SYS_futex, wait_addr, static_cast<int>(futex_wait_flags::cmp_requeue_pi) | FUTEX_PRIVATE_FLAG,
-                      wake_count, requeue_addr, nullptr, cmp_value);
     if (ret == -1) {
         return -errno;
     }

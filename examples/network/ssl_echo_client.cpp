@@ -18,10 +18,10 @@ using namespace neforce;
 
 int main() {
     // 创建SSL上下文（客户端模式）
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
 
     // 自签名证书测试：跳过服务器证书验证
-    ctx.set_verify_mode(ssl_verify::NONE);
+    ctx.set_verify_mode(ssl_verify::none);
 
     // 创建SSL Socket
     ssl_socket client;

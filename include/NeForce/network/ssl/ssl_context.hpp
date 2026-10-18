@@ -23,20 +23,20 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @brief SSL/TLS 对等方证书验证标志
  */
-enum class ssl_verify {
-    NONE = 0x00,                 ///< 不验证对等方证书
-    PEER = 0x01,                 ///< 验证对等方证书
-    FAIL_IF_NO_PEER_CERT = 0x02, ///< 对等方无证书时失败
-    CLIENT_ONCE = 0x04,          ///< 客户端证书仅请求一次
-    POST_HANDSHAKE = 0x08,       ///< 握手后验证
+enum class ssl_verify : byte_t {
+    none = 0x00,                 ///< 不验证对等方证书
+    peer = 0x01,                 ///< 验证对等方证书
+    fail_if_no_peer_cert = 0x02, ///< 对等方无证书时失败
+    client_once = 0x04,          ///< 客户端证书仅请求一次
+    post_handshake = 0x08,       ///< 握手后验证
 };
 
 NEFORCE_NODISCARD constexpr ssl_verify operator|(ssl_verify lhs, ssl_verify rhs) noexcept {
-    return static_cast<ssl_verify>(static_cast<int>(lhs) | static_cast<int>(rhs));
+    return static_cast<ssl_verify>(static_cast<byte_t>(lhs) | static_cast<byte_t>(rhs));
 }
 
 NEFORCE_NODISCARD constexpr ssl_verify operator&(ssl_verify lhs, ssl_verify rhs) noexcept {
-    return static_cast<ssl_verify>(static_cast<int>(lhs) & static_cast<int>(rhs));
+    return static_cast<ssl_verify>(static_cast<byte_t>(lhs) & static_cast<byte_t>(rhs));
 }
 
 
@@ -68,10 +68,10 @@ NEFORCE_NODISCARD constexpr ssl_option operator&(ssl_option lhs, ssl_option rhs)
  * 定义SSL上下文的角色和协议类型。
  */
 enum class ssl_method {
-    TLS_SERVER,      ///< TLS服务器端
-    TLS_CLIENT,      ///< TLS客户端端
-    TLS_SERVER_DTLS, ///< DTLS服务器端
-    TLS_CLIENT_DTLS  ///< DTLS客户端端
+    tls_server,  ///< TLS服务器端
+    tls_client,  ///< TLS客户端端
+    dtls_server, ///< DTLS服务器端
+    dtls_client  ///< DTLS客户端端
 };
 
 
@@ -112,7 +112,7 @@ public:
      * - 设置默认密码套件
      * - 设置默认CA验证路径
      */
-    explicit ssl_context(ssl_method method = ssl_method::TLS_SERVER);
+    explicit ssl_context(ssl_method method = ssl_method::tls_server);
 
     ~ssl_context();
 

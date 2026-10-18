@@ -216,7 +216,8 @@ public:
         try {
             setter_(obj, value);
             return true;
-        } catch (...) {
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
             return false;
         }
     }

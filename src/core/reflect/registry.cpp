@@ -1,6 +1,5 @@
 #include <NeForce/core/reflect/registry.hpp>
 #include <NeForce/core/async/signals.hpp>
-
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_REFLECT__
 

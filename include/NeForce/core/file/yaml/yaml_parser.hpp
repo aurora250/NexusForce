@@ -216,20 +216,6 @@ private:
     void skip_whitespace_and_comments();
 
     /**
-     * @brief 判断字符是否为YAML空白字符
-     * @param ch 待检查的字符
-     * @return 如果是空格或制表符返回 true
-     */
-    NEFORCE_NODISCARD bool is_whitespace(char ch) const noexcept;
-
-    /**
-     * @brief 判断字符是否为换行符
-     * @param ch 待检查的字符
-     * @return 如果是 '\\n' 或 '\\r' 返回 true
-     */
-    NEFORCE_NODISCARD bool is_newline(char ch) const noexcept;
-
-    /**
      * @brief 预读当前行的缩进级别（空格数）
      * @return 当前行的缩进空格数
      *
@@ -499,55 +485,12 @@ private:
     NEFORCE_NODISCARD bool is_document_end() const noexcept;
 
     /**
-     * @brief 判断字符是否可作为纯文本内容
-     * @param ch 待检查的字符
-     * @return 如果是安全字符返回 true
-     *
-     * 纯文本字符串不能包含指示符（如 :、#、[、] 等）或流指示符。
-     */
-    NEFORCE_NODISCARD bool is_plain_safe(char ch) const noexcept;
-
-    /**
-     * @brief 判断字符是否可用于键名
-     * @param ch 待检查的字符
-     * @return 如果是有效的键名字符返回 true
-     */
-    NEFORCE_NODISCARD bool is_key_char(char ch) const noexcept;
-
-    /**
-     * @brief 判断字符是否为YAML指示符
-     * @param ch 待检查的字符
-     * @return 如果是指示符返回 true
-     *
-     * 指示符包括：-、?、:、,、[、]、{、}、#、&、*、!、|、>、'、"、%、@、`
-     */
-    NEFORCE_NODISCARD bool is_indicator(char ch) const noexcept;
-
-    /**
-     * @brief 判断字符是否为流样式指示符
-     * @param ch 待检查的字符
-     * @return 如果是流指示符返回 true
-     *
-     * 流指示符包括：[、]、{、}、,
-     */
-    NEFORCE_NODISCARD bool is_flow_indicator(char ch) const noexcept;
-
-    /**
      * @brief 解析Unicode转义序列
      * @param digits 十六进制数字位数（4用于\\u，8用于\\U）
      * @return 对应的Unicode码点
      * @throws yaml_exception 转义序列无效时抛出
      */
     codepoint parse_unicode_escape(size_t digits);
-
-    /**
-     * @brief 反转义字符串中的转义序列
-     * @param str 包含转义序列的原始字符串
-     * @return 反转义后的字符串
-     *
-     * 处理 \\\\、\\"、\\n、\\t、\\r、\\b、\\f、\\/、\\uXXXX、\\UXXXXXXXX 等转义序列。
-     */
-    NEFORCE_NODISCARD string unescape_string(const string& str) const;
 
     /**
      * @brief 抛出带位置信息的解析错误
@@ -584,33 +527,25 @@ public:
     shared_ptr<yaml_value> parse();
 
     /**
-     * @brief 尝试解析YAML文档（不抛出异常）
+     * @brief 尝试解析YAML文档
      * @return 成功时返回包含根节点的 optional，失败时返回空 optional
-     *
-     * 与 parse() 功能相同，但解析失败时不抛出异常，
-     * 而是返回一个空的 optional 对象。
      */
-    optional<shared_ptr<yaml_value>> try_parse();
+    optional<shared_ptr<yaml_value>> try_parse() noexcept;
 
     /**
      * @brief 解析多个YAML文档
      * @return 所有文档的根节点列表
      * @throws yaml_exception 解析失败时抛出
      *
-     * 解析由 --- 分隔的多个YAML文档。如果只有单个文档，
-     * 返回包含一个元素的vector。
-     *
-     * @see parse() 单文档解析
+     * 解析由 --- 分隔的多个YAML文档
      */
     vector<shared_ptr<yaml_value>> parse_documents();
 
     /**
-     * @brief 尝试解析多个YAML文档（不抛出异常）
+     * @brief 尝试解析多个YAML文档
      * @return 成功时返回文档列表，失败时返回空 optional
-     *
-     * 与 parse_documents() 功能相同，但解析失败时不抛出异常。
      */
-    optional<vector<shared_ptr<yaml_value>>> try_parse_documents();
+    optional<vector<shared_ptr<yaml_value>>> try_parse_documents() noexcept;
 };
 
 /** @} */ // YamlConfig

@@ -78,7 +78,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/locale.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/daemon.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
@@ -437,10 +436,32 @@ target_compile_definitions(NexusForce PUBLIC
 )
 message(STATUS "PCRE2 with JIT linked successfully")
 
-find_package(ICU REQUIRED COMPONENTS uc i18n)
-target_link_libraries(NexusForce PUBLIC ICU::uc ICU::i18n)
-target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_ICU)
-message(STATUS "ICU linked successfully")
+
+if(NEXUSFORCE_ENABLE_LOCALE)
+    target_sources(NexusForce PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/core/locale/locale.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/core/locale/locale_data.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/core/locale/locale_fallback.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/core/locale/locale_tables.cpp
+    )
+    target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_LOCALE)
+
+    if(NEXUSFORCE_ENABLE_ICU)
+        find_package(ICU QUIET COMPONENTS uc i18n)
+        if(TARGET ICU::uc AND TARGET ICU::i18n)
+            target_link_libraries(NexusForce PUBLIC ICU::uc ICU::i18n)
+            target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_ICU)
+            set(NEXUSFORCE_ICU_LINKED TRUE PARENT_SCOPE)
+            message(STATUS "ICU linked successfully")
+        else()
+            message(WARNING "ICU not found - the locale component falls back to its built-in backend")
+        endif()
+    else()
+        message(STATUS "ICU support disabled - the locale component uses its built-in backend")
+    endif()
+else()
+    message(STATUS "locale component disabled - its sources and the ICU probe are skipped")
+endif()
 
 message(STATUS "")
 

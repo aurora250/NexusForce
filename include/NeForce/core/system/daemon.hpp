@@ -59,8 +59,10 @@ NEFORCE_ERROR_BUILD_SYSTEM_CLASS(daemon_exception, "Daemon Operation Failed.")
  */
 class NEFORCE_API daemon {
 public:
-    /** @brief 守护进程运行状态 */
-    enum class daemon_state {
+    /**
+     * @brief 守护进程运行状态
+     */
+    enum class state {
         stopped,   ///< 未启动
         starting,  ///< 正在启动
         running,   ///< 正常运行
@@ -68,7 +70,9 @@ public:
         stopping   ///< 正在停止
     };
 
-    /** @brief 子进程配置 */
+    /**
+     * @brief 子进程配置
+     */
     struct child_config {
         string name;                       ///< 唯一名称
         string executable;                 ///< 可执行文件路径
@@ -82,7 +86,9 @@ public:
         vector<pair<string, string>> envs; ///< 额外环境变量
     };
 
-    /** @brief 子进程运行时状态 */
+    /**
+     * @brief 子进程运行时状态
+     */
     struct child_status {
         string name;                    ///< 名称
         process::native_id_type pid{0}; ///< 进程 ID
@@ -91,34 +97,12 @@ public:
         bool running{false};            ///< 是否正在运行
     };
 
-    /** @brief 启动回调，run() 进入主循环前调用 */
-    using start_callback = function<void()>;
-
-    /** @brief 停止回调，收到终止信号后调用 */
-    using stop_callback = function<void()>;
-
-    /** @brief 重载回调，收到 SIGHUP 后调用。返回 true 继续运行，false 请求终止 */
-    using reload_callback = function<bool()>;
-
-    /** @brief 子进程退出回调 */
-    using child_exit_callback = function<void(const string& name, int exit_code)>;
+    using start_callback = function<void()>;                                       ///< 启动回调
+    using stop_callback = function<void()>;                                        ///< 停止回调，收到终止信号后调用
+    using reload_callback = function<bool()>;                                      ///< 重载回调，收到 SIGHUP 后调用
+    using child_exit_callback = function<void(const string& name, int exit_code)>; ///< 子进程退出回调
 
 private:
-    atomic<daemon_state> state_{daemon_state::stopped};
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    void* pid_handle_{nullptr};
-#else
-    int pid_fd_{-1};
-#endif
-    string pid_path_;
-    string work_dir_{"/"};
-
-    unique_ptr<signal_guard> signal_guard_;
-
-    system_event shutdown_event_{false, system_event::type::manual_reset};
-    system_event reload_event_{false, system_event::type::auto_reset};
-
     struct child_entry {
         child_config config;
         unique_ptr<process> proc;
@@ -127,6 +111,17 @@ private:
         int64_t last_health_check_ms{0};
         bool running{false};
     };
+
+    atomic<state> state_{state::stopped};
+    native_handle_type pid_handle_;
+    string pid_path_;
+    string work_dir_{"/"};
+
+    unique_ptr<signal_guard> signal_guard_;
+
+    system_event shutdown_event_{false, system_event::type::manual_reset};
+    system_event reload_event_{false, system_event::type::auto_reset};
+
     mutable mutex children_mutex_;
     flat_unordered_map<string, child_entry> children_;
 
@@ -140,7 +135,6 @@ private:
     atomic<int64_t> last_ping_{0};
     thread watchdog_thread_;
 
-    bool daemonize_impl() noexcept;
     void setup_signal_handlers();
     void start_all_children();
     void stop_all_children();
@@ -149,7 +143,7 @@ private:
     void watchdog_loop();
 
 public:
-    daemon() = default;
+    daemon();
     ~daemon();
 
     daemon(const daemon&) = delete;
@@ -157,20 +151,28 @@ public:
     daemon(daemon&&) = delete;
     daemon& operator=(daemon&&) = delete;
 
-    /** @brief 注册启动回调 */
+    /**
+     * @brief 注册启动回调
+     */
     void on_start(start_callback cb) { on_start_ = move(cb); }
 
-    /** @brief 注册停止回调 */
+    /**
+     * @brief 注册停止回调
+     */
     void on_stop(stop_callback cb) { on_stop_ = move(cb); }
 
-    /** @brief 注册重载回调 */
+    /**
+     * @brief 注册重载回调
+     */
     void on_reload(reload_callback cb) { on_reload_ = move(cb); }
 
-    /** @brief 注册子进程退出回调 */
+    /**
+     * @brief 注册子进程退出回调
+     */
     void on_child_exit(child_exit_callback cb) { on_child_exit_ = move(cb); }
 
     /**
-     * @brief 将当前进程转为守护进程（Linux 双 fork）
+     * @brief 将当前进程转为守护进程
      * @param work_dir 守护进程工作目录
      * @return 父进程返回 false，子进程返回 true
      * @note Windows 上始终返回 true
@@ -178,17 +180,21 @@ public:
     bool daemonize(const string& work_dir = "/");
 
     /**
-     * @brief 创建并锁定 PID 文件（单实例保护）
+     * @brief 创建并锁定 PID 文件
      * @param path PID 文件路径
      * @return true 创建成功；false 已被其他实例锁定
      * @throws daemon_exception 创建失败时抛出
      */
     bool write_pid_file(const string& path);
 
-    /** @brief 删除 PID 文件并释放锁 */
+    /**
+     * @brief 删除 PID 文件并释放锁
+     */
     void remove_pid_file();
 
-    /** @brief 检查 PID 文件是否被锁定 */
+    /**
+     * @brief 检查 PID 文件是否被锁定
+     */
     NEFORCE_NODISCARD static bool is_pid_file_locked(const string& path);
 
     /**
@@ -199,36 +205,44 @@ public:
     bool add_child(const child_config& cfg);
 
     /**
-     * @brief 移除子进程（先优雅终止）
+     * @brief 移除子进程
      * @param name 子进程名称
      */
     void remove_child(const string& name);
 
-    /** @brief 获取子进程运行状态 */
+    /**
+     * @brief 获取子进程运行状态
+     */
     NEFORCE_NODISCARD child_status get_child_status(const string& name) const;
 
-    /** @brief 获取所有子进程状态 */
+    /**
+     * @brief 获取所有子进程状态
+     */
     NEFORCE_NODISCARD vector<child_status> all_child_statuses() const;
 
     /**
-     * @brief 进入信号驱动主循环（阻塞）
-     * @return 退出码，0 为正常退出
+     * @brief 进入信号驱动主循环
+     * @return 退出码
      */
     int run();
 
-    /** @brief 请求优雅关闭（可从任何线程调用） */
+    /**
+     * @brief 请求优雅关闭
+     */
     void request_shutdown();
 
-    /** @brief 请求重载配置（可从任何线程调用） */
+    /**
+     * @brief 请求重载配置
+     */
     void request_reload();
 
-    /** @brief 获取当前状态 */
-    NEFORCE_NODISCARD daemon_state state() const noexcept { return state_.load(); }
+    /**
+     * @brief 获取当前状态
+     */
+    NEFORCE_NODISCARD state state() const noexcept { return state_.load(); }
 
     /**
-     * @brief 看门狗喂狗（从工作线程周期性调用）
-     *
-     * 若超过 set_watchdog_timeout() 设置的时长未调用此方法，守护进程将强制退出。
+     * @brief 看门狗喂狗
      */
     void watchdog_ping();
 
@@ -238,7 +252,6 @@ public:
      */
     void set_watchdog_timeout(int timeout_ms);
 
-#ifdef NEFORCE_PLATFORM_LINUX
     /**
      * @brief 通知 systemd 服务已就绪
      */
@@ -254,7 +267,6 @@ public:
      * @brief 通知 systemd 看门狗喂狗
      */
     static void notify_watchdog();
-#endif
 };
 
 /** @} */ // Daemon

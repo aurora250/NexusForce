@@ -1695,7 +1695,7 @@ protected:
 };
 
 TEST_F(H2TlsIntegrationTest, H2AlpnNegotiationServerClient) {
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     if (!server_ctx.load_certificate(SERVER_CERT, SERVER_KEY)) {
         GTEST_SKIP() << "Test certificate not found at " << SERVER_CERT;
     }
@@ -1708,7 +1708,7 @@ TEST_F(H2TlsIntegrationTest, H2AlpnNegotiationServerClient) {
     const ports server_port = server.port();
     ASSERT_NE(server_port.value(), 0);
 
-    ssl_context client_ctx(ssl_method::TLS_CLIENT);
+    ssl_context client_ctx(ssl_method::tls_client);
     client_ctx.set_alpn_protos({"h2"});
 
     // The client gets its own io_context: the server occupies ctx_'s first worker thread
@@ -1735,7 +1735,7 @@ TEST_F(H2TlsIntegrationTest, H2AlpnNegotiationServerClient) {
 }
 
 TEST_F(H2TlsIntegrationTest, Http11AlpnFallback) {
-    ssl_context server_ctx(ssl_method::TLS_SERVER);
+    ssl_context server_ctx(ssl_method::tls_server);
     if (!server_ctx.load_certificate(SERVER_CERT, SERVER_KEY)) {
         GTEST_SKIP() << "Test certificate not found at " << SERVER_CERT;
     }
@@ -1745,7 +1745,7 @@ TEST_F(H2TlsIntegrationTest, Http11AlpnFallback) {
     const ports server_port = server.port();
     ASSERT_NE(server_port.value(), 0);
 
-    ssl_context client_ctx(ssl_method::TLS_CLIENT);
+    ssl_context client_ctx(ssl_method::tls_client);
     client_ctx.set_alpn_protos({"http/1.1"});
 
     // Own context for the client, for the same reason as above.

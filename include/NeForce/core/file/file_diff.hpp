@@ -34,14 +34,9 @@ class NEFORCE_API file_diff {
 public:
     file_diff() = delete;
 
-    using size_type =
-#ifdef NEFORCE_PLATFORM_WINDOWS
-            unsigned long; ///< 大小类型
-#else
-            size_t; ///< 大小类型
-#endif
-
-    using difference_type = int64_t; ///< 差异偏移量类型
+    using size_type = unsigned long;                        ///< 大小类型
+    using difference_type = int64_t;                        ///< 偏移量类型
+    using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
     /**
      * @struct binary_diff_entry

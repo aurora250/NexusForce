@@ -9,10 +9,10 @@ bool file_diff::compare(const path& file1, const path& file2, const bool binary)
 bool file_diff::compare_binary(const path& file1, const path& file2) {
     file f1, f2;
 
-    if (!f1.open(file1, false, file_access::READ, file_shared::SHARE_READ)) {
+    if (!f1.open(file1, false, file_access::read, file_shared::share_read)) {
         return false;
     }
-    if (!f2.open(file2, false, file_access::READ, file_shared::SHARE_READ)) {
+    if (!f2.open(file2, false, file_access::read, file_shared::share_read)) {
         return false;
     }
 
@@ -47,8 +47,8 @@ bool file_diff::compare_binary(const path& file1, const path& file2) {
 bool file_diff::compare_text(const path& file1, const path& file2, const bool ignore_case,
                              const bool ignore_whitespace) {
     file f1, f2;
-    if (!f1.open(file1, false, file_access::READ, file_shared::SHARE_READ) ||
-        !f2.open(file2, false, file_access::READ, file_shared::SHARE_READ)) {
+    if (!f1.open(file1, false, file_access::read, file_shared::share_read) ||
+        !f2.open(file2, false, file_access::read, file_shared::share_read)) {
         return false;
     }
 
@@ -128,10 +128,10 @@ vector<file_diff::binary_diff_entry> file_diff::binary_diff(const path& file1, c
 
     file f1, f2;
 
-    if (!f1.open(file1, false, file_access::READ, file_shared::SHARE_READ)) {
+    if (!f1.open(file1, false, file_access::read, file_shared::share_read)) {
         return diffs;
     }
-    if (!f2.open(file2, false, file_access::READ, file_shared::SHARE_READ)) {
+    if (!f2.open(file2, false, file_access::read, file_shared::share_read)) {
         return diffs;
     }
 

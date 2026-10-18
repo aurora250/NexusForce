@@ -379,7 +379,6 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 | 🎨 代码格式化      | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19.0         |
 | 🔍 静态分析        | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19.0         |
 | ⚠️ 必选依赖(vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.0         |
-|                    | [icu](https://icu.unicode.org/)                                     | 78.0         |
 |                    | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0        |
 | 📦 可选依赖(vcpkg) | [libpq](https://www.postgresql.org/)                                | 16.0         |
 |                    | [libmysql](https://www.mysql.com/)                                  | 8.0          |
@@ -388,6 +387,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 |                    | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0        |
 |                    | [lz4](https://lz4.org/)                                             | 1.10.0       |
 |                    | [zlib](https://www.zlib.net/)                                       | 1.3.0        |
+|                    | [icu](https://icu.unicode.org/)                                     | 78.0         |
 |                    | [GTest](https://google.github.io/googletest/)                       | 1.17.0       |
 |                    | [benchmark](https://github.com/google/benchmark/)                   | 1.9.0        |
 

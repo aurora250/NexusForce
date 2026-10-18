@@ -15,6 +15,7 @@ namespace {
     constexpr seed_type l = 18;         ///< 位移量3
 } // namespace
 
+
 random_mt::result_type random_mt::generate_word() noexcept {
     if (index_ >= n) {
         for (size_t i = 0; i < n; ++i) {

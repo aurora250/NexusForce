@@ -26,7 +26,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
     ::mode_t convert_attributes(const file_attri attr) {
         ::mode_t mode = 0;
-        if ((static_cast<fud_t>(attr) & S_IWUSR) == 0) {
+        if ((static_cast<native_id_type>(attr) & S_IWUSR) == 0) {
             mode |= S_IRUSR | S_IRGRP | S_IROTH;
         } else {
             mode |= S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
@@ -72,7 +72,7 @@ bool file::flush_write_buffer() const noexcept {
 
 #else
     ssize_t total_written = 0;
-    while (total_written < static_cast<ssize_t>(write_buffer_pos_)) {
+    while (compare_less(total_written, write_buffer_pos_)) {
         const ssize_t bytes_written =
                 ::write(handle_, write_buffer_.data() + total_written, write_buffer_pos_ - total_written);
 
@@ -223,12 +223,13 @@ bool file::open(path pth, const bool append, file_access access, file_shared sha
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const wstring wpth = character::to_wstring(pth.view());
-    handle_ = ::CreateFileW(wpth.data(), static_cast<fud_t>(access), static_cast<fud_t>(share_mode), nullptr,
-                            static_cast<fud_t>(creation), static_cast<fud_t>(attributes), nullptr);
+    handle_ = ::CreateFileW(wpth.data(), static_cast<native_id_type>(access), static_cast<native_id_type>(share_mode),
+                            nullptr, static_cast<native_id_type>(creation), static_cast<native_id_type>(attributes),
+                            nullptr);
 
 #else
-    auto flags = static_cast<fud_t>(access);
-    const auto creation_flags = static_cast<fud_t>(creation);
+    auto flags = static_cast<native_id_type>(access);
+    const auto creation_flags = static_cast<native_id_type>(creation);
 
     if ((creation_flags & O_CREAT) != 0 && (flags & (O_RDONLY | O_WRONLY | O_RDWR)) == 0) {
         flags |= O_RDWR;
@@ -244,7 +245,7 @@ bool file::open(path pth, const bool append, file_access access, file_shared sha
 
     ::mode_t mode = 0;
     if ((creation_flags & O_CREAT) != 0) {
-        if (attributes == file_attri::OTHERS) {
+        if (attributes == file_attri::others) {
             mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
         } else {
             mode = convert_attributes(attributes);
@@ -280,7 +281,7 @@ bool file::open(path pth, const bool append, file_access access, file_shared sha
     opened_ = true;
     append_mode_ = append;
 
-    if (append && !seek(0, file_pointer::END)) {
+    if (append && !seek(0, file_pointer::end)) {
         set_last_error();
         return false;
     }
@@ -352,13 +353,13 @@ file::size_type file::write(const void* data, const size_type size) {
 
     if (!append_mode_ && read_buffer_pos_ < read_buffer_size_) {
         const difference_type logical_pos = tell();
-        if (logical_pos < 0 || !seek(logical_pos, file_pointer::BEGIN)) {
+        if (logical_pos < 0 || !seek(logical_pos, file_pointer::begin)) {
             set_last_error();
             return 0;
         }
     }
 
-    if (append_mode_ && !seek(0, file_pointer::END)) {
+    if (append_mode_ && !seek(0, file_pointer::end)) {
         set_last_error();
         return 0;
     }
@@ -569,7 +570,7 @@ string file::read() const {
         set_last_error();
         return {};
     }
-    if (!seek(0, file_pointer::BEGIN)) {
+    if (!seek(0, file_pointer::begin)) {
         return {};
     }
 
@@ -590,7 +591,7 @@ string file::read() const {
     }
     content.resize(done);
 
-    if (!seek(current_pos, file_pointer::BEGIN)) {
+    if (!seek(current_pos, file_pointer::begin)) {
         set_last_error();
     }
     return content;
@@ -628,7 +629,7 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
         return chunks;
     }
 
-    if (!seek(0, file_pointer::BEGIN)) {
+    if (!seek(0, file_pointer::begin)) {
         set_last_error();
         return chunks;
     }
@@ -697,7 +698,7 @@ vector<string> file::read_chunks(const size_type chunk_size) const {
         remaining -= chunk.size();
     }
 
-    if (!seek(original_pos, file_pointer::BEGIN)) {
+    if (!seek(original_pos, file_pointer::begin)) {
         set_last_error();
     }
     return chunks;
@@ -710,7 +711,7 @@ bool file::write_chunks(const vector<string>& chunks) {
 
     const difference_type original_pos = tell();
 
-    if (append_mode_ && !seek(0, file_pointer::END)) {
+    if (append_mode_ && !seek(0, file_pointer::end)) {
         set_last_error();
         return false;
     }
@@ -782,7 +783,7 @@ bool file::write_chunks(const vector<string>& chunks) {
     if (!flush()) {
         success = false;
     }
-    if (!append_mode_ && original_pos >= 0 && !seek(original_pos, file_pointer::BEGIN)) {
+    if (!append_mode_ && original_pos >= 0 && !seek(original_pos, file_pointer::begin)) {
         set_last_error();
     }
     return success;
@@ -1063,16 +1064,16 @@ bool file::seek(const difference_type distance, file_pointer method) const {
     }
 
     difference_type target_pos = 0;
-    switch (static_cast<fud_t>(method)) {
-        case static_cast<fud_t>(file_pointer::BEGIN): {
+    switch (static_cast<native_id_type>(method)) {
+        case static_cast<native_id_type>(file_pointer::begin): {
             target_pos = distance;
             break;
         }
-        case static_cast<fud_t>(file_pointer::CURRENT): {
+        case static_cast<native_id_type>(file_pointer::current): {
             target_pos = current_logical_pos + distance;
             break;
         }
-        case static_cast<fud_t>(file_pointer::END): {
+        case static_cast<native_id_type>(file_pointer::end): {
             const uint64_t file_sz = size64();
             if (file_sz > static_cast<uint64_t>(numeric_traits<difference_type>::max())) {
                 last_error_code_ = errc::file_too_large;
@@ -1310,22 +1311,22 @@ bool file::truncate(const difference_type size) const {
         return false;
     }
 
-    if (!seek(size, file_pointer::BEGIN)) {
+    if (!seek(size, file_pointer::begin)) {
         return false;
     }
 
     if (::SetEndOfFile(handle_) == FALSE) {
         set_last_error();
-        ignore = seek(current_pos, file_pointer::BEGIN);
+        ignore = seek(current_pos, file_pointer::begin);
         return false;
     }
 
     if (size < current_pos) {
-        if (!seek(size, file_pointer::BEGIN)) {
+        if (!seek(size, file_pointer::begin)) {
             set_last_error();
         }
     } else {
-        ignore = seek(current_pos, file_pointer::BEGIN);
+        ignore = seek(current_pos, file_pointer::begin);
     }
 
     return true;
@@ -1341,7 +1342,7 @@ bool file::truncate(const difference_type size) const {
     }
 
     if (size < current_pos) {
-        if (!seek(size, file_pointer::BEGIN)) {
+        if (!seek(size, file_pointer::begin)) {
             set_last_error();
         }
     }

@@ -375,7 +375,6 @@ The core components of NexusForce strictly adhere to relevant international stan
 | 🎨 Code Formatter                 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19.0                |
 | 🔍 Static Analyzer                | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19.0                |
 | ⚠️ Mandatory Dependencies (vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.0                |
-|                                   | [icu](https://icu.unicode.org/)                                     | 78.0                |
 |                                   | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0               |
 | 📦 Optional Dependencies (vcpkg)  | [libpq](https://www.postgresql.org/)                                | 16.0                |
 |                                   | [libmysql](https://www.mysql.com/)                                  | 8.0                 |
@@ -384,6 +383,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 |                                   | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0               |
 |                                   | [lz4](https://lz4.org/)                                             | 1.10.0              |
 |                                   | [zlib](https://www.zlib.net/)                                       | 1.3.0               |
+|                                   | [icu](https://icu.unicode.org/)                                     | 78.0                |
 |                                   | [GTest](https://google.github.io/googletest/)                       | 1.17.0              |
 |                                   | [benchmark](https://github.com/google/benchmark/)                   | 1.9.0               |
 

@@ -29,17 +29,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * 提供对文件句柄的异步读写操作，由 io_context 事件循环驱动。
  *
  * @note 不持有文件句柄所有权，句柄生命周期由调用方保证。
- * @note Windows 上只有以 file_attri::OVERLAPPED 打开的句柄才会真正异步
+ * @note Windows 上只有以 file_attri::overlapped 打开的句柄才会真正异步
  */
 class NEFORCE_API file_async {
 public:
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type = ::DWORD;          ///< 大小类型
-    using difference_type = ::LONGLONG; ///< 偏移量类型
-#else
-    using size_type = size_t;        ///< 大小类型
-    using difference_type = ::off_t; ///< 偏移量类型
-#endif
+    using size_type = unsigned long;                        ///< 大小类型
+    using difference_type = int64_t;                        ///< 偏移量类型
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
 private:

@@ -758,7 +758,7 @@ TEST_F(SmtpSocketTest, AuthenticateWithoutConnectionThrows) {
 
 TEST_F(SmtpSocketTest, StarttlsWithoutConnectionThrows) {
     smtp_socket smtp;
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     EXPECT_THROW(smtp.starttls(ctx), smtp_exception);
 }
 

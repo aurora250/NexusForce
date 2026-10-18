@@ -499,8 +499,8 @@ static void impl(int argc, const char* argv[]) {
     string generated = generate_code(headers, all_classes, all_enums);
 
     try {
-        file out_file(path(output_path), false, file_access::WRITE, file_shared::SHARE_READ,
-                      file_creation::CREATE_FORCE, file_attri::NORMAL);
+        file out_file(path(output_path), false, file_access::write, file_shared::share_read,
+                      file_creation::create_force, file_attri::normal);
         out_file.write(generated.data(), static_cast<file::size_type>(generated.size()));
     } catch (const exception& e) {
         eprintfln("Error writing output: {}", e.what());
@@ -512,8 +512,8 @@ static void impl(int argc, const char* argv[]) {
         for (const auto& kv: new_cache) {
             cache_data += kv.second + "|" + kv.first + "\n";
         }
-        file cache_file(path(cache_path), false, file_access::WRITE, file_shared::SHARE_READ,
-                        file_creation::CREATE_FORCE, file_attri::NORMAL);
+        file cache_file(path(cache_path), false, file_access::write, file_shared::share_read,
+                        file_creation::create_force, file_attri::normal);
         cache_file.write(cache_data.data(), static_cast<file::size_type>(cache_data.size()));
     } catch (const exception& e) {
         eprintfln("Warning: Could not write cache file: {}", e.what());

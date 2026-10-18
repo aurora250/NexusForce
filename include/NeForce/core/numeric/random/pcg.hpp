@@ -33,8 +33,7 @@ private:
     template <typename>
     friend class random_engine;
 
-    static constexpr seed_type multiplier = 6364136223846793005ULL;    ///< 默认乘数
-    static constexpr seed_type default_stream = 0xda3e39cb94b95bdbULL; ///< 默认流标识
+    static constexpr seed_type multiplier = 6364136223846793005ULL; ///< 默认乘数
 
     seed_type state_ = 0;     ///< 线性同余状态
     seed_type increment_ = 1; ///< 线性同余增量
@@ -103,10 +102,8 @@ private:
     template <typename>
     friend class random_engine;
 
-    static constexpr seed_type multiplier_hi = 0x2360ed051fc65da4ULL;        ///< 128 位乘数高位
-    static constexpr seed_type multiplier_lo = 0x4385df649fccf645ULL;        ///< 128 位乘数低位
-    static constexpr seed_type default_increment_hi = 0x5851f42d4c957f2dULL; ///< 默认增量高位
-    static constexpr seed_type default_increment_lo = 0x14057b7ef767814fULL; ///< 默认增量低位
+    static constexpr seed_type multiplier_hi = 0x2360ed051fc65da4ULL; ///< 128 位乘数高位
+    static constexpr seed_type multiplier_lo = 0x4385df649fccf645ULL; ///< 128 位乘数低位=
 
     seed_type state_hi_ = 0;     ///< 状态高位
     seed_type state_lo_ = 0;     ///< 状态低位

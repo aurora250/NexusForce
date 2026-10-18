@@ -867,8 +867,8 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
                                 group_inner->decrement();
                             }
                             // NOLINTNEXTLINE(bugprone-empty-catch)
-                        } catch (...) {
-                            /* ignore */
+                        } catch (const exception& e) {
+                            NEFORCE_REPORT_EXCEPTION(e);
                         }
                     }
                 };

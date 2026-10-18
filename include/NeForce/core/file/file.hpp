@@ -113,15 +113,9 @@ public:
         bool operator!=(const line_iterator& rhs) const noexcept { return !(*this == rhs); }
     };
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    using size_type = ::DWORD;           ///< 大小类型
-    using difference_type = ::LONGLONG;  ///< 偏移量类型
-    using native_handle_type = ::HANDLE; ///< 原生文件句柄类型
-#else
-    using size_type = size_t;        ///< 大小类型
-    using difference_type = ::off_t; ///< 偏移量类型
-    using native_handle_type = int;  ///< 原生文件句柄类型
-#endif
+    using size_type = unsigned long;                        ///< 大小类型
+    using difference_type = int64_t;                        ///< 偏移量类型
+    using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
     /**
      * @struct chunk_info
@@ -175,9 +169,9 @@ public:
      *
      * 创建并打开文件。
      */
-    explicit file(path pth, bool append = false, file_access access = file_access::READ_WRITE,
-                  file_shared share_mode = file_shared::SHARE_READ, file_creation creation = file_creation::OPEN_EXIST,
-                  file_attri attributes = file_attri::NORMAL);
+    explicit file(path pth, bool append = false, file_access access = file_access::read_write,
+                  file_shared share_mode = file_shared::share_read, file_creation creation = file_creation::open_exist,
+                  file_attri attributes = file_attri::normal);
 
     file(const file&) = delete;
     file& operator=(const file&) = delete;
@@ -213,9 +207,9 @@ public:
      * @return 打开成功返回true
      * @note 在 Windows 上若需要使用 file_async 执行异步，必须在 attributes 中传入 file_attri::OVERLAPPED
      */
-    bool open(path pth, bool append = false, file_access access = file_access::READ_WRITE,
-              file_shared share_mode = file_shared::SHARE_READ_WRITE,
-              file_creation creation = file_creation::OPEN_EXIST, file_attri attributes = file_attri::NORMAL);
+    bool open(path pth, bool append = false, file_access access = file_access::read_write,
+              file_shared share_mode = file_shared::share_read_write,
+              file_creation creation = file_creation::open_exist, file_attri attributes = file_attri::normal);
 
     /**
      * @brief 重新打开文件
@@ -226,9 +220,9 @@ public:
      * @param attributes 文件属性
      * @return 打开成功返回true
      */
-    bool open(bool append = false, file_access access = file_access::READ_WRITE,
-              file_shared share_mode = file_shared::SHARE_READ_WRITE,
-              file_creation creation = file_creation::OPEN_EXIST, file_attri attributes = file_attri::NORMAL);
+    bool open(bool append = false, file_access access = file_access::read_write,
+              file_shared share_mode = file_shared::share_read_write,
+              file_creation creation = file_creation::open_exist, file_attri attributes = file_attri::normal);
 
     /**
      * @brief 关闭文件
@@ -385,7 +379,7 @@ public:
      * @param method 移动方式
      * @return 移动成功返回true
      */
-    bool seek(difference_type distance, file_pointer method = file_pointer::END) const;
+    bool seek(difference_type distance, file_pointer method = file_pointer::end) const;
 
     /**
      * @brief 获取当前文件指针位置

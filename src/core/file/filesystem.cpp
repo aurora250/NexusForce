@@ -587,8 +587,8 @@ bool filesystem::create_and_write(const path& p, const string& content, const bo
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     file f;
-    if (!f.open(p, append, append ? file_access::APPEND : file_access::WRITE, file_shared::NO_SHARE,
-                file_creation::OPEN_FORCE, file_attri::NORMAL)) {
+    if (!f.open(p, append, append ? file_access::append : file_access::write, file_shared::no_share,
+                file_creation::open_force, file_attri::normal)) {
         return false;
     }
     const file::size_type written = f.write(content, content.size());

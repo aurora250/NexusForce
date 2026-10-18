@@ -50,8 +50,8 @@ public:
      * - RAW：原始密钥（32 字节 AES-256 key，不派生）
      */
     enum class key_type : byte_t {
-        PBKDF2, ///< 口令派生
-        RAW     ///< 原始密钥
+        pbkdf2, ///< 口令派生
+        raw     ///< 原始密钥
     };
 
 protected:
@@ -106,7 +106,7 @@ public:
      * 打开config.database指定的数据库文件。
      * 如果database为空，创建内存数据库。
      */
-    bool connect(const db_config& config, const string& encryption_key, key_type type = key_type::PBKDF2);
+    bool connect(const db_config& config, const string& encryption_key, key_type type = key_type::pbkdf2);
 
     /**
      * @brief 重新连接数据库
@@ -116,7 +116,7 @@ public:
      * @return 重连成功返回true
      */
     NEFORCE_NODISCARD bool reconnect(const db_config& config, const string& encryption_key,
-                                     key_type type = key_type::PBKDF2);
+                                     key_type type = key_type::pbkdf2);
 
     /**
      * @brief 修改已打开数据库的加密密钥
@@ -126,7 +126,7 @@ public:
      *
      * 允许在不关闭连接的情况下更换加密密钥。如果从未加密数据库调用此方法，将为其启用加密。
      */
-    NEFORCE_NODISCARD bool rekey(const string& new_key, key_type type = key_type::PBKDF2);
+    NEFORCE_NODISCARD bool rekey(const string& new_key, key_type type = key_type::pbkdf2);
 
 #    endif
 
@@ -216,7 +216,7 @@ private:
 class NEFORCE_API sqlite_factory final : public idb_factory {
 #    ifdef NEFORCE_SUPPORT_SQLCIPHER
     string encryption_key_;                                                ///< 加密密钥
-    sqlite_connect::key_type key_type_ = sqlite_connect::key_type::PBKDF2; ///< 密钥类型
+    sqlite_connect::key_type key_type_ = sqlite_connect::key_type::pbkdf2; ///< 密钥类型
 #    endif
 
 public:
@@ -235,7 +235,7 @@ public:
      * @param type 密钥类型
      */
     explicit sqlite_factory(db_config config, string encryption_key,
-                            sqlite_connect::key_type type = sqlite_connect::key_type::PBKDF2) :
+                            sqlite_connect::key_type type = sqlite_connect::key_type::pbkdf2) :
     idb_factory(move(config)),
     encryption_key_(move(encryption_key)),
     key_type_(type) {}

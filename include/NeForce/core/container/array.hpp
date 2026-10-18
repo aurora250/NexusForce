@@ -207,6 +207,8 @@ public:
         _NEFORCE copy(ilist.begin(), ilist.begin() + size, array_);
     }
 
+    constexpr array(const T (&arr)[Size]) noexcept { _NEFORCE copy(arr, arr + Size, array_); }
+
     /**
      * @brief 获取起始迭代器
      * @return 指向第一个元素的迭代器

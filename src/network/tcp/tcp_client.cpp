@@ -445,7 +445,7 @@ bool ssl_client::post_connect() {
     if (!ssl_ctx_) {
         return true;
     }
-    ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::PEER : ssl_verify::NONE);
+    ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::peer : ssl_verify::none);
 
     if (!ssl_ctx_->is_valid()) {
         handle_exception(ssl_exception("SSL context is invalid"));
@@ -500,7 +500,7 @@ void ssl_client::set_verify_peer(bool verify) {
     }
     verify_peer_ = verify;
     if (ssl_ctx_ && ssl_ctx_->is_valid()) {
-        ssl_ctx_->set_verify_mode(verify ? ssl_verify::PEER : ssl_verify::NONE);
+        ssl_ctx_->set_verify_mode(verify ? ssl_verify::peer : ssl_verify::none);
     }
 }
 
@@ -513,14 +513,14 @@ void ssl_client::set_sni_hostname(string hostname) {
 
 bool ssl_client::load_ca_file(const string& ca_file) {
     if (!ssl_ctx_) {
-        ssl_ctx_ = ssl_context(ssl_method::TLS_CLIENT);
+        ssl_ctx_ = ssl_context(ssl_method::tls_client);
     }
     return ssl_ctx_->load_verify_locations(ca_file, "");
 }
 
 bool ssl_client::load_ca_path(const string& ca_path) {
     if (!ssl_ctx_) {
-        ssl_ctx_ = ssl_context(ssl_method::TLS_CLIENT);
+        ssl_ctx_ = ssl_context(ssl_method::tls_client);
     }
     return ssl_ctx_->load_verify_locations("", ca_path);
 }
@@ -689,7 +689,7 @@ void ssl_client::begin_async_post_connect(tcp_socket* sock, io_context& ctx, fun
         return;
     }
 
-    ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::PEER : ssl_verify::NONE);
+    ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::peer : ssl_verify::none);
 
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     auto* ssl_sock = static_cast<ssl_socket*>(sock);

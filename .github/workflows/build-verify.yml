@@ -94,6 +94,16 @@ jobs:
 
           - os: ubuntu-latest
             compiler: clang
+            config: no-icu
+            cppstd: 20
+
+          - os: ubuntu-latest
+            compiler: clang
+            config: no-locale
+            cppstd: 20
+
+          - os: ubuntu-latest
+            compiler: clang
             config: pool-off
             cppstd: 20
           - os: ubuntu-latest
@@ -246,6 +256,20 @@ jobs:
               FLAGS+=(
                 -DNEXUSFORCE_ENABLE_ZLIB=OFF
                 -DNEXUSFORCE_ENABLE_LZ4=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            no-icu)
+              FLAGS+=(
+                -DNEXUSFORCE_ENABLE_ICU=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            no-locale)
+              FLAGS+=(
+                -DNEXUSFORCE_ENABLE_LOCALE=OFF
                 -DNEXUSFORCE_BUILD_EXAMPLES=OFF
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
               )

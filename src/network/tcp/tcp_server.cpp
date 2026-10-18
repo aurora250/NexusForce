@@ -225,7 +225,7 @@ optional<unique_ptr<tcp_socket>> tcp_server::accept_one() {
 
 ssl_server::ssl_server(const ports port, io_context& ctx, const size_t worker_count) :
 tcp_server_base(port, ctx, worker_count),
-ssl_ctx_(ssl_method::TLS_SERVER) {}
+ssl_ctx_(ssl_method::tls_server) {}
 
 bool ssl_server::load_certificate(const string& cert_file, const string& key_file) {
     if (is_running()) {

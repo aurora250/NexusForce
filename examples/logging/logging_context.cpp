@@ -78,7 +78,7 @@ int main() {
     // ========== Syslog 输出 ==========
     printcln(color::cyan(), "\n--- Syslog 输出 ---");
 #ifdef NEFORCE_PLATFORM_LINUX
-    auto syslog = make_shared<syslog_sink>("NexusForceApp", syslog_facility::LOG_USER);
+    auto syslog = make_shared<syslog_sink>("NexusForceApp", syslog_facility::user);
     syslog->set_formatter(make_unique<log_formatter>("[{level}] {message}"));
     log->add_sink(syslog);
 

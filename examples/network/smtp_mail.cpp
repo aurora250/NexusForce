@@ -46,7 +46,7 @@ int main() {
 
         // STARTTLS 加密
         println("Upgrading to TLS...");
-        ssl_context ssl(ssl_method::TLS_CLIENT);
+        ssl_context ssl(ssl_method::tls_client);
         smtp.starttls(ssl, smtp_host);
 
         // 认证

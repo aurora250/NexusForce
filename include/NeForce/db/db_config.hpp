@@ -62,23 +62,12 @@ struct database_stmt_exception final : database_exception {
 /**
  * @enum db_type
  * @brief 数据库类型枚举
- *
- * 定义支持的数据库类型，每种类型对应一个数据库后端。
- * 枚举值仅在对应数据库支持时可用。
  */
 enum class db_type : uint8_t {
-#ifdef NEFORCE_SUPPORT_MYSQL
-    MYSQL = 1, ///< MySQL数据库
-#endif
-#ifdef NEFORCE_SUPPORT_SQLITE3
-    SQLITE3, ///< SQLite3数据库
-#endif
-#ifdef NEFORCE_SUPPORT_HIREDIS
-    REDIS, ///< Redis键值存储
-#endif
-#ifdef NEFORCE_SUPPORT_POSTGRESQL
-    POSTGRESQL ///< PostgreSQL数据库
-#endif
+    mysql = 1, ///< MySQL数据库
+    sqlite3,   ///< SQLite3数据库
+    redis,     ///< Redis键值存储
+    postgresql ///< PostgreSQL数据库
 };
 
 /**

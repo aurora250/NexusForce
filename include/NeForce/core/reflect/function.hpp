@@ -64,7 +64,8 @@ public:
         }
         try {
             return invoker_(obj, args);
-        } catch (...) {
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
             return meta_any{};
         }
     }

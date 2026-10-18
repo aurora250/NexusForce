@@ -4324,7 +4324,7 @@ protected:
 };
 
 TEST_F(HttpServerAlpnTest, HttpsConstructorSetsAlpnProtocols) {
-    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_context ctx(ssl_method::tls_server);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     bool cert_loaded = ctx.load_certificate("D:/OpenSSL/server.crt", "D:/OpenSSL/server.key");
 #else
@@ -4381,7 +4381,7 @@ TEST_F(HttpServerAlpnTest, SslSocketGetAlpnNegotiatedProxyWorks) {
 }
 
 TEST_F(HttpServerAlpnTest, SslStreamGetAlpnNegotiatedWithoutHandshake) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ssl_context ctx(ssl_method::tls_client);
     ctx.set_alpn_protos({"h2"});
     ssl_stream stream(ctx);
     EXPECT_TRUE(stream.alpn_negotiated().empty());
@@ -4434,7 +4434,7 @@ TEST_F(HttpClientConfigUnit, VerifySslSetterUpdatesConfig) {
 TEST_F(HttpClientConfigUnit, SetSslContextPropagatesToClient) {
     http_client client(ctx_);
     EXPECT_FALSE(client.get_client().has_ssl_context());
-    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_ssl_context(ssl_context(ssl_method::tls_client));
     EXPECT_TRUE(client.get_client().has_ssl_context());
 }
 

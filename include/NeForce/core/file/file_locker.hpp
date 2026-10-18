@@ -40,8 +40,9 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API file_locker {
 public:
-    using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
+    using size_type = unsigned long;                        ///< 大小类型
     using difference_type = int64_t;                        ///< 偏移量类型
+    using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
 private:
     native_handle_type handle_; ///< 文件句柄
@@ -69,7 +70,7 @@ public:
      * 如果length为0，锁定从offset到文件末尾的所有区域。
      */
     NEFORCE_NODISCARD bool lock(difference_type offset, difference_type length,
-                                file_lock mode = file_lock::EXCLUSIVE) const noexcept;
+                                file_lock mode = file_lock::exclusive) const noexcept;
 
     /**
      * @brief 解锁文件区域
@@ -113,7 +114,7 @@ public:
      *
      * 锁定从文件开头到末尾的整个文件。
      */
-    NEFORCE_NODISCARD bool lock_whole(file_lock mode = file_lock::EXCLUSIVE) const noexcept;
+    NEFORCE_NODISCARD bool lock_whole(file_lock mode = file_lock::exclusive) const noexcept;
 
     /**
      * @brief 解锁整个文件

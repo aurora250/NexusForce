@@ -110,7 +110,7 @@ private:
     void ignore_unsafe() const;
 
     void beep_unsafe() const noexcept;
-    void flash_screen_unsafe() const noexcept;
+    void flash_screen_unsafe() const;
 
     void fade_effect_unsafe(string_view text, const color& from, const color& to, milliseconds duration,
                             bool is_fade_in) const;
@@ -580,7 +580,7 @@ public:
      * @brief 获取终端类型
      * @return 终端类型字符串
      */
-    NEFORCE_NODISCARD string console_type() const;
+    NEFORCE_NODISCARD static string console_type();
 
     /**
      * @brief 查询光标位置
@@ -616,7 +616,7 @@ public:
     /**
      * @brief 屏幕闪烁
      */
-    void flash_screen() noexcept;
+    void flash_screen();
 
     /**
      * @brief 显示通知
