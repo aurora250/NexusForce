@@ -110,6 +110,31 @@ void post(Executor& ex, function<void()> handler) {
     ex.execute(move(handler));
 }
 
+
+/// @cond
+NEFORCE_BEGIN_INNER__
+template <typename T, typename = void>
+struct __is_executor_impl : false_type {};
+
+template <typename T>
+struct __is_executor_impl<T, void_t<decltype(declval<T&>().execute(declval<function<void()>>()))>> : true_type {};
+NEFORCE_END_INNER__
+/// @endcond
+
+/**
+ * @brief 判断类型是否为执行器
+ * @tparam T 待检测类型
+ */
+template <typename T>
+struct is_executor : inner::__is_executor_impl<decay_t<T>> {};
+
+/**
+ * @var is_executor_v
+ * @brief is_executor的便捷变量模板
+ */
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_executor_v = is_executor<T>::value;
+
 /** @} */ // Executor
 
 /** @} */ // AsyncComponents

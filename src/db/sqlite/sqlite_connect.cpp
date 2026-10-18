@@ -48,7 +48,7 @@ bool sqlite_connect::connect(const db_config& config, const string& encryption_k
         return false;
     }
     if (!encryption_key.empty()) {
-        if (type == key_type::RAW) {
+        if (type == key_type::raw) {
             ::sqlite3_exec(static_cast<sqlite3*>(link_), "PRAGMA cipher_kdf_iter = 1;", nullptr, nullptr, nullptr);
         }
         const int rc = ::sqlite3_key_v2(static_cast<sqlite3*>(link_), "main", encryption_key.data(),
@@ -72,7 +72,7 @@ bool sqlite_connect::rekey(const string& new_key, const key_type type) {
     if (link_ == nullptr) {
         return false;
     }
-    if (type == key_type::RAW) {
+    if (type == key_type::raw) {
         ::sqlite3_exec(static_cast<::sqlite3*>(link_), "PRAGMA cipher_kdf_iter = 1;", nullptr, nullptr, nullptr);
     }
     const int rc = ::sqlite3_rekey_v2(static_cast<::sqlite3*>(link_), "main", new_key.data(),

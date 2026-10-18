@@ -104,7 +104,7 @@ bool file_info::size(size_type& out_size) const noexcept {
     if (::GetFileSizeEx(handle_, &li) == FALSE) {
         return false;
     }
-    if (li.QuadPart > static_cast<::LONGLONG>(numeric_traits<size_type>::max())) {
+    if (compare_greater(li.QuadPart, numeric_traits<size_type>::max())) {
         return false;
     }
     out_size = static_cast<size_type>(li.QuadPart);
@@ -114,7 +114,7 @@ bool file_info::size(size_type& out_size) const noexcept {
     if (::fstat64(handle_, &st) == -1) {
         return false;
     }
-    if (static_cast<uint64_t>(st.st_size) > numeric_traits<size_type>::max()) {
+    if (compare_greater(st.st_size, numeric_traits<size_type>::max())) {
         return false;
     }
     out_size = static_cast<size_type>(st.st_size);

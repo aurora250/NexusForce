@@ -27,11 +27,11 @@ namespace locale_data {
      * @brief 数字与货币格式风格
      */
     struct number_style {
-        string_view decimal_point;   ///< 小数点
-        string_view group_separator; ///< 千位分隔符
-        uint32_t digit_zero;         ///< 本地数字零的码点，0 表示 ASCII 数字
-        bool indian_grouping;        ///< 是否使用印度式分组（3;2;2）
-        bool currency_before;        ///< 货币符号是否前置
+        string_view decimal_point;      ///< 小数点
+        string_view group_separator;    ///< 千位分隔符
+        uint32_t digit_zero;            ///< 本地数字零的码点，0 表示 ASCII 数字
+        bool indian_grouping;           ///< 是否使用印度式分组（3;2;2）
+        bool currency_before;           ///< 货币符号是否前置
         string_view currency_separator; ///< 货币符号与数值之间的分隔符，空串表示紧邻
     };
 
@@ -42,21 +42,21 @@ namespace locale_data {
      * 模式使用 ICU / SimpleDateFormat 风格的模式字母。
      */
     struct calendar_style {
-        string_view language;            ///< ISO 639 语言代码
-        array<string_view, 7> long_days;    ///< 星期全名，索引 0 为星期日
-        array<string_view, 7> short_days;   ///< 星期缩写
+        string_view language;                ///< ISO 639 语言代码
+        array<string_view, 7> long_days;     ///< 星期全名，索引 0 为星期日
+        array<string_view, 7> short_days;    ///< 星期缩写
         array<string_view, 12> long_months;  ///< 月份全名，索引 0 为一月
         array<string_view, 12> short_months; ///< 月份缩写
-        string_view am;                  ///< 上午标识
-        string_view pm;                  ///< 下午标识
-        string_view full_date;           ///< 完整日期模式
-        string_view long_date;           ///< 长日期模式
-        string_view medium_date;         ///< 中日期模式
-        string_view short_date;          ///< 短日期模式
-        string_view full_time;           ///< 完整时间模式
-        string_view long_time;           ///< 长时间模式
-        string_view medium_time;         ///< 中时间模式
-        string_view short_time;          ///< 短时间模式
+        string_view am;                      ///< 上午标识
+        string_view pm;                      ///< 下午标识
+        string_view full_date;               ///< 完整日期模式
+        string_view long_date;               ///< 长日期模式
+        string_view medium_date;             ///< 中日期模式
+        string_view short_date;              ///< 短日期模式
+        string_view full_time;               ///< 完整时间模式
+        string_view long_time;               ///< 长时间模式
+        string_view medium_time;             ///< 中时间模式
+        string_view short_time;              ///< 短时间模式
     };
 
     /**
@@ -64,8 +64,8 @@ namespace locale_data {
      * @brief 货币符号信息
      */
     struct currency_entry {
-        string_view code;      ///< ISO 4217 货币代码
-        string_view symbol;    ///< 货币符号
+        string_view code;        ///< ISO 4217 货币代码
+        string_view symbol;      ///< 货币符号
         uint8_t fraction_digits; ///< 小数位数
     };
 

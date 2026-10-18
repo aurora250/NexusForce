@@ -53,7 +53,7 @@ public:
      * @return 文件属性标志
      *
      * 返回文件的属性信息。
-     * 如果获取失败，返回file_attri::OTHERS。
+     * 如果获取失败，返回file_attri::others。
      */
     NEFORCE_NODISCARD file_attri attributes() const noexcept;
 

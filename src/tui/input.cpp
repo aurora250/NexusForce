@@ -155,7 +155,7 @@ unsigned long WINAPI input_driver::input_thread_proc(void* selfp) {
 }
 #endif
 
-void input_driver::process_accumulated_bytes(const byte_t* data, size_t len) {
+void input_driver::process_accumulated_bytes(const byte_t* data, const size_t len) {
     for (size_t i = 0; i < len; ++i) {
         process_byte(data[i]);
     }
@@ -166,7 +166,7 @@ void input_driver::process_accumulated_bytes(const byte_t* data, size_t len) {
     }
 }
 
-void input_driver::process_byte(byte_t byte) {
+void input_driver::process_byte(const byte_t byte) {
     if (mouse_active_) {
         accum_ += static_cast<char>(byte);
         if (parse_mouse_sequence()) {

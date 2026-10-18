@@ -69,7 +69,7 @@ public:
         if (capacity_ > 0 && buffer_.size() >= capacity_) {
             return false;
         }
-        buffer_.push_back(move(value));
+        buffer_.push_back(_NEFORCE move(value));
         cv_.notify_one();
         return true;
     }
@@ -87,7 +87,7 @@ public:
         if (closed_) {
             return false;
         }
-        buffer_.push_back(move(value));
+        buffer_.push_back(_NEFORCE move(value));
         cv_.notify_one();
         return true;
     }
@@ -102,7 +102,7 @@ public:
         if (buffer_.empty()) {
             return false;
         }
-        out = move(buffer_.front());
+        out = _NEFORCE move(buffer_.front());
         buffer_.pop_front();
         cv_.notify_one();
         return true;
@@ -119,7 +119,7 @@ public:
         if (buffer_.empty()) {
             return false;
         }
-        out = move(buffer_.front());
+        out = _NEFORCE move(buffer_.front());
         buffer_.pop_front();
         cv_.notify_one();
         return true;

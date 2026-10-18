@@ -17,7 +17,6 @@
  */
 
 #include "NeForce/core/file/file_constants.hpp"
-#include "NeForce/core/typeinfo/types.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

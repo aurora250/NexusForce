@@ -10,6 +10,7 @@
 
 #include "NeForce/core/async/coroutine.hpp"
 #ifdef NEFORCE_STANDARD_20
+#    include "NeForce/core/async/executor.hpp"
 #    include "NeForce/core/exception/exception_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -68,6 +69,8 @@ struct co_spawn_task {
  */
 template <typename Executor, typename Func>
 void co_spawn(Executor&& exec, Func func) {
+    static_assert(is_executor_v<Executor>, "Executor should be a executor");
+
     auto inner = [](Func f) -> co_spawn_task { co_await f(); };
     co_spawn_task task = inner(func);
     exec.execute([h = task.handle]() mutable { h.resume(); });

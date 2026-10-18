@@ -4,13 +4,13 @@
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
-renderer::renderer(screen& target, const theme& t, int term_w, int term_h) :
+renderer::renderer(screen& target, const theme& t, const int term_w, const int term_h) :
 screen_(target),
 theme_(t),
 term_w_(term_w),
 term_h_(term_h) {}
 
-void renderer::render(const element& tree, const vector<layout_rect>& layout, bool has_focus) {
+void renderer::render(const element& tree, const vector<layout_rect>& layout, const bool has_focus) {
     has_focus_ = has_focus;
     scrollbar_hits_.clear();
     int idx = 0;
@@ -344,8 +344,8 @@ const element* find_element_at(const vector<layout_rect>& layout, const element&
     }
 }
 
-component_base* hit_test_at(const vector<layout_rect>& layout, const element& tree, int mx, int my, int& idx,
-                            component_base* fallback) {
+component_base* hit_test_at(const vector<layout_rect>& layout, const element& tree, const int mx, const int my,
+                            int& idx, component_base* fallback) {
     switch (tree.kind()) {
         case element::kind::text:
         case element::kind::button:
@@ -440,9 +440,11 @@ void renderer::apply_style_to_cell(cell& cell, const style& style) {
     }
 }
 
-void renderer::apply_text(int x, int y, const string& text, const style& style) { apply_text(x, y, text, style, -1); }
+void renderer::apply_text(const int x, const int y, const string& text, const style& style) {
+    apply_text(x, y, text, style, -1);
+}
 
-void renderer::apply_text(int x, int y, const string& text, const style& style, int max_x) {
+void renderer::apply_text(const int x, const int y, const string& text, const style& style, const int max_x) {
     if (x < 0 || y < 0 || x >= term_w_ || y >= term_h_) {
         return;
     }
@@ -476,7 +478,8 @@ void renderer::apply_text(int x, int y, const string& text, const style& style, 
     }
 }
 
-void renderer::apply_border(int x, int y, int w, int h, enum style::border border, const _NEFORCE color& c) {
+void renderer::apply_border(const int x, const int y, const int w, const int h, const enum style::border border,
+                            const _NEFORCE color& c) {
     if (border == style::border::none || w < 2 || h < 2) {
         return;
     }
@@ -511,7 +514,7 @@ void renderer::apply_border(int x, int y, int w, int h, enum style::border borde
         }
     }
 
-    auto set_border_cell = [this, &c](int bx, int by, const char* ch) {
+    auto set_border_cell = [this, &c](const int bx, const int by, const char* ch) {
         if (bx >= 0 && bx < term_w_ && by >= 0 && by < term_h_) {
             auto& cell = screen_.fast_cell_at(bx, by);
             cell.character = ch;
@@ -561,8 +564,8 @@ void renderer::apply_clear(int x, int y, int w, int h) {
     }
 }
 
-void renderer::render_button(int x, int y, int w, int h, const string& label, const style& style, const theme& theme,
-                             style::variant variant) {
+void renderer::render_button(const int x, const int y, const int w, const int h, const string& label,
+                             const style& style, const theme& theme, const style::variant variant) {
     tui::style s = theme.button_style(variant);
     s = style::merge(s, style);
 
@@ -579,13 +582,14 @@ void renderer::render_button(int x, int y, int w, int h, const string& label, co
     }
 }
 
-void renderer::render_checkbox(int x, int y, int w, int h, const string& label, bool checked, const style& style) {
+void renderer::render_checkbox(const int x, const int y, const int w, const int h, const string& label,
+                               const bool checked, const style& style) {
     string display = checked ? "[x] " : "[ ] ";
     display += label;
     render_text_block(x, y, w, h, display, style, style::wrap_mode::word);
 }
 
-void renderer::render_separator(int x, int y, int w) {
+void renderer::render_separator(const int x, const int y, const int w) {
     if (w <= 0) {
         return;
     }
@@ -596,8 +600,8 @@ void renderer::render_separator(int x, int y, int w) {
     }
 }
 
-void renderer::render_text_block(int x, int y, int w, int h, const string& text, const tui::style& style,
-                                 style::wrap_mode wm, int* out_end_x, int* out_end_y) {
+void renderer::render_text_block(const int x, const int y, const int w, const int h, const string& text,
+                                 const tui::style& style, const style::wrap_mode wm, int* out_end_x, int* out_end_y) {
     if (w <= 0 || h <= 0 || text.empty()) {
         if (out_end_x != nullptr) {
             *out_end_x = x;
@@ -632,7 +636,7 @@ void renderer::render_text_block(int x, int y, int w, int h, const string& text,
     int cx = x;
     int cy = y;
 
-    const auto render_codepoint = [this, &style](int px, int py, const utf8_iterator& it) {
+    const auto render_codepoint = [this, &style](const int px, const int py, const utf8_iterator& it) {
         if (px >= 0 && px < term_w_ && py >= 0 && py < term_h_) {
             bool skip = false;
             for (const auto& clip: clip_stack_) {

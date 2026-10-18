@@ -8,6 +8,7 @@
 #else
 #    include <cerrno>
 #    include <cstdio>
+#    include <cstdlib>
 #    include <fcntl.h>
 #    include <sys/file.h>
 #    include <sys/socket.h>

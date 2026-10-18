@@ -13,7 +13,7 @@ application& application::with_theme(const theme& theme) {
     return *this;
 }
 
-application& application::with_fps(int fps) {
+application& application::with_fps(const int fps) {
     fps_ = fps;
     return *this;
 }
@@ -101,7 +101,7 @@ int application::run() {
     return exit_code_;
 }
 
-void application::quit(int exit_code) {
+void application::quit(const int exit_code) {
     exit_code_ = exit_code;
     ctx_.stop();
 }

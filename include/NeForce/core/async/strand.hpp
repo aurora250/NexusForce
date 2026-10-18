@@ -71,10 +71,8 @@ public:
     impl_(make_shared<impl>(ctx)) {}
 
     /**
-     * @brief 投递 handler 到 strand 队列末尾
+     * @brief 投递到队列末尾
      * @param handler 要执行的 handler
-     *
-     * handler 保证与 strand 中其他 handler 串行执行。
      */
     void post(handler_type handler) {
         impl_->queue_.push(move(handler));
@@ -82,11 +80,16 @@ public:
     }
 
     /**
-     * @brief 尽可能在当前线程同步执行 handler
+     * @brief 投递到队列末尾
+     * @param handler 要执行的 handler
+     */
+    void execute(handler_type handler) { post(move(handler)); }
+
+    /**
+     * @brief 尝试同步执行
      * @param handler 要执行的 handler
      *
-     * 若当前没有其他 handler 在执行（strand 未锁定），则在调用线程立即执行 handler。
-     * 否则降级为 post()，投递到队列等待串行执行。
+     * 若当前没有其他 handler 在执行，则立即执行 handler；否则投递到队列等待执行。
      */
     void dispatch(handler_type handler) {
         bool expected = false;

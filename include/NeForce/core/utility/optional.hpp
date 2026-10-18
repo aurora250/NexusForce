@@ -49,15 +49,20 @@ struct optional_exception final : memory_exception {
 template <typename T>
 class optional;
 
-
 template <typename T>
 struct is_optional : false_type {};
+template <typename T>
+struct is_optional<const T> : is_optional<T> {};
+template <typename T>
+struct is_optional<volatile T> : is_optional<T> {};
+template <typename T>
+struct is_optional<const volatile T> : is_optional<T> {};
 
 template <typename T>
 struct is_optional<optional<T>> : true_type {};
 
 template <typename T>
-NEFORCE_INLINE17 bool is_optional_v = is_optional<T>::value;
+NEFORCE_INLINE17 constexpr bool is_optional_v = is_optional<T>::value;
 
 
 /**

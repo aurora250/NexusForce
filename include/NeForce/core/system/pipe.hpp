@@ -43,13 +43,8 @@ public:
     using native_handle_type = _NEFORCE native_handle_type;
 
 private:
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type read_handle_ = nullptr;
-    native_handle_type write_handle_ = nullptr;
-#else
-    native_handle_type fds_[2] = {-1, -1};
-#endif
-    bool nonblocking_{false}; ///< 非阻塞模式标志
+    native_handle_type handles_[2]; // r, w
+    bool nonblocking_{false};       ///< 非阻塞模式标志
 
 public:
     /**
@@ -57,7 +52,7 @@ public:
      *
      * 创建一个未初始化的管道对象。
      */
-    pipe() noexcept = default;
+    pipe() noexcept;
 
     /**
      * @brief 创建管道并设置非阻塞模式
@@ -161,24 +156,12 @@ public:
     /**
      * @brief 获取读端句柄
      */
-    NEFORCE_NODISCARD native_handle_type native_read_handle() const noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        return read_handle_;
-#else
-        return fds_[0];
-#endif
-    }
+    NEFORCE_NODISCARD native_handle_type native_read_handle() const noexcept { return handles_[0]; }
 
     /**
      * @brief 获取写端句柄
      */
-    NEFORCE_NODISCARD native_handle_type native_write_handle() const noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        return write_handle_;
-#else
-        return fds_[1];
-#endif
-    }
+    NEFORCE_NODISCARD native_handle_type native_write_handle() const noexcept { return handles_[1]; }
 
     /**
      * @brief 分离读端句柄（调用者负责关闭）
@@ -204,15 +187,14 @@ public:
     using native_handle_type = _NEFORCE native_handle_type;
 
 private:
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type pipe_handle_;
-    bool is_server_{false};
-#else
-    native_handle_type fd_{-1};
-    string fifo_path_;
-#endif
+    native_handle_type handle_;
     string name_;
     bool nonblocking_{false};
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    bool is_server_{false};
+#else
+    string fifo_path_;
+#endif
 
 public:
     /**
@@ -315,7 +297,7 @@ public:
      */
     NEFORCE_NODISCARD native_handle_type native_handle() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        return pipe_handle_;
+        return handle_;
 #else
         return fd_;
 #endif

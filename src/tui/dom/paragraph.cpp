@@ -3,7 +3,7 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 namespace {
-    vector<string> wrap_text(const string& content, int max_width) {
+    vector<string> wrap_text(const string& content, const int max_width) {
         vector<string> lines;
         if (content.empty()) {
             lines.push_back("");
@@ -56,7 +56,7 @@ namespace {
         return lines;
     }
 
-    string pad_line(const string& line, int max_width, enum style::align align) {
+    string pad_line(const string& line, const int max_width, const enum style::align align) {
         if (line.size() >= max_width) {
             return line;
         }
@@ -72,7 +72,7 @@ namespace {
         }
     }
 
-    element paragraph_impl(string content, int max_width, enum style::align align) {
+    element paragraph_impl(string content, const int max_width, const enum style::align align) {
         auto lines = wrap_text(content, max_width);
         elements elements;
         for (auto& line: lines) {
@@ -86,15 +86,15 @@ namespace {
 } // anonymous namespace
 
 
-element paragraph(string content, int max_width) {
+element paragraph(string content, const int max_width) {
     return paragraph_impl(move(content), max_width, style::align::start);
 }
 
-element paragraph_align_center(string content, int max_width) {
+element paragraph_align_center(string content, const int max_width) {
     return paragraph_impl(move(content), max_width, style::align::center);
 }
 
-element paragraph_align_right(string content, int max_width) {
+element paragraph_align_right(string content, const int max_width) {
     return paragraph_impl(move(content), max_width, style::align::end);
 }
 

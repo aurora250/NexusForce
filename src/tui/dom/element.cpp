@@ -1,4 +1,3 @@
-#include <NeForce/tui/dom/layout.hpp>
 #include <NeForce/tui/component/component.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -70,7 +69,7 @@ element& element::operator=(element&& other) noexcept {
     return *this;
 }
 
-element& element::with_key(size_t k) {
+element& element::with_key(const size_t k) {
     node_->key = k;
     return *this;
 }
@@ -115,7 +114,7 @@ bool element::cursor_visible() const noexcept { return node_->cursor_visible; }
 
 style::wrap_mode element::wrap_mode() const noexcept { return node_->style.text_wrap.value_or(style::wrap_mode::none); }
 
-element& element::with_cursor_visible(bool v) {
+element& element::with_cursor_visible(const bool v) {
     ensure_node();
     node_->cursor_visible = v;
     return *this;
@@ -123,7 +122,7 @@ element& element::with_cursor_visible(bool v) {
 
 size_t element::cursor_pos() const noexcept { return node_->cursor_pos; }
 
-element& element::with_cursor_pos(size_t pos) {
+element& element::with_cursor_pos(const size_t pos) {
     ensure_node();
     node_->cursor_pos = pos;
     return *this;
@@ -151,12 +150,12 @@ void element::ensure_node() {
     }
 }
 
-void element::init_kind(enum kind k) {
+void element::init_kind(const enum kind k) {
     ensure_node();
     node_->kind = k;
 }
 
-void element::reserve_children(size_t n) {
+void element::reserve_children(const size_t n) {
     ensure_node();
     node_->children.reserve(n);
 }
@@ -196,7 +195,7 @@ element element::zstack(vector<element> children) {
     return el;
 }
 
-element element::text(string content, tui::style style, style::wrap_mode wrap) {
+element element::text(string content, tui::style style, const style::wrap_mode wrap) {
     element el;
     el.node_->kind = kind::text;
     el.node_->text = move(content);
@@ -207,7 +206,7 @@ element element::text(string content, tui::style style, style::wrap_mode wrap) {
     return el;
 }
 
-element element::spacer(int flex) {
+element element::spacer(const int flex) {
     element el;
     el.node_->kind = kind::spacer;
     el.node_->flex = flex;
@@ -220,7 +219,7 @@ element element::separator() {
     return el;
 }
 
-element element::button(string label, function<void()> on_click, tui::style style, style::variant variant) {
+element element::button(string label, function<void()> on_click, tui::style style, const style::variant variant) {
     element el;
     el.node_->kind = kind::button;
     el.node_->text = move(label);
@@ -252,7 +251,7 @@ element element::checkbox(string label, state<bool>& checked, tui::style style) 
     return el;
 }
 
-element element::scroll_view(element child, tui::style style, int scroll_x, int scroll_y) {
+element element::scroll_view(element child, tui::style style, const int scroll_x, const int scroll_y) {
     element el;
     el.node_->kind = kind::scroll_view;
     el.node_->children.push_back(move(child));
@@ -302,7 +301,7 @@ element element::gridbox(vector<vector<element>> grid) {
     return el;
 }
 
-element element::when(bool cond, function<element()> then, function<element()> otherwise) {
+element element::when(const bool cond, function<element()> then, function<element()> otherwise) {
     element el;
     el.node_->kind = kind::when;
     el.node_->children.push_back(cond ? then() : otherwise());
@@ -311,11 +310,12 @@ element element::when(bool cond, function<element()> then, function<element()> o
 
 bool element::is_layout_dirty() const noexcept { return node_->layout_dirty_; }
 
-void element::set_layout_dirty(bool dirty) { node_->layout_dirty_ = dirty; }
+void element::set_layout_dirty(const bool dirty) { node_->layout_dirty_ = dirty; }
 
 const vector<layout_rect>& element::cached_layout() const noexcept { return node_->cached_layout_; }
 
-void element::set_cached_layout(const vector<layout_rect>& layout, int constraint_w, int constraint_h) const {
+void element::set_cached_layout(const vector<layout_rect>& layout, const int constraint_w,
+                                const int constraint_h) const {
     node_->cached_layout_ = layout;
     node_->cached_constraint_w_ = constraint_w;
     node_->cached_constraint_h_ = constraint_h;

@@ -52,11 +52,11 @@ enum class file_access : native_id_type {
 #endif
 };
 
-constexpr file_access operator|(file_access a, file_access b) {
+constexpr file_access operator|(file_access a, file_access b) noexcept {
     return static_cast<file_access>(static_cast<native_id_type>(a) | static_cast<native_id_type>(b));
 }
 
-constexpr file_access operator&(file_access a, file_access b) {
+constexpr file_access operator&(file_access a, file_access b) noexcept {
     return static_cast<file_access>(static_cast<native_id_type>(a) & static_cast<native_id_type>(b));
 }
 
@@ -85,11 +85,11 @@ enum class file_shared : native_id_type {
 #endif
 };
 
-constexpr file_shared operator|(file_shared a, file_shared b) {
+constexpr file_shared operator|(file_shared a, file_shared b) noexcept {
     return static_cast<file_shared>(static_cast<native_id_type>(a) | static_cast<native_id_type>(b));
 }
 
-constexpr file_shared operator&(file_shared a, file_shared b) {
+constexpr file_shared operator&(file_shared a, file_shared b) noexcept {
     return static_cast<file_shared>(static_cast<native_id_type>(a) & static_cast<native_id_type>(b));
 }
 
@@ -116,11 +116,11 @@ enum class file_creation : native_id_type {
 #endif
 };
 
-constexpr file_creation operator|(file_creation a, file_creation b) {
+constexpr file_creation operator|(file_creation a, file_creation b) noexcept {
     return static_cast<file_creation>(static_cast<native_id_type>(a) | static_cast<native_id_type>(b));
 }
 
-constexpr file_creation operator&(file_creation a, file_creation b) {
+constexpr file_creation operator&(file_creation a, file_creation b) noexcept {
     return static_cast<file_creation>(static_cast<native_id_type>(a) & static_cast<native_id_type>(b));
 }
 
@@ -163,11 +163,11 @@ enum class file_attri : native_id_type {
 #endif
 };
 
-constexpr file_attri operator|(file_attri a, file_attri b) {
+constexpr file_attri operator|(file_attri a, file_attri b) noexcept {
     return static_cast<file_attri>(static_cast<native_id_type>(a) | static_cast<native_id_type>(b));
 }
 
-constexpr file_attri operator&(file_attri a, file_attri b) {
+constexpr file_attri operator&(file_attri a, file_attri b) noexcept {
     return static_cast<file_attri>(static_cast<native_id_type>(a) & static_cast<native_id_type>(b));
 }
 
@@ -213,11 +213,11 @@ enum class file_lock : native_id_type {
 #endif
 };
 
-constexpr file_lock operator|(file_lock a, file_lock b) {
+constexpr file_lock operator|(file_lock a, file_lock b) noexcept {
     return static_cast<file_lock>(static_cast<native_id_type>(a) | static_cast<native_id_type>(b));
 }
 
-constexpr file_lock operator&(file_lock a, file_lock b) {
+constexpr file_lock operator&(file_lock a, file_lock b) noexcept {
     return static_cast<file_lock>(static_cast<native_id_type>(a) & static_cast<native_id_type>(b));
 }
 

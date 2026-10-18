@@ -10,12 +10,13 @@
  */
 
 #include "NeForce/core/algorithm/remove.hpp"
+#include "NeForce/core/async/executor.hpp"
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/apply.hpp"
-#include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
 #include "NeForce/core/reflect/any.hpp"
+#include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -545,6 +546,9 @@ public:
      * 如果信号被阻塞，则什么也不做。
      */
     void emit(Types... args) {
+        using slot_callback = typename slot_entry::callback_type;
+        static_assert(is_invocable_v<slot_callback, Types...>, "slot_callback should be invocable.");
+
         vector<slot_entry> snapshot;
         {
             lock<mutex> lk(mutex_);
@@ -554,7 +558,7 @@ public:
             snapshot = slots_;
         }
 
-        for (auto& slot: snapshot) {
+        for (slot_entry& slot: snapshot) {
             if (!slot.connected_flag || !(*slot.connected_flag)) {
                 continue;
             }
@@ -584,17 +588,20 @@ public:
      */
     template <typename Executor>
     void emit_executor(Executor& executor, Types... args) {
+        static_assert(is_executor_v<Executor>, "Executor should be a executor");
+
         auto weak_flag = weak_ptr<bool>(blocked_flag_);
         auto args_tuple = _NEFORCE make_tuple(_NEFORCE forward<Types>(args)...);
 
-        executor.post([this, weak_flag = _NEFORCE move(weak_flag), args_tuple = _NEFORCE move(args_tuple)]() mutable {
-            if (weak_flag.expired()) {
-                return;
-            }
+        executor.execute(
+                [this, weak_flag = _NEFORCE move(weak_flag), args_tuple = _NEFORCE move(args_tuple)]() mutable {
+                    if (weak_flag.expired()) {
+                        return;
+                    }
 
-            _NEFORCE apply([this](auto&&... a) { this->emit(_NEFORCE forward<decltype(a)>(a)...); },
-                           _NEFORCE move(args_tuple));
-        });
+                    _NEFORCE apply([this](auto&&... a) { this->emit(_NEFORCE forward<decltype(a)>(a)...); },
+                                   _NEFORCE move(args_tuple));
+                });
     }
 
     /**
@@ -662,8 +669,9 @@ public:
      */
     template <typename Func, typename Predicate>
     connection connect_if(Func callback, Predicate pred, int priority = 0) {
-        using result_type = invoke_result_t<Predicate, Types...>;
-        static_assert(is_boolean_v<result_type>, "only boolean results are allowed");
+        static_assert(is_invocable_v<Func, Types...>, "Func should be invocable.");
+        static_assert(is_invocable_v<Predicate, Types...>, "Predicate should be invocable.");
+        static_assert(is_boolean_v<invoke_result_t<Predicate, Types...>>, "only boolean results are allowed");
 
         return this->connect(
                 [callback = _NEFORCE move(callback), pred = _NEFORCE move(pred)](Types... args) mutable {
@@ -690,8 +698,8 @@ public:
      */
     template <typename Self, typename MemFn, typename Predicate, typename... Tag>
     connection connect_if(Self self, MemFn memfn, Predicate pred, int priority, Tag... tag) {
-        using result_type = invoke_result_t<Predicate, Types...>;
-        static_assert(is_boolean_v<result_type>, "only boolean results are allowed");
+        static_assert(is_invocable_v<Predicate, Types...>, "Predicate should be invocable.");
+        static_assert(is_boolean_v<invoke_result_t<Predicate, Types...>>, "only boolean results are allowed");
         static_assert(sizeof...(Tag) <= 1, "only zero or one tag is allowed");
 
         auto bound = this->bind(_NEFORCE move(self), memfn, tag...);
@@ -720,8 +728,7 @@ public:
     template <typename Func, typename Filter>
     connection connect_filtered(Func callback, Filter filter, int priority = 0) {
         static_assert(is_invocable_v<Filter, Types...>, "Filter should be invocable.");
-        using result_type = invoke_result_t<Filter, Types...>;
-        static_assert(is_optional_v<result_type>, "only optional results are allowed");
+        static_assert(is_optional_v<invoke_result_t<Filter, Types...>>, "only optional results are allowed");
 
         return this->connect(
                 [callback = _NEFORCE move(callback), filter = _NEFORCE move(filter)](Types... args) mutable {
@@ -802,7 +809,7 @@ public:
     }
 
     /**
-     * @brief 动态连接（类型擦除版本）
+     * @brief 动态连接
      * @param callback 接收 meta_any 参数列表的回调
      *
      * 将类型擦除的回调适配为信号的实际参数类型并连接。
@@ -818,7 +825,7 @@ public:
     }
 
     /**
-     * @brief 通过 meta_any 触发信号（类型擦除版本）
+     * @brief 通过 meta_any 触发信号
      * @param args 参数列表
      */
     void emit_dynamic(const vector<reflect::meta_any>& args) override {
@@ -829,7 +836,7 @@ public:
     }
 
     /**
-     * @brief 检查信号是否为空（无活跃槽）
+     * @brief 检查信号是否为空
      * @return 是否为空
      */
     NEFORCE_NODISCARD bool empty() const noexcept {

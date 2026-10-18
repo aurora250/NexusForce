@@ -8,13 +8,11 @@
  * 此文件提供了完整的文件操作接口。
  */
 
-#include "NeForce/core/exception/error_code.hpp"
 #include "NeForce/core/file/file_async.hpp"
 #include "NeForce/core/file/file_diff.hpp"
 #include "NeForce/core/file/file_info.hpp"
 #include "NeForce/core/file/file_locker.hpp"
 #include "NeForce/core/file/file_mapper.hpp"
-#include "NeForce/core/file/path.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

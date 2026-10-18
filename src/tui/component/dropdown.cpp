@@ -1,4 +1,5 @@
 #include <NeForce/tui/component/dropdown.hpp>
+#include <utility>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 NEFORCE_BEGIN_COMPONENTS__
@@ -7,7 +8,7 @@ namespace {
     class dropdown_component final : public component_base {
     public:
         explicit dropdown_component(dropdown_option opt) :
-        opt_(_NEFORCE move(opt)) {
+        opt_(move(opt)) {
             if (opt_.open == nullptr) {
                 owned_open_ = false;
                 open_ptr_ = &owned_open_;
@@ -30,14 +31,14 @@ namespace {
             if (*open_ptr_) {
                 elements items;
                 for (size_t i = 0; i < opt_.entries.size(); ++i) {
-                    const bool is_sel = (static_cast<int>(i) == selected_);
+                    const bool is_sel = compare_equal(i, selected_);
                     string label = is_sel ? " * " : "   ";
                     label += opt_.entries[i];
                     items.push_back(element::text(label));
                 }
-                children.push_back(element::vbox(_NEFORCE move(items)));
+                children.push_back(element::vbox(move(items)));
             }
-            return element::vbox(_NEFORCE move(children));
+            return element::vbox(move(children));
         }
 
         bool on_key(const key_event& e) override {

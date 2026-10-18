@@ -38,24 +38,15 @@ public:
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
 private:
+    struct state;
+
     native_handle_type handle_;
     io_context* ctx_{nullptr};
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    struct win_state;
-    unique_ptr<win_state> win_; ///< IOCP 异步状态
-#else
-#    ifdef NEFORCE_USING_IO_URING
-    struct uring;
-    unique_ptr<uring> uring_; ///< io_uring 环
-#    endif
-#endif
+    unique_ptr<state> state_; ///< IO 异步状态
 
-    void ensure_iocp(io_context& ctx);
+    void ensure_state(io_context& ctx);
     void release_binding() noexcept;
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    bool complete_win_op(win_state& state, ::OVERLAPPED* ov, error_code ec, size_type bytes);
-#endif
+    bool complete_state(state& state, void* ov, error_code ec, size_type bytes);
 
     void do_async_read(io_context& ctx, string& buffer, size_type size, difference_type offset, cancellation_slot* slot,
                        function<void(error_code, size_type)> handler);

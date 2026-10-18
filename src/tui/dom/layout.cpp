@@ -15,7 +15,7 @@ namespace {
 
     int measure_text_width(const string& text) { return string_display_width(text); }
 
-    int compute_wrapped_height(const string& text, int max_width, style::wrap_mode wm) {
+    int compute_wrapped_height(const string& text, const int max_width, const style::wrap_mode wm) {
         if (max_width <= 0 || wm == style::wrap_mode::none) {
             return 1;
         }
@@ -103,7 +103,7 @@ namespace {
     int measure_element_height(const element& el, int allocated_width = -1);
     void assign_layout(const element& el, vector<layout_rect>& out, int x, int y, int total_w, int total_h);
 
-    int child_flex_weight(const element& child, bool is_row) {
+    int child_flex_weight(const element& child, const bool is_row) {
         const auto& cs = child.style();
         if (child.kind() == element::kind::spacer) {
             return child.flex();
@@ -124,9 +124,9 @@ namespace {
     }
 
     void assign_layout_flex_line(const vector<size_t>& indices, const vector<element>& children, const box_props& lp,
-                                 const vector<int>& child_sizes, int content_x, int content_y, int content_w,
-                                 int content_h, bool is_row, int line_cross_pos, int line_cross_size,
-                                 vector<layout_rect>& out) {
+                                 const vector<int>& child_sizes, const int content_x, const int content_y,
+                                 const int content_w, const int content_h, const bool is_row, const int line_cross_pos,
+                                 const int line_cross_size, vector<layout_rect>& out) {
         const int n = static_cast<int>(indices.size());
         int total_content_size = 0;
         for (size_t i = 0; i < indices.size(); ++i) {
@@ -212,7 +212,7 @@ namespace {
     }
 
     vector<int> compute_flex_sizes(const vector<size_t>& indices, const vector<element>& children, const box_props& lp,
-                                   int main_axis_space, bool is_row) {
+                                   const int main_axis_space, const bool is_row) {
         const int n = static_cast<int>(indices.size());
         vector<int> sizes(n);
 
@@ -344,7 +344,7 @@ namespace {
         return content_w;
     }
 
-    int measure_element_height(const element& el, int allocated_width) {
+    int measure_element_height(const element& el, const int allocated_width) {
         const auto k = el.kind();
         const auto& style = el.style();
         int content_h = 0;
@@ -368,7 +368,7 @@ namespace {
             case element::kind::text_input: {
                 const style::wrap_mode wm = el.style().text_wrap.value_or(style::wrap_mode::none);
                 if (wm != style::wrap_mode::none) {
-                    int effective_w = allocated_width > 0 ? allocated_width : measure_element_width(el);
+                    const int effective_w = allocated_width > 0 ? allocated_width : measure_element_width(el);
                     if (effective_w > 0) {
                         const int wrapped = compute_wrapped_height(el.text(), effective_w, wm);
                         content_h = (wrapped > 1) ? wrapped + 2 : 1;
@@ -935,7 +935,7 @@ namespace {
 } // namespace
 
 
-vector<layout_rect> compute_layout(const element& element, int constraint_w, int constraint_h) {
+vector<layout_rect> compute_layout(const element& element, const int constraint_w, const int constraint_h) {
     if (!element.is_layout_dirty() && element.cached_constraint_w() == constraint_w &&
         element.cached_constraint_h() == constraint_h) {
         return element.cached_layout();

@@ -3,7 +3,7 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 namespace {
-    element graph_from_points(const vector<int>& points, int width, int height) {
+    element graph_from_points(const vector<int>& points, const int width, const int height) {
         if (points.empty()) {
             return element::text(string(width, ' '));
         }

@@ -10,7 +10,7 @@ namespace {
         title_(move(title)) {
             owned_show_ = (show != nullptr) ? *show : true;
             show_ptr_ = (show != nullptr) ? show : &owned_show_;
-            add_child(_NEFORCE move(child));
+            add_child(move(child));
         }
 
         element render() override {
@@ -21,7 +21,7 @@ namespace {
             if (*show_ptr_) {
                 parts.push_back(active_child()->render());
             }
-            return element::vbox(_NEFORCE move(parts));
+            return element::vbox(move(parts));
         }
 
         bool on_key(const key_event& e) override {

@@ -37,7 +37,7 @@ style style::merge(const style& base, const style& over) {
     return result;
 }
 
-style theme::button_style(style::variant v) const {
+style theme::button_style(const style::variant v) const {
     style s;
     s.fg = fg;
     s.padding = {0, 2, 0, 2};
@@ -70,7 +70,7 @@ style theme::text_style() const {
     return s;
 }
 
-style theme::input_style(bool focused) const {
+style theme::input_style(const bool focused) const {
     style s;
     s.fg = fg;
     s.bg = bg;

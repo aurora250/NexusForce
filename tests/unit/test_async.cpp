@@ -52,7 +52,7 @@ namespace {
 
     struct simple_executor {
         vector<function<void()>> tasks;
-        void post(function<void()> f) { tasks.push_back(move(f)); }
+        void execute(function<void()> f) { tasks.push_back(move(f)); }
         void run() {
             auto pending = move(tasks);
             tasks.clear();

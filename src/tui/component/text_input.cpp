@@ -4,7 +4,7 @@ NEFORCE_BEGIN_TUI__
 NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
-    size_t utf8_next(const string& s, size_t pos) {
+    size_t utf8_next(const string& s, const size_t pos) {
         if (pos >= s.size()) {
             return s.size();
         }
@@ -24,7 +24,7 @@ namespace {
         return pos + 1;
     }
 
-    size_t utf8_prev(const string& s, size_t pos) {
+    size_t utf8_prev(const string& s, const size_t pos) {
         if (pos == 0) {
             return 0;
         }
@@ -115,7 +115,7 @@ namespace {
             if (e.key == K::backspace) {
                 string val = opt_.text->value();
                 if (!val.empty()) {
-                    size_t cp = cursor_pos_ != nullptr ? cursor_pos_->value() : val.size();
+                    const size_t cp = cursor_pos_ != nullptr ? cursor_pos_->value() : val.size();
                     if (cp == 0) {
                         return false;
                     }
@@ -132,7 +132,7 @@ namespace {
             if (e.key == K::delete_) {
                 string val = opt_.text->value();
                 if (!val.empty()) {
-                    size_t cp = cursor_pos_ != nullptr ? cursor_pos_->value() : 0;
+                    const size_t cp = cursor_pos_ != nullptr ? cursor_pos_->value() : 0;
                     if (cp >= val.size()) {
                         return false;
                     }
@@ -150,10 +150,10 @@ namespace {
                 return true;
             }
             if (e.key == K::printable && e.cp.value() >= 0x20) {
-                string val = opt_.text->value();
+                const string val = opt_.text->value();
                 const size_t cp = cursor_pos_ != nullptr ? cursor_pos_->value() : val.size();
                 string before = val.substr(0, cp);
-                string after = val.substr(cp);
+                const string_view after = val.view(cp);
                 e.cp.append_to(before);
                 *opt_.text = before + after;
                 if (cursor_pos_ != nullptr) {
@@ -164,7 +164,7 @@ namespace {
             return false;
         }
 
-        void on_animation(int64_t delta) override {
+        void on_animation(const int64_t delta) override {
             if (cursor_visible_ == nullptr) {
                 return;
             }
