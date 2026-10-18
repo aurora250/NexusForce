@@ -147,6 +147,15 @@ struct resize_event {
     int height; ///< 新的终端高度
 };
 
+/**
+ * @brief 粘贴事件
+ *
+ * 终端开启括号粘贴模式（bracketed paste）后，一次粘贴整体作为一个事件送达
+ */
+struct paste_event {
+    string text; ///< 粘贴的文本，行分隔符归一化
+};
+
 /** @} */ // TUI
 
 NEFORCE_END_TUI__

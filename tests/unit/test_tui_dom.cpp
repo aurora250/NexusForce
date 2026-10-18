@@ -252,8 +252,12 @@ TEST(TuiScrollIndicatorTest, VerticalThumbMovesWithOffset) {
 TEST(TuiScrollIndicatorTest, VerticalIndicatorIsBlankWhenEverythingFits) {
     const element el = vscroll_indicator(5, 10, 0, 4);
 
-    EXPECT_EQ(el.kind(), element::kind::text);
-    EXPECT_EQ(el.text(), string(4, ' '));
+    EXPECT_EQ(el.kind(), element::kind::vbox);
+    ASSERT_EQ(el.children().size(), 4U);
+    for (const auto& child: el.children()) {
+        EXPECT_EQ(child.kind(), element::kind::text);
+        EXPECT_EQ(child.text(), " ");
+    }
 }
 
 TEST(TuiScrollIndicatorTest, HorizontalIndicatorShowsThumbProportionalToVisibleColumns) {

@@ -57,6 +57,14 @@ public:
                         const element& tree, const vector<scrollbar_hit>& hits);
 
     /**
+     * @brief 分发粘贴事件
+     * @param e 粘贴事件
+     * @param root 根组件
+     * @return true 表示事件已被处理
+     */
+    bool dispatch_paste(const paste_event& e, component_base* root);
+
+    /**
      * @brief 设置脏标记回调
      * @param cb 回调函数
      * @note 由 reconciler 注入

@@ -529,7 +529,7 @@ bool named_pipe::set_nonblocking(bool v) noexcept {
     return true;
 }
 
-bool named_pipe::remove(const string& path) {
+bool named_pipe::remove(const string& path) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ignore = path;
     return true;

@@ -8,19 +8,48 @@ namespace {
         int width = 0;
         const auto& raw = text.view();
         for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
-            width += it->display_width();
+            // Control characters are rendered as a blank cell,
+            // so they must also be measured as one column;
+            // otherwise the element would be laid out narrower than what the renderer draws and the tail of the text would be clipped.
+            const auto value = it->value();
+            width += (value < 0x20 || value == 0x7F) ? 1 : it->display_width();
         }
         return width;
     }
 
     int measure_text_width(const string& text) { return string_display_width(text); }
 
+    size_t count_line_breaks(const string& text) {
+        const auto& raw = text.view();
+        size_t count = 0;
+        for (size_t i = 0; i < raw.size(); ++i) {
+            if (raw[i] == '\n') {
+                ++count;
+            }
+        }
+        return count;
+    }
+
     int compute_wrapped_height(const string& text, const int max_width, const style::wrap_mode wm) {
+        const auto breaks = count_line_breaks(text);
         if (max_width <= 0 || wm == style::wrap_mode::none) {
-            return 1;
+            return static_cast<int>(1 + breaks);
         }
         if (text.empty()) {
             return 1;
+        }
+        if (breaks > 0) {
+            int total = 0;
+            const auto& raw = text.view();
+            size_t start = 0;
+            for (size_t i = 0; i <= raw.size(); ++i) {
+                if (i == raw.size() || raw[i] == '\n') {
+                    const int segment = compute_wrapped_height(raw.substr(start, i - start), max_width, wm);
+                    total += max(1, segment);
+                    start = i + 1;
+                }
+            }
+            return max(1, total);
         }
 
         if (wm == style::wrap_mode::character) {
@@ -355,7 +384,7 @@ namespace {
                 if (wm != style::wrap_mode::none && allocated_width > 0) {
                     content_h = compute_wrapped_height(el.text(), allocated_width, wm);
                 } else {
-                    content_h = 1;
+                    content_h = static_cast<int>(1 + count_line_breaks(el.text()));
                 }
                 break;
             }

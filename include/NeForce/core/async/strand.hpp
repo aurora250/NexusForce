@@ -44,11 +44,16 @@ private:
             if (!self->locked_.compare_exchange_strong(expected, true, memory_order_acquire, memory_order_relaxed)) {
                 return;
             }
-            auto handler = self->queue_.try_pop();
+            const auto handler = self->queue_.try_pop();
             if (handler) {
                 auto shared_handler = make_shared<function<void()>>(move(*handler));
                 self->ctx->post([self, shared_handler]() {
-                    (*shared_handler)();
+                    try {
+                        (*shared_handler)();
+                        // NOLINTNEXTLINE(bugprone-empty-catch)
+                    } catch (const exception& e) {
+                        NEFORCE_REPORT_EXCEPTION(e);
+                    }
                     self->locked_.store(false, memory_order_release);
                     self->drain_one(self);
                 });
@@ -94,9 +99,18 @@ public:
     void dispatch(handler_type handler) {
         bool expected = false;
         if (impl_->locked_.compare_exchange_strong(expected, true, memory_order_acquire, memory_order_relaxed)) {
-            handler();
+            bool escaped = false;
+            try {
+                handler();
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
+                escaped = true;
+            }
             impl_->locked_.store(false, memory_order_release);
             impl_->drain_one(impl_);
+            if (escaped) {
+                throw;
+            }
         } else {
             post(move(handler));
         }

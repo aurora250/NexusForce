@@ -306,7 +306,8 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`application`** - 应用入口，Builder 模式配置（主题/FPS/标题），驱动事件循环与动画计时器
 - **`reconciler`** - 声明式渲染引擎，Cell 级终端帧差分与增量 ANSI 输出，焦点链遍历，鼠标命中测试与滚动条交互
 - **`screen`** - 终端帧缓冲，逐 Cell 差分生成最小 ANSI 转义序列
-- **`input_driver`** - 跨平台终端输入驱动，解析 ANSI/鼠标/UTF-8 序列
+- **`input_driver`** - 跨平台终端输入驱动，监听 stdin 并分发按键/鼠标/粘贴事件
+- **`input_parser`** - 无 I/O 的输入解析状态机，识别 ASCII/UTF-8、控制键、CSI/SS3、带修饰键序列、Alt+字符、SGR 鼠标与括号粘贴
 - **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
 - **`style` / `theme`** - 样式系统 + 语义化主题，预置暗色主题
 - **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染

@@ -308,7 +308,8 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`application`** - Application entry point, Builder pattern config (theme/FPS/title), drives event loop and animation timer
 - **`reconciler`** - Declarative rendering engine, cell-level terminal frame diffing with incremental ANSI output, focus chain traversal, mouse hit-testing and scrollbar interaction
 - **`screen`** - Terminal frame buffer, per-cell diffing to produce minimal ANSI escape sequences
-- **`input_driver`** - Cross-platform terminal input driver, parses ANSI/mouse/UTF-8 sequences
+- **`input_driver`** - Cross-platform terminal input driver, watches stdin and dispatches key/mouse/paste events
+- **`input_parser`** - I/O-free input parsing state machine: ASCII/UTF-8, control keys, CSI/SS3, modifier sequences, Alt+char, SGR mouse and bracketed paste
 - **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
 - **`style` / `theme`** - Style system + semantic theming, dark theme preset
 - **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling

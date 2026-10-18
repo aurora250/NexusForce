@@ -20,8 +20,8 @@ timestamp timestamp::now() noexcept {
     constexpr uint64_t EPOCH_DIFF = 116444736000000000ULL;
     return timestamp(static_cast<int64_t>(uli.QuadPart - EPOCH_DIFF) / 10000000LL);
 #else
-    struct ::timeval tv = {0, 0};
-    ::gettimeofday(&tv, 0);
+    ::timeval tv = {0, 0};
+    ::gettimeofday(&tv, nullptr);
     return timestamp(tv.tv_sec);
 #endif
 }

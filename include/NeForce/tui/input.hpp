@@ -11,6 +11,7 @@
 #include "NeForce/core/async/strand.hpp"
 #include "NeForce/core/system/console.hpp"
 #include "NeForce/tui/events.hpp"
+#include "NeForce/tui/input_parser.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <termios.h>
 #endif
@@ -29,7 +30,7 @@ class reconciler;
 /**
  * @brief 终端输入驱动
  *
- * 监听输入，解析为 key_event 或 mouse_event 后分发到 reconciler。
+ * 监听输入，交由 input_parser 解析为按键 / 鼠标 / 粘贴事件后分发到 reconciler。
  */
 class NEFORCE_API input_driver {
 public:
@@ -71,23 +72,19 @@ private:
 #endif
 
     void process_byte(byte_t byte);
-    bool parse_escape_sequence();
-    bool parse_utf8_sequence();
-    bool parse_mouse_sequence();
+    void process_accumulated_bytes(const byte_t* data, size_t len);
+    void deliver(const parsed_input& input);
     void dispatch_key(const key_event& e);
     void dispatch_mouse(const mouse_event& e);
-    void process_accumulated_bytes(const byte_t* data, size_t len);
+    void dispatch_paste(const paste_event& e);
 
     io_context& ctx_;
     reconciler& reconiler_;
     strand& strand_;
     sys_console& console_;
 
-    string accum_;              ///< 转义序列 / UTF-8 累积缓冲
-    bool esc_active_ = false;   ///< 是否在处理 ESC 序列
-    bool mouse_active_ = false; ///< 是否在处理鼠标序列
-    bool utf8_active_ = false;  ///< 是否在处理 UTF-8 多字节序列
-    bool listening_ = false;    ///< 是否已启动监听
+    input_parser parser_;    ///< 输入序列解析器
+    bool listening_ = false; ///< 是否已启动监听
 
     bool term_saved_ = false; ///< 是否已保存原始终端属性
 #ifdef NEFORCE_PLATFORM_LINUX

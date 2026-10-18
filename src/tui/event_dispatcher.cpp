@@ -11,6 +11,14 @@ bool event_dispatcher::dispatch_key(const key_event& e, component_base* root) {
         return false;
     }
 
+    // The focused component gets the first look at Tab,
+    // so that editors and autocomplete popups can claim it;
+    // focus navigation only runs when the event was not consumed.
+    auto* focused = focus_mgr_.focused();
+    if (focused != nullptr && focused->on_key(e)) {
+        return true;
+    }
+
     if (e.key == key_event::type::tab || e.key == key_event::type::tab_reverse) {
         if (e.key == key_event::type::tab_reverse || (e.mods & key_modifier::shift) != key_modifier::none) {
             focus_mgr_.focus_prev();
@@ -23,19 +31,32 @@ bool event_dispatcher::dispatch_key(const key_event& e, component_base* root) {
         return true;
     }
 
+    if (focused != nullptr && !focused->pass_through()) {
+        return false;
+    }
+    if (focused == root && focused != nullptr) {
+        return false;
+    }
+    if (root->on_key(e)) {
+        return true;
+    }
+    return false;
+}
+
+bool event_dispatcher::dispatch_paste(const paste_event& e, component_base* root) {
+    if (root == nullptr) {
+        return false;
+    }
     auto* focused = focus_mgr_.focused();
     if (focused != nullptr) {
-        if (focused->on_key(e)) {
+        if (focused->on_paste(e)) {
             return true;
         }
         if (!focused->pass_through()) {
             return false;
         }
     }
-    if (root->on_key(e)) {
-        return true;
-    }
-    return false;
+    return root->on_paste(e);
 }
 
 bool event_dispatcher::dispatch_mouse(const mouse_event& e, component_base* root, const vector<layout_rect>& layout,

@@ -67,5 +67,16 @@ void focus_manager::focus_prev() {
     set_focus(focus_chain_[idx]);
 }
 
+void focus_manager::validate_focus() noexcept {
+    if (focused_ == nullptr) {
+        return;
+    }
+    if (find(focus_chain_.begin(), focus_chain_.end(), focused_) != focus_chain_.end()) {
+        return;
+    }
+    focused_->set_has_focus(false);
+    focused_ = nullptr;
+}
+
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

@@ -164,6 +164,25 @@ namespace {
             return false;
         }
 
+        bool on_paste(const paste_event& e) override {
+            if (!has_focus() || e.text.empty()) {
+                return false;
+            }
+
+            const string val = opt_.text->value();
+            size_t at = (cursor_pos_ != nullptr) ? cursor_pos_->value() : val.size();
+            at = min(at, val.size());
+
+            string before = val.substr(0, at);
+            const string_view after = val.view(at);
+            before.append(e.text);
+            *opt_.text = before + after;
+            if (cursor_pos_ != nullptr) {
+                *cursor_pos_ = before.size();
+            }
+            return true;
+        }
+
         void on_animation(const int64_t delta) override {
             if (cursor_visible_ == nullptr) {
                 return;

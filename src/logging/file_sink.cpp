@@ -102,7 +102,7 @@ max_files_(max_files) {
 }
 
 void file_sink::log(const log_event& event) {
-    const string formatted = formatter_ ? formatter_->format(event) : default_sink_format(event);
+    const string formatted = format_event(event);
     lock<mutex> lock(mutex_);
 
     if (enable_date_rotation_) {

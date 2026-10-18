@@ -85,9 +85,10 @@ private:
     mutable mutex mutex_;          ///< 互斥锁
     console_size last_size_{0, 0}; ///< 上次记录的控制台尺寸
 
-    bool alt_buffer_active_ = false; // 交替缓冲区是否激活
-    bool mouse_enabled_ = false;     // 鼠标输入是否开启
-    int pending_char_ = -1;          // kbhit 预读的字符，-1 表示无待处理字符
+    bool alt_buffer_active_ = false;       // 交替缓冲区是否激活
+    bool mouse_enabled_ = false;           // 鼠标输入是否开启
+    bool bracketed_paste_enabled_ = false; // 括号粘贴模式是否开启
+    int pending_char_ = -1;                // kbhit 预读的字符，-1 表示无待处理字符
 
 private:
     void print_string_unsafe(const string& str) const noexcept { print_string_unsafe(str.view()); }
@@ -493,6 +494,19 @@ public:
      * @return 是否已启用鼠标输入
      */
     NEFORCE_NODISCARD bool is_mouse_enabled() const noexcept;
+
+    /**
+     * @brief 启用或禁用括号粘贴模式
+     * @param enable 是否启用括号粘贴
+     * @note 需终端支持 bracketed paste（xterm 2004 扩展）
+     */
+    void enable_bracketed_paste(bool enable = true) noexcept;
+
+    /**
+     * @brief 检测当前是否已启用括号粘贴模式
+     * @return 是否已启用括号粘贴
+     */
+    NEFORCE_NODISCARD bool is_bracketed_paste_enabled() const noexcept;
 
     /**
      * @brief 检查是否有键盘输入可读（非阻塞）

@@ -4,6 +4,20 @@
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
+namespace {
+    void put_codepoint(const codepoint& cp, cell& target) {
+        const uint32_t value = cp.value();
+        if (value < 0x20 || value == 0x7F) {
+            target.character = " ";
+            return;
+        }
+        cp.append_to(target.character);
+    }
+
+    bool is_line_break(const codepoint& cp) noexcept { return cp.value() == '\n'; }
+} // namespace
+
+
 renderer::renderer(screen& target, const theme& t, const int term_w, const int term_h) :
 screen_(target),
 theme_(t),
@@ -83,17 +97,15 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
                         const size_t cp = min(el.cursor_pos(), display.size());
                         int cx = inner_x;
                         int cy = inner_y;
-                        const auto& raw = display.view();
-                        const auto* data = reinterpret_cast<const byte_t*>(raw.data());
-                        for (utf8_iterator it(data, cp); it != utf8_iterator(); ++it) {
-                            const int cw = max(1, it->display_width());
-                            if (cx + cw > inner_x + inner_w) {
-                                cx = inner_x;
-                                cy += 1;
-                            }
-                            cx += cw;
+                        if (cp > 0) {
+                            const string prefix = display.substr(0, cp);
+                            render_text_block(inner_x, inner_y, inner_w, inner_h, prefix, el.style(), wm, &cx, &cy);
                         }
-                        if (cx < rect.x + rect.w) {
+                        if (cx >= inner_x + inner_w) {
+                            cx = inner_x;
+                            cy += 1;
+                        }
+                        if (cy < inner_y + inner_h && cx < rect.x + rect.w) {
                             apply_text(cx, cy, "\xe2\x96\x8c", el.style());
                         }
                     }
@@ -251,7 +263,8 @@ void renderer::clear_element_area(const element& el, const vector<layout_rect>& 
         case element::kind::checkbox:
         case element::kind::text_input:
         case element::kind::separator:
-        case element::kind::spacer: {
+        case element::kind::spacer:
+        case element::kind::canvas: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 apply_clear(rect.x, rect.y, rect.w, rect.h);
@@ -295,7 +308,8 @@ const element* find_element_at(const vector<layout_rect>& layout, const element&
         case element::kind::checkbox:
         case element::kind::text_input:
         case element::kind::separator:
-        case element::kind::spacer: {
+        case element::kind::spacer:
+        case element::kind::canvas: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
@@ -352,7 +366,8 @@ component_base* hit_test_at(const vector<layout_rect>& layout, const element& tr
         case element::kind::checkbox:
         case element::kind::text_input:
         case element::kind::separator:
-        case element::kind::spacer: {
+        case element::kind::spacer:
+        case element::kind::canvas: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
@@ -465,7 +480,7 @@ void renderer::apply_text(const int x, const int y, const string& text, const st
         if (!skip) {
             auto& cell = screen_.fast_cell_at(cx, y);
             cell.reset();
-            it->append_to(cell.character);
+            put_codepoint(*it, cell);
             apply_style_to_cell(cell, style);
         }
         const int cw = it->display_width();
@@ -576,7 +591,12 @@ void renderer::render_button(const int x, const int y, const int w, const int h,
     if (h >= 3) {
         render_text_block(x + 1, y + 1, inner_w, h - 2, label, s, style::wrap_mode::none);
     } else {
-        int label_x = x + (w - static_cast<int>(label.size())) / 2;
+        int label_w = 0;
+        const auto& raw = label.view();
+        for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
+            label_w += max(1, it->display_width());
+        }
+        int label_x = x + (w - label_w) / 2;
         label_x = max(label_x, x + 1);
         render_text_block(label_x, y, min(inner_w, w - (label_x - x)), 1, label, s, style::wrap_mode::none);
     }
@@ -648,7 +668,7 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
             if (!skip) {
                 auto& cell = screen_.fast_cell_at(px, py);
                 cell.reset();
-                it->append_to(cell.character);
+                put_codepoint(*it, cell);
                 apply_style_to_cell(cell, style);
             }
         }
@@ -663,6 +683,14 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
 
     if (wm == style::wrap_mode::character) {
         for (utf8_iterator it(data, len); it != utf8_iterator(); ++it) {
+            if (is_line_break(*it)) {
+                cy += 1;
+                cx = x;
+                if (cy >= y + h) {
+                    break;
+                }
+                continue;
+            }
             const int cpw = it->display_width();
             if (cx + max(1, cpw) > x + w) {
                 cy += 1;
@@ -695,7 +723,7 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
 
         const size_t word_start = pos;
         size_t word_end = pos;
-        while (word_end < len && data[word_end] != ' ') {
+        while (word_end < len && data[word_end] != ' ' && data[word_end] != '\n') {
             const byte_t lead = data[word_end];
             if ((lead & 0x80) == 0) {
                 ++word_end;
@@ -764,7 +792,24 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
             }
         }
 
+        // The separator space was written explicitly above,
+        // so the source spaces that follow the word must be consumed here;
+        // otherwise every word boundary would be rendered with a double space.
         pos = word_end;
+        while (pos < len && data[pos] == ' ') {
+            ++pos;
+        }
+        if (pos < len && data[pos] == '\n') {
+            ++pos;
+            cy += 1;
+            cx = x;
+            if (cy >= y + h) {
+                break;
+            }
+            while (pos < len && data[pos] == ' ') {
+                ++pos;
+            }
+        }
     }
     if (out_end_x != nullptr) {
         *out_end_x = cx;

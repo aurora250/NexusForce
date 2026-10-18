@@ -1,5 +1,4 @@
 #include <NeForce/core/file/filesystem.hpp>
-#include <NeForce/core/system/console.hpp>
 #include <NeForce/logging/file_sink.hpp>
 #include <NeForce/logging/logger.hpp>
 #include <gtest/gtest.h>
@@ -9,7 +8,23 @@ namespace {
     class mock_sink : public log_sink {
     public:
         vector<log_event> events;
+        size_t flush_count = 0;
+
         void log(const log_event& event) override { events.push_back(event); }
+
+        void flush() override { ++flush_count; }
+    };
+
+    class relay_sink : public log_sink {
+    public:
+        void log(const log_event& event) override {
+            if (event.message == "relay trigger") {
+                logger_registry::instance()
+                        .get_logger("flush.target")
+                        ->log(log_level::INFO, "relayed", source_location{"test.cpp", "test", 1});
+            }
+        }
+
         void flush() override {}
     };
 
@@ -144,19 +159,14 @@ TEST(ConsoleSinkTest, FlushDoesNotThrow) {
 
 class FileSinkTest : public ::testing::Test {
 protected:
+    path dir;
     path filename;
     void SetUp() override {
-        filename = path("test_log_" + to_string(steady_clock::now().since_epoch().count()) + ".log");
+        dir = path("test_log_dir_" + to_string(steady_clock::now().since_epoch().count()));
+        filesystem::create_directories(dir);
+        filename = dir / path("test_log.log");
     }
-    void TearDown() override {
-        filesystem::remove(filename);
-        for (int i = 1; i < 10; ++i) {
-            path rotated(filename.str() + "." + to_string(i));
-            filesystem::remove(rotated);
-        }
-        path dateRotated(filename.str() + "." + datetime::now().date().to_string());
-        filesystem::remove(dateRotated);
-    }
+    void TearDown() override { filesystem::remove_all(dir); }
 
     log_event make_event(string msg) {
         log_event ev;
@@ -233,6 +243,35 @@ TEST_F(FileSinkTest, MaxFilesRetention) {
     if (f2.is_opened()) {
         f2.close();
     }
+}
+
+TEST_F(FileSinkTest, SetFormatterWhileLogging) {
+    file_sink sink(filename, 10 * 1024 * 1024, false);
+    sink.set_formatter(make_unique<log_formatter>("{message}"));
+
+    vector<thread> workers;
+    for (int i = 0; i < 2; ++i) {
+        workers.emplace_back([&sink, this] {
+            for (int j = 0; j < 100; ++j) {
+                sink.log(make_event("concurrent message"));
+            }
+        });
+    }
+    workers.emplace_back([&sink] {
+        for (int i = 0; i < 100; ++i) {
+            sink.set_formatter(make_unique<log_formatter>(i % 2 == 0 ? "{message}" : "[{level}] {message}"));
+        }
+    });
+    for (auto& worker: workers) {
+        worker.join();
+    }
+    sink.flush();
+
+    file in;
+    ASSERT_TRUE(in.open(filename));
+    const string content = in.read();
+    in.close();
+    EXPECT_NE(content.find("concurrent message"), string::npos);
 }
 
 class LoggerTest : public ::testing::Test {
@@ -554,7 +593,7 @@ protected:
     }
 };
 
-TEST_F(OverflowPolicyTest, DiscardPolicy) { // may block
+TEST_F(OverflowPolicyTest, DiscardPolicy) {
     auto log = root();
     log->enable_async(nullptr, 4, overflow_policy::discard);
 
@@ -584,6 +623,120 @@ TEST_F(OverflowPolicyTest, OverrunOldestPolicy) {
     log->disable_async();
 }
 
+TEST_F(OverflowPolicyTest, DiscardPolicyRepeatedCycle) {
+    auto log = root();
+    for (int cycle = 0; cycle < 100; ++cycle) {
+        auto sink = make_shared<mock_sink>();
+        log->add_sink(sink);
+        log->enable_async(nullptr, 4, overflow_policy::discard);
+        for (int i = 0; i < 50; ++i) {
+            NEFORCE_LOG_INFO("cycle test " + to_string(i));
+        }
+        log->flush();
+        log->disable_async();
+        EXPECT_FALSE(sink->events.empty());
+        log->clear_sinks();
+    }
+}
+
+TEST_F(OverflowPolicyTest, DisableDeliversQueuedEventsInOrder) {
+    auto log = root();
+    log->enable_async(nullptr, 256, overflow_policy::block);
+
+    auto sink = make_shared<mock_sink>();
+    log->add_sink(sink);
+
+    for (int i = 0; i < 100; ++i) {
+        NEFORCE_LOG_INFO("queued " + to_string(i));
+    }
+    log->disable_async();
+
+    ASSERT_EQ(sink->events.size(), 100u);
+    for (size_t i = 0; i < sink->events.size(); ++i) {
+        EXPECT_EQ(sink->events[i].message, "queued " + to_string(i));
+    }
+}
+
+TEST_F(OverflowPolicyTest, FlushDeliversQueuedEventsInOrder) {
+    auto log = root();
+    log->enable_async(nullptr, 1024, overflow_policy::block);
+
+    auto sink = make_shared<mock_sink>();
+    log->add_sink(sink);
+
+    for (int i = 0; i < 200; ++i) {
+        NEFORCE_LOG_INFO("flushed " + to_string(i));
+        if (i % 20 == 0) {
+            log->flush();
+        }
+    }
+    log->flush();
+
+    ASSERT_EQ(sink->events.size(), 200u);
+    for (size_t i = 0; i < sink->events.size(); ++i) {
+        EXPECT_EQ(sink->events[i].message, "flushed " + to_string(i));
+    }
+    log->disable_async();
+}
+
+TEST_F(OverflowPolicyTest, ReenableAfterDisable) {
+    auto log = root();
+    auto sink = make_shared<mock_sink>();
+    log->add_sink(sink);
+
+    log->enable_async(nullptr, 8, overflow_policy::discard);
+    NEFORCE_LOG_INFO("first pass");
+    log->disable_async();
+
+    log->enable_async(nullptr, 8, overflow_policy::discard);
+    NEFORCE_LOG_INFO("second pass");
+    log->disable_async();
+
+    ASSERT_EQ(sink->events.size(), 2u);
+    EXPECT_EQ(sink->events[0].message, "first pass");
+    EXPECT_EQ(sink->events[1].message, "second pass");
+}
+
+TEST_F(OverflowPolicyTest, ExternalPoolStaysRunning) {
+    auto pool = make_shared<thread_pool>();
+    ASSERT_TRUE(pool->start(1));
+
+    auto log = root();
+    log->enable_async(pool, 64, overflow_policy::block);
+
+    auto sink = make_shared<mock_sink>();
+    log->add_sink(sink);
+
+    NEFORCE_LOG_INFO("external pool");
+    log->flush();
+    log->disable_async();
+
+    EXPECT_TRUE(pool->running());
+    EXPECT_FALSE(sink->events.empty());
+    EXPECT_FALSE(log->is_async());
+    pool->stop();
+}
+
+TEST_F(OverflowPolicyTest, AutoFlushIntervalTriggersSinkFlush) {
+    auto log = root();
+    log->enable_async(nullptr, 64, overflow_policy::block);
+
+    auto sink = make_shared<mock_sink>();
+    log->add_sink(sink);
+
+    log->set_auto_flush(1);
+    NEFORCE_LOG_INFO("auto flush one");
+    this_thread::sleep_for(5_ms);
+    NEFORCE_LOG_INFO("auto flush two");
+
+    log->set_auto_flush(0);
+    log->flush();
+
+    EXPECT_GE(sink->flush_count, 1u);
+    EXPECT_FALSE(sink->events.empty());
+    log->disable_async();
+}
+
 TEST(AutoFlushTest, SetInterval) {
     auto log = root();
     log->set_auto_flush(5000);
@@ -601,4 +754,60 @@ TEST(CompileTimeFilterTest, DebugMacroCompiles) {
     NEFORCE_LOG_DEBUG("debug compile test");
     NEFORCE_LOGF_DEBUG("debug format {}", 42);
     SUCCEED();
+}
+
+TEST(HierarchicalLoggerTest, NewChildInheritsCurrentLevel) {
+    auto parent = logger_registry::instance().get_logger("late_parent");
+    parent->set_level(log_level::ERROR);
+    auto child = logger_registry::instance().get_logger("late_parent.child");
+    EXPECT_EQ(child->effective_level(), log_level::ERROR);
+    parent->set_level(logger::INHERIT);
+}
+
+TEST(LoggerRegistryTest, SameNameReturnsSameInstance) {
+    auto first = logger_registry::instance().get_logger("same.name");
+    auto second = logger_registry::instance().get_logger("same.name");
+    EXPECT_EQ(first, second);
+}
+
+TEST(LoggerRegistryTest, ConcurrentCreationIsStable) {
+    auto& registry = logger_registry::instance();
+    constexpr size_t count = 8;
+    vector<shared_ptr<logger>> created(count);
+    vector<thread> workers;
+
+    for (size_t i = 0; i < count; ++i) {
+        workers.emplace_back(
+                [&registry, &created, i] { created[i] = registry.get_logger("concurrent" + to_string(i) + ".child"); });
+    }
+    for (auto& worker: workers) {
+        worker.join();
+    }
+
+    for (size_t i = 0; i < count; ++i) {
+        ASSERT_NE(created[i], nullptr);
+        EXPECT_EQ(created[i]->name(), "concurrent" + to_string(i) + ".child");
+        ASSERT_NE(created[i]->parent(), nullptr);
+        EXPECT_EQ(created[i]->parent()->name(), "concurrent" + to_string(i));
+        EXPECT_EQ(registry.get_logger("concurrent" + to_string(i) + ".child"), created[i]);
+    }
+}
+
+TEST(LoggerRegistryTest, FlushAllWithCrossLoggerSink) {
+    auto& registry = logger_registry::instance();
+    auto source = registry.get_logger("flush.source");
+    auto target = registry.get_logger("flush.target");
+
+    auto sink = make_shared<mock_sink>();
+    target->add_sink(sink);
+    source->add_sink(make_shared<relay_sink>());
+
+    source->log(log_level::INFO, "relay trigger", source_location{"test.cpp", "test", 1});
+    registry.flush_all();
+
+    ASSERT_EQ(sink->events.size(), 1u);
+    EXPECT_EQ(sink->events[0].message, "relayed");
+
+    source->clear_sinks();
+    target->clear_sinks();
 }

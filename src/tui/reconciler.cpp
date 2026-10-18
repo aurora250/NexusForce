@@ -47,6 +47,7 @@ namespace {
     }
 } // namespace
 
+
 reconciler::reconciler(sys_console& console, strand& s, io_context& ctx) :
 console_(console),
 strand_(s),
@@ -136,6 +137,13 @@ bool reconciler::dispatch_mouse(const mouse_event& e) {
     return event_dispatcher_.dispatch_mouse(e, root_, prev_layout_, prev_tree_, renderer_.scrollbar_hits());
 }
 
+bool reconciler::dispatch_paste(const paste_event& e) {
+    if (root_ == nullptr || !mounted_) {
+        return false;
+    }
+    return event_dispatcher_.dispatch_paste(e, root_);
+}
+
 void reconciler::flush() {
     if (!mounted_ || root_ == nullptr) {
         return;
@@ -146,11 +154,20 @@ void reconciler::flush() {
     if (rendering_) {
         return;
     }
+
+    struct rendering_guard {
+        bool& flag;
+
+        ~rendering_guard() { flag = false; }
+    };
+
     rendering_ = true;
-    dirty_ = false;
+    rendering_guard guard{rendering_};
 
     refresh_term_size();
     renderer_.set_term_size(term_w_, term_h_);
+
+    const bool repaint_all = (term_w_ != painted_w_ || term_h_ != painted_h_);
 
     if (current_screen_.dimx() != term_w_ || current_screen_.dimy() != term_h_) {
         current_screen_.resize(term_w_, term_h_);
@@ -159,7 +176,12 @@ void reconciler::flush() {
 
     element new_tree = root_->render();
 
+    if (root_->structure_dirty()) {
+        root_->clear_structure_dirty();
+        focus_mgr_.mark_chain_dirty();
+    }
     focus_mgr_.rebuild_chain(root_);
+    focus_mgr_.validate_focus();
 
     reconcile_keys(prev_tree_, new_tree);
     tag_owners(new_tree, root_);
@@ -171,16 +193,22 @@ void reconciler::flush() {
     const bool has_focus = (focus_mgr_.focused() != nullptr);
     renderer_.render(new_tree, newLayout, has_focus);
 
-    const string output = current_screen_.to_string(prev_screen_);
+    string output;
+    if (repaint_all) {
+        output += "\033[2J";
+    }
+    output += current_screen_.to_string(prev_screen_);
 
     prev_screen_ = current_screen_;
     prev_tree_ = move(new_tree);
     prev_layout_ = move(newLayout);
+    painted_w_ = term_w_;
+    painted_h_ = term_h_;
+    dirty_ = false;
 
     if (!output.empty()) {
         console_.print_string(output);
     }
-    rendering_ = false;
 }
 
 NEFORCE_END_TUI__

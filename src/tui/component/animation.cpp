@@ -5,7 +5,7 @@ NEFORCE_BEGIN_TUI__
 animator::animator(float* value, const float to, const milliseconds dur, easing::function easing_fn,
                    const milliseconds delay) :
 value_(value),
-from_(*value),
+from_(value_ != nullptr ? *value_ : 0.0F),
 to_(to),
 duration_ms_(dur),
 delay_ms_(delay),

@@ -10,6 +10,7 @@
  * - syslog_sink: 系统日志输出
  */
 
+#include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #include "NeForce/core/utility/color.hpp"
@@ -47,8 +48,17 @@ NEFORCE_API const color& level_color(log_level level);
 class NEFORCE_API log_sink {
 protected:
     unique_ptr<log_formatter> formatter_;    ///< 格式化器
+    mutable mutex formatter_mutex_;          ///< 格式化器互斥锁
     int64_t flush_interval_ms_{0};           ///< 自动刷新间隔毫秒数（0=禁用）
     timestamp last_flush_{timestamp::now()}; ///< 上次刷新的时间戳
+
+    /**
+     * @brief 用当前格式化器格式化一条事件
+     * @param event 要格式化的日志事件
+     * @return 格式化后的文本
+     * @note 与 set_formatter() 并发安全
+     */
+    NEFORCE_NODISCARD string format_event(const log_event& event) const;
 
 public:
     virtual ~log_sink() = default;
@@ -65,12 +75,14 @@ public:
     /**
      * @brief 设置格式化器
      * @param formatter 新的格式化器
+     * @note 可以在输出过程中调用，正在格式化的事件仍使用旧格式化器
      */
     void set_formatter(unique_ptr<log_formatter> formatter);
 
     /**
      * @brief 设置自动刷新间隔
      * @param interval_ms 间隔毫秒数，0 表示禁用自动刷新
+     * @warning 与 log() 的自动刷新判断存在竞争，仅应在开始输出前调用
      */
     void set_flush_interval(int64_t interval_ms) { flush_interval_ms_ = interval_ms; }
 

@@ -56,10 +56,16 @@ void screen::resize(const int dimx, const int dimy) {
 }
 
 uint8_t screen::register_hyperlink(const string& link) {
-    hyperlinks_.push_back(link);
-    if (hyperlinks_.size() > 255) {
+    const auto& raw = link.view();
+    for (size_t i = 0; i < hyperlinks_.size(); ++i) {
+        if (hyperlinks_[i] == raw) {
+            return static_cast<uint8_t>(i + 1);
+        }
+    }
+    if (hyperlinks_.size() >= 255) {
         return 0;
     }
+    hyperlinks_.push_back(link);
     return static_cast<uint8_t>(hyperlinks_.size());
 }
 
@@ -178,6 +184,44 @@ void screen::update_cell_style(string& ss, const cell& prev, const cell& next) c
     }
 }
 
+void screen::append_cursor(string& ss) const {
+    if (cursor_.shape == tui::cursor::shape::hidden) {
+        ss += "\033[?25l";
+        return;
+    }
+
+    int cx = cursor_.x;
+    int cy = cursor_.y;
+    cx = (cx < 0) ? 0 : ((cx >= dimx_) ? dimx_ - 1 : cx);
+    cy = (cy < 0) ? 0 : ((cy >= dimy_) ? dimy_ - 1 : cy);
+    append_cursor_move(ss, cx, cy);
+
+    switch (cursor_.shape) {
+        case tui::cursor::shape::block_blinking:
+            ss += "\033[1 q";
+            break;
+        case tui::cursor::shape::block:
+            ss += "\033[2 q";
+            break;
+        case tui::cursor::shape::underline_blinking:
+            ss += "\033[3 q";
+            break;
+        case tui::cursor::shape::underline:
+            ss += "\033[4 q";
+            break;
+        case tui::cursor::shape::bar_blinking:
+            ss += "\033[5 q";
+            break;
+        case tui::cursor::shape::bar:
+            ss += "\033[6 q";
+            break;
+        case tui::cursor::shape::hidden:
+        default:
+            break;
+    }
+    ss += "\033[?25h";
+}
+
 string screen::to_string(const screen& prev) const {
     string result;
     result.reserve(static_cast<size_t>(dimx_) * dimy_ * 4);
@@ -231,6 +275,7 @@ string screen::to_string(const screen& prev) const {
     }
 
     result += "\033[0m";
+    append_cursor(result);
 
     return result;
 }

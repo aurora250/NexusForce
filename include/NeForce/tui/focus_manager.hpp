@@ -72,6 +72,11 @@ public:
      */
     NEFORCE_NODISCARD bool is_chain_dirty() const noexcept { return chain_dirty_; }
 
+    /**
+     * @brief 校验当前焦点组件是否仍在焦点链中
+     */
+    void validate_focus() noexcept;
+
 private:
     component_base* focused_ = nullptr;
     vector<component_base*> focus_chain_;

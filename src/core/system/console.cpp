@@ -815,6 +815,21 @@ bool sys_console::is_mouse_enabled() const noexcept {
     return mouse_enabled_;
 }
 
+void sys_console::enable_bracketed_paste(const bool enable) noexcept {
+    lock<mutex> lock(mutex_);
+    if (enable == bracketed_paste_enabled_) {
+        return;
+    }
+    const string_view control = enable ? "\033[?2004h" : "\033[?2004l";
+    print_string_unsafe(control);
+    bracketed_paste_enabled_ = enable;
+}
+
+bool sys_console::is_bracketed_paste_enabled() const noexcept {
+    lock<mutex> lock(mutex_);
+    return bracketed_paste_enabled_;
+}
+
 bool sys_console::kbhit() noexcept {
     lock<mutex> lock(mutex_);
     if (pending_char_ != -1) {

@@ -37,9 +37,20 @@
 - 添加内置区域设置后端 `src/core/system/locale_fallback.cpp`：字符分类与大小写转换使用自研 Unicode 表，数字、货币、日期时间格式化与区域名称查询使用自研精简区域数据
 - 添加内置后端的区域数据组件 `src/core/system/locale_data.{hpp,cpp}`：数字与货币风格、日期名称与模式、语言与地区名称、本币、可用区域与 ISO 3166 列表
 - 添加 Unicode 字符表生成脚本 `scripts/generate_locale_tables.py` 与生成结果 `src/core/system/locale_tables.{hpp,cpp}`：字符分类、大小写映射与规范分解表，按 Unicode 字符数据库生成，分类规则与 ICU4C 一致
+- 添加 TUI 输入解析状态机 `tui::input_parser` + `tui::parsed_input`：识别 ASCII/UTF-8 可打印字符、控制字符、CSI 与 SS3 序列、带修饰键的 CSI（`ESC[1;5C` 等）、Alt+字符前缀、SGR 鼠标序列与括号粘贴
+- 添加粘贴事件链路 `tui::paste_event` / `component_base::on_paste()` / `event_dispatcher::dispatch_paste()` / `reconciler::dispatch_paste()`：一次粘贴整体送达，行分隔符归一化为 `\n`，不再把多行粘贴中的换行当作回车提交
+- 添加 `sys_console::enable_bracketed_paste()` / `is_bracketed_paste_enabled()`（`ESC[?2004h/l`），`tui::application` 在进入与退出时自动开关括号粘贴模式
+- 添加 `focus_manager::validate_focus()` 与 `component_base::structure_dirty()` / `clear_structure_dirty()`：组件动态增删后焦点链自动失效重建，焦点组件被移除时不再留下悬空指针
+- `screen::to_string()` 现在依据 `cursor()` 输出真实终端光标位置与形状（`DECSCUSR`，块/下划线/竖线 × 闪烁），光标形状为 `hidden` 时保持隐藏
+- `element::flexbox()` 尊重 `box_props::dir`，可以构造列方向的弹性容器
+- `paragraph()` 系列按显示宽度换行，超长单词按字符断行，且 `max_width == 0` 时仍按显式换行符分行
+- 添加 TUI 显式换行支持：`element::text` / 文本输入框中的 `\n` 现在作为硬换行渲染，行高按换行与自动换行合并计算
 
 ### 🔧 Improvements
 
+- 异步日志的批量写入改为单个 drain 任务循环排空队列：不再每批提交一个新任务，批次的到达顺序稳定，线程池任务数也随之减少
+- 异步日志队列满且策略为 `block` 时改用 `notify_all()` 唤醒生产者，多个生产者不再只被唤醒一个
+- 新建的子 Logger 立即继承父 Logger 当前生效的级别；此前固定为 INFO，要等父级再次 `set_level()` 才生效
 - `locale::monetary()` 报告地区本币而非固定 USD，并补齐 `mon_grouping`、`positive_sign`、`negative_sign`
 - `locale::numeric()` 补齐 `exponential`、`nan_symbol`、`infinity_symbol` 与 `grouping`
 - 内置后端的一级比较忽略大小写与重音、二级区分重音、三级区分大小写；排序键按级编码，键的字节序与 `compare()` 的结果一致
@@ -151,9 +162,26 @@
 - `memory_pool` 释放路径的最近交付块判定改为只登记指针：命中时从 span 头部读取尺寸类，登记成本降为一次存储
 - `memory_pool` 线程缓存的释放热路径恢复为直行推送，缓存裁剪拆为冷路径函数，批量模式不再为裁剪分支付出热路径代价
 - `memory_pool` 大对象区域缓存桶由 64 KiB 起改为 32 KiB 起逐桶翻倍，线程槽位由 4 增到 8，相邻尺寸的大对象不再互相挤占缓存槽
+- TUI 终端尺寸变化后强制整屏重绘，避免缩放后残留旧内容
+- TUI Tab 键先交给焦点组件处理，未被消费时才做焦点导航，使编辑器/补全弹层可以占用 Tab
+- TUI 渲染器不再把控制字符写入 cell 网格，按钮标签按显示宽度居中
+- `screen::register_hyperlink()` 对相同链接去重，句柄表到达 255 上限时返回 0 而不是继续入队造成错位
 
 ### 🐛 Bug Fixes
 
+- 修复异步日志在 `disable_async()` 中死锁：停止线程池时仍持有 sinks 互斥锁，而正在收尾的 drain 任务正等在同一把锁上，`flush()` / `disable_async()` 因此偶发永久阻塞
+- 修复 drain 任务在判定自身"已结束"后仍继续写 sink 的问题：`discard` / `overrun_oldest` 策略下，后一批事件可能先于前一批到达 sink，日志顺序错乱
+- 修复 `flush()` 在异步模式下与 drain 任务争抢队列：原实现自行弹出队列并写 sink，与后台批量写入并发，sink 收到的事件会乱序，且 `flush()` 返回时更早的事件可能还没写出；现在通过与 drain 握手确认后才返回
+- 修复 `disable_async()` 与 `enqueue_async()` 的竞态丢事件：切回同步模式时已在投递路径上的事件被丢弃，现将模式判定移入队列锁并回退为同步写入
+- 修复线程池拒绝 drain 任务时事件永久滞留：不再把 `drain_scheduled_` 保持为 true，改为就地排空队列，阻塞策略下的生产者也不会再被永久挂起
+- 修复 `enable_async()` 不重置 `drain_scheduled_` / `flush_requested_`：上一轮异步模式遗留的状态会让新一轮不再派发 drain 任务
+- 修复 `disable_async()` 会停止调用方传入的共享线程池：现仅在自身创建的线程池上调用 `stop()`
+- 修复 `logger` 自动刷新的 `last_auto_flush_` 数据竞争：多线程同时记日志时该时间戳被并发写，现为原子量并保证每个间隔只触发一次刷新
+- 修复 `logger::set_level()` 与日志热路径的数据竞争：`explicit_level_` / `effective_level_` / `parent_` 改为原子量，`children_` 由互斥锁保护
+- 修复 `logger_registry::get_logger()` 在锁外创建并插入 `loggers_`：并发创建 Logger 时同时改动哈希表，现整个创建过程在注册中心锁内完成
+- 修复 `logger_registry::flush_all()` 持锁执行刷新：sink 中再调用 `get_logger()` 会自死锁，现先快照再在锁外刷新
+- 修复 `NEFORCE_LOG_*_EVERY_N` / `NEFORCE_LOG_*_FIRST_N` 的静态计数器数据竞争：改为原子计数
+- 修复 `log_sink` 格式化器在 `set_formatter()` 与 `log()` 之间的数据竞争：新增受锁保护的 `format_event()`，内置的 console / file / syslog sink 统一走该入口
 - 修复 `locale::format_datetime()` 把无时区的 datetime 当作 UTC 实例、再按系统时区偏移呈现，导致 `datetime::parse()` 得到的墙上时间被平移：现在无时区的 datetime 按自身字段格式化，带偏移的 datetime 才换算到系统时区
 - 修复 `locale::format_datetime(dt, date_style, time_style)` 把日期风格与时间风格传反：`udat_open` 的第一个参数是时间风格，`full` 与 `short` 组合时的结果因此相反
 - 修复 `locale::time()` 的 `date_fmt` 与 `time_fmt` 互换：实参顺序修正后分别返回日期模式与时间模式
@@ -276,6 +304,19 @@
 - 修复 `memory_pool` 在线程缓存关闭时仍向线程缓存填充整批块的缺陷，此前这些块既不归还也不复用
 - 修复 `memory_pool` 尺寸类下标缺少边界校验的缺陷：`size_to_class()` 返回的大对象哨兵值在小对象路径被当作数组下标使用，现降级走大对象路径
 - 修复 `memory_pool` 超大请求（超过 2^46 字节）在区域尺寸计算中溢出的缺陷，现直接返回失败而不是映射一小块内存
+- 修复 TUI 进度条 `gauge()` / `gauge_direction()` 只有全空与全满两种状态：原先把归一化进度先截断成 `0`/`1` 再乘宽度，现值 `0.5` 可以正确填充一半
+- 修复 TUI 输入解析的多处缺陷：Alt+字符（`ESC` 前缀）会使解析器卡死并最终抛出多余 Escape、带修饰键的 CSI 序列整体作废、畸形鼠标序列可永久吞掉后续输入、`ESC[200~` 粘贴被拆成逐字符
+- 修复 `screen::to_string()` 忽略 `cursor()`，导致 `set_cursor()` 形同虚设、终端光标始终隐藏
+- 修复 `canvas` 元素造成布局索引错位：`find_element_at()` / `hit_test_at()` / `clear_element_area()` 未消费 `canvas` 的布局矩形，其前后元素的点击命中与清除区域都会偏移
+- 修复 `reconciler::flush()` 在 `render()` 抛异常后永久停止渲染
+- 修复焦点链不随组件增删更新导致 Tab 导航跳过新组件，以及聚焦组件被 `remove_child()` 移除后 `focused_` 悬空
+- 修复 `animator` 以空指针构造时在初始化列表解引用空指针
+- 修复 `vscroll_indicator()` 在内容可完全显示时返回一行 `height` 个空格，占据 `height` 列而非一列空白
+- 修复 TUI 词换行渲染在每个词边界多写一个空格，导致换行后的文本出现双空格
+- 修复 TUI 文本输入框的光标位置在词换行/自动换行下偏移，现按渲染器实际排版结果定位
+- 修复 TUI 超长单行输入时光标消失，光标绘制不再越过输入框内边界
+- 修复 TUI 渲染器把控制字符原样写入 cell 网格，会破坏整帧的字符对齐：现值一律渲染为空白，并按一列测量宽度
+- 修复 `strand` 的 handler 抛异常会让串行化锁永久保持在置位状态，其后所有 `post`/`dispatch` 只入队永不执行：`dispatch()` 现在先复位锁、推进队列，再把异常抛回调用者；`drain_one()` 的投递回调吞掉异常后继续排空
 
 ### 📚 Documentation
 

@@ -82,6 +82,13 @@ public:
     bool dispatch_mouse(const mouse_event& e);
 
     /**
+     * @brief 分发粘贴事件到焦点组件
+     * @param e 粘贴事件
+     * @return true 表示事件已被处理
+     */
+    bool dispatch_paste(const paste_event& e);
+
+    /**
      * @brief 有脏标记则执行渲染管线
      */
     void flush();
@@ -111,6 +118,8 @@ private:
 
     int term_w_ = 80;
     int term_h_ = 24;
+    int painted_w_ = 0;
+    int painted_h_ = 0;
     theme theme_{dark_theme};
 
     screen current_screen_{80, 24};

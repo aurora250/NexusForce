@@ -58,7 +58,12 @@ element& element::operator=(const element& other) {
 
 element::element(element&& other) noexcept :
 node_(move(other.node_)) {
-    other.node_ = make_shared<node>();
+    try {
+        other.node_ = make_shared<node>();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
+    }
 }
 
 element& element::operator=(element&& other) noexcept {
@@ -274,7 +279,6 @@ element element::flexbox(vector<element> children, box_props config) {
     el.node_->kind = kind::flexbox;
     el.node_->children = move(children);
     el.node_->layout = config;
-    el.node_->layout.dir = style::direction::row;
     el.node_->layout.wrap = config.wrap;
     return el;
 }
@@ -291,7 +295,7 @@ element element::gridbox(vector<vector<element>> grid) {
     el.node_->children.reserve(static_cast<size_t>(rows) * cols);
     for (int r = 0; r < rows; ++r) {
         for (int c = 0; c < cols; ++c) {
-            if (c < static_cast<int>(grid[r].size())) {
+            if (compare_less(c, grid[r].size())) {
                 el.node_->children.push_back(grid[r][c]);
             } else {
                 el.node_->children.push_back(element::text(""));

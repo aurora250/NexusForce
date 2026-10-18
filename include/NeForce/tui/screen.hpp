@@ -219,8 +219,7 @@ public:
      * @param prev 上一帧的 screen
      * @return ANSI 转义序列字符串
      *
-     * 比较当前帧与上一帧的每个 cell，仅输出变化的
-     * 样式和字符，最小化终端写入量。
+     * 比较当前帧与上一帧的每个 cell，仅输出变化的样式和字符，最小化终端写入量。
      */
     NEFORCE_NODISCARD string to_string(const screen& prev) const;
 
@@ -248,6 +247,7 @@ private:
     vector<string> hyperlinks_;
 
     void update_cell_style(string& ss, const cell& prev, const cell& next) const;
+    void append_cursor(string& ss) const;
 };
 
 /** @} */ // TUI

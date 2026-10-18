@@ -8,14 +8,16 @@ element gauge(const float progress, const int width) {
 
 element gauge_direction(const float progress, const enum gauge_direction direction, const int size) {
     const float clamped = (progress < 0.0F) ? 0.0F : ((progress > 1.0F) ? 1.0F : progress);
-    const int filled = static_cast<int>(clamped) * size;
-    const int empty = size - filled;
+    const int length = (size < 0) ? 0 : size;
+    int filled = static_cast<int>(clamped * static_cast<float>(length));
+    filled = (filled < 0) ? 0 : ((filled > length) ? length : filled);
+    const int empty = length - filled;
 
     const string fill_char = "█";
     const string empty_char = "░";
 
     string bar;
-    bar.reserve(static_cast<size_t>(size) * 3);
+    bar.reserve(static_cast<size_t>(length) * static_cast<size_t>(3));
 
     switch (direction) {
         case gauge_direction::right:

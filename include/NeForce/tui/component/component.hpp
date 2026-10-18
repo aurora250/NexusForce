@@ -78,6 +78,21 @@ public:
     virtual void on_mouse_leave() {}
 
     /**
+     * @brief 粘贴事件处理
+     * @param e 粘贴事件
+     * @return true 表示事件已消费
+     *
+     * 终端开启括号粘贴模式后，一次粘贴整体送达此方法，而不是拆成逐个按键。
+     * 输入类组件应实现此方法插入整段文本，避免把粘贴内容中的换行当作回车提交。
+     *
+     * @note 未消费时事件按 pass_through() 规则继续向上冒泡。
+     */
+    virtual bool on_paste(const paste_event& e) {
+        ignore = e;
+        return false;
+    }
+
+    /**
      * @brief 设置事件穿透
      * @param v 是否穿透
      *
@@ -173,6 +188,8 @@ public:
      * @param child 子组件指针
      *
      * 父组件接管子组件生命周期。注册后子组件将参与焦点链遍历和生命周期管理。
+     *
+     * @note 注册会使焦点链失效，下一帧渲染时自动重建
      */
     void add_child(unique_ptr<component_base> child) {
         if (child == nullptr) {
@@ -187,6 +204,7 @@ public:
         if (active_child_ == nullptr) {
             active_child_ = raw;
         }
+        mark_structure_dirty();
         raw->setup();
     }
 
@@ -194,14 +212,19 @@ public:
      * @brief 移除子组件
      * @param child 子组件指针
      * @return 子组件指针，调用者接管其生命周期
+     * @note 移除会使焦点链失效，下一帧渲染时自动重建
      */
     unique_ptr<component_base> remove_child(component_base* child) {
         child->cleanup();
         child->parent_ = nullptr;
+        mark_structure_dirty();
         for (auto it = children_.begin(); it != children_.end(); ++it) {
             if (it->get() == child) {
                 auto owned = move(*it);
                 children_.erase(it);
+                if (active_child_ == child) {
+                    active_child_ = children_.empty() ? nullptr : children_.front().get();
+                }
                 return owned;
             }
         }
@@ -273,6 +296,17 @@ public:
     }
 
     /**
+     * @brief 组件树结构是否发生变化
+     * @return true 表示子树增删过组件，焦点链需要重建
+     */
+    NEFORCE_NODISCARD bool structure_dirty() const noexcept { return structure_dirty_; }
+
+    /**
+     * @brief 清除结构变化标记
+     */
+    void clear_structure_dirty() noexcept { structure_dirty_ = false; }
+
+    /**
      * @brief 请求焦点
      */
     virtual void take_focus() {
@@ -325,10 +359,20 @@ protected:
     friend class focus_manager;
     friend class application;
 
+    /**
+     * @brief 向上传播结构变化标记
+     */
+    void mark_structure_dirty() noexcept {
+        for (auto* p = this; p != nullptr; p = p->parent_) {
+            p->structure_dirty_ = true;
+        }
+    }
+
     component_base* parent_ = nullptr;            ///< 父组件指针
     component_base* active_child_ = nullptr;      ///< 当前激活的子组件
     bool has_focus_ = false;                      ///< reconciler 焦点状态
     bool pass_through_ = false;                   ///< 事件穿透标志
+    bool structure_dirty_ = false;                ///< 组件树结构变化标记
     strand* strand_ = nullptr;                    ///< 串行执行器
     io_context* ctx_ = nullptr;                   ///< 事件循环上下文
     vector<unique_ptr<component_base>> children_; ///< 子组件列表

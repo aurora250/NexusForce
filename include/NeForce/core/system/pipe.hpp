@@ -295,20 +295,14 @@ public:
      * @brief 获取原生句柄
      * @return 原生句柄
      */
-    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        return handle_;
-#else
-        return fd_;
-#endif
-    }
+    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept { return handle_; }
 
     /**
      * @brief 删除命名管道（仅 Linux FIFO）
      * @param path FIFO 文件路径
      * @return 是否删除成功
      */
-    static bool remove(const string& path);
+    static bool remove(const string& path) noexcept;
 };
 
 /** @} */ // Pipe

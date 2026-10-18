@@ -212,17 +212,15 @@ struct NEFORCE_API theme {
 /**
  * @brief 预置暗色主题
  */
-NEFORCE_INLINE17 constexpr theme dark_theme = {
-        /* .bg = */ .bg = color{16, 16, 16},
-        /* .fg = */ .fg = color{220, 220, 220},
-        /* .primary = */ .primary = color::cyan(),
-        /* .secondary = */ .secondary = color{100, 100, 220},
-        /* .danger = */ .danger = color::red(),
-        /* .success = */ .success = color::green(),
-        /* .warning = */ .warning = color::yellow(),
-        /* .muted = */ .muted = color{128, 128, 128},
-        /* .border = */ .border = color{64, 64, 64},
-};
+NEFORCE_INLINE17 constexpr theme dark_theme = {color{16, 16, 16},    // bg
+                                               color{220, 220, 220}, // fg
+                                               color::cyan(),        // primary
+                                               color{100, 100, 220}, // secondary
+                                               color::red(),         // danger
+                                               color::green(),       // success
+                                               color::yellow(),      // warning
+                                               color{128, 128, 128}, // muted
+                                               color{64, 64, 64}};   // border
 
 /** @} */ // TUI
 

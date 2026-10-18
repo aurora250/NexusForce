@@ -3,8 +3,15 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 element vscroll_indicator(const int total, const int visible, const int offset, const int height) {
+    if (height <= 0) {
+        return element::empty();
+    }
     if (total <= visible) {
-        return element::text(string(height, ' '));
+        elements blanks;
+        for (int i = 0; i < height; ++i) {
+            blanks.push_back(element::text(" "));
+        }
+        return element::vbox(move(blanks));
     }
 
     const float ratio = static_cast<float>(visible) / static_cast<float>(total);
@@ -26,6 +33,9 @@ element vscroll_indicator(const int total, const int visible, const int offset, 
 }
 
 element hscroll_indicator(const int total, const int visible, const int offset, const int width) {
+    if (width <= 0) {
+        return element::empty();
+    }
     if (total <= visible) {
         return element::text(string(width, ' '));
     }

@@ -194,6 +194,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/table.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/application.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/input_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/event_dispatcher.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/focus_manager.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/reconciler.cpp

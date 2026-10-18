@@ -120,7 +120,15 @@ void log_formatter::parse_pattern() {
     }
 }
 
-void log_sink::set_formatter(unique_ptr<log_formatter> formatter) { formatter_ = move(formatter); }
+void log_sink::set_formatter(unique_ptr<log_formatter> formatter) {
+    lock<mutex> formatter_lock(formatter_mutex_);
+    formatter_ = move(formatter);
+}
+
+string log_sink::format_event(const log_event& event) const {
+    lock<mutex> formatter_lock(formatter_mutex_);
+    return formatter_ ? formatter_->format(event) : default_sink_format(event);
+}
 
 const color& level_color(const log_level level) {
     switch (level) {
@@ -141,10 +149,7 @@ const color& level_color(const log_level level) {
     }
 }
 
-void console_sink::log(const log_event& event) {
-    const string formatted = formatter_ ? formatter_->format(event) : default_sink_format(event);
-    printcln(level_color(event.level), formatted);
-}
+void console_sink::log(const log_event& event) { printcln(level_color(event.level), format_event(event)); }
 
 void console_sink::flush() { console.flush(); }
 
@@ -170,7 +175,7 @@ void syslog_sink::ensure_open() {
 
 void syslog_sink::log(const log_event& event) {
     ensure_open();
-    const string formatted = formatter_ ? formatter_->format(event) : default_sink_format(event);
+    const string formatted = format_event(event);
     const int priority = to_syslog_priority(event.level);
     ::syslog(priority, "%s", formatted.data());
 }

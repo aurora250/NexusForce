@@ -36,6 +36,7 @@ int application::run() {
     console_.enable_alternate_screen_buffer();
     console_.hide_cursor();
     console_.enable_mouse();
+    console_.enable_bracketed_paste();
     console_.set_window_title(title_.empty() ? "NexusForce TUI"_sv : title_.view());
 
     reconiler_ = make_unique<reconciler>(console_, render_strand_, ctx_);
@@ -91,6 +92,7 @@ int application::run() {
 
     input_->stop();
     console_.hide_cursor(false);
+    console_.enable_bracketed_paste(false);
     console_.enable_mouse(false);
     console_.enable_alternate_screen_buffer(false);
 

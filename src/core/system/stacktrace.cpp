@@ -14,7 +14,9 @@
 #    endif
 #    include <DbgHelp.h>
 #else
+#    include <NeForce/core/string/to_numerics.hpp>
 #    include <cstdio>
+#    include <cstdlib>
 #    include <cxxabi.h>
 #    include <dlfcn.h>
 #    include <execinfo.h>
@@ -69,7 +71,7 @@ namespace {
             return {};
         }
 
-        FILE* fp = ::popen(cmd, "r");
+        ::FILE* fp = ::popen(cmd, "r");
         if (fp == nullptr) {
             return {};
         }
@@ -232,7 +234,7 @@ stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
     const size_t valid_frames = captured - to_skip;
 
     frames_.reserve(valid_frames);
-    for (size_t i = to_skip; i < static_cast<size_t>(captured); ++i) {
+    for (size_t i = to_skip; compare_less(i, captured); ++i) {
         frames_.emplace_back(buffer[i]);
     }
 #endif

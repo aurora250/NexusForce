@@ -38,6 +38,7 @@ add_executable(NexusForceUnitTests
         test_tui.cpp
         test_tui_component.cpp
         test_tui_dom.cpp
+        test_tui_input.cpp
         test_utf.cpp
         test_util_container.cpp
         test_utility.cpp
