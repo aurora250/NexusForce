@@ -304,7 +304,7 @@ private:
 
         callback_type callback;          ///< 回调函数
         shared_ptr<bool> connected_flag; ///< 连接状态标志
-        int priority;                    ///< 优先级（值越大优先级越高）
+        int priority;                    ///< 优先级
 
         slot_entry(callback_type cb, shared_ptr<bool> flag, const int pri = 0) :
         callback(_NEFORCE move(cb)),
@@ -496,10 +496,10 @@ public:
     }
 
     /**
-     * @brief 连接普通函数/lambda
+     * @brief 连接函数
      * @tparam Func 函数类型
      * @param callback 回调函数
-     * @param priority 优先级（值越大优先级越高）
+     * @param priority 优先级
      * @return 连接句柄
      */
     template <typename Func>
@@ -517,7 +517,7 @@ public:
      * @param self 对象指针/智能指针
      * @param memfn 成员函数指针
      * @param priority 优先级
-     * @param tag 连接标签（可选）
+     * @param tag 连接标签
      * @return 连接句柄
      */
     template <typename Self, typename MemFn, typename... Tag>
@@ -719,6 +719,10 @@ public:
      */
     template <typename Func, typename Filter>
     connection connect_filtered(Func callback, Filter filter, int priority = 0) {
+        static_assert(is_invocable_v<Filter, Types...>, "Filter should be invocable.");
+        using result_type = invoke_result_t<Filter, Types...>;
+        static_assert(is_optional_v<result_type>, "only optional results are allowed");
+
         return this->connect(
                 [callback = _NEFORCE move(callback), filter = _NEFORCE move(filter)](Types... args) mutable {
                     auto filtered = filter(args...);
@@ -748,7 +752,8 @@ public:
      */
     template <typename Func, typename Transform>
     connection connect_transformed(Func callback, Transform transform, int priority = 0) {
-        static_assert(is_invocable_v<Transform, Types...>, "only function inputs are allowed");
+        static_assert(is_invocable_v<Transform, Types...>, "Transform should be invocable.");
+        static_assert(is_invocable_v<Func, invoke_result_t<Transform, Types...>>, "Func should be invocable.");
 
         return this->connect(
                 [callback = _NEFORCE move(callback), transform = _NEFORCE move(transform)](Types... args) mutable {

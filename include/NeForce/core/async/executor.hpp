@@ -5,8 +5,7 @@
  * @file executor.hpp
  * @brief 多态执行器抽象
  *
- * 类型擦除的执行器包装，可持有 io_context::executor、strand、
- * thread_pool 或任何满足 executor 概念的类型。
+ * 类型擦除的执行器包装，可持有 io_context::executor、strand、thread_pool 或任何满足 executor 概念的类型。
  */
 
 #include "NeForce/core/functional/function.hpp"
@@ -29,9 +28,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @class executor
  * @brief 多态执行器
  *
- * 类型擦除的执行器句柄，可包装任意满足 executor 概念的类型。
- * 任意拥有一个可调用 execute(handler_type) 方法的类型都可以
- * 通过模板构造函数包装为 executor。
+ * 任意拥有一个可调用 execute(handler_type) 方法的类型都可以通过模板构造函数包装为 executor。
  */
 class executor {
 public:

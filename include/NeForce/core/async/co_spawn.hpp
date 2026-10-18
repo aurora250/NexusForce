@@ -6,7 +6,6 @@
  * @brief 协程启动器
  *
  * co_spawn 在指定的 executor 上启动协程。
- * 依赖于 C++20 协程支持。
  */
 
 #include "NeForce/core/async/coroutine.hpp"
@@ -23,8 +22,6 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @struct co_spawn_task
  * @brief co_spawn 使用的协程任务类型
- *
- * initial_suspend 将协程恢复投递到 executor。
  */
 struct co_spawn_task {
     struct promise_type {
@@ -45,7 +42,7 @@ struct co_spawn_task {
 
         template <typename U>
         auto await_transform(U&& u) {
-            return forward<U>(u);
+            return _NEFORCE forward<U>(u);
         }
     };
 
@@ -59,7 +56,7 @@ struct co_spawn_task {
  * @brief 在 executor 上启动协程
  * @tparam Executor 执行器类型
  * @tparam Func 返回 awaitable 的可调用对象
- * @param exec 执行器（如 io_context::executor 或 strand）
+ * @param exec 执行器
  * @param func 协程工厂函数，返回 awaitable
  *
  * @code

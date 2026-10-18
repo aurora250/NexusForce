@@ -15,7 +15,6 @@
  */
 
 #include "NeForce/core/utility/packages.hpp"
-#include <ctime>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -1511,7 +1510,7 @@ public:
      * @brief 获取当前时间戳
      * @return 当前时间戳
      */
-    NEFORCE_NODISCARD static timestamp now() noexcept { return timestamp(::time(nullptr)); }
+    NEFORCE_NODISCARD static timestamp now() noexcept;
 
     /**
      * @brief 转换为日期时间

@@ -118,12 +118,12 @@ public:
     using result_type = uint64_t; ///< 结果类型
     using seed_type = uint64_t;   ///< 种子类型
 
+    static constexpr bool is_plus = (Scramble == xoroshiro_scramble::PLUS);           ///< 是否为 + 混淆
+    static constexpr bool is_star_star = (Scramble == xoroshiro_scramble::STAR_STAR); ///< 是否为 ** 混淆
+
 private:
     template <typename>
     friend class random_engine;
-
-    static constexpr bool is_plus = (Scramble == xoroshiro_scramble::PLUS);           ///< 是否为 + 混淆
-    static constexpr bool is_star_star = (Scramble == xoroshiro_scramble::STAR_STAR); ///< 是否为 ** 混淆
 
     seed_type state_[4] = {0, 0, 0, 0}; ///< 状态字
 

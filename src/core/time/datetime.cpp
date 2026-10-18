@@ -1,10 +1,30 @@
 #include <NeForce/core/time/datetime.hpp>
+#include <ctime>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
 #    include <sysinfoapi.h>
 #    include <timezoneapi.h>
 #endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <sys/time.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
+
+timestamp timestamp::now() noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::FILETIME ft;
+    ::GetSystemTimeAsFileTime(&ft);
+    ::ULARGE_INTEGER uli;
+    uli.LowPart = ft.dwLowDateTime;
+    uli.HighPart = ft.dwHighDateTime;
+    constexpr uint64_t EPOCH_DIFF = 116444736000000000ULL;
+    return timestamp(static_cast<int64_t>(uli.QuadPart - EPOCH_DIFF) / 10000000LL);
+#else
+    struct ::timeval tv = {0, 0};
+    ::gettimeofday(&tv, 0);
+    return timestamp(tv.tv_sec);
+#endif
+}
 
 NEFORCE_NODISCARD datetime datetime::now() noexcept {
     try {
@@ -20,7 +40,7 @@ NEFORCE_NODISCARD datetime datetime::now() noexcept {
                      60;
         }
         return datetime(st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, offset);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
         const ::time_t now_time = ::time(nullptr);
         if (now_time == static_cast<::time_t>(-1)) {
             return {};

@@ -65,7 +65,7 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
     const ::BOOL result = ::WaitOnAddress(p, &value, sizeof(platform_wait_t), numeric_traits<::DWORD>::max());
 
     if (result == 0) {
-        ::DWORD err = ::GetLastError();
+        const ::DWORD err = ::GetLastError();
         if (err != 0 && err != ERROR_TIMEOUT) {
             terminate();
         }

@@ -25,7 +25,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @section standards 遵循的国际标准
  * 本实现严格遵循以下并发编程与内存模型相关标准规范：
  *
- * **硬件架构规范（内存屏障与指令集参考）：**
+ * **硬件架构规范：**
  * - **Intel® 64 and IA-32 Architectures Software Developer's Manual**：x86/x64 内存排序
  *   https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html
  * - **ARM Architecture Reference Manual (Armv8-A)**：ARM 弱内存序模型
@@ -41,7 +41,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * | 内存顺序       | 枚举值     | 语义说明                                                     |
  * |----------------|------------|--------------------------------------------------------------|
  * | relaxed        | 0          | 最宽松：仅保证原子性，无同步或顺序约束                        |
- * | consume        | 1          | 数据依赖：依赖该值的操作不会被重排到前面（通常由编译器优化为 acquire） |
+ * | consume        | 1          | 数据依赖：依赖该值的操作不会被重排到该操作之前                 |
  * | acquire        | 2          | 获取语义：后续读写不会被重排到该操作之前                      |
  * | release        | 3          | 释放语义：之前的读写不会被重排到该操作之后                    |
  * | acq_rel        | 4          | 获取-释放组合：兼具 acquire 和 release 语义                   |
@@ -148,8 +148,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *          - 平台间移植性问题（强/弱内存模型差异）
  *
  * @see https://en.cppreference.com/w/cpp/atomic/memory_order
- * @see
- * https://www.intel.com/content/www/us/en/docs/programmable/683364/current/transactional-synchronization-extensions.html
+ * @see https://www.intel.com/content/www/us/en/support/articles/000059422/processors.html
  * @see https://developer.arm.com/documentation/100941/0101/Memory-ordering
  * @{
  */
@@ -191,12 +190,9 @@ NEFORCE_INLINE17 constexpr auto memory_order_seq_cst = memory_order::seq_cst;
  *
  * 用于扩展memory_order的功能，支持硬件锁消除（HLE）等高级特性。
  *
- * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
- * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
- * 功能，并在运行时做好fallback 处理。
- *
- * @see
- * https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html
+ * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE和RTM）已在后续处理器中被弃用或默认禁用。
+ * 使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE功能，并在运行时做好fallback 处理。
+ * @see https://www.intel.com/content/www/us/en/support/articles/000059422/processors.html
  */
 enum class memory_order_modifier : int64_t {
     memory_order_none = 0,                   ///< 无修饰符
@@ -215,9 +211,9 @@ enum class memory_order_modifier : int64_t {
  * @param mod 内存顺序修饰符
  * @return 组合后的内存顺序
  * @note 用于将内存顺序与修饰符组合使用
- * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
- * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
- * 功能，并在运行时做好fallback 处理。
+ * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE和RTM）已在后续处理器中被弃用或默认禁用。
+ * 使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE功能，并在运行时做好fallback 处理。
+ * @see https://www.intel.com/content/www/us/en/support/articles/000059422/processors.html
  */
 constexpr memory_order operator|(memory_order mo, memory_order_modifier mod) noexcept {
     return static_cast<memory_order>(static_cast<int64_t>(mo) | static_cast<int64_t>(mod));
@@ -229,9 +225,9 @@ constexpr memory_order operator|(memory_order mo, memory_order_modifier mod) noe
  * @param mod 内存顺序修饰符
  * @return 提取后的内存顺序
  * @note 用于从组合值中提取特定的内存顺序或修饰符
- * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
- * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
- * 功能，并在运行时做好fallback 处理。
+ * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE和RTM）已在后续处理器中被弃用或默认禁用。
+ * 使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE功能，并在运行时做好fallback 处理。
+ * @see https://www.intel.com/content/www/us/en/support/articles/000059422/processors.html
  */
 constexpr memory_order operator&(memory_order mo, memory_order_modifier mod) noexcept {
     return static_cast<memory_order>(static_cast<int64_t>(mo) & static_cast<int64_t>(mod));
@@ -241,10 +237,9 @@ constexpr memory_order operator&(memory_order mo, memory_order_modifier mod) noe
 /**
  * @enum rtm_status_flag
  * @brief RTM事务状态标志位定义
- * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
- * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
- * 功能，并在运行时做好fallback 处理。
- * @see https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html
+ * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE和RTM）已在后续处理器中被弃用或默认禁用。
+ * 使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE功能，并在运行时做好fallback 处理。
+ * @see https://www.intel.com/content/www/us/en/support/articles/000059422/processors.html
  */
 enum class rtm_status_flag : uint32_t {
     xabort_explicit = 1 << 0, ///< 由XABORT指令显式中止

@@ -5,7 +5,7 @@
  * @file strand.hpp
  * @brief 串行化执行器
  *
- * strand 保证投递到它的 handler 严格串行执行，同一时刻只有一个 handler 在运行，其余排队。
+ * strand 保证投递到它的 handler 严格串行执行。
  */
 
 #include "NeForce/core/async/atomic.hpp"
@@ -24,8 +24,6 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @class strand
  * @brief 串行化执行器
- *
- * 所有投递到 strand 的 handler 严格串行执行，无需显式加锁。
  */
 class strand {
 public:
