@@ -222,6 +222,19 @@ NEFORCE_INLINE17 constexpr theme dark_theme = {color{16, 16, 16},    // bg
                                                color{128, 128, 128}, // muted
                                                color{64, 64, 64}};   // border
 
+/**
+ * @brief 预置亮色主题
+ */
+NEFORCE_INLINE17 constexpr theme light_theme = {color{250, 250, 250},  // bg
+                                                color{32, 32, 32},     // fg
+                                                color{0, 110, 190},    // primary
+                                                color{90, 90, 200},    // secondary
+                                                color{190, 30, 30},    // danger
+                                                color{20, 130, 60},    // success
+                                                color{160, 120, 0},    // warning
+                                                color{110, 110, 110},  // muted
+                                                color{200, 200, 200}}; // border
+
 /** @} */ // TUI
 
 NEFORCE_END_TUI__

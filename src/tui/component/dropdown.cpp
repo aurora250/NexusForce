@@ -1,5 +1,4 @@
 #include <NeForce/tui/component/dropdown.hpp>
-#include <utility>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 NEFORCE_BEGIN_COMPONENTS__

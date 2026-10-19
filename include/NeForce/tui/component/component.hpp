@@ -279,7 +279,9 @@ public:
      * @brief 是否处于激活状态
      * @return 是否活跃
      */
-    NEFORCE_NODISCARD bool active() const noexcept { return parent_ == nullptr || parent_->active_child() == this; }
+    NEFORCE_NODISCARD virtual bool active() const noexcept {
+        return parent_ == nullptr || parent_->active_child() == this;
+    }
 
     /**
      * @brief 是否拥有焦点

@@ -2874,7 +2874,7 @@ TEST(TupleEmpty, Comparison) {
 
 TEST(TupleEmpty, Hash) {
     tuple<> t;
-    EXPECT_EQ(t.to_hash(), constants::FNV_OFFSET_BASIS);
+    EXPECT_EQ(t.to_hash(), constants::FNV_OFFSET_BASIS64);
 }
 
 TEST(TupleEmpty, Swap) {

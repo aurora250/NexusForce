@@ -155,7 +155,7 @@ public:
      */
     static uuid v7() noexcept;
 
-    NEFORCE_NODISCARD size_t to_hash() const noexcept { return FNV_hash(data_.data(), data_.size()); }
+    NEFORCE_NODISCARD size_t to_hash() const noexcept { return FNV_hash64(data_.data(), data_.size()); }
 };
 
 /** @} */ // UUID

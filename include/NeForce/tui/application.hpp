@@ -96,6 +96,27 @@ public:
      */
     void quit(int exit_code = 0);
 
+    /**
+     * @brief 让出终端
+     *
+     * 退出交替屏幕缓冲区、关闭鼠标与括号粘贴、恢复终端原始属性并显示光标，
+     * 使调用方可以把终端交给交互式子进程。此时应用仍持有组件树与状态。
+     */
+    void suspend();
+
+    /**
+     * @brief 收回终端
+     *
+     * 重新进入交替屏幕缓冲区、恢复鼠标与括号粘贴、回到原始模式，并强制整屏重绘
+     */
+    void resume();
+
+    /**
+     * @brief 是否处于让出终端状态
+     * @return 是否已让出
+     */
+    NEFORCE_NODISCARD bool suspended() const noexcept { return suspended_; }
+
 private:
     io_context ctx_;
     strand render_strand_{ctx_};
@@ -108,6 +129,7 @@ private:
     int exit_code_ = 0;
     string title_;
     bool running_ = false;
+    bool suspended_ = false;
 };
 
 /** @} */ // TUI

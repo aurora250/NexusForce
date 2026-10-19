@@ -2221,11 +2221,72 @@ public:
      * @param n 重复次数
      * @return 新字符串
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string repeat(size_type n) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string repeat(size_type n) const {
         basic_string result;
         result.reserve(size() * n);
         while (n-- != 0U) {
             result += *this;
+        }
+        return _NEFORCE move(result);
+    }
+
+    /**
+     * @brief 重复当前字符n次
+     * @param c 重复字符
+     * @param n 重复次数
+     * @return 新字符串
+     */
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 basic_string repeat(value_type c, size_type n) {
+        basic_string result;
+        result.reserve(n);
+        while (n-- != 0U) {
+            result += c;
+        }
+        return _NEFORCE move(result);
+    }
+
+    /**
+     * @brief 重复当前字符串n次
+     * @param str 重复字符串
+     * @param n 重复次数
+     * @return 新字符串
+     */
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 basic_string repeat(const_pointer str, size_type n) {
+        basic_string result;
+        view_type view = str;
+        result.reserve(n * view.size());
+        while (n-- != 0U) {
+            result += view;
+        }
+        return _NEFORCE move(result);
+    }
+
+    /**
+     * @brief 重复当前字符串n次
+     * @param str 重复字符串
+     * @param n 重复次数
+     * @return 新字符串
+     */
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 basic_string repeat(view_type str, size_type n) {
+        basic_string result;
+        result.reserve(n * str.size());
+        while (n-- != 0U) {
+            result += str;
+        }
+        return _NEFORCE move(result);
+    }
+
+    /**
+     * @brief 重复当前字符串n次
+     * @param str 重复字符串
+     * @param n 重复次数
+     * @return 新字符串
+     */
+    NEFORCE_NODISCARD static NEFORCE_CONSTEXPR20 basic_string repeat(const basic_string& str, size_type n) {
+        basic_string result;
+        result.reserve(n * str.size());
+        while (n-- != 0U) {
+            result += str;
         }
         return _NEFORCE move(result);
     }

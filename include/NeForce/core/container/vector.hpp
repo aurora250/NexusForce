@@ -167,9 +167,9 @@ public:
  */
 template <typename T, typename Alloc = allocator<T>>
 class vector : public icollector<vector<T, Alloc>> {
-    static_assert(is_object_v<T>, "vector only contains object types.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<T, typename Alloc::value_type>, "allocator type mismatch.");
+    static_assert(is_object_v<T>, "vector only contains object types.");
 
 public:
     using pointer = T*;                                                       ///< 指针类型

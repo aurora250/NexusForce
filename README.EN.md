@@ -310,6 +310,19 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`screen`** - Terminal frame buffer, per-cell diffing to produce minimal ANSI escape sequences
 - **`input_driver`** - Cross-platform terminal input driver, watches stdin and dispatches key/mouse/paste events
 - **`input_parser`** - I/O-free input parsing state machine: ASCII/UTF-8, control keys, CSI/SS3, modifier sequences, Alt+char, SGR mouse and bracketed paste
+- **`headless`** - Terminal-free driver: fixed size, frame output captured in memory, byte-level input injection; the base for snapshot tests and offscreen rendering
+- **`rich_text`** - `text_span` rich text element mixing several styles on one line (color/bold/italic/strikethrough)
+- **`text_layout`** - `layout_text` / `text_display_width` / `caret_position`, the single line-breaking implementation shared by renderer, layout and editor caret
+- **`virtual_list`** - Virtual list that only renders items inside the viewport, with bottom-follow, wheel and keyboard scrolling
+- **`panel`** - Bordered, padded panel element for dialogs and cards
+- **`text_area`** - Multi-line editor: soft wrap, selection, undo/redo, input history and caret-following scroll
+- **`select_list`** - Filterable candidate list (command palette / completion popup)
+- **`approve_prompt`** - Permission confirmation dialog (allow / deny / always)
+- **`status_indicator`** - Spinner + label + elapsed time status line
+- **`streaming_text`** - Frame-coalesced commits for high-frequency appended text
+- **`markdown` / `markdown_cache`** - Markdown rendering plus a (text, width) keyed element-tree cache that reuses parsing when the same Markdown is repainted (the parser lives in `core/file/md`)
+- **`code_block` / `diff`** - Gutter+highlighted code block and unified diff renderers
+- **`color_depth` / `light_theme`** - 16/256/truecolor output and a light theme, with per-frame atomic commits via synchronized output
 - **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
 - **`style` / `theme`** - Style system + semantic theming, dark theme preset
 - **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling

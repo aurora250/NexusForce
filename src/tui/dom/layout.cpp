@@ -1,135 +1,49 @@
-#include <NeForce/core/string/utf_iterator.hpp>
 #include <NeForce/tui/dom/layout.hpp>
+#include <NeForce/tui/dom/text_layout.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 namespace {
-    int string_display_width(const string& text) {
-        int width = 0;
-        const auto& raw = text.view();
-        for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
-            // Control characters are rendered as a blank cell,
-            // so they must also be measured as one column;
-            // otherwise the element would be laid out narrower than what the renderer draws and the tail of the text would be clipped.
-            const auto value = it->value();
-            width += (value < 0x20 || value == 0x7F) ? 1 : it->display_width();
-        }
-        return width;
-    }
+    int string_display_width(const string& text) { return text_display_width(text.view()); }
 
     int measure_text_width(const string& text) { return string_display_width(text); }
 
-    size_t count_line_breaks(const string& text) {
+    int count_line_breaks(const string& text) {
         const auto& raw = text.view();
-        size_t count = 0;
+        int breaks = 0;
         for (size_t i = 0; i < raw.size(); ++i) {
             if (raw[i] == '\n') {
-                ++count;
+                ++breaks;
             }
         }
-        return count;
+        return breaks;
     }
 
     int compute_wrapped_height(const string& text, const int max_width, const style::wrap_mode wm) {
-        const auto breaks = count_line_breaks(text);
-        if (max_width <= 0 || wm == style::wrap_mode::none) {
-            return static_cast<int>(1 + breaks);
+        if (wm == style::wrap_mode::none || max_width <= 0) {
+            return max(1, static_cast<int>(layout_text(text.view(), max_width, style::wrap_mode::none).lines.size()));
         }
-        if (text.empty()) {
-            return 1;
-        }
-        if (breaks > 0) {
-            int total = 0;
-            const auto& raw = text.view();
-            size_t start = 0;
-            for (size_t i = 0; i <= raw.size(); ++i) {
-                if (i == raw.size() || raw[i] == '\n') {
-                    const int segment = compute_wrapped_height(raw.substr(start, i - start), max_width, wm);
-                    total += max(1, segment);
-                    start = i + 1;
-                }
-            }
-            return max(1, total);
-        }
-
-        if (wm == style::wrap_mode::character) {
-            const int total_w = string_display_width(text);
-            return max(1, (total_w + max_width - 1) / max_width);
-        }
-
-        int lines = 1;
-        int line_w = 0;
-        const auto& raw = text.view();
-        const auto* data = reinterpret_cast<const byte_t*>(raw.data());
-        const size_t len = raw.size();
-
-        size_t pos = 0;
-        while (pos < len) {
-            if (line_w == 0) {
-                while (pos < len && data[pos] == ' ') {
-                    ++pos;
-                }
-                if (pos >= len) {
-                    break;
-                }
-            }
-
-            size_t word_end = pos;
-            while (word_end < len && data[word_end] != ' ') {
-                const byte_t lead = data[word_end];
-                if ((lead & 0x80) == 0) {
-                    ++word_end;
-                } else if ((lead & 0xE0) == 0xC0) {
-                    word_end += 2;
-                } else if ((lead & 0xF0) == 0xE0) {
-                    word_end += 3;
-                } else if ((lead & 0xF8) == 0xF0) {
-                    word_end += 4;
-                } else {
-                    ++word_end;
-                }
-            }
-
-            const string word_sv = raw.view(pos, word_end - pos);
-            const int word_w = string_display_width(word_sv);
-
-            if (line_w == 0) {
-                if (word_w > max_width) {
-                    lines += (word_w - 1) / max_width;
-                    line_w = word_w % max_width;
-                    if (line_w == 0) {
-                        line_w = 0;
-                    }
-                } else {
-                    line_w = word_w;
-                }
-            } else {
-                if (line_w + 1 + word_w > max_width) {
-                    ++lines;
-                    line_w = word_w;
-                    if (word_w > max_width) {
-                        lines += (word_w - 1) / max_width;
-                        line_w = word_w % max_width;
-                        if (line_w == 0) {
-                            line_w = 0;
-                        }
-                    }
-                } else {
-                    line_w += 1 + word_w;
-                }
-            }
-
-            pos = word_end;
-            while (pos < len && data[pos] == ' ') {
-                ++pos;
-            }
-        }
-
-        return lines;
+        return max(1, static_cast<int>(layout_text(text.view(), max_width, wm).lines.size()));
     }
 
     int measure_element_width(const element& el);
     int measure_element_height(const element& el, int allocated_width = -1);
+
+    string flatten_spans(const vector<text_span>& spans) {
+        string result;
+        for (const auto& span: spans) {
+            result.append(span.content);
+        }
+        return result;
+    }
+
+    int rich_text_width(const vector<text_span>& spans) {
+        int width = 0;
+        for (const auto& span: spans) {
+            width += string_display_width(span.content);
+        }
+        return width;
+    }
     void assign_layout(const element& el, vector<layout_rect>& out, int x, int y, int total_w, int total_h);
 
     int child_flex_weight(const element& child, const bool is_row) {
@@ -287,6 +201,15 @@ namespace {
                 content_w = measure_text_width(el.text());
                 break;
             }
+            case element::kind::rich_text: {
+                content_w = rich_text_width(el.spans());
+                break;
+            }
+            case element::kind::virtual_list:
+            case element::kind::canvas: {
+                content_w = 0;
+                break;
+            }
             case element::kind::button: {
                 content_w = measure_text_width(el.text()) + 2;
                 break;
@@ -345,6 +268,14 @@ namespace {
                 content_w = el.children().empty() ? 0 : measure_element_width(el.children()[0]);
                 break;
             }
+            case element::kind::panel: {
+                using padding = struct style::padding;
+                const padding pad = style.padding.value_or(padding{});
+                const int border_w = (style.border.has_value() && style.border.value() != style::border::none) ? 2 : 0;
+                content_w = (el.children().empty() ? 0 : measure_element_width(el.children()[0])) + pad.left +
+                            pad.right + border_w;
+                break;
+            }
             case element::kind::each:
             case element::kind::when: {
                 int max_child_w = 0;
@@ -386,6 +317,20 @@ namespace {
                 } else {
                     content_h = static_cast<int>(1 + count_line_breaks(el.text()));
                 }
+                break;
+            }
+            case element::kind::rich_text: {
+                const style::wrap_mode wm = el.wrap_mode();
+                const string flat = flatten_spans(el.spans());
+                if (wm != style::wrap_mode::none && allocated_width > 0) {
+                    content_h = compute_wrapped_height(flat, allocated_width, wm);
+                } else {
+                    content_h = static_cast<int>(1 + count_line_breaks(flat));
+                }
+                break;
+            }
+            case element::kind::virtual_list: {
+                content_h = 0;
                 break;
             }
             case element::kind::button:
@@ -494,6 +439,14 @@ namespace {
                 content_h = el.children().empty() ? 1 : measure_element_height(el.children()[0]);
                 break;
             }
+            case element::kind::panel: {
+                using padding = struct style::padding;
+                const padding pad = style.padding.value_or(padding{});
+                const int border_h = (style.border.has_value() && style.border.value() != style::border::none) ? 2 : 0;
+                content_h = (el.children().empty() ? 0 : measure_element_height(el.children()[0])) + pad.top +
+                            pad.bottom + border_h;
+                break;
+            }
             case element::kind::each:
             case element::kind::when: {
                 int totalH = 0;
@@ -537,7 +490,25 @@ namespace {
 
         switch (k) {
             case element::kind::separator:
-            case element::kind::spacer: {
+            case element::kind::spacer:
+            case element::kind::virtual_list: {
+                out.push_back(rect);
+                return;
+            }
+            case element::kind::rich_text: {
+                const int content_w = measure_element_width(el);
+                const int content_h = measure_element_height(el, rect.w);
+                if (content_w > 0 && content_w < rect.w) {
+                    rect.w = content_w;
+                }
+                if (content_h > 0 && content_h < rect.h) {
+                    rect.h = content_h;
+                }
+                const style::wrap_mode wm = el.wrap_mode();
+                if (wm != style::wrap_mode::none && rect.w > 0) {
+                    const int wrapped_h = compute_wrapped_height(flatten_spans(el.spans()), rect.w, wm);
+                    rect.h = max(rect.h, wrapped_h);
+                }
                 out.push_back(rect);
                 return;
             }
@@ -555,6 +526,21 @@ namespace {
                     int content_h = max(measure_element_height(child), rect.h - 2 - pad.top - pad.bottom);
                     assign_layout(child, out, content_x, content_y, content_w, content_h);
                 }
+                return;
+            }
+            case element::kind::panel: {
+                out.push_back(rect);
+                if (el.children().empty()) {
+                    return;
+                }
+                using padding = struct style::padding;
+                const padding pad = style.padding.value_or(padding{});
+                const int border_w = (style.border.has_value() && style.border.value() != style::border::none) ? 1 : 0;
+                const int inner_x = rect.x + border_w + pad.left;
+                const int inner_y = rect.y + border_w + pad.top;
+                const int inner_w = max(0, rect.w - 2 * border_w - pad.left - pad.right);
+                const int inner_h = max(0, rect.h - 2 * border_w - pad.top - pad.bottom);
+                assign_layout(el.children()[0], out, inner_x, inner_y, inner_w, inner_h);
                 return;
             }
             case element::kind::canvas: {

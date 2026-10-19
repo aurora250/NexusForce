@@ -82,6 +82,15 @@ struct cell {
 };
 
 /**
+ * @brief 终端颜色深度
+ */
+enum class color_depth : uint8_t {
+    ansi16,    ///< 基础 16 色（SGR 30-37 / 90-97）
+    ansi256,   ///< 256 色（SGR 38;5;n）
+    truecolor, ///< 24 位真彩色（SGR 38;2;r;g;b）
+};
+
+/**
  * @brief 光标状态
  */
 struct cursor {
@@ -154,6 +163,16 @@ public:
      * @return cell 引用
      */
     NEFORCE_NODISCARD cell& fast_cell_at(int x, int y) noexcept { return cells_[static_cast<size_t>(y) * dimx_ + x]; }
+
+    /**
+     * @brief 无边界检查的只读 cell 访问
+     * @param x 列坐标
+     * @param y 行坐标
+     * @return cell 常量引用
+     */
+    NEFORCE_NODISCARD const cell& fast_cell_at(int x, int y) const noexcept {
+        return cells_[static_cast<size_t>(y) * dimx_ + x];
+    }
 
     /**
      * @brief 清空所有 cell
@@ -232,6 +251,21 @@ public:
     NEFORCE_NODISCARD string to_plaintext() const;
 
     /**
+     * @brief 设置输出颜色深度
+     * @param depth 颜色深度
+     *
+     * 决定 to_string() 生成的 SGR 序列形式：
+     * 默认 256 色，真彩色终端可输出 24 位色，能力不足时降级到 16 色。
+     */
+    void set_color_depth(color_depth depth) noexcept { depth_ = depth; }
+
+    /**
+     * @brief 获取输出颜色深度
+     * @return 颜色深度
+     */
+    NEFORCE_NODISCARD color_depth color_depth_mode() const noexcept { return depth_; }
+
+    /**
      * @brief 重置光标位置跟踪
      * @param clear 同时清空 cell 内容
      */
@@ -244,6 +278,7 @@ public:
 
 private:
     tui::cursor cursor_;
+    color_depth depth_ = color_depth::ansi256;
     vector<string> hyperlinks_;
 
     void update_cell_style(string& ss, const cell& prev, const cell& next) const;

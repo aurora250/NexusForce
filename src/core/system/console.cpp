@@ -1026,6 +1026,18 @@ bool sys_console::supports_truecolor() const {
 #endif
 }
 
+bool sys_console::supports_256_color() const {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    return supports_colors();
+#else
+    if (!supports_colors()) {
+        return false;
+    }
+    const string term = environment::get("TERM");
+    return term.contains("256") || term.contains("truecolor") || term.contains("direct");
+#endif
+}
+
 bool sys_console::supports_unicode() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::GetConsoleOutputCP() == CP_UTF8;

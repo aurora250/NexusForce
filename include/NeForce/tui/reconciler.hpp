@@ -68,6 +68,13 @@ public:
     void mark_dirty();
 
     /**
+     * @brief 丢弃帧缓冲并强制整屏重绘
+     *
+     * 终端内容被外部改写过后调用，下一帧会先清屏再完整重绘
+     */
+    void invalidate();
+
+    /**
      * @brief 分发键盘事件到焦点组件
      * @param e 键盘事件
      * @return true 表示事件已被处理
@@ -100,6 +107,26 @@ public:
     NEFORCE_NODISCARD bool is_dirty() const noexcept { return dirty_; }
 
     /**
+     * @brief 获取最近一帧的帧缓冲
+     * @return 帧缓冲引用
+     *
+     * 供 headless 驱动、快照测试与调试读取渲染结果。
+     */
+    NEFORCE_NODISCARD const screen& frame() const noexcept { return current_screen_; }
+
+    /**
+     * @brief 获取最近一帧的布局结果
+     * @return 布局矩形列表
+     */
+    NEFORCE_NODISCARD const vector<layout_rect>& frame_layout() const noexcept { return prev_layout_; }
+
+    /**
+     * @brief 获取最近一帧的元素树
+     * @return 元素树引用
+     */
+    NEFORCE_NODISCARD const element& frame_tree() const noexcept { return prev_tree_; }
+
+    /**
      * @brief 获取组件调度回调
      */
     NEFORCE_NODISCARD function<void(component_base*)> schedule_render_callback();
@@ -109,6 +136,53 @@ public:
      * @param t 主题
      */
     void set_theme(const theme& t);
+
+    /**
+     * @brief 设置帧输出颜色深度
+     * @param depth 颜色深度
+     *
+     * 默认按终端能力自动选择，可显式覆盖以便颜色降级测试。
+     */
+    void set_color_depth(color_depth depth);
+
+    /**
+     * @brief 获取当前颜色深度
+     * @return 颜色深度
+     */
+    NEFORCE_NODISCARD color_depth color_depth_mode() const noexcept;
+
+    /**
+     * @brief 开关同步输出
+     * @param enable 是否启用
+     *
+     * 启用后每帧以 `ESC[?2026h` / `ESC[?2026l` 包裹，
+     * 支持该扩展的终端会把这一帧提交；不支持的终端会忽略该序列。
+     */
+    void set_synchronized_output(bool enable) noexcept { synchronized_output_ = enable; }
+
+    /**
+     * @brief 是否启用同步输出
+     * @return 是否启用
+     */
+    NEFORCE_NODISCARD bool synchronized_output() const noexcept { return synchronized_output_; }
+
+    /**
+     * @brief 设置帧输出接收方
+     * @param sink 接收 ANSI 字符串的回调，为空表示写往控制台
+     *
+     * 用于无终端环境（headless 测试、录制回放）接管帧输出。
+     */
+    void set_output_sink(function<void(string_view)> sink) { output_sink_ = _NEFORCE move(sink); }
+
+    /**
+     * @brief 强制终端尺寸
+     * @param width 列数
+     * @param height 行数
+     *
+     * 设置为非正数表示恢复为自动探测。headless 场景下必须固定尺寸，
+     * 否则尺寸会取自控制台。
+     */
+    void set_term_size(int width, int height) noexcept;
 
 private:
     sys_console& console_;
@@ -131,8 +205,12 @@ private:
 
     element prev_tree_;
     vector<layout_rect> prev_layout_;
+    function<void(string_view)> output_sink_;
     bool dirty_ = true;
     bool mounted_ = false;
+    bool synchronized_output_ = true;
+    int forced_w_ = 0;
+    int forced_h_ = 0;
     bool update_pending_ = false;
     bool rendering_ = false;
 

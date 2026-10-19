@@ -1,5 +1,7 @@
 #include <NeForce/core/string/utf_iterator.hpp>
 #include <NeForce/tui/component/component.hpp>
+#include <NeForce/tui/dom/layout.hpp>
+#include <NeForce/tui/dom/text_layout.hpp>
 #include <NeForce/tui/renderer.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -14,7 +16,26 @@ namespace {
         cp.append_to(target.character);
     }
 
-    bool is_line_break(const codepoint& cp) noexcept { return cp.value() == '\n'; }
+    struct virtual_window {
+        int first;      // index of the first visible item
+        int skip;       // rows of the first item that are scrolled out
+        int visible;    // number of items to render
+        int max_scroll; // largest valid scroll offset
+        int content_h;  // total content height in rows
+    };
+
+    virtual_window compute_virtual_window(const element& el, const int area_h) {
+        const int item_h = max(1, el.item_height());
+        const int count = static_cast<int>(el.item_count());
+        virtual_window win{};
+        win.content_h = count * item_h;
+        win.max_scroll = max(0, win.content_h - max(0, area_h));
+        const int scroll = (el.scroll_y() < 0) ? 0 : min(el.scroll_y(), win.max_scroll);
+        win.first = scroll / item_h;
+        win.skip = scroll % item_h;
+        win.visible = (max(0, area_h) + item_h - 1) / item_h + 1;
+        return win;
+    }
 } // namespace
 
 
@@ -80,32 +101,48 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
                 const style::wrap_mode wm = el.style().text_wrap.value_or(style::wrap_mode::none);
                 const bool show_cursor = el.cursor_visible() && has_focus_;
 
-                const auto border_color = has_focus_ ? theme_.primary : theme_.border;
-                apply_border(rect.x, rect.y, rect.w, rect.h, style::border::single, border_color);
+                if (el.rect_state() != nullptr) {
+                    auto* box = static_cast<state<layout_rect>*>(el.rect_state());
+                    if (box->value().x != rect.x || box->value().y != rect.y || box->value().w != rect.w ||
+                        box->value().h != rect.h) {
+                        *box = rect;
+                    }
+                }
 
-                const bool tall = (rect.h >= 3);
-                const int inner_x = rect.x + 1;
-                const int inner_y = tall ? rect.y + 1 : rect.y;
-                const int inner_w = max(1, rect.w - 2);
-                const int inner_h = tall ? rect.h - 2 : 1;
+                const enum style::border border_kind = el.style().border.value_or(style::border::single);
+                const int border_w = (border_kind == style::border::none) ? 0 : 1;
+                const auto border_color = has_focus_ ? theme_.primary : theme_.border;
+                if (border_w > 0) {
+                    apply_border(rect.x, rect.y, rect.w, rect.h, border_kind, border_color);
+                }
+
+                const bool framed = (rect.h >= 2 * border_w + 1);
+                const int inner_x = rect.x + border_w;
+                const int inner_y = framed ? rect.y + border_w : rect.y;
+                const int inner_w = max(1, rect.w - 2 * border_w);
+                const int inner_h = framed ? max(1, rect.h - 2 * border_w) : 1;
+                const int scroll_row = max(0, el.scroll_y());
 
                 if (!display.empty()) {
-                    int end_x = inner_x;
-                    int end_y = inner_y;
-                    render_text_block(inner_x, inner_y, inner_w, inner_h, display, el.style(), wm, &end_x, &end_y);
+                    const text_layout text_lay = layout_text(display.view(), inner_w, wm);
+                    render_text_block(inner_x, inner_y, inner_w, inner_h, display, el.style(), wm, nullptr, nullptr,
+                                      scroll_row);
+
+                    const size_t sel_begin = min(el.selection_begin(), display.size());
+                    const size_t sel_end = min(el.selection_end(), display.size());
+                    if (sel_end > sel_begin) {
+                        apply_selection_overlay(inner_x, inner_y, inner_w, inner_h, display, text_lay, sel_begin,
+                                                sel_end, scroll_row);
+                    }
+
                     if (show_cursor) {
-                        const size_t cp = min(el.cursor_pos(), display.size());
-                        int cx = inner_x;
-                        int cy = inner_y;
-                        if (cp > 0) {
-                            const string prefix = display.substr(0, cp);
-                            render_text_block(inner_x, inner_y, inner_w, inner_h, prefix, el.style(), wm, &cx, &cy);
-                        }
-                        if (cx >= inner_x + inner_w) {
-                            cx = inner_x;
-                            cy += 1;
-                        }
-                        if (cy < inner_y + inner_h && cx < rect.x + rect.w) {
+                        int row = 0;
+                        int col = 0;
+                        caret_position(text_lay, display.view(), min(el.cursor_pos(), display.size()), row, col);
+                        const int visible_row = row - scroll_row;
+                        const int cx = inner_x + min(col, max(0, inner_w - 1));
+                        const int cy = inner_y + visible_row;
+                        if (visible_row >= 0 && visible_row < inner_h && cx < rect.x + rect.w) {
                             apply_text(cx, cy, "\xe2\x96\x8c", el.style());
                         }
                     }
@@ -120,6 +157,36 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
                     apply_text(inner_x, inner_y, "\xe2\x96\x8c", el.style());
                 }
                 ++idx;
+            }
+            return;
+        }
+        case element::kind::panel: {
+            if (compare_less(idx, layout.size())) {
+                const auto& rect = layout[static_cast<size_t>(idx)];
+                ++idx;
+                const enum style::border b = el.style().border.value_or(style::border::none);
+                if (b != style::border::none) {
+                    apply_border(rect.x, rect.y, rect.w, rect.h, b, el.style().borderColor.value_or(theme_.border));
+                }
+                for (const auto& child: el.children()) {
+                    render_subtree(child, layout, idx);
+                }
+            }
+            return;
+        }
+        case element::kind::rich_text: {
+            if (compare_less(idx, layout.size())) {
+                const auto& rect = layout[static_cast<size_t>(idx)];
+                render_rich_text(rect.x, rect.y, rect.w, rect.h, el.spans(), el.style(), el.wrap_mode());
+                ++idx;
+            }
+            return;
+        }
+        case element::kind::virtual_list: {
+            if (compare_less(idx, layout.size())) {
+                const auto& rect = layout[static_cast<size_t>(idx)];
+                ++idx;
+                render_virtual_list(el, rect);
             }
             return;
         }
@@ -160,7 +227,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
                     int content_top = numeric_traits<int>::max();
                     int content_right = 0;
                     int content_bottom = 0;
-                    for (int i = child_start_idx; i < child_end_idx && i < static_cast<int>(layout.size()); ++i) {
+                    for (int i = child_start_idx; i < child_end_idx && compare_less(i, layout.size()); ++i) {
                         const auto& cr = layout[i];
                         content_left = min(content_left, cr.x);
                         content_top = min(content_top, cr.y);
@@ -259,11 +326,13 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
 void renderer::clear_element_area(const element& el, const vector<layout_rect>& layout, int& idx) {
     switch (el.kind()) {
         case element::kind::text:
+        case element::kind::rich_text:
         case element::kind::button:
         case element::kind::checkbox:
         case element::kind::text_input:
         case element::kind::separator:
         case element::kind::spacer:
+        case element::kind::virtual_list:
         case element::kind::canvas: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -272,6 +341,7 @@ void renderer::clear_element_area(const element& el, const vector<layout_rect>& 
             }
             return;
         }
+        case element::kind::panel:
         case element::kind::scroll_view: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -304,11 +374,13 @@ void renderer::clear_element_area(const element& el, const vector<layout_rect>& 
 const element* find_element_at(const vector<layout_rect>& layout, const element& tree, int mx, int my, int& idx) {
     switch (tree.kind()) {
         case element::kind::text:
+        case element::kind::rich_text:
         case element::kind::button:
         case element::kind::checkbox:
         case element::kind::text_input:
         case element::kind::separator:
         case element::kind::spacer:
+        case element::kind::virtual_list:
         case element::kind::canvas: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -319,6 +391,7 @@ const element* find_element_at(const vector<layout_rect>& layout, const element&
             }
             return nullptr;
         }
+        case element::kind::panel:
         case element::kind::scroll_view: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -362,11 +435,13 @@ component_base* hit_test_at(const vector<layout_rect>& layout, const element& tr
                             int& idx, component_base* fallback) {
     switch (tree.kind()) {
         case element::kind::text:
+        case element::kind::rich_text:
         case element::kind::button:
         case element::kind::checkbox:
         case element::kind::text_input:
         case element::kind::separator:
         case element::kind::spacer:
+        case element::kind::virtual_list:
         case element::kind::canvas: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -378,6 +453,7 @@ component_base* hit_test_at(const vector<layout_rect>& layout, const element& tr
             }
             return nullptr;
         }
+        case element::kind::panel:
         case element::kind::scroll_view: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -620,9 +696,37 @@ void renderer::render_separator(const int x, const int y, const int w) {
     }
 }
 
-void renderer::render_text_block(const int x, const int y, const int w, const int h, const string& text,
-                                 const tui::style& style, const style::wrap_mode wm, int* out_end_x, int* out_end_y) {
-    if (w <= 0 || h <= 0 || text.empty()) {
+int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const tui::style& style) {
+    const int cw = max(1, cp.display_width());
+    if (x >= 0 && x < term_w_ && y >= 0 && y < term_h_ && !is_clipped(x, y)) {
+        auto& cell = screen_.fast_cell_at(x, y);
+        cell.reset();
+        put_codepoint(cp, cell);
+        apply_style_to_cell(cell, style);
+    }
+    for (int i = 1; i < cw && x + i < term_w_; ++i) {
+        auto& next = screen_.fast_cell_at(x + i, y);
+        next.reset();
+        next.automerge = true;
+    }
+    return cw;
+}
+
+bool renderer::is_clipped(const int x, const int y) const noexcept {
+    for (const auto& clip: clip_stack_) {
+        if (x < clip.x || x >= clip.x + clip.w || y < clip.y || y >= clip.y + clip.h) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void renderer::render_glyph_run(const int x, const int y, const int w, const int h, const vector<run_glyph>& glyphs,
+                                const style::wrap_mode wm, const int scroll_row, int* out_end_x, int* out_end_y) {
+    int cx = x;
+    int cy = y;
+
+    if (w <= 0 || h <= 0 || glyphs.empty()) {
         if (out_end_x != nullptr) {
             *out_end_x = x;
         }
@@ -632,190 +736,187 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
         return;
     }
 
-    if (wm == style::wrap_mode::none) {
-        apply_text(x, y, text, style, x + w);
-        if (out_end_x != nullptr) {
-            int end_x = x;
-            const auto& raw = text.view();
-            for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size());
-                 it != utf8_iterator() && end_x < x + w; ++it) {
-                end_x += max(1, it->display_width());
-            }
-            *out_end_x = end_x;
-        }
-        if (out_end_y != nullptr) {
-            *out_end_y = y;
-        }
-        return;
+    string flat;
+    vector<size_t> glyph_offsets;
+    glyph_offsets.reserve(glyphs.size() + 1);
+    for (const auto& g: glyphs) {
+        glyph_offsets.push_back(flat.size());
+        g.cp.append_to(flat);
     }
+    glyph_offsets.push_back(flat.size());
 
-    const auto& raw = text.view();
-    const auto* data = reinterpret_cast<const byte_t*>(raw.data());
-    const size_t len = raw.size();
+    const text_layout lay = layout_text(flat.view(), w, wm);
 
-    int cx = x;
-    int cy = y;
-
-    const auto render_codepoint = [this, &style](const int px, const int py, const utf8_iterator& it) {
-        if (px >= 0 && px < term_w_ && py >= 0 && py < term_h_) {
-            bool skip = false;
-            for (const auto& clip: clip_stack_) {
-                if (px < clip.x || px >= clip.x + clip.w || py < clip.y || py >= clip.y + clip.h) {
-                    skip = true;
-                    break;
-                }
-            }
-            if (!skip) {
-                auto& cell = screen_.fast_cell_at(px, py);
-                cell.reset();
-                put_codepoint(*it, cell);
-                apply_style_to_cell(cell, style);
-            }
-        }
-        const int cw = it->display_width();
-        for (int ww = 1; ww < cw && px + ww < term_w_; ++ww) {
-            auto& next = screen_.fast_cell_at(px + ww, py);
-            next.reset();
-            next.automerge = true;
-        }
-        return max(1, cw);
-    };
-
-    if (wm == style::wrap_mode::character) {
-        for (utf8_iterator it(data, len); it != utf8_iterator(); ++it) {
-            if (is_line_break(*it)) {
-                cy += 1;
-                cx = x;
-                if (cy >= y + h) {
-                    break;
-                }
-                continue;
-            }
-            const int cpw = it->display_width();
-            if (cx + max(1, cpw) > x + w) {
-                cy += 1;
-                cx = x;
-                if (cy >= y + h) {
-                    break;
-                }
-            }
-            cx += render_codepoint(cx, cy, it);
-        }
-        if (out_end_x != nullptr) {
-            *out_end_x = cx;
-        }
-        if (out_end_y != nullptr) {
-            *out_end_y = cy;
-        }
-        return;
-    }
-
-    size_t pos = 0;
-    while (pos < len && cy < y + h) {
-        if (cx == x) {
-            while (pos < len && data[pos] == ' ') {
-                ++pos;
-            }
-            if (pos >= len) {
-                break;
-            }
-        }
-
-        const size_t word_start = pos;
-        size_t word_end = pos;
-        while (word_end < len && data[word_end] != ' ' && data[word_end] != '\n') {
-            const byte_t lead = data[word_end];
-            if ((lead & 0x80) == 0) {
-                ++word_end;
-            } else if ((lead & 0xE0) == 0xC0) {
-                word_end += 2;
-            } else if ((lead & 0xF0) == 0xE0) {
-                word_end += 3;
-            } else if ((lead & 0xF8) == 0xF0) {
-                word_end += 4;
-            } else {
-                ++word_end;
-            }
-        }
-
-        int word_w = 0;
-        for (utf8_iterator it(data + word_start, word_end - word_start); it != utf8_iterator(); ++it) {
-            word_w += it->display_width();
-        }
-
-        if (word_w == 0 && word_start < len && data[word_start] == ' ') {
-            if (cx + 1 > x + w) {
-                cy += 1;
-                cx = x;
-                if (cy >= y + h) {
-                    break;
-                }
-            }
-            cx += render_codepoint(cx, cy, utf8_iterator(reinterpret_cast<const byte_t*>(" "), 1));
-            ++pos;
+    size_t glyph_index = 0;
+    for (size_t row = 0; row < lay.lines.size(); ++row) {
+        if (compare_less(row, scroll_row)) {
             continue;
         }
-
-        const int space_w = (cx > x) ? 1 : 0;
-        if (cx > x && cx + space_w + word_w > x + w) {
-            cy += 1;
-            cx = x;
-            if (cy >= y + h) {
+        if (cy >= y + h) {
+            break;
+        }
+        const auto& line = lay.lines[row];
+        while (glyph_index + 1 < glyph_offsets.size() && glyph_offsets[glyph_index] < line.begin) {
+            ++glyph_index;
+        }
+        cx = x;
+        while (glyph_index + 1 < glyph_offsets.size() && glyph_offsets[glyph_index] < line.end) {
+            const auto& g = glyphs[glyph_index];
+            const int cw = max(1, g.cp.display_width());
+            if (cx + cw > x + w) {
                 break;
             }
-            pos = word_start;
-            while (pos < len && data[pos] == ' ') {
-                ++pos;
-            }
-            continue;
+            cx += draw_glyph(cx, cy, g.cp, *g.style);
+            ++glyph_index;
         }
+        cy += 1;
+    }
 
-        if (cx > x) {
-            cx += render_codepoint(cx, cy, utf8_iterator(reinterpret_cast<const byte_t*>(" "), 1));
-        }
-
-        if (word_w > w && cx == x) {
-            for (utf8_iterator it(data + word_start, word_end - word_start); it != utf8_iterator(); ++it) {
-                const int cpw = it->display_width();
-                if (cx + max(1, cpw) > x + w) {
-                    cy += 1;
-                    cx = x;
-                    if (cy >= y + h) {
-                        break;
-                    }
-                }
-                cx += render_codepoint(cx, cy, it);
-            }
-        } else {
-            for (utf8_iterator it(data + word_start, word_end - word_start); it != utf8_iterator(); ++it) {
-                cx += render_codepoint(cx, cy, it);
-            }
-        }
-
-        // The separator space was written explicitly above,
-        // so the source spaces that follow the word must be consumed here;
-        // otherwise every word boundary would be rendered with a double space.
-        pos = word_end;
-        while (pos < len && data[pos] == ' ') {
-            ++pos;
-        }
-        if (pos < len && data[pos] == '\n') {
-            ++pos;
-            cy += 1;
-            cx = x;
-            if (cy >= y + h) {
-                break;
-            }
-            while (pos < len && data[pos] == ' ') {
-                ++pos;
-            }
-        }
+    if (cy > y) {
+        cy -= 1;
     }
     if (out_end_x != nullptr) {
         *out_end_x = cx;
     }
     if (out_end_y != nullptr) {
         *out_end_y = cy;
+    }
+}
+
+void renderer::render_text_block(const int x, const int y, const int w, const int h, const string& text,
+                                 const tui::style& style, const style::wrap_mode wm, int* out_end_x, int* out_end_y,
+                                 const int scroll_row) {
+    vector<run_glyph> glyphs;
+    const auto& raw = text.view();
+    for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
+        glyphs.push_back(run_glyph{*it, &style});
+    }
+    render_glyph_run(x, y, w, h, glyphs, wm, scroll_row, out_end_x, out_end_y);
+}
+
+void renderer::apply_selection_overlay(const int x, const int y, const int /*w*/, const int h, const string& text,
+                                       const text_layout& lay, const size_t sel_begin, const size_t sel_end,
+                                       const int scroll_row) {
+    const auto& raw = text.view();
+    const auto* data = reinterpret_cast<const byte_t*>(raw.data());
+
+    for (size_t row = 0; row < lay.lines.size(); ++row) {
+        const int visible = static_cast<int>(row) - scroll_row;
+        if (visible < 0) {
+            continue;
+        }
+        if (visible >= h) {
+            break;
+        }
+        const auto& line = lay.lines[row];
+        if (line.end <= sel_begin || line.begin >= sel_end) {
+            continue;
+        }
+
+        int cx = x;
+        size_t pos = line.begin;
+        while (pos < line.end) {
+            const utf8_iterator it(data + pos, line.end - pos);
+            if (it == utf8_iterator()) {
+                break;
+            }
+            const int cw = max(1, it->display_width());
+            const bool selected = (pos >= sel_begin && pos < sel_end);
+            if (selected && y + visible >= 0 && y + visible < term_h_ && cx >= 0 && cx < term_w_ &&
+                !is_clipped(cx, y + visible)) {
+                auto& target = screen_.fast_cell_at(cx, y + visible);
+                target.inverted = true;
+            }
+            cx += cw;
+            pos += max<size_t>(1, it->utf8_length());
+        }
+    }
+}
+
+void renderer::render_rich_text(const int x, const int y, const int w, const int h, const vector<text_span>& spans,
+                                const tui::style& style, const style::wrap_mode wm, int* out_end_x, int* out_end_y) {
+    vector<tui::style> merged;
+    merged.reserve(spans.size());
+    for (const auto& span: spans) {
+        merged.push_back(tui::style::merge(style, span.style));
+    }
+
+    vector<run_glyph> glyphs;
+    for (size_t i = 0; i < spans.size(); ++i) {
+        const auto& raw = spans[i].content.view();
+        for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
+            glyphs.push_back(run_glyph{*it, &merged[i]});
+        }
+    }
+    render_glyph_run(x, y, w, h, glyphs, wm, 0, out_end_x, out_end_y);
+}
+
+void renderer::render_virtual_list(const element& el, const layout_rect& rect) {
+    if (rect.w <= 0 || rect.h <= 0) {
+        if (el.viewport_state() != nullptr) {
+            *static_cast<state<int>*>(el.viewport_state()) = 0;
+        }
+        return;
+    }
+
+    const int item_h = max(1, el.item_height());
+    const auto win = compute_virtual_window(el, rect.h);
+
+    if (el.scroll_y_state() != nullptr && el.scroll_y() != min(max(0, el.scroll_y()), win.max_scroll)) {
+        *static_cast<state<int>*>(el.scroll_y_state()) = min(max(0, el.scroll_y()), win.max_scroll);
+    }
+    if (el.viewport_state() != nullptr) {
+        auto* vp = static_cast<state<int>*>(el.viewport_state());
+        if (vp->value() != rect.h) {
+            *vp = rect.h;
+        }
+    }
+
+    if (!el.item_builder()) {
+        return;
+    }
+
+    clip_stack_.push_back(clip_rect{rect.x, rect.y, rect.w, rect.h});
+    apply_clear(rect.x, rect.y, rect.w, rect.h);
+
+    const int count = static_cast<int>(el.item_count());
+    for (int step = 0; step < win.visible; ++step) {
+        const int index = win.first + step;
+        if (index < 0 || index >= count) {
+            break;
+        }
+        const element item = el.item_builder()(static_cast<size_t>(index));
+        if (item.kind() == element::kind::empty) {
+            continue;
+        }
+        auto item_layout = compute_layout(item, rect.w, item_h);
+        const int offset_y = rect.y + step * item_h - win.skip;
+        for (auto& r: item_layout) {
+            r.x += rect.x;
+            r.y += offset_y;
+        }
+        int child_idx = 0;
+        render_subtree(item, item_layout, child_idx);
+    }
+
+    clip_stack_.pop_back();
+
+    if (win.content_h > rect.h && el.scroll_y_state() != nullptr) {
+        const int thumb_size = max(1, rect.h * rect.h / max(1, win.content_h));
+        const int ms = max(1, win.content_h - rect.h);
+        const int thumb_pos = (rect.h - thumb_size) * min(max(0, el.scroll_y()), win.max_scroll) / ms;
+
+        scrollbar_hits_.push_back({el.scroll_y_state(), rect.x + rect.w - 1, rect.y, rect.h, thumb_pos, thumb_size,
+                                   win.content_h, rect.x, rect.w, true});
+        for (int i = 0; i < rect.h; ++i) {
+            const int by = rect.y + i;
+            const int bx = rect.x + rect.w - 1;
+            if (bx >= 0 && bx < term_w_ && by >= 0 && by < term_h_) {
+                auto& cell = screen_.fast_cell_at(bx, by);
+                cell.character = (i >= thumb_pos && i < thumb_pos + thumb_size) ? "\xe2\x96\x88" : "\xe2\x94\x82";
+                cell.foreground = theme_.border;
+            }
+        }
     }
 }
 

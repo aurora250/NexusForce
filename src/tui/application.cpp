@@ -103,6 +103,36 @@ int application::run() {
     return exit_code_;
 }
 
+void application::suspend() {
+    if (!running_ || suspended_ || input_ == nullptr) {
+        return;
+    }
+    input_->stop();
+    console_.enable_bracketed_paste(false);
+    console_.enable_mouse(false);
+    console_.enable_alternate_screen_buffer(false);
+    console_.hide_cursor(false);
+    console_.flush();
+    suspended_ = true;
+}
+
+void application::resume() {
+    if (!running_ || !suspended_ || input_ == nullptr) {
+        return;
+    }
+    console_.enable_virtual_terminal_processing();
+    console_.enable_alternate_screen_buffer();
+    console_.hide_cursor();
+    console_.enable_mouse();
+    console_.enable_bracketed_paste();
+    input_->start();
+    if (reconiler_ != nullptr) {
+        reconiler_->invalidate();
+        reconiler_->flush();
+    }
+    suspended_ = false;
+}
+
 void application::quit(const int exit_code) {
     exit_code_ = exit_code;
     ctx_.stop();

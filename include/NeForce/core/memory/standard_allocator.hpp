@@ -357,8 +357,6 @@ NEFORCE_CONSTEXPR20 void deallocate(void* ptr, inner::alloc_size_t bytes) noexce
  */
 template <typename T>
 class standard_allocator {
-    static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
-
 public:
     using value_type = T;                  ///< 元素类型
     using pointer = T*;                    ///< 指针类型
@@ -404,6 +402,7 @@ public:
      * 分配 n 个 T 类型的连续内存空间。
      */
     NEFORCE_ALLOC_NODISCARD NEFORCE_CONSTEXPR20 static pointer allocate(const size_type n) {
+        static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
         const size_type alloc_size = sizeof(value_type) * n;
         NEFORCE_DEBUG_VERIFY(alloc_size <= static_cast<size_type>(-1), "allocation will cause memory overflow.");
         try {
@@ -428,6 +427,7 @@ public:
      * @note p 必须为 nullptr 或先前由 allocate() 返回的指针
      */
     NEFORCE_CONSTEXPR20 static void deallocate(pointer p, const size_type n) noexcept {
+        static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
         NEFORCE_DEBUG_VERIFY(p != nullptr || n == 0, "null pointer cannot point to a block of non-zero size");
         _NEFORCE deallocate<align_size>(p, n * sizeof(value_type));
     }

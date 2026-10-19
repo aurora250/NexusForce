@@ -55,6 +55,16 @@ ctx_(ctx),
 event_dispatcher_(focus_mgr_),
 renderer_(current_screen_, theme_, term_w_, term_h_) {
     event_dispatcher_.set_dirty_callback([this] { mark_dirty(); });
+
+    auto depth = color_depth::ansi256;
+    if (console_.supports_truecolor()) {
+        depth = color_depth::truecolor;
+    } else if (!console_.supports_256_color()) {
+        depth = color_depth::ansi16;
+    }
+    current_screen_.set_color_depth(depth);
+    prev_screen_.set_color_depth(depth);
+
     refresh_term_size();
     current_screen_.resize(term_w_, term_h_);
     prev_screen_.resize(term_w_, term_h_);
@@ -74,12 +84,31 @@ function<void(component_base*)> reconciler::schedule_render_callback() {
 }
 
 void reconciler::refresh_term_size() {
+    if (forced_w_ > 0 && forced_h_ > 0) {
+        term_w_ = forced_w_;
+        term_h_ = forced_h_;
+        return;
+    }
     const auto sz = console_.get_console_size();
     if (sz.width > 0 && sz.height > 0) {
         term_w_ = sz.width;
         term_h_ = sz.height;
     }
 }
+
+void reconciler::set_term_size(const int width, const int height) noexcept {
+    forced_w_ = width;
+    forced_h_ = height;
+    mark_dirty();
+}
+
+void reconciler::set_color_depth(const color_depth depth) {
+    current_screen_.set_color_depth(depth);
+    prev_screen_.set_color_depth(depth);
+    mark_dirty();
+}
+
+color_depth reconciler::color_depth_mode() const noexcept { return current_screen_.color_depth_mode(); }
 
 void reconciler::setup_tree(component_base* comp) {
     comp->strand_ = &strand_;
@@ -114,6 +143,12 @@ void reconciler::schedule_update(component_base* comp) {
 }
 
 void reconciler::mark_dirty() { dirty_ = true; }
+
+void reconciler::invalidate() {
+    painted_w_ = 0;
+    painted_h_ = 0;
+    dirty_ = true;
+}
 
 void reconciler::set_theme(const theme& t) {
     theme_ = t;
@@ -197,7 +232,13 @@ void reconciler::flush() {
     if (repaint_all) {
         output += "\033[2J";
     }
+    if (synchronized_output_) {
+        output += "\033[?2026h";
+    }
     output += current_screen_.to_string(prev_screen_);
+    if (synchronized_output_) {
+        output += "\033[?2026l";
+    }
 
     prev_screen_ = current_screen_;
     prev_tree_ = move(new_tree);
@@ -207,7 +248,11 @@ void reconciler::flush() {
     dirty_ = false;
 
     if (!output.empty()) {
-        console_.print_string(output);
+        if (output_sink_) {
+            output_sink_(output.view());
+        } else {
+            console_.print_string(output);
+        }
     }
 }
 

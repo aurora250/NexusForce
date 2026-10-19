@@ -5573,7 +5573,7 @@ TEST_F(FlatUnorderedMapTest, ErasingAheadDuringIterationNeverYieldsErasedElement
         map[i] = i;
     }
 
-    std::vector<bool> erased(256, false);
+    vector<bool> erased(256, false);
     for (auto it = map.begin(); it != map.end(); ++it) {
         EXPECT_FALSE(erased[static_cast<size_t>(it->first)]) << "yielded erased key " << it->first;
         const size_t ahead = static_cast<size_t>(it->first + 128) % 256u;

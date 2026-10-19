@@ -62,9 +62,9 @@ NEFORCE_NODISCARD constexpr type_id type_id_for() noexcept {
         return type_name_v<T>.to_hash();
     } else {
 #ifdef NEFORCE_COMPILER_MSVC
-        return FNV_hash_string(__FUNCSIG__, sizeof(__FUNCSIG__) - 1);
+        return FNV_hash_string64(__FUNCSIG__, sizeof(__FUNCSIG__) - 1);
 #else
-        return FNV_hash_string(__PRETTY_FUNCTION__, sizeof(__PRETTY_FUNCTION__) - 1);
+        return FNV_hash_string64(__PRETTY_FUNCTION__, sizeof(__PRETTY_FUNCTION__) - 1);
 #endif
     }
 }

@@ -1272,7 +1272,7 @@ TEST(RandomDistributionTest, LogUniformIsUniformOnLogScale) {
         ASSERT_GE(value, 1.0);
         ASSERT_LT(value, 1000.0);
 
-        const double position = std::log(value) / std::log(1000.0);
+        const double position = static_cast<double>(logarithm_e(static_cast<decimal_t>(value)) / logarithm_e(1000.0));
         const int bucket = static_cast<int>(position * 10.0);
         ASSERT_GE(bucket, 0);
         ASSERT_LT(bucket, 10);

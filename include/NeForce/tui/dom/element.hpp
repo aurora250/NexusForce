@@ -26,6 +26,16 @@ template <typename T>
 class state;
 /// @endcond
 
+/**
+ * @brief 富文本片段
+ *
+ * 一段具有统一样式的文本。多个片段拼接成一行富文本，
+ * 使同一行内可以混排不同颜色、粗体、下划线等样式。
+ */
+struct text_span {
+    string content;   ///< 片段文本，可包含 `\n` 表示硬换行
+    tui::style style; ///< 片段样式，覆盖富文本元素的基础样式
+};
 
 /**
  * @brief 虚拟UI元素
@@ -40,22 +50,25 @@ public:
      * @brief 元素类型枚举
      */
     enum class kind : uint8_t {
-        empty,       ///< 空元素
-        vbox,        ///< 垂直布局容器
-        hbox,        ///< 水平布局容器
-        zstack,      ///< 层叠容器
-        text,        ///< 文本节点
-        spacer,      ///< 弹性占位
-        separator,   ///< 分割线
-        button,      ///< 按钮
-        text_input,  ///< 文本输入框
-        checkbox,    ///< 复选框
-        scroll_view, ///< 滚动区域
-        canvas,      ///< 自定义绘制
-        when,        ///< 条件渲染
-        each,        ///< 列表渲染
-        flexbox,     ///< CSS-flexbox 弹性容器
-        gridbox,     ///< 网格布局容器
+        empty,        ///< 空元素
+        vbox,         ///< 垂直布局容器
+        hbox,         ///< 水平布局容器
+        zstack,       ///< 层叠容器
+        text,         ///< 文本节点
+        rich_text,    ///< 富文本节点
+        virtual_list, ///< 虚拟列表节点
+        spacer,       ///< 弹性占位
+        separator,    ///< 分割线
+        button,       ///< 按钮
+        text_input,   ///< 文本输入框
+        checkbox,     ///< 复选框
+        scroll_view,  ///< 滚动区域
+        canvas,       ///< 自定义绘制
+        panel,        ///< 带边框的面板容器
+        when,         ///< 条件渲染
+        each,         ///< 列表渲染
+        flexbox,      ///< CSS-flexbox 弹性容器
+        gridbox,      ///< 网格布局容器
     };
 
     element();
@@ -80,6 +93,87 @@ public:
     NEFORCE_NODISCARD const tui::style& style() const;
     NEFORCE_NODISCARD const box_props& layout() const;
     NEFORCE_NODISCARD const string& text() const;
+
+    /**
+     * @brief 获取富文本片段列表
+     * @return 片段列表
+     */
+    NEFORCE_NODISCARD const vector<text_span>& spans() const;
+
+    /**
+     * @brief 获取虚拟列表的项数量
+     * @return 项数量
+     */
+    NEFORCE_NODISCARD size_t item_count() const noexcept;
+
+    /**
+     * @brief 获取虚拟列表的固定项高度
+     * @return 每项占用的行数
+     */
+    NEFORCE_NODISCARD int item_height() const noexcept;
+
+    /**
+     * @brief 获取虚拟列表的项构建回调
+     * @return 以项索引为参数的元素构建回调
+     */
+    NEFORCE_NODISCARD const function<element(size_t)>& item_builder() const;
+
+    /**
+     * @brief 获取回写布局矩形的状态指针
+     * @return `state<layout_rect>*` 指针，未设置时为 nullptr
+     */
+    NEFORCE_NODISCARD void* rect_state() const noexcept;
+
+    /**
+     * @brief 绑定回写布局矩形的状态
+     * @param s `state<layout_rect>` 指针
+     * @return 自身引用
+     *
+     * 渲染器会把该元素最终占用的矩形写入状态，供需要知道自身尺寸的自定义组件使用。
+     */
+    element& with_rect_state(void* s);
+
+    /**
+     * @brief 设置纵向滚动偏移
+     * @param y 行偏移
+     * @return 自身引用
+     *
+     * 文本输入框用它实现多行文本的垂直滚动。
+     */
+    element& with_scroll_y(int y);
+
+    /**
+     * @brief 获取选中区间起点
+     * @return 字节偏移
+     */
+    NEFORCE_NODISCARD size_t selection_begin() const noexcept;
+
+    /**
+     * @brief 获取选中区间终点
+     * @return 字节偏移
+     */
+    NEFORCE_NODISCARD size_t selection_end() const noexcept;
+
+    /**
+     * @brief 设置选中区间
+     * @param begin 起点字节偏移
+     * @param end 终点字节偏移
+     * @return 自身引用
+     */
+    element& with_selection(size_t begin, size_t end);
+
+    /**
+     * @brief 获取虚拟列表回写可视高度的状态指针
+     * @return `state<int>*` 指针，未设置时为 nullptr
+     */
+    NEFORCE_NODISCARD void* viewport_state() const noexcept;
+
+    /**
+     * @brief 绑定回写可视高度的状态
+     * @param s `state<int>` 指针
+     * @return 自身引用
+     */
+    element& with_viewport_state(void* s);
     NEFORCE_NODISCARD const function<void()>& on_click() const;
     NEFORCE_NODISCARD int flex() const noexcept;
     NEFORCE_NODISCARD void* state_ref() const noexcept;
@@ -122,6 +216,28 @@ public:
     static element hbox(vector<element> children, box_props props = {});
     static element zstack(vector<element> children);
     static element text(string content, tui::style style = {}, style::wrap_mode wrap = style::wrap_mode::none);
+
+    /**
+     * @brief 富文本元素
+     * @param spans 样式片段列表
+     * @param style 基础样式，片段样式在其之上合并
+     * @param wrap 换行模式
+     * @return 富文本元素
+     */
+    static element rich_text(vector<text_span> spans, tui::style style = {},
+                             style::wrap_mode wrap = style::wrap_mode::word);
+
+    /**
+     * @brief 虚拟列表元素
+     * @param item_count 项总数
+     * @param item_height 每项占用的固定行数
+     * @param builder 项构建回调，仅对可视窗口内的索引调用
+     * @param scroll_y 初始纵向滚动偏移
+     * @return 虚拟列表元素
+     */
+    static element virtual_list(size_t item_count, int item_height, function<element(size_t)> builder,
+                                int scroll_y = 0);
+
     static element spacer(int flex = 1);
     static element separator();
     static element button(string label, function<void()> on_click, tui::style style = {},
@@ -137,8 +253,22 @@ public:
      */
     element& with_style(const tui::style& s);
 
-    /// @brief 自定义绘制区域
-    static element canvas(function<void(int, int, int, int)> draw_function, tui::style style = {});
+    /**
+     * @brief 自定义绘制区域
+     * @param draw_function 绘制函数
+     * @param style 绘制样式
+     */
+    static element canvas(function<void(int, int, int, int)> draw_function, tui::style style = tui::style{});
+
+    /**
+     * @brief 面板容器
+     * @param child 子元素
+     * @param style 样式，`border` 决定是否绘制边框，`padding` 决定内边距
+     * @return 面板元素
+     *
+     * 面板自身占用一个布局矩形，因此可以绘制边框并把子元素排布在内边距之内。
+     */
+    static element panel(element child, tui::style style = {});
 
     /**
      * @brief CSS-flexbox 弹性容器

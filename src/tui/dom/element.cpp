@@ -4,11 +4,13 @@ NEFORCE_BEGIN_TUI__
 
 struct element::node {
     string text;
+    vector<text_span> spans;
     tui::style style;
     box_props layout;
     vector<element> children;
     function<void()> on_click;
     function<void(int, int, int, int)> draw_function;
+    function<element(size_t)> item_builder;
     string placeholder;
     mutable vector<layout_rect> cached_layout_;
 
@@ -16,14 +18,20 @@ struct element::node {
     component_base* owner = nullptr;
     void* scroll_x_state = nullptr;
     void* scroll_y_state = nullptr;
+    void* viewport_state = nullptr;
+    void* rect_state = nullptr;
 
     size_t key = 0;
     size_t cursor_pos = 0;
+    size_t selection_begin = 0;
+    size_t selection_end = 0;
+    size_t item_count = 0;
 
     int flex = 0;
     int scroll_x = 0;
     int scroll_y = 0;
     int grid_columns = 0;
+    int item_height = 1;
     mutable int cached_constraint_w_ = -1;
     mutable int cached_constraint_h_ = -1;
 
@@ -92,6 +100,47 @@ const style& element::style() const { return node_->style; }
 const box_props& element::layout() const { return node_->layout; }
 
 const string& element::text() const { return node_->text; }
+
+const vector<text_span>& element::spans() const { return node_->spans; }
+
+size_t element::item_count() const noexcept { return node_->item_count; }
+
+int element::item_height() const noexcept { return node_->item_height; }
+
+const function<element(size_t)>& element::item_builder() const { return node_->item_builder; }
+
+void* element::viewport_state() const noexcept { return node_->viewport_state; }
+
+void* element::rect_state() const noexcept { return node_->rect_state; }
+
+element& element::with_rect_state(void* s) {
+    ensure_node();
+    node_->rect_state = s;
+    return *this;
+}
+
+element& element::with_scroll_y(const int y) {
+    ensure_node();
+    node_->scroll_y = y;
+    return *this;
+}
+
+size_t element::selection_begin() const noexcept { return node_->selection_begin; }
+
+size_t element::selection_end() const noexcept { return node_->selection_end; }
+
+element& element::with_selection(const size_t begin, const size_t end) {
+    ensure_node();
+    node_->selection_begin = begin;
+    node_->selection_end = end;
+    return *this;
+}
+
+element& element::with_viewport_state(void* s) {
+    ensure_node();
+    node_->viewport_state = s;
+    return *this;
+}
 
 const function<void()>& element::on_click() const { return node_->on_click; }
 
@@ -211,6 +260,28 @@ element element::text(string content, tui::style style, const style::wrap_mode w
     return el;
 }
 
+element element::rich_text(vector<text_span> spans, tui::style style, const style::wrap_mode wrap) {
+    element el;
+    el.node_->kind = kind::rich_text;
+    el.node_->spans = move(spans);
+    el.node_->style = move(style);
+    if (wrap != style::wrap_mode::none) {
+        el.node_->style.text_wrap = wrap;
+    }
+    return el;
+}
+
+element element::virtual_list(const size_t item_count, const int item_height, function<element(size_t)> builder,
+                              const int scroll_y) {
+    element el;
+    el.node_->kind = kind::virtual_list;
+    el.node_->item_count = item_count;
+    el.node_->item_height = (item_height > 0) ? item_height : 1;
+    el.node_->item_builder = move(builder);
+    el.node_->scroll_y = scroll_y;
+    return el;
+}
+
 element element::spacer(const int flex) {
     element el;
     el.node_->kind = kind::spacer;
@@ -263,6 +334,14 @@ element element::scroll_view(element child, tui::style style, const int scroll_x
     el.node_->style = move(style);
     el.node_->scroll_x = scroll_x;
     el.node_->scroll_y = scroll_y;
+    return el;
+}
+
+element element::panel(element child, tui::style style) {
+    element el;
+    el.node_->kind = kind::panel;
+    el.node_->children.push_back(move(child));
+    el.node_->style = move(style);
     return el;
 }
 

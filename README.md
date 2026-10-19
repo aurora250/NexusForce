@@ -308,6 +308,19 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`screen`** - 终端帧缓冲，逐 Cell 差分生成最小 ANSI 转义序列
 - **`input_driver`** - 跨平台终端输入驱动，监听 stdin 并分发按键/鼠标/粘贴事件
 - **`input_parser`** - 无 I/O 的输入解析状态机，识别 ASCII/UTF-8、控制键、CSI/SS3、带修饰键序列、Alt+字符、SGR 鼠标与括号粘贴
+- **`headless`** - 无终端驱动：固定尺寸、帧输出回收到内存、字节级输入注入，作为快照测试与离屏渲染底座
+- **`rich_text`** - `text_span` 富文本元素，同一行内混排多种样式（颜色/粗体/斜体/删除线）
+- **`text_layout`** - `layout_text` / `text_display_width` / `caret_position`，渲染器、布局与编辑器光标共用的分行实现
+- **`virtual_list`** - 只渲染可视窗口内项的虚拟列表，支持贴底自动跟随、滚轮与键盘滚动
+- **`panel`** - 自带边框与内边距的面板元素，承载对话框与卡片
+- **`text_area`** - 多行编辑器：软换行、选区、撤销重做、输入历史与光标随动滚动
+- **`select_list`** - 可过滤的候选列表（命令面板 / 补全弹层）
+- **`approve_prompt`** - 权限确认对话框（允许 / 拒绝 / 总是允许）
+- **`status_indicator`** - 旋转 + 文案 + 耗时的运行状态行
+- **`streaming_text`** - 高频追加文本的帧内合并提交
+- **`markdown` / `markdown_cache`** - Markdown 渲染与「文本+宽度」维度的元素树缓存，重复重绘同一段 Markdown 时复用解析结果（解析本体在 `core/file/md`）
+- **`code_block` / `diff`** - 带行号与着色的代码块、unified diff 渲染器
+- **`color_depth` / `light_theme`** - 16 色 / 256 色 / 真彩输出与亮色主题，同步输出按帧原子提交
 - **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
 - **`style` / `theme`** - 样式系统 + 语义化主题，预置暗色主题
 - **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染

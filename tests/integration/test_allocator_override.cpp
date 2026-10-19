@@ -120,7 +120,7 @@ TEST(AllocatorOverride, StandardContainersUseThePool) {
     memory_pool& pool = system_memory_pool();
     const size_t before = pool.stats().os_map_calls;
     {
-        std::vector<string> lines;
+        vector<string> lines;
         for (int index = 0; index < 20000; ++index) {
             lines.emplace_back(static_cast<size_t>(index % 97) + 1, static_cast<char>('a' + (index % 26)));
         }

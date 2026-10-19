@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/tui/dom/element.hpp"
+#include "NeForce/tui/dom/text_layout.hpp"
 #include "NeForce/tui/dom/style.hpp"
 #include "NeForce/tui/screen.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -96,7 +97,22 @@ public:
      * @param out_end_y 输出结束行
      */
     void render_text_block(int x, int y, int w, int h, const string& text, const tui::style& style, style::wrap_mode wm,
-                           int* out_end_x = nullptr, int* out_end_y = nullptr);
+                           int* out_end_x = nullptr, int* out_end_y = nullptr, int scroll_row = 0);
+
+    /**
+     * @brief 渲染富文本块
+     * @param x 起始列
+     * @param y 起始行
+     * @param w 宽度约束
+     * @param h 高度约束
+     * @param spans 富文本片段列表
+     * @param style 基础样式，片段样式在其之上合并
+     * @param wm 换行模式
+     * @param out_end_x 输出结束列
+     * @param out_end_y 输出结束行
+     */
+    void render_rich_text(int x, int y, int w, int h, const vector<text_span>& spans, const tui::style& style,
+                          style::wrap_mode wm, int* out_end_x = nullptr, int* out_end_y = nullptr);
 
     /**
      * @brief 绘制边框
@@ -191,6 +207,11 @@ private:
         int x, y, w, h;
     };
 
+    struct run_glyph {
+        codepoint cp;
+        const tui::style* style;
+    };
+
     screen& screen_;
     const theme& theme_;
     int term_w_;
@@ -200,6 +221,14 @@ private:
     bool has_focus_ = false;
 
     void render_subtree(const element& el, const vector<layout_rect>& layout, int& idx);
+
+    int draw_glyph(int x, int y, const codepoint& cp, const tui::style& style);
+    void apply_selection_overlay(int x, int y, int w, int h, const string& text, const text_layout& lay,
+                                 size_t sel_begin, size_t sel_end, int scroll_row);
+    NEFORCE_NODISCARD bool is_clipped(int x, int y) const noexcept;
+    void render_glyph_run(int x, int y, int w, int h, const vector<run_glyph>& glyphs, style::wrap_mode wm,
+                          int scroll_row, int* out_end_x, int* out_end_y);
+    void render_virtual_list(const element& el, const layout_rect& rect);
 };
 
 /**

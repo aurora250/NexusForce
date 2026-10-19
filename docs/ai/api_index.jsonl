@@ -235,6 +235,10 @@
 {"name": "anycast_exception", "kind": "struct", "ns": "neforce", "header": "NeForce/core/utility/any.hpp", "brief": "any转换异常"}
 {"name": "application", "kind": "class", "ns": "neforce::tui", "header": "NeForce/tui/application.hpp", "brief": "TUI应用程序入口"}
 {"name": "apply", "kind": "function", "ns": "neforce", "header": "NeForce/core/functional/apply.hpp", "brief": "将元组元素解包作为参数调用函数"}
+{"name": "approve_prompt", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/approve_prompt.hpp", "brief": "创建确认对话框组件"}
+{"name": "approve_prompt_option", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/approve_prompt.hpp", "brief": "确认对话框配置"}
+{"name": "approve_prompt_view", "kind": "class", "ns": "neforce::tui::components", "header": "NeForce/tui/component/approve_prompt.hpp", "brief": "确认对话框组件"}
+{"name": "approve_result", "kind": "enum", "ns": "neforce::tui::components", "header": "NeForce/tui/component/approve_prompt.hpp", "brief": "确认结果"}
 {"name": "arccosine", "kind": "function", "ns": "neforce", "header": "NeForce/core/numeric/math.hpp", "brief": "计算反余弦值"}
 {"name": "arcsine", "kind": "function", "ns": "neforce", "header": "NeForce/core/numeric/math.hpp", "brief": "计算反正弦值"}
 {"name": "arctangent", "kind": "function", "ns": "neforce", "header": "NeForce/core/numeric/math.hpp", "brief": "计算反正切值"}
@@ -456,6 +460,7 @@
 {"name": "cancellation_slot", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/cancellation_slot.hpp", "brief": "异步操作取消槽"}
 {"name": "cancellation_token", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/generator.hpp", "brief": "取消令牌"}
 {"name": "cancellation_token::check_awaiter", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/generator.hpp", "brief": "取消检查等待器"}
+{"name": "caret_position", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/text_layout.hpp", "brief": "计算字节偏移所在的行与列"}
 {"name": "catch_event", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/renderer.hpp", "brief": "在事件传递到子组件前拦截处理"}
 {"name": "cbegin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取const容器的const起始迭代器"}
 {"name": "cbegin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取const数组的const起始指针"}
@@ -533,10 +538,13 @@
 {"name": "co_spawn_task::promise_type", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/co_spawn.hpp", "brief": ""}
 {"name": "cocktail_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "鸡尾酒排序（双向冒泡排序）"}
 {"name": "cocktail_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "鸡尾酒排序（默认升序）"}
+{"name": "code_block", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/code_block.hpp", "brief": "创建代码块元素"}
+{"name": "code_block_option", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/code_block.hpp", "brief": "代码块配置"}
 {"name": "codepoint", "kind": "class", "ns": "neforce", "header": "NeForce/core/string/codepoint.hpp", "brief": "Unicode码点包装类"}
 {"name": "collapsible", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/collapsible.hpp", "brief": "创建可折叠区域"}
 {"name": "color", "kind": "class", "ns": "neforce", "header": "NeForce/core/utility/color.hpp", "brief": "RGB颜色类"}
 {"name": "color", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/element.hpp", "brief": "前景色装饰器"}
+{"name": "color_depth", "kind": "enum", "ns": "neforce::tui", "header": "NeForce/tui/screen.hpp", "brief": "终端颜色深度"}
 {"name": "column_meta", "kind": "struct", "ns": "neforce", "header": "NeForce/db/db_interface.hpp", "brief": "列元数据"}
 {"name": "common_adaptor", "kind": "struct", "ns": "neforce::ranges::views", "header": "NeForce/core/iterator/ranges.hpp", "brief": ""}
 {"name": "common_adaptor_closure", "kind": "struct", "ns": "neforce::ranges::views", "header": "NeForce/core/iterator/ranges.hpp", "brief": ""}
@@ -687,6 +695,10 @@
 {"name": "detected_or", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "检测Op<Args...>是否有效，如果无效则使用Default类型"}
 {"name": "detected_or_t", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "detected_or的便捷别名，返回检测到的类型或默认类型"}
 {"name": "device_exception", "kind": "struct", "ns": "neforce", "header": "NeForce/core/exception/system_exception.hpp", "brief": "设备行为异常"}
+{"name": "diff_kind", "kind": "enum", "ns": "neforce::tui", "header": "NeForce/tui/dom/diff.hpp", "brief": "差异行类型"}
+{"name": "diff_line", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/diff.hpp", "brief": "结构化差异行"}
+{"name": "diff_view", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/diff.hpp", "brief": "渲染结构化差异"}
+{"name": "diff_view_option", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/diff.hpp", "brief": "差异视图配置"}
 {"name": "dim", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/element.hpp", "brief": "暗色装饰器"}
 {"name": "dimensions", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/screen.hpp", "brief": "终端尺寸"}
 {"name": "disjunction", "kind": "struct", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "类型集合的逻辑或操作"}
@@ -1041,6 +1053,7 @@
 {"name": "hazard_pointer_obj", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/hazard_ptr.hpp", "brief": "险象指针对象模板"}
 {"name": "hazard_pointer_obj_base", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/hazard_ptr.hpp", "brief": "险象指针对象基类"}
 {"name": "hazard_pointer_record", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/hazard_ptr.hpp", "brief": "险象指针记录"}
+{"name": "headless", "kind": "class", "ns": "neforce::tui", "header": "NeForce/tui/headless.hpp", "brief": "无终端应用驱动"}
 {"name": "health_check_filter", "kind": "class", "ns": "neforce::http", "header": "NeForce/network/http/health_check.hpp", "brief": "健康检查端点过滤器"}
 {"name": "hecto", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/numeric/ratio.hpp", "brief": "百（10^2）"}
 {"name": "hexadecimal", "kind": "struct", "ns": "neforce", "header": "NeForce/core/utility/hexadecimal.hpp", "brief": "十六进制数值包装类"}
@@ -1386,6 +1399,7 @@
 {"name": "latch", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/latch.hpp", "brief": "闩锁类"}
 {"name": "launch", "kind": "enum", "ns": "neforce", "header": "NeForce/core/async/future.hpp", "brief": "异步启动策略枚举"}
 {"name": "layout_rect", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/layout_types.hpp", "brief": "布局矩形"}
+{"name": "layout_text", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/text_layout.hpp", "brief": "计算文本排版"}
 {"name": "lazy_thread", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/lazy_thread.hpp", "brief": "延迟启动线程类"}
 {"name": "lb_backend", "kind": "struct", "ns": "neforce::http", "header": "NeForce/network/http/load_balancer.hpp", "brief": "负载均衡后端节点"}
 {"name": "lb_strategy", "kind": "enum", "ns": "neforce::http", "header": "NeForce/network/http/load_balancer.hpp", "brief": "负载均衡策略"}
@@ -1488,6 +1502,14 @@
 {"name": "map", "kind": "function", "ns": "neforce", "header": "NeForce/core/container/map.hpp", "brief": ""}
 {"name": "map", "kind": "function", "ns": "neforce", "header": "NeForce/core/container/map.hpp", "brief": ""}
 {"name": "map::value_compare", "kind": "struct", "ns": "neforce", "header": "NeForce/core/container/map.hpp", "brief": "值比较函数对象"}
+{"name": "markdown", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/markdown.hpp", "brief": "渲染 Markdown 文本"}
+{"name": "markdown_builder", "kind": "class", "ns": "neforce", "header": "NeForce/core/file/md/markdown_builder.hpp", "brief": "Markdown 构建器"}
+{"name": "markdown_builder_option", "kind": "struct", "ns": "neforce", "header": "NeForce/core/file/md/markdown_builder.hpp", "brief": "构建选项"}
+{"name": "markdown_cache", "kind": "class", "ns": "neforce::tui", "header": "NeForce/tui/dom/markdown.hpp", "brief": "Markdown 渲染缓存"}
+{"name": "markdown_document", "kind": "struct", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "Markdown 文档"}
+{"name": "markdown_option", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/markdown.hpp", "brief": "Markdown 渲染配置"}
+{"name": "markdown_parser", "kind": "class", "ns": "neforce", "header": "NeForce/core/file/md/markdown_parser.hpp", "brief": "Markdown 解析器"}
+{"name": "markdown_parser_option", "kind": "struct", "ns": "neforce", "header": "NeForce/core/file/md/markdown_parser.hpp", "brief": "解析选项"}
 {"name": "mask_from_to", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/bit.hpp", "brief": "生成从from到to的位掩码"}
 {"name": "match_bytes", "kind": "function", "ns": "neforce::simd", "header": "NeForce/core/simd/bytes.hpp", "brief": "逐字节比较两个 128-bit SIMD 向量的相等性"}
 {"name": "match_lanes", "kind": "function", "ns": "neforce::simd", "header": "NeForce/core/simd/memory.hpp", "brief": ""}
@@ -1514,6 +1536,17 @@
 {"name": "md5", "kind": "function", "ns": "neforce", "header": "NeForce/core/encrypt/md5.hpp", "brief": "MD5哈希便捷函数（字符串版本）"}
 {"name": "md5", "kind": "function", "ns": "neforce", "header": "NeForce/core/encrypt/md5.hpp", "brief": "MD5哈希便捷函数（字节视图版本）"}
 {"name": "md5", "kind": "function", "ns": "neforce", "header": "NeForce/core/encrypt/md5.hpp", "brief": "MD5哈希便捷函数（字节向量版本）"}
+{"name": "md_align", "kind": "enum", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "表格列对齐"}
+{"name": "md_block", "kind": "struct", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "块级节点"}
+{"name": "md_block_kind", "kind": "enum", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "块级节点类型"}
+{"name": "md_empty", "kind": "function", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "判断文档是否为空"}
+{"name": "md_exception", "kind": "struct", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "Markdown 格式操作失败"}
+{"name": "md_find_reference", "kind": "function", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "按标签查找链接引用定义"}
+{"name": "md_inline", "kind": "struct", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "行内节点"}
+{"name": "md_inline_kind", "kind": "enum", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "行内节点类型"}
+{"name": "md_inlines", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "行内节点列表"}
+{"name": "md_plain_text", "kind": "function", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "提取块级或行内节点的纯文本"}
+{"name": "md_reference", "kind": "struct", "ns": "neforce", "header": "NeForce/core/file/md/markdown_value.hpp", "brief": "链接引用定义"}
 {"name": "mdc", "kind": "class", "ns": "neforce", "header": "NeForce/logging/log_event.hpp", "brief": "Mapped Diagnostic Context，线程局部上下文"}
 {"name": "median", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/compare.hpp", "brief": "返回三个值的中位数"}
 {"name": "median", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/compare.hpp", "brief": "返回三个值的中位数"}
@@ -1764,8 +1797,8 @@
 {"name": "operator\"\"_uuid", "kind": "function", "ns": "neforce::literals", "header": "NeForce/core/utility/uuid.hpp", "brief": "UUID字面量运算符"}
 {"name": "operator%", "kind": "function", "ns": "neforce", "header": "NeForce/core/time/duration.hpp", "brief": "取模运算符（持续时间 % 标量）"}
 {"name": "operator%", "kind": "function", "ns": "neforce", "header": "NeForce/core/time/duration.hpp", "brief": "取模运算符（持续时间 % 持续时间）"}
-{"name": "operator%=", "kind": "function", "ns": "neforce::uint128_t", "header": "NeForce/core/numeric/int128.hpp", "brief": "取模赋值"}
 {"name": "operator%=", "kind": "function", "ns": "neforce::int128_t", "header": "NeForce/core/numeric/int128.hpp", "brief": "取模赋值"}
+{"name": "operator%=", "kind": "function", "ns": "neforce::uint128_t", "header": "NeForce/core/numeric/int128.hpp", "brief": "取模赋值"}
 {"name": "operator&", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/future.hpp", "brief": ""}
 {"name": "operator&", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/memory_order.hpp", "brief": "内存顺序与修饰符的与操作符"}
 {"name": "operator&", "kind": "function", "ns": "neforce", "header": "NeForce/core/file/file_constants.hpp", "brief": ""}
@@ -1810,8 +1843,8 @@
 {"name": "operator-", "kind": "function", "ns": "neforce", "header": "NeForce/core/time/time_point.hpp", "brief": "减法运算符（时间点 - 时间点）"}
 {"name": "operator/", "kind": "function", "ns": "neforce", "header": "NeForce/core/time/duration.hpp", "brief": "除法运算符（持续时间 / 标量）"}
 {"name": "operator/", "kind": "function", "ns": "neforce", "header": "NeForce/core/time/duration.hpp", "brief": "除法运算符（持续时间 / 持续时间）"}
-{"name": "operator/=", "kind": "function", "ns": "neforce::uint128_t", "header": "NeForce/core/numeric/int128.hpp", "brief": "除法赋值"}
 {"name": "operator/=", "kind": "function", "ns": "neforce::int128_t", "header": "NeForce/core/numeric/int128.hpp", "brief": "除法赋值"}
+{"name": "operator/=", "kind": "function", "ns": "neforce::uint128_t", "header": "NeForce/core/numeric/int128.hpp", "brief": "除法赋值"}
 {"name": "operator<", "kind": "function", "ns": "neforce", "header": "NeForce/core/interface/icommon.hpp", "brief": ""}
 {"name": "operator<", "kind": "function", "ns": "neforce", "header": "NeForce/core/iterator/normal_iterator.hpp", "brief": "小于比较运算符"}
 {"name": "operator<", "kind": "function", "ns": "neforce", "header": "NeForce/core/iterator/normal_iterator.hpp", "brief": "小于比较运算符"}
@@ -1962,7 +1995,9 @@
 {"name": "parity", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/bit.hpp", "brief": "计算整数的奇偶性"}
 {"name": "parity32", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/bit.hpp", "brief": "计算32位整数的奇偶性"}
 {"name": "parity64", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/bit.hpp", "brief": "计算64位整数的奇偶性"}
+{"name": "parse_inline_markdown", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/markdown.hpp", "brief": "解析行内强调片段"}
 {"name": "parse_ranges", "kind": "function", "ns": "neforce::http", "header": "NeForce/network/http/http_range.hpp", "brief": "解析HTTP Range头部值"}
+{"name": "parse_unified_diff", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/diff.hpp", "brief": "解析 unified diff 文本"}
 {"name": "parsed_input", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/input_parser.hpp", "brief": "解析结果"}
 {"name": "partial_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "部分排序"}
 {"name": "partial_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "部分排序"}
@@ -2093,10 +2128,10 @@
 {"name": "redis_result", "kind": "struct", "ns": "neforce", "header": "NeForce/db/redis/redis_result.hpp", "brief": "Redis结果集类"}
 {"name": "redis_session_store", "kind": "class", "ns": "neforce::http", "header": "NeForce/network/http/session_store_redis.hpp", "brief": "Redis后端会话存储"}
 {"name": "reduce", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/parallel.hpp", "brief": "并行归约操作"}
-{"name": "ref", "kind": "class", "ns": "neforce::tui", "header": "NeForce/tui/dom/ref.hpp", "brief": "可变引用适配器"}
 {"name": "ref", "kind": "function", "ns": "neforce", "header": "NeForce/core/utility/reference_wrapper.hpp", "brief": "创建引用包装器"}
 {"name": "ref", "kind": "function", "ns": "neforce", "header": "NeForce/core/utility/reference_wrapper.hpp", "brief": "删除const右值的ref重载"}
 {"name": "ref", "kind": "function", "ns": "neforce", "header": "NeForce/core/utility/reference_wrapper.hpp", "brief": "重新包装已存在的引用包装器"}
+{"name": "ref", "kind": "class", "ns": "neforce::tui", "header": "NeForce/tui/dom/ref.hpp", "brief": "可变引用适配器"}
 {"name": "ref_view", "kind": "class", "ns": "neforce::ranges", "header": "NeForce/core/iterator/ranges.hpp", "brief": ""}
 {"name": "reference_wrapper", "kind": "class", "ns": "neforce", "header": "NeForce/core/utility/reference_wrapper.hpp", "brief": "引用包装器类模板"}
 {"name": "reference_wrapper", "kind": "function", "ns": "neforce", "header": "NeForce/core/utility/reference_wrapper.hpp", "brief": ""}
@@ -2174,8 +2209,8 @@
 {"name": "reverse_bits32", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/bit.hpp", "brief": "反转32位整数的位顺序"}
 {"name": "reverse_bits64", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/bit.hpp", "brief": "反转64位整数的位顺序"}
 {"name": "reverse_bytes", "kind": "function", "ns": "neforce::simd", "header": "NeForce/core/simd/bytes.hpp", "brief": "反转向量中 16 字节的顺序"}
-{"name": "reverse_iterator", "kind": "class", "ns": "neforce::ranges", "header": "NeForce/core/iterator/ranges.hpp", "brief": ""}
 {"name": "reverse_iterator", "kind": "class", "ns": "neforce", "header": "NeForce/core/iterator/reverse_iterator.hpp", "brief": "反向迭代器模板类"}
+{"name": "reverse_iterator", "kind": "class", "ns": "neforce::ranges", "header": "NeForce/core/iterator/ranges.hpp", "brief": ""}
 {"name": "reverse_proxy_filter", "kind": "class", "ns": "neforce::http", "header": "NeForce/network/http/reverse_proxy.hpp", "brief": "HTTP反向代理过滤器"}
 {"name": "reverse_view", "kind": "class", "ns": "neforce::ranges", "header": "NeForce/core/iterator/ranges.hpp", "brief": ""}
 {"name": "rotate", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "旋转范围元素"}
@@ -2227,6 +2262,9 @@
 {"name": "security_headers_filter", "kind": "class", "ns": "neforce::http", "header": "NeForce/network/http/http_security.hpp", "brief": "HTTP安全头过滤器"}
 {"name": "select1st", "kind": "struct", "ns": "neforce", "header": "NeForce/core/functional/functor.hpp", "brief": "选择pair的第一个元素"}
 {"name": "select2nd", "kind": "struct", "ns": "neforce", "header": "NeForce/core/functional/functor.hpp", "brief": "选择pair的第二个元素"}
+{"name": "select_list", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/select_list.hpp", "brief": "创建可选择列表组件"}
+{"name": "select_list_option", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/select_list.hpp", "brief": "可选择列表配置"}
+{"name": "select_list_view", "kind": "class", "ns": "neforce::tui::components", "header": "NeForce/tui/component/select_list.hpp", "brief": "可选择列表组件"}
 {"name": "select_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "选择排序"}
 {"name": "select_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "选择排序（默认升序）"}
 {"name": "semaphore", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/semaphore.hpp", "brief": "系统信号量类"}
@@ -2441,6 +2479,9 @@
 {"name": "static_power< Base >", "kind": "struct", "ns": "neforce", "header": "NeForce/core/numeric/static_numeric.hpp", "brief": ""}
 {"name": "static_select_int_t", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/numeric/static_numeric.hpp", "brief": "根据数值选择最合适整数类型的类型别名"}
 {"name": "static_sign", "kind": "struct", "ns": "neforce", "header": "NeForce/core/numeric/static_numeric.hpp", "brief": "计算整数的符号"}
+{"name": "status_indicator", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/status_indicator.hpp", "brief": "创建状态指示组件"}
+{"name": "status_indicator_option", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/status_indicator.hpp", "brief": "状态指示配置"}
+{"name": "status_indicator_view", "kind": "class", "ns": "neforce::tui::components", "header": "NeForce/tui/component/status_indicator.hpp", "brief": "状态指示组件"}
 {"name": "std::tuple_element< I, _NEFORCE pair< T1, T2 > >", "kind": "struct", "ns": "neforce", "header": "NeForce/core/utility/pair.hpp", "brief": ""}
 {"name": "std::tuple_element< I, _NEFORCE tuple< Types... > >", "kind": "struct", "ns": "neforce", "header": "NeForce/core/utility/tuple.hpp", "brief": ""}
 {"name": "std::tuple_element< Idx, _NEFORCE array< T, Size > >", "kind": "struct", "ns": "neforce", "header": "NeForce/core/container/array.hpp", "brief": ""}
@@ -2462,6 +2503,9 @@
 {"name": "storeu_si256", "kind": "function", "ns": "neforce::simd", "header": "NeForce/core/simd/memory.hpp", "brief": "非对齐存储 256-bit 向量"}
 {"name": "storeu_si512", "kind": "function", "ns": "neforce::simd", "header": "NeForce/core/simd/memory.hpp", "brief": "非对齐存储 512-bit 向量"}
 {"name": "strand", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/strand.hpp", "brief": "串行化执行器"}
+{"name": "streaming_text", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/streaming_text.hpp", "brief": "创建流式文本组件"}
+{"name": "streaming_text_option", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/streaming_text.hpp", "brief": "流式文本配置"}
+{"name": "streaming_text_view", "kind": "class", "ns": "neforce::tui::components", "header": "NeForce/tui/component/streaming_text.hpp", "brief": "流式文本组件"}
 {"name": "strikethrough", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/element.hpp", "brief": "删除线装饰器"}
 {"name": "string", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/string/string.hpp", "brief": "字符字符串"}
 {"name": "string_builder", "kind": "class", "ns": "neforce", "header": "NeForce/core/string/string_builder.hpp", "brief": "延迟拼接的字符串构建器"}
@@ -2508,10 +2552,10 @@
 {"name": "suspend_always", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/coroutine.hpp", "brief": "始终暂停的等待器"}
 {"name": "suspend_never", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/coroutine.hpp", "brief": "从不暂停的等待器"}
 {"name": "swap", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/unique_ptr.hpp", "brief": "交换两个unique_ptr"}
-{"name": "swap", "kind": "function", "ns": "neforce::reflect", "header": "NeForce/core/reflect/any.hpp", "brief": "交换两个 meta_any"}
 {"name": "swap", "kind": "function", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "交换两个相同类型的值"}
 {"name": "swap", "kind": "function", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "交换两个相同类型的数组"}
 {"name": "swap", "kind": "function", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "删除无参数的swap重载"}
+{"name": "swap", "kind": "function", "ns": "neforce::reflect", "header": "NeForce/core/reflect/any.hpp", "brief": "交换两个 meta_any"}
 {"name": "swap_ranges", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "交换两个范围的元素"}
 {"name": "swap_relaxed", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/atomic.hpp", "brief": ""}
 {"name": "sys_console", "kind": "class", "ns": "neforce", "header": "NeForce/core/system/console.hpp", "brief": "系统控制台单例类"}
@@ -2567,8 +2611,15 @@
 {"name": "tera", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/numeric/ratio.hpp", "brief": "太（10^12）"}
 {"name": "terminate", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/terminate.hpp", "brief": "终止处理"}
 {"name": "terminate_handler", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/exception/terminate.hpp", "brief": "终止处理函数指针类型"}
+{"name": "text_area", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/text_area.hpp", "brief": "创建多行编辑器组件"}
+{"name": "text_area_option", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/text_area.hpp", "brief": "多行编辑器配置"}
+{"name": "text_area_view", "kind": "class", "ns": "neforce::tui::components", "header": "NeForce/tui/component/text_area.hpp", "brief": "多行文本编辑器"}
+{"name": "text_display_width", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/text_layout.hpp", "brief": "计算字符串的显示宽度"}
 {"name": "text_input", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/text_input.hpp", "brief": "创建文本输入组件"}
 {"name": "text_input_option", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/text_input.hpp", "brief": "文本输入组件配置"}
+{"name": "text_layout", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/text_layout.hpp", "brief": "文本分行结果"}
+{"name": "text_line", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/text_layout.hpp", "brief": "可视行"}
+{"name": "text_span", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/element.hpp", "brief": "富文本片段"}
 {"name": "text_wrap", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/element.hpp", "brief": "文本换行装饰器"}
 {"name": "theme", "kind": "struct", "ns": "neforce::tui", "header": "NeForce/tui/dom/style.hpp", "brief": "主题"}
 {"name": "thirdparty_exception", "kind": "struct", "ns": "neforce", "header": "NeForce/core/exception/exception.hpp", "brief": "第三方操作异常"}
@@ -2861,6 +2912,9 @@
 {"name": "vector", "kind": "function", "ns": "neforce", "header": "NeForce/core/container/vector.hpp", "brief": ""}
 {"name": "vector_iterator", "kind": "struct", "ns": "neforce", "header": "NeForce/core/container/vector.hpp", "brief": "向量迭代器"}
 {"name": "view_base", "kind": "struct", "ns": "neforce::ranges", "header": "NeForce/core/typeinfo/concepts.hpp", "brief": "范围视图的基类模板"}
+{"name": "virtual_list", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/virtual_list.hpp", "brief": "创建虚拟列表组件"}
+{"name": "virtual_list_option", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/virtual_list.hpp", "brief": "虚拟列表配置"}
+{"name": "virtual_list_view", "kind": "class", "ns": "neforce::tui::components", "header": "NeForce/tui/component/virtual_list.hpp", "brief": "虚拟列表组件"}
 {"name": "virtual_thread", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/virtual_thread.hpp", "brief": "虚拟线程用户门面类"}
 {"name": "virtual_thread_scheduler", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/virtual_thread.hpp", "brief": "虚拟线程调度器"}
 {"name": "virtual_thread_task", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/virtual_thread.hpp", "brief": "异步任务主模板"}

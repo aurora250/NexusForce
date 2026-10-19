@@ -204,7 +204,7 @@ struct tuple<> : public icommon<tuple<>> {
      * @return FNV偏移基准值
      */
     NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t to_hash() const noexcept {
-        return constants::FNV_OFFSET_BASIS;
+        return constants::FNV_OFFSET_BASIS64;
     }
 };
 

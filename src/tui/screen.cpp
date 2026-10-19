@@ -3,6 +3,34 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 namespace {
+    void append_color(string& ss, const color& c, const bool background, const color_depth depth) {
+        if (c.A() == 0) {
+            ss += background ? "\033[49m" : "\033[39m";
+            return;
+        }
+        if (depth == color_depth::ansi16) {
+            ss += "\033[";
+            ss += _NEFORCE to_string(c.to_ansi_basic(background));
+            ss += "m";
+            return;
+        }
+
+        ss += "\033[";
+        ss += _NEFORCE to_string(background ? 48 : 38);
+        if (depth == color_depth::truecolor) {
+            ss += ";2;";
+            ss += _NEFORCE to_string(c.R());
+            ss += ";";
+            ss += _NEFORCE to_string(c.G());
+            ss += ";";
+            ss += _NEFORCE to_string(c.B());
+        } else {
+            ss += ";5;";
+            ss += _NEFORCE to_string(c.to_ansi_256());
+        }
+        ss += "m";
+    }
+
     void append_cursor_move(string& ss, const int x, const int y) {
         ss.append("\033[");
         ss.append(to_string(y + 1));
@@ -164,23 +192,11 @@ void screen::update_cell_style(string& ss, const cell& prev, const cell& next) c
     }
 
     if (!next.foreground.equal_to(prev.foreground)) {
-        if (next.foreground.A() == 0) {
-            ss += "\033[39m";
-        } else {
-            ss += "\033[38;5;";
-            ss += _NEFORCE to_string(next.foreground.to_ansi_256());
-            ss += "m";
-        }
+        append_color(ss, next.foreground, false, depth_);
     }
 
     if (!next.background.equal_to(prev.background)) {
-        if (next.background.A() == 0) {
-            ss += "\033[49m";
-        } else {
-            ss += "\033[48;5;";
-            ss += _NEFORCE to_string(next.background.to_ansi_256());
-            ss += "m";
-        }
+        append_color(ss, next.background, true, depth_);
     }
 }
 

@@ -579,6 +579,15 @@ public:
     NEFORCE_NODISCARD bool supports_truecolor() const;
 
     /**
+     * @brief 检测终端是否支持 256 色
+     * @return 是否支持 256 色
+     *
+     * 依据 `TERM` 是否含 `256` / `truecolor` / `direct` 判定；
+     * 不支持 256 色的终端按 16 色（基础 ANSI）降级。
+     */
+    NEFORCE_NODISCARD bool supports_256_color() const;
+
+    /**
      * @brief 检查是否支持Unicode
      * @return 是否支持
      */
