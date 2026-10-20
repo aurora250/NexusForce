@@ -173,9 +173,11 @@ set(CPP_SOURCES
 
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/animation.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/approve_prompt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/composer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/collapsible.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/containers.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/dropdown.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/log_view.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/menu.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/hoverable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/modal.cpp
@@ -186,7 +188,9 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/select_list.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/slider.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/status_indicator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/output_block.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/streaming_text.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/tool_card.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_area.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/toggle.cpp
@@ -211,6 +215,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/input_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/event_dispatcher.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/focus_manager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/keymap.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/reconciler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/renderer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/screen.cpp

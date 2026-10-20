@@ -24,18 +24,61 @@ namespace {
         int content_h;  // total content height in rows
     };
 
+    int item_rows_at(const element& el, const size_t index) {
+        const auto* heights = el.item_heights();
+        if (heights == nullptr || index >= heights->size()) {
+            return max(1, el.item_height_hint());
+        }
+        const int measured = (*heights)[index];
+        return (measured > 0) ? measured : max(1, el.item_height_hint());
+    }
+
     virtual_window compute_virtual_window(const element& el, const int area_h) {
-        const int item_h = max(1, el.item_height());
         const int count = static_cast<int>(el.item_count());
+        const int area = max(0, area_h);
+
         virtual_window win{};
-        win.content_h = count * item_h;
-        win.max_scroll = max(0, win.content_h - max(0, area_h));
+        if (el.item_heights() == nullptr) {
+            const int item_h = max(1, el.item_height());
+            win.content_h = count * item_h;
+            win.max_scroll = max(0, win.content_h - area);
+            const int scroll = (el.scroll_y() < 0) ? 0 : min(el.scroll_y(), win.max_scroll);
+            win.first = scroll / item_h;
+            win.skip = scroll % item_h;
+            win.visible = (area + item_h - 1) / item_h + 1;
+            return win;
+        }
+
+        int total = 0;
+        for (int i = 0; i < count; ++i) {
+            total += item_rows_at(el, static_cast<size_t>(i));
+        }
+        win.content_h = total;
+        win.max_scroll = max(0, total - area);
         const int scroll = (el.scroll_y() < 0) ? 0 : min(el.scroll_y(), win.max_scroll);
-        win.first = scroll / item_h;
-        win.skip = scroll % item_h;
-        win.visible = (max(0, area_h) + item_h - 1) / item_h + 1;
+
+        int consumed = 0;
+        int first = 0;
+        while (first < count) {
+            const int rows = item_rows_at(el, static_cast<size_t>(first));
+            if (consumed + rows > scroll) {
+                break;
+            }
+            consumed += rows;
+            ++first;
+        }
+        win.first = min(first, max(0, count - 1));
+        win.skip = max(0, scroll - consumed);
+        win.visible = 0;
+        int filled = (win.skip > 0) ? win.skip : 0;
+        for (int i = win.first; i < count && filled < area; ++i) {
+            filled += item_rows_at(el, static_cast<size_t>(i));
+            ++win.visible;
+        }
+        win.visible = (win.visible == 0) ? 1 : win.visible + 1;
         return win;
     }
+
 } // namespace
 
 
@@ -157,6 +200,39 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
                     apply_text(inner_x, inner_y, "\xe2\x96\x8c", el.style());
                 }
                 ++idx;
+            }
+            return;
+        }
+        case element::kind::band: {
+            if (compare_less(idx, layout.size())) {
+                const auto& rect = layout[static_cast<size_t>(idx)];
+                ++idx;
+                if (el.rect_state() != nullptr) {
+                    auto* box = static_cast<state<layout_rect>*>(el.rect_state());
+                    if (box->value().x != rect.x || box->value().y != rect.y || box->value().w != rect.w ||
+                        box->value().h != rect.h) {
+                        *box = rect;
+                    }
+                }
+                const _NEFORCE color fill = el.style().bg.value_or(theme_.bg);
+                for (int row = 0; row < rect.h; ++row) {
+                    const int cy = rect.y + row;
+                    if (cy < 0 || cy >= term_h_) {
+                        continue;
+                    }
+                    for (int col = 0; col < rect.w; ++col) {
+                        const int cx = rect.x + col;
+                        if (cx >= 0 && cx < term_w_) {
+                            auto& cell = screen_.fast_cell_at(cx, cy);
+                            cell.background = fill;
+                        }
+                    }
+                }
+                band_stack_.push_back(fill);
+                for (const auto& child: el.children()) {
+                    render_subtree(child, layout, idx);
+                }
+                band_stack_.pop_back();
             }
             return;
         }
@@ -342,6 +418,7 @@ void renderer::clear_element_area(const element& el, const vector<layout_rect>& 
             return;
         }
         case element::kind::panel:
+        case element::kind::band:
         case element::kind::scroll_view: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -392,6 +469,7 @@ const element* find_element_at(const vector<layout_rect>& layout, const element&
             return nullptr;
         }
         case element::kind::panel:
+        case element::kind::band:
         case element::kind::scroll_view: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -454,6 +532,7 @@ component_base* hit_test_at(const vector<layout_rect>& layout, const element& tr
             return nullptr;
         }
         case element::kind::panel:
+        case element::kind::band:
         case element::kind::scroll_view: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
@@ -503,7 +582,7 @@ void renderer::apply_style_to_cell(cell& cell, const style& style) {
     if (style.bg.has_value()) {
         cell.background = style.bg.value();
     } else {
-        cell.background = theme_.bg;
+        cell.background = band_stack_.empty() ? theme_.bg : band_stack_.back();
     }
     if (style.bold.has_value()) {
         cell.bold = style.bold.value();
@@ -696,13 +775,29 @@ void renderer::render_separator(const int x, const int y, const int w) {
     }
 }
 
-int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const tui::style& style) {
+uint8_t renderer::hyperlink_of(const string* link) {
+    if (link == nullptr || link->empty()) {
+        return 0;
+    }
+    if (cached_link_ == link) {
+        return cached_link_id_;
+    }
+    cached_link_ = link;
+    cached_link_id_ = screen_.register_hyperlink(*link);
+    return cached_link_id_;
+}
+
+int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const tui::style& style, const string* link) {
     const int cw = max(1, cp.display_width());
     if (x >= 0 && x < term_w_ && y >= 0 && y < term_h_ && !is_clipped(x, y)) {
         auto& cell = screen_.fast_cell_at(x, y);
         cell.reset();
         put_codepoint(cp, cell);
         apply_style_to_cell(cell, style);
+        const uint8_t id = hyperlink_of(link);
+        if (id != 0) {
+            cell.hyperlink = id;
+        }
     }
     for (int i = 1; i < cw && x + i < term_w_; ++i) {
         auto& next = screen_.fast_cell_at(x + i, y);
@@ -766,7 +861,7 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
             if (cx + cw > x + w) {
                 break;
             }
-            cx += draw_glyph(cx, cy, g.cp, *g.style);
+            cx += draw_glyph(cx, cy, g.cp, *g.style, g.link);
             ++glyph_index;
         }
         cy += 1;
@@ -789,7 +884,7 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
     vector<run_glyph> glyphs;
     const auto& raw = text.view();
     for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
-        glyphs.push_back(run_glyph{*it, &style});
+        glyphs.push_back(run_glyph{*it, &style, nullptr});
     }
     render_glyph_run(x, y, w, h, glyphs, wm, scroll_row, out_end_x, out_end_y);
 }
@@ -845,13 +940,21 @@ void renderer::render_rich_text(const int x, const int y, const int w, const int
     for (size_t i = 0; i < spans.size(); ++i) {
         const auto& raw = spans[i].content.view();
         for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
-            glyphs.push_back(run_glyph{*it, &merged[i]});
+            glyphs.push_back(run_glyph{*it, &merged[i], &spans[i].link});
         }
     }
     render_glyph_run(x, y, w, h, glyphs, wm, 0, out_end_x, out_end_y);
 }
 
 void renderer::render_virtual_list(const element& el, const layout_rect& rect) {
+    if (el.viewport_rect_state() != nullptr) {
+        auto* box = static_cast<state<layout_rect>*>(el.viewport_rect_state());
+        const auto& current = box->value();
+        if (current.x != rect.x || current.y != rect.y || current.w != rect.w || current.h != rect.h) {
+            *box = rect;
+        }
+    }
+
     if (rect.w <= 0 || rect.h <= 0) {
         if (el.viewport_state() != nullptr) {
             *static_cast<state<int>*>(el.viewport_state()) = 0;
@@ -859,7 +962,9 @@ void renderer::render_virtual_list(const element& el, const layout_rect& rect) {
         return;
     }
 
-    const int item_h = max(1, el.item_height());
+    const bool variable = (el.item_heights() != nullptr);
+    auto* heights = const_cast<vector<int>*>(el.item_heights());
+
     const auto win = compute_virtual_window(el, rect.h);
 
     if (el.scroll_y_state() != nullptr && el.scroll_y() != min(max(0, el.scroll_y()), win.max_scroll)) {
@@ -879,24 +984,51 @@ void renderer::render_virtual_list(const element& el, const layout_rect& rect) {
     clip_stack_.push_back(clip_rect{rect.x, rect.y, rect.w, rect.h});
     apply_clear(rect.x, rect.y, rect.w, rect.h);
 
+    constexpr int measure_limit = 100000;
     const int count = static_cast<int>(el.item_count());
+    int offset = -win.skip;
+
     for (int step = 0; step < win.visible; ++step) {
         const int index = win.first + step;
-        if (index < 0 || index >= count) {
+        if (index < 0 || index >= count || offset >= rect.h) {
             break;
         }
+
+        const int hint = item_rows_at(el, static_cast<size_t>(index));
         const element item = el.item_builder()(static_cast<size_t>(index));
+
         if (item.kind() == element::kind::empty) {
+            offset += hint;
             continue;
         }
-        auto item_layout = compute_layout(item, rect.w, item_h);
-        const int offset_y = rect.y + step * item_h - win.skip;
-        for (auto& r: item_layout) {
-            r.x += rect.x;
-            r.y += offset_y;
+
+        const int limit = variable ? measure_limit : hint;
+        auto item_layout = compute_layout(item, rect.w, limit);
+
+        int natural = hint;
+        if (variable) {
+            natural = 0;
+            for (const auto& box: item_layout) {
+                natural = max(natural, box.y + box.h);
+            }
+            natural = max(1, natural);
+            if (heights != nullptr && static_cast<size_t>(index) < heights->size() && (*heights)[index] != natural) {
+                (*heights)[index] = natural;
+            }
+            if (natural != hint) {
+                item_layout = compute_layout(item, rect.w, natural);
+            }
+        }
+
+        const int offset_y = rect.y + offset;
+        for (auto& box: item_layout) {
+            box.x += rect.x;
+            box.y += offset_y;
         }
         int child_idx = 0;
         render_subtree(item, item_layout, child_idx);
+
+        offset += natural;
     }
 
     clip_stack_.pop_back();

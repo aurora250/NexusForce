@@ -268,10 +268,14 @@ namespace {
                 content_w = el.children().empty() ? 0 : measure_element_width(el.children()[0]);
                 break;
             }
-            case element::kind::panel: {
+            case element::kind::panel:
+            case element::kind::band: {
                 using padding = struct style::padding;
                 const padding pad = style.padding.value_or(padding{});
-                const int border_w = (style.border.has_value() && style.border.value() != style::border::none) ? 2 : 0;
+                const int border_w = (k == element::kind::panel && style.border.has_value() &&
+                                      style.border.value() != style::border::none)
+                                             ? 2
+                                             : 0;
                 content_w = (el.children().empty() ? 0 : measure_element_width(el.children()[0])) + pad.left +
                             pad.right + border_w;
                 break;
@@ -439,10 +443,14 @@ namespace {
                 content_h = el.children().empty() ? 1 : measure_element_height(el.children()[0]);
                 break;
             }
-            case element::kind::panel: {
+            case element::kind::panel:
+            case element::kind::band: {
                 using padding = struct style::padding;
                 const padding pad = style.padding.value_or(padding{});
-                const int border_h = (style.border.has_value() && style.border.value() != style::border::none) ? 2 : 0;
+                const int border_h = (k == element::kind::panel && style.border.has_value() &&
+                                      style.border.value() != style::border::none)
+                                             ? 2
+                                             : 0;
                 content_h = (el.children().empty() ? 0 : measure_element_height(el.children()[0])) + pad.top +
                             pad.bottom + border_h;
                 break;
@@ -528,14 +536,18 @@ namespace {
                 }
                 return;
             }
-            case element::kind::panel: {
+            case element::kind::panel:
+            case element::kind::band: {
                 out.push_back(rect);
                 if (el.children().empty()) {
                     return;
                 }
                 using padding = struct style::padding;
                 const padding pad = style.padding.value_or(padding{});
-                const int border_w = (style.border.has_value() && style.border.value() != style::border::none) ? 1 : 0;
+                const int border_w = (k == element::kind::panel && style.border.has_value() &&
+                                      style.border.value() != style::border::none)
+                                             ? 1
+                                             : 0;
                 const int inner_x = rect.x + border_w + pad.left;
                 const int inner_y = rect.y + border_w + pad.top;
                 const int inner_w = max(0, rect.w - 2 * border_w - pad.left - pad.right);

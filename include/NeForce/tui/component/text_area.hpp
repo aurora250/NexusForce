@@ -37,6 +37,7 @@ struct text_area_option {
     size_t history_limit = 100;                               ///< 历史条目上限
     size_t undo_limit = 100;                                  ///< 撤销栈上限
     function<void()> on_submit;                               ///< 提交回调
+    function<void(const string&)> on_change;                  ///< 内容变化回调（用于实时过滤/补全）
 };
 
 /**
@@ -174,6 +175,7 @@ private:
     void move_page(int direction, bool extend);
     NEFORCE_NODISCARD size_t word_boundary(size_t from, bool forward) const;
     void notify_changed();
+    void notify_content_changed();
 };
 
 /**

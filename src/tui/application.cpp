@@ -18,6 +18,18 @@ application& application::with_fps(const int fps) {
     return *this;
 }
 
+application& application::with_two_stage_quit(const bool enable) noexcept {
+    two_stage_quit_ = enable;
+    return *this;
+}
+
+application& application::on_quit_hint(function<void(bool)> cb) {
+    quit_hint_ = move(cb);
+    return *this;
+}
+
+keymap* application::shortcuts() noexcept { return reconiler_ != nullptr ? &reconiler_->shortcuts() : nullptr; }
+
 application& application::with_title(string title) {
     title_ = title;
     return *this;
@@ -42,6 +54,44 @@ int application::run() {
     reconiler_ = make_unique<reconciler>(console_, render_strand_, ctx_);
     reconiler_->set_theme(theme_);
     input_ = make_unique<input_driver>(ctx_, *reconiler_, render_strand_);
+
+    auto& keys = reconiler_->shortcuts();
+    keys.bind(key_binding{key_event::type::printable, key_modifier::ctrl, key_modifier::none, U'c',
+                          [this](const key_event&) {
+                              if (!two_stage_quit_) {
+                                  quit(130);
+                                  return true;
+                              }
+                              if (quit_pending_) {
+                                  quit(130);
+                                  return true;
+                              }
+                              quit_pending_ = true;
+                              if (quit_hint_) {
+                                  quit_hint_(true);
+                              }
+                              auto reset = make_shared<function<void()>>();
+                              *reset = [this, reset] {
+                                  if (quit_pending_) {
+                                      quit_pending_ = false;
+                                      if (quit_hint_) {
+                                          quit_hint_(false);
+                                      }
+                                  }
+                              };
+                              ctx_.schedule_timer(2000, *reset);
+                              return true;
+                          },
+                          "ctrl+c quit"});
+    keys.bind(key_binding{key_event::type::printable, key_modifier::ctrl, key_modifier::none, U'l',
+                          [this](const key_event&) {
+                              if (reconiler_ != nullptr) {
+                                  reconiler_->invalidate();
+                                  reconiler_->flush();
+                              }
+                              return true;
+                          },
+                          "ctrl+l redraw"});
 
     reconiler_->mount(root_.get());
 

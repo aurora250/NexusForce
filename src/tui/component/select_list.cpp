@@ -59,6 +59,15 @@ void select_list_view::rebuild_matches() {
     scroll_ = 0;
 }
 
+void select_list_view::set_visible_rows(const int rows) {
+    const int clamped = max(1, rows);
+    if (clamped == opt_.visible_rows) {
+        return;
+    }
+    opt_.visible_rows = clamped;
+    schedule_render();
+}
+
 void select_list_view::set_items(vector<string> items) {
     opt_.items = move(items);
     rebuild_matches();

@@ -93,6 +93,12 @@ public:
     NEFORCE_NODISCARD int selected_position() const noexcept { return position_; }
 
     /**
+     * @brief 设置可视行数
+     * @param rows 行数
+     */
+    void set_visible_rows(int rows);
+
+    /**
      * @brief 设置选中序号
      * @param position 匹配列表中的序号
      */

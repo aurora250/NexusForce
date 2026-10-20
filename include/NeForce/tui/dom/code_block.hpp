@@ -21,14 +21,18 @@ NEFORCE_BEGIN_TUI__
  * @brief 代码块配置
  */
 struct code_block_option {
-    string code;             ///< 代码内容
-    string language;         ///< 语言标识，用于选择着色规则
-    int width = 0;           ///< 宽度约束（0 表示由布局决定）
-    bool show_gutter = true; ///< 是否显示行号栏
-    int start_line = 1;      ///< 起始行号
-    bool highlight = true;   ///< 是否启用简单着色
-    tui::style style;        ///< 基础样式
-    tui::style gutter_style; ///< 行号栏样式
+    string code;               ///< 代码内容
+    string language;           ///< 语言标识，用于选择着色规则
+    int width = 0;             ///< 宽度约束（0 表示由布局决定）
+    bool show_gutter = true;   ///< 是否显示行号栏
+    int start_line = 1;        ///< 起始行号
+    bool highlight = true;     ///< 是否启用简单着色
+    bool background = true;    ///< 是否绘制整块背景带
+    bool left_bar = true;      ///< 是否绘制左侧竖线
+    size_t collapse_after = 0; ///< 超过该行数时折叠中间部分，0 表示不折叠
+    tui::style style;          ///< 基础样式
+    tui::style gutter_style;   ///< 行号栏样式
+    tui::style band_style;     ///< 背景带样式
 };
 
 /**

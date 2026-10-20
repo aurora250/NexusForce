@@ -1,3 +1,5 @@
+#include <NeForce/core/string/to_string.hpp>
+#include <NeForce/core/utility/packages.hpp>
 #include <NeForce/tui/dom/code_block.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -169,12 +171,54 @@ element code_block(code_block_option opt) {
         rows.push_back(element::text(" "));
     }
 
+    if (opt.collapse_after > 0 && rows.size() > opt.collapse_after) {
+        const size_t head = max<size_t>(1, opt.collapse_after / 2);
+        const size_t tail = max<size_t>(1, opt.collapse_after - head);
+        const size_t hidden = rows.size() - head - tail;
+
+        elements collapsed;
+        for (size_t i = 0; i < head && i < rows.size(); ++i) {
+            collapsed.push_back(rows[i]);
+        }
+
+        tui::style hint_style = opt.gutter_style;
+        if (!hint_style.dim.has_value()) {
+            hint_style.dim = true;
+        }
+        string hint = "\xe2\x80\xa6 " + to_string(static_cast<int64_t>(hidden)) + " lines hidden \xc2\xb7 expand";
+        collapsed.push_back(element::text(hint, hint_style, style::wrap_mode::none));
+
+        for (size_t i = rows.size() - tail; i < rows.size(); ++i) {
+            collapsed.push_back(rows[i]);
+        }
+        rows = _NEFORCE move(collapsed);
+    }
+
     element body = element::vbox(move(rows));
     if (opt.width > 0) {
         tui::style width_style;
         width_style.width = style::size_hint{style::size_hint::fixed, opt.width};
         body = body.with_style(width_style);
     }
+
+    if (opt.left_bar) {
+        tui::style bar_style = opt.gutter_style;
+        body = element::hbox({element::text("\xe2\x94\x82", bar_style, style::wrap_mode::none),
+                              element::text(" ", bar_style, style::wrap_mode::none), _NEFORCE move(body)});
+    }
+
+    if (opt.background) {
+        tui::style band_style = opt.band_style;
+        if (!band_style.bg.has_value()) {
+            band_style.bg = _NEFORCE color{26, 26, 30};
+        }
+        using padding = struct style::padding;
+        if (!band_style.padding.has_value()) {
+            band_style.padding = padding{0, 1, 0, 1};
+        }
+        body = element::band(_NEFORCE move(body), band_style);
+    }
+
     return body;
 }
 

@@ -35,6 +35,7 @@ class state;
 struct text_span {
     string content;   ///< 片段文本，可包含 `\n` 表示硬换行
     tui::style style; ///< 片段样式，覆盖富文本元素的基础样式
+    string link;      ///< 超链接地址（OSC-8），空表示普通文本
 };
 
 /**
@@ -65,6 +66,7 @@ public:
         scroll_view,  ///< 滚动区域
         canvas,       ///< 自定义绘制
         panel,        ///< 带边框的面板容器
+        band,         ///< 背景色带容器
         when,         ///< 条件渲染
         each,         ///< 列表渲染
         flexbox,      ///< CSS-flexbox 弹性容器
@@ -163,9 +165,32 @@ public:
     element& with_selection(size_t begin, size_t end);
 
     /**
-     * @brief 获取虚拟列表回写可视高度的状态指针
-     * @return `state<int>*` 指针，未设置时为 nullptr
+     * @brief 获取变高虚拟列表的高度表
+     * @return 每项实测高度数组指针，固定高度模式下为 nullptr
+     *
+     * 数组长度等于项数量，元素为 0 表示该项尚未测量。
      */
+    NEFORCE_NODISCARD const vector<int>* item_heights() const noexcept;
+
+    /**
+     * @brief 获取变高虚拟列表的估算项高度
+     * @return 尚未测量项占位使用的行数
+     */
+    NEFORCE_NODISCARD int item_height_hint() const noexcept;
+
+    /**
+     * @brief 获取视口矩形回写状态
+     * @return `state<layout_rect>*` 指针，未设置时为 nullptr
+     */
+    NEFORCE_NODISCARD void* viewport_rect_state() const noexcept;
+
+    /**
+     * @brief 绑定视口矩形回写状态
+     * @param s `state<layout_rect>` 指针
+     * @return 自身引用
+     */
+    element& with_viewport_rect_state(void* s);
+
     NEFORCE_NODISCARD void* viewport_state() const noexcept;
 
     /**
@@ -234,9 +259,22 @@ public:
      * @param builder 项构建回调，仅对可视窗口内的索引调用
      * @param scroll_y 初始纵向滚动偏移
      * @return 虚拟列表元素
+     * @note 虚拟列表自身不主张高度，放进列容器时必须显式给出尺寸
      */
     static element virtual_list(size_t item_count, int item_height, function<element(size_t)> builder,
                                 int scroll_y = 0);
+
+    /**
+     * @brief 变高虚拟列表元素
+     * @param item_count 项总数
+     * @param item_height_hint 未测量项的估算高度
+     * @param heights 每项实测高度数组，长度需不小于 item_count；元素 0 表示未测量
+     * @param builder 项构建回调，仅对可视窗口内的索引调用
+     * @param scroll_y 初始纵向滚动偏移
+     * @return 虚拟列表元素
+     */
+    static element virtual_list(size_t item_count, int item_height_hint, vector<int>* heights,
+                                function<element(size_t)> builder, int scroll_y = 0);
 
     static element spacer(int flex = 1);
     static element separator();
@@ -269,6 +307,14 @@ public:
      * 面板自身占用一个布局矩形，因此可以绘制边框并把子元素排布在内边距之内。
      */
     static element panel(element child, tui::style style = {});
+
+    /**
+     * @brief 背景色带容器
+     * @param child 子元素
+     * @param style 样式，`bg` 用于填充整个矩形，`padding` 决定内边距
+     * @return 色带元素
+     */
+    static element band(element child, tui::style style = {});
 
     /**
      * @brief CSS-flexbox 弹性容器

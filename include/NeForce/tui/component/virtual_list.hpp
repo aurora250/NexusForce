@@ -11,6 +11,7 @@
 
 #include "NeForce/tui/component/component.hpp"
 #include "NeForce/tui/dom/element.hpp"
+#include "NeForce/tui/dom/layout_types.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 NEFORCE_BEGIN_COMPONENTS__
@@ -30,7 +31,8 @@ NEFORCE_BEGIN_COMPONENTS__
  */
 struct virtual_list_option {
     size_t item_count = 0;                 ///< 项总数
-    int item_height = 1;                   ///< 每项占用的固定行数
+    int item_height = 1;                   ///< 每项占用的固定行数（变高模式下为未测量项的估算高度）
+    bool variable_height = false;          ///< 是否启用变高项（按实测高度定位）
     function<element(size_t)> render_item; ///< 项构建回调，只对可视项调用
     bool auto_follow = true;               ///< 追加项时是否自动贴底
     tui::style style;                      ///< 列表样式
@@ -70,10 +72,42 @@ public:
     void set_item_renderer(function<element(size_t)> render_item);
 
     /**
-     * @brief 设置固定项高度
-     * @param height 行数
+     * @brief 设置项高度
+     * @param height 行数；变高模式下作为未测量项的估算高度
      */
     void set_item_height(int height);
+
+    /**
+     * @brief 是否启用变高项
+     * @return 是否变高
+     */
+    NEFORCE_NODISCARD bool variable_height() const noexcept { return opt_.variable_height; }
+
+    /**
+     * @brief 启用或关闭变高模式
+     * @param enable 是否变高
+     */
+    void set_variable_height(bool enable);
+
+    /**
+     * @brief 丢弃已测量的项高度
+     *
+     * 宽度或内容变化后调用，下一次渲染会重新测量可视项。
+     */
+    void invalidate_heights();
+
+    /**
+     * @brief 获取指定项的已测量高度
+     * @param index 项索引
+     * @return 行数，0 表示尚未测量
+     */
+    NEFORCE_NODISCARD int measured_height(size_t index) const noexcept;
+
+    /**
+     * @brief 已测量项的数量
+     * @return 项数量
+     */
+    NEFORCE_NODISCARD size_t measured_count() const noexcept;
 
     /**
      * @brief 获取项总数
@@ -164,10 +198,15 @@ private:
     virtual_list_option opt_;
     state<int>* scroll_ = nullptr;
     state<int>* viewport_ = nullptr;
+    state<layout_rect>* rect_ = nullptr;
+    vector<int> heights_;
+    vector<int> heights_snapshot_;
+    int layout_width_ = 0;
     bool follow_ = true;
     bool follow_pending_ = true;
 
     void clamp_scroll();
+    NEFORCE_NODISCARD int rows_of(size_t index) const noexcept;
 };
 
 /**

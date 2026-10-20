@@ -3,7 +3,12 @@
 #include <NeForce/tui/application.hpp>
 #include <NeForce/tui/component/approve_prompt.hpp>
 #include <NeForce/tui/component/select_list.hpp>
+#include <NeForce/tui/component/composer.hpp>
+#include <NeForce/tui/component/log_view.hpp>
+#include <NeForce/tui/component/output_block.hpp>
 #include <NeForce/tui/component/status_indicator.hpp>
+#include <NeForce/tui/component/tool_card.hpp>
+#include <NeForce/tui/keymap.hpp>
 #include <NeForce/tui/component/streaming_text.hpp>
 #include <NeForce/tui/component/text_area.hpp>
 #include <NeForce/tui/component/virtual_list.hpp>
@@ -915,4 +920,636 @@ TEST(TuiMarkdownCacheTest, CachedTreeRendersIdenticalOutput) {
         EXPECT_EQ(layout_cached[i].w, layout_direct[i].w) << i;
         EXPECT_EQ(layout_cached[i].h, layout_direct[i].h) << i;
     }
+}
+
+
+TEST(TuiBandTest, FillsBackgroundAndInsetsChild) {
+    tui::style st;
+    st.bg = _NEFORCE color{10, 20, 30};
+    using padding = struct style::padding;
+    st.padding = padding{0, 2, 0, 2};
+
+    const element tree = element::band(element::text("hi"), st);
+    const auto layout = compute_layout(tree, 10, 3);
+
+    ASSERT_EQ(layout.size(), 2U);
+    EXPECT_EQ(layout[0].w, 10);
+    EXPECT_EQ(layout[1].x, 2);
+
+    screen scr(10, 3);
+    renderer r(scr, dark_theme, 10, 3);
+    r.render(tree, layout, false);
+
+    EXPECT_EQ(scr.fast_cell_at(0, 0).background, (_NEFORCE color{10, 20, 30}));
+    EXPECT_EQ(scr.fast_cell_at(9, 2).background, (_NEFORCE color{10, 20, 30}));
+    EXPECT_EQ(scr.fast_cell_at(2, 0).character, "h");
+    EXPECT_EQ(scr.fast_cell_at(2, 0).background, (_NEFORCE color{10, 20, 30}));
+}
+
+TEST(TuiBandTest, TextInsideBandInheritsBandBackground) {
+    tui::style band_style;
+    band_style.bg = _NEFORCE color{40, 40, 40};
+
+    const element tree = element::band(element::rich_text({text_span{"ab", style{}}}), band_style);
+    const auto layout = compute_layout(tree, 6, 2);
+
+    screen scr(6, 2);
+    renderer r(scr, dark_theme, 6, 2);
+    r.render(tree, layout, false);
+
+    EXPECT_EQ(scr.fast_cell_at(0, 0).character, "a");
+    EXPECT_EQ(scr.fast_cell_at(0, 0).background, (_NEFORCE color{40, 40, 40}));
+}
+
+TEST(TuiLinkTest, SpanLinkBecomesOscHyperlink) {
+    text_span span;
+    span.content = "docs";
+    span.link = "https://example.com";
+
+    const element tree = element::rich_text({span}, style{}, style::wrap_mode::none);
+    const auto layout = compute_layout(tree, 8, 1);
+
+    screen scr(8, 1);
+    screen prev(8, 1);
+    renderer r(scr, dark_theme, 8, 1);
+    r.render(tree, layout, false);
+
+    const uint8_t id = scr.fast_cell_at(0, 0).hyperlink;
+    ASSERT_NE(id, 0);
+    EXPECT_EQ(scr.hyperlink(id), "https://example.com"_sv);
+
+    const string ansi = scr.to_string(prev);
+    EXPECT_TRUE(ansi.view().find("\033]8;;https://example.com"_sv) != string_view::npos);
+}
+
+
+TEST(TuiVariableVirtualListTest, MeasuredHeightsDriveOffsets) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    virtual_list_option opt;
+    opt.item_count = 3;
+    opt.variable_height = true;
+    opt.item_height = 1;
+    opt.render_item = [](const size_t index) {
+        elements rows;
+        rows.push_back(element::text("head " + to_string(static_cast<int64_t>(index))));
+        for (size_t i = 0; i < index; ++i) {
+            rows.push_back(element::text("extra"));
+        }
+        return element::vbox(move(rows));
+    };
+    opt.style.height = style::size_hint{style::size_hint::fixed, 6};
+
+    auto view = make_unique<virtual_list_view>(opt);
+    virtual_list_view* list = view.get();
+    holder.add_child(move(view));
+
+    headless app(&holder, 10, 6);
+    app.render();
+    app.tick();
+    app.tick();
+
+    EXPECT_EQ(list->measured_height(0), 1);
+    EXPECT_EQ(list->measured_height(1), 2);
+    EXPECT_EQ(list->measured_height(2), 3);
+    EXPECT_EQ(list->content_rows(), 6);
+    EXPECT_EQ(app.frame().fast_cell_at(0, 0).character, "h");
+    EXPECT_EQ(app.frame().fast_cell_at(0, 1).character, "h");
+    EXPECT_EQ(app.frame().fast_cell_at(0, 3).character, "h");
+}
+
+TEST(TuiVariableVirtualListTest, WidthChangeInvalidatesMeasurements) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    virtual_list_option opt;
+    opt.item_count = 2;
+    opt.variable_height = true;
+    opt.item_height = 1;
+    opt.render_item = [](const size_t) {
+        return element::text("a b c d e f g h i j", style{}, style::wrap_mode::word);
+    };
+    opt.style.height = style::size_hint{style::size_hint::fixed, 5};
+
+    auto view = make_unique<virtual_list_view>(opt);
+    virtual_list_view* list = view.get();
+    holder.add_child(move(view));
+
+    headless app(&holder, 20, 5);
+    app.render();
+    app.tick();
+    const int wide = list->measured_height(0);
+    EXPECT_EQ(wide, 1);
+
+    app.resize(8, 5);
+    app.tick();
+    app.tick();
+    EXPECT_GE(list->measured_height(0), 2);
+}
+
+
+TEST(TuiLogViewTest, AppendsMessagesAndReportsCount) {
+    log_view log;
+    log.setup();
+
+    const uint64_t first = log.append(log_role::user, "hello");
+    const uint64_t second = log.append(log_role::assistant, "hi there");
+
+    EXPECT_EQ(log.message_count(), 2U);
+    EXPECT_NE(first, second);
+}
+
+TEST(TuiLogViewTest, StreamingChunksAreCoalescedUntilCommit) {
+    log_view log;
+    log.setup();
+
+    const uint64_t id = log.append(log_role::assistant, "a");
+    log.append_chunk(id, "b");
+    log.append_chunk(id, "c");
+
+    // Nothing is visible to the renderer before commit, but the message list is intact.
+    EXPECT_EQ(log.message_count(), 1U);
+
+    log.commit();
+    log.finish(id);
+
+    const element tree = log.render();
+    EXPECT_EQ(tree.kind(), element::kind::vbox);
+}
+
+TEST(TuiLogViewTest, AutoFollowKeepsNewMessagesVisible) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    log_view_option opt;
+    opt.gap = 0;
+    auto owned = make_unique<log_view>(opt);
+    log_view* log = owned.get();
+    holder.add_child(move(owned));
+
+    headless app(&holder, 20, 3);
+    app.render();
+
+    for (int i = 0; i < 6; ++i) {
+        const uint64_t id = log->append(log_role::user, "line" + to_string(static_cast<int64_t>(i)));
+        log->finish(id);
+    }
+    // Variable heights need a measurement pass before the scroll metrics settle.
+    app.tick();
+    app.tick();
+    app.tick();
+
+    // Only items that became visible are measured, which is the point of the
+    // virtual list; the tail therefore converges first.
+    EXPECT_GE(log->list().measured_count(), 1U);
+    EXPECT_TRUE(log->at_bottom());
+    EXPECT_EQ(log->pending_messages(), 0U);
+    EXPECT_TRUE(app.plaintext().view().find("line5"_sv) != string_view::npos);
+}
+
+TEST(TuiLogViewTest, ScrolledUpCountsPendingMessages) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    log_view_option opt;
+    opt.gap = 0;
+    auto owned = make_unique<log_view>(opt);
+    log_view* log = owned.get();
+    holder.add_child(move(owned));
+
+    headless app(&holder, 20, 3);
+    app.render();
+
+    for (int i = 0; i < 5; ++i) {
+        const uint64_t id = log->append(log_role::user, "line" + to_string(static_cast<int64_t>(i)));
+        log->finish(id);
+    }
+    app.tick();
+    app.tick();
+    ASSERT_TRUE(log->at_bottom());
+
+    log->list().scroll_to(0);
+    app.tick();
+    EXPECT_FALSE(log->at_bottom());
+
+    const uint64_t id = log->append(log_role::assistant, "new");
+    log->finish(id);
+    app.tick();
+    EXPECT_EQ(log->pending_messages(), 1U);
+
+    log->scroll_to_bottom();
+    app.tick();
+    EXPECT_EQ(log->pending_messages(), 0U);
+}
+
+TEST(TuiLogViewTest, FinishedMessagesUseRenderCache) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    log_view_option opt;
+    opt.gap = 0;
+    auto owned = make_unique<log_view>(opt);
+    log_view* log = owned.get();
+    holder.add_child(move(owned));
+
+    headless app(&holder, 24, 6);
+    app.render();
+
+    const uint64_t id = log->append(log_role::assistant, "**bold** text");
+    log->finish(id);
+    app.tick();
+    app.tick();
+
+    const size_t misses_before = log->cache().miss_count();
+    app.render();
+    app.render();
+
+    EXPECT_GT(log->cache().miss_count(), 0U);
+    EXPECT_EQ(log->cache().miss_count(), misses_before);
+    EXPECT_GT(log->cache().hit_count(), 0U);
+}
+
+TEST(TuiLogViewTest, ClearDropsEverything) {
+    log_view log;
+    log.setup();
+    log.append(log_role::user, "a");
+    log.clear();
+
+    EXPECT_EQ(log.message_count(), 0U);
+    EXPECT_EQ(log.pending_messages(), 0U);
+}
+
+
+TEST(TuiComposerTest, EnterSubmitsAndClearsInput) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    string submitted;
+    composer_option opt;
+    opt.on_submit = [&submitted](const string& text) { submitted = text; };
+
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    holder.add_child(move(owned));
+    box->setup();
+    box->editor().set_text(string("hello"));
+    box->editor().set_has_focus(true);
+
+    EXPECT_TRUE(box->on_key(make_key(key_event::type::enter)));
+    EXPECT_EQ(submitted, "hello");
+    EXPECT_EQ(box->text(), "");
+}
+
+TEST(TuiComposerTest, ShiftEnterInsertsNewline) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    int submits = 0;
+    composer_option opt;
+    opt.on_submit = [&submits](const string&) { ++submits; };
+
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    holder.add_child(move(owned));
+    box->setup();
+    box->editor().set_has_focus(true);
+
+    EXPECT_TRUE(box->on_key(make_char(U'a')));
+    EXPECT_TRUE(box->on_key(make_key(key_event::type::enter, key_modifier::shift)));
+    EXPECT_TRUE(box->on_key(make_char(U'b')));
+    EXPECT_EQ(submits, 0);
+    EXPECT_EQ(box->text(), "a\nb");
+}
+
+TEST(TuiComposerTest, SlashTriggerOpensAndAcceptsCompletion) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    composer_option opt;
+    opt.complete = [](const completion_request& request, vector<completion_item>& items) {
+        for (const auto* name: {"/help", "/clear", "/compact"}) {
+            const string text(name);
+            if (request.query.empty() || text.view().find(request.query.view()) != string_view::npos) {
+                completion_item item;
+                item.label = text;
+                items.push_back(move(item));
+            }
+        }
+    };
+
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    holder.add_child(move(owned));
+    box->setup();
+    box->editor().set_has_focus(true);
+
+    EXPECT_TRUE(box->on_key(make_char(U'/')));
+    EXPECT_TRUE(box->completion_open());
+
+    EXPECT_TRUE(box->on_key(make_char(U'c')));
+    EXPECT_TRUE(box->on_key(make_char(U'l')));
+    EXPECT_TRUE(box->completion_open());
+
+    EXPECT_TRUE(box->on_key(make_key(key_event::type::tab)));
+    EXPECT_FALSE(box->completion_open());
+    EXPECT_EQ(box->text(), "/clear");
+}
+
+TEST(TuiComposerTest, EscapeClosesPopupBeforeBubbling) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    composer_option opt;
+    opt.complete = [](const completion_request&, vector<completion_item>& items) {
+        completion_item item;
+        item.label = "/help";
+        items.push_back(move(item));
+    };
+
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    holder.add_child(move(owned));
+    box->setup();
+    box->editor().set_has_focus(true);
+
+    box->on_key(make_char(U'/'));
+    ASSERT_TRUE(box->completion_open());
+
+    EXPECT_TRUE(box->on_key(make_key(key_event::type::escape)));
+    EXPECT_FALSE(box->completion_open());
+
+    EXPECT_FALSE(box->on_key(make_key(key_event::type::escape)));
+}
+
+TEST(TuiComposerTest, RunningPhaseEscInterrupts) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    int interrupts = 0;
+    composer_option opt;
+    opt.on_interrupt = [&interrupts] { ++interrupts; };
+
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    holder.add_child(move(owned));
+    box->setup();
+
+    box->set_phase(composer_phase::running);
+    EXPECT_TRUE(box->on_key(make_key(key_event::type::escape)));
+    EXPECT_EQ(interrupts, 1);
+}
+
+TEST(TuiComposerTest, NonTriggerCharacterKeepsPopupClosed) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    composer_option opt;
+    opt.complete = [](const completion_request&, vector<completion_item>& items) {
+        completion_item item;
+        item.label = "x";
+        items.push_back(move(item));
+    };
+
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    holder.add_child(move(owned));
+    box->setup();
+    box->editor().set_has_focus(true);
+
+    box->on_key(make_char(U'a'));
+    EXPECT_FALSE(box->completion_open());
+}
+
+
+TEST(TuiKeymapTest, GlobalLayerWinsOverFocusLayer) {
+    keymap map;
+    int global_calls = 0;
+    int focus_calls = 0;
+
+    map.bind(shortcut_layer::global,
+             key_binding{key_event::type::printable, key_modifier::ctrl, key_modifier::none, U'c',
+                         [&global_calls](const key_event&) {
+                             ++global_calls;
+                             return true;
+                         },
+                         "ctrl+c quit"});
+    map.bind(shortcut_layer::focus,
+             key_binding{key_event::type::printable, key_modifier::ctrl, key_modifier::none, U'c',
+                         [&focus_calls](const key_event&) {
+                             ++focus_calls;
+                             return true;
+                         },
+                         "focus ctrl+c"});
+
+    EXPECT_TRUE(map.dispatch(make_char(U'c', key_modifier::ctrl)));
+    EXPECT_EQ(global_calls, 1);
+    EXPECT_EQ(focus_calls, 0);
+}
+
+TEST(TuiKeymapTest, UnmatchedKeysFallThrough) {
+    keymap map;
+    bool called = false;
+    map.bind(key_binding{key_event::type::enter, key_modifier::none, key_modifier::none, 0,
+                         [&called](const key_event&) {
+                             called = true;
+                             return true;
+                         },
+                         "enter"});
+
+    EXPECT_FALSE(map.dispatch(make_key(key_event::type::escape)));
+    EXPECT_FALSE(called);
+    EXPECT_TRUE(map.dispatch(make_key(key_event::type::enter)));
+    EXPECT_TRUE(called);
+}
+
+TEST(TuiKeymapTest, ModifiersAreRequiredAndForbidden) {
+    keymap map;
+    int calls = 0;
+    map.bind(key_binding{key_event::type::printable, key_modifier::shift, key_modifier::ctrl, U't',
+                         [&calls](const key_event&) {
+                             ++calls;
+                             return true;
+                         },
+                         "shift+t"});
+
+    EXPECT_FALSE(map.dispatch(make_char(U't')));
+    EXPECT_FALSE(map.dispatch(make_char(U't', key_modifier::ctrl)));
+    EXPECT_TRUE(map.dispatch(make_char(U't', key_modifier::shift)));
+    EXPECT_EQ(calls, 1);
+}
+
+TEST(TuiKeymapTest, HandlerCanDeclineToKeepLooking) {
+    keymap map;
+    int declining = 0;
+    int accepting = 0;
+    map.bind(key_binding{key_event::type::enter, key_modifier::none, key_modifier::none, 0,
+                         [&accepting](const key_event&) {
+                             ++accepting;
+                             return true;
+                         },
+                         ""});
+    // Later registrations are tried first, so this one runs before the accepting one.
+    map.bind(key_binding{key_event::type::enter, key_modifier::none, key_modifier::none, 0,
+                         [&declining](const key_event&) {
+                             ++declining;
+                             return false;
+                         },
+                         ""});
+
+    EXPECT_TRUE(map.dispatch(make_key(key_event::type::enter)));
+    EXPECT_EQ(declining, 1);
+    EXPECT_EQ(accepting, 1);
+}
+
+TEST(TuiKeymapTest, HintsAndCountsTrackBindings) {
+    keymap map;
+    map.bind(shortcut_layer::global,
+             key_binding{key_event::type::enter, key_modifier::none, key_modifier::none, 0, nullptr, "enter send"});
+    map.bind(shortcut_layer::overlay,
+             key_binding{key_event::type::escape, key_modifier::none, key_modifier::none, 0, nullptr, "esc close"});
+
+    EXPECT_EQ(map.count(), 2U);
+    EXPECT_EQ(map.count(shortcut_layer::global), 1U);
+    ASSERT_EQ(map.hints(shortcut_layer::global).size(), 1U);
+    EXPECT_EQ(map.hints(shortcut_layer::global)[0], "enter send");
+
+    map.clear(shortcut_layer::global);
+    EXPECT_EQ(map.count(), 1U);
+}
+
+
+TEST(TuiOutputBlockTest, TogglesBetweenCollapsedAndExpanded) {
+    output_block_option opt;
+    opt.header = element::text("head");
+    opt.body = element::text("body1\nbody2");
+    opt.collapsed = true;
+    opt.hidden_lines = 2;
+
+    output_block block(opt);
+    block.setup();
+    EXPECT_TRUE(block.collapsed());
+
+    const element collapsed = block.render();
+    EXPECT_EQ(collapsed.kind(), element::kind::band);
+
+    EXPECT_TRUE(block.on_key(make_key(key_event::type::enter)));
+    EXPECT_FALSE(block.collapsed());
+
+    const element expanded = block.render();
+    EXPECT_EQ(expanded.kind(), element::kind::band);
+
+    EXPECT_TRUE(block.on_key(make_key(key_event::type::left)));
+    EXPECT_TRUE(block.collapsed());
+}
+
+TEST(TuiOutputBlockTest, HiddenLineCountFormatsHint) {
+    output_block_option opt;
+    opt.header = element::text("head");
+    opt.body = element::text("body");
+    opt.collapsed = true;
+    opt.hidden_lines = 42;
+    opt.collapsed_format = "%d lines";
+
+    output_block block(opt);
+    block.setup();
+    const element tree = block.render();
+
+    ASSERT_FALSE(tree.children().empty());
+    const element& inner = tree.children()[0];
+    ASSERT_EQ(inner.kind(), element::kind::vbox);
+    ASSERT_GE(inner.children().size(), 2U);
+    const element& hint_row = inner.children()[1];
+    EXPECT_EQ(hint_row.kind(), element::kind::rich_text);
+    EXPECT_TRUE(hint_row.spans()[0].content.view().find("42"_sv) != string_view::npos);
+}
+
+TEST(TuiOutputBlockTest, ClickInsideToggles) {
+    output_block_option opt;
+    opt.header = element::text("head");
+    opt.body = element::text("body");
+    opt.collapsed = true;
+
+    output_block block(opt);
+    block.setup();
+    ignore = block.render();
+
+    mouse_event press;
+    press.action = mouse_action::press;
+    press.x = 1;
+    press.y = 0;
+    EXPECT_TRUE(block.on_mouse(press));
+    EXPECT_FALSE(block.collapsed());
+}
+
+
+TEST(TuiToolCardTest, StatusChangesIconAndStyle) {
+    tool_card_option opt;
+    opt.title = "bash";
+    opt.summary = "ls -la";
+    opt.status = tool_status::running;
+
+    tool_card card(opt);
+    card.setup();
+    EXPECT_TRUE(card.running());
+
+    const element running = card.render();
+    EXPECT_EQ(running.kind(), element::kind::band);
+
+    card.set_status(tool_status::success, 1200);
+    EXPECT_FALSE(card.running());
+    const element success = card.render();
+    EXPECT_EQ(success.kind(), element::kind::band);
+}
+
+TEST(TuiToolCardTest, AnimationAccumulatesElapsedTimeWhileRunning) {
+    tool_card_option opt;
+    opt.title = "bash";
+
+    tool_card card(opt);
+    card.setup();
+    card.on_animation(500);
+    card.on_animation(700);
+    EXPECT_TRUE(card.running());
+
+    card.set_status(tool_status::failed);
+    card.on_animation(1000);
+    EXPECT_FALSE(card.running());
+}
+
+TEST(TuiToolCardTest, OutputCollapsesAndExpands) {
+    tool_card_option opt;
+    opt.title = "bash";
+    opt.collapsed = true;
+
+    tool_card card(opt);
+    card.setup();
+    card.set_output(string("line1\nline2\nline3"));
+    ignore = card.render();
+
+    EXPECT_TRUE(card.output().collapsed());
+    EXPECT_TRUE(card.on_key(make_key(key_event::type::enter)));
+    EXPECT_FALSE(card.output().collapsed());
 }

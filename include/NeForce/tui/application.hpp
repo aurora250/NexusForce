@@ -10,7 +10,9 @@
 
 #include "NeForce/core/async/strand.hpp"
 #include "NeForce/core/system/console.hpp"
+#include "NeForce/core/functional/function.hpp"
 #include "NeForce/tui/dom/style.hpp"
+#include "NeForce/tui/keymap.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -117,6 +119,37 @@ public:
      */
     NEFORCE_NODISCARD bool suspended() const noexcept { return suspended_; }
 
+    /**
+     * @brief 开关两段式 Ctrl+C 退出
+     * @param enable 是否启用
+     * @return 自身引用
+     *
+     * 启用后第一次 `Ctrl+C` 只进入"待确认"状态，第二次才真正退出；
+     * 两秒内没有第二次按键会自动复位。
+     */
+    application& with_two_stage_quit(bool enable = true) noexcept;
+
+    /**
+     * @brief 是否处于待确认退出的状态
+     * @return 是否待确认
+     */
+    NEFORCE_NODISCARD bool quit_pending() const noexcept { return quit_pending_; }
+
+    /**
+     * @brief 设置待确认状态变化回调
+     * @param cb 回调，参数为是否待确认
+     *
+     * 供应用在状态行之类的位置提示。
+     */
+    application& on_quit_hint(function<void(bool)> cb);
+
+    /**
+     * @brief 获取全局快捷键表
+     * @return 快捷键表引用，应用可在运行前追加全局绑定
+     * @note 仅在 `run()` 之后有效。
+     */
+    NEFORCE_NODISCARD keymap* shortcuts() noexcept;
+
 private:
     io_context ctx_;
     strand render_strand_{ctx_};
@@ -130,6 +163,9 @@ private:
     string title_;
     bool running_ = false;
     bool suspended_ = false;
+    bool two_stage_quit_ = true;
+    bool quit_pending_ = false;
+    function<void(bool)> quit_hint_;
 };
 
 /** @} */ // TUI

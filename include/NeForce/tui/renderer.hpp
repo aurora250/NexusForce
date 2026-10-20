@@ -210,6 +210,7 @@ private:
     struct run_glyph {
         codepoint cp;
         const tui::style* style;
+        const string* link;
     };
 
     screen& screen_;
@@ -217,12 +218,16 @@ private:
     int term_w_;
     int term_h_;
     vector<clip_rect> clip_stack_;
+    vector<_NEFORCE color> band_stack_;
     vector<scrollbar_hit> scrollbar_hits_;
     bool has_focus_ = false;
+    const string* cached_link_ = nullptr;
+    uint8_t cached_link_id_ = 0;
 
     void render_subtree(const element& el, const vector<layout_rect>& layout, int& idx);
 
-    int draw_glyph(int x, int y, const codepoint& cp, const tui::style& style);
+    int draw_glyph(int x, int y, const codepoint& cp, const tui::style& style, const string* link);
+    NEFORCE_NODISCARD uint8_t hyperlink_of(const string* link);
     void apply_selection_overlay(int x, int y, int w, int h, const string& text, const text_layout& lay,
                                  size_t sel_begin, size_t sel_end, int scroll_row);
     NEFORCE_NODISCARD bool is_clipped(int x, int y) const noexcept;

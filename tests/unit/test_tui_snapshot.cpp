@@ -2,7 +2,10 @@
 #include <NeForce/core/async/strand.hpp>
 #include <NeForce/tui/component/text_input.hpp>
 #include <NeForce/tui/component/approve_prompt.hpp>
+#include <NeForce/tui/component/composer.hpp>
+#include <NeForce/tui/component/log_view.hpp>
 #include <NeForce/tui/component/select_list.hpp>
+#include <NeForce/tui/component/tool_card.hpp>
 #include <NeForce/tui/component/status_indicator.hpp>
 #include <NeForce/tui/component/text_area.hpp>
 #include <NeForce/tui/dom/code_block.hpp>
@@ -372,12 +375,53 @@ TEST(TuiCodeBlockTest, GutterNumbersStartFromConfiguredLine) {
     code_block_option opt;
     opt.code = "a\nb";
     opt.start_line = 10;
+    opt.background = false;
+    opt.left_bar = false;
 
     const element el = code_block(opt);
     ASSERT_EQ(el.kind(), element::kind::vbox);
     ASSERT_EQ(el.children().size(), 2U);
     EXPECT_EQ(el.children()[0].children()[0].text(), "10 ");
     EXPECT_EQ(el.children()[1].children()[0].text(), "11 ");
+}
+
+TEST(TuiCodeBlockTest, BackgroundAndLeftBarWrapTheRows) {
+    code_block_option opt;
+    opt.code = "a\nb";
+
+    const element el = code_block(opt);
+    ASSERT_EQ(el.kind(), element::kind::band);
+    ASSERT_EQ(el.children().size(), 1U);
+
+    const element& row = el.children()[0];
+    ASSERT_EQ(row.kind(), element::kind::hbox);
+    ASSERT_EQ(row.children().size(), 3U);
+    EXPECT_EQ(row.children()[0].text(), "\xe2\x94\x82");
+    EXPECT_EQ(row.children()[2].kind(), element::kind::vbox);
+}
+
+TEST(TuiCodeBlockTest, CollapseKeepsHeadAndTailWithSummary) {
+    code_block_option opt;
+    opt.code = "1\n2\n3\n4\n5\n6\n7\n8";
+    opt.collapse_after = 4;
+    opt.background = false;
+    opt.left_bar = false;
+
+    const element el = code_block(opt);
+    ASSERT_EQ(el.kind(), element::kind::vbox);
+
+    bool found_hint = false;
+    for (const auto& row: el.children()) {
+        if (row.kind() == element::kind::hbox && row.children().size() >= 2) {
+            const string& text = row.children()[1].text();
+            if (text.view().find("lines hidden"_sv) != string_view::npos) {
+                found_hint = true;
+            }
+        } else if (row.text().view().find("lines hidden"_sv) != string_view::npos) {
+            found_hint = true;
+        }
+    }
+    EXPECT_TRUE(found_hint);
 }
 
 TEST(TuiDiffSnapshotTest, RendersUnifiedDiff) {
@@ -490,4 +534,155 @@ TEST(TuiStatusIndicatorSnapshotTest, RendersSpinnerLabelAndTimer) {
     headless app(&host, 24, 1);
     app.render();
     NEFORCE_EXPECT_SNAPSHOT("status_indicator", app.plaintext());
+}
+
+
+TEST(TuiChatSnapshotTest, RendersTranscriptWithToolCardAndPendingHint) {
+    io_context ctx;
+    strand s{ctx};
+
+    component_host host;
+    log_view_option opt;
+    opt.gap = 1;
+    auto owned = make_unique<log_view>(opt);
+    log_view* log = owned.get();
+    host.add_child(move(owned));
+
+    headless app(&host, 52, 16);
+    app.render();
+
+    const uint64_t first = log->append(log_role::user, "Add a **retry** helper to `net.hpp`");
+    log->finish(first);
+
+    const uint64_t second = log->append(log_role::assistant, "I will add `retry_async` with exponential backoff.\n\n"
+                                                             "- jitter\n- cap at 30s\n\n```cpp\n"
+                                                             "auto retry_async(task fn, int attempts = 3);\n```");
+    log->finish(second);
+
+    const uint64_t third = log->append(log_role::tool, "bash  \xe2\x80\xa2 exited 0\nCompiling...\n"
+                                                       "2 warnings\nBuild finished in 3.4s");
+    log->finish(third);
+    app.tick();
+    app.tick();
+    app.tick();
+
+    NEFORCE_EXPECT_SNAPSHOT("chat_transcript", app.plaintext());
+}
+
+TEST(TuiComposerSnapshotTest, ShowsCompletionPopupAndHintLine) {
+    io_context ctx;
+    strand s{ctx};
+
+    component_host host;
+    composer_option opt;
+    opt.complete = [](const completion_request& request, vector<completion_item>& items) {
+        struct entry {
+            const char* name;
+            const char* detail;
+        };
+        static const entry entries[] = {{"/help", "show commands"},
+                                        {"/clear", "clear transcript"},
+                                        {"/compact", "compact context"},
+                                        {"/model", "switch model"}};
+        for (const auto& item: entries) {
+            const string label(item.name);
+            if (request.query.empty() || label.view().find(request.query.view()) != string_view::npos) {
+                completion_item entry_item;
+                entry_item.label = label;
+                entry_item.detail = string(item.detail);
+                items.push_back(move(entry_item));
+            }
+        }
+    };
+
+    auto owned = make_unique<composer>(opt);
+    host.add_child(move(owned));
+
+    headless app(&host, 40, 9);
+    app.render();
+    app.feed("\t");
+    app.tick();
+    app.feed("/c");
+    app.tick();
+
+    NEFORCE_EXPECT_SNAPSHOT("composer_completions", app.plaintext());
+}
+
+TEST(TuiToolCardSnapshotTest, RendersRunningAndFinishedCards) {
+    io_context ctx;
+    strand s{ctx};
+
+    struct stack : component<> {
+        vector<component_base*> cards;
+
+        void adopt(unique_ptr<component_base> child) {
+            cards.push_back(child.get());
+            add_child(move(child));
+        }
+
+        element render() override {
+            elements parts;
+            for (auto* card: cards) {
+                parts.push_back(card->render());
+            }
+            return element::vbox(move(parts));
+        }
+    };
+
+    stack host;
+    tool_card_option running_opt;
+    running_opt.title = "bash";
+    running_opt.summary = "pytest -q";
+    running_opt.status = tool_status::running;
+    host.adopt(make_unique<tool_card>(running_opt));
+
+    tool_card_option done_opt;
+    done_opt.title = "edit";
+    done_opt.summary = "src/net.hpp";
+    done_opt.status = tool_status::success;
+    done_opt.elapsed_ms = 2400;
+    done_opt.collapsed = false;
+    auto done = make_unique<tool_card>(done_opt);
+    tool_card* done_card = done.get();
+    host.adopt(move(done));
+
+    auto failed = make_unique<tool_card>(tool_card_option{string("bash"), string("make test"), tool_status::failed,
+                                                          int64_t{1400}, true, size_t{12}, style{}, style{}, style{}});
+    tool_card* failed_card = failed.get();
+    host.adopt(move(failed));
+
+    headless app(&host, 48, 14);
+    done_card->set_output(string("diff --git a/src/net.hpp\n+auto retry_async(...);"));
+    failed_card->set_output(string("line1\nline2\nline3"));
+    app.render();
+    app.tick();
+
+    NEFORCE_EXPECT_SNAPSHOT("tool_cards", app.plaintext());
+}
+
+TEST(TuiDiffGroupedSnapshotTest, GroupsByFileAndCollapses) {
+    const string patch = "diff --git a/src/a.cpp b/src/a.cpp\n"
+                         "--- a/src/a.cpp\n"
+                         "+++ b/src/a.cpp\n"
+                         "@@ -1,3 +1,4 @@\n"
+                         " int main() {\n"
+                         "-    return 1;\n"
+                         "+    log();\n"
+                         "+    return 0;\n"
+                         " }\n"
+                         "diff --git a/src/b.cpp b/src/b.cpp\n"
+                         "--- a/src/b.cpp\n"
+                         "+++ b/src/b.cpp\n"
+                         "@@ -10,2 +10,2 @@\n"
+                         "-old\n"
+                         "+new\n";
+
+    fixed_root holder;
+    diff_view_option opt;
+    opt.width = 40;
+    holder.content = diff_view(patch.view(), opt);
+
+    headless app(&holder, 40, 16);
+    app.render();
+    NEFORCE_EXPECT_SNAPSHOT("diff_grouped", app.plaintext());
 }

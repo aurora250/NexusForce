@@ -321,6 +321,12 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`status_indicator`** - Spinner + label + elapsed time status line
 - **`streaming_text`** - Frame-coalesced commits for high-frequency appended text
 - **`markdown` / `markdown_cache`** - Markdown rendering plus a (text, width) keyed element-tree cache that reuses parsing when the same Markdown is repainted (the parser lives in `core/file/md`)
+- **`log_view`** - Chat transcript: variable-height messages, streaming coalescing, bottom-follow and an "N new messages" hint
+- **`composer`** - Input orchestration: multi-line editor + completion popup + hint line, with submit/newline/interrupt semantics
+- **`tool_card`** - Tool call card: status icon, elapsed time and collapsible output
+- **`output_block`** - Collapsible output block ("… N lines hidden", toggled by key or click)
+- **`keymap`** - Three-layer shortcut table (global/overlay/focus), two-stage `Ctrl+C` quit and `Ctrl+L` redraw
+- **`band`** - Background band element for full-row blocks in code blocks, diffs and tool cards
 - **`code_block` / `diff`** - Gutter+highlighted code block and unified diff renderers
 - **`color_depth` / `light_theme`** - 16/256/truecolor output and a light theme, with per-frame atomic commits via synchronized output
 - **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout

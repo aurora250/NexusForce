@@ -19,6 +19,8 @@ struct element::node {
     void* scroll_x_state = nullptr;
     void* scroll_y_state = nullptr;
     void* viewport_state = nullptr;
+    void* viewport_rect_state = nullptr;
+    vector<int>* item_heights = nullptr;
     void* rect_state = nullptr;
 
     size_t key = 0;
@@ -32,6 +34,7 @@ struct element::node {
     int scroll_y = 0;
     int grid_columns = 0;
     int item_height = 1;
+    int item_height_hint = 1;
     mutable int cached_constraint_w_ = -1;
     mutable int cached_constraint_h_ = -1;
 
@@ -108,6 +111,18 @@ size_t element::item_count() const noexcept { return node_->item_count; }
 int element::item_height() const noexcept { return node_->item_height; }
 
 const function<element(size_t)>& element::item_builder() const { return node_->item_builder; }
+
+const vector<int>* element::item_heights() const noexcept { return node_->item_heights; }
+
+int element::item_height_hint() const noexcept { return node_->item_height_hint; }
+
+void* element::viewport_rect_state() const noexcept { return node_->viewport_rect_state; }
+
+element& element::with_viewport_rect_state(void* s) {
+    ensure_node();
+    node_->viewport_rect_state = s;
+    return *this;
+}
 
 void* element::viewport_state() const noexcept { return node_->viewport_state; }
 
@@ -282,6 +297,14 @@ element element::virtual_list(const size_t item_count, const int item_height, fu
     return el;
 }
 
+element element::virtual_list(const size_t item_count, const int item_height_hint, vector<int>* heights,
+                              function<element(size_t)> builder, const int scroll_y) {
+    element el = element::virtual_list(item_count, item_height_hint, move(builder), scroll_y);
+    el.node_->item_height_hint = (item_height_hint > 0) ? item_height_hint : 1;
+    el.node_->item_heights = heights;
+    return el;
+}
+
 element element::spacer(const int flex) {
     element el;
     el.node_->kind = kind::spacer;
@@ -334,6 +357,14 @@ element element::scroll_view(element child, tui::style style, const int scroll_x
     el.node_->style = move(style);
     el.node_->scroll_x = scroll_x;
     el.node_->scroll_y = scroll_y;
+    return el;
+}
+
+element element::band(element child, tui::style style) {
+    element el;
+    el.node_->kind = kind::band;
+    el.node_->children.push_back(move(child));
+    el.node_->style = move(style);
     return el;
 }
 

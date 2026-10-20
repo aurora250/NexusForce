@@ -64,15 +64,19 @@
 - 添加 `application::suspend()` / `resume()`：让出终端给交互式子进程（`$EDITOR`、需要 TTY 的命令）后收回并强制整屏重绘
 - 添加 `reconciler::invalidate()`、`frame()`、`frame_layout()`、`frame_tree()`、`set_output_sink()`、`set_term_size()`、`set_color_depth()`、`set_synchronized_output()`：离屏渲染与快照测试所需的观测与控制接口
 - 添加 `surface::fast_cell_at()` 的只读重载
-- 添加 Markdown 文档模块 `core/file/md`（`markdown_value.hpp` / `markdown_parser.hpp` / `markdown_builder.hpp`）：与呈现无关的完整文档模型、`markdown_parser` 解析器与 `markdown_builder` 构建器，与 `json` / `yaml` / `toml` / `ini` 同级；三者与配置格式模块保持一致的类式风格——解析器构造时注入文本、`parse()` / `parse_inline()` 出结果，构建器链式 `append()` / `reference()` 累积后 `build()` 出文本，`markdown_document` 通过 `istringify` 提供 `to_string()`
-- Markdown 块级结构完整覆盖：ATX 与 **Setext** 标题、段落（懒惰续行 + 软/硬换行）、围栏代码块（反引号/波浪线、长度匹配、info string 与语言）与缩进代码块、**HTML 块 1-7 类**（脚本/注释/处理指令/声明/CDATA/块级标签/自定义标签）、引用块（可嵌套、可含任意子块）、有序/无序/嵌套列表（起始编号、`.`/`)` 分隔符、**紧凑与松散列表**、任务列表、**列表项内可含任意子块**（多段落、子列表、引用、代码块）、分隔线、**管道表格**（对齐行、转义竖线、列数校验）、**链接引用定义**（单行/多行标题）
-- Markdown 行内结构完整覆盖：实体引用（命名子集 + 十进制/十六进制数值）、行内代码（多反引号围栏、首尾空格规则）、强调与加粗（含 `***` 三重限定符、`_` 词内禁用、左右侧强调判定）、删除线、行内链接与图片（**内联式 / 完整引用式 / 折叠式 / 简写式**）、**自动链接**（URL 与邮箱）、**行内 HTML**（标签/注释/处理指令/CDATA）、反斜杠转义与硬换行（两空格与行尾反斜杠）
-- Markdown 构建器输出规范化文本：文本按需转义（行首块标记、行内标记字符）以保证 `parse → build → parse` **结构等价**、代码围栏长度与字符按内容自适应、松散列表保留空行、引用逐行加 `>`、表格按对齐输出分隔行、引用定义统一追加在文末
 - 添加 `md_find_reference()` / `md_plain_text()` / `md_empty()` 文档查询接口
-- Markdown 解析器性能优化：行切分改为**零拷贝行视图**（用库内 `memory_find()` 的 SIMD 字节搜索定位换行，行内容直接引用源文本；只有含制表符、需要按制表位展开的行才复制到持有存储中），行内解析改为**按片段追加**（连续普通字符一次 `append()`，不再逐字符累加），段落拼接预留容量；实测解析吞吐 32 → 50 MB/s（混合文档）、89 → 286 MB/s（纯段落）、13 → 16 MB/s（200 KB 长文档），4 KB 消息 154 → 125 µs
-- Markdown 解析器与构建器的分配优化：表格的表头/对齐/数据行按实际数量一次性预留容量（数据行先扫描计数再预留）、列表解析复用跨项的行暂存缓冲、构建器的文本转义改为**按片段复制**并正确区分行首标记（`-`/`+`/`>`/`=` 行首加反斜杠，`1.` 这类有序标记改转义其后的分隔符）；构建器输出吞吐 300 → 565 MB/s，解析侧改动落在测量噪声内（节点构造才是剩余开销）
-- 添加 TUI 侧的 `tui::markdown_cache`：以「文本内容 + 宽度」为键缓存 Markdown 的元素树，重复渲染同一段 Markdown 时直接复用（含元素节点上的布局缓存），实测每帧 20 条消息的重绘成本 2.3 ms → 12 µs（约 185×）；该缓存位于 TUI 层，`core/file/md` 保持与 `json` / `toml` / `yaml` / `ini` 同样的三头文件结构与无呈现概念
-
+- Markdown 解析器与构建器的分配优化：表格的表头/对齐/数据行按实际数量一次性预留容量、列表解析复用跨项的行暂存缓冲、构建器的文本转义改为**按片段复制**并正确区分行首标记
+- 添加对话记录组件 `components::log_view`：变高消息、流式合并追加、贴底自动跟随、上滚期间"N 条新消息"提示、定稿消息走 Markdown 渲染缓存
+- 添加输入编排组件 `components::composer`：多行编辑器 + 补全弹层 + 状态提示行，`Enter` 提交、`Shift+Enter` 换行、`Ctrl+Enter` 提交，触发符（默认 `/`）自动唤起补全，`Tab`/`Enter` 接受、`Esc` 关闭，运行中 `Esc` 触发中断
+- 添加工具调用卡片 `components::tool_card`：工具名 + 参数摘要 + 状态图标 + 耗时 + 可折叠输出
+- 添加可折叠输出块 `components::output_block`：头部一行 + 折叠提示，`Enter`/`Space`/`→` 展开、`←` 折叠，点击切换
+- 添加快捷键表 `tui::keymap`：`global`/`overlay`/`focus` 三层绑定，修饰键可要求也可禁止，同层后注册者优先，`hints()` 可复用为状态行说明
+- 添加全局快捷键接入：`reconciler::shortcuts()` 在事件抵达组件树之前处理全局层，`application` 默认绑定 `Ctrl+C` 与 `Ctrl+L`
+- 添加背景色带元素 `element::band()`：把整个矩形刷成背景色并在内边距内排布子元素，色带内文本自动继承色带底色
+- 添加富文本片段超链接 `text_span::link`：渲染为 OSC-8 超链接
+- 虚拟列表支持**变高项**：`element::virtual_list()` 新增高度表重载、`components::virtual_list_view` 新增 `variable_height`/`invalidate_heights()`/`measured_height()`，只对可视项做实测并回写，宽度变化自动失效重测
+- `code_block()` 新增整块背景带、左侧竖线与 `collapse_after` 折叠
+- `diff_view()` 新增按文件分组、hunk 折叠与背景带，`diff_view_option` 增加 `added_style`/`removed_style`/`header_style`/`band_style`
 
 ### 🔧 Improvements
 
@@ -196,9 +200,7 @@
 - `screen::register_hyperlink()` 对相同链接去重，句柄表到达 255 上限时返回 0 而不是继续入队造成错位
 - TUI 渲染器的文本绘制统一改为基于 `text_layout` 的字形流实现，词换行、字符换行、显式换行与选区叠加共用同一套分行结果
 - TUI 文本输入框支持无边框形态、纵向滚动（`with_scroll_y()`）与选区高亮（`with_selection()`），并回写自身布局矩形（`with_rect_state()`）
-- 新增 8 份 TUI 快照测试（Markdown、代码块、unified diff、多行编辑器、可选列表、确认对话框、状态行、虚拟列表）与快照基准设施 `tests/unit/tui_snapshot.hpp`（`NEFORCE_UPDATE_SNAPSHOTS=1` 重新生成）
-- TUI 的 `markdown()` 改为消费 `core/file/md` 的文档模型，只负责 AST → `element` 的样式映射，解析不再与渲染耦合；同时补齐此前做不了的**管道表格**（列宽按显示宽度对齐、支持左/中/右）与**嵌套列表**（按层级缩进）、任务列表勾选标记、链接下划线与图片替代文字
-- TUI 新增 `markdown_option::link_style`，Markdown 表格与嵌套列表各增一份快照基准
+- `components::select_list` 新增 `set_visible_rows()`，输入区补全弹层按匹配数量收缩，不再固定占满可视行数
 
 ### 🐛 Bug Fixes
 

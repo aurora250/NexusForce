@@ -2,6 +2,7 @@
 #define NEFORCE_TEST_TUI_SNAPSHOT_HPP__
 #include "NeForce/core/string/string.hpp"
 #include "NeForce/core/file/file.hpp"
+#include "NeForce/core/file/filesystem.hpp"
 #include "NeForce/core/system/environment.hpp"
 #include <gtest/gtest.h>
 
@@ -28,7 +29,8 @@ namespace tui_snapshot {
     }
 
     inline void write_file(const neforce::string& path, const neforce::string& content) {
-        neforce::file out(neforce::path{path}, true);
+        neforce::file out(neforce::path{path}, false, neforce::file_access::read_write,
+                          neforce::file_shared::share_read, neforce::file_creation::create_force);
         out.write(content);
     }
 

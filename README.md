@@ -319,6 +319,12 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`status_indicator`** - 旋转 + 文案 + 耗时的运行状态行
 - **`streaming_text`** - 高频追加文本的帧内合并提交
 - **`markdown` / `markdown_cache`** - Markdown 渲染与「文本+宽度」维度的元素树缓存，重复重绘同一段 Markdown 时复用解析结果（解析本体在 `core/file/md`）
+- **`log_view`** - 对话记录：变高消息、流式合并、贴底跟随与「N 条新消息」提示
+- **`composer`** - 输入编排：多行编辑器 + 补全弹层 + 提示行，提交/换行/中断语义
+- **`tool_card`** - 工具调用卡片：状态图标、耗时与可折叠输出
+- **`output_block`** - 可折叠输出块（「… N 行已折叠」，可键盘或点击切换）
+- **`keymap`** - 三层快捷键表（全局/弹层/焦点），`Ctrl+C` 两段式退出与 `Ctrl+L` 重绘
+- **`band`** - 背景色带元素，代码块/差异/工具卡片的整行背景块
 - **`code_block` / `diff`** - 带行号与着色的代码块、unified diff 渲染器
 - **`color_depth` / `light_theme`** - 16 色 / 256 色 / 真彩输出与亮色主题，同步输出按帧原子提交
 - **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局

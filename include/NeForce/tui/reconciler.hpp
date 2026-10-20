@@ -15,6 +15,7 @@
 #include "NeForce/tui/dom/layout.hpp"
 #include "NeForce/tui/event_dispatcher.hpp"
 #include "NeForce/tui/focus_manager.hpp"
+#include "NeForce/tui/keymap.hpp"
 #include "NeForce/tui/renderer.hpp"
 #include "NeForce/tui/screen.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -138,6 +139,18 @@ public:
     void set_theme(const theme& t);
 
     /**
+     * @brief 获取快捷键表
+     * @return 快捷键表引用
+     */
+    NEFORCE_NODISCARD keymap& shortcuts() noexcept { return shortcuts_; }
+
+    /**
+     * @brief 获取快捷键表
+     * @return 快捷键表常量引用
+     */
+    NEFORCE_NODISCARD const keymap& shortcuts() const noexcept { return shortcuts_; }
+
+    /**
      * @brief 设置帧输出颜色深度
      * @param depth 颜色深度
      *
@@ -200,6 +213,7 @@ private:
     screen prev_screen_{80, 24};
 
     focus_manager focus_mgr_;
+    keymap shortcuts_;
     event_dispatcher event_dispatcher_;
     renderer renderer_;
 

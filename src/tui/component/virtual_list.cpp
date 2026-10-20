@@ -10,10 +10,32 @@ follow_(opt_.auto_follow) {}
 void virtual_list_view::setup() {
     scroll_ = &create_state<int>(0);
     viewport_ = &create_state<int>(0);
+    rect_ = &create_state<layout_rect>(layout_rect{});
+    heights_.assign(opt_.item_count, 0);
+    heights_snapshot_ = heights_;
 }
 
-void virtual_list_view::set_item_renderer(function<element(size_t)> render_item) {
-    opt_.render_item = move(render_item);
+int virtual_list_view::rows_of(const size_t index) const noexcept {
+    if (!opt_.variable_height) {
+        return max(1, opt_.item_height);
+    }
+    if (index < heights_.size() && heights_[index] > 0) {
+        return heights_[index];
+    }
+    return max(1, opt_.item_height);
+}
+
+void virtual_list_view::set_variable_height(const bool enable) {
+    if (opt_.variable_height == enable) {
+        return;
+    }
+    opt_.variable_height = enable;
+    invalidate_heights();
+}
+
+void virtual_list_view::invalidate_heights() {
+    heights_.assign(opt_.item_count, 0);
+    heights_snapshot_ = heights_;
     schedule_render();
 }
 
@@ -27,10 +49,36 @@ void virtual_list_view::set_item_height(const int height) {
     schedule_render();
 }
 
+int virtual_list_view::measured_height(const size_t index) const noexcept {
+    return (index < heights_.size()) ? heights_[index] : 0;
+}
+
+size_t virtual_list_view::measured_count() const noexcept {
+    size_t count = 0;
+    for (const int height: heights_) {
+        if (height > 0) {
+            ++count;
+        }
+    }
+    return count;
+}
+
+void virtual_list_view::set_item_renderer(function<element(size_t)> render_item) {
+    opt_.render_item = move(render_item);
+    schedule_render();
+}
+
 int virtual_list_view::viewport_rows() const noexcept { return viewport_ != nullptr ? viewport_->value() : 0; }
 
 int virtual_list_view::content_rows() const noexcept {
-    return static_cast<int>(opt_.item_count) * max(1, opt_.item_height);
+    if (!opt_.variable_height) {
+        return static_cast<int>(opt_.item_count) * max(1, opt_.item_height);
+    }
+    int total = 0;
+    for (size_t i = 0; i < opt_.item_count; ++i) {
+        total += rows_of(i);
+    }
+    return total;
 }
 
 int virtual_list_view::scroll_offset() const noexcept { return scroll_ != nullptr ? scroll_->value() : 0; }
@@ -61,6 +109,8 @@ void virtual_list_view::set_item_count(const size_t count) {
     }
     const bool was_at_bottom = at_bottom();
     opt_.item_count = count;
+    heights_.resize(count, 0);
+    heights_snapshot_.resize(count, 0);
     if (follow_ && was_at_bottom) {
         follow_pending_ = true;
     }
@@ -102,21 +152,42 @@ element virtual_list_view::render() {
         return element::empty();
     }
 
-    if (follow_pending_) {
-        follow_pending_ = false;
-        if (follow_) {
-            const int target = max(0, content_rows() - max(0, viewport_rows()));
-            if (target != scroll_->value()) {
-                scroll_->set_quiet(target);
-            }
+    // While following, keep the viewport pinned to the bottom.
+    // This must be re-evaluated every frame:
+    // item heights are estimates until the renderer measures them,
+    // so pinning once on append can leave the view mid-content.
+    if (follow_) {
+        const int target = max(0, content_rows() - max(0, viewport_rows()));
+        if (target != scroll_->value()) {
+            scroll_->set_quiet(target);
+        }
+    }
+    follow_pending_ = false;
+
+    if (opt_.variable_height) {
+        // A width change invalidates every measured height.
+        const int width = (rect_ != nullptr) ? rect_->value().w : 0;
+        if (width > 0 && width != layout_width_) {
+            layout_width_ = width;
+            heights_.assign(opt_.item_count, 0);
+            heights_snapshot_ = heights_;
         }
     }
 
-    element el = element::virtual_list(opt_.item_count, max(1, opt_.item_height), opt_.render_item, scroll_->value())
-                         .with_scroll_y_state(scroll_)
-                         .with_viewport_state(viewport_);
-    el = el.with_style(opt_.style);
+    element el = opt_.variable_height ? element::virtual_list(opt_.item_count, max(1, opt_.item_height), &heights_,
+                                                              opt_.render_item, scroll_->value())
+                                      : element::virtual_list(opt_.item_count, max(1, opt_.item_height),
+                                                              opt_.render_item, scroll_->value());
+    el = el.with_scroll_y_state(scroll_).with_viewport_state(viewport_).with_viewport_rect_state(rect_).with_style(
+            opt_.style);
     el.set_owner(this);
+
+    // The renderer writes measured heights back while drawing;
+    // if they changed, request one more frame so the scroll metrics settle immediately.
+    if (opt_.variable_height && rect_ != nullptr && rect_->value().h > 0 && heights_ != heights_snapshot_) {
+        heights_snapshot_ = heights_;
+        schedule_render();
+    }
     return el;
 }
 

@@ -159,7 +159,13 @@ bool reconciler::dispatch_key(const key_event& e) {
     if (root_ == nullptr || !mounted_) {
         return false;
     }
-    return event_dispatcher_.dispatch_key(e, root_);
+    if (shortcuts_.dispatch(e)) {
+        return true;
+    }
+    if (event_dispatcher_.dispatch_key(e, root_)) {
+        return true;
+    }
+    return false;
 }
 
 bool reconciler::dispatch_mouse(const mouse_event& e) {

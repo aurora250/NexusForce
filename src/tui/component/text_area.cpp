@@ -69,6 +69,13 @@ void text_area_view::clamp_cursor() {
 
 void text_area_view::notify_changed() { schedule_render(); }
 
+void text_area_view::notify_content_changed() {
+    schedule_render();
+    if (opt_.on_change && opt_.text != nullptr) {
+        opt_.on_change(opt_.text->value());
+    }
+}
+
 void text_area_view::record_undo() {
     if (opt_.text == nullptr) {
         return;
@@ -97,7 +104,7 @@ void text_area_view::insert_text(const string_view chunk) {
     cursor_ = before.size();
     anchor_ = cursor_;
     *opt_.text = before + after;
-    notify_changed();
+    notify_content_changed();
 }
 
 void text_area_view::erase_selection() {
@@ -126,7 +133,7 @@ void text_area_view::set_text(string value) {
     cursor_ = text().size();
     anchor_ = cursor_;
     scroll_row_ = 0;
-    notify_changed();
+    notify_content_changed();
 }
 
 void text_area_view::set_cursor(const size_t offset) {
@@ -152,7 +159,7 @@ bool text_area_view::undo() {
     *opt_.text = last.text;
     cursor_ = min(last.cursor, text().size());
     anchor_ = min(last.anchor, text().size());
-    notify_changed();
+    notify_content_changed();
     return true;
 }
 
@@ -166,7 +173,7 @@ bool text_area_view::redo() {
     *opt_.text = next.text;
     cursor_ = min(next.cursor, text().size());
     anchor_ = min(next.anchor, text().size());
-    notify_changed();
+    notify_content_changed();
     return true;
 }
 
@@ -212,7 +219,7 @@ void text_area_view::jump_history(const int delta) {
         cursor_ = text().size();
     }
     anchor_ = cursor_;
-    notify_changed();
+    notify_content_changed();
 }
 
 size_t text_area_view::word_boundary(const size_t from, const bool forward) const {

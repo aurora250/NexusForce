@@ -39,14 +39,32 @@ struct diff_line {
 };
 
 /**
+ * @brief 单个文件的差异
+ */
+struct diff_file {
+    string header;           ///< 文件头原文（`diff --git` / `---` / `+++`）
+    string path;             ///< 新文件路径
+    vector<diff_line> lines; ///< 该文件的差异行（含 hunk 头）
+    int added = 0;           ///< 新增行数
+    int removed = 0;         ///< 删除行数
+};
+
+/**
  * @brief 差异视图配置
  */
 struct diff_view_option {
-    int width = 0;            ///< 宽度约束（0 表示由布局决定）
-    bool show_gutter = true;  ///< 是否显示行号栏
-    bool show_markers = true; ///< 是否显示 +/- 标记列
-    tui::style style;         ///< 基础样式
-    tui::style gutter_style;  ///< 行号栏样式
+    int width = 0;                  ///< 宽度约束（0 表示由布局决定）
+    bool show_gutter = true;        ///< 是否显示行号栏
+    bool show_markers = true;       ///< 是否显示 +/- 标记列
+    bool group_by_file = true;      ///< 是否按文件分组并显示文件头
+    size_t collapse_hunk_after = 0; ///< 单个 hunk 超过该行数时折叠中间部分，0 表示不折叠
+    bool background = true;         ///< 是否绘制整块背景带
+    tui::style style;               ///< 基础样式
+    tui::style gutter_style;        ///< 行号栏样式
+    tui::style added_style;         ///< 新增行样式
+    tui::style removed_style;       ///< 删除行样式
+    tui::style header_style;        ///< 文件头样式
+    tui::style band_style;          ///< 背景带样式
 };
 
 /**
@@ -58,6 +76,13 @@ struct diff_view_option {
  * `\ No newline at end of file` 归为元信息行。
  */
 NEFORCE_API vector<diff_line> parse_unified_diff(string_view patch);
+
+/**
+ * @brief 按文件解析 unified diff 文本
+ * @param patch 差异文本
+ * @return 文件差异列表
+ */
+NEFORCE_API vector<diff_file> parse_unified_diff_files(string_view patch);
 
 /**
  * @brief 渲染结构化差异
@@ -74,6 +99,14 @@ NEFORCE_API element diff_view(const vector<diff_line>& lines, diff_view_option o
  * @return 元素树（vbox）
  */
 NEFORCE_API element diff_view(string_view patch, diff_view_option opt = {});
+
+/**
+ * @brief 渲染按文件分组的差异
+ * @param files 文件差异列表
+ * @param opt 配置
+ * @return 元素树（vbox）
+ */
+NEFORCE_API element diff_view(const vector<diff_file>& files, diff_view_option opt = {});
 
 /** @} */ // TUI
 

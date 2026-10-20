@@ -462,7 +462,7 @@ namespace {
             0                      // 192..255
     };
 
-    NEFORCE_ALWAYS_INLINE bool is_inline_special(char chr) noexcept {
+    bool is_inline_special(char chr) noexcept {
         const auto c = static_cast<byte_t>(chr);
         return ((inline_special_mask[c >> 6] >> (c & 63)) & 1U) != 0U;
     }
