@@ -128,6 +128,7 @@ private:
     output_block* output_ = nullptr;
     size_t frame_ = 0;
     int64_t frame_accum_ = 0;
+    string header_key_;
 
     NEFORCE_NODISCARD string status_icon();
     NEFORCE_NODISCARD tui::style status_style() const;

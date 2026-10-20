@@ -180,7 +180,7 @@ namespace {
             const auto& child = children[indices[i]];
             const int fw = child_flex_weight(child, is_row);
             if (fw > 0 && total_flex > 0) {
-                sizes[i] = (i == static_cast<size_t>(n - 1)) ? remaining_space : flex_available * fw / total_flex;
+                sizes[i] = compare_equal(i, n - 1) ? remaining_space : flex_available * fw / total_flex;
                 remaining_flex -= fw;
                 remaining_space -= sizes[i];
             } else {
@@ -334,7 +334,10 @@ namespace {
                 break;
             }
             case element::kind::virtual_list: {
-                content_h = 0;
+                constexpr int max_estimate_rows = 10000;
+                const long long rows =
+                        static_cast<long long>(el.item_count()) * static_cast<long long>(max(1, el.item_height()));
+                content_h = static_cast<int>(rows < max_estimate_rows ? rows : max_estimate_rows);
                 break;
             }
             case element::kind::button:

@@ -933,6 +933,39 @@ curl http://localhost:8080/frontend
 
 ---
 
+## 终端 UI 模块
+
+### 1. 计数器（counter）
+
+演示 TUI 的最小骨架：声明式元素 DSL（`vbox` / `hbox` / `text` / `button` / `spacer` / `separator`）、响应式 `state<T>`、组件生命周期与键盘事件。
+
+```bash
+./build/bin/NexusForceTUICounterExample
+# 方向键 / Tab 切换焦点，Enter 增加计数，q 退出
+```
+
+### 2. 待办列表（todo）
+
+演示输入框焦点与光标、`element::each` + `with_key` 差分、`vector<T>` 批量状态更新、`scroll_view` 裁剪与自动滚动条、上下导航高亮。
+
+```bash
+./build/bin/NexusForceTUITODOExample
+# 输入内容回车新增，↑/↓ 选择，空格切换完成，d 删除
+```
+
+### 3. 对话应用（chat）
+
+演示终端对话组件栈：`log_view`（变高消息 + 流式合并 + 贴底跟随 + "N 条新消息"提示）、`composer`（多行输入 + `/` 命令补全 + 提示行）、`tool_runner` + `process_watcher`（真实子进程流式输出、可中断）、`status_indicator`、Markdown 渲染与缓存。
+
+```bash
+./build/bin/NexusForceTUIChatExample
+# 输入 / 打开命令补全：/help、/clear、/md、/run <cmd>
+# 输入 !ls -la 直接执行 shell 命令，输出流入工具卡片
+# Esc 中断正在运行的工具，Ctrl+C 两段式退出，Ctrl+L 重绘
+```
+
+---
+
 ## 文件路径说明
 
 | 示例                   | 源文件                                                           |
@@ -941,6 +974,9 @@ curl http://localhost:8080/frontend
 | Logging Hierarchy      | `examples/logging/logging_hierarchy.cpp`                         |
 | Logging Async          | `examples/logging/logging_async.cpp`                             |
 | Logging Context        | `examples/logging/logging_context.cpp`                           |
+| TUI Counter            | `examples/tui/counter.cpp`                                       |
+| TUI Todo List          | `examples/tui/todo.cpp`                                          |
+| TUI Chat Agent         | `examples/tui/chat.cpp`                                          |
 | TCP Echo Server/Client | `examples/network/tcp_echo_server.cpp` / `tcp_echo_client.cpp`   |
 | UDP Echo               | `examples/network/udp_echo.cpp`                                  |
 | HTTP Server            | `examples/network/http_server.cpp`                               |

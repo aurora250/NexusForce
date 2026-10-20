@@ -454,6 +454,14 @@ public:
     void set_window_title(string_view title);
 
     /**
+     * @brief 把文本写入系统剪贴板
+     * @param text 文本
+     *
+     * 不依赖本地 X11/Wayland 会话。终端不支持时无副作用。
+     */
+    void copy_to_clipboard(string_view text);
+
+    /**
      * @brief 设置控制台输出代码页为 UTF-8
      */
     void set_output_utf8() noexcept;

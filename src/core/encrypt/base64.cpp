@@ -4,8 +4,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    constexpr auto base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-    constexpr auto base64url_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+    constexpr string_view base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    constexpr string_view base64url_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
     constexpr int base64_char_to_index(const char c) {
         if (c >= 'A' && c <= 'Z') {
@@ -46,13 +46,14 @@ namespace {
     }
 
 #ifdef NEFORCE_SIMD_SSSE3
-    NEFORCE_ALWAYS_INLINE_INLINE simd::vec128_t base64_shuffle_lookup(const simd::vec128_t idx, const char* alphabet) {
+    NEFORCE_ALWAYS_INLINE_INLINE simd::vec128_t base64_shuffle_lookup(const simd::vec128_t idx,
+                                                                      const string_view alphabet) {
         // pshufb only uses the low 4 bits of each index byte, so split the
         // 6-bit indices into four 16-char ranges and select per range.
-        const simd::vec128_t a0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(alphabet));
-        const simd::vec128_t a1 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(alphabet + 16));
-        const simd::vec128_t a2 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(alphabet + 32));
-        const simd::vec128_t a3 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(alphabet + 48));
+        const simd::vec128_t a0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(alphabet.data()));
+        const simd::vec128_t a1 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(alphabet.data() + 16));
+        const simd::vec128_t a2 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(alphabet.data() + 32));
+        const simd::vec128_t a3 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(alphabet.data() + 48));
 
         const simd::vec128_t m1 = ::_mm_cmpgt_epi8(idx, ::_mm_set1_epi8(15));
         const simd::vec128_t m2 = ::_mm_cmpgt_epi8(idx, ::_mm_set1_epi8(31));
@@ -75,7 +76,7 @@ namespace {
                                     ::_mm_cvtsi32_si128(static_cast<int>(tail)));
     }
 
-    NEFORCE_ALWAYS_INLINE_INLINE void base64_encode_12bytes(const byte_t* src, char* dst, const char* alphabet) {
+    NEFORCE_ALWAYS_INLINE_INLINE void base64_encode_12bytes(const byte_t* src, char* dst, const string_view alphabet) {
         simd::vec128_t v = load_12_bytes(src);
 
         const simd::vec128_t be_mask = ::_mm_set_epi8(-1, 9, 10, 11, -1, 6, 7, 8, -1, 3, 4, 5, -1, 0, 1, 2);
@@ -138,7 +139,7 @@ namespace {
     NEFORCE_ALWAYS_INLINE_INLINE simd::vec128_t base64_decode_16chars(const char* src, byte_t* dst,
                                                                       const char plus_char, const char slash_char) {
         const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
-        simd::vec128_t val = base64_map_to_index(v, plus_char, slash_char);
+        const simd::vec128_t val = base64_map_to_index(v, plus_char, slash_char);
         const simd::vec128_t valid = base64_valid_mask(v, plus_char, slash_char);
 
         const simd::vec128_t mask6 = ::_mm_set1_epi32(0x3F);

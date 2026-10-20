@@ -1,4 +1,5 @@
 #include <NeForce/tui/component/text_area.hpp>
+#include <NeForce/core/system/console.hpp>
 #include <NeForce/tui/dom/text_layout.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -65,6 +66,75 @@ void text_area_view::clamp_cursor() {
     const size_t len = text().size();
     cursor_ = min(cursor_, len);
     anchor_ = min(anchor_, len);
+}
+
+size_t text_area_view::offset_at(const int row, const int column) const {
+    const layout_rect box = (rect_ != nullptr) ? rect_->value() : layout_rect{};
+    const enum style::border border = opt_.style.border.value_or(style::border::none);
+    const int border_w = (border == style::border::none) ? 0 : 1;
+    const int inner_w = max(1, box.w - 2 * border_w);
+
+    const string_view value = text().view();
+    const text_layout lay = layout_text(value, inner_w, opt_.wrap);
+    if (lay.lines.empty()) {
+        return 0;
+    }
+
+    const size_t line_index =
+            static_cast<size_t>(max(0, min(row + scroll_row_, static_cast<int>(lay.lines.size()) - 1)));
+    const auto& line = lay.lines[line_index];
+
+    size_t pos = line.begin;
+    int walked = 0;
+    while (pos < line.end && walked < max(0, column)) {
+        const size_t next = utf8_next(value, pos);
+        walked += max(1, text_display_width(value.substr(pos, next - pos)));
+        pos = next;
+    }
+    return pos;
+}
+
+bool text_area_view::copy_selection() {
+    if (!has_selection()) {
+        return false;
+    }
+    const string_view value = text().view();
+    const size_t begin = min(selection_begin(), value.size());
+    const size_t end = min(selection_end(), value.size());
+    if (end <= begin) {
+        return false;
+    }
+    console.copy_to_clipboard(value.substr(begin, end - begin));
+    return true;
+}
+
+bool text_area_view::on_mouse(const mouse_event& e) {
+    if (opt_.text == nullptr) {
+        return false;
+    }
+    if (e.action != mouse_action::press && e.action != mouse_action::move) {
+        return false;
+    }
+
+    const layout_rect box = (rect_ != nullptr) ? rect_->value() : layout_rect{};
+    const enum style::border border = opt_.style.border.value_or(style::border::none);
+    const int border_w = (border == style::border::none) ? 0 : 1;
+    const int inner_x = box.x + border_w;
+    const int inner_y = box.y + border_w;
+
+    const size_t offset = offset_at(e.y - inner_y, e.x - inner_x);
+    if (e.action == mouse_action::press) {
+        cursor_ = offset;
+        anchor_ = offset;
+        dragging_ = true;
+    } else {
+        if (!dragging_) {
+            return false;
+        }
+        cursor_ = offset;
+    }
+    schedule_render();
+    return true;
 }
 
 void text_area_view::notify_changed() { schedule_render(); }
@@ -382,6 +452,18 @@ bool text_area_view::on_key(const key_event& e) {
                 }
                 if (is_letter('y')) {
                     return redo();
+                }
+                if (is_letter('c')) {
+                    return copy_selection();
+                }
+                if (is_letter('x')) {
+                    if (!copy_selection()) {
+                        return false;
+                    }
+                    record_undo();
+                    erase_selection();
+                    notify_content_changed();
+                    return true;
                 }
                 if (is_letter('p')) {
                     jump_history(-1);

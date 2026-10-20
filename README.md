@@ -309,29 +309,13 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`input_driver`** - 跨平台终端输入驱动，监听 stdin 并分发按键/鼠标/粘贴事件
 - **`input_parser`** - 无 I/O 的输入解析状态机，识别 ASCII/UTF-8、控制键、CSI/SS3、带修饰键序列、Alt+字符、SGR 鼠标与括号粘贴
 - **`headless`** - 无终端驱动：固定尺寸、帧输出回收到内存、字节级输入注入，作为快照测试与离屏渲染底座
-- **`rich_text`** - `text_span` 富文本元素，同一行内混排多种样式（颜色/粗体/斜体/删除线）
-- **`text_layout`** - `layout_text` / `text_display_width` / `caret_position`，渲染器、布局与编辑器光标共用的分行实现
-- **`virtual_list`** - 只渲染可视窗口内项的虚拟列表，支持贴底自动跟随、滚轮与键盘滚动
-- **`panel`** - 自带边框与内边距的面板元素，承载对话框与卡片
-- **`text_area`** - 多行编辑器：软换行、选区、撤销重做、输入历史与光标随动滚动
-- **`select_list`** - 可过滤的候选列表（命令面板 / 补全弹层）
-- **`approve_prompt`** - 权限确认对话框（允许 / 拒绝 / 总是允许）
-- **`status_indicator`** - 旋转 + 文案 + 耗时的运行状态行
-- **`streaming_text`** - 高频追加文本的帧内合并提交
-- **`markdown` / `markdown_cache`** - Markdown 渲染与「文本+宽度」维度的元素树缓存，重复重绘同一段 Markdown 时复用解析结果（解析本体在 `core/file/md`）
 - **`log_view`** - 对话记录：变高消息、流式合并、贴底跟随与「N 条新消息」提示
 - **`composer`** - 输入编排：多行编辑器 + 补全弹层 + 提示行，提交/换行/中断语义
-- **`tool_card`** - 工具调用卡片：状态图标、耗时与可折叠输出
-- **`output_block`** - 可折叠输出块（「… N 行已折叠」，可键盘或点击切换）
-- **`keymap`** - 三层快捷键表（全局/弹层/焦点），`Ctrl+C` 两段式退出与 `Ctrl+L` 重绘
-- **`band`** - 背景色带元素，代码块/差异/工具卡片的整行背景块
-- **`code_block` / `diff`** - 带行号与着色的代码块、unified diff 渲染器
-- **`color_depth` / `light_theme`** - 16 色 / 256 色 / 真彩输出与亮色主题，同步输出按帧原子提交
+- **`tool_runner`** - 工具执行组件：PTY/管道子进程 + 逐帧合并输出 + 环形裁剪 + 状态回写
+- **`pty` / `process_watcher`** - 伪终端封装与异步子进程监视器
+- **`copy_to_clipboard` / 鼠标选择** - OSC 52 剪贴板写入，`text_area` 拖拽选区与 `log_view` 点击选中复制
 - **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
-- **`style` / `theme`** - 样式系统 + 语义化主题，预置暗色主题
 - **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染
-- **`component_base` / `component<P>`** - 组件基类，焦点管理、上下文注入（`provide_context`/`context`，沿父链查找）、响应式状态工厂
-- **`animator` / `easing`** - 属性动画器 + 缓动函数
 
 ### 🧬 类型与特性 (TypeInfo)
 - **类型萃取** - 完备的编译期类型判断

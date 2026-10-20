@@ -14,6 +14,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/named_mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/notification.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/process_watcher.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/semaphore.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
@@ -84,6 +85,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/daemon.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pty.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/registry_key.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/share_memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
@@ -191,6 +193,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/output_block.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/streaming_text.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/tool_card.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/tool_runner.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_area.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/toggle.cpp
@@ -217,6 +220,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/focus_manager.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/keymap.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/reconciler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/recorder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/renderer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/screen.cpp
 )

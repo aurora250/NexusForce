@@ -137,6 +137,8 @@ public:
      * @brief 获取可视行数
      * @return 行数
      */
+    NEFORCE_NODISCARD layout_rect viewport_rect() const noexcept;
+
     NEFORCE_NODISCARD int viewport_rows() const noexcept;
 
     /**

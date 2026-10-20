@@ -24,6 +24,10 @@ NEFORCE_BEGIN_TUI__
  * @{
  */
 
+/// @cond
+class recorder;
+/// @endcond
+
 /**
  * @brief 无终端应用驱动
  *
@@ -134,6 +138,25 @@ public:
     NEFORCE_NODISCARD const reconciler& pipeline() const noexcept { return *reconciler_; }
 
     /**
+     * @brief 绑定录制器
+     * @param rec 录制器指针，nullptr 停止录制
+     */
+    void set_recorder(recorder* rec) noexcept { recorder_ = rec; }
+
+    /**
+     * @brief 获取事件循环上下文
+     * @return io_context 引用
+     * @note 需要与界面共用同一个事件循环的组件必须使用这里的上下文，否则调度定时器与 fd 回调不会被驱动。
+     */
+    NEFORCE_NODISCARD io_context& context() noexcept { return ctx_; }
+
+    /**
+     * @brief 获取串行执行器
+     * @return strand 引用
+     */
+    NEFORCE_NODISCARD strand& executor() noexcept { return strand_; }
+
+    /**
      * @brief 获取终端宽度
      * @return 列数
      */
@@ -152,6 +175,7 @@ private:
     input_parser parser_;
     string ansi_;
     component_base* root_;
+    recorder* recorder_ = nullptr;
     int width_;
     int height_;
 };

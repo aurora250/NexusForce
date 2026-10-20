@@ -374,11 +374,6 @@ public:
         using other = standard_allocator<U>;
     };
 
-private:
-    /// 最终对齐大小：取类型对齐要求和阈值中的较大值
-    static constexpr inner::alloc_size_t align_size = alignof(T) > MEMORY_ALIGN_THRESHHOLD ? alignof(T)
-                                                                                           : MEMORY_ALIGN_THRESHHOLD;
-
 public:
     NEFORCE_CONSTEXPR20 standard_allocator() noexcept = default; ///< 默认构造函数
 
@@ -405,6 +400,8 @@ public:
         static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
         const size_type alloc_size = sizeof(value_type) * n;
         NEFORCE_DEBUG_VERIFY(alloc_size <= static_cast<size_type>(-1), "allocation will cause memory overflow.");
+        constexpr inner::alloc_size_t align_size =
+                alignof(T) > MEMORY_ALIGN_THRESHHOLD ? alignof(T) : MEMORY_ALIGN_THRESHHOLD;
         try {
             return static_cast<T*>(_NEFORCE allocate<align_size>(alloc_size));
         } catch (...) {
@@ -429,6 +426,8 @@ public:
     NEFORCE_CONSTEXPR20 static void deallocate(pointer p, const size_type n) noexcept {
         static_assert(is_allocable_v<T>, "allocator can`t alloc void, reference, function or const type.");
         NEFORCE_DEBUG_VERIFY(p != nullptr || n == 0, "null pointer cannot point to a block of non-zero size");
+        constexpr inner::alloc_size_t align_size =
+                alignof(T) > MEMORY_ALIGN_THRESHHOLD ? alignof(T) : MEMORY_ALIGN_THRESHHOLD;
         _NEFORCE deallocate<align_size>(p, n * sizeof(value_type));
     }
 

@@ -215,7 +215,7 @@ public:
      * @note 移除会使焦点链失效，下一帧渲染时自动重建
      */
     unique_ptr<component_base> remove_child(component_base* child) {
-        child->cleanup();
+        child->release_tree();
         child->parent_ = nullptr;
         mark_structure_dirty();
         for (auto it = children_.begin(); it != children_.end(); ++it) {
@@ -240,6 +240,19 @@ public:
             return parent_->remove_child(this);
         }
         return nullptr;
+    }
+
+    /**
+     * @brief 递归释放整棵子树的资源
+     * @note 释放后组件树仍保有结构，但不应再发起新的异步操作
+     */
+    void release_tree() noexcept {
+        for (size_t i = 0; i < children_.size(); ++i) {
+            if (children_[i] != nullptr) {
+                children_[i]->release_tree();
+            }
+        }
+        cleanup();
     }
 
     /**

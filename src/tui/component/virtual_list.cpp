@@ -68,6 +68,10 @@ void virtual_list_view::set_item_renderer(function<element(size_t)> render_item)
     schedule_render();
 }
 
+layout_rect virtual_list_view::viewport_rect() const noexcept {
+    return (rect_ != nullptr) ? rect_->value() : layout_rect{};
+}
+
 int virtual_list_view::viewport_rows() const noexcept { return viewport_ != nullptr ? viewport_->value() : 0; }
 
 int virtual_list_view::content_rows() const noexcept {

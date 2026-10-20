@@ -74,7 +74,7 @@ renderer_(current_screen_, theme_, term_w_, term_h_) {
 reconciler::~reconciler() {
     mounted_ = false;
     if (root_ != nullptr) {
-        root_->cleanup();
+        root_->release_tree();
         root_ = nullptr;
     }
 }

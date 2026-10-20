@@ -7,3 +7,8 @@ add_nexusforce_example(NexusForceTUICounterExample tui
 add_nexusforce_example(NexusForceTUITODOExample tui
     todo.cpp
 )
+
+# ---- TUI Chat (agent-style) ----
+add_nexusforce_example(NexusForceTUIChatExample tui
+    chat.cpp
+)

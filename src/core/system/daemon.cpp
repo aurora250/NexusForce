@@ -370,24 +370,24 @@ void daemon::check_and_restart_children() {
 }
 
 void daemon::setup_signal_handlers() {
-    auto& mgr = system_signal_manager::instance();
+    auto& mgr = system_signal::instance();
 
-    const auto shutdown_hander = [this](system_signal_manager::event, void*) -> bool {
+    const auto shutdown_hander = [this](system_signal::event, void*) -> bool {
         request_shutdown();
         return false;
     };
-    mgr.register_handler(system_signal_manager::event::TERMINATE, shutdown_hander);
-    mgr.register_handler(system_signal_manager::event::INTERRUPT, shutdown_hander);
+    mgr.register_handler(system_signal::event::TERMINATE, shutdown_hander);
+    mgr.register_handler(system_signal::event::INTERRUPT, shutdown_hander);
 
-    mgr.register_handler(system_signal_manager::event::HANGUP, [this](system_signal_manager::event, void*) -> bool {
+    mgr.register_handler(system_signal::event::HANGUP, [this](system_signal::event, void*) -> bool {
         request_reload();
         return true;
     });
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    mgr.register_handler(system_signal_manager::event::CLOSE, shutdown_hander);
-    mgr.register_handler(system_signal_manager::event::SHUTDOWN, shutdown_hander);
-    mgr.register_handler(system_signal_manager::event::LOGOFF, shutdown_hander);
+    mgr.register_handler(system_signal::event::CLOSE, shutdown_hander);
+    mgr.register_handler(system_signal::event::SHUTDOWN, shutdown_hander);
+    mgr.register_handler(system_signal::event::LOGOFF, shutdown_hander);
 #endif
 }
 

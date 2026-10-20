@@ -52,13 +52,14 @@ struct log_role_style {
  * @brief 对话记录配置
  */
 struct log_view_option {
-    vector<log_role_style> roles;  ///< 按 `log_role` 索引的来源样式，缺省项使用内置默认
-    markdown_option markdown;      ///< Markdown 渲染配置
-    int gap = 1;                   ///< 消息之间的空行数
-    int height_hint = 4;           ///< 未测量消息的估算高度
-    bool auto_follow = true;       ///< 追加消息时是否自动贴底
-    bool show_pending_hint = true; ///< 上滚期间是否显示新消息提示
-    size_t cache_capacity = 64;    ///< Markdown 渲染缓存容量
+    vector<log_role_style> roles;              ///< 按 `log_role` 索引的来源样式，缺省项使用内置默认
+    markdown_option markdown;                  ///< Markdown 渲染配置
+    int gap = 1;                               ///< 消息之间的空行数
+    int height_hint = 4;                       ///< 未测量消息的估算高度
+    bool auto_follow = true;                   ///< 追加消息时是否自动贴底
+    bool show_pending_hint = true;             ///< 上滚期间是否显示新消息提示
+    size_t cache_capacity = 64;                ///< Markdown 渲染缓存容量
+    function<void(uint64_t)> on_message_click; ///< 点击消息回调（参数为消息 id）
 };
 
 /**
@@ -199,6 +200,38 @@ public:
 
     bool on_key(const key_event& e) override;
 
+    /**
+     * @brief 鼠标事件
+     *
+     * 左键点击选中命中的消息并触发 `on_message_click` 回调。
+     */
+    bool on_mouse(const mouse_event& e) override;
+
+    /**
+     * @brief 当前选中的消息 id
+     * @return 消息 id，未选中时为 0
+     */
+    NEFORCE_NODISCARD uint64_t selected_message() const noexcept { return selected_; }
+
+    /**
+     * @brief 选中指定消息
+     * @param id 消息 id
+     */
+    void select_message(uint64_t id);
+
+    /**
+     * @brief 把指定消息的文本写入系统剪贴板
+     * @param id 消息 id
+     * @return 是否有内容被复制
+     */
+    bool copy_message(uint64_t id);
+
+    /**
+     * @brief 复制当前选中的消息
+     * @return 是否有内容被复制
+     */
+    bool copy_selected();
+
     void on_animation(int64_t delta) override;
 
     NEFORCE_NODISCARD bool focusable() const override { return true; }
@@ -219,10 +252,13 @@ private:
     virtual_list_view* list_ = nullptr;
     uint64_t next_id_ = 1;
     size_t pending_ = 0;
+    uint64_t selected_ = 0;
+    function<void(uint64_t)> on_message_click_;
 
     NEFORCE_NODISCARD message* find(uint64_t id);
     NEFORCE_NODISCARD const log_role_style& style_of(log_role role) const;
     NEFORCE_NODISCARD element render_message(size_t index);
+    NEFORCE_NODISCARD uint64_t message_at(int y) const;
     void mark_arrived();
 };
 

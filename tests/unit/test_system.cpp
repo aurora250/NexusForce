@@ -9,6 +9,7 @@
 #include <NeForce/core/system/pipe.hpp>
 #include <NeForce/core/time/datetime.hpp>
 #include <NeForce/core/system/process.hpp>
+#include <NeForce/core/system/pty.hpp>
 #include <NeForce/core/system/share_memory.hpp>
 #include <NeForce/core/system/signal.hpp>
 #include <NeForce/core/system/stacktrace.hpp>
@@ -6220,57 +6221,57 @@ TEST_F(SystemEventTest, Reset_WhileThreadsWaiting_WakesNobody) {
 class SignalManagerTest : public ::testing::Test {
 protected:
     void SetUp() override {
-        auto& mgr = system_signal_manager::instance();
+        auto& mgr = system_signal::instance();
         mgr.reset_force();
 
-        mgr.remove_handler(system_signal_manager::event::CUSTOM_1);
-        mgr.remove_handler(system_signal_manager::event::CUSTOM_2);
-        mgr.remove_handler(system_signal_manager::event::TIMEOUT);
-        mgr.remove_handler(system_signal_manager::event::USER1);
-        mgr.remove_handler(system_signal_manager::event::USER2);
+        mgr.remove_handler(system_signal::event::CUSTOM_1);
+        mgr.remove_handler(system_signal::event::CUSTOM_2);
+        mgr.remove_handler(system_signal::event::TIMEOUT);
+        mgr.remove_handler(system_signal::event::USER1);
+        mgr.remove_handler(system_signal::event::USER2);
 
         mgr.set_force_exit_timeout(5000);
     }
 
     void TearDown() override {
-        auto& mgr = system_signal_manager::instance();
+        auto& mgr = system_signal::instance();
         mgr.reset_force();
 
-        mgr.remove_handler(system_signal_manager::event::CUSTOM_1);
-        mgr.remove_handler(system_signal_manager::event::CUSTOM_2);
-        mgr.remove_handler(system_signal_manager::event::TIMEOUT);
-        mgr.remove_handler(system_signal_manager::event::USER1);
-        mgr.remove_handler(system_signal_manager::event::USER2);
+        mgr.remove_handler(system_signal::event::CUSTOM_1);
+        mgr.remove_handler(system_signal::event::CUSTOM_2);
+        mgr.remove_handler(system_signal::event::TIMEOUT);
+        mgr.remove_handler(system_signal::event::USER1);
+        mgr.remove_handler(system_signal::event::USER2);
     }
 };
 
 TEST_F(SignalManagerTest, Instance_ReturnsSameInstance) {
-    system_signal_manager& mgr1 = system_signal_manager::instance();
-    system_signal_manager& mgr2 = system_signal_manager::instance();
+    system_signal& mgr1 = system_signal::instance();
+    system_signal& mgr2 = system_signal::instance();
     EXPECT_EQ(&mgr1, &mgr2);
 }
 
 TEST_F(SignalManagerTest, Instance_InitiallyNotRunning) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     EXPECT_FALSE(mgr.is_running());
 }
 
 TEST_F(SignalManagerTest, StartMonitoring_StartsRunning) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     mgr.start_monitoring();
     EXPECT_TRUE(mgr.is_running());
     mgr.stop_monitoring();
 }
 
 TEST_F(SignalManagerTest, StopMonitoring_StopsRunning) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     mgr.start_monitoring();
     mgr.stop_monitoring();
     EXPECT_FALSE(mgr.is_running());
 }
 
 TEST_F(SignalManagerTest, StartMonitoring_AlreadyRunning_NoEffect) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     mgr.start_monitoring();
     EXPECT_TRUE(mgr.is_running());
     mgr.start_monitoring();
@@ -6279,24 +6280,23 @@ TEST_F(SignalManagerTest, StartMonitoring_AlreadyRunning_NoEffect) {
 }
 
 TEST_F(SignalManagerTest, StopMonitoring_AlreadyStopped_NoEffect) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     EXPECT_FALSE(mgr.is_running());
     mgr.stop_monitoring();
     EXPECT_FALSE(mgr.is_running());
 }
 
 TEST_F(SignalManagerTest, RegisterHandler_ValidHandler_Success) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<bool> was_called{false};
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1,
-                         [&was_called](system_signal_manager::event, void*) -> bool {
-                             was_called = true;
-                             return true;
-                         });
+    mgr.register_handler(system_signal::event::CUSTOM_1, [&was_called](system_signal::event, void*) -> bool {
+        was_called = true;
+        return true;
+    });
 
     mgr.start_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
 
     this_thread::sleep_for(200_ms);
     EXPECT_TRUE(was_called.load());
@@ -6305,25 +6305,25 @@ TEST_F(SignalManagerTest, RegisterHandler_ValidHandler_Success) {
 }
 
 TEST_F(SignalManagerTest, RegisterHandler_NullHandler_ThrowsException) {
-    system_signal_manager& mgr = system_signal_manager::instance();
-    EXPECT_THROW(mgr.register_handler(system_signal_manager::event::CUSTOM_1, nullptr), system_exception);
+    system_signal& mgr = system_signal::instance();
+    EXPECT_THROW(mgr.register_handler(system_signal::event::CUSTOM_1, nullptr), system_exception);
 }
 
 TEST_F(SignalManagerTest, RegisterHandler_MultipleEvents_AllCalled) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<int> call_count{0};
 
-    auto handler = [&call_count](system_signal_manager::event, void*) -> bool {
+    auto handler = [&call_count](system_signal::event, void*) -> bool {
         ++call_count;
         return true;
     };
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1, handler);
-    mgr.register_handler(system_signal_manager::event::CUSTOM_2, handler);
+    mgr.register_handler(system_signal::event::CUSTOM_1, handler);
+    mgr.register_handler(system_signal::event::CUSTOM_2, handler);
 
     mgr.start_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
-    mgr.send_signal(system_signal_manager::event::CUSTOM_2);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_2);
 
     this_thread::sleep_for(200_ms);
     EXPECT_GE(call_count.load(), 2);
@@ -6332,21 +6332,20 @@ TEST_F(SignalManagerTest, RegisterHandler_MultipleEvents_AllCalled) {
 }
 
 TEST_F(SignalManagerTest, RegisterHandlers_BatchRegistersAll) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<int> call_count{0};
 
-    auto handler = [&call_count](system_signal_manager::event, void*) -> bool {
+    auto handler = [&call_count](system_signal::event, void*) -> bool {
         ++call_count;
         return true;
     };
 
-    vector<system_signal_manager::event> events = {system_signal_manager::event::CUSTOM_1,
-                                                   system_signal_manager::event::CUSTOM_2};
+    vector<system_signal::event> events = {system_signal::event::CUSTOM_1, system_signal::event::CUSTOM_2};
     mgr.register_handlers(events, handler);
 
     mgr.start_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
-    mgr.send_signal(system_signal_manager::event::CUSTOM_2);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_2);
 
     this_thread::sleep_for(200_ms);
     EXPECT_GE(call_count.load(), 2);
@@ -6355,26 +6354,25 @@ TEST_F(SignalManagerTest, RegisterHandlers_BatchRegistersAll) {
 }
 
 TEST_F(SignalManagerTest, RegisterHandlers_NullHandler_ThrowsException) {
-    system_signal_manager& mgr = system_signal_manager::instance();
-    vector<system_signal_manager::event> events = {system_signal_manager::event::CUSTOM_1,
-                                                   system_signal_manager::event::CUSTOM_2};
+    system_signal& mgr = system_signal::instance();
+    vector<system_signal::event> events = {system_signal::event::CUSTOM_1, system_signal::event::CUSTOM_2};
     EXPECT_THROW(mgr.register_handlers(events, nullptr), system_exception);
 }
 
 TEST_F(SignalManagerTest, RemoveHandler_HandlerNotCalled) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<int> call_count{0};
 
-    auto handler = [&call_count](system_signal_manager::event, void*) -> bool {
+    auto handler = [&call_count](system_signal::event, void*) -> bool {
         ++call_count;
         return true;
     };
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1, handler);
-    mgr.remove_handler(system_signal_manager::event::CUSTOM_1);
+    mgr.register_handler(system_signal::event::CUSTOM_1, handler);
+    mgr.remove_handler(system_signal::event::CUSTOM_1);
 
     mgr.start_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
 
     this_thread::sleep_for(200_ms);
     EXPECT_EQ(call_count.load(), 0);
@@ -6383,23 +6381,22 @@ TEST_F(SignalManagerTest, RemoveHandler_HandlerNotCalled) {
 }
 
 TEST_F(SignalManagerTest, RemoveHandler_NonExistent_NoThrow) {
-    system_signal_manager& mgr = system_signal_manager::instance();
-    EXPECT_NO_THROW(mgr.remove_handler(system_signal_manager::event::CUSTOM_1));
+    system_signal& mgr = system_signal::instance();
+    EXPECT_NO_THROW(mgr.remove_handler(system_signal::event::CUSTOM_1));
 }
 
 TEST_F(SignalManagerTest, SendSignal_HasContext_ContextReceived) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<void*> received_context{nullptr};
     int test_value = 42;
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1,
-                         [&received_context](system_signal_manager::event, void* ctx) -> bool {
-                             received_context.store(ctx, memory_order_release);
-                             return true;
-                         });
+    mgr.register_handler(system_signal::event::CUSTOM_1, [&received_context](system_signal::event, void* ctx) -> bool {
+        received_context.store(ctx, memory_order_release);
+        return true;
+    });
 
     mgr.start_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1, &test_value);
+    mgr.send_signal(system_signal::event::CUSTOM_1, &test_value);
 
     this_thread::sleep_for(200_ms);
     EXPECT_EQ(received_context.load(memory_order_acquire), &test_value);
@@ -6408,19 +6405,18 @@ TEST_F(SignalManagerTest, SendSignal_HasContext_ContextReceived) {
 }
 
 TEST_F(SignalManagerTest, SendSignal_MultipleTimes_AllProcessed) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<int> call_count{0};
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1,
-                         [&call_count](system_signal_manager::event, void*) -> bool {
-                             ++call_count;
-                             return true;
-                         });
+    mgr.register_handler(system_signal::event::CUSTOM_1, [&call_count](system_signal::event, void*) -> bool {
+        ++call_count;
+        return true;
+    });
 
     mgr.start_monitoring();
 
     for (int i = 0; i < 5; ++i) {
-        mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+        mgr.send_signal(system_signal::event::CUSTOM_1);
     }
 
     this_thread::sleep_for(300_ms);
@@ -6430,17 +6426,16 @@ TEST_F(SignalManagerTest, SendSignal_MultipleTimes_AllProcessed) {
 }
 
 TEST_F(SignalManagerTest, SignalHandler_ReturnsFalse_ProcessContinues) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<bool> was_called{false};
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1,
-                         [&was_called](system_signal_manager::event, void*) -> bool {
-                             was_called = true;
-                             return false;
-                         });
+    mgr.register_handler(system_signal::event::CUSTOM_1, [&was_called](system_signal::event, void*) -> bool {
+        was_called = true;
+        return false;
+    });
 
     mgr.start_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
 
     this_thread::sleep_for(200_ms);
     EXPECT_TRUE(was_called.load());
@@ -6450,16 +6445,15 @@ TEST_F(SignalManagerTest, SignalHandler_ReturnsFalse_ProcessContinues) {
 }
 
 TEST_F(SignalManagerTest, SendSignal_NotMonitoring_StillProcessedWhenStarted) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<int> call_count{0};
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1,
-                         [&call_count](system_signal_manager::event, void*) -> bool {
-                             ++call_count;
-                             return true;
-                         });
+    mgr.register_handler(system_signal::event::CUSTOM_1, [&call_count](system_signal::event, void*) -> bool {
+        ++call_count;
+        return true;
+    });
 
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
     mgr.start_monitoring();
 
     this_thread::sleep_for(200_ms);
@@ -6469,7 +6463,7 @@ TEST_F(SignalManagerTest, SendSignal_NotMonitoring_StillProcessedWhenStarted) {
 }
 
 TEST_F(SignalManagerTest, SetForceExitTimeout_UpdatesTimeout) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     mgr.set_force_exit_timeout(3000);
     mgr.start_monitoring();
     EXPECT_TRUE(mgr.is_running());
@@ -6478,26 +6472,25 @@ TEST_F(SignalManagerTest, SetForceExitTimeout_UpdatesTimeout) {
 
 TEST_F(SignalManagerTest, IsPlatformSignal_NativeSignal_ReturnsTrue) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::INTERRUPT));
-    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::CTRL_BREAK));
-    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::CLOSE));
+    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::INTERRUPT));
+    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::CTRL_BREAK));
+    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::CLOSE));
 #else
-    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::INTERRUPT));
-    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::TERMINATE));
-    EXPECT_TRUE(system_signal_manager::is_platform_signal(system_signal_manager::event::HANGUP));
+    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::INTERRUPT));
+    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::TERMINATE));
+    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::HANGUP));
 #endif
 }
 
 TEST_F(SignalManagerTest, IsPlatformSignal_CustomSignal_ReturnsFalse) {
-    EXPECT_FALSE(system_signal_manager::is_platform_signal(system_signal_manager::event::CUSTOM_1));
-    EXPECT_FALSE(system_signal_manager::is_platform_signal(system_signal_manager::event::CUSTOM_2));
-    EXPECT_FALSE(system_signal_manager::is_platform_signal(system_signal_manager::event::FORCE_EXIT));
+    EXPECT_FALSE(system_signal::is_platform_signal(system_signal::event::CUSTOM_1));
+    EXPECT_FALSE(system_signal::is_platform_signal(system_signal::event::CUSTOM_2));
+    EXPECT_FALSE(system_signal::is_platform_signal(system_signal::event::FORCE_EXIT));
 }
 
 TEST_F(SignalManagerTest, BlockUnblockSignals_LinuxOnly_ReturnsResult) {
-    system_signal_manager& mgr = system_signal_manager::instance();
-    vector<system_signal_manager::event> signals = {system_signal_manager::event::USER1,
-                                                    system_signal_manager::event::USER2};
+    system_signal& mgr = system_signal::instance();
+    vector<system_signal::event> signals = {system_signal::event::USER1, system_signal::event::USER2};
 
     bool block_result = mgr.block_signals(signals);
     bool unblock_result = mgr.unblock_signals(signals);
@@ -6507,21 +6500,21 @@ TEST_F(SignalManagerTest, BlockUnblockSignals_LinuxOnly_ReturnsResult) {
 }
 
 TEST_F(SignalManagerTest, BlockSignals_EmptyList_ReturnsTrue) {
-    system_signal_manager& mgr = system_signal_manager::instance();
-    vector<system_signal_manager::event> empty;
+    system_signal& mgr = system_signal::instance();
+    vector<system_signal::event> empty;
     bool result = mgr.block_signals(empty);
     EXPECT_TRUE(result);
 }
 
 TEST_F(SignalManagerTest, UnblockSignals_EmptyList_ReturnsTrue) {
-    system_signal_manager& mgr = system_signal_manager::instance();
-    vector<system_signal_manager::event> empty;
+    system_signal& mgr = system_signal::instance();
+    vector<system_signal::event> empty;
     bool result = mgr.unblock_signals(empty);
     EXPECT_TRUE(result);
 }
 
 TEST_F(SignalManagerTest, StopMonitoring_CleansUpHandlers) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     mgr.start_monitoring();
     mgr.stop_monitoring();
 
@@ -6533,13 +6526,13 @@ TEST_F(SignalManagerTest, StopMonitoring_CleansUpHandlers) {
 TEST_F(SignalManagerTest, SignalGuard_StartsAndStopsMonitoring) {
     {
         signal_guard guard;
-        EXPECT_TRUE(system_signal_manager::instance().is_running());
+        EXPECT_TRUE(system_signal::instance().is_running());
     }
-    EXPECT_FALSE(system_signal_manager::instance().is_running());
+    EXPECT_FALSE(system_signal::instance().is_running());
 }
 
 TEST_F(SignalManagerTest, SignalGuard_Nested_HandlesCorrectly) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     {
         signal_guard guard1;
         EXPECT_TRUE(mgr.is_running());
@@ -6552,29 +6545,22 @@ TEST_F(SignalManagerTest, SignalGuard_Nested_HandlesCorrectly) {
     EXPECT_FALSE(mgr.is_running());
 }
 
-TEST_F(SignalManagerTest, CopyConstructor_IsDeleted) {
-    EXPECT_FALSE(is_copy_constructible<system_signal_manager>::value);
-}
+TEST_F(SignalManagerTest, CopyConstructor_IsDeleted) { EXPECT_FALSE(is_copy_constructible<system_signal>::value); }
 
-TEST_F(SignalManagerTest, CopyAssignment_IsDeleted) { EXPECT_FALSE(is_copy_assignable<system_signal_manager>::value); }
+TEST_F(SignalManagerTest, CopyAssignment_IsDeleted) { EXPECT_FALSE(is_copy_assignable<system_signal>::value); }
 
-TEST_F(SignalManagerTest, MoveConstructor_IsDeleted) {
-    EXPECT_FALSE(is_move_constructible<system_signal_manager>::value);
-}
+TEST_F(SignalManagerTest, MoveConstructor_IsDeleted) { EXPECT_FALSE(is_move_constructible<system_signal>::value); }
 
-TEST_F(SignalManagerTest, MoveAssignment_IsDeleted) { EXPECT_FALSE(is_move_assignable<system_signal_manager>::value); }
+TEST_F(SignalManagerTest, MoveAssignment_IsDeleted) { EXPECT_FALSE(is_move_assignable<system_signal>::value); }
 
 TEST_F(SignalManagerTest, SignalEvent_EnumValues_Distinct) {
-    EXPECT_NE(static_cast<int>(system_signal_manager::event::INTERRUPT),
-              static_cast<int>(system_signal_manager::event::TERMINATE));
-    EXPECT_NE(static_cast<int>(system_signal_manager::event::CUSTOM_1),
-              static_cast<int>(system_signal_manager::event::CUSTOM_2));
-    EXPECT_NE(static_cast<int>(system_signal_manager::event::TIMEOUT),
-              static_cast<int>(system_signal_manager::event::FORCE_EXIT));
+    EXPECT_NE(static_cast<int>(system_signal::event::INTERRUPT), static_cast<int>(system_signal::event::TERMINATE));
+    EXPECT_NE(static_cast<int>(system_signal::event::CUSTOM_1), static_cast<int>(system_signal::event::CUSTOM_2));
+    EXPECT_NE(static_cast<int>(system_signal::event::TIMEOUT), static_cast<int>(system_signal::event::FORCE_EXIT));
 }
 
 TEST_F(SignalManagerTest, LongRunningMonitoring_Success) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     mgr.start_monitoring();
     this_thread::sleep_for(300_ms);
     EXPECT_TRUE(mgr.is_running());
@@ -6582,23 +6568,22 @@ TEST_F(SignalManagerTest, LongRunningMonitoring_Success) {
 }
 
 TEST_F(SignalManagerTest, SendSignal_AfterStopMonitoring_QueuedAndProcessed) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<int> call_count{0};
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1,
-                         [&call_count](system_signal_manager::event, void*) -> bool {
-                             ++call_count;
-                             return true;
-                         });
+    mgr.register_handler(system_signal::event::CUSTOM_1, [&call_count](system_signal::event, void*) -> bool {
+        ++call_count;
+        return true;
+    });
 
     mgr.start_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
     this_thread::sleep_for(200_ms);
 
     EXPECT_EQ(call_count.load(), 1);
 
     mgr.stop_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
 
     mgr.start_monitoring();
     this_thread::sleep_for(200_ms);
@@ -6608,7 +6593,7 @@ TEST_F(SignalManagerTest, SendSignal_AfterStopMonitoring_QueuedAndProcessed) {
 }
 
 TEST_F(SignalManagerTest, WaitForSignal_SignalReceived_ReturnsCorrectEvent) {
-    system_signal_manager& mgr = system_signal_manager::instance();
+    system_signal& mgr = system_signal::instance();
     atomic<bool> wait_started{false};
 
     mgr.start_monitoring();
@@ -6618,62 +6603,61 @@ TEST_F(SignalManagerTest, WaitForSignal_SignalReceived_ReturnsCorrectEvent) {
             this_thread::sleep_for(10_ms);
         }
         this_thread::sleep_for(50_ms);
-        mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+        mgr.send_signal(system_signal::event::CUSTOM_1);
     });
 
     wait_started.store(true);
-    system_signal_manager::event ev = mgr.wait_for_signal(500);
+    system_signal::event ev = mgr.wait_for_signal(500);
 
-    EXPECT_TRUE(ev == system_signal_manager::event::CUSTOM_1 || ev == system_signal_manager::event::TIMEOUT);
+    EXPECT_TRUE(ev == system_signal::event::CUSTOM_1 || ev == system_signal::event::TIMEOUT);
 
     sender.join();
     mgr.stop_monitoring();
 }
 
 TEST_F(SignalManagerTest, HandlerReceivesCorrectEvent) {
-    system_signal_manager& mgr = system_signal_manager::instance();
-    atomic<system_signal_manager::event> received_event{system_signal_manager::event::TIMEOUT};
+    system_signal& mgr = system_signal::instance();
+    atomic<system_signal::event> received_event{system_signal::event::TIMEOUT};
 
-    mgr.register_handler(system_signal_manager::event::CUSTOM_1,
-                         [&received_event](system_signal_manager::event ev, void*) -> bool {
-                             received_event.store(ev);
-                             return true;
-                         });
+    mgr.register_handler(system_signal::event::CUSTOM_1, [&received_event](system_signal::event ev, void*) -> bool {
+        received_event.store(ev);
+        return true;
+    });
 
     mgr.start_monitoring();
-    mgr.send_signal(system_signal_manager::event::CUSTOM_1);
+    mgr.send_signal(system_signal::event::CUSTOM_1);
     this_thread::sleep_for(200_ms);
 
-    EXPECT_EQ(received_event.load(), system_signal_manager::event::CUSTOM_1);
+    EXPECT_EQ(received_event.load(), system_signal::event::CUSTOM_1);
 
     mgr.stop_monitoring();
 }
 
 TEST_F(SignalManagerTest, FromNative_Interrupt_ReturnsInterrupt) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    EXPECT_EQ(system_signal_manager::from_native(CTRL_C_EVENT), system_signal_manager::event::INTERRUPT);
+    EXPECT_EQ(system_signal::from_native(CTRL_C_EVENT), system_signal::event::INTERRUPT);
 #else
-    EXPECT_EQ(system_signal_manager::from_native(SIGINT), system_signal_manager::event::INTERRUPT);
+    EXPECT_EQ(system_signal::from_native(SIGINT), system_signal::event::INTERRUPT);
 #endif
 }
 
 TEST_F(SignalManagerTest, FromNative_Terminate_ReturnsTerminate) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    EXPECT_EQ(system_signal_manager::from_native(CTRL_BREAK_EVENT), system_signal_manager::event::CTRL_BREAK);
+    EXPECT_EQ(system_signal::from_native(CTRL_BREAK_EVENT), system_signal::event::CTRL_BREAK);
 #else
-    EXPECT_EQ(system_signal_manager::from_native(SIGTERM), system_signal_manager::event::TERMINATE);
+    EXPECT_EQ(system_signal::from_native(SIGTERM), system_signal::event::TERMINATE);
 #endif
 }
 
 TEST_F(SignalManagerTest, FromNative_UnknownSignal_ReturnsCustom) {
     int unknown = 99999;
-    system_signal_manager::event ev = system_signal_manager::from_native(unknown);
-    EXPECT_NE(static_cast<int>(ev), static_cast<int>(system_signal_manager::event::INTERRUPT));
-    EXPECT_NE(static_cast<int>(ev), static_cast<int>(system_signal_manager::event::TERMINATE));
+    system_signal::event ev = system_signal::from_native(unknown);
+    EXPECT_NE(static_cast<int>(ev), static_cast<int>(system_signal::event::INTERRUPT));
+    EXPECT_NE(static_cast<int>(ev), static_cast<int>(system_signal::event::TERMINATE));
 }
 
 TEST_F(SignalManagerTest, ToNative_Interrupt_ReturnsValidSignal) {
-    int sig = system_signal_manager::to_native(system_signal_manager::event::INTERRUPT);
+    int sig = system_signal::to_native(system_signal::event::INTERRUPT);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     EXPECT_EQ(sig, CTRL_C_EVENT);
 #else
@@ -6682,7 +6666,7 @@ TEST_F(SignalManagerTest, ToNative_Interrupt_ReturnsValidSignal) {
 }
 
 TEST_F(SignalManagerTest, ToNative_Terminate_ReturnsValidSignal) {
-    int sig = system_signal_manager::to_native(system_signal_manager::event::TERMINATE);
+    int sig = system_signal::to_native(system_signal::event::TERMINATE);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     EXPECT_EQ(sig, -1);
 #else
@@ -6691,17 +6675,17 @@ TEST_F(SignalManagerTest, ToNative_Terminate_ReturnsValidSignal) {
 }
 
 TEST_F(SignalManagerTest, ToNative_CustomEvent_ReturnsMinusOne) {
-    int sig = system_signal_manager::to_native(system_signal_manager::event::CUSTOM_1);
+    int sig = system_signal::to_native(system_signal::event::CUSTOM_1);
     EXPECT_EQ(sig, -1);
 }
 
 TEST_F(SignalManagerTest, FromNativeToNative_Roundtrip_Consistent) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    system_signal_manager::event ev = system_signal_manager::from_native(CTRL_C_EVENT);
-    EXPECT_EQ(system_signal_manager::to_native(ev), CTRL_C_EVENT);
+    system_signal::event ev = system_signal::from_native(CTRL_C_EVENT);
+    EXPECT_EQ(system_signal::to_native(ev), CTRL_C_EVENT);
 #else
-    system_signal_manager::event ev = system_signal_manager::from_native(SIGINT);
-    EXPECT_EQ(system_signal_manager::to_native(ev), SIGINT);
+    system_signal::event ev = system_signal::from_native(SIGINT);
+    EXPECT_EQ(system_signal::to_native(ev), SIGINT);
 #endif
 }
 
@@ -7619,6 +7603,105 @@ TEST_F(ProcessTest, SearchPathEmptyReturnsEmpty) {
 TEST_F(ProcessTest, SearchPathNonexistentReturnsEmpty) {
     string path = process::search_path("nonexistent_executable_12345");
     EXPECT_TRUE(path.empty());
+}
+
+
+class PtyTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        if (!pty::is_available()) {
+            GTEST_SKIP() << "pseudo terminal is not available in this environment";
+        }
+    }
+
+    static string open_session(pty& session, const int columns = 80, const int rows = 24) {
+        session.open(pty::console_size{columns, rows});
+        return {};
+    }
+
+    static string read_until(pty& session, const string_view needle, const int attempts = 400) {
+        string collected;
+        for (int i = 0; i < attempts; ++i) {
+            collected.append(session.read_available());
+            if (collected.find(needle) != string::npos) {
+                break;
+            }
+            if (session.poll_exit()) {
+                collected.append(session.read_available());
+                break;
+            }
+            this_thread::sleep_for(milliseconds(5));
+        }
+        return collected;
+    }
+};
+
+TEST_F(PtyTest, OpenExposesMasterHandle) {
+    pty session;
+    session.open(pty::console_size{100, 30});
+    EXPECT_GE(session.master_handle(), 0);
+    EXPECT_FALSE(session.is_running());
+}
+
+TEST_F(PtyTest, RunsCommandAndReportsExitCode) {
+    pty session;
+    session.open(pty::console_size{100, 30});
+    session.start("/bin/sh", {"-c", "printf 'pty-ok'; exit 5"});
+
+    const string collected = read_until(session, "pty-ok");
+    EXPECT_NE(collected.find("pty-ok"), string::npos);
+    EXPECT_EQ(session.wait(5000), 5);
+    EXPECT_FALSE(session.is_running());
+}
+
+TEST_F(PtyTest, MissingExecutableThrowsInsteadOfSilentExit) {
+    pty session;
+    session.open();
+
+    EXPECT_THROW(session.start("nonexistent_executable_xyz_12345", {}), pty_exception);
+    EXPECT_FALSE(session.is_running());
+}
+
+TEST_F(PtyTest, EnvironmentVariablesAreAppendedToTheChild) {
+    pty session;
+    session.open();
+    session.start("/bin/sh", {"-c", "printf '%s' \"$NEFORCE_PTY_TEST\""}, "", {"NEFORCE_PTY_TEST=pty-42"});
+
+    const string collected = read_until(session, "pty-42");
+    EXPECT_NE(collected.find("pty-42"), string::npos);
+    EXPECT_EQ(session.wait(5000), 0);
+}
+
+TEST_F(PtyTest, WorkDirectoryAppliesToTheChild) {
+    pty session;
+    session.open();
+    session.start("/bin/sh", {"-c", "pwd"}, "/tmp");
+
+    const string collected = read_until(session, "/tmp");
+    EXPECT_NE(collected.find("/tmp"), string::npos);
+    EXPECT_EQ(session.wait(5000), 0);
+}
+
+TEST_F(PtyTest, SignalledChildReportsNegativeCode) {
+    pty session;
+    session.open();
+    session.start("/bin/sleep", {"30"});
+    this_thread::sleep_for(milliseconds(50));
+
+    session.terminate();
+    EXPECT_LT(session.wait(5000), 0);
+}
+
+TEST_F(PtyTest, WaitTimeoutKeepsChildRunning) {
+    pty session;
+    session.open();
+    session.start("/bin/sleep", {"30"});
+
+    EXPECT_EQ(session.wait(20), -1);
+    EXPECT_TRUE(session.is_running());
+
+    session.terminate();
+    EXPECT_LT(session.wait(5000), 0);
 }
 
 TEST_F(SysinfoTest, NetworkInterfacesReturnsList) {

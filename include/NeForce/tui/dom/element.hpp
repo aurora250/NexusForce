@@ -259,7 +259,8 @@ public:
      * @param builder 项构建回调，仅对可视窗口内的索引调用
      * @param scroll_y 初始纵向滚动偏移
      * @return 虚拟列表元素
-     * @note 虚拟列表自身不主张高度，放进列容器时必须显式给出尺寸
+     * @note 虚拟列表没有内容高度：布局时按 `item_count × item_height` 估算固有高度，
+     *       需要铺满剩余空间时仍应显式设置 `style.height = fill`
      */
     static element virtual_list(size_t item_count, int item_height, function<element(size_t)> builder,
                                 int scroll_y = 0);

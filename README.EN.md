@@ -311,29 +311,12 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`input_driver`** - Cross-platform terminal input driver, watches stdin and dispatches key/mouse/paste events
 - **`input_parser`** - I/O-free input parsing state machine: ASCII/UTF-8, control keys, CSI/SS3, modifier sequences, Alt+char, SGR mouse and bracketed paste
 - **`headless`** - Terminal-free driver: fixed size, frame output captured in memory, byte-level input injection; the base for snapshot tests and offscreen rendering
-- **`rich_text`** - `text_span` rich text element mixing several styles on one line (color/bold/italic/strikethrough)
-- **`text_layout`** - `layout_text` / `text_display_width` / `caret_position`, the single line-breaking implementation shared by renderer, layout and editor caret
-- **`virtual_list`** - Virtual list that only renders items inside the viewport, with bottom-follow, wheel and keyboard scrolling
-- **`panel`** - Bordered, padded panel element for dialogs and cards
-- **`text_area`** - Multi-line editor: soft wrap, selection, undo/redo, input history and caret-following scroll
-- **`select_list`** - Filterable candidate list (command palette / completion popup)
-- **`approve_prompt`** - Permission confirmation dialog (allow / deny / always)
-- **`status_indicator`** - Spinner + label + elapsed time status line
-- **`streaming_text`** - Frame-coalesced commits for high-frequency appended text
-- **`markdown` / `markdown_cache`** - Markdown rendering plus a (text, width) keyed element-tree cache that reuses parsing when the same Markdown is repainted (the parser lives in `core/file/md`)
 - **`log_view`** - Chat transcript: variable-height messages, streaming coalescing, bottom-follow and an "N new messages" hint
 - **`composer`** - Input orchestration: multi-line editor + completion popup + hint line, with submit/newline/interrupt semantics
-- **`tool_card`** - Tool call card: status icon, elapsed time and collapsible output
-- **`output_block`** - Collapsible output block ("… N lines hidden", toggled by key or click)
-- **`keymap`** - Three-layer shortcut table (global/overlay/focus), two-stage `Ctrl+C` quit and `Ctrl+L` redraw
-- **`band`** - Background band element for full-row blocks in code blocks, diffs and tool cards
-- **`code_block` / `diff`** - Gutter+highlighted code block and unified diff renderers
-- **`color_depth` / `light_theme`** - 16/256/truecolor output and a light theme, with per-frame atomic commits via synchronized output
+- **`pty` / `process_watcher`** - Pseudo-terminal wrapper and an async child-process watcher that falls back to pipes when no devpts is available
+- **`copy_to_clipboard` / mouse selection** - OSC 52 clipboard writes, `text_area` drag selection and `log_view` click-to-select-and-copy
 - **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
-- **`style` / `theme`** - Style system + semantic theming, dark theme preset
 - **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling
-- **`component_base` / `component<P>`** - Component base class, focus management, context injection (`provide_context`/`context`, walks up parent chain), reactive state factory
-- **`animator` / `easing`** - Property animator + easing functions
 
 ### 🧬 Type Traits & Concepts
 - **Type Traits** - Comprehensive compile-time type judgments

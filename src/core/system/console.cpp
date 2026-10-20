@@ -1,3 +1,4 @@
+#include <NeForce/core/encrypt/base64.hpp>
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    ifdef NEFORCE_COMPILER_MSVC
@@ -368,14 +369,12 @@ void sys_console::fade_effect_unsafe(const string_view text, const color& from, 
     flush_unsafe();
 }
 
-sys_console::sys_console() noexcept
+sys_console::sys_console() noexcept :
 #ifdef NEFORCE_PLATFORM_WINDOWS
-:
 out_(::GetStdHandle(STD_OUTPUT_HANDLE)),
 in_(::GetStdHandle(STD_INPUT_HANDLE)),
 err_(::GetStdHandle(STD_ERROR_HANDLE))
 #else
-:
 out_(STDOUT_FILENO),
 in_(STDIN_FILENO),
 err_(STDERR_FILENO)
@@ -383,7 +382,8 @@ err_(STDERR_FILENO)
 {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     try {
-        if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE || err_ == INVALID_HANDLE_VALUE) {
+        if (out_ == INVALID_HANDLE_VALUE || out_ == nullptr || in_ == INVALID_HANDLE_VALUE || in_ == nullptr ||
+            err_ == INVALID_HANDLE_VALUE || err_ == nullptr) {
             return;
         }
 
@@ -391,12 +391,13 @@ err_(STDERR_FILENO)
         ::SetConsoleCP(CP_UTF8);
 
         ::DWORD mode = 0;
-        ::GetConsoleMode(out_, &mode);
-        mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-        ::SetConsoleMode(out_, mode);
+        if (::GetConsoleMode(out_, &mode) == TRUE) {
+            mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+            ::SetConsoleMode(out_, mode);
+        }
         // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (const exception& e) {
-        NEFORCE_REPORT_EXCEPTION(e);
+    } catch (...) {
+        // ignore
     }
 #endif
 }
@@ -751,6 +752,14 @@ void sys_console::set_reverse(const bool enable) noexcept {
 void sys_console::reset_text_attributes() noexcept {
     lock<mutex> lock(mutex_);
     print_string_unsafe("\033[0m");
+}
+
+void sys_console::copy_to_clipboard(const string_view text) {
+    lock<mutex> lock(mutex_);
+    const string payload = base64_encode(string(text));
+    print_string_unsafe("\033]52;c;"_sv);
+    print_string_unsafe(payload.view());
+    print_string_unsafe("\a"_sv);
 }
 
 void sys_console::set_window_title(const string_view title) {

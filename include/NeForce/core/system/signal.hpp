@@ -35,10 +35,10 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @class system_signal_manager
- * @brief 信号管理器
+ * @class system_signal
+ * @brief 系统信号
  *
- * 统一管理跨平台的信号处理，提供异步信号安全的分发机制。
+ * 统一管理操作系统的信号处理，提供安全的分发机制。
  *
  * 特性：
  * - 异步信号安全
@@ -46,7 +46,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 信号队列与超时清理
  * - 自定义事件与强制退出
  */
-class NEFORCE_API system_signal_manager {
+class NEFORCE_API system_signal {
 public:
     /**
      * @enum event
@@ -118,8 +118,8 @@ private:
      * @brief 信号等待结果
      */
     struct signal_result {
-        system_signal_manager::event event; ///< 信号事件
-        void* context;                      ///< 上下文数据
+        system_signal::event event; ///< 信号事件
+        void* context;              ///< 上下文数据
     };
 
     /**
@@ -160,7 +160,7 @@ private:
 
     friend class signal_guard;
 
-    system_signal_manager();
+    system_signal();
 
     void add_guard_ref() {
         if (guard_count_++ == 0) {
@@ -186,21 +186,18 @@ private:
     void send_signal_nolock(event event, void* context);
 
 public:
-    system_signal_manager(const system_signal_manager&) = delete;
-    system_signal_manager& operator=(const system_signal_manager&) = delete;
-    system_signal_manager(const system_signal_manager&&) = delete;
-    system_signal_manager& operator=(const system_signal_manager&&) = delete;
+    system_signal(const system_signal&) = delete;
+    system_signal& operator=(const system_signal&) = delete;
+    system_signal(const system_signal&&) = delete;
+    system_signal& operator=(const system_signal&&) = delete;
 
-    ~system_signal_manager();
+    ~system_signal();
 
     /**
      * @brief 获取单例实例
      * @return 信号管理器实例引用
      */
-    static system_signal_manager& instance() {
-        static system_signal_manager instance;
-        return instance;
-    }
+    static system_signal& instance();
 
     /**
      * @brief 注册信号处理函数
@@ -327,14 +324,14 @@ public:
      *
      * 启动信号监控。
      */
-    signal_guard() { system_signal_manager::instance().add_guard_ref(); }
+    signal_guard() { system_signal::instance().add_guard_ref(); }
 
     /**
      * @brief 析构函数
      *
      * 停止信号监控。
      */
-    ~signal_guard() { system_signal_manager::instance().remove_guard_ref(); }
+    ~signal_guard() { system_signal::instance().remove_guard_ref(); }
 
     signal_guard(const signal_guard&) = delete;
     signal_guard& operator=(const signal_guard&) = delete;

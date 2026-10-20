@@ -55,7 +55,7 @@ void tool_card::set_summary(string summary) {
 }
 
 void tool_card::set_output(string text) {
-    tui::style st;
+    const tui::style st{};
     element content = element::text(move(text), st, style::wrap_mode::none);
     const size_t lines = content.text().empty() ? 0 : static_cast<size_t>(1 + count_newlines(content.text().view()));
     set_output_element(move(content), lines);
@@ -81,8 +81,8 @@ void tool_card::set_collapsed(const bool collapsed) {
 string tool_card::status_icon() {
     switch (opt_.status) {
         case tool_status::running: {
-            const string frame = spinner(3, frame_).text();
-            return frame.empty() ? string(".") : frame;
+            const string& frame = spinner(3, frame_).text();
+            return frame.empty() ? "." : frame;
         }
         case tool_status::success: {
             return "\xe2\x9c\x94";
@@ -94,7 +94,7 @@ string tool_card::status_icon() {
             return "\xe2\x8f\xb9";
         }
     }
-    return string("?");
+    return "?";
 }
 
 tui::style tool_card::status_style() const {
@@ -156,8 +156,24 @@ element tool_card::render() {
     }
 
     if (output_ != nullptr) {
-        output_->set_header(element::hbox(move(head)));
-        output_->set_collapsed(opt_.collapsed);
+        // render() must not mutate a child unconditionally:
+        // every setter call schedules another frame,
+        // and the reconciler would flush without ever converging.
+        string key = status_icon();
+        key += '\x1f';
+        key += opt_.title;
+        key += '\x1f';
+        key += opt_.summary;
+        key += '\x1f';
+        key += to_string(static_cast<int64_t>(opt_.status));
+        if (opt_.elapsed_ms > 0) {
+            key += '\x1f';
+            key += to_string(opt_.elapsed_ms);
+        }
+        if (key != header_key_) {
+            header_key_ = move(key);
+            output_->set_header(element::hbox(move(head)));
+        }
         return output_->render();
     }
 

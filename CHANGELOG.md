@@ -77,9 +77,12 @@
 - 虚拟列表支持**变高项**：`element::virtual_list()` 新增高度表重载、`components::virtual_list_view` 新增 `variable_height`/`invalidate_heights()`/`measured_height()`，只对可视项做实测并回写，宽度变化自动失效重测
 - `code_block()` 新增整块背景带、左侧竖线与 `collapse_after` 折叠
 - `diff_view()` 新增按文件分组、hunk 折叠与背景带，`diff_view_option` 增加 `added_style`/`removed_style`/`header_style`/`band_style`
+- 添加伪终端组件 `pty`：`open()` 申请主从端、`start()` 以会话首进程启动子进程并把它接到从端，Windows 上以 `pty_exception` 明确拒绝
+- 添加异步子进程监视器 `process_watcher`：`start()` / `start_shell()` 走 PTY 或管道，输出增量回调、退出回调，伪终端不可用时自动回退到管道
 
 ### 🔧 Improvements
 
+- `pty::wait()` 在无超时直接阻塞于 `waitpid()` 而非 5ms 轮询；退出码解码与 `process::wait()` 统一
 - 异步日志的批量写入改为单个 drain 任务循环排空队列：不再每批提交一个新任务，批次的到达顺序稳定，线程池任务数也随之减少
 - 异步日志队列满且策略为 `block` 时改用 `notify_all()` 唤醒生产者，多个生产者不再只被唤醒一个
 - 新建的子 Logger 立即继承父 Logger 当前生效的级别；此前固定为 INFO，要等父级再次 `set_level()` 才生效
@@ -204,6 +207,10 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `components::tool_card::render()` 无条件回写子组件头部导致的无限刷新：每次渲染都调用 `output_block::set_header()` 会再排一帧，`headless::tick()` 因此永不返回；现在仅在头部签名变化时回写
+- 修复宿主先于组件树销毁时的野指针崩溃：`reconciler` 析构改为 `release_tree()` 递归清理，`tool_runner` 在 `cleanup()` 中结束子进程并注销句柄
+- 修复 `process_watcher` 的定时器在监视器销毁后仍访问自身：自旋轮询与升级终止两个定时回调携带生存标志，析构后自动失效
+- 修复自动高度容器中的虚拟列表高度塌陷为 0：`virtual_list` 现在给出 `item_count × item_height` 的估算固有高度，`vbox` 内嵌虚拟列表不再需要显式 `height = fill` 才可见
 - 修复异步日志在 `disable_async()` 中死锁：停止线程池时仍持有 sinks 互斥锁，而正在收尾的 drain 任务正等在同一把锁上，`flush()` / `disable_async()` 因此偶发永久阻塞
 - 修复 drain 任务在判定自身"已结束"后仍继续写 sink 的问题：`discard` / `overrun_oldest` 策略下，后一批事件可能先于前一批到达 sink，日志顺序错乱
 - 修复 `flush()` 在异步模式下与 drain 任务争抢队列：原实现自行弹出队列并写 sink，与后台批量写入并发，sink 收到的事件会乱序，且 `flush()` 返回时更早的事件可能还没写出；现在通过与 drain 握手确认后才返回

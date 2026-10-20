@@ -1,4 +1,5 @@
 #include <NeForce/tui/headless.hpp>
+#include <NeForce/tui/recorder.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -24,6 +25,9 @@ void headless::resize(const int width, const int height) {
 }
 
 void headless::feed(const string_view bytes) {
+    if (recorder_ != nullptr) {
+        recorder_->record_input(bytes);
+    }
     for (size_t i = 0; i < bytes.size(); ++i) {
         parsed_input input;
         if (!parser_.feed(static_cast<byte_t>(bytes[i]), input)) {
@@ -74,6 +78,9 @@ size_t headless::pump(const size_t max_rounds) {
 void headless::render() {
     reconciler_->mark_dirty();
     reconciler_->flush();
+    if (recorder_ != nullptr) {
+        recorder_->record_frame(plaintext().view());
+    }
 }
 
 void headless::tick() {

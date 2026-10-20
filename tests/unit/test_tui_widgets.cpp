@@ -9,6 +9,9 @@
 #include <NeForce/tui/component/status_indicator.hpp>
 #include <NeForce/tui/component/tool_card.hpp>
 #include <NeForce/tui/keymap.hpp>
+#include <NeForce/tui/recorder.hpp>
+#include <NeForce/core/async/process_watcher.hpp>
+#include <NeForce/tui/component/tool_runner.hpp>
 #include <NeForce/tui/component/streaming_text.hpp>
 #include <NeForce/tui/component/text_area.hpp>
 #include <NeForce/tui/component/virtual_list.hpp>
@@ -41,7 +44,11 @@ namespace {
             if (child_count() == 0) {
                 return element::empty();
             }
-            return child_at(0)->render();
+            elements parts;
+            for (size_t i = 0; i < child_count(); ++i) {
+                parts.push_back(child_at(i)->render());
+            }
+            return element::vbox(move(parts));
         }
 
         template <typename T>
@@ -1552,4 +1559,417 @@ TEST(TuiToolCardTest, OutputCollapsesAndExpands) {
     EXPECT_TRUE(card.output().collapsed());
     EXPECT_TRUE(card.on_key(make_key(key_event::type::enter)));
     EXPECT_FALSE(card.output().collapsed());
+}
+
+TEST(TuiToolCardTest, RepeatedRenderDoesNotScheduleAnotherFrame) {
+    host_root holder;
+    auto owned = make_unique<tool_card>(tool_card_option{});
+    auto* card = owned.get();
+    holder.add_child(move(owned));
+
+    headless app(&holder, 30, 6);
+    app.render();
+
+    card->set_output(string("out"));
+    app.tick();
+    const auto first = app.plaintext();
+    app.tick();
+    app.tick();
+    EXPECT_EQ(app.plaintext(), first);
+}
+
+TEST(TuiVirtualListComponentTest, AutoParentMeasuresEstimatedHeight) {
+    const auto builder = [](const size_t index) {
+        return element::text(to_string(static_cast<int64_t>(index)), style{}, style::wrap_mode::none);
+    };
+
+    elements rows;
+    rows.push_back(element::text("header", style{}, style::wrap_mode::none));
+    rows.push_back(element::virtual_list(5, 2, builder));
+    const element tree = element::vbox(move(rows));
+
+    const auto layout = compute_layout(tree, 20, 40);
+    ASSERT_EQ(layout.size(), 2U);
+    EXPECT_EQ(layout[0].h, 1);
+    EXPECT_EQ(layout[1].y, 1);
+    EXPECT_EQ(layout[1].h, 10);
+
+    const element tight = element::vbox(elements{element::virtual_list(5, 2, builder)});
+    const auto tight_layout = compute_layout(tight, 20, 3);
+    ASSERT_EQ(tight_layout.size(), 1U);
+    EXPECT_EQ(tight_layout[0].h, 3);
+}
+
+TEST(TuiComponentLifetimeTest, TreeReleasedBeforeEventLoopDies) {
+    host_root holder;
+    auto app = make_unique<headless>(&holder, 40, 8);
+
+    tool_runner_option opt;
+    auto owned = make_unique<tool_runner>(app->context(), app->executor(), opt);
+    tool_runner* runner = owned.get();
+    holder.add_child(move(owned));
+    app->render();
+
+    ASSERT_TRUE(runner->start("printf 'life\\n'"));
+    for (int i = 0; i < 400 && runner->running(); ++i) {
+        app->tick();
+        this_thread::sleep_for(milliseconds(2));
+    }
+    EXPECT_FALSE(runner->running());
+    EXPECT_EQ(runner->exit_code(), 0);
+
+    ASSERT_TRUE(runner->start("sleep 5"));
+    app->tick();
+    EXPECT_TRUE(runner->running());
+
+    app.reset();
+    EXPECT_FALSE(runner->running());
+
+    holder.detach_all_children();
+}
+
+
+TEST(TuiProcessWatcherTest, StreamsOutputAndReportsExit) {
+    io_context ctx;
+    strand s{ctx};
+
+    process_watcher watcher(ctx, s);
+    string output;
+    int code = -99;
+    watcher.set_on_output([&output](const string_view chunk) { output.append(string(chunk)); });
+    watcher.set_on_exit([&ctx, &code](const int value) {
+        code = value;
+        ctx.stop();
+    });
+
+    ASSERT_TRUE(watcher.start_shell("printf 'alpha'; printf 'beta'; exit 7"));
+    EXPECT_TRUE(watcher.running());
+
+    io_context::work guard{ctx};
+    ctx.run();
+
+    EXPECT_EQ(output, "alphabeta");
+    EXPECT_EQ(code, 7);
+    EXPECT_FALSE(watcher.running());
+    EXPECT_EQ(watcher.exit_code(), 7);
+}
+
+TEST(TuiProcessWatcherTest, PtyModeFallsBackWhenUnavailable) {
+    io_context ctx;
+    strand s{ctx};
+
+    process_watcher watcher(ctx, s);
+    string output;
+    watcher.set_on_output([&output](const string_view chunk) { output.append(string(chunk)); });
+    watcher.set_on_exit([&ctx](int) { ctx.stop(); });
+
+    process_watcher::option opt;
+    opt.use_pty = true;
+    ASSERT_TRUE(watcher.start("/bin/sh", {"-c", "printf fallback"}, opt));
+    io_context::work guard{ctx};
+    ctx.run();
+
+    EXPECT_NE(output.view().find("fallback"_sv), string_view::npos);
+    EXPECT_EQ(watcher.uses_pty(), process_watcher::supports_pty());
+}
+
+TEST(TuiProcessWatcherTest, FailingCommandReportsNonZeroExit) {
+    io_context ctx;
+    strand s{ctx};
+
+    process_watcher watcher(ctx, s);
+    int code = 0;
+    watcher.set_on_exit([&ctx, &code](const int value) {
+        code = value;
+        ctx.stop();
+    });
+    ASSERT_TRUE(watcher.start_shell("exit 3"));
+    io_context::work guard{ctx};
+    ctx.run();
+
+    EXPECT_EQ(code, 3);
+}
+
+
+TEST(TuiToolRunnerTest, StreamsToCardAndMarksSuccess) {
+    host_root holder;
+    headless app(&holder, 40, 10);
+
+    tool_runner_option opt;
+    opt.card.title = "bash";
+    opt.card.collapsed = false;
+    auto owned = make_unique<tool_runner>(app.context(), app.executor(), opt);
+    tool_runner* runner = owned.get();
+    holder.add_child(move(owned));
+    app.render();
+
+    ASSERT_TRUE(runner->start("printf 'tool-output\\n'; exit 0"));
+    for (int i = 0; i < 300 && runner->running(); ++i) {
+        app.tick();
+        this_thread::sleep_for(milliseconds(5));
+    }
+    app.tick();
+
+    EXPECT_FALSE(runner->running());
+    EXPECT_EQ(runner->exit_code(), 0);
+    EXPECT_NE(runner->output().view().find("tool-output"_sv), string_view::npos);
+    EXPECT_EQ(runner->card().status(), tool_status::success);
+}
+
+TEST(TuiToolRunnerTest, FailureSetsFailedStatus) {
+    host_root holder;
+    headless app(&holder, 40, 8);
+
+    tool_runner_option opt;
+    opt.card.title = "bash";
+    auto owned = make_unique<tool_runner>(app.context(), app.executor(), opt);
+    tool_runner* runner = owned.get();
+    holder.add_child(move(owned));
+    app.render();
+
+    ASSERT_TRUE(runner->start("exit 9"));
+    for (int i = 0; i < 300 && runner->running(); ++i) {
+        app.tick();
+        this_thread::sleep_for(milliseconds(5));
+    }
+    app.tick();
+
+    EXPECT_EQ(runner->exit_code(), 9);
+    EXPECT_EQ(runner->card().status(), tool_status::failed);
+}
+
+TEST(TuiToolRunnerTest, InterruptMarksInterrupted) {
+    host_root holder;
+    headless app(&holder, 40, 8);
+
+    tool_runner_option opt;
+    opt.card.title = "bash";
+    auto owned = make_unique<tool_runner>(app.context(), app.executor(), opt);
+    tool_runner* runner = owned.get();
+    holder.add_child(move(owned));
+    app.render();
+
+    ASSERT_TRUE(runner->start("sleep 5"));
+    app.tick();
+
+    runner->interrupt();
+    for (int i = 0; i < 600 && runner->running(); ++i) {
+        app.tick();
+        this_thread::sleep_for(milliseconds(5));
+    }
+    app.tick();
+
+    EXPECT_FALSE(runner->running());
+    EXPECT_EQ(runner->card().status(), tool_status::interrupted);
+}
+
+TEST(TuiToolRunnerTest, OutputRingDropsOldestLines) {
+    host_root holder;
+    headless app(&holder, 40, 8);
+
+    tool_runner_option opt;
+    opt.card.title = "bash";
+    opt.max_output_lines = 3;
+    auto owned = make_unique<tool_runner>(app.context(), app.executor(), opt);
+    tool_runner* runner = owned.get();
+    holder.add_child(move(owned));
+    app.render();
+
+    const string payload("l1\nl2\nl3\nl4\nl5");
+    runner->append_output(payload.view());
+    runner->on_animation(16);
+
+    EXPECT_EQ(runner->output(), "l3\nl4\nl5");
+}
+
+TEST(TuiTextAreaMouseTest, ClickPositionsCaretAndDragSelects) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    auto& text = holder.make_state<string>(string("hello world"));
+    text_area_option opt;
+    opt.text = &text;
+    opt.style.width = style::size_hint{style::size_hint::fixed, 20};
+    opt.style.height = style::size_hint{style::size_hint::fixed, 3};
+
+    auto view = make_unique<text_area_view>(opt);
+    text_area_view* area = view.get();
+    holder.add_child(move(view));
+    area->set_has_focus(true);
+
+    headless app(&holder, 20, 3);
+    app.render();
+    app.tick();
+
+    mouse_event press;
+    press.action = mouse_action::press;
+    press.button = mouse_button::left;
+    press.x = 5;
+    press.y = 0;
+    EXPECT_TRUE(area->on_mouse(press));
+    EXPECT_EQ(area->cursor(), 5U);
+
+    mouse_event drag = press;
+    drag.action = mouse_action::move;
+    drag.x = 11;
+    EXPECT_TRUE(area->on_mouse(drag));
+    EXPECT_EQ(area->selection_begin(), 5U);
+    EXPECT_EQ(area->selection_end(), 11U);
+}
+
+TEST(TuiTextAreaMouseTest, CopySelectionWithoutSelectionFails) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    auto& text = holder.make_state<string>(string("abc"));
+    text_area_option opt;
+    opt.text = &text;
+
+    auto view = make_unique<text_area_view>(opt);
+    text_area_view* area = view.get();
+    holder.add_child(move(view));
+
+    EXPECT_FALSE(area->copy_selection());
+
+    area->select_all();
+    EXPECT_TRUE(area->copy_selection());
+}
+
+
+TEST(TuiLogViewMouseTest, ClickSelectsMessageUnderCursor) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    log_view_option opt;
+    opt.gap = 0;
+    auto owned = make_unique<log_view>(opt);
+    log_view* log = owned.get();
+    holder.add_child(move(owned));
+
+    headless app(&holder, 24, 8);
+    app.render();
+
+    uint64_t clicked = 0;
+    const uint64_t first = log->append(log_role::user, "first");
+    log->finish(first);
+    const uint64_t second = log->append(log_role::assistant, "second");
+    log->finish(second);
+    app.tick();
+    app.tick();
+    app.tick();
+
+    mouse_event press;
+    press.action = mouse_action::press;
+    press.button = mouse_button::left;
+    press.x = 1;
+    press.y = 0;
+    EXPECT_TRUE(log->on_mouse(press));
+    clicked = log->selected_message();
+    EXPECT_TRUE(clicked == first || clicked == second);
+    EXPECT_TRUE(log->copy_selected());
+}
+
+TEST(TuiLogViewMouseTest, CopyMessageWritesClipboardPath) {
+    log_view log;
+    log.setup();
+
+    const uint64_t id = log.append(log_role::assistant, "copy me");
+    log.finish(id);
+    EXPECT_TRUE(log.copy_message(id));
+    EXPECT_FALSE(log.copy_message(id + 99));
+}
+
+
+TEST(TuiRecorderTest, RoundTripsSessionThroughJson) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    auto& text = holder.make_state<string>(string());
+    text_area_option opt;
+    opt.text = &text;
+    auto view = make_unique<text_area_view>(opt);
+    holder.add_child(move(view));
+
+    recorder rec("session");
+    rec.begin("session", 20, 4);
+
+    headless app(&holder, 20, 4);
+    app.set_recorder(&rec);
+    app.render();
+
+    // The Tab that establishes focus is itself recorded, so replay reproduces it.
+    app.feed("\t");
+    app.tick();
+    app.feed("abc");
+    app.tick();
+    app.render();
+    app.feed("\x7f");
+    app.tick();
+    app.render();
+
+    EXPECT_GT(rec.size(), 0U);
+    EXPECT_GT(rec.frame_count(), 2U);
+
+    const string json = rec.serialize();
+    EXPECT_NE(json.view().find("\"records\""_sv), string_view::npos);
+
+    host_root holder2;
+    holder2.bind(s, ctx);
+    auto& text2 = holder2.make_state<string>(string());
+    text_area_option opt2;
+    opt2.text = &text2;
+    holder2.add_child(make_unique<text_area_view>(opt2));
+
+    headless app2(&holder2, 20, 4);
+    app2.render();
+
+    const auto report = recorder::replay(json.view(), app2);
+    const auto raw = (report.mismatch_details.empty() ? string() : report.mismatch_details.front());
+    EXPECT_TRUE(report.ok()) << raw.data();
+    EXPECT_GT(report.frames, 2U);
+    EXPECT_EQ(text2.value(), "ab");
+}
+
+TEST(TuiRecorderTest, DetectsFrameMismatch) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+    auto& text = holder.make_state<string>(string("x"));
+    text_area_option opt;
+    opt.text = &text;
+    holder.add_child(make_unique<text_area_view>(opt));
+
+    headless app(&holder, 20, 4);
+    app.render();
+
+    recorder rec("bad");
+    rec.begin("bad");
+    rec.record_frame("this frame never existed");
+    const auto report = recorder::replay(rec.serialize().view(), app);
+    EXPECT_FALSE(report.ok());
+    EXPECT_EQ(report.mismatches, 1U);
+    EXPECT_EQ(report.mismatch_events.size(), 1U);
+}
+
+TEST(TuiRecorderTest, RejectsMalformedJson) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root holder;
+    holder.content = element::text("x");
+
+    headless app(&holder, 20, 4);
+    app.render();
+
+    const auto report = recorder::replay("{not json"_sv, app);
+    EXPECT_FALSE(report.ok());
+    EXPECT_EQ(report.mismatch_details.size(), 1U);
 }

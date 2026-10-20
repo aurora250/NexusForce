@@ -1,5 +1,6 @@
 #include <NeForce/core/string/to_string.hpp>
 #include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/system/console.hpp>
 #include <NeForce/tui/component/log_view.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -61,8 +62,8 @@ void log_view::setup() {
     list_opt.variable_height = true;
     list_opt.auto_follow = opt_.auto_follow;
     list_opt.render_item = [this](const size_t index) { return render_message(index); };
-    // A virtual list claims no height of its own;
-    // inside a column it has to fill the remaining space explicitly.
+    // A virtual list has no content height of its own; inside a column it
+    // has to fill the remaining space explicitly.
     list_opt.style.height = style::size_hint{style::size_hint::fill, 1};
 
     auto owned = make_unique<virtual_list_view>(list_opt);
@@ -245,7 +246,7 @@ element log_view::render_message(const size_t index) {
 
     const string header = item.title.empty() ? role_style.name : item.title;
     if (!header.empty()) {
-        tui::style title_style = role_style.title;
+        const tui::style title_style = role_style.title;
         parts.push_back(element::rich_text({text_span{header, title_style}}, title_style, style::wrap_mode::none));
     }
 
@@ -304,6 +305,66 @@ bool log_view::on_key(const key_event& e) {
     }
     return handled;
 }
+
+uint64_t log_view::message_at(const int y) const {
+    if (list_ == nullptr || messages_.empty()) {
+        return 0;
+    }
+
+    const auto box = list_->viewport_rect();
+    if (box.h <= 0 || y < box.y || y >= box.y + box.h) {
+        return 0;
+    }
+
+    int offset = 0;
+    const int target = list_->scroll_offset() + (y - box.y);
+    for (size_t i = 0; i < messages_.size(); ++i) {
+        const int measured = list_->measured_height(i);
+        const int rows = measured > 0 ? measured : max(1, list_->item_height());
+        if (target < offset + rows) {
+            return messages_[i].id;
+        }
+        offset += rows;
+    }
+    return 0;
+}
+
+bool log_view::on_mouse(const mouse_event& e) {
+    if (e.action != mouse_action::press || e.button != mouse_button::left) {
+        return false;
+    }
+    const uint64_t id = message_at(e.y);
+    if (id == 0) {
+        return false;
+    }
+    selected_ = id;
+    if (opt_.on_message_click) {
+        opt_.on_message_click(id);
+    }
+    schedule_render();
+    return true;
+}
+
+void log_view::select_message(const uint64_t id) {
+    selected_ = id;
+    schedule_render();
+}
+
+bool log_view::copy_message(const uint64_t id) {
+    for (const auto& item: messages_) {
+        if (item.id != id) {
+            continue;
+        }
+        if (item.content.empty()) {
+            return false;
+        }
+        console.copy_to_clipboard(item.content.view());
+        return true;
+    }
+    return false;
+}
+
+bool log_view::copy_selected() { return copy_message(selected_); }
 
 void log_view::on_animation(const int64_t delta) {
     ignore = delta;

@@ -142,6 +142,19 @@ public:
 
     bool on_key(const key_event& e) override;
 
+    /**
+     * @brief 鼠标事件
+     *
+     * 左键按下把光标移到点击位置，按住拖动扩展选区。
+     */
+    bool on_mouse(const mouse_event& e) override;
+
+    /**
+     * @brief 把选中文本写入系统剪贴板
+     * @return 是否有内容被复制
+     */
+    bool copy_selection();
+
     bool on_paste(const paste_event& e) override;
 
     NEFORCE_NODISCARD bool focusable() const override { return true; }
@@ -159,6 +172,7 @@ private:
     size_t anchor_ = 0;
     int scroll_row_ = 0;
     bool geometry_known_ = false;
+    bool dragging_ = false;
     vector<snapshot> undo_;
     vector<snapshot> redo_;
     vector<string> history_;
@@ -176,6 +190,7 @@ private:
     NEFORCE_NODISCARD size_t word_boundary(size_t from, bool forward) const;
     void notify_changed();
     void notify_content_changed();
+    NEFORCE_NODISCARD size_t offset_at(int row, int column) const;
 };
 
 /**
