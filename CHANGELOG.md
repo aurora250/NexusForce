@@ -77,11 +77,12 @@
 - 虚拟列表支持**变高项**：`element::virtual_list()` 新增高度表重载、`components::virtual_list_view` 新增 `variable_height`/`invalidate_heights()`/`measured_height()`，只对可视项做实测并回写，宽度变化自动失效重测
 - `code_block()` 新增整块背景带、左侧竖线与 `collapse_after` 折叠
 - `diff_view()` 新增按文件分组、hunk 折叠与背景带，`diff_view_option` 增加 `added_style`/`removed_style`/`header_style`/`band_style`
-- 添加伪终端组件 `pty`：`open()` 申请主从端、`start()` 以会话首进程启动子进程并把它接到从端，Windows 上以 `pty_exception` 明确拒绝
+- 添加伪终端组件 `pty`：`open()` 申请主从端、`start()` 以会话首进程启动子进程并把它接到从端
 - 添加异步子进程监视器 `process_watcher`：`start()` / `start_shell()` 走 PTY 或管道，输出增量回调、退出回调，伪终端不可用时自动回退到管道
 
 ### 🔧 Improvements
 
+- `process_watcher` 在 Windows 上改由轮询定时器拉取子进程输出，POSIX 仍走 fd 就绪回调
 - `pty::wait()` 在无超时直接阻塞于 `waitpid()` 而非 5ms 轮询；退出码解码与 `process::wait()` 统一
 - 异步日志的批量写入改为单个 drain 任务循环排空队列：不再每批提交一个新任务，批次的到达顺序稳定，线程池任务数也随之减少
 - 异步日志队列满且策略为 `block` 时改用 `notify_all()` 唤醒生产者，多个生产者不再只被唤醒一个
@@ -207,6 +208,7 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `tool_card::status_icon()` 的悬垂引用：`spinner()` 返回的临时元素在语句结束时释放共享节点，绑定到 `element::text()` 的引用随之失效，运行中卡片的图标会随机渲染成 `.`；现改为取值拷贝
 - 修复 `components::tool_card::render()` 无条件回写子组件头部导致的无限刷新：每次渲染都调用 `output_block::set_header()` 会再排一帧，`headless::tick()` 因此永不返回；现在仅在头部签名变化时回写
 - 修复宿主先于组件树销毁时的野指针崩溃：`reconciler` 析构改为 `release_tree()` 递归清理，`tool_runner` 在 `cleanup()` 中结束子进程并注销句柄
 - 修复 `process_watcher` 的定时器在监视器销毁后仍访问自身：自旋轮询与升级终止两个定时回调携带生存标志，析构后自动失效

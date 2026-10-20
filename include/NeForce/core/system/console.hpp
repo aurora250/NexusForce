@@ -462,6 +462,31 @@ public:
     void copy_to_clipboard(string_view text);
 
     /**
+     * @brief 请求终端返回剪贴板内容
+     * @warning 需要终端支持 OSC 52 读取；多数终端出于安全考虑默认禁用该查询
+     *
+     * 只发送查询序列，不读取应答。
+     */
+    void request_clipboard();
+
+    /**
+     * @brief 解析 OSC 52 应答序列
+     * @param buffer 输入缓冲，必须以应答序列开头
+     * @param consumed 可选输出，成功时为序列占用的字节数
+     * @return 解码后的剪贴板文本；不是完整应答、终端拒绝或解码失败时返回空串且 consumed 为 0
+     */
+    NEFORCE_NODISCARD static string parse_clipboard_response(string_view buffer, size_t* consumed = nullptr);
+
+    /**
+     * @brief 同步读取系统剪贴板
+     * @param timeout_ms 等待应答的超时毫秒
+     * @return 剪贴板文本，超时、终端不支持或内容为空时返回空串
+     *
+     * 发送 OSC 52 查询并把标准输入临时切到非规范模式等待应答。
+     */
+    NEFORCE_NODISCARD string read_clipboard(int timeout_ms = 200);
+
+    /**
      * @brief 设置控制台输出代码页为 UTF-8
      */
     void set_output_utf8() noexcept;

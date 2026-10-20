@@ -456,6 +456,10 @@ bool text_area_view::on_key(const key_event& e) {
                 if (is_letter('c')) {
                     return copy_selection();
                 }
+                if (is_letter('v')) {
+                    console.request_clipboard();
+                    return true;
+                }
                 if (is_letter('x')) {
                     if (!copy_selection()) {
                         return false;

@@ -31,32 +31,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    string build_command_line(const string& executable, const vector<string>& args) {
-        auto needs_quoting = [](const string& s) -> bool {
-            if (s.empty()) {
-                return true;
-            }
-            for (const char c: s) {
-                if (c == ' ' || c == '\t' || c == '"' || c == '&' || c == '|' || c == '<' || c == '>' || c == '^' ||
-                    c == '%') {
-                    return true;
-                }
-            }
-            return false;
-        };
-
-        string cmd_line = needs_quoting(executable) ? ("\"" + executable + "\"") : executable;
-
-        for (const auto& arg: args) {
-            cmd_line += ' ';
-            if (needs_quoting(arg)) {
-                cmd_line += '"' + arg + '"';
-            } else {
-                cmd_line += arg;
-            }
-        }
-        return cmd_line;
-    }
 
     string escape_arg_runas(const string& arg) {
         if (arg.find_first_of(" \t\"") == string::npos) {
@@ -553,7 +527,7 @@ void process::start(const string& executable, const vector<string>& args) {
         si.hStdError = stderr_write_handle;
     }
 
-    const string cmd_line = build_command_line(executable, args);
+    const string cmd_line = process::build_command_line(executable, args);
 
     void* env_block = nullptr;
     string env_block_str;
@@ -1655,6 +1629,28 @@ void process::chain(vector<process*>& processes) {
     for (size_t i = 0; i < processes.size() - 1; ++i) {
         chain(*processes[i], *processes[i + 1]);
     }
+}
+
+string process::build_command_line(const string& executable, const vector<string>& args) {
+    const auto needs_quoting = [](const string& value) -> bool {
+        if (value.empty()) {
+            return true;
+        }
+        for (const char c: value) {
+            if (c == ' ' || c == '\t' || c == '"' || c == '&' || c == '|' || c == '<' || c == '>' || c == '^' ||
+                c == '%') {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    string command_line = needs_quoting(executable) ? ('"' + executable + '"') : executable;
+    for (const auto& arg: args) {
+        command_line += ' ';
+        command_line += needs_quoting(arg) ? ('"' + arg + '"') : arg;
+    }
+    return command_line;
 }
 
 string process::search_path(const string& executable) {

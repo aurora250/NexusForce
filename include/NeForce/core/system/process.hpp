@@ -478,6 +478,14 @@ public:
      * @return 可执行文件完整路径，未找到返回空字符串
      */
     NEFORCE_NODISCARD static string search_path(const string& executable);
+
+    /**
+     * @brief 把可执行文件与参数拼成 Windows 命令行字符串
+     * @param executable 可执行文件路径
+     * @param args 参数列表
+     * @return 命令行字符串，含空格或 shell 特殊字符的参数会被双引号包裹
+     */
+    NEFORCE_NODISCARD static string build_command_line(const string& executable, const vector<string>& args);
 };
 
 /** @} */ // Process

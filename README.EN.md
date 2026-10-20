@@ -314,7 +314,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`log_view`** - Chat transcript: variable-height messages, streaming coalescing, bottom-follow and an "N new messages" hint
 - **`composer`** - Input orchestration: multi-line editor + completion popup + hint line, with submit/newline/interrupt semantics
 - **`pty` / `process_watcher`** - Pseudo-terminal wrapper and an async child-process watcher that falls back to pipes when no devpts is available
-- **`copy_to_clipboard` / mouse selection** - OSC 52 clipboard writes, `text_area` drag selection and `log_view` click-to-select-and-copy
+- **Clipboard / mouse selection** - OSC 52 writes and reads, `text_area` drag selection and `log_view` click-to-select-and-copy
 - **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
 - **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling
 

@@ -42,7 +42,8 @@ void headless::feed(const string_view bytes) {
                 reconciler_->dispatch_mouse(input.mouse);
                 break;
             }
-            case parsed_input::kind::paste: {
+            case parsed_input::kind::paste:
+            case parsed_input::kind::clipboard: {
                 paste_event pe;
                 pe.text = input.paste_text;
                 reconciler_->dispatch_paste(pe);

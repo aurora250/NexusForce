@@ -426,6 +426,48 @@ TEST(TuiTextAreaTest, SubmitOnEnterInvokesCallback) {
     EXPECT_EQ(text.value(), "hi");
 }
 
+TEST(TuiTextAreaTest, ClipboardAnswerFromTerminalIsPasted) {
+    host_root holder;
+    auto& text = holder.make_state<string>(string("ab"));
+
+    text_area_option opt;
+    opt.text = &text;
+    auto view = make_unique<text_area_view>(opt);
+    text_area_view* area = view.get();
+    holder.add_child(move(view));
+
+    headless app(&holder, 20, 4);
+    app.render();
+    app.feed("\t");
+    ASSERT_TRUE(area->has_focus());
+    area->set_cursor(2);
+
+    app.feed("\033]52;c;cGFzdGVk\a");
+    EXPECT_EQ(text.value(), "abpasted");
+}
+
+TEST(TuiTextAreaTest, CtrlVRequestsTheClipboardInsteadOfInsertingV) {
+    host_root holder;
+    auto& text = holder.make_state<string>(string());
+
+    text_area_option opt;
+    opt.text = &text;
+    auto view = make_unique<text_area_view>(opt);
+    text_area_view* area = view.get();
+    holder.add_child(move(view));
+
+    headless app(&holder, 20, 4);
+    app.render();
+    area->set_has_focus(true);
+
+    key_event ctrl_v;
+    ctrl_v.key = key_event::type::printable;
+    ctrl_v.cp = codepoint{static_cast<char32_t>('v')};
+    ctrl_v.mods = key_modifier::ctrl;
+    EXPECT_TRUE(area->on_key(ctrl_v));
+    EXPECT_TRUE(text.value().empty());
+}
+
 TEST(TuiTextAreaTest, PasteInsertsWholeText) {
     io_context ctx;
     strand s{ctx};

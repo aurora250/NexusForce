@@ -409,18 +409,29 @@ app.resume();      // 重新接管并强制整屏重绘
 ## 11. 鼠标与剪贴板
 
 - 列表/卡片的点击：`log_view::on_mouse` 按滚动偏移与实测高度反查消息；
-- 编辑器：点击定位光标、拖动选择；`Ctrl+C` 复制选区、`Ctrl+X` 剪切；
-- 剪贴板写入走 OSC 52，ssh / tmux 同样有效；粘贴由终端的括号粘贴事件自动送达 `on_paste()`，无需自建通道。
+- 编辑器：点击定位光标、拖动选择；`Ctrl+C` 复制选区、`Ctrl+X` 剪切、`Ctrl+V` 读取剪贴板；
+
+读取分两条路，全屏应用应当用第一条：
+
+```cpp
+sys_console::instance().request_clipboard();  // 只发 OSC 52 查询，不阻塞
+```
+
+```cpp
+const string text = sys_console::instance().read_clipboard(200);  // 同步读，用于非全屏工具
+```
+
+> ⚠️ OSC 52 读取需要终端支持，多数终端（含 Windows Terminal、iTerm2 默认配置、大部分 tmux 版本）出于安全考虑关闭了查询；
+> 此时应答为 `ESC ] 52 ; c ; ? BEL`，解析器不会产出事件，`read_clipboard()` 返回空串。
+> 粘贴的**主路径仍然是终端的括号粘贴事件**（`Ctrl+Shift+V` / 鼠标右键），不需要任何查询。
 
 ---
 
 ## 12. 限制
 
-- **PTY 仅 POSIX**：Windows 上 `pty::is_supported()` 为 false，`open()` 抛 `pty_exception`；
-  `process_watcher` 会自动降级为管道模式，`tool_runner` 亦然。
 - 管道模式没有终端语义：子进程 `isatty()` 为假时颜色与进度条可能不出现，`\r` 不会被转换；需要这些行为时请用 PTY。
 - 沙箱/容器可能没有挂载 `devpts`，用 `pty::is_available()` 提前判断。
-- 剪贴板是**只写**的，读取依赖终端支持，框架不实现。
+- 剪贴板读取依赖终端的 OSC 52 查询支持，终端拒绝时静默返回空；括号粘贴不依赖该能力。
 
 ---
 

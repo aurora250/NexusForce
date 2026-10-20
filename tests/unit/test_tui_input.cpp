@@ -1,4 +1,5 @@
 #include <NeForce/core/async/io_context.hpp>
+#include <NeForce/core/system/console.hpp>
 #include <NeForce/core/async/strand.hpp>
 #include <NeForce/tui/component/text_input.hpp>
 #include <NeForce/tui/dom/element.hpp>
@@ -79,6 +80,84 @@ namespace {
     };
 } // namespace
 
+
+TEST(TuiInputParserTest, ClipboardResponseBecomesClipboardEvent) {
+    parser_runner runner;
+    runner.feed_string("\033]52;c;aGVsbG8=\a"_sv);
+
+    ASSERT_EQ(runner.size(), 1U);
+    EXPECT_EQ(runner.at(0).type, parsed_input::kind::clipboard);
+    EXPECT_EQ(runner.at(0).paste_text, "hello"_sv);
+}
+
+TEST(TuiInputParserTest, ClipboardResponseSupportsStringTerminator) {
+    parser_runner runner;
+    runner.feed_string("\033]52;c;aGVsbG8=\033\\"_sv);
+
+    ASSERT_EQ(runner.size(), 1U);
+    EXPECT_EQ(runner.at(0).type, parsed_input::kind::clipboard);
+    EXPECT_EQ(runner.at(0).paste_text, "hello"_sv);
+}
+
+TEST(TuiInputParserTest, RefusedClipboardQueryProducesNoEvent) {
+    parser_runner runner;
+    runner.feed_string("\033]52;c;?\a"_sv);
+    EXPECT_EQ(runner.size(), 0U);
+}
+
+TEST(TuiInputParserTest, UnrelatedOscSequenceIsDropped) {
+    parser_runner runner;
+    runner.feed_string("\033]0;title\a"_sv);
+    EXPECT_EQ(runner.size(), 0U);
+
+    runner.feed_string("x"_sv);
+    ASSERT_EQ(runner.size(), 1U);
+    EXPECT_EQ(runner.at(0).type, parsed_input::kind::key);
+}
+
+TEST(TuiInputParserTest, IncompleteClipboardResponseIsDiscardedOnFlush) {
+    parser_runner runner;
+    runner.feed_string("\033]52;c;aGVs"_sv);
+    EXPECT_EQ(runner.size(), 0U);
+
+    runner.feed_string("x"_sv);
+    ASSERT_EQ(runner.size(), 1U);
+    EXPECT_EQ(runner.at(0).type, parsed_input::kind::key);
+    EXPECT_EQ(runner.at(0).key.key, key_event::type::printable);
+}
+
+TEST(SysConsoleClipboardTest, ParsesBelTerminatedResponse) {
+    size_t consumed = 0;
+    const string text = sys_console::parse_clipboard_response("\033]52;c;aGVsbG8=\a"_sv, &consumed);
+    EXPECT_EQ(text, "hello"_sv);
+    EXPECT_EQ(consumed, 16U);
+}
+
+TEST(SysConsoleClipboardTest, ParsesStringTerminatedResponse) {
+    size_t consumed = 0;
+    const string text = sys_console::parse_clipboard_response("\033]52;c;aGVsbG8=\033\\"_sv, &consumed);
+    EXPECT_EQ(text, "hello"_sv);
+    EXPECT_EQ(consumed, 17U);
+}
+
+TEST(SysConsoleClipboardTest, ParsesNonPrimarySelection) {
+    const string text = sys_console::parse_clipboard_response("\033]52;p;c2VsZWN0aW9u\a"_sv);
+    EXPECT_EQ(text, "selection"_sv);
+}
+
+TEST(SysConsoleClipboardTest, RejectsRefusalAndIncompleteInput) {
+    size_t consumed = 7;
+    EXPECT_TRUE(sys_console::parse_clipboard_response("\033]52;c;?\a"_sv, &consumed).empty());
+    EXPECT_EQ(consumed, 9U);
+
+    consumed = 7;
+    EXPECT_TRUE(sys_console::parse_clipboard_response("\033]52;c;aGVs"_sv, &consumed).empty());
+    EXPECT_EQ(consumed, 0U);
+
+    consumed = 7;
+    EXPECT_TRUE(sys_console::parse_clipboard_response("plain text"_sv, &consumed).empty());
+    EXPECT_EQ(consumed, 0U);
+}
 
 TEST(TuiInputParserTest, PrintableAsciiBecomesPrintableKey) {
     parser_runner runner;

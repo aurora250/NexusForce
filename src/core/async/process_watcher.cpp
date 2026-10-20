@@ -21,25 +21,31 @@ process_watcher::~process_watcher() {
 bool process_watcher::supports_pty() noexcept { return pty::is_available(); }
 
 void process_watcher::release_handles() {
+#ifndef NEFORCE_PLATFORM_WINDOWS
     if (term_ != nullptr) {
-        ctx_.remove_fd(static_cast<native_handle_type>(term_->master_handle()));
+        ctx_.remove_fd(static_cast<io_context::native_handle_type>(term_->master_handle()));
     }
     if (out_pipe_ != nullptr) {
-        ctx_.remove_fd(out_pipe_->native_read_handle());
+        ctx_.remove_fd(static_cast<io_context::native_handle_type>(out_pipe_->native_read_handle()));
     }
+#endif
     term_.reset();
     out_pipe_.reset();
     proc_.reset();
 }
 
 void process_watcher::attach_pipe() {
-    const auto fd = out_pipe_->native_read_handle();
+#ifndef NEFORCE_PLATFORM_WINDOWS
+    const auto fd = static_cast<io_context::native_handle_type>(out_pipe_->native_read_handle());
     ctx_.add_fd(fd, epoll_in, [this](int /*fd*/, uint32_t /*events*/, error_code /*ec*/) { drain_pipe(); }, false);
+#endif
 }
 
 void process_watcher::attach_pty() {
-    const auto fd = static_cast<native_handle_type>(term_->master_handle());
+#ifndef NEFORCE_PLATFORM_WINDOWS
+    const auto fd = static_cast<io_context::native_handle_type>(term_->master_handle());
     ctx_.add_fd(fd, epoll_in, [this](int /*fd*/, uint32_t /*events*/, error_code /*ec*/) { drain_pty(); }, false);
+#endif
 }
 
 bool process_watcher::start(const string& executable, const vector<string>& args, option opt) {
@@ -98,6 +104,13 @@ bool process_watcher::start(const string& executable, const vector<string>& args
         if (!*guard || !running_) {
             return;
         }
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        if (term_ != nullptr) {
+            drain_pty();
+        } else if (out_pipe_ != nullptr) {
+            drain_pipe();
+        }
+#endif
         poll_exit();
         if (running_) {
             ctx_.schedule_timer(poll_interval_ms_, *tick);

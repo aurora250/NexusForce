@@ -102,6 +102,7 @@ void input_parser::reset() {
     seq_.clear();
     utf8_.clear();
     paste_.clear();
+    osc_.clear();
     alt_ = key_modifier::none;
 }
 
@@ -121,6 +122,9 @@ bool input_parser::feed(const byte_t byte, parsed_input& out) {
     switch (state_) {
         case state::paste: {
             return feed_paste(byte, out);
+        }
+        case state::osc: {
+            return feed_osc(byte, out);
         }
         case state::utf8: {
             return feed_utf8(byte, out);
@@ -151,7 +155,7 @@ bool input_parser::flush(parsed_input& out) {
         emit_key(out, ke);
         return true;
     }
-    if (state_ == state::utf8 || state_ == state::csi || state_ == state::ss3) {
+    if (state_ == state::utf8 || state_ == state::csi || state_ == state::ss3 || state_ == state::osc) {
         reset();
     }
     return false;
@@ -182,6 +186,13 @@ bool input_parser::feed_escape(const byte_t byte, parsed_input& out) {
     if (byte == '[') {
         state_ = state::csi;
         seq_.clear();
+        return false;
+    }
+    if (byte == ']') {
+        state_ = state::osc;
+        osc_.clear();
+        osc_ += '\033';
+        osc_ += ']';
         return false;
     }
     if (byte == 'O') {
@@ -440,6 +451,37 @@ bool input_parser::feed_utf8(const byte_t byte, parsed_input& out) {
     }
     utf8_ += static_cast<char>(byte);
     return complete_utf8(out);
+}
+
+bool input_parser::feed_osc(const byte_t byte, parsed_input& out) {
+    osc_ += static_cast<char>(byte);
+
+    const bool terminated_by_bel = (byte == 0x07);
+    const bool terminated_by_st = (osc_.size() >= 2 && osc_[osc_.size() - 2] == '\033' && byte == '\\');
+    if (!terminated_by_bel && !terminated_by_st) {
+        // Guards against a terminal that never terminates the sequence.
+        if (osc_.size() > max_paste_size) {
+            reset();
+        }
+        return false;
+    }
+
+    return finish_osc(out);
+}
+
+bool input_parser::finish_osc(parsed_input& out) {
+    const string sequence = osc_;
+    reset();
+
+    const string decoded = sys_console::parse_clipboard_response(sequence.view());
+    if (decoded.empty()) {
+        // "?" answers (terminal refuses the query) and unrelated OSC sequences produce no event.
+        return false;
+    }
+
+    out.type = parsed_input::kind::clipboard;
+    out.paste_text = decoded;
+    return true;
 }
 
 bool input_parser::complete_utf8(parsed_input& out) {

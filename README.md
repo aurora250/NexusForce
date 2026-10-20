@@ -313,7 +313,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`composer`** - 输入编排：多行编辑器 + 补全弹层 + 提示行，提交/换行/中断语义
 - **`tool_runner`** - 工具执行组件：PTY/管道子进程 + 逐帧合并输出 + 环形裁剪 + 状态回写
 - **`pty` / `process_watcher`** - 伪终端封装与异步子进程监视器
-- **`copy_to_clipboard` / 鼠标选择** - OSC 52 剪贴板写入，`text_area` 拖拽选区与 `log_view` 点击选中复制
+- **剪贴板 / 鼠标选择** - OSC 52 写入与读取，`text_area` 拖拽选区与 `log_view` 点击选中复制
 - **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
 - **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染
 

@@ -81,8 +81,11 @@ void tool_card::set_collapsed(const bool collapsed) {
 string tool_card::status_icon() {
     switch (opt_.status) {
         case tool_status::running: {
-            const string& frame = spinner(3, frame_).text();
-            return frame.empty() ? "." : frame;
+            // Take a copy: element::text() returns a reference into the element's shared node,
+            // and the temporary returned by spinner() releases that node at the end of this statement,
+            // which would leave a dangling reference behind.
+            const string frame = spinner(3, frame_).text();
+            return frame.empty() ? string(".") : frame;
         }
         case tool_status::success: {
             return "\xe2\x9c\x94";

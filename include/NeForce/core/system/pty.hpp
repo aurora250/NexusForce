@@ -127,7 +127,7 @@ public:
      * @brief 读取至多指定字节的输出
      * @param buffer 缓冲区
      * @param size 缓冲区大小
-     * @return 实际读取的字节数，-1 表示错误或已关闭
+     * @return 实际读取的字节数，-1 表示错误、已关闭或当前没有可读数据
      */
     int read(void* buffer, size_t size) noexcept;
 
@@ -191,12 +191,18 @@ public:
     void close() noexcept;
 
 private:
-    int master_{-1};
+    native_handle_type handle_; ///< 伪终端句柄
     int child_id_{0};
     int exit_code_{-1};
     bool finished_{false};
     int columns_{80};
     int rows_{24};
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    native_handle_type read_handle_{nullptr};    ///< 子进程输出句柄
+    native_handle_type write_handle_{nullptr};   ///< 子进程输入句柄
+    native_handle_type process_handle_{nullptr}; ///< 子进程句柄
+#endif
 
     void reap(bool blocking, int timeout_ms);
 };

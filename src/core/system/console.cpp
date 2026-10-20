@@ -1,6 +1,7 @@
 #include <NeForce/core/encrypt/base64.hpp>
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <NeForce/core/string/utf.hpp>
 #    ifdef NEFORCE_COMPILER_MSVC
 #        include <consoleapi.h>
 #        include <consoleapi2.h>
@@ -12,6 +13,7 @@
 #    endif
 #    include <WinBase.h>
 #    include <WinNls.h>
+#    include <WinUser.h>
 #    include <conio.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -20,10 +22,59 @@
 #    include <cerrno>
 #    include <fcntl.h>
 #    include <sys/ioctl.h>
+#    include <poll.h>
 #    include <termios.h>
 #    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+namespace {
+    bool set_windows_clipboard(const string_view text) {
+        const wstring wide = character::to_wstring(text);
+        if (::OpenClipboard(nullptr) == FALSE) {
+            return false;
+        }
+
+        bool stored = false;
+        if (::EmptyClipboard() != FALSE) {
+            const auto bytes = static_cast<::SIZE_T>((wide.size() + 1) * sizeof(wchar_t));
+            const ::HGLOBAL block = ::GlobalAlloc(GMEM_MOVEABLE, bytes);
+            if (block != nullptr) {
+                void* target = ::GlobalLock(block);
+                if (target != nullptr) {
+                    ::memcpy(target, wide.data(), bytes);
+                    ::GlobalUnlock(block);
+                    stored = ::SetClipboardData(CF_UNICODETEXT, block) != nullptr;
+                }
+                if (!stored) {
+                    ::GlobalFree(block);
+                }
+            }
+        }
+        ::CloseClipboard();
+        return stored;
+    }
+
+    string get_windows_clipboard() {
+        string result;
+        if (::OpenClipboard(nullptr) == FALSE) {
+            return result;
+        }
+        const ::HANDLE block = ::GetClipboardData(CF_UNICODETEXT);
+        if (block != nullptr) {
+            const auto* wide = static_cast<const wchar_t*>(::GlobalLock(block));
+            if (wide != nullptr) {
+                result = character::to_string(wstring(wide));
+                ::GlobalUnlock(block);
+            }
+        }
+        ::CloseClipboard();
+        return result;
+    }
+} // namespace
+#endif
+
 
 void sys_console::print_string_unsafe(const string_view str) const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -755,11 +806,134 @@ void sys_console::reset_text_attributes() noexcept {
 }
 
 void sys_console::copy_to_clipboard(const string_view text) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (set_windows_clipboard(text)) {
+        return;
+    }
+#endif
     lock<mutex> lock(mutex_);
     const string payload = base64_encode(string(text));
     print_string_unsafe("\033]52;c;"_sv);
     print_string_unsafe(payload.view());
     print_string_unsafe("\a"_sv);
+}
+
+void sys_console::request_clipboard() {
+    lock<mutex> lock(mutex_);
+    print_string_unsafe("\033]52;c;?\a"_sv);
+}
+
+string sys_console::parse_clipboard_response(const string_view buffer, size_t* consumed) {
+    if (consumed != nullptr) {
+        *consumed = 0;
+    }
+
+    // Terminals answer with ESC ] 52 ; <selection> ; <base64> <terminator>,
+    // where the terminator is either BEL or the string terminator ESC \\.
+    constexpr string_view prefix = "\033]52;";
+    if (buffer.size() < prefix.size() || !buffer.starts_with(prefix)) {
+        return {};
+    }
+
+    const auto separator = buffer.find(';', prefix.size());
+    if (separator == string_view::npos) {
+        return {};
+    }
+
+    size_t end = string_view::npos;
+    size_t terminator_length = 0;
+    for (size_t i = separator + 1; i < buffer.size(); ++i) {
+        if (buffer[i] == '\a') {
+            end = i;
+            terminator_length = 1;
+            break;
+        }
+        if (buffer[i] == '\033' && i + 1 < buffer.size() && buffer[i + 1] == '\\') {
+            end = i;
+            terminator_length = 2;
+            break;
+        }
+    }
+    if (end == string_view::npos) {
+        return {};
+    }
+
+    const string_view payload = buffer.substr(separator + 1, end - separator - 1);
+    if (payload.empty() || payload == "?"_sv) {
+        if (consumed != nullptr) {
+            *consumed = end + terminator_length;
+        }
+        return {};
+    }
+
+    if (consumed != nullptr) {
+        *consumed = end + terminator_length;
+    }
+    return base64_decode(payload);
+}
+
+string sys_console::read_clipboard(const int timeout_ms) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ignore = timeout_ms;
+    return get_windows_clipboard();
+#else
+    if (::isatty(in_) != 1) {
+        return {};
+    }
+
+    ::termios saved{};
+    if (::tcgetattr(in_, &saved) != 0) {
+        return {};
+    }
+
+    ::termios raw = saved;
+    raw.c_lflag &= static_cast<::tcflag_t>(~(ICANON | ECHO));
+    raw.c_cc[VMIN] = 0;
+    raw.c_cc[VTIME] = 0;
+    if (::tcsetattr(in_, TCSANOW, &raw) != 0) {
+        return {};
+    }
+
+    struct termios_guard {
+        int fd;
+        const ::termios* saved;
+
+        ~termios_guard() { (void) ::tcsetattr(fd, TCSANOW, saved); }
+    };
+
+    const termios_guard restore{in_, &saved};
+    request_clipboard();
+
+    string collected;
+    string decoded;
+    const auto deadline = steady_clock::now() + milliseconds(timeout_ms);
+
+    while (steady_clock::now() < deadline) {
+        ::pollfd entry{};
+        entry.fd = in_;
+        entry.events = POLLIN;
+
+        const int ready = ::poll(&entry, 1, 20);
+        if (ready <= 0) {
+            continue;
+        }
+
+        char buffer[512];
+        const ssize_t count = ::read(in_, buffer, sizeof(buffer));
+        if (count <= 0) {
+            break;
+        }
+        collected.append(buffer, static_cast<size_t>(count));
+
+        size_t consumed = 0;
+        decoded = parse_clipboard_response(collected.view(), &consumed);
+        if (consumed > 0) {
+            break;
+        }
+    }
+
+    return decoded;
+#endif
 }
 
 void sys_console::set_window_title(const string_view title) {

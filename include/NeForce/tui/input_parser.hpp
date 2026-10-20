@@ -9,6 +9,7 @@
  * 解析器是无 I/O 的纯状态机，可脱离终端单独测试。
  */
 
+#include "NeForce/core/system/console.hpp"
 #include "NeForce/tui/events.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -29,16 +30,17 @@ struct parsed_input {
      * @brief 事件类型
      */
     enum class kind : uint8_t {
-        none,  ///< 未产出事件
-        key,   ///< 键盘事件，见 key
-        mouse, ///< 鼠标事件，见 mouse
-        paste, ///< 粘贴事件，见 paste_text
+        none,     ///< 未产出事件
+        key,      ///< 键盘事件，见 key
+        mouse,    ///< 鼠标事件，见 mouse
+        paste,    ///< 粘贴事件，见 paste_text
+        clipboard ///< 剪贴板应答
     };
 
     kind type = kind::none; ///< 事件类型
     tui::key_event key;     ///< 键盘事件
     tui::mouse_event mouse; ///< 鼠标事件
-    string paste_text;      ///< 粘贴文本
+    string paste_text;      ///< 剪贴板文本
 };
 
 /**
@@ -52,6 +54,7 @@ struct parsed_input {
  * - Alt+字符（`ESC` 前缀）
  * - SGR 鼠标序列（`ESC[<b;x;yM/m`）
  * - 括号粘贴（`ESC[200~` … `ESC[201~`）
+ * - OSC 52 剪贴板应答（`ESC]52;c;<base64>BEL` 或 `ESC \\` 结尾）
  *
  * @note 解析器不持有任何终端资源，应用需自行开启 raw 模式、`?1006` 鼠标模式与 `?2004` 括号粘贴模式
  */
@@ -95,12 +98,14 @@ private:
         ss3,
         utf8,
         paste,
+        osc,
     };
 
     state state_ = state::ground;
     string seq_;
     string utf8_;
     string paste_;
+    string osc_;
     key_modifier alt_ = key_modifier::none;
 
     void emit_key(parsed_input& out, const key_event& ke);
@@ -110,6 +115,8 @@ private:
     bool feed_ss3(byte_t byte, parsed_input& out);
     bool feed_utf8(byte_t byte, parsed_input& out);
     bool feed_paste(byte_t byte, parsed_input& out);
+    bool feed_osc(byte_t byte, parsed_input& out);
+    bool finish_osc(parsed_input& out);
     bool complete_utf8(parsed_input& out);
     bool finish_csi(parsed_input& out);
     bool parse_sgr_mouse(string_view body, parsed_input& out, bool release);

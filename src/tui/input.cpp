@@ -191,7 +191,8 @@ void input_driver::deliver(const parsed_input& input) {
             dispatch_mouse(input.mouse);
             break;
         }
-        case parsed_input::kind::paste: {
+        case parsed_input::kind::paste:
+        case parsed_input::kind::clipboard: {
             paste_event pe;
             pe.text = input.paste_text;
             dispatch_paste(pe);
