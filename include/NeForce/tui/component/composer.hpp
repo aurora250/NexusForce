@@ -68,6 +68,8 @@ struct composer_option {
     function<void()> on_interrupt;                                                ///< 运行中按 Esc 的中断回调
     tui::style style;                                                             ///< 输入框样式（传给编辑器）
     tui::style bar_style;                                                         ///< 状态行样式
+    size_t history_limit = 100;                                                   ///< 提交历史条数上限，0 表示不记录
+    bool history_enabled = true; ///< 是否启用单行下的 `Up`/`Down` 历史浏览
 };
 
 /**
@@ -77,6 +79,7 @@ struct composer_option {
  * - 可打印字符、编辑键全部转发给内部编辑器
  * - 补全弹层开启时：`Up`/`Down`/`PgUp`/`PgDn` 移动，`Tab`/`Enter` 接受，`Esc` 关闭
  * - `Enter` 提交，`Shift+Enter` 换行，`Ctrl+Enter` 提交
+ * - 单行文本时 `Up`/`Down` 浏览提交历史
  * - 空闲时 `Esc` 冒泡给上层，运行中 `Esc` 触发中断
  *
  * @note `Ctrl+C` 等全局快捷键不在此消费，交给 `keymap` 的全局层处理。
@@ -123,6 +126,12 @@ public:
      * @brief 提交当前文本
      */
     void submit();
+
+    /**
+     * @brief 提交历史条目数
+     * @return 条目数
+     */
+    NEFORCE_NODISCARD size_t history_size() const noexcept;
 
     /**
      * @brief 是否正在显示补全弹层
@@ -177,6 +186,7 @@ private:
     void refresh_completions();
     void accept_completion();
     NEFORCE_NODISCARD string current_hint() const;
+    NEFORCE_NODISCARD bool history_browsable() const;
 };
 
 /**

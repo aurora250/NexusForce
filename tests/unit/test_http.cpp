@@ -27,6 +27,8 @@
 #include <NeForce/core/memory/byte_cursor.hpp>
 #include <NeForce/network/http/async_filter.hpp>
 #include <NeForce/network/http/http_client.hpp>
+#include <NeForce/core/async/thread.hpp>
+#include <NeForce/network/tcp/tcp_acceptor.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 using namespace neforce::http;
@@ -4464,4 +4466,523 @@ TEST_F(HttpClientConfigUnit, SetConfigReplacesWholeConfig) {
     const auto& got = client.get_config();
     EXPECT_EQ(got.connect_timeout, milliseconds(999));
     EXPECT_EQ(got.max_redirects, 9u);
+}
+
+namespace {
+    void raw_send(tcp_socket& sock, const string_view data) {
+        sock.send_all(memory_view<const char>(data.data(), data.size()));
+    }
+
+    string read_request_head(tcp_socket& sock) {
+        string request;
+        vector<char> buffer(512);
+        while (request.find("\r\n\r\n") == string::npos) {
+            const ssize_t n = sock.receive(memory_view<char>(buffer.data(), buffer.size()));
+            if (n <= 0) {
+                break;
+            }
+            request.append(buffer.data(), static_cast<size_t>(n));
+        }
+        return request;
+    }
+
+    class loopback_http_server {
+    public:
+        loopback_http_server() {
+            acceptor_.open(ip_address::loopback());
+            const auto bound = acceptor_.local_endpoint();
+            if (bound.has_value()) {
+                port_ = bound->port();
+            }
+        }
+
+        NEFORCE_NODISCARD ports port() const noexcept { return port_; }
+
+        NEFORCE_NODISCARD string base_url() const { return "http://127.0.0.1:" + to_string(port_.value()) + "/"; }
+
+        NEFORCE_NODISCARD tcp_socket accept() { return acceptor_.accept(); }
+
+    private:
+        tcp_acceptor acceptor_;
+        ports port_{0u};
+    };
+
+    http_client_request make_get_request(const loopback_http_server& server, const string& path) {
+        http_client_request req;
+        req.method = http_method::GET();
+        req.host = "127.0.0.1";
+        req.port = server.port();
+        req.scheme = "http";
+        req.path = path;
+        return req;
+    }
+} // namespace
+
+class HttpClientStreamIoTest : public ::testing::Test {
+protected:
+    io_context ctx_;
+};
+
+class HttpClientRetryIoTest : public ::testing::Test {
+protected:
+    io_context ctx_;
+};
+
+TEST_F(HttpClientStreamIoTest, DefaultConfigEnablesKeepAliveAndRetryPolicy) {
+    const http_client::config cfg;
+    EXPECT_TRUE(cfg.keep_alive);
+    EXPECT_EQ(cfg.keep_alive_idle_timeout, milliseconds(60000));
+    EXPECT_EQ(cfg.stream_idle_timeout, milliseconds(300000));
+    EXPECT_EQ(cfg.retry.max_attempts, 1u);
+}
+
+TEST_F(HttpClientStreamIoTest, ChunkedStreamDeliversBodyIncrementally) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    thread server_thread([&server] {
+        try {
+            tcp_socket sock = server.accept();
+            read_request_head(sock);
+            raw_send(sock, "HTTP/1.1 200 OK\r\nContent-Type: text/event-stream\r\nTransfer-Encoding: chunked\r\n\r\n");
+            raw_send(sock, "5\r\nalpha\r\n");
+            this_thread::sleep_for_ms(30);
+            raw_send(sock, "4\r\nbeta\r\n");
+            this_thread::sleep_for_ms(30);
+            raw_send(sock, "0\r\n\r\n");
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    vector<string> chunks;
+    string assembled;
+    string content_type;
+    size_t header_calls = 0;
+
+    http_stream_observer observer;
+    observer.on_headers = [&](const http_client_response& response) {
+        ++header_calls;
+        content_type = response.content_type();
+    };
+    observer.on_data = [&](const string_view data) {
+        chunks.emplace_back(data);
+        assembled += data;
+        return true;
+    };
+
+    const http_client_response response = client.request_stream(make_get_request(server, "/events"), observer);
+    server_thread.join();
+
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(1u, header_calls);
+    EXPECT_EQ("text/event-stream", content_type);
+    EXPECT_EQ("alphabeta", assembled);
+    EXPECT_GE(chunks.size(), 2u);
+    EXPECT_TRUE(response.body.empty());
+}
+
+TEST_F(HttpClientStreamIoTest, ContentLengthStreamStopsAtDeclaredLength) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    thread server_thread([&server] {
+        try {
+            tcp_socket sock = server.accept();
+            read_request_head(sock);
+            raw_send(sock, "HTTP/1.1 200 OK\r\nContent-Length: 9\r\n\r\n");
+            raw_send(sock, "abc");
+            this_thread::sleep_for_ms(30);
+            raw_send(sock, "defghi");
+            this_thread::sleep_for_ms(30);
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    string assembled;
+    http_stream_observer observer;
+    observer.on_data = [&](const string_view data) {
+        assembled += data;
+        return true;
+    };
+
+    const http_client_response response = client.request_stream(make_get_request(server, "/data"), observer);
+    server_thread.join();
+
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ("abcdefghi", assembled);
+}
+
+TEST_F(HttpClientStreamIoTest, UnframedStreamEndsWhenPeerCloses) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    thread server_thread([&server] {
+        try {
+            tcp_socket sock = server.accept();
+            read_request_head(sock);
+            raw_send(sock, "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n");
+            raw_send(sock, "xyz");
+            this_thread::sleep_for_ms(30);
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    string assembled;
+    http_stream_observer observer;
+    observer.on_data = [&](const string_view data) {
+        assembled += data;
+        return true;
+    };
+
+    const http_client_response response = client.request_stream(make_get_request(server, "/text"), observer);
+    server_thread.join();
+
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ("xyz", assembled);
+}
+
+TEST_F(HttpClientStreamIoTest, ChunkBoundariesSplitAcrossReadsAreReassembled) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    // Writing one byte at a time forces the decoder to resume mid-size-line and mid-payload.
+    thread server_thread([&server] {
+        try {
+            tcp_socket sock = server.accept();
+            read_request_head(sock);
+            raw_send(sock, "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
+            const string_view wire = "b\r\nhello world\r\n3\r\nabc\r\n0\r\n\r\n";
+            for (const char c: wire) {
+                raw_send(sock, string_view(&c, 1));
+            }
+            this_thread::sleep_for_ms(30);
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    string assembled;
+    http_stream_observer observer;
+    observer.on_data = [&](const string_view data) {
+        assembled += data;
+        return true;
+    };
+
+    const http_client_response response = client.request_stream(make_get_request(server, "/slow"), observer);
+    server_thread.join();
+
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ("hello worldabc", assembled);
+}
+
+TEST_F(HttpClientStreamIoTest, AbortFromAnotherThreadUnblocksTheStream) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    thread server_thread([&server] {
+        try {
+            tcp_socket sock = server.accept();
+            read_request_head(sock);
+            raw_send(sock, "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
+            raw_send(sock, "5\r\nalpha\r\n");
+            this_thread::sleep_for_ms(800);
+            raw_send(sock, "0\r\n\r\n");
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    string assembled;
+    http_stream_observer observer;
+    observer.on_data = [&](const string_view data) {
+        assembled += data;
+        return true;
+    };
+
+    http_stream_handle handle;
+    thread aborter([&handle] {
+        this_thread::sleep_for_ms(100);
+        handle.abort();
+    });
+
+    const auto begin = steady_clock::now();
+    const http_client_response response = client.request_stream(make_get_request(server, "/slow"), observer, &handle);
+    const auto elapsed = time_cast<milliseconds>(steady_clock::now() - begin);
+
+    aborter.join();
+    server_thread.join();
+
+    EXPECT_TRUE(handle.is_aborted());
+    EXPECT_LT(elapsed.count(), 600);
+    EXPECT_EQ("alpha", assembled);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_FALSE(response.body.empty() && assembled.empty());
+}
+
+TEST_F(HttpClientStreamIoTest, ReturningFalseFromCallbackStopsTheStream) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    thread server_thread([&server] {
+        try {
+            tcp_socket sock = server.accept();
+            read_request_head(sock);
+            raw_send(sock, "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
+            raw_send(sock, "5\r\nalpha\r\n");
+            this_thread::sleep_for_ms(50);
+            raw_send(sock, "4\r\nbeta\r\n");
+            this_thread::sleep_for_ms(50);
+            raw_send(sock, "0\r\n\r\n");
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    size_t calls = 0;
+    string assembled;
+    http_stream_observer observer;
+    observer.on_data = [&](const string_view data) {
+        ++calls;
+        assembled += data;
+        return false;
+    };
+
+    http_stream_handle handle;
+    const auto begin = steady_clock::now();
+    client.request_stream(make_get_request(server, "/stop"), observer, &handle);
+    const auto elapsed = time_cast<milliseconds>(steady_clock::now() - begin);
+
+    server_thread.join();
+
+    EXPECT_EQ(1u, calls);
+    EXPECT_EQ("alpha", assembled);
+    EXPECT_TRUE(handle.is_aborted());
+    EXPECT_LT(elapsed.count(), 600);
+}
+
+TEST_F(HttpClientStreamIoTest, StreamWithoutDataCallbackThrows) {
+    http_client client(ctx_);
+    http_stream_observer observer;
+
+    http_client_request req;
+    req.host = "127.0.0.1";
+    req.port = ports(1u);
+    req.scheme = "http";
+    req.path = "/";
+
+    EXPECT_THROW(client.request_stream(req, observer), value_exception);
+}
+
+TEST_F(HttpClientRetryIoTest, RetryableStatusIsRetriedWhenPolicyAllows) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    size_t accepts = 0;
+    thread server_thread([&] {
+        try {
+            for (int i = 0; i < 2; ++i) {
+                tcp_socket sock = server.accept();
+                ++accepts;
+                read_request_head(sock);
+                if (i == 0) {
+                    raw_send(sock,
+                             "HTTP/1.1 503 Service Unavailable\r\nContent-Length: 0\r\nConnection: close\r\n\r\n");
+                } else {
+                    raw_send(sock, "HTTP/1.1 200 OK\r\nContent-Length: 2\r\nConnection: close\r\n\r\nok");
+                }
+                sock.close();
+            }
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client::config cfg;
+    cfg.retry.max_attempts = 3;
+    cfg.retry.initial_backoff = milliseconds(10);
+    cfg.retry.max_backoff = milliseconds(50);
+    http_client client(ctx_, cfg);
+
+    const http_client_response response = client.get(server.base_url());
+    server_thread.join();
+
+    EXPECT_EQ(2u, accepts);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ("ok", response.body);
+}
+
+TEST_F(HttpClientRetryIoTest, RetryDisabledByDefaultReturnsTheFailure) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    size_t accepts = 0;
+    thread server_thread([&] {
+        try {
+            tcp_socket sock = server.accept();
+            ++accepts;
+            read_request_head(sock);
+            raw_send(sock, "HTTP/1.1 503 Service Unavailable\r\nContent-Length: 0\r\nConnection: close\r\n\r\n");
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    const http_client_response response = client.get(server.base_url());
+    server_thread.join();
+
+    EXPECT_EQ(1u, accepts);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S5_SERVICE_UNAVAILABLE), static_cast<uint16_t>(response.status));
+}
+
+TEST_F(HttpClientRetryIoTest, RetryAfterHeaderIsHonoured) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    size_t accepts = 0;
+    thread server_thread([&] {
+        try {
+            for (int i = 0; i < 2; ++i) {
+                tcp_socket sock = server.accept();
+                ++accepts;
+                read_request_head(sock);
+                if (i == 0) {
+                    raw_send(sock, "HTTP/1.1 429 Too Many Requests\r\nRetry-After: 0\r\nContent-Length: 0\r\n"
+                                   "Connection: close\r\n\r\n");
+                } else {
+                    raw_send(sock, "HTTP/1.1 200 OK\r\nContent-Length: 5\r\nConnection: close\r\n\r\nhello");
+                }
+                sock.close();
+            }
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client::config cfg;
+    cfg.retry.max_attempts = 2;
+    cfg.retry.initial_backoff = milliseconds(10);
+    cfg.retry.max_backoff = milliseconds(50);
+    http_client client(ctx_, cfg);
+
+    const http_client_response response = client.get(server.base_url());
+    server_thread.join();
+
+    EXPECT_EQ(2u, accepts);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ("hello", response.body);
+}
+
+TEST_F(HttpClientRetryIoTest, ClientErrorStatusIsNotRetried) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    size_t accepts = 0;
+    thread server_thread([&] {
+        try {
+            tcp_socket sock = server.accept();
+            ++accepts;
+            read_request_head(sock);
+            raw_send(sock, "HTTP/1.1 400 Bad Request\r\nContent-Length: 0\r\nConnection: close\r\n\r\n");
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client::config cfg;
+    cfg.retry.max_attempts = 3;
+    cfg.retry.initial_backoff = milliseconds(10);
+    http_client client(ctx_, cfg);
+
+    const http_client_response response = client.get(server.base_url());
+    server_thread.join();
+
+    EXPECT_EQ(1u, accepts);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_BAD_REQUEST), static_cast<uint16_t>(response.status));
+}
+
+TEST_F(HttpClientRetryIoTest, KeepAliveReusesTheConnectionForConsecutiveRequests) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    size_t requests_on_one_connection = 0;
+    thread server_thread([&] {
+        try {
+            tcp_socket sock = server.accept();
+            for (int i = 0; i < 2; ++i) {
+                const string request = read_request_head(sock);
+                if (request.empty()) {
+                    break;
+                }
+                ++requests_on_one_connection;
+                raw_send(sock, "HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok");
+            }
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    const http_client_response first = client.get(server.base_url());
+    const http_client_response second = client.get(server.base_url());
+    server_thread.join();
+
+    EXPECT_EQ("ok", first.body);
+    EXPECT_EQ("ok", second.body);
+    EXPECT_EQ(2u, requests_on_one_connection);
+}
+
+TEST_F(HttpClientRetryIoTest, NoContentResponseKeepsConnectionUsable) {
+    loopback_http_server server;
+    ASSERT_NE(0u, server.port().value());
+
+    size_t requests_on_one_connection = 0;
+    thread server_thread([&] {
+        try {
+            tcp_socket sock = server.accept();
+            for (int i = 0; i < 2; ++i) {
+                const string request = read_request_head(sock);
+                if (request.empty()) {
+                    break;
+                }
+                ++requests_on_one_connection;
+                if (i == 0) {
+                    raw_send(sock, "HTTP/1.1 204 No Content\r\n\r\n");
+                } else {
+                    raw_send(sock, "HTTP/1.1 200 OK\r\nContent-Length: 5\r\n\r\nfinal");
+                }
+            }
+            sock.close();
+        } catch (const exception&) {
+            // Failures after the client aborts or disconnects early are expected here.
+        }
+    });
+
+    http_client client(ctx_);
+    const http_client_response first = client.get(server.base_url());
+    const http_client_response second = client.get(server.base_url());
+    server_thread.join();
+
+    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_NO_CONTENT), static_cast<uint16_t>(first.status));
+    EXPECT_TRUE(first.body.empty());
+    EXPECT_EQ("final", second.body);
+    EXPECT_EQ(2u, requests_on_one_connection);
 }

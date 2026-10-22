@@ -65,6 +65,12 @@ public:
     bool dispatch_paste(const paste_event& e, component_base* root);
 
     /**
+     * @brief 是否正在拖拽滚动条
+     * @return 滚动条拖拽进行中返回true
+     */
+    NEFORCE_NODISCARD bool is_dragging() const noexcept { return drag_state_ != nullptr; }
+
+    /**
      * @brief 设置脏标记回调
      * @param cb 回调函数
      * @note 由 reconciler 注入

@@ -18,6 +18,7 @@
 #include "NeForce/tui/keymap.hpp"
 #include "NeForce/tui/renderer.hpp"
 #include "NeForce/tui/screen.hpp"
+#include "NeForce/tui/selection.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -188,6 +189,41 @@ public:
     void set_output_sink(function<void(string_view)> sink) { output_sink_ = _NEFORCE move(sink); }
 
     /**
+     * @brief 获取当前屏幕选区
+     * @return 选区引用
+     */
+    NEFORCE_NODISCARD const screen_selection& selection() const noexcept { return selection_; }
+
+    /**
+     * @brief 复制当前选区并清空
+     * @return 选区内有文本并已写入剪贴板返回true
+     */
+    bool copy_selection();
+
+    /**
+     * @brief 清空选区
+     */
+    void clear_selection();
+
+    /**
+     * @brief 设置剪贴板写入回调
+     * @param writer 回调，为空表示写往终端剪贴板
+     */
+    void set_clipboard_writer(function<void(string_view)> writer) { clipboard_writer_ = _NEFORCE move(writer); }
+
+    /**
+     * @brief 开关鼠标拖选
+     * @param enable 是否启用
+     */
+    void set_selection_enabled(bool enable) noexcept { selection_enabled_ = enable; }
+
+    /**
+     * @brief 是否启用鼠标拖选
+     * @return 启用返回true
+     */
+    NEFORCE_NODISCARD bool selection_enabled() const noexcept { return selection_enabled_; }
+
+    /**
      * @brief 强制终端尺寸
      * @param width 列数
      * @param height 行数
@@ -228,8 +264,16 @@ private:
     bool update_pending_ = false;
     bool rendering_ = false;
 
+    screen_selection selection_;
+    bool selecting_ = false;
+    int select_origin_x_ = 0;
+    int select_origin_y_ = 0;
+    bool selection_enabled_ = true;
+    function<void(string_view)> clipboard_writer_;
+
     void refresh_term_size();
     void setup_tree(component_base* comp);
+    bool handle_selection_mouse(const mouse_event& e);
 };
 
 /** @} */ // TUI

@@ -7,23 +7,22 @@
 namespace {
     constexpr _NEFORCE size_t default_alignment = _NEFORCE max<size_t>(alignof(_NEFORCE max_align_t), 16);
 
-    NEFORCE_ALWAYS_INLINE void* pool_allocate(const _NEFORCE size_t size, const _NEFORCE size_t alignment) noexcept {
+    void* pool_allocate(const _NEFORCE size_t size, const _NEFORCE size_t alignment) noexcept {
         return _NEFORCE system_memory_pool().try_allocate(size, alignment);
     }
 
-    NEFORCE_ALWAYS_INLINE void* pool_allocate_nothrow(const _NEFORCE size_t size,
-                                                      const _NEFORCE size_t alignment) noexcept {
+    void* pool_allocate_nothrow(const _NEFORCE size_t size, const _NEFORCE size_t alignment) noexcept {
         return _NEFORCE system_memory_pool().try_allocate(size, alignment);
     }
 
-    NEFORCE_ALWAYS_INLINE void pool_release(void* ptr) noexcept { _NEFORCE system_memory_pool().deallocate(ptr); }
+    void pool_release(void* ptr) noexcept { _NEFORCE system_memory_pool().deallocate(ptr); }
 
-    NEFORCE_ALWAYS_INLINE _NEFORCE size_t aligned_size(const std::align_val_t alignment) noexcept {
+    _NEFORCE size_t aligned_size(const std::align_val_t alignment) noexcept {
         const auto value = static_cast<_NEFORCE size_t>(alignment);
         return value < 16 ? 16 : value;
     }
 
-    NEFORCE_ALWAYS_INLINE _NEFORCE size_t aligned_size(const _NEFORCE align_t alignment) noexcept {
+    _NEFORCE size_t aligned_size(const _NEFORCE align_t alignment) noexcept {
         const auto value = static_cast<_NEFORCE size_t>(alignment);
         return value < 16 ? 16 : value;
     }

@@ -217,7 +217,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Security Middleware** - `csrf_filter` CSRF protection, `http_security` security headers, `http_cache` HTTP caching policies
 - **WebSocket** - RFC 6455/7692 full-duplex `websocket_session` / `websocket_server`, event-driven zero-thread mode
 - **WebSocket Compression** - permessage-deflate (RFC 7692), window bit negotiation and context takeover control
-- **HTTP Client** - `http_client` scheme-aware mode (auto SSL for https), request/response handling
+- **HTTP Client** - `http_client` scheme-aware mode (auto SSL for https), request/response handling, connection reuse + retry backoff
 - **TCP/UDP Socket** - High-performance `tcp_socket` / `udp_socket`, with `async_connect()` / `async_read()` / `async_write()` async operations
 - **SSL/TLS** - Encrypted transport `ssl_context` / `ssl_stream`, SNI multi-certificate management `sni_manager`, ALPN protocol negotiation
 - **`dns_client`** - Domain name resolution, per-operation async state object architecture, completion-token async API (callback/cancellation slot/future/awaitable)
@@ -314,7 +314,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`log_view`** - Chat transcript: variable-height messages, streaming coalescing, bottom-follow and an "N new messages" hint
 - **`composer`** - Input orchestration: multi-line editor + completion popup + hint line, with submit/newline/interrupt semantics
 - **`pty` / `process_watcher`** - Pseudo-terminal wrapper and an async child-process watcher that falls back to pipes when no devpts is available
-- **Clipboard / mouse selection** - OSC 52 writes and reads, `text_area` drag selection and `log_view` click-to-select-and-copy
+- **Clipboard / mouse selection** - OSC 52 writes and reads, `text_area` drag selection, `log_view` click-to-select-and-copy, `composer` up/down browsing of submitted history
 - **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
 - **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling
 

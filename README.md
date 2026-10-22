@@ -215,7 +215,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **安全中间件** - `csrf_filter` CSRF 防护、`http_security` 安全响应头、`http_cache` HTTP 缓存策略
 - **WebSocket** - RFC 6455/7692 全双工通信 `websocket_session` / `websocket_server`，事件驱动零线程模式
 - **WebSocket 压缩** - permessage-deflate（RFC 7692），窗口比特位协商与上下文接管控制
-- **HTTP 客户端** - `http_client` scheme 感知模式（https 自动 SSL），请求/响应处理
+- **HTTP 客户端** - `http_client` scheme 感知模式（https 自动 SSL），请求/响应处理，连接复用 + 重试退避
 - **TCP/UDP 套接字** - 高性能网络通信 `tcp_socket` / `udp_socket`，支持 `async_connect()` / `async_read()` / `async_write()` 异步操作
 - **SSL/TLS** - 加密网络传输 `ssl_context` / `ssl_stream`，SNI 多证书管理 `sni_manager`，ALPN 协议协商
 - **`dns_client`** - 域名解析，per-operation 异步状态对象架构，completion-token 异步 API（回调/取消槽/future/awaitable）
@@ -313,7 +313,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`composer`** - 输入编排：多行编辑器 + 补全弹层 + 提示行，提交/换行/中断语义
 - **`tool_runner`** - 工具执行组件：PTY/管道子进程 + 逐帧合并输出 + 环形裁剪 + 状态回写
 - **`pty` / `process_watcher`** - 伪终端封装与异步子进程监视器
-- **剪贴板 / 鼠标选择** - OSC 52 写入与读取，`text_area` 拖拽选区与 `log_view` 点击选中复制
+- **剪贴板 / 鼠标选择** - OSC 52 写入与读取，`text_area` 拖拽选区、`log_view` 点击选中复制、`composer` 单行上下键浏览提交历史
 - **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
 - **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染
 

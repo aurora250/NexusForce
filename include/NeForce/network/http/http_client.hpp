@@ -9,6 +9,7 @@
  * Cookie管理、代理、文件下载等功能。
  */
 
+#include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/file/path.hpp"
 #include "NeForce/core/utility/byte_size.hpp"
@@ -22,6 +23,79 @@ NEFORCE_BEGIN_HTTP__
  * @addtogroup HTTP HTTP
  * @{
  */
+
+/**
+ * @struct http_retry_policy
+ * @brief 重试策略
+ * @warning 客户端无法判断请求是否幂等，非幂等请求开启重试可能产生重复副作用
+ */
+struct http_retry_policy {
+    uint16_t max_attempts = 1;            ///< 总尝试次数，1 表示不重试
+    milliseconds initial_backoff{200};    ///< 首次退避时长
+    milliseconds max_backoff{5000};       ///< 单次退避时长上限
+    uint16_t backoff_multiplier = 2;      ///< 退避倍数，每次失败后乘该值
+    bool honor_retry_after = true;        ///< 是否优先采用响应的 `Retry-After` 头（秒）作为退避时长
+    bool retry_on_transport_error = true; ///< 传输层失败时是否重试
+    bool retry_on_status_code = true;     ///< 可重试状态码是否重试
+};
+
+/**
+ * @class http_stream_handle
+ * @brief 流式请求控制句柄
+ * @note 重复使用同一句柄发起下一次流式请求前应先 `reset()`
+ */
+class NEFORCE_API http_stream_handle {
+public:
+    http_stream_handle() = default;
+    ~http_stream_handle() = default;
+
+    http_stream_handle(const http_stream_handle&) = delete;
+    http_stream_handle& operator=(const http_stream_handle&) = delete;
+
+    /**
+     * @brief 取消进行中的流式请求
+     * @warning 只中断本机阻塞读取，不会通知对端；被中止的连接不再复用
+     */
+    void abort() noexcept;
+
+    /**
+     * @brief 查询是否已请求取消
+     * @return 已置位取消标记返回true
+     */
+    NEFORCE_NODISCARD bool is_aborted() const noexcept { return aborted_.load(); }
+
+    /**
+     * @brief 清除取消标记，供复用句柄发起下一次请求
+     */
+    void reset() noexcept {
+        aborted_.store(false);
+        handle_.store(socket_base::invalid_handle);
+    }
+
+private:
+    friend class http_client;
+
+    void attach(const socket_base::native_handle_type handle) noexcept { handle_.store(handle); }
+    void detach() noexcept { handle_.store(socket_base::invalid_handle); }
+
+    atomic<bool> aborted_{false};                                                 ///< 是否已请求取消
+    atomic<socket_base::native_handle_type> handle_{socket_base::invalid_handle}; ///< 当前绑定的 socket 句柄
+};
+
+/**
+ * @struct http_stream_observer
+ * @brief 流式响应观察者
+ */
+struct http_stream_observer {
+    function<void(const http_client_response&)> on_headers; ///< 响应头到达回调
+    function<bool(string_view data)> on_data;               ///< 正文片段回调，返回 false 立即中止
+
+    /**
+     * @brief 检查观察者是否具备正文回调
+     * @return 已设置 `on_data` 返回true
+     */
+    NEFORCE_NODISCARD bool valid() const noexcept { return static_cast<bool>(on_data); }
+};
 
 /**
  * @class http_client
@@ -90,7 +164,9 @@ public:
         milliseconds receive_timeout{5000};                 ///< 接收超时
         uint16_t max_redirects = 5;                         ///< 最大重定向次数
         bool follow_redirects = true;                       ///< 是否跟随重定向
-        bool keep_alive = false;                            ///< 是否保持连接
+        bool keep_alive = true;                             ///< 是否复用连接
+        milliseconds keep_alive_idle_timeout{60000};        ///< 空闲连接复用上限，超过后重连；0 表示不限制
+        milliseconds stream_idle_timeout{300000};           ///< 流式响应两段正文之间的最长空闲，0 表示沿用接收超时
         bool verify_ssl = true;                             ///< 是否验证SSL证书
         byte_size max_response_size{10_MB};                 ///< 最大响应大小
         byte_size buffer_size{8_KB};                        ///< 缓冲区大小
@@ -98,8 +174,8 @@ public:
         string user_agent{"NexusForce HTTP Client/1.0"};    ///< User-Agent
         string proxy_host;                                  ///< 代理主机
         ports proxy_port{ports::UNDEF};                     ///< 代理端口
+        http_retry_policy retry;                            ///< 重试策略
         // TODO: Connection pool — max_connections_per_host, idle_timeout, max_idle_connections
-        // TODO: Retry policy — max_retries, retry_backoff_ms, retry_on_status_codes (429, 502, 503, 504)
         // TODO: Circuit breaker — failure_threshold, recovery_timeout, half_open_max_requests
     };
 
@@ -119,18 +195,31 @@ private:
 
     progress_callback_t progress_callback_; ///< 进度回调
     error_callback_t error_callback_;       ///< 错误回调
+    time_point last_activity_;              ///< 上一次响应结束时刻
 
 private:
     string build_request_str(const http_client_request& req, const url& req_url) const;
     bool send_request(string_view request_str, time_point& send_start);
 
     optional<http_client_response> read_response(time_point& receive_start, const string& request_host,
-                                                 const string& request_path);
+                                                 const string& request_path, bool expect_body);
 
     void update_cookies(const vector<http_cookie>& resp_cookies, const url& request_url);
     string build_cookie_header(const url& request_url) const;
 
+    bool prepare_connection(const http_client_request& request);
+
+    http_client_response do_request_once(http_client_request request, int redirect_count, bool& transport_failed);
     http_client_response do_request(http_client_request request, int redirect_count = 0);
+
+    http_client_response stream_once(const http_client_request& request, int redirect_count,
+                                     const http_stream_observer& observer, http_stream_handle* handle,
+                                     bool& transport_failed);
+    http_client_response do_request_stream(const http_client_request& request, const http_stream_observer& observer,
+                                           http_stream_handle* handle, int redirect_count);
+
+    milliseconds retry_backoff(uint16_t attempt, const http_client_response& response) const;
+
     bool ensure_connected(const string& host, ports port, bool use_ssl = false);
 
 public:
@@ -434,6 +523,28 @@ public:
      * @return 下载成功返回true
      */
     bool download_file(const string& url, path output, bool is_binary = true);
+
+    /**
+     * @brief 发送流式请求
+     * @param req 请求对象
+     * @param observer 响应头与正文片段回调
+     * @param handle 可选的取消句柄，请求返回前一直绑定底层连接
+     * @return 响应元信息，`body` 始终为空
+     * @warning 被取消时返回值仍可能带有已解析的状态码与响应头，需要通过 `http_stream_handle::is_aborted` 区分"对端正常结束"与"本端中止"
+     */
+    http_client_response request_stream(const http_client_request& req, const http_stream_observer& observer,
+                                        http_stream_handle* handle = nullptr);
+
+    /**
+     * @brief 异步流式请求
+     * @param req 请求对象
+     * @param observer 响应头与正文片段回调
+     * @param handle 可选的取消句柄
+     * @return future响应元信息
+     * @warning `handle` 由调用方管理生命周期，future 完成前不得析构
+     */
+    future<http_client_response> request_stream_async(http_client_request req, const http_stream_observer& observer,
+                                                      http_stream_handle* handle = nullptr);
 
     /**
      * @brief 异步HTTP请求

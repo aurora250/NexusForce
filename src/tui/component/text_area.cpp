@@ -272,8 +272,7 @@ void text_area_view::jump_history(const int delta) {
         }
         --history_pos_;
     } else {
-        if (history_pos_ + 1 >= history_.size()) {
-            history_pos_ = history_.size();
+        if (history_pos_ >= history_.size()) {
             return;
         }
         ++history_pos_;
@@ -281,6 +280,7 @@ void text_area_view::jump_history(const int delta) {
 
     record_undo();
     if (history_pos_ >= history_.size()) {
+        // Stepping past the newest entry returns to an empty draft.
         opt_.text->set_quiet(string());
         cursor_ = 0;
     } else {

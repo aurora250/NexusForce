@@ -79,9 +79,21 @@
 - `diff_view()` 新增按文件分组、hunk 折叠与背景带，`diff_view_option` 增加 `added_style`/`removed_style`/`header_style`/`band_style`
 - 添加伪终端组件 `pty`：`open()` 申请主从端、`start()` 以会话首进程启动子进程并把它接到从端
 - 添加异步子进程监视器 `process_watcher`：`start()` / `start_shell()` 走 PTY 或管道，输出增量回调、退出回调，伪终端不可用时自动回退到管道
+- 添加流式 HTTP 接口 `http_client::request_stream()` / `request_stream_async()`：正文不缓冲，每读到一段就回调 `http_stream_observer::on_data`
+- 添加流式请求取消句柄 `http_stream_handle`：`abort()` 可跨线程调用，对底层 socket 执行 `shutdown` 立即唤醒阻塞读取；`on_data` 返回 `false` 等价于 `abort()`
+- 添加重试策略 `http_retry_policy`（`config::retry`）：可重试状态码（408/429/500/502/503/504）与传输层失败按倍数退避重试，优先采用响应的 `Retry-After`（秒）作为退避时长，默认不重试
+- `http_client::config` 新增 `keep_alive_idle_timeout` 与 `stream_idle_timeout`：空闲超限的连接主动重连，流式读取期间使用独立的接收超时
+- 添加屏幕选区 `tui::screen_selection` 与 `paint_selection()` / `selection_text()`：以帧缓冲单元格为坐标跨组件选取，行内尾随空白裁剪、宽字符续列跳过
+- `reconciler` 接入鼠标拖选：左键按下拖动即开始选区，`Ctrl+C` 复制并清空选区，其余按键、滚轮、窗口变化都会丢弃选区；`set_clipboard_writer()` 可接管复制目标
+- `components::composer` 提交时记录历史，单行编辑下 `Up`/`Down` 浏览提交历史（多行时仍由编辑器移动光标）
+- `text_area_view` 新增 `history_previous()` / `history_next()` / `in_history()`：把历史浏览开放给上层组件，方向键可映射到历史
 
 ### 🔧 Improvements
 
+- `http_client` 默认开启连接复用：连续请求不再重复握手，响应带 `Connection: close` 时仍会主动断开
+- `http_client` 的 `HEAD`、`204`、`304` 与 1xx 响应不再尝试读取正文，避免复用连接被后续请求阻塞
+- 重定向跟随会带上目标 scheme：`http -> https` 跳转不再被当作明文 HTTP 重放
+- `text_area_view` 在历史浏览中越过最新一条时清空输入，与 `Ctrl+N` 的既有语义保持一致
 - Windows 动态库导出表缩小，加载更快、导入库更小，模板实例与 STL/COMDAT 内部符号不再越界导出
 - `process_watcher` 在 Windows 上改由轮询定时器拉取子进程输出，POSIX 仍走 fd 就绪回调
 - `pty::wait()` 在无超时直接阻塞于 `waitpid()` 而非 5ms 轮询；退出码解码与 `process::wait()` 统一

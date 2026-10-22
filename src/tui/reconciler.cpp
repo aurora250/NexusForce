@@ -45,6 +45,17 @@ namespace {
             }
         }
     }
+
+    bool is_copy_shortcut(const key_event& e) noexcept {
+        if (e.key != key_event::type::printable) {
+            return false;
+        }
+        const auto cp = e.cp.value();
+        if (cp != static_cast<uint32_t>(U'c') && cp != static_cast<uint32_t>(U'C')) {
+            return false;
+        }
+        return (e.mods & key_modifier::ctrl) != key_modifier::none;
+    }
 } // namespace
 
 
@@ -159,6 +170,15 @@ bool reconciler::dispatch_key(const key_event& e) {
     if (root_ == nullptr || !mounted_) {
         return false;
     }
+    // A pending selection owns ^C / ^Shift+C:
+    // copying beats quitting, and any other key drops the highlight so it never survives a content change.
+    if (!selection_.empty()) {
+        if (is_copy_shortcut(e)) {
+            copy_selection();
+            return true;
+        }
+        clear_selection();
+    }
     if (shortcuts_.dispatch(e)) {
         return true;
     }
@@ -175,7 +195,96 @@ bool reconciler::dispatch_mouse(const mouse_event& e) {
     if (dirty_) {
         flush();
     }
+
+    if (e.action == mouse_action::wheel && !selection_.empty()) {
+        clear_selection();
+    }
+    if (handle_selection_mouse(e)) {
+        return true;
+    }
+
     return event_dispatcher_.dispatch_mouse(e, root_, prev_layout_, prev_tree_, renderer_.scrollbar_hits());
+}
+
+bool reconciler::handle_selection_mouse(const mouse_event& e) {
+    if (!selection_enabled_ || e.button != mouse_button::left) {
+        return false;
+    }
+    // A scrollbar drag owns the pointer; dragging its thumb must not paint a selection.
+    if (event_dispatcher_.is_dragging()) {
+        selecting_ = false;
+        return false;
+    }
+
+    switch (e.action) {
+        case mouse_action::press: {
+            selecting_ = true;
+            select_origin_x_ = e.x;
+            select_origin_y_ = e.y;
+            if (!selection_.empty()) {
+                clear_selection();
+            }
+            return false;
+        }
+        case mouse_action::move: {
+            if (!selecting_) {
+                return false;
+            }
+            if (selection_.empty() && e.x == select_origin_x_ && e.y == select_origin_y_) {
+                return true;
+            }
+            if (selection_.empty()) {
+                selection_.start(select_origin_x_, select_origin_y_);
+            }
+            selection_.extend_to(e.x, e.y);
+            mark_dirty();
+            return true;
+        }
+        case mouse_action::release: {
+            if (!selecting_) {
+                return false;
+            }
+            selecting_ = false;
+            return !selection_.empty();
+        }
+        default: {
+            return false;
+        }
+    }
+}
+
+bool reconciler::copy_selection() {
+    if (selection_.empty()) {
+        return false;
+    }
+
+    const string text = selection_text(current_screen_, selection_);
+    clear_selection();
+    if (text.empty()) {
+        return false;
+    }
+
+    if (clipboard_writer_) {
+        clipboard_writer_(text.view());
+        return true;
+    }
+
+    try {
+        console_.copy_to_clipboard(text.view());
+    } catch (const exception& e) {
+        NEFORCE_REPORT_EXCEPTION(e);
+        return false;
+    }
+    return true;
+}
+
+void reconciler::clear_selection() {
+    if (selection_.empty() && !selecting_) {
+        return;
+    }
+    selection_.clear();
+    selecting_ = false;
+    mark_dirty();
 }
 
 bool reconciler::dispatch_paste(const paste_event& e) {
@@ -233,6 +342,7 @@ void reconciler::flush() {
 
     const bool has_focus = (focus_mgr_.focused() != nullptr);
     renderer_.render(new_tree, newLayout, has_focus);
+    paint_selection(current_screen_, selection_);
 
     string output;
     if (repaint_all) {

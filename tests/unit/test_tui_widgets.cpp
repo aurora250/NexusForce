@@ -2084,3 +2084,370 @@ TEST(TuiRecorderTest, RejectsMalformedJson) {
     EXPECT_FALSE(report.ok());
     EXPECT_EQ(report.mismatch_details.size(), 1U);
 }
+
+namespace {
+    void put_glyph(screen& frame, const int x, const int y, const char* glyph) {
+        frame.fast_cell_at(x, y).character = string(glyph);
+    }
+
+    void put_line(screen& frame, const int x, const int y, const string_view text) {
+        for (size_t i = 0; i < text.size(); ++i) {
+            frame.fast_cell_at(x + static_cast<int>(i), y).character = string(text.data() + i, 1);
+        }
+    }
+} // namespace
+
+TEST(TuiSelectionTest, FullRowsAreJoinedWithNewlinesAndTrailingBlanksTrimmed) {
+    screen frame(12, 3);
+    put_line(frame, 0, 0, "hello");
+    put_line(frame, 0, 1, "world");
+
+    screen_selection selection;
+    selection.start(0, 0);
+    selection.extend_to(11, 1);
+
+    EXPECT_EQ(string("hello\nworld"), selection_text(frame, selection));
+}
+
+TEST(TuiSelectionTest, PartialRowsUseTheDragColumns) {
+    screen frame(12, 2);
+    put_line(frame, 0, 0, "hello");
+    put_line(frame, 0, 1, "world");
+
+    screen_selection selection;
+    selection.start(2, 0);
+    selection.extend_to(2, 1);
+
+    EXPECT_EQ(string("llo\nwor"), selection_text(frame, selection));
+}
+
+TEST(TuiSelectionTest, ReverseDragProducesTheSameText) {
+    screen frame(12, 3);
+    put_line(frame, 0, 0, "alpha");
+    put_line(frame, 0, 1, "beta");
+    put_line(frame, 0, 2, "gamma");
+
+    screen_selection forward;
+    forward.start(0, 0);
+    forward.extend_to(4, 2);
+
+    screen_selection backward;
+    backward.start(4, 2);
+    backward.extend_to(0, 0);
+
+    EXPECT_EQ(selection_text(frame, forward), selection_text(frame, backward));
+    EXPECT_EQ(string("alpha\nbeta\ngamma"), selection_text(frame, backward));
+}
+
+TEST(TuiSelectionTest, WideGlyphsDoNotInsertPadding) {
+    screen frame(8, 1);
+    put_glyph(frame, 0, 0, "\xe4\xb8\xad");
+    put_glyph(frame, 2, 0, "x");
+
+    screen_selection selection;
+    selection.start(0, 0);
+    selection.extend_to(2, 0);
+
+    EXPECT_EQ(string("\xe4\xb8\xadx"), selection_text(frame, selection));
+}
+
+TEST(TuiSelectionTest, ContainsCoversTheMiddleRows) {
+    screen_selection selection;
+    selection.start(2, 1);
+    selection.extend_to(4, 3);
+
+    EXPECT_TRUE(selection.contains(2, 1));
+    EXPECT_TRUE(selection.contains(7, 2));
+    EXPECT_TRUE(selection.contains(4, 3));
+    EXPECT_FALSE(selection.contains(1, 1));
+    EXPECT_FALSE(selection.contains(5, 3));
+    EXPECT_FALSE(selection.contains(3, 4));
+}
+
+TEST(TuiSelectionTest, EmptySelectionYieldsNoText) {
+    screen frame(8, 2);
+    put_line(frame, 0, 0, "abc");
+
+    const screen_selection selection;
+    EXPECT_TRUE(selection.empty());
+    EXPECT_TRUE(selection_text(frame, selection).empty());
+}
+
+TEST(TuiSelectionTest, PaintMarksOnlyTheSelectedCells) {
+    screen frame(6, 2);
+    screen_selection selection;
+    selection.start(1, 0);
+    selection.extend_to(3, 0);
+
+    paint_selection(frame, selection);
+
+    EXPECT_TRUE(frame.fast_cell_at(1, 0).inverted);
+    EXPECT_TRUE(frame.fast_cell_at(3, 0).inverted);
+    EXPECT_FALSE(frame.fast_cell_at(0, 0).inverted);
+    EXPECT_FALSE(frame.fast_cell_at(4, 0).inverted);
+    EXPECT_FALSE(frame.fast_cell_at(1, 1).inverted);
+}
+
+TEST(TuiSelectionTest, DragAcrossLinesCopiesThroughTheReconciler) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root root;
+    root.content = element::vbox({element::text("hello"), element::text("world")});
+
+    headless app(&root, 12, 3);
+    app.render();
+
+    reconciler& pipe = app.pipeline();
+    string copied;
+    pipe.set_clipboard_writer([&copied](const string_view text) { copied = string(text); });
+
+    mouse_event press;
+    press.x = 0;
+    press.y = 0;
+    press.button = mouse_button::left;
+    press.action = mouse_action::press;
+    pipe.dispatch_mouse(press);
+
+    mouse_event drag = press;
+    drag.action = mouse_action::move;
+    drag.x = 4;
+    drag.y = 1;
+    pipe.dispatch_mouse(drag);
+
+    mouse_event release = drag;
+    release.action = mouse_action::release;
+    pipe.dispatch_mouse(release);
+
+    EXPECT_TRUE(pipe.selection().active);
+    EXPECT_TRUE(pipe.copy_selection());
+    EXPECT_EQ(string("hello\nworld"), copied);
+    EXPECT_FALSE(pipe.selection().active);
+}
+
+TEST(TuiSelectionTest, ClickWithoutDragDoesNotStartSelection) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root root;
+    root.content = element::text("hello");
+
+    headless app(&root, 12, 2);
+    app.render();
+
+    reconciler& pipe = app.pipeline();
+
+    mouse_event press;
+    press.x = 1;
+    press.y = 0;
+    press.button = mouse_button::left;
+    press.action = mouse_action::press;
+    pipe.dispatch_mouse(press);
+
+    mouse_event release = press;
+    release.action = mouse_action::release;
+    pipe.dispatch_mouse(release);
+
+    EXPECT_FALSE(pipe.selection().active);
+    EXPECT_FALSE(pipe.copy_selection());
+}
+
+TEST(TuiSelectionTest, ScrollbarDragIsNotTreatedAsSelection) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root root;
+    root.content = element::text("hello");
+
+    headless app(&root, 12, 2);
+    app.render();
+
+    reconciler& pipe = app.pipeline();
+
+    mouse_event press;
+    press.x = 2;
+    press.y = 0;
+    press.button = mouse_button::left;
+    press.action = mouse_action::press;
+    pipe.dispatch_mouse(press);
+
+    mouse_event drag = press;
+    drag.action = mouse_action::move;
+    drag.x = 5;
+    drag.y = 1;
+    pipe.dispatch_mouse(drag);
+
+    EXPECT_TRUE(pipe.selection().active);
+    pipe.clear_selection();
+    EXPECT_FALSE(pipe.selection().active);
+}
+
+TEST(TuiSelectionTest, CopyShortcutTakesPrecedenceAndClearsTheSelection) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root root;
+    root.content = element::text("hello");
+
+    headless app(&root, 12, 2);
+    app.render();
+
+    reconciler& pipe = app.pipeline();
+    string copied;
+    pipe.set_clipboard_writer([&copied](const string_view text) { copied = string(text); });
+
+    mouse_event press;
+    press.x = 0;
+    press.y = 0;
+    press.button = mouse_button::left;
+    press.action = mouse_action::press;
+    pipe.dispatch_mouse(press);
+
+    mouse_event drag = press;
+    drag.action = mouse_action::move;
+    drag.x = 4;
+    drag.y = 0;
+    pipe.dispatch_mouse(drag);
+
+    ASSERT_TRUE(pipe.selection().active);
+
+    EXPECT_TRUE(pipe.dispatch_key(make_char(U'c', key_modifier::ctrl)));
+    EXPECT_EQ(string("hello"), copied);
+    EXPECT_FALSE(pipe.selection().active);
+}
+
+TEST(TuiSelectionTest, OtherKeysDropTheSelection) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root root;
+    root.content = element::text("hello");
+
+    headless app(&root, 12, 2);
+    app.render();
+
+    reconciler& pipe = app.pipeline();
+
+    mouse_event press;
+    press.x = 0;
+    press.y = 0;
+    press.button = mouse_button::left;
+    press.action = mouse_action::press;
+    pipe.dispatch_mouse(press);
+
+    mouse_event drag = press;
+    drag.action = mouse_action::move;
+    drag.x = 3;
+    drag.y = 0;
+    pipe.dispatch_mouse(drag);
+
+    ASSERT_TRUE(pipe.selection().active);
+
+    pipe.dispatch_key(make_char(U'x'));
+    EXPECT_FALSE(pipe.selection().active);
+}
+
+TEST(TuiComposerTest, SubmitRecordsHistoryAndArrowKeysBrowseIt) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    vector<string> submitted;
+    composer_option opt;
+    opt.on_submit = [&submitted](const string& text) { submitted.push_back(text); };
+
+    auto view = make_unique<composer>(opt);
+    composer* comp = view.get();
+    holder.add_child(move(view));
+    comp->take_focus();
+
+    comp->on_key(make_char(U'l'));
+    comp->on_key(make_char(U's'));
+    comp->on_key(make_key(key_event::type::enter));
+
+    comp->on_key(make_char(U'p'));
+    comp->on_key(make_char(U'w'));
+    comp->on_key(make_char(U'd'));
+    comp->on_key(make_key(key_event::type::enter));
+
+    ASSERT_EQ(2u, submitted.size());
+    EXPECT_EQ(string("ls"), submitted[0]);
+    EXPECT_EQ(string("pwd"), submitted[1]);
+    EXPECT_EQ(2u, comp->history_size());
+    EXPECT_EQ(string(""), string(comp->text()));
+
+    EXPECT_TRUE(comp->on_key(make_key(key_event::type::up)));
+    EXPECT_EQ(string("pwd"), string(comp->text()));
+    EXPECT_TRUE(comp->on_key(make_key(key_event::type::up)));
+    EXPECT_EQ(string("ls"), string(comp->text()));
+    EXPECT_TRUE(comp->on_key(make_key(key_event::type::down)));
+    EXPECT_EQ(string("pwd"), string(comp->text()));
+    EXPECT_TRUE(comp->on_key(make_key(key_event::type::down)));
+    EXPECT_TRUE(comp->text().empty());
+}
+
+TEST(TuiComposerTest, DownWithoutHistoryDoesNotEraseTheDraft) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    composer_option opt;
+    auto view = make_unique<composer>(opt);
+    composer* comp = view.get();
+    holder.add_child(move(view));
+    comp->take_focus();
+
+    comp->on_key(make_char(U'a'));
+    comp->on_key(make_char(U'b'));
+
+    comp->on_key(make_key(key_event::type::down));
+    EXPECT_EQ(string("ab"), string(comp->text()));
+}
+
+TEST(TuiComposerTest, MultiLineDraftKeepsArrowKeysForTheCaret) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    vector<string> submitted;
+    composer_option opt;
+    opt.on_submit = [&submitted](const string& text) { submitted.push_back(text); };
+
+    auto view = make_unique<composer>(opt);
+    composer* comp = view.get();
+    holder.add_child(move(view));
+    comp->take_focus();
+
+    comp->on_key(make_char(U'x'));
+    comp->on_key(make_key(key_event::type::enter, key_modifier::shift));
+    comp->on_key(make_char(U'y'));
+    ASSERT_EQ(string("x\ny"), string(comp->text()));
+    comp->on_key(make_key(key_event::type::enter));
+    ASSERT_EQ(1u, submitted.size());
+    EXPECT_EQ(string("x\ny"), submitted[0]);
+    EXPECT_EQ(1u, comp->history_size());
+
+    comp->on_key(make_char(U'p'));
+    comp->on_key(make_key(key_event::type::enter, key_modifier::shift));
+    comp->on_key(make_char(U'q'));
+
+    comp->on_key(make_key(key_event::type::up));
+    EXPECT_EQ(string("p\nq"), string(comp->text()));
+}
+
+TEST(TuiComposerTest, HistoryLimitZeroDisablesRecording) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    composer_option opt;
+    opt.history_limit = 0;
+    auto view = make_unique<composer>(opt);
+    composer* comp = view.get();
+    holder.add_child(move(view));
+    comp->take_focus();
+
+    comp->on_key(make_char(U'a'));
+    comp->on_key(make_key(key_event::type::enter));
+
+    EXPECT_EQ(0u, comp->history_size());
+}

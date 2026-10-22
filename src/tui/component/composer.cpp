@@ -18,6 +18,7 @@ void composer::setup() {
     area_opt.style = opt_.style;
     area_opt.wrap = style::wrap_mode::word;
     area_opt.submit_on_enter = false;
+    area_opt.history_limit = opt_.history_limit;
     area_opt.on_change = [this](const string&) {
         if (popup_ != nullptr) {
             refresh_completions();
@@ -65,11 +66,25 @@ void composer::submit() {
     if (payload.empty()) {
         return;
     }
+    // submit() is what records the entry in the editor history;
+    // clearing the text afterwards keeps the composer ready for the next message without losing the record.
+    input_->submit();
     if (opt_.on_submit) {
         opt_.on_submit(payload);
     }
     input_->set_text(string());
     close_completion();
+}
+
+size_t composer::history_size() const noexcept { return input_ == nullptr ? 0 : input_->history_size(); }
+
+bool composer::history_browsable() const {
+    if (!opt_.history_enabled || input_ == nullptr || popup_ != nullptr) {
+        return false;
+    }
+    // Multi-line drafts keep arrow keys for caret movement; history only owns single-line editing.
+    const string_view content = input_->text();
+    return !content.contains('\n');
 }
 
 bool composer::extract_query(string& query) const {
@@ -312,6 +327,20 @@ bool composer::on_key(const key_event& e) {
         }
         submit();
         return true;
+    }
+
+    if (!shift && !ctrl && history_browsable()) {
+        if (e.key == K::up && input_->history_size() > 0) {
+            input_->history_previous();
+            close_completion();
+            return true;
+        }
+        // Only step forward while actually inside the history, otherwise the draft would be lost.
+        if (e.key == K::down && input_->in_history()) {
+            input_->history_next();
+            close_completion();
+            return true;
+        }
     }
 
     const bool handled = input_->on_key(e);

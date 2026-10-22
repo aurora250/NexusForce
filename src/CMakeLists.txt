@@ -224,6 +224,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/recorder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/renderer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/screen.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/selection.cpp
 )
 
 # 编译为动态库

@@ -125,6 +125,26 @@ public:
     NEFORCE_NODISCARD size_t history_size() const noexcept { return history_.size(); }
 
     /**
+     * @brief 当前是否停留在历史条目上
+     * @return 正在浏览历史返回true
+     */
+    NEFORCE_NODISCARD bool in_history() const noexcept { return history_pos_ < history_.size(); }
+
+    /**
+     * @brief 切换到上一条提交历史
+     *
+     * 与按键 `Ctrl+P` 等价，供上层组件把方向键映射到历史浏览。
+     */
+    void history_previous() { jump_history(-1); }
+
+    /**
+     * @brief 切换到下一条提交历史
+     *
+     * 与按键 `Ctrl+N` 等价；已经位于最新条目时会把内容清空。
+     */
+    void history_next() { jump_history(1); }
+
+    /**
      * @brief 撤销
      * @return 是否发生了撤销
      */
