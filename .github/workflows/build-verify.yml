@@ -66,62 +66,62 @@ jobs:
             config: minimal
             cppstd: 17
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: gcc
             config: full
             cppstd: 20
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: gcc
             config: minimal
             cppstd: 14
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: gcc
             config: all-db
             cppstd: 20
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: clang
             config: full
             cppstd: 20
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: clang
             config: minimal
             cppstd: 17
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: clang
             config: no-compress
             cppstd: 20
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: clang
             config: no-icu
             cppstd: 20
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: clang
             config: no-locale
             cppstd: 20
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: clang
             config: pool-off
             cppstd: 20
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: clang
             config: pool-tls-global-dynamic
             cppstd: 20
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: gcc
             config: cross-riscv64
             cppstd: 20
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: gcc
             config: cross-loongarch64
             cppstd: 20
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
             compiler: gcc
             config: cross-arm64
             cppstd: 20
@@ -149,9 +149,6 @@ jobs:
       - name: Install Clang (Ubuntu)
         if: runner.os == 'Linux' && matrix.compiler == 'clang'
         run: |
-          UBUNTU_VERSION=$(lsb_release -cs)
-          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
-          sudo add-apt-repository -y "deb http://apt.llvm.org/${UBUNTU_VERSION}/ llvm-toolchain-${UBUNTU_VERSION}-19 main"
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends clang-19 clang++-19
           sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-19   100
@@ -466,7 +463,7 @@ jobs:
 
   allocator:
     name: "allocator · global new/delete override (gcc · Release)"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -560,7 +557,7 @@ jobs:
         run: |
           echo "| 项目 | 值 |" >> $GITHUB_STEP_SUMMARY
           echo "|------|----|" >> $GITHUB_STEP_SUMMARY
-          echo "| 平台 | ubuntu-latest |" >> $GITHUB_STEP_SUMMARY
+          echo "| 平台 | ubuntu-24.04 |" >> $GITHUB_STEP_SUMMARY
           echo "| 编译器 | gcc |" >> $GITHUB_STEP_SUMMARY
           echo "| 配置 | NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE=ON |" >> $GITHUB_STEP_SUMMARY
           echo "| 覆盖生效验证 | new/delete 计入 system_memory_pool() 统计 |" >> $GITHUB_STEP_SUMMARY

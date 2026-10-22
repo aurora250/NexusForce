@@ -35,19 +35,15 @@ on:
 
 jobs:
   format-check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Install clang-format-19
         run: |
-          UBUNTU_VERSION=$(lsb_release -cs)
-          
-          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
-          sudo add-apt-repository "deb http://apt.llvm.org/${UBUNTU_VERSION}/ llvm-toolchain-${UBUNTU_VERSION}-19 main"
-          sudo apt-get update
-          sudo apt-get install -y clang-format-19
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends clang-format-19
           sudo ln -sf /usr/bin/clang-format-19 /usr/bin/clang-format
           clang-format --version
 
