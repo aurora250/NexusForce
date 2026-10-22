@@ -70,16 +70,7 @@ int application::run() {
                               if (quit_hint_) {
                                   quit_hint_(true);
                               }
-                              auto reset = make_shared<function<void()>>();
-                              *reset = [this, reset] {
-                                  if (quit_pending_) {
-                                      quit_pending_ = false;
-                                      if (quit_hint_) {
-                                          quit_hint_(false);
-                                      }
-                                  }
-                              };
-                              ctx_.schedule_timer(2000, *reset);
+                              schedule_quit_hint_reset();
                               return true;
                           },
                           "ctrl+c quit"});
@@ -97,42 +88,10 @@ int application::run() {
 
     input_->start();
 
-    auto resize_check = make_shared<function<void()>>();
-    *resize_check = [this, resize_check] {
-        if (input_driver::check_resize_flag() || console_.is_terminal_resized()) {
-            reconiler_->mark_dirty();
-        }
-        ctx_.schedule_timer(200, *resize_check);
-    };
-    ctx_.schedule_timer(200, *resize_check);
+    schedule_resize_check();
 
     if (fps_ > 0) {
-        int interval_ms = 1000 / fps_;
-        auto tick = make_shared<function<void()>>();
-        auto last_time = make_shared<int64_t>(0);
-        *tick = [this, interval_ms, tick, last_time] {
-            const auto now = static_cast<int64_t>(interval_ms);
-            const auto delta = (*last_time == 0) ? interval_ms : now;
-            *last_time = now;
-
-            if (root_ != nullptr && reconiler_ != nullptr) {
-                vector<component_base*> stack;
-                stack.push_back(root_.get());
-                while (!stack.empty()) {
-                    auto* comp = stack.back();
-                    stack.pop_back();
-                    comp->on_animation(delta);
-                    for (size_t i = 0; i < comp->child_count(); ++i) {
-                        stack.push_back(comp->child_at(i));
-                    }
-                }
-                reconiler_->mark_dirty();
-            }
-
-            reconiler_->flush();
-            ctx_.schedule_timer(interval_ms, *tick);
-        };
-        ctx_.schedule_timer(interval_ms, *tick);
+        schedule_frame_tick();
     }
 
     {
@@ -186,6 +145,60 @@ void application::resume() {
 void application::quit(const int exit_code) {
     exit_code_ = exit_code;
     ctx_.stop();
+}
+
+void application::schedule_quit_hint_reset() {
+    ctx_.schedule_timer(2000, [this] {
+        if (!quit_pending_) {
+            return;
+        }
+        quit_pending_ = false;
+        if (quit_hint_) {
+            quit_hint_(false);
+        }
+    });
+}
+
+void application::schedule_resize_check() {
+    // A fresh closure per round:
+    // a callback that captures the shared_ptr owning it is a reference cycle,
+    // and the repeating chains leaked one block per application run.
+    ctx_.schedule_timer(200, [this] {
+        if (!running_ || reconiler_ == nullptr) {
+            return;
+        }
+        if (input_driver::check_resize_flag() || console_.is_terminal_resized()) {
+            reconiler_->mark_dirty();
+        }
+        schedule_resize_check();
+    });
+}
+
+void application::schedule_frame_tick() {
+    const int interval_ms = max(1, 1000 / max(1, fps_));
+    ctx_.schedule_timer(interval_ms, [this, interval_ms] {
+        if (!running_ || reconiler_ == nullptr) {
+            return;
+        }
+
+        if (root_ != nullptr) {
+            const auto delta = static_cast<int64_t>(interval_ms);
+            vector<component_base*> stack;
+            stack.push_back(root_.get());
+            while (!stack.empty()) {
+                auto* comp = stack.back();
+                stack.pop_back();
+                comp->on_animation(delta);
+                for (size_t i = 0; i < comp->child_count(); ++i) {
+                    stack.push_back(comp->child_at(i));
+                }
+            }
+            reconiler_->mark_dirty();
+        }
+
+        reconiler_->flush();
+        schedule_frame_tick();
+    });
 }
 
 NEFORCE_END_TUI__

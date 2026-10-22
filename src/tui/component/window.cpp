@@ -34,10 +34,10 @@ namespace {
 
             if (opt_.render) {
                 window_options::render_state state;
-                state.inner = inner_el;
+                state.inner = move(inner_el);
                 state.title = opt_.title;
                 state.active = focused();
-                return opt_.render(state);
+                return opt_.render(move(state));
             }
 
             style border_style;
@@ -48,8 +48,8 @@ namespace {
 
             style tmp;
             tmp.bold = true;
-            element title_bar = element::text(opt_.title, tmp);
-            element content = element::vbox({title_bar, element::separator(), inner_el});
+            element title_bar = element::text(opt_.title, move(tmp));
+            element content = element::vbox({move(title_bar), element::separator(), move(inner_el)});
 
             style window_style;
             window_style.border = border_style.border;

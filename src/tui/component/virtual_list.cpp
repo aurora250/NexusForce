@@ -192,7 +192,7 @@ element virtual_list_view::render() {
         heights_snapshot_ = heights_;
         schedule_render();
     }
-    return el;
+    return move(el);
 }
 
 bool virtual_list_view::on_key(const key_event& e) {

@@ -7,7 +7,7 @@ NEFORCE_BEGIN_HTTP__
 
 namespace {
     size_t parse_chunk_size(string_view line) {
-        auto semi = line.find(';');
+        const auto semi = line.find(';');
         if (semi != string_view::npos) {
             line = line.substr(0, semi);
         }
@@ -29,7 +29,7 @@ bool chunked_body_reader::read_line(string& line) {
     line.clear();
     char c = '\0';
     while (true) {
-        auto n = socket_->receive({&c, 1}, 1);
+        const auto n = socket_->receive({&c, 1}, 1);
         if (n != 1) {
             return false;
         }
@@ -57,9 +57,9 @@ void chunked_body_reader::parse_trailers() {
         if (line.empty()) {
             break;
         }
-        auto colon = line.find(':');
+        const auto colon = line.find(':');
         if (colon != string::npos) {
-            string_view key = line.view(0, colon);
+            const string_view key = line.view(0, colon);
             string_view value = line.view(colon + 1);
             while (!value.empty() && value[0] == ' ') {
                 value = value.substr(1);
@@ -79,7 +79,7 @@ bool chunked_body_reader::next_chunk(byte_vector& out) {
         NEFORCE_THROW_EXCEPTION(http_exception("Failed to read chunk size"));
     }
 
-    size_t chunk_size = parse_chunk_size(size_line.view());
+    const size_t chunk_size = parse_chunk_size(size_line.view());
 
     if (chunk_size == 0) {
         parse_trailers();
@@ -98,9 +98,9 @@ bool chunked_body_reader::next_chunk(byte_vector& out) {
 
     out.resize(chunk_size);
     ssize_t total_received = 0;
-    while (static_cast<size_t>(total_received) < chunk_size) {
-        ssize_t n = socket_->receive(memory_view<char>{reinterpret_cast<char*>(out.data()) + total_received,
-                                                       chunk_size - static_cast<size_t>(total_received)});
+    while (compare_less(total_received, chunk_size)) {
+        const ssize_t n = socket_->receive(memory_view<char>{reinterpret_cast<char*>(out.data()) + total_received,
+                                                             chunk_size - static_cast<size_t>(total_received)});
         if (n <= 0) {
             NEFORCE_THROW_EXCEPTION(http_exception("Failed to read complete chunk data"));
         }

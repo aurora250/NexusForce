@@ -32,11 +32,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * watcher.start_shell("ls --color=auto");
  * ctx.run();
  * @endcode
- *
- * 回调运行在 `io_context` 所在线程，因此可以直接更新 UI 状态。
- *
- * @note 管道模式不建立终端，输出没有 `\r\n` 转换与颜色协商；
- *       伪终端需要系统挂载 `devpts`，可用 `pty::is_available()` 决策。
  */
 class NEFORCE_API process_watcher {
 public:
@@ -87,8 +82,6 @@ public:
      * @param args 参数
      * @param opt 启动配置
      * @return 是否启动成功
-     *
-     * 伪终端请求但当前环境不可用时会自动降级为管道模式。
      */
     bool start(const string& executable, const vector<string>& args = vector<string>{}, option opt = option{});
 
@@ -171,6 +164,7 @@ private:
 
     void attach_pipe();
     void attach_pty();
+    void schedule_poll(const shared_ptr<bool>& guard);
     bool drain_pipe();
     bool drain_pty();
     void poll_exit();

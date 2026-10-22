@@ -87,7 +87,7 @@ void http_filter_chain::execute_filters(http_request& request, http_response& re
 
 void http_filter_chain::execute_pre_filters_async(http_request& request, http_response& response, http_context& ctx,
                                                   function<void(bool)> next) {
-    auto* filters = &filters_;
+    const auto* filters = &filters_;
 
     struct chain_state {
         const vector<filter_entry>* filters;
@@ -154,7 +154,7 @@ void http_filter_chain::execute_pre_filters_async(http_request& request, http_re
         }
     };
 
-    auto state = make_shared<chain_state>();
+    const auto state = make_shared<chain_state>();
     state->filters = filters;
     state->request_raw = &request;
     state->response_raw = &response;
@@ -165,7 +165,7 @@ void http_filter_chain::execute_pre_filters_async(http_request& request, http_re
 
 void http_filter_chain::execute_post_filters_async(http_request& request, http_response& response, http_context& ctx,
                                                    function<void()> next) {
-    auto* filters = &filters_;
+    const auto* filters = &filters_;
 
     struct chain_state {
         const vector<filter_entry>* filters;
@@ -223,7 +223,7 @@ void http_filter_chain::execute_post_filters_async(http_request& request, http_r
         }
     };
 
-    auto state = make_shared<chain_state>();
+    const auto state = make_shared<chain_state>();
     state->filters = filters;
     state->request_raw = &request;
     state->response_raw = &response;
@@ -267,7 +267,7 @@ bool cors_filter::pre_filter(http_request& request, http_response& response) {
     return true;
 }
 
-bool logging_filter::pre_filter(http_request& request, http_response& response) {
+bool logging_filter::pre_filter(http_request& request, http_response& /*response*/) {
     string log_msg =
             "[" + datetime::now().to_string() + "] Request: " + request.method.to_string() + " " + request.path;
 
@@ -299,7 +299,7 @@ bool logging_filter::pre_filter(http_request& request, http_response& response) 
     return true;
 }
 
-void logging_filter::post_filter(http_request& request, http_response& response) {
+void logging_filter::post_filter(http_request& /*request*/, http_response& response) {
     using UT = underlying_type_t<http_status>;
 
     string log_msg = "[" + datetime::now().to_string() + "] Response: " + to_string(static_cast<UT>(response.status));
@@ -549,7 +549,6 @@ void static_file_filter::add_spa_exclude_path(string path_prefix) {
 }
 
 bool authentication_filter::is_path_excluded(const string& path) const {
-    // NOLINTNEXTLINE(readability-use-anyofallof)
     for (const auto& excluded: excluded_paths_) {
         if (path == excluded || path.starts_with(excluded)) {
             return true;

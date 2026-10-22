@@ -166,6 +166,10 @@ private:
     bool two_stage_quit_ = true;
     bool quit_pending_ = false;
     function<void(bool)> quit_hint_;
+
+    void schedule_quit_hint_reset();
+    void schedule_resize_check();
+    void schedule_frame_tick();
 };
 
 /** @} */ // TUI

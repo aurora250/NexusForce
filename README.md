@@ -508,8 +508,6 @@ nexusforce_deploy_runtime(my_app)
 
 ---
 
----
-
 ## 🚀 快速开始
 
 在开始之前，请确保已完成编译指南中的安装步骤。

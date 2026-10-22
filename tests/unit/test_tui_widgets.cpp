@@ -1781,6 +1781,26 @@ TEST(TuiProcessWatcherTest, FailingCommandReportsNonZeroExit) {
     EXPECT_EQ(code, 3);
 }
 
+TEST(TuiProcessWatcherTest, RepeatedStartsDoNotAccumulateTimerCallbacks) {
+    for (int i = 0; i < 4; ++i) {
+        io_context ctx;
+        strand s{ctx};
+        process_watcher watcher(ctx, s);
+        int code = -99;
+        watcher.set_on_exit([&ctx, &code](const int value) {
+            code = value;
+            ctx.stop();
+        });
+
+        ASSERT_TRUE(watcher.start_shell("exit 0"));
+        io_context::work guard{ctx};
+        ctx.run();
+
+        EXPECT_FALSE(watcher.running());
+        EXPECT_EQ(code, 0);
+        EXPECT_EQ(watcher.exit_code(), 0);
+    }
+}
 
 TEST(TuiToolRunnerTest, StreamsToCardAndMarksSuccess) {
     host_root holder;

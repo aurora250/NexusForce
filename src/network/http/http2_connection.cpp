@@ -163,7 +163,7 @@ void http2_connection::handle_frame(http2_frame_type type, uint8_t flags, uint32
 }
 
 void http2_connection::handle_data_frame(uint8_t flags, uint32_t stream_id, const byte_t* payload, size_t len) {
-    auto it = pending_.find(stream_id);
+    const auto it = pending_.find(stream_id);
     if (it == pending_.end()) {
         send_rst_stream(stream_id, http2_error::STREAM_CLOSED);
         return;
@@ -190,7 +190,7 @@ void http2_connection::handle_data_frame(uint8_t flags, uint32_t stream_id, cons
     it->second.end_stream = end_stream;
 
     if (end_stream) {
-        auto stream_it2 = streams_.find(stream_id);
+        const auto stream_it2 = streams_.find(stream_id);
         if (stream_it2 != streams_.end()) {
             stream_it2->second->on_receive_data(true);
             if (stream_it2->second->is_closed()) {
@@ -213,7 +213,7 @@ void http2_connection::handle_headers_frame(uint8_t flags, uint32_t stream_id, c
     const bool end_stream = (flags & HTTP2_FLAG_END_STREAM) != 0;
     const bool end_headers = (flags & HTTP2_FLAG_END_HEADERS) != 0;
 
-    if (streams_.find(stream_id) == streams_.end()) {
+    if (!streams_.contains(stream_id)) {
         if (streams_.size() >= local_settings_.max_concurrent_streams()) {
             send_rst_stream(stream_id, http2_error::REFUSED_STREAM);
             return;
@@ -238,7 +238,7 @@ void http2_connection::handle_headers_frame(uint8_t flags, uint32_t stream_id, c
     ps.waiting_continuation = false;
 
     if (end_stream) {
-        auto stream_it = streams_.find(stream_id);
+        const auto stream_it = streams_.find(stream_id);
         if (stream_it != streams_.end() && stream_it->second->is_closed()) {
             streams_.erase(stream_it);
             stream_priorities_.erase(stream_id);
@@ -256,7 +256,7 @@ void http2_connection::handle_headers_frame(uint8_t flags, uint32_t stream_id, c
 void http2_connection::handle_continuation_frame(uint8_t flags, uint32_t stream_id, const byte_t* payload, size_t len) {
     const bool end_headers = (flags & HTTP2_FLAG_END_HEADERS) != 0;
 
-    auto it = pending_.find(stream_id);
+    const auto it = pending_.find(stream_id);
     if (it == pending_.end() || !it->second.waiting_continuation) {
         close_connection(http2_error::PROTOCOL_ERROR);
         return;
@@ -290,7 +290,7 @@ void http2_connection::handle_push_promise_frame(uint32_t /*stream_id*/, const b
     if (!psid_opt) {
         return;
     }
-    uint32_t promised_stream_id = *psid_opt & 0x7FFFFFFF;
+    const uint32_t promised_stream_id = *psid_opt & 0x7FFFFFFF;
 
     // Save header block fragment to pending_
     auto& ps = pending_[promised_stream_id];
@@ -364,7 +364,7 @@ void http2_connection::handle_goaway_frame(const byte_t* payload, size_t /*len*/
 }
 
 void http2_connection::handle_rst_stream_frame(uint32_t stream_id, const byte_t* /*payload*/) {
-    auto stream_it = streams_.find(stream_id);
+    const auto stream_it = streams_.find(stream_id);
     if (stream_it != streams_.end()) {
         stream_it->second->on_receive_rst_stream();
         streams_.erase(stream_it);
@@ -380,7 +380,7 @@ void http2_connection::handle_window_update_frame(uint32_t stream_id, const byte
     if (!inc_opt) {
         return;
     }
-    uint32_t increment = *inc_opt & 0x7FFFFFFF;
+    const uint32_t increment = *inc_opt & 0x7FFFFFFF;
 
     // RFC 7540 §6.9: WINDOW_UPDATE with increment of 0 is a PROTOCOL_ERROR
     if (increment == 0) {
@@ -389,7 +389,7 @@ void http2_connection::handle_window_update_frame(uint32_t stream_id, const byte
     }
 
     // RFC 7540 §6.9: window must not exceed 2^31-1
-    uint32_t current = (stream_id == 0) ? flow_control_.connection_window() : flow_control_.window(stream_id);
+    const uint32_t current = (stream_id == 0) ? flow_control_.connection_window() : flow_control_.window(stream_id);
     if (static_cast<uint64_t>(current) + increment > 0x7FFFFFFF) {
         send_goaway(http2_error::FLOW_CONTROL_ERROR);
         return;
@@ -430,7 +430,7 @@ void http2_connection::send_push_promise(uint32_t stream_id, uint32_t promised_s
     http2_push_promise_frame ppf;
     ppf.stream_id = stream_id;
     ppf.promised_stream_id = promised_stream_id;
-    ppf.header_block = header_block;
+    ppf.header_block = move(header_block);
     ppf.end_headers = true;
     write_frame(framer_.encode_push_promise_frame(ppf));
     last_stream_id_ = max(promised_stream_id, last_stream_id_);
@@ -449,7 +449,7 @@ void http2_connection::send_response(uint32_t stream_id, const vector<hpack_head
         while (offset < header_block.size()) {
             size_t chunk_size = header_block.size() - offset;
             chunk_size = min<size_t>(chunk_size, max_frame);
-            bool is_last = (offset + chunk_size >= header_block.size());
+            const bool is_last = (offset + chunk_size >= header_block.size());
 
             if (first) {
                 http2_headers_frame hf;
@@ -510,7 +510,7 @@ void http2_connection::send_response(uint32_t stream_id, const vector<hpack_head
 
     if (end_stream) {
         lock<recursive_mutex> lk(stream_mutex_);
-        auto stream_it = streams_.find(stream_id);
+        const auto stream_it = streams_.find(stream_id);
         if (stream_it != streams_.end()) {
             stream_it->second->on_send_data(true);
             if (stream_it->second->is_closed()) {
@@ -629,13 +629,13 @@ void http2_connection::route_stream(uint32_t stream_id, const vector<hpack_heade
 
     auto weak_self = weak_from_this();
     router_->handle_request_async(move(req), [weak_self, stream_id, end_stream](http_response res) {
-        auto self = weak_self.lock();
+        const auto self = weak_self.lock();
         if (!self || self->closed_) {
             return;
         }
 
         if (res.status >= http_status::S1_SWITCHING_PROTOCOLS) {
-            auto hpack_headers =
+            const auto hpack_headers =
                     response_headers_to_hpack(static_cast<int>(static_cast<uint16_t>(res.status)), res.headers);
             self->send_response(stream_id, hpack_headers, res.body, end_stream);
         }

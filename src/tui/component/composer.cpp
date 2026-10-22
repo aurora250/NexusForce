@@ -36,13 +36,7 @@ void composer::take_focus() {
     }
 }
 
-const string& composer::text() const {
-    static const string empty_text;
-    if (input_ == nullptr) {
-        return empty_text;
-    }
-    return input_->text();
-}
+string_view composer::text() const noexcept { return input_ == nullptr ? "" : input_->text(); }
 
 void composer::set_phase(const composer_phase phase) {
     if (phase_ == phase) {
@@ -83,7 +77,7 @@ bool composer::extract_query(string& query) const {
         return false;
     }
 
-    const string_view content = input_->text().view();
+    const string_view content = input_->text();
     const size_t cursor = min(input_->cursor(), content.size());
 
     size_t begin = cursor;
@@ -158,9 +152,8 @@ void composer::close_completion() {
     if (popup_ == nullptr) {
         return;
     }
-    auto owned = remove_child(popup_);
+    remove_child(popup_);
     popup_ = nullptr;
-    ignore = owned;
     schedule_render();
 }
 
@@ -197,7 +190,7 @@ void composer::accept_completion() {
     const auto& item = items[static_cast<size_t>(position)];
     const string insertion = item.insert.empty() ? item.label : item.insert;
 
-    const string_view content = input_->text().view();
+    const string_view content = input_->text();
     const size_t cursor = min(input_->cursor(), content.size());
     size_t begin = cursor;
     while (begin > 0) {
@@ -258,13 +251,14 @@ element composer::render() {
     if (!bar.dim.has_value()) {
         bar.dim = true;
     }
-    const auto phase_color = (phase_ == composer_phase::running) ? _NEFORCE color::yellow() : bar.fg;
+    auto phase_color = (phase_ == composer_phase::running) ? _NEFORCE color::yellow() : bar.fg;
     tui::style left_style = bar;
     if (phase_color.has_value()) {
-        left_style.fg = phase_color;
+        left_style.fg = move(phase_color);
     }
 
-    parts.push_back(element::rich_text({text_span{" " + current_hint(), left_style}}, bar, style::wrap_mode::none));
+    parts.push_back(
+            element::rich_text({text_span{" " + current_hint(), move(left_style)}}, move(bar), style::wrap_mode::none));
 
     return element::vbox(move(parts));
 }

@@ -48,7 +48,7 @@ bool token_bucket_limiter::allow(const string& key, double rate, double burst) {
 
     {
         lock<mutex> lk(mutex_);
-        auto it = buckets_.find(key);
+        const auto it = buckets_.find(key);
         if (it != buckets_.end()) {
             it->second.last_access_ms = now;
             return it->second.bucket.try_consume(now);

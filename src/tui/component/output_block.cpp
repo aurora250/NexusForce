@@ -54,7 +54,7 @@ element output_block::render_hint() const {
         }
         text += raw[i];
     }
-    return element::rich_text({text_span{" " + text, st}}, st, style::wrap_mode::none);
+    return element::rich_text({text_span{" " + move(text), st}}, st, style::wrap_mode::none);
 }
 
 element output_block::render() {
@@ -62,8 +62,8 @@ element output_block::render() {
 
     if (opt_.header.kind() != element::kind::empty) {
         elements head_cells;
-        const string marker = opt_.collapsed ? "\xe2\x96\xb8 " : "\xe2\x96\xbe ";
-        head_cells.push_back(element::text(marker, opt_.hint_style, style::wrap_mode::none));
+        string marker = opt_.collapsed ? "\xe2\x96\xb8 " : "\xe2\x96\xbe ";
+        head_cells.push_back(element::text(move(marker), opt_.hint_style, style::wrap_mode::none));
         head_cells.push_back(opt_.header);
         parts.push_back(element::hbox(move(head_cells)));
     }
@@ -82,9 +82,9 @@ element output_block::render() {
         style.padding = padding{0, 1, 0, 1};
     }
 
-    element body = element::band(element::vbox(move(parts)), style);
+    element body = element::band(element::vbox(move(parts)), move(style));
     body = body.with_rect_state(rect_);
-    return body;
+    return move(body);
 }
 
 bool output_block::on_key(const key_event& e) {

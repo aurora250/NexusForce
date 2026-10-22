@@ -49,8 +49,8 @@ element status_indicator_view::render() {
     }
 
     vector<text_span> spans;
-    const string frame_text = spinner(opt_.charset, frame_).text();
-    spans.push_back(text_span{frame_text, opt_.spinner_style});
+    string frame_text = spinner(opt_.charset, frame_).text();
+    spans.push_back(text_span{move(frame_text), opt_.spinner_style});
     if (!opt_.label.empty()) {
         spans.push_back(text_span{" " + opt_.label, opt_.label_style});
     }

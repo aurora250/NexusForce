@@ -11,6 +11,7 @@
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/io_context.hpp"
 #include "NeForce/core/async/lock_free_queue.hpp"
+#include "NeForce/core/exception/exception_ptr.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -53,6 +54,9 @@ private:
                         // NOLINTNEXTLINE(bugprone-empty-catch)
                     } catch (const exception& e) {
                         NEFORCE_REPORT_EXCEPTION(e);
+                        // NOLINTNEXTLINE(bugprone-empty-catch)
+                    } catch (...) {
+                        NEFORCE_REPORT_EXCEPTION(value_exception("unknown exception in strand handler"));
                     }
                     self->locked_.store(false, memory_order_release);
                     self->drain_one(self);
@@ -98,21 +102,26 @@ public:
      */
     void dispatch(handler_type handler) {
         bool expected = false;
-        if (impl_->locked_.compare_exchange_strong(expected, true, memory_order_acquire, memory_order_relaxed)) {
-            bool escaped = false;
-            try {
-                handler();
-            } catch (const exception& e) {
-                NEFORCE_REPORT_EXCEPTION(e);
-                escaped = true;
-            }
-            impl_->locked_.store(false, memory_order_release);
-            impl_->drain_one(impl_);
-            if (escaped) {
-                throw;
-            }
-        } else {
+        if (!impl_->locked_.compare_exchange_strong(expected, true, memory_order_acquire, memory_order_relaxed)) {
             post(move(handler));
+            return;
+        }
+
+        exception_ptr failure;
+        try {
+            handler();
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
+            failure = current_exception();
+        } catch (...) {
+            failure = current_exception();
+        }
+
+        impl_->locked_.store(false, memory_order_release);
+        impl_->drain_one(impl_);
+
+        if (failure) {
+            rethrow_exception(failure);
         }
     }
 

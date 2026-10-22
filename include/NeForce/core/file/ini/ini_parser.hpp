@@ -90,37 +90,6 @@ private:
     void advance() noexcept;
 
     /**
-     * @brief 判断是否为注释行
-     * @param line 要检查的行内容
-     * @return 是否为注释行（空行或以;、#开头的行）
-     */
-    NEFORCE_NODISCARD bool is_comment_line(const string& line) const;
-
-    /**
-     * @brief 判断是否为节定义行
-     * @param line 要检查的行内容
-     * @param section_name [输出] 解析出的节名称
-     * @return 是否为节定义行
-     *
-     * 节定义格式：[section_name]
-     * 节名称会去除首尾空白字符。
-     */
-    bool is_section_line(const string& line, string& section_name) const;
-
-    /**
-     * @brief 解析键值对
-     * @param line 要解析的行内容
-     * @param key [输出] 解析出的键名
-     * @param value [输出] 解析出的值
-     * @return 解析是否成功
-     *
-     * 解析格式：key = value
-     * 键和值都会去除首尾空白字符。
-     * 如果值被引号包裹（单引号或双引号），会自动去除引号。
-     */
-    bool parse_key_value(const string& line, string& key, string& value) const;
-
-    /**
      * @brief 解析单行内容
      * @param line 要解析的行
      * @throws ini_exception 当解析遇到语法错误时抛出

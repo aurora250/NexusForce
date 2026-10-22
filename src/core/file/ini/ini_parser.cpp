@@ -2,6 +2,40 @@
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    bool is_comment_line(const string_view line) noexcept {
+        const string_view trimmed = line.trim();
+        return trimmed.empty() || trimmed[0] == ';' || trimmed[0] == '#';
+    }
+
+    bool is_section_line(const string_view line, string& section_name) {
+        const string_view trimmed = line.trim();
+        if (trimmed.size() >= 2 && trimmed.front() == '[' && trimmed.back() == ']') {
+            section_name = trimmed.substr(1, trimmed.size() - 2).trim();
+            return true;
+        }
+        return false;
+    }
+
+    bool parse_key_value(const string& line, string& key, string& value) {
+        const size_t pos = line.find('=');
+        if (pos == string::npos) {
+            return false;
+        }
+
+        key = line.head(pos).trim();
+        value = line.tail(pos + 1).trim();
+
+        if (value.size() >= 2 &&
+            ((value.front() == '"' && value.back() == '"') || (value.front() == '\'' && value.back() == '\''))) {
+            value = value.substr(1, value.size() - 2);
+        }
+
+        return !key.empty();
+    }
+} // namespace
+
+
 void ini_parser::skip_whitespace() noexcept {
     while (pos_ < len_ && is_space(current())) {
         advance();
@@ -45,46 +79,13 @@ void ini_parser::advance() noexcept {
     }
 }
 
-bool ini_parser::is_comment_line(const string& line) const {
-    string trimmed = line;
-    trimmed.trim();
-    return trimmed.empty() || trimmed[0] == ';' || trimmed[0] == '#';
-}
-
-bool ini_parser::is_section_line(const string& line, string& section_name) const {
-    string trimmed = line;
-    trimmed.trim();
-    if (trimmed.size() >= 2 && trimmed.front() == '[' && trimmed.back() == ']') {
-        section_name = trimmed.substr(1, trimmed.size() - 2).trim();
-        return true;
-    }
-    return false;
-}
-
-bool ini_parser::parse_key_value(const string& line, string& key, string& value) const {
-    const size_t pos = line.find('=');
-    if (pos == string::npos) {
-        return false;
-    }
-
-    key = line.head(pos).trim();
-    value = line.tail(pos + 1).trim();
-
-    if (value.size() >= 2 &&
-        ((value.front() == '"' && value.back() == '"') || (value.front() == '\'' && value.back() == '\''))) {
-        value = value.substr(1, value.size() - 2);
-    }
-
-    return !key.empty();
-}
-
 void ini_parser::parse_line(const string& line) {
-    if (is_comment_line(line)) {
+    if (is_comment_line(line.view())) {
         return;
     }
 
     string section_name;
-    if (is_section_line(line, section_name)) {
+    if (is_section_line(line.view(), section_name)) {
         auto new_section = make_unique<ini_section>(section_name);
         current_section_ = new_section.get();
         root_->add_section(section_name, move(new_section));

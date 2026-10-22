@@ -89,61 +89,6 @@ private:
     void advance() noexcept;
 
     /**
-     * @brief 判断是否为注释行
-     * @param line 要检查的行内容
-     * @return 是否为注释行
-     */
-    NEFORCE_NODISCARD bool is_comment_line(const string& line) const;
-
-    /**
-     * @brief 判断是否为空白行
-     * @param line 要检查的行内容
-     * @return 是否为空白行
-     */
-    NEFORCE_NODISCARD bool is_blank_line(const string& line) const;
-
-    /**
-     * @brief 解析变量行
-     * @param line 当前行内容
-     * @param name [输出] 解析出的变量名
-     * @param variable [输出] 解析出的变量对象
-     * @return 解析是否成功
-     *
-     * @throws env_exception 当变量格式错误时抛出
-     */
-    bool parse_variable_line(const string& line, string& name, unique_ptr<env_variable>& variable) const;
-
-    /**
-     * @brief 解析无引号的值
-     * @param line 当前行内容
-     * @param pos 解析位置
-     * @return 解析出的值字符串
-     *
-     * 无引号值在遇到空格、制表符或注释符号时结束。
-     */
-    string parse_unquoted_value(const string& line, size_t& pos) const;
-
-    /**
-     * @brief 解析单引号包裹的值
-     * @param line 当前行内容
-     * @param pos 解析位置
-     * @return 解析出的值字符串
-     *
-     * 支持单引号内的转义：''' 表示一个单引号字符。
-     */
-    string parse_single_quoted_value(const string& line, size_t& pos) const;
-
-    /**
-     * @brief 解析双引号包裹的值
-     * @param line 当前行内容
-     * @param pos 解析位置
-     * @return 解析出的值字符串
-     *
-     * 支持转义序列
-     */
-    string parse_double_quoted_value(const string& line, size_t& pos) const;
-
-    /**
      * @brief 解析单行内容
      * @param line 要解析的行
      *

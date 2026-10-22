@@ -6,11 +6,11 @@ NEFORCE_BEGIN_TUI__
 NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
-    size_t utf8_next(const string_view text, const size_t pos) {
+    size_t utf8_next(const string_view text, const size_t pos) noexcept {
         if (pos >= text.size()) {
             return text.size();
         }
-        const auto lead = static_cast<unsigned char>(text[pos]);
+        const auto lead = static_cast<byte_t>(text[pos]);
         if ((lead & 0x80) == 0) {
             return pos + 1;
         }
@@ -26,32 +26,31 @@ namespace {
         return pos + 1;
     }
 
-    size_t utf8_prev(const string_view text, const size_t pos) {
+    size_t utf8_prev(const string_view text, const size_t pos) noexcept {
         if (pos == 0) {
             return 0;
         }
         size_t p = pos - 1;
-        while (p > 0 && (static_cast<unsigned char>(text[p]) & 0xC0) == 0x80) {
+        while (p > 0 && (static_cast<byte_t>(text[p]) & 0xC0) == 0x80) {
             --p;
         }
         return p;
     }
 
-    bool is_space_at(const string_view text, const size_t pos) {
+    bool is_space_at(const string_view text, const size_t pos) noexcept {
         return pos < text.size() && (text[pos] == ' ' || text[pos] == '\t' || text[pos] == '\n');
     }
 
-    bool is_word_at(const string_view text, const size_t pos) { return pos < text.size() && !is_space_at(text, pos); }
+    bool is_word_at(const string_view text, const size_t pos) noexcept {
+        return pos < text.size() && !is_space_at(text, pos);
+    }
 } // namespace
 
 
 text_area_view::text_area_view(text_area_option opt) :
 opt_(move(opt)) {}
 
-const string& text_area_view::text() const {
-    static const string empty_text;
-    return (opt_.text != nullptr) ? opt_.text->value() : empty_text;
-}
+string_view text_area_view::text() const noexcept { return (opt_.text != nullptr) ? opt_.text->value().view() : ""; }
 
 size_t text_area_view::selection_begin() const noexcept { return min(anchor_, cursor_); }
 
@@ -74,7 +73,7 @@ size_t text_area_view::offset_at(const int row, const int column) const {
     const int border_w = (border == style::border::none) ? 0 : 1;
     const int inner_w = max(1, box.w - 2 * border_w);
 
-    const string_view value = text().view();
+    const string_view value = text();
     const text_layout lay = layout_text(value, inner_w, opt_.wrap);
     if (lay.lines.empty()) {
         return 0;
@@ -98,7 +97,7 @@ bool text_area_view::copy_selection() {
     if (!has_selection()) {
         return false;
     }
-    const string_view value = text().view();
+    const string_view value = text();
     const size_t begin = min(selection_begin(), value.size());
     const size_t end = min(selection_end(), value.size());
     if (end <= begin) {
@@ -293,7 +292,7 @@ void text_area_view::jump_history(const int delta) {
 }
 
 size_t text_area_view::word_boundary(const size_t from, const bool forward) const {
-    const string_view value = text().view();
+    const string_view value = text();
     size_t pos = min(from, value.size());
     if (forward) {
         while (pos < value.size() && !is_word_at(value, pos)) {
@@ -314,7 +313,7 @@ size_t text_area_view::word_boundary(const size_t from, const bool forward) cons
 }
 
 void text_area_view::move_line_boundary(const bool to_end, const bool extend) {
-    const string_view value = text().view();
+    const string_view value = text();
     size_t pos = min(cursor_, value.size());
     if (to_end) {
         while (pos < value.size() && value[pos] != '\n') {
@@ -341,7 +340,7 @@ void text_area_view::move_document_boundary(const bool to_end, const bool extend
 }
 
 void text_area_view::move_up_or_down(const int delta, const bool extend) {
-    const string_view value = text().view();
+    const string_view value = text();
     const int visible_w = max(1, rect_ != nullptr ? rect_->value().w : 0);
     const text_layout lay = layout_text(value, visible_w, opt_.wrap);
 
@@ -397,7 +396,7 @@ element text_area_view::render() {
     const int inner_w = max(1, box.w - 2 * border_w);
     const int inner_h = max(1, box.h - 2 * border_w);
 
-    const string_view value = text().view();
+    const string_view value = text();
     const text_layout lay = layout_text(value, inner_w, st.text_wrap.value_or(style::wrap_mode::word));
     int row = 0;
     int col = 0;
@@ -529,14 +528,14 @@ bool text_area_view::on_key(const key_event& e) {
             }
             record_undo();
             const size_t next = ctrl ? word_boundary(cursor_, true) : utf8_next(value.view(), cursor_);
-            const string head = value.substr(0, cursor_);
+            string head = value.substr(0, cursor_);
             const string_view tail = value.view(next);
             *opt_.text = move(head) + tail;
             notify_changed();
             return true;
         }
         case K::left: {
-            const size_t target = ctrl ? word_boundary(cursor_, false) : utf8_prev(text().view(), cursor_);
+            const size_t target = ctrl ? word_boundary(cursor_, false) : utf8_prev(text(), cursor_);
             cursor_ = target;
             if (!shift) {
                 anchor_ = cursor_;
@@ -545,7 +544,7 @@ bool text_area_view::on_key(const key_event& e) {
             return true;
         }
         case K::right: {
-            const size_t target = ctrl ? word_boundary(cursor_, true) : utf8_next(text().view(), cursor_);
+            const size_t target = ctrl ? word_boundary(cursor_, true) : utf8_next(text(), cursor_);
             cursor_ = target;
             if (!shift) {
                 anchor_ = cursor_;

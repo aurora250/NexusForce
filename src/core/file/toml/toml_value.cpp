@@ -247,7 +247,7 @@ namespace {
                     }
                     case toml_string::Literal: {
                         string lit = "'";
-                        for (char c: str) {
+                        for (const char c: str) {
                             if (c == '\'') {
                                 lit += "''";
                             } else {

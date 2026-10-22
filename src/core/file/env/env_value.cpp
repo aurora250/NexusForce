@@ -26,7 +26,7 @@ namespace {
             case env_value::Variable: {
                 const env_variable* var = value->as_variable();
                 const string& val = var->get_value();
-                env_variable::quote_type qt = var->get_quote_type();
+                const env_variable::quote_type qt = var->get_quote_type();
 
                 string result;
                 if (var->is_exported()) {

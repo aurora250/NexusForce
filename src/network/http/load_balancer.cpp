@@ -40,7 +40,7 @@ void load_balancer::mark_failure(lb_backend* backend) {
 }
 
 void load_balancer::run_health_checks() {
-    auto now_ms = static_cast<uint64_t>(steady_clock::now().since_epoch().count() / 1'000'000);
+    const auto now_ms = static_cast<uint64_t>(steady_clock::now().since_epoch().count() / 1'000'000);
 
     lock<mutex> lk(mutex_);
     for (auto& backend: backends_) {
@@ -75,7 +75,7 @@ size_t load_balancer::healthy_count() const {
 lb_backend* load_balancer::select_round_robin() {
     size_t attempts = 0;
     while (attempts < backends_.size()) {
-        size_t idx = rr_counter_++ % backends_.size();
+        const size_t idx = rr_counter_++ % backends_.size();
         if (backends_[idx].healthy) {
             ++backends_[idx].active_connections;
             return &backends_[idx];
@@ -90,7 +90,7 @@ lb_backend* load_balancer::select_least_connections() {
     size_t min_conn = numeric_traits<size_t>::max();
     for (auto& b: backends_) {
         if (b.healthy) {
-            size_t conn = b.active_connections;
+            const size_t conn = b.active_connections;
             if (conn < min_conn) {
                 min_conn = conn;
                 best = &b;
@@ -114,7 +114,7 @@ lb_backend* load_balancer::select_weighted() {
         return nullptr;
     }
 
-    auto target = secret::next_int<size_t>(total_weight);
+    const auto target = secret::next_int<size_t>(total_weight);
     size_t cumulative = 0;
     for (auto& b: backends_) {
         if (b.healthy) {
@@ -139,7 +139,7 @@ lb_backend* load_balancer::select_random() {
         return nullptr;
     }
 
-    auto idx = secret::next_int<size_t>(healthy.size());
+    const auto idx = secret::next_int<size_t>(healthy.size());
     ++healthy[idx]->active_connections;
     return healthy[idx];
 }

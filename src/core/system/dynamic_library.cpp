@@ -318,7 +318,7 @@ string dynamic_library::program_location() {
 #endif
 }
 
-string dynamic_library::symbol_location(void* symbol_ptr) {
+string dynamic_library::symbol_location(const void* symbol_ptr) {
     if (symbol_ptr == nullptr) {
         return "";
     }

@@ -65,7 +65,7 @@ public:
      * @brief 文本内容
      * @return 文本常量引用
      */
-    NEFORCE_NODISCARD const string& text() const;
+    NEFORCE_NODISCARD string_view text() const noexcept;
 
     /**
      * @brief 光标字节偏移

@@ -369,7 +369,7 @@ void yaml_parser::register_anchor(const string& anchor, const shared_ptr<yaml_va
         return;
     }
 
-    auto it = anchors_.find(anchor);
+    const auto it = anchors_.find(anchor);
     if (it != anchors_.end()) {
         throw_parse_error("Duplicate anchor: &" + anchor);
     }
@@ -392,7 +392,7 @@ shared_ptr<yaml_value> yaml_parser::parse_alias() {
     if (alias_name.empty()) {
         throw_parse_error("Empty alias name");
     }
-    auto it = anchors_.find(alias_name);
+    const auto it = anchors_.find(alias_name);
     if (it == anchors_.end()) {
         throw_parse_error("Undefined alias: *" + alias_name);
     }
@@ -1177,7 +1177,6 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
             advance();
         } else if (ch == '_') {
             advance();
-            continue;
         } else if (ch == '.') {
             if (is_hex || is_octal || is_binary) {
                 throw_parse_error("Float not allowed in this number format");

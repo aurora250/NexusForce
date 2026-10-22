@@ -467,7 +467,7 @@ void http_server::handle_client(unique_ptr<tcp_socket> client_socket) {
             return;
         }
         lock<mutex> lk(conn_mutex_);
-        auto it = conn_per_ip_.find(client_ip);
+        const auto it = conn_per_ip_.find(client_ip);
         if (it != conn_per_ip_.end() && --it->second == 0) {
             conn_per_ip_.erase(it);
         }

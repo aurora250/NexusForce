@@ -170,7 +170,7 @@ http_router::http_handler_t http_router::find_handler(const http_method& method,
         search_path = search_path.head(search_path.length() - 1);
     }
 
-    auto trie_it = tries_.find(method.method());
+    const auto trie_it = tries_.find(method.method());
     if (trie_it != tries_.end()) {
         vector<pair<string, string>> params;
         auto handler = trie_it->second.match(search_path, case_sensitive, params);
@@ -182,7 +182,7 @@ http_router::http_handler_t http_router::find_handler(const http_method& method,
         }
     }
 
-    auto method_it = routes_.find(method.method());
+    const auto method_it = routes_.find(method.method());
     if (method_it == routes_.end()) {
         return {};
     }
@@ -234,7 +234,7 @@ void http_router::setup_default_handlers() {
                         "</body></html>";
     };
 
-    exception_handler_ = [](http_request& request, http_response& response, const exception& e) {
+    exception_handler_ = [](http_request& /*request*/, http_response& response, const exception& /*e*/) {
         response.status = http_status::S5_INTERNAL_SERVER_ERROR;
         response.status_message = "Internal Server Error";
         response.set_content_type(http_content::HTML_TEXT());
@@ -247,7 +247,7 @@ void http_router::setup_default_handlers() {
 }
 
 void http_router::resolve_handler(http_request& request, http_response& response) {
-    auto handler = find_handler(request.method, request.path, request);
+    const auto handler = find_handler(request.method, request.path, request);
 
     if (handler) {
         handler(request, response);

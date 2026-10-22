@@ -20,7 +20,7 @@ proxy_backend reverse_proxy_filter::select_backend(const http_request& request) 
         return {};
     }
 
-    size_t idx = rr_counter_++ % backends_.size();
+    const size_t idx = rr_counter_++ % backends_.size();
     return backends_[idx];
 }
 
@@ -48,9 +48,9 @@ http_client_response reverse_proxy_filter::forward(const proxy_backend& backend,
         creq.headers["Host"] = backend.host;
     }
 
-    auto client_ip = request.client_ip();
+    const auto client_ip = request.client_ip();
     if (!client_ip.empty()) {
-        auto existing_fwd = creq.headers.find("X-Forwarded-For");
+        const auto existing_fwd = creq.headers.find("X-Forwarded-For");
         if (existing_fwd != creq.headers.end()) {
             creq.headers["X-Forwarded-For"] = existing_fwd->second + ", " + client_ip;
         } else {
@@ -94,7 +94,7 @@ bool reverse_proxy_filter::pre_filter(http_request& request, http_response& resp
         return true;
     }
 
-    auto backend = select_backend(request);
+    const auto backend = select_backend(request);
     if (backend.host.empty()) {
         response.status = http_status::S5_BAD_GATEWAY;
         response.status_message = "Bad Gateway";
@@ -104,7 +104,7 @@ bool reverse_proxy_filter::pre_filter(http_request& request, http_response& resp
     }
 
     try {
-        auto backend_resp = forward(backend, request);
+        const auto backend_resp = forward(backend, request);
         copy_response(backend_resp, response);
     } catch (const exception& e) {
         response.status = http_status::S5_BAD_GATEWAY;

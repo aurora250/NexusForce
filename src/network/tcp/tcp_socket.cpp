@@ -353,7 +353,7 @@ namespace {
 } // namespace
 
 void tcp_socket::async_connect(io_context& ctx, const ip_address& endpoint, function<void(error_code)> handler) {
-    auto op = make_shared<connect_op<function<void(error_code)>>>();
+    const auto op = make_shared<connect_op<function<void(error_code)>>>();
     op->ctx = &ctx;
     op->sock = this;
     op->endpoint = endpoint;
@@ -363,7 +363,7 @@ void tcp_socket::async_connect(io_context& ctx, const ip_address& endpoint, func
 
 void tcp_socket::async_connect(io_context& ctx, const ip_address& endpoint, cancellation_slot& slot,
                                function<void(error_code)> handler) {
-    auto op = make_shared<connect_op<function<void(error_code)>>>();
+    const auto op = make_shared<connect_op<function<void(error_code)>>>();
     op->ctx = &ctx;
     op->sock = this;
     op->endpoint = endpoint;
@@ -403,7 +403,11 @@ namespace {
             if (err != WSAEWOULDBLOCK) {
 #else
             const int err = errno;
+#    if EAGAIN != EWOULDBLOCK
             if (err != EAGAIN && err != EWOULDBLOCK) {
+#    else
+            if (err != EWOULDBLOCK) {
+#    endif
 #endif
                 handler(error_code(err, error_category::system()), 0);
                 return;
@@ -457,7 +461,7 @@ namespace {
 } // namespace
 
 void tcp_socket::async_read(io_context& ctx, memory_view<char> buffer, function<void(error_code, size_t)> handler) {
-    auto op = make_shared<read_op<function<void(error_code, size_t)>>>();
+    const auto op = make_shared<read_op<function<void(error_code, size_t)>>>();
     op->ctx = &ctx;
     op->sock = this;
     op->buffer = buffer;
@@ -467,7 +471,7 @@ void tcp_socket::async_read(io_context& ctx, memory_view<char> buffer, function<
 
 void tcp_socket::async_read(io_context& ctx, memory_view<char> buffer, cancellation_slot& slot,
                             function<void(error_code, size_t)> handler) {
-    auto op = make_shared<read_op<function<void(error_code, size_t)>>>();
+    const auto op = make_shared<read_op<function<void(error_code, size_t)>>>();
     op->ctx = &ctx;
     op->sock = this;
     op->buffer = buffer;
@@ -508,7 +512,11 @@ namespace {
             if (err != WSAEWOULDBLOCK) {
 #else
             const int err = errno;
+#    if EAGAIN != EWOULDBLOCK
             if (err != EAGAIN && err != EWOULDBLOCK) {
+#    else
+            if (err != EWOULDBLOCK) {
+#    endif
 #endif
                 handler(error_code(err, error_category::system()), 0);
                 return;
@@ -568,7 +576,7 @@ namespace {
 
 void tcp_socket::async_write(io_context& ctx, memory_view<const char> buffer,
                              function<void(error_code, size_t)> handler) {
-    auto op = make_shared<write_op<function<void(error_code, size_t)>>>();
+    const auto op = make_shared<write_op<function<void(error_code, size_t)>>>();
     op->ctx = &ctx;
     op->sock = this;
     op->buffer = buffer;
@@ -578,7 +586,7 @@ void tcp_socket::async_write(io_context& ctx, memory_view<const char> buffer,
 
 void tcp_socket::async_write(io_context& ctx, memory_view<const char> buffer, cancellation_slot& slot,
                              function<void(error_code, size_t)> handler) {
-    auto op = make_shared<write_op<function<void(error_code, size_t)>>>();
+    const auto op = make_shared<write_op<function<void(error_code, size_t)>>>();
     op->ctx = &ctx;
     op->sock = this;
     op->buffer = buffer;

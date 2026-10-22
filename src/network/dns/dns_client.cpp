@@ -1,4 +1,3 @@
-#include <NeForce/core/async/async.hpp>
 #include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/numeric/random.hpp>
 #include <NeForce/core/string/format.hpp>
@@ -720,7 +719,7 @@ void dns_client::dns_query_op::on_tcp_connected(const error_code ec) {
     tcp_socket_->async_write(
             *client->ctx_,
             memory_view<const char>{reinterpret_cast<const char*>(tcp_request_buf_.data()), tcp_request_buf_.size()},
-            [self](error_code ec, size_t bytes) { self->on_tcp_written(ec, bytes); });
+            [self](error_code iec, size_t bytes) { self->on_tcp_written(iec, bytes); });
 }
 
 void dns_client::dns_query_op::on_tcp_written(const error_code ec, const size_t /*bytes*/) {
@@ -732,7 +731,7 @@ void dns_client::dns_query_op::on_tcp_written(const error_code ec, const size_t 
     auto self = shared_from_this();
     tcp_socket_->async_read(*client->ctx_,
                             memory_view<char>{reinterpret_cast<char*>(tcp_len_buf_), sizeof(tcp_len_buf_)},
-                            [self](error_code ec, size_t bytes) { self->on_tcp_len_read(ec, bytes); });
+                            [self](error_code iec, size_t bytes) { self->on_tcp_len_read(iec, bytes); });
 }
 
 void dns_client::dns_query_op::on_tcp_len_read(const error_code ec, const size_t bytes) {
@@ -758,7 +757,7 @@ void dns_client::dns_query_op::on_tcp_len_read(const error_code ec, const size_t
     tcp_socket_->async_read(
             *client->ctx_,
             memory_view<char>{reinterpret_cast<char*>(tcp_response_buf_.data()), tcp_response_buf_.size()},
-            [self](error_code ec, size_t n) { self->on_tcp_body_read(ec, n); });
+            [self](error_code iec, size_t n) { self->on_tcp_body_read(iec, n); });
 }
 
 void dns_client::dns_query_op::on_tcp_body_read(const error_code ec, const size_t bytes) {
@@ -774,7 +773,7 @@ void dns_client::dns_query_op::on_tcp_body_read(const error_code ec, const size_
                 *client->ctx_,
                 memory_view<char>{reinterpret_cast<char*>(tcp_response_buf_.data() + tcp_response_received_),
                                   tcp_response_buf_.size() - tcp_response_received_},
-                [self](error_code ec, size_t n) { self->on_tcp_body_read(ec, n); });
+                [self](error_code iec, size_t n) { self->on_tcp_body_read(iec, n); });
         return;
     }
 

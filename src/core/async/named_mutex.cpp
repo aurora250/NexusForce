@@ -143,7 +143,7 @@ void named_mutex::lock() {
     if (mapped_addr_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(share_memory_exception("named_mutex: not initialized"));
     }
-    int ret = ::pthread_mutex_lock(static_cast<pthread_mutex_t*>(mapped_addr_));
+    const int ret = ::pthread_mutex_lock(static_cast<pthread_mutex_t*>(mapped_addr_));
     if (ret == EOWNERDEAD) {
         ::pthread_mutex_consistent(static_cast<pthread_mutex_t*>(mapped_addr_));
     }
@@ -160,7 +160,7 @@ bool named_mutex::try_lock() {
     if (mapped_addr_ == nullptr) {
         return false;
     }
-    int ret = ::pthread_mutex_trylock(static_cast<pthread_mutex_t*>(mapped_addr_));
+    const int ret = ::pthread_mutex_trylock(static_cast<pthread_mutex_t*>(mapped_addr_));
     if (ret == EBUSY) {
         return false;
     }

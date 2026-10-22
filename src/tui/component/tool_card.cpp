@@ -28,7 +28,7 @@ void tool_card::setup() {
     out_opt.hidden_lines = opt_.hidden_lines;
     out_opt.collapsed_format = "\xe2\x80\xa6 %d lines hidden \xc2\xb7 enter to expand";
 
-    auto owned = make_unique<output_block>(out_opt);
+    auto owned = make_unique<output_block>(move(out_opt));
     output_ = owned.get();
     add_child(move(owned));
 }
@@ -55,8 +55,7 @@ void tool_card::set_summary(string summary) {
 }
 
 void tool_card::set_output(string text) {
-    const tui::style st{};
-    element content = element::text(move(text), st, style::wrap_mode::none);
+    element content = element::text(move(text), tui::style{}, style::wrap_mode::none);
     const size_t lines = content.text().empty() ? 0 : static_cast<size_t>(1 + count_newlines(content.text().view()));
     set_output_element(move(content), lines);
 }
@@ -84,8 +83,8 @@ string tool_card::status_icon() {
             // Take a copy: element::text() returns a reference into the element's shared node,
             // and the temporary returned by spinner() releases that node at the end of this statement,
             // which would leave a dangling reference behind.
-            const string frame = spinner(3, frame_).text();
-            return frame.empty() ? string(".") : frame;
+            string frame = spinner(3, frame_).text();
+            return frame.empty() ? string(".") : move(frame);
         }
         case tool_status::success: {
             return "\xe2\x9c\x94";

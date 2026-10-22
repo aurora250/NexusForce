@@ -51,16 +51,16 @@ namespace {
 
             // Parse quality value q=N (RFC 7231 §5.3.1)
             double q_value = 1.0;
-            size_t semi = encoding.find(';');
+            const size_t semi = encoding.find(';');
             if (semi != string_view::npos) {
                 string_view params = encoding.view(semi + 1);
                 encoding = encoding.head(semi).trim();
 
                 // Find q= parameter
-                size_t q_pos = params.find("q=");
+                const size_t q_pos = params.find("q=");
                 if (q_pos != string_view::npos) {
                     string_view q_str = params.view(q_pos + 2).trim();
-                    size_t q_end = q_str.find(';');
+                    const size_t q_end = q_str.find(';');
                     if (q_end != string_view::npos) {
                         q_str = q_str.head(q_end);
                     }

@@ -188,7 +188,7 @@ string http_client::build_request_str(const http_client_request& req, const url&
     for (const auto& kv: persistent_headers_) {
         const string& key = kv.first;
         const string& value = kv.second;
-        if (req.headers.find(key) == req.headers.end() && key != "Host" && key != "Cookie") {
+        if (!req.headers.contains(key) && key != "Host" && key != "Cookie") {
             req_str += key + ": " + value + "\r\n";
         }
     }

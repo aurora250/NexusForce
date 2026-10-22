@@ -121,7 +121,7 @@ namespace {
                     }
                     const size_t prev = utf8_prev(val, cp);
                     val.erase(prev, cp - prev);
-                    *opt_.text = val;
+                    *opt_.text = move(val);
                     if (cursor_pos_ != nullptr) {
                         *cursor_pos_ = prev;
                     }
@@ -138,7 +138,7 @@ namespace {
                     }
                     const size_t next = utf8_next(val, cp);
                     val.erase(cp, next - cp);
-                    *opt_.text = val;
+                    *opt_.text = move(val);
                     return true;
                 }
                 return false;

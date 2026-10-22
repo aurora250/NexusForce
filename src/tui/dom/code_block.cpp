@@ -186,7 +186,7 @@ element code_block(code_block_option opt) {
             hint_style.dim = true;
         }
         string hint = "\xe2\x80\xa6 " + to_string(static_cast<int64_t>(hidden)) + " lines hidden \xc2\xb7 expand";
-        collapsed.push_back(element::text(hint, hint_style, style::wrap_mode::none));
+        collapsed.push_back(element::text(move(hint), hint_style, style::wrap_mode::none));
 
         for (size_t i = rows.size() - tail; i < rows.size(); ++i) {
             collapsed.push_back(rows[i]);
@@ -202,7 +202,7 @@ element code_block(code_block_option opt) {
     }
 
     if (opt.left_bar) {
-        tui::style bar_style = opt.gutter_style;
+        const tui::style bar_style = opt.gutter_style;
         body = element::hbox({element::text("\xe2\x94\x82", bar_style, style::wrap_mode::none),
                               element::text(" ", bar_style, style::wrap_mode::none), _NEFORCE move(body)});
     }

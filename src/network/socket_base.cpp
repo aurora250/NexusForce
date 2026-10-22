@@ -1,6 +1,5 @@
 #include <NeForce/network/socket_base.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <cerrno>
 #    include <fcntl.h>
 #    include <netinet/tcp.h>
 #    include <unistd.h>

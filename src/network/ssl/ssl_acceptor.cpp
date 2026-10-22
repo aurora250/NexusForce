@@ -121,7 +121,7 @@ namespace {
 } // namespace
 
 void ssl_acceptor::async_accept(io_context& ctx, function<void(error_code, ssl_socket)> handler) {
-    auto op = make_shared<ssl_accept_op>();
+    const auto op = make_shared<ssl_accept_op>();
     op->ctx = &ctx;
     op->acceptor = this;
     op->handler = move(handler);
@@ -130,7 +130,7 @@ void ssl_acceptor::async_accept(io_context& ctx, function<void(error_code, ssl_s
 
 void ssl_acceptor::async_accept(io_context& ctx, cancellation_slot& slot,
                                 function<void(error_code, ssl_socket)> handler) {
-    auto op = make_shared<ssl_accept_op>();
+    const auto op = make_shared<ssl_accept_op>();
     op->ctx = &ctx;
     op->acceptor = this;
     op->handler = move(handler);

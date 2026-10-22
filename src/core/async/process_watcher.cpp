@@ -102,9 +102,16 @@ bool process_watcher::start(const string& executable, const vector<string>& args
     }
 
     running_ = true;
+    schedule_poll(alive_);
 
-    auto tick = make_shared<function<void()>>();
-    *tick = [this, tick, guard = alive_] {
+    return true;
+}
+
+void process_watcher::schedule_poll(const shared_ptr<bool>& guard) {
+    // Every round installs a fresh closure instead of having a closure capture the shared_ptr that owns it:
+    // that self reference is a reference cycle,
+    // so the callback block (and the function object holding it) leaked once per start().
+    ctx_.schedule_timer(poll_interval_ms_, [this, guard] {
         if (!*guard || !running_) {
             return;
         }
@@ -116,13 +123,10 @@ bool process_watcher::start(const string& executable, const vector<string>& args
         }
 #endif
         poll_exit();
-        if (running_) {
-            ctx_.schedule_timer(poll_interval_ms_, *tick);
+        if (*guard && running_) {
+            schedule_poll(guard);
         }
-    };
-    ctx_.schedule_timer(poll_interval_ms_, *tick);
-
-    return true;
+    });
 }
 
 bool process_watcher::start_shell(const string& command_line, option opt) {
@@ -254,8 +258,7 @@ void process_watcher::terminate() {
     }
     term_sent_ = true;
 
-    const auto escalate = make_shared<function<void()>>();
-    *escalate = [this, guard = alive_] {
+    ctx_.schedule_timer(300, [this, guard = alive_] {
         if (!*guard || !running_) {
             return;
         }
@@ -265,8 +268,7 @@ void process_watcher::terminate() {
             proc_->terminate();
         }
         poll_exit();
-    };
-    ctx_.schedule_timer(300, *escalate);
+    });
 }
 
 NEFORCE_END_NAMESPACE__

@@ -81,7 +81,7 @@ void select_list_view::set_filter(string filter) {
 }
 
 int select_list_view::selected_index() const noexcept {
-    if (position_ < 0 || position_ >= static_cast<int>(match_indices_.size())) {
+    if (position_ < 0 || compare_greater_equal(position_, match_indices_.size())) {
         return -1;
     }
     return static_cast<int>(match_indices_[static_cast<size_t>(position_)]);

@@ -66,7 +66,7 @@ bool tool_runner::start(const string& command_line) {
         // No devpts (container / sandbox): fall back to pipes so the tool still runs.
         proc.use_pty = false;
     }
-    if (!watcher_->start_shell(command_line, proc)) {
+    if (!watcher_->start_shell(command_line, move(proc))) {
         if (card_ != nullptr) {
             card_->set_status(tool_status::failed, static_cast<int64_t>(0));
         }

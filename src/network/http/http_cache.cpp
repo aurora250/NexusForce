@@ -7,13 +7,13 @@ NEFORCE_BEGIN_HTTP__
 
 optional<cached_response> response_cache::get(const string& key) {
     shared_lock<shared_mutex> lk(mutex_);
-    auto it = entries_.find(key);
+    const auto it = entries_.find(key);
     if (it == entries_.end()) {
         return none;
     }
 
     auto& entry = it->second;
-    auto age = seconds{datetime::now() - entry.response.cached_at};
+    const auto age = seconds{datetime::now() - entry.response.cached_at};
 
     if (age >= entry.response.max_age) {
         return none;
@@ -44,7 +44,7 @@ void response_cache::put(const string& key, const http_response& response, secon
         evict_lru();
     }
 
-    uint64_t now_ms = static_cast<uint64_t>(steady_clock::now().since_epoch().count() / 1'000'000);
+    const uint64_t now_ms = static_cast<uint64_t>(steady_clock::now().since_epoch().count() / 1'000'000);
     entries_[key] = {move(cached), now_ms};
 }
 
@@ -55,7 +55,7 @@ void response_cache::remove(const string& key) {
 
 void response_cache::cleanup() {
     lock<shared_mutex> lk(mutex_);
-    auto now = datetime::now();
+    const auto now = datetime::now();
     for (auto it = entries_.begin(); it != entries_.end();) {
         auto age = seconds{now - it->second.response.cached_at};
         if (age >= it->second.response.max_age) {
@@ -72,7 +72,7 @@ void response_cache::clear() {
 }
 
 string response_cache::generate_etag(string_view body) {
-    auto hash = SHA1::hash_hex({reinterpret_cast<const byte_t*>(body.data()), body.size()});
+    const auto hash = SHA1::hash_hex({reinterpret_cast<const byte_t*>(body.data()), body.size()});
     return "\"" + hash + "\"";
 }
 
@@ -82,7 +82,7 @@ void response_cache::evict_lru() {
     uint64_t oldest_ms = numeric_traits<uint64_t>::max();
     string oldest_key;
 
-    for (auto& kv: entries_) {
+    for (const auto& kv: entries_) {
         if (kv.second.last_access_ms < oldest_ms) {
             oldest_ms = kv.second.last_access_ms;
             oldest_key = kv.first;
@@ -102,11 +102,11 @@ bool cache_filter::pre_filter(http_request& request, http_response& response) {
         return true;
     }
 
-    string key = response_cache::build_key(request.method, request.path.view());
+    const string key = response_cache::build_key(request.method, request.path.view());
     auto cached = cache_->get(key);
 
     if (cached) {
-        auto if_none_match = request.header("If-None-Match");
+        const auto if_none_match = request.header("If-None-Match");
         if (!if_none_match.empty() && if_none_match == cached->etag) {
             response.status = http_status::S3_NOT_MODIFIED;
             response.status_message = "Not Modified";
@@ -138,12 +138,12 @@ void cache_filter::post_filter(http_request& request, http_response& response) {
         return;
     }
 
-    string cc = response.header("Cache-Control");
+    const string_view cc = response.header("Cache-Control");
     if (cc.contains("no-cache") || cc.contains("no-store") || cc.contains("private")) {
         return;
     }
 
-    string key = response_cache::build_key(request.method, request.path.view());
+    const string key = response_cache::build_key(request.method, request.path.view());
     cache_->put(key, response);
 }
 

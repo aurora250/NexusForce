@@ -251,7 +251,7 @@ ssize_t tcp_client_base::send(const void* data, size_t length) {
     }
 
     try {
-        ssize_t sent = socket_->send(memory_view<const char>(static_cast<const char*>(data), length));
+        const ssize_t sent = socket_->send(memory_view<const char>(static_cast<const char*>(data), length));
         if (sent < 0 && auto_reconnect_) {
             disconnect();
         }
@@ -302,7 +302,7 @@ ssize_t tcp_client_base::receive(void* buffer, size_t length) {
     }
 
     try {
-        ssize_t received = socket_->receive(memory_view<char>(static_cast<char*>(buffer), length));
+        const ssize_t received = socket_->receive(memory_view<char>(static_cast<char*>(buffer), length));
         if (received < 0 && auto_reconnect_) {
             disconnect();
         }
@@ -331,7 +331,7 @@ vector<char> tcp_client_base::receive_all(size_t max_size) {
 
         char buffer[8192];
         while (true) {
-            ssize_t n = socket_->receive(memory_view<char>(buffer));
+            const ssize_t n = socket_->receive(memory_view<char>(buffer));
             if (n < 0) {
                 if (auto_reconnect_) {
                     disconnect();
@@ -371,7 +371,7 @@ bool tcp_client_base::receive_exact(memory_view<char> buffer) {
     size_t total = 0;
     while (total < buffer.size()) {
         try {
-            ssize_t n = socket_->receive(buffer.view(total));
+            const ssize_t n = socket_->receive(buffer.view(total));
             if (n <= 0) {
                 if (auto_reconnect_) {
                     disconnect();
@@ -628,7 +628,7 @@ struct tcp_client_base::async_connect_op : enable_shared_from_this<async_connect
 };
 
 void tcp_client_base::async_connect(io_context& ctx, const ip_address& endpoint, function<void(error_code)> handler) {
-    auto op = make_shared<async_connect_op>();
+    const auto op = make_shared<async_connect_op>();
     op->client = this;
     op->ctx = &ctx;
     op->endpoint = endpoint;
@@ -638,7 +638,7 @@ void tcp_client_base::async_connect(io_context& ctx, const ip_address& endpoint,
 
 void tcp_client_base::async_connect(io_context& ctx, const ip_address& endpoint, cancellation_slot& slot,
                                     function<void(error_code)> handler) {
-    auto op = make_shared<async_connect_op>();
+    const auto op = make_shared<async_connect_op>();
     op->client = this;
     op->ctx = &ctx;
     op->endpoint = endpoint;

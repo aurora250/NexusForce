@@ -8,7 +8,7 @@ byte_vector grpc_framer::encode(const grpc_message& msg) {
     byte_vector frame;
     frame.push_back(msg.compressed ? 1 : 0);
 
-    auto len = static_cast<uint32_t>(msg.payload.size());
+    const auto len = static_cast<uint32_t>(msg.payload.size());
     frame.push_back(static_cast<byte_t>((len >> 24) & 0xFF));
     frame.push_back(static_cast<byte_t>((len >> 16) & 0xFF));
     frame.push_back(static_cast<byte_t>((len >> 8) & 0xFF));
@@ -32,10 +32,10 @@ int grpc_framer::decode(const byte_t* data, size_t len, vector<grpc_message>& ou
     int count = 0;
 
     while (offset + 5 <= len) {
-        bool compressed = data[offset] != 0;
+        const bool compressed = data[offset] != 0;
         offset++;
 
-        uint32_t msg_len = endian::read_be32(data + offset);
+        const uint32_t msg_len = endian::read_be32(data + offset);
         offset += 4;
 
         if (msg_len > max_receive_size.bytes()) {
@@ -62,7 +62,7 @@ int grpc_framer::decode(const byte_t* data, size_t len, vector<grpc_message>& ou
 void grpc_handler::process_unary(http_request& request, http_response& response, unary_handler handler) {
     vector<grpc_message> messages;
     const auto* data = reinterpret_cast<const byte_t*>(request.body.data());
-    int n = framer_.decode(data, request.body.size(), messages);
+    const int n = framer_.decode(data, request.body.size(), messages);
 
     if (n < 0) {
         send_error(response, grpc_status::INVALID_ARGUMENT, "Invalid gRPC frame");

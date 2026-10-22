@@ -97,7 +97,7 @@ public:
         flat_unordered_map<string, string> default_headers; ///< 默认请求头
         string user_agent{"NexusForce HTTP Client/1.0"};    ///< User-Agent
         string proxy_host;                                  ///< 代理主机
-        ports proxy_port;                                   ///< 代理端口
+        ports proxy_port{ports::UNDEF};                     ///< 代理端口
         // TODO: Connection pool — max_connections_per_host, idle_timeout, max_idle_connections
         // TODO: Retry policy — max_retries, retry_backoff_ms, retry_on_status_codes (429, 502, 503, 504)
         // TODO: Circuit breaker — failure_threshold, recovery_timeout, half_open_max_requests

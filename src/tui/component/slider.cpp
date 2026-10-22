@@ -27,7 +27,7 @@ namespace {
             }
             bar += "] " + to_string(*opt_.value);
 
-            return element::hbox({element::text(opt_.label + " "), element::text(bar)});
+            return element::hbox({element::text(opt_.label + " "), element::text(move(bar))});
         }
 
         bool on_key(const key_event& e) override {

@@ -193,7 +193,7 @@ public:
      * @param symbol_ptr 符号地址
      * @return 动态库文件路径，失败返回空字符串
      */
-    NEFORCE_NODISCARD static string symbol_location(void* symbol_ptr);
+    NEFORCE_NODISCARD static string symbol_location(const void* symbol_ptr);
 };
 
 /** @} */ // DynamicLibrary

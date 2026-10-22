@@ -194,6 +194,7 @@ public:
      * @param delay_ms 延迟毫秒数
      * @param handler 到期时执行的回调（在 run() 线程中执行）
      * @return 定时器 ID，可用于 cancel_timer()
+     * @note 回调会被拷贝、需要重新排期时应安装新闭包
      */
     size_t schedule_timer(uint64_t delay_ms, timer_callback handler);
 

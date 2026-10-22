@@ -62,8 +62,8 @@ void log_view::setup() {
     list_opt.variable_height = true;
     list_opt.auto_follow = opt_.auto_follow;
     list_opt.render_item = [this](const size_t index) { return render_message(index); };
-    // A virtual list has no content height of its own; inside a column it
-    // has to fill the remaining space explicitly.
+    // A virtual list has no content height of its own;
+    // inside a column it has to fill the remaining space explicitly.
     list_opt.style.height = style::size_hint{style::size_hint::fill, 1};
 
     auto owned = make_unique<virtual_list_view>(list_opt);

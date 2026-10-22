@@ -281,7 +281,7 @@ vector<char> ssl_stream::read_all(const size_t max_size) {
 
         buffer.insert(buffer.end(), static_cast<char*>(temp), static_cast<char*>(temp) + ret);
 
-        if (ret < static_cast<ssize_t>(to_read)) {
+        if (compare_less(ret, to_read)) {
             break;
         }
     }
@@ -474,7 +474,7 @@ namespace {
 } // namespace
 
 void ssl_stream::async_handshake(io_context& ctx, function<void(error_code)> handler) {
-    auto op = make_shared<ssl_handshake_op>();
+    const auto op = make_shared<ssl_handshake_op>();
     op->ctx = &ctx;
     op->stream = this;
     op->handler = move(handler);
@@ -482,7 +482,7 @@ void ssl_stream::async_handshake(io_context& ctx, function<void(error_code)> han
 }
 
 void ssl_stream::async_handshake(io_context& ctx, cancellation_slot& slot, function<void(error_code)> handler) {
-    auto op = make_shared<ssl_handshake_op>();
+    const auto op = make_shared<ssl_handshake_op>();
     op->ctx = &ctx;
     op->stream = this;
     op->handler = move(handler);
@@ -553,7 +553,7 @@ namespace {
 } // namespace
 
 void ssl_stream::async_read(io_context& ctx, memory_view<char> buffer, function<void(error_code, size_t)> handler) {
-    auto op = make_shared<ssl_read_op>();
+    const auto op = make_shared<ssl_read_op>();
     op->ctx = &ctx;
     op->ssl = static_cast<::SSL*>(ssl_);
     op->buffer = buffer;
@@ -563,7 +563,7 @@ void ssl_stream::async_read(io_context& ctx, memory_view<char> buffer, function<
 
 void ssl_stream::async_read(io_context& ctx, memory_view<char> buffer, cancellation_slot& slot,
                             function<void(error_code, size_t)> handler) {
-    auto op = make_shared<ssl_read_op>();
+    const auto op = make_shared<ssl_read_op>();
     op->ctx = &ctx;
     op->ssl = static_cast<::SSL*>(ssl_);
     op->buffer = buffer;
@@ -634,7 +634,7 @@ namespace {
 
 void ssl_stream::async_write(io_context& ctx, memory_view<const char> buffer,
                              function<void(error_code, size_t)> handler) {
-    auto op = make_shared<ssl_write_op>();
+    const auto op = make_shared<ssl_write_op>();
     op->ctx = &ctx;
     op->ssl = static_cast<::SSL*>(ssl_);
     op->buffer = buffer;
@@ -644,7 +644,7 @@ void ssl_stream::async_write(io_context& ctx, memory_view<const char> buffer,
 
 void ssl_stream::async_write(io_context& ctx, memory_view<const char> buffer, cancellation_slot& slot,
                              function<void(error_code, size_t)> handler) {
-    auto op = make_shared<ssl_write_op>();
+    const auto op = make_shared<ssl_write_op>();
     op->ctx = &ctx;
     op->ssl = static_cast<::SSL*>(ssl_);
     op->buffer = buffer;

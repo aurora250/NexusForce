@@ -27,7 +27,7 @@ bool csrf_filter::pre_filter(http_request& request, http_response& response) {
     // Use session-based storage when available (prevents subdomain cookie injection),
     // fall back to double-submit cookie pattern when no session exists.
     const string session_key = "_csrf_token";
-    bool has_session = (request.session != nullptr);
+    const bool has_session = (request.session != nullptr);
 
     string csrf_token;
     if (has_session && !request.session->get(session_key).empty()) {

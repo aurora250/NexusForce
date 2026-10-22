@@ -133,12 +133,12 @@ namespace {
         switch (align) {
             case md_align::right: {
                 string result = spaces_of(static_cast<size_t>(padding));
-                return result + text;
+                return move(result) + text;
             }
             case md_align::center: {
                 string left = spaces_of(static_cast<size_t>(padding / 2));
                 string right = spaces_of(static_cast<size_t>(padding - padding / 2));
-                return left + text + right;
+                return move(left) + text + move(right);
             }
             default: {
                 return text + spaces_of(static_cast<size_t>(padding));

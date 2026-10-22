@@ -209,6 +209,9 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `process_watcher::start()` 定时器回调的引用环：回调捕获了持有它自身的 `shared_ptr<function<...>>`，每次 `start()` 泄漏一个回调块；改为每轮安装新闭包的 `schedule_poll()`，并去掉不必要的 `make_shared<function>` 间接层
+- 修复 `application` 三处定时器的同类引用环：帧 tick、窗口尺寸检查与 `Ctrl+C` 提示复位都捕获了持有自身的 `shared_ptr<function<...>>`，每次运行泄漏；现改为成员函数每轮安装新闭包 / 一次性闭包
+- 修复 `strand` 在 handler 抛出非 `exception` 派生类型时永久保持锁定：内外两处 handler 调用都补上 `catch (...)`，异常不再逃逸并导致后续投递全部排队不执行
 - 修复 `compressed_pair` EBCO 特化的 `get_base()` 返回 `compressed_pair&` 而非基类引用：`get_base() == get_base()` 因此命中 `icomparable` 的成员 `operator==`（比较 `.value` 的尺寸/指针）而不是比较分配器，导致 `deque` / `list` / `rb_tree` / `hashtable` / `flat_hashtable` 在等分配器（`standard_allocator`）下误走逐元素复制分支；`std::swap` 于 moved-from（中控器为空）的 `deque` 上移动赋值时 `emplace_back` 解引用空迭代器，clang 下抛出 `0xC0000005`（MSVC 下为未定义行为），`StackTest.Swap` / `QueueTest.Swap` 失败
 - 修复 `deque::move_assign_impl` 逐元素回退分支对 moved-from 状态的越界访问：中控器为空时先重建再写入，避免空迭代器上构造元素
 - 修复 `process_watcher` 在 Windows 上可能丢失子进程最后一段输出：退出轮询只 drain 一次就上报 `on_exit`，而管道与 ConPTY 的尾部数据常在子进程被回收之后才可读；现在退出后最多再轮询两次，直到连续两轮读不到数据才上报退出码

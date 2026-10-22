@@ -3822,6 +3822,53 @@ TEST(StrandTest, Dispatch) {
     EXPECT_EQ(count, 1);
 }
 
+TEST(StrandTest, DispatchRethrowsHandlerFailureToTheCaller) {
+    io_context ctx;
+    strand str(ctx);
+
+    EXPECT_THROW(str.dispatch([] { NEFORCE_THROW_EXCEPTION(value_exception("handler failed")); }), value_exception);
+
+    int ran = 0;
+    str.dispatch([&ran] { ++ran; });
+    EXPECT_EQ(ran, 1);
+}
+
+TEST(StrandTest, DispatchRethrowsForeignExceptionAsValueException) {
+    io_context ctx;
+    strand str(ctx);
+
+    EXPECT_THROW(str.dispatch([] { throw 42; }), value_exception);
+
+    int ran = 0;
+    str.dispatch([&ran] { ++ran; });
+    EXPECT_EQ(ran, 1);
+}
+
+TEST(StrandTest, DispatchKeepsQueuedHandlersRunnableAfterFailure) {
+    io_context ctx;
+    strand str(ctx);
+
+    EXPECT_THROW(str.dispatch([] { NEFORCE_THROW_EXCEPTION(value_exception("handler failed")); }), value_exception);
+
+    int queued = 0;
+    str.post([&queued] { ++queued; });
+    ctx.run();
+    EXPECT_EQ(queued, 1);
+}
+
+TEST(StrandTest, ForeignExceptionInQueuedHandlerDoesNotLockTheStrand) {
+    io_context ctx;
+    strand str(ctx);
+
+    str.post([] { throw 7; });
+    ctx.run();
+
+    int ran = 0;
+    str.post([&ran] { ++ran; });
+    ctx.run();
+    EXPECT_EQ(ran, 1);
+}
+
 TEST(StrandTest, Serialization) {
     io_context ctx;
     strand str(ctx);

@@ -148,7 +148,7 @@ namespace {
         encode_integer(static_cast<uint32_t>(total_bits / 8 + (((total_bits % 8) != 0U) ? 1 : 0)), 7, output);
 
         output.resize(hdr_pos);
-        auto encoded_len = static_cast<uint32_t>((total_bits + 7) / 8);
+        const auto encoded_len = static_cast<uint32_t>((total_bits + 7) / 8);
         output.push_back(0x80);
         encode_integer(encoded_len, 7, output);
 
@@ -181,7 +181,7 @@ namespace {
             return 0;
         }
         const uint8_t max_prefix = (1U << prefix_bits) - 1;
-        uint8_t first = *first_opt & max_prefix;
+        const uint8_t first = *first_opt & max_prefix;
 
         if (first < max_prefix) {
             return first;
@@ -250,7 +250,7 @@ namespace {
             }
         }
 
-        size_t remaining = cur.bits_remaining();
+        const size_t remaining = cur.bits_remaining();
         if (remaining > 7) {
             return {};
         }
@@ -273,7 +273,7 @@ namespace {
         if (!first) {
             return {};
         }
-        bool huffman = (*first & 0x80) != 0;
+        const bool huffman = (*first & 0x80) != 0;
 
         uint32_t len = decode_integer(cur, 7);
 
@@ -373,7 +373,7 @@ byte_vector hpack_encoder::encode(const vector<hpack_header_field>& headers) {
 
     for (const auto& hdr: headers) {
         const int32_t idx = find_in_tables(hdr.name, hdr.value);
-        if (idx >= 1 && idx <= HPACK_STATIC_TABLE_SIZE) {
+        if (idx >= 1 && compare_less_equal(idx, HPACK_STATIC_TABLE_SIZE)) {
             output.push_back(0x80);
             encode_integer(static_cast<uint32_t>(idx), 7, output);
             continue;
@@ -447,7 +447,7 @@ void hpack_decoder::decode_incremental(byte_cursor& cur, header_callback cb) {
         const uint8_t first = *first_opt;
 
         if ((first & 0x80) != 0) {
-            uint32_t idx = decode_integer(cur, 7);
+            const uint32_t idx = decode_integer(cur, 7);
             if (idx == 0) {
                 continue;
             }
@@ -461,7 +461,7 @@ void hpack_decoder::decode_incremental(byte_cursor& cur, header_callback cb) {
                 }
             }
         } else if ((first & 0x40) != 0) {
-            uint32_t name_idx = decode_integer(cur, 6);
+            const uint32_t name_idx = decode_integer(cur, 6);
             string name;
             if (name_idx == 0) {
                 name = decode_string(cur);
@@ -477,10 +477,10 @@ void hpack_decoder::decode_incremental(byte_cursor& cur, header_callback cb) {
             add_to_dynamic_table(name, value);
             cb(name, value);
         } else if ((first & 0x20) != 0) {
-            uint32_t new_size = decode_integer(cur, 5);
+            const uint32_t new_size = decode_integer(cur, 5);
             set_max_table_size(new_size);
         } else if ((first & 0xF0) == 0x00) {
-            uint32_t name_idx = decode_integer(cur, 4);
+            const uint32_t name_idx = decode_integer(cur, 4);
             string name;
             if (name_idx == 0) {
                 name = decode_string(cur);
@@ -495,7 +495,7 @@ void hpack_decoder::decode_incremental(byte_cursor& cur, header_callback cb) {
             string value = decode_string(cur);
             cb(name, value);
         } else if ((first & 0xF0) == 0x10) {
-            uint32_t name_idx = decode_integer(cur, 4);
+            const uint32_t name_idx = decode_integer(cur, 4);
             string name;
             if (name_idx == 0) {
                 name = decode_string(cur);
@@ -587,7 +587,7 @@ byte_vector http2_framer::encode_push_promise_frame(const http2_push_promise_fra
         result.push_back(frame.pad_length);
     }
     // Promised Stream ID (31-bit)
-    uint32_t psid = frame.promised_stream_id & 0x7FFFFFFF;
+    const uint32_t psid = frame.promised_stream_id & 0x7FFFFFFF;
     result.push_back(static_cast<byte_t>((psid >> 24) & 0xFF));
     result.push_back(static_cast<byte_t>((psid >> 16) & 0xFF));
     result.push_back(static_cast<byte_t>((psid >> 8) & 0xFF));
@@ -602,7 +602,7 @@ byte_vector http2_framer::encode_push_promise_frame(const http2_push_promise_fra
 
 byte_vector http2_framer::encode_rst_stream_frame(const http2_rst_stream_frame& frame) {
     byte_vector result = build_frame_header(http2_frame_type::RST_STREAM, 0, frame.stream_id, 4);
-    auto code = static_cast<uint32_t>(frame.error_code);
+    const auto code = static_cast<uint32_t>(frame.error_code);
     result.push_back(static_cast<byte_t>((code >> 24) & 0xFF));
     result.push_back(static_cast<byte_t>((code >> 16) & 0xFF));
     result.push_back(static_cast<byte_t>((code >> 8) & 0xFF));
@@ -611,12 +611,12 @@ byte_vector http2_framer::encode_rst_stream_frame(const http2_rst_stream_frame& 
 }
 
 byte_vector http2_framer::encode_settings_frame(const http2_settings_frame& frame) {
-    uint8_t flags = frame.ack ? HTTP2_FLAG_ACK : 0;
-    size_t payload_len = frame.entries.size() * 6;
+    const uint8_t flags = frame.ack ? HTTP2_FLAG_ACK : 0;
+    const size_t payload_len = frame.entries.size() * 6;
 
     byte_vector result = build_frame_header(http2_frame_type::SETTINGS, flags, 0, payload_len);
     for (const auto& entry: frame.entries) {
-        auto id = static_cast<uint16_t>(entry.id);
+        const auto id = static_cast<uint16_t>(entry.id);
         result.push_back(static_cast<byte_t>((id >> 8) & 0xFF));
         result.push_back(static_cast<byte_t>(id & 0xFF));
         result.push_back(static_cast<byte_t>((entry.value >> 24) & 0xFF));
@@ -628,7 +628,7 @@ byte_vector http2_framer::encode_settings_frame(const http2_settings_frame& fram
 }
 
 byte_vector http2_framer::encode_ping_frame(const http2_ping_frame& frame) {
-    uint8_t flags = frame.ack ? HTTP2_FLAG_ACK : 0;
+    const uint8_t flags = frame.ack ? HTTP2_FLAG_ACK : 0;
     byte_vector result = build_frame_header(http2_frame_type::PING, flags, 0, 8);
     const uint64_t data = frame.opaque_data;
     for (int i = 7; i >= 0; --i) {
@@ -638,16 +638,16 @@ byte_vector http2_framer::encode_ping_frame(const http2_ping_frame& frame) {
 }
 
 byte_vector http2_framer::encode_goaway_frame(const http2_goaway_frame& frame) {
-    size_t payload_len = 8 + frame.debug_data.size();
+    const size_t payload_len = 8 + frame.debug_data.size();
     byte_vector result = build_frame_header(http2_frame_type::GOAWAY, 0, 0, payload_len);
 
-    uint32_t id = frame.last_stream_id;
+    const uint32_t id = frame.last_stream_id;
     result.push_back(static_cast<byte_t>((id >> 24) & 0x7F));
     result.push_back(static_cast<byte_t>((id >> 16) & 0xFF));
     result.push_back(static_cast<byte_t>((id >> 8) & 0xFF));
     result.push_back(static_cast<byte_t>(id & 0xFF));
 
-    auto code = static_cast<uint32_t>(frame.error_code);
+    const auto code = static_cast<uint32_t>(frame.error_code);
     result.push_back(static_cast<byte_t>((code >> 24) & 0xFF));
     result.push_back(static_cast<byte_t>((code >> 16) & 0xFF));
     result.push_back(static_cast<byte_t>((code >> 8) & 0xFF));
@@ -659,7 +659,7 @@ byte_vector http2_framer::encode_goaway_frame(const http2_goaway_frame& frame) {
 
 byte_vector http2_framer::encode_window_update_frame(const http2_window_update_frame& frame) {
     byte_vector result = build_frame_header(http2_frame_type::WINDOW_UPDATE, 0, frame.stream_id, 4);
-    uint32_t inc = frame.window_size_increment & 0x7FFFFFFF;
+    const uint32_t inc = frame.window_size_increment & 0x7FFFFFFF;
     result.push_back(static_cast<byte_t>((inc >> 24) & 0xFF));
     result.push_back(static_cast<byte_t>((inc >> 16) & 0xFF));
     result.push_back(static_cast<byte_t>((inc >> 8) & 0xFF));
@@ -668,7 +668,7 @@ byte_vector http2_framer::encode_window_update_frame(const http2_window_update_f
 }
 
 byte_vector http2_framer::encode_continuation_frame(const http2_continuation_frame& frame) {
-    uint8_t flags = frame.end_headers ? HTTP2_FLAG_END_HEADERS : 0;
+    const uint8_t flags = frame.end_headers ? HTTP2_FLAG_END_HEADERS : 0;
     byte_vector result =
             build_frame_header(http2_frame_type::CONTINUATION, flags, frame.stream_id, frame.header_block.size());
     result.insert(result.end(), frame.header_block.begin(), frame.header_block.end());
@@ -685,7 +685,7 @@ void http2_framer::decode_frames(const byte_t* data, size_t len, frame_callback 
     byte_cursor cur(data, len);
 
     while (cur.remaining() >= 9) {
-        size_t frame_start = cur.consumed_bytes();
+        const size_t frame_start = cur.consumed_bytes();
 
         auto length_opt = cur.try_read_be24();
         auto type_opt = cur.try_read_byte();
@@ -712,7 +712,7 @@ void http2_framer::decode_frames(const byte_t* data, size_t len, frame_callback 
     }
 
     if (!cur.exhausted()) {
-        size_t consumed = cur.consumed_bytes();
+        const size_t consumed = cur.consumed_bytes();
         partial_buffer_.assign(data + consumed, data + len);
     } else {
         partial_buffer_.clear();
@@ -803,14 +803,14 @@ bool http2_flow_control::can_send(uint32_t stream_id, uint32_t amount) const {
     if (amount > connection_window_) {
         return false;
     }
-    auto it = stream_windows_.find(stream_id);
+    const auto it = stream_windows_.find(stream_id);
     const uint32_t stream_window = (it != stream_windows_.end()) ? it->second : initial_window_;
     return amount <= stream_window;
 }
 
 void http2_flow_control::consume(uint32_t stream_id, uint32_t amount) {
     connection_window_ -= amount;
-    auto it = stream_windows_.find(stream_id);
+    const auto it = stream_windows_.find(stream_id);
     if (it == stream_windows_.end()) {
         stream_windows_[stream_id] = initial_window_ - amount;
     } else {
@@ -822,7 +822,7 @@ void http2_flow_control::add_window(uint32_t stream_id, uint32_t amount) {
     if (stream_id == 0) {
         connection_window_ += amount;
     } else {
-        auto it = stream_windows_.find(stream_id);
+        const auto it = stream_windows_.find(stream_id);
         if (it == stream_windows_.end()) {
             stream_windows_[stream_id] = initial_window_ + amount;
         } else {
@@ -832,7 +832,7 @@ void http2_flow_control::add_window(uint32_t stream_id, uint32_t amount) {
 }
 
 uint32_t http2_flow_control::window(uint32_t stream_id) const {
-    auto it = stream_windows_.find(stream_id);
+    const auto it = stream_windows_.find(stream_id);
     return (it != stream_windows_.end()) ? it->second : initial_window_;
 }
 
@@ -848,7 +848,7 @@ http2_settings::http2_settings() {
 void http2_settings::set(http2_settings_id id, uint32_t value) { params_[static_cast<uint16_t>(id)] = value; }
 
 uint32_t http2_settings::get(http2_settings_id id) const {
-    auto it = params_.find(static_cast<uint16_t>(id));
+    const auto it = params_.find(static_cast<uint16_t>(id));
     return (it != params_.end()) ? it->second : 0;
 }
 
@@ -861,7 +861,7 @@ uint32_t http2_settings::max_header_list_size() const { return get(http2_setting
 
 void http2_settings::apply_remote_settings(const http2_settings_frame& frame) {
     for (const auto& entry: frame.entries) {
-        uint32_t value = entry.value;
+        const uint32_t value = entry.value;
         switch (entry.id) {
             case http2_settings_id::MAX_FRAME_SIZE:
                 if (value < 16384 || value > 16777215) {

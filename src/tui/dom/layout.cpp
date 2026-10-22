@@ -393,12 +393,12 @@ namespace {
 
                     int rem_flex = total_flex;
                     int rem_space = flex_avail;
-                    for (size_t i = 0; i < static_cast<size_t>(n); ++i) {
+                    for (size_t i = 0; compare_less(i, n); ++i) {
                         const auto& child = children[i];
                         const int fw = child_flex_weight(child, true);
                         int child_w = 0;
                         if (fw > 0 && total_flex > 0) {
-                            child_w = (i == static_cast<size_t>(n - 1)) ? rem_space : flex_avail * fw / total_flex;
+                            child_w = compare_equal(i, n - 1) ? rem_space : flex_avail * fw / total_flex;
                             rem_flex -= fw;
                             rem_space -= child_w;
                         } else {

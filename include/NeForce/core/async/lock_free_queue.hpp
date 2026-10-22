@@ -375,8 +375,8 @@ private:
 template <typename T, typename Traits = lock_free_queue_traits>
 class lock_free_queue {
 public:
-    using producer_token_t = ::neforce::producer_token;
-    using consumer_token_t = ::neforce::consumer_token;
+    using producer_token_t = producer_token;
+    using consumer_token_t = consumer_token;
 
     using index_t = typename Traits::index_t;
     using size_t = typename Traits::size_t;

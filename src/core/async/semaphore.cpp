@@ -19,8 +19,8 @@ namespace {
         ::timespec now{};
         ::clock_gettime(CLOCK_REALTIME, &now);
 
-        auto total_ns = relative.count();
-        total_ns = max(total_ns, static_cast<decltype(total_ns)>(0));
+        int64_t total_ns = relative.count();
+        total_ns = max(total_ns, static_cast<int64_t>(0));
 
         constexpr long kNsPerSec = 1'000'000'000L;
         now.tv_sec += static_cast<::time_t>(total_ns / kNsPerSec);

@@ -7698,6 +7698,9 @@ protected:
         if (!pty::is_supported()) {
             GTEST_SKIP() << "the pseudo terminal API is not present on this platform";
         }
+        if (!pty::is_available()) {
+            GTEST_SKIP() << "pseudo terminal is not available in this environment";
+        }
     }
 };
 

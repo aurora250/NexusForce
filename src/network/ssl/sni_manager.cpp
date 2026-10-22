@@ -33,7 +33,7 @@ void* sni_manager::select_ssl_ctx(const string& server_name) const {
         return has_default_ ? default_context_.native_handle() : nullptr;
     }
 
-    auto it = hosts_.find(string(server_name).lowercase());
+    const auto it = hosts_.find(string(server_name).lowercase());
     if (it != hosts_.end()) {
         return it->second.native_handle();
     }
@@ -52,7 +52,7 @@ void* sni_manager::select_ssl_ctx(const string& server_name) const {
 }
 
 int sni_manager::sni_callback(void* ssl, int* /*alert*/, void* arg) {
-    auto* manager = static_cast<sni_manager*>(arg);
+    const auto* manager = static_cast<sni_manager*>(arg);
     if (manager == nullptr) {
         return SSL_TLSEXT_ERR_OK;
     }

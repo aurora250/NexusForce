@@ -528,7 +528,7 @@ size_t io_context::run_one(int timeout_ms) {
         int wait_ms = timeout_ms;
         if (timeout_ms >= 0) {
             const uint64_t elapsed_ms = now_ms() - begin_ms;
-            if (elapsed_ms >= static_cast<uint64_t>(timeout_ms)) {
+            if (compare_greater_equal(elapsed_ms, timeout_ms)) {
                 return 0;
             }
             wait_ms = static_cast<int>(static_cast<uint64_t>(timeout_ms) - elapsed_ms);

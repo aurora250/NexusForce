@@ -17,7 +17,7 @@ namespace {
         return result;
     }
 
-    optional<http_session> deserialize(const string& id, const string& data) {
+    optional<http_session> deserialize(const string& id, const string_view data) {
         http_session session;
         session.id = id;
         session.is_new = false;
@@ -46,11 +46,11 @@ namespace {
 
 optional<http_session> redis_session_store::load(const string& id) {
     const string key = prefix_ + id;
-    auto result = conn_->get(key);
+    const auto result = conn_->get(key);
     if (!result || result->empty()) {
         return none;
     }
-    return deserialize(id, string(result->value()));
+    return deserialize(id, result->value());
 }
 
 void redis_session_store::save(const http_session& session) {

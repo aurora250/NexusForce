@@ -39,8 +39,8 @@ pair<string, bool> health_check_filter::build_health_json() {
         start_time_ms_ = static_cast<int64_t>(steady_clock::now().since_epoch().count() / 1'000'000);
     }
 
-    int64_t now_ms = static_cast<int64_t>(steady_clock::now().since_epoch().count() / 1'000'000);
-    int64_t uptime_s = (now_ms - start_time_ms_) / 1000;
+    const int64_t now_ms = static_cast<int64_t>(steady_clock::now().since_epoch().count() / 1'000'000);
+    const int64_t uptime_s = (now_ms - start_time_ms_) / 1000;
 
     string json = R"({"status":"ok","uptime":)" + to_string(uptime_s);
     bool all_ok = true;
@@ -53,7 +53,7 @@ pair<string, bool> health_check_filter::build_health_json() {
                 json += ",";
             }
             first = false;
-            bool ok = kv.second ? kv.second() : true;
+            const bool ok = kv.second ? kv.second() : true;
             if (!ok) {
                 all_ok = false;
             }
@@ -62,7 +62,7 @@ pair<string, bool> health_check_filter::build_health_json() {
         json += "}";
 
         if (!all_ok) {
-            auto pos = json.find("\"ok\"");
+            const auto pos = json.find("\"ok\"");
             if (pos != string::npos) {
                 json.replace(pos, 4, "\"unhealthy\"");
             }

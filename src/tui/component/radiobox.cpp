@@ -16,7 +16,7 @@ namespace {
         element render() override {
             elements items;
             for (size_t i = 0; i < opt_.entries.size(); ++i) {
-                const bool sel = (static_cast<int>(i) == selected_);
+                const bool sel = compare_equal(i, selected_);
                 string label = sel ? "(*) " : "( ) ";
                 label += opt_.entries[i];
                 items.push_back(element::text(label));

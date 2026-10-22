@@ -33,11 +33,11 @@ namespace {
             if (direction_ == split_direction::left || direction_ == split_direction::right) {
                 element left = (direction_ == split_direction::left) ? main_el : back_el;
                 element right = (direction_ == split_direction::right) ? main_el : back_el;
-                return element::hbox({left, element::text(sep_char), right});
+                return element::hbox({left, element::text(move(sep_char)), right});
             }
             element top = (direction_ == split_direction::top) ? main_el : back_el;
             element bottom = (direction_ == split_direction::bottom) ? main_el : back_el;
-            return element::vbox({top, element::text(sep_char), bottom});
+            return element::vbox({top, element::text(move(sep_char)), bottom});
         }
 
         bool on_key(const key_event& e) override {

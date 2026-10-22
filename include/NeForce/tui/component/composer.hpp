@@ -111,7 +111,7 @@ public:
      * @brief 当前文本
      * @return 文本
      */
-    NEFORCE_NODISCARD const string& text() const;
+    NEFORCE_NODISCARD string_view text() const noexcept;
 
     /**
      * @brief 替换文本并清空选区
