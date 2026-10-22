@@ -566,7 +566,7 @@ size_t io_context::run_one(int timeout_ms) {
                 }
             }
             if (cb) {
-                cb(fd, events[i].events, error_code{});
+                cb(fd, static_cast<epoll_event>(events[i].events), error_code{});
                 ++count;
             }
         }

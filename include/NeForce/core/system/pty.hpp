@@ -8,7 +8,7 @@
  * 在 POSIX 系统上创建伪终端并在其上启动子进程，使子进程获得真正的终端语义。
  */
 
-#include "console.hpp"
+#include "NeForce/core/system/console.hpp"
 #include "NeForce/core/system/signal.hpp"
 #include "NeForce/core/exception/system_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
