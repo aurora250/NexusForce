@@ -219,6 +219,154 @@ public:
     unordered_map(ilist.begin(), ilist.end(), n, hf, eql) {}
 
     /**
+     * @brief 使用指定分配器构造空 unordered_map
+     * @param alloc 分配器
+     */
+    explicit unordered_map(const allocator_type& alloc) :
+    ht_(alloc) {}
+
+    /**
+     * @brief 使用指定分配器和初始桶数构造
+     * @param n 初始桶数
+     * @param alloc 分配器
+     */
+    unordered_map(size_type n, const allocator_type& alloc) :
+    ht_(n, alloc) {}
+
+    /**
+     * @brief 使用指定分配器、初始桶数和哈希函数构造
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    unordered_map(size_type n, const hasher& hf, const allocator_type& alloc) :
+    ht_(n, hf, alloc) {}
+
+    /**
+     * @brief 使用指定分配器、初始桶数、哈希函数和键相等比较函数构造
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    unordered_map(size_type n, const hasher& hf, const key_equal& eql, const allocator_type& alloc) :
+    ht_(n, hf, eql, alloc) {}
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源 unordered_map
+     * @param alloc 分配器
+     */
+    unordered_map(const unordered_map& other, const allocator_type& alloc) :
+    ht_(other.ht_, alloc) {}
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源 unordered_map
+     * @param alloc 分配器
+     */
+    unordered_map(unordered_map&& other, const allocator_type& alloc) :
+    ht_(_NEFORCE move(other.ht_), alloc) {}
+
+    /**
+     * @brief 范围构造并指定分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    unordered_map(Iterator first, Iterator last, const allocator_type& alloc) :
+    ht_(alloc) {
+        ht_.insert_unique(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器和初始桶数
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始桶数
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    unordered_map(Iterator first, Iterator last, size_type n, const allocator_type& alloc) :
+    ht_(n, alloc) {
+        ht_.insert_unique(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器、初始桶数和哈希函数
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    unordered_map(Iterator first, Iterator last, size_type n, const hasher& hf, const allocator_type& alloc) :
+    ht_(n, hf, alloc) {
+        ht_.insert_unique(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器、初始桶数、哈希函数和键相等比较函数
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    unordered_map(Iterator first, Iterator last, size_type n, const hasher& hf, const key_equal& eql,
+                  const allocator_type& alloc) :
+    ht_(n, hf, eql, alloc) {
+        ht_.insert_unique(first, last);
+    }
+
+    /**
+     * @brief 初始化列表构造并指定分配器
+     * @param ilist 初始化列表
+     * @param alloc 分配器
+     */
+    unordered_map(std::initializer_list<value_type> ilist, const allocator_type& alloc) :
+    unordered_map(ilist.begin(), ilist.end(), alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器和初始桶数
+     * @param ilist 初始化列表
+     * @param n 初始桶数
+     * @param alloc 分配器
+     */
+    unordered_map(std::initializer_list<value_type> ilist, size_type n, const allocator_type& alloc) :
+    unordered_map(ilist.begin(), ilist.end(), n, alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器、初始桶数和哈希函数
+     * @param ilist 初始化列表
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    unordered_map(std::initializer_list<value_type> ilist, size_type n, const hasher& hf, const allocator_type& alloc) :
+    unordered_map(ilist.begin(), ilist.end(), n, hf, alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器、初始桶数、哈希函数和键相等比较函数
+     * @param ilist 初始化列表
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    unordered_map(std::initializer_list<value_type> ilist, size_type n, const hasher& hf, const key_equal& eql,
+                  const allocator_type& alloc) :
+    unordered_map(ilist.begin(), ilist.end(), n, hf, eql, alloc) {}
+
+    /**
      * @brief 获取起始迭代器
      * @return 指向第一个元素的迭代器
      */
@@ -265,6 +413,12 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return ht_.max_size(); }
+
+    /**
+     * @brief 获取当前分配器
+     * @return 分配器副本
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return ht_.get_allocator(); }
 
     /**
      * @brief 检查是否为空
@@ -524,12 +678,13 @@ public:
 
 #ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename HashFcn = hash<iter_map_key_t<Iterator>>,
-          typename Compare = equal_to<iter_map_key_t<Iterator>>, typename Alloc>
+          typename Compare = equal_to<iter_map_key_t<Iterator>>,
+          typename Alloc = allocator<hashtable_node<pair<const iter_map_key_t<Iterator>, iter_map_value_t<Iterator>>>>>
 unordered_map(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
         -> unordered_map<iter_map_key_t<Iterator>, iter_map_value_t<Iterator>, HashFcn, Compare, Alloc>;
 
 template <typename Key, typename T, typename HashFcn = hash<Key>, typename Compare = equal_to<Key>,
-          typename Alloc = allocator<pair<const Key, T>>>
+          typename Alloc = allocator<hashtable_node<pair<const Key, T>>>>
 unordered_map(std::initializer_list<pair<Key, T>>, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
         -> unordered_map<Key, T, HashFcn, Compare, Alloc>;
 

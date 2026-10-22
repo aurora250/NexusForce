@@ -81,7 +81,7 @@ struct composer_option {
  *
  * @note `Ctrl+C` 等全局快捷键不在此消费，交给 `keymap` 的全局层处理。
  */
-class NEFORCE_API composer final : public component<> {
+class NEFORCE_API composer final : public component_base {
 public:
     /**
      * @brief 构造函数

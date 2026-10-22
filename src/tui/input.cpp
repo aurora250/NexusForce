@@ -78,8 +78,8 @@ void input_driver::start() {
     ::signal(SIGWINCH, sigwinch_handler);
 
     ctx_.add_fd(
-            STDIN_FILENO, epoll_in, [this](int fd, uint32_t events, error_code ec) { drain_stdin(fd, events, ec); },
-            false);
+            STDIN_FILENO, epoll_event::in,
+            [this](int fd, epoll_event events, error_code ec) { drain_stdin(fd, events, ec); }, false);
 
 #else
     stdin_handle_ = ::GetStdHandle(STD_INPUT_HANDLE);
@@ -127,7 +127,7 @@ void input_driver::stop() {
 }
 
 #ifdef NEFORCE_PLATFORM_LINUX
-void input_driver::drain_stdin(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) {
+void input_driver::drain_stdin(int /*fd*/, epoll_event /*events*/, error_code /*ec*/) {
     byte_t buffer[256];
     while (true) {
         const ssize_t n = ::read(STDIN_FILENO, buffer, sizeof(buffer));

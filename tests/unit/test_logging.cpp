@@ -246,26 +246,28 @@ TEST_F(FileSinkTest, MaxFilesRetention) {
 }
 
 TEST_F(FileSinkTest, SetFormatterWhileLogging) {
-    file_sink sink(filename, 10 * 1024 * 1024, false);
-    sink.set_formatter(make_unique<log_formatter>("{message}"));
+    {
+        file_sink sink(filename, 10 * 1024 * 1024, false);
+        sink.set_formatter(make_unique<log_formatter>("{message}"));
 
-    vector<thread> workers;
-    for (int i = 0; i < 2; ++i) {
-        workers.emplace_back([&sink, this] {
-            for (int j = 0; j < 100; ++j) {
-                sink.log(make_event("concurrent message"));
+        vector<thread> workers;
+        for (int i = 0; i < 2; ++i) {
+            workers.emplace_back([&sink, this] {
+                for (int j = 0; j < 100; ++j) {
+                    sink.log(make_event("concurrent message"));
+                }
+            });
+        }
+        workers.emplace_back([&sink] {
+            for (int i = 0; i < 100; ++i) {
+                sink.set_formatter(make_unique<log_formatter>(i % 2 == 0 ? "{message}" : "[{level}] {message}"));
             }
         });
-    }
-    workers.emplace_back([&sink] {
-        for (int i = 0; i < 100; ++i) {
-            sink.set_formatter(make_unique<log_formatter>(i % 2 == 0 ? "{message}" : "[{level}] {message}"));
+        for (auto& worker: workers) {
+            worker.join();
         }
-    });
-    for (auto& worker: workers) {
-        worker.join();
+        sink.flush();
     }
-    sink.flush();
 
     file in;
     ASSERT_TRUE(in.open(filename));

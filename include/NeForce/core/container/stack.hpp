@@ -47,13 +47,35 @@ private:
     Sequence seq_{}; ///< 底层容器实例
 
 public:
+    /**
+     * @brief 默认构造函数
+     */
     stack() = default;
-    ~stack() = default;
 
+    /**
+     * @brief 拷贝构造函数
+     */
     stack(const stack&) = default;
-    stack& operator=(const stack&) = default;
+
+    /**
+     * @brief 移动构造函数
+     */
     stack(stack&&) noexcept(is_nothrow_move_constructible_v<Sequence>) = default;
+
+    /**
+     * @brief 拷贝赋值运算符
+     */
+    stack& operator=(const stack&) = default;
+
+    /**
+     * @brief 移动赋值运算符
+     */
     stack& operator=(stack&&) noexcept(is_nothrow_move_assignable_v<Sequence>) = default;
+
+    /**
+     * @brief 析构函数
+     */
+    ~stack() = default;
 
     /**
      * @brief 构造函数，使用指定的底层容器副本
@@ -131,7 +153,12 @@ public:
      * @brief 交换两个栈的内容
      * @param other 要交换的另一个栈
      */
-    void swap(stack& other) noexcept(is_nothrow_swappable_v<Sequence>) { _NEFORCE swap(seq_, other.seq_); }
+    void swap(stack& other) noexcept(is_nothrow_swappable_v<Sequence>) {
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
+        _NEFORCE swap(seq_, other.seq_);
+    }
 
     /**
      * @brief 相等比较操作符

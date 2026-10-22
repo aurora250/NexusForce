@@ -7634,19 +7634,84 @@ protected:
         }
         return collected;
     }
+
+    static string shell_executable() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return "cmd.exe";
+#else
+        return "/bin/sh";
+#endif
+    }
+
+    static vector<string> shell_exit_args(const int code) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return {"/c", "exit " + to_string(static_cast<int64_t>(code))};
+#else
+        return {"-c", "exit " + to_string(static_cast<int64_t>(code))};
+#endif
+    }
+
+    static vector<string> shell_echo_exit_args(const int code) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return {"/c", "echo pty-ok& exit " + to_string(static_cast<int64_t>(code))};
+#else
+        return {"-c", "printf 'pty-ok'; exit " + to_string(static_cast<int64_t>(code))};
+#endif
+    }
+
+    static vector<string> shell_env_args() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return {"/c", "echo %NEFORCE_PTY_TEST%"};
+#else
+        return {"-c", "printf '%s' \"$NEFORCE_PTY_TEST\""};
+#endif
+    }
+
+    static vector<string> shell_work_dir_args() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return {"/c", "cd"};
+#else
+        return {"-c", "pwd"};
+#endif
+    }
+
+    static string sleep_executable() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return "cmd.exe";
+#else
+        return "/bin/sleep";
+#endif
+    }
+
+    static vector<string> sleep_args() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return {"/c", "ping -n 30 127.0.0.1 >nul"};
+#else
+        return {"30"};
+#endif
+    }
 };
 
-TEST_F(PtyTest, OpenExposesMasterHandle) {
+class PtySessionTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        if (!pty::is_supported()) {
+            GTEST_SKIP() << "the pseudo terminal API is not present on this platform";
+        }
+    }
+};
+
+TEST_F(PtySessionTest, OpenExposesMasterHandle) {
     pty session;
     session.open(pty::console_size{100, 30});
-    EXPECT_GE(session.master_handle(), 0);
+    EXPECT_TRUE(session.is_master_handle_valid());
     EXPECT_FALSE(session.is_running());
 }
 
 TEST_F(PtyTest, RunsCommandAndReportsExitCode) {
     pty session;
     session.open(pty::console_size{100, 30});
-    session.start("/bin/sh", {"-c", "printf 'pty-ok'; exit 5"});
+    session.start(shell_executable(), shell_echo_exit_args(5));
 
     const string collected = read_until(session, "pty-ok");
     EXPECT_NE(collected.find("pty-ok"), string::npos);
@@ -7654,7 +7719,7 @@ TEST_F(PtyTest, RunsCommandAndReportsExitCode) {
     EXPECT_FALSE(session.is_running());
 }
 
-TEST_F(PtyTest, MissingExecutableThrowsInsteadOfSilentExit) {
+TEST_F(PtySessionTest, MissingExecutableThrowsInsteadOfSilentExit) {
     pty session;
     session.open();
 
@@ -7665,7 +7730,7 @@ TEST_F(PtyTest, MissingExecutableThrowsInsteadOfSilentExit) {
 TEST_F(PtyTest, EnvironmentVariablesAreAppendedToTheChild) {
     pty session;
     session.open();
-    session.start("/bin/sh", {"-c", "printf '%s' \"$NEFORCE_PTY_TEST\""}, "", {"NEFORCE_PTY_TEST=pty-42"});
+    session.start(shell_executable(), shell_env_args(), "", {"NEFORCE_PTY_TEST=pty-42"});
 
     const string collected = read_until(session, "pty-42");
     EXPECT_NE(collected.find("pty-42"), string::npos);
@@ -7673,35 +7738,54 @@ TEST_F(PtyTest, EnvironmentVariablesAreAppendedToTheChild) {
 }
 
 TEST_F(PtyTest, WorkDirectoryAppliesToTheChild) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const string work_dir = environment::get("TEMP");
+    if (work_dir.empty()) {
+        GTEST_SKIP() << "TEMP is not set";
+    }
+#else
+    const string work_dir = "/tmp";
+#endif
+
     pty session;
     session.open();
-    session.start("/bin/sh", {"-c", "pwd"}, "/tmp");
+    session.start(shell_executable(), shell_work_dir_args(), work_dir);
 
-    const string collected = read_until(session, "/tmp");
-    EXPECT_NE(collected.find("/tmp"), string::npos);
+    const string collected = read_until(session, work_dir.view());
+    EXPECT_NE(collected.find(work_dir.view()), string::npos);
     EXPECT_EQ(session.wait(5000), 0);
 }
 
 TEST_F(PtyTest, SignalledChildReportsNegativeCode) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    // Windows has no signal exit status: terminate() calls TerminateProcess() and the child
+    // reports an ordinary process exit code, so the negative-code contract is POSIX only.
+    GTEST_SKIP() << "signal exit status is POSIX only";
+#else
     pty session;
     session.open();
-    session.start("/bin/sleep", {"30"});
+    session.start(sleep_executable(), sleep_args());
     this_thread::sleep_for(milliseconds(50));
 
     session.terminate();
     EXPECT_LT(session.wait(5000), 0);
+#endif
 }
 
 TEST_F(PtyTest, WaitTimeoutKeepsChildRunning) {
     pty session;
     session.open();
-    session.start("/bin/sleep", {"30"});
+    session.start(sleep_executable(), sleep_args());
 
     EXPECT_EQ(session.wait(20), -1);
     EXPECT_TRUE(session.is_running());
 
     session.terminate();
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_GE(session.wait(5000), 0);
+#else
     EXPECT_LT(session.wait(5000), 0);
+#endif
 }
 
 TEST_F(SysinfoTest, NetworkInterfacesReturnsList) {

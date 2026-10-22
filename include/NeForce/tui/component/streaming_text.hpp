@@ -44,7 +44,7 @@ struct streaming_text_option {
  * // 渲染循环每帧会自动 commit()
  * @endcode
  */
-class NEFORCE_API streaming_text_view final : public component<> {
+class NEFORCE_API streaming_text_view final : public component_base {
 public:
     streaming_text_view() = default;
 

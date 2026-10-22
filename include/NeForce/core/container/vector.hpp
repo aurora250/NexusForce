@@ -9,6 +9,7 @@
  * 支持动态内存管理、随机访问迭代器和插入/删除操作。
  */
 
+#include "NeForce/core/memory/allocator_traits.hpp"
 #include "NeForce/core/memory/memory_view.hpp"
 #include "NeForce/core/memory/standard_allocator.hpp"
 #include "NeForce/core/memory/uninitialized.hpp"
@@ -410,6 +411,60 @@ private:
         return;
     }
 
+    NEFORCE_CONSTEXPR20 void copy_assign_impl(const vector& other, true_type /*pocca*/) {
+        if (get_allocator() == other.get_allocator()) {
+            pair_.get_base() = other.pair_.get_base();
+            copy_assign_impl(other, false_type{});
+            return;
+        }
+
+        _NEFORCE destroy(start_, finish_);
+        deallocate();
+        start_ = finish_ = pair_.value = nullptr;
+
+        pair_.get_base() = other.pair_.get_base();
+
+        const size_type n = other.size();
+        start_ = allocate_and_copy(n, other.begin(), other.end());
+        finish_ = start_ + n;
+        pair_.value = finish_;
+    }
+
+    NEFORCE_CONSTEXPR20 void copy_assign_impl(const vector& other, false_type /*pocca*/) {
+        assign(other.cbegin(), other.cend());
+    }
+
+    NEFORCE_CONSTEXPR20 void
+    move_assign_impl(vector&& other,
+                     true_type /*pocma*/) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, pointer>>) {
+        swap_impl(other, true_type{});
+    }
+
+    NEFORCE_CONSTEXPR20 void move_assign_impl(vector&& other, false_type /*pocma*/) {
+        if (get_allocator() == other.get_allocator()) {
+            swap_impl(other, false_type{});
+        } else {
+            vector tmp(_NEFORCE move(other), get_allocator());
+            swap_impl(tmp, false_type{});
+        }
+    }
+
+    NEFORCE_CONSTEXPR20 void
+    swap_impl(vector& other,
+              true_type /*pocs*/) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, pointer>>) {
+        _NEFORCE swap(start_, other.start_);
+        _NEFORCE swap(finish_, other.finish_);
+        _NEFORCE swap(pair_, other.pair_);
+    }
+
+    NEFORCE_CONSTEXPR20 void swap_impl(vector& other, false_type /*pocs*/) noexcept {
+        NEFORCE_DEBUG_VERIFY(get_allocator() == other.get_allocator(),
+                             "swap requires equal allocators when POCS is false");
+        _NEFORCE swap(start_, other.start_);
+        _NEFORCE swap(finish_, other.finish_);
+        _NEFORCE swap(pair_.value, other.pair_.value);
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -468,12 +523,8 @@ public:
      * @brief 拷贝构造函数
      * @param other 源向量
      */
-    NEFORCE_CONSTEXPR20 vector(const vector& other) {
-        const size_type n = other.size();
-        start_ = vector::allocate_and_copy(n, other.begin(), other.end());
-        finish_ = start_ + n;
-        pair_.value = finish_;
-    }
+    NEFORCE_CONSTEXPR20 vector(const vector& other) :
+    vector(other, allocator_traits<allocator_type>::select_on_container_copy_construction(other.get_allocator())) {}
 
     /**
      * @brief 拷贝赋值运算符
@@ -484,9 +535,7 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-
-        vector::clear();
-        vector::insert(end(), other.cbegin(), other.cend());
+        copy_assign_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_copy_assignment{});
         return *this;
     }
 
@@ -495,8 +544,11 @@ public:
      * @param other 源向量
      */
     NEFORCE_CONSTEXPR20
-    vector(vector&& other) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, pointer>>) {
-        vector::swap(other);
+    vector(vector&& other) noexcept(is_nothrow_move_constructible_v<compressed_pair<allocator_type, pointer>>) :
+    start_(other.start_),
+    finish_(other.finish_),
+    pair_(_NEFORCE move(other.pair_)) {
+        other.start_ = other.finish_ = other.pair_.value = nullptr;
     }
 
     /**
@@ -504,15 +556,15 @@ public:
      * @param other 源向量
      * @return 自身引用
      */
-    NEFORCE_CONSTEXPR20 vector&
-    operator=(vector&& other) noexcept(is_nothrow_destructible_v<value_type> &&
-                                       is_nothrow_swappable_v<compressed_pair<allocator_type, pointer>>) {
+    NEFORCE_CONSTEXPR20 vector& operator=(vector&& other) noexcept(
+            (allocator_traits<allocator_type>::propagate_on_container_move_assignment::value ||
+             allocator_traits<allocator_type>::is_always_equal::value) &&
+            is_nothrow_destructible_v<value_type> && is_nothrow_swappable_v<compressed_pair<allocator_type, pointer>>) {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-
-        vector::clear();
-        vector::swap(other);
+        move_assign_impl(_NEFORCE move(other),
+                         typename allocator_traits<allocator_type>::propagate_on_container_move_assignment{});
         return *this;
     }
 
@@ -640,11 +692,18 @@ public:
      */
     NEFORCE_CONSTEXPR20 vector(vector&& other, const allocator_type& alloc) :
     pair_(exact_arg_construct_tag{}, alloc, nullptr) {
-        const size_type n = other.size();
-        start_ = allocate_and_move(n, other.begin(), other.end());
-        finish_ = start_ + n;
-        pair_.value = finish_;
-        other.clear();
+        if (get_allocator() == other.get_allocator()) {
+            start_ = other.start_;
+            finish_ = other.finish_;
+            pair_.value = other.pair_.value;
+            other.start_ = other.finish_ = other.pair_.value = nullptr;
+        } else {
+            const size_type n = other.size();
+            start_ = allocate_and_move(n, other.begin(), other.end());
+            finish_ = start_ + n;
+            pair_.value = finish_;
+            other.clear();
+        }
     }
 
     /**
@@ -787,9 +846,7 @@ public:
     /**
      * @brief 获取当前分配器
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const allocator_type& get_allocator() const noexcept {
-        return pair_.get_base();
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 allocator_type get_allocator() const noexcept { return pair_.get_base(); }
 
     /**
      * @brief 检查是否为空
@@ -1300,14 +1357,12 @@ public:
      * @brief 交换两个向量的内容
      * @param other 要交换的另一个向量
      */
-    NEFORCE_CONSTEXPR20 void swap(vector& other) noexcept(is_nothrow_swappable_v<allocator_type>) {
+    NEFORCE_CONSTEXPR20 void
+    swap(vector& other) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, pointer>>) {
         if (_NEFORCE addressof(other) == this) {
             return;
         }
-
-        _NEFORCE swap(start_, other.start_);
-        _NEFORCE swap(finish_, other.finish_);
-        _NEFORCE swap(pair_, other.pair_);
+        swap_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_swap{});
     }
 
     /**

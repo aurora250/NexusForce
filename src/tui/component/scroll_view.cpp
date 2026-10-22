@@ -4,7 +4,7 @@ NEFORCE_BEGIN_TUI__
 NEFORCE_BEGIN_COMPONENTS__
 
 namespace {
-    class scroll_view_component final : public component<> {
+    class scroll_view_component final : public component_base {
     public:
         explicit scroll_view_component(scroll_view_option opt) :
         opt_(move(opt)) {}

@@ -32,7 +32,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * 支持快速的键查找，且允许重复键。底层使用红黑树实现。
  */
 template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<rb_tree_node<Key>>>
-class multiset : icollector<multiset<Key, Compare, Alloc>> {
+class multiset : public icollector<multiset<Key, Compare, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<rb_tree_node<Key>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Key>, "multiset only contains object types.");
@@ -164,6 +164,81 @@ public:
     }
 
     /**
+     * @brief 使用指定分配器构造空 multiset
+     * @param alloc 分配器
+     */
+    explicit multiset(const allocator_type& alloc) :
+    tree_(Compare(), alloc) {}
+
+    /**
+     * @brief 使用指定比较函数和分配器构造空 multiset
+     * @param comp 比较函数对象
+     * @param alloc 分配器
+     */
+    multiset(const key_compare& comp, const allocator_type& alloc) :
+    tree_(comp, alloc) {}
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源 multiset
+     * @param alloc 分配器
+     */
+    multiset(const multiset& other, const allocator_type& alloc) :
+    tree_(other.tree_, alloc) {}
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源 multiset
+     * @param alloc 分配器
+     */
+    multiset(multiset&& other, const allocator_type& alloc) :
+    tree_(_NEFORCE move(other.tree_), alloc) {}
+
+    /**
+     * @brief 范围构造并指定分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    multiset(Iterator first, Iterator last, const allocator_type& alloc) :
+    tree_(Compare(), alloc) {
+        tree_.insert_equal(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定比较函数和分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param comp 比较函数对象
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    multiset(Iterator first, Iterator last, const key_compare& comp, const allocator_type& alloc) :
+    tree_(comp, alloc) {
+        tree_.insert_equal(first, last);
+    }
+
+    /**
+     * @brief 初始化列表构造并指定分配器
+     * @param ilist 初始化列表
+     * @param alloc 分配器
+     */
+    multiset(std::initializer_list<value_type> ilist, const allocator_type& alloc) :
+    multiset(ilist.begin(), ilist.end(), alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定比较函数和分配器
+     * @param ilist 初始化列表
+     * @param comp 比较函数对象
+     * @param alloc 分配器
+     */
+    multiset(std::initializer_list<value_type> ilist, const key_compare& comp, const allocator_type& alloc) :
+    multiset(ilist.begin(), ilist.end(), comp, alloc) {}
+
+    /**
      * @brief 析构函数
      */
     ~multiset() = default;
@@ -251,6 +326,12 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return tree_.max_size(); }
+
+    /**
+     * @brief 获取当前分配器
+     * @return 分配器副本
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return tree_.get_allocator(); }
 
     /**
      * @brief 检查是否为空
@@ -453,10 +534,10 @@ public:
 
 #ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename Compare = less<iter_value_t<Iterator>>,
-          typename Alloc = allocator<iter_value_t<Iterator>>>
+          typename Alloc = allocator<rb_tree_node<iter_value_t<Iterator>>>>
 multiset(Iterator, Iterator, Compare = Compare(), Alloc = Alloc()) -> multiset<iter_value_t<Iterator>, Compare, Alloc>;
 
-template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<Key>>
+template <typename Key, typename Compare = less<Key>, typename Alloc = allocator<rb_tree_node<Key>>>
 multiset(std::initializer_list<Key>, Compare = Compare(), Alloc = Alloc()) -> multiset<Key, Compare, Alloc>;
 
 template <typename Iterator, typename Alloc>

@@ -58,6 +58,26 @@ public:
     queue() = default;
 
     /**
+     * @brief 拷贝构造函数
+     */
+    queue(const queue&) = default;
+
+    /**
+     * @brief 移动构造函数
+     */
+    queue(queue&&) noexcept(is_nothrow_move_constructible_v<Sequence>) = default;
+
+    /**
+     * @brief 拷贝赋值运算符
+     */
+    queue& operator=(const queue&) = default;
+
+    /**
+     * @brief 移动赋值运算符
+     */
+    queue& operator=(queue&&) noexcept(is_nothrow_move_assignable_v<Sequence>) = default;
+
+    /**
      * @brief 构造函数，使用指定的底层容器副本
      * @param other 底层容器副本
      */

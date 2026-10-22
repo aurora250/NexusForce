@@ -188,7 +188,7 @@ public:
  * @note 稀疏向量在插入/删除时需要移动元素，但迭代性能优异，缓存友好，适用于查找频繁、修改较少且需要有序遍历的场景。
  */
 template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator<Value>>
-class sparse_vector : icollector<sparse_vector<Key, Value, KeyOfValue, Compare, Alloc>> {
+class sparse_vector : public icollector<sparse_vector<Key, Value, KeyOfValue, Compare, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<Value, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "sparse_vector only contains object types.");
@@ -288,6 +288,24 @@ private:
         return iterator(pos, this);
     }
 
+    void swap_impl(sparse_vector& other, true_type /*pocs*/) noexcept(is_nothrow_swappable_v<container_type> &&
+                                                                      is_nothrow_swappable_v<Compare> &&
+                                                                      is_nothrow_swappable_v<KeyOfValue>) {
+        data_.swap(other.data_);
+        _NEFORCE swap(key_compare_, other.key_compare_);
+        _NEFORCE swap(extracter_, other.extracter_);
+    }
+
+    void swap_impl(sparse_vector& other, false_type /*pocs*/) noexcept(is_nothrow_swappable_v<container_type> &&
+                                                                       is_nothrow_swappable_v<Compare> &&
+                                                                       is_nothrow_swappable_v<KeyOfValue>) {
+        NEFORCE_DEBUG_VERIFY(get_allocator() == other.get_allocator(),
+                             "swap requires equal allocators when POCS is false");
+        data_.swap(other.data_);
+        _NEFORCE swap(key_compare_, other.key_compare_);
+        _NEFORCE swap(extracter_, other.extracter_);
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -350,6 +368,42 @@ public:
         extracter_ = _NEFORCE move(other.extracter_);
         return *this;
     }
+
+    /**
+     * @brief 使用指定分配器构造空稀疏向量
+     * @param alloc 分配器
+     */
+    explicit sparse_vector(const allocator_type& alloc) :
+    data_(alloc) {}
+
+    /**
+     * @brief 使用指定比较函数和分配器构造空稀疏向量
+     * @param comp 比较函数对象
+     * @param alloc 分配器
+     */
+    sparse_vector(const Compare& comp, const allocator_type& alloc) :
+    data_(alloc),
+    key_compare_(comp) {}
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源稀疏向量
+     * @param alloc 分配器
+     */
+    sparse_vector(const sparse_vector& other, const allocator_type& alloc) :
+    data_(other.data_, alloc),
+    key_compare_(other.key_compare_),
+    extracter_(other.extracter_) {}
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源稀疏向量
+     * @param alloc 分配器
+     */
+    sparse_vector(sparse_vector&& other, const allocator_type& alloc) :
+    data_(_NEFORCE move(other.data_), alloc),
+    key_compare_(_NEFORCE move(other.key_compare_)),
+    extracter_(_NEFORCE move(other.extracter_)) {}
 
     /**
      * @brief 析构函数
@@ -439,6 +493,12 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return data_.max_size(); }
+
+    /**
+     * @brief 获取当前分配器
+     * @return 分配器副本
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return data_.get_allocator(); }
 
     /**
      * @brief 检查是否为空
@@ -800,9 +860,10 @@ public:
      */
     void swap(sparse_vector& other) noexcept(is_nothrow_swappable_v<container_type> &&
                                              is_nothrow_swappable_v<Compare> && is_nothrow_swappable_v<KeyOfValue>) {
-        data_.swap(other.data_);
-        _NEFORCE swap(key_compare_, other.key_compare_);
-        _NEFORCE swap(extracter_, other.extracter_);
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
+        swap_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_swap{});
     }
 
     /**

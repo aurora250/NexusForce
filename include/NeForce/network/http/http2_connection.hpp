@@ -92,8 +92,8 @@ private:
     void route_stream(uint32_t stream_id, const vector<hpack_header_field>& headers, const byte_t* data,
                       size_t data_len, bool end_stream);
 
-    void on_readable(int fd, uint32_t events, error_code ec);
-    void on_writable(int fd, uint32_t events, error_code ec);
+    void on_readable(int fd, epoll_event events, error_code ec);
+    void on_writable(int fd, epoll_event events, error_code ec);
 
     void handle_frame(http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t* payload, size_t len);
 

@@ -3609,13 +3609,13 @@ TEST(IoContextTest, AddFdAgainOnSameFdUpdatesTheWatchedDirection) {
     int read_ready_calls = 0;
 
     // A pipe's read end is never writable, so the first direction is registered but inert.
-    ctx.add_fd(fds[0], epoll_out, [&](int, uint32_t, error_code) { ++write_ready_calls; });
+    ctx.add_fd(fds[0], epoll_event::out, [&](int, epoll_event, error_code) { ++write_ready_calls; });
 
     const char payload = 'x';
     ASSERT_EQ(::write(fds[1], &payload, 1), 1);
 
     // Re-register the same fd for readability while a byte is already buffered.
-    ctx.add_fd(fds[0], epoll_in, [&](int, uint32_t, error_code) { ++read_ready_calls; });
+    ctx.add_fd(fds[0], epoll_event::in, [&](int, epoll_event, error_code) { ++read_ready_calls; });
 
     for (int i = 0; i < 10 && read_ready_calls == 0; ++i) {
         ctx.run_one(50);

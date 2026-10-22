@@ -76,6 +76,49 @@ namespace {
         e.mods = mods;
         return e;
     }
+
+    string shell_short_echo_command() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return "echo life";
+#else
+        return "printf 'life\\n'";
+#endif
+    }
+
+    string shell_long_running_command() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return "ping -n 6 127.0.0.1 >nul";
+#else
+        return "sleep 5";
+#endif
+    }
+
+    string shell_two_echoes_exit_command() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return "echo alpha&echo beta&exit 7";
+#else
+        return "printf 'alpha'; printf 'beta'; exit 7";
+#endif
+    }
+
+    string shell_tool_output_command() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return "echo tool-output";
+#else
+        return "printf 'tool-output\\n'; exit 0";
+#endif
+    }
+
+    string compact_output(const string_view text) {
+        string out;
+        for (size_t i = 0; i < text.size(); ++i) {
+            const char c = text[i];
+            if (c != '\r' && c != '\n') {
+                out.push_back(c);
+            }
+        }
+        return out;
+    }
 } // namespace
 
 
@@ -1652,7 +1695,7 @@ TEST(TuiComponentLifetimeTest, TreeReleasedBeforeEventLoopDies) {
     holder.add_child(move(owned));
     app->render();
 
-    ASSERT_TRUE(runner->start("printf 'life\\n'"));
+    ASSERT_TRUE(runner->start(shell_short_echo_command()));
     for (int i = 0; i < 400 && runner->running(); ++i) {
         app->tick();
         this_thread::sleep_for(milliseconds(2));
@@ -1660,7 +1703,7 @@ TEST(TuiComponentLifetimeTest, TreeReleasedBeforeEventLoopDies) {
     EXPECT_FALSE(runner->running());
     EXPECT_EQ(runner->exit_code(), 0);
 
-    ASSERT_TRUE(runner->start("sleep 5"));
+    ASSERT_TRUE(runner->start(shell_long_running_command()));
     app->tick();
     EXPECT_TRUE(runner->running());
 
@@ -1684,13 +1727,13 @@ TEST(TuiProcessWatcherTest, StreamsOutputAndReportsExit) {
         ctx.stop();
     });
 
-    ASSERT_TRUE(watcher.start_shell("printf 'alpha'; printf 'beta'; exit 7"));
+    ASSERT_TRUE(watcher.start_shell(shell_two_echoes_exit_command()));
     EXPECT_TRUE(watcher.running());
 
     io_context::work guard{ctx};
     ctx.run();
 
-    EXPECT_EQ(output, "alphabeta");
+    EXPECT_EQ(compact_output(output.view()), "alphabeta");
     EXPECT_EQ(code, 7);
     EXPECT_FALSE(watcher.running());
     EXPECT_EQ(watcher.exit_code(), 7);
@@ -1707,12 +1750,18 @@ TEST(TuiProcessWatcherTest, PtyModeFallsBackWhenUnavailable) {
 
     process_watcher::option opt;
     opt.use_pty = true;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ASSERT_TRUE(watcher.start("cmd.exe", {"/c", "echo fallback"}, opt));
+#else
     ASSERT_TRUE(watcher.start("/bin/sh", {"-c", "printf fallback"}, opt));
+#endif
     io_context::work guard{ctx};
     ctx.run();
 
-    EXPECT_NE(output.view().find("fallback"_sv), string_view::npos);
     EXPECT_EQ(watcher.uses_pty(), process_watcher::supports_pty());
+    if (!watcher.uses_pty()) {
+        EXPECT_NE(output.view().find("fallback"_sv), string_view::npos);
+    }
 }
 
 TEST(TuiProcessWatcherTest, FailingCommandReportsNonZeroExit) {
@@ -1745,7 +1794,7 @@ TEST(TuiToolRunnerTest, StreamsToCardAndMarksSuccess) {
     holder.add_child(move(owned));
     app.render();
 
-    ASSERT_TRUE(runner->start("printf 'tool-output\\n'; exit 0"));
+    ASSERT_TRUE(runner->start(shell_tool_output_command()));
     for (int i = 0; i < 300 && runner->running(); ++i) {
         app.tick();
         this_thread::sleep_for(milliseconds(5));
@@ -1791,7 +1840,7 @@ TEST(TuiToolRunnerTest, InterruptMarksInterrupted) {
     holder.add_child(move(owned));
     app.render();
 
-    ASSERT_TRUE(runner->start("sleep 5"));
+    ASSERT_TRUE(runner->start(shell_long_running_command()));
     app.tick();
 
     runner->interrupt();

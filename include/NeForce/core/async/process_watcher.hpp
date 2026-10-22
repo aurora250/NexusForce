@@ -164,14 +164,15 @@ private:
     function<void(int)> on_exit_;
     int poll_interval_ms_ = 30;
     int exit_code_ = -1;
+    int settle_polls_ = 0;
     bool running_ = false;
     bool term_sent_ = false;
     shared_ptr<bool> alive_ = make_shared<bool>(true);
 
     void attach_pipe();
     void attach_pty();
-    void drain_pipe();
-    void drain_pty();
+    bool drain_pipe();
+    bool drain_pty();
     void poll_exit();
     void finish(int code);
     void release_handles();

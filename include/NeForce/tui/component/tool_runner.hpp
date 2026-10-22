@@ -51,7 +51,7 @@ struct tool_runner_option {
  * // 中断：runner.interrupt();
  * @endcode
  */
-class NEFORCE_API tool_runner final : public component<> {
+class NEFORCE_API tool_runner final : public component_base {
 public:
     /**
      * @brief 构造函数

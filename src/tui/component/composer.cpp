@@ -30,7 +30,7 @@ void composer::setup() {
 }
 
 void composer::take_focus() {
-    component<>::take_focus();
+    component_base::take_focus();
     if (input_ != nullptr) {
         input_->set_has_focus(true);
     }

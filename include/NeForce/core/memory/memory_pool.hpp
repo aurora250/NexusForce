@@ -457,6 +457,11 @@ public:
     using size_type = size_t;          ///< 大小类型
     using difference_type = ptrdiff_t; ///< 差值类型
 
+    using propagate_on_container_copy_assignment = true_type;
+    using propagate_on_container_move_assignment = true_type;
+    using propagate_on_container_swap = true_type;
+    using is_always_equal = false_type;
+
     /**
      * @struct rebind
      * @brief 重新绑定模板
@@ -506,6 +511,9 @@ public:
      * @throws allocate_exception 当内存分配失败时抛出
      */
     NEFORCE_ALLOC_NODISCARD pointer allocate(size_type n) {
+        if (n > max_size()) {
+            NEFORCE_THROW_EXCEPTION(allocate_exception("pool_allocator: n exceeds max_size"));
+        }
         return static_cast<pointer>(pool_->allocate(sizeof(value_type) * n, alignof(value_type)));
     }
 
@@ -533,6 +541,8 @@ public:
      * @return 内存池指针
      */
     NEFORCE_NODISCARD memory_pool* pool() const noexcept { return pool_; }
+
+    NEFORCE_NODISCARD pool_allocator select_on_container_copy_construction() const noexcept { return *this; }
 
 private:
     memory_pool* pool_{&system_memory_pool()};

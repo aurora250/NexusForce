@@ -332,7 +332,7 @@ private:
      * @brief 获取分配器
      * @return 分配器引用
      */
-    allocator_type& get_allocator() noexcept { return alloc_lf_.get_base(); }
+    allocator_type& alloc_ref() noexcept { return alloc_lf_.get_base(); }
 
     /**
      * @brief 分配元数据数组
@@ -341,7 +341,7 @@ private:
      * @throws memory_exception 元数据分配失败
      */
     NEFORCE_NODISCARD byte_t* allocate_metadata(const size_t capacity) {
-        byte_allocator_type alloc(get_allocator());
+        byte_allocator_type alloc(alloc_ref());
         byte_t* mem = nullptr;
         try {
             mem = alloc.allocate(capacity + FLAT_HT_PAD);
@@ -366,7 +366,7 @@ private:
         if (mem == nullptr) {
             return;
         }
-        byte_allocator_type alloc(get_allocator());
+        byte_allocator_type alloc(alloc_ref());
         alloc.deallocate(mem, capacity + FLAT_HT_PAD);
     }
 
@@ -384,7 +384,7 @@ private:
         deleted_ = 0;
         growth_threshold_ = 0;
 
-        allocator_type& alloc = get_allocator();
+        allocator_type& alloc = alloc_ref();
         data_ = alloc.allocate(cap);
         try {
             metadata_ = allocate_metadata(cap);
@@ -407,14 +407,20 @@ private:
                     _NEFORCE destroy(&data_[i]);
                 }
             }
-            allocator_type& alloc = get_allocator();
+            allocator_type& alloc = alloc_ref();
             alloc.deallocate(data_, capacity_);
             data_ = nullptr;
         }
+
         if (metadata_ != nullptr) {
             free_metadata(metadata_, capacity_);
             metadata_ = nullptr;
         }
+
+        capacity_ = 0;
+        size_ = 0;
+        deleted_ = 0;
+        growth_threshold_ = 0;
     }
 
     /**
@@ -677,7 +683,7 @@ private:
             return;
         }
 
-        allocator_type& alloc = get_allocator();
+        allocator_type& alloc = alloc_ref();
         Value* new_data = alloc.allocate(new_capacity);
         byte_t* new_metadata = nullptr;
         try {
@@ -932,6 +938,103 @@ private:
         return const_iterator(iter.index(), iter.container());
     }
 
+    void copy_assign_impl(const flat_hashtable& other, true_type /*pocca*/) {
+        if (alloc_lf_.get_base() == other.alloc_lf_.get_base()) {
+            copy_assign_impl(other, false_type{});
+            return;
+        }
+
+        free_arrays();
+        capacity_ = 0;
+        size_ = 0;
+        deleted_ = 0;
+        growth_threshold_ = 0;
+
+        alloc_lf_.get_base() = other.alloc_lf_.get_base();
+        alloc_lf_.value = other.alloc_lf_.value;
+
+        copy_from(other);
+    }
+
+    void copy_assign_impl(const flat_hashtable& other, false_type /*pocca*/) {
+        alloc_lf_.value = other.alloc_lf_.value;
+        clear();
+        copy_from(other);
+    }
+
+    void move_assign_impl(flat_hashtable&& other, true_type /*pocma*/) noexcept(
+            is_nothrow_swappable_v<hasher> && is_nothrow_swappable_v<key_equal> && is_nothrow_swappable_v<ExtractKey> &&
+            is_nothrow_swappable_v<compressed_pair<allocator_type, float>>) {
+        _NEFORCE swap(data_, other.data_);
+        _NEFORCE swap(metadata_, other.metadata_);
+        _NEFORCE swap(capacity_, other.capacity_);
+        _NEFORCE swap(size_, other.size_);
+        _NEFORCE swap(growth_threshold_, other.growth_threshold_);
+        _NEFORCE swap(deleted_, other.deleted_);
+        _NEFORCE swap(hasher_, other.hasher_);
+        _NEFORCE swap(equals_, other.equals_);
+        _NEFORCE swap(extracter_, other.extracter_);
+        alloc_lf_.swap(other.alloc_lf_);
+    }
+
+    void move_assign_impl(flat_hashtable&& other, false_type /*pocma*/) {
+        if (alloc_lf_.get_base() == other.alloc_lf_.get_base()) {
+            _NEFORCE swap(data_, other.data_);
+            _NEFORCE swap(metadata_, other.metadata_);
+            _NEFORCE swap(capacity_, other.capacity_);
+            _NEFORCE swap(size_, other.size_);
+            _NEFORCE swap(growth_threshold_, other.growth_threshold_);
+            _NEFORCE swap(deleted_, other.deleted_);
+            _NEFORCE swap(hasher_, other.hasher_);
+            _NEFORCE swap(equals_, other.equals_);
+            _NEFORCE swap(extracter_, other.extracter_);
+            _NEFORCE swap(alloc_lf_.value, other.alloc_lf_.value);
+        } else {
+            clear();
+            try {
+                for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                    emplace_equal(_NEFORCE move(*iter));
+                }
+                other.clear();
+            } catch (...) {
+                clear();
+                throw;
+            }
+        }
+    }
+
+    void swap_impl(flat_hashtable& other,
+                   true_type /*pocs*/) noexcept(is_nothrow_swappable_v<hasher> && is_nothrow_swappable_v<key_equal> &&
+                                                is_nothrow_swappable_v<ExtractKey> &&
+                                                is_nothrow_swappable_v<compressed_pair<allocator_type, float>>) {
+        _NEFORCE swap(data_, other.data_);
+        _NEFORCE swap(metadata_, other.metadata_);
+        _NEFORCE swap(capacity_, other.capacity_);
+        _NEFORCE swap(size_, other.size_);
+        _NEFORCE swap(growth_threshold_, other.growth_threshold_);
+        _NEFORCE swap(deleted_, other.deleted_);
+        _NEFORCE swap(hasher_, other.hasher_);
+        _NEFORCE swap(equals_, other.equals_);
+        _NEFORCE swap(extracter_, other.extracter_);
+        alloc_lf_.swap(other.alloc_lf_);
+    }
+
+    void swap_impl(flat_hashtable& other, false_type /*pocs*/) noexcept(is_nothrow_swappable_v<hasher> &&
+                                                                        is_nothrow_swappable_v<key_equal> &&
+                                                                        is_nothrow_swappable_v<ExtractKey>) {
+        NEFORCE_DEBUG_VERIFY(get_allocator() == other.get_allocator(),
+                             "swap requires equal allocators when POCS is false");
+        _NEFORCE swap(data_, other.data_);
+        _NEFORCE swap(metadata_, other.metadata_);
+        _NEFORCE swap(capacity_, other.capacity_);
+        _NEFORCE swap(size_, other.size_);
+        _NEFORCE swap(growth_threshold_, other.growth_threshold_);
+        _NEFORCE swap(deleted_, other.deleted_);
+        _NEFORCE swap(hasher_, other.hasher_);
+        _NEFORCE swap(equals_, other.equals_);
+        _NEFORCE swap(extracter_, other.extracter_);
+    }
+
 public:
     /**
      * @brief 构造函数，指定初始容量
@@ -994,12 +1097,8 @@ public:
      * @param other 源哈希表
      */
     flat_hashtable(const flat_hashtable& other) :
-    hasher_(other.hasher_),
-    equals_(other.equals_),
-    extracter_(other.extracter_),
-    alloc_lf_(other.alloc_lf_) {
-        copy_from(other);
-    }
+    flat_hashtable(other,
+                   allocator_traits<allocator_type>::select_on_container_copy_construction(other.get_allocator())) {}
 
     /**
      * @brief 拷贝赋值运算符
@@ -1010,12 +1109,10 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        clear();
         hasher_ = other.hasher_;
         equals_ = other.equals_;
         extracter_ = other.extracter_;
-        alloc_lf_ = other.alloc_lf_;
-        copy_from(other);
+        copy_assign_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_copy_assignment{});
         return *this;
     }
 
@@ -1047,13 +1144,136 @@ public:
      * @param other 源哈希表
      * @return 自身引用
      */
-    flat_hashtable& operator=(flat_hashtable&& other) noexcept {
+    flat_hashtable&
+    operator=(flat_hashtable&& other) noexcept(allocator_traits<allocator_type>::is_always_equal::value &&
+                                               is_nothrow_swappable_v<hasher> && is_nothrow_swappable_v<key_equal> &&
+                                               is_nothrow_swappable_v<ExtractKey> &&
+                                               is_nothrow_swappable_v<compressed_pair<allocator_type, float>>) {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        clear();
-        swap(other);
+        move_assign_impl(_NEFORCE move(other),
+                         typename allocator_traits<allocator_type>::propagate_on_container_move_assignment{});
         return *this;
+    }
+
+    /**
+     * @brief 使用指定分配器构造空哈希表
+     * @param alloc 分配器
+     */
+    explicit flat_hashtable(const allocator_type& alloc) :
+    alloc_lf_(exact_arg_construct_tag{}, alloc, 0.875F) {}
+
+    /**
+     * @brief 使用指定分配器和初始容量构造
+     * @param n 初始容量提示
+     * @param alloc 分配器
+     */
+    flat_hashtable(const size_type n, const allocator_type& alloc) :
+    alloc_lf_(exact_arg_construct_tag{}, alloc, 0.875F) {
+        if (n > 0) {
+            const size_t cap = next_power_of_2(static_cast<size_t>(static_cast<double>(n) / max_load_factor()));
+            alloc_arrays(cap);
+        }
+    }
+
+    /**
+     * @brief 使用指定分配器、初始容量和哈希函数构造
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    flat_hashtable(const size_type n, const HashFcn& hf, const allocator_type& alloc) :
+    hasher_(hf),
+    alloc_lf_(exact_arg_construct_tag{}, alloc, 0.875F) {
+        if (n > 0) {
+            const size_t cap = next_power_of_2(static_cast<size_t>(static_cast<double>(n) / max_load_factor()));
+            alloc_arrays(cap);
+        }
+    }
+
+    /**
+     * @brief 使用指定分配器、初始容量、哈希函数和相等比较函数构造
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param eql 相等比较函数
+     * @param alloc 分配器
+     */
+    flat_hashtable(const size_type n, const HashFcn& hf, const EqualKey& eql, const allocator_type& alloc) :
+    hasher_(hf),
+    equals_(eql),
+    alloc_lf_(exact_arg_construct_tag{}, alloc, 0.875F) {
+        if (n > 0) {
+            const size_t cap = next_power_of_2(static_cast<size_t>(static_cast<double>(n) / max_load_factor()));
+            alloc_arrays(cap);
+        }
+    }
+
+    /**
+     * @brief 使用指定分配器和所有函数对象构造
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param eql 相等比较函数
+     * @param ext 值提取函数
+     * @param alloc 分配器
+     */
+    flat_hashtable(const size_type n, const HashFcn& hf, const EqualKey& eql, const ExtractKey& ext,
+                   const allocator_type& alloc) :
+    hasher_(hf),
+    equals_(eql),
+    extracter_(ext),
+    alloc_lf_(exact_arg_construct_tag{}, alloc, 0.875F) {
+        if (n > 0) {
+            const size_t cap = next_power_of_2(static_cast<size_t>(static_cast<double>(n) / max_load_factor()));
+            alloc_arrays(cap);
+        }
+    }
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源哈希表
+     * @param alloc 分配器
+     */
+    flat_hashtable(const flat_hashtable& other, const allocator_type& alloc) :
+    hasher_(other.hasher_),
+    equals_(other.equals_),
+    extracter_(other.extracter_),
+    alloc_lf_(exact_arg_construct_tag{}, alloc, other.alloc_lf_.value) {
+        copy_from(other);
+    }
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源哈希表
+     * @param alloc 分配器
+     */
+    flat_hashtable(flat_hashtable&& other, const allocator_type& alloc) :
+    hasher_(_NEFORCE move(other.hasher_)),
+    equals_(_NEFORCE move(other.equals_)),
+    extracter_(_NEFORCE move(other.extracter_)),
+    alloc_lf_(exact_arg_construct_tag{}, alloc, other.alloc_lf_.value) {
+        if (alloc_lf_.get_base() == other.alloc_lf_.get_base()) {
+            data_ = other.data_;
+            metadata_ = other.metadata_;
+            capacity_ = other.capacity_;
+            size_ = other.size_;
+            growth_threshold_ = other.growth_threshold_;
+            deleted_ = other.deleted_;
+            other.data_ = nullptr;
+            other.metadata_ = nullptr;
+            other.capacity_ = 0;
+            other.size_ = 0;
+            other.growth_threshold_ = 0;
+            other.deleted_ = 0;
+        } else {
+            if (other.size_ > 0) {
+                reserve(other.size_);
+                for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                    emplace_equal(_NEFORCE move(*iter));
+                }
+                other.clear();
+            }
+        }
     }
 
     /**
@@ -1136,6 +1356,12 @@ public:
      * @return 容量
      */
     NEFORCE_NODISCARD size_type capacity() const noexcept { return capacity_; }
+
+    /**
+     * @brief 获取分配器
+     * @return 分配器引用
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return alloc_lf_.get_base(); }
 
     /**
      * @brief 获取哈希函数对象
@@ -1719,16 +1945,7 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return;
         }
-        _NEFORCE swap(data_, other.data_);
-        _NEFORCE swap(metadata_, other.metadata_);
-        _NEFORCE swap(capacity_, other.capacity_);
-        _NEFORCE swap(size_, other.size_);
-        _NEFORCE swap(growth_threshold_, other.growth_threshold_);
-        _NEFORCE swap(deleted_, other.deleted_);
-        _NEFORCE swap(hasher_, other.hasher_);
-        _NEFORCE swap(equals_, other.equals_);
-        _NEFORCE swap(extracter_, other.extracter_);
-        alloc_lf_.swap(other.alloc_lf_);
+        swap_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_swap{});
     }
 
     /**

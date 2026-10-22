@@ -11,6 +11,7 @@
  */
 
 #include "NeForce/core/container/flat_unordered_map.hpp"
+#include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/core/system/console.hpp"
 #include "NeForce/core/system/stacktrace.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -40,8 +41,13 @@ public:
     using const_pointer = const T*;
     using reference = T&;
     using const_reference = const T&;
-    using size_type = size_t;
+    using size_type = typename allocator_traits<Alloc>::size_type;
     using difference_type = ptrdiff_t;
+
+    using propagate_on_container_copy_assignment = true_type;
+    using propagate_on_container_move_assignment = true_type;
+    using propagate_on_container_swap = true_type;
+    using is_always_equal = false_type;
 
     /**
      * @struct rebind
@@ -52,23 +58,31 @@ public:
      */
     template <typename U>
     struct rebind {
-        using other = trace_allocator<U>;
+        using other = trace_allocator<U, typename allocator_traits<Alloc>::template rebind_alloc<U>>;
     };
 
+    using traces_map = flat_unordered_map<void*, stacktrace>;
+    using traces_map_shared = shared_ptr<traces_map>;
+
 private:
-    compressed_pair<Alloc, flat_unordered_map<T*, stacktrace>> traces_; ///< 内存分配追踪表
+    compressed_pair<Alloc, traces_map_shared> traces_; ///< 内存分配追踪表
 
 public:
     /**
      * @brief 默认构造函数
      */
-    trace_allocator() = default;
+    trace_allocator() :
+    traces_(default_construct_tag{}, make_shared<traces_map>()) {}
+
+    template <typename U, typename OtherAlloc>
+    trace_allocator(const trace_allocator<U, OtherAlloc>& other) noexcept :
+    traces_(exact_arg_construct_tag{}, other.get_base(), other.traces_shared()) {}
 
     /**
      * @brief 拷贝构造函数
      * @param other 源分配器
      */
-    trace_allocator(const trace_allocator& other) :
+    trace_allocator(const trace_allocator& other) noexcept :
     traces_(other.traces_) {}
 
     /**
@@ -90,11 +104,31 @@ public:
      * 检查是否存在未释放的内存，如果有则输出内存泄漏报告。
      */
     ~trace_allocator() {
-        if (!traces_.value.empty()) {
-            _NEFORCE eprintln("Memory leaks detected! \n");
-            print_stacktrace();
+        try {
+            if (traces_.value && traces_.value.use_count() == 1 && !traces_.value->empty()) {
+                eprintln("Memory leaks detected! \n");
+                print_stacktrace();
+            }
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
         }
     }
+
+    NEFORCE_NODISCARD const traces_map& traces() const noexcept { return *traces_.value; }
+
+    NEFORCE_NODISCARD traces_map& traces() noexcept { return *traces_.value; }
+
+    NEFORCE_NODISCARD const traces_map_shared& traces_shared() const noexcept { return traces_.value; }
+
+    NEFORCE_NODISCARD traces_map_shared& traces_shared() noexcept { return traces_.value; }
+
+    NEFORCE_NODISCARD const Alloc& get_base() const noexcept { return traces_.get_base(); }
+
+    NEFORCE_NODISCARD Alloc& get_base() noexcept { return traces_.get_base(); }
 
     /**
      * @brief 打印所有未释放内存的调用栈
@@ -102,12 +136,12 @@ public:
      * 遍历追踪表，输出每个泄漏指针的地址和分配时的调用栈。
      */
     void print_stacktrace() const {
-        for (auto& entry: traces_.value) {
+        for (auto& entry: traces()) {
             if (entry.first == nullptr) {
                 continue;
             }
-            _NEFORCE eprintln("Leaked pointer: ", static_cast<void*>(entry.first));
-            _NEFORCE eprintln("Allocation stack trace:\n", entry.second);
+            eprintln("Leaked pointer: ", entry.first);
+            eprintln("Allocation stack trace:\n", entry.second);
         }
     }
 
@@ -120,7 +154,14 @@ public:
      */
     NEFORCE_ALLOC_NODISCARD NEFORCE_ALLOC_OPTIMIZE pointer allocate(const size_type n) {
         pointer ptr = traces_.get_base().allocate(n);
-        traces_.value[ptr] = stacktrace::current(1);
+        if (ptr != nullptr) {
+            try {
+                traces()[ptr] = stacktrace::current(1);
+            } catch (...) {
+                traces_.get_base().deallocate(ptr, n);
+                throw;
+            }
+        }
         return ptr;
     }
 
@@ -140,9 +181,19 @@ public:
      * 释放由allocate分配的内存，并从追踪表中移除记录。
      */
     void deallocate(pointer p, const size_type n) noexcept {
-        auto it = traces_.value.find(p);
-        if (it != traces_.value.end()) {
-            traces_.value.erase(it);
+        if (p != nullptr) {
+            try {
+                auto it = traces().find(p);
+                if (it != traces().end()) {
+                    traces().erase(it);
+                }
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
+            }
         }
         traces_.get_base().deallocate(p, n);
     }
@@ -154,16 +205,24 @@ public:
      * 释放由allocate()分配的单个元素内存。
      */
     void deallocate(pointer p) noexcept { this->deallocate(p, 1); }
+
+    /**
+     * @brief 获取分配器可分配的最大元素数量
+     * @return 最大可分配元素数量
+     */
+    NEFORCE_NODISCARD size_type max_size() const noexcept { return allocator_traits<Alloc>::max_size(get_base()); }
+
+    NEFORCE_NODISCARD trace_allocator select_on_container_copy_construction() const noexcept { return *this; }
 };
 
-template <typename T, typename U>
-NEFORCE_NODISCARD bool operator==(const trace_allocator<T>& lhs, const trace_allocator<U>& rhs) noexcept {
-    return true;
+template <typename T, typename U, typename A1, typename A2>
+bool operator==(const trace_allocator<T, A1>& lhs, const trace_allocator<U, A2>& rhs) noexcept {
+    return lhs.traces_shared() == rhs.traces_shared() && lhs.get_base() == rhs.get_base();
 }
 
-template <typename T, typename U>
-NEFORCE_NODISCARD bool operator!=(const trace_allocator<T>& lhs, const trace_allocator<U>& rhs) noexcept {
-    return false;
+template <typename T, typename U, typename A1, typename A2>
+bool operator!=(const trace_allocator<T, A1>& lhs, const trace_allocator<U, A2>& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 /** @} */ // Stacktrace

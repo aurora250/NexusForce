@@ -43,7 +43,7 @@ struct status_indicator_option {
  *
  * 由 `on_animation()` 驱动帧切换与计时。
  */
-class NEFORCE_API status_indicator_view final : public component<> {
+class NEFORCE_API status_indicator_view final : public component_base {
 public:
     status_indicator_view() = default;
 

@@ -37,14 +37,17 @@ void process_watcher::release_handles() {
 void process_watcher::attach_pipe() {
 #ifndef NEFORCE_PLATFORM_WINDOWS
     const auto fd = static_cast<io_context::native_handle_type>(out_pipe_->native_read_handle());
-    ctx_.add_fd(fd, epoll_in, [this](int /*fd*/, uint32_t /*events*/, error_code /*ec*/) { drain_pipe(); }, false);
+    ctx_.add_fd(
+            fd, epoll_event::in, [this](int /*fd*/, epoll_event /*events*/, error_code /*ec*/) { drain_pipe(); },
+            false);
 #endif
 }
 
 void process_watcher::attach_pty() {
 #ifndef NEFORCE_PLATFORM_WINDOWS
     const auto fd = static_cast<io_context::native_handle_type>(term_->master_handle());
-    ctx_.add_fd(fd, epoll_in, [this](int /*fd*/, uint32_t /*events*/, error_code /*ec*/) { drain_pty(); }, false);
+    ctx_.add_fd(
+            fd, epoll_event::in, [this](int /*fd*/, epoll_event /*events*/, error_code /*ec*/) { drain_pty(); }, false);
 #endif
 }
 
@@ -53,6 +56,7 @@ bool process_watcher::start(const string& executable, const vector<string>& args
 
     exit_code_ = -1;
     term_sent_ = false;
+    settle_polls_ = 0;
     poll_interval_ms_ = max(1, opt.poll_interval_ms);
 
     const bool want_pty = opt.use_pty && pty::is_available();
@@ -129,24 +133,32 @@ bool process_watcher::start_shell(const string& command_line, option opt) {
 #endif
 }
 
-void process_watcher::drain_pipe() {
+bool process_watcher::drain_pipe() {
     if (out_pipe_ == nullptr) {
-        return;
+        return false;
     }
     const string data = out_pipe_->read_available();
-    if (!data.empty() && on_output_) {
+    if (data.empty()) {
+        return false;
+    }
+    if (on_output_) {
         on_output_(data.view());
     }
+    return true;
 }
 
-void process_watcher::drain_pty() {
+bool process_watcher::drain_pty() {
     if (term_ == nullptr) {
-        return;
+        return false;
     }
     const string data = term_->read_available();
-    if (!data.empty() && on_output_) {
+    if (data.empty()) {
+        return false;
+    }
+    if (on_output_) {
         on_output_(data.view());
     }
+    return true;
 }
 
 void process_watcher::poll_exit() {
@@ -176,6 +188,21 @@ void process_watcher::poll_exit() {
     }
 
     if (exited) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        // ConPTY and the stdout pipe deliver their tail after the child has been reaped,
+        // so the first exit poll can still miss the final chunk.
+        // Keep polling until two consecutive polls read nothing, then report the exit.
+        if (settle_polls_ == 0) {
+            settle_polls_ = 2;
+        }
+        if (settle_polls_ > 0) {
+            const bool more = (term_ != nullptr) ? drain_pty() : drain_pipe();
+            settle_polls_ = more ? 2 : settle_polls_ - 1;
+            if (settle_polls_ > 0) {
+                return;
+            }
+        }
+#endif
         finish(code);
     }
 }

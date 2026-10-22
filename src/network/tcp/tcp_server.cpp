@@ -23,8 +23,8 @@ void tcp_server_base::accept_loop() {
             fd_registered = false;
         }
         fired->store(false, memory_order_release);
-        ctx_.add_fd(acceptor_fd, epoll_in,
-                    [fired](int, uint32_t, error_code) { fired->store(true, memory_order_release); });
+        ctx_.add_fd(acceptor_fd, epoll_event::in,
+                    [fired](int, epoll_event, error_code) { fired->store(true, memory_order_release); });
         fd_registered = true;
     };
 

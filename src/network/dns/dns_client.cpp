@@ -12,10 +12,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    uint16_t read_be16(const byte_t* p) noexcept {
-        return static_cast<uint16_t>((static_cast<uint16_t>(p[0]) << 8) | static_cast<uint16_t>(p[1]));
-    }
-
     uint16_t generate_dns_client_id() {
         thread_local random_mt tls_random;
         thread_local bool seeded = false;
@@ -507,7 +503,7 @@ namespace {
                 NEFORCE_THROW_EXCEPTION(dns_exception::parse_error("Additional section exceeds buffer"));
             }
 
-            const uint16_t rtype = read_be16(&response[offset]);
+            const uint16_t rtype = endian::read_be16(&response[offset]);
 
             if (rtype == edns::OPT_TYPE) {
                 offset = name_start;
@@ -541,7 +537,7 @@ void dns_client::dns_query_op::start() {
     expected_question_ = randomize_case_pattern(domain.view(), client->case_randomize_);
     query_data_ = build_query(domain.view(), type, qclass, client->recursion_desired_, true, client->dnssec_ok_,
                               client->edns_udp_payload_, expected_question_.view());
-    query_id_ = read_be16(query_data_.data());
+    query_id_ = endian::read_be16(query_data_.data());
 
     {
         client->pending_mutex_.lock();
@@ -580,7 +576,7 @@ void dns_client::dns_query_op::retry_udp() {
     expected_question_ = randomize_case_pattern(domain.view(), client->case_randomize_);
     query_data_ = build_query(domain.view(), type, qclass, client->recursion_desired_, true, client->dnssec_ok_,
                               client->edns_udp_payload_, expected_question_.view());
-    query_id_ = read_be16(query_data_.data());
+    query_id_ = endian::read_be16(query_data_.data());
 
     {
         client->pending_mutex_.lock();
@@ -671,7 +667,7 @@ void dns_client::dns_query_op::start_tcp_fallback() {
         expected_question_ = randomize_case_pattern(domain.view(), client->case_randomize_);
         query_data_ = build_query(domain.view(), type, qclass, client->recursion_desired_, true, client->dnssec_ok_,
                                   client->edns_udp_payload_, expected_question_.view());
-        query_id_ = read_be16(query_data_.data());
+        query_id_ = endian::read_be16(query_data_.data());
 
         if (tcp_only_) {
             client->pending_mutex_.lock();
@@ -749,7 +745,7 @@ void dns_client::dns_query_op::on_tcp_len_read(const error_code ec, const size_t
         return;
     }
 
-    const uint16_t len = read_be16(tcp_len_buf_);
+    const uint16_t len = endian::read_be16(tcp_len_buf_);
     if (len == 0) {
         finish_tcp(make_error_code(errc::protocol_error), dns_query_result{});
         return;
@@ -873,8 +869,8 @@ void dns_client::stop_io() {
 
 void dns_client::register_shared_receive() {
     auto* self = this;
-    ctx_->add_fd(static_cast<int>(shared_socket_.native_handle()), epoll_in,
-                 [self](int /*fd*/, uint32_t /*events*/, const error_code ec) { self->on_udp_readable(ec); });
+    ctx_->add_fd(static_cast<int>(shared_socket_.native_handle()), epoll_event::in,
+                 [self](int /*fd*/, epoll_event /*events*/, const error_code ec) { self->on_udp_readable(ec); });
 }
 
 void dns_client::on_udp_readable(const error_code ec) {
@@ -902,7 +898,7 @@ void dns_client::process_udp_receive() {
         if (buffer.size() < sizeof(uint16_t)) {
             continue;
         }
-        const uint16_t response_id = read_be16(buffer.data());
+        const uint16_t response_id = endian::read_be16(buffer.data());
         dispatch_to_op(response_id, move(buffer));
     }
 }

@@ -194,6 +194,81 @@ public:
     }
 
     /**
+     * @brief 使用指定分配器构造空 multimap
+     * @param alloc 分配器
+     */
+    explicit multimap(const allocator_type& alloc) :
+    tree_(Compare(), alloc) {}
+
+    /**
+     * @brief 使用指定比较函数和分配器构造空 multimap
+     * @param comp 比较函数对象
+     * @param alloc 分配器
+     */
+    multimap(const key_compare& comp, const allocator_type& alloc) :
+    tree_(comp, alloc) {}
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源 multimap
+     * @param alloc 分配器
+     */
+    multimap(const multimap& other, const allocator_type& alloc) :
+    tree_(other.tree_, alloc) {}
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源 multimap
+     * @param alloc 分配器
+     */
+    multimap(multimap&& other, const allocator_type& alloc) :
+    tree_(_NEFORCE move(other.tree_), alloc) {}
+
+    /**
+     * @brief 范围构造并指定分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    multimap(Iterator first, Iterator last, const allocator_type& alloc) :
+    tree_(Compare(), alloc) {
+        tree_.insert_equal(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定比较函数和分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param comp 比较函数对象
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    multimap(Iterator first, Iterator last, const key_compare& comp, const allocator_type& alloc) :
+    tree_(comp, alloc) {
+        tree_.insert_equal(first, last);
+    }
+
+    /**
+     * @brief 初始化列表构造并指定分配器
+     * @param ilist 初始化列表
+     * @param alloc 分配器
+     */
+    multimap(std::initializer_list<value_type> ilist, const allocator_type& alloc) :
+    multimap(ilist.begin(), ilist.end(), alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定比较函数和分配器
+     * @param ilist 初始化列表
+     * @param comp 比较函数对象
+     * @param alloc 分配器
+     */
+    multimap(std::initializer_list<value_type> ilist, const key_compare& comp, const allocator_type& alloc) :
+    multimap(ilist.begin(), ilist.end(), comp, alloc) {}
+
+    /**
      * @brief 析构函数
      */
     ~multimap() = default;
@@ -281,6 +356,12 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return tree_.max_size(); }
+
+    /**
+     * @brief 获取当前分配器
+     * @return 分配器副本
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return tree_.get_allocator(); }
 
     /**
      * @brief 检查是否为空

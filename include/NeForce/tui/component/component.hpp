@@ -37,7 +37,20 @@ struct empty_props {};
  */
 class component_base {
 public:
-    virtual ~component_base() = default;
+    /**
+     * @brief 构造组件基类
+     */
+    NEFORCE_API component_base();
+
+    /**
+     * @brief 析构组件基类
+     */
+    virtual NEFORCE_API ~component_base();
+
+    component_base(const component_base&) = delete;
+    component_base& operator=(const component_base&) = delete;
+    component_base(component_base&&) = delete;
+    component_base& operator=(component_base&&) = delete;
 
     /**
      * @brief 声明式渲染
@@ -375,6 +388,23 @@ protected:
     friend class application;
 
     /**
+     * @brief 创建响应式状态变量
+     * @tparam T 值类型
+     * @param initial 初始值
+     * @return 状态变量引用
+     *
+     * 状态变量生命周期绑定到组件。
+     *
+     * @note 必须在构造函数或 setup() 中调用，禁止在 render() 中动态创建。
+     */
+    template <typename T>
+    state<T>& create_state(T initial) {
+        auto s = _NEFORCE make_shared<state<T>>(this, _NEFORCE move(initial));
+        states_.push_back(s);
+        return *s;
+    }
+
+    /**
      * @brief 向上传播结构变化标记
      */
     void mark_structure_dirty() noexcept {
@@ -404,13 +434,15 @@ protected:
 private:
     function<void(component_base*)> schedule_render_cb_;    ///< 由 reconciler 注入的调度回调
     flat_unordered_map<size_t, shared_ptr<void>> contexts_; ///< 上下文映射
+    vector<shared_ptr<void>> states_;                       ///< 类型擦除的状态列表
 };
 
 /**
  * @brief 组件模板
  * @tparam P 属性类型，父组件向子组件传递的只读参数
  *
- * 所有 TUI 组件应继承此类并实现 render()。
+ * 需要属性参数的用户组件继承此类并实现 render()；
+ * 不接收属性的库内组件直接继承 component_base。
  */
 template <typename P = empty_props>
 class component : public component_base {
@@ -432,35 +464,13 @@ protected:
     NEFORCE_NODISCARD const props_type& props() const noexcept { return props_; }
 
     /**
-     * @brief 创建响应式状态变量
-     * @tparam T 值类型
-     * @param initial 初始值
-     * @return 状态变量引用
-     *
-     * 状态变量生命周期绑定到组件。
-     *
-     * @note 必须在构造函数或 setup() 中调用，禁止在 render() 中动态创建。
-     */
-    template <typename T>
-    state<T>& create_state(T initial) {
-        auto s = _NEFORCE make_shared<state<T>>(this, _NEFORCE move(initial));
-        states_.push_back(s);
-        return *s;
-    }
-
-    /**
      * @brief 注入属性
      * @param p 属性值
      */
     void set_props(props_type p) { props_ = _NEFORCE move(p); }
 
 private:
-    friend class reconciler;
-    friend class focus_manager;
-    friend class application;
-
     props_type props_;
-    vector<shared_ptr<void>> states_; ///< 类型擦除的状态列表
 };
 
 

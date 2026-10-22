@@ -298,7 +298,7 @@ namespace {
                     }
                 });
             }
-            ctx->add_fd(sock->native_handle(), epoll_out, [self](int, uint32_t, error_code ec) {
+            ctx->add_fd(sock->native_handle(), epoll_event::out, [self](int, epoll_event, error_code ec) {
                 bool expected = false;
                 if (self->fired_.compare_exchange_strong(expected, true)) {
                     self->on_ready(ec);
@@ -419,7 +419,7 @@ namespace {
                     }
                 });
             }
-            ctx->add_fd(fd, epoll_in, [self](int, uint32_t, error_code ec) {
+            ctx->add_fd(fd, epoll_event::in, [self](int, epoll_event, error_code ec) {
                 bool expected = false;
                 if (self->fired_.compare_exchange_strong(expected, true)) {
                     self->on_ready(ec);
@@ -524,7 +524,7 @@ namespace {
                     }
                 });
             }
-            ctx->add_fd(fd, epoll_out, [self](int, uint32_t, error_code ec) {
+            ctx->add_fd(fd, epoll_event::out, [self](int, epoll_event, error_code ec) {
                 bool expected = false;
                 if (self->fired_.compare_exchange_strong(expected, true)) {
                     self->on_ready(ec);

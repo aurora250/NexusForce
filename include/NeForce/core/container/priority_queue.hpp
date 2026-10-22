@@ -65,6 +65,28 @@ public:
     priority_queue() = default;
 
     /**
+     * @brief 拷贝构造函数
+     */
+    priority_queue(const priority_queue&) = default;
+
+    /**
+     * @brief 移动构造函数
+     */
+    priority_queue(priority_queue&&) noexcept(is_nothrow_move_constructible_v<compressed_pair<Compare, Sequence>>) =
+            default;
+
+    /**
+     * @brief 拷贝赋值运算符
+     */
+    priority_queue& operator=(const priority_queue&) = default;
+
+    /**
+     * @brief 移动赋值运算符
+     */
+    priority_queue&
+    operator=(priority_queue&&) noexcept(is_nothrow_move_assignable_v<compressed_pair<Compare, Sequence>>) = default;
+
+    /**
      * @brief 构造函数，指定比较函数
      * @param comp 比较函数对象
      */
@@ -87,8 +109,7 @@ public:
      * @param comp 比较函数对象
      * @param seq 要移动的底层容器
      */
-    priority_queue(const Compare& comp, Sequence&& seq) noexcept(is_nothrow_move_constructible_v<Sequence> &&
-                                                                 is_nothrow_copy_constructible_v<Compare>) :
+    priority_queue(const Compare& comp, Sequence&& seq) :
     pair_(exact_arg_construct_tag{}, comp, _NEFORCE move(seq)) {
         make_heap_inside();
     }
@@ -161,6 +182,11 @@ public:
         pair_.value.insert(pair_.value.end(), first, last);
         make_heap_inside();
     }
+
+    /**
+     * @brief 析构函数
+     */
+    ~priority_queue() = default;
 
     /**
      * @brief 检查优先队列是否为空
@@ -237,8 +263,11 @@ public:
      * @brief 交换两个优先队列的内容
      * @param other 要交换的另一个优先队列
      */
-    void swap(priority_queue& other) noexcept(is_nothrow_swappable_v<Sequence> && is_nothrow_swappable_v<Compare>) {
-        pair_.swap(other.pair_);
+    void swap(priority_queue& other) noexcept(is_nothrow_swappable_v<compressed_pair<Compare, Sequence>>) {
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
+        _NEFORCE swap(pair_, other.pair_);
     }
 
     /**

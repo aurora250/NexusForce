@@ -34,7 +34,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename Value, typename HashFcn = hash<Value>, typename EqualKey = equal_to<Value>,
           typename Alloc = allocator<hashtable_node<Value>>>
-class unordered_set : icollector<unordered_set<Value, HashFcn, EqualKey, Alloc>> {
+class unordered_set : public icollector<unordered_set<Value, HashFcn, EqualKey, Alloc>> {
     static_assert(is_hash_v<HashFcn, Value>, "unordered set requires valid hash function.");
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<hashtable_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
@@ -218,6 +218,154 @@ public:
     unordered_set(ilist.begin(), ilist.end(), n, hf, eql) {}
 
     /**
+     * @brief 使用指定分配器构造空 unordered_set
+     * @param alloc 分配器
+     */
+    explicit unordered_set(const allocator_type& alloc) :
+    ht_(alloc) {}
+
+    /**
+     * @brief 使用指定分配器和初始桶数构造
+     * @param n 初始桶数
+     * @param alloc 分配器
+     */
+    unordered_set(size_type n, const allocator_type& alloc) :
+    ht_(n, alloc) {}
+
+    /**
+     * @brief 使用指定分配器、初始桶数和哈希函数构造
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    unordered_set(size_type n, const hasher& hf, const allocator_type& alloc) :
+    ht_(n, hf, alloc) {}
+
+    /**
+     * @brief 使用指定分配器、初始桶数、哈希函数和键相等比较函数构造
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    unordered_set(size_type n, const hasher& hf, const key_equal& eql, const allocator_type& alloc) :
+    ht_(n, hf, eql, alloc) {}
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源 unordered_set
+     * @param alloc 分配器
+     */
+    unordered_set(const unordered_set& other, const allocator_type& alloc) :
+    ht_(other.ht_, alloc) {}
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源 unordered_set
+     * @param alloc 分配器
+     */
+    unordered_set(unordered_set&& other, const allocator_type& alloc) :
+    ht_(_NEFORCE move(other.ht_), alloc) {}
+
+    /**
+     * @brief 范围构造并指定分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    unordered_set(Iterator first, Iterator last, const allocator_type& alloc) :
+    ht_(alloc) {
+        ht_.insert_unique(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器和初始桶数
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始桶数
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    unordered_set(Iterator first, Iterator last, size_type n, const allocator_type& alloc) :
+    ht_(n, alloc) {
+        ht_.insert_unique(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器、初始桶数和哈希函数
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    unordered_set(Iterator first, Iterator last, size_type n, const hasher& hf, const allocator_type& alloc) :
+    ht_(n, hf, alloc) {
+        ht_.insert_unique(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器、初始桶数、哈希函数和键相等比较函数
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    unordered_set(Iterator first, Iterator last, size_type n, const hasher& hf, const key_equal& eql,
+                  const allocator_type& alloc) :
+    ht_(n, hf, eql, alloc) {
+        ht_.insert_unique(first, last);
+    }
+
+    /**
+     * @brief 初始化列表构造并指定分配器
+     * @param ilist 初始化列表
+     * @param alloc 分配器
+     */
+    unordered_set(std::initializer_list<value_type> ilist, const allocator_type& alloc) :
+    unordered_set(ilist.begin(), ilist.end(), alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器和初始桶数
+     * @param ilist 初始化列表
+     * @param n 初始桶数
+     * @param alloc 分配器
+     */
+    unordered_set(std::initializer_list<value_type> ilist, size_type n, const allocator_type& alloc) :
+    unordered_set(ilist.begin(), ilist.end(), n, alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器、初始桶数和哈希函数
+     * @param ilist 初始化列表
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    unordered_set(std::initializer_list<value_type> ilist, size_type n, const hasher& hf, const allocator_type& alloc) :
+    unordered_set(ilist.begin(), ilist.end(), n, hf, alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器、初始桶数、哈希函数和键相等比较函数
+     * @param ilist 初始化列表
+     * @param n 初始桶数
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    unordered_set(std::initializer_list<value_type> ilist, size_type n, const hasher& hf, const key_equal& eql,
+                  const allocator_type& alloc) :
+    unordered_set(ilist.begin(), ilist.end(), n, hf, eql, alloc) {}
+
+    /**
      * @brief 获取起始迭代器
      * @return 指向第一个元素的迭代器
      */
@@ -264,6 +412,12 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return ht_.max_size(); }
+
+    /**
+     * @brief 获取当前分配器
+     * @return 分配器副本
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return ht_.get_allocator(); }
 
     /**
      * @brief 检查是否为空
@@ -391,15 +545,38 @@ public:
     /**
      * @brief 删除指定位置的元素
      * @param position 要删除的位置
+     * @return 指向被删除元素之后位置的迭代器
      */
-    void erase(iterator position) noexcept { ht_.erase(position); }
+    iterator erase(iterator position) noexcept(noexcept(ht_.erase(position))) { return ht_.erase(position); }
 
     /**
      * @brief 删除指定范围内的元素
      * @param first 起始迭代器
      * @param last 结束迭代器
+     * @return 指向最后一个被删除元素之后位置的迭代器
      */
-    void erase(iterator first, iterator last) noexcept { ht_.erase(first, last); }
+    iterator erase(iterator first, iterator last) noexcept(noexcept(ht_.erase(first, last))) {
+        return ht_.erase(first, last);
+    }
+
+    /**
+     * @brief 删除指定位置的常量元素
+     * @param position 要删除的位置
+     * @return 指向被删除元素之后位置的常量迭代器
+     */
+    const_iterator erase(const_iterator position) noexcept(noexcept(ht_.erase(position))) {
+        return ht_.erase(position);
+    }
+
+    /**
+     * @brief 删除指定范围内的常量元素
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @return 指向最后一个被删除元素之后位置的常量迭代器
+     */
+    const_iterator erase(const_iterator first, const_iterator last) noexcept(noexcept(ht_.erase(first, last))) {
+        return ht_.erase(first, last);
+    }
 
     /**
      * @brief 清空unordered_set
@@ -463,11 +640,13 @@ public:
 
 #ifdef NEFORCE_STANDARD_17
 template <typename Iterator, typename HashFcn = hash<iter_value_t<Iterator>>,
-          typename Compare = equal_to<iter_value_t<Iterator>>, typename Alloc = allocator<iter_value_t<Iterator>>>
+          typename Compare = equal_to<iter_value_t<Iterator>>,
+          typename Alloc = allocator<hashtable_node<iter_value_t<Iterator>>>>
 unordered_set(Iterator, Iterator, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
         -> unordered_set<iter_value_t<Iterator>, HashFcn, Compare, Alloc>;
 
-template <typename Key, typename HashFcn = hash<Key>, typename Compare = equal_to<Key>, typename Alloc = allocator<Key>>
+template <typename Key, typename HashFcn = hash<Key>, typename Compare = equal_to<Key>,
+          typename Alloc = allocator<hashtable_node<Key>>>
 unordered_set(std::initializer_list<Key>, HashFcn = HashFcn(), Compare = Compare(), Alloc = Alloc())
         -> unordered_set<Key, HashFcn, Compare, Alloc>;
 

@@ -13,6 +13,9 @@
 
 #include "NeForce/core/algorithm/sort.hpp"
 #include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/memory/allocator_traits.hpp"
+#include "NeForce/core/memory/construct.hpp"
+#include "NeForce/core/utility/compressed_pair.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -421,7 +424,12 @@ private:
     using node_type = hashtable_node<Value>; ///< 节点类型
     using link_type = node_type*;            ///< 节点指针类型
 
-    vector<link_type> buckets_{};                                                ///< 桶数组
+    /// 桶数组使用的重绑定分配器
+    using bucket_allocator = typename allocator_traits<allocator_type>::template rebind_alloc<link_type>;
+    /// 桶数组容器类型
+    using bucket_container = vector<link_type, bucket_allocator>;
+
+    bucket_container buckets_{};                                                 ///< 桶数组
     size_type size_ = 0;                                                         ///< 元素数量
     hasher hasher_{};                                                            ///< 哈希函数对象
     key_equal equals_{};                                                         ///< 键相等比较对象
@@ -845,6 +853,95 @@ private:
         return const_iterator(const_cast<node_type*>(iter.base()), iter.bucket(), iter.container());
     }
 
+    void copy_assign_impl(const hashtable& other, true_type /*pocca*/) {
+        if (pair_.get_base() == other.pair_.get_base()) {
+            copy_assign_impl(other, false_type{});
+            return;
+        }
+
+        clear();
+
+        bucket_container new_buckets(bucket_allocator(other.pair_.get_base()));
+        buckets_.~bucket_container();
+        _NEFORCE construct(&buckets_, _NEFORCE move(new_buckets));
+
+        pair_.get_base() = other.pair_.get_base();
+        pair_.value = other.pair_.value;
+
+        hasher_ = other.hasher_;
+        equals_ = other.equals_;
+        extracter_ = other.extracter_;
+
+        copy_from(other);
+    }
+
+    void copy_assign_impl(const hashtable& other, false_type /*pocca*/) {
+        clear();
+        hasher_ = other.hasher_;
+        equals_ = other.equals_;
+        extracter_ = other.extracter_;
+        copy_from(other);
+    }
+
+    void move_assign_impl(hashtable&& other, true_type /*pocma*/) noexcept(
+            is_nothrow_swappable_v<HashFcn> && is_nothrow_swappable_v<EqualKey> &&
+            is_nothrow_swappable_v<compressed_pair<allocator_type, float>> &&
+            is_nothrow_swappable_v<bucket_container>) {
+        clear();
+        _NEFORCE swap(hasher_, other.hasher_);
+        _NEFORCE swap(equals_, other.equals_);
+        _NEFORCE swap(extracter_, other.extracter_);
+        pair_.swap(other.pair_);
+        buckets_ = _NEFORCE move(other.buckets_);
+        size_ = other.size_;
+        other.size_ = 0;
+    }
+
+    void move_assign_impl(hashtable&& other, false_type /*pocma*/) {
+        if (pair_.get_base() == other.pair_.get_base() && buckets_.get_allocator() == other.buckets_.get_allocator()) {
+            _NEFORCE swap(hasher_, other.hasher_);
+            _NEFORCE swap(equals_, other.equals_);
+            _NEFORCE swap(extracter_, other.extracter_);
+            buckets_.swap(other.buckets_);
+            _NEFORCE swap(size_, other.size_);
+            _NEFORCE swap(pair_.value, other.pair_.value);
+        } else {
+            clear();
+            try {
+                for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                    emplace_equal(_NEFORCE move(*iter));
+                }
+                other.clear();
+            } catch (...) {
+                clear();
+                throw;
+            }
+        }
+    }
+
+    void swap_impl(hashtable& other,
+                   true_type /*pocs*/) noexcept(is_nothrow_swappable_v<HashFcn> && is_nothrow_swappable_v<EqualKey> &&
+                                                is_nothrow_swappable_v<compressed_pair<allocator_type, float>> &&
+                                                is_nothrow_swappable_v<bucket_container>) {
+        _NEFORCE swap(hasher_, other.hasher_);
+        _NEFORCE swap(equals_, other.equals_);
+        _NEFORCE swap(extracter_, other.extracter_);
+        buckets_.swap(other.buckets_);
+        _NEFORCE swap(size_, other.size_);
+        pair_.swap(other.pair_);
+    }
+
+    void swap_impl(hashtable& other,
+                   false_type /*pocs*/) noexcept(is_nothrow_swappable_v<HashFcn> && is_nothrow_swappable_v<EqualKey>) {
+        NEFORCE_DEBUG_VERIFY(get_allocator() == other.get_allocator(),
+                             "swap requires equal allocators when POCS is false");
+        _NEFORCE swap(hasher_, other.hasher_);
+        _NEFORCE swap(equals_, other.equals_);
+        _NEFORCE swap(extracter_, other.extracter_);
+        buckets_.swap(other.buckets_);
+        _NEFORCE swap(size_, other.size_);
+    }
+
 public:
     /**
      * @brief 构造函数
@@ -899,12 +996,7 @@ public:
      * @param other 源哈希表
      */
     hashtable(const hashtable& other) :
-    hasher_(other.hasher_),
-    equals_(other.equals_),
-    extracter_(other.extracter_),
-    pair_(other.pair_) {
-        hashtable::copy_from(other);
-    }
+    hashtable(other, allocator_traits<allocator_type>::select_on_container_copy_construction(other.get_allocator())) {}
 
     /**
      * @brief 拷贝赋值运算符
@@ -915,11 +1007,7 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        hashtable::clear();
-        hasher_ = other.hasher_;
-        equals_ = other.equals_;
-        extracter_ = other.extracter_;
-        hashtable::copy_from(other);
+        copy_assign_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_copy_assignment{});
         return *this;
     }
 
@@ -942,13 +1030,117 @@ public:
      * @param other 源哈希表
      * @return 自身引用
      */
-    hashtable& operator=(hashtable&& other) noexcept(noexcept(hashtable::swap(other))) {
+    hashtable& operator=(hashtable&& other) noexcept(allocator_traits<allocator_type>::is_always_equal::value &&
+                                                     is_nothrow_swappable_v<HashFcn> &&
+                                                     is_nothrow_swappable_v<EqualKey> &&
+                                                     is_nothrow_swappable_v<compressed_pair<allocator_type, float>> &&
+                                                     is_nothrow_swappable_v<bucket_container>) {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        clear();
-        hashtable::swap(other);
+        move_assign_impl(_NEFORCE move(other),
+                         typename allocator_traits<allocator_type>::propagate_on_container_move_assignment{});
         return *this;
+    }
+
+    /**
+     * @brief 使用指定分配器构造空哈希表
+     * @param alloc 分配器
+     * @param max_lf 最大负载因子
+     */
+    explicit hashtable(const allocator_type& alloc, float max_lf = 1.0F) :
+    buckets_(bucket_allocator(alloc)),
+    pair_(exact_arg_construct_tag{}, alloc, max_lf) {}
+
+    /**
+     * @brief 使用指定分配器和初始桶数量构造
+     * @param n 初始桶数量提示
+     * @param alloc 分配器
+     * @param max_lf 最大负载因子
+     */
+    explicit hashtable(const size_type n, const allocator_type& alloc, float max_lf = 1.0F) :
+    buckets_(next_size(n), nullptr, bucket_allocator(alloc)),
+    pair_(exact_arg_construct_tag{}, alloc, max_lf) {}
+
+    /**
+     * @brief 使用指定分配器、初始桶数量和哈希函数构造
+     * @param n 初始桶数量提示
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     * @param max_lf 最大负载因子
+     */
+    hashtable(const size_type n, const HashFcn& hf, const allocator_type& alloc, float max_lf = 1.0F) :
+    buckets_(next_size(n), nullptr, bucket_allocator(alloc)),
+    hasher_(hf),
+    pair_(exact_arg_construct_tag{}, alloc, max_lf) {}
+
+    /**
+     * @brief 使用指定分配器、初始桶数量、哈希函数和相等比较函数构造
+     * @param n 初始桶数量提示
+     * @param hf 哈希函数
+     * @param eql 相等比较函数
+     * @param alloc 分配器
+     * @param max_lf 最大负载因子
+     */
+    hashtable(const size_type n, const HashFcn& hf, const EqualKey& eql, const allocator_type& alloc,
+              float max_lf = 1.0F) :
+    buckets_(next_size(n), nullptr, bucket_allocator(alloc)),
+    hasher_(hf),
+    equals_(eql),
+    pair_(exact_arg_construct_tag{}, alloc, max_lf) {}
+
+    /**
+     * @brief 使用指定分配器、初始桶数量和所有函数对象构造
+     * @param n 初始桶数量提示
+     * @param hf 哈希函数
+     * @param eql 相等比较函数
+     * @param ext 值提取函数
+     * @param alloc 分配器
+     * @param max_lf 最大负载因子
+     */
+    hashtable(const size_type n, const HashFcn& hf, const EqualKey& eql, const ExtractKey& ext,
+              const allocator_type& alloc, float max_lf = 1.0F) :
+    buckets_(next_size(n), nullptr, bucket_allocator(alloc)),
+    hasher_(hf),
+    equals_(eql),
+    extracter_(ext),
+    pair_(exact_arg_construct_tag{}, alloc, max_lf) {}
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源哈希表
+     * @param alloc 分配器
+     */
+    hashtable(const hashtable& other, const allocator_type& alloc) :
+    buckets_(bucket_allocator(alloc)),
+    hasher_(other.hasher_),
+    equals_(other.equals_),
+    extracter_(other.extracter_),
+    pair_(exact_arg_construct_tag{}, alloc, other.max_load_factor()) {
+        hashtable::copy_from(other);
+    }
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源哈希表
+     * @param alloc 分配器
+     */
+    hashtable(hashtable&& other, const allocator_type& alloc) :
+    buckets_(bucket_allocator(alloc)),
+    hasher_(_NEFORCE move(other.hasher_)),
+    equals_(_NEFORCE move(other.equals_)),
+    extracter_(_NEFORCE move(other.extracter_)),
+    pair_(exact_arg_construct_tag{}, alloc, other.max_load_factor()) {
+        if (alloc == other.get_allocator()) {
+            buckets_.swap(other.buckets_);
+            size_ = other.size_;
+            other.size_ = 0;
+        } else {
+            for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                emplace_equal(_NEFORCE move(*iter));
+            }
+            other.clear();
+        }
     }
 
     /**
@@ -1017,6 +1209,12 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
+
+    /**
+     * @brief 获取当前分配器
+     * @return 分配器副本
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return pair_.get_base(); }
 
     /**
      * @brief 检查是否为空
@@ -1114,7 +1312,7 @@ public:
             NEFORCE_THROW_EXCEPTION(value_exception("hashtable size exceeds max count"));
         }
 
-        vector<link_type> new_buckets(n, nullptr);
+        bucket_container new_buckets(n, nullptr, buckets_.get_allocator());
 
         for (size_type bucket = 0; bucket < old_size; ++bucket) {
             link_type cur = buckets_[bucket];
@@ -1559,16 +1757,12 @@ public:
      * @param other 要交换的另一个哈希表
      */
     void swap(hashtable& other) noexcept(is_nothrow_swappable_v<HashFcn> && is_nothrow_swappable_v<EqualKey> &&
-                                         is_nothrow_swappable_v<allocator_type>) {
+                                         is_nothrow_swappable_v<compressed_pair<allocator_type, float>> &&
+                                         is_nothrow_swappable_v<bucket_container>) {
         if (_NEFORCE addressof(other) == this) {
             return;
         }
-        _NEFORCE swap(hasher_, other.hasher_);
-        _NEFORCE swap(equals_, other.equals_);
-        _NEFORCE swap(extracter_, other.extracter_);
-        buckets_.swap(other.buckets_);
-        _NEFORCE swap(size_, other.size_);
-        pair_.swap(other.pair_);
+        swap_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_swap{});
     }
 
     /**

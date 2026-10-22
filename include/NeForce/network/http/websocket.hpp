@@ -287,8 +287,8 @@ private:
 
     void start_event_driven();
 
-    void on_readable(int fd, uint32_t events, error_code ec);
-    void on_writable(int fd, uint32_t events, error_code ec);
+    void on_readable(int fd, epoll_event events, error_code ec);
+    void on_writable(int fd, epoll_event events, error_code ec);
     void on_heartbeat_timer();
 
     void flush_event_writes();

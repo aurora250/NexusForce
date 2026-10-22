@@ -66,7 +66,7 @@ public:
 
 private:
 #ifdef NEFORCE_PLATFORM_LINUX
-    void drain_stdin(int fd, uint32_t events, error_code ec);
+    void drain_stdin(int fd, epoll_event events, error_code ec);
 #else
     static unsigned long WINAPI input_thread_proc(void* selfp);
 #endif

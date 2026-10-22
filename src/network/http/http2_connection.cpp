@@ -48,12 +48,12 @@ http2_connection::~http2_connection() {
 void http2_connection::start() {
     const int fd = static_cast<int>(socket_->native_handle());
     auto weak_self = weak_from_this();
-    ctx_->add_fd(fd, epoll_in, [weak_self](int, uint32_t, error_code) {
-        auto self = weak_self.lock();
+    ctx_->add_fd(fd, epoll_event::in, [weak_self](int, epoll_event, error_code) {
+        const auto self = weak_self.lock();
         if (!self || self->closed_) {
             return;
         }
-        self->on_readable(0, 0, error_code{});
+        self->on_readable(0, epoll_event::none, error_code{});
     });
 
     http2_settings_frame sf;
@@ -65,7 +65,7 @@ void http2_connection::start() {
     flush_writes();
 }
 
-void http2_connection::on_readable(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) {
+void http2_connection::on_readable(int /*fd*/, epoll_event /*events*/, error_code /*ec*/) {
     lock<recursive_mutex> lk(stream_mutex_);
     if (closed_) {
         return;
@@ -119,7 +119,7 @@ void http2_connection::on_readable(int /*fd*/, uint32_t /*events*/, error_code /
     flush_writes();
 }
 
-void http2_connection::on_writable(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) { flush_writes(); }
+void http2_connection::on_writable(int /*fd*/, epoll_event /*events*/, error_code /*ec*/) { flush_writes(); }
 
 void http2_connection::handle_frame(http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t* payload,
                                     size_t len) {
@@ -178,7 +178,6 @@ void http2_connection::handle_data_frame(uint8_t flags, uint32_t stream_id, cons
         connection_consumed_ = 0;
     }
 
-    auto stream_it = stream_consumed_.find(stream_id);
     uint32_t& stream_consumed = stream_consumed_[stream_id];
     stream_consumed += static_cast<uint32_t>(len);
     if (stream_consumed >= WINDOW_UPDATE_THRESHOLD) {

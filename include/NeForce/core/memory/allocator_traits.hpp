@@ -60,6 +60,28 @@ protected:
     using __pointer = typename T::pointer;
     template <typename T>
     using __c_pointer = typename T::const_pointer;
+
+    template <typename Alloc, typename = void>
+    struct __pocca : false_type {};
+    template <typename Alloc>
+    struct __pocca<Alloc, void_t<typename Alloc::propagate_on_container_copy_assignment>>
+    : Alloc::propagate_on_container_copy_assignment {};
+
+    template <typename Alloc, typename = void>
+    struct __pocma : false_type {};
+    template <typename Alloc>
+    struct __pocma<Alloc, void_t<typename Alloc::propagate_on_container_move_assignment>>
+    : Alloc::propagate_on_container_move_assignment {};
+
+    template <typename Alloc, typename = void>
+    struct __pocs : false_type {};
+    template <typename Alloc>
+    struct __pocs<Alloc, void_t<typename Alloc::propagate_on_container_swap>> : Alloc::propagate_on_container_swap {};
+
+    template <typename Alloc, typename = void>
+    struct __is_always_equal : is_empty<Alloc> {};
+    template <typename Alloc>
+    struct __is_always_equal<Alloc, void_t<typename Alloc::is_always_equal>> : Alloc::is_always_equal {};
 };
 
 NEFORCE_END_INNER__
@@ -83,6 +105,11 @@ struct allocator_traits : inner::__allocator_traits_base {
     using allocator_type = Alloc;
     using value_type = typename Alloc::value_type;
     using pointer = detected_or_t<value_type*, __pointer, Alloc>;
+
+    using propagate_on_container_copy_assignment = typename __pocca<Alloc>::type;
+    using propagate_on_container_move_assignment = typename __pocma<Alloc>::type;
+    using propagate_on_container_swap = typename __pocs<Alloc>::type;
+    using is_always_equal = typename __is_always_equal<Alloc>::type;
 
 private:
     template <template <typename> class Func, typename T, typename = void>
@@ -112,6 +139,13 @@ private:
     struct real_size<AllocU, Diff, void_t<typename AllocU::size_type>> {
         using type = typename AllocU::size_type;
     };
+
+    template <typename AllocU, typename = void>
+    struct has_member_soCCC : false_type {};
+
+    template <typename AllocU>
+    struct has_member_soCCC<AllocU, void_t<decltype(declval<const AllocU&>().select_on_container_copy_construction())>>
+    : true_type {};
 
 public:
     using const_pointer = typename real_ptr<__c_pointer, const value_type>::type; ///< 常量指针类型
@@ -170,6 +204,18 @@ private:
         return _NEFORCE numeric_traits<size_type>::max() / sizeof(value_type);
     }
 
+    template <typename Alloc2>
+    static NEFORCE_CONSTEXPR20 allocator_type
+    __soCCC(Alloc2& alloc, true_type /*unused*/) noexcept(noexcept(alloc.select_on_container_copy_construction())) {
+        return alloc.select_on_container_copy_construction();
+    }
+
+    template <typename Alloc2>
+    static NEFORCE_CONSTEXPR20 allocator_type
+    __soCCC(Alloc2& alloc, false_type /*unused*/) noexcept(is_nothrow_copy_constructible_v<Alloc2>) {
+        return alloc;
+    }
+
 public:
     /**
      * @brief 分配内存
@@ -220,9 +266,19 @@ public:
      * @param alloc 分配器对象
      * @return 分配器可以分配的最大元素数量
      */
-    static NEFORCE_CONSTEXPR20 size_type
+    static constexpr size_type
     max_size(const Alloc& alloc) noexcept(noexcept(allocator_traits::__max_size_aux(alloc, 0))) {
         return allocator_traits::__max_size_aux(alloc, 0);
+    }
+
+    /**
+     * @brief 选择拷贝构造时使用的分配器
+     * @param alloc 源容器持有的分配器
+     * @return 新容器应使用的分配器
+     */
+    static NEFORCE_CONSTEXPR20 Alloc select_on_container_copy_construction(const Alloc& alloc) noexcept(
+            noexcept(allocator_traits::__soCCC(alloc, has_member_soCCC<Alloc>{}))) {
+        return allocator_traits::__soCCC(alloc, has_member_soCCC<Alloc>{});
     }
 };
 

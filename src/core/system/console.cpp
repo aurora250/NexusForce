@@ -11,6 +11,7 @@
 #        include <wingdi.h>
 #        include <wincon.h>
 #    endif
+#    include <windef.h>
 #    include <WinBase.h>
 #    include <WinNls.h>
 #    include <WinUser.h>
@@ -65,7 +66,7 @@ namespace {
         if (block != nullptr) {
             const auto* wide = static_cast<const wchar_t*>(::GlobalLock(block));
             if (wide != nullptr) {
-                result = character::to_string(wstring(wide));
+                result = wcharacter::to_string(wide);
                 ::GlobalUnlock(block);
             }
         }
@@ -432,23 +433,18 @@ err_(STDERR_FILENO)
 #endif
 {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    try {
-        if (out_ == INVALID_HANDLE_VALUE || out_ == nullptr || in_ == INVALID_HANDLE_VALUE || in_ == nullptr ||
-            err_ == INVALID_HANDLE_VALUE || err_ == nullptr) {
-            return;
-        }
+    if (out_ == INVALID_HANDLE_VALUE || out_ == nullptr || in_ == INVALID_HANDLE_VALUE || in_ == nullptr ||
+        err_ == INVALID_HANDLE_VALUE || err_ == nullptr) {
+        return;
+    }
 
-        ::SetConsoleOutputCP(CP_UTF8);
-        ::SetConsoleCP(CP_UTF8);
+    ::SetConsoleOutputCP(CP_UTF8);
+    ::SetConsoleCP(CP_UTF8);
 
-        ::DWORD mode = 0;
-        if (::GetConsoleMode(out_, &mode) == TRUE) {
-            mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-            ::SetConsoleMode(out_, mode);
-        }
-        // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
+    ::DWORD mode = 0;
+    if (::GetConsoleMode(out_, &mode) == TRUE) {
+        mode |= ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+        ::SetConsoleMode(out_, mode);
     }
 #endif
 }
@@ -874,7 +870,7 @@ string sys_console::parse_clipboard_response(const string_view buffer, size_t* c
 
 string sys_console::read_clipboard(const int timeout_ms) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ignore = timeout_ms;
+    (void) timeout_ms;
     return get_windows_clipboard();
 #else
     if (::isatty(in_) != 1) {

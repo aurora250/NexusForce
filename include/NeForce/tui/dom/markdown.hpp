@@ -85,7 +85,7 @@ public:
      * @param width 渲染宽度，非正数表示沿用构造时的 `markdown_option::width`
      * @return 元素树常量引用
      */
-    NEFORCE_NODISCARD const element& render(string_view text, int width = 0);
+    const element& render(string_view text, int width = 0);
 
     /**
      * @brief 清空缓存

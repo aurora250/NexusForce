@@ -12,11 +12,11 @@
 #    include <unistd.h>
 #else
 #    include <NeForce/core/string/utf.hpp>
+#    include <windef.h>
 #    include <WinBase.h>
 #    include <WinUser.h>
 #    include <handleapi.h>
 #    include <heapapi.h>
-#    include <ioapiset.h>
 #    include <libloaderapi.h>
 #    include <namedpipeapi.h>
 #    include <processthreadsapi.h>
@@ -73,10 +73,7 @@ namespace {
         ::SECURITY_ATTRIBUTES attributes{};
         attributes.nLength = sizeof(attributes);
         attributes.bInheritHandle = TRUE;
-        if (::CreatePipe(&read_end, &write_end, &attributes, 0) == FALSE) {
-            return false;
-        }
-        return true;
+        return ::CreatePipe(&read_end, &write_end, &attributes, 0) != FALSE;
     }
 
     wstring windows_environment_block(const vector<string>& env) {
@@ -214,7 +211,25 @@ bool pty::is_supported() noexcept {
 
 bool pty::is_available() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return conpty().valid();
+    if (!conpty().valid()) {
+        return false;
+    }
+    // CreatePseudoConsole() exists on every Windows 10 1809+ build,
+    // but the console host behind it can still be absent or broken.
+    // A child started in such a pseudoconsole dies immediately with STATUS_DLL_INIT_FAILED and writes nothing,
+    // so probe once and cache the answer:
+    // callers then fall back to the pipe path instead of reporting an empty tool result.
+    static const bool usable = [] {
+        try {
+            pty probe;
+            probe.open(console_size{80, 24});
+            probe.start("cmd.exe", {"/c", "exit", "0"});
+            return probe.wait(5000) == 0;
+        } catch (...) {
+            return false;
+        }
+    }();
+    return usable;
 #else
     static const bool available = [] {
         const int fd = ::posix_openpt(O_RDWR | O_NOCTTY);
@@ -257,16 +272,15 @@ void pty::open(console_size size) {
         NEFORCE_THROW_EXCEPTION(pty_exception(last_error()));
     }
 
-    // The pseudo console owns the child side of both pipes; the parent keeps the write side of
-    // the input pipe and the read side of the output pipe.
-    ::HANDLE console = nullptr;
-    const ::HRESULT result = conpty().create(console_coord(columns_, rows_), input_read, output_write, 0, &console);
-    if (result != S_OK || console == nullptr) {
+    // The pseudo console owns the child side of both pipes;
+    // the parent keeps the write side of the input pipe and the read side of the output pipe.
+    ::HANDLE pseudo = nullptr;
+    const ::HRESULT result = conpty().create(console_coord(columns_, rows_), input_read, output_write, 0, &pseudo);
+    if (result != S_OK || pseudo == nullptr) {
         ::CloseHandle(input_read);
         ::CloseHandle(input_write);
         ::CloseHandle(output_read);
         ::CloseHandle(output_write);
-        ignore = result;
         NEFORCE_THROW_EXCEPTION(pty_exception("CreatePseudoConsole failed", last_error()));
     }
 
@@ -275,7 +289,7 @@ void pty::open(console_size size) {
     ::CloseHandle(input_read);
     ::CloseHandle(output_write);
 
-    handle_ = console;
+    handle_ = pseudo;
     write_handle_ = input_write;
     read_handle_ = output_read;
 #else
@@ -322,7 +336,7 @@ void pty::start(const string& executable, const vector<string>& args, const stri
 
     ::SIZE_T attribute_bytes = 0;
     (void) ::InitializeProcThreadAttributeList(nullptr, 1, 0, &attribute_bytes);
-    ::LPPROC_THREAD_ATTRIBUTE_LIST attributes =
+    auto* const attributes =
             static_cast<::LPPROC_THREAD_ATTRIBUTE_LIST>(::HeapAlloc(::GetProcessHeap(), 0, attribute_bytes));
     if (attributes == nullptr) {
         NEFORCE_THROW_EXCEPTION(pty_exception("failed to allocate the process attribute list"));
@@ -343,9 +357,9 @@ void pty::start(const string& executable, const vector<string>& args, const stri
     }
 
     const attribute_guard guard{attributes};
-    ::HANDLE console = handle_;
-    if (::UpdateProcThreadAttribute(attributes, 0, PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE, &console, sizeof(console),
-                                    nullptr, nullptr) == FALSE) {
+    ::HANDLE pseudo = handle_;
+    if (::UpdateProcThreadAttribute(attributes, 0, PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE, static_cast<::PVOID>(&pseudo),
+                                    sizeof(pseudo), nullptr, nullptr) == FALSE) {
         NEFORCE_THROW_EXCEPTION(pty_exception(last_error()));
     }
 
@@ -521,6 +535,8 @@ native_handle_type pty::master_handle() const noexcept {
     return handle_;
 #endif
 }
+
+bool pty::is_master_handle_valid() const noexcept { return master_handle() != invalid_handle; }
 
 native_id_type pty::process_id() const noexcept { return static_cast<native_id_type>(child_id_); }
 

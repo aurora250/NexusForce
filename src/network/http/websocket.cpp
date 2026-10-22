@@ -647,11 +647,11 @@ void websocket_session::start_event_driven() {
 
     auto self = shared_from_this();
 
-    ctx_->add_fd(fd, epoll_in, [self](int f, uint32_t ev, error_code) {
-        if ((ev & epoll_in) != 0U) {
+    ctx_->add_fd(fd, epoll_event::in, [self](int f, epoll_event ev, error_code) {
+        if ((ev & epoll_event::in) != epoll_event::none) {
             self->on_readable(f, ev, error_code{});
         }
-        if ((ev & epoll_out) != 0U) {
+        if ((ev & epoll_event::out) != epoll_event::none) {
             self->on_writable(f, ev, error_code{});
         }
     });
@@ -660,7 +660,7 @@ void websocket_session::start_event_driven() {
                                                [self]() { self->on_heartbeat_timer(); });
 }
 
-void websocket_session::on_readable(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) {
+void websocket_session::on_readable(int /*fd*/, epoll_event /*events*/, error_code /*ec*/) {
     if (!running_) {
         return;
     }
@@ -768,7 +768,7 @@ void websocket_session::try_parse_frames() {
     }
 }
 
-void websocket_session::on_writable(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) { flush_event_writes(); }
+void websocket_session::on_writable(int /*fd*/, epoll_event /*events*/, error_code /*ec*/) { flush_event_writes(); }
 
 void websocket_session::flush_event_writes() {
     lock<mutex> lk(write_mutex_);
@@ -795,7 +795,7 @@ void websocket_session::flush_event_writes() {
 
     if (ctrl_queue_.empty() && write_queue_.empty() && running_) {
         const int fd = static_cast<int>(socket_->native_handle());
-        ctx_->mod_fd(fd, epoll_in);
+        ctx_->mod_fd(fd, epoll_event::in);
     }
 }
 

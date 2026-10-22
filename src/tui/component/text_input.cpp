@@ -35,7 +35,7 @@ namespace {
         return p;
     }
 
-    class text_input_component final : public component<> {
+    class text_input_component final : public component_base {
     public:
         explicit text_input_component(text_input_option opt) :
         opt_(move(opt)) {}

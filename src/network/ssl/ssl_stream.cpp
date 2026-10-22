@@ -446,8 +446,8 @@ namespace {
                         self->handler(make_operation_aborted());
                     });
                 }
-                ctx->add_fd(fd_, epoll_in,
-                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_fd_ready(ec); });
+                ctx->add_fd(fd_, epoll_event::in,
+                            [self](int /*fd*/, epoll_event /*events*/, error_code ec) { self->on_fd_ready(ec); });
             } else if (err == SSL_ERROR_WANT_WRITE) {
                 auto self = shared_from_this();
                 if (cancel_slot != nullptr) {
@@ -456,8 +456,8 @@ namespace {
                         self->handler(make_operation_aborted());
                     });
                 }
-                ctx->add_fd(fd_, epoll_out,
-                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_fd_ready(ec); });
+                ctx->add_fd(fd_, epoll_event::out,
+                            [self](int /*fd*/, epoll_event /*events*/, error_code ec) { self->on_fd_ready(ec); });
             } else {
                 handler(error_code(err, ssl_category()));
             }
@@ -523,8 +523,8 @@ namespace {
                         self->handler(make_operation_aborted(), 0);
                     });
                 }
-                ctx->add_fd(fd, epoll_in,
-                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
+                ctx->add_fd(fd, epoll_event::in,
+                            [self](int /*fd*/, epoll_event /*events*/, error_code ec) { self->on_ready(ec); });
             } else if (err == SSL_ERROR_WANT_WRITE) {
                 auto self = shared_from_this();
                 if (cancel_slot != nullptr) {
@@ -533,8 +533,8 @@ namespace {
                         self->handler(make_operation_aborted(), 0);
                     });
                 }
-                ctx->add_fd(fd, epoll_out,
-                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
+                ctx->add_fd(fd, epoll_event::out,
+                            [self](int /*fd*/, epoll_event /*events*/, error_code ec) { self->on_ready(ec); });
             } else if (err == SSL_ERROR_ZERO_RETURN) {
                 handler(error_code{make_error_code(errc::connection_reset)}, 0);
             } else {
@@ -605,8 +605,8 @@ namespace {
                         self->handler(make_operation_aborted(), 0);
                     });
                 }
-                ctx->add_fd(fd, epoll_out,
-                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
+                ctx->add_fd(fd, epoll_event::out,
+                            [self](int /*fd*/, epoll_event /*events*/, error_code ec) { self->on_ready(ec); });
             } else if (err == SSL_ERROR_WANT_READ) {
                 auto self = shared_from_this();
                 if (cancel_slot != nullptr) {
@@ -615,8 +615,8 @@ namespace {
                         self->handler(make_operation_aborted(), 0);
                     });
                 }
-                ctx->add_fd(fd, epoll_in,
-                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
+                ctx->add_fd(fd, epoll_event::in,
+                            [self](int /*fd*/, epoll_event /*events*/, error_code ec) { self->on_ready(ec); });
             } else {
                 handler(error_code(err, ssl_category()), 0);
             }

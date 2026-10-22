@@ -21,26 +21,26 @@ namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     system_event* g_notify_event = nullptr;
 
-    system_signal_manager::event map_win_event(unsigned long event_id) {
+    system_signal::event map_win_event(unsigned long event_id) {
         switch (event_id) {
             case CTRL_C_EVENT:
-                return system_signal_manager::event::INTERRUPT;
+                return system_signal::event::INTERRUPT;
             case CTRL_BREAK_EVENT:
-                return system_signal_manager::event::CTRL_BREAK;
+                return system_signal::event::CTRL_BREAK;
             case CTRL_CLOSE_EVENT:
-                return system_signal_manager::event::CLOSE;
+                return system_signal::event::CLOSE;
             case CTRL_LOGOFF_EVENT:
-                return system_signal_manager::event::LOGOFF;
+                return system_signal::event::LOGOFF;
             case CTRL_SHUTDOWN_EVENT:
-                return system_signal_manager::event::SHUTDOWN;
+                return system_signal::event::SHUTDOWN;
             default:
-                return static_cast<system_signal_manager::event>(event_id);
+                return static_cast<system_signal::event>(event_id);
         }
     }
 
     ::BOOL __stdcall windows_handler(unsigned long event_id) {
         if (g_notify_event != nullptr) {
-            system_signal_manager::instance().send_signal(map_win_event(event_id));
+            system_signal::instance().send_signal(map_win_event(event_id));
         }
         return TRUE;
     }
@@ -72,7 +72,7 @@ namespace {
 
     thread_local void* g_signal_context = nullptr;
 
-    void send_platform_signal(system_signal::event e) {
+    void send_platform_signal(const system_signal::event e) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         const int native = system_signal::to_native(e);
         if (native >= 0) {
@@ -566,7 +566,7 @@ system_signal::event system_signal::from_native(int native_signal) noexcept {
 #endif
 }
 
-int system_signal::to_native(event e) noexcept {
+int system_signal::to_native(const event e) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     switch (e) {
         case event::INTERRUPT:

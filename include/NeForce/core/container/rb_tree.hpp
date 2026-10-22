@@ -13,6 +13,7 @@
 #include "NeForce/core/algorithm/compare.hpp"
 #include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/interface/iiterator.hpp"
+#include "NeForce/core/memory/allocator_traits.hpp"
 #include "NeForce/core/memory/construct.hpp"
 #include "NeForce/core/memory/standard_allocator.hpp"
 #include "NeForce/core/utility/compressed_pair.hpp"
@@ -616,7 +617,7 @@ public:
  */
 template <typename Key, typename Value, typename KeyOfValue, typename Compare,
           typename Alloc = allocator<rb_tree_node<Value>>>
-class rb_tree : icollector<rb_tree<Key, Value, KeyOfValue, Compare, Alloc>> {
+class rb_tree : public icollector<rb_tree<Key, Value, KeyOfValue, Compare, Alloc>> {
     static_assert(is_allocator_v<Alloc>, "Alloc type is not a standard allocator type.");
     static_assert(is_same_v<rb_tree_node<Value>, typename Alloc::value_type>, "allocator type mismatch.");
     static_assert(is_object_v<Value>, "list only contains object types.");
@@ -868,7 +869,7 @@ private:
      * @brief 初始化头节点
      */
     void header_init() {
-        header_ = size_pair_.get_base().allocate(1);
+        header_ = size_pair_.get_base().allocate();
         header_->color_ = RB_TREE_RED;
         root() = nullptr;
         leftmost() = header_;
@@ -943,6 +944,64 @@ private:
         return rb_tree::insert_into(x, y, node);
     }
 
+    void copy_assign_impl(const rb_tree& other, true_type /*pocca*/) {
+        rb_tree tmp(other, other.get_allocator());
+        swap_impl(tmp, true_type{});
+    }
+
+    void copy_assign_impl(const rb_tree& other, false_type /*pocca*/) {
+        rb_tree tmp(other, get_allocator());
+        swap_impl(tmp, false_type{});
+    }
+
+    void move_assign_impl(rb_tree&& other, true_type /*pocma*/) noexcept(
+            is_nothrow_swappable_v<Compare> && is_nothrow_swappable_v<KeyOfValue> &&
+            is_nothrow_swappable_v<compressed_pair<allocator_type, size_t>>) {
+        _NEFORCE swap(header_, other.header_);
+        _NEFORCE swap(size_pair_, other.size_pair_);
+        _NEFORCE swap(key_compare_, other.key_compare_);
+        _NEFORCE swap(extracter_, other.extracter_);
+    }
+
+    void move_assign_impl(rb_tree&& other, false_type /*pocma*/) {
+        if (size_pair_.get_base() == other.size_pair_.get_base()) {
+            _NEFORCE swap(header_, other.header_);
+            _NEFORCE swap(size_pair_.value, other.size_pair_.value);
+            _NEFORCE swap(key_compare_, other.key_compare_);
+            _NEFORCE swap(extracter_, other.extracter_);
+        } else {
+            clear();
+            try {
+                for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                    emplace_equal(_NEFORCE move(*iter));
+                }
+                other.clear();
+            } catch (...) {
+                clear();
+                throw;
+            }
+        }
+    }
+
+    void swap_impl(rb_tree& other,
+                   true_type /*pocs*/) noexcept(is_nothrow_swappable_v<Compare> && is_nothrow_swappable_v<KeyOfValue> &&
+                                                is_nothrow_swappable_v<compressed_pair<allocator_type, size_t>>) {
+        _NEFORCE swap(header_, other.header_);
+        _NEFORCE swap(size_pair_, other.size_pair_);
+        _NEFORCE swap(key_compare_, other.key_compare_);
+        _NEFORCE swap(extracter_, other.extracter_);
+    }
+
+    void swap_impl(rb_tree& other, false_type /*pocs*/) noexcept(is_nothrow_swappable_v<Compare> &&
+                                                                 is_nothrow_swappable_v<KeyOfValue>) {
+        NEFORCE_DEBUG_VERIFY(get_allocator() == other.get_allocator(),
+                             "swap requires equal allocators when POCS is false");
+        _NEFORCE swap(header_, other.header_);
+        _NEFORCE swap(size_pair_.value, other.size_pair_.value);
+        _NEFORCE swap(key_compare_, other.key_compare_);
+        _NEFORCE swap(extracter_, other.extracter_);
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -963,12 +1022,7 @@ public:
      * @param other 源红黑树
      */
     rb_tree(const rb_tree& other) :
-    key_compare_(other.key_compare_),
-    extracter_(other.extracter_),
-    size_pair_(other.size_pair_) {
-        header_init();
-        rb_tree::copy_from(other);
-    }
+    rb_tree(other, allocator_traits<allocator_type>::select_on_container_copy_construction(other.get_allocator())) {}
 
     /**
      * @brief 拷贝赋值运算符
@@ -979,8 +1033,7 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        rb_tree tmp(other);
-        rb_tree::swap(tmp);
+        copy_assign_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_copy_assignment{});
         return *this;
     }
 
@@ -1004,12 +1057,15 @@ public:
      * @param other 源红黑树
      * @return 自身引用
      */
-    rb_tree& operator=(rb_tree&& other) noexcept(is_nothrow_move_constructible_v<rb_tree>) {
+    rb_tree& operator=(rb_tree&& other) noexcept(allocator_traits<allocator_type>::is_always_equal::value &&
+                                                 is_nothrow_swappable_v<Compare> &&
+                                                 is_nothrow_swappable_v<KeyOfValue> &&
+                                                 is_nothrow_swappable_v<compressed_pair<allocator_type, size_t>>) {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        rb_tree tmp(_NEFORCE move(other));
-        rb_tree::swap(tmp);
+        move_assign_impl(_NEFORCE move(other),
+                         typename allocator_traits<allocator_type>::propagate_on_container_move_assignment{});
         return *this;
     }
 
@@ -1063,7 +1119,7 @@ public:
         } else {
             try {
                 for (auto iter = other.begin(); iter != other.end(); ++iter) {
-                    emplace_unique(_NEFORCE move(*iter));
+                    emplace_equal(_NEFORCE move(*iter));
                 }
                 other.clear();
             } catch (...) {
@@ -1170,7 +1226,7 @@ public:
     /**
      * @brief 获取当前分配器
      */
-    NEFORCE_NODISCARD const allocator_type& get_allocator() const noexcept { return size_pair_.get_base(); }
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return size_pair_.get_base(); }
 
     /**
      * @brief 检查是否为空
@@ -1623,11 +1679,11 @@ public:
      * @param other 要交换的另一个红黑树
      */
     void swap(rb_tree& other) noexcept(is_nothrow_swappable_v<Compare> && is_nothrow_swappable_v<KeyOfValue> &&
-                                       is_nothrow_swappable_v<allocator_type>) {
-        _NEFORCE swap(header_, other.header_);
-        _NEFORCE swap(size_pair_, other.size_pair_);
-        _NEFORCE swap(key_compare_, other.key_compare_);
-        _NEFORCE swap(extracter_, other.extracter_);
+                                       is_nothrow_swappable_v<compressed_pair<allocator_type, size_t>>) {
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
+        swap_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_swap{});
     }
 
     /**

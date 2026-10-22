@@ -176,7 +176,7 @@ namespace {
                     }
                 });
             }
-            ctx->add_fd(fd, epoll_in, [self](int, uint32_t, error_code ec) {
+            ctx->add_fd(fd, epoll_event::in, [self](int, epoll_event, error_code ec) {
                 bool expected = false;
                 if (self->fired_.compare_exchange_strong(expected, true)) {
                     self->on_ready(ec);
@@ -247,7 +247,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
     auto ep_copy = make_shared<ip_address>(endpoint);
     auto fired = make_shared<atomic<bool>>(false);
     native_handle_type fd = native_handle();
-    ctx.add_fd(fd, epoll_out, [handler_ptr, data_copy, ep_copy, fd, fired](int, uint32_t, error_code ec) {
+    ctx.add_fd(fd, epoll_event::out, [handler_ptr, data_copy, ep_copy, fd, fired](int, epoll_event, error_code ec) {
         bool expected = false;
         if (!fired->compare_exchange_strong(expected, true)) {
             return;
@@ -316,7 +316,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
         }
     });
 
-    ctx.add_fd(fd, epoll_out, [handler_ptr, data_copy, ep_copy, fd, fired](int, uint32_t, error_code ec) {
+    ctx.add_fd(fd, epoll_event::out, [handler_ptr, data_copy, ep_copy, fd, fired](int, epoll_event, error_code ec) {
         bool expected = false;
         if (!fired->compare_exchange_strong(expected, true)) {
             return;

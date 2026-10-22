@@ -175,14 +175,16 @@ set(CPP_SOURCES
 
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/animation.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/approve_prompt.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/composer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/collapsible.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/component.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/composer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/containers.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/dropdown.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/hoverable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/log_view.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/menu.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/hoverable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/modal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/output_block.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/radiobox.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/renderer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/resizable_split.cpp
@@ -190,12 +192,11 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/select_list.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/slider.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/status_indicator.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/output_block.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/streaming_text.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_area.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/tool_card.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/tool_runner.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_area.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/toggle.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/virtual_list.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/window.cpp
@@ -278,11 +279,6 @@ if (WIN32)
             VERSION ${NEXUSFORCE_VERSION}
             SOVERSION ${NEXUSFORCE_VERSION_MAJOR}
     )
-    if(MSVC)
-        set_target_properties(NexusForce PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
-    elseif(WIN32)
-        target_link_options(NexusForce PRIVATE -Wl,-export-all-symbols)
-    endif()
 elseif(UNIX AND NOT APPLE)
     set_target_properties(NexusForce PROPERTIES
             CXX_STANDARD ${CMAKE_CXX_STANDARD}

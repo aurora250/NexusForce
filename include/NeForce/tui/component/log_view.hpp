@@ -74,7 +74,7 @@ struct log_view_option {
  * log.finish(id);                    // 渲染缓存
  * @endcode
  */
-class NEFORCE_API log_view final : public component<> {
+class NEFORCE_API log_view final : public component_base {
 public:
     /**
      * @brief 构造函数

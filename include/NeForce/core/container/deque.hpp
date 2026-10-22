@@ -13,6 +13,7 @@
 #include "NeForce/core/algorithm/shift.hpp"
 #include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/interface/iiterator.hpp"
+#include "NeForce/core/memory/allocator_traits.hpp"
 #include "NeForce/core/memory/standard_allocator.hpp"
 #include "NeForce/core/memory/uninitialized.hpp"
 #include "NeForce/core/utility/compressed_pair.hpp"
@@ -801,6 +802,101 @@ private:
         }
     }
 
+    void copy_assign_impl(const deque& other, true_type /*pocca*/) {
+        if (get_allocator() == other.get_allocator()) {
+            map_size_pair_.get_base() = other.get_allocator();
+            map_pair_.get_base() = map_allocator(other.get_allocator());
+            copy_assign_impl(other, false_type{});
+            return;
+        }
+
+        if (map_pair_.value != nullptr) {
+            clear();
+            for (size_type i = 0; i < map_size_pair_.value; ++i) {
+                if (map_pair_.value[i] != nullptr) {
+                    map_size_pair_.get_base().deallocate(map_pair_.value[i], buffer_size);
+                    map_pair_.value[i] = nullptr;
+                }
+            }
+            map_pair_.get_base().deallocate(map_pair_.value, map_size_pair_.value);
+            map_pair_.value = nullptr;
+            map_size_pair_.value = 0;
+        }
+
+        start_ = iterator{};
+        finish_ = iterator{};
+
+        map_size_pair_.get_base() = other.get_allocator();
+        map_pair_.get_base() = map_allocator(other.get_allocator());
+        deque::copy_initialize(other.cbegin(), other.cend());
+    }
+
+    void copy_assign_impl(const deque& other, false_type /*pocca*/) {
+        const size_t len = size();
+        if (len >= other.size()) {
+            deque::erase(_NEFORCE copy(other.start_, other.finish_, start_), finish_);
+        } else {
+            auto mid = other.begin() + len;
+            _NEFORCE copy(other.begin(), mid, start_);
+            deque::insert(end(), mid, other.end());
+        }
+    }
+
+    void move_assign_impl(deque&& other, true_type /*pocma*/) noexcept(
+            is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>> &&
+            is_nothrow_swappable_v<compressed_pair<map_allocator, map_pointer>>) {
+        swap_impl(other, true_type{});
+    }
+
+    void move_assign_impl(deque&& other, false_type /*pocma*/) {
+        if (map_size_pair_.get_base() == other.map_size_pair_.get_base() &&
+            map_pair_.get_base() == other.map_pair_.get_base()) {
+            swap_impl(other, false_type{});
+        } else {
+            if (map_pair_.value == nullptr) {
+                deque::create_map_and_nodes(0);
+            }
+            clear();
+            try {
+                for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                    emplace_back(_NEFORCE move(*iter));
+                }
+                other.clear();
+            } catch (...) {
+                clear();
+                throw;
+            }
+        }
+    }
+
+    void swap_impl(deque& other,
+                   true_type /*pocs*/) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>> &&
+                                                is_nothrow_swappable_v<compressed_pair<map_allocator, map_pointer>>) {
+        _NEFORCE swap(start_, other.start_);
+        _NEFORCE swap(finish_, other.finish_);
+        _NEFORCE swap(map_size_pair_, other.map_size_pair_);
+        _NEFORCE swap(map_pair_, other.map_pair_);
+        start_.container_ = this;
+        finish_.container_ = this;
+        other.start_.container_ = &other;
+        other.finish_.container_ = &other;
+    }
+
+    void swap_impl(deque& other,
+                   false_type /*pocs*/) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>> &&
+                                                 is_nothrow_swappable_v<compressed_pair<map_allocator, map_pointer>>) {
+        NEFORCE_DEBUG_VERIFY(get_allocator() == other.get_allocator(),
+                             "swap requires equal allocators when POCS is false");
+        _NEFORCE swap(start_, other.start_);
+        _NEFORCE swap(finish_, other.finish_);
+        _NEFORCE swap(map_size_pair_.value, other.map_size_pair_.value);
+        _NEFORCE swap(map_pair_.value, other.map_pair_.value);
+        start_.container_ = this;
+        finish_.container_ = this;
+        other.start_.container_ = &other;
+        other.finish_.container_ = &other;
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -854,7 +950,8 @@ public:
      * @brief 拷贝构造函数
      * @param other 源双端队列
      */
-    deque(const deque& other) { deque::copy_initialize(other.cbegin(), other.cend()); }
+    deque(const deque& other) :
+    deque(other, allocator_traits<allocator_type>::select_on_container_copy_construction(other.get_allocator())) {}
 
     /**
      * @brief 拷贝赋值运算符
@@ -865,15 +962,7 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-
-        const size_t len = size();
-        if (len >= other.size()) {
-            deque::erase(_NEFORCE copy(other.start_, other.finish_, start_), finish_);
-        } else {
-            auto mid = other.begin() + len;
-            _NEFORCE copy(other.begin(), mid, start_);
-            deque::insert(end(), mid, other.end());
-        }
+        copy_assign_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_copy_assignment{});
         return *this;
     }
 
@@ -881,20 +970,138 @@ public:
      * @brief 移动构造函数
      * @param other 源双端队列
      */
-    deque(deque&& other) noexcept { deque::swap(other); }
+    deque(deque&& other) noexcept(is_nothrow_move_constructible_v<compressed_pair<allocator_type, size_type>> &&
+                                  is_nothrow_move_constructible_v<compressed_pair<map_allocator, map_pointer>>) :
+    start_(other.start_),
+    finish_(other.finish_),
+    map_size_pair_(_NEFORCE move(other.map_size_pair_)),
+    map_pair_(_NEFORCE move(other.map_pair_)) {
+        start_.container_ = this;
+        finish_.container_ = this;
+        other.start_ = other.finish_ = iterator{};
+        other.map_size_pair_.value = 0;
+        other.map_pair_.value = nullptr;
+    }
 
     /**
      * @brief 移动赋值运算符
      * @param other 源双端队列
      * @return 自身引用
      */
-    deque& operator=(deque&& other) noexcept {
+    deque& operator=(deque&& other) noexcept(
+            (allocator_traits<allocator_type>::propagate_on_container_move_assignment::value ||
+             allocator_traits<allocator_type>::is_always_equal::value) &&
+            is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>> &&
+            is_nothrow_swappable_v<compressed_pair<map_allocator, map_pointer>>) {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        clear();
-        deque::swap(other);
+        move_assign_impl(_NEFORCE move(other),
+                         typename allocator_traits<allocator_type>::propagate_on_container_move_assignment{});
         return *this;
+    }
+
+    /**
+     * @brief 使用指定分配器构造空双端队列
+     * @param alloc 分配器
+     */
+    explicit deque(const allocator_type& alloc) :
+    map_size_pair_(exact_arg_construct_tag{}, alloc, 0),
+    map_pair_(exact_arg_construct_tag{}, map_allocator(alloc), nullptr) {
+        deque::fill_initialize(0, _NEFORCE initialize<T>());
+    }
+
+    /**
+     * @brief 使用指定分配器构造 n 个默认构造元素的双端队列
+     * @param n 元素数量
+     * @param alloc 分配器
+     */
+    explicit deque(const size_type n, const allocator_type& alloc) :
+    map_size_pair_(exact_arg_construct_tag{}, alloc, 0),
+    map_pair_(exact_arg_construct_tag{}, map_allocator(alloc), nullptr) {
+        deque::fill_initialize(n, _NEFORCE initialize<T>());
+    }
+
+    /**
+     * @brief 使用指定分配器构造 n 个指定值元素的双端队列
+     * @param n 元素数量
+     * @param value 初始值
+     * @param alloc 分配器
+     */
+    deque(const size_type n, const T& value, const allocator_type& alloc) :
+    map_size_pair_(exact_arg_construct_tag{}, alloc, 0),
+    map_pair_(exact_arg_construct_tag{}, map_allocator(alloc), nullptr) {
+        deque::fill_initialize(n, value);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    deque(Iterator first, Iterator last, const allocator_type& alloc) :
+    map_size_pair_(exact_arg_construct_tag{}, alloc, 0),
+    map_pair_(exact_arg_construct_tag{}, map_allocator(alloc), nullptr) {
+        deque::copy_initialize(first, last);
+    }
+
+    /**
+     * @brief 初始化列表构造并指定分配器
+     * @param ilist 初始化列表
+     * @param alloc 分配器
+     */
+    deque(std::initializer_list<T> ilist, const allocator_type& alloc) :
+    deque(ilist.begin(), ilist.end(), alloc) {}
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源双端队列
+     * @param alloc 分配器
+     */
+    deque(const deque& other, const allocator_type& alloc) :
+    map_size_pair_(exact_arg_construct_tag{}, alloc, 0),
+    map_pair_(exact_arg_construct_tag{}, map_allocator(alloc), nullptr) {
+        deque::copy_initialize(other.cbegin(), other.cend());
+    }
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源双端队列
+     * @param alloc 分配器
+     *
+     * 分配器相等时直接窃取 other 的内部结构（常数时间）；
+     * 否则逐元素移动构造，源 deque 被清空。
+     */
+    deque(deque&& other, const allocator_type& alloc) :
+    map_size_pair_(exact_arg_construct_tag{}, alloc, 0),
+    map_pair_(exact_arg_construct_tag{}, map_allocator(alloc), nullptr) {
+        if (get_allocator() == other.get_allocator()) {
+            start_ = other.start_;
+            finish_ = other.finish_;
+            map_size_pair_.value = other.map_size_pair_.value;
+            map_pair_.value = other.map_pair_.value;
+
+            start_.container_ = this;
+            finish_.container_ = this;
+
+            other.start_ = other.finish_ = iterator{};
+            other.map_size_pair_.value = 0;
+            other.map_pair_.value = nullptr;
+        } else {
+            deque::create_map_and_nodes(0);
+            try {
+                for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                    emplace_back(_NEFORCE move(*iter));
+                }
+                other.clear();
+            } catch (...) {
+                clear();
+                throw;
+            }
+        }
     }
 
     /**
@@ -1004,6 +1211,12 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return static_cast<size_type>(-1); }
+
+    /**
+     * @brief 获取当前分配器
+     * @return 分配器副本
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return map_size_pair_.get_base(); }
 
     /**
      * @brief 检查是否为空
@@ -1408,15 +1621,12 @@ public:
      * @brief 交换两个双端队列的内容
      * @param other 要交换的另一个双端队列
      */
-    void swap(deque& other) noexcept(is_nothrow_swappable_v<map_allocator> && is_nothrow_swappable_v<allocator_type>) {
+    void swap(deque& other) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>> &&
+                                     is_nothrow_swappable_v<compressed_pair<map_allocator, map_pointer>>) {
         if (_NEFORCE addressof(other) == this) {
             return;
         }
-
-        _NEFORCE swap(start_, other.start_);
-        _NEFORCE swap(finish_, other.finish_);
-        _NEFORCE swap(map_pair_, other.map_pair_);
-        _NEFORCE swap(map_size_pair_, other.map_size_pair_);
+        swap_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_swap{});
     }
 
     /**
@@ -1454,6 +1664,9 @@ deque(T, Alloc = Alloc()) -> deque<T, Alloc>;
 
 template <typename Iterator, typename Alloc>
 deque(Iterator, Iterator, Alloc = Alloc()) -> deque<iter_value_t<Iterator>, Alloc>;
+
+template <typename T, typename Alloc>
+deque(std::initializer_list<T>, Alloc) -> deque<T, Alloc>;
 #endif
 
 /** @} */ // Container

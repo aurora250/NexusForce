@@ -510,8 +510,8 @@ struct smtp_socket::async_connect_op : enable_shared_from_this<async_connect_op>
         if (cancel_slot != nullptr) {
             cancel_slot->assign([self]() mutable { self->fail(make_operation_aborted()); });
         }
-        ctx->add_fd(sock->native_handle(), epoll_out,
-                    [self](int, uint32_t, error_code ec) mutable { self->on_connect_ready(ec); });
+        ctx->add_fd(sock->native_handle(), epoll_event::out,
+                    [self](int, epoll_event, error_code ec) mutable { self->on_connect_ready(ec); });
     }
 
     void on_connect_ready(error_code ec) {
@@ -731,7 +731,7 @@ struct smtp_socket::async_connect_op : enable_shared_from_this<async_connect_op>
         }
 
         auto self = shared_from_this();
-        ctx->add_fd(fd, epoll_in, [self, cb = move(cb)](int, uint32_t, error_code ec) mutable {
+        ctx->add_fd(fd, epoll_event::in, [self, cb = move(cb)](int, epoll_event, error_code ec) mutable {
             if (ec) {
                 cb(ec, false, 0);
                 return;
@@ -805,7 +805,7 @@ struct smtp_socket::async_connect_op : enable_shared_from_this<async_connect_op>
         }
 
         auto self = shared_from_this();
-        ctx->add_fd(fd, epoll_out, [self, cb = move(cb)](int, uint32_t, error_code ec) mutable {
+        ctx->add_fd(fd, epoll_event::out, [self, cb = move(cb)](int, epoll_event, error_code ec) mutable {
             if (ec) {
                 cb(ec);
                 return;

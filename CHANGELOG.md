@@ -82,6 +82,7 @@
 
 ### 🔧 Improvements
 
+- Windows 动态库导出表缩小，加载更快、导入库更小，模板实例与 STL/COMDAT 内部符号不再越界导出
 - `process_watcher` 在 Windows 上改由轮询定时器拉取子进程输出，POSIX 仍走 fd 就绪回调
 - `pty::wait()` 在无超时直接阻塞于 `waitpid()` 而非 5ms 轮询；退出码解码与 `process::wait()` 统一
 - 异步日志的批量写入改为单个 drain 任务循环排空队列：不再每批提交一个新任务，批次的到达顺序稳定，线程池任务数也随之减少
@@ -208,6 +209,9 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `compressed_pair` EBCO 特化的 `get_base()` 返回 `compressed_pair&` 而非基类引用：`get_base() == get_base()` 因此命中 `icomparable` 的成员 `operator==`（比较 `.value` 的尺寸/指针）而不是比较分配器，导致 `deque` / `list` / `rb_tree` / `hashtable` / `flat_hashtable` 在等分配器（`standard_allocator`）下误走逐元素复制分支；`std::swap` 于 moved-from（中控器为空）的 `deque` 上移动赋值时 `emplace_back` 解引用空迭代器，clang 下抛出 `0xC0000005`（MSVC 下为未定义行为），`StackTest.Swap` / `QueueTest.Swap` 失败
+- 修复 `deque::move_assign_impl` 逐元素回退分支对 moved-from 状态的越界访问：中控器为空时先重建再写入，避免空迭代器上构造元素
+- 修复 `process_watcher` 在 Windows 上可能丢失子进程最后一段输出：退出轮询只 drain 一次就上报 `on_exit`，而管道与 ConPTY 的尾部数据常在子进程被回收之后才可读；现在退出后最多再轮询两次，直到连续两轮读不到数据才上报退出码
 - 修复 `tool_card::status_icon()` 的悬垂引用：`spinner()` 返回的临时元素在语句结束时释放共享节点，绑定到 `element::text()` 的引用随之失效，运行中卡片的图标会随机渲染成 `.`；现改为取值拷贝
 - 修复 `components::tool_card::render()` 无条件回写子组件头部导致的无限刷新：每次渲染都调用 `output_block::set_header()` 会再排一帧，`headless::tick()` 因此永不返回；现在仅在头部签名变化时回写
 - 修复宿主先于组件树销毁时的野指针崩溃：`reconciler` 析构改为 `release_tree()` 递归清理，`tool_runner` 在 `cleanup()` 中结束子进程并注销句柄

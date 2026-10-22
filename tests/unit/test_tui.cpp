@@ -7,6 +7,7 @@
 #include <NeForce/tui/component/renderer.hpp>
 #include <NeForce/tui/component/dropdown.hpp>
 #include <NeForce/tui/component/animation.hpp>
+#include <NeForce/tui/component/log_view.hpp>
 #include <NeForce/tui/dom/element.hpp>
 #include <NeForce/tui/dom/layout.hpp>
 #include <NeForce/tui/dom/linear_gradient.hpp>
@@ -438,6 +439,38 @@ TEST(TuiComponentTest, RenderCreatesElement) {
     auto el = comp.render();
     EXPECT_EQ(el.kind(), element::kind::text);
     EXPECT_EQ(el.text(), "hello");
+}
+
+namespace {
+    struct CoreComponent : component_base {
+        element render() override { return element::text("core"); }
+
+        void init() { counter_ = &create_state<int>(3); }
+
+        int count() const { return counter_->value(); }
+
+        void bump() { *counter_ = counter_->value() + 1; }
+
+    private:
+        state<int>* counter_ = nullptr;
+    };
+} // namespace
+
+TEST(TuiComponentTest, BaseComponentCreatesState) {
+    CoreComponent comp;
+    comp.init();
+    EXPECT_EQ(comp.count(), 3);
+    comp.bump();
+    EXPECT_EQ(comp.count(), 4);
+}
+
+TEST(TuiComponentBoundaryTest, LibraryComponentsStayOffTheComponentTemplate) {
+    static_assert(is_base_of<component_base, components::log_view>::value,
+                  "library components derive from component_base");
+    static_assert(!is_base_of<component<>, components::log_view>::value,
+                  "library components must not instantiate component<P>: the DLL would export the "
+                  "template members and every consumer that instantiates them fails with LNK2005");
+    static_assert(is_base_of<component_base, component<>>::value, "component<P> derives from component_base");
 }
 
 TEST(TuiStateTest, InitialValue) {

@@ -48,7 +48,7 @@ struct select_list_option {
  * 键位：`↑`/`↓`/`Ctrl+P`/`Ctrl+N` 移动，`PgUp`/`PgDn` 翻页，`Enter` 确认，
  * `Esc` 先清空过滤再取消；可打印字符写入过滤串，`Backspace` 删除。
  */
-class NEFORCE_API select_list_view final : public component<> {
+class NEFORCE_API select_list_view final : public component_base {
 public:
     /**
      * @brief 构造函数

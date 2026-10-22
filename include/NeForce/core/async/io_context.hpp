@@ -37,12 +37,22 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-/// @brief 监控可读事件
-NEFORCE_INLINE17 constexpr uint32_t epoll_in = 0x001;
-/// @brief 监控可写事件
-NEFORCE_INLINE17 constexpr uint32_t epoll_out = 0x004;
-/// @brief 边沿触发模式
-NEFORCE_INLINE17 constexpr uint32_t epoll_et = 0x80000000;
+/// @brief epoll 事件标志
+enum class epoll_event : uint32_t {
+    none = 0,
+    in = 0x001,      ///< 监控可读事件
+    out = 0x004,     ///< 监控可写事件
+    et = 0x80000000, ///< 边沿触发模式
+};
+
+constexpr epoll_event operator|(epoll_event a, epoll_event b) noexcept {
+    return static_cast<epoll_event>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));
+}
+
+constexpr epoll_event operator&(epoll_event a, epoll_event b) noexcept {
+    return static_cast<epoll_event>(static_cast<uint32_t>(a) & static_cast<uint32_t>(b));
+}
+
 
 /**
  * @class io_context
@@ -67,7 +77,7 @@ public:
     /// @brief 通用 handler 类型
     using handler_type = function<void()>;
     /// @brief fd 事件回调，参数为 (fd, events, error_code)
-    using fd_callback = function<void(int fd, uint32_t events, error_code ec)>;
+    using fd_callback = function<void(int fd, epoll_event events, error_code ec)>;
     /// @brief 定时器到期回调
     using timer_callback = function<void()>;
 
@@ -197,11 +207,11 @@ public:
     /**
      * @brief 注册 fd 进行事件监控
      * @param fd 要监控的文件描述符
-     * @param events epoll_in / epoll_out 掩码
+     * @param events epoll_event 事件
      * @param cb 事件就绪时的回调
      * @param edge_triggered 是否使用边缘触发模式，默认 true
      */
-    void add_fd(native_handle_type fd, uint32_t events, fd_callback cb, bool edge_triggered = true);
+    void add_fd(native_handle_type fd, epoll_event events, fd_callback cb, bool edge_triggered = true);
 
     /**
      * @brief 修改已注册 fd 的事件掩码
@@ -209,7 +219,7 @@ public:
      * @param events 新的事件掩码
      * @param edge_triggered 是否使用边缘触发模式，默认 true
      */
-    void mod_fd(native_handle_type fd, uint32_t events, bool edge_triggered = true);
+    void mod_fd(native_handle_type fd, epoll_event events, bool edge_triggered = true);
 
     /**
      * @brief 取消 fd 的事件监控
@@ -233,7 +243,7 @@ private:
     /// @brief fd 注册信息
     struct fd_info {
         native_handle_type fd;
-        uint32_t events;
+        epoll_event events;
         fd_callback callback;
     };
 

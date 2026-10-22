@@ -19,24 +19,24 @@ namespace {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    long to_wsa_events(const uint32_t e) {
+    long to_wsa_events(const epoll_event e) {
         long wsa = FD_CLOSE;
-        if ((e & epoll_in) != 0U) {
+        if ((e & epoll_event::in) != epoll_event::none) {
             wsa |= FD_READ | FD_ACCEPT;
         }
-        if ((e & epoll_out) != 0U) {
+        if ((e & epoll_event::out) != epoll_event::none) {
             wsa |= FD_WRITE | FD_CONNECT;
         }
         return wsa;
     }
 
-    uint32_t from_wsa_events(const long network_events) {
-        uint32_t out = 0;
+    epoll_event from_wsa_events(const long network_events) {
+        auto out = epoll_event::none;
         if ((network_events & (FD_READ | FD_ACCEPT)) != 0) {
-            out |= epoll_in;
+            out = out | epoll_event::in;
         }
         if ((network_events & (FD_WRITE | FD_CONNECT | FD_CLOSE)) != 0) {
-            out |= epoll_out;
+            out = out | epoll_event::out;
         }
         return out;
     }
@@ -83,9 +83,9 @@ void io_context::monitor_loop() {
                 const native_handle_type fd = fds[idx];
                 ::WSANETWORKEVENTS net_ev{};
                 if (::WSAEnumNetworkEvents(fd, handles[idx], &net_ev) == 0) {
-                    const uint32_t events = from_wsa_events(net_ev.lNetworkEvents);
-                    if (events != 0) {
-                        ::PostQueuedCompletionStatus(iocp_handle_, events, fd, nullptr);
+                    const epoll_event events = from_wsa_events(net_ev.lNetworkEvents);
+                    if (events != epoll_event::none) {
+                        ::PostQueuedCompletionStatus(iocp_handle_, static_cast<uint32_t>(events), fd, nullptr);
                     }
                 }
             }
@@ -202,13 +202,13 @@ io_context::io_context() {
     wake_fd_ = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC | EFD_SEMAPHORE);
 
     ::epoll_event ev{};
-    ev.events = epoll_in;
+    ev.events = static_cast<uint32_t>(epoll_event::in);
     ev.data.fd = wake_fd_;
     ::epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, wake_fd_, &ev);
 
     fd_info wake_info{};
     wake_info.fd = wake_fd_;
-    wake_info.events = epoll_in;
+    wake_info.events = epoll_event::in;
     fd_map_[wake_fd_] = move(wake_info);
 #else
     iocp_handle_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 0);
@@ -269,10 +269,10 @@ io_context::~io_context() {
 #endif
 }
 
-void io_context::add_fd(native_handle_type fd, uint32_t events, fd_callback cb, bool edge_triggered) {
+void io_context::add_fd(native_handle_type fd, epoll_event events, fd_callback cb, bool edge_triggered) {
 #ifdef NEFORCE_PLATFORM_LINUX
     ::epoll_event ev{};
-    ev.events = events | (edge_triggered ? epoll_et : 0U);
+    ev.events = static_cast<uint32_t>(events | (edge_triggered ? epoll_event::et : epoll_event::none));
     ev.data.fd = fd;
 
     lock<mutex> lk(fd_mutex_);
@@ -281,7 +281,7 @@ void io_context::add_fd(native_handle_type fd, uint32_t events, fd_callback cb, 
     // EEXIST once the fd is registered, and ignoring that leaves the kernel watching the
     // *old* event mask while fd_map_ already holds the new callback, so the new callback
     // never receives anything. Components register the same fd once per direction
-    // (connect: epoll_out, then read: epoll_in), so this is a routine transition, not an
+    // (connect: epoll_event::out, then read: epoll_event::in), so this is a routine transition, not an
     // error case.
     const int ctl_op = (fd_map_.contains(fd)) ? EPOLL_CTL_MOD : EPOLL_CTL_ADD;
     if (::epoll_ctl(epoll_fd_, ctl_op, fd, &ev) != 0) {
@@ -323,7 +323,7 @@ void io_context::add_fd(native_handle_type fd, uint32_t events, fd_callback cb, 
         info.fd = fd;
         info.events = events;
         info.callback = move(cb);
-        if (fd_map_.find(fd) == fd_map_.end()) {
+        if (!fd_map_.contains(fd)) {
             registered_fds_.fetch_add(1, memory_order_relaxed);
         }
         fd_map_[fd] = move(info);
@@ -333,26 +333,21 @@ void io_context::add_fd(native_handle_type fd, uint32_t events, fd_callback cb, 
 #endif
 }
 
-void io_context::mod_fd(native_handle_type fd, uint32_t events, bool edge_triggered) {
+void io_context::mod_fd(native_handle_type fd, epoll_event events, bool edge_triggered) {
     lock<mutex> lk(fd_mutex_);
-#ifdef NEFORCE_PLATFORM_LINUX
-    auto it = fd_map_.find(fd);
+
+    const auto it = fd_map_.find(fd);
     if (it == fd_map_.end()) {
         return;
     }
     it->second.events = events;
 
+#ifdef NEFORCE_PLATFORM_LINUX
     ::epoll_event ev{};
-    ev.events = events | (edge_triggered ? epoll_et : 0U);
+    ev.events = static_cast<uint32_t>(events | (edge_triggered ? epoll_event::et : epoll_event::none));
     ev.data.fd = fd;
     ::epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, fd, &ev);
 #else
-    auto it = fd_map_.find(fd);
-    if (it == fd_map_.end()) {
-        return;
-    }
-    it->second.events = events;
-
     const auto eit = fd_events_.find(fd);
     if (eit != fd_events_.end() && eit->second != nullptr) {
         ::WSAEventSelect(fd, eit->second, to_wsa_events(events));
@@ -373,7 +368,7 @@ void io_context::remove_fd(native_handle_type fd) {
     ::epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, fd, nullptr);
 #else
     lock<mutex> lk(fd_mutex_);
-    if (fd_map_.find(fd) != fd_map_.end()) {
+    if (fd_map_.contains(fd)) {
         fd_map_.erase(fd);
         registered_fds_.fetch_sub(1, memory_order_relaxed);
     }
@@ -597,7 +592,7 @@ size_t io_context::run_one(int timeout_ms) {
             }
         } else if (key != 0 && ok == TRUE) {
             const int fd = static_cast<int>(key);
-            const auto events = static_cast<uint32_t>(bytes);
+            const auto events = static_cast<epoll_event>(bytes);
 
             // Dispatch on a copy, taken under fd_mutex_ so a concurrent add_fd()/remove_fd()
             // cannot free the entry while it is being copied; see the Linux branch above.

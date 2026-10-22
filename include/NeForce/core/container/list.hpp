@@ -12,6 +12,7 @@
 #include "NeForce/core/algorithm/compare.hpp"
 #include "NeForce/core/interface/icollector.hpp"
 #include "NeForce/core/interface/iiterator.hpp"
+#include "NeForce/core/memory/allocator_traits.hpp"
 #include "NeForce/core/memory/construct.hpp"
 #include "NeForce/core/memory/standard_allocator.hpp"
 #include "NeForce/core/utility/compressed_pair.hpp"
@@ -244,6 +245,24 @@ private:
     }
 
     /**
+     * @brief 用当前分配器销毁所有节点
+     */
+    void destroy_all_nodes() noexcept(is_nothrow_destructible_v<node_type>) {
+        if (head_ == nullptr) {
+            return;
+        }
+        link_type p = head_->next;
+        while (p != head_) {
+            link_type q = p;
+            p = p->next;
+            list::destroy_node(q);
+        }
+        list::destroy_node(head_);
+        head_ = nullptr;
+        pair_.value = 0;
+    }
+
+    /**
      * @brief 初始化头节点
      *
      * 创建并初始化哨兵节点，其prev和next都指向自身。
@@ -257,6 +276,81 @@ private:
             throw;
         }
         head_->prev = head_->next = head_;
+    }
+
+    void copy_assign_impl(const list& other, true_type /*pocca*/) {
+        if (pair_.get_base() == other.pair_.get_base()) {
+            copy_assign_impl(other, false_type{});
+            return;
+        }
+
+        destroy_all_nodes();
+        pair_.get_base() = other.pair_.get_base();
+        try {
+            list::init_header();
+        } catch (...) {
+            head_ = nullptr;
+            throw;
+        }
+
+        try {
+            for (auto iter = other.cbegin(); iter != other.cend(); ++iter) {
+                list::emplace_back(*iter);
+            }
+        } catch (...) {
+            list::clear();
+            throw;
+        }
+    }
+
+    void copy_assign_impl(const list& other, false_type /*pocca*/) {
+        list::clear();
+        try {
+            for (auto iter = other.cbegin(); iter != other.cend(); ++iter) {
+                list::emplace_back(*iter);
+            }
+        } catch (...) {
+            list::clear();
+            throw;
+        }
+    }
+
+    void
+    move_assign_impl(list&& other,
+                     true_type /*pocma*/) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>>) {
+        _NEFORCE swap(head_, other.head_);
+        _NEFORCE swap(pair_, other.pair_);
+    }
+
+    void move_assign_impl(list&& other, false_type /*pocma*/) {
+        if (pair_.get_base() == other.pair_.get_base()) {
+            _NEFORCE swap(head_, other.head_);
+            _NEFORCE swap(pair_.value, other.pair_.value);
+        } else {
+            clear();
+            try {
+                for (auto iter = other.begin(); iter != other.end(); ++iter) {
+                    emplace_back(_NEFORCE move(*iter));
+                }
+                other.clear();
+            } catch (...) {
+                clear();
+                throw;
+            }
+        }
+    }
+
+    void swap_impl(list& other,
+                   true_type /*pocs*/) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>>) {
+        _NEFORCE swap(head_, other.head_);
+        _NEFORCE swap(pair_, other.pair_);
+    }
+
+    void swap_impl(list& other, false_type /*pocs*/) noexcept {
+        NEFORCE_DEBUG_VERIFY(get_allocator() == other.get_allocator(),
+                             "swap requires equal allocators when POCS is false");
+        _NEFORCE swap(head_, other.head_);
+        _NEFORCE swap(pair_.value, other.pair_.value);
     }
 
 public:
@@ -334,7 +428,7 @@ public:
      * @param other 源链表
      */
     list(const list& other) :
-    list(other.begin(), other.end()) {}
+    list(other, allocator_traits<allocator_type>::select_on_container_copy_construction(other.get_allocator())) {}
 
     /**
      * @brief 拷贝赋值运算符
@@ -345,8 +439,7 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        list tmp(other);
-        list::swap(tmp);
+        copy_assign_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_copy_assignment{});
         return *this;
     }
 
@@ -354,9 +447,12 @@ public:
      * @brief 移动构造函数
      * @param other 源链表
      */
-    list(list&& other) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>>) {
-        init_header();
-        list::swap(other);
+    list(list&& other) noexcept(is_nothrow_move_constructible_v<compressed_pair<allocator_type, size_type>>) :
+    head_(other.head_),
+    pair_(_NEFORCE move(other.pair_)) {
+        other.head_ = nullptr;
+        other.pair_.value = 0;
+        other.init_header();
     }
 
     /**
@@ -364,13 +460,13 @@ public:
      * @param other 源链表
      * @return 自身引用
      */
-    list& operator=(list&& other) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>> &&
-                                           is_nothrow_destructible_v<node_type>) {
+    list& operator=(list&& other) noexcept(allocator_traits<allocator_type>::is_always_equal::value &&
+                                           is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>>) {
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        clear();
-        list::swap(other);
+        move_assign_impl(_NEFORCE move(other),
+                         typename allocator_traits<allocator_type>::propagate_on_container_move_assignment{});
         return *this;
     }
 
@@ -594,7 +690,7 @@ public:
     /**
      * @brief 获取当前分配器
      */
-    NEFORCE_NODISCARD const allocator_type& get_allocator() const noexcept { return pair_.get_base(); }
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return pair_.get_base(); }
 
     /**
      * @brief 检查是否为空
@@ -912,9 +1008,11 @@ public:
      * @brief 交换两个链表的内容
      * @param other 要交换的另一个链表
      */
-    void swap(list& other) noexcept(is_nothrow_swappable_v<allocator_type>) {
-        _NEFORCE swap(head_, other.head_);
-        _NEFORCE swap(pair_, other.pair_);
+    void swap(list& other) noexcept(is_nothrow_swappable_v<compressed_pair<allocator_type, size_type>>) {
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
+        swap_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_swap{});
     }
 
     /**
@@ -1197,7 +1295,7 @@ public:
 };
 
 #ifdef NEFORCE_STANDARD_17
-template <typename Iterator, typename Alloc>
+template <typename Iterator, typename Alloc = allocator<list_node<iter_value_t<Iterator>>>>
 list(Iterator, Iterator, Alloc = Alloc()) -> list<iter_value_t<Iterator>, Alloc>;
 #endif
 

@@ -53,7 +53,7 @@ struct text_area_option {
  *
  * @note 文本中的换行统一为 `\\n`。
  */
-class NEFORCE_API text_area_view final : public component<> {
+class NEFORCE_API text_area_view final : public component_base {
 public:
     /**
      * @brief 构造函数

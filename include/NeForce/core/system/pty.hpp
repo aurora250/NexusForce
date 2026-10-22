@@ -72,7 +72,7 @@ public:
     NEFORCE_NODISCARD static bool is_supported() noexcept;
 
     /**
-     * @brief 当前环境是否真的能打开伪终端
+     * @brief 当前环境是否真的能打开伪终端并启动子进程
      * @return 是否可用
      */
     NEFORCE_NODISCARD static bool is_available() noexcept;
@@ -87,14 +87,11 @@ public:
     /**
      * @brief 在伪终端上启动子进程
      * @param executable 可执行文件路径
-     * @param args 参数列表，`argv[0]` 为可执行文件名本身
+     * @param args 参数列表，`argv[0]` 应为可执行文件名
      * @param work_dir 工作目录，空表示继承
      * @param env `键=值` 形式的环境变量
      * @param merged_stderr 保留参数以与管道模式对齐
-     * @throws pty_exception 未打开、可执行文件不存在、`fork`/`chdir`/`exec` 失败时抛出
-     *
-     * 子进程成为新会话的首进程并把主端从端设为控制终端。父子之间有一根 close-on-exec 的通报管道，
-     * `exec` 之前的任何失败都会带回父进程并由本函数抛出，而不是变成子进程的 127 退出码。
+     * @throws pty_exception 操作失败时抛出
      */
     void start(const string& executable, const vector<string>& args = {}, const string& work_dir = {},
                const vector<string>& env = {}, bool merged_stderr = true);
@@ -110,6 +107,11 @@ public:
      * @return 可读写的描述符，未打开时为 -1
      */
     NEFORCE_NODISCARD native_handle_type master_handle() const noexcept;
+
+    /**
+     * @brief 主句柄是否有效
+     */
+    NEFORCE_NODISCARD bool is_master_handle_valid() const noexcept;
 
     /**
      * @brief 子进程 id

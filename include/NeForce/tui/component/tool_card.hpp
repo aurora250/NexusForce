@@ -55,7 +55,7 @@ struct tool_card_option {
  *
  * 状态图标：执行中为旋转动画，成功 `✔`、失败 `✖`、中断 `⏹`。
  */
-class NEFORCE_API tool_card final : public component<> {
+class NEFORCE_API tool_card final : public component_base {
 public:
     /**
      * @brief 构造函数

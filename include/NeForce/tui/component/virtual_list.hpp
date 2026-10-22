@@ -49,7 +49,7 @@ struct virtual_list_option {
  * list.set_item_count(messages.size());   // 追加消息后调用，会自动贴底
  * @endcode
  */
-class NEFORCE_API virtual_list_view final : public component<> {
+class NEFORCE_API virtual_list_view final : public component_base {
 public:
     /**
      * @brief 构造函数

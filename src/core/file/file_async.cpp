@@ -276,7 +276,7 @@ void file_async::ensure_state(io_context& ctx) {
 
     if (state_ != nullptr) {
         const int uring_fd = state_->ring_fd();
-        ctx_->add_fd(uring_fd, epoll_in, [this](int /*fd*/, uint32_t /*events*/, error_code /*ec*/) {
+        ctx_->add_fd(uring_fd, epoll_event::in, [this](int /*fd*/, epoll_event /*events*/, error_code /*ec*/) {
             if (state_ == nullptr) {
                 return;
             }

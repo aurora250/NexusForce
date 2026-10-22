@@ -43,7 +43,7 @@ struct output_block_option {
  *
  * 键位：`Enter` / `Space` / `Right` 展开，`Left` 折叠；点击头部切换。
  */
-class NEFORCE_API output_block final : public component<> {
+class NEFORCE_API output_block final : public component_base {
 public:
     /**
      * @brief 构造函数

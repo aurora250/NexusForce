@@ -224,6 +224,156 @@ public:
     flat_unordered_multimap(ilist.begin(), ilist.end(), n, hf, eql) {}
 
     /**
+     * @brief 使用指定分配器构造空容器
+     * @param alloc 分配器
+     */
+    explicit flat_unordered_multimap(const allocator_type& alloc) :
+    ht_(alloc) {}
+
+    /**
+     * @brief 使用指定分配器和初始容量构造
+     * @param n 初始容量提示
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(const size_type n, const allocator_type& alloc) :
+    ht_(n, alloc) {}
+
+    /**
+     * @brief 使用指定分配器、初始容量和哈希函数构造
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(const size_type n, const hasher& hf, const allocator_type& alloc) :
+    ht_(n, hf, alloc) {}
+
+    /**
+     * @brief 使用指定分配器、初始容量、哈希函数和键相等比较函数构造
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(const size_type n, const hasher& hf, const key_equal& eql, const allocator_type& alloc) :
+    ht_(n, hf, eql, alloc) {}
+
+    /**
+     * @brief 拷贝构造并指定分配器
+     * @param other 源容器
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(const flat_unordered_multimap& other, const allocator_type& alloc) :
+    ht_(other.ht_, alloc) {}
+
+    /**
+     * @brief 移动构造并指定分配器
+     * @param other 源容器
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(flat_unordered_multimap&& other, const allocator_type& alloc) :
+    ht_(_NEFORCE move(other.ht_), alloc) {}
+
+    /**
+     * @brief 范围构造并指定分配器
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    flat_unordered_multimap(Iterator first, Iterator last, const allocator_type& alloc) :
+    ht_(alloc) {
+        ht_.insert_equal(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器和初始容量
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始容量提示
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    flat_unordered_multimap(Iterator first, Iterator last, const size_type n, const allocator_type& alloc) :
+    ht_(n, alloc) {
+        ht_.insert_equal(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器、初始容量和哈希函数
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    flat_unordered_multimap(Iterator first, Iterator last, const size_type n, const hasher& hf,
+                            const allocator_type& alloc) :
+    ht_(n, hf, alloc) {
+        ht_.insert_equal(first, last);
+    }
+
+    /**
+     * @brief 范围构造并指定分配器、初始容量、哈希函数和键相等比较函数
+     * @tparam Iterator 迭代器类型
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    template <typename Iterator, enable_if_t<is_iter_v<Iterator>, int> = 0>
+    flat_unordered_multimap(Iterator first, Iterator last, const size_type n, const hasher& hf, const key_equal& eql,
+                            const allocator_type& alloc) :
+    ht_(n, hf, eql, alloc) {
+        ht_.insert_equal(first, last);
+    }
+
+    /**
+     * @brief 初始化列表构造并指定分配器
+     * @param ilist 初始化列表
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(std::initializer_list<value_type> ilist, const allocator_type& alloc) :
+    flat_unordered_multimap(ilist.begin(), ilist.end(), alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器和初始容量
+     * @param ilist 初始化列表
+     * @param n 初始容量提示
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(std::initializer_list<value_type> ilist, const size_type n, const allocator_type& alloc) :
+    flat_unordered_multimap(ilist.begin(), ilist.end(), n, alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器、初始容量和哈希函数
+     * @param ilist 初始化列表
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(std::initializer_list<value_type> ilist, const size_type n, const hasher& hf,
+                            const allocator_type& alloc) :
+    flat_unordered_multimap(ilist.begin(), ilist.end(), n, hf, alloc) {}
+
+    /**
+     * @brief 初始化列表构造并指定分配器、初始容量、哈希函数和键相等比较函数
+     * @param ilist 初始化列表
+     * @param n 初始容量提示
+     * @param hf 哈希函数
+     * @param eql 键相等比较函数
+     * @param alloc 分配器
+     */
+    flat_unordered_multimap(std::initializer_list<value_type> ilist, const size_type n, const hasher& hf,
+                            const key_equal& eql, const allocator_type& alloc) :
+    flat_unordered_multimap(ilist.begin(), ilist.end(), n, hf, eql, alloc) {}
+
+    /**
      * @brief 获取起始迭代器
      * @return 指向第一个元素的迭代器
      */
@@ -270,6 +420,12 @@ public:
      * @return 最大元素数量
      */
     NEFORCE_NODISCARD size_type max_size() const noexcept { return ht_.max_size(); }
+
+    /**
+     * @brief 获取当前分配器
+     * @return 分配器副本
+     */
+    NEFORCE_NODISCARD allocator_type get_allocator() const noexcept { return ht_.get_allocator(); }
 
     /**
      * @brief 检查是否为空

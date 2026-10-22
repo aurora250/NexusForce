@@ -109,25 +109,25 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
      * @brief 获取基类引用
      * @return 基类的引用
      */
-    constexpr compressed_pair& get_base() & noexcept { return *this; }
+    constexpr IfEmpty& get_base() & noexcept { return *this; }
 
     /**
      * @brief 获取基类常量引用
      * @return 基类的常量引用
      */
-    constexpr const compressed_pair& get_base() const& noexcept { return *this; }
+    constexpr const IfEmpty& get_base() const& noexcept { return *this; }
 
     /**
      * @brief 获取基类引用
      * @return 基类的引用
      */
-    constexpr compressed_pair&& get_base() && noexcept { return _NEFORCE move(*this); }
+    constexpr IfEmpty&& get_base() && noexcept { return _NEFORCE move(*this); }
 
     /**
      * @brief 获取基类常量引用
      * @return 基类的常量引用
      */
-    constexpr const compressed_pair&& get_base() const&& noexcept { return _NEFORCE move(*this); }
+    constexpr const IfEmpty&& get_base() const&& noexcept { return _NEFORCE move(*this); }
 
     /**
      * @brief 交换两个压缩对

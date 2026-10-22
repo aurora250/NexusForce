@@ -55,7 +55,7 @@ struct approve_prompt_option {
  *
  * 键位：`←`/`→`/`Tab` 切换选项，`1`-`3` 直接选择并确认，`Enter` 确认当前项，`Esc` 取消（拒绝）。
  */
-class NEFORCE_API approve_prompt_view final : public component<> {
+class NEFORCE_API approve_prompt_view final : public component_base {
 public:
     /**
      * @brief 构造函数
