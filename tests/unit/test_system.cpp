@@ -3772,6 +3772,19 @@ TEST_F(ProcessTest, Start_WithCaptureOutput_ReturnsValidId) {
     p.wait();
 }
 
+TEST_F(ProcessTest, StartAndWorkDirAcceptPathOverloads) {
+    path temp = path::temp_directory_path();
+    process p;
+    p.set_capture_stdout(true).set_work_dir(temp);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    p.start(path{"cmd.exe"}, {"/c", "cd"});
+#else
+    p.start(path{"/bin/sh"}, {"-c", "pwd"});
+#endif
+    EXPECT_EQ(p.wait(5000), 0);
+    EXPECT_TRUE(p.stdout_output().view().find(temp.filename()) != string_view::npos);
+}
+
 TEST_F(ProcessTest, Start_InvalidExecutable_ThrowsException) {
     process p;
     EXPECT_THROW(p.start("nonexistent_executable_xyz_12345", {}), process_exception);

@@ -3954,3 +3954,30 @@ TEST_F(StackTest, RecursivePop) {
     }
     EXPECT_EQ(expected, -1);
 }
+
+namespace {
+    struct nested_vector_value {
+        vector<string> items;
+    };
+} // namespace
+
+TEST_F(VectorTest, CopyAssignmentKeepsNestedBuffersIndependent) {
+    vector<nested_vector_value> first;
+    nested_vector_value value;
+    value.items.push_back(string{"a"});
+    first.push_back(value);
+
+    vector<nested_vector_value> second{first};
+    second[0].items.push_back(string{"b"});
+
+    vector<nested_vector_value> target;
+    target = first;
+    target = second;
+    first.clear();
+    second.clear();
+
+    ASSERT_EQ(target.size(), 1U);
+    ASSERT_EQ(target[0].items.size(), 2U);
+    EXPECT_EQ(target[0].items[0], string{"a"});
+    EXPECT_EQ(target[0].items[1], string{"b"});
+}

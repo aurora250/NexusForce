@@ -11,6 +11,7 @@
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/file/path.hpp"
 #include "NeForce/core/system/pipe.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -227,6 +228,13 @@ public:
     process& set_work_dir(const string& dir);
 
     /**
+     * @brief 设置工作目录
+     * @param dir 工作目录路径
+     * @return 自身引用
+     */
+    process& set_work_dir(const path& dir) { return set_work_dir(dir.str()); }
+
+    /**
      * @brief 设置子进程环境变量
      * @param key 变量名
      * @param value 变量值
@@ -318,6 +326,13 @@ public:
     void start(const string& executable, const vector<string>& args = {});
 
     /**
+     * @brief 启动子进程
+     * @param executable 可执行文件路径
+     * @param args 命令行参数列表
+     */
+    void start(const path& executable, const vector<string>& args = {}) { start(executable.str(), args); }
+
+    /**
      * @brief 以管理员/root 权限启动子进程
      * @param executable 可执行文件路径
      * @param args 命令行参数列表
@@ -382,6 +397,7 @@ public:
      * @return 包含退出码和合并的 stdout+stderr 的 shell_result
      * @throws process_exception 执行失败或超时
      */
+    // TODO: add shell_options (work_dir, capture_stderr, interactive stdio) so callers can avoid platform-specific shell branches.
     NEFORCE_NODISCARD static shell_result execute_shell(const string& command, int timeout_ms = -1);
 
     /**

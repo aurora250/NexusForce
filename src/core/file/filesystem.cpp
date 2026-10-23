@@ -633,6 +633,24 @@ byte_size filesystem::size(const path& p) {
 #endif
 }
 
+bool filesystem::resize(const path& p, const size_t size) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const wstring wide_path = character::to_wstring(p.view());
+    const ::HANDLE handle = ::CreateFileW(wide_path.data(), GENERIC_WRITE, FILE_SHARE_READ, nullptr, OPEN_EXISTING,
+                                          FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (handle == INVALID_HANDLE_VALUE) {
+        return false;
+    }
+    ::LARGE_INTEGER distance{};
+    distance.QuadPart = static_cast<::LONGLONG>(size);
+    const bool ok = ::SetFilePointerEx(handle, distance, nullptr, FILE_BEGIN) != 0 && ::SetEndOfFile(handle) != 0;
+    ::CloseHandle(handle);
+    return ok;
+#else
+    return ::truncate(p.data(), static_cast<::off_t>(size)) == 0;
+#endif
+}
+
 path filesystem::temp_directory() { return path{environment::temp_directory()}; }
 
 path filesystem::home_directory() { return path{environment::home_directory()}; }

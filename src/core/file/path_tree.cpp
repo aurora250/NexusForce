@@ -163,12 +163,23 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
 
         const bool custom_ok = !options.custom_filter || options.custom_filter(*child_node);
 
-        if (type_ok && ext_ok && custom_ok) {
+        const bool selected = type_ok && ext_ok && custom_ok;
+        if (is_dir && !selected && options.files_only) {
+            // files_only does not expose directories,
+            // but their descendants must still be reachable from the scanned tree.
+            scan_impl(child_node, options, current_depth + 1, chain);
+            for (auto& descendant: child_node->children_) {
+                descendant->parent_ = parent;
+                parent->children_.push_back(descendant);
+            }
+            continue;
+        }
+        if (selected) {
             parent->children_.push_back(child_node);
         }
 
         if (is_dir) {
-            node::ptr& recurse_node = (type_ok && ext_ok && custom_ok) ? parent->children_.back() : child_node;
+            node::ptr& recurse_node = selected ? parent->children_.back() : child_node;
             if (options.follow_symlinks && chain != nullptr) {
                 pair<uint64_t, uint64_t> id_pair;
                 if (resolved_dir_id(child_path, id_pair)) {
@@ -289,12 +300,23 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
 
         const bool custom_ok = !options.custom_filter || options.custom_filter(*child_node);
 
-        if (type_ok && ext_ok && custom_ok) {
+        const bool selected = type_ok && ext_ok && custom_ok;
+        if (is_dir && !selected && options.files_only) {
+            // files_only does not expose directories,
+            // but their descendants must still be reachable from the scanned tree.
+            scan_impl(child_node, options, current_depth + 1, chain);
+            for (auto& descendant: child_node->children_) {
+                descendant->parent_ = parent;
+                parent->children_.push_back(descendant);
+            }
+            continue;
+        }
+        if (selected) {
             parent->children_.push_back(child_node);
         }
 
         if (is_dir) {
-            node::ptr& recurse_node = (type_ok && ext_ok && custom_ok) ? parent->children_.back() : child_node;
+            node::ptr& recurse_node = selected ? parent->children_.back() : child_node;
             if (options.follow_symlinks && chain != nullptr) {
                 pair<uint64_t, uint64_t> id_pair;
                 if (resolved_dir_id(child_path, id_pair)) {

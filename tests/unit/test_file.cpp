@@ -1991,6 +1991,89 @@ TEST_F(PathTest, LexicallyNormalRelativeDotDot) {
 #endif
 }
 
+TEST_F(PathTest, IsAbsolute) {
+    EXPECT_TRUE(path{"/tmp"}.is_absolute());
+    EXPECT_FALSE(path{"tmp"}.is_absolute());
+    EXPECT_FALSE(path{}.is_absolute());
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_TRUE(path{"C:\\temp"}.is_absolute());
+    EXPECT_FALSE(path{"C:temp"}.is_absolute());
+    EXPECT_TRUE(path{"\\\\server\\share"}.is_absolute());
+#endif
+}
+
+TEST_F(PathTest, ComponentsSkipEmptySegments) {
+    const auto parts = path{"/usr/local/bin"}.components();
+    ASSERT_EQ(parts.size(), 3u);
+    EXPECT_EQ(parts[0], string{"usr"});
+    EXPECT_EQ(parts[1], string{"local"});
+    EXPECT_EQ(parts[2], string{"bin"});
+    EXPECT_TRUE(path{}.components().empty());
+}
+
+TEST_F(PathTest, AppendOperatorAddsSuffixWithoutSeparator) {
+    path p{"archive"};
+    p += ".tar.gz";
+    EXPECT_EQ(p.str(), "archive.tar.gz");
+    path directory{"dir"};
+    directory += '/';
+    EXPECT_EQ((directory / "file").str(), "dir/file");
+}
+
+TEST_F(PathTest, CanonicalAndWeaklyCanonical) {
+    const path file = get_test_path("canonical.txt");
+    filesystem::create_and_write(file, string{"content"});
+    const path canonical = file.canonical();
+    ASSERT_FALSE(canonical.empty());
+    EXPECT_TRUE(canonical.is_absolute());
+    EXPECT_TRUE(canonical.is_file());
+    const path missing = get_test_path("missing") / path("child.txt");
+    const path weak = missing.weakly_canonical();
+    ASSERT_FALSE(weak.empty());
+    EXPECT_TRUE(weak.is_absolute());
+    EXPECT_EQ(weak.filename(), string_view{"child.txt"});
+    EXPECT_EQ(weak.parent_path().filename(), string_view{"missing"});
+    EXPECT_TRUE(weak.parent_path().parent_path().is_directory());
+}
+
+TEST_F(PathTest, IsWithinHandlesParentsAndPrefixSiblings) {
+    const path root = test_dir_.weakly_canonical();
+    const path nested = get_test_path("nested") / path("child.txt");
+    filesystem::create_directories(nested.parent_path());
+    EXPECT_TRUE(root.is_within(root));
+    EXPECT_TRUE(nested.weakly_canonical().is_within(root));
+    EXPECT_FALSE((root / path("..") / path("outside.txt")).weakly_canonical().is_within(root));
+    EXPECT_FALSE(path{test_dir_.str() + "-sibling"}.weakly_canonical().is_within(root));
+    EXPECT_FALSE(nested.is_within(path{}));
+}
+
+#ifndef NEFORCE_PLATFORM_WINDOWS
+TEST_F(PathTest, CanonicalResolvesSymlinkEscapes) {
+    const path outside = path::temp_directory_path() / path("neforce_path_outside");
+    filesystem::create_directories(outside);
+    filesystem::create_and_write(outside / path("secret.txt"), string{"secret"});
+    const path link = get_test_path("escape");
+    ASSERT_EQ(::symlink(outside.data(), link.data()), 0);
+    const path target = link / path("secret.txt");
+    EXPECT_EQ(target.canonical(), (outside / path("secret.txt")).canonical());
+    EXPECT_FALSE(target.weakly_canonical().is_within(test_dir_.weakly_canonical()));
+    filesystem::remove_all(outside);
+}
+#endif
+
+TEST_F(FilesystemTest, ResizeFile) {
+    const path resized = test_dir_ / path("resize.txt");
+    ASSERT_TRUE(filesystem::create_and_write(resized, string{"0123456789"}));
+    EXPECT_TRUE(filesystem::resize(resized, 4));
+    EXPECT_EQ(filesystem::size(resized).bytes(), 4u);
+    file input{resized, false, file_access::read};
+    ASSERT_TRUE(input.is_opened());
+    EXPECT_EQ(input.read(), string{"0123"});
+    EXPECT_TRUE(filesystem::resize(resized, 8));
+    EXPECT_EQ(filesystem::size(resized).bytes(), 8u);
+    EXPECT_FALSE(filesystem::resize(test_dir_ / path("missing.txt"), 1));
+}
+
 class PathTreeTest : public ::testing::Test {
 protected:
     void SetUp() override {

@@ -4,6 +4,9 @@
 
 ### 🚀 New Features
 
+- `path` 新增 `is_absolute`、`canonical`、`weakly_canonical`、`is_within`、`components` 与 `operator+=`（字符串/字符），便于安全路径判断与路径拼接
+- `filesystem` 新增 `resize`，用于截断/扩展文件
+- `process` 新增 `set_work_dir(const path&)` 与 `start(const path&, ...)` 重载
 - `tui::theme` 新增角色表与成员函数，旧版九字段仍保留并从角色派生
 - `code_block_option` 新增 `syntax`；`markdown_option` 新增 `math_style` / `parse_math`；`text_line` 新增 `continuation`
 - `renderer::render_glyph_run` / `render_rich_text` 追加可选的悬挂前缀参数
@@ -247,6 +250,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `path_tree::scan` 在 `files_only` 下丢失嵌套目录文件的问题
+- 修复 `vector` 拷贝赋值复用旧元素导致嵌套容器缓冲区共享、二次释放的问题；改为重建存储并保留深拷贝语义
 - 修复 `renderer::draw_glyph()` 宽字符续列越界：内容超出屏幕底部时，宽字形第二列会写到帧缓冲之外；现在续列同样做行边界检查
 - 修复 `process_watcher::start()` 定时器回调的引用环：回调捕获了持有它自身的 `shared_ptr<function<...>>`，每次 `start()` 泄漏一个回调块；改为每轮安装新闭包的 `schedule_poll()`，并去掉不必要的 `make_shared<function>` 间接层
 - 修复 `application` 三处定时器的同类引用环：帧 tick、窗口尺寸检查与 `Ctrl+C` 提示复位都捕获了持有自身的 `shared_ptr<function<...>>`，每次运行泄漏；现改为成员函数每轮安装新闭包 / 一次性闭包

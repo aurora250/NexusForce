@@ -431,7 +431,26 @@ private:
     }
 
     NEFORCE_CONSTEXPR20 void copy_assign_impl(const vector& other, false_type /*pocca*/) {
-        assign(other.cbegin(), other.cend());
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
+        const size_type n = other.size();
+        pointer new_start = n == 0 ? nullptr : pair_.get_base().allocate(n);
+        pointer new_finish = new_start;
+        try {
+            new_finish = _NEFORCE uninitialized_copy(other.cbegin(), other.cend(), new_start);
+        } catch (...) {
+            _NEFORCE destroy(new_start, new_finish);
+            if (new_start != nullptr) {
+                pair_.get_base().deallocate(new_start, n);
+            }
+            throw;
+        }
+        _NEFORCE destroy(start_, finish_);
+        deallocate();
+        start_ = new_start;
+        finish_ = new_finish;
+        pair_.value = new_start == nullptr ? nullptr : new_start + n;
     }
 
     NEFORCE_CONSTEXPR20 void

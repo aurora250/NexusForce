@@ -138,6 +138,15 @@ public:
     static byte_size size(const path& p);
 
     /**
+     * @brief 调整文件大小
+     * @param p 文件路径
+     * @param size 新大小（字节）
+     * @return 成功返回 true
+     * @note 新大小大于原大小时，新增内容未定义。
+     */
+    static bool resize(const path& p, size_t size);
+
+    /**
      * @brief 获取临时目录路径
      * @return 临时目录路径
      */

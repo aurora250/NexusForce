@@ -247,6 +247,12 @@ public:
     NEFORCE_NODISCARD bool empty() const noexcept { return path_.empty(); }
 
     /**
+     * @brief 获取路径组件列表
+     * @return 按顺序排列的非空组件
+     */
+    NEFORCE_NODISCARD vector<string> components() const;
+
+    /**
      * @brief 获取起始路径组件迭代器
      * @return 指向第一个组件的迭代器
      */
@@ -297,6 +303,12 @@ public:
     NEFORCE_NODISCARD path lexically_normal() const;
 
     /**
+     * @brief 检查路径是否为绝对路径
+     * @return 是否为绝对路径
+     */
+    NEFORCE_NODISCARD bool is_absolute() const noexcept;
+
+    /**
      * @brief 获取绝对路径
      * @param base 基础路径
      * @return 绝对路径
@@ -304,6 +316,25 @@ public:
      * 将相对路径转换为绝对路径。
      */
     NEFORCE_NODISCARD path absolute(const path& base = current_path()) const;
+
+    /**
+     * @brief 获取规范路径
+     * @return 规范路径；路径不存在或无法解析时返回空路径
+     */
+    NEFORCE_NODISCARD path canonical() const;
+
+    /**
+     * @brief 获取弱规范路径
+     * @return 规范路径；尾部不存在的组件按字面量追加
+     */
+    NEFORCE_NODISCARD path weakly_canonical() const;
+
+    /**
+     * @brief 判断当前路径是否位于基础路径之内
+     * @param base 基础路径
+     * @return 位于基础路径之内（包含自身）返回 true
+     */
+    NEFORCE_NODISCARD bool is_within(const path& base) const;
 
     /**
      * @brief 获取相对于另一路径的路径
@@ -361,6 +392,22 @@ public:
      * @return 连接后的新路径
      */
     path operator/(string_view pth) const;
+
+    /**
+     * @brief 原地追加字符串
+     * @param text 要追加的文本
+     * @return 自身引用
+     *
+     * 不插入分隔符，适合追加扩展名等场景。
+     */
+    path& operator+=(string_view text);
+
+    /**
+     * @brief 原地追加字符
+     * @param ch 要追加的字符
+     * @return 自身引用
+     */
+    path& operator+=(char ch);
 
     /**
      * @brief 扫描此路径（必须为目录）并返回路径树

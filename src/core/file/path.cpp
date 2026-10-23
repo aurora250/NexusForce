@@ -50,6 +50,16 @@ void path::split_iterator::find_next() {
     }
 }
 
+vector<string> path::components() const {
+    vector<string> result;
+    for (const auto& part: *this) {
+        if (!part.empty()) {
+            result.push_back(string{part});
+        }
+    }
+    return result;
+}
+
 path path::parent_path() const {
     if (path_.empty()) {
         return path{};
@@ -240,6 +250,113 @@ path path::absolute(const path& base) const {
 #endif
 }
 
+bool path::is_absolute() const noexcept {
+    if (path_.empty()) {
+        return false;
+    }
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (path_.size() >= 2 && path_[1] == ':') {
+        return path_.size() >= 3 && (path_[2] == '/' || path_[2] == '\\');
+    }
+    return path_.size() >= 2 && (path_[0] == '/' || path_[0] == '\\') && (path_[1] == '/' || path_[1] == '\\');
+#else
+    return path_[0] == '/';
+#endif
+}
+
+path path::canonical() const {
+    if (path_.empty()) {
+        return {};
+    }
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const wstring wide_path = character::to_wstring(path_.view());
+    const ::HANDLE handle = ::CreateFileW(wide_path.data(), FILE_READ_ATTRIBUTES,
+                                          FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, nullptr,
+                                          OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, nullptr);
+    if (handle == INVALID_HANDLE_VALUE) {
+        return {};
+    }
+    const ::DWORD length = ::GetFinalPathNameByHandleW(handle, nullptr, 0, VOLUME_NAME_DOS);
+    if (length == 0) {
+        ::CloseHandle(handle);
+        return {};
+    }
+    wstring buffer(length, L'\0');
+    const ::DWORD written = ::GetFinalPathNameByHandleW(handle, buffer.data(), length, VOLUME_NAME_DOS);
+    ::CloseHandle(handle);
+    if (written == 0 || written >= length) {
+        return {};
+    }
+    buffer.resize(written);
+    string result = wcharacter::to_string(buffer);
+    if (result.view().substr(0, 4) == "\\\\?\\") {
+        result = result.view().substr(4);
+        if (result.view().substr(0, 4) == "UNC\\") {
+            result = "\\\\" + result.view().substr(4);
+        }
+    }
+    return path{move(result)};
+#else
+    char buffer[PATH_MAX];
+    if (::realpath(path_.data(), buffer) == nullptr) {
+        return {};
+    }
+    return path{string{buffer}};
+#endif
+}
+
+path path::weakly_canonical() const {
+    if (path_.empty()) {
+        return {};
+    }
+    path direct = canonical();
+    if (!direct.empty()) {
+        return move(direct);
+    }
+    path current = absolute().lexically_normal();
+    vector<string> tail;
+    while (!current.empty()) {
+        const path resolved = current.canonical();
+        if (!resolved.empty()) {
+            path result = resolved;
+            for (auto it = tail.rbegin(); it != tail.rend(); ++it) {
+                result /= it->view();
+            }
+            return result.lexically_normal();
+        }
+        const string name{current.filename()};
+        if (!name.empty() && name != "." && name != "..") {
+            tail.push_back(name);
+        }
+        const path parent = current.parent_path();
+        if (parent == current) {
+            break;
+        }
+        current = parent;
+    }
+    return absolute().lexically_normal();
+}
+
+bool path::is_within(const path& base) const {
+    if (base.empty()) {
+        return false;
+    }
+    const path target = weakly_canonical();
+    const path root = base.weakly_canonical();
+    if (target.empty() || root.empty()) {
+        return false;
+    }
+    const path relative_path = target.relative(root);
+    if (relative_path == path{"."}) {
+        return true;
+    }
+    if (relative_path.is_absolute()) {
+        return false;
+    }
+    const auto first = relative_path.begin();
+    return first != relative_path.end() && *first != "..";
+}
+
 path path::relative(const path& base) const {
     const path abs_path = this->absolute();
     const path abs_base = base.absolute();
@@ -256,7 +373,14 @@ path path::relative(const path& base) const {
 
     size_t i = 0;
     const size_t n = min(this_parts.size(), base_parts.size());
-    while (i < n && this_parts[i] == base_parts[i]) {
+    const auto same_component = [](const string& lhs, const string& rhs) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return lhs.compare_ignore_case(rhs) == 0;
+#else
+        return lhs == rhs;
+#endif
+    };
+    while (i < n && same_component(this_parts[i], base_parts[i])) {
         ++i;
     }
 
@@ -336,6 +460,16 @@ path& path::operator/=(const path& other) {
         path_ += other.path_;
     }
 
+    return *this;
+}
+
+path& path::operator+=(const string_view text) {
+    path_ += text;
+    return *this;
+}
+
+path& path::operator+=(const char ch) {
+    path_ += ch;
     return *this;
 }
 
