@@ -89,10 +89,14 @@ term_w_(term_w),
 term_h_(term_h) {}
 
 void renderer::render(const element& tree, const vector<layout_rect>& layout, const bool has_focus) {
+    ++stats_.frames;
+    painted_this_frame_ = 0;
     has_focus_ = has_focus;
     scrollbar_hits_.clear();
     int idx = 0;
     render_subtree(tree, layout, idx);
+    stats_.last_frame_cells = painted_this_frame_;
+    stats_.total_cells += painted_this_frame_;
 }
 
 void renderer::render_subtree(const element& el, const vector<layout_rect>& layout, int& idx) {
@@ -253,7 +257,8 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
         case element::kind::rich_text: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
-                render_rich_text(rect.x, rect.y, rect.w, rect.h, el.spans(), el.style(), el.wrap_mode());
+                render_rich_text(rect.x, rect.y, rect.w, rect.h, el.spans(), el.style(), el.wrap_mode(), nullptr,
+                                 nullptr, el.hang().empty() ? nullptr : &el.hang(), el.hang_width());
                 ++idx;
             }
             return;
@@ -789,6 +794,9 @@ uint8_t renderer::hyperlink_of(const string* link) {
 
 int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const tui::style& style, const string* link) {
     const int cw = max(1, cp.display_width());
+    if (x >= 0 && x < term_w_ && y >= 0 && y < term_h_) {
+        ++painted_this_frame_;
+    }
     if (x >= 0 && x < term_w_ && y >= 0 && y < term_h_ && !is_clipped(x, y)) {
         auto& cell = screen_.fast_cell_at(x, y);
         cell.reset();
@@ -800,6 +808,11 @@ int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const tu
         }
     }
     for (int i = 1; i < cw && x + i < term_w_; ++i) {
+        // The first cell is bounds-checked above;
+        // the wide-glyph continuation columns can still fall outside the screen when content overflows.
+        if (y < 0 || y >= term_h_) {
+            break;
+        }
         auto& next = screen_.fast_cell_at(x + i, y);
         next.reset();
         next.automerge = true;
@@ -817,7 +830,8 @@ bool renderer::is_clipped(const int x, const int y) const noexcept {
 }
 
 void renderer::render_glyph_run(const int x, const int y, const int w, const int h, const vector<run_glyph>& glyphs,
-                                const style::wrap_mode wm, const int scroll_row, int* out_end_x, int* out_end_y) {
+                                const style::wrap_mode wm, const int scroll_row, int* out_end_x, int* out_end_y,
+                                const vector<text_span>* hang, const int hang_cols) {
     int cx = x;
     int cy = y;
 
@@ -840,7 +854,7 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
     }
     glyph_offsets.push_back(flat.size());
 
-    const text_layout lay = layout_text(flat.view(), w, wm);
+    const text_layout lay = layout_text_hang(flat.view(), w, wm, hang_cols);
 
     size_t glyph_index = 0;
     for (size_t row = 0; row < lay.lines.size(); ++row) {
@@ -855,6 +869,19 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
             ++glyph_index;
         }
         cx = x;
+        if (hang != nullptr && hang_cols > 0 && line.continuation) {
+            for (const auto& span: *hang) {
+                const tui::style& merged = span.style;
+                const auto& raw_hang = span.content.view();
+                for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw_hang.data()), raw_hang.size());
+                     it != utf8_iterator(); ++it) {
+                    if (cx + max(1, it->display_width()) > x + w) {
+                        break;
+                    }
+                    cx += draw_glyph(cx, cy, *it, merged, span.link.empty() ? nullptr : &span.link);
+                }
+            }
+        }
         while (glyph_index + 1 < glyph_offsets.size() && glyph_offsets[glyph_index] < line.end) {
             const auto& g = glyphs[glyph_index];
             const int cw = max(1, g.cp.display_width());
@@ -929,7 +956,8 @@ void renderer::apply_selection_overlay(const int x, const int y, const int /*w*/
 }
 
 void renderer::render_rich_text(const int x, const int y, const int w, const int h, const vector<text_span>& spans,
-                                const tui::style& style, const style::wrap_mode wm, int* out_end_x, int* out_end_y) {
+                                const tui::style& style, const style::wrap_mode wm, int* out_end_x, int* out_end_y,
+                                const vector<text_span>* hang, const int hang_cols) {
     vector<tui::style> merged;
     merged.reserve(spans.size());
     for (const auto& span: spans) {
@@ -943,7 +971,7 @@ void renderer::render_rich_text(const int x, const int y, const int w, const int
             glyphs.push_back(run_glyph{*it, &merged[i], &spans[i].link});
         }
     }
-    render_glyph_run(x, y, w, h, glyphs, wm, 0, out_end_x, out_end_y);
+    render_glyph_run(x, y, w, h, glyphs, wm, 0, out_end_x, out_end_y, hang, hang_cols);
 }
 
 void renderer::render_virtual_list(const element& el, const layout_rect& rect) {

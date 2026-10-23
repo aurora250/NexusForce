@@ -39,6 +39,15 @@ constexpr key_modifier operator&(key_modifier a, key_modifier b) noexcept {
 
 
 /**
+ * @brief 按键动作
+ */
+enum class key_action : uint8_t {
+    press,   ///< 按下
+    repeat,  ///< 自动重复
+    release, ///< 释放
+};
+
+/**
  * @brief 键盘事件
  *
  * 表示一次键盘输入，可能是特殊键或可打印字符。
@@ -95,6 +104,8 @@ struct key_event {
     type key = type::unknown;               ///< 按键标识
     codepoint cp;                           ///< 可打印字符的码点
     key_modifier mods = key_modifier::none; ///< 当前按下的修饰键
+    key_action action = key_action::press;  ///< 按键动作
+    codepoint base_cp;                      ///< 未施加修饰键时的码点（0 表示未提供）
 
     /**
      * @brief 检查是否为可打印字符
@@ -145,6 +156,13 @@ struct mouse_event {
 struct resize_event {
     int width;  ///< 新的终端宽度
     int height; ///< 新的终端高度
+};
+
+/**
+ * @brief 终端焦点事件
+ */
+struct focus_event {
+    bool focused = true; ///< 获得焦点为 true
 };
 
 /**

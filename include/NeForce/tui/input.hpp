@@ -77,6 +77,7 @@ private:
     void dispatch_key(const key_event& e);
     void dispatch_mouse(const mouse_event& e);
     void dispatch_paste(const paste_event& e);
+    void dispatch_focus(const parsed_input& input);
 
     io_context& ctx_;
     reconciler& reconiler_;

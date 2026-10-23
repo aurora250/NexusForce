@@ -31,6 +31,8 @@ struct markdown_option {
     tui::style quote_style;      ///< 引用样式
     tui::style list_style;       ///< 列表标记样式
     tui::style link_style;       ///< 链接样式（默认下划线）
+    tui::style math_style;       ///< 数学公式样式
+    bool parse_math = true;      ///< 是否识别 `$…$` 与 `$$…$$` 公式
 };
 
 /**
@@ -125,6 +127,86 @@ private:
     size_t misses_ = 0;
     uint64_t stamp_ = 0;
     markdown_option opt_;
+};
+
+/**
+ * @brief 流式 Markdown 渲染器
+ *
+ * 把"逐块追加"的 Markdown 增量渲染成稳定的元素树。
+ *
+ * 封口发生在围栏代码块之外的最后一个空行处，
+ * 且尾部至少保留 1024 字节，
+ * 保证未闭合的代码块、表格或列表不会被从中间切断。
+ *
+ * @code
+ * markdown_stream stream(opt);
+ * stream.append(chunk);            // 每次收到正文片段
+ * view = stream.render(width);     // 每帧取一次
+ * @endcode
+ */
+class NEFORCE_API markdown_stream {
+public:
+    /**
+     * @brief 构造函数
+     * @param opt 渲染配置
+     */
+    explicit markdown_stream(markdown_option opt = {});
+
+    /**
+     * @brief 析构函数
+     */
+    ~markdown_stream();
+
+    markdown_stream(const markdown_stream&) = delete;
+    markdown_stream& operator=(const markdown_stream&) = delete;
+    markdown_stream(markdown_stream&&) = delete;
+    markdown_stream& operator=(markdown_stream&&) = delete;
+
+    /**
+     * @brief 追加文本
+     * @param chunk 追加的片段
+     */
+    void append(string_view chunk);
+
+    /**
+     * @brief 替换全文
+     * @param text 新全文
+     */
+    void set_text(string_view text);
+
+    /**
+     * @brief 重置为空
+     */
+    void reset();
+
+    /**
+     * @brief 渲染当前内容
+     * @param width 渲染宽度，非正数表示沿用构造时的宽度
+     * @return 元素树；未封口部分每帧重新解析
+     */
+    const element& render(int width = 0);
+
+    /**
+     * @brief 当前全文
+     * @return 文本视图
+     */
+    NEFORCE_NODISCARD string_view text() const noexcept;
+
+    /**
+     * @brief 已封口字节数
+     * @return 字节数
+     */
+    NEFORCE_NODISCARD size_t sealed_bytes() const noexcept;
+
+    /**
+     * @brief 已封口块数
+     * @return 块数
+     */
+    NEFORCE_NODISCARD size_t sealed_blocks() const noexcept;
+
+private:
+    struct impl;
+    unique_ptr<impl> impl_;
 };
 
 /** @} */ // TUI

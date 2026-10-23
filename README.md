@@ -315,6 +315,16 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`pty` / `process_watcher`** - 伪终端封装与异步子进程监视器
 - **剪贴板 / 鼠标选择** - OSC 52 写入与读取，`text_area` 拖拽选区、`log_view` 点击选中复制、`composer` 单行上下键浏览提交历史
 - **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
+- **主题角色** - 81 个语义颜色角色 + 六套调色板（雾蓝/樱）+ 用户主题 JSON + 按终端背景自动明暗
+- **动效原语** - 共享帧时钟、扫光（shimmer）、平滑揭示（reveal）、旋转动画帧集
+- **富文本** - Markdown 表格/引用悬挂缩进/链接 OSC-8/图片占位、流式增量渲染、`$…$` 与 `$$…$$` 数学公式
+- **语法高亮** - 20 种语言的表驱动高亮，代码块按语言自动着色
+- **LaTeX** - TeX 子集排版为多行 Unicode（分数/根式/上下标/矩阵/cases/大运算符上下限）
+- **Mermaid** - flowchart / sequence / state / class / ER / gitGraph / pie / mindmap / timeline / gantt / journey / quadrant / requirement 子集渲染为框线字符图，Markdown 围栏自动接入
+- **终端协议** - 终端画像探测、OSC 11 背景查询、通知（OSC 9/777/99/BEL）、光标形状、焦点事件、Kitty 键盘开关
+- **图像协议** - PNG 解码（8 位 RGB/RGBA）与 Kitty / iTerm2 / Sixel 编码
+- **键盘与焦点** - Kitty `CSI-u` 与 modifyOtherKeys 解析（含按下/重复/释放）、窗口焦点事件、根组件按键预览
+- **选区跟随** - 拖选即复制、滚动后选区平移、`selection_text()` 取文本
 - **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染
 
 ### 🧬 类型与特性 (TypeInfo)

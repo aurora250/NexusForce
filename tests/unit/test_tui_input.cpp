@@ -759,3 +759,83 @@ TEST(TuiParagraphTest, KeepsExplicitNewlines) {
     EXPECT_EQ(el.children()[0].text(), "ab");
     EXPECT_EQ(el.children()[1].text(), "cd");
 }
+
+
+TEST(TuiKittyKeyboardTest, ShiftEnterIsDistinguishedFromEnter) {
+    parser_runner plain;
+    plain.feed_bytes("\r", 1);
+    ASSERT_EQ(plain.events.size(), 1U);
+    EXPECT_EQ(plain.events[0].key.key, key_event::type::enter);
+    EXPECT_EQ(plain.events[0].key.mods, key_modifier::none);
+
+    parser_runner modified;
+    modified.feed_bytes("\x1b[13;2u", 7);
+    ASSERT_EQ(modified.events.size(), 1U);
+    EXPECT_EQ(modified.events[0].type, parsed_input::kind::key);
+    EXPECT_EQ(modified.events[0].key.key, key_event::type::enter);
+    EXPECT_EQ(modified.events[0].key.mods, key_modifier::shift);
+}
+
+TEST(TuiKittyKeyboardTest, CtrlEnterAndPrintableCodes) {
+    parser_runner ctrl_enter;
+    ctrl_enter.feed_bytes("\x1b[13;5u", 7);
+    ASSERT_EQ(ctrl_enter.events.size(), 1U);
+    EXPECT_EQ(ctrl_enter.events[0].key.mods, key_modifier::ctrl);
+    EXPECT_EQ(ctrl_enter.events[0].key.key, key_event::type::enter);
+
+    parser_runner ctrl_a;
+    ctrl_a.feed_bytes("\x1b[97;5u", 7);
+    ASSERT_EQ(ctrl_a.events.size(), 1U);
+    EXPECT_EQ(ctrl_a.events[0].key.key, key_event::type::printable);
+    EXPECT_EQ(ctrl_a.events[0].key.cp.value(), static_cast<char32_t>('a'));
+    EXPECT_EQ(ctrl_a.events[0].key.mods, key_modifier::ctrl);
+}
+
+TEST(TuiKittyKeyboardTest, ReleaseAndRepeatActions) {
+    parser_runner release;
+    release.feed_bytes("\x1b[97;1:3u", 9);
+    ASSERT_EQ(release.events.size(), 1U);
+    EXPECT_EQ(release.events[0].key.action, key_action::release);
+
+    parser_runner repeat;
+    repeat.feed_bytes("\x1b[97;1:2u", 9);
+    ASSERT_EQ(repeat.events.size(), 1U);
+    EXPECT_EQ(repeat.events[0].key.action, key_action::repeat);
+}
+
+TEST(TuiKittyKeyboardTest, FunctionalKeyCodes) {
+    parser_runner arrows;
+    arrows.feed_bytes("\x1b[57352u", 8);
+    ASSERT_EQ(arrows.events.size(), 1U);
+    EXPECT_EQ(arrows.events[0].key.key, key_event::type::up);
+
+    parser_runner f5;
+    f5.feed_bytes("\x1b[57368u", 8);
+    ASSERT_EQ(f5.events.size(), 1U);
+    EXPECT_EQ(f5.events[0].key.key, key_event::type::F5);
+}
+
+TEST(TuiKittyKeyboardTest, ProtocolRepliesAreIgnored) {
+    parser_runner reply;
+    reply.feed_bytes("\x1b[?1u", 5);
+    EXPECT_TRUE(reply.events.empty());
+}
+
+TEST(TuiModifyOtherKeysTest, DecodesModifiedKey) {
+    parser_runner runner;
+    runner.feed_bytes("\x1b[27;5;13~", 10);
+    ASSERT_EQ(runner.events.size(), 1U);
+    EXPECT_EQ(runner.events[0].key.key, key_event::type::enter);
+    EXPECT_EQ(runner.events[0].key.mods, key_modifier::ctrl);
+}
+
+TEST(TuiFocusEventTest, ReportsFocusInAndOut) {
+    parser_runner runner;
+    runner.feed_bytes("\x1b[I", 3);
+    runner.feed_bytes("\x1b[O", 3);
+    ASSERT_EQ(runner.events.size(), 2U);
+    EXPECT_EQ(runner.events[0].type, parsed_input::kind::focus);
+    EXPECT_TRUE(runner.events[0].focused);
+    EXPECT_EQ(runner.events[1].type, parsed_input::kind::focus);
+    EXPECT_FALSE(runner.events[1].focused);
+}

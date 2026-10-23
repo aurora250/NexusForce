@@ -4,6 +4,32 @@
 
 ### 🚀 New Features
 
+- `tui::theme` 新增角色表与成员函数，旧版九字段仍保留并从角色派生
+- `code_block_option` 新增 `syntax`；`markdown_option` 新增 `math_style` / `parse_math`；`text_line` 新增 `continuation`
+- `renderer::render_glyph_run` / `render_rich_text` 追加可选的悬挂前缀参数
+- 添加 Kitty 键盘协议与 modifyOtherKeys 解析：`ESC[code;mods[:event]u`、`ESC[27;mods;code~`，`key_event` 新增 `action`（按下/重复/释放）与 `base_cp`
+- 添加终端焦点事件：`ESC[I` / `ESC[O` 解析为 `parsed_input::kind::focus`，`reconciler::dispatch_focus()` 遍历组件树回调 `component_base::on_focus()` 并暂停/恢复帧时钟
+- 添加根组件按键预览 `component_base::preview_key()`：在焦点组件之前处理必须优先的全局键
+- 添加终端画像与协议工具 `tui/terminal_protocol.hpp`：`detect_terminal_profile()`、OSC 11 背景查询/解析、通知（OSC 9/777/99/BEL）、光标形状（DECSCUSR）、焦点事件开关、Kitty 键盘开关
+- 添加图像协议 `tui/image.hpp`：PNG 解码（8 位 RGB/RGBA、5 种过滤器、IDAT 拼接、zlib 解压）、Kitty/iTerm2/Sixel 编码与 `detect_image_protocol()`
+- 添加 Mermaid 渲染 `core/file/mermaid/mermaid.hpp`：flowchart、sequenceDiagram、stateDiagram、classDiagram、erDiagram、gitGraph、pie、mindmap、timeline、gantt、journey、quadrantChart、requirementDiagram 渲染为框线字符图，并接入 Markdown 的 ` ```mermaid ` 围栏
+- 选区支持平移 `screen_selection::translate()` 与 `reconciler::scroll_selection()`：应用滚动转录后选区跟随内容
+- 添加 `reconciler::set_copy_on_select()`：拖选结束即写入剪贴板并保留高亮；`reconciler::selection_text()` 取选区文本
+- 添加 `application::request_quit()`：组件内部（如 `/quit`）可正常退出事件循环并恢复终端
+- 添加 TUI 主题角色系统 `tui::theme_role`：把界面颜色收敛为 81 个语义角色（品牌/焦点、文本、表面、状态、diff、工具点、语法、图表、chrome、子代理），`theme` 新增 `get()` / `set()` 与 `has_palette`
+- 添加六套内置调色板 `tui::make_palette()`：雾蓝 `dark` / `light` / `dark-ansi`、樱 `pink-night` / `pink-day` / `pink-ansi`，颜色值逐条取自 dsh-TUI 的 `theme.ts`（MIT），并提供生成脚本 `scripts/gen_theme_palettes.py`
+- 添加主题目录 `tui::theme_catalog`：用户主题 JSON（`{name, base, colors}`）加载与局部覆盖、`auto` 伪主题按终端背景明暗解析、同名主题覆盖、坏文档跳过
+- 添加颜色工具 `tui::lighten` / `darken` / `parse_color`（`#rgb`、`#rrggbb`、`#rrggbbaa`、`rgb()`、`ansi256()`、`ansi:name`）
+- 添加动效原语 `tui::frame_clock`（进程级共享帧时钟，`application` 每帧推进）、`shimmer_color` / `shimmer_sweep`（移动高亮扫光）、`reveal`（平滑揭示，`max(3, 积压/8)` 步长）、旋转动画帧集 `find_spinner` / `spinner_frame`
+- 添加 Markdown 悬挂缩进：`element::with_hang()` + `layout_text_hang()` + `text_line::continuation`，引用块与列表的续行按前缀宽度收窄并对齐
+- Markdown 表格改为列宽预算算法：最小不可断词宽度、理想宽度、按剩余空间贪心分配、单元格内换行、垂直居中、完整边框与表头居中加粗
+- Markdown 链接与图片输出 OSC-8 超链接；图片渲染为 `[img] alt`
+- Markdown 支持 `$…$` 与 `$$…$$` 数学公式：块级公式竖排、行内公式压成单行、无法排版时回退原文；`markdown_option::parse_math` 可关闭
+- 添加流式 Markdown 渲染器 `tui::markdown_stream`：按围栏代码块之外的空行封口已解析前缀，仅重解析尾部，块间距稳定不闪烁
+- 添加表驱动语法高亮 `tui::highlighter`：20 种语言、10 个记号分类、跨行块注释与多行字符串状态；`code_block` 按语言自动着色
+- 添加 LaTeX 渲染器 `tui::render_latex()`：TeX 子集（约 220 个符号、分数/根式/上下标/大运算符上下限/矩阵/cases/aligned/重音/间距）排版为多行 Unicode 文本，失败返回 `none` 而不产出半个公式
+- 添加 Markdown 渲染缓存与 `code_block` 语法配色 `syntax_palette`
+- 显示宽度模型对齐 Unicode 15：东亚宽度 W/F 与 Emoji_Presentation 表按 UCD 重新生成，组合符与变体选择符按零宽处理；`text_display_width` 增加 4096 条哈希缓存
 - 添加物化与顺序类惰性算子：`distinct` / `distinct_by` / `order_by` / `order_by_descending` / `then_by` / `then_by_descending` / `group_by` / `chunk` / `sliding` / `zip` / `enumerate` / `scan`，链式 API 与 `views` 管道适配器
 - 添加终端算子 `to_map`、与 `to_lookup`
 - 新增视图组件：`distinct_view`、`order_by_view`、`group_by_view` 与 `grouping`、`chunk_view`、`sliding_view`、`zip_view`、`enumerate_view`、`scan_view`
@@ -221,6 +247,7 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `renderer::draw_glyph()` 宽字符续列越界：内容超出屏幕底部时，宽字形第二列会写到帧缓冲之外；现在续列同样做行边界检查
 - 修复 `process_watcher::start()` 定时器回调的引用环：回调捕获了持有它自身的 `shared_ptr<function<...>>`，每次 `start()` 泄漏一个回调块；改为每轮安装新闭包的 `schedule_poll()`，并去掉不必要的 `make_shared<function>` 间接层
 - 修复 `application` 三处定时器的同类引用环：帧 tick、窗口尺寸检查与 `Ctrl+C` 提示复位都捕获了持有自身的 `shared_ptr<function<...>>`，每次运行泄漏；现改为成员函数每轮安装新闭包 / 一次性闭包
 - 修复 `strand` 在 handler 抛出非 `exception` 派生类型时永久保持锁定：内外两处 handler 调用都补上 `catch (...)`，异常不再逃逸并导致后续投递全部排队不执行

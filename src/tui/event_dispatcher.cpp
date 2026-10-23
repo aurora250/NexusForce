@@ -14,6 +14,12 @@ bool event_dispatcher::dispatch_key(const key_event& e, component_base* root) {
     // The focused component gets the first look at Tab,
     // so that editors and autocomplete popups can claim it;
     // focus navigation only runs when the event was not consumed.
+    // The root gets a look first so applications can bind keys that must win
+    // over the focused editor (for example `?` opening help on empty input).
+    if (root->preview_key(e)) {
+        return true;
+    }
+
     auto* focused = focus_mgr_.focused();
     if (focused != nullptr && focused->on_key(e)) {
         return true;

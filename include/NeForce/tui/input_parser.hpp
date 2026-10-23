@@ -30,17 +30,19 @@ struct parsed_input {
      * @brief 事件类型
      */
     enum class kind : uint8_t {
-        none,     ///< 未产出事件
-        key,      ///< 键盘事件，见 key
-        mouse,    ///< 鼠标事件，见 mouse
-        paste,    ///< 粘贴事件，见 paste_text
-        clipboard ///< 剪贴板应答
+        none,      ///< 未产出事件
+        key,       ///< 键盘事件，见 key
+        mouse,     ///< 鼠标事件，见 mouse
+        paste,     ///< 粘贴事件，见 paste_text
+        clipboard, ///< 剪贴板应答
+        focus      ///< 焦点事件，见 focused
     };
 
     kind type = kind::none; ///< 事件类型
     tui::key_event key;     ///< 键盘事件
     tui::mouse_event mouse; ///< 鼠标事件
     string paste_text;      ///< 剪贴板文本
+    bool focused = true;    ///< 焦点事件
 };
 
 /**
@@ -55,6 +57,8 @@ struct parsed_input {
  * - SGR 鼠标序列（`ESC[<b;x;yM/m`）
  * - 括号粘贴（`ESC[200~` … `ESC[201~`）
  * - OSC 52 剪贴板应答（`ESC]52;c;<base64>BEL` 或 `ESC \\` 结尾）
+ * - 焦点事件（`ESC[I` / `ESC[O`）
+ * - Kitty 键盘协议（`ESC[<code>;<mods>[:<event>]u`）与 modifyOtherKeys（`ESC[27;<mods>;<code>~`）
  *
  * @note 解析器不持有任何终端资源，应用需自行开启 raw 模式、`?1006` 鼠标模式与 `?2004` 括号粘贴模式
  */

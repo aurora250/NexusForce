@@ -30,6 +30,17 @@ void screen_selection::extend_to(const int x, const int y) noexcept {
     caret_y = y;
 }
 
+void screen_selection::translate(const int delta_y) noexcept {
+    if (!active || delta_y == 0) {
+        return;
+    }
+    anchor_y += delta_y;
+    caret_y += delta_y;
+    if ((anchor_y < 0 && caret_y < 0) || (anchor_y > 4096 && caret_y > 4096)) {
+        clear();
+    }
+}
+
 void screen_selection::clear() noexcept {
     active = false;
     anchor_x = 0;

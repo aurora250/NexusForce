@@ -73,6 +73,12 @@ struct screen_selection {
      * @return 在选区内返回true
      */
     NEFORCE_NODISCARD bool contains(int x, int y) const noexcept;
+
+    /**
+     * @brief 平移选区
+     * @param delta_y 行偏移
+     */
+    void translate(int delta_y) noexcept;
 };
 
 /**

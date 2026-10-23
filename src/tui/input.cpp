@@ -191,6 +191,10 @@ void input_driver::deliver(const parsed_input& input) {
             dispatch_mouse(input.mouse);
             break;
         }
+        case parsed_input::kind::focus: {
+            dispatch_focus(input);
+            break;
+        }
         case parsed_input::kind::paste:
         case parsed_input::kind::clipboard: {
             paste_event pe;
@@ -206,7 +210,17 @@ void input_driver::deliver(const parsed_input& input) {
 }
 
 void input_driver::dispatch_key(const key_event& e) {
+    // Key releases are parsed for apps that want them, but the default dispatch
+    // only forwards presses: a release would otherwise fire every binding twice.
+    if (e.action == key_action::release) {
+        return;
+    }
     deliver_guarded(strand_, [this, e] { reconiler_.dispatch_key(e); });
+}
+
+void input_driver::dispatch_focus(const parsed_input& input) {
+    const focus_event event{input.focused};
+    deliver_guarded(strand_, [this, event] { reconiler_.dispatch_focus(event); });
 }
 
 void input_driver::dispatch_mouse(const mouse_event& e) {

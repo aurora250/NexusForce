@@ -1,0 +1,14 @@
+# ---- Text layout (width, wrap) ----
+add_nexusforce_benchmark(NexusForceTextLayoutBenchmark
+    text_layout_benchmark.cpp
+)
+
+# ---- Markdown (parse, layout, stream) ----
+add_nexusforce_benchmark(NexusForceMarkdownBenchmark
+    markdown_benchmark.cpp
+)
+
+# ---- Frame diff (render + ANSI) ----
+add_nexusforce_benchmark(NexusForceFrameBenchmark
+    frame_benchmark.cpp
+)

@@ -1,4 +1,5 @@
 #include <NeForce/tui/application.hpp>
+#include <NeForce/tui/component/motion.hpp>
 #include <NeForce/tui/input.hpp>
 #include <NeForce/tui/reconciler.hpp>
 NEFORCE_BEGIN_NAMESPACE__
@@ -12,6 +13,8 @@ application& application::with_theme(const theme& theme) {
     theme_ = theme;
     return *this;
 }
+
+application* application::running_instance_ = nullptr;
 
 application& application::with_fps(const int fps) {
     fps_ = fps;
@@ -84,6 +87,7 @@ int application::run() {
                           },
                           "ctrl+l redraw"});
 
+    running_instance_ = this;
     reconiler_->mount(root_.get());
 
     input_->start();
@@ -109,6 +113,9 @@ int application::run() {
     input_.reset();
 
     running_ = false;
+    if (running_instance_ == this) {
+        running_instance_ = nullptr;
+    }
     return exit_code_;
 }
 
@@ -147,6 +154,14 @@ void application::quit(const int exit_code) {
     ctx_.stop();
 }
 
+bool application::request_quit(const int exit_code) noexcept {
+    if (running_instance_ == nullptr) {
+        return false;
+    }
+    running_instance_->quit(exit_code);
+    return true;
+}
+
 void application::schedule_quit_hint_reset() {
     ctx_.schedule_timer(2000, [this] {
         if (!quit_pending_) {
@@ -180,6 +195,8 @@ void application::schedule_frame_tick() {
         if (!running_ || reconiler_ == nullptr) {
             return;
         }
+
+        frame_clock::instance().tick(interval_ms);
 
         if (root_ != nullptr) {
             const auto delta = static_cast<int64_t>(interval_ms);

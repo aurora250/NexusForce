@@ -18,6 +18,24 @@ NEFORCE_BEGIN_TUI__
  */
 
 /**
+ * @brief 语法着色配色
+ *
+ * 每项为空表示沿用默认色：关键字青、字符串绿、数字黄、注释暗淡。
+ */
+struct syntax_palette {
+    optional<_NEFORCE color> keyword;     ///< 关键字
+    optional<_NEFORCE color> string_;     ///< 字符串
+    optional<_NEFORCE color> comment;     ///< 注释
+    optional<_NEFORCE color> number;      ///< 数字
+    optional<_NEFORCE color> function;    ///< 函数名
+    optional<_NEFORCE color> type;        ///< 类型
+    optional<_NEFORCE color> variable;    ///< 变量
+    optional<_NEFORCE color> op;          ///< 运算符
+    optional<_NEFORCE color> punctuation; ///< 标点
+    optional<_NEFORCE color> constant;    ///< 常量
+};
+
+/**
  * @brief 代码块配置
  */
 struct code_block_option {
@@ -33,6 +51,7 @@ struct code_block_option {
     tui::style style;          ///< 基础样式
     tui::style gutter_style;   ///< 行号栏样式
     tui::style band_style;     ///< 背景带样式
+    syntax_palette syntax;     ///< 语法着色配色
 };
 
 /**

@@ -570,16 +570,16 @@ TEST(DisplayWidthTest, WideRangeEdges) {
     EXPECT_EQ(codepoint(0x2E7FU).display_width(), 1);
     EXPECT_EQ(codepoint(0x2E80U).display_width(), 2);
     EXPECT_EQ(codepoint(0x33BFU).display_width(), 2);
-    EXPECT_EQ(codepoint(0x33C0U).display_width(), 1);
+    EXPECT_EQ(codepoint(0x33C0U).display_width(), 2);
 
-    EXPECT_EQ(codepoint(0x4DFFU).display_width(), 1);
+    EXPECT_EQ(codepoint(0x4DFFU).display_width(), 2);
     EXPECT_EQ(codepoint(0x4E00U).display_width(), 2);
-    EXPECT_EQ(codepoint(0xA4CFU).display_width(), 2);
+    EXPECT_EQ(codepoint(0xA4CFU).display_width(), 1);
     EXPECT_EQ(codepoint(0xA4D0U).display_width(), 1);
 
     EXPECT_EQ(codepoint(0xABFFU).display_width(), 1);
     EXPECT_EQ(codepoint(0xAC00U).display_width(), 2);
-    EXPECT_EQ(codepoint(0xD7AFU).display_width(), 2);
+    EXPECT_EQ(codepoint(0xD7AFU).display_width(), 1);
     EXPECT_EQ(codepoint(0xD7B0U).display_width(), 1);
 
     EXPECT_EQ(codepoint(0xFF00U).display_width(), 1);

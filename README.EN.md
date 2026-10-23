@@ -316,6 +316,16 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`pty` / `process_watcher`** - Pseudo-terminal wrapper and an async child-process watcher that falls back to pipes when no devpts is available
 - **Clipboard / mouse selection** - OSC 52 writes and reads, `text_area` drag selection, `log_view` click-to-select-and-copy, `composer` up/down browsing of submitted history
 - **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
+- **Theme roles** - 81 semantic color roles, six palettes (mist/sakura), user theme JSON, automatic light/dark from the terminal background
+- **Motion primitives** - shared frame clock, shimmer sweep, smooth reveal, spinner frame sets
+- **Rich text** - markdown tables, hanging quote indents, OSC-8 links, image placeholders, incremental streaming, `$…$` / `$$…$$` math
+- **Syntax highlighting** - table-driven highlighter for 20 languages, code blocks colored by language
+- **LaTeX** - TeX subset typeset as multi-line Unicode (fractions, roots, scripts, matrices, cases, operator limits)
+- **Mermaid** - flowchart / sequence / state / class / ER / gitGraph / pie / mindmap / timeline / gantt / journey / quadrant / requirement subsets rendered as box-drawing art, automatically wired into markdown fences
+- **Terminal protocols** - profile detection, OSC 11 background query, notifications (OSC 9/777/99/BEL), cursor shape, focus events, Kitty keyboard toggles
+- **Image protocols** - PNG decoding (8-bit RGB/RGBA) plus Kitty / iTerm2 / Sixel encoders
+- **Keyboard and focus** - Kitty `CSI-u` and modifyOtherKeys (press/repeat/release), window focus events, root key preview
+- **Selection follow** - copy on drag release, selection translation after scrolling, `selection_text()`
 - **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling
 
 ### 🧬 Type Traits & Concepts

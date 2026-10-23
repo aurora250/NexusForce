@@ -367,7 +367,7 @@ public:
      * @param n 索引
      * @return 指定位置的字符引用
      */
-    NEFORCE_NODISCARD constexpr const_reference at(const size_type n) const {
+    NEFORCE_NODISCARD constexpr const_reference at(const size_type n) const noexcept {
         NEFORCE_DEBUG_VERIFY(n <= size_, "basic string view index out of ranges.");
         return data_[n];
     }
@@ -402,7 +402,7 @@ public:
      * @param off 起始偏移
      * @return 实际复制的字符数
      */
-    constexpr size_type copy(CharT* const str, size_type count, const size_type off = 0) const {
+    constexpr size_type copy(CharT* const str, size_type count, const size_type off = 0) const noexcept {
         NEFORCE_DEBUG_VERIFY(off <= size_, "basic string view index out of ranges.");
         count = clamp_size(off, count);
         Traits::copy(str, data_ + off, count);
@@ -415,7 +415,8 @@ public:
      * @param count 子视图长度，默认为npos
      * @return 子字符串视图
      */
-    NEFORCE_NODISCARD constexpr basic_string_view substr(const size_type off = 0, const size_type count = npos) const {
+    NEFORCE_NODISCARD constexpr basic_string_view substr(const size_type off = 0,
+                                                         const size_type count = npos) const noexcept {
         NEFORCE_DEBUG_VERIFY(off <= size_, "basic string view index out of ranges.");
         const size_type clamp = clamp_size(off, count);
         return basic_string_view(data_ + off, clamp);
@@ -426,14 +427,16 @@ public:
      * @param count 长度
      * @return 子串
      */
-    NEFORCE_NODISCARD constexpr basic_string_view head(const size_type count = npos) const { return substr(0, count); }
+    NEFORCE_NODISCARD constexpr basic_string_view head(const size_type count = npos) const noexcept {
+        return substr(0, count);
+    }
 
     /**
      * @brief 获取尾部子串
      * @param off 起始偏移
      * @return 子串
      */
-    NEFORCE_NODISCARD constexpr basic_string_view tail(const size_type off = 0) const { return substr(off); }
+    NEFORCE_NODISCARD constexpr basic_string_view tail(const size_type off = 0) const noexcept { return substr(off); }
 
     /**
      * @brief 获取子视图
@@ -441,7 +444,8 @@ public:
      * @param count 子视图长度
      * @return 子字符串视图
      */
-    NEFORCE_NODISCARD constexpr basic_string_view view(const size_type off, const size_type count = npos) const {
+    NEFORCE_NODISCARD constexpr basic_string_view view(const size_type off,
+                                                       const size_type count = npos) const noexcept {
         return substr(off, count);
     }
 
@@ -462,7 +466,7 @@ public:
      * @return 比较结果
      */
     NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n,
-                                            const basic_string_view view) const {
+                                            const basic_string_view view) const noexcept {
         return substr(off, n).compare(view);
     }
 
@@ -476,7 +480,7 @@ public:
      * @return 比较结果
      */
     NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n, const basic_string_view view,
-                                            const size_type roff, const size_type count) const {
+                                            const size_type roff, const size_type count) const noexcept {
         return substr(off, n).compare(view.substr(roff, count));
     }
 
@@ -496,7 +500,8 @@ public:
      * @param str C风格字符串
      * @return 比较结果
      */
-    NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n, const CharT* const str) const {
+    NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n,
+                                            const CharT* const str) const noexcept {
         return substr(off, n).compare(basic_string_view(str));
     }
 
@@ -509,7 +514,7 @@ public:
      * @return 比较结果
      */
     NEFORCE_NODISCARD constexpr int compare(const size_type off, const size_type n, const CharT* const str,
-                                            const size_type count) const {
+                                            const size_type count) const noexcept {
         return substr(off, n).compare(basic_string_view(str, count));
     }
 

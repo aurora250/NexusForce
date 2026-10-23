@@ -44,6 +44,15 @@ struct scrollbar_hit {
 };
 
 /**
+ * @brief 渲染统计
+ */
+struct render_stats {
+    uint64_t frames = 0;           ///< 累计帧数
+    uint64_t last_frame_cells = 0; ///< 上一帧绘制的单元格数
+    uint64_t total_cells = 0;      ///< 累计绘制单元格数
+};
+
+/**
  * @brief 元素树渲染器
  *
  * 将元素树与布局结果渲染到 screen 帧缓冲区。
@@ -67,6 +76,12 @@ public:
      * @param has_focus 当前是否有焦点组件
      */
     void render(const element& tree, const vector<layout_rect>& layout, bool has_focus);
+
+    /**
+     * @brief 获取渲染统计
+     * @return 统计快照
+     */
+    NEFORCE_NODISCARD const render_stats& stats() const noexcept { return stats_; }
 
     /**
      * @brief 更新终端尺寸
@@ -112,7 +127,8 @@ public:
      * @param out_end_y 输出结束行
      */
     void render_rich_text(int x, int y, int w, int h, const vector<text_span>& spans, const tui::style& style,
-                          style::wrap_mode wm, int* out_end_x = nullptr, int* out_end_y = nullptr);
+                          style::wrap_mode wm, int* out_end_x = nullptr, int* out_end_y = nullptr,
+                          const vector<text_span>* hang = nullptr, int hang_cols = 0);
 
     /**
      * @brief 绘制边框
@@ -215,6 +231,8 @@ private:
 
     screen& screen_;
     const theme& theme_;
+    render_stats stats_;
+    uint64_t painted_this_frame_ = 0;
     int term_w_;
     int term_h_;
     vector<clip_rect> clip_stack_;
@@ -232,7 +250,8 @@ private:
                                  size_t sel_begin, size_t sel_end, int scroll_row);
     NEFORCE_NODISCARD bool is_clipped(int x, int y) const noexcept;
     void render_glyph_run(int x, int y, int w, int h, const vector<run_glyph>& glyphs, style::wrap_mode wm,
-                          int scroll_row, int* out_end_x, int* out_end_y);
+                          int scroll_row, int* out_end_x, int* out_end_y, const vector<text_span>* hang = nullptr,
+                          int hang_cols = 0);
     void render_virtual_list(const element& el, const layout_rect& rect);
 };
 

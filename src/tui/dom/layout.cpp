@@ -19,7 +19,11 @@ namespace {
         return breaks;
     }
 
-    int compute_wrapped_height(const string& text, const int max_width, const style::wrap_mode wm) {
+    int compute_wrapped_height(const string& text, const int max_width, const style::wrap_mode wm,
+                               const int hang_cols = 0) {
+        if (hang_cols > 0) {
+            return max(1, static_cast<int>(layout_text_hang(text.view(), max_width, wm, hang_cols).lines.size()));
+        }
         if (wm == style::wrap_mode::none || max_width <= 0) {
             return max(1, static_cast<int>(layout_text(text.view(), max_width, style::wrap_mode::none).lines.size()));
         }
@@ -327,7 +331,7 @@ namespace {
                 const style::wrap_mode wm = el.wrap_mode();
                 const string flat = flatten_spans(el.spans());
                 if (wm != style::wrap_mode::none && allocated_width > 0) {
-                    content_h = compute_wrapped_height(flat, allocated_width, wm);
+                    content_h = compute_wrapped_height(flat, allocated_width, wm, el.hang_width());
                 } else {
                     content_h = static_cast<int>(1 + count_line_breaks(flat));
                 }

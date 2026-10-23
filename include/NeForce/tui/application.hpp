@@ -99,6 +99,13 @@ public:
     void quit(int exit_code = 0);
 
     /**
+     * @brief 请求退出当前正在运行的应用
+     * @param exit_code 退出码
+     * @return 有运行中的应用时返回 true
+     */
+    static bool request_quit(int exit_code = 0) noexcept;
+
+    /**
      * @brief 让出终端
      *
      * 退出交替屏幕缓冲区、关闭鼠标与括号粘贴、恢复终端原始属性并显示光标，
@@ -162,6 +169,7 @@ private:
     int exit_code_ = 0;
     string title_;
     bool running_ = false;
+    static application* running_instance_;
     bool suspended_ = false;
     bool two_stage_quit_ = true;
     bool quit_pending_ = false;

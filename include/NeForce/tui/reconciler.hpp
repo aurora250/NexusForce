@@ -98,6 +98,19 @@ public:
     bool dispatch_paste(const paste_event& e);
 
     /**
+     * @brief 分发终端焦点事件
+     * @param e 焦点事件
+     * @return 事件总会分发给整棵组件树，返回 true
+     */
+    bool dispatch_focus(const focus_event& e);
+
+    /**
+     * @brief 终端是否处于焦点
+     * @return 获得焦点返回 true
+     */
+    NEFORCE_NODISCARD bool focused() const noexcept { return focused_; }
+
+    /**
      * @brief 有脏标记则执行渲染管线
      */
     void flush();
@@ -206,6 +219,30 @@ public:
     void clear_selection();
 
     /**
+     * @brief 获取选区文本
+     * @return 文本，无选区时为空串
+     */
+    NEFORCE_NODISCARD string selection_text() const;
+
+    /**
+     * @brief 平移选区
+     * @param delta_rows 行偏移
+     */
+    void scroll_selection(int delta_rows);
+
+    /**
+     * @brief 开关"松开鼠标即复制"
+     * @param enable 是否启用
+     */
+    void set_copy_on_select(bool enable) noexcept { copy_on_select_ = enable; }
+
+    /**
+     * @brief 是否启用"松开鼠标即复制"
+     * @return 启用返回 true
+     */
+    NEFORCE_NODISCARD bool copy_on_select() const noexcept { return copy_on_select_; }
+
+    /**
      * @brief 设置剪贴板写入回调
      * @param writer 回调，为空表示写往终端剪贴板
      */
@@ -265,7 +302,9 @@ private:
     bool rendering_ = false;
 
     screen_selection selection_;
+    bool focused_ = true;
     bool selecting_ = false;
+    bool copy_on_select_ = true;
     int select_origin_x_ = 0;
     int select_origin_y_ = 0;
     bool selection_enabled_ = true;
@@ -274,6 +313,7 @@ private:
     void refresh_term_size();
     void setup_tree(component_base* comp);
     bool handle_selection_mouse(const mouse_event& e);
+    bool write_selection(bool keep);
 };
 
 /** @} */ // TUI

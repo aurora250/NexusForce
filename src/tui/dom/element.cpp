@@ -1,10 +1,13 @@
 #include <NeForce/tui/component/component.hpp>
+#include <NeForce/tui/dom/text_layout.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 struct element::node {
     string text;
     vector<text_span> spans;
+    vector<text_span> hang;
+    int hang_width = 0;
     tui::style style;
     box_props layout;
     vector<element> children;
@@ -105,6 +108,21 @@ const box_props& element::layout() const { return node_->layout; }
 const string& element::text() const { return node_->text; }
 
 const vector<text_span>& element::spans() const { return node_->spans; }
+
+const vector<text_span>& element::hang() const { return node_->hang; }
+
+int element::hang_width() const noexcept { return node_->hang_width; }
+
+element& element::with_hang(vector<text_span> prefix) {
+    node_->hang = _NEFORCE move(prefix);
+    int width = 0;
+    for (const auto& span: node_->hang) {
+        width += text_display_width(span.content.view());
+    }
+    node_->hang_width = width;
+    node_->layout_dirty_ = true;
+    return *this;
+}
 
 size_t element::item_count() const noexcept { return node_->item_count; }
 

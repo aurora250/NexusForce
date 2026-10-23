@@ -2,6 +2,7 @@
 #include <NeForce/core/async/strand.hpp>
 #include <NeForce/tui/application.hpp>
 #include <NeForce/tui/component/approve_prompt.hpp>
+#include <NeForce/tui/component/motion.hpp>
 #include <NeForce/tui/component/select_list.hpp>
 #include <NeForce/tui/component/composer.hpp>
 #include <NeForce/tui/component/log_view.hpp>
@@ -2450,4 +2451,135 @@ TEST(TuiComposerTest, HistoryLimitZeroDisablesRecording) {
     comp->on_key(make_key(key_event::type::enter));
 
     EXPECT_EQ(0u, comp->history_size());
+}
+
+
+TEST(TuiSelectionTest, CopyOnSelectWritesOnReleaseAndKeepsHighlight) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root root;
+    root.content = element::vbox({element::text("hello"), element::text("world")});
+
+    headless app(&root, 12, 3);
+    app.render();
+
+    reconciler& pipe = app.pipeline();
+    string copied;
+    pipe.set_clipboard_writer([&copied](const string_view text) { copied = string(text); });
+    pipe.set_copy_on_select(true);
+
+    mouse_event press;
+    press.x = 0;
+    press.y = 0;
+    press.button = mouse_button::left;
+    press.action = mouse_action::press;
+    pipe.dispatch_mouse(press);
+
+    mouse_event drag = press;
+    drag.action = mouse_action::move;
+    drag.x = 4;
+    drag.y = 1;
+    pipe.dispatch_mouse(drag);
+
+    mouse_event release = drag;
+    release.action = mouse_action::release;
+    pipe.dispatch_mouse(release);
+
+    EXPECT_EQ(string("hello\nworld"), copied);
+    EXPECT_TRUE(pipe.selection().active);
+}
+
+TEST(TuiSelectionTest, ScrollSelectionFollowsContent) {
+    screen_selection selection;
+    selection.start(0, 2);
+    selection.extend_to(4, 3);
+    selection.translate(-2);
+    EXPECT_TRUE(selection.active);
+    EXPECT_EQ(selection.anchor_y, 0);
+    EXPECT_EQ(selection.caret_y, 1);
+
+    selection.translate(-3);
+    EXPECT_FALSE(selection.active);
+}
+
+TEST(TuiSelectionTest, ScrollSelectionThroughReconcilerKeepsTextAligned) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root root;
+    root.content = element::vbox({element::text("row0"), element::text("row1"), element::text("row2")});
+    headless app(&root, 12, 4);
+    app.render();
+    reconciler& pipe = app.pipeline();
+
+    mouse_event press;
+    press.x = 0;
+    press.y = 1;
+    press.button = mouse_button::left;
+    press.action = mouse_action::press;
+    pipe.dispatch_mouse(press);
+    mouse_event drag = press;
+    drag.action = mouse_action::move;
+    drag.x = 3;
+    drag.y = 1;
+    pipe.dispatch_mouse(drag);
+
+    EXPECT_EQ(string("row1"), pipe.selection_text());
+    pipe.scroll_selection(-1);
+    EXPECT_EQ(string("row0"), pipe.selection_text());
+}
+
+TEST(TuiFocusDispatchTest, FocusChangeReachesComponentsAndPausesClock) {
+    io_context ctx;
+    strand s{ctx};
+    fixed_root root;
+    root.content = element::text("hello");
+    headless app(&root, 10, 2);
+    app.render();
+
+    frame_clock::instance().reset();
+    frame_clock::instance().set_paused(false);
+
+    focus_event lost;
+    lost.focused = false;
+    app.pipeline().dispatch_focus(lost);
+    EXPECT_TRUE(frame_clock::instance().paused());
+    EXPECT_FALSE(app.pipeline().focused());
+
+    focus_event gained;
+    gained.focused = true;
+    app.pipeline().dispatch_focus(gained);
+    EXPECT_FALSE(frame_clock::instance().paused());
+    EXPECT_TRUE(app.pipeline().focused());
+}
+
+
+namespace {
+    struct preview_root : component<> {
+        int previews = 0;
+        element render() override { return element::text("root"); }
+        bool preview_key(const key_event& e) override {
+            ++previews;
+            return e.key == key_event::type::printable && e.cp.value() == U'q';
+        }
+    };
+} // namespace
+
+TEST(TuiPreviewKeyTest, RootSeesKeysBeforeTheFocusedChild) {
+    io_context ctx;
+    strand s{ctx};
+    preview_root root;
+    headless app(&root, 20, 3);
+    app.render();
+
+    key_event q;
+    q.key = key_event::type::printable;
+    q.cp = codepoint{U'q'};
+    EXPECT_TRUE(app.pipeline().dispatch_key(q));
+    EXPECT_EQ(root.previews, 1);
+
+    key_event other;
+    other.key = key_event::type::printable;
+    other.cp = codepoint{U'x'};
+    app.pipeline().dispatch_key(other);
+    EXPECT_EQ(root.previews, 2);
 }

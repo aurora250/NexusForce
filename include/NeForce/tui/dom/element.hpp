@@ -165,6 +165,27 @@ public:
     element& with_selection(size_t begin, size_t end);
 
     /**
+     * @brief 获取悬挂缩进前缀
+     * @return 前缀片段列表
+     */
+    NEFORCE_NODISCARD const vector<text_span>& hang() const;
+
+    /**
+     * @brief 设置悬挂缩进前缀
+     * @param prefix 换行后续行重复绘制的前缀
+     * @return 自身引用
+     *
+     * 仅对富文本元素生效；续行可用宽度会减去前缀宽度。
+     */
+    element& with_hang(vector<text_span> prefix);
+
+    /**
+     * @brief 获取悬挂前缀宽度
+     * @return 列数，未设置前缀时为 0
+     */
+    NEFORCE_NODISCARD int hang_width() const noexcept;
+
+    /**
      * @brief 获取变高虚拟列表的高度表
      * @return 每项实测高度数组指针，固定高度模式下为 nullptr
      *

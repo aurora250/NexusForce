@@ -10,6 +10,7 @@
 
 #include "NeForce/core/utility/color.hpp"
 #include "NeForce/core/utility/optional.hpp"
+#include "NeForce/tui/dom/theme_role.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -178,15 +179,32 @@ struct box_props {
  * @brief 主题
  */
 struct NEFORCE_API theme {
-    color bg;        ///< 默认背景色
-    color fg;        ///< 默认前景色
-    color primary;   ///< 主色调
-    color secondary; ///< 次要色调
-    color danger;    ///< 危险/错误色
-    color success;   ///< 成功色
-    color warning;   ///< 警告色
-    color muted;     ///< 弱化/禁用色
-    color border;    ///< 边框色
+    color bg;                       ///< 默认背景色
+    color fg;                       ///< 默认前景色
+    color primary;                  ///< 主色调
+    color secondary;                ///< 次要色调
+    color danger;                   ///< 危险/错误色
+    color success;                  ///< 成功色
+    color warning;                  ///< 警告色
+    color muted;                    ///< 弱化/禁用色
+    color border;                   ///< 边框色
+    color roles_[theme_role_count]; ///< 角色表
+    bool has_palette;               ///< 角色表是否由调色板构造
+
+    /**
+     * @brief 取角色颜色
+     * @param role 角色
+     * @return 颜色
+     */
+    NEFORCE_NODISCARD color get(theme_role role) const noexcept;
+
+    /**
+     * @brief 设置角色颜色
+     * @param role 角色
+     * @param value 颜色
+     * @return 自身引用
+     */
+    theme& set(theme_role role, color value) noexcept;
 
     /**
      * @brief 获取按钮样式
@@ -203,7 +221,7 @@ struct NEFORCE_API theme {
 
     /**
      * @brief 获取输入框样式
-     * @param focused 是否处于焦点状态
+     * @param focused 是否处于聚焦状态
      * @return 输入框样式
      */
     NEFORCE_NODISCARD style input_style(bool focused) const;

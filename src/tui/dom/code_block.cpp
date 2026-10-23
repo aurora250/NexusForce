@@ -1,4 +1,5 @@
 #include <NeForce/core/string/to_string.hpp>
+#include <NeForce/tui/dom/highlight.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/tui/dom/code_block.hpp>
 NEFORCE_BEGIN_NAMESPACE__
@@ -122,6 +123,79 @@ namespace {
         }
         return lines;
     }
+
+    tui::style class_style(const syntax_class cls, const tui::style& base, const code_block_option& opt) {
+        tui::style st = base;
+        const syntax_palette& palette = opt.syntax;
+        switch (cls) {
+            case syntax_class::keyword:
+                st.fg = palette.keyword.value_or(_NEFORCE color::cyan());
+                break;
+            case syntax_class::string:
+                st.fg = palette.string_.value_or(_NEFORCE color::green());
+                break;
+            case syntax_class::comment:
+                if (palette.comment.has_value()) {
+                    st.fg = palette.comment;
+                } else {
+                    st.dim = true;
+                }
+                break;
+            case syntax_class::number:
+                st.fg = palette.number.value_or(_NEFORCE color::yellow());
+                break;
+            case syntax_class::function:
+                st.fg = palette.function.value_or(_NEFORCE color::cyan());
+                break;
+            case syntax_class::type:
+                st.fg = palette.type.value_or(_NEFORCE color::magenta());
+                break;
+            case syntax_class::variable:
+                if (palette.variable.has_value()) {
+                    st.fg = palette.variable;
+                }
+                break;
+            case syntax_class::op:
+                if (palette.op.has_value()) {
+                    st.fg = palette.op;
+                }
+                break;
+            case syntax_class::punctuation:
+                if (palette.punctuation.has_value()) {
+                    st.fg = palette.punctuation;
+                } else {
+                    st.dim = true;
+                }
+                break;
+            case syntax_class::constant:
+                st.fg = palette.constant.value_or(_NEFORCE color::magenta());
+                break;
+            case syntax_class::plain:
+            default:
+                break;
+        }
+        return st;
+    }
+
+    vector<text_span> runs_to_spans(const string_view line, const vector<syntax_run>& runs, const tui::style& base,
+                                    const code_block_option& opt) {
+        vector<text_span> spans;
+        size_t cursor = 0;
+        for (const auto& run: runs) {
+            if (run.begin > cursor) {
+                spans.push_back(text_span{string{line.substr(cursor, run.begin - cursor)}, base, string()});
+            }
+            if (run.end > run.begin) {
+                spans.push_back(text_span{string{line.substr(run.begin, run.end - run.begin)},
+                                          class_style(run.cls, base, opt), string()});
+            }
+            cursor = max(cursor, run.end);
+        }
+        if (cursor < line.size()) {
+            spans.push_back(text_span{string{line.substr(cursor, line.size() - cursor)}, base, string()});
+        }
+        return spans;
+    }
 } // namespace
 
 
@@ -140,6 +214,9 @@ element code_block(code_block_option opt) {
     number_style.fg = _NEFORCE color::yellow();
     tui::style keyword_style = base_style;
     keyword_style.fg = _NEFORCE color::cyan();
+
+    const highlighter* grammar = opt.highlight ? find_highlighter(opt.language.view()) : nullptr;
+    highlight_state lexer_state;
 
     const auto lines = split_lines(opt.code.view());
     int gutter_width = 1;
@@ -160,9 +237,16 @@ element code_block(code_block_option opt) {
             cells.push_back(element::text(padded + " ", gutter, style::wrap_mode::none));
         }
 
-        const auto spans = opt.highlight ? highlight_line(lines[i], base_style, string_style, comment_style,
-                                                          number_style, keyword_style)
-                                         : vector<text_span>{text_span{string(lines[i]), base_style}};
+        vector<text_span> spans;
+        if (grammar != nullptr) {
+            vector<syntax_run> runs;
+            grammar->highlight_line(lines[i], lexer_state, runs);
+            spans = runs_to_spans(lines[i], runs, base_style, opt);
+        } else if (opt.highlight) {
+            spans = highlight_line(lines[i], base_style, string_style, comment_style, number_style, keyword_style);
+        } else {
+            spans.push_back(text_span{string(lines[i]), base_style, string()});
+        }
         cells.push_back(element::rich_text(spans, base_style, style::wrap_mode::none));
         rows.push_back(element::hbox(move(cells)));
     }

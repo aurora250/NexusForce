@@ -296,6 +296,190 @@ element patch = diff_view(unified_diff_text, dv);
 - 整帧用 `ESC[?2026h/l` 包裹（同步输出），支持该扩展的终端会原子提交整帧；
   `set_synchronized_output(false)` 关闭。
 
+### 8.1 角色化主题
+
+组件不应出现字面色值，而是从 `theme_role` 取色：
+
+```cpp
+#include <NeForce/tui/dom/theme.hpp>
+
+theme t = make_palette(theme_palette_id::dark);     // 雾蓝·暗
+const color accent = t.get(theme_role::accent);
+const color added  = t.get(theme_role::diff_added);
+
+// 局部覆盖（用户主题）
+t.set(theme_role::accent, color{0xFF, 0x9E, 0xC7});
+```
+
+- 81 个角色覆盖品牌/焦点、文本、表面、状态、diff、工具点、语法、图表、chrome 与子代理；
+- 六套内置调色板：`dark` / `light` / `dark-ansi` / `pink-night` / `pink-day` / `pink-ansi`；
+- `make_palette()` 会同步旧版字段（`fg` / `primary` / `danger` …），旧组件自动跟随；
+- 旧版 `dark_theme` 仍可用，其 `get()` 把角色映射回九色。
+
+### 8.2 主题目录与用户主题
+
+```cpp
+auto& catalog = theme_catalog::instance();
+catalog.load_user_themes("~/.nexuswave/themes");     // 目录下 *.json
+const theme t = catalog.resolve("auto");             // 按终端背景明暗选择
+```
+
+用户主题文档：
+
+```json
+{ "name": "sakura", "base": "dark", "colors": { "accent": "#FF9EC7", "text": "#E8E6E0" } }
+```
+
+- `base` 必须是内置调色板名；未知颜色键与非法值被忽略；
+- `auto` 由 `set_terminal_light()` 决定，通常来自 OSC 11 背景查询；
+- 同名主题后注册者覆盖先注册者。
+
+### 8.3 颜色工具
+
+`lighten` / `darken` / `parse_color`（`#rgb`、`#rrggbb(aa)`、`rgb()`、`ansi256()`、`ansi:name`）。
+
+---
+
+## 8A. 动效
+
+```cpp
+#include <NeForce/tui/component/motion.hpp>
+
+const int64_t now = frame_clock::instance().now_ms();   // 同帧内一致
+const vector<color> ramp = shimmer_sweep(width, now, base, highlight);
+
+reveal r;                       // 流式揭示
+const size_t shown = r.advance(arrived);
+```
+
+- `frame_clock` 由 `application` 每帧推进；`set_paused(true)` 冻结全部动画（失焦时用）；
+- 扫光：10 列窗口、每 `step_ms` 前进一列、正弦相位插值，循环周期 `width + 2 * window`；
+- 揭示：每帧前进 `max(3, ceil(积压/8))`，突发文本不会一次跳完；
+- 旋转动画：`find_spinner("braille")` 取帧集，`spinner_frame(set, now)` 取当前帧；
+- 动效只应改颜色与字形，不要改布局，否则每帧都会整屏重排。
+
+---
+
+## 8B. 富文本：Markdown / 高亮 / 公式
+
+### 8B.1 Markdown
+
+```cpp
+markdown_option opt;
+opt.width = 100;
+opt.parse_math = true;
+element tree = markdown(source.view(), opt);
+```
+
+- 表格：按列宽预算换行、完整边框、表头居中加粗、超宽时单元格内折行；
+- 引用：`▎` / `▏` 竖轨，换行后由悬挂前缀补画；列表续行对齐到正文列；
+- 链接与图片：链接输出 OSC-8，图片渲染为 `[img] alt`；
+- 公式：`$…$` 行内、`$$…$$` 块级；块级放不下时回退单行，再不支持则回退原文。
+
+### 8B.2 流式 Markdown
+
+```cpp
+markdown_stream stream(opt);
+stream.append(chunk);            // 收到正文片段
+view = stream.render(width);     // 每帧取一次
+```
+
+已封口前缀只解析一次；封口只发生在围栏代码块之外的最后一个空行，且尾部至少保留
+1024 字节，因此未闭合的代码块与表格不会被切断。
+
+### 8B.3 语法高亮
+
+```cpp
+const highlighter* hl = find_highlighter("cpp");
+highlight_state state;
+vector<syntax_run> runs;
+hl->highlight_line(line, state, runs);
+```
+
+`code_block` 已自动按 `language` 着色；配色通过 `code_block_option::syntax` 覆盖。
+支持 20 种语言，未知语言退化为纯文本。
+
+### 8B.4 Mermaid
+
+`` ````mermaid ` `` 围栏会渲染成框线图。渲染器位于核心层
+`core/file/mermaid/mermaid.hpp`（与 `core/file/md` 同层，不依赖 TUI），
+支持 flowchart、sequenceDiagram、stateDiagram、classDiagram、erDiagram、gitGraph、
+pie、mindmap、timeline、gantt、journey、quadrantChart、requirementDiagram；
+放不下或类型不支持时回退到源码。
+
+```cpp
+#include <NeForce/core/file/mermaid/mermaid.hpp>
+
+if (const auto art = render_mermaid(source)) {
+    for (const auto& line: art->lines) { /* ... */ }
+}
+```
+
+`mermaid_art::styled` 为每行提供 `border / text / edge / edge_label / title` 角色分段，
+调用方自行映射到颜色；`render_mermaid` 对空输入、未知类型和超长源码返回 `none`。
+
+### 8B.5 LaTeX
+
+```cpp
+#include <NeForce/tui/dom/latex.hpp>
+
+if (const auto layout = render_latex("\frac{a}{b}", true)) {
+    for (const auto& line: layout->lines) { /* ... */ }
+}
+```
+
+TeX 子集排版为多行 Unicode：分数、根式、上下标、大运算符上下限、矩阵、cases、
+aligned、重音与间距。无法排版时返回 `none`，调用方应回退到原文。
+
+---
+
+## 8C. 性能
+
+- `renderer::stats()` 给出累计帧数与绘制单元格数，用来定位帧开销；
+- 文本宽度有 4096 条缓存，长文本（>512 字节）绕过缓存；
+- 长列表用 `virtual_list`，Markdown 用 `markdown_cache` 或 `markdown_stream`；
+- `benchmark/tui` 提供文本排版、Markdown、帧渲染三组基准。
+
+## 8D. 终端协议与图像
+
+```cpp
+#include <NeForce/tui/terminal_protocol.hpp>
+
+const terminal_profile profile = detect_terminal_profile(
+        env("TERM"), env("COLORTERM"), env("TERM_PROGRAM"), env("TMUX"),
+        env("KITTY_WINDOW_ID"), env("WT_SESSION"));
+
+if (profile.focus_events)          { write(build_focus_events(true)); }
+if (profile.kitty_keyboard)        { write(build_kitty_keyboard(true, 1)); }
+
+const optional<color> background = parse_osc11_reply(reply);
+if (background.has_value()) {
+    theme_catalog::instance().set_terminal_light(is_light_background(*background));
+}
+
+write(build_notification("NexusWave", "task finished", notify_method::osc9));
+write(build_cursor_shape(cursor_shape::bar_blink));
+```
+
+- 键盘：Kitty `CSI-u` 与 modifyOtherKeys 都会解码成带修饰键的 `key_event`，
+  `Shift+Enter` 因此与 `Enter` 可区分；`key_action::release` 默认不派发给组件。
+- 焦点：`?1004` 之后窗口进出焦点会回调 `component_base::on_focus()`；失焦自动暂停帧时钟。
+- 图像：`decode_png()` 解码 8 位 RGB/RGBA PNG，`encode_kitty` / `encode_iterm2` / `encode_sixel`
+  生成对应协议序列，`detect_image_protocol()` 按 `TERM`/`TERM_PROGRAM`/`KITTY_WINDOW_ID` 选择协议。
+- 通知：`build_notification()` 支持 OSC 9 / 777 / 99、BEL 与 Windows 回退。
+
+### 8D.1 选区跟随滚动
+
+拖选结束默认自动复制（`set_copy_on_select`），并保留高亮。应用滚动转录后调用：
+
+```cpp
+reconciler& pipe = app.pipeline();
+pipe.scroll_by(-3);          // 你自己的滚动逻辑
+pipe.scroll_selection(3);    // 选区随内容下移，保持覆盖同一段文字
+```
+
+`scroll_selection(delta_rows)` 的行方向与内容移动方向一致：内容向上滚（用户往下翻）时传负值。
+
 ---
 
 ## 9. 对话界面

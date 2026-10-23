@@ -94,6 +94,116 @@ namespace {
         }
         return ke;
     }
+
+    vector<string_view> split_view(const string_view text, const char sep) {
+        vector<string_view> parts;
+        size_t start = 0;
+        for (size_t i = 0; i <= text.size(); ++i) {
+            if (i == text.size() || text[i] == sep) {
+                parts.push_back(text.substr(start, i - start));
+                start = i + 1;
+            }
+        }
+        return parts;
+    }
+
+    int parse_int(const string_view text, const int fallback) noexcept {
+        if (text.empty()) {
+            return fallback;
+        }
+        int value = 0;
+        for (const char c: text) {
+            if (c < '0' || c > '9') {
+                return fallback;
+            }
+            value = value * 10 + (c - '0');
+            if (value > 10000000) {
+                return fallback;
+            }
+        }
+        return value;
+    }
+
+    void map_functional_key(const int code, key_event& ke) noexcept {
+        switch (code) {
+            case 57344:
+                ke.key = key_event::type::escape;
+                return;
+            case 57345:
+                ke.key = key_event::type::enter;
+                return;
+            case 57346:
+                ke.key = key_event::type::tab;
+                return;
+            case 57347:
+                ke.key = key_event::type::backspace;
+                return;
+            case 57348:
+                ke.key = key_event::type::insert;
+                return;
+            case 57349:
+                ke.key = key_event::type::delete_;
+                return;
+            case 57350:
+                ke.key = key_event::type::left;
+                return;
+            case 57351:
+                ke.key = key_event::type::right;
+                return;
+            case 57352:
+                ke.key = key_event::type::up;
+                return;
+            case 57353:
+                ke.key = key_event::type::down;
+                return;
+            case 57354:
+                ke.key = key_event::type::page_up;
+                return;
+            case 57355:
+                ke.key = key_event::type::page_down;
+                return;
+            case 57356:
+                ke.key = key_event::type::home;
+                return;
+            case 57357:
+                ke.key = key_event::type::end;
+                return;
+            default:
+                break;
+        }
+        if (code >= 57364 && code <= 57387) {
+            const int index = code - 57364;
+            const auto type = static_cast<key_event::type>(static_cast<int>(key_event::type::F1) + index);
+            ke.key = type;
+        }
+    }
+
+    void map_kitty_code(const int code, key_event& ke) noexcept {
+        map_functional_key(code, ke);
+        if (ke.key != key_event::type::unknown) {
+            return;
+        }
+        switch (code) {
+            case 27:
+                ke.key = key_event::type::escape;
+                return;
+            case 13:
+                ke.key = key_event::type::enter;
+                return;
+            case 9:
+                ke.key = key_event::type::tab;
+                return;
+            case 127:
+                ke.key = key_event::type::backspace;
+                return;
+            default:
+                break;
+        }
+        if (code >= 32 && code <= 0x10FFFF) {
+            ke.key = key_event::type::printable;
+            ke.cp = codepoint{static_cast<char32_t>(code)};
+        }
+    }
 } // namespace
 
 
@@ -257,6 +367,63 @@ bool input_parser::finish_csi(parsed_input& out) {
     }
     seq_.clear();
 
+    if (body.empty() && final == 'I') {
+        out.type = parsed_input::kind::focus;
+        out.focused = true;
+        return true;
+    }
+    if (body.empty() && final == 'O') {
+        out.type = parsed_input::kind::focus;
+        out.focused = false;
+        return true;
+    }
+    if (final == 'u') {
+        // Kitty keyboard protocol: code[:alternates][;mods[:event]][;text].
+        if (!body.empty() && (body[0] == '?' || body[0] == '>' || body[0] == '<')) {
+            return false;
+        }
+        const vector<string_view> parts = split_view(body, ';');
+        const string_view code_part = parts.empty() ? string_view{} : parts[0];
+        const size_t colon = code_part.find(string_view{":"});
+        const int code = parse_int(colon == string_view::npos ? code_part : code_part.substr(0, colon), -1);
+        if (code < 0) {
+            return false;
+        }
+        int modifiers = 1;
+        int event_type = 1;
+        if (parts.size() > 1) {
+            const vector<string_view> mod_part = split_view(parts[1], ':');
+            modifiers = parse_int(mod_part.empty() ? string_view{} : mod_part[0], 1);
+            if (mod_part.size() > 1) {
+                event_type = parse_int(mod_part[1], 1);
+            }
+        }
+        key_event ke;
+        map_kitty_code(code, ke);
+        if (ke.key == key_event::type::unknown) {
+            return false;
+        }
+        ke.mods = modifier_of(modifiers);
+        if (ke.key == key_event::type::tab && (ke.mods & key_modifier::shift) != key_modifier::none) {
+            ke.key = key_event::type::tab_reverse;
+        }
+        if (event_type == 2) {
+            ke.action = key_action::repeat;
+        } else if (event_type == 3) {
+            ke.action = key_action::release;
+        }
+        if (colon != string_view::npos) {
+            const string_view alternate = code_part.substr(colon + 1);
+            const size_t next = alternate.find(string_view{":"});
+            const int base = parse_int(next == string_view::npos ? alternate : alternate.substr(0, next), 0);
+            if (base > 0 && base <= 0x10FFFF) {
+                ke.base_cp = codepoint{static_cast<char32_t>(base)};
+            }
+        }
+        emit_key(out, ke);
+        return true;
+    }
+
     if (!body.empty() && body[0] == '<') {
         if (final == 'M') {
             return parse_sgr_mouse(body, out, false);
@@ -318,6 +485,16 @@ bool input_parser::finish_csi(parsed_input& out) {
             break;
         }
         case '~': {
+            if (primary == 27 && values.size() >= 3) {
+                key_event modified;
+                map_kitty_code(values[2], modified);
+                if (modified.key == key_event::type::unknown) {
+                    return false;
+                }
+                modified.mods = modifier_of(values[1]);
+                emit_key(out, modified);
+                return true;
+            }
             switch (primary) {
                 case 1:
                 case 7: {

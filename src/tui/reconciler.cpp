@@ -1,3 +1,4 @@
+#include <NeForce/tui/component/motion.hpp>
 #include <NeForce/tui/reconciler.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -245,7 +246,13 @@ bool reconciler::handle_selection_mouse(const mouse_event& e) {
                 return false;
             }
             selecting_ = false;
-            return !selection_.empty();
+            if (selection_.empty()) {
+                return false;
+            }
+            if (copy_on_select_) {
+                write_selection(true);
+            }
+            return true;
         }
         default: {
             return false;
@@ -253,13 +260,15 @@ bool reconciler::handle_selection_mouse(const mouse_event& e) {
     }
 }
 
-bool reconciler::copy_selection() {
+bool reconciler::write_selection(const bool keep) {
     if (selection_.empty()) {
         return false;
     }
 
-    const string text = selection_text(current_screen_, selection_);
-    clear_selection();
+    const string text = tui::selection_text(current_screen_, selection_);
+    if (!keep) {
+        clear_selection();
+    }
     if (text.empty()) {
         return false;
     }
@@ -278,6 +287,23 @@ bool reconciler::copy_selection() {
     return true;
 }
 
+string reconciler::selection_text() const {
+    if (selection_.empty()) {
+        return string();
+    }
+    return tui::selection_text(current_screen_, selection_);
+}
+
+void reconciler::scroll_selection(const int delta_rows) {
+    if (selection_.empty()) {
+        return;
+    }
+    selection_.translate(delta_rows);
+    mark_dirty();
+}
+
+bool reconciler::copy_selection() { return write_selection(false); }
+
 void reconciler::clear_selection() {
     if (selection_.empty() && !selecting_) {
         return;
@@ -285,6 +311,25 @@ void reconciler::clear_selection() {
     selection_.clear();
     selecting_ = false;
     mark_dirty();
+}
+
+bool reconciler::dispatch_focus(const focus_event& e) {
+    focused_ = e.focused;
+    frame_clock::instance().set_paused(!e.focused);
+    if (root_ != nullptr) {
+        vector<component_base*> stack;
+        stack.push_back(root_);
+        while (!stack.empty()) {
+            component_base* comp = stack.back();
+            stack.pop_back();
+            comp->on_focus(e.focused);
+            for (size_t i = 0; i < comp->child_count(); ++i) {
+                stack.push_back(comp->child_at(i));
+            }
+        }
+    }
+    mark_dirty();
+    return true;
 }
 
 bool reconciler::dispatch_paste(const paste_event& e) {

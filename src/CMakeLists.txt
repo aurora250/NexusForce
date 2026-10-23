@@ -76,6 +76,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/codepoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/width.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/to_string.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
@@ -183,6 +184,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/hoverable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/log_view.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/menu.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/motion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/modal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/output_block.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/radiobox.cpp
@@ -204,7 +206,10 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/diff.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/element.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/gauge.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/highlight.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/graph.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/mermaid/mermaid.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/latex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/layout.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/markdown.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/paragraph.cpp
@@ -213,8 +218,12 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/style.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/table.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/text_layout.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/theme.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/theme_palettes.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/application.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/headless.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/image.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/terminal_protocol.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/input_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/event_dispatcher.cpp

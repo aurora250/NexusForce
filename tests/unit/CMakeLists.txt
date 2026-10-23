@@ -37,11 +37,20 @@ add_executable(NexusForceUnitTests
         test_system.cpp
         test_time.cpp
         test_tui.cpp
+        test_tui_motion.cpp
         test_tui_component.cpp
         test_tui_dom.cpp
+        test_tui_highlight.cpp
+        test_tui_image.cpp
+        test_tui_terminal_protocol.cpp
         test_tui_input.cpp
+        test_mermaid.cpp
+        test_tui_latex.cpp
+        test_tui_markdown.cpp
         test_tui_snapshot.cpp
+        test_tui_theme.cpp
         test_tui_widgets.cpp
+        test_tui_width.cpp
         test_utf.cpp
         test_util_container.cpp
         test_utility.cpp

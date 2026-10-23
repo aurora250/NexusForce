@@ -53,6 +53,16 @@ public:
     component_base& operator=(component_base&&) = delete;
 
     /**
+     * @brief 全局按键预览
+     * @param e 键盘事件
+     * @return true 表示事件已被消费
+     */
+    virtual bool preview_key(const key_event& e) {
+        ignore = e;
+        return false;
+    }
+
+    /**
      * @brief 声明式渲染
      * @returns 虚拟元素树
      *
@@ -84,9 +94,13 @@ public:
     }
 
     /**
+     * @brief 终端焦点变化回调
+     * @param focused 获得焦点为 true
+     */
+    virtual void on_focus(bool focused) { ignore = focused; }
+
+    /**
      * @brief 鼠标离开回调
-     *
-     * 当鼠标从前一帧的当前组件移动到其他组件时，Reconciler 调用此方法。
      */
     virtual void on_mouse_leave() {}
 
@@ -94,10 +108,6 @@ public:
      * @brief 粘贴事件处理
      * @param e 粘贴事件
      * @return true 表示事件已消费
-     *
-     * 终端开启括号粘贴模式后，一次粘贴整体送达此方法，而不是拆成逐个按键。
-     * 输入类组件应实现此方法插入整段文本，避免把粘贴内容中的换行当作回车提交。
-     *
      * @note 未消费时事件按 pass_through() 规则继续向上冒泡。
      */
     virtual bool on_paste(const paste_event& e) {
@@ -121,13 +131,13 @@ public:
     NEFORCE_NODISCARD bool pass_through() const noexcept { return pass_through_; }
 
     /**
-     * @brief 是否持有 Reconciler 键盘焦点
+     * @brief 是否持有键盘焦点
      * @return 是否聚焦
      */
     NEFORCE_NODISCARD bool has_focus() const noexcept { return has_focus_; }
 
     /**
-     * @brief 设置 Reconciler 焦点状态（由 Reconciler 调用）
+     * @brief 设置焦点状态
      * @param v 是否聚焦
      */
     void set_has_focus(bool v) noexcept { has_focus_ = v; }
@@ -154,10 +164,7 @@ public:
 
     /**
      * @brief 是否需要更新
-     * @return true 表示需要重新 render，false 跳过本次渲染
-     *
-     * 性能优化钩子。reconciler 在每次 flush 前检查此方法，
-     * 返回 false 则复用上次的 element 树。
+     * @return true 表示需要重新 render
      */
     virtual bool should_update() { return true; }
 
@@ -199,9 +206,6 @@ public:
     /**
      * @brief 注册子组件
      * @param child 子组件指针
-     *
-     * 父组件接管子组件生命周期。注册后子组件将参与焦点链遍历和生命周期管理。
-     *
      * @note 注册会使焦点链失效，下一帧渲染时自动重建
      */
     void add_child(unique_ptr<component_base> child) {

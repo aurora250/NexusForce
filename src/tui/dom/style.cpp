@@ -37,53 +37,5 @@ style style::merge(const style& base, const style& over) {
     return result;
 }
 
-style theme::button_style(const style::variant v) const {
-    style s;
-    s.fg = fg;
-    s.padding = {0, 2, 0, 2};
-    switch (v) {
-        case style::variant::primary:
-            s.bg = primary;
-            s.bold = true;
-            break;
-        case style::variant::secondary:
-            s.bg = secondary;
-            break;
-        case style::variant::danger:
-            s.fg = danger;
-            s.bold = true;
-            break;
-        case style::variant::success:
-            s.fg = success;
-            s.bold = true;
-            break;
-        case style::variant::default_:
-        default:
-            break;
-    }
-    return s;
-}
-
-style theme::text_style() const {
-    style s;
-    s.fg = fg;
-    return s;
-}
-
-style theme::input_style(const bool focused) const {
-    style s;
-    s.fg = fg;
-    s.bg = bg;
-    if (focused) {
-        s.border = style::border::single;
-        s.borderColor = primary;
-    } else {
-        s.border = style::border::single;
-        s.borderColor = border;
-    }
-    s.padding = {0, 1, 0, 1};
-    return s;
-}
-
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

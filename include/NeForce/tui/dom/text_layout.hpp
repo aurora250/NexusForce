@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/string/string_view.hpp"
+#include "NeForce/core/string/width.hpp"
 #include "NeForce/tui/dom/style.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -23,8 +24,9 @@ NEFORCE_BEGIN_TUI__
  * @brief 可视行
  */
 struct text_line {
-    size_t begin = 0; ///< 行起始字节偏移
-    size_t end = 0;   ///< 行结束字节偏移（不含）；行尾空白不计入
+    size_t begin = 0;          ///< 行起始字节偏移
+    size_t end = 0;            ///< 行结束字节偏移（不含）；行尾空白不计入
+    bool continuation = false; ///< 是否由自动换行产生
 };
 
 /**
@@ -39,7 +41,7 @@ struct text_layout {
  * @param text 文本
  * @return 显示宽度，控制字符按一列计
  */
-NEFORCE_API int text_display_width(string_view text);
+using neforce::text_display_width;
 
 /**
  * @brief 计算文本排版
@@ -56,6 +58,18 @@ NEFORCE_API int text_display_width(string_view text);
  * - 单个词宽于行宽时退化为按字符断行
  */
 NEFORCE_API text_layout layout_text(string_view text, int width, style::wrap_mode wm);
+
+/**
+ * @brief 计算带悬挂缩进的文本排版
+ * @param text 文本内容
+ * @param width 首行宽度
+ * @param wm 换行模式
+ * @param hang_cols 续行缩进列数
+ * @return 分行结果
+ *
+ * 硬换行后的行恢复整行宽度；只有自动换行产生的续行才缩进。
+ */
+NEFORCE_API text_layout layout_text_hang(string_view text, int width, style::wrap_mode wm, int hang_cols);
 
 /**
  * @brief 计算字节偏移所在的行与列
