@@ -136,6 +136,30 @@ public:
      * 对于大文件可能返回截断值。
      */
     static byte_size size(const path& p);
+
+    /**
+     * @brief 获取临时目录路径
+     * @return 临时目录路径
+     */
+    NEFORCE_NODISCARD static path temp_directory();
+
+    /**
+     * @brief 获取用户主目录路径
+     * @return 主目录路径
+     */
+    NEFORCE_NODISCARD static path home_directory();
+
+    /**
+     * @brief 获取应用程序数据目录路径
+     * @return 应用数据目录路径
+     */
+    NEFORCE_NODISCARD static path app_data_directory();
+
+    /**
+     * @brief 获取应用程序配置目录路径
+     * @return 应用配置目录路径
+     */
+    NEFORCE_NODISCARD static path config_directory();
 };
 
 /** @} */ // File

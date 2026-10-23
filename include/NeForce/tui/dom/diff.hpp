@@ -65,6 +65,11 @@ struct diff_view_option {
     tui::style removed_style;       ///< 删除行样式
     tui::style header_style;        ///< 文件头样式
     tui::style band_style;          ///< 背景带样式
+    bool side_by_side = false;      ///< 是否并排显示旧行与新行
+    int split_min_width = 110;      ///< 并排显示所需的最小宽度，窄于此值回退到统一视图
+    bool word_level = false;        ///< 是否启用词级差异高亮
+    tui::style word_added_style;    ///< 词级新增高亮样式，未设置时使用新增样式加粗
+    tui::style word_removed_style;  ///< 词级删除高亮样式，未设置时使用删除样式加粗
 };
 
 /**

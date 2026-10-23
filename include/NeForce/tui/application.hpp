@@ -106,6 +106,18 @@ public:
     static bool request_quit(int exit_code = 0) noexcept;
 
     /**
+     * @brief 挂起当前正在运行的应用（恢复终端状态）
+     * @return 有运行中的应用并成功挂起时返回 true
+     */
+    static bool suspend_current();
+
+    /**
+     * @brief 恢复当前正在运行的应用
+     * @return 有运行中的应用并成功恢复时返回 true
+     */
+    static bool resume_current();
+
+    /**
      * @brief 让出终端
      *
      * 退出交替屏幕缓冲区、关闭鼠标与括号粘贴、恢复终端原始属性并显示光标，

@@ -621,6 +621,7 @@ public:
     /**
      * @brief 获取线程池统计信息
      * @return 统计信息
+     * @note 统计值仅用于观测，不能当作同步屏障使用
      */
     NEFORCE_NODISCARD pool_statistics statistics() const;
 

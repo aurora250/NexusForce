@@ -19,6 +19,7 @@ void composer::setup() {
     area_opt.wrap = style::wrap_mode::word;
     area_opt.submit_on_enter = false;
     area_opt.history_limit = opt_.history_limit;
+    area_opt.word_undo = true;
     area_opt.on_change = [this](const string&) {
         if (popup_ != nullptr) {
             refresh_completions();

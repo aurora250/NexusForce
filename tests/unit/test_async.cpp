@@ -2092,6 +2092,7 @@ TEST(ThreadPool, StatisticsCountsAllCompletedTasks) {
         f.get();
     }
 
+    EXPECT_TRUE(wait_until_true([&pool] { return pool.statistics().total_completed >= 512U; }, 1000));
     const auto stats = pool.statistics();
     EXPECT_GE(stats.total_completed, 512u);
     EXPECT_EQ(stats.total_submitted, 512u);
@@ -2302,6 +2303,11 @@ TEST(ThreadPool, NestedFanOutCompletesAllChildren) {
     }
 
     EXPECT_EQ(children_done.load(), root_count * children);
+    EXPECT_TRUE(wait_until_true(
+            [&pool, root_count, children] {
+                return pool.statistics().total_completed >= static_cast<size_t>(root_count * children);
+            },
+            1000));
     const auto stats = pool.statistics();
     EXPECT_GE(stats.total_completed, static_cast<size_t>(root_count * children));
     pool.stop();

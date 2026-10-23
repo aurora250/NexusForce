@@ -154,6 +154,22 @@ void application::quit(const int exit_code) {
     ctx_.stop();
 }
 
+bool application::suspend_current() {
+    if (running_instance_ == nullptr || !running_instance_->running_ || running_instance_->suspended_) {
+        return false;
+    }
+    running_instance_->suspend();
+    return running_instance_->suspended_;
+}
+
+bool application::resume_current() {
+    if (running_instance_ == nullptr || !running_instance_->running_ || !running_instance_->suspended_) {
+        return false;
+    }
+    running_instance_->resume();
+    return !running_instance_->suspended_;
+}
+
 bool application::request_quit(const int exit_code) noexcept {
     if (running_instance_ == nullptr) {
         return false;

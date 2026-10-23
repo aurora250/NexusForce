@@ -36,6 +36,7 @@ struct text_area_option {
     bool submit_on_enter = false;                             ///< Enter 是否直接提交而不是换行
     size_t history_limit = 100;                               ///< 历史条目上限
     size_t undo_limit = 100;                                  ///< 撤销栈上限
+    bool word_undo = false;                                   ///< 是否按词/连续输入合并撤销步
     function<void()> on_submit;                               ///< 提交回调
     function<void(const string&)> on_change;                  ///< 内容变化回调（用于实时过滤/补全）
 };
@@ -194,6 +195,7 @@ private:
     bool geometry_known_ = false;
     bool dragging_ = false;
     vector<snapshot> undo_;
+    bool undo_coalescing_ = false;
     vector<snapshot> redo_;
     vector<string> history_;
     size_t history_pos_ = 0;

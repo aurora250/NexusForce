@@ -25,7 +25,7 @@ NEFORCE_BEGIN_TUI__
  * 起点是按下鼠标的单元格，终点是当前拖动位置，
  * 两者之间的所有单元格都属于选区，中间行整行参与选取。
  */
-struct screen_selection {
+struct NEFORCE_API screen_selection {
     bool active = false; ///< 是否已有选区
     int anchor_x = 0;    ///< 起点列
     int anchor_y = 0;    ///< 起点行

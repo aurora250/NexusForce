@@ -149,6 +149,10 @@ void text_area_view::record_undo() {
     if (opt_.text == nullptr) {
         return;
     }
+    if (opt_.word_undo && undo_coalescing_ && !undo_.empty()) {
+        redo_.clear();
+        return;
+    }
     undo_.push_back(snapshot{opt_.text->value(), cursor_, anchor_});
     if (undo_.size() > max<size_t>(1, opt_.undo_limit)) {
         undo_.erase(undo_.begin());
@@ -161,6 +165,7 @@ void text_area_view::insert_text(const string_view chunk) {
         return;
     }
     record_undo();
+    undo_coalescing_ = opt_.word_undo;
 
     string value = opt_.text->value();
     erase_selection();
@@ -219,6 +224,7 @@ void text_area_view::select_all() {
 }
 
 bool text_area_view::undo() {
+    undo_coalescing_ = false;
     if (undo_.empty() || opt_.text == nullptr) {
         return false;
     }
@@ -233,6 +239,7 @@ bool text_area_view::undo() {
 }
 
 bool text_area_view::redo() {
+    undo_coalescing_ = false;
     if (redo_.empty() || opt_.text == nullptr) {
         return false;
     }
@@ -434,6 +441,12 @@ bool text_area_view::on_key(const key_event& e) {
     using K = key_event::type;
     const bool shift = (e.mods & key_modifier::shift) != key_modifier::none;
     const bool ctrl = (e.mods & key_modifier::ctrl) != key_modifier::none;
+    if (e.key != K::printable && e.key != K::backspace && e.key != K::delete_) {
+        undo_coalescing_ = false;
+    }
+    if (e.key == K::printable && ctrl) {
+        undo_coalescing_ = false;
+    }
 
     switch (e.key) {
         case K::printable: {
@@ -505,6 +518,7 @@ bool text_area_view::on_key(const key_event& e) {
                 return false;
             }
             record_undo();
+            undo_coalescing_ = opt_.word_undo;
             const string& value = opt_.text->value();
             const size_t prev = ctrl ? word_boundary(cursor_, false) : utf8_prev(value.view(), cursor_);
             const string head = value.substr(0, prev);
@@ -527,6 +541,7 @@ bool text_area_view::on_key(const key_event& e) {
                 return false;
             }
             record_undo();
+            undo_coalescing_ = opt_.word_undo;
             const size_t next = ctrl ? word_boundary(cursor_, true) : utf8_next(value.view(), cursor_);
             string head = value.substr(0, cursor_);
             const string_view tail = value.view(next);

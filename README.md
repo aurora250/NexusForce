@@ -18,455 +18,452 @@
   <a href="https://github.com/aurora250/NexusForce/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-4CAF50?style=flat-square&logo=git&logoColor=white" alt="PRs Welcome"></a>
 </p>
 
-> 🌐 **语言** / **Language**  
-> 通过其他语言阅读: [English](README.EN.md)
+> 🌐 **Language**  
+> Read this in other languages: [中文 (Chinese)](README.CN.md)
 
 ---
 
-## 📑 目录
+## 📑 Table of Contents
 
-- [项目简介](#-项目简介)
-- [支持环境](#-支持环境)
-- [工程质量](#-工程质量)
-- [标准合规](#-标准合规)
-- [特性](#-特性)
-- [编译指南](#-编译指南)
-- [快速开始](#-快速开始)
-- [常见问题](#-常见问题)
-- [文档](#-文档)
-- [协议](#-协议)
-- [更新日志](#-更新日志)
-- [贡献者](#-贡献者)
+- [Project Overview](#-project-overview)
+- [Supported Environments](#-supported-environments)
+- [Engineering Quality](#-engineering-quality)
+- [Standards Compliance](#-standards-compliance)
+- [Features](#-features)
+- [Build Guide](#-build-guide)
+- [Quick Start](#-quick-start)
+- [FAQ](#-faq)
+- [Documentation](#-documentation)
+- [License](#-license)
+- [Changelog](#-changelog)
+- [Contributors](#-contributors)
 - [TODO](#-todo)
 
 ---
 
-## 📖 项目简介
+## 📖 Project Overview
 
-本项目旨在建立**功能健全、风格统一、可读性强、社区共建、跨平台兼容**的工业级现代 C++ 开发库。通过清晰的架构设计、规范的代码实现、丰富的设计模式应用，
-为项目开发提供实用的工具集，同时也为学习者提供理解底层原理的实践载体，建立从学习到生产的连接点。
+This project aims to establish a **feature-complete, stylistically unified, highly readable, community-driven, and cross-platform compatible** modern C++ development library. 
+Through clear architectural design, standardized code implementation, and rich applications of design patterns, 
+it provides a practical toolkit for project development while also serving as a practical learning resource 
+for learners to understand underlying principles, bridging the gap from learning to production.
 
-v1.0.0 开始承诺：**次版本号更新保持 API 兼容，主版本号更新包含不兼容变更**
-
----
-
-## 🖥️ 支持环境
-
-| 项目     | 详情                                                                      |
-|----------|---------------------------------------------------------------------------|
-| 操作系统 | 🪟 WINDOWS / 🐧 LINUX                                                     |
-| 架构     | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                            |
-| 位宽     | 64位                                                                      |
-| 编译器   | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
-| C++ 标准 | 14 / 17 / 20                                                              |
-
-> 本库欢迎开发者进行更多环境的兼容性开发，欢迎您进行贡献。
+Starting from v1.0.0, we commit to: **minor version updates maintain API compatibility, while major version updates may contain incompatible changes.**
 
 ---
 
-## ✨ 工程质量
+## 🖥️ Supported Environments
 
-NexusForce 严格遵循现代 C++ 工程最佳实践，通过多层次自动化检查确保代码健壮性与可读性。
+| Item            | Details                                                                   |
+|-----------------|---------------------------------------------------------------------------|
+| Platform        | 🪟 WINDOWS / 🐧 LINUX                                                     |
+| Instruction Set | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                            |
+| Bit Width       | 64-bit                                                                    |
+| Compiler        | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
+| C++ Standard    | 14 / 17 / 20                                                              |
 
-| 指标                         | 状态         | 说明                                                  |
-|------------------------------|--------------|-------------------------------------------------------|
-| 📊 **代码规模**              | 30万+ 行     | 核心库源码与头文件 20万+ 行，测试代码 8万+ 行         |
-| 🔒 **CodeQL 安全分析**       | **0 漏洞**   | 全规则集                                              |
-| 🔍 **Clang-Tidy 静态检查**   | **零警告**   | 全规则集                                              |
-| 🎨 **Clang-Format 代码风格** | **强制统一** | 配置严格，格式统一                                    |
-| 💧 **valgrind 内存检查**     | **0 泄漏**   | 全量测试                                              |
-| 🧪 **Sanitizer 检查**        | **已接入**   | ASan / UBSan / TSan 独立 CI 矩阵，编译与运行双覆盖    |
-
-> [`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，[`.clang-format`](.clang-format) 包含多项风格定制。
-> 每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
+> This library welcomes developers to contribute compatibility with more environments. Your contributions are greatly appreciated.
 
 ---
 
-## 📡 标准合规
+## ✨ Engineering Quality
 
-NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，确保行为可预测、互操作性强且安全可靠。以下为关键组件的标准映射：
+NexusForce strictly adheres to modern C++ engineering best practices, ensuring code robustness and readability through multi-layered automated checks.
 
-### 🌐 网络协议与互联网标准
+| Metric                            | Status                | Description                                                         |
+|-----------------------------------|-----------------------|---------------------------------------------------------------------|
+| 📊 **Codebase Size**              | 300k+ Lines           | Core library source and headers 200k+ lines, test code 80k+ lines   |
+| 🔒 **CodeQL Security Analysis**   | **0 Vulnerabilities** | Full ruleset                                                        |
+| 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings**     | Full ruleset                                                        |
+| 🎨 **Clang-Format Code Style**    | **Strictly Enforced** | Strict configuration, uniform formatting                            |
+| 💧 **valgrind Memory Check**      | **0 Leaks**           | Full test suite                                                     |
+| 🧪 **Sanitizer Check**            | **Enabled**           | Dedicated ASan / UBSan / TSan CI matrix, covering build and runtime |
 
-| 组件                  | 遵循标准                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 说明                                                                                                                                                                            |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **HTTP 与 WebSocket** | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540.html) / [RFC 7541](https://www.rfc-editor.org/rfc/rfc7541.html) (HTTP/2, HPACK), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) / [RFC 7692](https://www.rfc-editor.org/rfc/rfc7692.html) (WebSocket, permessage-deflate), [RFC 6066](https://www.rfc-editor.org/rfc/rfc6066.html) (SNI), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol) | HTTP/1.1 语义与路由、HTTP/2 帧层与 HPACK 头部压缩、Range 请求、响应压缩、CONNECT 隧道、Cookie 与 CSRF、CORS 跨域策略、WebSocket 升级/帧协议/permessage-deflate 压缩、SNI 多证书 |
-| **DNS 客户端**        | [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html), [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.html), [RFC 2181](https://www.rfc-editor.org/rfc/rfc2181.html), [RFC 6891](https://www.rfc-editor.org/rfc/rfc6891.html), [RFC 3596](https://www.rfc-editor.org/rfc/rfc3596.html), [RFC 2782](https://www.rfc-editor.org/rfc/rfc2782.html)                                                                                                                                                                                                                                                                     | DNS 协议客户端，A/AAAA/MX/SRV/PTR 记录查询、UDP/TCP 传输自动切换与 TTL 缓存管理                                                                                                 |
-| **ICMP 协议**         | [RFC 792](https://www.rfc-editor.org/rfc/rfc792.html) (STD 5), [RFC 1122](https://www.rfc-editor.org/rfc/rfc1122.html), [RFC 4884](https://www.rfc-editor.org/rfc/rfc4884.html), [IANA ICMP 参数注册表](https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml)                                                                                                                                                                                                                                                                                                                                          | Ping (Echo Request/Reply) 与 Traceroute (Time Exceeded) 网络诊断，含 RFC 1071 校验和算法                                                                                        |
-| **SMTP 协议**         | [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321.html) (STD 10), [RFC 5322](https://www.rfc-editor.org/rfc/rfc5322.html), [RFC 3207](https://www.rfc-editor.org/rfc/rfc3207.html) (STARTTLS), [RFC 8314](https://www.rfc-editor.org/rfc/rfc8314.html) (隐式 TLS), [RFC 4954](https://www.rfc-editor.org/rfc/rfc4954.html) (AUTH), [RFC 2045–2047](https://www.rfc-editor.org/rfc/rfc2045.html) (MIME)                                                                                                                                                                                                                   | 邮件传输与消息格式，支持 PLAIN/LOGIN 认证、STARTTLS/隐式 TLS 加密及 MIME 多部分消息                                                                                             |
-| **MAC 地址**          | [IEEE 802-2014](https://standards.ieee.org/ieee/802/3714/), [IEEE 802.3-2022](https://standards.ieee.org/ieee/802.3/10422/), [RFC 7042](https://www.rfc-editor.org/rfc/rfc7042.html)                                                                                                                                                                                                                                                                                                                                                                                                                                     | 48 位 EUI-48 地址解析与格式化，支持单播/多播/本地管理地址识别与标准十六进制表示                                                                                                 |
-| **URL 解析与编码**    | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | URI 通用语法、百分号编码及国际化资源标识符                                                                                                                                      |
-| **网络端口定义**      | [IANA 端口号注册表](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 知名端口分配                                                                                                                                                                    |
-| **UUID 生成**         | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | UUID v4（随机）与 v7（时间有序）生成规范                                                                                                                                        |
-
-### 📁 配置文件格式
-
-| 组件              | 遵循标准                                                                                                                                                                                                                 | 说明                                                                                  |
-|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| **JSON RFC 8259** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON 六种值类型、UTF-8 编码、IEEE 754-2019 双精度数字与字符串转义序列                 |
-| **TOML 1.0.0**    | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601    |
-| **YAML 1.2**      | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 是 JSON 严格超集，支持八种核心值类型、五种字符串标量样式、锚点别名与标签系统 |
-| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 及后续版本)                                                                                                                                              | 生成符合 ANSI SQL 与支持数据库方言的语句                                              |
-
-### 🔐 密码学与安全算法
-
-| 组件                       | 遵循标准                                                                                                                                   | 说明                                                                                                                                                                |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AES-256 加密**           | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html) | 高级加密标准，支持 ECB/CBC/GCM 模式（[NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)） |
-| **ChaCha20-Poly1305 AEAD** | [IETF RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html)                                                                               | ChaCha20 流密码 + Poly1305 认证器，AEAD 认证加密，支持关联数据（AAD）                                                                                               |
-| **SHA-256 哈希**           | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)          | 安全哈希算法（SHA-2 家族），256 位输出                                                                                                                              |
-| **SHA-1 哈希**             | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (历史兼容)                                                   | ⚠️ 已标注安全警告（[SHAttered](https://shattered.io/) 碰撞攻击）                                                                                                    |
-| **MD5 哈希**               | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (历史兼容)                                                                              | ⚠️ 已标注安全警告，仅用于非安全校验场景                                                                                                                             |
-| **Base64 编码**            | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5) | 标准与 URL 安全 Base64 编解码，严格填充规则与非法字符检测                                                                                                           |
-
-### 🔤 字符编码与国际化
-
-| 组件                        | 遵循标准                                                                                                                                                                                                                         | 说明                                               |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| **UTF-8 / UTF-16 / UTF-32** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode 码点操作、规范化与编码转换，含无效序列检测 |
-| **Unicode 码点处理**        | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13                                                                                                                                                        | 代理对处理、BOM 检测与替换字符 (U+FFFD) 规则       |
-| **字节大小单位**            | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                      | 二进制前缀 (KiB/MiB/GiB) 与十进制前缀 (kB/MB/GB)   |
-
-### 📐 数据结构与算法
-
-| 组件           | 遵循标准 / 学术文献                                                                                                                                                                                      | 说明                                                                                          |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **堆算法**     | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §25.8.6                                                                                                                                    | 复杂度保证与 Floyd 堆调整优化 ([Algorithm 245](https://dl.acm.org/doi/10.1145/512274.512284)) |
-| **红黑树**     | [Guibas & Sedgewick (1978)](https://doi.org/10.1109/SFCS.1978.3)                                                                                                                                         | 自平衡二叉搜索树经典实现，O(log n) 复杂度保证                                                 |
-| **莱昂纳多堆** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html)                                                                                                            | 自适应排序算法，最优时间复杂度 O(n)                                                           |
-| **内省排序**   | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23)                                                                                                        | 混合快速/堆/插入排序，C++ 标准库 sort 默认算法                                                |
-| **非加密哈希** | [FNV-1a 草案](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3)                                                         | 高性能哈希表与布隆过滤器专用                                                                  |
-| **布隆过滤器** | [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Broder & Mitzenmacher (2004)](https://doi.org/10.1080/15427951.2004.10129096), [Kirsch & Mitzenmacher (2006)](https://doi.org/10.1002/rsa.20208) | 双哈希优化的概率性集合成员查询结构，O(k) 插入/查询，支持最优参数 (m, k) 推导与误报率估算      |
-
-### ⚙️ 系统、并发与命令行
-
-| 组件           | 遵循标准                                                                                                                                                                          | 说明                                                       |
-|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
-| **原子内存序** | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4                                                                                                               | C++ 内存模型，含硬件屏障等价与 Intel TSX HLE 支持          |
-| **命令行解析** | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) 第12章, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html)                    | 支持短选项组合、长选项、`--` 分隔符与可选值                |
-| **日期与时间** | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX 时间戳](https://pubs.opengroup.org/onlinepubs/9699919799/) | 公历计算、儒略日转换与 Unix 纪元处理                       |
-
-### 🎨 图形、色彩与数学
-
-| 组件               | 遵循标准                                                                                                                          | 说明                                              |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| **RGB 颜色模型**   | [W3C CSS Color Level 4](https://www.w3.org/TR/css-color-4/), [Compositing Level 1](https://www.w3.org/TR/compositing-1/)          | 直通 Alpha 合成、十六进制格式与 ANSI 256 色调色板 |
-| **灰度转换**       | [ITU-R BT.709](https://www.itu.int/rec/R-REC-BT.709/) / [IEC 61966-2-1 (sRGB)](https://webstore.iec.ch/publication/6169)          | 人眼感知加权（0.299R + 0.587G + 0.114B）          |
-| **数学函数与常量** | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html)        | 三角函数归约、牛顿迭代法与机器精度容差            |
-| **随机数生成**     | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | 梅森旋转 (MT19937) 与操作系统熵源真随机数         |
-
-> 所有涉及上述标准的组 (group)，均在其注释中标注了具体的标准章节号与官方链接，开发者可随时溯源验证。
+> [`.clang-tidy`](.clang-tidy) contains approximately 60 explicit exemptions, and [`.clang-format`](.clang-format) includes several style customizations. Each exemption addresses inherent requirements of low-level system programming, adhering to the principle of "strict by default, relaxed as needed."
 
 ---
 
-## 🚀 特性
+## 📡 Standards Compliance
 
-### 🔄 并发与异步 (Async)
-- **`thread_pool`** - 基于 NUMA 感知任务窃取与多策略定制的高性能线程池，性能测试详见 [线程池性能测试记录](benchmark/async/PERFORMANCE.md)
-- **`io_context`** - 异步 I/O 执行上下文，统一事件循环、定时器与取消模型
-- **`cancellation_slot`** - 支持 `async_connect` / `async_read` / `async_write` 可中断异步 I/O
-- **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度，支持任务取消标志
-- **`async_stream`** - 异步流抽象接口，统一读写协议
-- **`async_read()` / `async_write()`** - 自由函数组合器，基于 `shared_from_this` 自动处理部分读写重试
-- **`thread_pool_executor`** - 将 `thread_pool::submit_task()` 适配为标准 executor 接口
-- **`generator`/`task`** - 协程原语和任务生成器
-- **`virtual_thread`** - C#风格的轻量级协程
-- **`connection`/`signal`/`signal_base`** - 观察者模式的信号槽，`signal_base` 提供类型擦除基类支持反射驱动的动态连接
-- **`call_once`** - 基于FUTEX的多线程单次调用实现
-- **停止令牌** - 可取消的异步操作 `stop_token`/`stop_source`/`stop_callback`
-- **同步原语** - 互斥锁 `mutex`、读写锁 `shared_mutex`、信号量 `semaphore`/`atomic_semaphore`、线程屏障 `barrier`与闩锁 `latch`
-- **原子操作** - 原子类型 `atomic`、原子FUTEX `atomic_futex`、全局原子操作函数体系
-- **多策略线程** - 通用线程 `thread`、携带停止令牌的作用域线程 `scope_thread`、手动开启的惰性线程 `lazy_thread`
-- **基本异步模型** - `async` 及其配套的 `future`/`promise`/`packaged_task` 结构
-- **危险指针** - 无锁数据结构的内存管理 `hazard_ptr`/`hazard_pointer_domain`
+The core components of NexusForce strictly adhere to relevant international standards and industry specifications, ensuring predictable behavior, strong interoperability, and reliable security. The following table maps key components to their respective standards:
 
-### 📦 容器 (Container)
-- **标准容器** - `array`/`vector`/`list`/`deque`/`map`/`set`/`unordered_map`/`unordered_set`/`sparse_map`/`sparse_set`/`flat_unordered_map`/`flat_unordered_set` 等
-- **`rb_tree`** - 自平衡二叉搜索树实现
-- **`hashtable`** - 链地址法哈希表
-- **`flat_hashtable`** - 高性能 SwissTable 开放寻址平坦哈希表，H2 预过滤 + SIMD 批量探测，性能测试详见 [平坦哈希表性能测试记录](benchmark/container/PERFORMANCE.md)
-- **`bloom_filter`** - 概率性数据结构
-- **`lru_cache`/`ttl_cache`** - 基于最近最少使用/过期时间的缓存策略
-- **`buffer_chain`** - 零拷贝链式缓冲区，支持 writev 聚合输出
-- **`sparse_vector`** - 基于排序扁平数组的关联容器，O(log n) 二分查找，O(1) 缓存友好迭代
-- **`bitmap`/`bitset`** - 高效位操作容器
+### 🌐 Network Protocols & Internet Standards
 
-### 🔐 加密与安全 (Encrypt)
-- **`AES256`** - 高级加密标准实现
-- **`ChaCha20Poly1305`** - ChaCha20-Poly1305 AEAD 认证加密，支持 AAD
-- **`SHA1`/`SHA256`** - 安全哈希算法
-- **`MD5`** - 消息摘要算法
-- **`base64`** - 二进制数据编码
+| Component                    | Standards Followed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Description                                                                                                                                                                                                                                                                 |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **HTTP & WebSocket**         | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540.html) / [RFC 7541](https://www.rfc-editor.org/rfc/rfc7541.html) (HTTP/2, HPACK), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) / [RFC 7692](https://www.rfc-editor.org/rfc/rfc7692.html) (WebSocket, permessage-deflate), [RFC 6066](https://www.rfc-editor.org/rfc/rfc6066.html) (SNI), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol) | HTTP/1.1 semantics and routing, HTTP/2 frame layer and HPACK header compression, Range requests, response compression, CONNECT tunneling, Cookie and CSRF, CORS cross-origin policy, WebSocket upgrade/frame protocol/permessage-deflate compression, SNI multi-certificate |
+| **DNS Client**               | [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html), [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.html), [RFC 2181](https://www.rfc-editor.org/rfc/rfc2181.html), [RFC 6891](https://www.rfc-editor.org/rfc/rfc6891.html), [RFC 3596](https://www.rfc-editor.org/rfc/rfc3596.html), [RFC 2782](https://www.rfc-editor.org/rfc/rfc2782.html)                                                                                                                                                                                                                                                                     | DNS protocol client, A/AAAA/MX/SRV/PTR record queries, UDP/TCP transport auto-switching and TTL cache management                                                                                                                                                            |
+| **ICMP Protocol**            | [RFC 792](https://www.rfc-editor.org/rfc/rfc792.html) (STD 5), [RFC 1122](https://www.rfc-editor.org/rfc/rfc1122.html), [RFC 4884](https://www.rfc-editor.org/rfc/rfc4884.html), [IANA ICMP Parameters Registry](https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml)                                                                                                                                                                                                                                                                                                                                 | Ping (Echo Request/Reply) and Traceroute (Time Exceeded) network diagnostics, including RFC 1071 checksum algorithm                                                                                                                                                         |
+| **SMTP Protocol**            | [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321.html) (STD 10), [RFC 5322](https://www.rfc-editor.org/rfc/rfc5322.html), [RFC 3207](https://www.rfc-editor.org/rfc/rfc3207.html) (STARTTLS), [RFC 8314](https://www.rfc-editor.org/rfc/rfc8314.html) (Implicit TLS), [RFC 4954](https://www.rfc-editor.org/rfc/rfc4954.html) (AUTH), [RFC 2045–2047](https://www.rfc-editor.org/rfc/rfc2045.html) (MIME)                                                                                                                                                                                                               | Email transport and message format, supporting PLAIN/LOGIN authentication, STARTTLS/Implicit TLS encryption, and MIME multipart messages                                                                                                                                    |
+| **MAC Address**              | [IEEE 802-2014](https://standards.ieee.org/ieee/802/3714/), [IEEE 802.3-2022](https://standards.ieee.org/ieee/802.3/10422/), [RFC 7042](https://www.rfc-editor.org/rfc/rfc7042.html)                                                                                                                                                                                                                                                                                                                                                                                                                                     | 48-bit EUI-48 address parsing and formatting, supporting unicast/multicast/locally administered address identification and standard hexadecimal representation                                                                                                              |
+| **URL Parsing & Encoding**   | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Generic URI syntax, percent-encoding, and Internationalized Resource Identifiers                                                                                                                                                                                            |
+| **Network Port Definitions** | [IANA Service Name and Transport Protocol Port Number Registry](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335)                                                                                                                                                                                                                                                                                                                                                                                                                                        | Well-known port assignments                                                                                                                                                                                                                                                 |
+| **UUID Generation**          | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | UUID v4 (random) and v7 (time-ordered) generation specifications                                                                                                                                                                                                            |
 
-### 📁 文件系统 (File)
-- **路径/文件操作** - 路径/文件系统操作 `path`/`path_tree`/`file`/`file_async`/`file_diff`/`file_locker`/`file_mapper`
-- **`file_async`** - 基于 `io_context` 与 `io_uring` 的异步文件 I/O，支持指定偏移量与取消槽
-- **`file_watcher`** - 实时文件系统变更监控
-- **配置文件解析** - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建
-- **`temp_file`** - 安全的临时文件管理
+### 📁 Configuration File Formats
 
-### 🌐 网络库 (Network)
-- **HTTP/1.1 服务器** - 完整协议实现：`http_server` / `http_router` / `http_filter` 中间件链
-- **HTTP/2 支持** - 帧层与 HPACK 头部压缩（RFC 7540/7541），9 种帧类型，流状态机，流量控制，TLS+ALPN 协商
-- **Radix Tree 路由** - 基于压缩前缀树的 O(k) 路由匹配，支持静态路径、:param 参数、* 通配符、正则回退
-- **HTTP 高级特性** - Range 请求（206 单/多范围）、gzip/deflate 响应压缩、Chunked 分块传输、CONNECT 隧道
-- **`multipart_parser` / `chunked_reader`** - 多部分表单解析与分块传输读取
-- **会话管理** - 可插拔 session_store（内存/Redis），CSRF Double-Submit Cookie 防护，Session Fixation 防护
-- **安全中间件** - `csrf_filter` CSRF 防护、`http_security` 安全响应头、`http_cache` HTTP 缓存策略
-- **WebSocket** - RFC 6455/7692 全双工通信 `websocket_session` / `websocket_server`，事件驱动零线程模式
-- **WebSocket 压缩** - permessage-deflate（RFC 7692），窗口比特位协商与上下文接管控制
-- **HTTP 客户端** - `http_client` scheme 感知模式（https 自动 SSL），请求/响应处理，连接复用 + 重试退避
-- **TCP/UDP 套接字** - 高性能网络通信 `tcp_socket` / `udp_socket`，支持 `async_connect()` / `async_read()` / `async_write()` 异步操作
-- **SSL/TLS** - 加密网络传输 `ssl_context` / `ssl_stream`，SNI 多证书管理 `sni_manager`，ALPN 协议协商
-- **`dns_client`** - 域名解析，per-operation 异步状态对象架构，completion-token 异步 API（回调/取消槽/future/awaitable）
-- **`io_context`** - 统一事件循环（Linux epoll 边缘触发 + min-heap 定时器），异步 I/O 回调驱动，取消模型
-- **`async_filter`** - 异步 pre/post 过滤链框架
-- **`byte_cursor`** - 无拷贝字节级协议解析游标，带边界检查与位级缓冲
-- **`load_balancer`** - 连接池 + 轮询负载均衡
-- **FTP** - FTP 服务器与客户端
-- **ICMP/SMTP** - ICMP 和 SMTP 协议操作
-- **`arp`/`mac_address`/`ip_address`/`ports`/`url`** - 网络编程工具
+| Component         | Standards Followed                                                                                                                                                                                                       | Description                                                                                                                                |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| **JSON RFC 8259** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON six value types, UTF-8 encoding, IEEE 754-2019 double-precision numbers, and string escape sequences                                  |
+| **TOML 1.0.0**    | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | Includes date-time format following [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601                                          |
+| **YAML 1.2**      | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 is a strict superset of JSON, supporting eight core value types, five string scalar styles, anchors and aliases, and a tag system |
+| **SQL**           | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 and later)                                                                                                                                               | Generates statements compliant with ANSI SQL and supported database dialects                                                               |
 
-### 🗄️ 数据库 (DB)
-- **`database_pool`** - 数据库连接复用与管理，支持 `warm_up()` 预热 / `active_count()` 活跃查询 / `get_tb_connect_for()` 自定义超时
-- **`sql_builder`** - 标准 SQL 语句流式构建，支持**方言感知占位符**（Generic `?` / PgSQL `$N` / Oracle `:N`）和**方言感知 DDL**（AUTO_INCREMENT / SERIAL / IDENTITY 自动适配）
-- **`sql_mapper<T>`** - 反射驱动 ORM SQL 生成器，自动生成 DDL/DML 语句，支持方言感知
-- **`repository<T, Connect>`** - 泛型 CRUD 仓库模板（find_all / find_by_pk / find_where / find_page / insert / update / remove / count）
-- **多数据库支持**:
-  - MySQL 客户端
-  - PostgreSQL 客户端
-  - SQLite 客户端
-  - Redis 客户端
-- **预处理语句** - 防止 SQL 注入
-- **结果集封装** - 统一结果访问接口
-- **DB 属性注解** - `PROP_PRIMARY_KEY` / `PROP_AUTO_INC` / `PROP_UNIQUE` / `PROP_INDEX` / `PROP_FOREIGN_KEY`，反射系统与 ORM 共享元数据
+### 🔐 Cryptography & Security Algorithms
 
-### 📝 日志系统 (Logging)
-- **`log_sink`** - 可扩展的日志输出目标
-- **`file_sink`** - 日志文件管理与轮转
-- **`log_formatter`** - 自定义日志格式
-- **`logger`** - 线程池驱动的异步日志，支持 `block`/`discard`/`overrun_oldest` 三种溢出策略，有界环形队列、自动 drain 调度
+| Component                  | Standards Followed                                                                                                                           | Description                                                                                                                                                                             |
+|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **AES-256 Encryption**     | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html)   | Advanced Encryption Standard, supports ECB/CBC/GCM modes ([NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)) |
+| **ChaCha20-Poly1305 AEAD** | [IETF RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html)                                                                                 | ChaCha20 stream cipher + Poly1305 authenticator, AEAD with associated data (AAD) support                                                                                                |
+| **SHA-256 Hashing**        | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)            | Secure Hash Algorithm (SHA-2 family), 256-bit output                                                                                                                                    |
+| **SHA-1 Hashing**          | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (historical compatibility)                                     | ⚠️ Marked with security warning ([SHAttered](https://shattered.io/) collision attack)                                                                                                   |
+| **MD5 Hashing**            | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (historical compatibility)                                                                | ⚠️ Marked with security warning, for non-cryptographic checksum scenarios only                                                                                                          |
+| **Base64 Encoding**        | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5)   | Standard and URL-safe Base64 encoding/decoding, strict padding rules and illegal character detection                                                                                    |
 
-### 🔤 字符串处理 (String)
-- **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`，支持拷贝
-- **Unicode 支持** - UTF 转换系统、码点操作类 `codepoint`、UTF-8 码点迭代器 `utf8_iterator` / `utf8_view`
-- **`formatter`/`format`** - 类型安全的格式化输出，支持位置参数 `{0}` `{1}` 和命名参数 `format_named()`
-- **`string_view`** - 大量使用字符串视图优化操作
-- **数值转换** - 可扩展的字符串与数值互转体系
-- **Boyer-Moore-Horspool** - 窄字符子串搜索加速
+### 🔤 Character Encoding & Internationalization
 
-### ⚙️ 系统接口 (System)
-- **`process`** - 进程创建与控制
-- **`pipe`** - 管道创建与管理
-- **`dynamic_library`** - 运行时库加载
-- **`console`** - 高集成度的终端交互
-- **`cmdline`** - 进程参数分析与操作
-- **`stacktrace`** - 异常调试
-- **`share_memory`** - 跨进程共享内存
-- **`locale`** - 本地化设置与解析
-- **`sysinfo`** - 硬件与 OS 信息
-- **`environment`** - 环境变量操作
-- **`system_signal_manager`** - 系统信号控制
-- **`system_event`** - 系统事件管理
+| Component                        | Standards Followed                                                                                                                                                                                                               | Description                                                                                          |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| **UTF-8 / UTF-16 / UTF-32**      | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode codepoint operations, normalization, and encoding conversion with invalid sequence detection |
+| **Unicode Codepoint Processing** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13                                                                                                                                                        | Surrogate pair handling, BOM detection, and replacement character (U+FFFD) rules                     |
+| **Byte Size Units**              | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                      | Binary prefixes (KiB/MiB/GiB) and decimal prefixes (kB/MB/GB)                                        |
 
-### ⏰ 时间处理 (Time)
-- **`steady_clock` / `system_clock`** - 多种时钟源高精度时钟
-- **`duration`** - 时间跨度计算
-- **`date` / `time` / `datetime` / `timestamp`** - 日历操作
-- **`scoped_click`** - 代码块执行时间测量
+### 📐 Data Structures & Algorithms
 
-### 🛠️ 工具库 (Utility)
-- **字面类型包装类** - 字面类型的高级封装
-- **`optional`** - 可选值处理
-- **`variant`** - 类型安全联合体
-- **`expected`** - 错误状态处理
-- **`any`** - 类型擦除容器
-- **`pair`/`tuple`** - 编译期键值对/元组
-- **`color`** - RGB 颜色操作
-- **`scope_exit` / `scope_fail` / `scope_success`** - 作用域守卫
-- **数值/字符信息** - 数值/字符类型信息获取
-- **`ratio`** - 编译期比率计算
-- **`uuid`** - UUID v4/v7 生成器
-- **`compressed_pair`** - EBCO内存优化
+| Component                      | Standards Followed / Academic Literature                                                                                                                                                                 | Description                                                                                                                                                                            |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Heap Algorithms**            | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §25.8.6                                                                                                                                    | Complexity guarantees and Floyd's heap adjustment optimization ([Algorithm 245](https://dl.acm.org/doi/10.1145/512274.512284))                                                         |
+| **Red-Black Tree**             | [Guibas & Sedgewick (1978)](https://doi.org/10.1109/SFCS.1978.3)                                                                                                                                         | Classic implementation of self-balancing binary search tree, O(log n) complexity guarantee                                                                                             |
+| **Leonardo Heap / Smoothsort** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html)                                                                                                            | Adaptive sorting algorithm, optimal time complexity O(n)                                                                                                                               |
+| **Introsort**                  | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23)                                                                                                        | Hybrid quick/heap/insertion sort, default algorithm for C++ standard library `sort`                                                                                                    |
+| **Non-cryptographic Hashing**  | [FNV-1a Draft](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3)                                                        | High-performance hash tables and Bloom filters                                                                                                                                         |
+| **Bloom Filter**               | [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Broder & Mitzenmacher (2004)](https://doi.org/10.1080/15427951.2004.10129096), [Kirsch & Mitzenmacher (2006)](https://doi.org/10.1002/rsa.20208) | Probabilistic set membership query structure with double hashing optimization, O(k) insertion/query, supporting optimal parameter (m, k) derivation and false positive rate estimation |
 
-### 🔍 反射系统 (Reflection)
-- **`NFRS`** - 预编译代码生成器，扫描 `NEFORCE_REFLECT_*` 标记自动生成类型注册代码，支持增量扫描
-- **`registry`** - 全局类型反射注册表，支持名称/type_id 双重查找、线程安全注册、动态信号槽连接 `connect_signal_to_slot()`
-- **`meta_type`** - 运行时类型元数据：基类列表、属性/函数映射、构造/克隆工厂、枚举/容器信息、信号名称列表、动态属性注册 `add_property()`
-- **`meta_property`** - 属性反射描述符，支持注解标志、变更通知信号
-- **`meta_function`** - 成员函数/静态函数反射描述符，支持重载、参数提示与运行时 `invoke()` 调用
-- **`meta_enum`** - 枚举反射：名称↔值双向查找、条目遍历
-- **`type_builder`** - 链式API 类型构建器：基类注册、属性/函数/信号注册、构造/克隆/容器配置
-- **JSON 序列化器** - 反射驱动的对象↔JSON 序列化与反序列化，递归处理嵌套类型与容器
-- **二进制序列化器** - 大端格式（Magic "NEBF" + 类型表 + 数据段），属性注解控制序列化行为
-- **类型识别** - 基于 type_name 特化 + 编译器函数签名的 hash-based type_id，非侵入式类型注册
-- **反射宏** - `NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` / `SIGNAL` / `ENUM` / `ENUM_VAL` 类体内标记，供 NFRS 扫描器识别
+### ⚙️ System, Concurrency & Command-Line
 
-### 🖥️ 终端UI框架 (TUI)
-- **`application`** - 应用入口，Builder 模式配置（主题/FPS/标题），驱动事件循环与动画计时器
-- **`reconciler`** - 声明式渲染引擎，Cell 级终端帧差分与增量 ANSI 输出，焦点链遍历，鼠标命中测试与滚动条交互
-- **`screen`** - 终端帧缓冲，逐 Cell 差分生成最小 ANSI 转义序列
-- **`input_driver`** - 跨平台终端输入驱动，监听 stdin 并分发按键/鼠标/粘贴事件
-- **`input_parser`** - 无 I/O 的输入解析状态机，识别 ASCII/UTF-8、控制键、CSI/SS3、带修饰键序列、Alt+字符、SGR 鼠标与括号粘贴
-- **`headless`** - 无终端驱动：固定尺寸、帧输出回收到内存、字节级输入注入，作为快照测试与离屏渲染底座
-- **`log_view`** - 对话记录：变高消息、流式合并、贴底跟随与「N 条新消息」提示
-- **`composer`** - 输入编排：多行编辑器 + 补全弹层 + 提示行，提交/换行/中断语义
-- **`tool_runner`** - 工具执行组件：PTY/管道子进程 + 逐帧合并输出 + 环形裁剪 + 状态回写
-- **`pty` / `process_watcher`** - 伪终端封装与异步子进程监视器
-- **剪贴板 / 鼠标选择** - OSC 52 写入与读取，`text_area` 拖拽选区、`log_view` 点击选中复制、`composer` 单行上下键浏览提交历史
-- **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
-- **主题角色** - 81 个语义颜色角色 + 六套调色板（雾蓝/樱）+ 用户主题 JSON + 按终端背景自动明暗
-- **动效原语** - 共享帧时钟、扫光（shimmer）、平滑揭示（reveal）、旋转动画帧集
-- **富文本** - Markdown 表格/引用悬挂缩进/链接 OSC-8/图片占位、流式增量渲染、`$…$` 与 `$$…$$` 数学公式
-- **语法高亮** - 20 种语言的表驱动高亮，代码块按语言自动着色
-- **LaTeX** - TeX 子集排版为多行 Unicode（分数/根式/上下标/矩阵/cases/大运算符上下限）
-- **Mermaid** - flowchart / sequence / state / class / ER / gitGraph / pie / mindmap / timeline / gantt / journey / quadrant / requirement 子集渲染为框线字符图，Markdown 围栏自动接入
-- **终端协议** - 终端画像探测、OSC 11 背景查询、通知（OSC 9/777/99/BEL）、光标形状、焦点事件、Kitty 键盘开关
-- **图像协议** - PNG 解码（8 位 RGB/RGBA）与 Kitty / iTerm2 / Sixel 编码
-- **键盘与焦点** - Kitty `CSI-u` 与 modifyOtherKeys 解析（含按下/重复/释放）、窗口焦点事件、根组件按键预览
-- **选区跟随** - 拖选即复制、滚动后选区平移、`selection_text()` 取文本
-- **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染
+| Component                 | Standards Followed                                                                                                                                                                   | Description                                                                       |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **Atomic Memory Order**   | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4                                                                                                                  | C++ memory model, includes hardware barrier equivalents and Intel TSX HLE support |
+| **Command-Line Parsing**  | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) Chapter 12, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html)                   | Supports short option grouping, long options, `--` delimiter, and optional values |
+| **Date & Time**           | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX Timestamp](https://pubs.opengroup.org/onlinepubs/9699919799/) | Gregorian calendar calculations, Julian day conversion, and Unix epoch handling   |
 
-### 🧬 类型与特性 (TypeInfo)
-- **类型萃取** - 完备的编译期类型判断
-- **概念约束** - 概念集支持
-- **`check_type`** - 运行时可读的类型名
-- **CRTP 静态多态** - 全局统一的零开销接口
+### 🎨 Graphics, Color & Mathematics
 
-### 💾 内存管理 (Memory)
-- **`shared_ptr`、`unique_ptr`、`weak_ptr`** - 智能指针结构
-- **`atomic<shared_ptr/weak_ptr>`** - 原子智能指针无锁操作
-- **`memory_view`** - 安全内存访问
-- **位/端序/字节流操作** - 内存状态修改
-- **构造/析构工具** - 对象生命周期管理
-- **`trace_allocator` ** - 调试用内存监控
-- **`standard_allocator`** - 基于编译器特性的策略特化分配器
-- **`memory_pool` / `pool_allocator`** - 高性能内存池：零块头 span + 尺寸类 + 线程本地缓存，大对象直接映射操作系统内存，性能测试详见 [内存池性能测试记录](benchmark/memory/PERFORMANCE.md)
+| Component                              | Standards Followed                                                                                                                | Description                                                                         |
+|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| **RGB Color Model**                    | [W3C CSS Color Level 4](https://www.w3.org/TR/css-color-4/), [Compositing Level 1](https://www.w3.org/TR/compositing-1/)          | Straight alpha compositing, hexadecimal formats, and ANSI 256-color palette         |
+| **Grayscale Conversion**               | [ITU-R BT.709](https://www.itu.int/rec/R-REC-BT.709/) / [IEC 61966-2-1 (sRGB)](https://webstore.iec.ch/publication/6169)          | Human perception weighting (0.299R + 0.587G + 0.114B)                               |
+| **Mathematical Functions & Constants** | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html)        | Trigonometric reduction, Newton's method iterations, and machine epsilon tolerances |
+| **Random Number Generation**           | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | Mersenne Twister (MT19937) and OS entropy source true random numbers                |
 
-#### 分配器模型
-
-- 打开 `NEXUSFORCE_USING_MEMORY_POOL`（默认）时，库容器（`basic_string`、`vector` 等）的分配统一由全局内存池承担
-- 显式打开 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` 并让每个会跨模块传递所有权的 C++ 模块链接 `NexusForceMemoryPoolOverrideStatic` 以使全进程使用全局内存池
-
-### 📦 压缩 (Compress)
-- **lz4 压缩** - `lz4_compressor` 高速数据压缩/解压
-- **zlib 压缩** - `zlib_compressor` 多策略通用数据压缩/解压
-
-### 🔌 插件系统 (Plugin)
-- **动态插件管理** - `plugin_manager` 运行时加载卸载插件
-- **插件接口** - 标准化插件开发
-
-### ❗ 异常处理 (Exception)
-- **异常指针** - `exception_ptr` 跨线程异常传递
-- **终止处理** - 多状态程序终止方式与对应回调
-- **异常/错误码系统** - 自定义的异常与错误码体系
-- **断点处理** - 调试断点触发与处理
-
-### 📐 算法库 (Algorithm)
-- **标准算法** - 基于迭代器系统的范围迭代算法
-- **并行算法** - 并行执行策略
-- **数值算法** - 数值计算与累加
-- **堆算法** - 堆操作与优先级队列
-- **范围操作** - ranges 支持
-- **链式查询** - 惰性链式算子
-- **哈希算法** - 多种哈希函数实现
-
-### 📊 数学库 (Math)
-- **数学常量** - 常用数学常数
-- **数学函数** - 超越函数与数值计算
-- **随机数生成** - LC、梅森旋转、PCG、异或移位旋转、位宽适配与硬件噪声算法
-- **随机数分布** - 均匀、伯努利、正态、指数、对数均匀与泊松分布，引擎符合标准库 UniformRandomBitGenerator 概念
-- **128位数学计算** - 128位有符号/无符号数值操作 `int128_t` / `uint128_t`
-
-> AI Agent 请阅读 [AI Agent 文档](docs/ai/README.md) 获取快速索引并分析 NexusForce 组件的方案
+> All classes and functions referencing the above standards include specific standard section numbers and official links in their comments, 
+> enabling developers to trace and verify at any time.
 
 ---
 
-## 🔧 编译指南
+## 🚀 Features
 
-### 📋 前置依赖
+### 🔄 Concurrency & Async
+- **`thread_pool`** - NUMA-aware work stealing thread pool with multi-strategy customization; for detailed performance testing, see [thread_pool performance test records](benchmark/async/PERFORMANCE.md)
+- **`io_context`** - Async I/O execution context, unified event loop, timer and cancellation model
+- **`cancellation_slot`** - Supports `async_connect` / `async_read` / `async_write` interruptible async I/O
+- **`timer_scheduler` / `basic_timer`** - Timer task scheduling based on red-black tree, supports cancellation flag
+- **`async_stream`** - Async stream abstraction interface, unified read/write protocol
+- **`async_read()` / `async_write()`** - Free function combinators, automatic partial read/write retry via `shared_from_this`
+- **`thread_pool_executor`** - Adapts `thread_pool::submit_task()` to standard executor interface
+- **`generator` / `task`** - Coroutine primitives and task generator
+- **`virtual_thread`** - C#-style lightweight coroutines
+- **`connection` / `signal` / `signal_base`** - Observer pattern signal-slot, `signal_base` provides type-erased base for reflection-driven dynamic connections
+- **`call_once`** - Multi-threaded single-call implementation based on FUTEX
+- **Stop Token** - Cancellable asynchronous operations `stop_token` / `stop_source` / `stop_callback`
+- **Synchronization Primitives** - Mutex `mutex`, shared mutex `shared_mutex`, semaphore `semaphore` / `atomic_semaphore`, thread barrier `barrier` and latch `latch`
+- **Atomic Operations** - Atomic types `atomic`, atomic FUTEX `atomic_futex`, global atomic operation function system
+- **Multi-strategy Threads** - General thread `thread`, scoped thread with stop token `scope_thread`, manually started lazy thread `lazy_thread`
+- **Basic Async Model** - `async` and its supporting `future` / `promise` / `packaged_task` structures
+- **Hazard Pointer** - Memory management for lock-free data structures `hazard_ptr` / `hazard_pointer_domain`
 
-| 类型               | 依赖                                                                | 最低版本要求 |
-|--------------------|---------------------------------------------------------------------|--------------|
-| 🔨 构建工具        | [CMake](https://cmake.org/)                                         | 3.21         |
-| 📦 包管理器        | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest       |
-| 🎨 代码格式化      | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19.0         |
-| 🔍 静态分析        | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19.0         |
-| ⚠️ 必选依赖(vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.0         |
-|                    | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0        |
-| 📦 可选依赖(vcpkg) | [libpq](https://www.postgresql.org/)                                | 16.0         |
-|                    | [libmysql](https://www.mysql.com/)                                  | 8.0          |
-|                    | [sqlite3](https://sqlite.org/index.html)                            | 3.0          |
-|                    | [sqlcipher](https://www.zetetic.net/sqlcipher/)                     | 4.0          |
-|                    | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0        |
-|                    | [lz4](https://lz4.org/)                                             | 1.10.0       |
-|                    | [zlib](https://www.zlib.net/)                                       | 1.3.0        |
-|                    | [icu](https://icu.unicode.org/)                                     | 78.0         |
-|                    | [GTest](https://google.github.io/googletest/)                       | 1.17.0       |
-|                    | [benchmark](https://github.com/google/benchmark/)                   | 1.9.0        |
+### 📦 Containers
+- **Standard Containers** - `array` / `vector` / `list` / `deque` / `map` / `set` / `unordered_map` / `unordered_set` / `sparse_map` / `sparse_set` / `flat_unordered_map` / `flat_unordered_set`, etc.
+- **`rb_tree`** - Self-balancing binary search tree implementation
+- **`hashtable`** - Separate chaining hash table
+- **`flat_hashtable`** - SwissTable open addressing flat hash table, H2 pre-filtering + SIMD group probing
+- **`bloom_filter`** - Probabilistic data structure
+- **`lru_cache` / `ttl_cache`** - Cache policies based on Least Recently Used / Time-To-Live
+- **`buffer_chain`** - Zero-copy chained buffer, supports writev aggregated output
+- **`sparse_vector`** - Sorted flat-array based associative container, O(log n) binary search, O(1) cache-friendly iteration
+- **`bitmap` / `bitset`** - Efficient bit manipulation containers
 
-### 🏗️ 编译步骤
+### 🔐 Encryption & Security
+- **`AES256`** - Advanced Encryption Standard implementation
+- **`ChaCha20Poly1305`** - ChaCha20-Poly1305 AEAD authenticated encryption with AAD support
+- **`SHA1` / `SHA256`** - Secure Hash Algorithm
+- **`MD5`** - Message Digest Algorithm
+- **`base64`** - Binary data encoding
 
-编译前确保您已经正确安装并配置了前置依赖。
+### 📁 File System
+- **Path/File Operations** - Path and file system operations `path` / `path_tree` / `file` / `file_async` / `file_diff` / `file_locker` / `file_mapper`
+- **`file_async`** - `io_context`- and `io_uring`-driven async file I/O, with offset specification and cancellation slot support
+- **`file_watcher`** - Real-time file system change monitoring
+- **Config File Parsing** - JSON/TOML/YAML/INI/ENV value system, format parsing and streaming builder
+- **`temp_file`** - Secure temporary file management
 
-> 💡 您可以在项目根目录的 `config.json` (编译项配置) 与 `vcpkg.json` (包管理配置) 中更改配置项以进行个性化编译
+### 🌐 Networking
+- **HTTP/1.1 Server** - Complete protocol: `http_server` / `http_router` / `http_filter` middleware chain
+- **HTTP/2 Support** - Frame layer & HPACK header compression (RFC 7540/7541), 9 frame types, stream state machine, flow control, TLS+ALPN negotiation
+- **Radix Tree Routing** - O(k) route matching via compressed prefix tree, static paths, :param params, * wildcards, regex fallback
+- **HTTP Advanced Features** - Range requests (206 single/multi-range), gzip/deflate response compression, Chunked transfer, CONNECT tunneling
+- **`multipart_parser` / `chunked_reader`** - Multipart form parsing and chunked transfer reading
+- **Session Management** - Pluggable session_store (memory/Redis), CSRF Double-Submit Cookie protection, Session Fixation protection
+- **Security Middleware** - `csrf_filter` CSRF protection, `http_security` security headers, `http_cache` HTTP caching policies
+- **WebSocket** - RFC 6455/7692 full-duplex `websocket_session` / `websocket_server`, event-driven zero-thread mode
+- **WebSocket Compression** - permessage-deflate (RFC 7692), window bit negotiation and context takeover control
+- **HTTP Client** - `http_client` scheme-aware mode (auto SSL for https), request/response handling, connection reuse + retry backoff
+- **TCP/UDP Socket** - High-performance `tcp_socket` / `udp_socket`, with `async_connect()` / `async_read()` / `async_write()` async operations
+- **SSL/TLS** - Encrypted transport `ssl_context` / `ssl_stream`, SNI multi-certificate management `sni_manager`, ALPN protocol negotiation
+- **`dns_client`** - Domain name resolution, per-operation async state object architecture, completion-token async API (callback/cancellation slot/future/awaitable)
+- **`io_context`** - Unified event loop (Linux epoll edge-triggered + min-heap timer), async I/O callback-driven, cancellation model
+- **`async_filter`** - Async pre/post filter chain framework
+- **`byte_cursor`** - Zero-copy byte-level protocol parsing cursor, with bounds checking and bit-level buffering
+- **`load_balancer`** - Connection pool + round-robin load balancing
+- **FTP** - FTP server and client
+- **ICMP/SMTP** - ICMP and SMTP protocol operations
+- **`arp` / `mac_address` / `ip_address` / `ports` / `url`** - Network programming utilities
+
+### 🗄️ Database
+- **`database_pool`** - Database connection reuse and management, with `warm_up()` / `active_count()` / `get_tb_connect_for()` timeout-aware acquisition
+- **`sql_builder`** - Fluent builder for standard SQL statements, with **dialect-aware placeholders** (Generic `?` / PgSQL `$N` / Oracle `:N`) and **dialect-aware DDL** (AUTO_INCREMENT / SERIAL / IDENTITY auto-adaptation)
+- **`sql_mapper<T>`** - Reflection-driven ORM SQL generator, auto-generates DDL/DML statements with dialect awareness
+- **`repository<T, Connect>`** - Generic CRUD repository template (find_all / find_by_pk / find_where / find_page / insert / update / remove / count)
+- **Multi-Database Support**:
+  - MySQL Client
+  - PostgreSQL Client
+  - SQLite Client
+  - Redis Client
+- **Prepared Statements** - Prevention of SQL injection
+- **Result Set Wrapper** - Unified result access interface
+- **DB Property Annotations** - `PROP_PRIMARY_KEY` / `PROP_AUTO_INC` / `PROP_UNIQUE` / `PROP_INDEX` / `PROP_FOREIGN_KEY`, shared metadata between reflection system and ORM
+
+### 📝 Logging
+- **`log_sink`** - Extensible log output targets
+- **`file_sink`** - Log file management and rotation
+- **`log_formatter`** - Customizable log format
+- **`logger`** - Thread-pool-driven async logger, supports `block`/`discard`/`overrun_oldest` overflow strategies, bounded ring buffer, auto drain scheduling
+
+### 🔤 String Processing
+- **PCRE2 Regular Expressions** - Efficient regex matching with JIT support `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`, supports copy
+- **Unicode Support** - UTF conversion system, codepoint operation class `codepoint`, UTF-8 codepoint iterator `utf8_iterator` / `utf8_view`
+- **`formatter`/`format`** - Type-safe formatted output, supports positional params `{0}` `{1}` and named params `format_named()`
+- **`string_view`** - Extensive use of string views for optimized operations
+- **Numeric Conversion** - Extensible string-to-number and number-to-string conversion system
+- **Boyer-Moore-Horspool** - Narrow character substring search acceleration
+
+### ⚙️ System Interface
+- **`process`** - Process creation and control
+- **`pipe`** - Pipe creation and management
+- **`dynamic_library`** - Runtime library loading
+- **`console`** - Highly integrated terminal interaction
+- **`cmdline`** - Process argument analysis and manipulation
+- **`stacktrace`** - Exception debugging
+- **`share_memory`** - Cross-process shared memory
+- **`locale`** - Locale configuration and parsing
+- **`sysinfo`** - Hardware and OS information
+- **`environment`** - Environment variable manipulation
+- **`system_signal_manager`** - System signal control
+- **`system_event`** - System event management
+
+### ⏰ Time Utilities
+- **`steady_clock` / `system_clock`** - High-resolution clocks with multiple clock sources
+- **`duration`** - Time span calculation
+- **`date` / `time` / `datetime` / `timestamp`** - Calendar operations
+- **`scoped_click`** - Execution time measurement for code blocks
+
+### 🛠️ Utility Library
+- **Literal Type Wrapper Classes** - Advanced encapsulation of literal types
+- **`optional`** - Optional value handling
+- **`variant`** - Type-safe union
+- **`expected`** - Error state handling
+- **`any`** - Type-erased container
+- **`pair` / `tuple`** - Compile-time key-value pair / tuple
+- **`color`** - RGB color operations
+- **`scope_exit` / `scope_fail` / `scope_success`** - Scope guards
+- **Numeric/Character Info** - Numeric and character type information retrieval
+- **`ratio`** - Compile-time ratio calculation
+- **`uuid`** - UUID v4/v7 generator
+- **`compressed_pair`** - EBCO memory optimization
+
+### 🔍 Reflection System
+- **`NFRS`** - Pre-compile code generator, scans `NEFORCE_REFLECT_*` markers to auto-generate type registration code, with incremental scanning
+- **`registry`** - Global type reflection registry with name/type_id dual lookup, thread-safe registration, and dynamic signal-slot connection `connect_signal_to_slot()`
+- **`meta_type`** - Runtime type metadata: base class list, property/function maps, constructor/clone factory, enum/container info, signal name list, dynamic property registration `add_property()`
+- **`meta_property`** - Property reflection descriptor with annotation flags and change notification signal
+- **`meta_function`** - Member/static function reflection descriptor with overload support, parameter hints, and runtime `invoke()` call
+- **`meta_enum`** - Enum reflection: name↔value bidirectional lookup, entry iteration
+- **`type_builder`** - Fluent API type builder: base class registration, property/function/signal registration, constructor/clone/container configuration
+- **JSON Serializer** - Reflection-driven object↔JSON serialization/deserialization, recursive nested types and containers
+- **Binary Serializer** - Big-endian format (Magic "NEBF" + type table + data segment), attribute-controlled serialization behavior
+- **Type Identification** - Hash-based type_id via type_name specialization + compiler function signature, non-intrusive type registration
+- **Reflection Macros** - `NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` / `SIGNAL` / `ENUM` / `ENUM_VAL` in-class markers for NFRS scanner recognition
+
+### 🖥️ Terminal UI Framework (TUI)
+- **`application`** - Application entry point, Builder pattern config (theme/FPS/title), drives event loop and animation timer
+- **`reconciler`** - Declarative rendering engine, cell-level terminal frame diffing with incremental ANSI output, focus chain traversal, mouse hit-testing and scrollbar interaction
+- **`screen`** - Terminal frame buffer, per-cell diffing to produce minimal ANSI escape sequences
+- **`input_driver`** - Cross-platform terminal input driver, watches stdin and dispatches key/mouse/paste events
+- **`input_parser`** - I/O-free input parsing state machine: ASCII/UTF-8, control keys, CSI/SS3, modifier sequences, Alt+char, SGR mouse and bracketed paste
+- **`headless`** - Terminal-free driver: fixed size, frame output captured in memory, byte-level input injection; the base for snapshot tests and offscreen rendering
+- **`log_view`** - Chat transcript: variable-height messages, streaming coalescing, bottom-follow and an "N new messages" hint
+- **`composer`** - Input orchestration: multi-line editor + completion popup + hint line, with submit/newline/interrupt semantics
+- **`pty` / `process_watcher`** - Pseudo-terminal wrapper and an async child-process watcher that falls back to pipes when no devpts is available
+- **Clipboard / mouse selection** - OSC 52 writes and reads, `text_area` drag selection, `log_view` click-to-select-and-copy, `composer` up/down browsing of submitted history
+- **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
+- **Theme roles** - 81 semantic color roles, six palettes (mist/sakura), user theme JSON, automatic light/dark from the terminal background
+- **Motion primitives** - shared frame clock, shimmer sweep, smooth reveal, spinner frame sets
+- **Rich text** - markdown tables, hanging quote indents, OSC-8 links, image placeholders, incremental streaming, `$…$` / `$$…$$` math
+- **Syntax highlighting** - table-driven highlighter for 20 languages, code blocks colored by language
+- **LaTeX** - TeX subset typeset as multi-line Unicode (fractions, roots, scripts, matrices, cases, operator limits)
+- **Mermaid** - flowchart / sequence / state / class / ER / gitGraph / pie / mindmap / timeline / gantt / journey / quadrant / requirement subsets rendered as box-drawing art, automatically wired into markdown fences
+- **Terminal protocols** - profile detection, OSC 11 background query, notifications (OSC 9/777/99/BEL), cursor shape, focus events, Kitty keyboard toggles
+- **Image protocols** - PNG decoding (8-bit RGB/RGBA) plus Kitty / iTerm2 / Sixel encoders
+- **Keyboard and focus** - Kitty `CSI-u` and modifyOtherKeys (press/repeat/release), window focus events, root key preview
+- **Selection follow** - copy on drag release, selection translation after scrolling, `selection_text()`
+- **`state<T>`** - Reactive state management, auto dirty-marking on write + strand-coalesced re-render scheduling
+
+### 🧬 Type Traits & Concepts
+- **Type Traits** - Comprehensive compile-time type judgments
+- **Concept Constraints** - Concept set support
+- **`check_type`** - Human-readable type names at runtime
+- **CRTP Static Polymorphism** - Globally unified zero-overhead interface
+
+### 💾 Memory Management
+- **`shared_ptr`, `unique_ptr`, `weak_ptr`** - Smart pointer structures
+- **`atomic<shared_ptr/weak_ptr>`** - Lock-free operations for atomic smart pointers
+- **`memory_view`** - Safe memory access
+- **Bit/Endian/Byte Stream Operations** - Memory state modification
+- **Construction/Destruction Tools** - Object lifecycle management
+- **`trace_allocator`** - Memory monitoring for debugging
+- **`standard_allocator`** - Strategy-specialized allocators based on compiler features
+
+### 📦 Compression
+- **lz4 Compression** - `lz4_compressor` high-speed data compression/decompression
+- **zlib Compression** - `zlib_compressor` multi-strategy general-purpose data compression/decompression
+
+### 🔌 Plugin System
+- **Dynamic Plugin Management** - `plugin_manager` runtime plugin loading and unloading
+- **Plugin Interface** - Standardized plugin development
+
+### ❗ Exception Handling
+- **Exception Pointer** - `exception_ptr` cross-thread exception propagation
+- **Termination Handling** - Multi-state program termination methods and corresponding callbacks
+- **Exception/Error Code System** - Custom exception and error code system
+- **Breakpoint Handling** - Debug breakpoint triggering and handling
+
+### 📐 Algorithm Library
+- **Standard Algorithms** - Range iteration algorithms based on iterator system
+- **Parallel Algorithms** - Parallel execution policies
+- **Numeric Algorithms** - Numerical computation and accumulation
+- **Heap Algorithms** - Heap operations and priority queues
+- **Range Operations** - Ranges library support
+- **Chain Query** - `query` provides LINQ / Stream style lazy chain operators (`ranges::from(container).filter(...).transform(...).take(...).to_vector()`), see [chain query example](examples/iterator/query_example.cpp)
+- **Hash Algorithms** - Multiple hash function implementations
+
+### 📊 Math Library
+- **Mathematical Constants** - Common mathematical constants
+- **Mathematical Functions** - Transcendental functions and numerical computation
+- **Random Number Generation** - LC, Mersenne Twister, PCG, xoroshiro, bit-width adapter and hardware noise algorithms
+- **Random Distributions** - uniform, Bernoulli, normal, exponential, log-uniform and Poisson distributions, engines satisfy the standard UniformRandomBitGenerator concept
+- **128-bit Math** - 128-bit signed/unsigned numeric operations `int128_t` / `uint128_t`
+
+> AI Agent: Please read [AI Agent documentation](docs/ai/README.md) for a quick index and analysis of NexusForce component solutions
+
+---
+
+## 🔧 Build Guide
+
+### 📋 Prerequisites
+
+| Type                              | Dependency                                                          | Version Requirement |
+|-----------------------------------|---------------------------------------------------------------------|---------------------|
+| 🔨 Build Tool                     | [CMake](https://cmake.org/)                                         | 3.21                |
+| 📦 Package Manager                | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest              |
+| 🎨 Code Formatter                 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19.0                |
+| 🔍 Static Analyzer                | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19.0                |
+| ⚠️ Mandatory Dependencies (vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.0                |
+|                                   | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0               |
+| 📦 Optional Dependencies (vcpkg)  | [libpq](https://www.postgresql.org/)                                | 16.0                |
+|                                   | [libmysql](https://www.mysql.com/)                                  | 8.0                 |
+|                                   | [sqlite3](https://sqlite.org/index.html)                            | 3.0                 |
+|                                   | [sqlcipher](https://www.zetetic.net/sqlcipher/)                     | 4.0                 |
+|                                   | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0               |
+|                                   | [lz4](https://lz4.org/)                                             | 1.10.0              |
+|                                   | [zlib](https://www.zlib.net/)                                       | 1.3.0               |
+|                                   | [icu](https://icu.unicode.org/)                                     | 78.0                |
+|                                   | [GTest](https://google.github.io/googletest/)                       | 1.17.0              |
+|                                   | [benchmark](https://github.com/google/benchmark/)                   | 1.9.0               |
+
+### 🏗️ Build Steps
+
+Ensure that you have correctly installed and configured the prerequisites before building.
+
+> 💡 You can modify the configuration items in `config.json` (build options) and `vcpkg.json` (package management configuration) in the project root directory for personalized builds.
 >
-> **本项目在 linux 系统中静默依赖 liburing-dev，如您需要 io_uring 功能，请在构建前确保您已经安装，否则相关功能将被禁用回退**
+> **This project implicitly depends on liburing-dev on Linux systems. If you need `io_uring` functionality,
+> please ensure it is installed before building; otherwise, the related features will be disabled and fall back to alternatives.**
 >
-> 实测 linux 系统中，vcpkg 构建 libmysql 需要 libtirpc-dev 库，libpq 需要 bison、flex、autoconf 库，且这些库不会由系统包管理器默认安装。
-> 如果您需要对应依赖，您可以通过系统包管理器提前安装以免 cmake 构建失败
+> In actual testing, on Linux, vcpkg requires libtirpc-dev libraries to build libmysql, libpq requires bison, flex, and autoconf libraries, and these libraries are not installed by default by the package manager.
+> If you need corresponding dependencies, you can install them in advance using the package manager to prevent cmake build failures.
 
 #### 🪟 Windows
 
 ```bash
-# 克隆最新发布版
+# Clone the latest release
 git clone --depth 1 https://github.com/aurora250/NexusForce.git
 cd NexusForce
 
-# 创建构建目录
+# Create build directory
 mkdir build && cd build
 
-# 编译选项配置
+# Configure build options
 cmake .. -G "Visual Studio 17 2022" -A x64
 
-# 编译
+# Build
 cmake --build . --config Release
 
-# 安装到系统目录
+# Install to system directory
 cmake --install . --config Release
 
-# 或使用脚本快速安装，更多参数参见install_nexusforce.py注释
+# Or use the script for quick installation, see install_nexusforce.py comments for more parameters
 python ./scripts/install_nexusforce.py --release
 ```
 
 #### 🐧 Ubuntu (Linux)
 
 ```bash
-# 克隆最新发布版
+# Clone the latest release
 git clone --depth 1 https://github.com/aurora250/NexusForce.git
 cd NexusForce
 
-# 创建构建目录
+# Create build directory
 mkdir build && cd build
 
-# 编译选项配置
+# Configure build options
 cmake ..
 
-# 编译
+# Build
 make -j$(nproc)
 
-# 安装到系统目录
+# Install to system directory
 sudo make install
 
-# 或使用脚本快速安装，更多参数参见install_nexusforce.py注释
+# Or use the script for quick installation, see install_nexusforce.py comments for more parameters
 python ./scripts/install_nexusforce.py --release
 ```
 
-### 🔗 在你的项目中使用 NexusForce
+### 🔗 Using NexusForce in Your Project
 
-安装完成后，在你的 CMake 项目中通过 `find_package` 引入 NexusForce，并使用提供的配置函数完成编译选项、反射扫描和运行时部署。
+After installation, use `find_package` in your CMake project to bring in NexusForce,
+and use the provided configuration functions to complete compiler options, reflection scanning, and runtime deployment.
 
-#### 基础链接
+#### Basic Linking
 
 ```cmake
 cmake_minimum_required(VERSION 3.19)
@@ -479,34 +476,34 @@ target_link_libraries(my_app PRIVATE NexusForce::NexusForce)
 nexusforce_compiler_options(my_app)
 ```
 
-#### 反射代码生成（NFRS）
+#### Reflection Code Generation (NFRS)
 
-如果你的代码中使用了 `NEFORCE_REFLECT_OBJ` 等反射标记宏，通过 `nexusforce_reflect_scan()` 一键集成 NFRS 预编译扫描：
+If your code uses reflection macros such as `NEFORCE_REFLECT_OBJ`, integrate NFRS pre-compile scanning with a single `nexusforce_reflect_scan()` call:
 
 ```cmake
-# 扫描 src/ 目录下的头文件，自动生成反射注册代码并注入到目标
+# Scan headers in src/ directory, auto-generate reflection registration code and inject into target
 nexusforce_reflect_scan(
     TARGET  my_app
     HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 ```
 
-参数说明：
+Parameter description:
 
-| 参数       | 必填 | 说明                                                                    |
-|------------|------|-------------------------------------------------------------------------|
-| `TARGET`   | 是   | 要注入生成代码的目标                                                    |
-| `HEADERS`  | 是   | 要扫描的头文件目录                                                      |
-| `OUTPUT`   | 否   | 生成文件路径，默认 `${CMAKE_CURRENT_BINARY_DIR}/_nfrs_gen_<target>.cpp` |
-| `EXCLUDES` | 否   | 排除的路径片段（传递给 NFRS 的 `-e` 选项）                              |
-| `DEPENDS`  | 否   | 额外的 CMake 级依赖文件                                                 |
+| Parameter  | Required | Description                                                                       |
+|------------|----------|-----------------------------------------------------------------------------------|
+| `TARGET`   | Yes      | The target to inject generated code into                                          |
+| `HEADERS`  | Yes      | Directory of headers to scan                                                      |
+| `OUTPUT`   | No       | Generated file path, default `${CMAKE_CURRENT_BINARY_DIR}/_nfrs_gen_<target>.cpp` |
+| `EXCLUDES` | No       | Path fragments to exclude (passed to NFRS `-e` option)                            |
+| `DEPENDS`  | No       | Additional CMake-level dependency files                                           |
 
-#### 运行时 DLL 部署
+#### Runtime DLL Deployment
 
-Windows 没有 RPATH，加载器只会从**加载方模块自身所在目录**、系统目录与 `PATH` 中查找 DLL。因此：
+Windows has no RPATH: the loader looks for a DLL only in the directory of the module that loads it, in the system directories and on `PATH`. Therefore:
 
-- 安装时会把 NexusForce.dll 的全部第三方依赖（ICU、PCRE2、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）一并打包进 `<prefix>/bin`，安装后的 `NFRS.exe` 在任意工作目录下都能直接运行，`nexusforce_reflect_scan()` 无需额外处理。
-- 你自己的可执行文件同样需要这些 DLL 才能启动，用 `nexusforce_deploy_runtime()` 把它们复制到目标构建目录：
+- The install packages every third-party dependency of NexusForce.dll (ICU, PCRE2, OpenSSL, zlib, lz4, hiredis, sqlcipher, libmysql, LIBPQ, ...) into `<prefix>/bin`, so the installed `NFRS.exe` runs from any working directory and `nexusforce_reflect_scan()` needs no further setup.
+- Your own executables need those DLLs as well; use `nexusforce_deploy_runtime()` to copy them next to the target:
 
 ```cmake
 add_executable(my_app main.cpp)
@@ -514,51 +511,54 @@ target_link_libraries(my_app PRIVATE NexusForce::NexusForce)
 nexusforce_deploy_runtime(my_app)
 ```
 
-该函数按目标配置复制 `NexusForce.dll`（Debug 为 `NexusForced.dll`），再从 `<prefix>/bin` 复制其余第三方依赖；Linux 上为空操作。若未调用，也可以把 `<prefix>/bin` 加入 `PATH`。
+It copies `NexusForce.dll` for the target's configuration (`NexusForced.dll` for Debug) and the remaining third-party dependencies from `<prefix>/bin`; it is a no-op on Linux. Adding `<prefix>/bin` to `PATH` is an alternative when the call is not used.
 
 ---
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-在开始之前，请确保已完成编译指南中的安装步骤。
+Before you begin, ensure you have completed the installation steps in the Build Guide.
 
-具体参见 [使用 NexusForce 快速构建常见功能！](QUICK_START.md)
-
----
-
-## ❓ 常见问题
-
-关于 NexusForce 的定位、设计理念、功能选型等，参见 [Q&A](Q&A.md)。
+For details, see [Quickly Build Common Features with NexusForce!](QUICK_START.md)
 
 ---
 
-## 📚 文档
+## ❓ FAQ
 
-完整 API 文档参见 [NexusForce API 文档](https://nexusforce.org.cn)。
-
----
-
-## ⚖️ 协议
-
-本项目基于 [MIT 开源协议](LICENSE) 发布。
-
-本项目包含的第三方代码与链接依赖的版权声明与许可证全文，参见 [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md)。
-分发二进制形式时请随附该文件：MIT 协议本身不覆盖移植代码与链接库的署名要求。
+For project positioning, design philosophy, feature selection guidance, etc., please see [Q&A](Q&A.md).
 
 ---
 
-## 📝 更新日志
+## 📚 Documentation
 
-详细更新记录参见 [CHANGELOG](CHANGELOG.md)。
+For complete API documentation, please visit the [NexusForce Documentation Website](https://nexusforce.org.cn)
 
 ---
 
-## 👥 贡献者
+## ⚖️ License
 
-感谢所有为本项目做出贡献的开发者！参见 [CONTRIBUTORS](CONTRIBUTORS.md)。
+This project is licensed under the [MIT License](LICENSE)
+
+Copyright notices and full license texts for the third-party code included in,
+and the libraries linked into, this project are in
+[THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md). Ship that file with any binary
+distribution: the MIT License alone does not cover the attribution requirements
+of the ported code and linked libraries.
+
+---
+
+## 📝 Changelog
+
+For detailed update records, please see [CHANGELOG](CHANGELOG.md)
+
+---
+
+## 👥 Contributors
+
+Thanks to all the developers who have contributed to this project! See [CONTRIBUTORS](CONTRIBUTORS.md) for the full list.
 
 ---
 
 ## 📌 TODO
 
-TODO 条例参见代码内的 TODO 注释
+For TODO items, see TODO comments within the code.

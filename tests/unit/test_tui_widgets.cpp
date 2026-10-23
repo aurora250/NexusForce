@@ -2583,3 +2583,38 @@ TEST(TuiPreviewKeyTest, RootSeesKeysBeforeTheFocusedChild) {
     app.pipeline().dispatch_key(other);
     EXPECT_EQ(root.previews, 2);
 }
+
+TEST(TuiTextAreaTest, WordUndoGroupsConsecutiveTyping) {
+    io_context ctx;
+    strand s{ctx};
+    host_root holder;
+    holder.bind(s, ctx);
+
+    auto& text = holder.make_state<string>(string());
+    text_area_option opt;
+    opt.text = &text;
+    opt.word_undo = true;
+
+    auto view = make_unique<text_area_view>(opt);
+    text_area_view* area = view.get();
+    holder.add_child(move(view));
+    area->set_has_focus(true);
+
+    area->on_key(make_char(U'h'));
+    area->on_key(make_char(U'e'));
+    area->on_key(make_char(U'l'));
+    area->on_key(make_char(U'l'));
+    area->on_key(make_char(U'o'));
+    EXPECT_EQ(text.value(), "hello");
+
+    EXPECT_TRUE(area->undo());
+    EXPECT_EQ(text.value(), "");
+    EXPECT_TRUE(area->redo());
+    EXPECT_EQ(text.value(), "hello");
+
+    area->on_key(make_char(U' '));
+    area->on_key(make_char(U'w'));
+    EXPECT_EQ(text.value(), "hello w");
+    EXPECT_TRUE(area->undo());
+    EXPECT_EQ(text.value(), "hello");
+}

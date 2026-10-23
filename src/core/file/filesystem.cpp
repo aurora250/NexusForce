@@ -1,5 +1,6 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/filesystem.hpp>
+#include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <dirent.h>
 #    include <cerrno>
@@ -631,5 +632,13 @@ byte_size filesystem::size(const path& p) {
     return byte_size{static_cast<uint64_t>(st.st_size)};
 #endif
 }
+
+path filesystem::temp_directory() { return path{environment::temp_directory()}; }
+
+path filesystem::home_directory() { return path{environment::home_directory()}; }
+
+path filesystem::app_data_directory() { return path{environment::app_data_directory()}; }
+
+path filesystem::config_directory() { return path{environment::config_directory()}; }
 
 NEFORCE_END_NAMESPACE__

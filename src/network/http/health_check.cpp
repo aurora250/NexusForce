@@ -34,6 +34,11 @@ bool health_check_filter::pre_filter(http_request& request, http_response& respo
     return false;
 }
 
+#ifdef NEFORCE_COMPILER_GCC
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Wstringop-overread"
+#endif
+
 pair<string, bool> health_check_filter::build_health_json() {
     if (start_time_ms_ == 0) {
         start_time_ms_ = static_cast<int64_t>(steady_clock::now().since_epoch().count() / 1'000'000);
@@ -72,6 +77,10 @@ pair<string, bool> health_check_filter::build_health_json() {
     json += "}";
     return {json, all_ok};
 }
+
+#ifdef NEFORCE_COMPILER_GCC
+#    pragma GCC diagnostic pop
+#endif
 
 NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__
