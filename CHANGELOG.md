@@ -7,6 +7,7 @@
 - `path` 新增 `is_absolute`、`canonical`、`weakly_canonical`、`is_within`、`components` 与 `operator+=`（字符串/字符），便于安全路径判断与路径拼接
 - `filesystem` 新增 `resize`，用于截断/扩展文件
 - `process` 新增 `set_work_dir(const path&)` 与 `start(const path&, ...)` 重载
+- `tui::text_area_view` / `tui::composer` 新增 `set_history_limit(size_t)`，可在运行时调整并裁剪提交历史
 - `tui::theme` 新增角色表与成员函数，旧版九字段仍保留并从角色派生
 - `code_block_option` 新增 `syntax`；`markdown_option` 新增 `math_style` / `parse_math`；`text_line` 新增 `continuation`
 - `renderer::render_glyph_run` / `render_rich_text` 追加可选的悬挂前缀参数

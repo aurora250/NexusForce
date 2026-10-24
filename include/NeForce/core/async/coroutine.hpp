@@ -16,6 +16,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup Coroutine 协程
  * @brief 协程支持
  * @{
@@ -137,6 +143,8 @@ struct suspend_never {
 };
 
 /** @} */ // Coroutine
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif

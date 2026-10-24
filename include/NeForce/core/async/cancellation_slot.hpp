@@ -17,6 +17,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup Cancellation 异步取消
  * @brief 异步操作取消支持
  * @{
@@ -92,6 +98,8 @@ public:
 };
 
 /** @} */ // Cancellation
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_CANCELLATION_SLOT_HPP__

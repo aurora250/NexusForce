@@ -15,6 +15,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup AsyncCompose 组合操作
  * @brief 异步组合操作
  * @{
@@ -46,6 +52,8 @@ void async_write(async_stream& stream, io_context& ctx, const void* data, size_t
                  function<void(error_code, size_t)> handler);
 
 /** @} */ // AsyncCompose
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_ASYNC_COMPOSE_HPP__

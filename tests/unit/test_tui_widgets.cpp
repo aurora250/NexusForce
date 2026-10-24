@@ -1306,6 +1306,42 @@ TEST(TuiComposerTest, EnterSubmitsAndClearsInput) {
     EXPECT_EQ(box->text(), "");
 }
 
+TEST(TuiComposerTest, SubmitOnEnterCanBeDisabledAtRuntime) {
+    composer_option opt;
+    string submitted;
+    opt.on_submit = [&submitted](const string& text) { submitted = text; };
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    box->setup();
+    box->editor().set_text(string("draft"));
+    box->editor().set_has_focus(true);
+    box->set_submit_on_enter(false);
+    EXPECT_TRUE(box->on_key(make_key(key_event::type::enter)));
+    EXPECT_TRUE(submitted.empty());
+    key_event submit = make_key(key_event::type::enter);
+    submit.mods = key_modifier::ctrl;
+    EXPECT_TRUE(box->on_key(submit));
+    EXPECT_EQ(submitted, string{"draft\n"});
+}
+
+TEST(TuiComposerTest, HistoryLimitCanBeChangedAtRuntime) {
+    composer_option opt;
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    box->setup();
+    box->editor().set_text(string("one"));
+    box->submit();
+    box->editor().set_text(string("two"));
+    box->submit();
+    box->editor().set_text(string("three"));
+    box->submit();
+    EXPECT_EQ(box->history_size(), 3U);
+    box->set_history_limit(2);
+    EXPECT_EQ(box->history_size(), 2U);
+    box->set_history_limit(0);
+    EXPECT_EQ(box->history_size(), 0U);
+}
+
 TEST(TuiComposerTest, ShiftEnterInsertsNewline) {
     io_context ctx;
     strand s{ctx};

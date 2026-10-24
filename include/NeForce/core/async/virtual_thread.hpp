@@ -29,6 +29,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup VirtualThread 虚拟线程
  * @brief 虚拟线程相关功能
  * @{
@@ -1061,6 +1067,8 @@ public:
 };
 
 /** @} */ // VirtualThread
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif

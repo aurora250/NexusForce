@@ -77,6 +77,15 @@ void composer::submit() {
     close_completion();
 }
 
+void composer::set_history_limit(const size_t limit) {
+    opt_.history_limit = limit;
+    if (input_ != nullptr) {
+        input_->set_history_limit(limit);
+    }
+}
+
+void composer::set_submit_on_enter(const bool enabled) { opt_.submit_on_enter = enabled; }
+
 size_t composer::history_size() const noexcept { return input_ == nullptr ? 0 : input_->history_size(); }
 
 bool composer::history_browsable() const {
@@ -323,6 +332,13 @@ bool composer::on_key(const key_event& e) {
     }
 
     if (e.key == K::enter) {
+        if (!opt_.submit_on_enter) {
+            if (ctrl) {
+                submit();
+                return true;
+            }
+            return input_->on_key(e);
+        }
         if (shift) {
             return input_->on_key(e);
         }

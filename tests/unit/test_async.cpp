@@ -1878,6 +1878,49 @@ TEST(ThreadPool, Exception) {
     pool.stop();
 }
 
+TEST(ThreadPool, CancelQueuedTaskSkipsExecution) {
+    thread_pool pool;
+    ASSERT_TRUE(pool.start(1));
+
+    mutex gate_mutex;
+    condition_variable gate;
+    bool started = false;
+    bool release = false;
+    auto first = pool.submit_task([&] {
+        {
+            lock<mutex> guard{gate_mutex};
+            started = true;
+        }
+        gate.notify_all();
+        unique_lock<mutex> guard{gate_mutex};
+        gate.wait(guard, [&] { return release; });
+        return 1;
+    });
+    {
+        unique_lock<mutex> guard{gate_mutex};
+        gate.wait(guard, [&] { return started; });
+    }
+
+    atomic<bool> ran{false};
+    auto queued = pool.submit_task([&] {
+        ran.store(true);
+        return 2;
+    });
+    ASSERT_TRUE(queued);
+    thread_pool::cancel_task(queued.task_info);
+    {
+        lock<mutex> guard{gate_mutex};
+        release = true;
+    }
+    gate.notify_all();
+
+    EXPECT_THROW(queued.future.get(), exception);
+    EXPECT_FALSE(ran.load());
+    EXPECT_EQ(first.future.get(), 1);
+    EXPECT_EQ(queued.task_info->status.load(), task_info::status::cancelled);
+    pool.stop();
+}
+
 TEST(ThreadPool, Statistics) {
     thread_pool pool;
     pool.start(2);
@@ -4123,6 +4166,41 @@ TEST(ChannelTest, CapacityZeroSynchronous) {
     EXPECT_TRUE(ch.write(42));
     reader.join();
     EXPECT_EQ(stage.load(), 2);
+}
+
+TEST(ChannelTest, MultiProducerMultiConsumer) {
+    channel<int> ch(32);
+    constexpr int producers = 4;
+    constexpr int per_producer = 500;
+    atomic<long long> sum{0};
+    atomic<int> consumed{0};
+    vector<thread> consumers;
+    for (int i = 0; i < 4; ++i) {
+        consumers.emplace_back([&] {
+            int value = 0;
+            while (ch.read(value)) {
+                sum.fetch_add(value, memory_order_relaxed);
+                consumed.fetch_add(1, memory_order_relaxed);
+            }
+        });
+    }
+    vector<thread> writers;
+    for (int p = 1; p <= producers; ++p) {
+        writers.emplace_back([&, p] {
+            for (int i = 0; i < per_producer; ++i) {
+                ch.write(p);
+            }
+        });
+    }
+    for (auto& writer: writers) {
+        writer.join();
+    }
+    ch.close();
+    for (auto& consumer: consumers) {
+        consumer.join();
+    }
+    EXPECT_EQ(consumed.load(), producers * per_producer);
+    EXPECT_EQ(sum.load(), static_cast<long long>(producers * (producers + 1) / 2 * per_producer));
 }
 
 TEST(ChannelTest, MaxCapacityUnbounded) {

@@ -17,6 +17,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup CompletionTokens 完成令牌
  * @{
  */
@@ -295,6 +301,8 @@ struct awaitable<void>::promise_type {
 };
 
 /** @} */ // CompletionTokens
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_STANDARD_20

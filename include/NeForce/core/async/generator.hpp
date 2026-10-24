@@ -22,6 +22,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @addtogroup Coroutine 协程
  * @{
  */
@@ -918,6 +924,8 @@ task<T> retry(Factory factory, const size_t max_attempts, function<bool(const ex
 }
 
 /** @} */ // Coroutine
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_STANDARD_20

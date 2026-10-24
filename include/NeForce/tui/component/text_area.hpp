@@ -126,6 +126,18 @@ public:
     NEFORCE_NODISCARD size_t history_size() const noexcept { return history_.size(); }
 
     /**
+     * @brief 调整提交历史上限
+     * @param limit 新上限，0 表示清空并停止记录
+     */
+    void set_history_limit(size_t limit) {
+        opt_.history_limit = limit;
+        while (history_.size() > limit) {
+            history_.erase(history_.begin());
+        }
+        history_pos_ = min(history_pos_, history_.size());
+    }
+
+    /**
      * @brief 当前是否停留在历史条目上
      * @return 正在浏览历史返回true
      */

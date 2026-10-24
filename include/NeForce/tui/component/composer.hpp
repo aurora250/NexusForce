@@ -69,6 +69,7 @@ struct composer_option {
     tui::style style;                                                             ///< 输入框样式（传给编辑器）
     tui::style bar_style;                                                         ///< 状态行样式
     size_t history_limit = 100;                                                   ///< 提交历史条数上限，0 表示不记录
+    bool submit_on_enter = true; ///< Enter 直接提交；false 时 Enter 换行、Ctrl+Enter 提交
     bool history_enabled = true; ///< 是否启用单行下的 `Up`/`Down` 历史浏览
 };
 
@@ -132,6 +133,18 @@ public:
      * @return 条目数
      */
     NEFORCE_NODISCARD size_t history_size() const noexcept;
+
+    /**
+     * @brief 调整提交历史上限
+     * @param limit 新上限，0 表示清空并停止记录
+     */
+    void set_history_limit(size_t limit);
+
+    /**
+     * @brief 设置 Enter 是否直接提交
+     * @param enabled true 时 Enter 提交、Shift+Enter 换行；false 时 Enter 换行、Ctrl+Enter 提交
+     */
+    void set_submit_on_enter(bool enabled);
 
     /**
      * @brief 是否正在显示补全弹层

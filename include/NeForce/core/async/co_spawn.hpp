@@ -15,8 +15,14 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup CoroutineSpawn 协程启动
- * @brief 在 executor 上启动协程
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
+ * @defgroup Coroutine 协程
+ * @brief 协程支持
  * @{
  */
 
@@ -76,7 +82,9 @@ void co_spawn(Executor&& exec, Func func) {
     exec.execute([h = task.handle]() mutable { h.resume(); });
 }
 
-/** @} */ // CoroutineSpawn
+/** @} */ // Coroutine
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_STANDARD_20

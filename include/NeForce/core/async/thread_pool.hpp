@@ -27,8 +27,8 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @defgroup ThreadPool 线程池
- * @brief 高性能线程池的实现
+ * @defgroup Thread 线程
+ * @brief 线程管理和相关操作
  * @{
  */
 
@@ -275,7 +275,8 @@ struct task_info {
         pending,   ///< 等待执行
         running,   ///< 正在执行
         completed, ///< 已完成
-        failed     ///< 执行失败
+        failed,    ///< 执行失败
+        cancelled  ///< 已取消或取消请求已生效
     };
 
     enum class priority_type : uint32_t {
@@ -283,6 +284,7 @@ struct task_info {
 
     const uint64_t id;                       ///< 任务ID
     atomic<status> status{status::pending};  ///< 任务状态
+    atomic<bool> cancel_requested{false};    ///< 是否请求取消
     timestamp submit_time{timestamp::now()}; ///< 提交时间
     timestamp start_time{0};                 ///< 开始执行时间
     timestamp finish_time{0};                ///< 完成时间
@@ -305,8 +307,18 @@ struct task_info {
      */
     NEFORCE_NODISCARD bool is_finished() const noexcept {
         const auto s = status.load(memory_order_acquire);
-        return s == status::completed || s == status::failed;
+        return s == status::completed || s == status::failed || s == status::cancelled;
     }
+
+    /**
+     * @brief 请求取消任务
+     */
+    void cancel() noexcept { cancel_requested.store(true, memory_order_release); }
+
+    /**
+     * @brief 是否已请求取消
+     */
+    NEFORCE_NODISCARD bool cancelled() const noexcept { return cancel_requested.load(memory_order_acquire); }
 
     /**
      * @brief 获取任务执行时间
@@ -757,6 +769,18 @@ public:
     }
 
     /**
+     * @brief 请求取消一个已提交任务
+     * @param info 任务信息
+     *
+     * 排队中的任务会被跳过；执行中的任务必须协作轮询。
+     */
+    static void cancel_task(const shared_ptr<task_info>& info) noexcept {
+        if (info) {
+            info->cancel();
+        }
+    }
+
+    /**
      * @brief 等待多个future完成
      * @tparam Types future结果类型
      * @param futures 要等待的future
@@ -859,7 +883,10 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
                             if (tracked) {
                                 info->finish_time = timestamp::now();
                                 auto expected = task_info::status::running;
-                                info->status.compare_exchange_strong(expected, task_info::status::completed,
+                                info->status.compare_exchange_strong(expected,
+                                                                     info->cancel_requested.load(memory_order_acquire)
+                                                                             ? task_info::status::cancelled
+                                                                             : task_info::status::completed,
                                                                      memory_order_release);
                             }
 
@@ -874,6 +901,16 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
                     }
                 };
 
+                if (info && info->cancel_requested.load(memory_order_acquire)) {
+                    if (tracked) {
+                        info->status.store(task_info::status::cancelled, memory_order_release);
+                        info->finish_time = timestamp::now();
+                    }
+                    if (group) {
+                        group->decrement();
+                    }
+                    NEFORCE_THROW_EXCEPTION(exception("task cancelled"));
+                }
                 context_guard guard(info, group, tracked);
                 try {
                     return _NEFORCE apply(func, args);
@@ -1014,7 +1051,7 @@ thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, const
 
 /// @endcond
 
-/** @} */ // ThreadPool
+/** @} */ // Thread
 
 /**
  * @addtogroup Executor 执行器

@@ -17,7 +17,8 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup Async 异步组件
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
  * @{
  */
 
@@ -173,6 +174,8 @@ private:
 };
 
 /** @} */ // Async
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_PROCESS_WATCHER_HPP__

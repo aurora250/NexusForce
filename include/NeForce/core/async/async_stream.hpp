@@ -15,6 +15,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup AsyncComponents 异步组件
+ * @brief 异步编程相关组件
+ * @{
+ */
+
+/**
  * @defgroup AsyncStream 异步流
  * @brief 异步 I/O 流抽象
  * @{
@@ -193,6 +199,8 @@ public:
 };
 
 /** @} */ // AsyncStream
+
+/** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_ASYNC_ASYNC_STREAM_HPP__
