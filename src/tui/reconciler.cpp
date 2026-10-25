@@ -126,6 +126,10 @@ void reconciler::setup_tree(component_base* comp) {
     comp->strand_ = &strand_;
     comp->ctx_ = &ctx_;
     comp->schedule_render_cb_ = schedule_render_callback();
+    comp->focus_request_cb_ = [this](component_base* target) {
+        focus_mgr_.set_focus(target);
+        mark_dirty();
+    };
     comp->setup();
 }
 

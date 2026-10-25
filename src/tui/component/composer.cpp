@@ -16,6 +16,7 @@ void composer::setup() {
     area_opt.text = opt_.text;
     area_opt.placeholder = opt_.placeholder;
     area_opt.style = opt_.style;
+    area_opt.style.border = style::border::none;
     area_opt.wrap = style::wrap_mode::word;
     area_opt.submit_on_enter = false;
     area_opt.history_limit = opt_.history_limit;
@@ -269,7 +270,11 @@ element composer::render() {
     }
 
     element editor = input_->render();
-    editor = element::band(move(editor), input_style);
+    if (input_style.border.has_value() && input_style.border.value() != style::border::none) {
+        editor = element::panel(move(editor), input_style);
+    } else {
+        editor = element::band(move(editor), input_style);
+    }
     parts.push_back(move(editor));
 
     tui::style bar = opt_.bar_style;

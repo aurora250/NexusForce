@@ -12,6 +12,7 @@
 - `process` 新增 `set_work_dir(const path&)` 与 `start(const path&, ...)` 重载
 - `tui::text_area_view` / `tui::composer` 新增 `set_history_limit(size_t)`，可在运行时调整并裁剪提交历史
 - 新增 `NeForce/compress/zstd_compress.hpp`：静态压缩/解压、`zstd_exception`、连续帧前缀恢复
+- `composer` 支持圆角/单线/双线面板边框（`composer_option::style.border`）
 - `tui::style` 新增 `show_horizontal_scrollbar`，允许静态内容关闭水平滚动条
 - 新增 `thread_pool::cancel_task()` / `task_info::cancelled()`：跳过排队任务并协作取消执行中任务；不强制终止线程
 - `tui::theme` 新增角色表与成员函数，旧版九字段仍保留并从角色派生
@@ -126,6 +127,7 @@
 
 ### 🔧 Improvements
 
+- `tui::chart` 饼图/环形图改为 2x2 子单元象限抗锯齿，边沿支持双 slice 前背景色
 - `band` 在未显式设置 `bg` 时保持透明，不再默认填充 `theme.bg`
 - `code_block` 支持继承 `code_style.bg`，不再固定 `#1a1a1e`
 - `channel<T>` 数据面改用 `lock_free_queue`（MPMC），无缓冲模式保留同步握手；容量边界仍由条件变量等待

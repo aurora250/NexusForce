@@ -216,6 +216,7 @@ public:
         child->strand_ = strand_;
         child->ctx_ = ctx_;
         child->schedule_render_cb_ = schedule_render_cb_;
+        child->focus_request_cb_ = focus_request_cb_;
         auto* raw = child.get();
         children_.push_back(move(child));
         if (active_child_ == nullptr) {
@@ -361,6 +362,19 @@ public:
     }
 
     /**
+     * @brief 请求框架焦点
+     *
+     * 组件主动把焦点转给自己；未挂载时回退到 take_focus()。
+     */
+    void request_focus() {
+        if (focus_request_cb_) {
+            focus_request_cb_(this);
+        } else {
+            take_focus();
+        }
+    }
+
+    /**
      * @brief 设置上下文值
      * @tparam Ctx 上下文类型
      * @param value 上下文值
@@ -436,7 +450,9 @@ protected:
     }
 
 private:
-    function<void(component_base*)> schedule_render_cb_;    ///< 由 reconciler 注入的调度回调
+    function<void(component_base*)> schedule_render_cb_; ///< 由 reconciler 注入的调度回调
+    function<void(component_base*)> focus_request_cb_;   ///< 由 reconciler 注入的焦点请求回调
+    friend class reconciler;
     flat_unordered_map<size_t, shared_ptr<void>> contexts_; ///< 上下文映射
     vector<shared_ptr<void>> states_;                       ///< 类型擦除的状态列表
 };

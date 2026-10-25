@@ -1572,38 +1572,100 @@ namespace {
         const int max_y = min(geom.h - 1, static_cast<int>(ceil(geom.pie_cy + outer / 2.0)));
         for (int y = min_y; y <= max_y; ++y) {
             for (int x = min_x; x <= max_x; ++x) {
-                const double dx = static_cast<double>(x) + 0.5 - geom.pie_cx;
-                const double dy_center = static_cast<double>(y) + 0.5 - geom.pie_cy;
-                const double dy_top = static_cast<double>(y) + 0.25 - geom.pie_cy;
-                const double dy_bottom = static_cast<double>(y) + 0.75 - geom.pie_cy;
-                auto inside = [&](const double dy) {
+                struct pie_sample {
+                    bool inside = false;
+                    size_t slice = 0;
+                };
+                auto sample_at = [&](const double sx, const double sy) {
+                    pie_sample sample;
+                    const double dx = sx - geom.pie_cx;
+                    const double dy = sy - geom.pie_cy;
                     const auto radius =
                             static_cast<double>(square_root(static_cast<decimal_t>(dx * dx + 4.0 * dy * dy)));
-                    return radius <= outer && radius >= inner;
+                    if (radius > outer || radius < inner) {
+                        return sample;
+                    }
+                    const double angle = clock_angle(dx, dy);
+                    if (angle > sweep) {
+                        return sample;
+                    }
+                    size_t slice = 0;
+                    while (slice + 1 < cumulative.size() && angle > cumulative[slice] * chart_pi * 2.0) {
+                        ++slice;
+                    }
+                    if (slice < spec.series.size()) {
+                        sample.inside = true;
+                        sample.slice = slice;
+                    }
+                    return sample;
                 };
-                const double angle = clock_angle(dx, dy_center);
-                const bool top = inside(dy_top) && angle <= sweep;
-                const bool bottom = inside(dy_bottom) && angle <= sweep;
-                if (!top && !bottom) {
+                const pie_sample samples[4] = {sample_at(x + 0.25, y + 0.25), sample_at(x + 0.75, y + 0.25),
+                                               sample_at(x + 0.25, y + 0.75), sample_at(x + 0.75, y + 0.75)};
+                size_t counts[16]{};
+                size_t dominant = spec.series.size();
+                size_t dominant_count = 0;
+                for (const auto& sample: samples) {
+                    if (!sample.inside || sample.slice >= 16) {
+                        continue;
+                    }
+                    ++counts[sample.slice];
+                    if (counts[sample.slice] > dominant_count ||
+                        (counts[sample.slice] == dominant_count &&
+                         sample.slice == (selected.value_or(spec.series.size())))) {
+                        dominant = sample.slice;
+                        dominant_count = counts[sample.slice];
+                    }
+                }
+                if (dominant >= spec.series.size() || dominant_count == 0) {
                     continue;
                 }
-                size_t slice = 0;
-                while (slice + 1 < cumulative.size() && angle > cumulative[slice] * chart_pi * 2.0) {
-                    ++slice;
+                size_t second = spec.series.size();
+                size_t second_count = 0;
+                for (size_t i = 0; i < spec.series.size() && i < 16; ++i) {
+                    if (i != dominant && counts[i] > second_count) {
+                        second = i;
+                        second_count = counts[i];
+                    }
                 }
-                if (slice >= spec.series.size()) {
+                unsigned int mask = 0;
+                for (int i = 0; i < 4; ++i) {
+                    if (samples[i].inside && samples[i].slice == dominant) {
+                        mask |= 1U << i;
+                    }
+                }
+                if (mask == 0) {
                     continue;
                 }
-                _NEFORCE color c = series_color_at(t, spec, slice);
-                const bool is_selected = selected.has_value() && selected.value() == slice;
+                static constexpr string_view glyphs[16] = {"",
+                                                           "\xe2\x96\x98",
+                                                           "\xe2\x96\x9d",
+                                                           "\xe2\x96\x80",
+                                                           "\xe2\x96\x96",
+                                                           "\xe2\x96\x8c",
+                                                           "\xe2\x96\x9e",
+                                                           "\xe2\x96\x9b",
+                                                           "\xe2\x96\x97",
+                                                           "\xe2\x96\x9a",
+                                                           "\xe2\x96\x90",
+                                                           "\xe2\x96\x9c",
+                                                           "\xe2\x96\x84",
+                                                           "\xe2\x96\x99",
+                                                           "\xe2\x96\x9f",
+                                                           "\xe2\x96\x88"};
+                _NEFORCE color c = series_color_at(t, spec, dominant);
+                const bool is_selected = selected.has_value() && selected.value() == dominant;
                 if (is_selected) {
                     c = lighten(c, 0.25);
                 }
                 style s;
                 s.fg = c;
+                if (second < spec.series.size()) {
+                    s.bg = series_color_at(t, spec, second);
+                } else {
+                    s.bg = t.get(theme_role::background);
+                }
                 s.bold = is_selected;
-                const char* glyph = top ? (bottom ? "\xe2\x96\x88" : "\xe2\x96\x80") : "\xe2\x96\x84";
-                painter.put(x, y, glyph, s);
+                painter.put(x, y, glyphs[mask], s);
             }
         }
         if (is_donut && outer >= 4.0) {

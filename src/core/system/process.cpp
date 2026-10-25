@@ -1688,4 +1688,62 @@ string process::search_path(const string& executable) {
     return "";
 }
 
+bool process::relaunch_current_process() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    wchar_t executable[MAX_PATH];
+    const ::DWORD length = ::GetModuleFileNameW(nullptr, executable, MAX_PATH);
+    if (length == 0 || length >= MAX_PATH) {
+        return false;
+    }
+    wchar_t* mutable_command = ::GetCommandLineW();
+    ::STARTUPINFOW startup{};
+    startup.cb = sizeof(startup);
+    ::PROCESS_INFORMATION child{};
+    const ::BOOL created = ::CreateProcessW(executable, mutable_command, nullptr, nullptr, FALSE,
+                                            CREATE_NEW_PROCESS_GROUP, nullptr, nullptr, &startup, &child);
+    if (!created) {
+        return false;
+    }
+    ::CloseHandle(child.hThread);
+    ::CloseHandle(child.hProcess);
+    return true;
+#else
+    vector<string> arguments;
+    file cmdline{path{"/proc/self/cmdline"}, false, file_access::read};
+    if (cmdline.is_opened()) {
+        const string bytes = cmdline.read();
+        size_t start = 0;
+        while (start < bytes.size()) {
+            size_t end = start;
+            while (end < bytes.size() && bytes[end] != '\0') {
+                ++end;
+            }
+            if (end > start) {
+                arguments.push_back(bytes.substr(start, end - start));
+            }
+            start = end + 1;
+        }
+    }
+    if (arguments.empty()) {
+        return false;
+    }
+    const ::pid_t child = ::fork();
+    if (child < 0) {
+        return false;
+    }
+    if (child == 0) {
+        ::setsid();
+        vector<char*> argv;
+        argv.reserve(arguments.size() + 1);
+        for (auto& argument: arguments) {
+            argv.push_back(argument.data());
+        }
+        argv.push_back(nullptr);
+        ::execv(arguments.front().data(), argv.data());
+        ::_exit(127);
+    }
+    return true;
+#endif
+}
+
 NEFORCE_END_NAMESPACE__

@@ -355,6 +355,27 @@ TEST(TuiChartTest, LegendsShowSwatchesAndSeriesNames) {
     EXPECT_FALSE(hidden_text.contains("beta"));
 }
 
+TEST(TuiChartTest, PieEdgesUseSubcellQuadrants) {
+    const chart_spec spec = pie_spec();
+    const screen scr = render_screen(chart(spec), spec.width, spec.height, test_theme());
+    const char* edge_glyphs[] = {"\xe2\x96\x98", "\xe2\x96\x9d", "\xe2\x96\x96", "\xe2\x96\x97", "\xe2\x96\x9a",
+                                 "\xe2\x96\x9e", "\xe2\x96\x99", "\xe2\x96\x9f", "\xe2\x96\x9b", "\xe2\x96\x9c",
+                                 "\xe2\x96\x80", "\xe2\x96\x84", "\xe2\x96\x8c", "\xe2\x96\x90"};
+    size_t edge_cells = 0;
+    for (int y = 0; y < scr.dimy(); ++y) {
+        for (int x = 0; x < scr.dimx(); ++x) {
+            const string& glyph = scr.fast_cell_at(x, y).character;
+            for (const char* edge: edge_glyphs) {
+                if (glyph == edge) {
+                    ++edge_cells;
+                    break;
+                }
+            }
+        }
+    }
+    EXPECT_GT(edge_cells, 12u);
+}
+
 TEST(TuiChartTest, PieAndDonutLegendShowPercentages) {
     for (const chart_kind kind: {chart_kind::pie, chart_kind::donut}) {
         const chart_spec spec = pie_spec(kind);

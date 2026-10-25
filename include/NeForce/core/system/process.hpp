@@ -449,6 +449,12 @@ public:
     NEFORCE_NODISCARD static privilege_level current_privilege_level() noexcept;
 
     /**
+     * @brief 以同一命令行重新启动当前进程
+     * @return 成功创建/执行子进程返回 true
+     */
+    static bool relaunch_current_process();
+
+    /**
      * @brief 根据进程 ID 获取进程名称
      * @param process_id 目标进程 ID
      * @return 进程名称，失败返回空字符串

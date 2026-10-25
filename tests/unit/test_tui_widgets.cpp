@@ -1284,6 +1284,32 @@ TEST(TuiLogViewTest, ClearDropsEverything) {
 }
 
 
+TEST(TuiComposerTest, RoundedBorderRendersSingleBoxAroundMultilineInput) {
+    host_root holder;
+    composer_option opt;
+    opt.style.border = style::border::rounded;
+    auto owned = make_unique<composer>(opt);
+    composer* box = owned.get();
+    holder.add_child(move(owned));
+    box->setup();
+    box->editor().set_text(string{"first\nsecond"});
+    headless app(&holder, 40, 8);
+    app.render();
+    const string text = app.plaintext();
+    EXPECT_TRUE(text.contains("\xe2\x95\xad"));
+    EXPECT_TRUE(text.contains("\xe2\x95\xae"));
+    EXPECT_TRUE(text.contains("\xe2\x95\xb0"));
+    EXPECT_TRUE(text.contains("first"));
+    EXPECT_TRUE(text.contains("second"));
+    size_t corners = 0;
+    size_t offset = 0;
+    while ((offset = text.find("\xe2\x95\xad", offset)) != string::npos) {
+        ++corners;
+        offset += 3;
+    }
+    EXPECT_EQ(corners, 1u);
+}
+
 TEST(TuiComposerTest, EnterSubmitsAndClearsInput) {
     io_context ctx;
     strand s{ctx};
