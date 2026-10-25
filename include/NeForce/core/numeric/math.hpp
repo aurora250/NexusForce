@@ -632,7 +632,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t exponential_e(const decimal_
  *
  * 采用倒数归约 + 2 的整数次幂阶梯归约 + 反正切级数
  */
-NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_e(const decimal_t x) noexcept {
+NEFORCE_PURE_FUNCTION constexpr decimal_t logarithm_e(const decimal_t x) noexcept {
     if (is_nan(x)) {
         return x;
     }
@@ -668,6 +668,24 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_e(const decimal_t 
     }
 
     return 2.0L * s + static_cast<decimal_t>(k) * constants::LN2;
+}
+
+/**
+ * @brief 浮点幂运算
+ * @tparam T 浮点类型
+ * @param x 底数
+ * @param y 指数
+ * @return x 的 y 次幂
+ */
+template <typename T, enable_if_t<is_floating_point_v<T>, int> = 0>
+NEFORCE_NODISCARD inline T power(const T& x, const T& y) noexcept {
+    if (y == static_cast<T>(0)) {
+        return static_cast<T>(1);
+    }
+    if (x <= static_cast<T>(0)) {
+        return numeric_traits<T>::quiet_nan();
+    }
+    return static_cast<T>(exponential_e(static_cast<decimal_t>(y) * logarithm_e(static_cast<decimal_t>(x))));
 }
 
 /**

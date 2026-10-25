@@ -1,3 +1,4 @@
+#include <NeForce/compress/zstd_compress.hpp>
 #include <gtest/gtest.h>
 #ifdef NEFORCE_SUPPORT_LZ4
 #    include <NeForce/compress/lz4_compress.hpp>
@@ -634,3 +635,38 @@ TEST_F(ZlibStreamDecompressorTest, Statistics) {
 }
 
 #endif
+
+TEST(ZstdCompressor, CompressAndDecompressString) {
+    if (!zstd_compressor::available()) {
+        GTEST_SKIP() << "zstd is not linked";
+    }
+    const string original{"Hello, Zstandard! repeated repeated repeated repeated."};
+    const auto compressed = zstd_compressor::compress(original.view());
+    ASSERT_FALSE(compressed.empty());
+    const auto decompressed = zstd_compressor::decompress(cbyte_view(compressed.data(), compressed.size()));
+    EXPECT_EQ(string_view(reinterpret_cast<const char*>(decompressed.data()), decompressed.size()), original.view());
+}
+
+TEST(ZstdCompressor, PrefixRecoveryKeepsCompleteLines) {
+    if (!zstd_compressor::available()) {
+        GTEST_SKIP() << "zstd is not linked";
+    }
+    const string original{"first\nsecond\nthird\n"};
+    auto compressed = zstd_compressor::compress(original.view());
+    compressed.resize(compressed.size() - 3);
+    string recovered;
+    bool torn = false;
+    EXPECT_TRUE(zstd_compressor::decompress_prefix(
+            string_view(reinterpret_cast<const char*>(compressed.data()), compressed.size()), recovered, &torn));
+    EXPECT_TRUE(torn);
+    EXPECT_FALSE(recovered.empty());
+    EXPECT_EQ(recovered.view().back(), '\n');
+}
+
+TEST(ZstdCompressor, CorruptFrameThrows) {
+    if (!zstd_compressor::available()) {
+        GTEST_SKIP() << "zstd is not linked";
+    }
+    const byte_vector corrupt{1, 2, 3, 4};
+    EXPECT_THROW((void) zstd_compressor::decompress(cbyte_view(corrupt.data(), corrupt.size())), zstd_exception);
+}

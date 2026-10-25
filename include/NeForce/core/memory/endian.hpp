@@ -242,6 +242,16 @@ public:
     }
 
     /**
+     * @brief 读取24位小端整数
+     * @param data 字节数组指针
+     * @return 读取的24位整数
+     */
+    static constexpr uint32_t read_le24(const byte_t* data) noexcept {
+        return static_cast<uint32_t>(data[0]) | (static_cast<uint32_t>(data[1]) << 8) |
+               (static_cast<uint32_t>(data[2]) << 16);
+    }
+
+    /**
      * @brief 读取32位小端整数
      * @param data 字节数组指针
      * @return 读取的32位整数
@@ -312,6 +322,17 @@ public:
     static constexpr void write_le16(byte_t* dest, uint16_t value) noexcept {
         dest[0] = static_cast<byte_t>(value & 0xFF);
         dest[1] = static_cast<byte_t>((value >> 8) & 0xFF);
+    }
+
+    /**
+     * @brief 写入24位小端整数
+     * @param dest 目标字节数组指针
+     * @param value 要写入的值
+     */
+    static constexpr void write_le24(byte_t* dest, uint32_t value) noexcept {
+        dest[0] = static_cast<byte_t>(value & 0xFF);
+        dest[1] = static_cast<byte_t>((value >> 8) & 0xFF);
+        dest[2] = static_cast<byte_t>((value >> 16) & 0xFF);
     }
 
     /**

@@ -11,6 +11,7 @@
 - `filesystem` 新增 `resize`，用于截断/扩展文件
 - `process` 新增 `set_work_dir(const path&)` 与 `start(const path&, ...)` 重载
 - `tui::text_area_view` / `tui::composer` 新增 `set_history_limit(size_t)`，可在运行时调整并裁剪提交历史
+- 新增 `NeForce/compress/zstd_compress.hpp`：静态压缩/解压、`zstd_exception`、连续帧前缀恢复
 - `tui::style` 新增 `show_horizontal_scrollbar`，允许静态内容关闭水平滚动条
 - 新增 `thread_pool::cancel_task()` / `task_info::cancelled()`：跳过排队任务并协作取消执行中任务；不强制终止线程
 - `tui::theme` 新增角色表与成员函数，旧版九字段仍保留并从角色派生

@@ -3,6 +3,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/NexusForceCompilerOptions.cmake)
 # 链接文件
 set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/lz4_compress.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/compress/zstd_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/async_compose.cpp
@@ -459,6 +460,15 @@ find_package(OpenSSL REQUIRED)
 target_link_libraries(NexusForce PUBLIC OpenSSL::SSL OpenSSL::Crypto)
 target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_OPENSSL)
 message(STATUS "OpenSSL linked successfully")
+
+find_path(NEFORCE_ZSTD_INCLUDE_DIR zstd.h)
+find_library(NEFORCE_ZSTD_LIBRARY zstd)
+if (NEFORCE_ZSTD_INCLUDE_DIR AND NEFORCE_ZSTD_LIBRARY)
+    target_include_directories(NexusForce PRIVATE ${NEFORCE_ZSTD_INCLUDE_DIR})
+    target_link_libraries(NexusForce PUBLIC ${NEFORCE_ZSTD_LIBRARY})
+    target_compile_definitions(NexusForce PRIVATE NEFORCE_HAVE_ZSTD=1)
+    message(STATUS "zstd linked successfully")
+endif()
 
 find_package(pcre2 CONFIG REQUIRED COMPONENTS 8BIT)
 target_link_libraries(NexusForce PUBLIC PCRE2::8BIT)
