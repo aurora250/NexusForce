@@ -63,7 +63,7 @@ struct cell {
         bold = dim = italic = inverted = underlined = underlined_double = blink = strikethrough = automerge = false;
         hyperlink = 0;
         foreground = _NEFORCE color{};
-        background = _NEFORCE color{};
+        background = _NEFORCE color{0, 0, 0, 0};
         character.clear();
     }
 

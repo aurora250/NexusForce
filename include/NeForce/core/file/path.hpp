@@ -247,6 +247,18 @@ public:
     NEFORCE_NODISCARD bool empty() const noexcept { return path_.empty(); }
 
     /**
+     * @brief 释放路径字符串
+     * @return 路径字符串
+     */
+    NEFORCE_NODISCARD string release() noexcept { return move(path_); }
+
+    /**
+     * @brief 释放路径字符串
+     * @return 路径字符串
+     */
+    void clear() noexcept { path_.clear(); }
+
+    /**
      * @brief 获取路径组件列表
      * @return 按顺序排列的非空组件
      */

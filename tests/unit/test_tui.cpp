@@ -1269,6 +1269,54 @@ TEST(TuiRendererTest, RenderVBox) {
     EXPECT_NE(plain.find("B"), string::npos);
 }
 
+TEST(TuiRendererTest, ScrollViewClipsBandBackground) {
+    using tui::renderer;
+    screen scr(20, 10);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 10);
+    tui::style band_style;
+    band_style.bg = neforce::color{200, 10, 10};
+    tui::style::size_hint height;
+    height.mode = tui::style::size_hint::fixed;
+    height.value = 20;
+    band_style.height = height;
+    auto band = element::band(element::text("background"), band_style);
+    auto sv = element::scroll_view(move(band), tui::style{}, 0, 5);
+    auto layout = compute_layout(sv, 20, 10);
+    r.render(sv, layout, false);
+    // The band starts above the viewport;
+    // its background must not paint the scroll-view border or the chart area above it.
+    EXPECT_NE(scr.fast_cell_at(2, 0).background, (neforce::color{200, 10, 10}));
+    EXPECT_NE(scr.fast_cell_at(2, 0).character, string{"b"});
+}
+
+TEST(TuiRendererTest, TextDoesNotPaintBackgroundOnlyBehindGlyphs) {
+    using tui::renderer;
+    screen scr(24, 4);
+    scr.clear();
+    renderer r(scr, dark_theme, 24, 4);
+    auto tree = element::vbox({element::text("AB"), element::text("  ")});
+    auto layout = compute_layout(tree, 24, 4);
+    r.render(tree, layout, false);
+    EXPECT_EQ(scr.fast_cell_at(0, 0).background.A(), 0);
+    EXPECT_EQ(scr.fast_cell_at(2, 0).background.A(), 0);
+    EXPECT_EQ(scr.fast_cell_at(0, 1).background.A(), 0);
+}
+
+TEST(TuiRendererTest, BandBackgroundAppliesBehindText) {
+    using tui::renderer;
+    screen scr(24, 4);
+    scr.clear();
+    renderer r(scr, dark_theme, 24, 4);
+    tui::style band;
+    band.bg = neforce::color{40, 40, 40};
+    auto tree = element::band(element::text("AB"), band);
+    auto layout = compute_layout(tree, 24, 4);
+    r.render(tree, layout, false);
+    EXPECT_EQ(scr.fast_cell_at(0, 0).background, (neforce::color{40, 40, 40}));
+    EXPECT_EQ(scr.fast_cell_at(2, 0).background, (neforce::color{40, 40, 40}));
+}
+
 TEST(TuiRendererTest, ScrollbarHitsCollected) {
     using tui::renderer;
     screen scr(40, 20);

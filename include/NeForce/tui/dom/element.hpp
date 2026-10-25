@@ -11,6 +11,7 @@
 
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
+#include "NeForce/tui/dom/canvas.hpp"
 #include "NeForce/tui/dom/layout_types.hpp"
 #include "NeForce/tui/dom/style.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -226,6 +227,12 @@ public:
     NEFORCE_NODISCARD style::variant variant() const noexcept;
     NEFORCE_NODISCARD const function<void(int, int, int, int)>& draw_function() const;
 
+    /**
+     * @brief 获取画布绘制回调
+     * @return 以画布上下文为参数的绘制回调，未设置时为空
+     */
+    NEFORCE_NODISCARD const function<void(canvas_painter&)>& painter_function() const;
+
     NEFORCE_NODISCARD void* owner() const noexcept;
     void set_owner(void* o);
 
@@ -315,10 +322,20 @@ public:
 
     /**
      * @brief 自定义绘制区域
-     * @param draw_function 绘制函数
+     * @param draw_function 绘制函数，参数为元素的全局列、行、宽、高
      * @param style 绘制样式
+     * @return 画布元素
      */
     static element canvas(function<void(int, int, int, int)> draw_function, tui::style style = tui::style{});
+
+    /**
+     * @brief 创建带画布上下文的绘制区域
+     * @param draw_function 绘制回调，参数为局部坐标画布上下文
+     * @param style 基础样式，绘制回调的样式在其上合并
+     * @return 画布元素
+     * @note 回调在渲染阶段执行，必须保持纯函数，不得修改状态或触发重渲染。
+     */
+    static element canvas(function<void(canvas_painter&)> draw_function, tui::style style = tui::style{});
 
     /**
      * @brief 面板容器

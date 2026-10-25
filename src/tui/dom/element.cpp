@@ -13,6 +13,7 @@ struct element::node {
     vector<element> children;
     function<void()> on_click;
     function<void(int, int, int, int)> draw_function;
+    function<void(canvas_painter&)> painter_function;
     function<element(size_t)> item_builder;
     string placeholder;
     mutable vector<layout_rect> cached_layout_;
@@ -184,6 +185,8 @@ void* element::state_ref() const noexcept { return node_->state_ref; }
 style::variant element::variant() const noexcept { return node_->variant; }
 
 const function<void(int, int, int, int)>& element::draw_function() const { return node_->draw_function; }
+
+const function<void(canvas_painter&)>& element::painter_function() const { return node_->painter_function; }
 
 void* element::owner() const noexcept { return node_->owner; }
 
@@ -398,6 +401,14 @@ element element::canvas(function<void(int, int, int, int)> draw_function, tui::s
     element el;
     el.node_->kind = kind::canvas;
     el.node_->draw_function = move(draw_function);
+    el.node_->style = move(style);
+    return el;
+}
+
+element element::canvas(function<void(canvas_painter&)> draw_function, tui::style style) {
+    element el;
+    el.node_->kind = kind::canvas;
+    el.node_->painter_function = move(draw_function);
     el.node_->style = move(style);
     return el;
 }

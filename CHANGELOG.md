@@ -4,10 +4,15 @@
 
 ### 🚀 New Features
 
+- 添加 `tui::chart` 通用图表：`chart_spec` 支持柱状图、折线图、面积图、饼图、环形图、散点图、直方图、热力图与雷达图，含标题、类目标签、多系列、轴/网格/图例选项、揭示进度与初始选中索引
+- 添加交互式 `tui::chart_component`：方向键/Home/End 移动选中点，鼠标按下按实际几何命中，`selected_point()` / `selected_points()` 暴露标签与数值，`animate_progress()` 在帧回调中推进进度
+- 添加单元格级画布原语 `tui::canvas_painter` 与 `element::canvas(function<void(canvas_painter&)>)` 重载：局部坐标、裁剪、宽字符、文本/填充/线段与主题访问，画布元素同时回写布局矩形
 - `path` 新增 `is_absolute`、`canonical`、`weakly_canonical`、`is_within`、`components` 与 `operator+=`（字符串/字符），便于安全路径判断与路径拼接
 - `filesystem` 新增 `resize`，用于截断/扩展文件
 - `process` 新增 `set_work_dir(const path&)` 与 `start(const path&, ...)` 重载
 - `tui::text_area_view` / `tui::composer` 新增 `set_history_limit(size_t)`，可在运行时调整并裁剪提交历史
+- `tui::style` 新增 `show_horizontal_scrollbar`，允许静态内容关闭水平滚动条
+- 新增 `thread_pool::cancel_task()` / `task_info::cancelled()`：跳过排队任务并协作取消执行中任务；不强制终止线程
 - `tui::theme` 新增角色表与成员函数，旧版九字段仍保留并从角色派生
 - `code_block_option` 新增 `syntax`；`markdown_option` 新增 `math_style` / `parse_math`；`text_line` 新增 `continuation`
 - `renderer::render_glyph_run` / `render_rich_text` 追加可选的悬挂前缀参数
@@ -120,6 +125,9 @@
 
 ### 🔧 Improvements
 
+- `band` 在未显式设置 `bg` 时保持透明，不再默认填充 `theme.bg`
+- `code_block` 支持继承 `code_style.bg`，不再固定 `#1a1a1e`
+- `channel<T>` 数据面改用 `lock_free_queue`（MPMC），无缓冲模式保留同步握手；容量边界仍由条件变量等待
 - `http_client` 默认开启连接复用：连续请求不再重复握手，响应带 `Connection: close` 时仍会主动断开
 - `http_client` 的 `HEAD`、`204`、`304` 与 1xx 响应不再尝试读取正文，避免复用连接被后续请求阻塞
 - 重定向跟随会带上目标 scheme：`http -> https` 跳转不再被当作明文 HTTP 重放
@@ -251,6 +259,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复未设置背景的文本在字形下绘制主题背景、空白处保持终端默认背景导致的块状色差
+- 修复 `scroll_view` 内 `band` 背景不受裁剪栈约束、滚动时把背景色涂到区域外的问题
 - 修复 `path_tree::scan` 在 `files_only` 下丢失嵌套目录文件的问题
 - 修复 `vector` 拷贝赋值复用旧元素导致嵌套容器缓冲区共享、二次释放的问题；改为重建存储并保留深拷贝语义
 - 修复 `renderer::draw_glyph()` 宽字符续列越界：内容超出屏幕底部时，宽字形第二列会写到帧缓冲之外；现在续列同样做行边界检查

@@ -34,6 +34,7 @@ style style::merge(const style& base, const style& over) {
     merge_optional(result.flex_grow, over.flex_grow);
     merge_optional(result.flex_shrink, over.flex_shrink);
     merge_optional(result.text_wrap, over.text_wrap);
+    merge_optional(result.show_horizontal_scrollbar, over.show_horizontal_scrollbar);
     return result;
 }
 

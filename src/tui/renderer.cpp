@@ -218,25 +218,29 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
                         *box = rect;
                     }
                 }
-                const _NEFORCE color fill = el.style().bg.value_or(theme_.bg);
-                for (int row = 0; row < rect.h; ++row) {
-                    const int cy = rect.y + row;
-                    if (cy < 0 || cy >= term_h_) {
-                        continue;
-                    }
-                    for (int col = 0; col < rect.w; ++col) {
-                        const int cx = rect.x + col;
-                        if (cx >= 0 && cx < term_w_) {
-                            auto& cell = screen_.fast_cell_at(cx, cy);
-                            cell.background = fill;
+                const auto fill = el.style().bg;
+                if (fill.has_value()) {
+                    for (int row = 0; row < rect.h; ++row) {
+                        const int cy = rect.y + row;
+                        if (cy < 0 || cy >= term_h_) {
+                            continue;
+                        }
+                        for (int col = 0; col < rect.w; ++col) {
+                            const int cx = rect.x + col;
+                            if (cx >= 0 && cx < term_w_ && !is_clipped(cx, cy)) {
+                                auto& cell = screen_.fast_cell_at(cx, cy);
+                                cell.background = *fill;
+                            }
                         }
                     }
+                    band_stack_.push_back(*fill);
                 }
-                band_stack_.push_back(fill);
                 for (const auto& child: el.children()) {
                     render_subtree(child, layout, idx);
                 }
-                band_stack_.pop_back();
+                if (fill.has_value()) {
+                    band_stack_.pop_back();
+                }
             }
             return;
         }
@@ -351,7 +355,7 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
                         }
                     }
 
-                    if (content_w > clip.w) {
+                    if (content_w > clip.w && el.style().show_horizontal_scrollbar.value_or(true)) {
                         const int barY = rect.y + rect.h - 1;
                         const int thumb_size = max(1, clip.w * clip.w / max(1, content_w));
                         int thumb_pos = 0;
@@ -390,9 +394,40 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
         case element::kind::canvas: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
+                if (el.rect_state() != nullptr) {
+                    auto* box = static_cast<state<layout_rect>*>(el.rect_state());
+                    if (box->value().x != rect.x || box->value().y != rect.y || box->value().w != rect.w ||
+                        box->value().h != rect.h) {
+                        *box = rect;
+                    }
+                }
                 const auto& fn = el.draw_function();
                 if (fn) {
                     fn(rect.x, rect.y, rect.w, rect.h);
+                }
+                const auto& painter_fn = el.painter_function();
+                if (painter_fn) {
+                    // Local clip is the element rectangle intersected with every active
+                    // clip rectangle on the renderer stack.
+                    int clip_x = 0;
+                    int clip_y = 0;
+                    int clip_w = rect.w;
+                    int clip_h = rect.h;
+                    for (const auto& clip: clip_stack_) {
+                        const int lx = clip.x - rect.x;
+                        const int ly = clip.y - rect.y;
+                        const int x0 = max(clip_x, lx);
+                        const int y0 = max(clip_y, ly);
+                        const int x1 = min(clip_x + clip_w, lx + clip.w);
+                        const int y1 = min(clip_y + clip_h, ly + clip.h);
+                        clip_x = x0;
+                        clip_y = y0;
+                        clip_w = max(0, x1 - x0);
+                        clip_h = max(0, y1 - y0);
+                    }
+                    canvas_painter painter(screen_, theme_, rect.x, rect.y, rect.w, rect.h, el.style(), clip_x, clip_y,
+                                           clip_w, clip_h);
+                    painter_fn(painter);
                 }
                 ++idx;
             }
@@ -586,9 +621,11 @@ void renderer::apply_style_to_cell(cell& cell, const style& style) {
     }
     if (style.bg.has_value()) {
         cell.background = style.bg.value();
-    } else {
-        cell.background = band_stack_.empty() ? theme_.bg : band_stack_.back();
+    } else if (!band_stack_.empty()) {
+        cell.background = band_stack_.back();
     }
+    // Unstyled text keeps the terminal's default background. Painting theme_.bg
+    // only behind glyphs creates visible blocks around text (the bug this fixes).
     if (style.bold.has_value()) {
         cell.bold = style.bold.value();
     }

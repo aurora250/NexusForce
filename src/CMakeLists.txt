@@ -202,6 +202,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/toggle.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/virtual_list.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/window.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/canvas.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/chart.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/code_block.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/diff.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/element.cpp

@@ -294,7 +294,7 @@ element code_block(code_block_option opt) {
     if (opt.background) {
         tui::style band_style = opt.band_style;
         if (!band_style.bg.has_value()) {
-            band_style.bg = _NEFORCE color{26, 26, 30};
+            band_style.bg = base_style.bg.has_value() ? *base_style.bg : _NEFORCE color{26, 26, 30};
         }
         using padding = struct style::padding;
         if (!band_style.padding.has_value()) {

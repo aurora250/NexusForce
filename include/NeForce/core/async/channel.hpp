@@ -131,30 +131,15 @@ public:
             if (closed_.load(memory_order_acquire)) {
                 return false;
             }
-            if (capacity_ > 0 && size_.load(memory_order_acquire) >= capacity_) {
+            if (size_.load(memory_order_acquire) >= capacity_) {
                 unique_lock<mutex> lock{control_mutex_};
                 not_full_.wait(lock, [this] {
-                    return closed_.load(memory_order_acquire) ||
-                           (capacity_ == 0 ? size_.load(memory_order_acquire) == 0
-                                           : size_.load(memory_order_acquire) < capacity_);
-                });
-                continue;
-            }
-            if (capacity_ == 0 && size_.load(memory_order_acquire) != 0) {
-                unique_lock<mutex> lock{control_mutex_};
-                not_full_.wait(lock, [this] {
-                    return closed_.load(memory_order_acquire) || size_.load(memory_order_acquire) == 0;
+                    return closed_.load(memory_order_acquire) || size_.load(memory_order_acquire) < capacity_;
                 });
                 continue;
             }
             if (!push(_NEFORCE move(value))) {
                 continue;
-            }
-            if (capacity_ == 0) {
-                unique_lock<mutex> lock{control_mutex_};
-                not_full_.wait(lock, [this] {
-                    return closed_.load(memory_order_acquire) || size_.load(memory_order_acquire) == 0;
-                });
             }
             return true;
         }

@@ -538,6 +538,10 @@ namespace {
                 cb.width = opt.width;
                 cb.highlight = opt.highlight_code;
                 cb.style = opt.style;
+                if (styles.code.bg.has_value()) {
+                    cb.style.bg = styles.code.bg;
+                    cb.band_style.bg = styles.code.bg;
+                }
                 return code_block(move(cb));
             }
             case md_block_kind::html_block: {

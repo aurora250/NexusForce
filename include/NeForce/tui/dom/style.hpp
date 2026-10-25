@@ -135,16 +135,17 @@ struct NEFORCE_API style {
     optional<bool> blink;             ///< 闪烁
     optional<bool> strikethrough;     ///< 删除线
 
-    optional<padding> padding;     ///< 内边距
-    optional<margin> margin;       ///< 外边距
-    optional<border> border;       ///< 边框样式
-    optional<color> borderColor;   ///< 边框颜色
-    optional<size_hint> width;     ///< 宽度约束
-    optional<size_hint> height;    ///< 高度约束
-    optional<align> align;         ///< 默认对齐方式
-    optional<float> flex_grow;     ///< 弹性增长权重
-    optional<float> flex_shrink;   ///< 弹性收缩权重
-    optional<wrap_mode> text_wrap; ///< 文本换行模式
+    optional<padding> padding;                ///< 内边距
+    optional<margin> margin;                  ///< 外边距
+    optional<border> border;                  ///< 边框样式
+    optional<color> borderColor;              ///< 边框颜色
+    optional<size_hint> width;                ///< 宽度约束
+    optional<size_hint> height;               ///< 高度约束
+    optional<align> align;                    ///< 默认对齐方式
+    optional<float> flex_grow;                ///< 弹性增长权重
+    optional<float> flex_shrink;              ///< 弹性收缩权重
+    optional<wrap_mode> text_wrap;            ///< 文本换行模式
+    optional<bool> show_horizontal_scrollbar; ///< 是否显示水平滚动条
 
     /**
      * @brief 合并两个样式

@@ -38,6 +38,7 @@ add_executable(NexusForceUnitTests
         test_time.cpp
         test_tui.cpp
         test_tui_motion.cpp
+        test_tui_chart.cpp
         test_tui_component.cpp
         test_tui_diff.cpp
         test_tui_dom.cpp
