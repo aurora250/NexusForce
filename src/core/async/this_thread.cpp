@@ -193,7 +193,7 @@ void sleep_for_ns(uint64_t ns) noexcept {
 #endif
 }
 
-bool set_affinity(size_t cpu_mask) noexcept {
+bool set_affinity(const size_t cpu_mask) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::SetThreadAffinityMask(::GetCurrentThread(), static_cast<::DWORD_PTR>(cpu_mask)) != 0;
 #else

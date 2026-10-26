@@ -45,7 +45,7 @@ bool secret::system_supported() {
 #endif
 }
 
-void secret::get_random_bytes(byte_t* buffer, size_t length) {
+void secret::get_random_bytes(byte_t* buffer, const size_t length) {
     if (buffer == nullptr || length == 0) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid buffer or length"));
     }

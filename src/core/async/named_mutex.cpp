@@ -21,7 +21,7 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-named_mutex::named_mutex(const string& name, bool create) :
+named_mutex::named_mutex(const string& name, const bool create) :
 name_(name) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (create) {

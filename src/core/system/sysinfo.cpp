@@ -16,8 +16,8 @@
 #    include <iphlpapi.h>
 #    include <netioapi.h>
 #    include <pdh.h>
+#    include <pdhmsg.h>
 #    include <powerbase.h>
-#    include <powrprof.h>
 #    include <psapi.h>
 #    include <winternl.h>
 #    include <wbemcli.h>
@@ -928,7 +928,7 @@ void sysinfo::init() {
 
     hostname_.clear();
     wchar_t computer_name[256] = {};
-    ::DWORD computer_name_length = static_cast<::DWORD>(sizeof(computer_name) / sizeof(wchar_t));
+    auto computer_name_length = static_cast<::DWORD>(sizeof(computer_name) / sizeof(wchar_t));
     if (::GetComputerNameW(computer_name, &computer_name_length) == TRUE) {
         hostname_ = wcharacter::to_string(computer_name);
     }
@@ -1337,77 +1337,72 @@ vector<float64_t> sysinfo::cpu_usage_per_core() {
     lock<mutex> guard(core_mutex);
     vector<float64_t> usage;
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    static ::PDH_HQUERY core_query = nullptr;
-    static ::PDH_HCOUNTER core_counter = nullptr;
-    if (core_query == nullptr) {
-        if (::PdhOpenQueryW(nullptr, 0, &core_query) != ERROR_SUCCESS) {
-            core_query = nullptr;
-            return usage;
-        }
-        using pdh_add_english_counter_fn = ::PDH_STATUS(WINAPI*)(::PDH_HQUERY, ::LPCWSTR, ::DWORD_PTR, ::PDH_HCOUNTER*);
-        pdh_add_english_counter_fn add_english = nullptr;
-        const ::HMODULE pdh_module = ::GetModuleHandleW(L"pdh.dll");
-        if (pdh_module != nullptr) {
-            add_english =
-                    reinterpret_cast<pdh_add_english_counter_fn>(::GetProcAddress(pdh_module, "PdhAddEnglishCounterW"));
-        }
-        ::PDH_STATUS counter_status = ERROR_SUCCESS;
-        if (add_english != nullptr) {
-            counter_status = add_english(core_query, L"\\Processor(*)\\% Processor Time", 0, &core_counter);
-        } else {
-            counter_status = ::PdhAddCounterW(core_query, L"\\Processor(*)\\% Processor Time", 0, &core_counter);
-        }
-        if (counter_status != ERROR_SUCCESS) {
-            ::PdhCloseQuery(core_query);
-            core_query = nullptr;
-            return usage;
-        }
-        ::PdhCollectQueryData(core_query);
+    struct processor_performance {
+        ::LARGE_INTEGER idle_time;
+        ::LARGE_INTEGER kernel_time;
+        ::LARGE_INTEGER user_time;
+        ::LARGE_INTEGER dpc_time;
+        ::LARGE_INTEGER interrupt_time;
+        ::ULONG interrupt_count;
+    };
+    // Raw per-core counters are exact cumulative CPU time, so deltas stay meaningful even for
+    // very short sampling intervals; PDH formatted percentages turn invalid in that case.
+    static vector<uint64_t> previous_idle;
+    static vector<uint64_t> previous_total;
+    using nt_query_system_information_fn = ::LONG(WINAPI*)(::ULONG, void*, ::ULONG, ::PULONG);
+    constexpr ::ULONG system_processor_performance_information = 8;
+    const ::HMODULE ntdll = ::GetModuleHandleW(L"ntdll.dll");
+    if (ntdll == nullptr) {
         return usage;
     }
-    ::DWORD size = 0;
-    ::DWORD count = 0;
-    if (::PdhCollectQueryData(core_query) != ERROR_SUCCESS) {
+    const auto query =
+            reinterpret_cast<nt_query_system_information_fn>(::GetProcAddress(ntdll, "NtQuerySystemInformation"));
+    if (query == nullptr) {
         return usage;
     }
-    if (::PdhGetFormattedCounterArrayW(core_counter, PDH_FMT_DOUBLE, &size, &count, nullptr) != PDH_MORE_DATA) {
+    ::ULONG required = 0;
+    query(system_processor_performance_information, nullptr, 0, &required);
+    if (required == 0) {
         return usage;
     }
-    vector<::BYTE> buffer(size);
-    auto* items = reinterpret_cast<::PDH_FMT_COUNTERVALUE_ITEM_W*>(buffer.data());
-    if (::PdhGetFormattedCounterArrayW(core_counter, PDH_FMT_DOUBLE, &size, &count, items) != ERROR_SUCCESS) {
+    const size_t capacity = static_cast<size_t>(required) + sizeof(processor_performance) * 64;
+    vector<::BYTE> buffer(capacity);
+    ::ULONG returned = 0;
+    if (query(system_processor_performance_information, buffer.data(), static_cast<::ULONG>(buffer.size()), &returned) <
+        0) {
         return usage;
     }
-    vector<pair<uint32_t, float64_t>> samples;
-    uint32_t highest = 0;
-    for (::DWORD index = 0; index < count; ++index) {
-        if (items[index].szName == nullptr) {
+    const auto* entries = reinterpret_cast<const processor_performance*>(buffer.data());
+    const size_t cores = static_cast<size_t>(returned) / sizeof(processor_performance);
+    if (cores == 0) {
+        return usage;
+    }
+    vector<uint64_t> idles(cores, 0);
+    vector<uint64_t> totals(cores, 0);
+    for (size_t index = 0; index < cores; ++index) {
+        idles[index] = static_cast<uint64_t>(entries[index].idle_time.QuadPart);
+        totals[index] = static_cast<uint64_t>(entries[index].kernel_time.QuadPart) +
+                        static_cast<uint64_t>(entries[index].user_time.QuadPart);
+    }
+    usage.assign(cores, 0.0);
+    if (previous_idle.size() != cores || previous_total.size() != cores) {
+        previous_idle = move(idles);
+        previous_total = move(totals);
+        return usage;
+    }
+    for (size_t index = 0; index < cores; ++index) {
+        if (totals[index] <= previous_total[index] || idles[index] < previous_idle[index]) {
             continue;
         }
-        const string name = wcharacter::to_string(items[index].szName);
-        if (name == "_Total") {
-            continue;
+        const uint64_t total_delta = totals[index] - previous_total[index];
+        const uint64_t idle_delta = idles[index] - previous_idle[index];
+        if (total_delta > idle_delta) {
+            usage[index] =
+                    100.0 * static_cast<float64_t>(total_delta - idle_delta) / static_cast<float64_t>(total_delta);
         }
-        uint32_t core_index = 0;
-        try {
-            core_index = static_cast<uint32_t>(to_uint64(name.view()));
-        } catch (const exception&) {
-            continue;
-        }
-        if (items[index].FmtValue.CStatus != PDH_CSTATUS_VALID_DATA &&
-            items[index].FmtValue.CStatus != PDH_CSTATUS_NEW_DATA) {
-            continue;
-        }
-        samples.emplace_back(core_index, items[index].FmtValue.doubleValue);
-        highest = highest > core_index ? highest : core_index;
     }
-    if (samples.empty()) {
-        return usage;
-    }
-    usage.assign(static_cast<size_t>(highest) + 1, 0.0);
-    for (const auto& sample: samples) {
-        usage[sample.first] = sample.second;
-    }
+    previous_idle = move(idles);
+    previous_total = move(totals);
 #else
     static vector<uint64_t> previous_total;
     static vector<uint64_t> previous_idle;
@@ -1484,6 +1479,35 @@ sysinfo::cpu_breakdown_info sysinfo::cpu_usage_breakdown() {
     static ::PDH_HCOUNTER interrupt_counter = nullptr;
     static ::PDH_HCOUNTER dpc_counter = nullptr;
     static ::PDH_HCOUNTER idle_counter = nullptr;
+    static bool has_previous_raw = false;
+    static uint64_t previous_user = 0;
+    static uint64_t previous_privileged = 0;
+    static uint64_t previous_interrupt = 0;
+    static uint64_t previous_dpc = 0;
+    static uint64_t previous_idle = 0;
+    // Percentage counters expose cumulative CPU time as their raw first value. Deriving the
+    // percentages from consecutive raw deltas keeps the breakdown self-consistent even when
+    // callers sample with a very short interval, where formatted PDH values are still noisy.
+    const auto read_raw = [](const ::PDH_HCOUNTER counter, uint64_t& out) {
+        ::PDH_RAW_COUNTER value{};
+        if (::PdhGetRawCounterValue(counter, nullptr, &value) != ERROR_SUCCESS) {
+            return false;
+        }
+        if (value.CStatus != PDH_CSTATUS_VALID_DATA && value.CStatus != PDH_CSTATUS_NEW_DATA) {
+            return false;
+        }
+        out = static_cast<uint64_t>(value.FirstValue);
+        return true;
+    };
+    const auto remember_raw = [](const uint64_t user, const uint64_t privileged, const uint64_t interrupt,
+                                 const uint64_t dpc, const uint64_t idle) {
+        has_previous_raw = true;
+        previous_user = user;
+        previous_privileged = privileged;
+        previous_interrupt = interrupt;
+        previous_dpc = dpc;
+        previous_idle = idle;
+    };
     if (breakdown_query == nullptr) {
         if (::PdhOpenQueryW(nullptr, 0, &breakdown_query) != ERROR_SUCCESS) {
             breakdown_query = nullptr;
@@ -1511,36 +1535,57 @@ sysinfo::cpu_breakdown_info sysinfo::cpu_usage_breakdown() {
             return result;
         }
         ::PdhCollectQueryData(breakdown_query);
+        uint64_t initial_user = 0;
+        uint64_t initial_privileged = 0;
+        uint64_t initial_interrupt = 0;
+        uint64_t initial_dpc = 0;
+        uint64_t initial_idle = 0;
+        if (read_raw(user_counter, initial_user) && read_raw(privileged_counter, initial_privileged) &&
+            read_raw(interrupt_counter, initial_interrupt) && read_raw(dpc_counter, initial_dpc) &&
+            read_raw(idle_counter, initial_idle)) {
+            remember_raw(initial_user, initial_privileged, initial_interrupt, initial_dpc, initial_idle);
+        }
         return result;
     }
     if (::PdhCollectQueryData(breakdown_query) != ERROR_SUCCESS) {
         return result;
     }
-    float64_t user = 0.0;
-    float64_t privileged = 0.0;
-    float64_t interrupt = 0.0;
-    float64_t dpc = 0.0;
-    float64_t idle = 0.0;
-    const auto read_value = [](const ::PDH_HCOUNTER counter, float64_t& out) {
-        ::PDH_FMT_COUNTERVALUE value{};
-        if (::PdhGetFormattedCounterValue(counter, PDH_FMT_DOUBLE, nullptr, &value) != ERROR_SUCCESS) {
-            return;
-        }
-        if (value.CStatus == PDH_CSTATUS_VALID_DATA || value.CStatus == PDH_CSTATUS_NEW_DATA) {
-            out = value.doubleValue;
-        }
-    };
-    read_value(user_counter, user);
-    read_value(privileged_counter, privileged);
-    read_value(interrupt_counter, interrupt);
-    read_value(dpc_counter, dpc);
-    read_value(idle_counter, idle);
-    const auto clamp = [](const float64_t value) { return value < 0.0 ? 0.0 : (value > 100.0 ? 100.0 : value); };
-    result.user = clamp(user);
-    result.idle = clamp(idle);
-    result.irq = clamp(interrupt);
-    result.softirq = clamp(dpc);
-    result.system = clamp(privileged - interrupt - dpc);
+    uint64_t user = 0;
+    uint64_t privileged = 0;
+    uint64_t interrupt = 0;
+    uint64_t dpc = 0;
+    uint64_t idle = 0;
+    if (!read_raw(user_counter, user) || !read_raw(privileged_counter, privileged) ||
+        !read_raw(interrupt_counter, interrupt) || !read_raw(dpc_counter, dpc) || !read_raw(idle_counter, idle)) {
+        return result;
+    }
+    if (!has_previous_raw || user < previous_user || privileged < previous_privileged ||
+        interrupt < previous_interrupt || dpc < previous_dpc || idle < previous_idle) {
+        remember_raw(user, privileged, interrupt, dpc, idle);
+        return result;
+    }
+    const uint64_t user_delta = user - previous_user;
+    const uint64_t privileged_delta = privileged - previous_privileged;
+    const uint64_t interrupt_delta = interrupt - previous_interrupt;
+    const uint64_t dpc_delta = dpc - previous_dpc;
+    const uint64_t idle_delta = idle - previous_idle;
+    previous_user = user;
+    previous_privileged = privileged;
+    previous_interrupt = interrupt;
+    previous_dpc = dpc;
+    previous_idle = idle;
+    const uint64_t total_delta = user_delta + privileged_delta + idle_delta;
+    if (total_delta == 0) {
+        return result;
+    }
+    const float64_t scale = 100.0 / static_cast<float64_t>(total_delta);
+    result.user = static_cast<float64_t>(user_delta) * scale;
+    result.idle = static_cast<float64_t>(idle_delta) * scale;
+    result.irq = static_cast<float64_t>(interrupt_delta) * scale;
+    result.softirq = static_cast<float64_t>(dpc_delta) * scale;
+    result.system = privileged_delta > interrupt_delta + dpc_delta
+                            ? static_cast<float64_t>(privileged_delta - interrupt_delta - dpc_delta) * scale
+                            : 0.0;
 #else
     const string content = read_file_all("/proc/stat");
     if (content.empty()) {
@@ -1611,7 +1656,7 @@ uint32_t sysinfo::process_count() {
     vector<::DWORD> processes(1024);
     for (;;) {
         ::DWORD needed = 0;
-        const ::DWORD bytes = static_cast<::DWORD>(processes.size() * sizeof(::DWORD));
+        const auto bytes = static_cast<::DWORD>(processes.size() * sizeof(::DWORD));
         if (::EnumProcesses(processes.data(), bytes, &needed) == FALSE) {
             return 0;
         }
@@ -1660,6 +1705,10 @@ sysinfo::disk_info sysinfo::disk_status(const string& path) {
         target = current;
     }
     info.path = wcharacter::to_string(target.view());
+
+    if (::GetFileAttributesW(target.data()) == INVALID_FILE_ATTRIBUTES) {
+        return info;
+    }
 
     wchar_t root[MAX_PATH] = {};
     if (::GetVolumePathNameW(target.data(), root, MAX_PATH) == FALSE) {
@@ -2105,7 +2154,7 @@ sysinfo::battery_info sysinfo::battery_status() {
             info.capacity_mwh = static_cast<float64_t>(battery_state.RemainingCapacity);
             info.full_capacity_mwh = static_cast<float64_t>(battery_state.MaxCapacity);
         }
-        const ::LONG rate = static_cast<::LONG>(battery_state.Rate);
+        const auto rate = static_cast<::LONG>(battery_state.Rate);
         info.rate_mw = static_cast<float64_t>(rate < 0 ? -rate : rate);
         if (battery_state.EstimatedTime > 0 && info.remaining_seconds < 0) {
             info.remaining_seconds = static_cast<int64_t>(battery_state.EstimatedTime);

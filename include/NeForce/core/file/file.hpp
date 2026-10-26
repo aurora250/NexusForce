@@ -161,15 +161,15 @@ public:
      * @param pth 文件路径
      * @param append 是否为追加模式，默认为false
      * @param access 访问模式，默认为读写
-     * @param share_mode 共享模式，默认为只读共享
+     * @param share_mode 共享模式，默认为读写共享
      * @param creation 创建方式，默认为打开已存在文件
      * @param attributes 文件属性，默认为普通
      *
      * 创建并打开文件。
      */
     explicit file(path pth, bool append = false, file_access access = file_access::read_write,
-                  file_shared share_mode = file_shared::share_read, file_creation creation = file_creation::open_exist,
-                  file_attri attributes = file_attri::normal);
+                  file_shared share_mode = file_shared::share_read_write,
+                  file_creation creation = file_creation::open_exist, file_attri attributes = file_attri::normal);
 
     file(const file&) = delete;
     file& operator=(const file&) = delete;

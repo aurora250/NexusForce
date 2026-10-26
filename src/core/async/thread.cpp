@@ -93,7 +93,7 @@ void thread::hook::remove_hook(callback_t hook) {
 
 void thread::hook::invoke(const point point, const id thread_id) {
     lock<mutex> lock(thread_hook_mutex());
-    for (auto& hook: thread_hook_hooks()) {
+    for (const auto& hook: thread_hook_hooks()) {
         hook(point, thread_id);
     }
 }
@@ -280,7 +280,7 @@ bool thread::set_name(native_handle_type handle, const char* name) {
     init_thread_name_funcs();
     if (g_set_thread_description != nullptr) {
         wstring wstr{to_wstring(name)};
-        ::HRESULT hr = g_set_thread_description(handle, wstr.data());
+        const ::HRESULT hr = g_set_thread_description(handle, wstr.data());
         return SUCCEEDED(hr);
     }
 #    ifdef NEFORCE_COMPILER_MSVC

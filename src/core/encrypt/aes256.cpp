@@ -56,7 +56,7 @@ namespace {
         return static_cast<byte_t>(y ^ 0x63);
     }
 
-    byte_t AES256_inv_sbox_ct(byte_t x) {
+    byte_t AES256_inv_sbox_ct(const byte_t x) {
         // inv S(x) = gf_inv(rotl1(x) ^ rotl3(x) ^ rotl6(x) ^ 0x05)
         const auto r1 = static_cast<byte_t>((x << 1) | (x >> 7));
         const auto r3 = static_cast<byte_t>((x << 3) | (x >> 5));
@@ -692,7 +692,7 @@ byte_vector AES256::decrypt_ecb(const cbyte_view data, const cbyte_view key) {
 byte_vector AES256::encrypt_ecb_pkcs7(const cbyte_view data, const cbyte_view key) {
     byte_vector byte_data{data.data(), data.size()};
     const byte_t padding = 16 - (byte_data.size() % 16);
-    for (int i = 0; i < padding; ++i) {
+    for (byte_t i = 0; i < padding; ++i) {
         byte_data.push_back(padding);
     }
     return encrypt_ecb(byte_data.view(), key);

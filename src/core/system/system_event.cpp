@@ -114,7 +114,7 @@ void system_event::reset() noexcept {
 #endif
 }
 
-bool system_event::wait(uint32_t timeout_ms) noexcept {
+bool system_event::wait(const uint32_t timeout_ms) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const bool result = ::WaitForSingleObject(handle_, timeout_ms) == WAIT_OBJECT_0;
     if (result && type_ == type::auto_reset) {

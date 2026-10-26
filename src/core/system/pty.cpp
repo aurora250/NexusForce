@@ -215,16 +215,32 @@ bool pty::is_available() noexcept {
         return false;
     }
     // CreatePseudoConsole() exists on every Windows 10 1809+ build,
-    // but the console host behind it can still be absent or broken.
-    // A child started in such a pseudoconsole dies immediately with STATUS_DLL_INIT_FAILED and writes nothing,
-    // so probe once and cache the answer:
-    // callers then fall back to the pipe path instead of reporting an empty tool result.
+    // but the console host behind it can still be absent or broken: the child may start and
+    // exit normally while its output never reaches the pseudoconsole pipe, which would leave
+    // callers with an empty tool result. Probe the full data path once and cache the answer.
     static const bool usable = [] {
         try {
             pty probe;
             probe.open(console_size{80, 24});
-            probe.start("cmd.exe", {"/c", "exit", "0"});
-            return probe.wait(5000) == 0;
+            probe.start("cmd.exe", {"/c", "echo neforce-pty-probe"});
+            string seen;
+            int empty_after_exit = 0;
+            for (int attempt = 0; attempt < 400; ++attempt) {
+                const string chunk = probe.read_available();
+                seen += chunk;
+                if (seen.contains("neforce-pty-probe")) {
+                    return true;
+                }
+                if (probe.poll_exit() && chunk.empty()) {
+                    if (++empty_after_exit >= 100) {
+                        break;
+                    }
+                } else {
+                    empty_after_exit = 0;
+                }
+                ::Sleep(5);
+            }
+            return false;
         } catch (...) {
             return false;
         }
@@ -243,7 +259,7 @@ bool pty::is_available() noexcept {
 #endif
 }
 
-void pty::open(console_size size) {
+void pty::open(const console_size size) {
     close();
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -357,8 +373,10 @@ void pty::start(const string& executable, const vector<string>& args, const stri
     }
 
     const attribute_guard guard{attributes};
+    // UpdateProcThreadAttribute copies cbSize bytes from lpValue; PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE
+    // expects the HPCON handle value itself, not the address of the variable holding it.
     ::HANDLE pseudo = handle_;
-    if (::UpdateProcThreadAttribute(attributes, 0, PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE, static_cast<::PVOID>(&pseudo),
+    if (::UpdateProcThreadAttribute(attributes, 0, PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE, static_cast<::PVOID>(pseudo),
                                     sizeof(pseudo), nullptr, nullptr) == FALSE) {
         NEFORCE_THROW_EXCEPTION(pty_exception(last_error()));
     }

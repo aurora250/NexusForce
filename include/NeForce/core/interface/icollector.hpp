@@ -23,8 +23,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * @tparam T 派生类型
  *
  * 为集合类型提供统一的接口，包括大小查询、空检查和哈希计算。
- *
- * TODO: Make icollector replace ranges as the base class for iterable operations
  */
 template <typename T>
 struct icollector : icomparable<T> {

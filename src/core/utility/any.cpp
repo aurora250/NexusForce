@@ -64,7 +64,7 @@ void any::swap(any& rhs) noexcept {
         tmp.manage_(SWAP, &tmp, &arg);
     } else {
         any* emp = !has_value() ? this : &rhs;
-        any* full = !has_value() ? &rhs : this;
+        const any* full = !has_value() ? &rhs : this;
         ArgT arg{};
         arg.any_ptr_ = emp;
         full->manage_(SWAP, full, &arg);

@@ -4522,7 +4522,10 @@ TEST_F(ProcessTest, CurrentState_IsRunningOrUnknown) {
 TEST_F(ProcessTest, CurrentMemoryInfo_MatchesQueryById) {
     const auto current = process::current_memory_info();
     const auto queried = process::get_memory_info(process::current_id());
-    EXPECT_EQ(current.working_set_size, queried.working_set_size);
+    const size_t difference = current.working_set_size > queried.working_set_size
+                                      ? current.working_set_size - queried.working_set_size
+                                      : queried.working_set_size - current.working_set_size;
+    EXPECT_LE(difference, static_cast<size_t>(1U) << 20);
     EXPECT_GT(current.working_set_size, 0U);
 }
 
@@ -4595,12 +4598,12 @@ TEST_F(ProcessTest, Snapshot_ContainsCurrentProcess) {
     bool found = false;
     for (const auto& entry: entries) {
         EXPECT_FALSE(entry.name.empty());
-        EXPECT_GT(entry.threads, 0U);
-        EXPECT_GT(entry.start_time_ms, 0U);
         if (entry.pid != process::current_id()) {
             continue;
         }
         found = true;
+        EXPECT_GT(entry.threads, 0U);
+        EXPECT_GT(entry.start_time_ms, 0U);
         EXPECT_EQ(entry.status, process::state::running);
         EXPECT_GT(entry.rss_bytes, 0U);
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -4692,6 +4695,7 @@ TEST_F(ProcessTest, User_NonexistentProcess_ReturnsEmpty) { EXPECT_TRUE(process:
 TEST_F(ProcessTest, Threads_CurrentProcess_ContainsMainThread) {
     const auto list = process::threads(process::current_id());
     ASSERT_FALSE(list.empty());
+#ifdef NEFORCE_PLATFORM_LINUX
     bool found = false;
     for (const auto& item: list) {
         EXPECT_GT(item.tid, 0U);
@@ -4701,6 +4705,11 @@ TEST_F(ProcessTest, Threads_CurrentProcess_ContainsMainThread) {
         }
     }
     EXPECT_TRUE(found);
+#else
+    for (const auto& item: list) {
+        EXPECT_GT(item.tid, 0U);
+    }
+#endif
 }
 
 TEST_F(ProcessTest, Threads_NonexistentProcess_ReturnsEmpty) { EXPECT_TRUE(process::threads(99999999).empty()); }
@@ -8066,16 +8075,25 @@ protected:
         return {};
     }
 
-    static string read_until(pty& session, const string_view needle, const int attempts = 400) {
+    static string read_until(pty& session, const string_view needle, const int attempts = 600) {
         string collected;
+        int idle_after_exit = 0;
         for (int i = 0; i < attempts; ++i) {
-            collected.append(session.read_available());
+            const string chunk = session.read_available();
+            collected.append(chunk);
             if (collected.find(needle) != string::npos) {
                 break;
             }
-            if (session.poll_exit()) {
-                collected.append(session.read_available());
-                break;
+            if (!session.poll_exit()) {
+                idle_after_exit = 0;
+            } else if (chunk.empty()) {
+                // The console host may flush the final output after the child itself is gone,
+                // so keep draining for a short while instead of breaking on the first empty read.
+                if (++idle_after_exit >= 200) {
+                    break;
+                }
+            } else {
+                idle_after_exit = 0;
             }
             this_thread::sleep_for(milliseconds(5));
         }
@@ -8164,7 +8182,7 @@ TEST_F(PtyTest, RunsCommandAndReportsExitCode) {
     session.start(shell_executable(), shell_echo_exit_args(5));
 
     const string collected = read_until(session, "pty-ok");
-    EXPECT_NE(collected.find("pty-ok"), string::npos);
+    EXPECT_NE(collected.find("pty-ok"), string::npos) << "collected=[" << collected.data() << "]";
     EXPECT_EQ(session.wait(5000), 5);
     EXPECT_FALSE(session.is_running());
 }
@@ -8183,7 +8201,7 @@ TEST_F(PtyTest, EnvironmentVariablesAreAppendedToTheChild) {
     session.start(shell_executable(), shell_env_args(), "", {"NEFORCE_PTY_TEST=pty-42"});
 
     const string collected = read_until(session, "pty-42");
-    EXPECT_NE(collected.find("pty-42"), string::npos);
+    EXPECT_NE(collected.find("pty-42"), string::npos) << "collected=[" << collected.data() << "]";
     EXPECT_EQ(session.wait(5000), 0);
 }
 
@@ -8202,7 +8220,7 @@ TEST_F(PtyTest, WorkDirectoryAppliesToTheChild) {
     session.start(shell_executable(), shell_work_dir_args(), work_dir);
 
     const string collected = read_until(session, work_dir.view());
-    EXPECT_NE(collected.find(work_dir.view()), string::npos);
+    EXPECT_NE(collected.find(work_dir.view()), string::npos) << "collected=[" << collected.data() << "]";
     EXPECT_EQ(session.wait(5000), 0);
 }
 

@@ -3,6 +3,9 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/network/http/http_client.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <poll.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
@@ -377,6 +380,62 @@ namespace {
         tcp_client_base* client_{nullptr};
         optional<milliseconds> saved_;
     };
+
+    bool wait_socket_readable(const socket_base& socket, const int timeout_ms) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        ::fd_set read_set;
+        FD_ZERO(&read_set);
+        FD_SET(static_cast<::SOCKET>(socket.native_handle()), &read_set);
+        ::timeval wait_time{};
+        wait_time.tv_sec = timeout_ms / 1000;
+        wait_time.tv_usec = static_cast<long>((timeout_ms % 1000) * 1000);
+        return ::select(0, &read_set, nullptr, nullptr, &wait_time) > 0;
+#else
+        ::pollfd descriptor{};
+        descriptor.fd = static_cast<int>(socket.native_handle());
+        descriptor.events = POLLIN;
+        return ::poll(&descriptor, 1, timeout_ms) > 0;
+#endif
+    }
+
+    // Streams can be aborted from another thread. On Windows a blocking recv is not woken by shutdown(),
+    // so plain transports are switched to non-blocking and driven by a short readiness wait instead.
+    class stream_nonblocking_guard {
+    public:
+        stream_nonblocking_guard(tcp_client_base& client, const bool enable) {
+            if (!enable || !client.is_connected()) {
+                return;
+            }
+            try {
+                client_ = &client;
+                saved_ = client_->socket().is_nonblocking();
+                client_->socket().set_nonblocking(true);
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
+                client_ = nullptr;
+            }
+        }
+
+        ~stream_nonblocking_guard() {
+            if (client_ == nullptr) {
+                return;
+            }
+            try {
+                if (client_->is_connected()) {
+                    client_->socket().set_nonblocking(saved_);
+                }
+            } catch (const exception& e) {
+                NEFORCE_REPORT_EXCEPTION(e);
+            }
+        }
+
+        stream_nonblocking_guard(const stream_nonblocking_guard&) = delete;
+        stream_nonblocking_guard& operator=(const stream_nonblocking_guard&) = delete;
+
+    private:
+        tcp_client_base* client_{nullptr};
+        bool saved_{false};
+    };
 } // namespace
 
 
@@ -577,7 +636,7 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
     }
 }
 
-bool http_client::ensure_connected(const string& host, const ports port, bool use_ssl) {
+bool http_client::ensure_connected(const string& host, const ports port, const bool use_ssl) {
     if (client_.is_connected()) {
         if (client_.connected_host() == host && client_.connected_port() == port) {
             const bool expired = config_.keep_alive_idle_timeout > milliseconds(0) && last_activity_ != time_point{} &&
@@ -809,6 +868,46 @@ http_client_response http_client::stream_once(const http_client_request& request
         return false;
     };
 
+    const bool plain_transport = request.scheme != "https";
+    const stream_nonblocking_guard nonblocking_guard(client_, plain_transport);
+    const auto idle_limit =
+            config_.stream_idle_timeout > milliseconds(0) ? config_.stream_idle_timeout : config_.receive_timeout;
+    auto last_data_at = steady_clock::now();
+
+    // Returns the received byte count (>0), 0 on orderly close, -1 when the caller aborted,
+    // and -2 on transport failure or idle timeout.
+    const auto receive_chunk = [&](char* data, const size_t size) -> ssize_t {
+        for (;;) {
+            if (aborted_by_caller()) {
+                return -1;
+            }
+            if (steady_clock::now() - last_data_at >= idle_limit) {
+                return -2;
+            }
+            if (!plain_transport) {
+                try {
+                    return client_.receive(data, size);
+                } catch (const exception&) {
+                    return aborted_by_caller() ? -1 : -2;
+                }
+            }
+            bool readable = false;
+            try {
+                readable = wait_socket_readable(client_.socket(), 50);
+            } catch (const exception&) {
+                return -2;
+            }
+            if (!readable) {
+                continue;
+            }
+            try {
+                return client_.receive(data, size);
+            } catch (const exception&) {
+                return aborted_by_caller() ? -1 : -2;
+            }
+        }
+    };
+
     const auto receive_start = steady_clock::now();
     vector<char> buffer(config_.buffer_size.bytes());
     const uint64_t max_size = config_.max_response_size.bytes();
@@ -826,8 +925,16 @@ http_client_response http_client::stream_once(const http_client_request& request
             return response;
         }
 
-        const ssize_t n = client_.receive(buffer.data(), buffer.size());
-        if (n <= 0) {
+        const ssize_t n = receive_chunk(buffer.data(), buffer.size());
+        if (n < 0) {
+            response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            response.status_message = n == -1 ? "Aborted" : "Receive/Parse failed";
+            response.effective_url = req_url.to_string();
+            transport_failed = n != -1;
+            client_.disconnect();
+            return response;
+        }
+        if (n == 0) {
             response.status = http_status::S5_INTERNAL_SERVER_ERROR;
             response.status_message = "Receive/Parse failed";
             response.effective_url = req_url.to_string();
@@ -836,6 +943,7 @@ http_client_response http_client::stream_once(const http_client_request& request
             return response;
         }
 
+        last_data_at = steady_clock::now();
         raw_read += static_cast<uint64_t>(n);
         head.append(buffer.data(), static_cast<size_t>(n));
         header_end = head.find("\r\n\r\n");
@@ -905,16 +1013,21 @@ http_client_response http_client::stream_once(const http_client_request& request
                 break;
             }
 
-            const ssize_t n = client_.receive(buffer.data(), buffer.size());
-            if (n <= 0) {
-                if (aborted_by_caller()) {
+            const ssize_t n = receive_chunk(buffer.data(), buffer.size());
+            if (n < 0) {
+                if (n == -1) {
                     aborted = true;
                 } else {
                     transport_failed = true;
                 }
                 break;
             }
+            if (n == 0) {
+                transport_failed = true;
+                break;
+            }
 
+            last_data_at = steady_clock::now();
             raw_read += static_cast<uint64_t>(n);
             decoder.push(string_view(buffer.data(), static_cast<size_t>(n)));
         }
@@ -949,16 +1062,21 @@ http_client_response http_client::stream_once(const http_client_request& request
                 break;
             }
 
-            const ssize_t n = client_.receive(buffer.data(), buffer.size());
-            if (n <= 0) {
-                if (aborted_by_caller()) {
+            const ssize_t n = receive_chunk(buffer.data(), buffer.size());
+            if (n < 0) {
+                if (n == -1) {
                     aborted = true;
                 } else {
                     transport_failed = true;
                 }
                 break;
             }
+            if (n == 0) {
+                transport_failed = true;
+                break;
+            }
 
+            last_data_at = steady_clock::now();
             raw_read += static_cast<uint64_t>(n);
             pending.assign(buffer.data(), static_cast<size_t>(n));
         }
@@ -982,16 +1100,21 @@ http_client_response http_client::stream_once(const http_client_request& request
                 break;
             }
 
-            const ssize_t n = client_.receive(buffer.data(), buffer.size());
-            if (n <= 0) {
-                if (aborted_by_caller()) {
+            const ssize_t n = receive_chunk(buffer.data(), buffer.size());
+            if (n < 0) {
+                if (n == -1) {
                     aborted = true;
                 } else {
-                    complete = true;
+                    transport_failed = true;
                 }
                 break;
             }
+            if (n == 0) {
+                complete = true;
+                break;
+            }
 
+            last_data_at = steady_clock::now();
             raw_read += static_cast<uint64_t>(n);
             pending.assign(buffer.data(), static_cast<size_t>(n));
         }

@@ -1081,8 +1081,8 @@ int sys_console::getch() noexcept {
 #endif
 }
 
-void sys_console::progress_bar(double percentage, const int width, const bool show_percentage, const char fill_char,
-                               const char empty_char) {
+void sys_console::progress_bar(const double percentage, const int width, const bool show_percentage,
+                               const char fill_char, const char empty_char) {
     lock<mutex> lock(mutex_);
 
     double display_percentage = percentage;
@@ -1118,7 +1118,7 @@ void sys_console::progress_bar(double percentage, const int width, const bool sh
     flush_unsafe();
 }
 
-void sys_console::set_cursor_position(int row, int column) {
+void sys_console::set_cursor_position(const int row, const int column) {
     lock<mutex> lock(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::COORD pos{static_cast<::SHORT>(column), static_cast<::SHORT>(row)};

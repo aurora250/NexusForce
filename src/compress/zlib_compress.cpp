@@ -188,7 +188,7 @@ zlib_compressor::stream_compressor& zlib_compressor::stream_compressor::operator
 }
 
 void zlib_compressor::stream_compressor::reset(compress_level level, compress_strategy strategy,
-                                               compress_format format) {
+                                               const compress_format format) {
 
     int window_bits = MAX_WBITS;
     switch (format) {

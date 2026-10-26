@@ -166,7 +166,7 @@ public:
      */
     struct diag_entry {
         ip_family family{ip_family::INET4}; ///< IP 族
-        protocol proto{protocol::IP};       ///< 协议类型
+        protocol proto{protocol::AUTO};     ///< 协议类型
         state status{state::unknown};       ///< 连接状态
         string local;                       ///< 本地 endpoint
         string remote;                      ///< 对端 endpoint，格式同上

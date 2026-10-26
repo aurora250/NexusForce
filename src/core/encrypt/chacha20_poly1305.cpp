@@ -60,7 +60,7 @@ namespace {
     }
 
 #ifdef NEFORCE_SIMD_SSE2
-    NEFORCE_ALWAYS_INLINE_INLINE simd::vec128_t chacha20_rotl32(simd::vec128_t v, const int bits) {
+    NEFORCE_ALWAYS_INLINE_INLINE simd::vec128_t chacha20_rotl32(const simd::vec128_t v, const int bits) {
         return ::_mm_or_si128(::_mm_slli_epi32(v, bits), ::_mm_srli_epi32(v, 32 - bits));
     }
 

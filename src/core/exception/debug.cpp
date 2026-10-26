@@ -37,7 +37,7 @@ bool is_debugger_present() noexcept {
     }
 }
 
-void debug_breakpoint(bool condition, const char* message) noexcept {
+void debug_breakpoint(const bool condition, const char* message) noexcept {
     if (likely(condition)) {
     } else {
         try {
@@ -51,7 +51,7 @@ void debug_breakpoint(bool condition, const char* message) noexcept {
     }
 }
 
-void assert_stacktrace(bool condition, const char* message) noexcept {
+void assert_stacktrace(const bool condition, const char* message) noexcept {
     if (likely(condition)) {
     } else {
         try {

@@ -258,7 +258,7 @@ bool path::is_absolute() const noexcept {
     if (path_.size() >= 2 && path_[1] == ':') {
         return path_.size() >= 3 && (path_[2] == '/' || path_[2] == '\\');
     }
-    return path_.size() >= 2 && (path_[0] == '/' || path_[0] == '\\') && (path_[1] == '/' || path_[1] == '\\');
+    return !path_.empty() && (path_[0] == '/' || path_[0] == '\\');
 #else
     return path_[0] == '/';
 #endif
@@ -288,11 +288,11 @@ path path::canonical() const {
         return {};
     }
     buffer.resize(written);
-    string result = wcharacter::to_string(buffer);
-    if (result.view().substr(0, 4) == "\\\\?\\") {
-        result = result.view().substr(4);
-        if (result.view().substr(0, 4) == "UNC\\") {
-            result = "\\\\" + result.view().substr(4);
+    string result = wcharacter::to_string(buffer.view());
+    if (result.view().starts_with(R"(\\?\)")) {
+        result = result.substr(4);
+        if (result.starts_with("UNC\\")) {
+            result = "\\\\" + result.substr(4);
         }
     }
     return path{move(result)};

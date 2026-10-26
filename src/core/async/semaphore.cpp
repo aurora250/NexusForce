@@ -53,7 +53,7 @@ bool semaphore::try_acquire_for_impl(const nanoseconds timeout) noexcept {
 }
 #endif
 
-semaphore::semaphore(long initial, long maximum) {
+semaphore::semaphore(const long initial, const long maximum) {
     NEFORCE_CONSTEXPR_ASSERT(initial >= 0);
     NEFORCE_CONSTEXPR_ASSERT(maximum >= initial);
 
@@ -106,7 +106,7 @@ bool semaphore::try_acquire() noexcept {
 #endif
 }
 
-void semaphore::release(long update) {
+void semaphore::release(const long update) {
     if (update <= 0) {
         NEFORCE_THROW_EXCEPTION(system_exception("update failed"));
     }

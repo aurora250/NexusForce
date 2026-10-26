@@ -281,6 +281,15 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 Windows 下 `pty` 子进程未挂接到伪控制台导致读不到任何输出：`UpdateProcThreadAttribute` 的 `PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE` 需要传 `HPCON` 句柄值本身，原实现传的是变量地址（`&pseudo`），内核据此拿到的句柄无效，子进程虽能执行并返回正确退出码，但输出不进入伪控制台管道；现改为直接传 `pseudo`
+- 修复 Windows 下 `sysinfo::cpu_usage_breakdown()` 依赖 PDH 格式化百分比，短采样间隔下各项之和明显偏离 100（实测低至 89）：改为按原始计数（100ns 累计时间）增量计算，任意间隔下 user/system/idle/irq/softirq 之和恒为 100
+- 修复 Windows 下 `sysinfo::cpu_usage_per_core()` 在短采样间隔下返回空向量或缺失核心（PDH 通配符格式化值在样本不足时 CStatus 无效）：改用 `NtQuerySystemInformation(SystemProcessorPerformanceInformation)` 的原始计数增量，首次调用返回全零、此后始终返回全部核心
+- 修复 NFRS 反射生成器在输出文件被清理后跳过生成：`output_exists` 仅凭构造 `file` 对象就判定存在（构造失败不会抛出），缓存命中后直接返回，导致 clean 构建时 `_nfrs_gen_*.cpp` 缺失、编译报 C1083；现改为检查 `is_opened()`
+- 修复 Windows 下 `http_client` 流式响应无法被 `http_stream_handle::abort()` 中断：`shutdown()` 不会唤醒阻塞中的 `recv`，流式读取改为非阻塞套接字 + 就绪轮询（50ms 粒度），空闲超时由读取循环基于 `stream_idle_timeout` 自行约束
+- 修复 Windows 下 `process::current_command_line()` / `process::get_command_line()` 恒为空：`NtQueryInformationProcess(ProcessCommandLineInformation)` 需先查询所需缓冲区大小再二次查询，字符串内联在返回缓冲区中
+- 修复 Windows 下 `process::snapshot()` 中大量进程的 `threads` / `start_time_ms` 为 0：改用 `NtQuerySystemInformation(SystemProcessInformation)` 一次性填充全部进程的线程数与创建时间，不再依赖对每个进程 `OpenProcess` 成功
+- 修复 `sysinfo::disk_status(path)` 在 Windows 上对不存在的路径返回当前盘符数据：查询前先校验路径存在，不存在时返回零值信息
+- 修复 `path::is_absolute()` 在 Windows 上不把单前导分隔符（如 `/tmp`）视为绝对路径，与 `lexically_normal` 的判定不一致
 - 修复 `process::get_memory_info()` Linux 把 `/proc/<pid>/statm` 首字段（驻留页）当作虚拟内存大小的问题
 - 修复 `sysinfo::cpu_usage()` Linux 采样状态无锁导致的数据竞争；Windows 改用 `GetSystemTimes`，中文等本地化系统上 PDH 计数器名解析失败导致恒返回 0 的问题不再存在
 - 修复未设置背景的文本在字形下绘制主题背景、空白处保持终端默认背景导致的块状色差

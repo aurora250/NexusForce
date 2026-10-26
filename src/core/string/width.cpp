@@ -82,7 +82,7 @@ int text_display_width(const string_view text) {
     return width;
 }
 
-string display_truncate(string_view text, const int width) {
+string display_truncate(const string_view text, const int width) {
     if (width <= 0) {
         return {};
     }
@@ -101,7 +101,7 @@ string display_truncate(string_view text, const int width) {
     return string(text.data(), index);
 }
 
-string display_fit(string_view text, const int width, const bool right_align) {
+string display_fit(const string_view text, const int width, const bool right_align) {
     if (width <= 0) {
         return {};
     }

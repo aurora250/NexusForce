@@ -94,7 +94,8 @@ namespace {
         ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst), result);
     }
 
-    NEFORCE_ALWAYS_INLINE_INLINE simd::vec128_t base64_map_to_index(simd::vec128_t v, char plus_char, char slash_char) {
+    NEFORCE_ALWAYS_INLINE_INLINE simd::vec128_t base64_map_to_index(const simd::vec128_t v, const char plus_char,
+                                                                    const char slash_char) {
         simd::vec128_t values = ::_mm_sub_epi8(v, ::_mm_set1_epi8('A'));
 
         const simd::vec128_t is_lower = ::_mm_cmpgt_epi8(v, ::_mm_set1_epi8('a' - 1));
@@ -304,7 +305,7 @@ byte_vector base64::decode(const string_view data) {
     return result;
 }
 
-string base64::encode_url(const cbyte_view data, bool padding) {
+string base64::encode_url(const cbyte_view data, const bool padding) {
     if (data.empty()) {
         return {};
     }

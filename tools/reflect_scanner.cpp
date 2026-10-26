@@ -443,7 +443,7 @@ static void impl(int argc, const char* argv[]) {
     bool output_exists = false;
     try {
         file test{path{output_path}};
-        output_exists = true;
+        output_exists = test.is_opened();
         // NOLINTNEXTLINE(bugprone-empty-catch)
     } catch (const exception& e) {
         report_with_stack(e);

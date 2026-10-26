@@ -547,8 +547,10 @@
 #endif
 
 
-#ifdef NEFORCE_COMPILER_GNUC
+#if defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_STANDARD_17)
 #    define NEFORCE_UNUSED __attribute__((unused))
+#elif defined(NEFORCE_STANDARD_17)
+#    define NEFORCE_UNUSED [[maybe_unused]]
 #else
 #    define NEFORCE_UNUSED
 #endif

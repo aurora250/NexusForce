@@ -300,7 +300,7 @@ optional<thread_pool::task_type> thread_pool::take_task(worker_context& self) {
             if (backlog > local_batch_depth_ratio * attached_workers_.load(memory_order_acquire)) {
                 take_batch(self);
             }
-            return optional<task_type>{_NEFORCE move(item)};
+            return optional<task_type>{move(item)};
         }
     }
 
@@ -681,7 +681,7 @@ bool thread_pool::hold_warm_spin(worker_context& self) {
     int32_t expected = -1;
     if (warm_owner_.compare_exchange_strong(expected, static_cast<int32_t>(self.id), memory_order_acq_rel,
                                             memory_order_acquire) ||
-        expected == static_cast<int32_t>(self.id)) {
+        compare_equal(expected, self.id)) {
         while (is_running_.load(memory_order_acquire)) {
             const auto tick = time_cast<nanoseconds>(steady_clock::now() - steady_clock::time_point{}).count();
             if (tick >= deadline) {

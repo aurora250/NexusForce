@@ -65,7 +65,7 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const bool is_monotoni
                                               const int64_t ns) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const milliseconds timeout_ms = relative_time(sec, ns, is_monotonic);
-    ::BOOL result = ::SleepConditionVariableSRW(&cond_, mtx.native_handle(), timeout_ms.count(), 0);
+    const ::BOOL result = ::SleepConditionVariableSRW(&cond_, mtx.native_handle(), timeout_ms.count(), 0);
     if (result == TRUE) {
         return cv_status::success;
     }

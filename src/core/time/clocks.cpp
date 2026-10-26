@@ -56,7 +56,7 @@ system_clock::time_point system_clock::now() noexcept {
 
         const uint64_t ticks_since_unix_epoch = file_time - unix_epoch_offset;
         const uint64_t nanos = ticks_since_unix_epoch * 100;
-        rep total_nanos = static_cast<rep>(nanos);
+        const rep total_nanos = static_cast<rep>(nanos);
 #elif defined(NEFORCE_PLATFORM_LINUX)
         ::timespec ts{};
         ::clock_gettime(CLOCK_REALTIME, &ts);

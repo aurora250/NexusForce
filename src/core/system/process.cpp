@@ -116,16 +116,35 @@ namespace {
             return {};
         }
 
-        nt_unicode_string command_line{};
-        unsigned long returned = 0;
         constexpr unsigned long process_command_line_information = 60;
-        const LONG status = query(process_handle, process_command_line_information, &command_line,
-                                  static_cast<unsigned long>(sizeof(command_line)), &returned);
-        if (status < 0 || command_line.buffer == nullptr || command_line.length == 0) {
+        constexpr LONG status_info_length_mismatch = static_cast<LONG>(0xC0000004);
+
+        // The first query reports the required buffer size in ReturnLength; the string is copied
+        // inline after the UNICODE_STRING header, so the returned buffer must be that large.
+        nt_unicode_string command_line{};
+        unsigned long needed = 0;
+        LONG status = query(process_handle, process_command_line_information, &command_line,
+                            static_cast<unsigned long>(sizeof(command_line)), &needed);
+        if (status >= 0 && command_line.buffer != nullptr && command_line.length != 0) {
+            return wcharacter::to_string(
+                    basic_string_view<wchar_t>(command_line.buffer, command_line.length / sizeof(wchar_t)));
+        }
+        if (status != status_info_length_mismatch || needed <= sizeof(command_line)) {
             return {};
         }
-        return wcharacter::to_string(
-                basic_string_view<wchar_t>(command_line.buffer, command_line.length / sizeof(wchar_t)));
+
+        vector<::BYTE> buffer(needed);
+        unsigned long returned = 0;
+        status = query(process_handle, process_command_line_information, buffer.data(),
+                       static_cast<unsigned long>(buffer.size()), &returned);
+        if (status < 0) {
+            return {};
+        }
+        const auto* info = reinterpret_cast<const nt_unicode_string*>(buffer.data());
+        if (info->buffer == nullptr || info->length == 0) {
+            return {};
+        }
+        return wcharacter::to_string(basic_string_view<wchar_t>(info->buffer, info->length / sizeof(wchar_t)));
     }
 
     string user_name_of_handle(const ::HANDLE process_handle) {
@@ -152,8 +171,8 @@ namespace {
         const auto* user = reinterpret_cast<const ::TOKEN_USER*>(buffer.data());
         wchar_t account[256] = {};
         wchar_t domain[256] = {};
-        ::DWORD account_length = static_cast<::DWORD>(sizeof(account) / sizeof(wchar_t));
-        ::DWORD domain_length = static_cast<::DWORD>(sizeof(domain) / sizeof(wchar_t));
+        auto account_length = static_cast<::DWORD>(sizeof(account) / sizeof(wchar_t));
+        auto domain_length = static_cast<::DWORD>(sizeof(domain) / sizeof(wchar_t));
         ::SID_NAME_USE use = ::SidTypeUnknown;
         if (::LookupAccountSidW(nullptr, user->User.Sid, account, &account_length, domain, &domain_length, &use) ==
             FALSE) {
@@ -185,20 +204,26 @@ namespace {
         ::SIZE_T virtual_size;
     };
 
-    map<uint32_t, uint64_t> virtual_sizes_of_processes() {
+    struct system_process_facts {
+        uint64_t virtual_size{0};
+        uint32_t threads{0};
+        uint64_t create_time_ms{0};
+    };
+
+    map<uint32_t, system_process_facts> system_process_facts_of_processes() {
         // SystemProcessInformation == 5, resolved dynamically to avoid linking ntdll.
         constexpr ::ULONG system_process_information = 5;
-        constexpr ::LONG status_info_length_mismatch = static_cast<::LONG>(0xC0000004);
-        map<uint32_t, uint64_t> sizes;
+        constexpr auto status_info_length_mismatch = static_cast<::LONG>(0xC0000004);
+        map<uint32_t, system_process_facts> facts;
         const ::HMODULE ntdll = ::GetModuleHandleW(L"ntdll.dll");
         if (ntdll == nullptr) {
-            return sizes;
+            return facts;
         }
         using nt_query_system_information_fn = ::LONG(WINAPI*)(::ULONG, void*, ::ULONG, ::PULONG);
         const auto query =
                 reinterpret_cast<nt_query_system_information_fn>(::GetProcAddress(ntdll, "NtQuerySystemInformation"));
         if (query == nullptr) {
-            return sizes;
+            return facts;
         }
         ::ULONG size = 0;
         ::LONG status = query(system_process_information, nullptr, 0, &size);
@@ -219,7 +244,17 @@ namespace {
                 const auto* entry = reinterpret_cast<const system_process_basic_info*>(cursor);
                 const auto process_id = static_cast<uint32_t>(reinterpret_cast<::ULONG_PTR>(entry->unique_process_id));
                 if (process_id != 0) {
-                    sizes[process_id] = static_cast<uint64_t>(entry->virtual_size);
+                    system_process_facts fact;
+                    fact.virtual_size = static_cast<uint64_t>(entry->virtual_size);
+                    fact.threads = static_cast<uint32_t>(entry->number_of_threads);
+                    const auto ticks = static_cast<uint64_t>(entry->create_time.QuadPart);
+                    if (ticks != 0) {
+                        ::FILETIME create_filetime{};
+                        create_filetime.dwLowDateTime = static_cast<::DWORD>(ticks & 0xFFFFFFFFU);
+                        create_filetime.dwHighDateTime = static_cast<::DWORD>((ticks >> 32) & 0xFFFFFFFFU);
+                        fact.create_time_ms = filetime_to_unix_ms(create_filetime);
+                    }
+                    facts[process_id] = fact;
                 }
                 if (entry->next_entry_offset == 0) {
                     break;
@@ -231,7 +266,7 @@ namespace {
             }
             break;
         }
-        return sizes;
+        return facts;
     }
 
     process::io_info io_info_of_handle(const ::HANDLE process_handle) {
@@ -1394,7 +1429,7 @@ void process::start_elevated(const string& executable, const vector<string>& arg
 #endif
 }
 
-int process::wait(int timeout_ms) {
+int process::wait(const int timeout_ms) {
     if (!started_) {
         NEFORCE_THROW_EXCEPTION(process_exception("Process not started"));
     }
@@ -1691,7 +1726,7 @@ process::shell_result process::execute_shell(const string& command, const int ti
 }
 
 process::shell_result process::execute_elevated_shell(const string& command, const int timeout_ms,
-                                                      elevation_tool tool) {
+                                                      const elevation_tool tool) {
     if (command.empty()) {
         NEFORCE_THROW_EXCEPTION(process_exception("Empty shell command"));
     }
@@ -1746,19 +1781,28 @@ vector<process::snapshot_entry> process::snapshot() {
     if (tool_snapshot == INVALID_HANDLE_VALUE) {
         return out;
     }
-    const auto virtual_sizes = virtual_sizes_of_processes();
+    const auto system_facts = system_process_facts_of_processes();
     ::PROCESSENTRY32W entry{};
     entry.dwSize = sizeof(entry);
     if (::Process32FirstW(tool_snapshot, &entry) == TRUE) {
         do {
+            if (entry.th32ProcessID == 0) {
+                continue;
+            }
             snapshot_entry item;
             item.pid = static_cast<uint32_t>(entry.th32ProcessID);
             item.parent_pid = static_cast<uint32_t>(entry.th32ParentProcessID);
             item.threads = static_cast<uint32_t>(entry.cntThreads);
             item.name = wcharacter::to_string(entry.szExeFile);
-            const auto virtual_size = virtual_sizes.find(item.pid);
-            if (virtual_size != virtual_sizes.end()) {
-                item.virtual_bytes = virtual_size->second;
+            const auto facts = system_facts.find(item.pid);
+            if (facts != system_facts.end()) {
+                item.virtual_bytes = facts->second.virtual_size;
+                if (facts->second.threads != 0) {
+                    item.threads = facts->second.threads;
+                }
+                if (facts->second.create_time_ms != 0) {
+                    item.start_time_ms = facts->second.create_time_ms;
+                }
             }
             const ::HANDLE handle =
                     ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, entry.th32ProcessID);
@@ -1843,7 +1887,7 @@ vector<process::snapshot_entry> process::snapshot() {
     return out;
 }
 
-string process::get_name(native_id_type process_id) {
+string process::get_name(const native_id_type process_id) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
     if (handle == nullptr) {
@@ -1922,7 +1966,7 @@ string process::get_executable_path(native_id_type process_id) {
 #endif
 }
 
-process::time_info process::get_time_info(native_id_type process_id) {
+process::time_info process::get_time_info(const native_id_type process_id) {
     time_info info;
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
@@ -2304,7 +2348,7 @@ bool process::relaunch_current() {
     ::PROCESS_INFORMATION child{};
     const ::BOOL created = ::CreateProcessW(executable, mutable_command, nullptr, nullptr, FALSE,
                                             CREATE_NEW_PROCESS_GROUP, nullptr, nullptr, &startup, &child);
-    if (!created) {
+    if (created == FALSE) {
         return false;
     }
     ::CloseHandle(child.hThread);
@@ -2564,7 +2608,7 @@ optional<process::priority> process::get_priority(const native_id_type process_i
     if (priority_class == 0) {
         return none;
     }
-    priority level = priority::normal;
+    auto level = priority::normal;
     if (!priority_from_class(priority_class, level)) {
         return none;
     }
@@ -2599,7 +2643,7 @@ bool process::set_priority(const native_id_type process_id, const priority level
 bool process::set_nice(const native_id_type process_id, const int32_t nice) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const int32_t value = nice < -20 ? -20 : (nice > 19 ? 19 : nice);
-    priority level = priority::normal;
+    auto level = priority::normal;
     if (value >= 15) {
         level = priority::idle;
     } else if (value >= 1) {
@@ -2673,6 +2717,5 @@ bool process::set_affinity(const native_id_type process_id, const uint64_t mask)
     return ::sched_setaffinity(static_cast<::pid_t>(process_id), sizeof(set), &set) == 0;
 #endif
 }
-
 
 NEFORCE_END_NAMESPACE__

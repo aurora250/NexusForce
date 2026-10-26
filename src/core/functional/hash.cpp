@@ -1,7 +1,6 @@
 #include <NeForce/core/functional/hash.hpp>
 #include <NeForce/core/memory/bit.hpp>
 #include <NeForce/core/numeric/int128.hpp>
-#include <NeForce/core/simd/types.hpp>
 #include <NeForce/core/utility/pair.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -378,7 +377,7 @@ namespace {
     constexpr uint64_t XXH3_PRIME64_2 = 0xC2B2AE3D27D4EB4FULL;
     constexpr uint64_t XXH3_PRIME64_3 = 0x165667B19E3779F9ULL;
     constexpr uint64_t XXH3_PRIME64_4 = 0x85EBCA77C2B2AE63ULL;
-    constexpr uint64_t XXH3_PRIME64_5 = 0x27D4EB2F165667C5ULL;
+    NEFORCE_UNUSED constexpr uint64_t XXH3_PRIME64_5 = 0x27D4EB2F165667C5ULL;
     constexpr size_t XXH3_SECRET_DEFAULT_SIZE = 192;
     constexpr size_t XXH3_STRIPE_LEN = 64;
     constexpr size_t XXH3_SECRET_CONSUME_RATE = 8;
@@ -421,7 +420,7 @@ namespace {
         return h;
     }
 
-    uint64_t XXH3_mix16B(const byte_t* data, const byte_t* secret, uint64_t seed) noexcept {
+    uint64_t XXH3_mix16B(const byte_t* data, const byte_t* secret, const uint64_t seed) noexcept {
         const uint64_t lo = endian::read_le64(data + 0);
         const uint64_t hi = endian::read_le64(data + 8);
         const uint64_t sl = endian::read_le64(secret + 0) ^ seed;

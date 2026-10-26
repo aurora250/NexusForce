@@ -11,7 +11,6 @@
 #    include <NeForce/core/string/to_string.hpp>
 #    include <windef.h>
 #    include <WinBase.h>
-#    include <processthreadsapi.h>
 #    include <shellapi.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

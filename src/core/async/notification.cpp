@@ -10,7 +10,7 @@ void notification::wait() const {
     cv_.wait(lock, [this]() { return notified_yet_.load(memory_order_acquire); });
 }
 
-bool notification::wait_for(milliseconds rest) const {
+bool notification::wait_for(const milliseconds rest) const {
     if (notified()) {
         return true;
     }
@@ -19,7 +19,7 @@ bool notification::wait_for(milliseconds rest) const {
     return cv_.wait_for(lock, rest, [this]() { return notified_yet_.load(memory_order_acquire); });
 }
 
-bool notification::wait_until(system_clock::time_point util) const {
+bool notification::wait_until(const system_clock::time_point util) const {
     if (notified()) {
         return true;
     }

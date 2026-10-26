@@ -3,7 +3,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    string escape_env_value(const string& value, env_variable::quote_type qt) {
+    string escape_env_value(const string& value, const env_variable::quote_type qt) {
         if (qt == env_variable::None) {
             return value;
         }

@@ -102,7 +102,7 @@ uint64_t io_context::next_timer_deadline() const {
     return timer_heap_.front().deadline_ms;
 }
 
-void io_context::process_timers(size_t max_count) {
+void io_context::process_timers(const size_t max_count) {
     unique_lock<mutex> lk(timer_mutex_);
     const uint64_t n_ms = now_ms();
     size_t count = 0;
@@ -144,7 +144,7 @@ bool io_context::cancel_timer(const size_t timer_id) {
     return false;
 }
 
-size_t io_context::drain_handlers(size_t max_count) {
+size_t io_context::drain_handlers(const size_t max_count) {
     size_t count = 0;
     for (size_t i = 0; i < max_count; ++i) {
         auto handler = external_queue_.try_pop();
@@ -629,7 +629,7 @@ size_t io_context::poll() {
     return total;
 }
 
-void io_context::run_pool(size_t n) {
+void io_context::run_pool(const size_t n) {
     {
         lock<mutex> lk(pool_mutex_);
         for (size_t i = 0; i < n; ++i) {
