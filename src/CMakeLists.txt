@@ -325,7 +325,7 @@ nexusforce_compiler_options(NexusForce)
 # 链接系统库
 if(WIN32)
     target_link_libraries(NexusForce PUBLIC
-            bcrypt cfgmgr32 Crypt32 DbgHelp iphlpapi Psapi pdh
+            bcrypt cfgmgr32 Crypt32 DbgHelp iphlpapi Psapi pdh powrprof
             SetupAPI Shell32 synchronization Wbemuuid ws2_32 wsock32
     )
 elseif(UNIX AND NOT APPLE)

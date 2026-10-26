@@ -9,8 +9,9 @@
 - `process` 新增 `get_command_line()` / `current_command_line()`、`get_executable_path()`、`current_name()`、`current_state()`
 - `process` 新增进程控制原语：`send_signal()`（Linux 走 pidfd，避免 PID 复用竞态；Windows 映射 terminate/kill）、`signal_name()`、`get_priority()` / `set_priority()` / `set_nice()`、`get_affinity()` / `set_affinity()`
 - `process` 新增 `io_info` / `get_io_info()` / `current_io_info()`、`get_user()`、`threads()`、`socket_owners()`；`snapshot_entry` 补充 `user`、`nice`、`kernel_thread` 与 `io` 字段
-- `sysinfo` 新增 `cpu_usage_per_core()`、`battery_info` / `battery_status()`
+- `sysinfo` 新增 `cpu_usage_per_core()`、`cpu_usage_breakdown()`、`disk_io_rates()`、`battery_info` / `battery_status()`
 - `sysinfo::network_interface` 新增 `operstate`、`mtu`、`speed_bps` 与收发字节/包/错误/丢包计数
+- `sysinfo::battery_info` 新增 `rate_mw`、`capacity_mwh`、`full_capacity_mwh`；`snapshot_entry` 在 Windows 上填充 `virtual_bytes`
 - `sysinfo` 新增 `mount_points()`；Windows 挂载点以卷根目录实现，Linux 读 `/proc/mounts`
 - `sysinfo::disk_info` 新增 `filesystem` 与 `available_bytes`，区分“空闲（含保留块）”与“非特权用户可用”
 - `sysinfo::network_interface` 新增 `index`、`prefix_length`、`is_loopback`：Windows 补子网掩码、MAC 与 IPv6 前缀，Linux 补 MAC 与接口索引且每个接口只保留一条记录

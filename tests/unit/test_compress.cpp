@@ -1,9 +1,10 @@
 #include <NeForce/compress/zstd_compress.hpp>
 #include <gtest/gtest.h>
+using namespace neforce;
+
 #ifdef NEFORCE_SUPPORT_LZ4
 #    include <NeForce/compress/lz4_compress.hpp>
 #    include <NeForce/core/algorithm/type_erase.hpp>
-using namespace neforce;
 
 namespace {
     constexpr uint8_t sample_data[] = "Hello, LZ4! This is a test string for compression and decompression.";

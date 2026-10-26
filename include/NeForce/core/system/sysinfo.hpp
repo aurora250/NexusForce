@@ -235,12 +235,46 @@ public:
      * 多电池时按剩余电量加权平均百分比。
      */
     struct battery_info {
-        bool present{false};            ///< 是否存在电池
-        bool on_ac{false};              ///< 是否接入交流电源
-        bool charging{false};           ///< 是否正在充电
-        float64_t charge_percent{-1.0}; ///< 剩余电量百分比，未知为 -1
-        int64_t remaining_seconds{-1};  ///< 预计可用秒数，未知为 -1
-        string status;                  ///< "charging"/"discharging"/"full"/"idle"/"unknown"
+        bool present{false};               ///< 是否存在电池
+        bool on_ac{false};                 ///< 是否接入交流电源
+        bool charging{false};              ///< 是否正在充电
+        float64_t charge_percent{-1.0};    ///< 剩余电量百分比，未知为 -1
+        int64_t remaining_seconds{-1};     ///< 预计可用秒数，未知为 -1
+        float64_t rate_mw{-1.0};           ///< 充放电功率绝对值（毫瓦），未知为 -1
+        float64_t capacity_mwh{-1.0};      ///< 当前剩余容量（毫瓦时），未知为 -1
+        float64_t full_capacity_mwh{-1.0}; ///< 满电容量（毫瓦时），未知为 -1
+        string status;                     ///< "charging"/"discharging"/"full"/"idle"/"unknown"
+    };
+
+    /**
+     * @struct cpu_breakdown_info
+     * @brief CPU 时间构成占比
+     *
+     * 各字段为 0.0-100.0 的百分比；平台无法提供的状态保持 0。
+     */
+    struct cpu_breakdown_info {
+        float64_t user{0.0};       ///< 用户态
+        float64_t nice{0.0};       ///< 低优先级用户态（Linux）
+        float64_t system{0.0};     ///< 内核态
+        float64_t idle{0.0};       ///< 空闲
+        float64_t iowait{0.0};     ///< 等待 I/O（Linux）
+        float64_t irq{0.0};        ///< 硬中断
+        float64_t softirq{0.0};    ///< 软中断（Windows 为 DPC）
+        float64_t steal{0.0};      ///< 虚拟化窃取时间（Linux）
+        float64_t guest{0.0};      ///< 客户机时间（Linux）
+        float64_t guest_nice{0.0}; ///< 低优先级客户机时间（Linux）
+    };
+
+    /**
+     * @struct disk_io_info
+     * @brief 磁盘 I/O 速率
+     */
+    struct disk_io_info {
+        string name;                         ///< 设备名
+        float64_t read_bytes_per_second{0};  ///< 读取速率（字节/秒）
+        float64_t write_bytes_per_second{0}; ///< 写入速率（字节/秒）
+        float64_t busy_percent{0};           ///< 忙碌百分比（0-100）
+        bool aggregate{false};               ///< 是否为整盘而非分区
     };
 
     /**
@@ -386,6 +420,12 @@ public:
     NEFORCE_NODISCARD static vector<float64_t> cpu_usage_per_core();
 
     /**
+     * @brief 获取 CPU 时间构成占比
+     * @return 各状态百分比
+     */
+    NEFORCE_NODISCARD static cpu_breakdown_info cpu_usage_breakdown();
+
+    /**
      * @brief 获取当前内存使用情况
      * @return 内存信息，每次调用实时采样
      */
@@ -415,6 +455,13 @@ public:
      * @return 挂载点列表，平台不支持或读取失败时返回空列表
      */
     NEFORCE_NODISCARD static vector<mount_point> mount_points();
+
+    /**
+     * @brief 获取各磁盘的 I/O 速率
+     * @return 磁盘 I/O 列表，按设备名排序
+     * @note 基于两次调用的差值，首次调用返回空或全 0；需要读取 /proc/diskstats 或 PDH
+     */
+    NEFORCE_NODISCARD static vector<disk_io_info> disk_io_rates();
 
     /**
      * @brief 获取系统运行时间

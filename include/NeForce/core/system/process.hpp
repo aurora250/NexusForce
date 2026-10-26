@@ -228,12 +228,14 @@ public:
         string name;                  ///< 进程名
         string command;               ///< 命令行
         state status{state::unknown}; ///< 运行状态
+        char state_code{0};           ///< 原始状态字符（Linux）
         uint32_t uid{0};              ///< 属主用户 ID（Linux）
         string user;                  ///< 属主用户名，无法解析时为空
         uint32_t threads{0};          ///< 线程数
         int32_t nice{0};              ///< nice 值（Linux）
         bool kernel_thread{false};    ///< 是否为内核线程（Linux）
         uint64_t rss_bytes{0};        ///< 常驻内存（字节）
+        uint64_t virtual_bytes{0};    ///< 虚拟内存（字节，Linux）
         uint64_t user_time_ms{0};     ///< 用户态 CPU 时间（毫秒）
         uint64_t system_time_ms{0};   ///< 内核态 CPU 时间（毫秒）
         uint64_t start_time_ms{0};    ///< 启动时刻（Unix 纪元毫秒）

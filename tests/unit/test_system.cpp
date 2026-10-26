@@ -4717,6 +4717,10 @@ TEST_F(ProcessTest, Snapshot_EnrichesCurrentProcess) {
         EXPECT_GE(entry.nice, -20);
         EXPECT_LE(entry.nice, 19);
         EXPECT_GT(entry.io.read_operations + entry.io.write_operations, 0U);
+        EXPECT_GT(entry.virtual_bytes, 0U);
+        EXPECT_NE(entry.state_code, 0);
+#else
+        EXPECT_EQ(entry.state_code, 0);
 #endif
         return;
     }
@@ -6160,12 +6164,42 @@ TEST_F(SysinfoTest, CpuUsagePerCore_ReturnsSamples) {
     }
 }
 
+TEST_F(SysinfoTest, CpuBreakdown_SumsToHundred) {
+    static_cast<void>(sysinfo::cpu_usage_breakdown());
+    this_thread::sleep_for(milliseconds(20));
+    const auto value = sysinfo::cpu_usage_breakdown();
+    const double total = value.user + value.nice + value.system + value.idle + value.iowait + value.irq +
+                         value.softirq + value.steal + value.guest + value.guest_nice;
+    EXPECT_GE(total, 95.0);
+    EXPECT_LE(total, 105.0);
+    EXPECT_GE(value.idle, 0.0);
+    EXPECT_LE(value.idle, 100.0);
+}
+
+TEST_F(SysinfoTest, DiskIoRates_ReturnsDevices) {
+    static_cast<void>(sysinfo::disk_io_rates());
+    this_thread::sleep_for(milliseconds(20));
+    const auto values = sysinfo::disk_io_rates();
+    EXPECT_FALSE(values.empty());
+    for (const auto& value: values) {
+        EXPECT_FALSE(value.name.empty());
+        EXPECT_GE(value.read_bytes_per_second, 0.0);
+        EXPECT_GE(value.write_bytes_per_second, 0.0);
+        EXPECT_GE(value.busy_percent, 0.0);
+        EXPECT_LE(value.busy_percent, 100.0);
+    }
+}
+
 TEST_F(SysinfoTest, BatteryStatus_IsConsistent) {
     const auto info = sysinfo::battery_status();
     EXPECT_FALSE(info.status.empty());
     if (info.present) {
         EXPECT_GE(info.charge_percent, 0.0);
         EXPECT_LE(info.charge_percent, 100.0);
+        if (info.full_capacity_mwh >= 0.0 && info.full_capacity_mwh > 0.0) {
+            EXPECT_GE(info.capacity_mwh, 0.0);
+            EXPECT_LE(info.capacity_mwh, info.full_capacity_mwh + 1.0);
+        }
     } else {
         EXPECT_EQ(info.charge_percent, -1.0);
         EXPECT_EQ(info.status, "unknown");

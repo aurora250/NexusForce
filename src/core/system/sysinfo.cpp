@@ -1,4 +1,7 @@
 #include <NeForce/core/async/mutex.hpp>
+#include <NeForce/core/container/flat_unordered_map.hpp>
+#include <NeForce/core/container/map.hpp>
+#include <NeForce/core/utility/tuple.hpp>
 #include <NeForce/core/string/to_string.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/utility/packages.hpp>
@@ -13,6 +16,8 @@
 #    include <iphlpapi.h>
 #    include <netioapi.h>
 #    include <pdh.h>
+#    include <powerbase.h>
+#    include <powrprof.h>
 #    include <psapi.h>
 #    include <winternl.h>
 #    include <wbemcli.h>
@@ -36,6 +41,7 @@
 #    include <unistd.h>
 #    include <cstdio>
 #    include <cstdlib>
+#    include <ctime>
 #    ifdef NEFORCE_ARCH_X86
 #        include <cpuid.h>
 #    endif
@@ -310,6 +316,15 @@ namespace {
             } else {
                 info.remaining_seconds = static_cast<int64_t>(energy_now_sum * 3600ULL / power_sum);
             }
+        }
+        if (energy_now_sum > 0) {
+            info.capacity_mwh = static_cast<float64_t>(energy_now_sum) / 1000.0;
+        }
+        if (energy_full_sum > 0) {
+            info.full_capacity_mwh = static_cast<float64_t>(energy_full_sum) / 1000.0;
+        }
+        if (power_sum > 0) {
+            info.rate_mw = static_cast<float64_t>(power_sum) / 1000.0;
         }
         if (!info.present) {
             info.status = "unknown";
@@ -1457,6 +1472,140 @@ vector<float64_t> sysinfo::cpu_usage_per_core() {
 }
 
 
+sysinfo::cpu_breakdown_info sysinfo::cpu_usage_breakdown() {
+    static mutex breakdown_mutex;
+    static vector<uint64_t> previous_fields;
+    lock<mutex> guard(breakdown_mutex);
+    cpu_breakdown_info result;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    static ::PDH_HQUERY breakdown_query = nullptr;
+    static ::PDH_HCOUNTER user_counter = nullptr;
+    static ::PDH_HCOUNTER privileged_counter = nullptr;
+    static ::PDH_HCOUNTER interrupt_counter = nullptr;
+    static ::PDH_HCOUNTER dpc_counter = nullptr;
+    static ::PDH_HCOUNTER idle_counter = nullptr;
+    if (breakdown_query == nullptr) {
+        if (::PdhOpenQueryW(nullptr, 0, &breakdown_query) != ERROR_SUCCESS) {
+            breakdown_query = nullptr;
+            return result;
+        }
+        using pdh_add_english_counter_fn = ::PDH_STATUS(WINAPI*)(::PDH_HQUERY, ::LPCWSTR, ::DWORD_PTR, ::PDH_HCOUNTER*);
+        pdh_add_english_counter_fn add_english = nullptr;
+        const ::HMODULE pdh_module = ::GetModuleHandleW(L"pdh.dll");
+        if (pdh_module != nullptr) {
+            add_english =
+                    reinterpret_cast<pdh_add_english_counter_fn>(::GetProcAddress(pdh_module, "PdhAddEnglishCounterW"));
+        }
+        const auto add = [&](const wchar_t* path, ::PDH_HCOUNTER* counter) -> bool {
+            const ::PDH_STATUS status = add_english != nullptr ? add_english(breakdown_query, path, 0, counter)
+                                                               : ::PdhAddCounterW(breakdown_query, path, 0, counter);
+            return status == ERROR_SUCCESS;
+        };
+        if (!add(L"\\Processor(_Total)\\% User Time", &user_counter) ||
+            !add(L"\\Processor(_Total)\\% Privileged Time", &privileged_counter) ||
+            !add(L"\\Processor(_Total)\\% Interrupt Time", &interrupt_counter) ||
+            !add(L"\\Processor(_Total)\\% DPC Time", &dpc_counter) ||
+            !add(L"\\Processor(_Total)\\% Idle Time", &idle_counter)) {
+            ::PdhCloseQuery(breakdown_query);
+            breakdown_query = nullptr;
+            return result;
+        }
+        ::PdhCollectQueryData(breakdown_query);
+        return result;
+    }
+    if (::PdhCollectQueryData(breakdown_query) != ERROR_SUCCESS) {
+        return result;
+    }
+    float64_t user = 0.0;
+    float64_t privileged = 0.0;
+    float64_t interrupt = 0.0;
+    float64_t dpc = 0.0;
+    float64_t idle = 0.0;
+    const auto read_value = [](const ::PDH_HCOUNTER counter, float64_t& out) {
+        ::PDH_FMT_COUNTERVALUE value{};
+        if (::PdhGetFormattedCounterValue(counter, PDH_FMT_DOUBLE, nullptr, &value) != ERROR_SUCCESS) {
+            return;
+        }
+        if (value.CStatus == PDH_CSTATUS_VALID_DATA || value.CStatus == PDH_CSTATUS_NEW_DATA) {
+            out = value.doubleValue;
+        }
+    };
+    read_value(user_counter, user);
+    read_value(privileged_counter, privileged);
+    read_value(interrupt_counter, interrupt);
+    read_value(dpc_counter, dpc);
+    read_value(idle_counter, idle);
+    const auto clamp = [](const float64_t value) { return value < 0.0 ? 0.0 : (value > 100.0 ? 100.0 : value); };
+    result.user = clamp(user);
+    result.idle = clamp(idle);
+    result.irq = clamp(interrupt);
+    result.softirq = clamp(dpc);
+    result.system = clamp(privileged - interrupt - dpc);
+#else
+    const string content = read_file_all("/proc/stat");
+    if (content.empty()) {
+        return result;
+    }
+    string line;
+    size_t position = 0;
+    if (!getline(content.view(), position, line) || !line.starts_with("cpu ")) {
+        return result;
+    }
+    const string_view data = line.view(4);
+    string_view token;
+    size_t offset = 0;
+    uint64_t fields[10] = {};
+    size_t count = 0;
+    while (count < 10 && getline(data, offset, token, is_space<char>)) {
+        if (!token.empty()) {
+            fields[count++] = to_uint64(token);
+        }
+    }
+    if (count < 4) {
+        return result;
+    }
+    vector<uint64_t> current(fields, fields + count);
+    if (previous_fields.size() != current.size()) {
+        previous_fields = move(current);
+        return result;
+    }
+    uint64_t delta[10] = {};
+    uint64_t total = 0;
+    for (size_t index = 0; index < count; ++index) {
+        if (current[index] < previous_fields[index]) {
+            previous_fields = move(current);
+            return result;
+        }
+        delta[index] = current[index] - previous_fields[index];
+    }
+    for (size_t index = 0; index < neforce::min(count, static_cast<size_t>(8)); ++index) {
+        total += delta[index];
+    }
+    previous_fields = move(current);
+    if (total == 0) {
+        return result;
+    }
+    if (count >= 10) {
+        delta[0] = delta[0] > delta[8] ? delta[0] - delta[8] : 0;
+        delta[1] = delta[1] > delta[9] ? delta[1] - delta[9] : 0;
+    }
+    const float64_t scale = 100.0 / static_cast<float64_t>(total);
+    result.user = static_cast<float64_t>(delta[0]) * scale;
+    result.nice = static_cast<float64_t>(delta[1]) * scale;
+    result.system = static_cast<float64_t>(delta[2]) * scale;
+    result.idle = static_cast<float64_t>(delta[3]) * scale;
+    result.iowait = static_cast<float64_t>(delta[4]) * scale;
+    result.irq = static_cast<float64_t>(delta[5]) * scale;
+    result.softirq = static_cast<float64_t>(delta[6]) * scale;
+    result.steal = static_cast<float64_t>(delta[7]) * scale;
+    if (count >= 10) {
+        result.guest = static_cast<float64_t>(delta[8]) * scale;
+        result.guest_nice = static_cast<float64_t>(delta[9]) * scale;
+    }
+#endif
+    return result;
+}
+
 uint32_t sysinfo::process_count() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     vector<::DWORD> processes(1024);
@@ -1743,6 +1892,194 @@ uint64_t sysinfo::uptime_seconds() {
 #endif
 }
 
+vector<sysinfo::disk_io_info> sysinfo::disk_io_rates() {
+    static mutex disk_io_mutex;
+    static flat_unordered_map<string, tuple<uint64_t, uint64_t, uint64_t>> previous;
+    static uint64_t previous_ms = 0;
+    lock<mutex> guard(disk_io_mutex);
+    vector<disk_io_info> result;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    static ::PDH_HQUERY disk_query = nullptr;
+    static ::PDH_HCOUNTER read_counter = nullptr;
+    static ::PDH_HCOUNTER write_counter = nullptr;
+    static ::PDH_HCOUNTER busy_counter = nullptr;
+    if (disk_query == nullptr) {
+        if (::PdhOpenQueryW(nullptr, 0, &disk_query) != ERROR_SUCCESS) {
+            disk_query = nullptr;
+            return result;
+        }
+        using pdh_add_english_counter_fn = ::PDH_STATUS(WINAPI*)(::PDH_HQUERY, ::LPCWSTR, ::DWORD_PTR, ::PDH_HCOUNTER*);
+        pdh_add_english_counter_fn add_english = nullptr;
+        const ::HMODULE pdh_module = ::GetModuleHandleW(L"pdh.dll");
+        if (pdh_module != nullptr) {
+            add_english =
+                    reinterpret_cast<pdh_add_english_counter_fn>(::GetProcAddress(pdh_module, "PdhAddEnglishCounterW"));
+        }
+        const auto add = [&](const wchar_t* path, ::PDH_HCOUNTER* counter) -> bool {
+            const ::PDH_STATUS status = add_english != nullptr ? add_english(disk_query, path, 0, counter)
+                                                               : ::PdhAddCounterW(disk_query, path, 0, counter);
+            return status == ERROR_SUCCESS;
+        };
+        if (!add(L"\\PhysicalDisk(*)\\Disk Read Bytes/sec", &read_counter) ||
+            !add(L"\\PhysicalDisk(*)\\Disk Write Bytes/sec", &write_counter) ||
+            !add(L"\\PhysicalDisk(*)\\% Disk Time", &busy_counter)) {
+            ::PdhCloseQuery(disk_query);
+            disk_query = nullptr;
+            return result;
+        }
+        ::PdhCollectQueryData(disk_query);
+        return result;
+    }
+    if (::PdhCollectQueryData(disk_query) != ERROR_SUCCESS) {
+        return result;
+    }
+    const auto collect_array = [](const ::PDH_HCOUNTER counter) {
+        flat_unordered_map<string, float64_t> values;
+        ::DWORD size = 0;
+        ::DWORD count = 0;
+        if (::PdhGetFormattedCounterArrayW(counter, PDH_FMT_DOUBLE, &size, &count, nullptr) != PDH_MORE_DATA) {
+            return values;
+        }
+        vector<::BYTE> buffer(size);
+        auto* items = reinterpret_cast<::PDH_FMT_COUNTERVALUE_ITEM_W*>(buffer.data());
+        if (::PdhGetFormattedCounterArrayW(counter, PDH_FMT_DOUBLE, &size, &count, items) != ERROR_SUCCESS) {
+            return values;
+        }
+        for (::DWORD index = 0; index < count; ++index) {
+            if (items[index].szName == nullptr) {
+                continue;
+            }
+            if (items[index].FmtValue.CStatus != PDH_CSTATUS_VALID_DATA &&
+                items[index].FmtValue.CStatus != PDH_CSTATUS_NEW_DATA) {
+                continue;
+            }
+            values[wcharacter::to_string(items[index].szName)] = items[index].FmtValue.doubleValue;
+        }
+        return values;
+    };
+    const auto reads = collect_array(read_counter);
+    const auto writes = collect_array(write_counter);
+    const auto busy = collect_array(busy_counter);
+    map<string, disk_io_info> entries;
+    for (auto iterator = reads.begin(); iterator != reads.end(); ++iterator) {
+        if (iterator->first == "_Total") {
+            continue;
+        }
+        disk_io_info value;
+        value.name = iterator->first;
+        value.read_bytes_per_second = iterator->second;
+        value.aggregate = true;
+        entries[iterator->first] = move(value);
+    }
+    for (auto iterator = writes.begin(); iterator != writes.end(); ++iterator) {
+        if (iterator->first == "_Total") {
+            continue;
+        }
+        disk_io_info& value = entries[iterator->first];
+        if (value.name.empty()) {
+            value.name = iterator->first;
+            value.aggregate = true;
+        }
+        value.write_bytes_per_second = iterator->second;
+    }
+    for (auto iterator = busy.begin(); iterator != busy.end(); ++iterator) {
+        if (iterator->first == "_Total") {
+            continue;
+        }
+        disk_io_info& value = entries[iterator->first];
+        if (value.name.empty()) {
+            value.name = iterator->first;
+            value.aggregate = true;
+        }
+        value.busy_percent = iterator->second < 0.0 ? 0.0 : (iterator->second > 100.0 ? 100.0 : iterator->second);
+    }
+    for (auto iterator = entries.begin(); iterator != entries.end(); ++iterator) {
+        result.push_back(move(iterator->second));
+    }
+#else
+    const string content = read_file_all("/proc/diskstats");
+    if (content.empty()) {
+        return result;
+    }
+    ::timespec now_time{};
+    ::clock_gettime(CLOCK_MONOTONIC, &now_time);
+    const uint64_t now =
+            static_cast<uint64_t>(now_time.tv_sec) * 1000ULL + static_cast<uint64_t>(now_time.tv_nsec) / 1000000ULL;
+    const uint64_t elapsed = previous_ms != 0 && now > previous_ms ? now - previous_ms : 0;
+
+    map<string, disk_io_info> entries;
+    flat_unordered_map<string, tuple<uint64_t, uint64_t, uint64_t>> next;
+    size_t position = 0;
+    string line;
+    while (getline(content.view(), position, line)) {
+        const string_view data = line.view();
+        string_view token;
+        size_t offset = 0;
+        string name;
+        uint64_t read_sectors = 0;
+        uint64_t write_sectors = 0;
+        uint64_t busy_ms = 0;
+        size_t field = 0;
+        bool valid = true;
+        while (getline(data, offset, token, is_space<char>)) {
+            if (token.empty()) {
+                continue;
+            }
+            if (field == 2) {
+                name = string(token);
+            } else if (field == 5) {
+                read_sectors = to_uint64(token);
+            } else if (field == 9) {
+                write_sectors = to_uint64(token);
+            } else if (field == 12) {
+                busy_ms = to_uint64(token);
+            }
+            ++field;
+            if (field > 12) {
+                break;
+            }
+        }
+        if (!valid || name.empty() || name.starts_with("loop") || name.starts_with("ram")) {
+            continue;
+        }
+        const uint64_t read_bytes = read_sectors * 512ULL;
+        const uint64_t write_bytes = write_sectors * 512ULL;
+        disk_io_info value;
+        value.name = name;
+        const string device = "/sys/class/block/" + name;
+        value.aggregate =
+                ::access((device + "/device").data(), F_OK) == 0 && ::access((device + "/partition").data(), F_OK) != 0;
+        if (elapsed > 0) {
+            const auto found = previous.find(name);
+            if (found != previous.end()) {
+                if (read_bytes >= get<0>(found->second)) {
+                    value.read_bytes_per_second = static_cast<float64_t>(read_bytes - get<0>(found->second)) * 1000.0 /
+                                                  static_cast<float64_t>(elapsed);
+                }
+                if (write_bytes >= get<1>(found->second)) {
+                    value.write_bytes_per_second = static_cast<float64_t>(write_bytes - get<1>(found->second)) *
+                                                   1000.0 / static_cast<float64_t>(elapsed);
+                }
+                if (busy_ms >= get<2>(found->second)) {
+                    const float64_t percent = static_cast<float64_t>(busy_ms - get<2>(found->second)) * 100.0 /
+                                              static_cast<float64_t>(elapsed);
+                    value.busy_percent = percent < 0.0 ? 0.0 : (percent > 100.0 ? 100.0 : percent);
+                }
+            }
+        }
+        next[name] = {read_bytes, write_bytes, busy_ms};
+        entries[name] = move(value);
+    }
+    previous = move(next);
+    previous_ms = now;
+    for (auto iterator = entries.begin(); iterator != entries.end(); ++iterator) {
+        result.push_back(move(iterator->second));
+    }
+#endif
+    return result;
+}
+
+
 sysinfo::battery_info sysinfo::battery_status() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     battery_info info;
@@ -1756,6 +2093,24 @@ sysinfo::battery_info sysinfo::battery_status() {
     info.charging = (status.BatteryFlag & 8) != 0;
     info.charge_percent = status.BatteryLifePercent == 255 ? -1.0 : static_cast<float64_t>(status.BatteryLifePercent);
     info.remaining_seconds = status.BatteryLifeTime == 0xFFFFFFFFUL ? -1 : static_cast<int64_t>(status.BatteryLifeTime);
+
+    ::SYSTEM_BATTERY_STATE battery_state{};
+    if (::CallNtPowerInformation(::SystemBatteryState, nullptr, 0, &battery_state, sizeof(battery_state)) == 0) {
+        info.present = info.present || battery_state.BatteryPresent != FALSE;
+        info.on_ac = info.on_ac || battery_state.AcOnLine != FALSE;
+        info.charging = info.charging || battery_state.Charging != FALSE;
+        if (battery_state.MaxCapacity > 0 && battery_state.RemainingCapacity <= battery_state.MaxCapacity) {
+            info.charge_percent = 100.0 * static_cast<float64_t>(battery_state.RemainingCapacity) /
+                                  static_cast<float64_t>(battery_state.MaxCapacity);
+            info.capacity_mwh = static_cast<float64_t>(battery_state.RemainingCapacity);
+            info.full_capacity_mwh = static_cast<float64_t>(battery_state.MaxCapacity);
+        }
+        const ::LONG rate = static_cast<::LONG>(battery_state.Rate);
+        info.rate_mw = static_cast<float64_t>(rate < 0 ? -rate : rate);
+        if (battery_state.EstimatedTime > 0 && info.remaining_seconds < 0) {
+            info.remaining_seconds = static_cast<int64_t>(battery_state.EstimatedTime);
+        }
+    }
     if (!info.present) {
         info.status = "unknown";
     } else if (info.charging) {

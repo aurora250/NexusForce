@@ -1,3 +1,4 @@
+#include <NeForce/core/container/flat_unordered_map.hpp>
 #include <NeForce/core/system/process.hpp>
 #include <NeForce/core/string/to_numerics.hpp>
 #include <NeForce/core/system/environment.hpp>
@@ -14,6 +15,7 @@
 #    include <securitybaseapi.h>
 #    include <processthreadsapi.h>
 #    include <TlHelp32.h>
+#    include <winternl.h>
 #    ifdef max
 #        undef max
 #    endif
@@ -160,6 +162,76 @@ namespace {
         const string account_text = wcharacter::to_string(account);
         const string domain_text = wcharacter::to_string(domain);
         return domain_text.empty() ? account_text : domain_text + "\\" + account_text;
+    }
+
+    struct system_process_basic_info {
+        ::ULONG next_entry_offset;
+        ::ULONG number_of_threads;
+        ::LARGE_INTEGER working_set_private_size;
+        ::ULONG hard_fault_count;
+        ::ULONG number_of_threads_high_watermark;
+        ::ULONGLONG cycle_time;
+        ::LARGE_INTEGER create_time;
+        ::LARGE_INTEGER user_time;
+        ::LARGE_INTEGER kernel_time;
+        ::UNICODE_STRING image_name;
+        ::LONG base_priority;
+        ::HANDLE unique_process_id;
+        ::HANDLE inherited_from_unique_process_id;
+        ::ULONG handle_count;
+        ::ULONG session_id;
+        ::ULONG_PTR unique_process_key;
+        ::SIZE_T peak_virtual_size;
+        ::SIZE_T virtual_size;
+    };
+
+    map<uint32_t, uint64_t> virtual_sizes_of_processes() {
+        // SystemProcessInformation == 5, resolved dynamically to avoid linking ntdll.
+        constexpr ::ULONG system_process_information = 5;
+        constexpr ::LONG status_info_length_mismatch = static_cast<::LONG>(0xC0000004);
+        map<uint32_t, uint64_t> sizes;
+        const ::HMODULE ntdll = ::GetModuleHandleW(L"ntdll.dll");
+        if (ntdll == nullptr) {
+            return sizes;
+        }
+        using nt_query_system_information_fn = ::LONG(WINAPI*)(::ULONG, void*, ::ULONG, ::PULONG);
+        const auto query =
+                reinterpret_cast<nt_query_system_information_fn>(::GetProcAddress(ntdll, "NtQuerySystemInformation"));
+        if (query == nullptr) {
+            return sizes;
+        }
+        ::ULONG size = 0;
+        ::LONG status = query(system_process_information, nullptr, 0, &size);
+        for (int attempt = 0; attempt < 4 && size > 0; ++attempt) {
+            vector<::BYTE> buffer(size + 65536);
+            ::ULONG returned = 0;
+            status = query(system_process_information, buffer.data(), static_cast<::ULONG>(buffer.size()), &returned);
+            if (status == status_info_length_mismatch) {
+                size = returned;
+                continue;
+            }
+            if (status < 0) {
+                break;
+            }
+            const ::BYTE* cursor = buffer.data();
+            const ::BYTE* end = buffer.data() + (returned != 0 ? returned : buffer.size());
+            while (cursor + sizeof(system_process_basic_info) <= end) {
+                const auto* entry = reinterpret_cast<const system_process_basic_info*>(cursor);
+                const auto process_id = static_cast<uint32_t>(reinterpret_cast<::ULONG_PTR>(entry->unique_process_id));
+                if (process_id != 0) {
+                    sizes[process_id] = static_cast<uint64_t>(entry->virtual_size);
+                }
+                if (entry->next_entry_offset == 0) {
+                    break;
+                }
+                if (cursor + entry->next_entry_offset > end) {
+                    break;
+                }
+                cursor += entry->next_entry_offset;
+            }
+            break;
+        }
+        return sizes;
     }
 
     process::io_info io_info_of_handle(const ::HANDLE process_handle) {
@@ -1674,6 +1746,7 @@ vector<process::snapshot_entry> process::snapshot() {
     if (tool_snapshot == INVALID_HANDLE_VALUE) {
         return out;
     }
+    const auto virtual_sizes = virtual_sizes_of_processes();
     ::PROCESSENTRY32W entry{};
     entry.dwSize = sizeof(entry);
     if (::Process32FirstW(tool_snapshot, &entry) == TRUE) {
@@ -1683,6 +1756,10 @@ vector<process::snapshot_entry> process::snapshot() {
             item.parent_pid = static_cast<uint32_t>(entry.th32ParentProcessID);
             item.threads = static_cast<uint32_t>(entry.cntThreads);
             item.name = wcharacter::to_string(entry.szExeFile);
+            const auto virtual_size = virtual_sizes.find(item.pid);
+            if (virtual_size != virtual_sizes.end()) {
+                item.virtual_bytes = virtual_size->second;
+            }
             const ::HANDLE handle =
                     ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, entry.th32ProcessID);
             if (handle != nullptr) {
@@ -1736,8 +1813,10 @@ vector<process::snapshot_entry> process::snapshot() {
         item.parent_pid = stat_data.parent_pid;
         item.name = move(stat_data.name);
         item.status = state_from_char(stat_data.state);
+        item.state_code = stat_data.state;
         item.threads = stat_data.threads;
         item.rss_bytes = stat_data.resident_pages * page_size;
+        item.virtual_bytes = stat_data.virtual_bytes;
         item.user_time_ms = stat_data.user_ticks * 1000 / ticks;
         item.system_time_ms = stat_data.system_ticks * 1000 / ticks;
         item.start_time_ms = start_time_ms(stat_data.start_ticks);
