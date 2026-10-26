@@ -4,6 +4,17 @@
 
 ### 🚀 New Features
 
+- `process` 新增 `snapshot()` 与 `process::snapshot_entry`：一次枚举全系统进程，给出父进程、状态、线程数、RSS、CPU 时间与启动时刻；Windows 走 Toolhelp 快照，Linux 读 `/proc`
+- `process` 新增 `get_time_info()` / 实例 `get_time_info()` / `current_time_info()`：用户态、内核态 CPU 时间与墙上时间统一为毫秒
+- `process` 新增 `get_command_line()` / `current_command_line()`、`get_executable_path()`、`current_name()`、`current_state()`
+- `process` 新增进程控制原语：`send_signal()`（Linux 走 pidfd，避免 PID 复用竞态；Windows 映射 terminate/kill）、`signal_name()`、`get_priority()` / `set_priority()` / `set_nice()`、`get_affinity()` / `set_affinity()`
+- `process` 新增 `io_info` / `get_io_info()` / `current_io_info()`、`get_user()`、`threads()`、`socket_owners()`；`snapshot_entry` 补充 `user`、`nice`、`kernel_thread` 与 `io` 字段
+- `sysinfo` 新增 `cpu_usage_per_core()`、`battery_info` / `battery_status()`
+- `sysinfo::network_interface` 新增 `operstate`、`mtu`、`speed_bps` 与收发字节/包/错误/丢包计数
+- `sysinfo` 新增 `mount_points()`；Windows 挂载点以卷根目录实现，Linux 读 `/proc/mounts`
+- `sysinfo::disk_info` 新增 `filesystem` 与 `available_bytes`，区分“空闲（含保留块）”与“非特权用户可用”
+- `sysinfo::network_interface` 新增 `index`、`prefix_length`、`is_loopback`：Windows 补子网掩码、MAC 与 IPv6 前缀，Linux 补 MAC 与接口索引且每个接口只保留一条记录
+- `sysinfo` 新增 `sysinfo::simd_instruction` 与 `sysinfo::simd_info`，并作为 `cpu_info::simd` 随实例提供：运行时探测 SSE/AVX/AVX-512 与 NEON/SVE，AVX 系列同时校验操作系统 XSAVE 状态
 - 添加 `tui::chart` 通用图表：`chart_spec` 支持柱状图、折线图、面积图、饼图、环形图、散点图、直方图、热力图与雷达图，含标题、类目标签、多系列、轴/网格/图例选项、揭示进度与初始选中索引
 - 添加交互式 `tui::chart_component`：方向键/Home/End 移动选中点，鼠标按下按实际几何命中，`selected_point()` / `selected_points()` 暴露标签与数值，`animate_progress()` 在帧回调中推进进度
 - 添加单元格级画布原语 `tui::canvas_painter` 与 `element::canvas(function<void(canvas_painter&)>)` 重载：局部坐标、裁剪、宽字符、文本/填充/线段与主题访问，画布元素同时回写布局矩形
@@ -127,6 +138,13 @@
 
 ### 🔧 Improvements
 
+- `process::check_permission()` Linux 语义与 Windows 对齐：`query_info` 只需进程存在，读/写/终止要求属主或 root，`execute` 恒为 false，`permission::all` 不再因 `/proc/<pid>` 的目录权限而误判
+- `process::get_state()` Linux 把被调试器跟踪的 `t` 状态映射为 `state::stopped`，该枚举值不再恒不可达
+- `process::get_memory_info()` Windows 补 `virtual_size`；`get_name()` 与快照在 Windows 改用宽字符 API，非 ASCII 路径不再乱码
+- `sysinfo::process_count()` Windows 按需扩容进程缓冲区，不再在 1024 个进程处截断
+- `sysinfo::network_interfaces()` Linux 每个接口只保留一条记录，Windows 补子网掩码与 MAC
+- `process` 内部读取 `/proc` 改用 `neforce::file`，不再直接使用 `fopen`/`fread`
+- `process` Linux 读取自身 `/proc/<pid>/stat` 遇到全零计数器时回退到 `/proc/thread-self/stat`，模拟环境下内存、线程与时间查询不再恒为 0
 - `tui::chart` 饼图/环形图改为 2x2 子单元象限抗锯齿，边沿支持双 slice 前背景色
 - `band` 在未显式设置 `bg` 时保持透明，不再默认填充 `theme.bg`
 - `code_block` 支持继承 `code_style.bg`，不再固定 `#1a1a1e`
@@ -262,6 +280,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `process::get_memory_info()` Linux 把 `/proc/<pid>/statm` 首字段（驻留页）当作虚拟内存大小的问题
+- 修复 `sysinfo::cpu_usage()` Linux 采样状态无锁导致的数据竞争；Windows 改用 `GetSystemTimes`，中文等本地化系统上 PDH 计数器名解析失败导致恒返回 0 的问题不再存在
 - 修复未设置背景的文本在字形下绘制主题背景、空白处保持终端默认背景导致的块状色差
 - 修复 `scroll_view` 内 `band` 背景不受裁剪栈约束、滚动时把背景色涂到区域外的问题
 - 修复 `path_tree::scan` 在 `files_only` 下丢失嵌套目录文件的问题

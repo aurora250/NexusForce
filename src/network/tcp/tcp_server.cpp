@@ -1,6 +1,11 @@
 #include <NeForce/network/tcp/tcp_server.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    const auto processors = sysinfo::instance().get_cpu_info().logical_processors;
+}
+
+
 void tcp_server_base::accept_loop() {
     if (!acceptor_->set_nonblocking(true)) {
         {
@@ -104,7 +109,7 @@ void tcp_server_base::accept_loop() {
 tcp_server_base::tcp_server_base(const ports port, io_context& ctx, const size_t worker_count) :
 ctx_(ctx),
 port_(port),
-worker_count_(worker_count == 0 ? sysinfo::instance().get_CPU_info().logical_processors : worker_count) {
+worker_count_(worker_count == 0 ? processors : worker_count) {
     if (worker_count_ == 0) {
         NEFORCE_THROW_EXCEPTION(value_exception("Worker count must be greater than 0"));
     }

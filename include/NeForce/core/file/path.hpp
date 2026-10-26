@@ -385,7 +385,7 @@ public:
     path& operator/=(const path& other);
 
     /**
-     * @brief 路径连接赋值操作符（字符串视图版本）
+     * @brief 路径连接赋值操作符
      * @param other 要连接的路径字符串视图
      * @return 自身引用
      */
@@ -399,7 +399,7 @@ public:
     path operator/(const path& other) const;
 
     /**
-     * @brief 路径连接操作符（字符串视图版本）
+     * @brief 路径连接操作符
      * @param pth 要连接的路径字符串视图
      * @return 连接后的新路径
      */
@@ -409,8 +409,6 @@ public:
      * @brief 原地追加字符串
      * @param text 要追加的文本
      * @return 自身引用
-     *
-     * 不插入分隔符，适合追加扩展名等场景。
      */
     path& operator+=(string_view text);
 

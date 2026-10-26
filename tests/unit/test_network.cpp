@@ -386,6 +386,66 @@ TEST_F(SocketBaseTest, TryOpenValidFamily) {
     sock.close();
 }
 
+TEST_F(SocketBaseTest, EnumerateSocketsRejectsUnsupportedFamily) {
+    socket_base sock;
+    EXPECT_FALSE(sock.enumerate_sockets(ip_family::UNIX, socket_base::protocol::TCP).has_value());
+}
+
+TEST_F(SocketBaseTest, EnumerateSocketsRejectsUnsupportedProtocol) {
+    socket_base sock;
+    EXPECT_FALSE(sock.enumerate_sockets(ip_family::INET4, socket_base::protocol::ICMP).has_value());
+}
+
+TEST_F(SocketBaseTest, EnumerateTcpSocketsFindsListener) {
+    socket_base sock;
+    sock.open(ip_family::INET4, socket_base::type::STREAM, socket_base::protocol::TCP);
+    sock.bind(ip_address::loopback(ports(0u), ip_family::INET4));
+    sock.listen(1);
+
+    const auto local = sock.local_endpoint();
+    ASSERT_TRUE(local.has_value());
+
+    const auto table = sock.enumerate_sockets(ip_family::INET4, socket_base::protocol::TCP);
+    if (!table.has_value()) {
+        GTEST_SKIP() << "socket table enumeration is not available";
+    }
+    bool found = false;
+    for (const auto& entry: *table) {
+        if (entry.local != local->to_string()) {
+            continue;
+        }
+        found = true;
+        EXPECT_EQ(entry.family, ip_family::INET4);
+        EXPECT_EQ(entry.proto, socket_base::protocol::TCP);
+        EXPECT_EQ(entry.status, socket_base::state::listen);
+    }
+    EXPECT_TRUE(found);
+}
+
+TEST_F(SocketBaseTest, EnumerateUdpSocketsFindsBoundSocket) {
+    socket_base sock;
+    sock.open(ip_family::INET4, socket_base::type::DGRAM, socket_base::protocol::UDP);
+    sock.bind(ip_address::any(ports(0u), ip_family::INET4));
+
+    const auto local = sock.local_endpoint();
+    ASSERT_TRUE(local.has_value());
+
+    const auto table = sock.enumerate_sockets(ip_family::INET4, socket_base::protocol::UDP);
+    if (!table.has_value()) {
+        GTEST_SKIP() << "socket table enumeration is not available";
+    }
+    bool found = false;
+    for (const auto& entry: *table) {
+        if (entry.local != local->to_string()) {
+            continue;
+        }
+        found = true;
+        EXPECT_EQ(entry.proto, socket_base::protocol::UDP);
+        EXPECT_EQ(entry.status, socket_base::state::unconnected);
+    }
+    EXPECT_TRUE(found);
+}
+
 class IpSocketTest : public ::testing::Test {
 protected:
     void SetUp() override {}

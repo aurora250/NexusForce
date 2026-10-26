@@ -10,9 +10,12 @@
 
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/thread.hpp"
+#include "NeForce/core/container/map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/file/path.hpp"
+#include "NeForce/core/string/string_view.hpp"
 #include "NeForce/core/system/pipe.hpp"
+#include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -92,7 +95,7 @@ public:
     struct time_info {
         uint64_t user_time_ms{0};   /**< 用户态 CPU 时间（毫秒） */
         uint64_t kernel_time_ms{0}; /**< 内核态 CPU 时间（毫秒） */
-        uint64_t wall_time_ms{0};   /**< 墙上经过时间（毫秒） */
+        uint64_t wall_time_ms{0};   /**< 自进程启动以来的墙上时间（毫秒） */
     };
 
     /**
@@ -102,14 +105,26 @@ public:
     enum class state {
         running,   /**< 进程正在运行 */
         suspended, /**< 进程已被挂起 */
-        stopped,   /**< 进程已停止 */
+        stopped,   /**< 进程被调试器跟踪而暂停（Linux） */
         exited,    /**< 进程已退出 */
         unknown    /**< 进程状态未知 */
     };
 
     /**
      * @enum permission
-     * @brief 进程权限枚举
+     * @brief 进程访问权限位
+     *
+     * 各平台语义不完全等价：
+     * - Windows：
+     *   - read/write 对应进程虚拟内存读写
+     *   - query_info 对应信息查询
+     *   - terminate 对应终止权限
+     *   - execute 无对应项而被忽略
+     * - Linux：
+     *   - read/write 表示能否访问目标进程内存
+     *   - query_info 表示能否读取 /proc 信息
+     *   - terminate 表示能否发送信号
+     *   - execute 恒为 false
      */
     enum class permission {
         read = 0x01,       /**< 读取权限 */
@@ -140,22 +155,95 @@ public:
     };
 
     /**
+     * @enum signal
+     * @brief 跨平台进程信号
+     */
+    enum class signal : int32_t {
+        terminate, ///< 请求终止
+        kill,      ///< 强制终止
+        interrupt, ///< 中断（LINUX）
+        quit,      ///< 退出（LINUX）
+        hangup,    ///< 挂断（LINUX）
+        stop,      ///< 暂停（LINUX）
+        resume,    ///< 继续（LINUX）
+        user1,     ///< 用户信号 1（LINUX）
+        user2      ///< 用户信号 2（LINUX）
+    };
+
+    /**
+     * @enum priority
+     * @brief 进程调度优先级
+     */
+    enum class priority : int32_t {
+        idle,         ///< 最低优先级
+        below_normal, ///< 低于普通优先级
+        normal,       ///< 普通优先级
+        normal_above, ///< 高于普通优先级
+        high,         ///< 高优先级
+        realtime      ///< 实时优先级，可能影响系统响应
+    };
+
+    /**
+     * @struct io_info
+     * @brief 进程 I/O 统计
+     */
+    struct io_info {
+        uint64_t read_bytes{0};       ///< 累计读取字节
+        uint64_t write_bytes{0};      ///< 累计写入字节
+        uint64_t read_operations{0};  ///< 读操作次数
+        uint64_t write_operations{0}; ///< 写操作次数
+        uint64_t other_bytes{0};      ///< 其它 I/O 字节（Windows）
+    };
+
+    /**
+     * @struct thread_info
+     * @brief 线程信息
+     */
+    struct thread_info {
+        uint32_t tid{0};              ///< 线程 ID
+        string name;                  ///< 线程名，无法获取时为空
+        state status{state::unknown}; ///< 线程状态
+        uint64_t user_time_ms{0};     ///< 用户态 CPU 时间（毫秒）
+        uint64_t system_time_ms{0};   ///< 内核态 CPU 时间（毫秒）
+        uint64_t start_time_ms{0};    ///< 启动时刻（Unix 纪元毫秒）
+    };
+
+    /**
      * @struct shell_result
      * @brief shell 命令执行结果
      */
     struct shell_result {
-        int exit_code; /**< 命令退出码 */
-        string output; /**< 合并的标准输出和标准错误 */
+        int exit_code{-1}; /**< 命令退出码 */
+        string output;     /**< 标准输出 */
+        string error;      /**< 错误输出 */
+    };
+
+    /**
+     * @struct snapshot_entry
+     * @brief 进程快照条目
+     */
+    struct snapshot_entry {
+        uint32_t pid{0};              ///< 进程 ID
+        uint32_t parent_pid{0};       ///< 父进程 ID
+        string name;                  ///< 进程名
+        string command;               ///< 命令行
+        state status{state::unknown}; ///< 运行状态
+        uint32_t uid{0};              ///< 属主用户 ID（Linux）
+        string user;                  ///< 属主用户名，无法解析时为空
+        uint32_t threads{0};          ///< 线程数
+        int32_t nice{0};              ///< nice 值（Linux）
+        bool kernel_thread{false};    ///< 是否为内核线程（Linux）
+        uint64_t rss_bytes{0};        ///< 常驻内存（字节）
+        uint64_t user_time_ms{0};     ///< 用户态 CPU 时间（毫秒）
+        uint64_t system_time_ms{0};   ///< 内核态 CPU 时间（毫秒）
+        uint64_t start_time_ms{0};    ///< 启动时刻（Unix 纪元毫秒）
+        io_info io;                   ///< 进程 I/O 统计
     };
 
 private:
     void reader_loop();
 
     void close_handles() noexcept;
-
-    /**
-     * @brief 分离进程句柄，使子进程生命周期不再受 process 对象控制
-     */
     void detach_handles() noexcept;
 
     native_id_type process_id_{0}; /**< 子进程 ID */
@@ -224,11 +312,12 @@ public:
     /**
      * @brief 设置子进程工作目录
      * @param dir 工作目录路径
+     * @return 自身引用
      */
     process& set_work_dir(const string& dir);
 
     /**
-     * @brief 设置工作目录
+     * @brief 设置子进程工作目录
      * @param dir 工作目录路径
      * @return 自身引用
      */
@@ -238,24 +327,28 @@ public:
      * @brief 设置子进程环境变量
      * @param key 变量名
      * @param value 变量值
+     * @return 自身引用
      */
     process& set_env(const string& key, const string& value);
 
     /**
      * @brief 捕获标准输出
      * @param v 是否捕获
+     * @return 自身引用
      */
     process& set_capture_stdout(bool v = true);
 
     /**
      * @brief 捕获标准错误
      * @param v 是否捕获，为 true 时 stderr 写入独立缓冲区
+     * @return 自身引用
      */
     process& set_capture_stderr(bool v = true);
 
     /**
      * @brief 预设要写入子进程 stdin 的数据
      * @param data 数据内容，在子进程启动后自动写入并关闭 stdin
+     * @return 自身引用
      */
     process& set_stdin_data(const string& data);
 
@@ -274,15 +367,15 @@ public:
     process& set_stderr_file(const string& file_path);
 
     /**
-     * @brief 设置外部管道作为 stdin（用于进程链）
+     * @brief 设置外部管道作为 stdin
      * @param external_pipe 上游进程的 stdout 连接的管道
      * @return 自身引用
-     * @note 该管道生命周期由调用者管理，process 不拥有所有权
+     * @note 该管道生命周期由调用者管理
      */
     process& set_external_stdin(pipe& external_pipe);
 
     /**
-     * @brief 将 stdout 连接到外部管道（供下游进程读取）
+     * @brief 将 stdout 连接到外部管道
      * @param external_pipe 外部管道对象
      * @return 自身引用
      * @note 该管道生命周期由调用者管理
@@ -290,7 +383,7 @@ public:
     process& set_external_stdout(pipe& external_pipe);
 
     /**
-     * @brief 将 stderr 连接到外部管道（供下游进程读取）
+     * @brief 将 stderr 连接到外部管道
      * @param external_pipe 外部管道对象
      * @return 自身引用
      * @note 该管道生命周期由调用者管理
@@ -315,7 +408,7 @@ public:
      * processes[0] stdout -> processes[1] stdin,
      * processes[1] stdout -> processes[2] stdin, ...
      */
-    static void chain(vector<process*>& processes);
+    static void chain(const vector<process*>& processes);
 
     /**
      * @brief 启动子进程
@@ -329,6 +422,7 @@ public:
      * @brief 启动子进程
      * @param executable 可执行文件路径
      * @param args 命令行参数列表
+     * @throws process_exception 启动失败时抛出
      */
     void start(const path& executable, const vector<string>& args = {}) { start(executable.str(), args); }
 
@@ -346,7 +440,7 @@ public:
     /**
      * @brief 等待子进程退出
      * @param timeout_ms 超时毫秒数，-1 表示无限等待
-     * @return 退出码，-1 超时
+     * @return 退出码，-1 表示超时
      * @throws process_exception 等待失败时抛出
      */
     int wait(int timeout_ms = -1);
@@ -372,6 +466,12 @@ public:
     /** @brief 获取子进程内存信息 */
     NEFORCE_NODISCARD memory_info get_memory_info() const;
 
+    /** @brief 获取子进程时间信息 */
+    NEFORCE_NODISCARD time_info get_time_info() const;
+
+    /** @brief 获取子进程 I/O 统计 */
+    NEFORCE_NODISCARD io_info get_io_info() const;
+
     /** @brief 子进程 ID */
     NEFORCE_NODISCARD native_id_type id() const noexcept { return process_id_; }
 
@@ -384,7 +484,11 @@ public:
     /** @brief 获取捕获的标准错误 */
     NEFORCE_NODISCARD const string& stderr_output() const noexcept { return stderr_buf_; }
 
-    /** @brief 向子进程的 stdin 写入数据 */
+    /**
+     * @brief 向子进程的 stdin 写入数据
+     * @param data 数据内容
+     * @throws process_exception 子进程未运行或 stdin 未打开时抛出
+     */
     void write_stdin(const string& data);
 
     /** @brief 关闭子进程的 stdin */
@@ -394,10 +498,9 @@ public:
      * @brief 执行 shell 命令并获取输出
      * @param command 命令字符串
      * @param timeout_ms 超时毫秒，-1 无限等待
-     * @return 包含退出码和合并的 stdout+stderr 的 shell_result
-     * @throws process_exception 执行失败或超时
+     * @return 包含退出码和 stdout+stderr 的 shell_result
+     * @throws process_exception 命令为空、执行失败或超时
      */
-    // TODO: add shell_options (work_dir, capture_stderr, interactive stdio) so callers can avoid platform-specific shell branches.
     NEFORCE_NODISCARD static shell_result execute_shell(const string& command, int timeout_ms = -1);
 
     /**
@@ -405,22 +508,21 @@ public:
      * @param command 命令字符串
      * @param timeout_ms 超时毫秒，-1 无限等待
      * @param tool 提权工具选择
-     * @return 包含退出码和空输出的 shell_result
-     * @throws process_exception 执行失败或超时
-     * @note 不捕获输出
+     * @return 包含退出码的 shell_result
+     * @throws process_exception 命令为空、执行失败或超时
+     * @note 提权执行不进行输出捕获
      */
-    static shell_result execute_elevated_shell(const string& command, int timeout_ms = -1,
-                                               elevation_tool tool = elevation_tool::auto_);
+    NEFORCE_NODISCARD static shell_result execute_elevated_shell(const string& command, int timeout_ms = -1,
+                                                                 elevation_tool tool = elevation_tool::auto_);
 
     /**
      * @brief 启动子进程并分离（fire-and-forget）
      * @param executable 可执行文件路径
      * @param args 命令行参数
      * @return 子进程 ID
-     *
-     * 启动后立即分离，不等待。进程在后台运行。
+     * @throws process_exception 启动失败时抛出
      */
-    static native_id_type spawn(const string& executable, const vector<string>& args = {});
+    NEFORCE_NODISCARD static native_id_type spawn(const string& executable, const vector<string>& args = {});
 
     /**
      * @brief 同步运行进程并返回退出码
@@ -429,44 +531,37 @@ public:
      * @param timeout_ms 超时毫秒，-1 无限等待
      * @return 退出码
      * @throws process_exception 超时或执行失败
+     * @note 不捕获子进程输出，输出直接写入当前进程的 stdout/stderr
      */
-    static int system(const string& executable, const vector<string>& args = {}, int timeout_ms = -1);
+    NEFORCE_NODISCARD static int run(const string& executable, const vector<string>& args = {}, int timeout_ms = -1);
 
     /**
-     * @brief 执行进程并捕获 stdout 输出
+     * @brief 同步运行进程并捕获 stdout
      * @param executable 可执行文件路径
      * @param args 命令行参数
      * @param timeout_ms 超时毫秒，-1 无限等待
-     * @return 标准输出字符串
+     * @return 退出码与捕获的标准输出
      * @throws process_exception 超时或执行失败
      */
-    static string capture(const string& executable, const vector<string>& args = {}, int timeout_ms = -1);
+    NEFORCE_NODISCARD static shell_result run_capture(const string& executable, const vector<string>& args = {},
+                                                      int timeout_ms = -1);
 
-    /** @brief 获取当前进程 ID */
+    /**
+     * @brief 获取当前进程 ID
+     */
     NEFORCE_NODISCARD static native_id_type current_id() noexcept;
 
-    /** @brief 获取当前进程的特权级别 */
-    NEFORCE_NODISCARD static privilege_level current_privilege_level() noexcept;
+    /**
+     * @brief 获取当前进程名称
+     * @return 进程名，失败返回空字符串
+     */
+    NEFORCE_NODISCARD static string current_name();
 
     /**
-     * @brief 以同一命令行重新启动当前进程
-     * @return 成功创建/执行子进程返回 true
+     * @brief 获取当前进程运行状态
+     * @return 当前进程状态
      */
-    static bool relaunch_current_process();
-
-    /**
-     * @brief 根据进程 ID 获取进程名称
-     * @param process_id 目标进程 ID
-     * @return 进程名称，失败返回空字符串
-     */
-    NEFORCE_NODISCARD static string name(native_id_type process_id);
-
-    /**
-     * @brief 查询任意进程的内存信息
-     * @param process_id 目标进程 ID
-     * @return 内存信息
-     */
-    NEFORCE_NODISCARD static memory_info get_memory_info(native_id_type process_id);
+    NEFORCE_NODISCARD static state current_state();
 
     /**
      * @brief 获取当前进程的内存信息
@@ -475,24 +570,187 @@ public:
     NEFORCE_NODISCARD static memory_info current_memory_info();
 
     /**
+     * @brief 获取当前进程的时间信息
+     * @return 时间信息
+     */
+    NEFORCE_NODISCARD static time_info current_time_info();
+
+    /**
+     * @brief 获取当前进程的特权级别
+     */
+    NEFORCE_NODISCARD static privilege_level current_privilege_level() noexcept;
+
+    /**
+     * @brief 获取当前进程的命令行
+     * @return 以空格分隔的参数串，失败返回空字符串
+     */
+    NEFORCE_NODISCARD static string current_command_line();
+
+    /**
+     * @brief 以同一命令行重新启动当前进程
+     * @return 成功创建/执行子进程返回 true
+     * @note 新进程与当前进程并行运行，本进程不会退出也不会等待新进程
+     */
+    static bool relaunch_current();
+
+    /**
+     * @brief 根据进程 ID 获取进程名称
+     * @param process_id 目标进程 ID
+     * @return 进程名，失败返回空字符串
+     */
+    NEFORCE_NODISCARD static string get_name(native_id_type process_id);
+
+    /**
+     * @brief 查询任意进程的内存信息
+     * @param process_id 目标进程 ID
+     * @return 内存信息，查询失败时各字段为 0
+     */
+    NEFORCE_NODISCARD static memory_info get_memory_info(native_id_type process_id);
+
+    /**
+     * @brief 查询任意进程的时间信息
+     * @param process_id 目标进程 ID
+     * @return 时间信息，查询失败时各字段为 0
+     */
+    NEFORCE_NODISCARD static time_info get_time_info(native_id_type process_id);
+
+    /**
+     * @brief 查询任意进程的 I/O 统计
+     * @param process_id 目标进程 ID
+     * @return I/O 统计，查询失败时各字段为 0
+     */
+    NEFORCE_NODISCARD static io_info get_io_info(native_id_type process_id);
+
+    /**
+     * @brief 查询当前进程的 I/O 统计
+     * @return I/O 统计，查询失败时各字段为 0
+     */
+    NEFORCE_NODISCARD static io_info current_io_info();
+
+    /**
+     * @brief 查询任意进程的属主用户名
+     * @param process_id 目标进程 ID
+     * @return 用户名，无法解析时返回空字符串
+     */
+    NEFORCE_NODISCARD static string get_user(native_id_type process_id);
+
+    /**
+     * @brief 枚举指定进程的线程
+     * @param process_id 目标进程 ID
+     * @return 线程列表，进程不存在或无权限时返回空列表
+     * @note 包含主线程（tid 等于进程 ID）
+     */
+    NEFORCE_NODISCARD static vector<thread_info> threads(native_id_type process_id);
+
+    /**
+     * @brief 建立 socket inode 到属主进程的映射
+     * @return inode 到进程 ID 列表的映射；Windows 无 inode 概念，返回空映射
+     * @note Linux 需要遍历 /proc/<pid>/fd，进程较多时开销明显
+     */
+    NEFORCE_NODISCARD static map<uint32_t, vector<native_id_type>> socket_owners();
+
+    /**
+     * @brief 向指定进程发送信号
+     * @param process_id 目标进程 ID
+     * @param sig 跨平台信号
+     * @return 发送成功返回 true
+     * @note Linux 使用 pidfd 避免 PID 复用竞态；Windows 只映射 terminate/kill
+     */
+    static bool send_signal(native_id_type process_id, signal sig) noexcept;
+
+    /**
+     * @brief 向指定进程发送平台原生信号
+     * @param process_id 目标进程 ID
+     * @param native_signal 原生信号编号（POSIX），Windows 只接受 9 与 15
+     * @return 发送成功返回 true
+     */
+    static bool send_signal(native_id_type process_id, int native_signal) noexcept;
+
+    /**
+     * @brief 获取信号的名称
+     * @param sig 跨平台信号
+     * @return 不含 SIG 前缀的名称，如 "TERM"
+     */
+    NEFORCE_NODISCARD static string_view signal_name(signal sig) noexcept;
+
+    /**
+     * @brief 查询进程调度优先级
+     * @param process_id 目标进程 ID
+     * @return 优先级；进程不存在或权限不足返回 none
+     */
+    NEFORCE_NODISCARD static optional<priority> get_priority(native_id_type process_id);
+
+    /**
+     * @brief 设置进程调度优先级
+     * @param process_id 目标进程 ID
+     * @param level 目标优先级
+     * @return 设置成功返回 true
+     * @note Linux 降低 nice 值需要特权；Windows 设置高优先级可能需要特权
+     */
+    static bool set_priority(native_id_type process_id, priority level) noexcept;
+
+    /**
+     * @brief 设置进程 nice 值
+     * @param process_id 目标进程 ID
+     * @param nice nice 值，范围 -20..19，超出范围会被截断
+     * @return 设置成功返回 true
+     * @note Linux 精确设置；Windows 按区间映射到进程优先级
+     */
+    static bool set_nice(native_id_type process_id, int32_t nice) noexcept;
+
+    /**
+     * @brief 查询进程 CPU 亲和性
+     * @param process_id 目标进程 ID
+     * @return 位掩码，bit N 表示第 N 个逻辑处理器；失败返回 none
+     * @note 仅覆盖前 64 个逻辑处理器
+     */
+    NEFORCE_NODISCARD static optional<uint64_t> get_affinity(native_id_type process_id);
+
+    /**
+     * @brief 设置进程 CPU 亲和性
+     * @param process_id 目标进程 ID
+     * @param mask 位掩码，bit N 表示第 N 个逻辑处理器
+     * @return 设置成功返回 true
+     * @note 仅覆盖前 64 个逻辑处理器，Windows 多处理器组下行为受限
+     */
+    static bool set_affinity(native_id_type process_id, uint64_t mask) noexcept;
+
+    /**
      * @brief 查询任意进程的运行状态
      * @param process_id 目标进程 ID
+     * @return 进程状态，无法确定或进程不存在时返回 unknown 或 exited
      */
     NEFORCE_NODISCARD static state get_state(native_id_type process_id);
 
     /**
      * @brief 获取指定进程的特权级别
      * @param process_id 目标进程 ID
+     * @return 特权级别，无法查询时返回 unknown
      */
     NEFORCE_NODISCARD static privilege_level get_privilege_level(native_id_type process_id);
 
     /**
+     * @brief 获取指定进程的命令行
+     * @param process_id 目标进程 ID
+     * @return 以空格分隔的参数串，失败或权限不足返回空字符串
+     */
+    NEFORCE_NODISCARD static string get_command_line(native_id_type process_id);
+
+    /**
+     * @brief 获取指定进程的可执行文件完整路径
+     * @param process_id 目标进程 ID
+     * @return 可执行文件路径，失败或权限不足返回空字符串
+     */
+    NEFORCE_NODISCARD static string get_executable_path(native_id_type process_id);
+
+    /**
      * @brief 检查对指定进程的访问权限
      * @param process_id 目标进程 ID
-     * @param permission 要检查的权限
-     * @return 是否拥有该权限
+     * @param perm 要检查的权限，可为多个权限位的组合
+     * @return 是否拥有全部请求的权限
+     * @note 平台语义差异见 permission；perm 为 0 时等价于检查进程是否存在
      */
-    NEFORCE_NODISCARD static bool check_permission(native_id_type process_id, permission permission);
+    NEFORCE_NODISCARD static bool check_permission(native_id_type process_id, permission perm);
 
     /**
      * @brief 在 PATH 环境变量中搜索可执行文件
@@ -508,6 +766,12 @@ public:
      * @return 命令行字符串，含空格或 shell 特殊字符的参数会被双引号包裹
      */
     NEFORCE_NODISCARD static string build_command_line(const string& executable, const vector<string>& args);
+
+    /**
+     * @brief 枚举全系统进程快照
+     * @return 快照条目列表，按 /proc 或系统快照的枚举顺序排列
+     */
+    NEFORCE_NODISCARD static vector<snapshot_entry> snapshot();
 };
 
 /** @} */ // Process

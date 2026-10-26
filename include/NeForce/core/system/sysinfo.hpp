@@ -24,11 +24,10 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 系统信息单例类
  *
  * 提供系统信息的查询功能，包括：
- * - CPU信息（型号、频率、核心数）
- * - 内存信息（物理内存、虚拟内存、使用率）
- * - 操作系统版本
- * - 系统架构
+ * - CPU信息（型号、频率、核心数、SIMD 能力）
+ * - 操作系统版本、系统架构
  * - 系统页面大小、分配粒度等底层信息
+ * - NUMA 拓扑与主机名
  *
  * @note 全局保持唯一的系统信息实例。
  */
@@ -54,16 +53,14 @@ public:
     /**
      * @struct memory_info
      * @brief 内存信息
-     *
-     * 包含物理内存和虚拟内存的使用情况。
      */
-    struct NEFORCE_API memory_info {
-        uint64_t total_physical{0};      ///< 物理内存总量
-        uint64_t available_physical{0};  ///< 可用物理内存
-        uint64_t total_virtual{0};       ///< 虚拟内存总量
-        uint64_t available_virtual{0};   ///< 可用虚拟内存
-        uint64_t total_page_file{0};     ///< 页面文件总量
-        uint64_t available_page_file{0}; ///< 可用页面文件
+    struct memory_info {
+        uint64_t total_physical{0};      ///< 物理内存总量（字节）
+        uint64_t available_physical{0};  ///< 可用物理内存（字节）
+        uint64_t total_virtual{0};       ///< 提交上限总量（物理内存 + 交换空间，字节）
+        uint64_t available_virtual{0};   ///< 可用提交额度（字节）
+        uint64_t total_page_file{0};     ///< 页面文件/交换空间总量（字节）
+        uint64_t available_page_file{0}; ///< 可用页面文件/交换空间（字节）
 
         /**
          * @brief 计算物理内存使用率
@@ -89,11 +86,13 @@ public:
      *
      * 描述单个磁盘分区（或挂载点）的容量及使用情况。
      */
-    struct NEFORCE_API disk_info {
-        string path;             ///< 磁盘路径或挂载点
-        uint64_t total_bytes{0}; ///< 总容量（字节）
-        uint64_t free_bytes{0};  ///< 可用空间（字节）
-        uint64_t used_bytes{0};  ///< 已用空间（字节）
+    struct disk_info {
+        string path;                 ///< 查询路径或挂载点
+        string filesystem;           ///< 文件系统类型名，无法确定时为空
+        uint64_t total_bytes{0};     ///< 总容量（字节）
+        uint64_t free_bytes{0};      ///< 空闲空间（字节，含保留块）
+        uint64_t available_bytes{0}; ///< 非特权用户可用空间（字节）
+        uint64_t used_bytes{0};      ///< 已用空间（字节，等于总容量减空闲空间）
 
         /**
          * @brief 磁盘使用率
@@ -108,19 +107,58 @@ public:
     };
 
     /**
-     * @struct CPU_info
+     * @enum simd_instruction
+     * @brief SIMD 指令集特性位
+     *
+     * 多个特性位可组合，用 simd_info::supports() 测试单个特性。
+     */
+    enum class simd_instruction : uint32_t {
+        sse2 = 1U << 0,      ///< SSE2
+        ssse3 = 1U << 1,     ///< SSSE3
+        sse4_1 = 1U << 2,    ///< SSE4.1
+        sse4_2 = 1U << 3,    ///< SSE4.2
+        avx = 1U << 4,       ///< AVX
+        avx2 = 1U << 5,      ///< AVX2
+        fma = 1U << 6,       ///< FMA3
+        avx512f = 1U << 7,   ///< AVX-512
+        aes = 1U << 8,       ///< AES-NI 或 ARMv8 AES
+        pclmulqdq = 1U << 9, ///< PCLMULQDQ 或 ARMv8 PMULL
+        neon = 1U << 10,     ///< ARM NEON / ASIMD
+        sve = 1U << 11       ///< ARM SVE
+    };
+
+    /**
+     * @struct simd_info
+     * @brief 运行时 SIMD 能力
+     */
+    struct simd_info {
+        uint32_t features{0}; ///< simd_instruction 位掩码
+
+        /**
+         * @brief 测试指令集是否可用
+         * @param instruction 指令集特性位
+         * @return 可用返回 true
+         */
+        NEFORCE_NODISCARD bool supports(const simd_instruction instruction) const noexcept {
+            return (features & static_cast<uint32_t>(instruction)) != 0;
+        }
+    };
+
+    /**
+     * @struct cpu_info
      * @brief CPU信息
      *
      * 包含处理器的型号、频率、核心数等信息。
      */
-    struct CPU_info {
+    struct cpu_info {
         string vendor;                  ///< 厂商名称
         string brand;                   ///< 型号名称
-        uint32_t max_MHz{0};            ///< 最大频率
-        uint32_t current_MHz{0};        ///< 当前频率
+        uint32_t max_mhz{0};            ///< 最大频率（MHz），无法获取时为 0
+        uint32_t current_mhz{0};        ///< 采集时刻的频率（MHz），无法获取时为 0，随 refresh() 更新
         uint32_t cores{0};              ///< 物理核心数
         uint32_t logical_processors{0}; ///< 逻辑处理器数
         string features;                ///< 支持的指令集特性
+        simd_info simd;                 ///< 运行时 SIMD 能力
 
         /**
          * @brief 检查是否支持超线程
@@ -133,7 +171,7 @@ public:
      * @struct os_version_info
      * @brief 操作系统版本信息
      */
-    struct NEFORCE_API os_version_info {
+    struct os_version_info {
         uint32_t major{0};       ///< 主版本号
         uint32_t minor{0};       ///< 次版本号
         uint32_t build{0};       ///< 构建号
@@ -145,7 +183,7 @@ public:
          * @brief 获取版本字符串
          * @return 格式为"major.minor.build"的版本字符串
          */
-        NEFORCE_NODISCARD string version() const;
+        NEFORCE_NODISCARD NEFORCE_API string version() const;
     };
 
     /**
@@ -153,11 +191,25 @@ public:
      * @brief 网络接口信息
      */
     struct network_interface {
-        string name;       ///< 接口名称
-        string address;    ///< IP 地址
-        string netmask;    ///< 子网掩码
-        string mac;        ///< MAC 地址
-        bool is_up{false}; ///< 接口是否启用
+        string name;              ///< 接口名称
+        string address;           ///< 首选单播 IP 地址
+        string netmask;           ///< 该地址的子网掩码，IPv6 下为空
+        string mac;               ///< MAC 地址，无法获取时为空
+        string operstate;         ///< 运行状态（"up"/"down"/"unknown" 等）
+        uint32_t index{0};        ///< 接口索引
+        uint8_t prefix_length{0}; ///< 首选地址的前缀长度
+        uint64_t mtu{0};          ///< MTU（字节），无法获取时为 0
+        uint64_t speed_bps{0};    ///< 链路速率（bit/s），无法获取时为 0
+        uint64_t rx_bytes{0};     ///< 累计接收字节
+        uint64_t tx_bytes{0};     ///< 累计发送字节
+        uint64_t rx_packets{0};   ///< 累计接收包
+        uint64_t tx_packets{0};   ///< 累计发送包
+        uint64_t rx_errors{0};    ///< 接收错误数
+        uint64_t tx_errors{0};    ///< 发送错误数
+        uint64_t rx_dropped{0};   ///< 接收丢包数
+        uint64_t tx_dropped{0};   ///< 发送丢包数
+        bool is_up{false};        ///< 接口是否启用
+        bool is_loopback{false};  ///< 是否为回环接口
     };
 
     /**
@@ -177,6 +229,21 @@ public:
     };
 
     /**
+     * @struct battery_info
+     * @brief 电池与电源状态
+     *
+     * 多电池时按剩余电量加权平均百分比。
+     */
+    struct battery_info {
+        bool present{false};            ///< 是否存在电池
+        bool on_ac{false};              ///< 是否接入交流电源
+        bool charging{false};           ///< 是否正在充电
+        float64_t charge_percent{-1.0}; ///< 剩余电量百分比，未知为 -1
+        int64_t remaining_seconds{-1};  ///< 预计可用秒数，未知为 -1
+        string status;                  ///< "charging"/"discharging"/"full"/"idle"/"unknown"
+    };
+
+    /**
      * @struct numa_node_info
      * @brief NUMA 节点信息
      *
@@ -190,13 +257,27 @@ public:
         vector<uint32_t> core_list; ///< 核心逻辑编号列表
     };
 
+    /**
+     * @struct mount_point
+     * @brief 挂载点信息
+     */
+    struct mount_point {
+        string source;               ///< 设备或来源
+        string target;               ///< 挂载路径
+        string filesystem;           ///< 文件系统类型
+        string options;              ///< 挂载选项
+        uint64_t total_bytes{0};     ///< 总容量（字节）
+        uint64_t free_bytes{0};      ///< 空闲容量（字节，含保留块）
+        uint64_t available_bytes{0}; ///< 非特权用户可用容量（字节）
+    };
+
 private:
     system_info system_info_{};                        ///< 系统信息
-    memory_info memory_info_{};                        ///< 内存信息
-    CPU_info cpu_info_{};                              ///< CPU信息
+    cpu_info cpu_info_{};                              ///< CPU信息
     os_version_info os_version_info_{};                ///< 操作系统信息
     architecture architecture_{architecture::unknown}; ///< 系统架构
     vector<numa_node_info> numa_nodes_;                ///< NUMA 节点信息列表
+    string hostname_;                                  ///< 主机名
     atomic<bool> initialized_{false};                  ///< 初始化标志
 
     /**
@@ -210,11 +291,15 @@ private:
     ~sysinfo() = default;
 
     /**
-     * @brief 初始化系统信息
-     *
-     * 实际执行信息收集操作，可能抛出异常。
+     * @brief 采集机器档案
      */
     void init();
+
+    /**
+     * @brief 探测 CPU 与操作系统的 SIMD 能力
+     * @return SIMD 能力位图
+     */
+    NEFORCE_NODISCARD static simd_info probe_simd();
 
 public:
     /**
@@ -229,11 +314,16 @@ public:
     sysinfo& operator=(sysinfo&&) = delete;
 
     /**
-     * @brief 刷新系统信息
-     *
-     * 重新收集所有系统信息，更新缓存的数据。
+     * @brief 刷新机器档案
+     * @note 静态度量函数每次调用都取当前值，不受此函数影响
      */
     void refresh() noexcept;
+
+    /**
+     * @brief 检查是否已初始化
+     * @return 是否已成功初始化
+     */
+    NEFORCE_NODISCARD bool is_initialized() const noexcept { return initialized_.load(memory_order_acquire); }
 
     /**
      * @brief 获取系统底层信息
@@ -242,23 +332,10 @@ public:
     NEFORCE_NODISCARD const system_info& get_system_info() const noexcept { return system_info_; }
 
     /**
-     * @brief 获取内存信息
-     * @return 内存信息结构引用
-     */
-    NEFORCE_NODISCARD const memory_info& get_memory_info() const noexcept { return memory_info_; }
-
-    /**
      * @brief 获取CPU信息
      * @return CPU信息结构引用
      */
-    NEFORCE_NODISCARD const CPU_info& get_CPU_info() const noexcept { return cpu_info_; }
-
-    /**
-     * @brief 从CPU型号字符串中解析标称频率
-     * @param brand CPU型号字符串
-     * @return 标称频率，单位 MHz；型号字符串不含频率信息时返回 0
-     */
-    NEFORCE_NODISCARD static uint32_t parse_brand_frequency(string_view brand) noexcept;
+    NEFORCE_NODISCARD const cpu_info& get_cpu_info() const noexcept { return cpu_info_; }
 
     /**
      * @brief 获取操作系统版本信息
@@ -282,16 +359,44 @@ public:
     NEFORCE_NODISCARD const vector<numa_node_info>& get_numa_info() const noexcept { return numa_nodes_; }
 
     /**
-     * @brief 检查是否已初始化
-     * @return 是否已成功初始化
+     * @brief 获取主机名
+     * @return 主机名，采集失败时为空字符串
      */
-    NEFORCE_NODISCARD bool is_initialized() const noexcept { return initialized_.load(memory_order_acquire); }
+    NEFORCE_NODISCARD const string& get_hostname() const noexcept { return hostname_; }
+
+    /**
+     * @brief 从CPU型号字符串中解析标称频率
+     * @param brand CPU型号字符串
+     * @return 标称频率，单位 MHz；型号字符串不含频率信息时返回 0
+     */
+    NEFORCE_NODISCARD static uint32_t parse_brand_frequency(string_view brand) noexcept;
 
     /**
      * @brief 获取当前CPU使用率
      * @return CPU使用百分比（0.0-100.0）
+     * @note 基于两次采样的差值，首次调用返回 0
      */
     NEFORCE_NODISCARD static float64_t cpu_usage();
+
+    /**
+     * @brief 获取每个逻辑处理器的 CPU 使用率
+     * @return 与逻辑处理器数量等长的使用率列表（0.0-100.0），无法获取时为空
+     * @note 基于两次采样的差值，首次调用返回全 0
+     */
+    NEFORCE_NODISCARD static vector<float64_t> cpu_usage_per_core();
+
+    /**
+     * @brief 获取当前内存使用情况
+     * @return 内存信息，每次调用实时采样
+     */
+    NEFORCE_NODISCARD static memory_info memory_status();
+
+    /**
+     * @brief 获取指定路径的磁盘空间信息
+     * @param path 文件系统路径，为空时取当前工作目录
+     * @return 磁盘信息，查询失败时容量字段为 0 且 filesystem 为空
+     */
+    NEFORCE_NODISCARD static disk_info disk_status(const string& path = {});
 
     /**
      * @brief 获取当前运行的进程数量
@@ -300,23 +405,28 @@ public:
     NEFORCE_NODISCARD static uint32_t process_count();
 
     /**
-     * @brief 获取指定路径的磁盘空间信息
-     * @param path 文件系统路径，若为 nullptr 则自动获取当前工作目录所在磁盘或根目录
-     * @return 磁盘信息
-     */
-    NEFORCE_NODISCARD static disk_info get_disk_info(const char* path = nullptr);
-
-    /**
      * @brief 枚举所有网络接口
      * @return 网络接口信息列表
      */
     NEFORCE_NODISCARD static vector<network_interface> network_interfaces();
 
     /**
+     * @brief 枚举本机挂载点
+     * @return 挂载点列表，平台不支持或读取失败时返回空列表
+     */
+    NEFORCE_NODISCARD static vector<mount_point> mount_points();
+
+    /**
      * @brief 获取系统运行时间
      * @return 系统启动以来的秒数
      */
     NEFORCE_NODISCARD static uint64_t uptime_seconds();
+
+    /**
+     * @brief 获取电池与电源状态
+     * @return 电池状态，无电池时 present 为 false
+     */
+    NEFORCE_NODISCARD static battery_info battery_status();
 };
 
 /** @} */ // SystemInfo

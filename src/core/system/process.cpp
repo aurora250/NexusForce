@@ -1,15 +1,18 @@
 #include <NeForce/core/system/process.hpp>
+#include <NeForce/core/string/to_numerics.hpp>
 #include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
 #    include <NeForce/core/exception/error_code.hpp>
 #    include <NeForce/core/string/utf.hpp>
+#    include <memoryapi.h>
 #    include <windef.h>
 #    include <WinBase.h>
 #    include <WinUser.h>
 #    include <Psapi.h>
 #    include <shellapi.h>
 #    include <securitybaseapi.h>
+#    include <processthreadsapi.h>
 #    include <TlHelp32.h>
 #    ifdef max
 #        undef max
@@ -21,12 +24,17 @@
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/file/file.hpp>
 #    include <NeForce/core/system/console.hpp>
-#    include <NeForce/core/system/sysinfo.hpp>
 #    include <cerrno>
 #    include <csignal>
-#    include <cstdio>
+#    include <ctime>
+#    include <pwd.h>
+#    include <sched.h>
+#    include <sys/resource.h>
 #    include <sys/select.h>
+#    include <sys/syscall.h>
+#    include <sys/types.h>
 #    include <sys/wait.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 namespace {
@@ -59,6 +67,197 @@ namespace {
             params += escape_arg_runas(args[i]);
         }
         return params;
+    }
+
+    constexpr uint64_t filetime_epoch_difference = 116444736000000000ULL;
+
+    uint64_t filetime_ticks(const ::FILETIME& value) noexcept {
+        ::ULARGE_INTEGER ticks{};
+        ticks.LowPart = value.dwLowDateTime;
+        ticks.HighPart = value.dwHighDateTime;
+        return ticks.QuadPart;
+    }
+
+    uint64_t filetime_to_unix_ms(const ::FILETIME& value) noexcept {
+        const uint64_t ticks = filetime_ticks(value);
+        return ticks < filetime_epoch_difference ? 0 : (ticks - filetime_epoch_difference) / 10000;
+    }
+
+    uint64_t filetime_span_ms(const ::FILETIME& value) noexcept { return filetime_ticks(value) / 10000; }
+
+    uint64_t unix_time_ms() noexcept {
+        ::FILETIME now{};
+        ::GetSystemTimeAsFileTime(&now);
+        return filetime_to_unix_ms(now);
+    }
+
+    string query_process_command_line(const ::HANDLE process_handle) {
+        if (process_handle == nullptr) {
+            return {};
+        }
+
+        struct nt_unicode_string {
+            uint16_t length;
+            uint16_t maximum_length;
+            wchar_t* buffer;
+        };
+        using nt_query_information_process_fn =
+                LONG(WINAPI*)(void*, unsigned long, void*, unsigned long, unsigned long*);
+
+        const ::HMODULE ntdll = ::GetModuleHandleW(L"ntdll.dll");
+        if (ntdll == nullptr) {
+            return {};
+        }
+        const auto query =
+                reinterpret_cast<nt_query_information_process_fn>(::GetProcAddress(ntdll, "NtQueryInformationProcess"));
+        if (query == nullptr) {
+            return {};
+        }
+
+        nt_unicode_string command_line{};
+        unsigned long returned = 0;
+        constexpr unsigned long process_command_line_information = 60;
+        const LONG status = query(process_handle, process_command_line_information, &command_line,
+                                  static_cast<unsigned long>(sizeof(command_line)), &returned);
+        if (status < 0 || command_line.buffer == nullptr || command_line.length == 0) {
+            return {};
+        }
+        return wcharacter::to_string(
+                basic_string_view<wchar_t>(command_line.buffer, command_line.length / sizeof(wchar_t)));
+    }
+
+    string user_name_of_handle(const ::HANDLE process_handle) {
+        if (process_handle == nullptr) {
+            return {};
+        }
+        ::HANDLE token = nullptr;
+        if (::OpenProcessToken(process_handle, TOKEN_QUERY, &token) == FALSE) {
+            return {};
+        }
+        ::DWORD size = 0;
+        ::GetTokenInformation(token, ::TokenUser, nullptr, 0, &size);
+        if (size == 0) {
+            ::CloseHandle(token);
+            return {};
+        }
+        vector<::BYTE> buffer(size);
+        if (::GetTokenInformation(token, ::TokenUser, buffer.data(), size, &size) == FALSE) {
+            ::CloseHandle(token);
+            return {};
+        }
+        ::CloseHandle(token);
+
+        const auto* user = reinterpret_cast<const ::TOKEN_USER*>(buffer.data());
+        wchar_t account[256] = {};
+        wchar_t domain[256] = {};
+        ::DWORD account_length = static_cast<::DWORD>(sizeof(account) / sizeof(wchar_t));
+        ::DWORD domain_length = static_cast<::DWORD>(sizeof(domain) / sizeof(wchar_t));
+        ::SID_NAME_USE use = ::SidTypeUnknown;
+        if (::LookupAccountSidW(nullptr, user->User.Sid, account, &account_length, domain, &domain_length, &use) ==
+            FALSE) {
+            return {};
+        }
+        const string account_text = wcharacter::to_string(account);
+        const string domain_text = wcharacter::to_string(domain);
+        return domain_text.empty() ? account_text : domain_text + "\\" + account_text;
+    }
+
+    process::io_info io_info_of_handle(const ::HANDLE process_handle) {
+        process::io_info info;
+        if (process_handle == nullptr) {
+            return info;
+        }
+        ::IO_COUNTERS counters{};
+        if (::GetProcessIoCounters(process_handle, &counters) == FALSE) {
+            return info;
+        }
+        info.read_bytes = counters.ReadTransferCount;
+        info.write_bytes = counters.WriteTransferCount;
+        info.read_operations = counters.ReadOperationCount;
+        info.write_operations = counters.WriteOperationCount;
+        info.other_bytes = counters.OtherTransferCount;
+        return info;
+    }
+
+    bool priority_from_class(const ::DWORD priority_class, process::priority& level) noexcept {
+        switch (priority_class) {
+            case IDLE_PRIORITY_CLASS:
+                level = process::priority::idle;
+                return true;
+            case BELOW_NORMAL_PRIORITY_CLASS:
+                level = process::priority::below_normal;
+                return true;
+            case NORMAL_PRIORITY_CLASS:
+                level = process::priority::normal;
+                return true;
+            case ABOVE_NORMAL_PRIORITY_CLASS:
+                level = process::priority::normal_above;
+                return true;
+            case HIGH_PRIORITY_CLASS:
+                level = process::priority::high;
+                return true;
+            case REALTIME_PRIORITY_CLASS:
+                level = process::priority::realtime;
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    ::DWORD class_for_priority(const process::priority level) noexcept {
+        switch (level) {
+            case process::priority::idle:
+                return IDLE_PRIORITY_CLASS;
+            case process::priority::below_normal:
+                return BELOW_NORMAL_PRIORITY_CLASS;
+            case process::priority::normal:
+                return NORMAL_PRIORITY_CLASS;
+            case process::priority::normal_above:
+                return ABOVE_NORMAL_PRIORITY_CLASS;
+            case process::priority::high:
+                return HIGH_PRIORITY_CLASS;
+            case process::priority::realtime:
+                return REALTIME_PRIORITY_CLASS;
+            default:
+                return 0;
+        }
+    }
+
+    string thread_name_of_handle(const ::HANDLE thread_handle) {
+        using get_thread_description_fn = ::HRESULT(WINAPI*)(::HANDLE, ::PWSTR*);
+        const ::HMODULE kernel32 = ::GetModuleHandleW(L"kernel32.dll");
+        if (kernel32 == nullptr) {
+            return {};
+        }
+        const auto get_description =
+                reinterpret_cast<get_thread_description_fn>(::GetProcAddress(kernel32, "GetThreadDescription"));
+        if (get_description == nullptr) {
+            return {};
+        }
+        ::PWSTR description = nullptr;
+        if (get_description(thread_handle, &description) < 0 || description == nullptr) {
+            return {};
+        }
+        string result = wcharacter::to_string(description);
+        ::LocalFree(description);
+        return result;
+    }
+
+    size_t virtual_size_of(const ::HANDLE process_handle) noexcept {
+        size_t total = 0;
+        const unsigned char* address = nullptr;
+        ::MEMORY_BASIC_INFORMATION info{};
+        while (::VirtualQueryEx(process_handle, address, &info, sizeof(info)) == sizeof(info)) {
+            if (info.State != MEM_FREE) {
+                total += static_cast<size_t>(info.RegionSize);
+            }
+            const auto* next = static_cast<const unsigned char*>(info.BaseAddress) + info.RegionSize;
+            if (next <= address) {
+                break;
+            }
+            address = next;
+        }
+        return total;
     }
 
 #endif
@@ -120,6 +319,298 @@ namespace {
     }
 
     bool has_pkexec() noexcept { return ::access("/usr/bin/pkexec", X_OK) == 0; }
+
+    struct linux_proc_stat {
+        string name;
+        char state{'?'};
+        uint32_t parent_pid{0};
+        uint32_t threads{0};
+        int32_t nice{0};
+        uint64_t flags{0};
+        uint64_t user_ticks{0};
+        uint64_t system_ticks{0};
+        uint64_t start_ticks{0};
+        uint64_t virtual_bytes{0};
+        uint64_t resident_pages{0};
+    };
+
+    string read_text_file(const path& file_path) {
+        file handle(file_path, false, file_access::read);
+        if (!handle.is_opened()) {
+            return {};
+        }
+        string content;
+        for (;;) {
+            const string chunk = handle.read(65536);
+            if (chunk.empty()) {
+                break;
+            }
+            content.append(chunk);
+            if (chunk.size() < 65536) {
+                break;
+            }
+        }
+        return content;
+    }
+
+    uint64_t clock_ticks_per_second() noexcept {
+        static const uint64_t cached = []() noexcept -> uint64_t {
+            const long ticks = ::sysconf(::_SC_CLK_TCK);
+            return ticks > 0 ? static_cast<uint64_t>(ticks) : 100;
+        }();
+        return cached;
+    }
+
+    uint64_t boot_time_ms() {
+        static const uint64_t cached = []() -> uint64_t {
+            const string text = read_text_file(path{"/proc/stat"});
+            size_t position = 0;
+            string line;
+            while (getline(text.view(), position, line)) {
+                if (line.starts_with("btime ")) {
+                    try {
+                        return to_uint64(line.view(6)) * 1000;
+                    } catch (const exception&) {
+                        return 0;
+                    }
+                }
+            }
+            return 0;
+        }();
+        return cached;
+    }
+
+    uint64_t unix_time_ms() noexcept {
+        ::timespec now{};
+        if (::clock_gettime(CLOCK_REALTIME, &now) != 0) {
+            return 0;
+        }
+        return static_cast<uint64_t>(now.tv_sec) * 1000 + static_cast<uint64_t>(now.tv_nsec) / 1000000;
+    }
+
+    uint64_t start_time_ms(const uint64_t start_ticks) {
+        return boot_time_ms() + start_ticks * 1000 / clock_ticks_per_second();
+    }
+
+    process::state state_from_char(const char value) noexcept {
+        switch (value) {
+            case 'T':
+                return process::state::suspended;
+            case 't':
+                return process::state::stopped;
+            case 'Z':
+            case 'X':
+            case 'x':
+                return process::state::exited;
+            case 'R':
+            case 'S':
+            case 'D':
+            case 'I':
+            case 'W':
+            case 'P':
+                return process::state::running;
+            default:
+                return process::state::unknown;
+        }
+    }
+
+    bool parse_proc_stat_text(const string& text, linux_proc_stat& out) {
+        if (text.empty()) {
+            return false;
+        }
+        const size_t open = text.find('(');
+        const size_t close = text.rfind(')');
+        if (open == string::npos || close == string::npos || close <= open || close + 2 >= text.size()) {
+            return false;
+        }
+        const auto fields = text.substr(close + 2).split(" \t");
+        if (fields.size() < 22) {
+            return false;
+        }
+        try {
+            out.name = text.substr(open + 1, close - open - 1);
+            out.state = fields[0].empty() ? '?' : fields[0][0];
+            out.parent_pid = static_cast<uint32_t>(to_uint64(fields[1].view()));
+            out.flags = to_uint64(fields[6].view());
+            out.user_ticks = to_uint64(fields[11].view());
+            out.system_ticks = to_uint64(fields[12].view());
+            out.threads = static_cast<uint32_t>(to_uint64(fields[17].view()));
+            out.nice = static_cast<int32_t>(to_int64(fields[16].view()));
+            out.start_ticks = to_uint64(fields[19].view());
+            out.virtual_bytes = to_uint64(fields[20].view());
+            out.resident_pages = to_uint64(fields[21].view());
+        } catch (const exception&) {
+            return false;
+        }
+        return true;
+    }
+
+    bool parse_proc_stat(const uint32_t process_id, linux_proc_stat& out) {
+        const bool is_self = compare_equal(process_id, ::getpid());
+        if (parse_proc_stat_text(read_text_file(path("/proc") / to_string(process_id).view() / "stat"), out)) {
+            if (!is_self || out.threads != 0) {
+                return true;
+            }
+        } else if (!is_self) {
+            return false;
+        }
+        // User-mode emulators such as qemu-user synthesize /proc/<self>/stat with zeroed counters.
+        // A real process always owns at least one thread, so fall back to the kernel-provided thread entry.
+        return parse_proc_stat_text(read_text_file(path("/proc/thread-self/stat")), out);
+    }
+
+    bool owner_uid_of(const uint32_t process_id, uint32_t& uid) {
+        const string text = read_text_file(path("/proc") / to_string(process_id).view() / "status");
+        size_t position = 0;
+        string line;
+        while (getline(text.view(), position, line)) {
+            if (!line.starts_with("Uid:")) {
+                continue;
+            }
+            const auto parts = line.substr(4).split(" \t");
+            if (parts.empty()) {
+                return false;
+            }
+            try {
+                uid = static_cast<uint32_t>(to_uint64(parts[0].view()));
+            } catch (const exception&) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    uint64_t kilobytes_value(const string_view line) {
+        const size_t colon = line.find(':');
+        if (colon == string::npos) {
+            return 0;
+        }
+        string_view value = line.substr(colon + 1);
+        value = value.trim_left();
+        size_t end = 0;
+        while (end < value.size() && value[end] >= '0' && value[end] <= '9') {
+            ++end;
+        }
+        if (end == 0) {
+            return 0;
+        }
+        try {
+            return to_uint64(value.substr(0, end));
+        } catch (const exception&) {
+            return 0;
+        }
+    }
+
+    int native_signal_of(const process::signal sig) noexcept {
+        switch (sig) {
+            case process::signal::terminate:
+                return SIGTERM;
+            case process::signal::kill:
+                return SIGKILL;
+            case process::signal::interrupt:
+                return SIGINT;
+            case process::signal::quit:
+                return SIGQUIT;
+            case process::signal::hangup:
+                return SIGHUP;
+            case process::signal::stop:
+                return SIGSTOP;
+            case process::signal::resume:
+                return SIGCONT;
+            case process::signal::user1:
+                return SIGUSR1;
+            case process::signal::user2:
+                return SIGUSR2;
+            default:
+                return 0;
+        }
+    }
+
+    bool send_native_signal(const int process_id, const int native_signal) noexcept {
+        if (process_id <= 0 || native_signal <= 0) {
+            return false;
+        }
+#    ifdef SYS_pidfd_open
+        const int descriptor = static_cast<int>(::syscall(SYS_pidfd_open, process_id, 0));
+        if (descriptor >= 0) {
+            const bool sent = ::syscall(SYS_pidfd_send_signal, descriptor, native_signal, nullptr, 0) == 0;
+            ::close(descriptor);
+            return sent;
+        }
+#    endif
+        return ::kill(process_id, native_signal) == 0;
+    }
+
+    string user_name_of_uid(const uint32_t uid) {
+        char buffer[16384] = {};
+        ::passwd entry{};
+        ::passwd* result = nullptr;
+        if (::getpwuid_r(static_cast<::uid_t>(uid), &entry, buffer, sizeof(buffer), &result) != 0 ||
+            result == nullptr) {
+            return {};
+        }
+        return result->pw_name;
+    }
+
+    process::priority priority_from_nice(const int32_t nice) noexcept {
+        if (nice >= 15) {
+            return process::priority::idle;
+        }
+        if (nice >= 1) {
+            return process::priority::below_normal;
+        }
+        if (nice == 0) {
+            return process::priority::normal;
+        }
+        if (nice >= -5) {
+            return process::priority::normal_above;
+        }
+        if (nice >= -14) {
+            return process::priority::high;
+        }
+        return process::priority::realtime;
+    }
+
+    int nice_for_priority(const process::priority level) noexcept {
+        switch (level) {
+            case process::priority::idle:
+                return 19;
+            case process::priority::below_normal:
+                return 10;
+            case process::priority::normal:
+                return 0;
+            case process::priority::normal_above:
+                return -5;
+            case process::priority::high:
+                return -10;
+            case process::priority::realtime:
+                return -19;
+            default:
+                return 0;
+        }
+    }
+
+    process::io_info io_info_from_proc(const uint32_t process_id) {
+        process::io_info info;
+        const string text = read_text_file(path("/proc") / to_string(process_id).view() / "io");
+        size_t position = 0;
+        string line;
+        while (getline(text.view(), position, line)) {
+            if (line.starts_with("read_bytes:")) {
+                info.read_bytes = kilobytes_value(line.view());
+            } else if (line.starts_with("write_bytes:")) {
+                info.write_bytes = kilobytes_value(line.view());
+            } else if (line.starts_with("syscr:")) {
+                info.read_operations = kilobytes_value(line.view());
+            } else if (line.starts_with("syscw:")) {
+                info.write_operations = kilobytes_value(line.view());
+            }
+        }
+        return info;
+    }
+
+
 #endif
 } // namespace
 
@@ -1071,6 +1562,13 @@ process::memory_info process::get_memory_info() const {
     return get_memory_info(process_id_);
 }
 
+process::time_info process::get_time_info() const {
+    if (!started_) {
+        return {};
+    }
+    return get_time_info(process_id_);
+}
+
 void process::write_stdin(const string& data) {
     if (!started_ || finished_) {
         NEFORCE_THROW_EXCEPTION(process_exception("Process not running, cannot write to stdin"));
@@ -1102,6 +1600,7 @@ process::shell_result process::execute_shell(const string& command, const int ti
 
     process p;
     p.set_capture_stdout(true);
+    p.set_capture_stderr(true);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     p.start("cmd.exe", {"/c", command});
@@ -1116,7 +1615,7 @@ process::shell_result process::execute_shell(const string& command, const int ti
         NEFORCE_THROW_EXCEPTION(process_exception("Command execution timeout"));
     }
 
-    return {exit_code, move(p.stdout_buf_)};
+    return {exit_code, p.stdout_buf_, p.stderr_buf_};
 }
 
 process::shell_result process::execute_elevated_shell(const string& command, const int timeout_ms,
@@ -1140,7 +1639,7 @@ process::shell_result process::execute_elevated_shell(const string& command, con
         NEFORCE_THROW_EXCEPTION(process_exception("Command execution timeout"));
     }
 
-    return {exit_code, ""};
+    return {exit_code, "", ""};
 }
 
 process::native_id_type process::current_id() noexcept {
@@ -1168,167 +1667,254 @@ process::privilege_level process::current_privilege_level() noexcept {
 #endif
 }
 
-string process::name(native_id_type process_id) {
+vector<process::snapshot_entry> process::snapshot() {
+    vector<snapshot_entry> out;
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
-
-    if (hProcess == nullptr) {
-        return "";
+    const ::HANDLE tool_snapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (tool_snapshot == INVALID_HANDLE_VALUE) {
+        return out;
     }
-
-    char process_name[MAX_PATH] = {0};
-    ::HMODULE h_mod = nullptr;
-    ::DWORD cb_needed = 0;
-
-    if (::EnumProcessModules(hProcess, &h_mod, sizeof(::HMODULE), &cb_needed) == TRUE) {
-        ::GetModuleBaseNameA(hProcess, h_mod, process_name, sizeof(process_name));
+    ::PROCESSENTRY32W entry{};
+    entry.dwSize = sizeof(entry);
+    if (::Process32FirstW(tool_snapshot, &entry) == TRUE) {
+        do {
+            snapshot_entry item;
+            item.pid = static_cast<uint32_t>(entry.th32ProcessID);
+            item.parent_pid = static_cast<uint32_t>(entry.th32ParentProcessID);
+            item.threads = static_cast<uint32_t>(entry.cntThreads);
+            item.name = wcharacter::to_string(entry.szExeFile);
+            const ::HANDLE handle =
+                    ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, entry.th32ProcessID);
+            if (handle != nullptr) {
+                ::DWORD state_code = 0;
+                if (::GetExitCodeProcess(handle, &state_code) == TRUE) {
+                    item.status = state_code == STILL_ACTIVE ? state::running : state::exited;
+                }
+                ::PROCESS_MEMORY_COUNTERS counters{};
+                if (::GetProcessMemoryInfo(handle, &counters, sizeof(counters)) == TRUE) {
+                    item.rss_bytes = counters.WorkingSetSize;
+                }
+                ::FILETIME creation{};
+                ::FILETIME exit_time{};
+                ::FILETIME kernel_time{};
+                ::FILETIME user_time{};
+                if (::GetProcessTimes(handle, &creation, &exit_time, &kernel_time, &user_time) == TRUE) {
+                    item.start_time_ms = filetime_to_unix_ms(creation);
+                    item.user_time_ms = filetime_span_ms(user_time);
+                    item.system_time_ms = filetime_span_ms(kernel_time);
+                }
+                item.command = query_process_command_line(handle);
+                item.io = io_info_of_handle(handle);
+                item.user = user_name_of_handle(handle);
+                ::CloseHandle(handle);
+            }
+            out.push_back(move(item));
+        } while (::Process32NextW(tool_snapshot, &entry) == TRUE);
     }
-
-    ::CloseHandle(hProcess);
-    return {process_name};
-#else
-    const path path("/proc/" + to_string(process_id) + "/comm");
-    // set file_access::READ to read readonly process file
-    const file comm_file(path, false, file_access::read);
-
-    if (!comm_file.is_opened()) {
-        return "";
+    ::CloseHandle(tool_snapshot);
+#elif defined(NEFORCE_PLATFORM_LINUX)
+    const auto page_size = static_cast<uint64_t>(process_page_size());
+    const uint64_t ticks = clock_ticks_per_second();
+    const path proc("/proc");
+    for (const auto& directory: proc.children()) {
+        const auto name_view = directory.filename();
+        if (name_view.empty() || name_view[0] < '0' || name_view[0] > '9') {
+            continue;
+        }
+        uint32_t process_id = 0;
+        try {
+            process_id = static_cast<uint32_t>(to_uint64(name_view));
+        } catch (const exception&) {
+            continue;
+        }
+        linux_proc_stat stat_data;
+        if (!parse_proc_stat(process_id, stat_data)) {
+            continue;
+        }
+        snapshot_entry item;
+        item.pid = process_id;
+        item.parent_pid = stat_data.parent_pid;
+        item.name = move(stat_data.name);
+        item.status = state_from_char(stat_data.state);
+        item.threads = stat_data.threads;
+        item.rss_bytes = stat_data.resident_pages * page_size;
+        item.user_time_ms = stat_data.user_ticks * 1000 / ticks;
+        item.system_time_ms = stat_data.system_ticks * 1000 / ticks;
+        item.start_time_ms = start_time_ms(stat_data.start_ticks);
+        item.nice = stat_data.nice;
+        item.kernel_thread = (stat_data.flags & 0x00200000ULL) != 0;
+        item.io = io_info_from_proc(process_id);
+        uint32_t uid = 0;
+        if (owner_uid_of(process_id, uid)) {
+            item.uid = uid;
+            item.user = user_name_of_uid(uid);
+        }
+        string command = read_text_file(proc / to_string(process_id).view() / "cmdline");
+        if (!command.empty()) {
+            for (auto& value: command) {
+                if (value == '\0') {
+                    value = ' ';
+                }
+            }
+            item.command = command.trim();
+        }
+        out.push_back(move(item));
     }
+#endif
+    return out;
+}
 
-    string name = comm_file.read_line();
-
-    if (!name.empty() && name.back() == '\n') {
-        name.pop_back();
+string process::get_name(native_id_type process_id) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
+    if (handle == nullptr) {
+        return {};
     }
-
+    wchar_t process_name[MAX_PATH] = {};
+    ::HMODULE module = nullptr;
+    ::DWORD needed = 0;
+    string name;
+    if (::EnumProcessModules(handle, &module, sizeof(::HMODULE), &needed) == TRUE) {
+        if (::GetModuleBaseNameW(handle, module, process_name, MAX_PATH) != 0) {
+            name = wcharacter::to_string(process_name);
+        }
+    }
+    ::CloseHandle(handle);
     return name;
+#else
+    linux_proc_stat stat_data;
+    if (parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
+        return move(stat_data.name);
+    }
+    return {};
 #endif
 }
+
+string process::current_name() { return get_name(current_id()); }
+
+process::state process::current_state() { return get_state(current_id()); }
+
+string process::current_command_line() { return get_command_line(current_id()); }
+
+string process::get_command_line(native_id_type process_id) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
+    if (handle == nullptr) {
+        return {};
+    }
+    string command = query_process_command_line(handle);
+    ::CloseHandle(handle);
+    return command;
+#else
+    string command = read_text_file(path("/proc") / to_string(process_id).view() / "cmdline");
+    if (command.empty()) {
+        return {};
+    }
+    for (auto& value: command) {
+        if (value == '\0') {
+            value = ' ';
+        }
+    }
+    return command.trim();
+#endif
+}
+
+string process::get_executable_path(native_id_type process_id) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
+    if (handle == nullptr) {
+        return {};
+    }
+    wchar_t buffer[MAX_PATH] = {};
+    string result;
+    if (::GetModuleFileNameExW(handle, nullptr, buffer, MAX_PATH) != 0) {
+        result = wcharacter::to_string(buffer);
+    }
+    ::CloseHandle(handle);
+    return result;
+#else
+    char buffer[4096] = {};
+    const string link = string("/proc/") + to_string(process_id) + "/exe";
+    const ssize_t length = ::readlink(link.data(), buffer, sizeof(buffer) - 1);
+    if (length <= 0) {
+        return {};
+    }
+    return {buffer, static_cast<size_t>(length)};
+#endif
+}
+
+process::time_info process::get_time_info(native_id_type process_id) {
+    time_info info;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
+    if (handle == nullptr) {
+        return info;
+    }
+    ::FILETIME creation{};
+    ::FILETIME exit_time{};
+    ::FILETIME kernel_time{};
+    ::FILETIME user_time{};
+    if (::GetProcessTimes(handle, &creation, &exit_time, &kernel_time, &user_time) == TRUE) {
+        const uint64_t started_at = filetime_to_unix_ms(creation);
+        const uint64_t now = unix_time_ms();
+        info.user_time_ms = filetime_span_ms(user_time);
+        info.kernel_time_ms = filetime_span_ms(kernel_time);
+        info.wall_time_ms = now > started_at ? now - started_at : 0;
+    }
+    ::CloseHandle(handle);
+#else
+    linux_proc_stat stat_data;
+    if (!parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
+        return info;
+    }
+    const uint64_t ticks = clock_ticks_per_second();
+    info.user_time_ms = stat_data.user_ticks * 1000 / ticks;
+    info.kernel_time_ms = stat_data.system_ticks * 1000 / ticks;
+    const uint64_t started_at = start_time_ms(stat_data.start_ticks);
+    const uint64_t now = unix_time_ms();
+    info.wall_time_ms = now > started_at ? now - started_at : 0;
+#endif
+    return info;
+}
+
+process::time_info process::current_time_info() { return get_time_info(current_id()); }
 
 process::memory_info process::get_memory_info(native_id_type process_id) {
     memory_info mem_info;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
-    if (hProcess == nullptr) {
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
+    if (handle == nullptr) {
         return mem_info;
     }
 
-    ::PROCESS_MEMORY_COUNTERS pmc;
-    if (::GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc)) == TRUE) {
-        mem_info.working_set_size = pmc.WorkingSetSize;
-        mem_info.peak_working_set_size = pmc.PeakWorkingSetSize;
-        mem_info.pagefile_usage = pmc.PagefileUsage;
-        mem_info.peak_pagefile_usage = pmc.PeakPagefileUsage;
+    ::PROCESS_MEMORY_COUNTERS counters{};
+    if (::GetProcessMemoryInfo(handle, &counters, sizeof(counters)) == TRUE) {
+        mem_info.working_set_size = counters.WorkingSetSize;
+        mem_info.peak_working_set_size = counters.PeakWorkingSetSize;
+        mem_info.pagefile_usage = counters.PagefileUsage;
+        mem_info.peak_pagefile_usage = counters.PeakPagefileUsage;
     }
-
-    ::CloseHandle(hProcess);
-
+    mem_info.virtual_size = virtual_size_of(handle);
+    ::CloseHandle(handle);
 #else
-    ::FILE* fp = ::fopen(("/proc/" + to_string(process_id) + "/statm").data(), "r");
-    if (fp != nullptr) {
-        char line[256];
-        if (::fgets(line, sizeof(line), fp) != nullptr) {
-            string_view line_view(line);
-            size_t pos = 0;
-
-            auto parse_next_ulong = [&line_view, &pos]() -> unsigned long {
-                while (pos < line_view.size() && line_view[pos] == ' ') {
-                    pos++;
-                }
-
-                if (pos >= line_view.size()) {
-                    return 0;
-                }
-
-                size_t end = pos;
-                while (end < line_view.size() && line_view[end] != ' ' && line_view[end] != '\n') {
-                    end++;
-                }
-
-                if (end == pos) {
-                    return 0;
-                }
-
-                const string_view num_sv(line_view.data() + pos, end - pos);
-                pos = end;
-
-                try {
-                    return static_cast<unsigned long>(to_uint64(num_sv));
-                } catch (const exception& e) {
-                    NEFORCE_REPORT_EXCEPTION(e);
-                    return 0;
-                }
-            };
-
-            mem_info.virtual_size = parse_next_ulong() * static_cast<size_t>(process_page_size());
-            mem_info.working_set_size = parse_next_ulong() * static_cast<size_t>(process_page_size());
-        }
-        ::fclose(fp);
+    linux_proc_stat stat_data;
+    if (parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
+        mem_info.virtual_size = static_cast<size_t>(stat_data.virtual_bytes);
+        mem_info.working_set_size = static_cast<size_t>(stat_data.resident_pages * process_page_size());
     }
 
-    fp = ::fopen(("/proc/" + to_string(process_id) + "/status").data(), "r");
-    if (fp != nullptr) {
-        char line[256];
-        while (::fgets(line, sizeof(line), fp) != nullptr) {
-            string_view line_view(line);
-
-            if (line_view.starts_with("VmHWM:")) {
-                string_view value_part = line_view.substr(6);
-                value_part = value_part.trim_left();
-
-                size_t num_end = 0;
-                while (num_end < value_part.size() &&
-                       ((value_part[num_end] >= '0' && value_part[num_end] <= '9') || value_part[num_end] == ' ')) {
-                    num_end++;
-                }
-
-                if (num_end > 0) {
-                    string_view num_sv = value_part.substr(0, num_end).trim_right();
-
-                    if (!num_sv.empty()) {
-                        try {
-                            const auto hwm_kb = static_cast<unsigned long>(to_uint64(num_sv));
-                            mem_info.peak_working_set_size = static_cast<size_t>(hwm_kb) * 1024;
-                            // NOLINTNEXTLINE(bugprone-empty-catch)
-                        } catch (const exception& e) {
-                            NEFORCE_REPORT_EXCEPTION(e);
-                        }
-                    }
-                }
-            } else if (line_view.starts_with("VmSwap:")) {
-                string_view value_part = line_view.substr(7);
-                value_part = value_part.trim();
-
-                size_t num_end = 0;
-                while (num_end < value_part.size() &&
-                       ((value_part[num_end] >= '0' && value_part[num_end] <= '9') || value_part[num_end] == ' ')) {
-                    num_end++;
-                }
-
-                if (num_end > 0) {
-                    string_view num_sv = value_part.substr(0, num_end);
-                    while (!num_sv.empty() && num_sv.back() == ' ') {
-                        num_sv = num_sv.substr(0, num_sv.size() - 1);
-                    }
-
-                    if (!num_sv.empty()) {
-                        try {
-                            const auto swap_kb = static_cast<unsigned long>(to_uint64(num_sv));
-                            mem_info.pagefile_usage = static_cast<size_t>(swap_kb) * 1024;
-                            // NOLINTNEXTLINE(bugprone-empty-catch)
-                        } catch (const exception& e) {
-                            NEFORCE_REPORT_EXCEPTION(e);
-                        }
-                    }
-                }
-            }
+    const string status = read_text_file(path("/proc") / to_string(process_id).view() / "status");
+    size_t position = 0;
+    string line;
+    while (getline(status.view(), position, line)) {
+        if (line.starts_with("VmHWM:")) {
+            mem_info.peak_working_set_size = static_cast<size_t>(kilobytes_value(line.view()) * 1024);
+        } else if (line.starts_with("VmSwap:")) {
+            mem_info.pagefile_usage = static_cast<size_t>(kilobytes_value(line.view()) * 1024);
         }
-        ::fclose(fp);
     }
-
     mem_info.peak_pagefile_usage = 0;
-
 #endif
     return mem_info;
 }
@@ -1337,120 +1923,55 @@ process::memory_info process::current_memory_info() { return get_memory_info(cur
 
 process::state process::get_state(native_id_type process_id) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
-    if (hProcess == nullptr) {
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
+    if (handle == nullptr) {
         return state::unknown;
     }
 
     ::DWORD exit_code = 0;
-    auto result = state::running;
-    if (::GetExitCodeProcess(hProcess, &exit_code) == TRUE) {
+    auto result = state::unknown;
+    if (::GetExitCodeProcess(handle, &exit_code) == TRUE) {
         if (exit_code != STILL_ACTIVE) {
             result = state::exited;
         } else {
-            const ::HANDLE hSnapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
-            if (hSnapshot != INVALID_HANDLE_VALUE) {
-                ::THREADENTRY32 te{};
-                te.dwSize = sizeof(te);
-                if (::Thread32First(hSnapshot, &te) == TRUE) {
+            result = state::running;
+            const ::HANDLE tool_snapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+            if (tool_snapshot != INVALID_HANDLE_VALUE) {
+                ::THREADENTRY32 entry{};
+                entry.dwSize = sizeof(entry);
+                if (::Thread32First(tool_snapshot, &entry) == TRUE) {
                     do {
-                        if (te.th32OwnerProcessID == process_id) {
-                            const ::HANDLE hThread = ::OpenThread(THREAD_QUERY_INFORMATION, FALSE, te.th32ThreadID);
-                            if (hThread != nullptr) {
-                                const ::DWORD suspend_count = ::SuspendThread(hThread);
-                                if (suspend_count != static_cast<::DWORD>(-1)) {
-                                    ::ResumeThread(hThread);
-                                    if (suspend_count > 0) {
-                                        result = state::suspended;
-                                    } else {
-                                        result = state::running;
-                                    }
-                                }
-                                ::CloseHandle(hThread);
-                            }
-                            break;
+                        if (entry.th32OwnerProcessID != process_id) {
+                            continue;
                         }
-                    } while (::Thread32Next(hSnapshot, &te) == TRUE);
+                        const ::HANDLE thread_handle =
+                                ::OpenThread(THREAD_QUERY_INFORMATION, FALSE, entry.th32ThreadID);
+                        if (thread_handle != nullptr) {
+                            const ::DWORD suspend_count = ::SuspendThread(thread_handle);
+                            ::ResumeThread(thread_handle);
+                            ::CloseHandle(thread_handle);
+                            if (suspend_count != static_cast<::DWORD>(-1) && suspend_count > 0) {
+                                result = state::suspended;
+                            }
+                        }
+                        break;
+                    } while (::Thread32Next(tool_snapshot, &entry) == TRUE);
                 }
-                ::CloseHandle(hSnapshot);
+                ::CloseHandle(tool_snapshot);
             }
         }
     }
-    ::CloseHandle(hProcess);
+    ::CloseHandle(handle);
     return result;
 #else
-    ::FILE* fp = ::fopen(("/proc/" + to_string(process_id) + "/stat").data(), "r");
-    if (fp == nullptr) {
-        if (::kill(process_id, 0) != 0) {
-            return state::exited;
-        }
-        return state::unknown;
+    linux_proc_stat stat_data;
+    if (parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
+        return state_from_char(stat_data.state);
     }
-
-    char line[512];
-    if (::fgets(line, sizeof(line), fp) == nullptr) {
-        ::fclose(fp);
-        return state::unknown;
+    if (::kill(process_id, 0) != 0) {
+        return state::exited;
     }
-    ::fclose(fp);
-
-    string_view line_view(line);
-    size_t pos = 0;
-
-    auto skip_field = [&line_view, &pos]() noexcept {
-        while (pos < line_view.size() && line_view[pos] == ' ') {
-            pos++;
-        }
-
-        if (pos >= line_view.size()) {
-            return;
-        }
-
-        if (line_view[pos] == '(') {
-            pos++;
-            while (pos < line_view.size() && line_view[pos] != ')') {
-                pos++;
-            }
-            if (pos < line_view.size()) {
-                pos++;
-            }
-        } else {
-            while (pos < line_view.size() && line_view[pos] != ' ' && line_view[pos] != '\n') {
-                pos++;
-            }
-        }
-    };
-
-    skip_field(); // PID
-    skip_field(); // PNAME
-
-    while (pos < line_view.size() && line_view[pos] == ' ') {
-        pos++;
-    }
-
-    char state_ch = '\0';
-    if (pos < line_view.size()) {
-        state_ch = line_view[pos];
-    }
-
-    switch (state_ch) {
-        case 'T':
-        case 't':
-            return state::suspended;
-        case 'Z':
-            return state::exited;
-        case 'R':
-        case 'S':
-        case 'D':
-        case 'I':
-        case 'W':
-            return state::running;
-        default:
-            if (::kill(process_id, 0) == 0) {
-                return state::unknown;
-            }
-            return state::exited;
-    }
+    return state::unknown;
 #endif
 }
 
@@ -1503,85 +2024,80 @@ process::privilege_level process::get_privilege_level(native_id_type process_id)
         }
         return (bIsAdmin == TRUE) ? privilege_level::privileged : privilege_level::not_privileged;
 #else
-        const string proc_status_path = string("/proc/") + to_string(process_id) + "/status";
-        ::FILE* fp = ::fopen(proc_status_path.data(), "r");
-        if (fp == nullptr) {
-            return privilege_level::unknown;
-        }
-
-        char line[256];
-        auto result = privilege_level::unknown;
-        while (::fgets(line, sizeof(line), fp) != nullptr) {
-            if (string_compare(line, "Uid:", 4) == 0) {
-                const char* ptr = line + 4;
-                char* endptr = nullptr;
-
-                ignore = inner::str_to_ints<long>(ptr, &endptr, 10);
-                if (endptr == ptr) {
-                    break;
-                }
-
-                const long euid = inner::str_to_ints<long>(endptr, &endptr, 10);
-                if (endptr == ptr) {
-                    break;
-                }
-
-                result = (euid == 0) ? privilege_level::privileged : privilege_level::not_privileged;
-                break;
+        const string status = read_text_file(path("/proc") / to_string(process_id).view() / "status");
+        size_t position = 0;
+        string line;
+        while (getline(status.view(), position, line)) {
+            if (!line.starts_with("Uid:")) {
+                continue;
+            }
+            const auto parts = line.substr(4).split(" \t");
+            if (parts.size() < 2) {
+                return privilege_level::unknown;
+            }
+            try {
+                return to_uint64(parts[1].view()) == 0 ? privilege_level::privileged : privilege_level::not_privileged;
+            } catch (const exception&) {
+                return privilege_level::unknown;
             }
         }
-        ::fclose(fp);
-        return result;
+        return privilege_level::unknown;
 #endif
     } catch (...) {
         return privilege_level::unknown;
     }
 }
 
-bool process::check_permission(native_id_type process_id, permission permission) {
+bool process::check_permission(native_id_type process_id, permission perm) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD desired_access = 0;
-
-    const int perm_val = static_cast<int>(permission);
-    if ((perm_val & static_cast<int>(permission::read)) != 0) {
+    const int value = static_cast<int>(perm);
+    if ((value & static_cast<int>(permission::read)) != 0) {
         desired_access |= PROCESS_VM_READ;
     }
-    if ((perm_val & static_cast<int>(permission::write)) != 0) {
+    if ((value & static_cast<int>(permission::write)) != 0) {
         desired_access |= PROCESS_VM_WRITE;
     }
-    if ((perm_val & static_cast<int>(permission::terminate)) != 0) {
+    if ((value & static_cast<int>(permission::terminate)) != 0) {
         desired_access |= PROCESS_TERMINATE;
     }
-    if ((perm_val & static_cast<int>(permission::query_info)) != 0) {
+    if ((value & static_cast<int>(permission::query_info)) != 0) {
         desired_access |= PROCESS_QUERY_INFORMATION;
     }
 
-    const ::HANDLE hProcess = ::OpenProcess(desired_access, FALSE, process_id);
-    if (hProcess != nullptr) {
-        ::CloseHandle(hProcess);
+    const ::HANDLE handle = ::OpenProcess(desired_access, FALSE, process_id);
+    if (handle == nullptr) {
+        return false;
+    }
+    ::CloseHandle(handle);
+    return true;
+#else
+    const string proc_path = string("/proc/") + to_string(process_id);
+    if (::access(proc_path.data(), F_OK) != 0) {
+        return false;
+    }
+
+    const int value = static_cast<int>(perm);
+    if (value == 0) {
         return true;
     }
-    return false;
-#else
-    const string proc_path = "/proc/" + to_string(process_id);
-
-    int access_mode = 0;
-    const int perm_val = static_cast<int>(permission);
-    if ((perm_val & static_cast<int>(permission::read)) != 0) {
-        access_mode |= R_OK;
-    }
-    if ((perm_val & static_cast<int>(permission::write)) != 0) {
-        access_mode |= W_OK;
-    }
-    if ((perm_val & static_cast<int>(permission::execute)) != 0) {
-        access_mode |= X_OK;
+    if ((value & static_cast<int>(permission::execute)) != 0) {
+        return false;
     }
 
-    if (access_mode == 0) {
-        access_mode = F_OK;
+    constexpr int owner_only = static_cast<int>(permission::read) | static_cast<int>(permission::write) |
+                               static_cast<int>(permission::terminate);
+    if ((value & owner_only) == 0) {
+        return true;
     }
-
-    return ::access(proc_path.data(), access_mode) == 0;
+    if (::geteuid() == 0) {
+        return true;
+    }
+    uint32_t uid = 0;
+    if (!owner_uid_of(static_cast<uint32_t>(process_id), uid)) {
+        return false;
+    }
+    return uid == static_cast<uint32_t>(::geteuid());
 #endif
 }
 
@@ -1593,7 +2109,7 @@ process::native_id_type process::spawn(const string& executable, const vector<st
     return id;
 }
 
-int process::system(const string& executable, const vector<string>& args, const int timeout_ms) {
+int process::run(const string& executable, const vector<string>& args, const int timeout_ms) {
     process p;
     p.start(executable, args);
     const int rc = p.wait(timeout_ms);
@@ -1604,16 +2120,17 @@ int process::system(const string& executable, const vector<string>& args, const 
     return rc;
 }
 
-string process::capture(const string& executable, const vector<string>& args, const int timeout_ms) {
+process::shell_result process::run_capture(const string& executable, const vector<string>& args, const int timeout_ms) {
     process p;
     p.set_capture_stdout(true);
+    p.set_capture_stderr(true);
     p.start(executable, args);
     const int rc = p.wait(timeout_ms);
     if (rc == -1 && timeout_ms >= 0) {
         p.terminate();
         NEFORCE_THROW_EXCEPTION(process_exception("Process execution timeout"));
     }
-    return p.stdout_output();
+    return {rc, p.stdout_output(), p.stderr_output()};
 }
 
 void process::chain(process& first, process& second) {
@@ -1622,7 +2139,7 @@ void process::chain(process& first, process& second) {
     second.set_external_stdin(second.stdin_pipe_);
 }
 
-void process::chain(vector<process*>& processes) {
+void process::chain(const vector<process*>& processes) {
     if (processes.size() < 2) {
         return;
     }
@@ -1636,10 +2153,17 @@ string process::build_command_line(const string& executable, const vector<string
         if (value.empty()) {
             return true;
         }
-        for (const char c: value) {
-            if (c == ' ' || c == '\t' || c == '"' || c == '&' || c == '|' || c == '<' || c == '>' || c == '^' ||
-                c == '%') {
-                return true;
+
+        constexpr uint64_t lo = (1ULL << 0x09) | (1ULL << 0x20) | (1ULL << 0x22) | (1ULL << 0x25) | (1ULL << 0x26) |
+                                (1ULL << 0x3C) | (1ULL << 0x3E);
+        constexpr uint64_t hi = (1ULL << (0x5E - 64)) | (1ULL << (0x7C - 64));
+
+        for (const byte_t u: value) {
+            if (u < 128) {
+                const uint64_t word = (u < 64) ? lo : hi;
+                if ((word >> (u & 63)) & 1) {
+                    return true;
+                }
             }
         }
         return false;
@@ -1688,7 +2212,7 @@ string process::search_path(const string& executable) {
     return "";
 }
 
-bool process::relaunch_current_process() {
+bool process::relaunch_current() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     wchar_t executable[MAX_PATH];
     const ::DWORD length = ::GetModuleFileNameW(nullptr, executable, MAX_PATH);
@@ -1745,5 +2269,331 @@ bool process::relaunch_current_process() {
     return true;
 #endif
 }
+
+process::io_info process::get_io_info(const native_id_type process_id) {
+    io_info info;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, process_id);
+    if (handle == nullptr) {
+        return info;
+    }
+    info = io_info_of_handle(handle);
+    ::CloseHandle(handle);
+#else
+    info = io_info_from_proc(static_cast<uint32_t>(process_id));
+#endif
+    return info;
+}
+
+process::io_info process::current_io_info() { return get_io_info(current_id()); }
+
+process::io_info process::get_io_info() const {
+    if (!started_) {
+        return {};
+    }
+    return get_io_info(process_id_);
+}
+
+string process::get_user(const native_id_type process_id) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
+    if (handle == nullptr) {
+        return {};
+    }
+    string name = user_name_of_handle(handle);
+    ::CloseHandle(handle);
+    return name;
+#else
+    uint32_t uid = 0;
+    if (!owner_uid_of(static_cast<uint32_t>(process_id), uid)) {
+        return {};
+    }
+    return user_name_of_uid(uid);
+#endif
+}
+
+vector<process::thread_info> process::threads(const native_id_type process_id) {
+    vector<thread_info> out;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE snapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+    if (snapshot == INVALID_HANDLE_VALUE) {
+        return out;
+    }
+    ::THREADENTRY32 entry{};
+    entry.dwSize = sizeof(entry);
+    if (::Thread32First(snapshot, &entry) == TRUE) {
+        do {
+            if (entry.th32OwnerProcessID != process_id) {
+                continue;
+            }
+            thread_info item;
+            item.tid = entry.th32ThreadID;
+            const ::HANDLE handle = ::OpenThread(THREAD_QUERY_INFORMATION, FALSE, entry.th32ThreadID);
+            if (handle != nullptr) {
+                ::FILETIME creation{};
+                ::FILETIME exit_time{};
+                ::FILETIME kernel_time{};
+                ::FILETIME user_time{};
+                if (::GetThreadTimes(handle, &creation, &exit_time, &kernel_time, &user_time) == TRUE) {
+                    item.start_time_ms = filetime_to_unix_ms(creation);
+                    item.user_time_ms = filetime_span_ms(user_time);
+                    item.system_time_ms = filetime_span_ms(kernel_time);
+                }
+                item.name = thread_name_of_handle(handle);
+                ::CloseHandle(handle);
+            }
+            out.push_back(move(item));
+        } while (::Thread32Next(snapshot, &entry) == TRUE);
+    }
+    ::CloseHandle(snapshot);
+#else
+    const path task_directory = path("/proc") / to_string(static_cast<uint32_t>(process_id)).view() / "task";
+    for (const auto& directory: task_directory.children()) {
+        const auto name_view = directory.filename();
+        if (name_view.empty()) {
+            continue;
+        }
+        uint32_t tid = 0;
+        try {
+            tid = static_cast<uint32_t>(to_uint64(name_view));
+        } catch (const exception&) {
+            continue;
+        }
+        linux_proc_stat stat_data;
+        if (!parse_proc_stat_text(read_text_file(path(directory.str() + "/stat")), stat_data)) {
+            continue;
+        }
+        thread_info item;
+        item.tid = tid;
+        item.name = move(stat_data.name);
+        item.status = state_from_char(stat_data.state);
+        const uint64_t ticks = clock_ticks_per_second();
+        item.user_time_ms = stat_data.user_ticks * 1000 / ticks;
+        item.system_time_ms = stat_data.system_ticks * 1000 / ticks;
+        item.start_time_ms = start_time_ms(stat_data.start_ticks);
+        out.push_back(move(item));
+    }
+#endif
+    return out;
+}
+
+map<uint32_t, vector<process::native_id_type>> process::socket_owners() {
+    map<uint32_t, vector<native_id_type>> owners;
+#ifdef NEFORCE_PLATFORM_LINUX
+    for (const auto& directory: path("/proc").children()) {
+        const auto name_view = directory.filename();
+        if (name_view.empty() || name_view[0] < '0' || name_view[0] > '9') {
+            continue;
+        }
+        native_id_type process_id = 0;
+        try {
+            process_id = static_cast<native_id_type>(to_uint64(name_view));
+        } catch (const exception&) {
+            continue;
+        }
+        for (const auto& descriptor: path(directory.str() + "/fd").children()) {
+            char target[256] = {};
+            const ssize_t length = ::readlink(descriptor.str().data(), target, sizeof(target) - 1);
+            if (length <= 0) {
+                continue;
+            }
+            const string_view text(target, static_cast<size_t>(length));
+            if (!text.starts_with("socket:[")) {
+                continue;
+            }
+            const auto close = text.find(']');
+            if (close == string_view::npos) {
+                continue;
+            }
+            uint32_t inode = 0;
+            try {
+                inode = static_cast<uint32_t>(to_uint64(text.substr(8, close - 8)));
+            } catch (const exception&) {
+                continue;
+            }
+            auto& pids = owners[inode];
+            if (pids.empty() || pids.back() != process_id) {
+                pids.push_back(process_id);
+            }
+        }
+    }
+#endif
+    return owners;
+}
+
+bool process::send_signal(const native_id_type process_id, const signal sig) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (sig != signal::terminate && sig != signal::kill) {
+        return false;
+    }
+    const ::HANDLE handle = ::OpenProcess(PROCESS_TERMINATE, FALSE, static_cast<::DWORD>(process_id));
+    if (handle == nullptr) {
+        return false;
+    }
+    const bool sent = ::TerminateProcess(handle, 1) != 0;
+    ::CloseHandle(handle);
+    return sent;
+#else
+    return send_native_signal(static_cast<int>(process_id), native_signal_of(sig));
+#endif
+}
+
+bool process::send_signal(const native_id_type process_id, const int native_signal) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (native_signal == 9 || native_signal == 15) {
+        return send_signal(process_id, signal::kill);
+    }
+    return false;
+#else
+    return send_native_signal(static_cast<int>(process_id), native_signal);
+#endif
+}
+
+string_view process::signal_name(const signal sig) noexcept {
+    switch (sig) {
+        case signal::terminate:
+            return "TERM";
+        case signal::kill:
+            return "KILL";
+        case signal::interrupt:
+            return "INT";
+        case signal::quit:
+            return "QUIT";
+        case signal::hangup:
+            return "HUP";
+        case signal::stop:
+            return "STOP";
+        case signal::resume:
+            return "CONT";
+        case signal::user1:
+            return "USR1";
+        case signal::user2:
+            return "USR2";
+        default:
+            return "UNKNOWN";
+    }
+}
+
+optional<process::priority> process::get_priority(const native_id_type process_id) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
+    if (handle == nullptr) {
+        return none;
+    }
+    const ::DWORD priority_class = ::GetPriorityClass(handle);
+    ::CloseHandle(handle);
+    if (priority_class == 0) {
+        return none;
+    }
+    priority level = priority::normal;
+    if (!priority_from_class(priority_class, level)) {
+        return none;
+    }
+    return level;
+#else
+    linux_proc_stat stat_data;
+    if (!parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
+        return none;
+    }
+    return priority_from_nice(stat_data.nice);
+#endif
+}
+
+bool process::set_priority(const native_id_type process_id, const priority level) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::DWORD priority_class = class_for_priority(level);
+    if (priority_class == 0) {
+        return false;
+    }
+    const ::HANDLE handle = ::OpenProcess(PROCESS_SET_INFORMATION, FALSE, process_id);
+    if (handle == nullptr) {
+        return false;
+    }
+    const bool changed = ::SetPriorityClass(handle, priority_class) != 0;
+    ::CloseHandle(handle);
+    return changed;
+#else
+    return ::setpriority(PRIO_PROCESS, static_cast<::id_t>(process_id), nice_for_priority(level)) == 0;
+#endif
+}
+
+bool process::set_nice(const native_id_type process_id, const int32_t nice) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const int32_t value = nice < -20 ? -20 : (nice > 19 ? 19 : nice);
+    priority level = priority::normal;
+    if (value >= 15) {
+        level = priority::idle;
+    } else if (value >= 1) {
+        level = priority::below_normal;
+    } else if (value == 0) {
+        level = priority::normal;
+    } else if (value >= -5) {
+        level = priority::normal_above;
+    } else if (value >= -14) {
+        level = priority::high;
+    } else {
+        level = priority::realtime;
+    }
+    return set_priority(process_id, level);
+#else
+    const int32_t value = nice < -20 ? -20 : (nice > 19 ? 19 : nice);
+    return ::setpriority(PRIO_PROCESS, static_cast<::id_t>(process_id), static_cast<int>(value)) == 0;
+#endif
+}
+
+optional<uint64_t> process::get_affinity(const native_id_type process_id) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
+    if (handle == nullptr) {
+        return none;
+    }
+    ::DWORD_PTR process_mask = 0;
+    ::DWORD_PTR system_mask = 0;
+    const bool ok = ::GetProcessAffinityMask(handle, &process_mask, &system_mask) != 0;
+    ::CloseHandle(handle);
+    if (!ok) {
+        return none;
+    }
+    return static_cast<uint64_t>(process_mask);
+#else
+    cpu_set_t set;
+    CPU_ZERO(&set);
+    if (::sched_getaffinity(static_cast<::pid_t>(process_id), sizeof(set), &set) != 0) {
+        return none;
+    }
+    uint64_t mask = 0;
+    for (int index = 0; index < 64 && index < CPU_SETSIZE; ++index) {
+        if (CPU_ISSET(index, &set)) {
+            mask |= (static_cast<uint64_t>(1) << index);
+        }
+    }
+    return mask;
+#endif
+}
+
+bool process::set_affinity(const native_id_type process_id, const uint64_t mask) noexcept {
+    if (mask == 0) {
+        return false;
+    }
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::HANDLE handle = ::OpenProcess(PROCESS_SET_INFORMATION, FALSE, process_id);
+    if (handle == nullptr) {
+        return false;
+    }
+    const bool changed = ::SetProcessAffinityMask(handle, static_cast<::DWORD_PTR>(mask)) != 0;
+    ::CloseHandle(handle);
+    return changed;
+#else
+    cpu_set_t set;
+    CPU_ZERO(&set);
+    for (int index = 0; index < 64 && index < CPU_SETSIZE; ++index) {
+        if ((mask & (static_cast<uint64_t>(1) << index)) != 0) {
+            CPU_SET(index, &set);
+        }
+    }
+    return ::sched_setaffinity(static_cast<::pid_t>(process_id), sizeof(set), &set) == 0;
+#endif
+}
+
 
 NEFORCE_END_NAMESPACE__

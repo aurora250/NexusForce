@@ -7,25 +7,35 @@
 #    include <NeForce/core/memory/bit.hpp>
 #    include <WinSock2.h>
 #    include <ws2ipdef.h>
+#    include <ws2tcpip.h>
 #    include <comdef.h>
 #    include <intrin.h>
 #    include <iphlpapi.h>
+#    include <netioapi.h>
 #    include <pdh.h>
 #    include <psapi.h>
 #    include <winternl.h>
 #    include <wbemcli.h>
+#    include <cwchar>
+#    ifdef NEFORCE_ARCH_X86
+#        include <immintrin.h>
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
+#    include <NeForce/core/file/file.hpp>
 #    include <dirent.h>
 #    include <ifaddrs.h>
 #    include <net/if.h>
+#    include <netpacket/packet.h>
 #    include <arpa/inet.h>
 #    include <netinet/in.h>
+#    include <sys/auxv.h>
 #    include <sys/sysinfo.h>
 #    include <sys/statvfs.h>
 #    include <sys/utsname.h>
 #    include <unistd.h>
 #    include <cstdio>
+#    include <cstdlib>
 #    ifdef NEFORCE_ARCH_X86
 #        include <cpuid.h>
 #    endif
@@ -110,9 +120,285 @@ namespace {
         return 0;
     }
 
+    string unescape_mount_field(const string& value) {
+        string unescaped;
+        unescaped.reserve(value.size());
+        for (size_t i = 0; i < value.size(); ++i) {
+            if (value[i] == '\\' && i + 3 < value.size() && value[i + 1] >= '0' && value[i + 1] <= '7' &&
+                value[i + 2] >= '0' && value[i + 2] <= '7' && value[i + 3] >= '0' && value[i + 3] <= '7') {
+                const int code = (value[i + 1] - '0') * 64 + (value[i + 2] - '0') * 8 + (value[i + 3] - '0');
+                unescaped.push_back(static_cast<char>(code));
+                i += 3;
+            } else {
+                unescaped.push_back(value[i]);
+            }
+        }
+        return unescaped;
+    }
+
+    uint8_t prefix_length_of(const uint32_t mask) noexcept {
+        uint32_t value = mask;
+        uint8_t bits = 0;
+        while ((value & 0x80000000U) != 0) {
+            ++bits;
+            value <<= 1;
+        }
+        return bits;
+    }
+
+    string mac_address_of(const ::sockaddr_ll& address) {
+        const size_t count = address.sll_halen > 6 ? 6 : static_cast<size_t>(address.sll_halen);
+        string text;
+        text.reserve(count * 3);
+        constexpr string_view digits = "0123456789ABCDEF";
+        for (size_t i = 0; i < count; ++i) {
+            if (i > 0) {
+                text.push_back(':');
+            }
+            text.push_back(digits[(address.sll_addr[i] >> 4) & 0x0F]);
+            text.push_back(digits[address.sll_addr[i] & 0x0F]);
+        }
+        return text;
+    }
+
+    vector<sysinfo::mount_point> read_mount_entries() {
+        vector<sysinfo::mount_point> entries;
+        const string text = read_file_all("/proc/mounts");
+        size_t position = 0;
+        string line;
+        while (getline(text.view(), position, line)) {
+            const auto parts = line.split(" \t");
+            if (parts.size() < 4) {
+                continue;
+            }
+            sysinfo::mount_point item;
+            item.source = unescape_mount_field(parts[0]);
+            item.target = unescape_mount_field(parts[1]);
+            item.filesystem = parts[2];
+            item.options = parts[3];
+            struct ::statvfs value{};
+            if (::statvfs(item.target.data(), &value) == 0) {
+                const uint64_t block_size = value.f_frsize != 0 ? value.f_frsize : value.f_bsize;
+                item.total_bytes = static_cast<uint64_t>(value.f_blocks) * block_size;
+                item.free_bytes = static_cast<uint64_t>(value.f_bfree) * block_size;
+                item.available_bytes = static_cast<uint64_t>(value.f_bavail) * block_size;
+            }
+            entries.push_back(move(item));
+        }
+        return entries;
+    }
+
+    string filesystem_type_of(const string& target) {
+        char resolved[PATH_MAX] = {};
+        if (::realpath(target.data(), resolved) == nullptr) {
+            return {};
+        }
+        const string absolute = resolved;
+        string best_target;
+        string best_type;
+        for (const auto& entry: read_mount_entries()) {
+            bool matches = false;
+            if (absolute == entry.target) {
+                matches = true;
+            } else if (entry.target == "/") {
+                matches = true;
+            } else if (absolute.size() > entry.target.size() && absolute.starts_with(entry.target.view()) &&
+                       absolute[entry.target.size()] == '/') {
+                matches = true;
+            }
+            if (matches && entry.target.size() >= best_target.size()) {
+                best_target = entry.target;
+                best_type = entry.filesystem;
+            }
+        }
+        return best_type;
+    }
+
+    uint64_t read_number_file(const string& file_path) {
+        const string text = read_file_all(file_path.data());
+        string_view value = text.view();
+        value = value.trim();
+        if (value.empty()) {
+            return 0;
+        }
+        try {
+            return to_uint64(value);
+        } catch (const exception&) {
+            return 0;
+        }
+    }
+
+    string read_trimmed_file(const string& file_path) {
+        const string text = read_file_all(file_path.data());
+        string_view value = text.view();
+        value = value.trim();
+        return string(value);
+    }
+
+    void fill_network_stats(sysinfo::network_interface& iface) {
+        const string base = "/sys/class/net/" + iface.name + "/";
+        iface.mtu = read_number_file(base + "mtu");
+        const uint64_t speed = read_number_file(base + "speed");
+        iface.speed_bps = (speed > 0 && speed < 1000000ULL) ? speed * 1000000ULL : 0;
+        iface.operstate = read_trimmed_file(base + "operstate");
+        iface.rx_bytes = read_number_file(base + "statistics/rx_bytes");
+        iface.tx_bytes = read_number_file(base + "statistics/tx_bytes");
+        iface.rx_packets = read_number_file(base + "statistics/rx_packets");
+        iface.tx_packets = read_number_file(base + "statistics/tx_packets");
+        iface.rx_errors = read_number_file(base + "statistics/rx_errors");
+        iface.tx_errors = read_number_file(base + "statistics/tx_errors");
+        iface.rx_dropped = read_number_file(base + "statistics/rx_dropped");
+        iface.tx_dropped = read_number_file(base + "statistics/tx_dropped");
+        if (iface.operstate.empty()) {
+            iface.operstate = iface.is_up ? "up" : "down";
+        }
+    }
+
+    sysinfo::battery_info read_battery_linux() {
+        sysinfo::battery_info info;
+        info.status = "unknown";
+        const path supplies("/sys/class/power_supply");
+        double weighted_percent = 0.0;
+        double weight_sum = 0.0;
+        uint64_t energy_now_sum = 0;
+        uint64_t energy_full_sum = 0;
+        uint64_t power_sum = 0;
+        bool discharging = false;
+        for (const auto& entry: supplies.children()) {
+            const string base = entry.str() + "/";
+            const string type = read_trimmed_file(base + "type");
+            if (type == "Mains" || type == "USB" || type == "USB_C") {
+                if (read_number_file(base + "online") == 1) {
+                    info.on_ac = true;
+                }
+                continue;
+            }
+            if (type != "Battery") {
+                continue;
+            }
+            info.present = true;
+            const string status = read_trimmed_file(base + "status");
+            if (status == "Charging") {
+                info.charging = true;
+            } else if (status == "Discharging") {
+                discharging = true;
+            }
+            const uint64_t energy_now = read_number_file(base + "energy_now");
+            const uint64_t energy_full = read_number_file(base + "energy_full");
+            uint64_t power_now = read_number_file(base + "power_now");
+            if (power_now == 0) {
+                const uint64_t voltage = read_number_file(base + "voltage_now");
+                const uint64_t current = read_number_file(base + "current_now");
+                power_now = voltage * current / 1000000ULL;
+            }
+            energy_now_sum += energy_now;
+            energy_full_sum += energy_full > 0 ? energy_full : energy_now;
+            power_sum += power_now;
+            const uint64_t capacity = read_number_file(base + "capacity");
+            const double weight = energy_now > 0 ? static_cast<double>(energy_now) : 1.0;
+            if (capacity <= 100) {
+                weighted_percent += static_cast<double>(capacity) * weight;
+                weight_sum += weight;
+            }
+        }
+        if (info.present && weight_sum > 0.0) {
+            info.charge_percent = weighted_percent / weight_sum;
+        }
+        if (info.present && power_sum > 0 && energy_now_sum > 0) {
+            if (info.charging && energy_full_sum > energy_now_sum) {
+                info.remaining_seconds = static_cast<int64_t>((energy_full_sum - energy_now_sum) * 3600ULL / power_sum);
+            } else {
+                info.remaining_seconds = static_cast<int64_t>(energy_now_sum * 3600ULL / power_sum);
+            }
+        }
+        if (!info.present) {
+            info.status = "unknown";
+        } else if (info.charging) {
+            info.status = "charging";
+        } else if (info.on_ac && info.charge_percent >= 99.0) {
+            info.status = "full";
+        } else if (info.on_ac) {
+            info.status = "idle";
+        } else if (discharging) {
+            info.status = "discharging";
+        }
+        return info;
+    }
+
+#else
+
+    uint64_t filetime_ticks(const ::FILETIME& value) noexcept {
+        ::ULARGE_INTEGER ticks{};
+        ticks.LowPart = value.dwLowDateTime;
+        ticks.HighPart = value.dwHighDateTime;
+        return ticks.QuadPart;
+    }
+
+    string mac_address_of(const ::BYTE* bytes, const ::ULONG length) {
+        if (bytes == nullptr) {
+            return {};
+        }
+        const size_t count = length > 6 ? 6 : static_cast<size_t>(length);
+        string text;
+        text.reserve(count * 3);
+        constexpr char digits[] = "0123456789ABCDEF";
+        for (size_t i = 0; i < count; ++i) {
+            if (i > 0) {
+                text.push_back(':');
+            }
+            text.push_back(digits[(bytes[i] >> 4) & 0x0F]);
+            text.push_back(digits[bytes[i] & 0x0F]);
+        }
+        return text;
+    }
+
+    const char* oper_state_name(const ::IF_OPER_STATUS status) noexcept {
+        switch (status) {
+            case IfOperStatusUp:
+                return "up";
+            case IfOperStatusDown:
+                return "down";
+            case IfOperStatusTesting:
+                return "testing";
+            case IfOperStatusUnknown:
+                return "unknown";
+            case IfOperStatusDormant:
+                return "dormant";
+            case IfOperStatusNotPresent:
+                return "notpresent";
+            case IfOperStatusLowerLayerDown:
+                return "lowerlayerdown";
+            default:
+                return "unknown";
+        }
+    }
+
+    void fill_ipv4_address(sysinfo::network_interface& iface, const ::SOCKADDR* address, const ::ULONG prefix) {
+        const auto* value = reinterpret_cast<const ::SOCKADDR_IN*>(address);
+        char text[INET_ADDRSTRLEN] = {};
+        if (::inet_ntop(AF_INET, &value->sin_addr, text, sizeof(text)) != nullptr) {
+            iface.address = text;
+        }
+        const ::ULONG bits = prefix > 32 ? 32 : prefix;
+        const uint32_t mask = bits == 0 ? 0 : (0xFFFFFFFFU << (32 - bits));
+        iface.netmask =
+                format("{}.{}.{}.{}", (mask >> 24) & 0xFF, (mask >> 16) & 0xFF, (mask >> 8) & 0xFF, mask & 0xFF);
+        iface.prefix_length = static_cast<uint8_t>(bits);
+    }
+
+    void fill_ipv6_address(sysinfo::network_interface& iface, const ::SOCKADDR* address, const ::ULONG prefix) {
+        const auto* value = reinterpret_cast<const ::SOCKADDR_IN6*>(address);
+        char text[INET6_ADDRSTRLEN] = {};
+        if (::inet_ntop(AF_INET6, &value->sin6_addr, text, sizeof(text)) != nullptr) {
+            iface.address = text;
+        }
+        iface.prefix_length = static_cast<uint8_t>(prefix > 128 ? 128 : prefix);
+    }
+
+
 #endif
 
-    void get_cpu_info_internal(sysinfo::CPU_info& cpu_info, const sysinfo::architecture arch) {
+    void get_cpu_info_internal(sysinfo::cpu_info& cpu_info, const sysinfo::architecture arch) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         char brand[49] = {};
 
@@ -196,7 +482,7 @@ namespace {
 
             if (::RegQueryValueExW(hkey, L"~MHz", nullptr, nullptr, reinterpret_cast<::LPBYTE>(&mhz), &size) ==
                 ERROR_SUCCESS) {
-                cpu_info.current_MHz = mhz;
+                cpu_info.current_mhz = mhz;
             }
 
             mhz = 0;
@@ -213,24 +499,24 @@ namespace {
             }
 
             if (result == ERROR_SUCCESS && mhz > 0) {
-                cpu_info.max_MHz = mhz;
+                cpu_info.max_mhz = mhz;
             }
 
             ::RegCloseKey(hkey);
         }
 
 #    ifdef NEFORCE_ARCH_X86
-        if (cpu_info.max_MHz == 0) {
+        if (cpu_info.max_mhz == 0) {
             ::__cpuid(cpu_info_data, 0x16);
             if (cpu_info_data[0] != 0) {
-                cpu_info.max_MHz = cpu_info_data[1];
-                if (cpu_info.current_MHz == 0) {
-                    cpu_info.current_MHz = cpu_info_data[0];
+                cpu_info.max_mhz = cpu_info_data[1];
+                if (cpu_info.current_mhz == 0) {
+                    cpu_info.current_mhz = cpu_info_data[0];
                 }
             }
         }
 
-        if (cpu_info.max_MHz == 0) {
+        if (cpu_info.max_mhz == 0) {
             ::__cpuid(cpu_info_data, 0x15);
             if (cpu_info_data[0] != 0 && cpu_info_data[1] != 0 && cpu_info_data[2] != 0) {
                 uint32_t crystal_clock = cpu_info_data[2];
@@ -238,15 +524,15 @@ namespace {
                     crystal_clock = 38400000;
                 }
 
-                cpu_info.max_MHz = (crystal_clock / 1000000) * cpu_info_data[1] / cpu_info_data[0];
+                cpu_info.max_mhz = (crystal_clock / 1000000) * cpu_info_data[1] / cpu_info_data[0];
             }
         }
 #    endif
 
-        if (cpu_info.max_MHz == 0) {
-            cpu_info.max_MHz = sysinfo::parse_brand_frequency(brand);
-            if (cpu_info.max_MHz != 0 && cpu_info.current_MHz == 0) {
-                cpu_info.current_MHz = cpu_info.max_MHz;
+        if (cpu_info.max_mhz == 0) {
+            cpu_info.max_mhz = sysinfo::parse_brand_frequency(brand);
+            if (cpu_info.max_mhz != 0 && cpu_info.current_mhz == 0) {
+                cpu_info.current_mhz = cpu_info.max_mhz;
             }
         }
 
@@ -338,7 +624,7 @@ namespace {
                 if (freq_key != nullptr && line.starts_with(freq_key)) {
                     const size_t colon = line.find(':');
                     if (colon != string::npos) {
-                        cpu_info.current_MHz = to_uint32(line.view(colon + 1));
+                        cpu_info.current_mhz = to_uint32(line.view(colon + 1));
                         extracted = true;
                     }
                 }
@@ -352,15 +638,15 @@ namespace {
                 }
 
                 if (extracted && !cpu_info.vendor.empty() && !cpu_info.brand.empty() && !cpu_info.features.empty() &&
-                    cpu_info.current_MHz > 0 && core_count_from_cpuinfo > 0) {
+                    cpu_info.current_mhz > 0 && core_count_from_cpuinfo > 0) {
                     first_processor = false;
                 }
             }
 
-            if (cpu_info.current_MHz == 0 && line.starts_with("cpu MHz")) {
+            if (cpu_info.current_mhz == 0 && line.starts_with("cpu MHz")) {
                 const size_t colon = line.find(':');
                 if (colon != string::npos) {
-                    cpu_info.current_MHz = to_uint32(line.view(colon + 1));
+                    cpu_info.current_mhz = to_uint32(line.view(colon + 1));
                 }
             }
         }
@@ -380,43 +666,43 @@ namespace {
             cpu_info.cores = cpu_info.logical_processors;
         }
 
-        if (cpu_info.current_MHz == 0 || cpu_info.max_MHz == 0) {
+        if (cpu_info.current_mhz == 0 || cpu_info.max_mhz == 0) {
             auto try_sysfs = [&cpu_info]() {
-                cpu_info.max_MHz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
-                if (cpu_info.max_MHz == 0) {
-                    cpu_info.max_MHz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq");
+                cpu_info.max_mhz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq");
+                if (cpu_info.max_mhz == 0) {
+                    cpu_info.max_mhz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq");
                 }
-                if (cpu_info.current_MHz == 0) {
-                    cpu_info.current_MHz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
+                if (cpu_info.current_mhz == 0) {
+                    cpu_info.current_mhz = read_sysfs_freq("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
                 }
             };
             try_sysfs();
         }
 
 #    ifdef NEFORCE_ARCH_X86
-        if (cpu_info.max_MHz == 0) {
+        if (cpu_info.max_mhz == 0) {
             unsigned int leaf_16[4] = {0, 0, 0, 0};
             if (::__get_cpuid(0x16, &leaf_16[0], &leaf_16[1], &leaf_16[2], &leaf_16[3]) != 0) {
-                cpu_info.max_MHz = (leaf_16[1] != 0) ? leaf_16[1] : leaf_16[0];
-                if (cpu_info.current_MHz == 0) {
-                    cpu_info.current_MHz = leaf_16[0];
+                cpu_info.max_mhz = (leaf_16[1] != 0) ? leaf_16[1] : leaf_16[0];
+                if (cpu_info.current_mhz == 0) {
+                    cpu_info.current_mhz = leaf_16[0];
                 }
             }
         }
 
-        if (cpu_info.max_MHz == 0) {
+        if (cpu_info.max_mhz == 0) {
             unsigned int leaf_15[4] = {0, 0, 0, 0};
             if (::__get_cpuid(0x15, &leaf_15[0], &leaf_15[1], &leaf_15[2], &leaf_15[3]) != 0 && leaf_15[0] != 0 &&
                 leaf_15[1] != 0 && leaf_15[2] != 0) {
-                cpu_info.max_MHz = (leaf_15[2] / 1000000) * leaf_15[1] / leaf_15[0];
+                cpu_info.max_mhz = (leaf_15[2] / 1000000) * leaf_15[1] / leaf_15[0];
             }
         }
 #    endif
 
-        if (cpu_info.max_MHz == 0 && !cpu_info.brand.empty()) {
-            cpu_info.max_MHz = sysinfo::parse_brand_frequency(cpu_info.brand.view());
-            if (cpu_info.max_MHz != 0 && cpu_info.current_MHz == 0) {
-                cpu_info.current_MHz = cpu_info.max_MHz;
+        if (cpu_info.max_mhz == 0 && !cpu_info.brand.empty()) {
+            cpu_info.max_mhz = sysinfo::parse_brand_frequency(cpu_info.brand.view());
+            if (cpu_info.max_mhz != 0 && cpu_info.current_mhz == 0) {
+                cpu_info.current_mhz = cpu_info.max_mhz;
             }
         }
 #endif
@@ -622,17 +908,14 @@ void sysinfo::init() {
     }
 
     get_cpu_info_internal(cpu_info_, architecture_);
+    cpu_info_.simd = probe_simd();
     get_os_version_internal(os_version_info_);
 
-    ::MEMORYSTATUSEX mem_status{};
-    mem_status.dwLength = sizeof(mem_status);
-    if (::GlobalMemoryStatusEx(&mem_status) == TRUE) {
-        memory_info_.total_physical = mem_status.ullTotalPhys;
-        memory_info_.available_physical = mem_status.ullAvailPhys;
-        memory_info_.total_virtual = mem_status.ullTotalVirtual;
-        memory_info_.available_virtual = mem_status.ullAvailVirtual;
-        memory_info_.total_page_file = mem_status.ullTotalPageFile;
-        memory_info_.available_page_file = mem_status.ullAvailPageFile;
+    hostname_.clear();
+    wchar_t computer_name[256] = {};
+    ::DWORD computer_name_length = static_cast<::DWORD>(sizeof(computer_name) / sizeof(wchar_t));
+    if (::GetComputerNameW(computer_name, &computer_name_length) == TRUE) {
+        hostname_ = wcharacter::to_string(computer_name);
     }
 
 #else
@@ -679,53 +962,14 @@ void sysinfo::init() {
     }
 
     get_cpu_info_internal(cpu_info_, architecture_);
+    cpu_info_.simd = probe_simd();
     get_os_version_internal(os_version_info_);
 
-    struct ::sysinfo linux_sysinfo{};
-    if (::sysinfo(&linux_sysinfo) == 0) {
-        memory_info_.total_physical = linux_sysinfo.totalram * linux_sysinfo.mem_unit;
-        memory_info_.available_physical = linux_sysinfo.freeram * linux_sysinfo.mem_unit;
-
-        memory_info_.total_page_file = linux_sysinfo.totalswap * linux_sysinfo.mem_unit;
-        memory_info_.available_page_file = linux_sysinfo.freeswap * linux_sysinfo.mem_unit;
-
-        memory_info_.total_virtual = memory_info_.total_physical + memory_info_.total_page_file;
-        memory_info_.available_virtual = memory_info_.available_physical + memory_info_.available_page_file;
-    }
-
-    const string memdata = read_file_all("/proc/meminfo");
-    if (!memdata.empty()) {
-        string_view line;
-        size_t pos = 0;
-        while (getline(memdata.view(), pos, line)) {
-            if (line.starts_with("MemTotal:")) {
-                const size_t colon = line.find(':');
-                if (colon != string::npos) {
-                    string_view value = line.view(colon + 1);
-                    ignore = value.trim_left();
-                    if (value.ends_with("kB")) {
-                        value = value.substr(0, value.length() - 2);
-                    }
-                    ignore = value.trim_right();
-                    if (!value.empty()) {
-                        memory_info_.total_physical = to_uint64(value) * 1024;
-                    }
-                }
-            } else if (line.starts_with("MemAvailable:")) {
-                const size_t colon = line.find(':');
-                if (colon != string::npos) {
-                    string_view value = line.view(colon + 1);
-                    ignore = value.trim_left();
-                    if (value.ends_with("kB")) {
-                        value = value.substr(0, value.length() - 2);
-                    }
-                    ignore = value.trim_right();
-                    if (!value.empty()) {
-                        memory_info_.available_physical = to_uint64(value) * 1024;
-                    }
-                }
-            }
-        }
+    hostname_.clear();
+    char computer_name[256] = {};
+    if (::gethostname(computer_name, sizeof(computer_name) - 1) == 0) {
+        computer_name[sizeof(computer_name) - 1] = '\0';
+        hostname_ = computer_name;
     }
 
 #endif
@@ -840,166 +1084,474 @@ void sysinfo::refresh() noexcept {
     }
 }
 
-float64_t sysinfo::cpu_usage() {
+sysinfo::memory_info sysinfo::memory_status() {
+    memory_info info;
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    static ::PDH_HQUERY cpu_query;
-    static ::PDH_HCOUNTER cpu_total;
-    static bool initialized = false;
-
-    if (!initialized) {
-        if (::PdhOpenQueryW(nullptr, 0, &cpu_query) != ERROR_SUCCESS) {
-            return 0.0;
-        }
-        if (::PdhAddCounterW(cpu_query, L"\\Processor(_Total)\\% Processor Time", 0, &cpu_total) != ERROR_SUCCESS) {
-            ::PdhCloseQuery(cpu_query);
-            return 0.0;
-        }
-        ::PdhCollectQueryData(cpu_query);
-        initialized = true;
-        return 0.0;
+    ::MEMORYSTATUSEX mem_status{};
+    mem_status.dwLength = sizeof(mem_status);
+    if (::GlobalMemoryStatusEx(&mem_status) == TRUE) {
+        info.total_physical = mem_status.ullTotalPhys;
+        info.available_physical = mem_status.ullAvailPhys;
+        info.total_virtual = mem_status.ullTotalVirtual;
+        info.available_virtual = mem_status.ullAvailVirtual;
+        info.total_page_file = mem_status.ullTotalPageFile;
+        info.available_page_file = mem_status.ullAvailPageFile;
     }
-
-    if (::PdhCollectQueryData(cpu_query) != ERROR_SUCCESS) {
-        return 0.0;
-    }
-
-    ::PDH_FMT_COUNTERVALUE counter_val{};
-
-    if (::PdhGetFormattedCounterValue(cpu_total, PDH_FMT_DOUBLE, nullptr, &counter_val) != ERROR_SUCCESS) {
-        return 0.0;
-    }
-
-    return counter_val.doubleValue;
-
 #else
+    struct ::sysinfo linux_sysinfo{};
+    if (::sysinfo(&linux_sysinfo) == 0) {
+        info.total_physical = linux_sysinfo.totalram * linux_sysinfo.mem_unit;
+        info.available_physical = linux_sysinfo.freeram * linux_sysinfo.mem_unit;
+        info.total_page_file = linux_sysinfo.totalswap * linux_sysinfo.mem_unit;
+        info.available_page_file = linux_sysinfo.freeswap * linux_sysinfo.mem_unit;
+        info.total_virtual = info.total_physical + info.total_page_file;
+        info.available_virtual = info.available_physical + info.available_page_file;
+    }
 
-    static uint64_t prev_total = 0;
-    static uint64_t prev_idle = 0;
+    const string memdata = read_file_all("/proc/meminfo");
+    if (!memdata.empty()) {
+        string_view line;
+        size_t pos = 0;
+        while (getline(memdata.view(), pos, line)) {
+            if (line.starts_with("MemTotal:")) {
+                const size_t colon = line.find(':');
+                if (colon != string::npos) {
+                    string_view value = line.view(colon + 1);
+                    ignore = value.trim_left();
+                    if (value.ends_with("kB")) {
+                        value = value.substr(0, value.length() - 2);
+                    }
+                    ignore = value.trim_right();
+                    if (!value.empty()) {
+                        info.total_physical = to_uint64(value) * 1024;
+                    }
+                }
+            } else if (line.starts_with("MemAvailable:")) {
+                const size_t colon = line.find(':');
+                if (colon != string::npos) {
+                    string_view value = line.view(colon + 1);
+                    ignore = value.trim_left();
+                    if (value.ends_with("kB")) {
+                        value = value.substr(0, value.length() - 2);
+                    }
+                    ignore = value.trim_right();
+                    if (!value.empty()) {
+                        info.available_physical = to_uint64(value) * 1024;
+                    }
+                }
+            }
+        }
+    }
+#endif
+    return info;
+}
 
+float64_t sysinfo::cpu_usage() {
+    static mutex usage_mutex;
+    static uint64_t previous_total = 0;
+    static uint64_t previous_idle = 0;
+
+    lock<mutex> guard(usage_mutex);
+
+    uint64_t total = 0;
+    uint64_t idle = 0;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::FILETIME idle_time{};
+    ::FILETIME kernel_time{};
+    ::FILETIME user_time{};
+    if (::GetSystemTimes(&idle_time, &kernel_time, &user_time) == FALSE) {
+        return 0.0;
+    }
+    total = filetime_ticks(kernel_time) + filetime_ticks(user_time);
+    idle = filetime_ticks(idle_time);
+#else
     const string content = read_file_all("/proc/stat");
     if (content.empty()) {
         return 0.0;
     }
-
     string line;
-    size_t pos = 0;
-    getline(content.view(), pos, line);
+    size_t position = 0;
+    getline(content.view(), position, line);
+    if (!line.starts_with("cpu ")) {
+        return 0.0;
+    }
+    const string_view data = line.view(4);
+    string_view token;
+    uint64_t fields[8] = {};
+    size_t offset = 0;
+    int index = 0;
+    while (index < 8 && getline(data, offset, token, is_space<char>)) {
+        if (!token.empty()) {
+            fields[index++] = to_uint64(token);
+        }
+    }
+    for (const uint64_t value: fields) {
+        total += value;
+    }
+    idle = fields[3] + fields[4];
+#endif
 
-    if (line.starts_with("cpu ")) {
-        const string_view data = line.view(4);
+    float64_t usage = 0.0;
+    if (previous_total != 0 && total > previous_total) {
+        const uint64_t total_delta = total - previous_total;
+        const uint64_t idle_delta = idle > previous_idle ? idle - previous_idle : 0;
+        if (total_delta > idle_delta) {
+            usage = 100.0 * static_cast<float64_t>(total_delta - idle_delta) / static_cast<float64_t>(total_delta);
+        }
+    }
+    previous_total = total;
+    previous_idle = idle;
+    return usage;
+}
+
+sysinfo::simd_info sysinfo::probe_simd() {
+    static const simd_info cached = []() -> simd_info {
+        simd_info info;
+#if defined(NEFORCE_ARCH_X86)
+        unsigned int eax = 0;
+        unsigned int ebx = 0;
+        unsigned int ecx = 0;
+        unsigned int edx = 0;
+#    ifdef NEFORCE_PLATFORM_WINDOWS
+        int registers[4] = {0, 0, 0, 0};
+        ::__cpuid(registers, 1);
+        ecx = static_cast<unsigned int>(registers[2]);
+        edx = static_cast<unsigned int>(registers[3]);
+#    else
+        if (::__get_cpuid(1, &eax, &ebx, &ecx, &edx) == 0) {
+            return info;
+        }
+#    endif
+        ignore = eax;
+        ignore = ebx;
+
+        if ((edx & (1U << 26)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::sse2);
+        }
+        if ((ecx & (1U << 9)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::ssse3);
+        }
+        if ((ecx & (1U << 19)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::sse4_1);
+        }
+        if ((ecx & (1U << 20)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::sse4_2);
+        }
+        if ((ecx & (1U << 25)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::aes);
+        }
+        if ((ecx & (1U << 1)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::pclmulqdq);
+        }
+
+        // AVX family requires the OS to preserve YMM/ZMM state through XSAVE.
+        uint64_t xcr0 = 0;
+        if ((ecx & (1U << 27)) != 0) {
+#    ifdef NEFORCE_PLATFORM_WINDOWS
+            xcr0 = ::_xgetbv(0);
+#    else
+            unsigned int xcr0_low = 0;
+            unsigned int xcr0_high = 0;
+            __asm__ volatile(".byte 0x0f, 0x01, 0xd0" : "=a"(xcr0_low), "=d"(xcr0_high) : "c"(0));
+            xcr0 = (static_cast<uint64_t>(xcr0_high) << 32) | xcr0_low;
+#    endif
+        }
+        const bool has_ymm = (xcr0 & 0x6) == 0x6;
+        const bool has_zmm = (xcr0 & 0xE0) == 0xE0;
+        if ((ecx & (1U << 28)) != 0 && has_ymm) {
+            info.features |= static_cast<uint32_t>(simd_instruction::avx);
+        }
+        if ((ecx & (1U << 12)) != 0 && has_ymm) {
+            info.features |= static_cast<uint32_t>(simd_instruction::fma);
+        }
+
+        unsigned int leaf7_ebx = 0;
+#    ifdef NEFORCE_PLATFORM_WINDOWS
+        ::__cpuidex(registers, 7, 0);
+        leaf7_ebx = static_cast<unsigned int>(registers[1]);
+#    else
+        if (::__get_cpuid_count(7, 0, &eax, &ebx, &ecx, &edx) != 0) {
+            leaf7_ebx = ebx;
+        }
+#    endif
+        if ((leaf7_ebx & (1U << 5)) != 0 && has_ymm) {
+            info.features |= static_cast<uint32_t>(simd_instruction::avx2);
+        }
+        if ((leaf7_ebx & (1U << 16)) != 0 && has_zmm) {
+            info.features |= static_cast<uint32_t>(simd_instruction::avx512f);
+        }
+#elif defined(NEFORCE_ARCH_ARM)
+#    ifdef NEFORCE_PLATFORM_WINDOWS
+#        if defined(NEFORCE_ARCH_AARCH64)
+        info.features |= static_cast<uint32_t>(simd_instruction::neon);
+#        else
+        if (::IsProcessorFeaturePresent(PF_ARM_NEON_INSTRUCTIONS_AVAILABLE) != FALSE) {
+            info.features |= static_cast<uint32_t>(simd_instruction::neon);
+        }
+#        endif
+#    else
+        // Linux UAPI HWCAP bits: NEON(12) on arm32, ASIMD(1), AES(3), PMULL(4), SVE(22) on aarch64.
+        const unsigned long hwcap = ::getauxval(AT_HWCAP);
+#        if defined(NEFORCE_ARCH_AARCH64)
+        if ((hwcap & (1UL << 1)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::neon);
+        }
+        if ((hwcap & (1UL << 3)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::aes);
+        }
+        if ((hwcap & (1UL << 4)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::pclmulqdq);
+        }
+        if ((hwcap & (1UL << 22)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::sve);
+        }
+#        else
+        if ((hwcap & (1UL << 12)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::neon);
+        }
+#        endif
+#    endif
+#endif
+        return info;
+    }();
+    return cached;
+}
+
+vector<float64_t> sysinfo::cpu_usage_per_core() {
+    static mutex core_mutex;
+    lock<mutex> guard(core_mutex);
+    vector<float64_t> usage;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    static ::PDH_HQUERY core_query = nullptr;
+    static ::PDH_HCOUNTER core_counter = nullptr;
+    if (core_query == nullptr) {
+        if (::PdhOpenQueryW(nullptr, 0, &core_query) != ERROR_SUCCESS) {
+            core_query = nullptr;
+            return usage;
+        }
+        using pdh_add_english_counter_fn = ::PDH_STATUS(WINAPI*)(::PDH_HQUERY, ::LPCWSTR, ::DWORD_PTR, ::PDH_HCOUNTER*);
+        pdh_add_english_counter_fn add_english = nullptr;
+        const ::HMODULE pdh_module = ::GetModuleHandleW(L"pdh.dll");
+        if (pdh_module != nullptr) {
+            add_english =
+                    reinterpret_cast<pdh_add_english_counter_fn>(::GetProcAddress(pdh_module, "PdhAddEnglishCounterW"));
+        }
+        ::PDH_STATUS counter_status = ERROR_SUCCESS;
+        if (add_english != nullptr) {
+            counter_status = add_english(core_query, L"\\Processor(*)\\% Processor Time", 0, &core_counter);
+        } else {
+            counter_status = ::PdhAddCounterW(core_query, L"\\Processor(*)\\% Processor Time", 0, &core_counter);
+        }
+        if (counter_status != ERROR_SUCCESS) {
+            ::PdhCloseQuery(core_query);
+            core_query = nullptr;
+            return usage;
+        }
+        ::PdhCollectQueryData(core_query);
+        return usage;
+    }
+    ::DWORD size = 0;
+    ::DWORD count = 0;
+    if (::PdhCollectQueryData(core_query) != ERROR_SUCCESS) {
+        return usage;
+    }
+    if (::PdhGetFormattedCounterArrayW(core_counter, PDH_FMT_DOUBLE, &size, &count, nullptr) != PDH_MORE_DATA) {
+        return usage;
+    }
+    vector<::BYTE> buffer(size);
+    auto* items = reinterpret_cast<::PDH_FMT_COUNTERVALUE_ITEM_W*>(buffer.data());
+    if (::PdhGetFormattedCounterArrayW(core_counter, PDH_FMT_DOUBLE, &size, &count, items) != ERROR_SUCCESS) {
+        return usage;
+    }
+    vector<pair<uint32_t, float64_t>> samples;
+    uint32_t highest = 0;
+    for (::DWORD index = 0; index < count; ++index) {
+        if (items[index].szName == nullptr) {
+            continue;
+        }
+        const string name = wcharacter::to_string(items[index].szName);
+        if (name == "_Total") {
+            continue;
+        }
+        uint32_t core_index = 0;
+        try {
+            core_index = static_cast<uint32_t>(to_uint64(name.view()));
+        } catch (const exception&) {
+            continue;
+        }
+        if (items[index].FmtValue.CStatus != PDH_CSTATUS_VALID_DATA &&
+            items[index].FmtValue.CStatus != PDH_CSTATUS_NEW_DATA) {
+            continue;
+        }
+        samples.emplace_back(core_index, items[index].FmtValue.doubleValue);
+        highest = highest > core_index ? highest : core_index;
+    }
+    if (samples.empty()) {
+        return usage;
+    }
+    usage.assign(static_cast<size_t>(highest) + 1, 0.0);
+    for (const auto& sample: samples) {
+        usage[sample.first] = sample.second;
+    }
+#else
+    static vector<uint64_t> previous_total;
+    static vector<uint64_t> previous_idle;
+    const string content = read_file_all("/proc/stat");
+    if (content.empty()) {
+        return usage;
+    }
+    vector<uint64_t> totals;
+    vector<uint64_t> idles;
+    size_t position = 0;
+    string line;
+    while (getline(content.view(), position, line)) {
+        if (!line.starts_with("cpu") || line.size() < 4 || line[3] < '0' || line[3] > '9') {
+            continue;
+        }
+        size_t begin = 3;
+        while (begin < line.size() && line[begin] >= '0' && line[begin] <= '9') {
+            ++begin;
+        }
+        const string_view data = line.view(begin);
         string_view token;
         uint64_t fields[8] = {};
         size_t offset = 0;
-        int idx = 0;
-
-        while (idx < 8 && getline(data, offset, token, is_space<char>)) {
+        int index = 0;
+        while (index < 8 && getline(data, offset, token, is_space<char>)) {
             if (!token.empty()) {
-                fields[idx++] = to_uint64(token);
+                fields[index++] = to_uint64(token);
             }
         }
-
-        const uint64_t user = fields[0];
-        const uint64_t nice = fields[1];
-        const uint64_t system = fields[2];
-        const uint64_t idle = fields[3];
-        const uint64_t iowait = fields[4];
-        const uint64_t irq = fields[5];
-        const uint64_t softirq = fields[6];
-        const uint64_t steal = fields[7];
-
-        const uint64_t total = user + nice + system + idle + iowait + irq + softirq + steal;
-        const uint64_t current_idle = idle + iowait;
-
-        if (prev_total > 0 && prev_idle > 0) {
-            const uint64_t total_diff = total - prev_total;
-            const uint64_t idle_diff = current_idle - prev_idle;
-
-            if (total_diff > 0) {
-                const float64_t usage =
-                        100.0 * (1.0 - static_cast<float64_t>(idle_diff) / static_cast<float64_t>(total_diff));
-                prev_total = total;
-                prev_idle = current_idle;
-                return usage;
-            }
+        uint64_t total = 0;
+        for (const uint64_t value: fields) {
+            total += value;
         }
-
-        prev_total = total;
-        prev_idle = current_idle;
+        totals.push_back(total);
+        idles.push_back(fields[3] + fields[4]);
     }
-    return 0.0;
+    if (totals.empty()) {
+        return usage;
+    }
+    if (previous_total.size() != totals.size() || previous_idle.size() != idles.size()) {
+        previous_total = totals;
+        previous_idle = move(idles);
+        usage.assign(totals.size(), 0.0);
+        return usage;
+    }
+    usage.resize(totals.size(), 0.0);
+    for (size_t index = 0; index < totals.size(); ++index) {
+        if (totals[index] <= previous_total[index] || idles[index] < previous_idle[index]) {
+            continue;
+        }
+        const uint64_t total_delta = totals[index] - previous_total[index];
+        const uint64_t idle_delta = idles[index] - previous_idle[index];
+        if (total_delta > idle_delta) {
+            usage[index] =
+                    100.0 * static_cast<float64_t>(total_delta - idle_delta) / static_cast<float64_t>(total_delta);
+        }
+    }
+    previous_total = move(totals);
+    previous_idle = move(idles);
 #endif
+    return usage;
 }
+
 
 uint32_t sysinfo::process_count() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::DWORD processes[1024];
-    ::DWORD needed = 0;
-    if (::EnumProcesses(processes, sizeof(processes), &needed) == FALSE) {
-        return 0;
+    vector<::DWORD> processes(1024);
+    for (;;) {
+        ::DWORD needed = 0;
+        const ::DWORD bytes = static_cast<::DWORD>(processes.size() * sizeof(::DWORD));
+        if (::EnumProcesses(processes.data(), bytes, &needed) == FALSE) {
+            return 0;
+        }
+        if (needed < bytes) {
+            return needed / static_cast<::DWORD>(sizeof(::DWORD));
+        }
+        processes.resize(processes.size() * 2);
     }
-    return needed / sizeof(::DWORD);
 #else
     uint32_t count = 0;
-    ::DIR* dir = ::opendir("/proc");
-    if (dir != nullptr) {
+    ::DIR* directory = ::opendir("/proc");
+    if (directory != nullptr) {
         const ::dirent* entry = nullptr;
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
-        while ((entry = ::readdir(dir)) != nullptr) {
-            if (entry->d_type == DT_DIR) {
-                bool is_numeric = true;
-                for (int i = 0; entry->d_name[i] != '\0'; i++) {
-                    if (!is_digit(entry->d_name[i])) {
-                        is_numeric = false;
-                        break;
-                    }
-                }
-                if (is_numeric) {
-                    count++;
+        while ((entry = ::readdir(directory)) != nullptr) {
+            if (entry->d_type != DT_DIR) {
+                continue;
+            }
+            bool numeric = entry->d_name[0] != '\0';
+            for (int i = 0; entry->d_name[i] != '\0'; i++) {
+                if (!is_digit(entry->d_name[i])) {
+                    numeric = false;
+                    break;
                 }
             }
+            if (numeric) {
+                count++;
+            }
         }
-        ::closedir(dir);
+        ::closedir(directory);
     }
     return count;
 #endif
 }
 
-sysinfo::disk_info sysinfo::get_disk_info(const char* path) {
+sysinfo::disk_info sysinfo::disk_status(const string& path) {
     disk_info info;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    wchar_t resolved_path[MAX_PATH];
-    if (path == nullptr) {
-        if (::GetCurrentDirectoryW(MAX_PATH, resolved_path) == FALSE) {
+    wstring target = character::to_wstring(path.view());
+    if (target.empty()) {
+        wchar_t current[MAX_PATH] = {};
+        if (::GetCurrentDirectoryW(MAX_PATH, current) == 0) {
             return info;
         }
-        if (resolved_path[1] == L':') {
-            resolved_path[3] = L'\0';
-        } else {
-            string_copy(resolved_path, L"C:\\");
-        }
-    } else {
-        const wstring wpath = character::to_wstring(path);
-        string_copy(resolved_path, wpath.data());
+        target = current;
+    }
+    info.path = wcharacter::to_string(target.view());
+
+    wchar_t root[MAX_PATH] = {};
+    if (::GetVolumePathNameW(target.data(), root, MAX_PATH) == FALSE) {
+        return info;
     }
 
-    ::ULARGE_INTEGER freeBytesAvailable, totalBytes, totalFreeBytes;
-    if (::GetDiskFreeSpaceExW(resolved_path, &freeBytesAvailable, &totalBytes, &totalFreeBytes) == TRUE) {
-        info.path = wcharacter::to_string(resolved_path);
-        info.total_bytes = totalBytes.QuadPart;
-        info.free_bytes = totalFreeBytes.QuadPart;
+    ::ULARGE_INTEGER available_bytes{};
+    ::ULARGE_INTEGER total_bytes{};
+    ::ULARGE_INTEGER free_bytes{};
+    if (::GetDiskFreeSpaceExW(root, &available_bytes, &total_bytes, &free_bytes) == TRUE) {
+        info.total_bytes = total_bytes.QuadPart;
+        info.free_bytes = free_bytes.QuadPart;
+        info.available_bytes = available_bytes.QuadPart;
         info.used_bytes = info.total_bytes - info.free_bytes;
+    }
+
+    wchar_t filesystem[MAX_PATH] = {};
+    if (::GetVolumeInformationW(root, nullptr, 0, nullptr, nullptr, nullptr, filesystem, MAX_PATH) == TRUE) {
+        info.filesystem = wcharacter::to_string(filesystem);
     }
 #else
-    const char* target_path = (path != nullptr) ? path : "/";
-    struct ::statvfs stat = {};
-    if (::statvfs(target_path, &stat) == 0) {
-        info.path = target_path;
-        const unsigned long block_size = stat.f_frsize;
-        info.total_bytes = static_cast<uint64_t>(stat.f_blocks) * block_size;
-        info.free_bytes = static_cast<uint64_t>(stat.f_bavail) * block_size;
-        info.used_bytes = info.total_bytes - info.free_bytes;
+    string target = path;
+    if (target.empty()) {
+        char current[PATH_MAX] = {};
+        if (::getcwd(current, sizeof(current)) == nullptr) {
+            return info;
+        }
+        target = current;
     }
+    info.path = target;
+
+    struct ::statvfs value{};
+    if (::statvfs(target.data(), &value) != 0) {
+        return info;
+    }
+    const uint64_t block_size = value.f_frsize != 0 ? value.f_frsize : value.f_bsize;
+    info.total_bytes = static_cast<uint64_t>(value.f_blocks) * block_size;
+    info.free_bytes = static_cast<uint64_t>(value.f_bfree) * block_size;
+    info.available_bytes = static_cast<uint64_t>(value.f_bavail) * block_size;
+    info.used_bytes = info.total_bytes - info.free_bytes;
+    info.filesystem = filesystem_type_of(target);
 #endif
 
     return info;
@@ -1009,81 +1561,171 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
     vector<network_interface> result;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::ULONG buf_size = 15000;
-    vector<::BYTE> buf(buf_size);
-    auto* addrs = reinterpret_cast<::PIP_ADAPTER_ADDRESSES>(buf.data());
-    constexpr ::ULONG flags = GAA_FLAG_INCLUDE_PREFIX;
+    ::ULONG buffer_size = 15000;
+    vector<::BYTE> buffer(buffer_size);
+    auto* addresses = reinterpret_cast<::PIP_ADAPTER_ADDRESSES>(buffer.data());
+    constexpr ::ULONG flags =
+            GAA_FLAG_INCLUDE_PREFIX | GAA_FLAG_SKIP_ANYCAST | GAA_FLAG_SKIP_MULTICAST | GAA_FLAG_SKIP_DNS_SERVER;
 
-    ::DWORD ret = ::GetAdaptersAddresses(AF_UNSPEC, flags, nullptr, addrs, &buf_size);
-    if (ret == ERROR_BUFFER_OVERFLOW) {
-        buf.resize(buf_size);
-        addrs = reinterpret_cast<::PIP_ADAPTER_ADDRESSES>(buf.data());
-        ret = ::GetAdaptersAddresses(AF_UNSPEC, flags, nullptr, addrs, &buf_size);
+    ::DWORD status = ::GetAdaptersAddresses(AF_UNSPEC, flags, nullptr, addresses, &buffer_size);
+    if (status == ERROR_BUFFER_OVERFLOW) {
+        buffer.resize(buffer_size);
+        addresses = reinterpret_cast<::PIP_ADAPTER_ADDRESSES>(buffer.data());
+        status = ::GetAdaptersAddresses(AF_UNSPEC, flags, nullptr, addresses, &buffer_size);
     }
-    if (ret != NO_ERROR) {
+    if (status != NO_ERROR) {
         return result;
     }
 
-    for (const auto* a = addrs; a != nullptr; a = a->Next) {
+    ::PMIB_IF_TABLE2 mib_table = nullptr;
+    const bool have_mib_table = ::GetIfTable2(&mib_table) == NO_ERROR && mib_table != nullptr;
+
+    for (const auto* adapter = addresses; adapter != nullptr; adapter = adapter->Next) {
         network_interface iface;
-        iface.name = a->AdapterName;
-        iface.is_up = a->OperStatus == IfOperStatusUp;
-
-        if (a->FirstUnicastAddress != nullptr) {
-            wchar_t addr_buf[64] = {};
-            ::DWORD addr_len = sizeof(addr_buf);
-            const ::SOCKADDR* sa = a->FirstUnicastAddress->Address.lpSockaddr;
-            ::WSAAddressToStringW(
-                    const_cast<::LPSOCKADDR>(sa),
-                    static_cast<::DWORD>(sa->sa_family == AF_INET6 ? sizeof(::SOCKADDR_IN6) : sizeof(::SOCKADDR_IN)),
-                    nullptr, addr_buf, &addr_len);
-            iface.address = wcharacter::to_string(addr_buf);
+        if (adapter->FriendlyName != nullptr) {
+            iface.name = wcharacter::to_string(adapter->FriendlyName);
         }
-
-        if (a->PhysicalAddressLength > 0) {
-            iface.mac =
-                    format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", a->PhysicalAddress[0], a->PhysicalAddress[1],
-                           a->PhysicalAddress[2], a->PhysicalAddress[3], a->PhysicalAddress[4], a->PhysicalAddress[5]);
-        }
-        result.push_back(iface);
-    }
-#else
-    ::ifaddrs* ifa = nullptr;
-    if (::getifaddrs(&ifa) != 0) {
-        return result;
-    }
-
-    for (const ::ifaddrs* p = ifa; p != nullptr; p = p->ifa_next) {
-        if (p->ifa_addr == nullptr) {
-            continue;
-        }
-
-        network_interface iface;
-        iface.name = p->ifa_name;
-        iface.is_up = (p->ifa_flags & IFF_UP) != 0;
-
-        char addr_buf[INET6_ADDRSTRLEN] = {};
-        if (p->ifa_addr->sa_family == AF_INET) {
-            ::inet_ntop(AF_INET, &reinterpret_cast<::sockaddr_in*>(p->ifa_addr)->sin_addr, addr_buf, sizeof(addr_buf));
-            iface.address = addr_buf;
-        } else if (p->ifa_addr->sa_family == AF_INET6) {
-            ::inet_ntop(AF_INET6, &reinterpret_cast<::sockaddr_in6*>(p->ifa_addr)->sin6_addr, addr_buf,
-                        sizeof(addr_buf));
-            iface.address = addr_buf;
-        }
-
-        if (p->ifa_netmask != nullptr) {
-            char nm_buf[INET6_ADDRSTRLEN] = {};
-            if (p->ifa_netmask->sa_family == AF_INET) {
-                ::inet_ntop(AF_INET, &reinterpret_cast<::sockaddr_in*>(p->ifa_netmask)->sin_addr, nm_buf,
-                            sizeof(nm_buf));
-                iface.netmask = nm_buf;
+        iface.index = adapter->IfIndex != 0 ? adapter->IfIndex : adapter->Ipv6IfIndex;
+        iface.is_up = adapter->OperStatus == IfOperStatusUp;
+        iface.is_loopback = adapter->IfType == IF_TYPE_SOFTWARE_LOOPBACK;
+        iface.mac = mac_address_of(adapter->PhysicalAddress, adapter->PhysicalAddressLength);
+        if (have_mib_table) {
+            for (::ULONG index = 0; index < mib_table->NumEntries; ++index) {
+                const auto& row = mib_table->Table[index];
+                if (row.InterfaceIndex != iface.index) {
+                    continue;
+                }
+                iface.mtu = row.Mtu;
+                iface.speed_bps =
+                        row.ReceiveLinkSpeed > row.TransmitLinkSpeed ? row.ReceiveLinkSpeed : row.TransmitLinkSpeed;
+                iface.rx_bytes = row.InOctets;
+                iface.tx_bytes = row.OutOctets;
+                iface.rx_packets = row.InUcastPkts + row.InNUcastPkts;
+                iface.tx_packets = row.OutUcastPkts + row.OutNUcastPkts;
+                iface.rx_errors = row.InErrors;
+                iface.tx_errors = row.OutErrors;
+                iface.rx_dropped = row.InDiscards;
+                iface.tx_dropped = row.OutDiscards;
+                iface.operstate = oper_state_name(row.OperStatus);
+                break;
             }
         }
 
-        result.push_back(iface);
+        const ::IP_ADAPTER_UNICAST_ADDRESS* ipv6 = nullptr;
+        for (const auto* unicast = adapter->FirstUnicastAddress; unicast != nullptr; unicast = unicast->Next) {
+            const ::SOCKADDR* address = unicast->Address.lpSockaddr;
+            if (address == nullptr) {
+                continue;
+            }
+            if (address->sa_family == AF_INET) {
+                fill_ipv4_address(iface, address, unicast->OnLinkPrefixLength);
+                break;
+            }
+            if (address->sa_family == AF_INET6 && ipv6 == nullptr) {
+                ipv6 = unicast;
+            }
+        }
+        if (iface.address.empty() && ipv6 != nullptr) {
+            fill_ipv6_address(iface, ipv6->Address.lpSockaddr, ipv6->OnLinkPrefixLength);
+        }
+        result.push_back(move(iface));
     }
-    ::freeifaddrs(ifa);
+    if (mib_table != nullptr) {
+        ::FreeMibTable(mib_table);
+    }
+#else
+    ::ifaddrs* list = nullptr;
+    if (::getifaddrs(&list) != 0) {
+        return result;
+    }
+
+    const auto find_or_add = [&result](const char* name) -> network_interface& {
+        for (auto& iface: result) {
+            if (iface.name == name) {
+                return iface;
+            }
+        }
+        network_interface iface;
+        iface.name = name;
+        iface.index = ::if_nametoindex(name);
+        result.push_back(move(iface));
+        return result.back();
+    };
+
+    for (const ::ifaddrs* current = list; current != nullptr; current = current->ifa_next) {
+        if (current->ifa_name == nullptr || current->ifa_addr == nullptr) {
+            continue;
+        }
+        network_interface& iface = find_or_add(current->ifa_name);
+        iface.is_up = (current->ifa_flags & IFF_UP) != 0;
+        iface.is_loopback = (current->ifa_flags & IFF_LOOPBACK) != 0;
+
+        if (current->ifa_addr->sa_family == AF_PACKET) {
+            if (iface.mac.empty()) {
+                iface.mac = mac_address_of(*reinterpret_cast<const ::sockaddr_ll*>(current->ifa_addr));
+            }
+            continue;
+        }
+        if (current->ifa_addr->sa_family != AF_INET || !iface.address.empty()) {
+            continue;
+        }
+        const auto* value = reinterpret_cast<const ::sockaddr_in*>(current->ifa_addr);
+        char text[INET_ADDRSTRLEN] = {};
+        if (::inet_ntop(AF_INET, &value->sin_addr, text, sizeof(text)) != nullptr) {
+            iface.address = text;
+        }
+        if (current->ifa_netmask != nullptr && current->ifa_netmask->sa_family == AF_INET) {
+            const auto* mask = reinterpret_cast<const ::sockaddr_in*>(current->ifa_netmask);
+            char mask_text[INET_ADDRSTRLEN] = {};
+            if (::inet_ntop(AF_INET, &mask->sin_addr, mask_text, sizeof(mask_text)) != nullptr) {
+                iface.netmask = mask_text;
+            }
+            iface.prefix_length = prefix_length_of(endian::network_to_host(mask->sin_addr.s_addr));
+        }
+    }
+
+    for (int pass = 0; pass < 2; ++pass) {
+        for (const ::ifaddrs* current = list; current != nullptr; current = current->ifa_next) {
+            if (current->ifa_name == nullptr || current->ifa_addr == nullptr ||
+                current->ifa_addr->sa_family != AF_INET6) {
+                continue;
+            }
+            network_interface& iface = find_or_add(current->ifa_name);
+            if (!iface.address.empty()) {
+                continue;
+            }
+            const auto* value = reinterpret_cast<const ::sockaddr_in6*>(current->ifa_addr);
+            const bool link_local = IN6_IS_ADDR_LINKLOCAL(&value->sin6_addr) != 0;
+            if (pass == 0 && link_local) {
+                continue;
+            }
+            char text[INET6_ADDRSTRLEN] = {};
+            if (::inet_ntop(AF_INET6, &value->sin6_addr, text, sizeof(text)) != nullptr) {
+                iface.address = text;
+            }
+            if (current->ifa_netmask != nullptr && current->ifa_netmask->sa_family == AF_INET6) {
+                const auto* mask = reinterpret_cast<const ::sockaddr_in6*>(current->ifa_netmask);
+                const auto* bytes = reinterpret_cast<const uint8_t*>(&mask->sin6_addr);
+                uint8_t bits = 0;
+                bool counting = true;
+                for (size_t i = 0; i < 16 && counting; ++i) {
+                    for (int bit = 7; bit >= 0; --bit) {
+                        if ((bytes[i] & (1U << bit)) != 0) {
+                            ++bits;
+                        } else {
+                            counting = false;
+                            break;
+                        }
+                    }
+                }
+                iface.prefix_length = bits;
+            }
+        }
+    }
+    ::freeifaddrs(list);
+    for (auto& iface: result) {
+        fill_network_stats(iface);
+    }
 #endif
 
     return result;
@@ -1100,5 +1742,75 @@ uint64_t sysinfo::uptime_seconds() {
     return static_cast<uint64_t>(info.uptime);
 #endif
 }
+
+sysinfo::battery_info sysinfo::battery_status() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    battery_info info;
+    ::SYSTEM_POWER_STATUS status{};
+    if (::GetSystemPowerStatus(&status) == FALSE) {
+        info.status = "unknown";
+        return info;
+    }
+    info.present = (status.BatteryFlag & 128) == 0;
+    info.on_ac = status.ACLineStatus == 1;
+    info.charging = (status.BatteryFlag & 8) != 0;
+    info.charge_percent = status.BatteryLifePercent == 255 ? -1.0 : static_cast<float64_t>(status.BatteryLifePercent);
+    info.remaining_seconds = status.BatteryLifeTime == 0xFFFFFFFFUL ? -1 : static_cast<int64_t>(status.BatteryLifeTime);
+    if (!info.present) {
+        info.status = "unknown";
+    } else if (info.charging) {
+        info.status = "charging";
+    } else if (info.on_ac && info.charge_percent >= 99.0) {
+        info.status = "full";
+    } else if (info.on_ac) {
+        info.status = "idle";
+    } else {
+        info.status = "discharging";
+    }
+    return info;
+#else
+    return read_battery_linux();
+#endif
+}
+
+vector<sysinfo::mount_point> sysinfo::mount_points() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    vector<mount_point> out;
+    wchar_t drives[512] = {};
+    const ::DWORD length = ::GetLogicalDriveStringsW(static_cast<::DWORD>(sizeof(drives) / sizeof(wchar_t)), drives);
+    if (length == 0) {
+        return out;
+    }
+    for (const wchar_t* drive = drives; *drive != L'\0'; drive += ::wcslen(drive) + 1) {
+        if (::GetDriveTypeW(drive) == DRIVE_NO_ROOT_DIR) {
+            continue;
+        }
+        mount_point item;
+        item.target = wcharacter::to_string(drive);
+        item.source = item.target;
+
+        ::ULARGE_INTEGER available_bytes{};
+        ::ULARGE_INTEGER total_bytes{};
+        ::ULARGE_INTEGER free_bytes{};
+        if (::GetDiskFreeSpaceExW(drive, &available_bytes, &total_bytes, &free_bytes) == TRUE) {
+            item.total_bytes = total_bytes.QuadPart;
+            item.free_bytes = free_bytes.QuadPart;
+            item.available_bytes = available_bytes.QuadPart;
+        }
+
+        wchar_t filesystem[MAX_PATH] = {};
+        ::DWORD flags = 0;
+        if (::GetVolumeInformationW(drive, nullptr, 0, nullptr, nullptr, &flags, filesystem, MAX_PATH) == TRUE) {
+            item.filesystem = wcharacter::to_string(filesystem);
+            item.options = (flags & FILE_READ_ONLY_VOLUME) != 0 ? "ro" : "rw";
+        }
+        out.push_back(move(item));
+    }
+    return out;
+#else
+    return read_mount_entries();
+#endif
+}
+
 
 NEFORCE_END_NAMESPACE__

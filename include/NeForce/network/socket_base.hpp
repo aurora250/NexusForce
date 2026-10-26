@@ -80,6 +80,27 @@ struct socket_exception final : network_exception {
  */
 class NEFORCE_API socket_base {
 public:
+    /**
+     * @brief 套接字状态
+     */
+    enum class state : uint8_t {
+        unknown = 0,
+        established = 1, ///< 连接已建立
+        syn_sent = 2,    ///< 已发送 SYN
+        syn_recv = 3,    ///< 已收到 SYN
+        fin_wait1 = 4,
+        fin_wait2 = 5,
+        time_wait = 6,
+        closed = 7, ///< 连接关闭 / Linux 的 CLOSE
+        close_wait = 8,
+        last_ack = 9,
+        listen = 10,
+        closing = 11,
+        new_syn_recv = 12, ///< Linux 特有
+        delete_tcb = 13,   ///< Windows 特有
+        unconnected = 14,  ///< UDP 未连接状态
+    };
+
     using native_handle_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
             uintptr_t; ///< 平台原生句柄类型
@@ -138,6 +159,23 @@ public:
         LLDP = ETH_P_LLDP,   ///< 链路层发现协议
         MPLS = ETH_P_MPLS_UC ///< 多协议标签交换单播
 #endif
+    };
+
+    /**
+     * @brief 跨平台套接字条目
+     */
+    struct diag_entry {
+        ip_family family{ip_family::INET4}; ///< IP 族
+        protocol proto{protocol::IP};       ///< 协议类型
+        state status{state::unknown};       ///< 连接状态
+        string local;                       ///< 本地 endpoint
+        string remote;                      ///< 对端 endpoint，格式同上
+        uint32_t pid{0};                    ///< 所属进程 PID（Windows）
+        uint32_t uid{0};                    ///< 所属用户 UID（Linux）
+        uint32_t inode{0};                  ///< socket inode（Linux）
+        uint64_t cookie{0};                 ///< 内核 cookie（Linux）
+        uint32_t receive_queue{0};          ///< 接收队列字节数
+        uint32_t send_queue{0};             ///< 发送队列字节数
     };
 
 protected:
@@ -413,6 +451,37 @@ public:
      * 释放后当前对象不再管理该socket，调用者负责关闭。
      */
     NEFORCE_NODISCARD native_handle_type release() noexcept { return exchange(fd_, invalid_handle); }
+
+    /**
+     * @brief 将平台相关的原始状态码归一化为统一枚举
+     * @param raw 原始状态码
+     * @param udp 是否为 UDP
+     * @return 统一状态枚举
+     */
+    NEFORCE_NODISCARD static state to_state(uint8_t raw, bool udp = false) noexcept;
+
+    /**
+     * @brief 将统一状态枚举转换为名称字符串
+     * @param st 统一状态枚举
+     * @return 状态名称
+     */
+    NEFORCE_NODISCARD static string_view state_name(state st) noexcept;
+
+    /**
+     * @brief 将平台原始状态码直接转换为名称
+     * @param raw  原始状态码
+     * @param udp  是否为 UDP
+     * @return 状态名称
+     */
+    NEFORCE_NODISCARD static string_view state_name(uint8_t raw, bool udp) noexcept;
+
+    /**
+     * @brief 枚举指定地址族与协议的套接字表
+     * @param family 地址族
+     * @param proto  协议
+     * @return 成功返回条目列表；平台不支持或系统调用失败返回 none
+     */
+    NEFORCE_NODISCARD static optional<vector<diag_entry>> enumerate_sockets(ip_family family, protocol proto);
 };
 
 

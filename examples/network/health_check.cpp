@@ -36,7 +36,7 @@ namespace {
  * @brief 检查磁盘空间
  */
 bool check_disk_space() {
-    const auto disk = sysinfo::get_disk_info();
+    const auto disk = sysinfo::disk_status();
     const auto free_mb = disk.free_bytes / (1024 * 1024);
     return free_mb > 100;
 }

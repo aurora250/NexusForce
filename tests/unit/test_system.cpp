@@ -15,6 +15,7 @@
 #include <NeForce/core/system/stacktrace.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/system/system_event.hpp>
+#include <NeForce/network/socket_base.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/system/registry_key.hpp>
 #endif
@@ -4064,6 +4065,10 @@ TEST_F(ProcessTest, GetMemoryInfo_RunningProcess_ReturnsNonZero) {
     p.start(get_long_running_executable(), get_long_running_args());
 
     auto mem_info = p.get_memory_info();
+    for (int attempt = 0; attempt < 100 && mem_info.working_set_size == 0; ++attempt) {
+        this_thread::sleep_for(milliseconds(10));
+        mem_info = p.get_memory_info();
+    }
     EXPECT_GT(mem_info.working_set_size, 0);
 
     p.terminate();
@@ -4171,18 +4176,18 @@ TEST_F(ProcessTest, CheckPermission_NoPermission_ReturnsResult) {
 }
 
 TEST_F(ProcessTest, Name_CurrentProcess_ReturnsNonEmpty) {
-    string name = process::name(process::current_id());
+    string name = process::get_name(process::current_id());
     EXPECT_FALSE(name.empty());
 }
 
 TEST_F(ProcessTest, Name_NonExistentProcess_ReturnsEmpty) {
-    string name = process::name(99999999);
+    string name = process::get_name(99999999);
     EXPECT_TRUE(name.empty());
 }
 
 TEST_F(ProcessTest, Name_ConsistentWithCurrentProcess) {
-    string name1 = process::name(process::current_id());
-    string name2 = process::name(process::current_id());
+    string name1 = process::get_name(process::current_id());
+    string name2 = process::get_name(process::current_id());
     EXPECT_EQ(name1, name2);
 }
 
@@ -4431,40 +4436,53 @@ TEST_F(ProcessTest, Spawn_WithArgs_ReturnsValidId) {
     EXPECT_GT(pid, 0);
 }
 
-TEST_F(ProcessTest, System_SuccessfulProcess_ReturnsZero) {
+TEST_F(ProcessTest, Run_SuccessfulProcess_ReturnsZero) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    int ret = process::system("cmd.exe", {"/c", "exit", "0"});
+    int ret = process::run("cmd.exe", {"/c", "exit", "0"});
 #else
-    int ret = process::system("/bin/true");
+    int ret = process::run("/bin/true");
 #endif
     EXPECT_EQ(ret, 0);
 }
 
-TEST_F(ProcessTest, System_WithTimeout_ReturnsExitCode) {
+TEST_F(ProcessTest, Run_WithTimeout_ReturnsExitCode) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    int ret = process::system("cmd.exe", {"/c", "exit", "0"}, 5000);
+    int ret = process::run("cmd.exe", {"/c", "exit", "0"}, 5000);
 #else
-    int ret = process::system("/bin/true", {}, 5000);
+    int ret = process::run("/bin/true", {}, 5000);
 #endif
     EXPECT_EQ(ret, 0);
 }
 
-TEST_F(ProcessTest, Capture_ReturnsNonEmptyOutput) {
+TEST_F(ProcessTest, Run_NonZeroExitCode_Returned) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    string output = process::capture("cmd.exe", {"/c", "echo", "hello_world"});
+    int ret = process::run("cmd.exe", {"/c", "exit", "3"});
 #else
-    string output = process::capture("/bin/sh", {"-c", "echo hello_world"});
+    int ret = process::run("/bin/sh", {"-c", "exit 3"});
 #endif
-    EXPECT_NE(output.find("hello_world"), string::npos);
+    EXPECT_EQ(ret, 3);
 }
 
-TEST_F(ProcessTest, Capture_WithTimeout_ReturnsOutput) {
+TEST_F(ProcessTest, RunCapture_ReturnsNonEmptyOutput) {
+    const auto result = process::run_capture(get_test_output_executable(), get_test_output_args());
+    EXPECT_EQ(result.exit_code, 0);
+    EXPECT_NE(result.output.find("hello"), string::npos);
+}
+
+TEST_F(ProcessTest, RunCapture_WithTimeout_ReturnsOutput) {
+    const auto result = process::run_capture(get_test_output_executable(), get_test_output_args(), 5000);
+    EXPECT_EQ(result.exit_code, 0);
+    EXPECT_NE(result.output.find("hello"), string::npos);
+}
+
+TEST_F(ProcessTest, RunCapture_NonZeroExitCode_Returned) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    string output = process::capture("cmd.exe", {"/c", "echo", "neforce"}, 5000);
+    const auto result = process::run_capture("cmd.exe", {"/c", "exit", "3"});
 #else
-    string output = process::capture("/bin/sh", {"-c", "echo neforce"}, 5000);
+    const auto result = process::run_capture("/bin/sh", {"-c", "exit 3"});
 #endif
-    EXPECT_NE(output.find("neforce"), string::npos);
+    EXPECT_EQ(result.exit_code, 3);
+    EXPECT_TRUE(result.output.empty());
 }
 
 TEST_F(ProcessTest, Chain_TwoProcesses_SecondReceivesFirstOutput) {
@@ -4489,6 +4507,254 @@ TEST_F(ProcessTest, Chain_TwoProcesses_SecondReceivesFirstOutput) {
     }
     EXPECT_NE(output.find("chained"), string::npos);
 }
+
+TEST_F(ProcessTest, CurrentName_MatchesGetName) {
+    const string name = process::current_name();
+    EXPECT_FALSE(name.empty());
+    EXPECT_EQ(name, process::get_name(process::current_id()));
+}
+
+TEST_F(ProcessTest, CurrentState_IsRunningOrUnknown) {
+    const auto state = process::current_state();
+    EXPECT_TRUE(state == process::state::running || state == process::state::unknown);
+}
+
+TEST_F(ProcessTest, CurrentMemoryInfo_MatchesQueryById) {
+    const auto current = process::current_memory_info();
+    const auto queried = process::get_memory_info(process::current_id());
+    EXPECT_EQ(current.working_set_size, queried.working_set_size);
+    EXPECT_GT(current.working_set_size, 0U);
+}
+
+TEST_F(ProcessTest, CurrentTimeInfo_HasWallTime) {
+    const auto info = process::current_time_info();
+    EXPECT_GT(info.wall_time_ms, 0U);
+}
+
+TEST_F(ProcessTest, CurrentCommandLine_IsNotEmpty) { EXPECT_FALSE(process::current_command_line().empty()); }
+
+TEST_F(ProcessTest, GetMemoryInfo_CurrentProcess_VirtualSizeNonZero) {
+    const auto info = process::get_memory_info(process::current_id());
+    EXPECT_GT(info.virtual_size, 0U);
+}
+
+TEST_F(ProcessTest, GetTimeInfo_CurrentProcess_MatchesCurrentQuery) {
+    const auto by_id = process::get_time_info(process::current_id());
+    const auto current = process::current_time_info();
+    EXPECT_GT(by_id.wall_time_ms, 0U);
+    EXPECT_LE(by_id.wall_time_ms, current.wall_time_ms + 1000U);
+}
+
+TEST_F(ProcessTest, GetTimeInfo_NonexistentProcess_ReturnsZero) {
+    const auto info = process::get_time_info(99999999);
+    EXPECT_EQ(info.user_time_ms, 0U);
+    EXPECT_EQ(info.kernel_time_ms, 0U);
+    EXPECT_EQ(info.wall_time_ms, 0U);
+}
+
+TEST_F(ProcessTest, InstanceTimeInfo_RunningProcess_HasWallTime) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    this_thread::sleep_for(milliseconds(50));
+    const auto info = p.get_time_info();
+    EXPECT_GT(info.wall_time_ms, 0U);
+    p.terminate();
+}
+
+TEST_F(ProcessTest, GetExecutablePath_CurrentProcess_NonEmpty) {
+    EXPECT_FALSE(process::get_executable_path(process::current_id()).empty());
+}
+
+TEST_F(ProcessTest, GetExecutablePath_NonexistentProcess_ReturnsEmpty) {
+    EXPECT_TRUE(process::get_executable_path(99999999).empty());
+}
+
+TEST_F(ProcessTest, GetCommandLine_CurrentProcess_NonEmpty) {
+    EXPECT_FALSE(process::get_command_line(process::current_id()).empty());
+}
+
+TEST_F(ProcessTest, GetCommandLine_NonexistentProcess_ReturnsEmpty) {
+    EXPECT_TRUE(process::get_command_line(99999999).empty());
+}
+
+#ifdef NEFORCE_PLATFORM_LINUX
+TEST_F(ProcessTest, GetCommandLine_ChildProcess_ContainsArguments) {
+    process p;
+    p.start("/bin/sleep", {"1"});
+    const string command = process::get_command_line(p.id());
+    EXPECT_NE(command.find("/bin/sleep"), string::npos);
+    EXPECT_NE(command.find(" 1"), string::npos);
+    p.terminate();
+}
+#endif
+
+TEST_F(ProcessTest, Snapshot_ContainsCurrentProcess) {
+    const auto entries = process::snapshot();
+    ASSERT_FALSE(entries.empty());
+
+    bool found = false;
+    for (const auto& entry: entries) {
+        EXPECT_FALSE(entry.name.empty());
+        EXPECT_GT(entry.threads, 0U);
+        EXPECT_GT(entry.start_time_ms, 0U);
+        if (entry.pid != process::current_id()) {
+            continue;
+        }
+        found = true;
+        EXPECT_EQ(entry.status, process::state::running);
+        EXPECT_GT(entry.rss_bytes, 0U);
+#ifdef NEFORCE_PLATFORM_LINUX
+        EXPECT_FALSE(entry.command.empty());
+#endif
+    }
+    EXPECT_TRUE(found);
+}
+
+TEST_F(ProcessTest, Snapshot_ChildProcessHasParentId) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    const auto entries = process::snapshot();
+    bool found = false;
+    for (const auto& entry: entries) {
+        if (entry.pid != p.id()) {
+            continue;
+        }
+        found = true;
+        EXPECT_EQ(entry.parent_pid, process::current_id());
+    }
+    EXPECT_TRUE(found);
+    p.terminate();
+}
+
+TEST_F(ProcessTest, SignalName_MatchesPortableSet) {
+    EXPECT_EQ(process::signal_name(process::signal::terminate), "TERM");
+    EXPECT_EQ(process::signal_name(process::signal::kill), "KILL");
+    EXPECT_EQ(process::signal_name(process::signal::interrupt), "INT");
+    EXPECT_EQ(process::signal_name(process::signal::user1), "USR1");
+}
+
+TEST_F(ProcessTest, SendSignal_NonexistentProcess_ReturnsFalse) {
+    EXPECT_FALSE(process::send_signal(99999999, process::signal::terminate));
+    EXPECT_FALSE(process::send_signal(99999999, 15));
+}
+
+TEST_F(ProcessTest, SendSignal_ChildProcessIsTerminated) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    EXPECT_TRUE(process::send_signal(p.id(), process::signal::terminate));
+    EXPECT_NE(p.wait(5000), -1);
+}
+
+TEST_F(ProcessTest, Priority_RoundTrips) {
+    const auto current = process::current_id();
+    const auto before = process::get_priority(current);
+    ASSERT_TRUE(before.has_value());
+    EXPECT_TRUE(process::set_priority(current, *before));
+    const auto after = process::get_priority(current);
+    ASSERT_TRUE(after.has_value());
+    EXPECT_EQ(*before, *after);
+}
+
+TEST_F(ProcessTest, Priority_NonexistentProcess_ReturnsNone) {
+    EXPECT_FALSE(process::get_priority(99999999).has_value());
+}
+
+TEST_F(ProcessTest, Affinity_RoundTrips) {
+    const auto current = process::current_id();
+    const auto mask = process::get_affinity(current);
+    ASSERT_TRUE(mask.has_value());
+    EXPECT_NE(*mask, 0U);
+    EXPECT_TRUE(process::set_affinity(current, *mask));
+    const auto after = process::get_affinity(current);
+    ASSERT_TRUE(after.has_value());
+    EXPECT_EQ(*after, *mask);
+}
+
+TEST_F(ProcessTest, Affinity_NonexistentProcess_ReturnsNone) {
+    EXPECT_FALSE(process::get_affinity(99999999).has_value());
+}
+
+TEST_F(ProcessTest, IoInfo_CurrentProcess_HasOperations) {
+    const auto info = process::get_io_info(process::current_id());
+    EXPECT_GT(info.read_operations + info.write_operations, 0U);
+}
+
+TEST_F(ProcessTest, IoInfo_NonexistentProcess_ReturnsZero) {
+    const auto info = process::get_io_info(99999999);
+    EXPECT_EQ(info.read_bytes, 0U);
+    EXPECT_EQ(info.write_bytes, 0U);
+}
+
+TEST_F(ProcessTest, User_CurrentProcess_NonEmpty) { EXPECT_FALSE(process::get_user(process::current_id()).empty()); }
+
+TEST_F(ProcessTest, User_NonexistentProcess_ReturnsEmpty) { EXPECT_TRUE(process::get_user(99999999).empty()); }
+
+TEST_F(ProcessTest, Threads_CurrentProcess_ContainsMainThread) {
+    const auto list = process::threads(process::current_id());
+    ASSERT_FALSE(list.empty());
+    bool found = false;
+    for (const auto& item: list) {
+        EXPECT_GT(item.tid, 0U);
+        if (item.tid == static_cast<uint32_t>(process::current_id())) {
+            found = true;
+            EXPECT_FALSE(item.name.empty());
+        }
+    }
+    EXPECT_TRUE(found);
+}
+
+TEST_F(ProcessTest, Threads_NonexistentProcess_ReturnsEmpty) { EXPECT_TRUE(process::threads(99999999).empty()); }
+
+TEST_F(ProcessTest, Snapshot_EnrichesCurrentProcess) {
+    const auto entries = process::snapshot();
+    for (const auto& entry: entries) {
+        if (entry.pid != static_cast<uint32_t>(process::current_id())) {
+            continue;
+        }
+        EXPECT_FALSE(entry.user.empty());
+        EXPECT_FALSE(entry.kernel_thread);
+#ifdef NEFORCE_PLATFORM_LINUX
+        EXPECT_GE(entry.nice, -20);
+        EXPECT_LE(entry.nice, 19);
+        EXPECT_GT(entry.io.read_operations + entry.io.write_operations, 0U);
+#endif
+        return;
+    }
+    FAIL() << "current process missing from snapshot";
+}
+
+#ifdef NEFORCE_PLATFORM_LINUX
+TEST_F(ProcessTest, SocketOwners_ContainsBoundSocket) {
+    socket_base socket;
+    socket.open(ip_family::INET4, socket_base::type::STREAM, socket_base::protocol::TCP);
+    socket.bind(ip_address::loopback(ports(0u), ip_family::INET4));
+    socket.listen(1);
+    const auto endpoint = socket.local_endpoint();
+    ASSERT_TRUE(endpoint.has_value());
+
+    const auto table = socket_base::enumerate_sockets(ip_family::INET4, socket_base::protocol::TCP);
+    if (!table.has_value()) {
+        GTEST_SKIP() << "socket table enumeration is not available";
+    }
+    const auto owners = process::socket_owners();
+    bool found = false;
+    for (const auto& entry: *table) {
+        if (entry.local != endpoint->to_string()) {
+            continue;
+        }
+        const auto owner = owners.find(entry.inode);
+        if (owner == owners.end()) {
+            continue;
+        }
+        for (const auto pid: owner->second) {
+            if (pid == process::current_id()) {
+                found = true;
+            }
+        }
+    }
+    EXPECT_TRUE(found);
+}
+#endif
 
 class ShareMemoryTest : public ::testing::Test {
 protected:
@@ -5251,60 +5517,52 @@ TEST_F(SysinfoTest, GetSystemInfo_ActiveProcessorMask_NonZero) {
     EXPECT_NE(info.active_processor_mask, 0);
 }
 
-TEST_F(SysinfoTest, GetMemoryInfo_TotalPhysical_NonZero) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_TotalPhysical_NonZero) {
+    const auto mem = sysinfo::memory_status();
 
     EXPECT_GT(mem.total_physical, 0);
 }
 
-TEST_F(SysinfoTest, GetMemoryInfo_AvailablePhysical_LessOrEqualTotal) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_AvailablePhysical_LessOrEqualTotal) {
+    const auto mem = sysinfo::memory_status();
 
     EXPECT_LE(mem.available_physical, mem.total_physical);
 }
 
-TEST_F(SysinfoTest, GetMemoryInfo_TotalVirtual_NonZero) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_TotalVirtual_NonZero) {
+    const auto mem = sysinfo::memory_status();
 
     EXPECT_GT(mem.total_virtual, 0);
 }
 
-TEST_F(SysinfoTest, GetMemoryInfo_AvailableVirtual_LessOrEqualTotal) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_AvailableVirtual_LessOrEqualTotal) {
+    const auto mem = sysinfo::memory_status();
 
     EXPECT_LE(mem.available_virtual, mem.total_virtual);
 }
 
-TEST_F(SysinfoTest, GetMemoryInfo_TotalPageFile_NonZero) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_TotalPageFile_NonZero) {
+    const auto mem = sysinfo::memory_status();
 
     EXPECT_GT(mem.total_page_file, 0);
 }
 
-TEST_F(SysinfoTest, GetMemoryInfo_AvailablePageFile_LessOrEqualTotal) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_AvailablePageFile_LessOrEqualTotal) {
+    const auto mem = sysinfo::memory_status();
 
     EXPECT_LE(mem.available_page_file, mem.total_page_file);
 }
 
-TEST_F(SysinfoTest, MemoryInfo_PhysicalMemoryUsage_BetweenZeroAndHundred) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_PhysicalMemoryUsage_BetweenZeroAndHundred) {
+    const auto mem = sysinfo::memory_status();
 
     float64_t usage = mem.physical_memory_usage();
     EXPECT_GE(usage, 0.0);
     EXPECT_LE(usage, 100.0);
 }
 
-TEST_F(SysinfoTest, MemoryInfo_AvailableMemory_NonZero) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_AvailableMemory_NonZero) {
+    const auto mem = sysinfo::memory_status();
 
     size_t available = mem.available_memory();
     EXPECT_GT(available, 0);
@@ -5327,40 +5585,40 @@ TEST_F(SysinfoTest, MemoryInfo_Default_PhysicalMemoryUsage_Zero) {
 
 TEST_F(SysinfoTest, GetCpuInfo_Cores_NonZero) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu = inst.get_CPU_info();
+    const auto& cpu = inst.get_cpu_info();
 
     EXPECT_GT(cpu.cores, 0);
 }
 
 TEST_F(SysinfoTest, GetCpuInfo_LogicalProcessors_NonZero) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu = inst.get_CPU_info();
+    const auto& cpu = inst.get_cpu_info();
 
     EXPECT_GT(cpu.logical_processors, 0);
 }
 
 TEST_F(SysinfoTest, GetCpuInfo_LogicalProcessors_GreaterOrEqualCores) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu = inst.get_CPU_info();
+    const auto& cpu = inst.get_cpu_info();
 
     EXPECT_GE(cpu.logical_processors, cpu.cores);
 }
 
 TEST_F(SysinfoTest, GetCpuInfo_MaxMHz_NonZero) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu = inst.get_CPU_info();
+    const auto& cpu = inst.get_cpu_info();
 
     if (sysinfo::parse_brand_frequency(cpu.brand.view()) > 0) {
-        EXPECT_GT(cpu.max_MHz, 0);
+        EXPECT_GT(cpu.max_mhz, 0);
         return;
     }
 
-    if (cpu.max_MHz == 0) {
+    if (cpu.max_mhz == 0) {
         GTEST_SKIP() << "host exposes no maximum CPU frequency";
     }
 
-    EXPECT_GE(cpu.max_MHz, 100);
-    EXPECT_LE(cpu.max_MHz, 20000);
+    EXPECT_GE(cpu.max_mhz, 100);
+    EXPECT_LE(cpu.max_mhz, 20000);
 }
 
 TEST_F(SysinfoTest, ParseBrandFrequency_ClockInBrand) {
@@ -5383,14 +5641,14 @@ TEST_F(SysinfoTest, ParseBrandFrequency_NoClockInBrand) {
 
 TEST_F(SysinfoTest, GetCpuInfo_CurrentMHz_NonZero) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu = inst.get_CPU_info();
+    const auto& cpu = inst.get_cpu_info();
 
-    EXPECT_GT(cpu.current_MHz, 0);
+    EXPECT_GT(cpu.current_mhz, 0);
 }
 
 TEST_F(SysinfoTest, CpuInfo_Hyperthreading_ReturnsLogicalResult) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu = inst.get_CPU_info();
+    const auto& cpu = inst.get_cpu_info();
 
     bool ht = cpu.hyperthreading();
     bool expected = (cpu.logical_processors > cpu.cores);
@@ -5398,15 +5656,32 @@ TEST_F(SysinfoTest, CpuInfo_Hyperthreading_ReturnsLogicalResult) {
 }
 
 TEST_F(SysinfoTest, CpuInfo_DefaultValues_AllZero) {
-    sysinfo::CPU_info cpu{};
+    sysinfo::cpu_info cpu{};
     EXPECT_TRUE(cpu.vendor.empty());
     EXPECT_TRUE(cpu.brand.empty());
-    EXPECT_EQ(cpu.max_MHz, 0);
-    EXPECT_EQ(cpu.current_MHz, 0);
+    EXPECT_EQ(cpu.max_mhz, 0);
+    EXPECT_EQ(cpu.current_mhz, 0);
     EXPECT_EQ(cpu.cores, 0);
     EXPECT_EQ(cpu.logical_processors, 0);
     EXPECT_TRUE(cpu.features.empty());
+    EXPECT_EQ(cpu.simd.features, 0U);
     EXPECT_FALSE(cpu.hyperthreading());
+}
+
+TEST_F(SysinfoTest, GetCpuInfo_SimdBaselineInstructionSet) {
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+#if defined(NEFORCE_ARCH_X86_64)
+    EXPECT_TRUE(cpu.simd.supports(sysinfo::simd_instruction::sse2));
+#elif defined(NEFORCE_ARCH_AARCH64)
+    EXPECT_TRUE(cpu.simd.supports(sysinfo::simd_instruction::neon));
+#endif
+}
+
+TEST_F(SysinfoTest, Refresh_UpdatesSimd) {
+    sysinfo& inst = sysinfo::instance();
+    const auto features_before = inst.get_cpu_info().simd.features;
+    inst.refresh();
+    EXPECT_EQ(inst.get_cpu_info().simd.features, features_before);
 }
 
 TEST_F(SysinfoTest, GetOsVersionInfo_Major_NonZero) {
@@ -5490,12 +5765,11 @@ TEST_F(SysinfoTest, ProcessCount_ConsistentWithCurrentProcess) {
 
 TEST_F(SysinfoTest, Refresh_UpdatesInfo_DoesNotThrow) {
     sysinfo& inst = sysinfo::instance();
-    auto mem_before = inst.get_memory_info().total_physical;
+    const auto cores_before = inst.get_cpu_info().cores;
 
     inst.refresh();
 
-    auto mem_after = inst.get_memory_info().total_physical;
-    EXPECT_EQ(mem_before, mem_after);
+    EXPECT_EQ(inst.get_cpu_info().cores, cores_before);
     EXPECT_TRUE(inst.is_initialized());
 }
 
@@ -5558,7 +5832,7 @@ TEST_F(SysinfoTest, MemoryInfo_Default_AvailableMemory_Zero) {
 
 TEST_F(SysinfoTest, GetCpuInfo_Features_NonEmpty) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu = inst.get_CPU_info();
+    const auto& cpu = inst.get_cpu_info();
 
 #ifndef NEFORCE_PLATFORM_WINDOWS
     EXPECT_FALSE(cpu.features.empty());
@@ -5589,19 +5863,17 @@ TEST_F(SysinfoTest, GetSystemInfo_ConsistentAcrossCalls) {
     EXPECT_EQ(info1.allocation_granularity, info2.allocation_granularity);
 }
 
-TEST_F(SysinfoTest, GetMemoryInfo_ConsistentAcrossCalls) {
-    sysinfo& inst = sysinfo::instance();
-    const auto& mem1 = inst.get_memory_info();
-    const auto& mem2 = inst.get_memory_info();
+TEST_F(SysinfoTest, MemoryStatus_ConsistentAcrossCalls) {
+    const auto mem1 = sysinfo::memory_status();
+    const auto mem2 = sysinfo::memory_status();
 
     EXPECT_EQ(mem1.total_physical, mem2.total_physical);
-    EXPECT_EQ(mem1.total_virtual, mem2.total_virtual);
 }
 
 TEST_F(SysinfoTest, GetCpuInfo_ConsistentAcrossCalls) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu1 = inst.get_CPU_info();
-    const auto& cpu2 = inst.get_CPU_info();
+    const auto& cpu1 = inst.get_cpu_info();
+    const auto& cpu2 = inst.get_cpu_info();
 
     EXPECT_EQ(cpu1.vendor, cpu2.vendor);
     EXPECT_EQ(cpu1.brand, cpu2.brand);
@@ -5721,7 +5993,7 @@ TEST_F(SysinfoTest, NumaInfo_CoreMaskConsistentWithCoreList) {
 
 TEST_F(SysinfoTest, NumaInfo_CoresWithinValidRange) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu_info = inst.get_CPU_info();
+    const auto& cpu_info = inst.get_cpu_info();
     const uint32_t max_cores = cpu_info.logical_processors;
     const auto& nodes = inst.get_numa_info();
     for (const auto& node: nodes) {
@@ -5733,7 +6005,7 @@ TEST_F(SysinfoTest, NumaInfo_CoresWithinValidRange) {
 
 TEST_F(SysinfoTest, NumaInfo_TotalCoresLessOrEqualLogicalProcessors) {
     sysinfo& inst = sysinfo::instance();
-    const auto& cpu_info = inst.get_CPU_info();
+    const auto& cpu_info = inst.get_cpu_info();
     const uint32_t total_logical = cpu_info.logical_processors;
     const auto& nodes = inst.get_numa_info();
     uint32_t total_cores = 0;
@@ -5769,6 +6041,134 @@ TEST_F(SysinfoTest, NumaInfo_AfterRefresh_Consistent) {
                 EXPECT_NE(node.core_mask & (uint64_t(1) << core), 0);
             }
         }
+    }
+}
+
+TEST_F(SysinfoTest, GetDiskInfo_CurrentDirectory_ReturnsValidData) {
+    const auto info = sysinfo::disk_status();
+    EXPECT_FALSE(info.path.empty());
+    EXPECT_GT(info.total_bytes, 0U);
+    EXPECT_LE(info.free_bytes, info.total_bytes);
+    EXPECT_LE(info.available_bytes, info.free_bytes);
+    EXPECT_EQ(info.used_bytes, info.total_bytes - info.free_bytes);
+    EXPECT_FALSE(info.filesystem.empty());
+}
+
+TEST_F(SysinfoTest, GetDiskInfo_ExplicitPath_ReturnsRequestedPath) {
+    const string path = environment::current_directory();
+    const auto info = sysinfo::disk_status(path);
+    EXPECT_EQ(info.path, path);
+    EXPECT_GT(info.total_bytes, 0U);
+}
+
+TEST_F(SysinfoTest, GetDiskInfo_NonexistentPath_ReturnsZero) {
+    const auto info = sysinfo::disk_status("/nonexistent_neforce_disk_path_12345");
+    EXPECT_EQ(info.total_bytes, 0U);
+    EXPECT_EQ(info.used_bytes, 0U);
+    EXPECT_TRUE(info.filesystem.empty());
+}
+
+TEST_F(SysinfoTest, DiskInfo_UsagePercent_WithinRange) {
+    const auto info = sysinfo::disk_status();
+    EXPECT_GE(info.usage_percent(), 0.0);
+    EXPECT_LE(info.usage_percent(), 100.0);
+}
+
+TEST_F(SysinfoTest, NetworkInterfaces_EntriesAreConsistent) {
+    const auto interfaces = sysinfo::network_interfaces();
+    ASSERT_FALSE(interfaces.empty());
+    for (const auto& iface: interfaces) {
+        EXPECT_FALSE(iface.name.empty());
+        if (!iface.mac.empty()) {
+            EXPECT_NE(iface.mac.find(':'), string::npos);
+        }
+        if (!iface.address.empty() && iface.address.find(':') == string::npos) {
+            EXPECT_LE(iface.prefix_length, 32);
+        }
+        if (!iface.address.empty() && iface.address.find(':') != string::npos) {
+            EXPECT_LE(iface.prefix_length, 128);
+        }
+    }
+}
+
+TEST_F(SysinfoTest, NetworkInterfaces_NamesUnique) {
+    const auto interfaces = sysinfo::network_interfaces();
+    for (size_t i = 0; i < interfaces.size(); ++i) {
+        for (size_t j = i + 1; j < interfaces.size(); ++j) {
+            EXPECT_NE(interfaces[i].name, interfaces[j].name);
+        }
+    }
+}
+
+TEST_F(SysinfoTest, NetworkInterfaces_HasLoopback) {
+    bool found = false;
+    for (const auto& iface: sysinfo::network_interfaces()) {
+        if (iface.is_loopback) {
+            found = true;
+            EXPECT_TRUE(iface.address.empty() || iface.address == "127.0.0.1" || iface.address == "::1" ||
+                        iface.address.starts_with("127.") || iface.address.starts_with("fe80:") ||
+                        iface.address.starts_with("::"));
+            break;
+        }
+    }
+    EXPECT_TRUE(found);
+}
+
+TEST_F(SysinfoTest, MountPoints_EntriesAreConsistent) {
+    const auto mounts = sysinfo::mount_points();
+    ASSERT_FALSE(mounts.empty());
+    for (const auto& mount: mounts) {
+        EXPECT_FALSE(mount.target.empty());
+        EXPECT_FALSE(mount.filesystem.empty());
+        EXPECT_LE(mount.available_bytes, mount.free_bytes);
+        EXPECT_LE(mount.free_bytes, mount.total_bytes);
+    }
+}
+
+TEST_F(SysinfoTest, Hostname_NonEmpty) { EXPECT_FALSE(sysinfo::instance().get_hostname().empty()); }
+
+TEST_F(SysinfoTest, CpuUsage_TwoSamplesWithinRange) {
+    const auto first = sysinfo::cpu_usage();
+    EXPECT_GE(first, 0.0);
+    this_thread::sleep_for(milliseconds(20));
+    const auto second = sysinfo::cpu_usage();
+    EXPECT_GE(second, 0.0);
+    EXPECT_LE(second, 100.0);
+}
+
+TEST_F(SysinfoTest, NetworkInterfaces_HaveLinkStats) {
+    const auto interfaces = sysinfo::network_interfaces();
+    ASSERT_FALSE(interfaces.empty());
+    bool has_mtu = false;
+    for (const auto& iface: interfaces) {
+        EXPECT_FALSE(iface.operstate.empty());
+        if (iface.mtu > 0) {
+            has_mtu = true;
+        }
+    }
+    EXPECT_TRUE(has_mtu);
+}
+
+TEST_F(SysinfoTest, CpuUsagePerCore_ReturnsSamples) {
+    const auto first = sysinfo::cpu_usage_per_core();
+    EXPECT_LE(first.size(), static_cast<size_t>(sysinfo::instance().get_cpu_info().logical_processors));
+    this_thread::sleep_for(milliseconds(20));
+    const auto second = sysinfo::cpu_usage_per_core();
+    EXPECT_FALSE(second.empty());
+    for (const auto value: second) {
+        EXPECT_GE(value, 0.0);
+    }
+}
+
+TEST_F(SysinfoTest, BatteryStatus_IsConsistent) {
+    const auto info = sysinfo::battery_status();
+    EXPECT_FALSE(info.status.empty());
+    if (info.present) {
+        EXPECT_GE(info.charge_percent, 0.0);
+        EXPECT_LE(info.charge_percent, 100.0);
+    } else {
+        EXPECT_EQ(info.charge_percent, -1.0);
+        EXPECT_EQ(info.status, "unknown");
     }
 }
 

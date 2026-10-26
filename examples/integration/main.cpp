@@ -264,9 +264,9 @@ void setup_routes(http_router& router) {
     // ---- 系统信息 ----
     router.get("/api/sysinfo", [](http_request& req, http_response& res) {
         auto& si = sysinfo::instance();
-        auto disk = sysinfo::get_disk_info();
-        auto& mem = si.get_memory_info();
-        auto& cpu = si.get_CPU_info();
+        auto disk = sysinfo::disk_status();
+        const auto mem = sysinfo::memory_status();
+        auto& cpu = si.get_cpu_info();
         auto& os = si.get_os_version_info();
 
         json_builder jb;
@@ -278,12 +278,12 @@ void setup_routes(http_router& router) {
         jb.key("cpu_logical").value(static_cast<double>(cpu.logical_processors));
         jb.key("cpu_usage_pct").value(sysinfo::cpu_usage());
         jb.key("memory_mb").begin_object();
-        jb.key("total").value(static_cast<double>(mem.total_physical / 10 * 1024 * 1024));
-        jb.key("available").value(static_cast<double>(mem.available_physical / 10 * 1024 * 1024));
+        jb.key("total").value(static_cast<double>(mem.total_physical / (1024 * 1024)));
+        jb.key("available").value(static_cast<double>(mem.available_physical / (1024 * 1024)));
         jb.end_object();
         jb.key("disk_mb").begin_object();
-        jb.key("total").value(static_cast<double>(disk.total_bytes / 10 * 1024 * 1024));
-        jb.key("free").value(static_cast<double>(disk.free_bytes / 10 * 1024 * 1024));
+        jb.key("total").value(static_cast<double>(disk.total_bytes / (1024 * 1024)));
+        jb.key("free").value(static_cast<double>(disk.free_bytes / (1024 * 1024)));
         jb.end_object();
         jb.key("uptime_sec").value(static_cast<double>(sysinfo::uptime_seconds()));
         jb.end_object();

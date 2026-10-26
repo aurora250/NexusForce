@@ -82,4 +82,43 @@ int text_display_width(const string_view text) {
     return width;
 }
 
+string display_truncate(string_view text, const int width) {
+    if (width <= 0) {
+        return {};
+    }
+    int used = 0;
+    size_t index = 0;
+    while (index < text.size()) {
+        const size_t begin = index;
+        const auto point = codepoint::decode_utf8(reinterpret_cast<const byte_t*>(text.data()), index, text.size());
+        const int cells = point.display_width();
+        if (used + cells > width) {
+            index = begin;
+            break;
+        }
+        used += cells;
+    }
+    return string(text.data(), index);
+}
+
+string display_fit(string_view text, const int width, const bool right_align) {
+    if (width <= 0) {
+        return {};
+    }
+    const int current = text_display_width(text);
+    if (current >= width) {
+        return display_truncate(text, width);
+    }
+    string out;
+    out.reserve(static_cast<size_t>(width));
+    if (right_align) {
+        out.append(static_cast<size_t>(width - current), ' ');
+        out.append(text.data(), text.size());
+    } else {
+        out.append(text.data(), text.size());
+        out.append(static_cast<size_t>(width - current), ' ');
+    }
+    return out;
+}
+
 NEFORCE_END_NAMESPACE__
