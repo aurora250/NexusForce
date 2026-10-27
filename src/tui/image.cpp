@@ -1,7 +1,6 @@
 #include <NeForce/core/algorithm/compare.hpp>
 #include <NeForce/tui/image.hpp>
 #ifdef NEFORCE_SUPPORT_ZLIB
-#    include <climits>
 #    include <zlib.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

@@ -1,27 +1,15 @@
 #include "NeForce/compress/zstd_compress.hpp"
-#include "NeForce/core/container/array.hpp"
-#ifdef NEFORCE_HAVE_ZSTD
+#ifdef NEFORCE_SUPPORT_ZSTD
+#    include "NeForce/core/container/array.hpp"
 #    include <zstd.h>
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 
-#ifdef NEFORCE_HAVE_ZSTD
 namespace {
     int clamp_level(const int level) noexcept { return level < -5 ? -5 : (level > 22 ? 22 : level); }
 } // namespace
-#endif
 
-
-bool zstd_compressor::available() noexcept {
-#ifdef NEFORCE_HAVE_ZSTD
-    return true;
-#else
-    return false;
-#endif
-}
 
 byte_vector zstd_compressor::compress_data(const byte_t* data, const size_t size, const int level) {
-#ifdef NEFORCE_HAVE_ZSTD
     ::ZSTD_CCtx* context = ::ZSTD_createCCtx();
     if (context == nullptr) {
         NEFORCE_THROW_EXCEPTION(zstd_exception("zstd compression context allocation failed"));
@@ -36,19 +24,12 @@ byte_vector zstd_compressor::compress_data(const byte_t* data, const size_t size
     }
     output.resize(written);
     return output;
-#else
-    (void) data;
-    (void) size;
-    (void) level;
-    NEFORCE_THROW_EXCEPTION(zstd_exception("zstd is not linked in this build"));
-#endif
 }
 
 bool zstd_compressor::decompress_prefix_data(const byte_t* data, const size_t size, string& output, bool* torn) {
     if (torn != nullptr) {
         *torn = false;
     }
-#ifdef NEFORCE_HAVE_ZSTD
     output.clear();
     ::ZSTD_DStream* stream = ::ZSTD_createDStream();
     if (stream == nullptr) {
@@ -84,12 +65,6 @@ bool zstd_compressor::decompress_prefix_data(const byte_t* data, const size_t si
     }
     ::ZSTD_freeDStream(stream);
     return true;
-#else
-    (void) data;
-    (void) size;
-    output.clear();
-    return false;
-#endif
 }
 
 byte_vector zstd_compressor::decompress(const cbyte_view& data, const size_t estimated_original_size) {
@@ -114,7 +89,6 @@ bool zstd_compressor::decompress_prefix(const string_view data, string& output, 
 }
 
 size_t zstd_compressor::frame_count(const string_view data) noexcept {
-#ifdef NEFORCE_HAVE_ZSTD
     size_t count = 0;
     size_t offset = 0;
     while (offset < data.size()) {
@@ -126,10 +100,7 @@ size_t zstd_compressor::frame_count(const string_view data) noexcept {
         offset += frame_size;
     }
     return count;
-#else
-    (void) data;
-    return 0;
-#endif
 }
 
 NEFORCE_END_NAMESPACE__
+#endif

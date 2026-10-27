@@ -278,9 +278,27 @@
 - TUI 渲染器的文本绘制统一改为基于 `text_layout` 的字形流实现，词换行、字符换行、显式换行与选区叠加共用同一套分行结果
 - TUI 文本输入框支持无边框形态、纵向滚动（`with_scroll_y()`）与选区高亮（`with_selection()`），并回写自身布局矩形（`with_rect_state()`）
 - `components::select_list` 新增 `set_visible_rows()`，输入区补全弹层按匹配数量收缩，不再固定占满可视行数
+- `text_display_width` 对纯 ASCII 直接返回字节数，扫描按 16 字节块推进
+- `codepoint::display_width()` 的 ASCII 分支内联到调用点，只有非 ASCII 才查 10 + 126 条区间表
+- 宽度缓存改为每线程 1024 槽，且只服务非 ASCII 字符串：无同步静态数组在多线程调用下的数据竞争消失，短 ASCII 串也不再为缓存命中付全串哈希
+- `layout_text` 在 `wrap_mode::none` 下只按硬换行切分，不再逐码点累计宽度
+- `renderer` 复用已算出的字形宽度、为字形数组与扁平串预留容量
+- `markdown_stream::render()` 增量维护外层 `vbox`，已封口块只插入一次
+- `screen::to_string()` 的单元格比较收敛到模块内，短串按字节内联比较、样式按字段比较
+- `codepoint::display_width()` 的非 ASCII 路径改为 16 位 BMP 页表，BMP 码点一次查表即得宽度，不再做 10 + 126 条区间的两次二分
+- `markdown_stream` 改为在围栏之外的每个空行处封口，已完成的块只解析一次，每帧只重解析最后一个未完成的块
+- Markdown 解析去掉不必要的中间拷贝，并新增解析器单独基准以区分解析与元素构建的开销
+- `tui::cell` 体积由 88 字节降到 52 字节：整屏清空与差量扫描的访存减半
+- `screen::to_string()` 整行与上一帧逐字节相同就跳过：`cell` 是 52 字节纯值类型且尾部填充清零，可按字节比较
+- `code_block` 把行号栏并进该行富文本片段，每行由一个节点代替『文本 + 富文本 + hbox』三个：单行代码块的构建成本下降
+- 布局测量结果按布局轮次缓存在元素节点上，同一次布局对同一子树的重复测量直接命中，冷布局由 150 µs 降到 69 µs
+- `screen::to_string()` 先用 16 字节比较定位行内首个与末个变化的字节，只扫描这段单元格，全量重绘由 91.5 µs 降到 38.6 µs
+- `code_block()` 改为按常量引用接收配置，每个代码围栏少拷贝约 600 字节的配置结构
 
 ### 🐛 Bug Fixes
 
+- 修复 `simd::memory_compare` 在 AVX2 路径上长度 ≥ 128 字节时把不同内存判为相等：四路比较结果用按位或合并，任意一路相等就会掩盖其余三路的差异，改为按位与；字符串比较、原子比较与差量扫描都受影响
+- 修复 `screen::to_string()` 把单元格字符与"终端样式状态"一起比较，导致差量恒判为样式不一致：内容未变化的帧也会全屏重绘并写出全部单元格；现只比较样式字段
 - 修复 Windows 下 `pty` 子进程未挂接到伪控制台导致读不到任何输出：`UpdateProcThreadAttribute` 的 `PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE` 需要传 `HPCON` 句柄值本身，原实现传的是变量地址（`&pseudo`），内核据此拿到的句柄无效，子进程虽能执行并返回正确退出码，但输出不进入伪控制台管道；现改为直接传 `pseudo`
 - 修复 Windows 下 `sysinfo::cpu_usage_breakdown()` 依赖 PDH 格式化百分比，短采样间隔下各项之和明显偏离 100（实测低至 89）：改为按原始计数（100ns 累计时间）增量计算，任意间隔下 user/system/idle/irq/softirq 之和恒为 100
 - 修复 Windows 下 `sysinfo::cpu_usage_per_core()` 在短采样间隔下返回空向量或缺失核心（PDH 通配符格式化值在样本不足时 CStatus 无效）：改用 `NtQuerySystemInformation(SystemProcessorPerformanceInformation)` 的原始计数增量，首次调用返回全零、此后始终返回全部核心

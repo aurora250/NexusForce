@@ -41,6 +41,7 @@ struct element::node {
     function<element(size_t)> item_builder;
     string placeholder;
     mutable vector<layout_rect> cached_layout_;
+    mutable measure_cache measure_;
 
     void* state_ref = nullptr;
     component_base* owner = nullptr;
@@ -79,6 +80,19 @@ struct element::node {
     node(node&&) noexcept = default;
     node& operator=(node&&) noexcept = default;
 };
+
+const measure_cache& element::cached_measure() const noexcept {
+    static constexpr measure_cache empty;
+    return node_ ? node_->measure_ : empty;
+}
+
+measure_cache& element::mutable_measure() const noexcept {
+    static measure_cache fallback;
+    if (node_ == nullptr) {
+        return fallback;
+    }
+    return node_->measure_;
+}
 
 element::element() :
 node_(make_shared<node>()) {}

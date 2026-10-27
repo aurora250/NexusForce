@@ -28,6 +28,7 @@ string(JSON CONFIG_ENABLE_SQLITE3    GET ${JSON_CONTENT} dependency sqlite3    s
 string(JSON CONFIG_ENABLE_HIREDIS    GET ${JSON_CONTENT} dependency hiredis    switch)
 string(JSON CONFIG_ENABLE_ZLIB       GET ${JSON_CONTENT} dependency zlib       switch)
 string(JSON CONFIG_ENABLE_LZ4        GET ${JSON_CONTENT} dependency lz4        switch)
+string(JSON CONFIG_ENABLE_ZSTD       GET ${JSON_CONTENT} dependency zstd       switch)
 string(JSON CONFIG_ENABLE_ICU        GET ${JSON_CONTENT} dependency icu        switch)
 
 # The locale component can be dropped entirely, which is what small embedded builds want:
@@ -186,8 +187,9 @@ option(NEXUSFORCE_ENABLE_SQLITE3    "Enable SQLite3 database support"    ${CONFI
 option(NEXUSFORCE_ENABLE_REDIS      "Enable Redis database support"      ${CONFIG_ENABLE_HIREDIS})
 option(NEXUSFORCE_ENABLE_ZLIB       "Enable zlib compression support"    ${CONFIG_ENABLE_ZLIB})
 option(NEXUSFORCE_ENABLE_LZ4        "Enable lz4 compression support"     ${CONFIG_ENABLE_LZ4})
+option(NEXUSFORCE_ENABLE_ZSTD       "Enable zstd compression support"    ${CONFIG_ENABLE_ZSTD})
 option(NEXUSFORCE_ENABLE_ICU        "Enable ICU4C locale support"        ${CONFIG_ENABLE_ICU})
-option(NEXUSFORCE_ENABLE_LOCALE     "Build the locale component"               ${CONFIG_ENABLE_LOCALE})
+option(NEXUSFORCE_ENABLE_LOCALE     "Build the locale component"         ${CONFIG_ENABLE_LOCALE})
 
 if(NOT NEXUSFORCE_ENABLE_LOCALE AND NEXUSFORCE_ENABLE_ICU)
     set(NEXUSFORCE_ENABLE_ICU OFF)
@@ -200,17 +202,19 @@ option(NEXUSFORCE_USING_IO_URING    "Using io uring"                           $
 option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"                ${CONFIG_USING_AES_NI})
 option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"                  ${CONFIG_USING_PCLMUL})
 
-option(NEXUSFORCE_USING_MEMORY_POOL
-        "Using memory pool as the allocator of library containers" ${CONFIG_USING_MEMORY_POOL})
-option(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE
-        "Replace the process wide operator new / delete with the memory pool" ${CONFIG_MEMORY_POOL_OVERRIDE})
-option(NEXUSFORCE_OVERRIDE_TEST_WITH_SHARED_GTEST
-        "Build the allocator override test against a shared GTest (rejected by the Windows debug heap)" OFF)
-
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
 option(NEXUSFORCE_BUILD_BENCHMARKS  "Build benchmark programs"           ${CONFIG_BUILD_BENCHMARKS})
 option(NEXUSFORCE_BUILD_DOCS        "Build documentation with Doxygen"   ${CONFIG_BUILD_DOCS})
+
+
+option(NEXUSFORCE_USING_MEMORY_POOL
+        "Using memory pool as the allocator of library containers"            ${CONFIG_USING_MEMORY_POOL})
+option(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE
+        "Replace the process wide operator new / delete with the memory pool" ${CONFIG_MEMORY_POOL_OVERRIDE})
+
+option(NEXUSFORCE_OVERRIDE_TEST_WITH_SHARED_GTEST
+        "Build the allocator override test against a shared GTest (rejected by the Windows debug heap)" OFF)
 
 
 if(DEFINED CONFIG_SIMD_LEVEL)
@@ -269,6 +273,7 @@ message(STATUS "  NEXUSFORCE_ENABLE_SQLITE3:      ${NEXUSFORCE_ENABLE_SQLITE3}")
 message(STATUS "  NEXUSFORCE_ENABLE_REDIS:        ${NEXUSFORCE_ENABLE_REDIS}")
 message(STATUS "  NEXUSFORCE_ENABLE_ZLIB:         ${NEXUSFORCE_ENABLE_ZLIB}")
 message(STATUS "  NEXUSFORCE_ENABLE_LZ4:          ${NEXUSFORCE_ENABLE_LZ4}")
+message(STATUS "  NEXUSFORCE_ENABLE_ZSTD:         ${NEXUSFORCE_ENABLE_ZSTD}")
 message(STATUS "  NEXUSFORCE_ENABLE_LOCALE:       ${NEXUSFORCE_ENABLE_LOCALE}")
 message(STATUS "  NEXUSFORCE_ENABLE_ICU:          ${NEXUSFORCE_ENABLE_ICU}")
 message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ON (NECESSARY)")

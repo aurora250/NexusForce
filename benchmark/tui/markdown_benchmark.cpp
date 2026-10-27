@@ -1,4 +1,5 @@
 #include <benchmark/benchmark.h>
+#include <NeForce/core/file/md/markdown_parser.hpp>
 #include <NeForce/tui/dom/markdown.hpp>
 using namespace neforce;
 using namespace neforce::tui;
@@ -41,7 +42,17 @@ static void BmMarkdownStreamAppend(benchmark::State& state) {
     }
 }
 
+// Parser only: the delta against BmMarkdownParse is what the element tree costs.
+static void BmMarkdownParserOnly(benchmark::State& state) {
+    const string source = make_document(static_cast<size_t>(state.range(0)));
+    for (auto _: state) {
+        const auto document = markdown_parser(string(source)).parse();
+        benchmark::DoNotOptimize(document.blocks.size());
+    }
+}
+
 BENCHMARK(BmMarkdownParse)->Range(1, 32);
+BENCHMARK(BmMarkdownParserOnly)->Range(1, 32);
 BENCHMARK(BmMarkdownStreamAppend)->Range(1, 32);
 
 BENCHMARK_MAIN();

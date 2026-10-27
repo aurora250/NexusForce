@@ -86,7 +86,7 @@ void canvas_painter::write_cell(const int x, const int y, const codepoint& cp, c
         if (value < 0x20 || value == 0x7F) {
             target.character = " ";
         } else {
-            cp.append_to(target.character);
+            target.character.set(cp, cw);
         }
         apply_style(target, style::merge(base_, over));
     }

@@ -70,6 +70,36 @@ namespace {
         return false;
     }
 
+    // Widths of the BMP, one byte per code point: text is overwhelmingly BMP,
+    // and two binary searches per code point (10 + 126 ranges) cost ~20 ns, which dominated CJK layout.
+    // Supplementary planes keep the range search; they are rare.
+    constexpr uint32_t BMP_LIMIT = 0x10000;
+
+    void paint_range(uint8_t* widths, const cp_range& range, const uint8_t width) noexcept {
+        const uint32_t last = range.last < BMP_LIMIT ? range.last : BMP_LIMIT - 1;
+        for (uint32_t cp = range.first; cp <= last; ++cp) {
+            widths[cp] = width;
+        }
+    }
+
+    struct bmp_width_table {
+        uint8_t widths[BMP_LIMIT]{};
+
+        bmp_width_table() noexcept {
+            memory_set(widths, 1, sizeof(widths));
+            for (const auto& range: WIDE_RANGES) {
+                paint_range(widths, range, 2);
+            }
+            for (const auto& range: ZERO_RANGES) {
+                paint_range(widths, range, 0);
+            }
+        }
+    };
+
+    // Namespace scope rather than a function-local static:
+    // this removes the thread-safe initialisation guard from the per-code-point path.
+    const bmp_width_table bmp_table;
+
     template <typename T>
     void append_utf8_char_aux(T& /*unused*/) {}
 
@@ -738,10 +768,10 @@ void codepoint::encode_utf32(const char32_t* data, const size_t len, u32string& 
     transcode_utf32(data, len, result);
 }
 
-int codepoint::display_width() const noexcept {
+int codepoint::display_width_wide() const noexcept {
     const uint32_t cp = value_;
-    if (cp > MAX_VALUE) {
-        return 0;
+    if (cp < BMP_LIMIT) {
+        return bmp_table.widths[cp];
     }
     if (in_ranges(ZERO_RANGES, ZERO_COUNT, cp)) {
         return 0;

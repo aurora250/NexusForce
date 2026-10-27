@@ -208,6 +208,11 @@ public:
     NEFORCE_NODISCARD const screen_selection& selection() const noexcept { return selection_; }
 
     /**
+     * @brief 当前进程内最近构造的 reconciler
+     */
+    NEFORCE_NODISCARD static reconciler* active_instance() noexcept;
+
+    /**
      * @brief 复制当前选区并清空
      * @return 选区内有文本并已写入剪贴板返回true
      */
@@ -302,6 +307,7 @@ private:
     bool rendering_ = false;
 
     screen_selection selection_;
+    static reconciler* active_instance_;
     bool focused_ = true;
     bool selecting_ = false;
     bool copy_on_select_ = true;

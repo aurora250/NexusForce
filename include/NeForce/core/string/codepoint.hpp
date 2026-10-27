@@ -422,6 +422,8 @@ public:
 private:
     uint32_t value_{0}; ///< 存储的码点值
 
+    NEFORCE_NODISCARD int display_width_wide() const noexcept;
+
 private:
     template <typename T>
     static bool utf16_codepoint(const T* data, size_t index, size_t len, uint32_t& cp, size_t& consumed,
@@ -535,7 +537,41 @@ public:
      * @return 宽度值：0（不可见/零宽）、1（半角）、2（全角）
      * @note 参照 East Asian Width 标准及常见零宽字符规则
      */
-    NEFORCE_NODISCARD int display_width() const noexcept;
+    NEFORCE_NODISCARD int display_width() const noexcept {
+        if (value_ < 0x80) {
+            return (value_ < 0x20 || value_ == 0x7F) ? 0 : 1;
+        }
+        return display_width_wide();
+    }
+
+    /**
+     * @brief 把码点编码为 UTF-8 写入缓冲区
+     * @param buffer 至少 4 字节的缓冲区
+     * @return 写入的字节数（1 ~ 4）
+     */
+    NEFORCE_NODISCARD size_t write_utf8(char* buffer) const noexcept {
+        const uint32_t cp = is_valid_codepoint(value_) ? value_ : REPLACEMENT_VALUE;
+        if (cp <= 0x7F) {
+            buffer[0] = static_cast<char>(cp);
+            return 1;
+        }
+        if (cp <= 0x7FF) {
+            buffer[0] = static_cast<char>(0xC0 | (cp >> 6));
+            buffer[1] = static_cast<char>(0x80 | (cp & 0x3F));
+            return 2;
+        }
+        if (cp <= 0xFFFF) {
+            buffer[0] = static_cast<char>(0xE0 | (cp >> 12));
+            buffer[1] = static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
+            buffer[2] = static_cast<char>(0x80 | (cp & 0x3F));
+            return 3;
+        }
+        buffer[0] = static_cast<char>(0xF0 | (cp >> 18));
+        buffer[1] = static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
+        buffer[2] = static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
+        buffer[3] = static_cast<char>(0x80 | (cp & 0x3F));
+        return 4;
+    }
 
     /**
      * @brief 获取码点的char32_t值

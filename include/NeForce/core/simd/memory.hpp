@@ -696,8 +696,10 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE int memory_compare(const void
         const vec256_t a1 = ::_mm256_cmpeq_epi8(loadu_si256(l + 32), loadu_si256(r + 32));
         const vec256_t a2 = ::_mm256_cmpeq_epi8(loadu_si256(l + 64), loadu_si256(r + 64));
         const vec256_t a3 = ::_mm256_cmpeq_epi8(loadu_si256(l + 96), loadu_si256(r + 96));
+        // The lanes are equal-masks (0xFF when equal), so a difference survives the AND and vanishes under OR:
+        // OR-ing would report "different" only when all four vectors differ at the same byte.
         const int joined =
-                inner::to_bitmask256(::_mm256_or_si256(::_mm256_or_si256(a0, a1), ::_mm256_or_si256(a2, a3)));
+                inner::to_bitmask256(::_mm256_and_si256(::_mm256_and_si256(a0, a1), ::_mm256_and_si256(a2, a3)));
         if (joined != -1) {
             size_t delta = 0;
             if (inner::to_bitmask256(a0) != -1) {

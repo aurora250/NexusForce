@@ -6,14 +6,7 @@ namespace {
     // Width in columns of the single glyph stored in a cell.
     // Wide glyphs occupy one column themselves and leave their remaining columns empty,
     // which the text extractor must skip.
-    int glyph_width(const string& glyph) {
-        if (glyph.empty()) {
-            return 1;
-        }
-        size_t index = 0;
-        const codepoint cp = codepoint::decode_utf8(reinterpret_cast<const byte_t*>(glyph.data()), index, glyph.size());
-        return max(1, cp.display_width());
-    }
+    int glyph_width(const cell_text& glyph) noexcept { return max(1, glyph.width()); }
 } // namespace
 
 
@@ -143,7 +136,7 @@ string selection_text(const surface& source, const screen_selection& selection) 
                 line.push_back(' ');
                 continue;
             }
-            line.append(current.character);
+            line.append(current.character.data(), current.character.size());
             skip = glyph_width(current.character) - 1;
         }
 

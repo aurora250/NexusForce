@@ -1,10 +1,11 @@
 #include <NeForce/compress/zstd_compress.hpp>
+#include <NeForce/compress/lz4_compress.hpp>
+#include <NeForce/compress/zlib_compress.hpp>
+#include <NeForce/core/algorithm/type_erase.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
 #ifdef NEFORCE_SUPPORT_LZ4
-#    include <NeForce/compress/lz4_compress.hpp>
-#    include <NeForce/core/algorithm/type_erase.hpp>
 
 namespace {
     constexpr uint8_t sample_data[] = "Hello, LZ4! This is a test string for compression and decompression.";
@@ -344,8 +345,6 @@ TEST_F(StreamDecompressorTest, Statistics) {
 #endif
 
 #ifdef NEFORCE_SUPPORT_ZLIB
-#    include <NeForce/compress/zlib_compress.hpp>
-using namespace neforce;
 
 namespace {
     constexpr uint8_t zlib_sample_data[] = "Hello, Zlib! This is a test string for compression and decompression.";
@@ -637,6 +636,8 @@ TEST_F(ZlibStreamDecompressorTest, Statistics) {
 
 #endif
 
+#ifdef NEFORCE_SUPPORT_ZSTD
+
 TEST(ZstdCompressor, CompressAndDecompressString) {
     if (!zstd_compressor::available()) {
         GTEST_SKIP() << "zstd is not linked";
@@ -671,3 +672,5 @@ TEST(ZstdCompressor, CorruptFrameThrows) {
     const byte_vector corrupt{1, 2, 3, 4};
     EXPECT_THROW((void) zstd_compressor::decompress(cbyte_view(corrupt.data(), corrupt.size())), zstd_exception);
 }
+
+#endif

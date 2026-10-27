@@ -199,7 +199,7 @@ namespace {
 } // namespace
 
 
-element code_block(code_block_option opt) {
+element code_block(const code_block_option& opt) {
     const tui::style base_style = opt.style;
     tui::style gutter = opt.gutter_style;
     if (!gutter.dim.has_value()) {
@@ -227,28 +227,36 @@ element code_block(code_block_option opt) {
 
     elements rows;
     for (size_t i = 0; i < lines.size(); ++i) {
-        elements cells;
+        // The gutter is the first span of the line rather than a sibling element:
+        // one rich text node per line instead of a text node, a rich text node and an hbox.
+        vector<text_span> spans;
         if (opt.show_gutter) {
             const string number = to_string(max(1, opt.start_line) + static_cast<int>(i));
             string padded = number;
             while (compare_less(padded.size(), gutter_width)) {
                 padded = " " + padded;
             }
-            cells.push_back(element::text(padded + " ", gutter, style::wrap_mode::none));
+            padded += " ";
+            spans.push_back(text_span{move(padded), gutter, string()});
         }
 
-        vector<text_span> spans;
         if (grammar != nullptr) {
             vector<syntax_run> runs;
             grammar->highlight_line(lines[i], lexer_state, runs);
-            spans = runs_to_spans(lines[i], runs, base_style, opt);
+            vector<text_span> code_spans = runs_to_spans(lines[i], runs, base_style, opt);
+            for (auto& span: code_spans) {
+                spans.push_back(move(span));
+            }
         } else if (opt.highlight) {
-            spans = highlight_line(lines[i], base_style, string_style, comment_style, number_style, keyword_style);
+            vector<text_span> code_spans =
+                    highlight_line(lines[i], base_style, string_style, comment_style, number_style, keyword_style);
+            for (auto& span: code_spans) {
+                spans.push_back(move(span));
+            }
         } else {
             spans.push_back(text_span{string(lines[i]), base_style, string()});
         }
-        cells.push_back(element::rich_text(spans, base_style, style::wrap_mode::none));
-        rows.push_back(element::hbox(move(cells)));
+        rows.push_back(element::rich_text(move(spans), base_style, style::wrap_mode::none));
     }
 
     if (rows.empty()) {

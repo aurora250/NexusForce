@@ -364,7 +364,7 @@ TEST(TuiChartTest, PieEdgesUseSubcellQuadrants) {
     size_t edge_cells = 0;
     for (int y = 0; y < scr.dimy(); ++y) {
         for (int x = 0; x < scr.dimx(); ++x) {
-            const string& glyph = scr.fast_cell_at(x, y).character;
+            const cell_text& glyph = scr.fast_cell_at(x, y).character;
             for (const char* edge: edge_glyphs) {
                 if (glyph == edge) {
                     ++edge_cells;

@@ -71,12 +71,15 @@ namespace {
 } // namespace
 
 
+reconciler* reconciler::active_instance_ = nullptr;
+
 reconciler::reconciler(sys_console& console, strand& s, io_context& ctx) :
 console_(console),
 strand_(s),
 ctx_(ctx),
 event_dispatcher_(focus_mgr_),
 renderer_(current_screen_, theme_, term_w_, term_h_) {
+    active_instance_ = this;
     event_dispatcher_.set_dirty_callback([this] { mark_dirty(); });
 
     auto depth = color_depth::ansi256;
@@ -95,12 +98,17 @@ renderer_(current_screen_, theme_, term_w_, term_h_) {
 }
 
 reconciler::~reconciler() {
+    if (active_instance_ == this) {
+        active_instance_ = nullptr;
+    }
     mounted_ = false;
     if (root_ != nullptr) {
         root_->release_tree();
         root_ = nullptr;
     }
 }
+
+reconciler* reconciler::active_instance() noexcept { return active_instance_; }
 
 function<void(component_base*)> reconciler::schedule_render_callback() {
     return [this](component_base* comp) { schedule_update(comp); };
@@ -128,7 +136,9 @@ void reconciler::set_term_size(const int width, const int height) noexcept {
 void reconciler::set_color_depth(const color_depth depth) {
     current_screen_.set_color_depth(depth);
     prev_screen_.set_color_depth(depth);
-    mark_dirty();
+    // Cells already on screen carry escape sequences in the old depth,
+    // so the frame has to be rewritten rather than diffed against itself.
+    invalidate();
 }
 
 color_depth reconciler::color_depth_mode() const noexcept { return current_screen_.color_depth_mode(); }
@@ -408,6 +418,9 @@ void reconciler::flush() {
     string output;
     if (repaint_all) {
         output += "\033[2J";
+        // The terminal is blank after the clear, so nothing on screen counts as painted:
+        // without this every cell that did not change would be skipped and stay empty.
+        prev_screen_.clear();
     }
     if (synchronized_output_) {
         output += "\033[?2026h";

@@ -264,6 +264,18 @@ public:
     NEFORCE_NODISCARD int cached_constraint_w() const noexcept;
     NEFORCE_NODISCARD int cached_constraint_h() const noexcept;
 
+    /**
+     * @brief 读取布局测量缓存
+     * @return 缓存内容；`stamp` 与当前布局轮次不符时视为未命中
+     */
+    NEFORCE_NODISCARD const measure_cache& cached_measure() const noexcept;
+
+    /**
+     * @brief 写入布局测量缓存
+     * @return 可写的缓存引用
+     */
+    NEFORCE_NODISCARD measure_cache& mutable_measure() const noexcept;
+
     static element empty();
     static element vbox(vector<element> children, box_props props = {});
     static element hbox(vector<element> children, box_props props = {});

@@ -12,3 +12,8 @@ add_nexusforce_benchmark(NexusForceMarkdownBenchmark
 add_nexusforce_benchmark(NexusForceFrameBenchmark
     frame_benchmark.cpp
 )
+
+# ---- Panel/table render (layout + draw) ----
+add_nexusforce_benchmark(NexusForceTuiRenderBenchmark
+    render_benchmark.cpp
+)

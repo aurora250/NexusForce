@@ -244,7 +244,7 @@ private:
 
     void render_subtree(const element& el, const vector<layout_rect>& layout, int& idx);
 
-    int draw_glyph(int x, int y, const codepoint& cp, const tui::style& style, const string* link);
+    int draw_glyph(int x, int y, const codepoint& cp, int cw, const tui::style& style, const string* link);
     NEFORCE_NODISCARD uint8_t hyperlink_of(const string* link);
     void apply_selection_overlay(int x, int y, int w, int h, const string& text, const text_layout& lay,
                                  size_t sel_begin, size_t sel_end, int scroll_row);

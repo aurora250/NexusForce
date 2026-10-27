@@ -106,6 +106,24 @@ public:
     static bool request_quit(int exit_code = 0) noexcept;
 
     /**
+     * @brief 当前帧是否存在鼠标选区
+     * @return 存在选区返回 true
+     */
+    static bool has_selection() noexcept;
+
+    /**
+     * @brief 读取当前选区文本
+     * @return 选区文本；无选区时返回空串
+     */
+    NEFORCE_NODISCARD static string selection_text();
+
+    /**
+     * @brief 复制当前选区到剪贴板
+     * @return 成功复制返回 true
+     */
+    static bool copy_selection();
+
+    /**
      * @brief 挂起当前正在运行的应用（恢复终端状态）
      * @return 有运行中的应用并成功挂起时返回 true
      */

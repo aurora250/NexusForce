@@ -178,6 +178,24 @@ bool application::request_quit(const int exit_code) noexcept {
     return true;
 }
 
+bool application::has_selection() noexcept {
+    reconciler* target =
+            running_instance_ != nullptr ? running_instance_->reconiler_.get() : reconciler::active_instance();
+    return target != nullptr && !target->selection().empty();
+}
+
+string application::selection_text() {
+    reconciler* target =
+            running_instance_ != nullptr ? running_instance_->reconiler_.get() : reconciler::active_instance();
+    return target != nullptr ? target->selection_text() : string();
+}
+
+bool application::copy_selection() {
+    reconciler* target =
+            running_instance_ != nullptr ? running_instance_->reconiler_.get() : reconciler::active_instance();
+    return target != nullptr && target->copy_selection();
+}
+
 void application::schedule_quit_hint_reset() {
     ctx_.schedule_timer(2000, [this] {
         if (!quit_pending_) {

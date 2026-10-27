@@ -26,13 +26,13 @@ namespace {
         return out;
     }
 
-    void put_codepoint(const codepoint& cp, cell& target) {
+    void put_codepoint(const codepoint& cp, const int width, cell& target) {
         const uint32_t value = cp.value();
         if (value < 0x20 || value == 0x7F) {
             target.character = " ";
             return;
         }
-        cp.append_to(target.character);
+        target.character.set(cp, width);
     }
 
     struct virtual_window {
@@ -734,7 +734,7 @@ void renderer::apply_text(const int x, const int y, const string& text, const st
         if (!skip) {
             auto& cell = screen_.fast_cell_at(cx, y);
             cell.reset();
-            put_codepoint(*it, cell);
+            put_codepoint(*it, max(1, it->display_width()), cell);
             apply_style_to_cell(cell, style);
         }
         const int cw = it->display_width();
@@ -895,15 +895,15 @@ uint8_t renderer::hyperlink_of(const string* link) {
     return cached_link_id_;
 }
 
-int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const tui::style& style, const string* link) {
-    const int cw = max(1, cp.display_width());
+int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const int cw, const tui::style& style,
+                         const string* link) {
     if (x >= 0 && x < term_w_ && y >= 0 && y < term_h_) {
         ++painted_this_frame_;
     }
     if (x >= 0 && x < term_w_ && y >= 0 && y < term_h_ && !is_clipped(x, y)) {
         auto& cell = screen_.fast_cell_at(x, y);
         cell.reset();
-        put_codepoint(cp, cell);
+        put_codepoint(cp, cw, cell);
         apply_style_to_cell(cell, style);
         const uint8_t id = hyperlink_of(link);
         if (id != 0) {
@@ -949,6 +949,7 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
     }
 
     string flat;
+    flat.reserve(glyphs.size() * 2);
     vector<size_t> glyph_offsets;
     glyph_offsets.reserve(glyphs.size() + 1);
     for (const auto& g: glyphs) {
@@ -978,10 +979,11 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
                 const auto& raw_hang = span.content.view();
                 for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw_hang.data()), raw_hang.size());
                      it != utf8_iterator(); ++it) {
-                    if (cx + max(1, it->display_width()) > x + w) {
+                    const int hang_width = max(1, it->display_width());
+                    if (cx + hang_width > x + w) {
                         break;
                     }
-                    cx += draw_glyph(cx, cy, *it, merged, span.link.empty() ? nullptr : &span.link);
+                    cx += draw_glyph(cx, cy, *it, hang_width, merged, span.link.empty() ? nullptr : &span.link);
                 }
             }
         }
@@ -991,7 +993,7 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
             if (cx + cw > x + w) {
                 break;
             }
-            cx += draw_glyph(cx, cy, g.cp, *g.style, g.link);
+            cx += draw_glyph(cx, cy, g.cp, cw, *g.style, g.link);
             ++glyph_index;
         }
         cy += 1;
@@ -1013,6 +1015,7 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
                                  const int scroll_row) {
     vector<run_glyph> glyphs;
     const auto& raw = text.view();
+    glyphs.reserve(raw.size());
     for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
         glyphs.push_back(run_glyph{*it, &style, nullptr});
     }

@@ -13,6 +13,7 @@
     "libmysql",
     "zlib",
     "lz4",
+    "zstd",
     "sqlite3",
     {
       "name": "sqlcipher",
@@ -56,6 +57,10 @@
       "description": "lz4 compression support",
       "dependencies": ["lz4"]
     },
+    "zstd": {
+      "description": "zstd compression support",
+      "dependencies": ["zstd"]
+    },
     "openssl": {
       "description": "OpenSSL support",
       "dependencies": ["openssl"]
@@ -79,7 +84,7 @@
   },
   "default-features": [
     "postgresql", "mysql", "sqlite3", "redis",
-    "zlib", "lz4",
+    "zlib", "lz4", "zstd",
     "openssl",
     "pcre2",
     "icu",

@@ -5,11 +5,12 @@
  * @file zstd_compress.hpp
  * @brief Zstandard 压缩解压缩工具
  *
- * 提供与 lz4_compressor 一致的静态压缩/解压接口：
- * 迭代器范围、字符串视图、字节向量、常量字节视图；
+ * 提供静态压缩/解压接口：迭代器范围、字符串视图、字节向量、常量字节视图；
  * 每次压缩生成一个带校验和的独立帧。解压支持多个连续帧，并提供保留完整前缀的流式恢复接口。
  */
-#include "NeForce/core/string/string.hpp"
+
+#ifdef NEFORCE_SUPPORT_ZSTD
+#    include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -54,19 +55,13 @@ private:
 
 public:
     /**
-     * @brief 当前构建是否链接了 libzstd
-     * @return 可用返回 true
-     */
-    NEFORCE_NODISCARD static bool available() noexcept;
-
-    /**
      * @brief 压缩迭代器范围中的数据
      * @tparam Iterator 连续单字节迭代器
      * @param begin 起始迭代器
      * @param end 结束迭代器
      * @param level 压缩级别（-5..22）
      * @return 压缩后的字节向量
-     * @throws zstd_exception 当压缩失败或未链接 libzstd 时抛出
+     * @throws zstd_exception 压缩失败时抛出
      */
     template <typename Iterator>
     NEFORCE_NODISCARD static byte_vector compress(Iterator begin, Iterator end, const int level = 3) {
@@ -81,7 +76,7 @@ public:
      * @param data 原文
      * @param level 压缩级别（-5..22）
      * @return 压缩后的字节向量
-     * @throws zstd_exception 当压缩失败或未链接 libzstd 时抛出
+     * @throws zstd_exception 压缩失败或时抛出
      */
     NEFORCE_NODISCARD static byte_vector compress(const string_view data, const int level = 3) {
         return compress_data(reinterpret_cast<const byte_t*>(data.data()), data.size(), level);
@@ -93,7 +88,7 @@ public:
      * @param data 数据
      * @param level 压缩级别（-5..22）
      * @return 压缩后的字节向量
-     * @throws zstd_exception 当压缩失败或未链接 libzstd 时抛出
+     * @throws zstd_exception 压缩失败时抛出
      */
     template <typename T>
     NEFORCE_NODISCARD static byte_vector compress(const vector<T>& data, const int level = 3) {
@@ -106,7 +101,7 @@ public:
      * @param data 压缩数据
      * @param estimated_original_size 预估原文大小（0 表示自动流式解码）
      * @return 解压后的字节向量
-     * @throws zstd_exception 当数据损坏、尾部不完整或未链接 libzstd 时抛出
+     * @throws zstd_exception 数据损坏或尾部不完整时抛出
      */
     NEFORCE_NODISCARD static byte_vector decompress(const cbyte_view& data, size_t estimated_original_size = 0);
 
@@ -130,4 +125,5 @@ public:
 /** @} */ // Compression
 
 NEFORCE_END_NAMESPACE__
+#endif
 #endif

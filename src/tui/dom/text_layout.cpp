@@ -60,6 +60,21 @@ namespace {
             return result;
         }
 
+        // wrap_mode::none never consults the width,
+        // so the layout degenerates to splitting on hard breaks:
+        // skip the per-codepoint width accounting entirely.
+        if (wm == style::wrap_mode::none) {
+            size_t begin = 0;
+            for (size_t i = 0; i < len; ++i) {
+                if (text[i] == '\n') {
+                    result.lines.push_back(text_line{begin, i, false});
+                    begin = i + 1;
+                }
+            }
+            result.lines.push_back(text_line{begin, len, false});
+            return result;
+        }
+
         size_t pos = 0;
         size_t line_begin = 0;
         int line_width = 0;

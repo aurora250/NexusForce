@@ -381,8 +381,11 @@ TEST(TuiCodeBlockTest, GutterNumbersStartFromConfiguredLine) {
     const element el = code_block(opt);
     ASSERT_EQ(el.kind(), element::kind::vbox);
     ASSERT_EQ(el.children().size(), 2U);
-    EXPECT_EQ(el.children()[0].children()[0].text(), "10 ");
-    EXPECT_EQ(el.children()[1].children()[0].text(), "11 ");
+    ASSERT_EQ(el.children()[0].kind(), element::kind::rich_text);
+    ASSERT_FALSE(el.children()[0].spans().empty());
+    EXPECT_EQ(el.children()[0].spans()[0].content, "10 ");
+    ASSERT_FALSE(el.children()[1].spans().empty());
+    EXPECT_EQ(el.children()[1].spans()[0].content, "11 ");
 }
 
 TEST(TuiCodeBlockTest, BackgroundAndLeftBarWrapTheRows) {

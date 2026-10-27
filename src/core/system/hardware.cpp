@@ -1,12 +1,13 @@
 #include <NeForce/core/container/vector.hpp>
+#include <NeForce/core/file/file.hpp>
 #include <NeForce/core/utility/pair.hpp>
 #include <NeForce/core/string/format.hpp>
 #include <NeForce/core/string/to_numerics.hpp>
 #include <NeForce/core/string/utf.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
-#include <cstdio>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <Windows.h>
+#    include <WinUser.h>
+#    include <winreg.h>
 #    include <SetupAPI.h>
 #endif
 #if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_X86)
@@ -17,23 +18,19 @@ NEFORCE_BEGIN_NAMESPACE__
 namespace {
 
     string read_text(const char* filepath) {
-        // TODO: using neforce::file instead
         string content;
-        ::FILE* file = ::fopen(filepath, "r");
-        if (file == nullptr) {
+        const file input(path{filepath}, false, file_access::read, file_shared::share_read_write);
+        if (!input.is_opened()) {
             return content;
         }
         char buffer[4096];
         for (;;) {
-            const size_t count = ::fread(buffer, 1, sizeof(buffer), file);
-            if (count > 0) {
-                content.append(buffer, count);
-            }
-            if (count < sizeof(buffer)) {
+            const auto count = input.read_binary(buffer, sizeof(buffer));
+            if (count == 0) {
                 break;
             }
+            content.append(buffer, count);
         }
-        ::fclose(file);
         return content;
     }
 
@@ -151,8 +148,8 @@ namespace {
     }
 
     void fill_cpu_cpuid(sysinfo::cpu_info& cpu) {
-#if defined(NEFORCE_PLATFORM_WINDOWS) && defined(NEFORCE_ARCH_X86)
         int registers[4] = {};
+#if defined(NEFORCE_PLATFORM_WINDOWS) && defined(NEFORCE_ARCH_X86)
         ::__cpuid(registers, 1);
 #elif defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_X86)
         unsigned int registers[4] = {};
@@ -193,6 +190,8 @@ namespace {
             return;
         }
 #else
+        int leaf1[4] = {};
+        int leaf7[4] = {};
         return;
 #endif
         const auto bit = [](const auto registers[4], const int index, const int position) noexcept {

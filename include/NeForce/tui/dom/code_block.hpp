@@ -62,7 +62,7 @@ struct code_block_option {
  * 着色规则只覆盖注释、字符串、数字与常见关键字，用于让 diff 与
  * 代码片段在终端里可读，不做完整语法分析。
  */
-element NEFORCE_API code_block(code_block_option opt);
+element NEFORCE_API code_block(const code_block_option& opt);
 
 /** @} */ // TUI
 

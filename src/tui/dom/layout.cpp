@@ -32,6 +32,50 @@ namespace {
 
     int measure_element_width(const element& el);
     int measure_element_height(const element& el, int allocated_width = -1);
+    int measure_element_width_impl(const element& el);
+    int measure_element_height_impl(const element& el, int allocated_width);
+
+    // Measuring recurses into children and the layout passes measure
+    // the same subtree several times (intrinsic size, flex distribution, then assignment).
+    // The result is memoised on the element node itself, keyed by a per-pass counter,
+    // so a copy of an element (which gets its own node) simply measures once.
+    uint32_t& layout_round() noexcept {
+        thread_local uint32_t round = 0;
+        return round;
+    }
+
+    measure_cache& writable_measure(const element& el) noexcept {
+        measure_cache& slot = el.mutable_measure();
+        if (slot.stamp != layout_round()) {
+            slot.stamp = layout_round();
+            slot.width = -1;
+            slot.height = -1;
+            slot.height_at = -1;
+        }
+        return slot;
+    }
+
+    int measure_element_width(const element& el) {
+        const measure_cache& cached = el.cached_measure();
+        if (cached.stamp == layout_round() && cached.width >= 0) {
+            return cached.width;
+        }
+        const int width = measure_element_width_impl(el);
+        writable_measure(el).width = width;
+        return width;
+    }
+
+    int measure_element_height(const element& el, const int allocated_width) {
+        const measure_cache& cached = el.cached_measure();
+        if (cached.stamp == layout_round() && cached.height >= 0 && cached.height_at == allocated_width) {
+            return cached.height;
+        }
+        const int height = measure_element_height_impl(el, allocated_width);
+        measure_cache& slot = writable_measure(el);
+        slot.height = height;
+        slot.height_at = allocated_width;
+        return height;
+    }
 
     string flatten_spans(const vector<text_span>& spans) {
         string result;
@@ -194,7 +238,7 @@ namespace {
         return sizes;
     }
 
-    int measure_element_width(const element& el) {
+    int measure_element_width_impl(const element& el) {
         const auto k = el.kind();
         const auto& style = el.style();
 
@@ -312,7 +356,7 @@ namespace {
         return content_w;
     }
 
-    int measure_element_height(const element& el, const int allocated_width) {
+    int measure_element_height_impl(const element& el, const int allocated_width) {
         const auto k = el.kind();
         const auto& style = el.style();
         int content_h = 0;
@@ -974,6 +1018,8 @@ vector<layout_rect> compute_layout(const element& element, const int constraint_
         element.cached_constraint_h() == constraint_h) {
         return element.cached_layout();
     }
+
+    ++layout_round();
 
     vector<layout_rect> result;
     if (element.kind() == element::kind::empty) {

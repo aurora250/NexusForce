@@ -1,3 +1,4 @@
+#include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/tui/dom/theme.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
@@ -212,5 +213,28 @@ TEST(TuiThemeCatalogTest, SameNameOverwrites) {
     ASSERT_TRUE(catalog.register_theme(string_view{R"({"name":"dup","base":"dark","colors":{"accent":"#000002"}})"}));
     EXPECT_EQ(catalog.user_theme_count(), 1u);
     EXPECT_EQ(catalog.find("dup")->get(theme_role::accent).to_string(), "000002FF");
+    catalog.clear_user_themes();
+}
+
+TEST(TuiThemeCatalogTest, LoadUserThemesFromDirectory) {
+    auto& catalog = theme_catalog::instance();
+    catalog.clear_user_themes();
+
+    const path directory = filesystem::temp_directory() / "neforce_theme_catalog_scan";
+    filesystem::remove_all(directory);
+    ASSERT_TRUE(filesystem::create_directories(directory));
+    ASSERT_TRUE(filesystem::create_and_write(directory / "first.json",
+                                             R"({"name":"scanned","base":"dark","colors":{"accent":"#123456"}})"));
+    ASSERT_TRUE(filesystem::create_and_write(directory / ".hidden.json", R"({"name":"hidden","base":"dark"})"));
+    ASSERT_TRUE(filesystem::create_and_write(directory / "notes.txt", "not a theme"));
+
+    EXPECT_TRUE(catalog.load_user_themes(directory.view()));
+    EXPECT_EQ(catalog.user_theme_count(), 2u);
+    const auto found = catalog.find("scanned");
+    ASSERT_TRUE(found.has_value());
+    EXPECT_EQ(found->get(theme_role::accent).to_string(), "123456FF");
+    EXPECT_TRUE(catalog.find("hidden").has_value());
+
+    filesystem::remove_all(directory);
     catalog.clear_user_themes();
 }

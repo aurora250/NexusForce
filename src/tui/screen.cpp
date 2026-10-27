@@ -1,3 +1,5 @@
+#include <NeForce/core/simd/bytes.hpp>
+#include <NeForce/core/simd/memory.hpp>
 #include <NeForce/tui/screen.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -31,6 +33,67 @@ namespace {
         ss += "m";
     }
 
+    // The glyph is a fixed-size value, so a cell comparison is a couple of word compares.
+    bool same_text(const cell& a, const cell& b) noexcept { return a.character == b.character; }
+
+    // The terminal keeps style state, not glyph state, so the emitted cell text must not
+    // take part in this comparison. Including it made every unchanged cell look like a
+    // style mismatch, which turned each frame into a full repaint.
+    // Field comparisons short-circuit on the first mismatch, which is the common case for
+    // the cells that are still scanned inside a changed row.
+    bool same_style(const cell& a, const cell& b) noexcept {
+        return a.bold == b.bold && a.dim == b.dim && a.italic == b.italic && a.inverted == b.inverted &&
+               a.underlined == b.underlined && a.underlined_double == b.underlined_double && a.blink == b.blink &&
+               a.strikethrough == b.strikethrough && a.hyperlink == b.hyperlink &&
+               a.foreground.equal_to(b.foreground) && a.background.equal_to(b.background);
+    }
+
+    // The changed cells of a row are found with 16-byte compares instead of scanning the
+    // row cell by cell: a frame that touches a few lines only pays for the touched span.
+    size_t first_changed_byte(const char* left, const char* right, const size_t size) noexcept {
+        size_t i = 0;
+        for (; i + 16 <= size; i += 16) {
+            const int mask =
+                    simd::to_bitmask(simd::match_bytes(simd::loadu_si128(left + i), simd::loadu_si128(right + i)));
+            if (mask != 0xFFFF) {
+                for (int k = 0; k < 16; ++k) {
+                    if ((((~mask) >> k) & 1) != 0) {
+                        return i + static_cast<size_t>(k);
+                    }
+                }
+            }
+        }
+        for (; i < size; ++i) {
+            if (left[i] != right[i]) {
+                return i;
+            }
+        }
+        return size;
+    }
+
+    size_t last_changed_byte(const char* left, const char* right, const size_t size) noexcept {
+        size_t i = size;
+        while (i >= 16) {
+            const int mask = simd::to_bitmask(
+                    simd::match_bytes(simd::loadu_si128(left + i - 16), simd::loadu_si128(right + i - 16)));
+            if (mask != 0xFFFF) {
+                for (int k = 15; k >= 0; --k) {
+                    if ((((~mask) >> k) & 1) != 0) {
+                        return i - 16 + static_cast<size_t>(k);
+                    }
+                }
+            }
+            i -= 16;
+        }
+        while (i > 0) {
+            --i;
+            if (left[i] != right[i]) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     void append_cursor_move(string& ss, const int x, const int y) {
         ss.append("\033[");
         ss.append(to_string(y + 1));
@@ -49,12 +112,12 @@ dimy_(dimy) {
     surface::clear();
 }
 
-string& surface::at(const int x, const int y) {
+string surface::at(const int x, const int y) const {
     if (x < 0 || x >= dimx_ || y < 0 || y >= dimy_) {
-        static string empty;
-        return empty;
+        return {};
     }
-    return fast_cell_at(x, y).character;
+    const auto& text = fast_cell_at(x, y).character;
+    return string{text.view()};
 }
 
 cell& surface::cell_at(const int x, const int y) {
@@ -135,7 +198,7 @@ string screen::to_plaintext() const {
         for (int x = 0; x <= last_non_space; ++x) {
             const auto& c = cells_[static_cast<size_t>(y) * static_cast<size_t>(dimx_) + static_cast<size_t>(x)];
             if (!c.character.empty() && !c.automerge) {
-                result += c.character;
+                result.append(c.character.data(), c.character.size());
             }
         }
     }
@@ -250,7 +313,21 @@ string screen::to_string(const screen& prev) const {
     term_state.reset();
 
     for (int y = 0; y < dimy_ && y < prev.dimy_; ++y) {
-        for (int x = 0; x < dimx_ && x < prev.dimx_; ++x) {
+        const int row_width = dimx_ < prev.dimx_ ? dimx_ : prev.dimx_;
+        const size_t row = static_cast<size_t>(y) * static_cast<size_t>(dimx_);
+        const size_t prev_row = static_cast<size_t>(y) * static_cast<size_t>(prev.dimx_);
+        // A row that is byte-identical to the previous frame needs no per-cell work at all:
+        // the whole row already shows what this frame would draw.
+        const size_t row_bytes = static_cast<size_t>(row_width) * sizeof(cell);
+        if (memory_compare(&cells_[row], &prev.cells_[prev_row], row_bytes) == 0) {
+            continue;
+        }
+        // Only the span between the first and the last changed cell needs scanning.
+        const auto* row_left = reinterpret_cast<const char*>(&cells_[row]);
+        const auto* row_right = reinterpret_cast<const char*>(&prev.cells_[prev_row]);
+        const int x_begin = static_cast<int>(first_changed_byte(row_left, row_right, row_bytes) / sizeof(cell));
+        const int x_end = static_cast<int>(last_changed_byte(row_left, row_right, row_bytes) / sizeof(cell));
+        for (int x = x_begin; x <= x_end; ++x) {
             const size_t idx = static_cast<size_t>(y) * dimx_ + x;
             const tui::cell& cell = cells_[idx];
 
@@ -258,11 +335,11 @@ string screen::to_string(const screen& prev) const {
                 continue;
             }
 
-            const tui::cell& prev_cell = prev.cells_[idx];
+            const tui::cell& prev_cell = prev.cells_[prev_row + static_cast<size_t>(x)];
 
-            const bool content_same = cell.visually_equal(prev_cell);
-            const bool style_match = cell.visually_equal(term_state);
-            if (content_same && style_match) {
+            // A cell that already matches the previous frame is already on screen,
+            // so the emit decision must not consult the terminal state at all.
+            if (same_text(cell, prev_cell) && same_style(cell, prev_cell)) {
                 continue;
             }
 
@@ -286,7 +363,7 @@ string screen::to_string(const screen& prev) const {
             term_state.strikethrough = cell.strikethrough;
             term_state.hyperlink = cell.hyperlink;
 
-            result.append(cell.character);
+            result.append(cell.character.data(), cell.character.size());
         }
     }
 

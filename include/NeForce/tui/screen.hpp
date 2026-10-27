@@ -6,6 +6,8 @@
  * @brief 终端帧缓冲抽象
  */
 
+#include "NeForce/core/string/codepoint.hpp"
+#include "NeForce/core/string/width.hpp"
 #include "NeForce/core/utility/color.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -28,10 +30,157 @@ struct dimensions {
 };
 
 /**
+ * @brief 单元格字形
+ *
+ * 单个 UTF-8 码点的定长存储（最多 4 字节），并缓存显示宽度。
+ * 固定 8 字节，使整屏清空与差量比较保持连续访存。
+ */
+class cell_text {
+public:
+    /**
+     * @brief 构造空字形
+     */
+    cell_text() noexcept = default;
+
+    /**
+     * @brief 从 UTF-8 文本构造，只保留首个码点
+     * @param text 文本
+     */
+    cell_text(const char* text) noexcept { assign(string_view{text}); }
+
+    /**
+     * @brief 从 UTF-8 文本构造，只保留首个码点
+     * @param text 文本
+     */
+    explicit cell_text(const string_view text) noexcept { assign(text); }
+
+    /**
+     * @brief 赋值 UTF-8 文本，只保留首个码点
+     * @param text 文本
+     * @return 自身引用
+     */
+    cell_text& operator=(const char* text) noexcept {
+        assign(string_view{text});
+        return *this;
+    }
+
+    /**
+     * @brief 赋值 UTF-8 文本，只保留首个码点
+     * @param text 文本
+     * @return 自身引用
+     */
+    cell_text& operator=(const string_view text) noexcept {
+        assign(text);
+        return *this;
+    }
+
+    /**
+     * @brief 赋值 UTF-8 文本，只保留首个码点
+     * @param text 文本
+     * @return 自身引用
+     */
+    cell_text& operator=(const string& text) noexcept {
+        assign(text.view());
+        return *this;
+    }
+
+    /**
+     * @brief 写入一个码点
+     * @param cp 码点
+     * @param width 该码点的显示宽度
+     */
+    void set(const codepoint& cp, const int width) noexcept {
+        length_ = static_cast<uint8_t>(cp.write_utf8(bytes_));
+        width_ = static_cast<int8_t>(width);
+    }
+
+    /**
+     * @brief 赋值 UTF-8 文本，只保留首个码点并重新计算宽度
+     * @param text 文本
+     */
+    void assign(const string_view text) noexcept {
+        const size_t size = text.size() < sizeof(bytes_) ? text.size() : sizeof(bytes_);
+        for (size_t i = 0; i < size; ++i) {
+            bytes_[i] = text[i];
+        }
+        length_ = static_cast<uint8_t>(size);
+        width_ = static_cast<int8_t>(size == 0 ? 0 : text_display_width(view()));
+    }
+
+    /**
+     * @brief 清空字形
+     */
+    void clear() noexcept {
+        length_ = 0;
+        width_ = 0;
+    }
+
+    /**
+     * @brief 字节数
+     * @return UTF-8 字节数
+     */
+    NEFORCE_NODISCARD size_t size() const noexcept { return length_; }
+
+    /**
+     * @brief 是否为空
+     * @return 空返回 true
+     */
+    NEFORCE_NODISCARD bool empty() const noexcept { return length_ == 0; }
+
+    /**
+     * @brief UTF-8 字节指针
+     * @return 数据指针
+     */
+    NEFORCE_NODISCARD const char* data() const noexcept { return bytes_; }
+
+    /**
+     * @brief UTF-8 文本视图
+     * @return 文本视图
+     */
+    NEFORCE_NODISCARD string_view view() const noexcept { return {bytes_, length_}; }
+
+    /**
+     * @brief 显示宽度
+     * @return 列数
+     */
+    NEFORCE_NODISCARD int width() const noexcept { return width_; }
+
+    /**
+     * @brief 字符串视图转换
+     * @return 文本视图
+     */
+    operator string_view() const noexcept { return view(); }
+
+    NEFORCE_NODISCARD bool operator==(const cell_text& other) const noexcept {
+        return length_ == other.length_ && (length_ == 0 || memory_compare(bytes_, other.bytes_, length_) == 0);
+    }
+
+    NEFORCE_NODISCARD bool operator!=(const cell_text& other) const noexcept { return !(*this == other); }
+
+    NEFORCE_NODISCARD bool operator==(const string_view other) const noexcept { return view() == other; }
+
+    NEFORCE_NODISCARD bool operator!=(const string_view other) const noexcept { return view() != other; }
+
+    NEFORCE_NODISCARD bool operator==(const char* other) const noexcept { return view() == string_view{other}; }
+
+    NEFORCE_NODISCARD bool operator!=(const char* other) const noexcept { return view() != string_view{other}; }
+
+    NEFORCE_NODISCARD bool operator==(const string& other) const noexcept { return view() == other.view(); }
+
+    NEFORCE_NODISCARD bool operator!=(const string& other) const noexcept { return view() != other.view(); }
+
+private:
+    char bytes_[4]{};    ///< UTF-8 字节
+    uint8_t length_ = 0; ///< 字节数
+    int8_t width_ = 0;   ///< 显示宽度
+    uint16_t reserved_ = 0;
+};
+
+/**
  * @brief 像素/字符单元
  */
 struct cell {
-    string character;           ///< 显示的字符
+    cell_text character;        ///< 显示的字形
     _NEFORCE color foreground;  ///< 前景色
     _NEFORCE color background;  ///< 背景色
     bool bold : 1;              ///< 粗体
@@ -44,6 +193,7 @@ struct cell {
     bool strikethrough : 1;     ///< 删除线
     bool automerge : 1;         ///< 相邻同内容自动融合
     uint8_t hyperlink = 0;      ///< 超链接 ID（0 表示无链接）
+    uint8_t reserved_ = 0;      ///< 填充字节
 
     cell() noexcept :
     bold(false),
@@ -146,7 +296,7 @@ public:
      * @param y 行坐标
      * @return 字符引用
      */
-    NEFORCE_NODISCARD string& at(int x, int y);
+    NEFORCE_NODISCARD string at(int x, int y) const;
 
     /**
      * @brief 有边界检查的 cell 访问

@@ -1,13 +1,9 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/path.hpp>
+#include <NeForce/core/file/path_tree.hpp>
 #include <NeForce/core/file/json/json_parser.hpp>
 #include <NeForce/tui/dom/theme.hpp>
 #include "theme_internal.hpp"
-#ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <Windows.h>
-#else
-#    include <dirent.h>
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -226,43 +222,16 @@ namespace {
     }
 
     vector<string> list_theme_files(const string_view directory) {
+        path_tree::scan_options options;
+        options.max_depth = 1;
+        options.include_hidden = true;
+        options.files_only = true;
+        options.extensions.push_back("json");
+        const path_tree tree = path_tree::scan(path(directory), options);
         vector<string> files;
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        string pattern{directory};
-        pattern += "\\*.json";
-        WIN32_FIND_DATAA data{};
-        const ::HANDLE handle = ::FindFirstFileA(pattern.data(), &data);
-        if (handle == INVALID_HANDLE_VALUE) {
-            return files;
+        for (auto& location: tree.all_file_paths()) {
+            files.push_back(move(location.release()));
         }
-        do {
-            if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0) {
-                string name{directory};
-                name += "\\";
-                name += data.cFileName;
-                files.push_back(move(name));
-            }
-        } while (::FindNextFileA(handle, &data) != 0);
-        ::FindClose(handle);
-#else
-        ::DIR* dir = ::opendir(string{directory}.data());
-        if (dir == nullptr) {
-            return files;
-        }
-        const ::dirent* entry = nullptr;
-        // NOLINTNEXTLINE(concurrency-mt-unsafe)
-        while ((entry = ::readdir(dir)) != nullptr) {
-            const string_view name{entry->d_name};
-            if (name.size() <= 5 || !name.ends_with(".json")) {
-                continue;
-            }
-            string full{directory};
-            full += "/";
-            full.append(name);
-            files.push_back(move(full));
-        }
-        ::closedir(dir);
-#endif
         return files;
     }
 

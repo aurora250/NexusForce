@@ -542,7 +542,7 @@ namespace {
                     cb.style.bg = styles.code.bg;
                     cb.band_style.bg = styles.code.bg;
                 }
-                return code_block(move(cb));
+                return code_block(cb);
             }
             case md_block_kind::html_block: {
                 elements lines;
@@ -760,7 +760,9 @@ namespace {
 
 
 element markdown(const string_view text, markdown_option opt) {
-    if (opt.parse_math) {
+    // Splitting the document into math segments copies every byte of it,
+    // so only pay for it when a formula can actually be present.
+    if (opt.parse_math && text.contains('$')) {
         vector<math_segment> segments = split_math_blocks(text);
         bool has_math = false;
         for (const auto& segment: segments) {
@@ -835,6 +837,7 @@ element markdown(const string_view text, markdown_option opt) {
     const auto styles = make_styles(opt);
 
     elements blocks;
+    blocks.reserve(document.blocks.size() * 2);
     for (size_t i = 0; i < document.blocks.size(); ++i) {
         if (i > 0) {
             blocks.push_back(element::text(string(), opt.style, style::wrap_mode::none));
@@ -982,13 +985,17 @@ namespace {
 
 struct markdown_stream::impl {
     explicit impl(markdown_option options) :
-    opt(move(options)) {}
+    opt(move(options)),
+    body(element::vbox({})) {}
 
     markdown_option opt;
     string text;
     size_t sealed = 0;
-    vector<element> blocks;
-    element rendered;
+    // Completed blocks are appended to this tree once; only the trailing incomplete block is rebuilt.
+    // Reassembling the whole document every frame deep-copied every block.
+    element body;
+    size_t stable_rows = 0;
+    size_t blocks = 0;
     int width = 0;
 };
 
@@ -1016,8 +1023,9 @@ void markdown_stream::set_text(const string_view text) {
 void markdown_stream::reset() {
     impl_->text.clear();
     impl_->sealed = 0;
-    impl_->blocks.clear();
-    impl_->rendered = element::empty();
+    impl_->body = element::vbox({});
+    impl_->stable_rows = 0;
+    impl_->blocks = 0;
 }
 
 const element& markdown_stream::render(int width) {
@@ -1030,34 +1038,39 @@ const element& markdown_stream::render(int width) {
     opt.width = width;
 
     const string_view full{impl_->text.view()};
-    const size_t boundary = find_seal_boundary(full, impl_->sealed, 1024);
+    auto& rows = impl_->body.children();
+
+    // Drop the previous incomplete block; it is rebuilt from the new tail below.
+    if (rows.size() > impl_->stable_rows) {
+        rows.resize(impl_->stable_rows);
+    }
+
+    // A blank line outside a fence ends a block, so everything up to the last such blank line is final:
+    // parse it once and only re-parse the block that is still growing.
+    const size_t boundary = find_seal_boundary(full, impl_->sealed, 0);
     if (boundary > impl_->sealed) {
         markdown_option chunk_opt = opt;
         chunk_opt.width = width;
-        const string_view chunk = full.substr(impl_->sealed, boundary - impl_->sealed);
-        impl_->blocks.push_back(markdown(chunk, chunk_opt));
+        rows.push_back(markdown(full.substr(impl_->sealed, boundary - impl_->sealed), chunk_opt));
+        rows.push_back(element::text(string()));
         impl_->sealed = boundary;
+        impl_->stable_rows = rows.size();
+        ++impl_->blocks;
     }
 
-    elements rows;
-    rows.reserve(impl_->blocks.size() + 1);
-    for (const auto& block: impl_->blocks) {
-        rows.push_back(block);
-        rows.push_back(element::text(string()));
-    }
     const string_view tail = full.substr(impl_->sealed);
     if (!tail.empty()) {
         rows.push_back(markdown(tail, opt));
     }
-    impl_->rendered = element::vbox(move(rows));
-    return impl_->rendered;
+    impl_->body.set_layout_dirty(true);
+    return impl_->body;
 }
 
 string_view markdown_stream::text() const noexcept { return impl_->text.view(); }
 
 size_t markdown_stream::sealed_bytes() const noexcept { return impl_->sealed; }
 
-size_t markdown_stream::sealed_blocks() const noexcept { return impl_->blocks.size(); }
+size_t markdown_stream::sealed_blocks() const noexcept { return impl_->blocks; }
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
