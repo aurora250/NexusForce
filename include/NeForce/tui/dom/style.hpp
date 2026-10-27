@@ -52,6 +52,7 @@ struct NEFORCE_API style {
         single,  ///< 单线边框 ┌─┐│└─┘
         double_, ///< 双线边框 ╔═╗║╚═╝
         rounded, ///< 圆角边框 ╭─╮│╰─╯
+        ascii,   ///< ASCII 边框 +-+|
     };
 
     /**

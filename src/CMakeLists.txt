@@ -3,8 +3,8 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/NexusForceCompilerOptions.cmake)
 # 链接文件
 set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/lz4_compress.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/compress/zstd_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/compress/zstd_compress.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/async_compose.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/async_stream.cpp
@@ -23,8 +23,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_exit_register.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/aes256.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/chacha20_poly1305.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/base64.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/chacha20_poly1305.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/md5.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha1.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha256.cpp
@@ -35,20 +35,17 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/exception_ptr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/terminate.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_builder.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_async.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_diff.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_info.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_locker.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_mapper.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/file_watcher.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/filesystem.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path_tree.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/temp_file.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_builder.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_parser.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/env/env_value.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/ini/ini_value.cpp
@@ -58,6 +55,10 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/md/markdown_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/md/markdown_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/md/markdown_value.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/mermaid/mermaid.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path_tree.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/temp_file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_value.cpp
@@ -71,20 +72,21 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/mt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/pcg.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/secret.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/reflect/registry.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/binary_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/json_serializer.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/reflect/registry.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/codepoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/width.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/to_string.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/width.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/daemon.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/daemon.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/hardware.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pty.cpp
@@ -103,7 +105,6 @@ set(CPP_SOURCES
 
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/db_config.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/mysql/mysql_prepared_statement.cpp
@@ -113,6 +114,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/db/pgsql/pgsql_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_result.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/db/sql_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_statement.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_result.cpp
@@ -121,42 +123,41 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/log_sink.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/logging/logger.cpp
 
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/icmp_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/smtp_socket.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket_base.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/udp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/dns/dns_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp/ftp_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp/ftp_protocol.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp/ftp_server.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client_message.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/chunked_reader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/csrf_filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/grpc.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/health_check.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http2_connection.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http2_protocol.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_cache.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_filter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_range.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_security.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/rate_limiter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session_store_redis.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_session.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/chunked_reader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/csrf_filter.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/grpc.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/health_check.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_cache.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/load_balancer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/multipart_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/rate_limiter.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/reverse_proxy.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session_store_redis.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/websocket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/websocket_deflate.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_acceptor.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/icmp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ip_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/smtp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/socket_base.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/sni_manager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_acceptor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_context.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_socket.cpp
@@ -166,6 +167,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/tcp/tcp_socket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/udp_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/arp.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/ip_address.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/util/mac_address.cpp
@@ -175,6 +177,9 @@ set(CPP_SOURCES
 
         ${CMAKE_CURRENT_SOURCE_DIR}/plugin/plugin_manager.cpp
 
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/application.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/chart/canvas_chart.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/chart/chart.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/animation.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/approve_prompt.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/collapsible.cpp
@@ -185,8 +190,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/hoverable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/log_view.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/menu.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/motion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/modal.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/motion.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/output_block.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/radiobox.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/renderer.cpp
@@ -196,22 +201,20 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/slider.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/status_indicator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/streaming_text.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_input.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_area.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/text_input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/toggle.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/tool_card.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/tool_runner.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/toggle.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/virtual_list.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/component/window.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/canvas.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/chart.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/code_block.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/diff.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/element.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/gauge.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/highlight.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/graph.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/mermaid/mermaid.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/highlight.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/latex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/layout.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/markdown.cpp
@@ -223,20 +226,19 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/text_layout.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/theme.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/dom/theme_palettes.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/application.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/headless.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/image.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/terminal_protocol.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/input.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/tui/input_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/event_dispatcher.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/focus_manager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/headless.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/image.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/input.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/input_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/keymap.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/reconciler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/recorder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/renderer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/screen.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/selection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tui/terminal_protocol.cpp
 )
 
 # 编译为动态库

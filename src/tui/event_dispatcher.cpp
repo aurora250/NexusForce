@@ -200,7 +200,19 @@ bool event_dispatcher::dispatch_mouse(const mouse_event& e, component_base* root
     }
 
     int idx = 0;
-    component_base* target = hit_test_at(layout, tree, e.x, e.y, idx, root);
+    component_base* hit = hit_test_at(layout, tree, e.x, e.y, idx, root);
+    component_base* target = hit;
+
+    if (e.action == mouse_action::press) {
+        mouse_capture_ = hit;
+    } else if (mouse_capture_ != nullptr) {
+        target = mouse_capture_;
+    }
+
+    if (e.action == mouse_action::release) {
+        mouse_capture_ = nullptr;
+    }
+
     if (target != last_mouse_target_) {
         if (last_mouse_target_ != nullptr) {
             last_mouse_target_->on_mouse_leave();

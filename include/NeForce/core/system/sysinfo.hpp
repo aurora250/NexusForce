@@ -57,6 +57,7 @@ public:
     struct memory_info {
         uint64_t total_physical{0};      ///< 物理内存总量（字节）
         uint64_t available_physical{0};  ///< 可用物理内存（字节）
+        uint64_t cached_physical{0};     ///< 系统缓存/待机内存（字节）
         uint64_t total_virtual{0};       ///< 提交上限总量（物理内存 + 交换空间，字节）
         uint64_t available_virtual{0};   ///< 可用提交额度（字节）
         uint64_t total_page_file{0};     ///< 页面文件/交换空间总量（字节）
@@ -160,6 +161,33 @@ public:
         string features;                ///< 支持的指令集特性
         simd_info simd;                 ///< 运行时 SIMD 能力
 
+        string family;     ///< 基础 Family
+        string model;      ///< 基础 Model
+        string stepping;   ///< Stepping
+        string ext_family; ///< 扩展 Family
+        string ext_model;  ///< 扩展 Model
+        string revision;   ///< 处理器修订号
+        string core_vid;   ///< 核心电压
+        string technology; ///< 制程工艺
+        string package;    ///< 封装/插槽
+        string code_name;  ///< 核心代号
+
+        uint32_t model_id{0};                 ///< 完整 Model 编号
+        uint32_t max_tdp_watts{0};            ///< 最大热设计功耗（W），未知为 0
+        uint32_t bus_speed_mhz{0};            ///< 外部时钟/总线频率（MHz）
+        uint32_t l1_kib{0};                   ///< L1 单实例容量（KiB）
+        uint32_t l1_instances{0};             ///< L1 实例数
+        uint32_t l1_data_kib{0};              ///< L1 数据缓存单实例容量（KiB）
+        uint32_t l1_data_instances{0};        ///< L1 数据缓存实例数
+        uint32_t l1_instruction_kib{0};       ///< L1 指令缓存单实例容量（KiB）
+        uint32_t l1_instruction_instances{0}; ///< L1 指令缓存实例数
+        uint32_t l2_kib{0};                   ///< L2 单实例容量（KiB）
+        uint32_t l2_instances{0};             ///< L2 实例数
+        uint32_t l3_kib{0};                   ///< L3 单实例容量（KiB）
+        uint32_t l3_instances{0};             ///< L3 实例数
+        uint32_t pcore_count{0};              ///< 性能核数量（异构 CPU）
+        uint32_t ecore_count{0};              ///< 能效核数量（异构 CPU）
+
         /**
          * @brief 检查是否支持超线程
          * @return 如果逻辑处理器数大于物理核心数返回true
@@ -184,6 +212,51 @@ public:
          * @return 格式为"major.minor.build"的版本字符串
          */
         NEFORCE_NODISCARD NEFORCE_API string version() const;
+    };
+
+    /**
+     * @struct hardware_info
+     * @brief 机器硬件档案
+     *
+     * 汇总 BIOS、主板和内存的静态信息。
+     */
+    struct hardware_info {
+        /**
+         * @struct bios_section
+         * @brief BIOS 信息
+         */
+        struct bios_section {
+            string brand;     ///< BIOS 厂商
+            string version;   ///< BIOS 版本
+            string date;      ///< 发布日期
+            string microcode; ///< CPU 微码版本
+        } bios;
+
+        /**
+         * @struct board_section
+         * @brief 主板信息
+         */
+        struct board_section {
+            string vendor;      ///< 主板厂商
+            string model;       ///< 主板型号
+            string bus;         ///< 总线类型
+            string chipset;     ///< 芯片组
+            string southbridge; ///< 南桥/IO 控制器
+        } board;
+
+        /**
+         * @struct memory_section
+         * @brief 内存信息
+         */
+        struct memory_section {
+            string type;                ///< 内存类型
+            string channel;             ///< 通道与模组数量
+            uint32_t module_count{0};   ///< 已识别模组数
+            uint32_t configured_mts{0}; ///< 实际运行速率（MT/s）
+            uint32_t rated_mts{0};      ///< 模组标称速率（MT/s）
+            string timings;             ///< 时序
+            string llc_ring;            ///< LLC/环形总线信息
+        } memory;
     };
 
     /**
@@ -308,6 +381,7 @@ public:
 private:
     system_info system_info_{};                        ///< 系统信息
     cpu_info cpu_info_{};                              ///< CPU信息
+    hardware_info hardware_info_{};                    ///< 机器硬件档案
     os_version_info os_version_info_{};                ///< 操作系统信息
     architecture architecture_{architecture::unknown}; ///< 系统架构
     vector<numa_node_info> numa_nodes_;                ///< NUMA 节点信息列表
@@ -328,6 +402,11 @@ private:
      * @brief 采集机器档案
      */
     void init();
+
+    /**
+     * @brief 采集 CPU/BIOS/主板/内存详细档案
+     */
+    void probe_hardware();
 
     /**
      * @brief 探测 CPU 与操作系统的 SIMD 能力
@@ -372,6 +451,12 @@ public:
     NEFORCE_NODISCARD const cpu_info& get_cpu_info() const noexcept { return cpu_info_; }
 
     /**
+     * @brief 获取机器硬件档案
+     * @return BIOS、主板和内存详细信息的引用
+     */
+    NEFORCE_NODISCARD const hardware_info& get_hardware_info() const noexcept { return hardware_info_; }
+
+    /**
      * @brief 获取操作系统版本信息
      * @return 操作系统版本信息结构引用
      */
@@ -397,6 +482,18 @@ public:
      * @return 主机名，采集失败时为空字符串
      */
     NEFORCE_NODISCARD const string& get_hostname() const noexcept { return hostname_; }
+
+    /**
+     * @brief 获取主机名副本
+     * @return 主机名
+     */
+    NEFORCE_NODISCARD string host_name() const;
+
+    /**
+     * @brief 获取操作系统版本副本
+     * @return 操作系统版本信息
+     */
+    NEFORCE_NODISCARD os_version_info os_version() const;
 
     /**
      * @brief 从CPU型号字符串中解析标称频率

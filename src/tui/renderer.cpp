@@ -1,4 +1,5 @@
 #include <NeForce/core/string/utf_iterator.hpp>
+#include <NeForce/core/string/width.hpp>
 #include <NeForce/tui/component/component.hpp>
 #include <NeForce/tui/dom/layout.hpp>
 #include <NeForce/tui/dom/text_layout.hpp>
@@ -7,6 +8,24 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 namespace {
+    string truncate_to_cols(const string_view text, const int max_cols) {
+        if (max_cols <= 0 || text.empty()) {
+            return string();
+        }
+        string out;
+        int used = 0;
+        for (utf8_iterator it(reinterpret_cast<const byte_t*>(text.data()), text.size()); it != utf8_iterator(); ++it) {
+            const codepoint& cp = *it;
+            const int width = cp.display_width();
+            if (used + width > max_cols) {
+                break;
+            }
+            cp.append_to(out);
+            used += width;
+        }
+        return out;
+    }
+
     void put_codepoint(const codepoint& cp, cell& target) {
         const uint32_t value = cp.value();
         if (value < 0x20 || value == 0x7F) {
@@ -248,12 +267,50 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
                 ++idx;
-                const enum style::border b = el.style().border.value_or(style::border::none);
+                const auto& panel_style = el.style();
+                const optional<_NEFORCE color> fill = panel_style.bg;
+                if (fill.has_value()) {
+                    for (int row = 0; row < rect.h; ++row) {
+                        const int cy = rect.y + row;
+                        if (cy < 0 || cy >= term_h_) {
+                            continue;
+                        }
+                        for (int column = 0; column < rect.w; ++column) {
+                            const int cx = rect.x + column;
+                            if (cx >= 0 && cx < term_w_ && !is_clipped(cx, cy)) {
+                                screen_.fast_cell_at(cx, cy).background = *fill;
+                            }
+                        }
+                    }
+                    band_stack_.push_back(*fill);
+                }
+                const enum style::border b = panel_style.border.value_or(style::border::none);
                 if (b != style::border::none) {
-                    apply_border(rect.x, rect.y, rect.w, rect.h, b, el.style().borderColor.value_or(theme_.border));
+                    apply_border(rect.x, rect.y, rect.w, rect.h, b, panel_style.borderColor.value_or(theme_.border));
+                }
+                if (!el.text().empty() && rect.w >= 6) {
+                    const string title = truncate_to_cols(el.text().view(), rect.w - 4);
+                    const int title_w = text_display_width(title.view());
+                    if (title_w > 0) {
+                        style clear_style;
+                        if (fill.has_value()) {
+                            clear_style.bg = *fill;
+                        }
+                        apply_text(rect.x + 2, rect.y, string(static_cast<size_t>(title_w + 2), ' '), clear_style);
+                        style title_style;
+                        title_style.fg = panel_style.fg.has_value() ? *panel_style.fg : theme_.primary;
+                        title_style.bold = true;
+                        if (fill.has_value()) {
+                            title_style.bg = *fill;
+                        }
+                        apply_text(rect.x + 3, rect.y, title, title_style);
+                    }
                 }
                 for (const auto& child: el.children()) {
                     render_subtree(child, layout, idx);
+                }
+                if (fill.has_value()) {
+                    band_stack_.pop_back();
                 }
             }
             return;
@@ -719,6 +776,15 @@ void renderer::apply_border(const int x, const int y, const int w, const int h, 
             br = "\xe2\x95\xaf"; // ╰ ╯
             hz = "\xe2\x94\x80";
             vt = "\xe2\x94\x82"; // ─ │
+            break;
+        }
+        case style::border::ascii: {
+            tl = "+";
+            tr = "+";
+            bl = "+";
+            br = "+";
+            hz = "-";
+            vt = "|";
             break;
         }
         default: {

@@ -1,7 +1,7 @@
 #include <NeForce/core/string/utf_iterator.hpp>
 #include <NeForce/core/string/width.hpp>
 #include <NeForce/tui/component/component.hpp>
-#include <NeForce/tui/dom/chart.hpp>
+#include <NeForce/tui/chart/chart.hpp>
 #include <NeForce/tui/dom/layout.hpp>
 #include <NeForce/tui/dom/theme.hpp>
 #include <NeForce/tui/headless.hpp>
@@ -1110,4 +1110,41 @@ TEST(TuiChartTest, HeadlessLineRevealAdvancesOverFrames) {
     EXPECT_FLOAT_EQ(host.view->progress(), 1.0F);
     EXPECT_FALSE(host.view->animating());
     EXPECT_GT(previous, 0U);
+}
+
+TEST(TuiChartTest, StreamBucketingIsOptInAndAggregates) {
+    deque<double> stream;
+    for (int index = 1; index <= 10; ++index) {
+        stream.push_back(static_cast<double>(index));
+    }
+    chart_spec spec;
+    spec.kind = chart_kind::line;
+    spec.series.push_back(chart_series{"s", {}, &stream});
+
+    EXPECT_EQ(chart_point_count(spec), 10U);
+
+    spec.stream_buckets = 5;
+    EXPECT_EQ(chart_point_count(spec), 5U);
+    const auto last = chart_points_at(spec, 1);
+    ASSERT_EQ(last.size(), 1U);
+    EXPECT_DOUBLE_EQ(last[0].value, 4.0);
+
+    spec.stream_aggregate = chart_stream_aggregate::high;
+    const auto high = chart_points_at(spec, 4);
+    ASSERT_EQ(high.size(), 1U);
+    EXPECT_DOUBLE_EQ(high[0].value, 10.0);
+
+    spec.stream_aggregate = chart_stream_aggregate::low;
+    const auto low = chart_points_at(spec, 0);
+    ASSERT_EQ(low.size(), 1U);
+    EXPECT_DOUBLE_EQ(low[0].value, 1.0);
+
+    spec.stream_buckets = 20;
+    spec.stream_aggregate = chart_stream_aggregate::last;
+    EXPECT_EQ(chart_point_count(spec), 20U);
+    EXPECT_TRUE(chart_points_at(spec, 0).empty());
+
+    spec.stream_buckets = 0;
+    spec.stream_samples = 4;
+    EXPECT_EQ(chart_point_count(spec), 4U);
 }

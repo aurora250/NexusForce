@@ -19,6 +19,7 @@
 #include <NeForce/tui/dom/element.hpp>
 #include <NeForce/tui/dom/layout.hpp>
 #include <NeForce/tui/dom/markdown.hpp>
+#include <NeForce/tui/dom/table.hpp>
 #include <NeForce/tui/dom/text_layout.hpp>
 #include <NeForce/tui/headless.hpp>
 #include <NeForce/tui/renderer.hpp>
@@ -2679,4 +2680,99 @@ TEST(TuiTextAreaTest, WordUndoGroupsConsecutiveTyping) {
     EXPECT_EQ(text.value(), "hello w");
     EXPECT_TRUE(area->undo());
     EXPECT_EQ(text.value(), "hello");
+}
+
+TEST(TuiPanelTest, PanelTitleAsciiBorderAndBackground) {
+    tui::style st;
+    st.border = style::border::ascii;
+    st.borderColor = neforce::color{10, 20, 30};
+    st.fg = neforce::color{200, 50, 50};
+    st.bg = neforce::color{5, 6, 7};
+
+    const element tree = element::panel(element::text("x"), "TITLE", st);
+    const auto layout = compute_layout(tree, 20, 5);
+    ASSERT_EQ(layout.size(), 2U);
+
+    screen scr(20, 5);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 5);
+    r.render(tree, layout, false);
+
+    EXPECT_EQ(scr.fast_cell_at(0, 0).character, "+");
+    EXPECT_EQ(scr.fast_cell_at(1, 0).character, "-");
+    EXPECT_EQ(scr.fast_cell_at(2, 0).character, " ");
+    EXPECT_EQ(scr.fast_cell_at(3, 0).character, "T");
+    EXPECT_EQ(scr.fast_cell_at(7, 0).character, "E");
+    EXPECT_EQ(scr.fast_cell_at(8, 0).character, " ");
+    EXPECT_EQ(scr.fast_cell_at(9, 0).character, "-");
+    EXPECT_EQ(scr.fast_cell_at(0, 1).character, "|");
+    EXPECT_EQ(scr.fast_cell_at(19, 4).character, "+");
+
+    const auto& title = scr.fast_cell_at(3, 0);
+    EXPECT_EQ(title.foreground.R(), 200);
+    EXPECT_EQ(title.foreground.G(), 50);
+    EXPECT_TRUE(title.bold);
+
+    const auto& body = scr.fast_cell_at(5, 2);
+    EXPECT_EQ(body.background.R(), 5);
+    EXPECT_EQ(body.background.G(), 6);
+    EXPECT_EQ(body.background.B(), 7);
+}
+
+TEST(TuiTableTest, FixedColumnWidthsAndAlignment) {
+    table t({{"id", "name", "value"}, {"1", "alpha", "42"}, {"22", "b", "7"}});
+    t.column_widths({4, 8, 6});
+    t.column_aligns({style::align::end, style::align::start, style::align::end});
+
+    const element tree = t.render();
+    const auto layout = compute_layout(tree, 30, 5);
+    screen scr(30, 5);
+    scr.clear();
+    renderer r(scr, dark_theme, 30, 5);
+    r.render(tree, layout, false);
+
+    EXPECT_EQ(scr.fast_cell_at(0, 0).character, " ");
+    EXPECT_EQ(scr.fast_cell_at(2, 0).character, "i");
+    EXPECT_EQ(scr.fast_cell_at(3, 0).character, "d");
+    EXPECT_EQ(scr.fast_cell_at(4, 0).character, "n");
+    EXPECT_EQ(scr.fast_cell_at(13, 0).character, "v");
+    EXPECT_EQ(scr.fast_cell_at(17, 0).character, "e");
+    EXPECT_EQ(scr.fast_cell_at(3, 1).character, "1");
+    EXPECT_EQ(scr.fast_cell_at(16, 2).character, " ");
+    EXPECT_EQ(scr.fast_cell_at(17, 2).character, "7");
+}
+
+TEST(TuiElementTest, MovedFromElementBehavesAsEmpty) {
+    element source = element::text("hello");
+    element moved = _NEFORCE move(source);
+
+    EXPECT_EQ(source.kind(), element::kind::empty);
+    EXPECT_TRUE(source.children().empty());
+    EXPECT_TRUE(source.text().empty());
+    EXPECT_TRUE(source.spans().empty());
+    EXPECT_EQ(source.key(), 0U);
+    EXPECT_EQ(source.owner(), nullptr);
+
+    const auto layout = compute_layout(source, 20, 5);
+    EXPECT_TRUE(layout.empty());
+    screen scr(20, 5);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 5);
+    r.render(source, layout, false);
+}
+
+TEST(TuiElementTest, NullChildInTreeDoesNotCrashLayoutOrRender) {
+    element dead = element::text("dead");
+    element keep = _NEFORCE move(dead);
+    vector<element> children;
+    children.push_back(_NEFORCE move(dead));
+    children.push_back(element::text("alive"));
+    const element tree = element::vbox(_NEFORCE move(children));
+
+    const auto layout = compute_layout(tree, 20, 5);
+    screen scr(20, 5);
+    scr.clear();
+    renderer r(scr, dark_theme, 20, 5);
+    r.render(tree, layout, false);
+    EXPECT_NE(scr.to_plaintext().find("alive"), string::npos);
 }

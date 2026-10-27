@@ -87,6 +87,7 @@ private:
 
     focus_manager& focus_mgr_;
     component_base* last_mouse_target_ = nullptr;
+    component_base* mouse_capture_ = nullptr;
     scroll_drag_state drag_state_storage_;
     scroll_drag_state* drag_state_ = nullptr;
     function<void()> mark_dirty_;

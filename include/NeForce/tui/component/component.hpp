@@ -149,6 +149,17 @@ public:
     virtual void on_animation(int64_t delta) { ignore = delta; }
 
     /**
+     * @brief 终端尺寸变化回调
+     * @param width 列数
+     * @param height 行数
+     * @note 在每次 `render()` 之前调用
+     */
+    virtual void on_terminal_resize(int width, int height) {
+        ignore = width;
+        ignore = height;
+    }
+
+    /**
      * @brief 挂载回调
      *
      * 在首次 render() 之前调用。在此连接 signal、订阅事件、启动异步操作。

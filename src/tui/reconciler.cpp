@@ -4,6 +4,17 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 namespace {
+    void notify_terminal_resize(component_base* comp, const int width, const int height) {
+        if (comp == nullptr) {
+            return;
+        }
+        comp->on_terminal_resize(width, height);
+        const size_t count = comp->child_count();
+        for (size_t index = 0; index < count; ++index) {
+            notify_terminal_resize(comp->child_at(index), width, height);
+        }
+    }
+
     void tag_owners(element& el, component_base* comp) {
         if (el.owner() == nullptr) {
             el.set_owner(comp);
@@ -365,6 +376,7 @@ void reconciler::flush() {
 
     refresh_term_size();
     renderer_.set_term_size(term_w_, term_h_);
+    notify_terminal_resize(root_, term_w_, term_h_);
 
     const bool repaint_all = (term_w_ != painted_w_ || term_h_ != painted_h_);
 

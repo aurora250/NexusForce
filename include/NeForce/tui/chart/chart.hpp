@@ -1,5 +1,5 @@
-#ifndef NEFORCE_TUI_DOM_CHART_HPP__
-#define NEFORCE_TUI_DOM_CHART_HPP__
+#ifndef NEFORCE_TUI_CHART_CHART_HPP__
+#define NEFORCE_TUI_CHART_CHART_HPP__
 
 /**
  * @file chart.hpp
@@ -19,11 +19,11 @@
  * @endcode
  */
 
+#include "NeForce/core/container/deque.hpp"
 #include "NeForce/core/string/string.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/core/utility/optional.hpp"
 #include "NeForce/tui/component/component.hpp"
-#include "NeForce/tui/dom/canvas.hpp"
 #include "NeForce/tui/dom/element.hpp"
 #include "NeForce/tui/dom/theme.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -72,16 +72,28 @@ enum class chart_easing : uint8_t {
 };
 
 /**
+ * @brief 流式数据聚合方式
+ *
+ * 仅在 `chart_spec::stream_buckets > 0` 时生效。
+ */
+enum class chart_stream_aggregate : uint8_t {
+    last, ///< 每个桶取最后一个有限样本
+    high, ///< 每个桶取最大值
+    low,  ///< 每个桶取最小值
+};
+
+/**
  * @brief 图表数据系列
  *
  * 每个系列包含一个名称与一组数值。折线图、柱状图等按索引共享 `chart_spec::labels`；
  * 热力图把每个系列当作一行；饼图与环形图把每个系列当作一个扇区。
  */
 struct chart_series {
-    string name;                    ///< 系列名称，用于图例与提示
-    vector<double> values;          ///< 数值列表，非有限值会被忽略
-    optional<_NEFORCE color> color; ///< 显式颜色，优先于角色色
-    optional<theme_role> role;      ///< 主题角色色，未设置时使用内置序列调色板
+    string name;                           ///< 系列名称，用于图例与提示
+    vector<double> values;                 ///< 数值列表，非有限值会被忽略
+    const deque<double>* stream = nullptr; ///< 流式数据源；设置后优先于 values
+    optional<_NEFORCE color> color;        ///< 显式颜色，优先于角色色
+    optional<theme_role> role;             ///< 主题角色色，未设置时使用内置序列调色板
 };
 
 /**
@@ -136,6 +148,10 @@ struct chart_spec {
     float progress = 1.0F;                      ///< 揭示进度，0 到 1，非有限值按 0 处理
     chart_easing easing = chart_easing::smooth; ///< 揭示缓动函数
     optional<size_t> selected_index;            ///< 初始选中索引，越界时忽略
+
+    size_t stream_samples = 0;                                              ///< 流式物化窗口，0 表示全部
+    size_t stream_buckets = 0;                                              ///< 流式桶数；>0 时按桶聚合（opt-in）
+    chart_stream_aggregate stream_aggregate = chart_stream_aggregate::last; ///< 桶聚合方式
 };
 
 /**
@@ -179,7 +195,7 @@ NEFORCE_API _NEFORCE color chart_series_color(const theme& t, const chart_series
  * 折线图、柱状图、散点图、直方图与雷达图返回类目数量；
  * 饼图与环形图返回系列数量；热力图返回行数乘列数。
  */
-NEFORCE_API size_t chart_point_count(const chart_spec& spec) noexcept;
+NEFORCE_API size_t chart_point_count(const chart_spec& spec);
 
 /**
  * @brief 获取指定索引对应的全部数据点
@@ -269,7 +285,7 @@ public:
      * @brief 获取可选中索引数量
      * @return 数量
      */
-    NEFORCE_NODISCARD size_t selection_count() const noexcept;
+    NEFORCE_NODISCARD size_t selection_count() const;
 
     /**
      * @brief 获取当前选中索引
@@ -395,4 +411,4 @@ private:
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_TUI_DOM_CHART_HPP__
+#endif // NEFORCE_TUI_CHART_CHART_HPP__

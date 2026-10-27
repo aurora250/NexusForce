@@ -259,7 +259,7 @@ public:
     NEFORCE_NODISCARD bool is_layout_dirty() const noexcept;
     void set_layout_dirty(bool dirty);
 
-    NEFORCE_NODISCARD const vector<layout_rect>& cached_layout() const noexcept;
+    NEFORCE_NODISCARD const vector<layout_rect>& cached_layout() const;
     void set_cached_layout(const vector<layout_rect>& layout, int constraint_w, int constraint_h) const;
     NEFORCE_NODISCARD int cached_constraint_w() const noexcept;
     NEFORCE_NODISCARD int cached_constraint_h() const noexcept;
@@ -346,6 +346,17 @@ public:
      * 面板自身占用一个布局矩形，因此可以绘制边框并把子元素排布在内边距之内。
      */
     static element panel(element child, tui::style style = {});
+
+    /**
+     * @brief 带标题的面板容器
+     * @param child 子元素
+     * @param title 标题，嵌入上边框
+     * @param style 样式；`fg` 作为标题色，`borderColor` 作为边框色，`bg` 作为面板底色
+     * @return 面板元素
+     *
+     * 标题从上边框左起第 3 列开始，两侧各留 1 个空格；超宽时截断。
+     */
+    static element panel(element child, string title, tui::style style = {});
 
     /**
      * @brief 背景色带容器

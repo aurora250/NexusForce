@@ -3,6 +3,30 @@
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
+namespace {
+    const vector<element>& no_children() {
+        static const vector<element> value;
+        return value;
+    }
+    const style& no_style() {
+        static const style value;
+        return value;
+    }
+    const box_props& no_layout() noexcept {
+        static constexpr box_props value;
+        return value;
+    }
+    const string& no_text() {
+        static const string value;
+        return value;
+    }
+    const vector<text_span>& no_spans() {
+        static const vector<text_span> value;
+        return value;
+    }
+} // namespace
+
+
 struct element::node {
     string text;
     vector<text_span> spans;
@@ -94,25 +118,28 @@ element& element::with_key(const size_t k) {
     return *this;
 }
 
-enum element::kind element::kind() const noexcept { return node_->kind; }
+enum element::kind element::kind() const noexcept { return node_ ? node_->kind : kind::empty; }
 
-size_t element::key() const noexcept { return node_->key; }
+size_t element::key() const noexcept { return node_ ? node_->key : 0; }
 
-const vector<element>& element::children() const { return node_->children; }
+const vector<element>& element::children() const { return node_ ? node_->children : no_children(); }
 
-vector<element>& element::children() { return node_->children; }
+vector<element>& element::children() {
+    ensure_node();
+    return node_->children;
+}
 
-const style& element::style() const { return node_->style; }
+const style& element::style() const { return node_ ? node_->style : no_style(); }
 
-const box_props& element::layout() const { return node_->layout; }
+const box_props& element::layout() const { return node_ ? node_->layout : no_layout(); }
 
-const string& element::text() const { return node_->text; }
+const string& element::text() const { return node_ ? node_->text : no_text(); }
 
-const vector<text_span>& element::spans() const { return node_->spans; }
+const vector<text_span>& element::spans() const { return node_ ? node_->spans : no_spans(); }
 
-const vector<text_span>& element::hang() const { return node_->hang; }
+const vector<text_span>& element::hang() const { return node_ ? node_->hang : no_spans(); }
 
-int element::hang_width() const noexcept { return node_->hang_width; }
+int element::hang_width() const noexcept { return node_ ? node_->hang_width : 0; }
 
 element& element::with_hang(vector<text_span> prefix) {
     node_->hang = _NEFORCE move(prefix);
@@ -178,31 +205,37 @@ element& element::with_viewport_state(void* s) {
 
 const function<void()>& element::on_click() const { return node_->on_click; }
 
-int element::flex() const noexcept { return node_->flex; }
+int element::flex() const noexcept { return node_ ? node_->flex : 0; }
 
-void* element::state_ref() const noexcept { return node_->state_ref; }
+void* element::state_ref() const noexcept { return node_ ? node_->state_ref : nullptr; }
 
-style::variant element::variant() const noexcept { return node_->variant; }
+style::variant element::variant() const noexcept { return node_ ? node_->variant : style::variant{}; }
 
 const function<void(int, int, int, int)>& element::draw_function() const { return node_->draw_function; }
 
 const function<void(canvas_painter&)>& element::painter_function() const { return node_->painter_function; }
 
-void* element::owner() const noexcept { return node_->owner; }
+void* element::owner() const noexcept { return node_ ? node_->owner : nullptr; }
 
-void element::set_owner(void* o) { node_->owner = static_cast<component_base*>(o); }
+void element::set_owner(void* o) {
+    if (node_) {
+        node_->owner = static_cast<component_base*>(o);
+    }
+}
 
-int element::scroll_x() const noexcept { return node_->scroll_x; }
+int element::scroll_x() const noexcept { return node_ ? node_->scroll_x : 0; }
 
-int element::scroll_y() const noexcept { return node_->scroll_y; }
+int element::scroll_y() const noexcept { return node_ ? node_->scroll_y : 0; }
 
-int element::grid_columns() const noexcept { return node_->grid_columns; }
+int element::grid_columns() const noexcept { return node_ ? node_->grid_columns : 0; }
 
-const string& element::placeholder() const noexcept { return node_->placeholder; }
+const string& element::placeholder() const noexcept { return node_ ? node_->placeholder : no_text(); }
 
-bool element::cursor_visible() const noexcept { return node_->cursor_visible; }
+bool element::cursor_visible() const noexcept { return node_ ? node_->cursor_visible : false; }
 
-style::wrap_mode element::wrap_mode() const noexcept { return node_->style.text_wrap.value_or(style::wrap_mode::none); }
+style::wrap_mode element::wrap_mode() const noexcept {
+    return node_ ? node_->style.text_wrap.value_or(style::wrap_mode::none) : style::wrap_mode::none;
+}
 
 element& element::with_cursor_visible(const bool v) {
     ensure_node();
@@ -397,6 +430,12 @@ element element::panel(element child, tui::style style) {
     return el;
 }
 
+element element::panel(element child, string title, tui::style style) {
+    element el = panel(move(child), move(style));
+    el.node_->text = move(title);
+    return el;
+}
+
 element element::canvas(function<void(int, int, int, int)> draw_function, tui::style style) {
     element el;
     el.node_->kind = kind::canvas;
@@ -451,23 +490,33 @@ element element::when(const bool cond, function<element()> then, function<elemen
     return el;
 }
 
-bool element::is_layout_dirty() const noexcept { return node_->layout_dirty_; }
+bool element::is_layout_dirty() const noexcept { return !node_ || node_->layout_dirty_; }
 
-void element::set_layout_dirty(const bool dirty) { node_->layout_dirty_ = dirty; }
+void element::set_layout_dirty(const bool dirty) {
+    if (node_) {
+        node_->layout_dirty_ = dirty;
+    }
+}
 
-const vector<layout_rect>& element::cached_layout() const noexcept { return node_->cached_layout_; }
+const vector<layout_rect>& element::cached_layout() const {
+    static const vector<layout_rect> value;
+    return node_ ? node_->cached_layout_ : value;
+}
 
 void element::set_cached_layout(const vector<layout_rect>& layout, const int constraint_w,
                                 const int constraint_h) const {
+    if (!node_) {
+        return;
+    }
     node_->cached_layout_ = layout;
     node_->cached_constraint_w_ = constraint_w;
     node_->cached_constraint_h_ = constraint_h;
     node_->layout_dirty_ = false;
 }
 
-int element::cached_constraint_w() const noexcept { return node_->cached_constraint_w_; }
+int element::cached_constraint_w() const noexcept { return node_ ? node_->cached_constraint_w_ : 0; }
 
-int element::cached_constraint_h() const noexcept { return node_->cached_constraint_h_; }
+int element::cached_constraint_h() const noexcept { return node_ ? node_->cached_constraint_h_ : 0; }
 
 NEFORCE_END_TUI__
 NEFORCE_END_NAMESPACE__

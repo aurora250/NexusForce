@@ -1,9 +1,12 @@
 #include <NeForce/core/numeric/math.hpp>
+#include <NeForce/core/numeric/numeric_traits.hpp>
 #include <NeForce/core/numeric/numeric_types.hpp>
 #include <NeForce/core/string/to_string.hpp>
 #include <NeForce/core/string/utf_iterator.hpp>
 #include <NeForce/core/string/width.hpp>
-#include <NeForce/tui/dom/chart.hpp>
+#include <NeForce/tui/chart/canvas_chart.hpp>
+#include <NeForce/tui/chart/chart_geometry.hpp>
+#include <NeForce/tui/chart/chart.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
@@ -184,33 +187,6 @@ namespace {
         return text;
     }
 
-    double nice_step(const double raw) {
-        if (!finite_number(raw) || raw <= 0.0) {
-            return 1.0;
-        }
-        const auto exponent = static_cast<double>(floor(logarithm_10(static_cast<decimal_t>(raw))));
-        double base = 1.0;
-        const int abs_exp = static_cast<int>(absolute(exponent));
-        if (exponent >= 0.0) {
-            base = power(10.0, static_cast<uint32_t>(abs_exp));
-        } else {
-            base = 1.0 / power(10.0, static_cast<uint32_t>(abs_exp));
-        }
-        if (!finite_number(base) || base <= 0.0) {
-            return 1.0;
-        }
-        const double fraction = raw / base;
-        double nice = 10.0;
-        if (fraction <= 1.0) {
-            nice = 1.0;
-        } else if (fraction <= 2.0) {
-            nice = 2.0;
-        } else if (fraction <= 5.0) {
-            nice = 5.0;
-        }
-        return nice * base;
-    }
-
     struct chart_model {
         size_t rows = 0;
         size_t cols = 0;
@@ -273,17 +249,11 @@ namespace {
         return model;
     }
 
-    struct axis_scale {
-        double min = 0.0;
-        double max = 1.0;
-        double step = 1.0;
-        vector<double> ticks;
-        bool valid = false;
-    };
+    using axis_scale = chart_axis_scale;
 
     axis_scale make_axis_scale(const chart_spec& spec, const chart_model& model) {
-        axis_scale scale;
         if (!model.any_finite) {
+            axis_scale scale;
             scale.min = 0.0;
             scale.max = 1.0;
             scale.step = 0.5;
@@ -292,58 +262,11 @@ namespace {
             scale.ticks.push_back(1.0);
             return scale;
         }
-        double lower = model.data_min;
-        double upper = model.data_max;
-        if (spec.axis.min.has_value() && finite_number(spec.axis.min.value())) {
-            lower = spec.axis.min.value();
-        }
-        if (spec.axis.max.has_value() && finite_number(spec.axis.max.value())) {
-            upper = spec.axis.max.value();
-        }
         const bool include_zero =
                 spec.axis.zero_baseline && (spec.kind == chart_kind::bar || spec.kind == chart_kind::histogram ||
                                             spec.kind == chart_kind::area || spec.kind == chart_kind::radar);
-        if (include_zero) {
-            lower = min(lower, 0.0);
-            upper = max(upper, 0.0);
-        }
-        if (lower > upper) {
-            const double swap = lower;
-            lower = upper;
-            upper = swap;
-        }
-        if (upper - lower <= 0.0 || !finite_number(upper - lower)) {
-            const double magnitude = max(1.0, absolute(lower));
-            lower -= magnitude * 0.5;
-            upper += magnitude * 0.5;
-        }
-        const int target_ticks = max(2, spec.axis.tick_count);
-        const double raw_step = (upper - lower) / static_cast<double>(target_ticks);
-        const double step = nice_step(raw_step);
-        scale.step = step;
-        if (spec.axis.min.has_value() || spec.axis.max.has_value()) {
-            scale.min = lower;
-            scale.max = upper;
-        } else {
-            scale.min = static_cast<double>(floor(lower / step)) * step;
-            scale.max = static_cast<double>(ceil(upper / step)) * step;
-        }
-        if (scale.max - scale.min <= 0.0 || !finite_number(scale.max - scale.min)) {
-            scale.min = lower;
-            scale.max = lower + step;
-        }
-        const double epsilon = step * 1e-6;
-        double tick = static_cast<double>(ceil(scale.min / step)) * step;
-        for (int i = 0; i < 64 && tick <= scale.max + epsilon; ++i) {
-            scale.ticks.push_back(tick);
-            tick += step;
-        }
-        if (scale.ticks.empty()) {
-            scale.ticks.push_back(scale.min);
-            scale.ticks.push_back(scale.max);
-        }
-        scale.valid = true;
-        return scale;
+        return chart_axis_scale_for(model.data_min, model.data_max, spec.axis.tick_count, include_zero, spec.axis.min,
+                                    spec.axis.max);
     }
 
     string tick_text(const chart_spec& spec, const axis_scale& scale, const double value, const bool compact = false) {
@@ -557,12 +480,7 @@ namespace {
     }
 
     double value_row_f(const double value, const axis_scale& scale, const chart_geometry& geom) noexcept {
-        const double span = scale.max - scale.min;
-        if (span <= 0.0 || !finite_number(span)) {
-            return static_cast<double>(geom.plot_y + max(0, geom.plot_h - 1));
-        }
-        const double ratio = clamp01((value - scale.min) / span);
-        return static_cast<double>(geom.plot_y) + (1.0 - ratio) * static_cast<double>(max(0, geom.plot_h - 1));
+        return chart_value_row_f(value, scale, geom.plot_y, geom.plot_h);
     }
 
     int value_row(const double value, const axis_scale& scale, const chart_geometry& geom) noexcept {
@@ -2077,26 +1995,98 @@ _NEFORCE color chart_series_color(const theme& t, const chart_series& series, co
     return palette[index % 8];
 }
 
-size_t chart_point_count(const chart_spec& spec) noexcept { return build_model(spec).selectable; }
+
+namespace {
+    void materialize_buckets(const chart_spec& spec, chart_series& series, const deque<double>& stream) {
+        const size_t size = stream.size();
+        const size_t width = spec.stream_buckets;
+        canvas_chart_window window;
+        window.samples = spec.stream_samples > 0 ? min(spec.stream_samples, size) : size;
+        window.end = size;
+        vector<canvas_chart_range> columns;
+        window.project(stream, width, columns);
+
+        const size_t stride = window.stride(width);
+        const size_t last_bucket = (size - 1) / stride;
+        const size_t skip = size > window.samples ? size - window.samples : 0;
+        vector<bool> occupied(width, false);
+        for (size_t index = skip; index < size; ++index) {
+            if (!is_finite(stream[index])) {
+                continue;
+            }
+            const size_t offset = last_bucket - index / stride;
+            if (offset < width) {
+                occupied[width - 1 - offset] = true;
+            }
+        }
+
+        series.values.assign(width, numeric_traits<double>::quiet_nan());
+        for (size_t column = 0; column < width && column < columns.size(); ++column) {
+            if (!occupied[column]) {
+                continue;
+            }
+            const auto& range = columns[column];
+            switch (spec.stream_aggregate) {
+                case chart_stream_aggregate::high:
+                    series.values[column] = range.high;
+                    break;
+                case chart_stream_aggregate::low:
+                    series.values[column] = range.low;
+                    break;
+                case chart_stream_aggregate::last:
+                default:
+                    series.values[column] = range.last;
+                    break;
+            }
+        }
+        series.stream = nullptr;
+    }
+
+    void materialize_stream(chart_spec& spec) {
+        for (auto& series: spec.series) {
+            if (series.stream == nullptr) {
+                continue;
+            }
+            const auto& stream = *series.stream;
+            if (spec.stream_buckets > 0 && !stream.empty()) {
+                materialize_buckets(spec, series, stream);
+                continue;
+            }
+            const size_t size = stream.size();
+            const size_t begin = spec.stream_samples > 0 && size > spec.stream_samples ? size - spec.stream_samples : 0;
+            series.values.assign(stream.begin() + static_cast<ptrdiff_t>(begin), stream.end());
+            series.stream = nullptr;
+        }
+    }
+} // namespace
+
+
+size_t chart_point_count(const chart_spec& spec) {
+    chart_spec view = spec;
+    materialize_stream(view);
+    return build_model(view).selectable;
+}
 
 vector<chart_point> chart_points_at(const chart_spec& spec, const size_t index) {
     vector<chart_point> points;
-    const chart_model model = build_model(spec);
+    chart_spec view = spec;
+    materialize_stream(view);
+    const chart_model model = build_model(view);
     if (index >= model.selectable) {
         return points;
     }
-    switch (spec.kind) {
+    switch (view.kind) {
         case chart_kind::pie:
         case chart_kind::donut: {
-            if (index >= spec.series.size()) {
+            if (index >= view.series.size()) {
                 return points;
             }
-            const auto& series = spec.series[index];
+            const auto& series = view.series[index];
             chart_point point;
             point.series_index = index;
             point.point_index = 0;
             point.series_name = series.name;
-            point.label = index < spec.labels.size() ? spec.labels[index] : series.name;
+            point.label = index < view.labels.size() ? view.labels[index] : series.name;
             point.value = pie_slice_value(series);
             points.push_back(move(point));
             break;
@@ -2107,10 +2097,10 @@ vector<chart_point> chart_points_at(const chart_spec& spec, const size_t index) 
             }
             const size_t row = index / model.cols;
             const size_t col = index % model.cols;
-            if (row >= spec.series.size()) {
+            if (row >= view.series.size()) {
                 return points;
             }
-            const auto& series = spec.series[row];
+            const auto& series = view.series[row];
             if (col >= series.values.size() || !finite_number(series.values[col])) {
                 return points;
             }
@@ -2118,18 +2108,18 @@ vector<chart_point> chart_points_at(const chart_spec& spec, const size_t index) 
             point.series_index = row;
             point.point_index = col;
             point.series_name = series.name;
-            point.label = col < spec.labels.size() ? spec.labels[col] : string();
+            point.label = col < view.labels.size() ? view.labels[col] : string();
             point.value = series.values[col];
             points.push_back(move(point));
             break;
         }
         default: {
-            const size_t count = spec.kind == chart_kind::radar ? model.spokes : model.categories;
+            const size_t count = view.kind == chart_kind::radar ? model.spokes : model.categories;
             if (index >= count) {
                 return points;
             }
-            for (size_t j = 0; j < spec.series.size(); ++j) {
-                const auto& series = spec.series[j];
+            for (size_t j = 0; j < view.series.size(); ++j) {
+                const auto& series = view.series[j];
                 if (index >= series.values.size() || !finite_number(series.values[index])) {
                     continue;
                 }
@@ -2137,7 +2127,7 @@ vector<chart_point> chart_points_at(const chart_spec& spec, const size_t index) 
                 point.series_index = j;
                 point.point_index = index;
                 point.series_name = series.name;
-                point.label = index < spec.labels.size() ? spec.labels[index] : string();
+                point.label = index < view.labels.size() ? view.labels[index] : string();
                 point.value = series.values[index];
                 points.push_back(move(point));
             }
@@ -2149,6 +2139,7 @@ vector<chart_point> chart_points_at(const chart_spec& spec, const size_t index) 
 
 element chart(const chart_spec& spec) {
     chart_spec view = spec;
+    materialize_stream(view);
     view.progress = static_cast<float>(clamp01(static_cast<double>(spec.progress)));
     style s;
     s.width = style::size_hint{style::size_hint::fixed, spec.width > 0 ? spec.width : default_chart_width};
@@ -2158,6 +2149,7 @@ element chart(const chart_spec& spec) {
 
 chart_component::chart_component(chart_spec spec) :
 spec_(move(spec)) {
+    materialize_stream(spec_);
     progress_ = static_cast<float>(clamp01(static_cast<double>(spec_.progress)));
     if (spec_.selected_index.has_value()) {
         const size_t count = chart_point_count(spec_);
@@ -2181,13 +2173,14 @@ void chart_component::clamp_selection() {
 }
 
 void chart_component::set_spec(chart_spec spec) {
+    materialize_stream(spec);
+    const optional<size_t> previous = selected_;
     spec_ = move(spec);
     progress_ = static_cast<float>(clamp01(static_cast<double>(spec_.progress)));
     animating_ = false;
-    selected_ = none;
-    if (spec_.selected_index.has_value() && spec_.selected_index.value() < chart_point_count(spec_)) {
-        selected_ = spec_.selected_index.value();
-    }
+    // Live charts replace their spec every frame.
+    // Preserve the interaction state unless the caller explicitly supplies a new selected index.
+    selected_ = spec_.selected_index.has_value() ? spec_.selected_index : previous;
     clamp_selection();
     schedule_render();
 }
@@ -2217,7 +2210,7 @@ void chart_component::animate_progress(const float target, const milliseconds du
     schedule_render();
 }
 
-size_t chart_component::selection_count() const noexcept { return chart_point_count(spec_); }
+size_t chart_component::selection_count() const { return chart_point_count(spec_); }
 
 bool chart_component::select(const size_t index) {
     const size_t count = selection_count();

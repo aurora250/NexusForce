@@ -744,12 +744,31 @@ namespace {
         if (::RegOpenKeyExW(HKEY_LOCAL_MACHINE, LR"(SOFTWARE\Microsoft\Windows NT\CurrentVersion)", 0, KEY_READ,
                             &hkey) == ERROR_SUCCESS) {
 
-            char product_name[256];
+            wchar_t product_name[256] = {};
             ::DWORD size = sizeof(product_name);
 
             if (::RegQueryValueExW(hkey, L"ProductName", nullptr, nullptr, reinterpret_cast<::LPBYTE>(product_name),
                                    &size) == ERROR_SUCCESS) {
-                os_version_info.product_name = product_name;
+                os_version_info.product_name = wcharacter::to_string(product_name);
+            }
+            if (os_version_info.major == 0) {
+                ::DWORD value = 0;
+                ::DWORD value_size = sizeof(value);
+                if (::RegQueryValueExW(hkey, L"CurrentMajorVersionNumber", nullptr, nullptr,
+                                       reinterpret_cast<::LPBYTE>(&value), &value_size) == ERROR_SUCCESS) {
+                    os_version_info.major = value;
+                }
+                value_size = sizeof(value);
+                if (::RegQueryValueExW(hkey, L"CurrentMinorVersionNumber", nullptr, nullptr,
+                                       reinterpret_cast<::LPBYTE>(&value), &value_size) == ERROR_SUCCESS) {
+                    os_version_info.minor = value;
+                }
+                wchar_t build[32] = {};
+                value_size = sizeof(build);
+                if (::RegQueryValueExW(hkey, L"CurrentBuildNumber", nullptr, nullptr, reinterpret_cast<::LPBYTE>(build),
+                                       &value_size) == ERROR_SUCCESS) {
+                    os_version_info.build = static_cast<uint32_t>(to_uint64(wcharacter::to_string(build).view()));
+                }
             }
 
             ::RegCloseKey(hkey);
@@ -872,8 +891,11 @@ string sysinfo::os_version_info::version() const {
 // NOLINTNEXTLINE(bugprone-exception-escape)
 sysinfo::sysinfo() noexcept {
     try {
-        lock<mutex> lock(sysinfo_mutex());
-        init();
+        {
+            lock<mutex> lock(sysinfo_mutex());
+            init();
+        }
+        probe_hardware();
     } catch (const exception& e) {
         NEFORCE_REPORT_EXCEPTION(e);
         initialized_.store(false, memory_order_release);
@@ -931,6 +953,14 @@ void sysinfo::init() {
     auto computer_name_length = static_cast<::DWORD>(sizeof(computer_name) / sizeof(wchar_t));
     if (::GetComputerNameW(computer_name, &computer_name_length) == TRUE) {
         hostname_ = wcharacter::to_string(computer_name);
+    }
+    if (hostname_.empty()) {
+        wchar_t environment_name[256] = {};
+        const ::DWORD length = ::GetEnvironmentVariableW(
+                L"COMPUTERNAME", environment_name, static_cast<::DWORD>(sizeof(environment_name) / sizeof(wchar_t)));
+        if (length > 0) {
+            hostname_ = wcharacter::to_string(environment_name);
+        }
     }
 
 #else
@@ -1088,6 +1118,10 @@ sysinfo& sysinfo::instance() noexcept {
     return instance;
 }
 
+string sysinfo::host_name() const { return hostname_; }
+
+sysinfo::os_version_info sysinfo::os_version() const { return os_version_info_; }
+
 void sysinfo::refresh() noexcept {
     try {
         lock<mutex> lock(sysinfo_mutex());
@@ -1111,6 +1145,10 @@ sysinfo::memory_info sysinfo::memory_status() {
         info.available_virtual = mem_status.ullAvailVirtual;
         info.total_page_file = mem_status.ullTotalPageFile;
         info.available_page_file = mem_status.ullAvailPageFile;
+    }
+    ::PERFORMANCE_INFORMATION performance{};
+    if (::GetPerformanceInfo(&performance, sizeof(performance)) == TRUE) {
+        info.cached_physical = static_cast<uint64_t>(performance.SystemCache) * performance.PageSize;
     }
 #else
     struct ::sysinfo linux_sysinfo{};
@@ -1152,6 +1190,19 @@ sysinfo::memory_info sysinfo::memory_status() {
                     ignore = value.trim_right();
                     if (!value.empty()) {
                         info.available_physical = to_uint64(value) * 1024;
+                    }
+                }
+            } else if (line.starts_with("Cached:") || line.starts_with("SReclaimable:")) {
+                const size_t colon = line.find(':');
+                if (colon != string::npos) {
+                    string_view value = line.view(colon + 1);
+                    ignore = value.trim_left();
+                    if (value.ends_with("kB")) {
+                        value = value.substr(0, value.length() - 2);
+                    }
+                    ignore = value.trim_right();
+                    if (!value.empty()) {
+                        info.cached_physical += to_uint64(value) * 1024;
                     }
                 }
             }

@@ -2,6 +2,36 @@
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
+namespace {
+    element column_cell(element cell, const int column, const vector<int>& widths,
+                        const vector<enum style::align>& aligns) {
+        const int width = column < static_cast<int>(widths.size()) ? widths[static_cast<size_t>(column)] : 0;
+        if (width <= 0) {
+            return cell;
+        }
+        const auto align =
+                column < static_cast<int>(aligns.size()) ? aligns[static_cast<size_t>(column)] : style::align::start;
+        box_props props;
+        props.dir = style::direction::row;
+        element row;
+        switch (align) {
+            case style::align::end:
+                row = element::hbox({element::spacer(1), move(cell)}, props);
+                break;
+            case style::align::center:
+                row = element::hbox({element::spacer(1), move(cell), element::spacer(1)}, props);
+                break;
+            default:
+                row = element::hbox({move(cell), element::spacer(1)}, props);
+                break;
+        }
+        tui::style fixed;
+        fixed.width = style::size_hint{style::size_hint::fixed, width};
+        return row.with_style(fixed);
+    }
+} // namespace
+
+
 table::table(vector<vector<string>> data) {
     rows_ = static_cast<int>(data.size());
     cols_ = 0;
@@ -85,8 +115,20 @@ table& table::decorate_alternate_row(const decorator& even, const decorator& odd
     return *this;
 }
 
+table& table::column_widths(vector<int> widths) {
+    column_widths_ = move(widths);
+    return *this;
+}
+
+table& table::column_aligns(vector<enum style::align> aligns) {
+    column_aligns_ = move(aligns);
+    return *this;
+}
+
 element table::render() const {
-    const string vbar = (selection_border_ == style::border::double_) ? "\xe2\x95\x91" : "\xe2\x94\x82"; // ║ or │
+    const string vbar = (selection_border_ == style::border::double_)
+                                ? "\xe2\x95\x91"
+                                : (selection_border_ == style::border::ascii ? "|" : "\xe2\x94\x82"); // ║ / | / │
 
     elements rows;
     for (int r = 0; r < rows_; ++r) {
@@ -103,6 +145,7 @@ element table::render() const {
                     cell = odd_decorator_(cell);
                 }
             }
+            cell = column_cell(move(cell), c, column_widths_, column_aligns_);
 
             if (selected_[r][c] && selection_border_ != style::border::none) {
                 if (c == 0) {

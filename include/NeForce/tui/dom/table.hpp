@@ -103,6 +103,22 @@ public:
     table& decorate_alternate_row(const decorator& even, const decorator& odd);
 
     /**
+     * @brief 设置固定列宽
+     * @param widths 每列宽度，0 表示按内容自适应；缺失列按自适应处理
+     * @return 自身引用
+     * @note 宽度不含选择边框；单元格内容超宽时由调用方自行截断
+     */
+    table& column_widths(vector<int> widths);
+
+    /**
+     * @brief 设置列对齐
+     * @param aligns 每列对齐方式
+     * @return 自身引用
+     * @note 仅在对应列设置了固定宽度时生效
+     */
+    table& column_aligns(vector<enum style::align> aligns);
+
+    /**
      * @brief 构建表格元素
      * @return element
      */
@@ -119,6 +135,8 @@ private:
     decorator even_decorator_;
     decorator odd_decorator_;
     bool alt_row_ = false;
+    vector<int> column_widths_;
+    vector<enum style::align> column_aligns_;
 };
 
 /** @} */ // TUI
