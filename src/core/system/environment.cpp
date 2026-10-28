@@ -7,9 +7,14 @@
 #    include <shlobj.h>
 #    include <urlmon.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <cstdlib>
 #    include <unistd.h>
+#endif
+#ifdef NEFORCE_PLATFORM_FREEBSD
+extern "C" {
+extern char** environ;
+}
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 

@@ -10,7 +10,10 @@
       "features": ["tools"]
     },
     "libpq",
-    "libmysql",
+    {
+      "name": "libmysql",
+      "platform": "!freebsd"
+    },
     "zlib",
     "lz4",
     "zstd",
@@ -35,7 +38,12 @@
     },
     "mysql": {
       "description": "MySQL support",
-      "dependencies": ["libmysql"]
+      "dependencies": [
+        {
+          "name": "libmysql",
+          "platform": "!freebsd"
+        }
+      ]
     },
     "sqlite3": {
       "description": "SQLite3 support",

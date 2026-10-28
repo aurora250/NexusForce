@@ -65,8 +65,9 @@ namespace {
         }
 
         char cmd[1024];
+        // TODO: using neforce::format instead
         const int written = ::snprintf(cmd, sizeof(cmd), "addr2line -e '%s' -f -C 0x%zx 2>/dev/null", info.dli_fname,
-                                       reinterpret_cast<size_t>(addr));
+                                       static_cast<size_t>(reinterpret_cast<uintptr_t>(addr)));
         if (written < 0 || static_cast<size_t>(written) >= sizeof(cmd)) {
             return {};
         }

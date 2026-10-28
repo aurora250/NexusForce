@@ -2,6 +2,7 @@
 #include <NeForce/core/string/width.hpp>
 #include <NeForce/tui/component/component.hpp>
 #include <NeForce/tui/chart/chart.hpp>
+#include <NeForce/tui/chart/canvas_chart.hpp>
 #include <NeForce/tui/dom/layout.hpp>
 #include <NeForce/tui/dom/theme.hpp>
 #include <NeForce/tui/headless.hpp>
@@ -1147,4 +1148,24 @@ TEST(TuiChartTest, StreamBucketingIsOptInAndAggregates) {
     spec.stream_buckets = 0;
     spec.stream_samples = 4;
     EXPECT_EQ(chart_point_count(spec), 4U);
+}
+
+TEST(TuiChartTest, CanvasWindowProjectUsesWindowEnd) {
+    deque<double> values;
+    for (int index = 1; index <= 10; ++index) {
+        values.push_back(static_cast<double>(index));
+    }
+    canvas_chart_window window;
+    window.samples = 10;
+    window.end = 11;
+
+    vector<canvas_chart_range> columns;
+    window.project(values, 5, columns);
+
+    ASSERT_EQ(columns.size(), 5U);
+    EXPECT_DOUBLE_EQ(columns[0].low, 2.0);
+    EXPECT_DOUBLE_EQ(columns[0].high, 3.0);
+    EXPECT_DOUBLE_EQ(columns[0].last, 3.0);
+    EXPECT_DOUBLE_EQ(columns[4].low, 10.0);
+    EXPECT_DOUBLE_EQ(columns[4].high, 10.0);
 }

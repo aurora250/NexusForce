@@ -14,8 +14,9 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <cstdlib>
+#    include <climits>
 #    include <dirent.h>
 #    include <fcntl.h>
 #    include <sys/stat.h>
@@ -567,8 +568,8 @@ bool path::exists(const string& path) {
     const wstring wpath = character::to_wstring(path.view());
     return ::GetFileAttributesW(wpath.data()) != INVALID_FILE_ATTRIBUTES;
 #else
-    struct ::stat64 st{};
-    return ::stat64(path.data(), &st) != -1;
+    struct ::stat st{};
+    return ::stat(path.data(), &st) != -1;
 #endif
 }
 
@@ -580,8 +581,8 @@ bool path::is_directory(const string& path) {
     const ::DWORD attrib = ::GetFileAttributesW(wpath.data());
     return attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY) != 0U;
 #else
-    struct ::stat64 st{};
-    if (::stat64(path.data(), &st) == -1) {
+    struct ::stat st{};
+    if (::stat(path.data(), &st) == -1) {
         return false;
     }
     return S_ISDIR(st.st_mode);
@@ -596,8 +597,8 @@ bool path::is_file(const string& path) {
     const ::DWORD attrib = ::GetFileAttributesW(wpath.data());
     return attrib != INVALID_FILE_ATTRIBUTES && (attrib & FILE_ATTRIBUTE_DIRECTORY) == 0U;
 #else
-    struct ::stat64 st{};
-    if (::stat64(path.data(), &st) == -1) {
+    struct ::stat st{};
+    if (::stat(path.data(), &st) == -1) {
         return false;
     }
     return S_ISREG(st.st_mode) || S_ISLNK(st.st_mode);

@@ -26,25 +26,33 @@
 #        include <immintrin.h>
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/file/file.hpp>
 #    include <dirent.h>
 #    include <ifaddrs.h>
 #    include <net/if.h>
-#    include <netpacket/packet.h>
 #    include <arpa/inet.h>
 #    include <netinet/in.h>
 #    include <sys/auxv.h>
-#    include <sys/sysinfo.h>
 #    include <sys/statvfs.h>
 #    include <sys/utsname.h>
 #    include <unistd.h>
+#    include <climits>
 #    include <cstdio>
 #    include <cstdlib>
 #    include <ctime>
 #    ifdef NEFORCE_ARCH_X86
 #        include <cpuid.h>
 #    endif
+#endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <netpacket/packet.h>
+#    include <sys/sysinfo.h>
+#endif
+#ifdef NEFORCE_PLATFORM_FREEBSD
+#    include <net/if_dl.h>
+#    include <sys/sysctl.h>
+#    include <sys/time.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -80,7 +88,7 @@ namespace {
         return string_view::npos;
     }
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 
     string read_file_all(const char* filepath) {
         string content;
@@ -152,6 +160,7 @@ namespace {
         return bits;
     }
 
+#    ifdef NEFORCE_PLATFORM_LINUX
     string mac_address_of(const ::sockaddr_ll& address) {
         const size_t count = address.sll_halen > 6 ? 6 : static_cast<size_t>(address.sll_halen);
         string text;
@@ -166,6 +175,7 @@ namespace {
         }
         return text;
     }
+#    endif
 
     vector<sysinfo::mount_point> read_mount_entries() {
         vector<sysinfo::mount_point> entries;
@@ -554,8 +564,8 @@ namespace {
 #else
         const string data = read_file_all("/proc/cpuinfo");
         if (data.empty()) {
-            cpu_info.cores = static_cast<uint32_t>(::sysconf(::_SC_NPROCESSORS_CONF));
-            cpu_info.logical_processors = static_cast<uint32_t>(::sysconf(::_SC_NPROCESSORS_ONLN));
+            cpu_info.cores = static_cast<uint32_t>(::sysconf(_SC_NPROCESSORS_CONF));
+            cpu_info.logical_processors = static_cast<uint32_t>(::sysconf(_SC_NPROCESSORS_ONLN));
             return;
         }
 
@@ -1150,6 +1160,34 @@ sysinfo::memory_info sysinfo::memory_status() {
     if (::GetPerformanceInfo(&performance, sizeof(performance)) == TRUE) {
         info.cached_physical = static_cast<uint64_t>(performance.SystemCache) * performance.PageSize;
     }
+
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    uint64_t physmem = 0;
+    ::size_t length = sizeof(physmem);
+    if (::sysctlbyname("hw.physmem", &physmem, &length, nullptr, 0) == 0) {
+        info.total_physical = physmem;
+    }
+    unsigned int free_count = 0;
+    unsigned int inactive_count = 0;
+    unsigned int page_size = 0;
+    length = sizeof(free_count);
+    ::sysctlbyname("vm.stats.vm.v_free_count", &free_count, &length, nullptr, 0);
+    length = sizeof(inactive_count);
+    ::sysctlbyname("vm.stats.vm.v_inactive_count", &inactive_count, &length, nullptr, 0);
+    length = sizeof(page_size);
+    ::sysctlbyname("vm.stats.vm.v_page_size", &page_size, &length, nullptr, 0);
+    if (page_size == 0) {
+        page_size = 4096;
+    }
+    info.available_physical = static_cast<uint64_t>(free_count + inactive_count) * page_size;
+    uint64_t swap_total = 0;
+    length = sizeof(swap_total);
+    ::sysctlbyname("vm.swap_total", &swap_total, &length, nullptr, 0);
+    info.total_page_file = swap_total;
+    info.available_page_file = 0;
+    info.total_virtual = info.total_physical + swap_total;
+    info.available_virtual = info.available_physical;
+
 #else
     struct ::sysinfo linux_sysinfo{};
     if (::sysinfo(&linux_sysinfo) == 0) {
@@ -1355,6 +1393,9 @@ sysinfo::simd_info sysinfo::probe_simd() {
             info.features |= static_cast<uint32_t>(simd_instruction::neon);
         }
 #        endif
+#    elif defined(NEFORCE_PLATFORM_FREEBSD)
+        unsigned long hwcap = 0;
+        ::elf_aux_info(AT_HWCAP, &hwcap, sizeof(hwcap));
 #    else
         // Linux UAPI HWCAP bits: NEON(12) on arm32, ASIMD(1), AES(3), PMULL(4), SVE(22) on aarch64.
         const unsigned long hwcap = ::getauxval(AT_HWCAP);
@@ -1909,12 +1950,30 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
         iface.is_up = (current->ifa_flags & IFF_UP) != 0;
         iface.is_loopback = (current->ifa_flags & IFF_LOOPBACK) != 0;
 
+#    ifdef NEFORCE_PLATFORM_LINUX
         if (current->ifa_addr->sa_family == AF_PACKET) {
             if (iface.mac.empty()) {
                 iface.mac = mac_address_of(*reinterpret_cast<const ::sockaddr_ll*>(current->ifa_addr));
             }
             continue;
         }
+#    endif
+#    ifdef NEFORCE_PLATFORM_FREEBSD
+        if (current->ifa_addr->sa_family == AF_LINK) {
+            if (iface.mac.empty()) {
+                const auto* link = reinterpret_cast<const ::sockaddr_dl*>(current->ifa_addr);
+                if (link->sdl_alen == 6) {
+                    const auto* hw = reinterpret_cast<const uint8_t*>(LLADDR(link));
+                    char text[18] = {};
+                    // TODO: using neforce::format instead
+                    ::snprintf(text, sizeof(text), "%02X:%02X:%02X:%02X:%02X:%02X", hw[0], hw[1], hw[2], hw[3], hw[4],
+                               hw[5]);
+                    iface.mac = text;
+                }
+            }
+            continue;
+        }
+#    endif
         if (current->ifa_addr->sa_family != AF_INET || !iface.address.empty()) {
             continue;
         }
@@ -1983,6 +2042,15 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
 uint64_t sysinfo::uptime_seconds() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return static_cast<uint64_t>(::GetTickCount64()) / 1000;
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    ::timeval boot_time{};
+    ::size_t length = sizeof(boot_time);
+    if (::sysctlbyname("kern.boottime", &boot_time, &length, nullptr, 0) != 0) {
+        return 0;
+    }
+    const auto now = static_cast<uint64_t>(::time(nullptr));
+    const auto boot = static_cast<uint64_t>(boot_time.tv_sec);
+    return now > boot ? now - boot : 0;
 #else
     struct ::sysinfo info;
     if (::sysinfo(&info) != 0) {

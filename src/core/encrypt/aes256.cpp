@@ -224,20 +224,20 @@ namespace {
         // standard AES round (AddRoundKey after MixColumns), so the round
         // keys are shifted one position: full rounds use keys 0..12, the
         // final AESE uses key 13 and key 14 is XORed separately.
-        simd::vec128_t state = ::vld1q_u8(src);
+        simd::vec128_t state = vld1q_u8(src);
 
         for (int round = 0; round < 13; ++round) {
-            state = ::vaeseq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(
-                                               expanded_key + static_cast<ptrdiff_t>(round * 16))));
+            state = ::vaeseq_u8(state, vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key +
+                                                                                 static_cast<ptrdiff_t>(round * 16))));
             state = ::vaesmcq_u8(state);
         }
 
-        state = ::vaeseq_u8(
-                state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key + static_cast<ptrdiff_t>(13 * 16))));
-        state = ::veorq_u8(
-                state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key + static_cast<ptrdiff_t>(14 * 16))));
+        state = ::vaeseq_u8(state,
+                            vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key + static_cast<ptrdiff_t>(13 * 16))));
+        state = ::veorq_u8(state,
+                           vld1q_u8(reinterpret_cast<const uint8_t*>(expanded_key + static_cast<ptrdiff_t>(14 * 16))));
 
-        ::vst1q_u8(dst, state);
+        vst1q_u8(dst, state);
 
 #else
         byte_t block[16];
@@ -283,23 +283,23 @@ namespace {
         // round key is InvMixColumns-transformed (AESIMC) on the fly and the
         // keys are shifted one position: the first round uses raw key 14,
         // full rounds use keys 13..2 and key 0 is XORed separately.
-        simd::vec128_t state = ::vld1q_u8(src);
+        simd::vec128_t state = vld1q_u8(src);
 
-        state = ::vaesdq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key +
-                                                                               static_cast<ptrdiff_t>(14 * 16))));
+        state = ::vaesdq_u8(
+                state, vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key + static_cast<ptrdiff_t>(14 * 16))));
         state = ::vaesimcq_u8(state);
 
         for (int round = 13; round >= 2; --round) {
-            state = ::vaesdq_u8(state, ::vaesimcq_u8(::vld1q_u8(reinterpret_cast<const uint8_t*>(
+            state = ::vaesdq_u8(state, ::vaesimcq_u8(vld1q_u8(reinterpret_cast<const uint8_t*>(
                                                inv_expanded_key + static_cast<ptrdiff_t>(round * 16)))));
             state = ::vaesimcq_u8(state);
         }
 
-        state = ::vaesdq_u8(state, ::vaesimcq_u8(::vld1q_u8(reinterpret_cast<const uint8_t*>(
+        state = ::vaesdq_u8(state, ::vaesimcq_u8(vld1q_u8(reinterpret_cast<const uint8_t*>(
                                            inv_expanded_key + static_cast<ptrdiff_t>(16)))));
-        state = ::veorq_u8(state, ::vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key)));
+        state = ::veorq_u8(state, vld1q_u8(reinterpret_cast<const uint8_t*>(inv_expanded_key)));
 
-        ::vst1q_u8(dst, state);
+        vst1q_u8(dst, state);
 
 #else
         byte_t block[16];

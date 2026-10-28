@@ -1,5 +1,5 @@
 #include <NeForce/core/file/file.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <cerrno>
 #    include <sys/stat.h>
 #    include <unistd.h>
@@ -23,7 +23,7 @@ namespace {
             -1;
 #endif
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     ::mode_t convert_attributes(const file_attri attr) {
         ::mode_t mode = 0;
         if ((static_cast<native_id_type>(attr) & S_IWUSR) == 0) {
@@ -1004,8 +1004,8 @@ file::size_type file::size() const {
     }
     return static_cast<size_type>(sz.QuadPart);
 #else
-    struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) {
+    struct ::stat st{};
+    if (::fstat(handle_, &st) == -1) {
         set_last_error();
         return 0;
     }
@@ -1038,11 +1038,19 @@ uint64_t file::size64() const {
     }
     return static_cast<uint64_t>(sz.QuadPart);
 #else
+#    ifdef NEFORCE_PLATFORM_LINUX
     struct ::stat64 st{};
     if (::fstat64(handle_, &st) == -1) {
         return 0;
     }
     return static_cast<uint64_t>(st.st_size);
+#    else
+    struct ::stat st{};
+    if (::fstat(handle_, &st) == -1) {
+        return 0;
+    }
+    return static_cast<uint64_t>(st.st_size);
+#    endif
 #endif
 }
 

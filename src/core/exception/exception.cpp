@@ -10,13 +10,13 @@
 extern "C" int __cxa_uncaught_exception() __attribute__((weak));
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <exception>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
 int uncaught_exceptions() noexcept {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    ifdef NEFORCE_STANDARD_17
     return std::uncaught_exceptions();
 #    else

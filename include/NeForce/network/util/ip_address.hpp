@@ -22,8 +22,11 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <netinet/in.h>
+#    ifdef NEFORCE_PLATFORM_FREEBSD
+#        include <sys/socket.h>
+#    endif
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -58,15 +61,17 @@ public:
         UNIX = AF_UNIX,    ///< Unix 域套接字
         INET4 = AF_INET,   ///< IPv4 互联网协议族
         INET6 = AF_INET6,  ///< IPv6 互联网协议族
-#ifdef NEFORCE_PLATFORM_LINUX
-        PACKET = AF_PACKET,       ///< 链路层数据包套接字
+#ifdef NEFORCE_PLATFORM_POSIX
         NETLINK = AF_NETLINK,     ///< 内核用户空间通信
         BLUETOOTH = AF_BLUETOOTH, ///< 蓝牙通信协议族
-        CAN = AF_CAN,             ///< CAN 总线协议族
-        ALG = AF_ALG,             ///< 内核加密 API 接口
-        VSOCK = AF_VSOCK,         ///< 虚拟机套接字
-        NFC = AF_NFC,             ///< 近场通信协议族
-        XDP = AF_XDP,             ///< 高性能数据路径
+#endif
+#ifdef NEFORCE_PLATFORM_LINUX
+        PACKET = AF_PACKET, ///< 链路层数据包套接字
+        CAN = AF_CAN,       ///< CAN 总线协议族
+        ALG = AF_ALG,       ///< 内核加密 API 接口
+        VSOCK = AF_VSOCK,   ///< 虚拟机套接字
+        NFC = AF_NFC,       ///< 近场通信协议族
+        XDP = AF_XDP,       ///< 高性能数据路径
 #endif
     };
 

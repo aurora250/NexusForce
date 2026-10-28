@@ -87,7 +87,7 @@ using int32_t = int;
  * Linux为long，Windows为long long
  */
 using int64_t =
-#ifdef NEFORCE_PLATFORM_LINUX64
+#ifdef NEFORCE_PLATFORM_POSIX64
         long;
 #else
         long long;
@@ -118,7 +118,7 @@ using uint32_t = unsigned int;
  * Linux为unsigned long，Windows为unsigned long long
  */
 using uint64_t =
-#ifdef NEFORCE_PLATFORM_LINUX64
+#ifdef NEFORCE_PLATFORM_POSIX64
         unsigned long;
 #else
         unsigned long long;

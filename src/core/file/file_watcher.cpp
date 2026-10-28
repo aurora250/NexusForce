@@ -2,14 +2,16 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/file_watcher.hpp>
 #include <NeForce/core/string/to_string.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <cerrno>
 #    include <dirent.h>
 #    include <poll.h>
-#    include <sys/eventfd.h>
-#    include <sys/inotify.h>
 #    include <sys/stat.h>
 #    include <unistd.h>
+#endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <sys/eventfd.h>
+#    include <sys/inotify.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -51,8 +53,8 @@ namespace {
                     continue;
                 }
                 const string child = full + "/" + name.data();
-                struct ::stat64 st{};
-                if (::lstat64(child.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
+                struct ::stat st{};
+                if (::lstat(child.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
                     pending.push_back(rel.empty() ? string(name) : rel + "/" + string(name));
                 }
             }
@@ -105,7 +107,7 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
         return false;
     }
 
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     inotify_fd_ = ::inotify_init1(IN_NONBLOCK);
     if (inotify_fd_ == -1) {
         watching_.store(false);
@@ -150,6 +152,10 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
     if (recursive_) {
         add_subdir_watches(inotify_fd_, mask, watch_path_.str(), linux_watch_map_);
     }
+#else
+    // TODO: implement the FreeBSD watcher (kqueue); watching is unsupported for now.
+    watching_.store(false);
+    return false;
 #endif
 
     watch_thread_ = thread(&file_watcher::watch_thread_func, this);
@@ -171,7 +177,7 @@ void file_watcher::stop() {
     if (dir_handle_ != INVALID_HANDLE_VALUE) {
         ::CancelIoEx(dir_handle_, nullptr);
     }
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (event_fd_ != -1) {
         constexpr uint64_t value = 1;
         ignore = ::write(event_fd_, &value, sizeof(value));
@@ -191,7 +197,7 @@ void file_watcher::stop() {
         ::CloseHandle(dir_handle_);
         dir_handle_ = INVALID_HANDLE_VALUE;
     }
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (watch_descriptor_ != -1) {
         ::inotify_rm_watch(inotify_fd_, watch_descriptor_);
         watch_descriptor_ = -1;
@@ -205,6 +211,12 @@ void file_watcher::stop() {
         inotify_fd_ = -1;
     }
     linux_watch_map_.clear();
+#else
+    inotify_fd_ = -1;
+    watch_descriptor_ = -1;
+    event_fd_ = -1;
+    watch_mask_ = 0;
+    linux_watch_map_.clear();
 #endif
 
     {
@@ -214,15 +226,19 @@ void file_watcher::stop() {
 }
 
 void file_watcher::watch_thread_func() {
+#ifdef NEFORCE_PLATFORM_FREEBSD
+    // TODO: implement the FreeBSD watcher (kqueue); watching is unsupported for now.
+    return;
+#else
     buffer_.resize(g_watch_buffer_size);
 
     string path_prefix = watch_path_.str();
     if (!path_prefix.empty() && path_prefix.back() != path::preferred_separator) {
         path_prefix += path::preferred_separator;
     }
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#    ifdef NEFORCE_PLATFORM_WINDOWS
     const size_t prefix_len = path_prefix.size();
-#endif
+#    endif
 
     struct batched_event {
         string file_name;
@@ -231,7 +247,7 @@ void file_watcher::watch_thread_func() {
     vector<batched_event> event_batch;
     event_batch.reserve(g_event_batch_capacity);
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#    ifdef NEFORCE_PLATFORM_WINDOWS
     ::OVERLAPPED local_overlapped{};
     memory_zero(&local_overlapped);
     local_overlapped.hEvent = ::CreateEvent(nullptr, TRUE, FALSE, nullptr);
@@ -363,7 +379,7 @@ void file_watcher::watch_thread_func() {
 
     ::CloseHandle(local_overlapped.hEvent);
 
-#else
+#    elif defined(NEFORCE_PLATFORM_LINUX)
     ::pollfd fds[2];
     fds[0].fd = inotify_fd_;
     fds[0].events = POLLIN;
@@ -471,6 +487,7 @@ void file_watcher::watch_thread_func() {
             }
         }
     }
+#    endif
 #endif
 }
 

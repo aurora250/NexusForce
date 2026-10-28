@@ -23,7 +23,7 @@
 #        include <wincon.h>
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <csignal>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

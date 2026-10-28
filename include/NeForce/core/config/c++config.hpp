@@ -76,7 +76,41 @@
 #    endif
 #endif
 
-#if !(defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_LINUX))
+#if defined(__FreeBSD__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @def NEFORCE_PLATFORM_FREEBSD
+ * @brief 定义在FreeBSD平台编译
+ */
+#    define NEFORCE_PLATFORM_FREEBSD 1
+
+#    if defined(__LP64__) || defined(_LP64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @def NEFORCE_PLATFORM_FREEBSD64
+ * @brief 定义在64位FreeBSD平台编译
+ */
+#        define NEFORCE_PLATFORM_FREEBSD64 1
+#    else
+/**
+ * @def NEFORCE_PLATFORM_FREEBSD32
+ * @brief 定义在32位FreeBSD平台编译
+ */
+#        define NEFORCE_PLATFORM_FREEBSD32 1
+#    endif
+#endif
+
+
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
+#    define NEFORCE_PLATFORM_POSIX
+#    if defined(NEFORCE_PLATFORM_LINUX64) || defined(NEFORCE_PLATFORM_FREEBSD64)
+#        define NEFORCE_PLATFORM_POSIX64
+#    endif
+#    if defined(NEFORCE_PLATFORM_LINUX32) || defined(NEFORCE_PLATFORM_FREEBSD32)
+#        define NEFORCE_PLATFORM_POSIX32
+#    endif
+#endif
+
+
+#if !(defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD))
 #    error "NeForce: 不支持的操作系统"
 #endif
 

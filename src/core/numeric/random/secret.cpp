@@ -16,7 +16,7 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <sys/random.h>
 #    include <sys/fcntl.h>
 #    include <unistd.h>

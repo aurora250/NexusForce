@@ -2,11 +2,17 @@
 #include <NeForce/core/async/thread.hpp>
 #include <NeForce/core/exception/terminate.hpp>
 #include <NeForce/core/time/clocks.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <cerrno>
+#    include <unistd.h>
+#endif
+#ifdef NEFORCE_PLATFORM_LINUX
 #    include <sys/epoll.h>
 #    include <sys/eventfd.h>
-#    include <unistd.h>
+#endif
+#ifdef NEFORCE_PLATFORM_FREEBSD
+#    include <fcntl.h>
+#    include <poll.h>
 #endif
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <WinSock2.h>
@@ -210,6 +216,22 @@ io_context::io_context() {
     wake_info.fd = wake_fd_;
     wake_info.events = epoll_event::in;
     fd_map_[wake_fd_] = move(wake_info);
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    int fds[2] = {-1, -1};
+    if (::pipe(fds) == 0) {
+        for (const int fd: fds) {
+            const int flags = ::fcntl(fd, F_GETFL);
+            ::fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+            ::fcntl(fd, F_SETFD, FD_CLOEXEC);
+        }
+        wake_fd_ = fds[0];
+        wake_write_fd_ = fds[1];
+
+        fd_info wake_info{};
+        wake_info.fd = wake_fd_;
+        wake_info.events = epoll_event::in;
+        fd_map_[wake_fd_] = move(wake_info);
+    }
 #else
     iocp_handle_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 0);
     wake_event_ = ::CreateEventW(nullptr, TRUE, FALSE, nullptr);
@@ -247,6 +269,13 @@ io_context::~io_context() {
     }
     if (wake_fd_ >= 0) {
         ::close(wake_fd_);
+    }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    if (wake_fd_ >= 0) {
+        ::close(wake_fd_);
+    }
+    if (wake_write_fd_ >= 0) {
+        ::close(wake_write_fd_);
     }
 #else
     if (iocp_handle_ != nullptr) {
@@ -298,6 +327,17 @@ void io_context::add_fd(native_handle_type fd, epoll_event events, fd_callback c
         registered_fds_.fetch_add(1, memory_order_relaxed);
     }
     fd_map_[fd] = move(info);
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    lock<mutex> lk(fd_mutex_);
+    fd_info info{};
+    info.fd = fd;
+    info.events = events;
+    info.callback = move(cb);
+    if (!fd_map_.contains(fd)) {
+        registered_fds_.fetch_add(1, memory_order_relaxed);
+    }
+    fd_map_[fd] = move(info);
+    wake();
 #else
     ::CreateIoCompletionPort(reinterpret_cast<::HANDLE>(fd), iocp_handle_, fd, 0);
 
@@ -347,6 +387,8 @@ void io_context::mod_fd(native_handle_type fd, epoll_event events, bool edge_tri
     ev.events = static_cast<uint32_t>(events | (edge_triggered ? epoll_event::et : epoll_event::none));
     ev.data.fd = fd;
     ::epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, fd, &ev);
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    wake();
 #else
     const auto eit = fd_events_.find(fd);
     if (eit != fd_events_.end() && eit->second != nullptr) {
@@ -366,6 +408,15 @@ void io_context::remove_fd(native_handle_type fd) {
         }
     }
     ::epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, fd, nullptr);
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    lock<mutex> lk(fd_mutex_);
+    if (fd_map_.contains(fd)) {
+        fd_map_.erase(fd);
+        if (fd != wake_fd_) {
+            registered_fds_.fetch_sub(1, memory_order_relaxed);
+        }
+    }
+    wake();
 #else
     lock<mutex> lk(fd_mutex_);
     if (fd_map_.contains(fd)) {
@@ -391,6 +442,9 @@ void io_context::wake() noexcept {
 #ifdef NEFORCE_PLATFORM_LINUX
     constexpr uint64_t val = 1;
     ::write(wake_fd_, &val, sizeof(val));
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    constexpr uint8_t val = 1;
+    ::write(wake_write_fd_, &val, sizeof(val));
 #else
     ::PostQueuedCompletionStatus(iocp_handle_, 0, 0, nullptr);
 #endif
@@ -400,7 +454,7 @@ size_t io_context::run() {
     running_.fetch_add(1, memory_order_relaxed);
     size_t total = 0;
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
     while (!stopped_.load(memory_order_acquire)) {
         const uint64_t deadline = next_timer_deadline();
 
@@ -567,6 +621,72 @@ size_t io_context::run_one(int timeout_ms) {
             }
             if (cb) {
                 cb(fd, static_cast<epoll_event>(events[i].events), error_code{});
+                ++count;
+            }
+        }
+
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+        vector<::pollfd> pfds;
+        vector<native_handle_type> fds;
+        {
+            lock<mutex> lk(fd_mutex_);
+            pfds.reserve(fd_map_.size());
+            fds.reserve(fd_map_.size());
+            for (const auto& pair: fd_map_) {
+                ::pollfd pfd{};
+                pfd.fd = pair.first;
+                if ((pair.second.events & epoll_event::in) != epoll_event::none) {
+                    pfd.events |= POLLIN;
+                }
+                if ((pair.second.events & epoll_event::out) != epoll_event::none) {
+                    pfd.events |= POLLOUT;
+                }
+                pfds.push_back(pfd);
+                fds.push_back(pair.first);
+            }
+        }
+
+        const int n = ::poll(pfds.data(), static_cast<::nfds_t>(pfds.size()), wait_ms);
+        if (n < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+            return 0;
+        }
+
+        for (size_t i = 0; i < pfds.size(); ++i) {
+            if (pfds[i].revents == 0) {
+                continue;
+            }
+            const int fd = fds[i];
+            if (fd == wake_fd_) {
+                char buf[64];
+                while (::read(wake_fd_, buf, sizeof(buf)) > 0) {
+                }
+                continue;
+            }
+
+            epoll_event events = epoll_event::none;
+            if ((pfds[i].revents & POLLIN) != 0) {
+                events = events | epoll_event::in;
+            }
+            if ((pfds[i].revents & POLLOUT) != 0) {
+                events = events | epoll_event::out;
+            }
+            if ((pfds[i].revents & (POLLERR | POLLHUP)) != 0) {
+                events = events | epoll_event::in | epoll_event::out;
+            }
+
+            fd_callback cb;
+            {
+                lock<mutex> lk(fd_mutex_);
+                const auto it = fd_map_.find(fd);
+                if (it != fd_map_.end()) {
+                    cb = it->second.callback;
+                }
+            }
+            if (cb) {
+                cb(fd, events, error_code{});
                 ++count;
             }
         }

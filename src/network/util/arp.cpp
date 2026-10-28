@@ -3,15 +3,17 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <iphlpapi.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/time/clocks.hpp>
+#    include <sys/ioctl.h>
+#    include <fcntl.h>
+#    include <cerrno>
+#endif
+#ifdef NEFORCE_PLATFORM_LINUX
 #    include <linux/if_ether.h>
 #    include <linux/if_packet.h>
 #    include <linux/if_arp.h>
 #    include <linux/if.h>
-#    include <sys/ioctl.h>
-#    include <fcntl.h>
-#    include <cerrno>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -135,6 +137,11 @@ bool arp::open(const char* iface) {
     opened_ = true;
     return true;
 
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    // TODO: FreeBSD raw socket access (bpf) is not implemented yet.
+    (void) iface;
+    return false;
+
 #else
     if (sock_.is_open()) {
         return true;
@@ -173,6 +180,11 @@ bool arp::open(const char* iface) {
 void arp::close() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     opened_ = false;
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    sock_.close();
+    local_mac_ = mac_address{};
+    local_ip_ = 0;
+    ifindex_ = -1;
 #else
     sock_.close();
 #endif
@@ -183,7 +195,10 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
         return none;
     }
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#ifdef NEFORCE_PLATFORM_FREEBSD
+    // TODO: FreeBSD raw socket access (bpf) is not implemented yet.
+    return none;
+#elif defined(NEFORCE_PLATFORM_WINDOWS)
     // Using system SendARP
     ::ULONG mac[2] = {0};
     ::ULONG mac_len = 6;

@@ -85,7 +85,6 @@ struct NEFORCE_API db_config {
     string charset;           ///< 数据库字符集
     ports port;               ///< 数据库端口号
 
-#ifdef NEFORCE_SUPPORT_POSTGRESQL
     /**
      * @brief 创建PostgreSQL数据库配置
      * @param db 数据库名
@@ -97,9 +96,7 @@ struct NEFORCE_API db_config {
      * - 用户名：postgres
      */
     static db_config for_postgresql(const string& db = "postgres");
-#endif
 
-#ifdef NEFORCE_SUPPORT_MYSQL
     /**
      * @brief 创建MySQL数据库配置
      * @param db 数据库名
@@ -111,9 +108,7 @@ struct NEFORCE_API db_config {
      * - 用户名：root
      */
     static db_config for_mysql(const string& db);
-#endif
 
-#ifdef NEFORCE_SUPPORT_SQLITE3
     /**
      * @brief 创建SQLite3数据库配置
      * @param file 数据库文件路径
@@ -123,9 +118,7 @@ struct NEFORCE_API db_config {
      * database字段存储文件路径。
      */
     static db_config for_sqlite(const string& file);
-#endif
 
-#ifdef NEFORCE_SUPPORT_HIREDIS
     /**
      * @brief 创建Redis数据库配置
      * @param db 数据库编号（作为字符串，如"0"）
@@ -136,7 +129,6 @@ struct NEFORCE_API db_config {
      * - database：数据库编号
      */
     static db_config for_redis(const string& db);
-#endif
 };
 
 /** @} */ // Database

@@ -23,7 +23,7 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/file/file.hpp>
 #    include <NeForce/core/system/console.hpp>
 #    include <cerrno>
@@ -369,7 +369,7 @@ namespace {
 
 #endif
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     char** build_argv(const string& executable, const vector<string>& args) {
         const size_t argc = args.size() + 2;
         auto* const argv = new char*[argc];
@@ -419,7 +419,7 @@ namespace {
 
     uint32_t process_page_size() noexcept {
         static const uint32_t cached = []() -> uint32_t {
-            const long ps = ::sysconf(::_SC_PAGESIZE);
+            const long ps = ::sysconf(_SC_PAGESIZE);
             return ps > 0 ? static_cast<uint32_t>(ps) : 4096;
         }();
         return cached;
@@ -462,7 +462,7 @@ namespace {
 
     uint64_t clock_ticks_per_second() noexcept {
         static const uint64_t cached = []() noexcept -> uint64_t {
-            const long ticks = ::sysconf(::_SC_CLK_TCK);
+            const long ticks = ::sysconf(_SC_CLK_TCK);
             return ticks > 0 ? static_cast<uint64_t>(ticks) : 100;
         }();
         return cached;

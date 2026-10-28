@@ -2849,13 +2849,13 @@ TEST(VirtualThreadTask, DestroyAwaitingTaskWhileSuspendedAsContinuation) {
         co_return 5;
     });
     EXPECT_FALSE(inner.is_done());
+    auto wrapper_body = [&]() -> virtual_thread_task<int> {
+        const int value = co_await inner;
+        wrapper_value.store(value, memory_order_release);
+        wrapper_finished.store(true, memory_order_release);
+        co_return value;
+    };
     {
-        auto wrapper_body = [&]() -> virtual_thread_task<int> {
-            const int value = co_await inner;
-            wrapper_value.store(value, memory_order_release);
-            wrapper_finished.store(true, memory_order_release);
-            co_return value;
-        };
         auto wrapper = virtual_thread::start(wrapper_body);
         EXPECT_FALSE(wrapper.is_done());
     }

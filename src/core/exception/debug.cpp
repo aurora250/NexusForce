@@ -4,7 +4,7 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <debugapi.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/file/file.hpp>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

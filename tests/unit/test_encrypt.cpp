@@ -636,26 +636,26 @@ TEST_F(SHA256Test, HashHexKnownVectorAbc) {
 
 TEST_F(SHA256Test, HashHexKnownVectorAbcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq) {
     const char* input = "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq";
-    auto result = SHA256::hash_hex({reinterpret_cast<const byte_t*>(input), strlen(input)});
+    auto result = SHA256::hash_hex({reinterpret_cast<const byte_t*>(input), string_length(input)});
     EXPECT_EQ(result, "248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1");
 }
 
 TEST_F(SHA256Test, HashHexKnownVectorAlphabet) {
     const char* input = "The quick brown fox jumps over the lazy dog";
-    auto result = SHA256::hash_hex({reinterpret_cast<const byte_t*>(input), strlen(input)});
+    auto result = SHA256::hash_hex({reinterpret_cast<const byte_t*>(input), string_length(input)});
     EXPECT_EQ(result, "d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592");
 }
 
 TEST_F(SHA256Test, HashHexKnownVectorAlphabetWithDot) {
     const char* input = "The quick brown fox jumps over the lazy dog.";
-    auto result = SHA256::hash_hex({reinterpret_cast<const byte_t*>(input), strlen(input)});
+    auto result = SHA256::hash_hex({reinterpret_cast<const byte_t*>(input), string_length(input)});
     EXPECT_EQ(result, "ef537f25c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c");
 }
 
 TEST_F(SHA256Test, HashHexKnownVector448Bits) {
     const char* input = "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopq"
                         "rsmnopqrstnopqrstu";
-    auto result = SHA256::hash_hex({reinterpret_cast<const byte_t*>(input), strlen(input)});
+    auto result = SHA256::hash_hex({reinterpret_cast<const byte_t*>(input), string_length(input)});
     EXPECT_EQ(result, "cf5b16a778af8380036ce59e7b0492370b249b11e8f07a51afac45037afee9d1");
 }
 

@@ -7,6 +7,7 @@
 #include <NeForce/core/exception/terminate.hpp>
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/network/util/network_exception.hpp>
+#include <csignal>
 #include <exception>
 #include <gtest/gtest.h>
 using namespace neforce;
@@ -603,7 +604,7 @@ TEST(ExceptionTest, MovePreservesInfo) {
 TEST(ExceptionTest, LongInfoIsTruncatedTo255) {
     const string long_msg(300, 'a');
     const exception e(long_msg.data());
-    EXPECT_EQ(::strlen(e.what()), static_cast<size_t>(255));
+    EXPECT_EQ(string_length(e.what()), static_cast<size_t>(255));
     EXPECT_EQ(e.what()[254], 'a');
 }
 

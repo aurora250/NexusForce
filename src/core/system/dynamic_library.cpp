@@ -5,12 +5,17 @@
 #    include <libloaderapi.h>
 #    include <winnt.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
-#    include <linux/limits.h>
+#ifdef NEFORCE_PLATFORM_POSIX
+#    include <climits>
 #    include <dlfcn.h>
 #    include <elf.h>
 #    include <link.h>
 #    include <unistd.h>
+#endif
+#ifdef NEFORCE_PLATFORM_FREEBSD
+#    ifndef ElfW
+#        define ElfW(type) Elf64_##type
+#    endif
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -185,10 +190,10 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
         return symbols;
     }
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     ::link_map* lm = nullptr;
     // NOLINTNEXTLINE(bugprone-multi-level-implicit-pointer-conversion)
-    if (::dlinfo(handle_, ::RTLD_DI_LINKMAP, static_cast<void*>(&lm)) != 0 || lm == nullptr) {
+    if (::dlinfo(handle_, RTLD_DI_LINKMAP, static_cast<void*>(&lm)) != 0 || lm == nullptr) {
         return symbols;
     }
 

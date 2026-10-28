@@ -19,7 +19,7 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <pthread.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

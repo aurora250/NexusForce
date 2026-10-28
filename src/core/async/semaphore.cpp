@@ -6,7 +6,7 @@
 #    include <WinBase.h>
 #    include <handleapi.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/algorithm/compare.hpp>
 #    include <cerrno>
 #    include <ctime>
@@ -14,7 +14,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     ::timespec relative_to_timespec(const nanoseconds relative) noexcept {
         ::timespec now{};
         ::clock_gettime(CLOCK_REALTIME, &now);

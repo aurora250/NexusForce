@@ -4,7 +4,7 @@
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/dns/dns_client.hpp>
 #include <NeForce/network/tcp/tcp_socket.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <arpa/inet.h>
 #    include <cerrno>
 #endif
@@ -15,7 +15,8 @@ namespace {
         thread_local random_mt tls_random;
         thread_local bool seeded = false;
         if (!seeded) {
-            const auto seed = steady_clock::now().since_epoch().count() ^ this_thread::id().native_handle();
+            const auto seed = static_cast<uint64_t>(steady_clock::now().since_epoch().count()) ^
+                              static_cast<uint64_t>(reinterpret_cast<uintptr_t>(this_thread::id().native_handle()));
             tls_random.set_seed(seed);
             seeded = true;
         }

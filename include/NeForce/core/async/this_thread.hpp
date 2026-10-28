@@ -20,7 +20,7 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <sched.h>
 #    include <ctime>
 #endif

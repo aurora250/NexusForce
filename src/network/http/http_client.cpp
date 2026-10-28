@@ -3,7 +3,7 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/network/http/http_client.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <poll.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

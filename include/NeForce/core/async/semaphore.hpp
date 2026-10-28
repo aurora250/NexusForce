@@ -15,6 +15,8 @@
 #include "atomic_timed_wait.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <bits/local_lim.h>
+#endif
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <semaphore.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

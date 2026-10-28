@@ -1,7 +1,7 @@
 #ifndef NEFORCE_CORE_CONTAINER_BUFFER_CHAIN_HPP__
 #define NEFORCE_CORE_CONTAINER_BUFFER_CHAIN_HPP__
 #include "NeForce/core/string/string.hpp"
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <sys/uio.h>
 #endif
 #ifdef NEFORCE_PLATFORM_WINDOWS

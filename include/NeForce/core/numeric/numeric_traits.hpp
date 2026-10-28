@@ -335,7 +335,7 @@ public:
     static constexpr int digits10 = 18;
 };
 
-#ifdef NEFORCE_PLATFORM_LINUX64
+#ifdef NEFORCE_PLATFORM_POSIX64
 template <>
 class numeric_traits<long long> : public numeric_traits<int64_t> {};
 #else
@@ -435,7 +435,7 @@ public:
     static constexpr int digits10 = 19;
 };
 
-#ifdef NEFORCE_PLATFORM_LINUX64
+#ifdef NEFORCE_PLATFORM_POSIX64
 template <>
 class numeric_traits<unsigned long long> : public numeric_traits<uint64_t> {};
 #else
@@ -488,7 +488,7 @@ class numeric_traits<wchar_t>;
 #ifdef NEFORCE_PLATFORM_WINDOWS
 template <>
 class numeric_traits<wchar_t> : public numeric_traits<uint16_t> {};
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
 #    ifdef NEFORCE_ARCH_ARM
 template <>
 class numeric_traits<wchar_t> : public numeric_traits<uint32_t> {};

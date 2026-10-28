@@ -1,6 +1,6 @@
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/logging/log_sink.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <syslog.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

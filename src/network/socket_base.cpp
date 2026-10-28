@@ -4,15 +4,17 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <iphlpapi.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <arpa/inet.h>
 #    include <cerrno>
 #    include <fcntl.h>
+#    include <netinet/tcp.h>
+#    include <unistd.h>
+#endif
+#ifdef NEFORCE_PLATFORM_LINUX
 #    include <linux/inet_diag.h>
 #    include <linux/netlink.h>
 #    include <linux/sock_diag.h>
-#    include <netinet/tcp.h>
-#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 

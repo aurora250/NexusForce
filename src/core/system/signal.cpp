@@ -7,7 +7,7 @@
 #    include <WinBase.h>
 #    include <consoleapi2.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/system/pipe.hpp>
 #    include <cstdlib>
 #    include <unistd.h>

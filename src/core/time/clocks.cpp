@@ -17,7 +17,7 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <ctime>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -37,7 +37,7 @@ void sleep_for_aux(const ssize_t s, const ssize_t ns) noexcept {
         ::WaitForSingleObject(timer, numeric_traits<::DWORD>::max());
         ::CloseHandle(timer);
     }
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     ::timespec ts{s, ns};
     while (::nanosleep(&ts, &ts) == -1) {
     }
@@ -57,7 +57,7 @@ system_clock::time_point system_clock::now() noexcept {
         const uint64_t ticks_since_unix_epoch = file_time - unix_epoch_offset;
         const uint64_t nanos = ticks_since_unix_epoch * 100;
         const rep total_nanos = static_cast<rep>(nanos);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
         ::timespec ts{};
         ::clock_gettime(CLOCK_REALTIME, &ts);
 
@@ -87,7 +87,7 @@ steady_clock::time_point steady_clock::now() noexcept {
         const rep nanos_per_tick = 1'000'000'000LL / static_cast<rep>(freq.QuadPart);
         const rep remainder = 1'000'000'000LL % static_cast<rep>(freq.QuadPart);
         const rep total_nanos = (ticks * nanos_per_tick) + ((ticks / static_cast<rep>(freq.QuadPart)) * remainder);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
         ::timespec ts{};
         ::clock_gettime(CLOCK_MONOTONIC, &ts);
 

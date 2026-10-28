@@ -230,7 +230,7 @@ __NEFORCE_BUILD_INTEGER_STRUCT(u, U, 64)
 using byte = uinteger8;
 
 
-#ifdef NEFORCE_PLATFORM_LINUX64
+#ifdef NEFORCE_PLATFORM_POSIX64
 template <>
 struct package<long long> {
     using type = integer64;

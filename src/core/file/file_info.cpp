@@ -1,5 +1,5 @@
 #include <NeForce/core/file/file_info.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <sys/stat.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -44,8 +44,8 @@ file_attri file_info::attributes() const noexcept {
     }
     return static_cast<file_attri>(info.dwFileAttributes);
 #else
-    struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) {
+    struct ::stat st{};
+    if (::fstat(handle_, &st) == -1) {
         return file_attri::others;
     }
     return static_cast<file_attri>(st.st_mode);
@@ -64,8 +64,8 @@ bool file_info::set_attributes(const file_attri attr) noexcept {
     }
     return ::SetFileAttributesW(p, static_cast<::DWORD>(attr)) != 0;
 #else
-    struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) {
+    struct ::stat st{};
+    if (::fstat(handle_, &st) == -1) {
         return false;
     }
     constexpr ::mode_t perm_mask = S_IRWXU | S_IRWXG | S_IRWXO;
@@ -89,11 +89,19 @@ uint64_t file_info::size64() const noexcept {
     }
     return static_cast<uint64_t>(li.QuadPart);
 #else
+#    ifdef NEFORCE_PLATFORM_LINUX
     struct ::stat64 st{};
     if (::fstat64(handle_, &st) == -1) {
         return 0;
     }
     return static_cast<uint64_t>(st.st_size);
+#    else
+    struct ::stat st{};
+    if (::fstat(handle_, &st) == -1) {
+        return 0;
+    }
+    return static_cast<uint64_t>(st.st_size);
+#    endif
 #endif
 }
 
@@ -110,8 +118,8 @@ bool file_info::size(size_type& out_size) const noexcept {
     out_size = static_cast<size_type>(li.QuadPart);
     return true;
 #else
-    struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) {
+    struct ::stat st{};
+    if (::fstat(handle_, &st) == -1) {
         return false;
     }
     if (compare_greater(st.st_size, numeric_traits<size_type>::max())) {
@@ -130,8 +138,8 @@ datetime file_info::last_access_time() const noexcept {
     }
     return filetime_to_datetime(ftAccess);
 #else
-    struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) {
+    struct ::stat st{};
+    if (::fstat(handle_, &st) == -1) {
         return datetime::epoch();
     }
     return filetime_to_datetime(st.st_atime);
@@ -159,8 +167,8 @@ datetime file_info::last_write_time() const noexcept {
     }
     return filetime_to_datetime(ftWrite);
 #else
-    struct ::stat64 st{};
-    if (::fstat64(handle_, &st) == -1) {
+    struct ::stat st{};
+    if (::fstat(handle_, &st) == -1) {
         return datetime::epoch();
     }
     return filetime_to_datetime(st.st_mtime);

@@ -4,7 +4,7 @@
 #    include <NeForce/core/config/windef.hpp>
 #    include <WinSock2.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <cerrno>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

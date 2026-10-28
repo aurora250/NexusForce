@@ -12,7 +12,7 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/async/atomic_base.hpp>
 #    include <NeForce/core/exception/error_code.hpp>
 #    include <fcntl.h>
@@ -24,9 +24,9 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     struct shm_header {
-        pthread_mutex_t mutex;
+        ::pthread_mutex_t mutex;
         int ready; /**< 0=uninit, 1=initing, 2=ready */
     };
 
@@ -428,6 +428,34 @@ void share_memory::grow(size_t new_size) {
             const wstring mutex_name = L"NeForce_shm_mutex_" + wname;
             mutex_handle_ = ::CreateMutexW(nullptr, FALSE, mutex_name.data());
         }
+    }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    // TODO: FreeBSD has no mremap; remap the grown shm object at offset 0.
+    const size_t fd_new_size = data_offset_ + new_size;
+    if (::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == -1) {
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
+    }
+
+    size_ = new_size;
+
+    if (mapped_addr_ != nullptr) {
+        const size_t old_size = internal_mapped_size_;
+        if (::munmap(original_mapped_addr_, old_size) != 0) {
+            const auto error = last_error();
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
+        }
+        void* addr = ::mmap(nullptr, fd_new_size, PROT_READ | PROT_WRITE, MAP_SHARED, handle_, 0);
+        if (addr == MAP_FAILED) {
+            original_mapped_addr_ = nullptr;
+            mapped_addr_ = nullptr;
+            const auto error = last_error();
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
+        }
+        original_mapped_addr_ = addr;
+        mapped_addr_ = static_cast<char*>(original_mapped_addr_) + data_offset_;
+        internal_mapped_size_ = fd_new_size;
+        mapped_size_ = new_size;
     }
 #else
     const size_t fd_new_size = data_offset_ + new_size;

@@ -1562,7 +1562,8 @@ TEST_F(GrpcIntegrationTest, EncodeMultipleMessages) {
     vector<grpc_message> msgs;
     for (auto* s: {"msg1", "msg2", "msg3"}) {
         grpc_message msg;
-        msg.payload = byte_vector(reinterpret_cast<const byte_t*>(s), reinterpret_cast<const byte_t*>(s) + strlen(s));
+        msg.payload =
+                byte_vector(reinterpret_cast<const byte_t*>(s), reinterpret_cast<const byte_t*>(s) + string_length(s));
         msgs.push_back(move(msg));
     }
     byte_vector encoded = grpc_framer::encode_messages(msgs);

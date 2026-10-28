@@ -12,7 +12,7 @@
 #include "NeForce/core/system/console.hpp"
 #include "NeForce/tui/events.hpp"
 #include "NeForce/tui/input_parser.hpp"
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <termios.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -65,7 +65,7 @@ public:
     static bool check_resize_flag();
 
 private:
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     void drain_stdin(int fd, epoll_event events, error_code ec);
 #else
     static unsigned long WINAPI input_thread_proc(void* selfp);
@@ -88,7 +88,7 @@ private:
     bool listening_ = false; ///< 是否已启动监听
 
     bool term_saved_ = false; ///< 是否已保存原始终端属性
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     ::termios old_termios_{}; ///< 原始终端属性
 #elif defined(NEFORCE_PLATFORM_WINDOWS)
     void* stdin_handle_ = nullptr;

@@ -1,5 +1,5 @@
 #include <NeForce/network/tcp/tcp_socket.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <cerrno>
 #    include <fcntl.h>
 #endif

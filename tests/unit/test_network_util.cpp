@@ -3,7 +3,7 @@
 #include <NeForce/network/util/mac_address.hpp>
 #include <NeForce/network/util/network_exception.hpp>
 #include <gtest/gtest.h>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <arpa/inet.h>
 #    include <unistd.h>
 #endif

@@ -50,7 +50,7 @@ public:
     static constexpr string_view spliter =
 #ifdef NEFORCE_PLATFORM_WINDOWS
             "\\/";
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
             "/";
 #endif
 

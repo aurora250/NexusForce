@@ -1,6 +1,6 @@
 #include <NeForce/tui/input.hpp>
 #include <NeForce/tui/reconciler.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <termios.h>
 #    include <unistd.h>
 #    include <csignal>
@@ -20,7 +20,7 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 namespace {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     volatile ::sig_atomic_t winsize_changed = 0;
 
     void sigwinch_handler(int /*unused*/) {
@@ -47,7 +47,7 @@ namespace {
 
 
 bool input_driver::check_resize_flag() {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     if (winsize_changed != 0) {
         winsize_changed = 0;
         return true;
@@ -69,7 +69,7 @@ void input_driver::start() {
         return;
     }
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     ::tcgetattr(STDIN_FILENO, &old_termios_);
     term_saved_ = true;
     ::termios raw = old_termios_;
@@ -106,7 +106,7 @@ void input_driver::stop() {
     }
     listening_ = false;
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     if (term_saved_) {
         ::tcsetattr(STDIN_FILENO, TCSANOW, &old_termios_);
         term_saved_ = false;
@@ -129,7 +129,7 @@ void input_driver::stop() {
 #endif
 }
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 void input_driver::drain_stdin(int /*fd*/, epoll_event /*events*/, error_code /*ec*/) {
     byte_t buffer[256];
     while (true) {

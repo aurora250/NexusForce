@@ -13,7 +13,7 @@
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/functional/apply.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <pthread.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -50,10 +50,19 @@ public:
         /**
          * @brief 系统线程标识符类型
          */
-        using native_id_type = unsigned long;
+        using native_id_type =
+#ifdef NEFORCE_PLATFORM_WINDOWS
+                unsigned long;
+#else
+                ::pthread_t;
+#endif
 
     private:
+#ifdef NEFORCE_PLATFORM_FREEBSD
+        native_id_type id_{nullptr}; ///< 系统线程标识符
+#else
         native_id_type id_{0}; ///< 系统线程标识符
+#endif
 
         friend class thread;
 
@@ -219,12 +228,12 @@ public:
 #ifdef NEFORCE_PLATFORM_WINDOWS
             void*;
 #else
-            unsigned long;
+            ::pthread_t;
 #endif
 
 private:
     native_handle_type handle_{}; ///< 线程句柄
-    id id_{0};                    ///< 线程ID
+    id id_;                       ///< 线程ID
     state state_ = NOT_A_THREAD;  ///< 线程状态
 
 #ifdef NEFORCE_PLATFORM_WINDOWS

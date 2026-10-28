@@ -140,7 +140,7 @@ void canvas_chart_window::project(const deque<double>& values, const size_t widt
         return;
     }
     const size_t stride_value = stride(width);
-    const uint64_t end = max<uint64_t>(end, values.size());
+    const uint64_t end = max<uint64_t>(this->end, values.size());
     const uint64_t last_bucket = (end - 1) / stride_value;
     const uint64_t start = end - values.size();
     const size_t skip = values.size() > samples ? values.size() - samples : 0;

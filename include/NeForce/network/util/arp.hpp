@@ -11,7 +11,7 @@
 
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/util/mac_address.hpp"
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include "NeForce/network/socket_base.hpp"
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -20,8 +20,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * @addtogroup NetworkUtil 网络工具
  * @{
  */
-
-// TODO(aurora250): use pimpl to avoid complex define branch
 
 /**
  * @class arp
@@ -37,6 +35,8 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API arp {
 private:
+    // TODO: use pimpl to avoid complex define branch
+
     string iface_; ///< 网络接口名称
 
 #ifdef NEFORCE_PLATFORM_WINDOWS

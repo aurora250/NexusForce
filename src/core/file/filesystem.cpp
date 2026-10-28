@@ -1,7 +1,7 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/core/system/environment.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <dirent.h>
 #    include <cerrno>
 #    include <cstdio>
@@ -253,17 +253,17 @@ bool filesystem::remove_all_in_directory(const path& p, const bool recursive) {
         if (entry->d_type == DT_DIR) {
             is_dir = true;
         } else if (entry->d_type == DT_UNKNOWN) {
-            struct ::stat64 st{};
+            struct ::stat st{};
             // lstat: symbolic links are entries to unlink, never directories to descend into
-            if (::lstat64(full.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
+            if (::lstat(full.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
                 is_dir = true;
             }
         }
         // DT_LNK and any other type are unlinked as plain entries;
         // following a symlink here could delete the contents of the tree it points to.
 #    else
-        struct ::stat64 st{};
-        if (::lstat64(full.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
+        struct ::stat st{};
+        if (::lstat(full.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
             is_dir = true;
         }
 #    endif
@@ -350,8 +350,8 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
         return false;
     }
 
-    struct ::stat64 st{};
-    if (::fstat64(src_fd, &st) == -1) {
+    struct ::stat st{};
+    if (::fstat(src_fd, &st) == -1) {
         ::close(src_fd);
         return false;
     }
@@ -362,8 +362,8 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
 
     // aliases (hard links / symlinks) of the destination
     // must never be truncated before the source is read.
-    struct ::stat64 dst_st{};
-    if (::stat64(actual_to.data(), &dst_st) == 0 && dst_st.st_dev == st.st_dev && dst_st.st_ino == st.st_ino) {
+    struct ::stat dst_st{};
+    if (::stat(actual_to.data(), &dst_st) == 0 && dst_st.st_dev == st.st_dev && dst_st.st_ino == st.st_ino) {
         ::close(src_fd);
         return true;
     }
@@ -481,14 +481,14 @@ bool filesystem::copy_directory(const path& src, const path& dest, const bool ov
         if (entry->d_type == DT_DIR) {
             is_dir = true;
         } else if (entry->d_type == DT_UNKNOWN) {
-            struct ::stat64 st{};
-            if (::lstat64(sp.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
+            struct ::stat st{};
+            if (::lstat(sp.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
                 is_dir = true;
             }
         }
 #    else
-        struct ::stat64 st{};
-        if (::lstat64(sp.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
+        struct ::stat st{};
+        if (::lstat(sp.data(), &st) == 0 && S_ISDIR(st.st_mode) && !S_ISLNK(st.st_mode)) {
             is_dir = true;
         }
 #    endif
@@ -622,8 +622,8 @@ byte_size filesystem::size(const path& p) {
     ul.HighPart = data.nFileSizeHigh;
     return byte_size{ul.QuadPart};
 #else
-    struct ::stat64 st{};
-    if (::stat64(p.data(), &st) == -1) {
+    struct ::stat st{};
+    if (::stat(p.data(), &st) == -1) {
         return byte_size{0};
     }
     if (S_ISDIR(st.st_mode)) {

@@ -148,8 +148,8 @@ namespace {
     }
 
     void fill_cpu_cpuid(sysinfo::cpu_info& cpu) {
-        int registers[4] = {};
 #if defined(NEFORCE_PLATFORM_WINDOWS) && defined(NEFORCE_ARCH_X86)
+        int registers[4] = {};
         ::__cpuid(registers, 1);
 #elif defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_X86)
         unsigned int registers[4] = {};
@@ -157,6 +157,7 @@ namespace {
             return;
         }
 #else
+        int registers[4] = {};
         return;
 #endif
         const auto eax = static_cast<uint32_t>(registers[0]);
@@ -758,7 +759,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
 
     string cpuinfo_field(const string& text, const char* key) {
-        const size_t key_length = ::strlen(key);
+        const size_t key_length = string_length(key);
         size_t position = 0;
         while (position < text.size()) {
             size_t line_end = text.find('\n', position);
@@ -807,13 +808,13 @@ namespace {
         uint64_t multiplier = 1;
         const char suffix = value.back();
         if (suffix == 'K' || suffix == 'k') {
-            multiplier = 1024;
+            multiplier = 1024UL;
             value.resize(value.size() - 1);
         } else if (suffix == 'M' || suffix == 'm') {
-            multiplier = 1024 * 1024;
+            multiplier = 1024UL * 1024UL;
             value.resize(value.size() - 1);
         } else if (suffix == 'G' || suffix == 'g') {
-            multiplier = 1024 * 1024 * 1024;
+            multiplier = 1024UL * 1024UL * 1024UL;
             value.resize(value.size() - 1);
         }
         return number_of(value) * multiplier;
@@ -827,9 +828,9 @@ namespace {
             if (level_text.empty()) {
                 break;
             }
-            const uint32_t level = number32_of(level_text);
-            const uint64_t bytes = cache_size_bytes(read_text((base + "size").data()));
-            const uint32_t kib = static_cast<uint32_t>(bytes / 1024);
+            const auto level = number32_of(level_text);
+            const auto bytes = cache_size_bytes(read_text((base + "size").data()));
+            const auto kib = static_cast<uint32_t>(bytes / 1024);
             string cache_type = read_text((base + "type").data());
             cache_type.trim();
             if (level == 1) {
@@ -961,6 +962,14 @@ namespace {
     }
 
 #endif // NEFORCE_PLATFORM_LINUX
+
+#ifdef NEFORCE_PLATFORM_FREEBSD
+    void probe_platform(sysinfo::hardware_info& hardware, sysinfo::cpu_info& cpu) {
+        // TODO: collect FreeBSD CPU/cache/board information through sysctl(3).
+        (void) hardware;
+        (void) cpu;
+    }
+#endif
 
 } // namespace
 

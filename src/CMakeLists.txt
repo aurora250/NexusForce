@@ -331,9 +331,15 @@ if(WIN32)
             SetupAPI Shell32 synchronization Wbemuuid ws2_32 wsock32
     )
 elseif(UNIX AND NOT APPLE)
-    target_link_libraries(NexusForce PUBLIC
-            atomic pthread
-    )
+    if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+        # FreeBSD's libc already provides the atomic builtins; there is no libatomic.
+        # backtrace() lives in libexecinfo, so consumers of the library need it as well.
+        target_link_libraries(NexusForce PUBLIC pthread execinfo)
+    else()
+        target_link_libraries(NexusForce PUBLIC
+                atomic pthread
+        )
+    endif()
 
     if(NEXUSFORCE_USING_IO_URING)
         find_package(uring QUIET)

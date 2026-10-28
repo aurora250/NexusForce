@@ -4299,7 +4299,7 @@ TEST_F(ProcessTest, Exception_What_ContainsErrorInfo) {
         FAIL() << "Expected process_exception";
     } catch (const process_exception& e) {
         EXPECT_NE(e.what(), nullptr);
-        EXPECT_GT(strlen(e.what()), 0);
+        EXPECT_GT(string_length(e.what()), 0);
     }
 }
 
@@ -5247,7 +5247,7 @@ TEST_F(ShareMemoryTest, Exception_What_ContainsErrorInfo) {
         FAIL() << "Expected share_memory_exception";
     } catch (const share_memory_exception& e) {
         EXPECT_NE(e.what(), nullptr);
-        EXPECT_GT(strlen(e.what()), 0);
+        EXPECT_GT(string_length(e.what()), 0);
     }
 }
 

@@ -15,13 +15,48 @@
 #    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <cerrno>
 #    include <linux/futex.h>
 #    include <syscall.h>
-#    include <ctime>
+#endif
+#ifdef NEFORCE_PLATFORM_POSIX
+#    include <NeForce/core/algorithm/compare.hpp>
+#    include <cerrno>
 #    include <unistd.h>
+#    include <ctime>
+#    include <pthread.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
+
+#ifdef NEFORCE_PLATFORM_FREEBSD
+namespace {
+    ::pthread_mutex_t& futex_mutex() noexcept {
+        static ::pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
+        return m;
+    }
+
+    ::pthread_cond_t& futex_cond() noexcept {
+        static ::pthread_cond_t c = PTHREAD_COND_INITIALIZER;
+        return c;
+    }
+
+    ::timespec futex_deadline(const bool is_monotonic, const int64_t sec, const int64_t ns) noexcept {
+        if (!is_monotonic) {
+            return ::timespec{static_cast<::time_t>(sec), static_cast<long>(ns)};
+        }
+        ::timespec mono{};
+        ::timespec real{};
+        ::clock_gettime(CLOCK_MONOTONIC, &mono);
+        ::clock_gettime(CLOCK_REALTIME, &real);
+        int64_t delta =
+                (sec - static_cast<int64_t>(mono.tv_sec)) * 1000000000LL + (ns - static_cast<int64_t>(mono.tv_nsec));
+        delta = max<int64_t>(delta, 0);
+        const int64_t total =
+                static_cast<int64_t>(real.tv_sec) * 1000000000LL + static_cast<int64_t>(real.tv_nsec) + delta;
+        return ::timespec{static_cast<::time_t>(total / 1000000000LL), static_cast<long>(total % 1000000000LL)};
+    }
+} // namespace
+#endif
+
 
 bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout, const int64_t sec, const int64_t ns,
                       const bool is_monotonic) {
@@ -42,6 +77,21 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
     }
     return false;
 
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    const auto* word = static_cast<const volatile platform_wait_t*>(addr);
+    ::pthread_mutex_lock(&futex_mutex());
+    bool timed_out = false;
+    const ::timespec deadline = futex_deadline(is_monotonic, sec, ns);
+    while (*word == value) {
+        if (!has_timeout) {
+            ::pthread_cond_wait(&futex_cond(), &futex_mutex());
+        } else if (::pthread_cond_timedwait(&futex_cond(), &futex_mutex(), &deadline) == ETIMEDOUT) {
+            timed_out = true;
+            break;
+        }
+    }
+    ::pthread_mutex_unlock(&futex_mutex());
+    return !timed_out;
 #else
     int oper = FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG;
     if (!is_monotonic) {
@@ -70,6 +120,13 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
             terminate();
         }
     }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    const auto* word = static_cast<const volatile platform_wait_t*>(addr);
+    ::pthread_mutex_lock(&futex_mutex());
+    while (*word == value) {
+        ::pthread_cond_wait(&futex_cond(), &futex_mutex());
+    }
+    ::pthread_mutex_unlock(&futex_mutex());
 #else
     const auto err =
             ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wait_private), value, nullptr);
@@ -92,6 +149,14 @@ void futex_notify(void* addr, const bool all) noexcept {
     } else {
         ::WakeByAddressSingle(p);
     }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    ::pthread_mutex_lock(&futex_mutex());
+    if (all) {
+        ::pthread_cond_broadcast(&futex_cond());
+    } else {
+        ::pthread_cond_signal(&futex_cond());
+    }
+    ::pthread_mutex_unlock(&futex_mutex());
 #else
     ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wake_private),
               all ? numeric_traits<platform_wait_t>::max() : 1);

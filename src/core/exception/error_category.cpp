@@ -6,7 +6,7 @@
 #    include <minwindef.h>
 #    include <WinBase.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <cstring>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -30,14 +30,14 @@ string generic_error_category::message(const int32_t ev) const {
     return "unknown error " + to_string(ev);
 #else
     char buf[256];
-#    if (_POSIX_C_SOURCE >= 200112L) && !defined(_GNU_SOURCE)
+#    ifdef _GNU_SOURCE
+    const char* s = ::strerror_r(ev, buf, sizeof(buf));
+    return s != nullptr ? string(s) : "unknown error " + to_string(ev);
+#    else
     if (::strerror_r(ev, buf, sizeof(buf)) == 0) {
         return string(buf);
     }
     return "unknown error " + to_string(ev);
-#    else
-    const char* s = ::strerror_r(ev, buf, sizeof(buf));
-    return s != nullptr ? string(s) : "unknown error " + to_string(ev);
 #    endif
 #endif
 }
@@ -67,14 +67,14 @@ string system_error_category::message(const int32_t ev) const {
 
 #else
     char buf[256];
-#    if (_POSIX_C_SOURCE >= 200112L) && !defined(_GNU_SOURCE)
+#    ifdef _GNU_SOURCE
+    const char* s = ::strerror_r(ev, buf, sizeof(buf));
+    return s != nullptr ? string(s) : "unknown error " + to_string(ev);
+#    else
     if (::strerror_r(ev, buf, sizeof(buf)) == 0) {
         return string(buf);
     }
     return "unknown error " + to_string(ev);
-#    else
-    const char* s = ::strerror_r(ev, buf, sizeof(buf));
-    return s != nullptr ? string(s) : "unknown error " + to_string(ev);
 #    endif
 #endif
 }

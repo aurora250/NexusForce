@@ -13,7 +13,7 @@
 #        undef min
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <dirent.h>
 #    include <sys/stat.h>
 #endif
@@ -39,8 +39,8 @@ namespace {
         out.second = info.nFileIndexLow;
         return true;
 #else
-        struct ::stat64 st{};
-        if (::stat64(p.data(), &st) == -1) {
+        struct ::stat st{};
+        if (::stat(p.data(), &st) == -1) {
             return false;
         }
         out.first = static_cast<uint64_t>(st.st_dev);
@@ -248,8 +248,8 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
         } else if (entry->d_type == DT_REG) {
             type = node_type::file;
         } else {
-            struct ::stat64 st{};
-            if (::stat64(child_path.data(), &st) == 0) {
+            struct ::stat st{};
+            if (::stat(child_path.data(), &st) == 0) {
                 if (S_ISDIR(st.st_mode)) {
                     type = node_type::directory;
                     is_dir = true;
@@ -261,8 +261,8 @@ void path_tree::scan_impl(const node::ptr& parent, const scan_options& options, 
             }
         }
 #    else
-        struct ::stat64 st{};
-        if (::stat64(child_path.data(), &st) == 0) {
+        struct ::stat st{};
+        if (::stat(child_path.data(), &st) == 0) {
             if (S_ISDIR(st.st_mode)) {
                 type = node_type::directory;
                 is_dir = true;

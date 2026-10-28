@@ -17,7 +17,7 @@
 #    include <WinUser.h>
 #    include <conio.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/system/environment.hpp>
 #    include <NeForce/core/time/clocks.hpp>
 #    include <cerrno>
@@ -81,7 +81,7 @@ void sys_console::print_string_unsafe(const string_view str) const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD written = 0;
     ::WriteFile(out_, str.data(), static_cast<::DWORD>(str.length()), &written, nullptr);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     size_t total = 0;
     while (total < str.length()) {
         const ssize_t written = ::write(out_, str.data() + total, str.length() - total);
@@ -100,7 +100,7 @@ void sys_console::print_error_unsafe(const string_view str) const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD written = 0;
     ::WriteFile(err_, str.data(), static_cast<::DWORD>(str.length()), &written, nullptr);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     size_t total = 0;
     while (total < str.length()) {
         const ssize_t written = ::write(err_, str.data() + total, str.length() - total);
@@ -179,7 +179,7 @@ string sys_console::readln_unsafe() const {
     } while (true);
 
     return result;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     string line;
     while (true) {
         char ch = 0;
@@ -218,7 +218,7 @@ string sys_console::read_unsafe() const {
         result.push_back(ch);
     }
     return result;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     string result;
 
     ::termios old_tio, new_tio;
@@ -273,7 +273,7 @@ char sys_console::read_char_unsafe() const noexcept {
     }
     ::SetConsoleMode(in_, original_mode);
     return (read > 0) ? ch : '\0';
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     ::termios old_tio, new_tio;
     ::tcgetattr(in_, &old_tio);
     new_tio = old_tio;
@@ -320,7 +320,7 @@ sys_console::console_size sys_console::get_console_size_unsafe() const {
 void sys_console::flush_unsafe() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::FlushFileBuffers(out_);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     if (::isatty(out_) != 0) {
         ::tcflush(out_, TCOFLUSH);
     } else {
@@ -334,7 +334,7 @@ void sys_console::ignore_unsafe() const { (void) readln_unsafe(); }
 void sys_console::beep_unsafe() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::Beep(800, 200);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     if (is_interactive()) {
         print_string_unsafe("\a");
         flush_unsafe();
@@ -365,7 +365,7 @@ void sys_console::flash_screen_unsafe() const {
     this_thread::sleep_for(milliseconds(100));
     ::SetConsoleTextAttribute(out_, csbi.wAttributes);
 
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
 
     print_string_unsafe("\033[7m");
     flush_unsafe();
@@ -526,7 +526,7 @@ void sys_console::clear() noexcept {
     ::FillConsoleOutputCharacterA(out_, ' ', length, top_left, &written);
     ::FillConsoleOutputAttribute(out_, screen.wAttributes, length, top_left, &written);
     ::SetConsoleCursorPosition(out_, top_left);
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     print_string_unsafe("\033[2J\033[1;1H");
 #endif
 }
@@ -654,7 +654,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     }
     ::SetConsoleMode(in_, original_mode);
 
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     print_string_unsafe(prompt);
     flush_unsafe();
 

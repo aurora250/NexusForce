@@ -9,7 +9,7 @@ typedef struct _WIN32_MEMORY_RANGE_ENTRY {
 } WIN32_MEMORY_RANGE_ENTRY, *PWIN32_MEMORY_RANGE_ENTRY;
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <sys/mman.h>
 #    include <sys/stat.h>
 #endif
@@ -188,8 +188,8 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
     }
 
     if (size == 0) {
-        struct ::stat64 st{};
-        if (::fstat64(file_handle_, &st) == -1) {
+        struct ::stat st{};
+        if (::fstat(file_handle_, &st) == -1) {
             return false;
         }
         const auto file_size = static_cast<uint64_t>(st.st_size);

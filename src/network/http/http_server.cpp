@@ -8,7 +8,7 @@
 #include <NeForce/network/ssl/ssl_socket.hpp>
 #include <NeForce/network/tcp/tcp_client.hpp>
 #include <NeForce/network/util/url.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <poll.h>
 #    include <sys/uio.h>
 #    include <cerrno>

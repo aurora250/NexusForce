@@ -5,7 +5,7 @@
 #    include <sysinfoapi.h>
 #    include <timezoneapi.h>
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <sys/time.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

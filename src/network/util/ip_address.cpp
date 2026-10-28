@@ -1,7 +1,7 @@
 #include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/util/ip_address.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <arpa/inet.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__

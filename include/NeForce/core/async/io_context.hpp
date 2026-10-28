@@ -294,6 +294,13 @@ private:
 
     void register_file_completion(uintptr_t key, file_completion_cb cb);
     void unregister_file_completion(uintptr_t key);
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    // TODO: using neforce::pipe instead
+
+    /// @brief 唤醒管道读端
+    int wake_fd_;
+    /// @brief 唤醒管道写端
+    int wake_write_fd_;
 #else
     /// @brief epoll 文件描述符
     int epoll_fd_;

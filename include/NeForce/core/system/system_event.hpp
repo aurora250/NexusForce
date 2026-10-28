@@ -9,7 +9,7 @@
  */
 
 #include "NeForce/core/numeric/numeric_traits.hpp"
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include "NeForce/core/memory/unique_ptr.hpp"
 #    include <pthread.h>
 #endif
@@ -42,7 +42,7 @@ public:
     };
 
 private:
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     struct mutex_deleter {
         void operator()(::pthread_mutex_t* m) const noexcept {
             ::pthread_mutex_destroy(m);
@@ -61,6 +61,7 @@ private:
 #ifdef NEFORCE_PLATFORM_WINDOWS
     void* handle_; ///< 事件句柄
 #else
+    // TODO: using neforce::mutex and neforce::condition_variable instead
     unique_ptr<::pthread_mutex_t, mutex_deleter> mutex_; ///< 互斥锁
     unique_ptr<::pthread_cond_t, cond_deleter> cond_;    ///< 条件变量
 #endif

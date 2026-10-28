@@ -36,7 +36,11 @@
 #            define SYS_close 57
 #        endif
 #    endif
-
+#endif
+#ifdef NEFORCE_PLATFORM_FREEBSD
+#    include <csignal>
+#    include <pthread.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -117,6 +121,9 @@ namespace {
         return a0;
     }
 #    endif
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    long syscall_exit(const int status) noexcept { ::_exit(status); }
+    long syscall_exit_group(const int status) noexcept { ::_exit(status); }
 #endif
 
     atomic<terminate_handler>& get_terminate_handler() noexcept {

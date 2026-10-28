@@ -1,12 +1,11 @@
 #include <NeForce/core/file/file_async.hpp>
 #include <NeForce/core/container/flat_unordered_map.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/async/thread.hpp>
-#    ifdef NEFORCE_USING_IO_URING
-#        include <liburing.h>
-#    else
-#        include <unistd.h>
-#    endif
+#    include <unistd.h>
+#endif
+#ifdef NEFORCE_USING_IO_URING
+#    include <liburing.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -30,11 +29,11 @@ namespace {
     };
 #endif
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     struct sync_io_op {
         io_context* ctx = nullptr;
         file_async::native_handle_type fd = -1;
-        off_t offset = 0;
+        ::off_t offset = 0;
         size_t size = 0;
         string* buffer = nullptr;
         shared_ptr<string> write_data;
@@ -49,7 +48,7 @@ namespace {
         try {
             thread worker([op]() mutable {
                 if (op->buffer != nullptr) {
-                    const auto n = ::pread64(op->fd, op->buffer->data(), op->size, op->offset);
+                    const auto n = ::pread(op->fd, op->buffer->data(), op->size, op->offset);
                     const error_code ec = (n < 0) ? last_error() : error_code{};
                     op->ctx->post([op, n, ec]() {
                         if (ec) {
@@ -62,7 +61,7 @@ namespace {
                         op->ctx->work_finished();
                     });
                 } else {
-                    const auto n = ::pwrite64(op->fd, op->write_data->data(), op->size, op->offset);
+                    const auto n = ::pwrite(op->fd, op->write_data->data(), op->size, op->offset);
                     const error_code ec = (n < 0) ? last_error() : error_code{};
                     op->ctx->post([op, n, ec]() {
                         op->handler(ec, n < 0 ? 0 : static_cast<file_async::size_type>(n));
@@ -433,7 +432,7 @@ void file_async::do_async_read(io_context& ctx, string& buffer, const size_type 
         op->buffer = &buffer;
         buffer.resize(size);
         const uint64_t resolved_offset =
-                offset >= 0 ? static_cast<uint64_t>(offset) : static_cast<uint64_t>(::lseek64(handle_, 0, SEEK_CUR));
+                offset >= 0 ? static_cast<uint64_t>(offset) : static_cast<uint64_t>(::lseek(handle_, 0, SEEK_CUR));
 
         {
             lock<mutex> lk(state_->ops_mutex);
@@ -492,7 +491,7 @@ void file_async::do_async_read(io_context& ctx, string& buffer, const size_type 
         const auto op = make_shared<sync_io_op>();
         op->ctx = ctx_;
         op->fd = handle_;
-        op->offset = static_cast<off_t>(offset >= 0 ? offset : ::lseek64(handle_, 0, SEEK_CUR));
+        op->offset = static_cast<::off_t>(offset >= 0 ? offset : ::lseek(handle_, 0, SEEK_CUR));
         op->size = static_cast<size_t>(size);
         op->buffer = &buffer;
         buffer.resize(size);
@@ -598,7 +597,7 @@ void file_async::do_async_write(io_context& ctx, string data, size_type size, co
         op->handler = move(handler);
         op->write_data = write_data;
         const uint64_t resolved_offset =
-                offset >= 0 ? static_cast<uint64_t>(offset) : static_cast<uint64_t>(::lseek64(handle_, 0, SEEK_CUR));
+                offset >= 0 ? static_cast<uint64_t>(offset) : static_cast<uint64_t>(::lseek(handle_, 0, SEEK_CUR));
 
         {
             lock<mutex> lk(state_->ops_mutex);
@@ -655,7 +654,7 @@ void file_async::do_async_write(io_context& ctx, string data, size_type size, co
         const auto op = make_shared<sync_io_op>();
         op->ctx = ctx_;
         op->fd = handle_;
-        op->offset = static_cast<off_t>(offset >= 0 ? offset : ::lseek64(handle_, 0, SEEK_CUR));
+        op->offset = static_cast<::off_t>(offset >= 0 ? offset : ::lseek(handle_, 0, SEEK_CUR));
         op->size = static_cast<size_t>(size);
         op->write_data = make_shared<string>(move(data));
         op->handler = move(handler);

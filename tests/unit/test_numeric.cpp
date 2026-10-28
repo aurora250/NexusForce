@@ -14,7 +14,7 @@ protected:
 };
 
 using TestTypes = ::testing::Types<
-#ifdef NEFORCE_STANDARD_20
+#if defined(NEFORCE_STANDARD_20) && !defined(NEFORCE_PLATFORM_FREEBSD)
         char8_t,
 #endif
         char16_t, char32_t, wchar_t, bool, char, int8_t, int16_t, int32_t, int64_t, uint8_t, uint16_t, uint32_t,

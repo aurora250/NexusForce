@@ -79,8 +79,11 @@ class consumer_token;
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-NEFORCE_INLINE17 constexpr thread::id invalid_thread_id_zero{0};
-NEFORCE_INLINE17 constexpr thread::id invalid_thread_id_max{static_cast<thread::id::native_id_type>(-1)};
+NEFORCE_INLINE17 constexpr thread::id invalid_thread_id_zero;
+
+NEFORCE_ALWAYS_INLINE_INLINE thread::id invalid_thread_id_max() noexcept {
+    return thread::id{reinterpret_cast<thread::id::native_id_type>(~static_cast<uintptr_t>(0))};
+}
 
 template <typename T>
 struct const_numeric_max {
@@ -2680,7 +2683,7 @@ private:
                         while (true) {
                             index &= main_hash->capacity_ - 1;
                             auto empty = inner::invalid_thread_id_zero;
-                            auto reusable = inner::invalid_thread_id_max;
+                            auto reusable = inner::invalid_thread_id_max();
                             if (main_hash->entries_[index].key_.compare_exchange_strong(empty, id, memory_order_seq_cst,
                                                                                         memory_order_relaxed) ||
                                 main_hash->entries_[index].key_.compare_exchange_strong(
@@ -2752,7 +2755,7 @@ private:
                 while (true) {
                     index &= main_hash->capacity_ - 1;
                     auto empty = inner::invalid_thread_id_zero;
-                    auto reusable = inner::invalid_thread_id_max;
+                    auto reusable = inner::invalid_thread_id_max();
                     if (main_hash->entries_[index].key_.compare_exchange_strong(reusable, id, memory_order_seq_cst,
                                                                                 memory_order_relaxed)) {
                         implicit_producer_hash_count_.fetch_sub(1, memory_order_relaxed);
@@ -2785,7 +2788,7 @@ private:
             do {
                 index &= hash->capacity_ - 1;
                 probed_key = id;
-                if (hash->entries_[index].key_.compare_exchange_strong(probed_key, inner::invalid_thread_id_max,
+                if (hash->entries_[index].key_.compare_exchange_strong(probed_key, inner::invalid_thread_id_max(),
                                                                        memory_order_seq_cst, memory_order_relaxed)) {
                     break;
                 }
