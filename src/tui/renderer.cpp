@@ -126,29 +126,39 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
         case element::kind::text: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
-                render_text_block(rect.x, rect.y, rect.w, rect.h, el.text(), el.style(), el.wrap_mode());
                 ++idx;
+                if (!is_rect_visible(rect.x, rect.y, rect.w, rect.h)) {
+                    return;
+                }
+                render_text_block(rect.x, rect.y, rect.w, rect.h, el.text(), el.style(), el.wrap_mode(), nullptr,
+                                  nullptr, 0, &el);
             }
             return;
         }
         case element::kind::button: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
-                render_button(rect.x, rect.y, rect.w, rect.h, el.text(), el.style(), theme_, el.variant());
                 ++idx;
+                if (!is_rect_visible(rect.x, rect.y, rect.w, rect.h)) {
+                    return;
+                }
+                render_button(rect.x, rect.y, rect.w, rect.h, el.text(), el.style(), theme_, el.variant());
             }
             return;
         }
         case element::kind::checkbox: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
+                ++idx;
+                if (!is_rect_visible(rect.x, rect.y, rect.w, rect.h)) {
+                    return;
+                }
                 bool checked = false;
                 if (el.state_ref() != nullptr) {
                     const auto* s = static_cast<state<bool>*>(el.state_ref());
                     checked = s->value();
                 }
                 render_checkbox(rect.x, rect.y, rect.w, rect.h, el.text(), checked, el.style());
-                ++idx;
             }
             return;
         }
@@ -318,9 +328,12 @@ void renderer::render_subtree(const element& el, const vector<layout_rect>& layo
         case element::kind::rich_text: {
             if (compare_less(idx, layout.size())) {
                 const auto& rect = layout[static_cast<size_t>(idx)];
-                render_rich_text(rect.x, rect.y, rect.w, rect.h, el.spans(), el.style(), el.wrap_mode(), nullptr,
-                                 nullptr, el.hang().empty() ? nullptr : &el.hang(), el.hang_width());
                 ++idx;
+                if (!is_rect_visible(rect.x, rect.y, rect.w, rect.h)) {
+                    return;
+                }
+                render_rich_text(rect.x, rect.y, rect.w, rect.h, el.spans(), el.style(), el.wrap_mode(), nullptr,
+                                 nullptr, el.hang().empty() ? nullptr : &el.hang(), el.hang_width(), &el);
             }
             return;
         }
@@ -829,15 +842,18 @@ void renderer::apply_clear(int x, int y, int w, int h) {
             return;
         }
     }
-    for (int i = 0; i < h; ++i) {
-        for (int j = 0; j < w; ++j) {
-            const int cx = x + j;
-            const int cy = y + i;
-            if (cx >= 0 && cx < term_w_ && cy >= 0 && cy < term_h_) {
-                auto& cell = screen_.fast_cell_at(cx, cy);
-                cell.reset();
-                cell.character = " ";
-            }
+    // One prepared blank cell is copied per column instead of reset() plus a string assignment:
+    // clearing a viewport is a hot path for scroll containers.
+    cell blank;
+    blank.reset();
+    blank.character = " ";
+    const int x0 = max(x, 0);
+    const int x1 = min(x + w, term_w_);
+    const int y0 = max(y, 0);
+    const int y1 = min(y + h, term_h_);
+    for (int cy = y0; cy < y1; ++cy) {
+        for (int cx = x0; cx < x1; ++cx) {
+            screen_.fast_cell_at(cx, cy) = blank;
         }
     }
 }
@@ -895,19 +911,18 @@ uint8_t renderer::hyperlink_of(const string* link) {
     return cached_link_id_;
 }
 
-int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const int cw, const tui::style& style,
+int renderer::draw_glyph(const int x, const int y, const codepoint& cp, const int cw, const cell& stamp,
                          const string* link) {
     if (x >= 0 && x < term_w_ && y >= 0 && y < term_h_) {
         ++painted_this_frame_;
     }
     if (x >= 0 && x < term_w_ && y >= 0 && y < term_h_ && !is_clipped(x, y)) {
-        auto& cell = screen_.fast_cell_at(x, y);
-        cell.reset();
-        put_codepoint(cp, cw, cell);
-        apply_style_to_cell(cell, style);
+        auto& target = screen_.fast_cell_at(x, y);
+        target = stamp;
+        put_codepoint(cp, cw, target);
         const uint8_t id = hyperlink_of(link);
         if (id != 0) {
-            cell.hyperlink = id;
+            target.hyperlink = id;
         }
     }
     for (int i = 1; i < cw && x + i < term_w_; ++i) {
@@ -932,13 +947,29 @@ bool renderer::is_clipped(const int x, const int y) const noexcept {
     return false;
 }
 
+bool renderer::is_rect_visible(const int x, const int y, const int w, const int h) const noexcept {
+    if (w <= 0 || h <= 0 || x >= term_w_ || y >= term_h_ || x + w <= 0 || y + h <= 0) {
+        return false;
+    }
+    for (const auto& clip: clip_stack_) {
+        if (x >= clip.x + clip.w || y >= clip.y + clip.h || x + w <= clip.x || y + h <= clip.y) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void renderer::render_glyph_run(const int x, const int y, const int w, const int h, const vector<run_glyph>& glyphs,
                                 const style::wrap_mode wm, const int scroll_row, int* out_end_x, int* out_end_y,
-                                const vector<text_span>* hang, const int hang_cols) {
+                                const vector<text_span>* hang, const int hang_cols, const element* owner,
+                                const tui::style* uniform_style, const vector<text_span>* spans,
+                                const vector<tui::style>* span_styles) {
     int cx = x;
     int cy = y;
 
-    if (w <= 0 || h <= 0 || glyphs.empty()) {
+    const bool cached = owner != nullptr && !owner->cached_glyph_flat().empty();
+    const size_t glyph_count = cached ? owner->cached_glyph_codepoints().size() : glyphs.size();
+    if (w <= 0 || h <= 0 || glyph_count == 0) {
         if (out_end_x != nullptr) {
             *out_end_x = x;
         }
@@ -948,17 +979,53 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
         return;
     }
 
-    string flat;
-    flat.reserve(glyphs.size() * 2);
-    vector<size_t> glyph_offsets;
-    glyph_offsets.reserve(glyphs.size() + 1);
-    for (const auto& g: glyphs) {
-        glyph_offsets.push_back(flat.size());
-        g.cp.append_to(flat);
+    // The flat string and the per-glyph byte offsets only depend on the element content,
+    // so they are cached on the node: re-rendering the same text skips the whole UTF-8 pass.
+    string flat_storage;
+    vector<uint32_t> local_offsets;
+    vector<codepoint> local_cps;
+    string_view flat;
+    const vector<uint32_t>* glyph_offsets = nullptr;
+    const vector<codepoint>* glyph_cps = nullptr;
+    if (cached) {
+        flat = owner->cached_glyph_flat().view();
+        glyph_offsets = &owner->cached_glyph_offsets();
+        glyph_cps = &owner->cached_glyph_codepoints();
+    } else {
+        flat_storage.reserve(glyphs.size() * 2);
+        local_offsets.reserve(glyphs.size() + 1);
+        local_cps.reserve(glyphs.size());
+        vector<uint16_t> local_spans;
+        const bool rich = spans != nullptr;
+        if (rich) {
+            local_spans.reserve(glyphs.size());
+        }
+        for (const auto& g: glyphs) {
+            local_offsets.push_back(static_cast<uint32_t>(flat_storage.size()));
+            local_cps.push_back(g.cp);
+            if (rich) {
+                local_spans.push_back(g.span);
+            }
+            g.cp.append_to(flat_storage);
+        }
+        local_offsets.push_back(static_cast<uint32_t>(flat_storage.size()));
+        flat = flat_storage.view();
+        if (owner != nullptr) {
+            owner->cache_glyph_run(flat_storage, local_offsets, local_cps, _NEFORCE move(local_spans));
+            glyph_offsets = &owner->cached_glyph_offsets();
+            glyph_cps = &owner->cached_glyph_codepoints();
+        } else {
+            glyph_offsets = &local_offsets;
+            glyph_cps = &local_cps;
+        }
     }
-    glyph_offsets.push_back(flat.size());
+    const vector<uint32_t>& offsets = *glyph_offsets;
+    const vector<codepoint>& cps = *glyph_cps;
 
-    const text_layout lay = layout_text_hang(flat.view(), w, wm, hang_cols);
+    // Only the rows that can be painted are wrapped:
+    // a long document stops as soon as the viewport is covered instead of laying out to the end.
+    const auto max_rows = static_cast<size_t>(max(0, scroll_row) + max(0, h));
+    const text_layout lay = layout_text_hang(flat, w, wm, hang_cols, max_rows);
 
     size_t glyph_index = 0;
     for (size_t row = 0; row < lay.lines.size(); ++row) {
@@ -969,13 +1036,16 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
             break;
         }
         const auto& line = lay.lines[row];
-        while (glyph_index + 1 < glyph_offsets.size() && glyph_offsets[glyph_index] < line.begin) {
+        while (glyph_index + 1 < offsets.size() && offsets[glyph_index] < line.begin) {
             ++glyph_index;
         }
         cx = x;
         if (hang != nullptr && hang_cols > 0 && line.continuation) {
             for (const auto& span: *hang) {
-                const tui::style& merged = span.style;
+                // One resolved prototype per span instead of ten optional tests per glyph.
+                cell stamp;
+                stamp.reset();
+                apply_style_to_cell(stamp, span.style);
                 const auto& raw_hang = span.content.view();
                 for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw_hang.data()), raw_hang.size());
                      it != utf8_iterator(); ++it) {
@@ -983,17 +1053,44 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
                     if (cx + hang_width > x + w) {
                         break;
                     }
-                    cx += draw_glyph(cx, cy, *it, hang_width, merged, span.link.empty() ? nullptr : &span.link);
+                    cx += draw_glyph(cx, cy, *it, hang_width, stamp, span.link.empty() ? nullptr : &span.link);
                 }
             }
         }
-        while (glyph_index + 1 < glyph_offsets.size() && glyph_offsets[glyph_index] < line.end) {
-            const auto& g = glyphs[glyph_index];
-            const int cw = max(1, g.cp.display_width());
+        cell stamp;
+        if (uniform_style != nullptr) {
+            stamp.reset();
+            apply_style_to_cell(stamp, *uniform_style);
+        }
+        // Cached rich-text runs resolve the style and link through the originating span;
+        // uncached runs carry them per glyph.
+        const vector<uint16_t>* span_of = (cached && spans != nullptr && span_styles != nullptr)
+                                                    ? &owner->cached_glyph_spans()
+                                                    : nullptr;
+        const tui::style* stamp_source = uniform_style;
+        while (glyph_index + 1 < offsets.size() && offsets[glyph_index] < line.end) {
+            const codepoint& cp = cps[glyph_index];
+            const int cw = max(1, cp.display_width());
             if (cx + cw > x + w) {
                 break;
             }
-            cx += draw_glyph(cx, cy, g.cp, cw, *g.style, g.link);
+            const tui::style* glyph_style = uniform_style;
+            const string* link = nullptr;
+            if (span_of != nullptr && glyph_index < span_of->size()) {
+                const size_t span_index = (*span_of)[glyph_index];
+                glyph_style = &(*span_styles)[span_index];
+                const string& target = (*spans)[span_index].link;
+                link = target.empty() ? nullptr : &target;
+            } else if (uniform_style == nullptr) {
+                glyph_style = glyphs[glyph_index].style;
+                link = glyphs[glyph_index].link;
+            }
+            if (glyph_style != stamp_source) {
+                stamp.reset();
+                apply_style_to_cell(stamp, *glyph_style);
+                stamp_source = glyph_style;
+            }
+            cx += draw_glyph(cx, cy, cp, cw, stamp, link);
             ++glyph_index;
         }
         cy += 1;
@@ -1012,14 +1109,50 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
 
 void renderer::render_text_block(const int x, const int y, const int w, const int h, const string& text,
                                  const tui::style& style, const style::wrap_mode wm, int* out_end_x, int* out_end_y,
-                                 const int scroll_row) {
-    vector<run_glyph> glyphs;
+                                 const int scroll_row, const element* owner) {
     const auto& raw = text.view();
-    glyphs.reserve(raw.size());
-    for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
-        glyphs.push_back(run_glyph{*it, &style, nullptr});
+    // Plain ASCII on a single unwrapped line is drawn byte by byte:
+    // no glyph vector, no re-encoded flat string and no wrapping pass.
+    // This is the common case for labels, table cells and transcript rows.
+    bool plain = wm == style::wrap_mode::none && scroll_row == 0 && w > 0 && h > 0;
+    if (plain) {
+        for (size_t i = 0; i < raw.size(); ++i) {
+            const auto ch = static_cast<unsigned char>(raw[i]);
+            if (ch >= 0x80 || ch == '\n') {
+                plain = false;
+                break;
+            }
+        }
     }
-    render_glyph_run(x, y, w, h, glyphs, wm, scroll_row, out_end_x, out_end_y);
+    if (plain) {
+        cell stamp;
+        stamp.reset();
+        apply_style_to_cell(stamp, style);
+        int cx = x;
+        const int limit = x + w;
+        for (size_t i = 0; i < raw.size() && cx < limit; ++i) {
+            const auto ch = static_cast<unsigned char>(raw[i]);
+            cx += draw_glyph(cx, y, codepoint(static_cast<char32_t>(ch)), 1, stamp, nullptr);
+        }
+        if (out_end_x != nullptr) {
+            *out_end_x = cx;
+        }
+        if (out_end_y != nullptr) {
+            *out_end_y = y;
+        }
+        return;
+    }
+
+    // The glyph run of a text element is immutable, so it is decoded once and cached on the node;
+    // later frames only wrap and draw.
+    vector<run_glyph> glyphs;
+    if (owner == nullptr || owner->cached_glyph_flat().empty()) {
+        glyphs.reserve(raw.size());
+        for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
+            glyphs.push_back(run_glyph{*it, &style, nullptr});
+        }
+    }
+    render_glyph_run(x, y, w, h, glyphs, wm, scroll_row, out_end_x, out_end_y, nullptr, 0, owner, &style);
 }
 
 void renderer::apply_selection_overlay(const int x, const int y, const int /*w*/, const int h, const string& text,
@@ -1063,21 +1196,40 @@ void renderer::apply_selection_overlay(const int x, const int y, const int /*w*/
 
 void renderer::render_rich_text(const int x, const int y, const int w, const int h, const vector<text_span>& spans,
                                 const tui::style& style, const style::wrap_mode wm, int* out_end_x, int* out_end_y,
-                                const vector<text_span>* hang, const int hang_cols) {
-    vector<tui::style> merged;
-    merged.reserve(spans.size());
-    for (const auto& span: spans) {
-        merged.push_back(tui::style::merge(style, span.style));
-    }
-
-    vector<run_glyph> glyphs;
-    for (size_t i = 0; i < spans.size(); ++i) {
-        const auto& raw = spans[i].content.view();
-        for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator(); ++it) {
-            glyphs.push_back(run_glyph{*it, &merged[i], &spans[i].link});
+                                const vector<text_span>* hang, const int hang_cols, const element* owner) {
+    // Merging a span style costs a 192-byte copy plus 21 optional merges;
+    // the result only depends on the element, so it is cached on the node after the first frame.
+    vector<tui::style> merged_local;
+    const vector<tui::style>* merged = nullptr;
+    const bool own_style = owner != nullptr && &style == &owner->style();
+    if (own_style && owner->cached_span_styles().size() == spans.size()) {
+        merged = &owner->cached_span_styles();
+    } else {
+        merged_local.reserve(spans.size());
+        for (const auto& span: spans) {
+            merged_local.push_back(tui::style::merge(style, span.style));
+        }
+        if (own_style) {
+            owner->cache_span_styles(merged_local);
+            merged = &owner->cached_span_styles();
+        } else {
+            merged = &merged_local;
         }
     }
-    render_glyph_run(x, y, w, h, glyphs, wm, 0, out_end_x, out_end_y, hang, hang_cols);
+
+    // The glyph run of a rich text element only depends on its spans, so it is decoded once
+    // and cached on the node; later frames wrap and draw without touching UTF-8 again.
+    vector<run_glyph> glyphs;
+    if (owner == nullptr || owner->cached_glyph_flat().empty()) {
+        for (size_t i = 0; i < spans.size(); ++i) {
+            const auto& raw = spans[i].content.view();
+            for (utf8_iterator it(reinterpret_cast<const byte_t*>(raw.data()), raw.size()); it != utf8_iterator();
+                 ++it) {
+                glyphs.push_back(run_glyph{*it, &(*merged)[i], &spans[i].link, static_cast<uint16_t>(i)});
+            }
+        }
+    }
+    render_glyph_run(x, y, w, h, glyphs, wm, 0, out_end_x, out_end_y, hang, hang_cols, owner, nullptr, &spans, merged);
 }
 
 void renderer::render_virtual_list(const element& el, const layout_rect& rect) {
@@ -1132,6 +1284,18 @@ void renderer::render_virtual_list(const element& el, const layout_rect& rect) {
         const element item = el.item_builder()(static_cast<size_t>(index));
 
         if (item.kind() == element::kind::empty) {
+            offset += hint;
+            continue;
+        }
+
+        // A single-line text item needs no layout pass: it is drawn straight into the row,
+        // which is the common case for log lines and message lists.
+        const bool single_line = item.kind() == element::kind::text &&
+                                 item.wrap_mode() == style::wrap_mode::none && hint == 1 &&
+                                 item.text().view().find('\n') == string_view::npos;
+        if (single_line) {
+            render_text_block(rect.x, rect.y + offset, rect.w, 1, item.text(), item.style(), style::wrap_mode::none,
+                              nullptr, nullptr, 0, &item);
             offset += hint;
             continue;
         }

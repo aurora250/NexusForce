@@ -91,7 +91,7 @@ TEST_F(TcpEchoIntegration, SendAllReceiveAll) {
 
     auto response = client.receive_all(payload.size());
     EXPECT_EQ(response.size(), payload.size());
-    EXPECT_EQ(memcmp(response.data(), payload.data(), payload.size()), 0);
+    EXPECT_EQ(memory_compare(response.data(), payload.data(), payload.size()), 0);
 
     client.close();
     server_thread.join();

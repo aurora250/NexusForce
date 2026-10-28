@@ -112,7 +112,8 @@ public:
      * @param out_end_y 输出结束行
      */
     void render_text_block(int x, int y, int w, int h, const string& text, const tui::style& style, style::wrap_mode wm,
-                           int* out_end_x = nullptr, int* out_end_y = nullptr, int scroll_row = 0);
+                           int* out_end_x = nullptr, int* out_end_y = nullptr, int scroll_row = 0,
+                           const element* owner = nullptr);
 
     /**
      * @brief 渲染富文本块
@@ -128,7 +129,7 @@ public:
      */
     void render_rich_text(int x, int y, int w, int h, const vector<text_span>& spans, const tui::style& style,
                           style::wrap_mode wm, int* out_end_x = nullptr, int* out_end_y = nullptr,
-                          const vector<text_span>* hang = nullptr, int hang_cols = 0);
+                          const vector<text_span>* hang = nullptr, int hang_cols = 0, const element* owner = nullptr);
 
     /**
      * @brief 绘制边框
@@ -227,6 +228,7 @@ private:
         codepoint cp;
         const tui::style* style;
         const string* link;
+        uint16_t span = 0;
     };
 
     screen& screen_;
@@ -244,14 +246,16 @@ private:
 
     void render_subtree(const element& el, const vector<layout_rect>& layout, int& idx);
 
-    int draw_glyph(int x, int y, const codepoint& cp, int cw, const tui::style& style, const string* link);
+    int draw_glyph(int x, int y, const codepoint& cp, int cw, const cell& stamp, const string* link);
     NEFORCE_NODISCARD uint8_t hyperlink_of(const string* link);
     void apply_selection_overlay(int x, int y, int w, int h, const string& text, const text_layout& lay,
                                  size_t sel_begin, size_t sel_end, int scroll_row);
     NEFORCE_NODISCARD bool is_clipped(int x, int y) const noexcept;
+    NEFORCE_NODISCARD bool is_rect_visible(int x, int y, int w, int h) const noexcept;
     void render_glyph_run(int x, int y, int w, int h, const vector<run_glyph>& glyphs, style::wrap_mode wm,
                           int scroll_row, int* out_end_x, int* out_end_y, const vector<text_span>* hang = nullptr,
-                          int hang_cols = 0);
+                          int hang_cols = 0, const element* owner = nullptr, const tui::style* uniform_style = nullptr,
+                          const vector<text_span>* spans = nullptr, const vector<tui::style>* span_styles = nullptr);
     void render_virtual_list(const element& el, const layout_rect& rect);
 };
 

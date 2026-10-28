@@ -177,22 +177,41 @@ namespace {
         return st;
     }
 
-    vector<text_span> runs_to_spans(const string_view line, const vector<syntax_run>& runs, const tui::style& base,
-                                    const code_block_option& opt) {
+    // Styles for the ten token classes, built once per code block instead of once per run.
+    struct syntax_styles {
+        tui::style plain;
+        tui::style values[10];
+
+        syntax_styles(const tui::style& base, const code_block_option& opt) :
+        plain(base) {
+            for (size_t i = 0; i < 10; ++i) {
+                values[i] = class_style(static_cast<syntax_class>(i), base, opt);
+            }
+        }
+
+        NEFORCE_NODISCARD const tui::style& of(const syntax_class cls) const noexcept {
+            const auto index = static_cast<size_t>(cls);
+            return index < 10 ? values[index] : plain;
+        }
+    };
+
+    vector<text_span> runs_to_spans(const string_view line, const vector<syntax_run>& runs,
+                                    const syntax_styles& styles) {
         vector<text_span> spans;
+        spans.reserve(runs.size() * 2 + 1);
         size_t cursor = 0;
         for (const auto& run: runs) {
             if (run.begin > cursor) {
-                spans.push_back(text_span{string{line.substr(cursor, run.begin - cursor)}, base, string()});
+                spans.push_back(text_span{string{line.substr(cursor, run.begin - cursor)}, styles.plain, string()});
             }
             if (run.end > run.begin) {
-                spans.push_back(text_span{string{line.substr(run.begin, run.end - run.begin)},
-                                          class_style(run.cls, base, opt), string()});
+                spans.push_back(
+                        text_span{string{line.substr(run.begin, run.end - run.begin)}, styles.of(run.cls), string()});
             }
             cursor = max(cursor, run.end);
         }
         if (cursor < line.size()) {
-            spans.push_back(text_span{string{line.substr(cursor, line.size() - cursor)}, base, string()});
+            spans.push_back(text_span{string{line.substr(cursor, line.size() - cursor)}, styles.plain, string()});
         }
         return spans;
     }
@@ -216,6 +235,11 @@ element code_block(const code_block_option& opt) {
     keyword_style.fg = _NEFORCE color::cyan();
 
     const highlighter* grammar = opt.highlight ? find_highlighter(opt.language.view()) : nullptr;
+    // Ten class styles are worth building only when a grammar will actually be used.
+    unique_ptr<syntax_styles> syntax;
+    if (grammar != nullptr) {
+        syntax = make_unique<syntax_styles>(base_style, opt);
+    }
     highlight_state lexer_state;
 
     const auto lines = split_lines(opt.code.view());
@@ -243,7 +267,7 @@ element code_block(const code_block_option& opt) {
         if (grammar != nullptr) {
             vector<syntax_run> runs;
             grammar->highlight_line(lines[i], lexer_state, runs);
-            vector<text_span> code_spans = runs_to_spans(lines[i], runs, base_style, opt);
+            vector<text_span> code_spans = runs_to_spans(lines[i], runs, *syntax);
             for (auto& span: code_spans) {
                 spans.push_back(move(span));
             }
@@ -283,7 +307,7 @@ element code_block(const code_block_option& opt) {
         for (size_t i = rows.size() - tail; i < rows.size(); ++i) {
             collapsed.push_back(rows[i]);
         }
-        rows = _NEFORCE move(collapsed);
+        rows = move(collapsed);
     }
 
     element body = element::vbox(move(rows));
@@ -295,8 +319,14 @@ element code_block(const code_block_option& opt) {
 
     if (opt.left_bar) {
         const tui::style bar_style = opt.gutter_style;
-        body = element::hbox({element::text("\xe2\x94\x82", bar_style, style::wrap_mode::none),
-                              element::text(" ", bar_style, style::wrap_mode::none), _NEFORCE move(body)});
+        // Built explicitly instead of from an initializer list: a list would copy each
+        // element (and deep-copy its node) before moving it into the row.
+        elements bar;
+        bar.reserve(3);
+        bar.push_back(element::text("\xe2\x94\x82", bar_style, style::wrap_mode::none));
+        bar.push_back(element::text(" ", bar_style, style::wrap_mode::none));
+        bar.push_back(move(body));
+        body = element::hbox(move(bar));
     }
 
     if (opt.background) {
@@ -308,7 +338,7 @@ element code_block(const code_block_option& opt) {
         if (!band_style.padding.has_value()) {
             band_style.padding = padding{0, 1, 0, 1};
         }
-        body = element::band(_NEFORCE move(body), band_style);
+        body = element::band(move(body), band_style);
     }
 
     return body;

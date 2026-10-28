@@ -1643,7 +1643,7 @@ namespace {
             }
 
             auto* bytes = static_cast<char*>(mapping_);
-            ::memset(bytes, 'a', total);
+            memory_set(bytes, 'a', total);
             if (::mprotect(bytes + page_size_, page_size_, PROT_NONE) != 0) {
                 ::munmap(mapping_, total);
                 mapping_ = nullptr;

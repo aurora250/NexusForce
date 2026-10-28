@@ -35,45 +35,60 @@ namespace {
     int measure_element_width_impl(const element& el);
     int measure_element_height_impl(const element& el, int allocated_width);
 
-    // Measuring recurses into children and the layout passes measure
-    // the same subtree several times (intrinsic size, flex distribution, then assignment).
-    // The result is memoised on the element node itself, keyed by a per-pass counter,
-    // so a copy of an element (which gets its own node) simply measures once.
+    // Visible region of the current pass: containers stop assigning children that start below it,
+    // so a tall document is not laid out past the viewport.
+    // Truncation only ever drops the tail, which the renderer would skip anyway.
+    int& clip_bottom() noexcept {
+        thread_local int bottom = numeric_traits<int>::max();
+        return bottom;
+    }
+
+    struct clip_guard {
+        int saved;
+
+        explicit clip_guard(const int bottom) :
+        saved(clip_bottom()) {
+            clip_bottom() = bottom;
+        }
+
+        ~clip_guard() { clip_bottom() = saved; }
+    };
+
+    // Measuring recurses into children and a single layout pass measures the same subtree
+    // several times (intrinsic size, flex distribution, then assignment); the result is memoised on the element node.
+    // A node whose subtree is clean also keeps its measurement across passes,
+    // so re-laying out an unchanged subtree costs nothing.
     uint32_t& layout_round() noexcept {
         thread_local uint32_t round = 0;
         return round;
     }
 
-    measure_cache& writable_measure(const element& el) noexcept {
-        measure_cache& slot = el.mutable_measure();
-        if (slot.stamp != layout_round()) {
-            slot.stamp = layout_round();
-            slot.width = -1;
-            slot.height = -1;
-            slot.height_at = -1;
-        }
-        return slot;
+    NEFORCE_NODISCARD bool measure_is_fresh(const element& el, const measure_cache& cached) noexcept {
+        return cached.stamp == layout_round() || !el.subtree_layout_dirty();
     }
 
     int measure_element_width(const element& el) {
         const measure_cache& cached = el.cached_measure();
-        if (cached.stamp == layout_round() && cached.width >= 0) {
+        if (cached.width >= 0 && measure_is_fresh(el, cached)) {
             return cached.width;
         }
         const int width = measure_element_width_impl(el);
-        writable_measure(el).width = width;
+        measure_cache& slot = el.mutable_measure();
+        slot.width = width;
+        slot.stamp = layout_round();
         return width;
     }
 
     int measure_element_height(const element& el, const int allocated_width) {
         const measure_cache& cached = el.cached_measure();
-        if (cached.stamp == layout_round() && cached.height >= 0 && cached.height_at == allocated_width) {
+        if (cached.height >= 0 && cached.height_at == allocated_width && measure_is_fresh(el, cached)) {
             return cached.height;
         }
         const int height = measure_element_height_impl(el, allocated_width);
-        measure_cache& slot = writable_measure(el);
+        measure_cache& slot = el.mutable_measure();
         slot.height = height;
         slot.height_at = allocated_width;
+        slot.stamp = layout_round();
         return height;
     }
 
@@ -92,7 +107,20 @@ namespace {
         }
         return width;
     }
+
     void assign_layout(const element& el, vector<layout_rect>& out, int x, int y, int total_w, int total_h);
+
+    void assign_layout_impl(const element& el, vector<layout_rect>& out, int x, int y, int total_w, int total_h);
+
+    void assign_layout(const element& el, vector<layout_rect>& out, const int x, const int y, const int total_w,
+                       const int total_h) {
+        if (el.take_cached_layout(total_w, total_h, x, y, out)) {
+            return;
+        }
+        const size_t start = out.size();
+        assign_layout_impl(el, out, x, y, total_w, total_h);
+        el.finish_layout(out, start, x, y, total_w, total_h);
+    }
 
     int child_flex_weight(const element& child, const bool is_row) {
         const auto& cs = child.style();
@@ -534,7 +562,7 @@ namespace {
         return content_h;
     }
 
-    void assign_layout(const element& el, vector<layout_rect>& out, int x, int y, int total_w, int total_h) {
+    void assign_layout_impl(const element& el, vector<layout_rect>& out, int x, int y, int total_w, int total_h) {
         const auto k = el.kind();
         const auto& style = el.style();
         const auto& lp = el.layout();
@@ -583,6 +611,8 @@ namespace {
                     int content_y = rect.y + 1 + pad.top - sy;
                     int content_w = max(measure_element_width(child), rect.w - 2 - pad.left - pad.right);
                     int content_h = max(measure_element_height(child), rect.h - 2 - pad.top - pad.bottom);
+                    // Only the visible rows of the scrolled child are laid out.
+                    const clip_guard clip(rect.y + rect.h - 2 - pad.bottom);
                     assign_layout(child, out, content_x, content_y, content_w, content_h);
                 }
                 return;
@@ -852,6 +882,10 @@ namespace {
 
                 int offset = is_row ? content_x + justify_offset : content_y + justify_offset;
                 for (size_t i = 0; i < n; ++i) {
+                    if (!is_row && offset > clip_bottom()) {
+                        // Everything from here starts below the viewport: stop assigning.
+                        break;
+                    }
                     const auto& child = children[i];
                     const auto& cs = child.style();
 
@@ -1020,6 +1054,13 @@ vector<layout_rect> compute_layout(const element& element, const int constraint_
     }
 
     ++layout_round();
+    // The pass never assigns rows below the terminal.
+    const clip_guard clip(constraint_h > 0 ? constraint_h - 1 : numeric_traits<int>::max());
+    // A tree that has never been laid out cannot reuse anything,
+    // so the dirty pre-pass (which walks every node) is skipped; every node keeps its "dirty" default.
+    if (!element.cached_layout().empty()) {
+        (void) element.refresh_subtree_layout_dirty();
+    }
 
     vector<layout_rect> result;
     if (element.kind() == element::kind::empty) {

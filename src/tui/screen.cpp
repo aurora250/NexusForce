@@ -73,6 +73,14 @@ namespace {
 
     size_t last_changed_byte(const char* left, const char* right, const size_t size) noexcept {
         size_t i = size;
+        // Skip equal spans 128 bytes at a time (AVX2), then locate the byte inside the last differing span:
+        // a tail of unchanged cells is the common case in a changed row.
+        while (i >= 128) {
+            if (memory_compare(left + i - 128, right + i - 128, 128) != 0) {
+                break;
+            }
+            i -= 128;
+        }
         while (i >= 16) {
             const int mask = simd::to_bitmask(
                     simd::match_bytes(simd::loadu_si128(left + i - 16), simd::loadu_si128(right + i - 16)));
@@ -100,6 +108,34 @@ namespace {
         ss.append(";");
         ss.append(to_string(x + 1));
         ss.append("H");
+    }
+
+    // Horizontal/vertical moves are shorter than an absolute position and keep the escape
+    // sequences small when a row scrolls or a cell inside the same line changes.
+    void append_relative_move(string& ss, const int from_x, const int from_y, const int x, const int y) {
+        if (y == from_y && x > from_x) {
+            const int dx = x - from_x;
+            if (dx == 1) {
+                ss.append("\033[C");
+            } else {
+                ss.append("\033[");
+                ss.append(to_string(dx));
+                ss.append("C");
+            }
+            return;
+        }
+        if (x == from_x && y > from_y) {
+            const int dy = y - from_y;
+            if (dy == 1) {
+                ss.append("\033[B");
+            } else {
+                ss.append("\033[");
+                ss.append(to_string(dy));
+                ss.append("B");
+            }
+            return;
+        }
+        append_cursor_move(ss, x, y);
     }
 } // namespace
 
@@ -129,9 +165,16 @@ cell& surface::cell_at(const int x, const int y) {
 }
 
 void surface::clear() {
-    for (auto& cell: cells_) {
-        cell.reset();
-        cell.character = " ";
+    // One prepared blank cell copied per position:
+    // reset() plus a string assignment costs several times more than a 52-byte copy.
+    static const cell blank = [] {
+        cell value;
+        value.reset();
+        value.character = " ";
+        return value;
+    }();
+    for (auto& target: cells_) {
+        target = blank;
     }
 }
 
@@ -172,6 +215,7 @@ void screen::clear() {
     surface::clear();
     cursor_ = tui::cursor{};
     hyperlinks_.clear();
+    blank_ = true;
 }
 
 void screen::reset_position(const bool clear) {
@@ -316,22 +360,27 @@ string screen::to_string(const screen& prev) const {
         const int row_width = dimx_ < prev.dimx_ ? dimx_ : prev.dimx_;
         const size_t row = static_cast<size_t>(y) * static_cast<size_t>(dimx_);
         const size_t prev_row = static_cast<size_t>(y) * static_cast<size_t>(prev.dimx_);
-        // A row that is byte-identical to the previous frame needs no per-cell work at all:
-        // the whole row already shows what this frame would draw.
         const size_t row_bytes = static_cast<size_t>(row_width) * sizeof(cell);
-        if (memory_compare(&cells_[row], &prev.cells_[prev_row], row_bytes) == 0) {
-            continue;
-        }
-        // Only the span between the first and the last changed cell needs scanning.
         const auto* row_left = reinterpret_cast<const char*>(&cells_[row]);
         const auto* row_right = reinterpret_cast<const char*>(&prev.cells_[prev_row]);
-        const int x_begin = static_cast<int>(first_changed_byte(row_left, row_right, row_bytes) / sizeof(cell));
+        // Whole-row equality is the cheapest test for an untouched row (AVX2 compare).
+        // A blank previous frame makes that test useless: nothing can match, so the row is
+        // scanned once for its first and last changed cell instead of being compared twice.
+        if (!prev.blank_ && memory_compare(row_left, row_right, row_bytes) == 0) {
+            continue;
+        }
+        const size_t first_changed = first_changed_byte(row_left, row_right, row_bytes);
+        if (first_changed == row_bytes) {
+            continue;
+        }
+        const int x_begin = static_cast<int>(first_changed / sizeof(cell));
         const int x_end = static_cast<int>(last_changed_byte(row_left, row_right, row_bytes) / sizeof(cell));
-        for (int x = x_begin; x <= x_end; ++x) {
+        for (int x = x_begin; x <= x_end;) {
             const size_t idx = static_cast<size_t>(y) * dimx_ + x;
             const tui::cell& cell = cells_[idx];
 
             if (cell.automerge) {
+                ++x;
                 continue;
             }
 
@@ -340,13 +389,34 @@ string screen::to_string(const screen& prev) const {
             // A cell that already matches the previous frame is already on screen,
             // so the emit decision must not consult the terminal state at all.
             if (same_text(cell, prev_cell) && same_style(cell, prev_cell)) {
+                ++x;
                 continue;
             }
 
-            if (last_y != y || last_x + 1 != x) {
-                append_cursor_move(result, x, y);
+            // Emit the longest adjacent run that shares this style:
+            // one cursor move and one style update per run instead of per cell.
+            int run_end = x;
+            while (run_end < x_end) {
+                const auto next_x = static_cast<size_t>(run_end) + 1;
+                const tui::cell& next = cells_[static_cast<size_t>(y) * dimx_ + next_x];
+                if (next.automerge || !same_style(next, cell)) {
+                    break;
+                }
+                const tui::cell& next_prev = prev.cells_[prev_row + next_x];
+                if (same_text(next, next_prev) && same_style(next, next_prev)) {
+                    break;
+                }
+                ++run_end;
             }
-            last_x = x;
+
+            if (last_y != y || last_x + 1 != x) {
+                if (last_x >= 0 && last_y >= 0) {
+                    append_relative_move(result, last_x, last_y, x, y);
+                } else {
+                    append_cursor_move(result, x, y);
+                }
+            }
+            last_x = run_end;
             last_y = y;
 
             update_cell_style(result, term_state, cell);
@@ -363,7 +433,11 @@ string screen::to_string(const screen& prev) const {
             term_state.strikethrough = cell.strikethrough;
             term_state.hyperlink = cell.hyperlink;
 
-            result.append(cell.character.data(), cell.character.size());
+            for (int i = x; i <= run_end; ++i) {
+                const tui::cell& glyph = cells_[static_cast<size_t>(y) * dimx_ + i];
+                result.append(glyph.character.data(), glyph.character.size());
+            }
+            x = run_end + 1;
         }
     }
 

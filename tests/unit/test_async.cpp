@@ -4067,7 +4067,7 @@ namespace {
 
         void async_read(io_context&, memory_view<char> buffer, function<void(error_code, size_t)> handler) override {
             size_t n = min(buffer.size(), data_.size() - read_pos_);
-            memcpy(buffer.data(), data_.data() + read_pos_, n);
+            memory_copy(buffer.data(), data_.data() + read_pos_, n);
             read_pos_ += n;
             handler(error_code{}, n);
         }
@@ -4075,7 +4075,7 @@ namespace {
         void async_read(io_context&, memory_view<char> buffer, cancellation_slot&,
                         function<void(error_code, size_t)> handler) override {
             size_t n = min(buffer.size(), data_.size() - read_pos_);
-            memcpy(buffer.data(), data_.data() + read_pos_, n);
+            memory_copy(buffer.data(), data_.data() + read_pos_, n);
             read_pos_ += n;
             handler(error_code{}, n);
         }

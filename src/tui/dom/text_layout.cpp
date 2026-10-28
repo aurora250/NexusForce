@@ -50,8 +50,12 @@ namespace {
         return codepoint{value};
     }
 
-    text_layout layout_impl(const string_view text, const int width, const style::wrap_mode wm, const int hang_cols) {
+    text_layout layout_impl(const string_view text, const int width, const style::wrap_mode wm, const int hang_cols,
+                            const size_t max_lines) {
         text_layout result;
+        // Callers that only paint a viewport ask for the first max_lines rows:
+        // wrapping a long document stops as soon as the visible part is complete.
+        const auto limit_reached = [&]() { return max_lines > 0 && result.lines.size() >= max_lines; };
 
         const auto* data = reinterpret_cast<const byte_t*>(text.data());
         const size_t len = text.size();
@@ -65,13 +69,15 @@ namespace {
         // skip the per-codepoint width accounting entirely.
         if (wm == style::wrap_mode::none) {
             size_t begin = 0;
-            for (size_t i = 0; i < len; ++i) {
+            for (size_t i = 0; i < len && !limit_reached(); ++i) {
                 if (text[i] == '\n') {
                     result.lines.push_back(text_line{begin, i, false});
                     begin = i + 1;
                 }
             }
-            result.lines.push_back(text_line{begin, len, false});
+            if (!limit_reached()) {
+                result.lines.push_back(text_line{begin, len, false});
+            }
             return result;
         }
 
@@ -82,7 +88,7 @@ namespace {
         bool continuation = false;
         int limit = max(1, width - (continuation ? hang_cols : 0));
 
-        while (pos < len) {
+        while (pos < len && !limit_reached()) {
             if (data[pos] == '\n') {
                 result.lines.push_back(text_line{line_begin, pos, continuation});
                 ++pos;
@@ -147,21 +153,24 @@ namespace {
             pos += bytes;
         }
 
-        result.lines.push_back(text_line{line_begin, len, continuation});
+        if (!limit_reached()) {
+            result.lines.push_back(text_line{line_begin, len, continuation});
+        }
         return result;
     }
 } // namespace
 
 
-text_layout layout_text(const string_view text, const int width, const style::wrap_mode wm) {
-    return layout_impl(text, width, wm, 0);
+text_layout layout_text(const string_view text, const int width, const style::wrap_mode wm, const size_t max_lines) {
+    return layout_impl(text, width, wm, 0, max_lines);
 }
 
-text_layout layout_text_hang(const string_view text, const int width, const style::wrap_mode wm, const int hang_cols) {
+text_layout layout_text_hang(const string_view text, const int width, const style::wrap_mode wm, const int hang_cols,
+                             const size_t max_lines) {
     if (hang_cols <= 0) {
-        return layout_impl(text, width, wm, 0);
+        return layout_impl(text, width, wm, 0, max_lines);
     }
-    return layout_impl(text, width, wm, hang_cols);
+    return layout_impl(text, width, wm, hang_cols, max_lines);
 }
 
 void caret_position(const text_layout& layout, const string_view text, const size_t offset, int& row, int& col) {

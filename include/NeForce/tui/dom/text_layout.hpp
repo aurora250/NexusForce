@@ -48,6 +48,7 @@ using neforce::text_display_width;
  * @param text 文本内容
  * @param width 行宽
  * @param wm 换行模式
+ * @param max_lines 最大行数
  * @return 分行结果
  *
  * 换行规则：
@@ -57,7 +58,7 @@ using neforce::text_display_width;
  * - `none` 模式只在硬换行处断行
  * - 单个词宽于行宽时退化为按字符断行
  */
-NEFORCE_API text_layout layout_text(string_view text, int width, style::wrap_mode wm);
+NEFORCE_API text_layout layout_text(string_view text, int width, style::wrap_mode wm, size_t max_lines = 0);
 
 /**
  * @brief 计算带悬挂缩进的文本排版
@@ -65,11 +66,13 @@ NEFORCE_API text_layout layout_text(string_view text, int width, style::wrap_mod
  * @param width 首行宽度
  * @param wm 换行模式
  * @param hang_cols 续行缩进列数
+ * @param max_lines 最多返回的行数，0 表示不限制
  * @return 分行结果
  *
  * 硬换行后的行恢复整行宽度；只有自动换行产生的续行才缩进。
  */
-NEFORCE_API text_layout layout_text_hang(string_view text, int width, style::wrap_mode wm, int hang_cols);
+NEFORCE_API text_layout layout_text_hang(string_view text, int width, style::wrap_mode wm, int hang_cols,
+                                         size_t max_lines = 0);
 
 /**
  * @brief 计算字节偏移所在的行与列

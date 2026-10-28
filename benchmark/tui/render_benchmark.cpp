@@ -56,17 +56,71 @@ static void BmLayoutPanelTable(benchmark::State& state) {
 }
 BENCHMARK(BmLayoutPanelTable)->Arg(120)->Arg(160)->Arg(240);
 
-// Cold layout: the tree is marked dirty every iteration, so the engine walks the whole
-// subtree instead of returning the cached rectangles.
+namespace {
+    // Marks every node, which is what a freshly built tree looks like: nothing can be
+    // reused and the whole tree has to be measured and assigned.
+    void mark_all_dirty(element& el) {
+        el.set_layout_dirty(true);
+        for (auto& child: el.children()) {
+            mark_all_dirty(child);
+        }
+    }
+} // namespace
+
+// Cold layout: the whole tree is marked dirty every iteration.
 static void BmLayoutPanelTableCold(benchmark::State& state) {
     const int width = static_cast<int>(state.range(0));
     const int height = 48;
     element tree = make_dashboard(height - 4);
     for (auto _: state) {
-        tree.set_layout_dirty(true);
+        mark_all_dirty(tree);
         benchmark::DoNotOptimize(compute_layout(tree, width, height));
     }
 }
 BENCHMARK(BmLayoutPanelTableCold)->Arg(120)->Arg(160)->Arg(240);
+
+// Dirty subtree: the tree stays alive, one cell changes, everything else is clean. Only
+// the path down to that cell should be measured and assigned.
+static void BmLayoutPanelTableDirty(benchmark::State& state) {
+    const int width = static_cast<int>(state.range(0));
+    const int height = 48;
+    element tree = make_dashboard(height - 4);
+    benchmark::DoNotOptimize(compute_layout(tree, width, height));
+    for (auto _: state) {
+        auto& rows = tree.children();
+        if (rows.empty() || rows[0].children().empty()) {
+            break;
+        }
+        rows[0].children()[0].set_layout_dirty(true);
+        benchmark::DoNotOptimize(compute_layout(tree, width, height));
+    }
+}
+BENCHMARK(BmLayoutPanelTableDirty)->Arg(120)->Arg(160)->Arg(240);
+
+// Only the root is marked dirty (e.g. a restyle that keeps the size): children keep their
+// measurements and fragments, which is what incremental layout is for.
+static void BmLayoutPanelTableRootDirty(benchmark::State& state) {
+    const int width = static_cast<int>(state.range(0));
+    const int height = 48;
+    element tree = make_dashboard(height - 4);
+    benchmark::DoNotOptimize(compute_layout(tree, width, height));
+    for (auto _: state) {
+        tree.set_layout_dirty(true);
+        benchmark::DoNotOptimize(compute_layout(tree, width, height));
+    }
+}
+BENCHMARK(BmLayoutPanelTableRootDirty)->Arg(120)->Arg(160)->Arg(240);
+
+// Table layout scaling: the same width with 44 and 200 rows.
+static void BmLayoutPanelTableRows(benchmark::State& state) {
+    const int width = 160;
+    const int rows = static_cast<int>(state.range(0));
+    element tree = make_dashboard(rows);
+    for (auto _: state) {
+        mark_all_dirty(tree);
+        benchmark::DoNotOptimize(compute_layout(tree, width, rows + 4));
+    }
+}
+BENCHMARK(BmLayoutPanelTableRows)->Arg(44)->Arg(200)->Arg(800);
 
 BENCHMARK_MAIN();

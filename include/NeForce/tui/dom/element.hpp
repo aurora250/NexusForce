@@ -265,6 +265,26 @@ public:
     NEFORCE_NODISCARD int cached_constraint_h() const noexcept;
 
     /**
+     * @brief 子树内是否含脏节点
+     * @return 子树内有节点需要重新布局返回 true
+     * @note 由布局前的遍历写入，供"只测量脏子树"使用
+     */
+    NEFORCE_NODISCARD bool subtree_layout_dirty() const noexcept;
+
+    /**
+     * @brief 写入子树脏标记
+     * @param dirty 子树内是否有需要重新布局的节点
+     */
+    void set_subtree_layout_dirty(bool dirty) const noexcept;
+
+    /**
+     * @brief 重新计算整个子树的脏标记
+     * @return 子树内有节点需要重新布局返回 true
+     * @note 布局入口调用一次，遍历开销与节点数线性相关
+     */
+    bool refresh_subtree_layout_dirty() const;
+
+    /**
      * @brief 读取布局测量缓存
      * @return 缓存内容；`stamp` 与当前布局轮次不符时视为未命中
      */
@@ -275,6 +295,75 @@ public:
      * @return 可写的缓存引用
      */
     NEFORCE_NODISCARD measure_cache& mutable_measure() const noexcept;
+
+    /**
+     * @brief 读取缓存的字形扁平串
+     * @return 已缓存的 UTF-8 扁平串；未缓存时为空
+     */
+    NEFORCE_NODISCARD const string& cached_glyph_flat() const;
+
+    /**
+     * @brief 读取缓存的字形字节偏移表
+     * @return 每个字形在扁平串中的起始字节偏移
+     */
+    NEFORCE_NODISCARD const vector<uint32_t>& cached_glyph_offsets() const;
+
+    /**
+     * @brief 读取缓存的字形码点表
+     * @return 每个字形对应的码点
+     */
+    NEFORCE_NODISCARD const vector<codepoint>& cached_glyph_codepoints() const;
+
+    /**
+     * @brief 读取缓存的字形所属片段下标
+     * @return 每个字形来自的富文本片段下标；纯文本元素为空
+     */
+    NEFORCE_NODISCARD const vector<uint16_t>& cached_glyph_spans() const;
+
+    /**
+     * @brief 读取缓存的富文本片段合并样式
+     * @return 每个片段与其基础样式合并后的结果；未缓存时为空
+     */
+    NEFORCE_NODISCARD const vector<tui::style>& cached_span_styles() const;
+
+    /**
+     * @brief 缓存字形扁平串与偏移表
+     * @param flat UTF-8 扁平串
+     * @param offsets 每个字形的起始字节偏移
+     * @param cps 每个字形对应的码点
+     * @param spans 每个字形来自的片段下标（纯文本留空）
+     * @note 元素的文本在构造后不可变，缓存对元素生命周期有效
+     */
+    void cache_glyph_run(string flat, vector<uint32_t> offsets, vector<codepoint> cps, vector<uint16_t> spans = {}) const;
+
+    /**
+     * @brief 缓存富文本片段合并样式
+     * @param styles 每个片段与其基础样式合并后的结果
+     */
+    void cache_span_styles(vector<tui::style> styles) const;
+
+    /**
+     * @brief 复用布局片段缓存
+     * @param constraint_w 可用宽度
+     * @param constraint_h 可用高度
+     * @param x 子树左上角列坐标
+     * @param y 子树左上角行坐标
+     * @param out 布局结果，片段会被平移到该坐标后追加
+     * @return 命中缓存并已追加返回 true
+     */
+    bool take_cached_layout(int constraint_w, int constraint_h, int x, int y, vector<layout_rect>& out) const;
+
+    /**
+     * @brief 保存本次布局的片段并清除脏标记
+     * @param out 本次布局结果
+     * @param start 本子树在 out 中的起始下标
+     * @param origin_x 子树左上角列坐标
+     * @param origin_y 子树左上角行坐标
+     * @param constraint_w 可用宽度
+     * @param constraint_h 可用高度
+     */
+    void finish_layout(const vector<layout_rect>& out, size_t start, int origin_x, int origin_y, int constraint_w,
+                       int constraint_h) const;
 
     static element empty();
     static element vbox(vector<element> children, box_props props = {});
@@ -425,6 +514,7 @@ public:
 private:
     struct node;
     shared_ptr<node> node_;
+    mutable bool shared_ = false;
 
     void ensure_node();
     void init_kind(enum kind k);

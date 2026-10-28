@@ -312,7 +312,10 @@ public:
      * @param y 行坐标
      * @return cell 引用
      */
-    NEFORCE_NODISCARD cell& fast_cell_at(int x, int y) noexcept { return cells_[static_cast<size_t>(y) * dimx_ + x]; }
+    NEFORCE_NODISCARD cell& fast_cell_at(int x, int y) noexcept {
+        blank_ = false;
+        return cells_[static_cast<size_t>(y) * dimx_ + x];
+    }
 
     /**
      * @brief 无边界检查的只读 cell 访问
@@ -329,7 +332,14 @@ public:
      */
     virtual void clear();
 
+    /**
+     * @brief 缓冲是否仍全为默认单元格
+     * @return 自构造或 clear() 以来没有写入过任何单元格返回 true
+     */
+    NEFORCE_NODISCARD bool is_blank() const noexcept { return blank_; }
+
 protected:
+    bool blank_ = true;
     int dimx_;
     int dimy_;
     vector<cell> cells_;

@@ -44,7 +44,7 @@ namespace {
             if (block != nullptr) {
                 void* target = ::GlobalLock(block);
                 if (target != nullptr) {
-                    ::memcpy(target, wide.data(), bytes);
+                    memory_copy(target, wide.data(), bytes);
                     ::GlobalUnlock(block);
                     stored = ::SetClipboardData(CF_UNICODETEXT, block) != nullptr;
                 }
