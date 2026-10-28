@@ -66,7 +66,9 @@ static void BmVirtualListFrame(benchmark::State& state) {
     const auto items = static_cast<size_t>(state.range(0));
     element tree = element::virtual_list(
             items, 1,
-            [](const size_t index) { return element::text(format("item {}", index), tui::style{}, style::wrap_mode::none); },
+            [](const size_t index) {
+                return element::text(format("item {}", index), tui::style{}, style::wrap_mode::none);
+            },
             0);
     screen target(width, height);
     renderer draw(target, dark_theme, width, height);

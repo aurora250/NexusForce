@@ -133,7 +133,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ## 🚀 特性
 
 ### 🔄 并发与异步 (Async)
-- **`thread_pool`** - 基于 NUMA 感知任务窃取与多策略定制的高性能线程池，性能测试详见 [线程池性能测试记录](benchmark/async/PERFORMANCE.md)
+- **`thread_pool`** - 基于 NUMA 感知任务窃取与多策略定制的高性能线程池
 - **`io_context`** - 异步 I/O 执行上下文，统一事件循环、定时器与取消模型
 - **`cancellation_slot`** - 支持 `async_connect` / `async_read` / `async_write` 可中断异步 I/O
 - **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度，支持任务取消标志
@@ -186,7 +186,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **安全中间件** - `csrf_filter` CSRF 防护、`http_security` 安全响应头、`http_cache` HTTP 缓存策略
 - **WebSocket** - RFC 6455/7692 全双工通信 `websocket_session` / `websocket_server`，事件驱动零线程模式
 - **WebSocket 压缩** - permessage-deflate（RFC 7692），窗口比特位协商与上下文接管控制
-- **HTTP 客户端** - `http_client` scheme 感知模式（https 自动 SSL），请求/响应处理
+- **HTTP 客户端** - `http_client` scheme 感知模式（https 自动 SSL），请求/响应处理，连接复用 + 重试退避
 - **TCP/UDP 套接字** - 高性能网络通信 `tcp_socket` / `udp_socket`，支持 `async_connect()` / `async_read()` / `async_write()` 异步操作
 - **SSL/TLS** - 加密网络传输 `ssl_context` / `ssl_stream`，SNI 多证书管理 `sni_manager`，ALPN 协议协商
 - **`dns_client`** - 域名解析，per-operation 异步状态对象架构，completion-token 异步 API（回调/取消槽/future/awaitable）
@@ -277,12 +277,26 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`application`** - 应用入口，Builder 模式配置（主题/FPS/标题），驱动事件循环与动画计时器
 - **`reconciler`** - 声明式渲染引擎，Cell 级终端帧差分与增量 ANSI 输出，焦点链遍历，鼠标命中测试与滚动条交互
 - **`screen`** - 终端帧缓冲，逐 Cell 差分生成最小 ANSI 转义序列
-- **`input_driver`** - 跨平台终端输入驱动，解析 ANSI/鼠标/UTF-8 序列
+- **`input_driver`** - 跨平台终端输入驱动，监听 stdin 并分发按键/鼠标/粘贴事件
+- **`input_parser`** - 无 I/O 的输入解析状态机，识别 ASCII/UTF-8、控制键、CSI/SS3、带修饰键序列、Alt+字符、SGR 鼠标与括号粘贴
+- **`headless`** - 无终端驱动：固定尺寸、帧输出回收到内存、字节级输入注入，作为快照测试与离屏渲染底座
+- **`log_view`** - 对话记录：变高消息、流式合并、贴底跟随与「N 条新消息」提示
+- **`composer`** - 输入编排：多行编辑器 + 补全弹层 + 提示行，提交/换行/中断语义
+- **`tool_runner`** - 工具执行组件：PTY/管道子进程 + 逐帧合并输出 + 环形裁剪 + 状态回写
+- **`pty` / `process_watcher`** - 伪终端封装与异步子进程监视器
+- **剪贴板 / 鼠标选择** - OSC 52 写入与读取，`text_area` 拖拽选区、`log_view` 点击选中复制、`composer` 单行上下键浏览提交历史
 - **`element`** - 不可变虚拟元素树，14+ 节点类型，装饰器链式组合，完整 Flexbox + Gridbox 网格布局
-- **`style` / `theme`** - 样式系统 + 语义化主题，预置暗色主题
+- **主题角色** - 81 个语义颜色角色 + 六套调色板（雾蓝/樱）+ 用户主题 JSON + 按终端背景自动明暗
+- **动效原语** - 共享帧时钟、扫光（shimmer）、平滑揭示（reveal）、旋转动画帧集
+- **富文本** - Markdown 表格/引用悬挂缩进/链接 OSC-8/图片占位、流式增量渲染、`$…$` 与 `$$…$$` 数学公式
+- **语法高亮** - 20 种语言的表驱动高亮，代码块按语言自动着色
+- **LaTeX** - TeX 子集排版为多行 Unicode（分数/根式/上下标/矩阵/cases/大运算符上下限）
+- **Mermaid** - flowchart / sequence / state / class / ER / gitGraph / pie / mindmap / timeline / gantt / journey / quadrant / requirement 子集渲染为框线字符图，Markdown 围栏自动接入
+- **终端协议** - 终端画像探测、OSC 11 背景查询、通知（OSC 9/777/99/BEL）、光标形状、焦点事件、Kitty 键盘开关
+- **图像协议** - PNG 解码（8 位 RGB/RGBA）与 Kitty / iTerm2 / Sixel 编码
+- **键盘与焦点** - Kitty `CSI-u` 与 modifyOtherKeys 解析（含按下/重复/释放）、窗口焦点事件、根组件按键预览
+- **选区跟随** - 拖选即复制、滚动后选区平移、`selection_text()` 取文本
 - **`state<T>`** - 响应式状态管理，写操作自动脏标记 + strand 合并调度重渲染
-- **`component_base` / `component<P>`** - 组件基类，焦点管理、上下文注入（`provide_context`/`context`，沿父链查找）、响应式状态工厂
-- **`animator` / `easing`** - 属性动画器 + 缓动函数
 
 ### 🧬 类型与特性 (TypeInfo)
 - **类型萃取** - 完备的编译期类型判断
@@ -298,6 +312,12 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **构造/析构工具** - 对象生命周期管理
 - **`trace_allocator` ** - 调试用内存监控
 - **`standard_allocator`** - 基于编译器特性的策略特化分配器
+- **`memory_pool` / `pool_allocator`** - 高性能内存池：零块头 span + 尺寸类 + 线程本地缓存，大对象直接映射操作系统内存，性能测试详见 [内存池性能测试记录](benchmark/memory/PERFORMANCE.md)
+
+#### 分配器模型
+
+- 打开 `NEXUSFORCE_USING_MEMORY_POOL`（默认）时，库容器（`basic_string`、`vector` 等）的分配统一由全局内存池承担
+- 显式打开 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` 并让每个会跨模块传递所有权的 C++ 模块链接 `NexusForceMemoryPoolOverrideStatic` 以使全进程使用全局内存池
 
 ### 📦 压缩 (Compress)
 - **lz4 压缩** - `lz4_compressor` 高速数据压缩/解压
@@ -319,6 +339,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **数值算法** - 数值计算与累加
 - **堆算法** - 堆操作与优先级队列
 - **范围操作** - ranges 支持
+- **链式查询** - 惰性链式算子
 - **哈希算法** - 多种哈希函数实现
 
 ### 📊 数学库 (Math)

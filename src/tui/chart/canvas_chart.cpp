@@ -302,7 +302,11 @@ void canvas_chart::raster(int x, int y, int width, int height, const vector<char
         if (cpu_mode) {
             colors[index] = row_colors[static_cast<size_t>(py) / 4U];
         } else if (style_.gradient && height > 1) {
-            const double fade = 0.55 * (static_cast<double>(py) / 4) / static_cast<double>(height - 1);
+            // Normalise by the actual cell row (not by py/4 against height-1);
+            // otherwise short charts (the overview memory sparklines are only 2-3 rows) reach a fade far
+            // beyond the intended maximum and the bottom row collapses to panel colour.
+            const double row_level = (static_cast<double>(py) / 4.F) / static_cast<double>(max(1, height - 1));
+            const double fade = 0.30 * row_level;
             const auto mix = [fade](const int base, const int accent) {
                 return static_cast<int>(
                         round(static_cast<double>(base) + (static_cast<double>(accent) - base) * (1.0 - fade)));

@@ -334,7 +334,8 @@ public:
      * @param spans 每个字形来自的片段下标（纯文本留空）
      * @note 元素的文本在构造后不可变，缓存对元素生命周期有效
      */
-    void cache_glyph_run(string flat, vector<uint32_t> offsets, vector<codepoint> cps, vector<uint16_t> spans = {}) const;
+    void cache_glyph_run(string flat, vector<uint32_t> offsets, vector<codepoint> cps,
+                         vector<uint16_t> spans = {}) const;
 
     /**
      * @brief 缓存富文本片段合并样式

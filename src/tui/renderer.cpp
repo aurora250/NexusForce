@@ -1064,9 +1064,8 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
         }
         // Cached rich-text runs resolve the style and link through the originating span;
         // uncached runs carry them per glyph.
-        const vector<uint16_t>* span_of = (cached && spans != nullptr && span_styles != nullptr)
-                                                    ? &owner->cached_glyph_spans()
-                                                    : nullptr;
+        const vector<uint16_t>* span_of =
+                (cached && spans != nullptr && span_styles != nullptr) ? &owner->cached_glyph_spans() : nullptr;
         const tui::style* stamp_source = uniform_style;
         while (glyph_index + 1 < offsets.size() && offsets[glyph_index] < line.end) {
             const codepoint& cp = cps[glyph_index];
@@ -1290,9 +1289,8 @@ void renderer::render_virtual_list(const element& el, const layout_rect& rect) {
 
         // A single-line text item needs no layout pass: it is drawn straight into the row,
         // which is the common case for log lines and message lists.
-        const bool single_line = item.kind() == element::kind::text &&
-                                 item.wrap_mode() == style::wrap_mode::none && hint == 1 &&
-                                 item.text().view().find('\n') == string_view::npos;
+        const bool single_line = item.kind() == element::kind::text && item.wrap_mode() == style::wrap_mode::none &&
+                                 hint == 1 && item.text().view().find('\n') == string_view::npos;
         if (single_line) {
             render_text_block(rect.x, rect.y + offset, rect.w, 1, item.text(), item.style(), style::wrap_mode::none,
                               nullptr, nullptr, 0, &item);
