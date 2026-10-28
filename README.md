@@ -356,6 +356,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Termination Handling** - Multi-state program termination methods and corresponding callbacks
 - **Exception/Error Code System** - Custom exception and error code system
 - **Breakpoint Handling** - Debug breakpoint triggering and handling
+- **Crash Dump** - `crash_dump` crash capture writing native dump
 
 ### 📐 Algorithm Library
 - **Standard Algorithms** - Range iteration algorithms based on iterator system

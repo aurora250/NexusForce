@@ -410,6 +410,14 @@
 #    define NEFORCE_SUPPORT_INTRINSIC_INT128 1
 #endif
 
+#if defined(NEFORCE_PLATFORM_LINUX) && (defined(NEFORCE_ARCH_X86_64) || defined(NEFORCE_ARCH_AARCH64))
+#    define NEFORCE_SUPPORT_NATIVE_DUMP_LINUX 1
+#endif
+
+#if defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_SUPPORT_NATIVE_DUMP_LINUX)
+#    define NEFORCE_SUPPORT_NATIVE_DUMP 1
+#endif
+
 
 /**
  * @defgroup CxxStandardDetection C++标准检测

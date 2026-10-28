@@ -666,6 +666,14 @@
 {"name": "cpp_type_to_sql_type", "kind": "function", "ns": "neforce", "header": "NeForce/db/sql_mapper.hpp", "brief": "将 C++ 类型 ID 映射为 SQL 类型名称"}
 {"name": "cpu_time", "kind": "function", "ns": "neforce::this_thread", "header": "NeForce/core/async/this_thread.hpp", "brief": "获取当前线程的 CPU 时间"}
 {"name": "cpu_times", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/this_thread.hpp", "brief": "CPU时间信息类"}
+{"name": "crash_dump::callback", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "转储完成后的通知回调"}
+{"name": "crash_dump::format", "kind": "enum", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "转储文件格式"}
+{"name": "crash_dump::options", "kind": "struct", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "崩溃转储的配置"}
+{"name": "crash_dump::report", "kind": "struct", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "崩溃处理过程中传给回调的现场摘要"}
+{"name": "crash_dump::result", "kind": "struct", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "一次转储写入的结果"}
+{"name": "crash_dump::native_supported", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "当前平台是否内置了转储写入器"}
+{"name": "crash_dump::handlers_installed", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "查询崩溃处理器是否已安装"}
+{"name": "crash_dump::reason", "kind": "enum", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "触发转储的原因"}
 {"name": "crbegin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取const容器的const反向起始迭代器"}
 {"name": "crbegin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取const数组的const反向起始迭代器"}
 {"name": "cref", "kind": "function", "ns": "neforce", "header": "NeForce/core/utility/reference_wrapper.hpp", "brief": "创建const引用包装器"}
@@ -1069,6 +1077,7 @@
 {"name": "get_rebind_type", "kind": "struct", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "获取指针的重新绑定类型"}
 {"name": "get_rebind_type_t", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "get_rebind_type的便捷别名"}
 {"name": "get_size_type", "kind": "struct", "ns": "neforce", "header": "NeForce/core/iterator/iterator_traits.hpp", "brief": "获取分配器的大小类型"}
+{"name": "get_terminate", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/terminate.hpp", "brief": "获取当前终止处理函数"}
 {"name": "get_worker_context", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "获取当前线程的工作线程上下文"}
 {"name": "getline", "kind": "function", "ns": "neforce", "header": "NeForce/core/string/string.hpp", "brief": "从字符串视图中按分隔符读取一行（字符版本）"}
 {"name": "getline", "kind": "function", "ns": "neforce", "header": "NeForce/core/string/string.hpp", "brief": "从字符串中按分隔符读取一行（字符串版本）"}
@@ -1221,6 +1230,7 @@
 {"name": "insert_iterator", "kind": "class", "ns": "neforce", "header": "NeForce/core/iterator/insert_iterator.hpp", "brief": "指定位置插入迭代器"}
 {"name": "insertion_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "插入排序"}
 {"name": "insertion_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "插入排序"}
+{"name": "crash_dump::install_handlers", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "安装崩溃处理器"}
 {"name": "int128_t", "kind": "struct", "ns": "neforce", "header": "NeForce/core/numeric/int128.hpp", "brief": "128位有符号整数类型"}
 {"name": "int16_t", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/types.hpp", "brief": "16位有符号整数类型"}
 {"name": "int32_t", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/types.hpp", "brief": "32位有符号整数类型"}
@@ -1776,6 +1786,7 @@
 {"name": "nano", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/numeric/ratio.hpp", "brief": "纳（10^-9）"}
 {"name": "nanoseconds", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/time/duration.hpp", "brief": "纳秒持续时间"}
 {"name": "narrow_char_traits", "kind": "struct", "ns": "neforce", "header": "NeForce/core/string/char_traits.hpp", "brief": "窄字符特征模板"}
+{"name": "crash_dump::native_format", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "当前平台的原生转储格式"}
 {"name": "native_handle_type", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/types.hpp", "brief": "系统句柄类型"}
 {"name": "native_id_type", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/types.hpp", "brief": "系统ID类型"}
 {"name": "negate", "kind": "struct", "ns": "neforce", "header": "NeForce/core/functional/functor.hpp", "brief": "取负运算仿函数"}
@@ -2760,8 +2771,8 @@
 {"name": "sysinfo::network_interface", "kind": "struct", "ns": "neforce", "header": "NeForce/core/system/sysinfo.hpp", "brief": "网络接口信息"}
 {"name": "sysinfo::numa_node_info", "kind": "struct", "ns": "neforce", "header": "NeForce/core/system/sysinfo.hpp", "brief": "NUMA 节点信息"}
 {"name": "sysinfo::os_version_info", "kind": "struct", "ns": "neforce", "header": "NeForce/core/system/sysinfo.hpp", "brief": "操作系统版本信息"}
-{"name": "sysinfo::simd_instruction", "kind": "enum", "ns": "neforce", "header": "NeForce/core/system/sysinfo.hpp", "brief": "SIMD 指令集特性位"}
 {"name": "sysinfo::simd_info", "kind": "struct", "ns": "neforce", "header": "NeForce/core/system/sysinfo.hpp", "brief": "运行时 SIMD 能力"}
+{"name": "sysinfo::simd_instruction", "kind": "enum", "ns": "neforce", "header": "NeForce/core/system/sysinfo.hpp", "brief": "SIMD 指令集特性位"}
 {"name": "sysinfo::system_info", "kind": "struct", "ns": "neforce", "header": "NeForce/core/system/sysinfo.hpp", "brief": "系统底层信息"}
 {"name": "syslog_facility", "kind": "enum", "ns": "neforce", "header": "NeForce/logging/log_sink.hpp", "brief": "Syslog 设施类型"}
 {"name": "syslog_sink", "kind": "class", "ns": "neforce", "header": "NeForce/logging/log_sink.hpp", "brief": "系统日志输出目标"}
@@ -2879,6 +2890,8 @@
 {"name": "to_string", "kind": "function", "ns": "neforce", "header": "NeForce/core/string/to_string.hpp", "brief": "将对转换为字符串"}
 {"name": "to_string", "kind": "function", "ns": "neforce", "header": "NeForce/core/string/to_string.hpp", "brief": "将元组转换为字符串"}
 {"name": "to_string", "kind": "function", "ns": "neforce", "header": "NeForce/logging/log_event.hpp", "brief": "将日志级别转换为字符串表示"}
+{"name": "to_string", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "转储格式的文本表示"}
+{"name": "to_string", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "崩溃原因的文本表示"}
 {"name": "to_string< char >", "kind": "function", "ns": "neforce", "header": "NeForce/core/interface/icharacter.hpp", "brief": "char类型右值字符串特化 - 直接移动"}
 {"name": "to_string_fixed", "kind": "function", "ns": "neforce", "header": "NeForce/core/string/to_string.hpp", "brief": "将浮点数转换为字符串（固定小数格式）"}
 {"name": "to_string_general", "kind": "function", "ns": "neforce", "header": "NeForce/core/string/to_string.hpp", "brief": "将浮点数转换为字符串（通用格式）"}
@@ -3033,6 +3046,7 @@
 {"name": "uninitialized_fill_n", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/uninitialized.hpp", "brief": "在未初始化内存中用指定值填充指定数量的元素"}
 {"name": "uninitialized_move", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/uninitialized.hpp", "brief": "在未初始化内存中移动元素"}
 {"name": "uninitialized_move_n", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/uninitialized.hpp", "brief": "在未初始化内存中移动指定数量的元素"}
+{"name": "crash_dump::uninstall_handlers", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "卸载崩溃处理器"}
 {"name": "unique", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "根据谓词移除连续重复元素"}
 {"name": "unique", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "移除连续重复元素"}
 {"name": "unique_copy", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "复制唯一元素"}
@@ -3159,6 +3173,7 @@
 {"name": "window", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/window.hpp", "brief": "创建浮动窗口组件"}
 {"name": "window_options", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/window.hpp", "brief": "窗口配置"}
 {"name": "worker_context", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "工作线程上下文"}
+{"name": "crash_dump::write", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "主动写出当前进程的转储"}
 {"name": "wstring", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/string/string.hpp", "brief": "宽字符字符串"}
 {"name": "wstring_view", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/string/string_view.hpp", "brief": "宽字符字符串视图"}
 {"name": "wyhash", "kind": "function", "ns": "neforce", "header": "NeForce/core/functional/hash.hpp", "brief": "wyhash 哈希算法"}

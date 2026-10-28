@@ -4125,7 +4125,7 @@ TEST(ChannelTest, CloseWakesReaders) {
     EXPECT_TRUE(ch.is_closed());
 }
 
-TEST(ChannelTest, BlockingWriteRead) {
+TEST(ChannelTest, BlockingWriteRead) { // may block
     channel<int> ch(2);
     atomic<bool> done{false};
 

@@ -226,6 +226,8 @@ void set_terminate(const terminate_handler handler) noexcept {
     get_terminate_handler().store(handler, memory_order_release);
 }
 
+terminate_handler get_terminate() noexcept { return get_terminate_handler().load(memory_order_acquire); }
+
 void terminate() noexcept {
     try {
         const auto handler = get_terminate_handler().load(memory_order_acquire);

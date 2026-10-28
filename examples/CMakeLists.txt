@@ -11,6 +11,7 @@ macro(add_nexusforce_example NAME SUB)
 endmacro()
 
 add_subdirectory(db)
+add_subdirectory(exception)
 add_subdirectory(iterator)
 add_subdirectory(logging)
 add_subdirectory(memory)

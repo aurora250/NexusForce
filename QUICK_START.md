@@ -966,6 +966,32 @@ curl http://localhost:8080/frontend
 
 ---
 
+## 异常与崩溃
+
+### 崩溃转储（crash_dump）
+
+安装统一的崩溃处理器：未捕获的 C++ 异常、Linux 致命信号与 Windows 未处理异常会被写成平台原生转储（Windows `.dmp`、Linux `.core`），也可以随时主动写出当前进程的转储。
+
+```bash
+./build/bin/NexusForceCrashDumpExample
+# 原生格式: elf-core
+# 内置写入器: 是
+# 写出: 成功 格式: elf-core 大小: 8192 字节 内存段: 0 截断: 0
+# 文件: /tmp/nexusforce_crash_dump_example/example-20261029-031500-12345.core
+
+# 触发一次真实的空指针崩溃，崩溃现场会写进同一目录
+./build/bin/NexusForceCrashDumpExample --crash
+```
+
+用 gdb 打开生成的 core 即可看到崩溃调用栈：
+
+```bash
+gdb ./build/bin/NexusForceCrashDumpExample /tmp/nexusforce_crash_dump_example/example-*.core
+(gdb) bt
+```
+
+---
+
 ## 文件路径说明
 
 | 示例                   | 源文件                                                           |
@@ -1002,3 +1028,4 @@ curl http://localhost:8080/frontend
 | Result Metadata        | `examples/db/result_metadata_example.cpp`                        |
 | Redis                  | `examples/db/redis_example.cpp`                                  |
 | ORM                    | `examples/db/orm_example.cpp`                                    |
+| 崩溃转储               | `examples/exception/crash_dump.cpp`                              |

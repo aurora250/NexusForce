@@ -5,6 +5,7 @@ add_executable(NexusForceUnitTests
         test_async.cpp
         test_complex_config.cpp
         test_compress.cpp
+        test_crash_dump.cpp
         test_db.cpp
         test_dns.cpp
         test_encrypt.cpp

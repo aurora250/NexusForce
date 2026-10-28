@@ -4,6 +4,8 @@
 
 ### 🚀 New Features
 
+- 新增 `crash_dump` 崩溃转储，统一接管 `terminate`、Linux 致命信号与 Windows 未处理异常过滤器，写出平台原生转储
+- `crash_dump::options` 支持内存捕获开关、数量/字节上限、文件名前缀、失败时回退内核 core，`crash_dump::callback` 在崩溃现场取得单行摘要；`crash_dump::write()` 可随时写出手动转储
 - `process` 新增 `snapshot()` 与 `process::snapshot_entry`：一次枚举全系统进程，给出父进程、状态、线程数、RSS、CPU 时间与启动时刻；Windows 走 Toolhelp 快照，Linux 读 `/proc`
 - `process` 新增 `get_time_info()` / 实例 `get_time_info()` / `current_time_info()`：用户态、内核态 CPU 时间与墙上时间统一为毫秒
 - `process` 新增 `get_command_line()` / `current_command_line()`、`get_executable_path()`、`current_name()`、`current_state()`

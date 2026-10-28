@@ -37,6 +37,14 @@ TEST(TerminateTest, TerminateCallsHandlerAndAborts) {
 #endif
 }
 
+TEST(TerminateTest, GetTerminateReturnsInstalledHandler) {
+    const auto previous = get_terminate();
+    set_terminate([]() {});
+    EXPECT_NE(get_terminate(), nullptr);
+    set_terminate(previous);
+    EXPECT_EQ(get_terminate(), previous);
+}
+
 TEST(TerminateTest, ExitHandlersCalledInReverseOrder) {
     EXPECT_EXIT(
             {

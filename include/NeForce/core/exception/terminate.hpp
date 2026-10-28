@@ -35,6 +35,12 @@ using terminate_handler = void (*)();
 void NEFORCE_API set_terminate(terminate_handler handler) noexcept;
 
 /**
+ * @brief 获取当前终止处理函数
+ * @return 当前注册的终止处理函数，未设置时为空指针
+ */
+NEFORCE_NODISCARD NEFORCE_API terminate_handler get_terminate() noexcept;
+
+/**
  * @brief 终止处理
  *
  * 调用当前设置的终止处理函数。

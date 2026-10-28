@@ -29,6 +29,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha1.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha256.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/xor.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/crash_dump.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/crash_dump_elf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/debug.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/error_category.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/error_code.cpp
