@@ -5,8 +5,17 @@
 #include <NeForce/core/string/string.hpp>
 #include <csignal>
 #include <gtest/gtest.h>
+#ifdef NEFORCE_PLATFORM_POSIX
+#    include <sys/resource.h>
+#endif
 #if NEFORCE_SUPPORT_NATIVE_DUMP_LINUX
 #    include <elf.h>
+#endif
+#if NEFORCE_SUPPORT_NATIVE_DUMP_FREEBSD
+#    include <sys/types.h>
+#    include <sys/elf_common.h>
+#    include <sys/elf64.h>
+#    include <sys/procfs.h>
 #endif
 using namespace neforce;
 
@@ -117,7 +126,7 @@ TEST_F(CrashDumpTest, ManualDumpWritesNativeFile) {
 }
 
 TEST_F(CrashDumpTest, ManualDumpProducesValidElfCore) {
-#ifdef NEFORCE_SUPPORT_NATIVE_DUMP_LINUX
+#ifdef NEFORCE_SUPPORT_NATIVE_DUMP_POSIX
     crash_dump::options options;
     options.directory = directory_;
     options.file_prefix = "elf";
@@ -134,7 +143,12 @@ TEST_F(CrashDumpTest, ManualDumpProducesValidElfCore) {
     EXPECT_EQ(static_cast<int>(header.e_ident[EI_CLASS]), ELFCLASS64);
     EXPECT_EQ(static_cast<int>(header.e_ident[EI_DATA]), ELFDATA2LSB);
     EXPECT_EQ(static_cast<int>(header.e_type), ET_CORE);
-#    if defined(__x86_64__)
+#    ifdef NEFORCE_SUPPORT_NATIVE_DUMP_FREEBSD
+    EXPECT_EQ(static_cast<int>(header.e_ident[EI_OSABI]), ELFOSABI_FREEBSD);
+#    else
+    EXPECT_EQ(static_cast<int>(header.e_ident[EI_OSABI]), ELFOSABI_NONE);
+#    endif
+#    if defined(NEFORCE_ARCH_X86_64)
     EXPECT_EQ(static_cast<int>(header.e_machine), EM_X86_64);
 #    else
     EXPECT_EQ(static_cast<int>(header.e_machine), EM_AARCH64);
@@ -150,7 +164,71 @@ TEST_F(CrashDumpTest, ManualDumpProducesValidElfCore) {
     EXPECT_GT(note.p_filesz, 0U);
     EXPECT_LE(note.p_offset + note.p_filesz, result.bytes);
 #else
-    GTEST_SKIP() << "skip in NEFORCE_SUPPORT_NATIVE_DUMP_LINUX undefined platform";
+    GTEST_SKIP() << "skip in platform without native dump writer";
+#endif
+}
+
+TEST_F(CrashDumpTest, ManualDumpUsesFreebsdNotes) {
+#if NEFORCE_SUPPORT_NATIVE_DUMP_FREEBSD
+    crash_dump::options options;
+    options.directory = directory_;
+    options.file_prefix = "freebsd";
+    options.include_memory = false;
+
+    const auto result = crash_dump::write(options);
+    ASSERT_TRUE(result.written);
+
+    file input(result.file, false, file_access::read, file_shared::share_read_write);
+    ASSERT_TRUE(input.is_opened());
+    Elf64_Ehdr header{};
+    ASSERT_EQ(input.read_binary(&header, sizeof(header)), sizeof(header));
+
+    Elf64_Phdr note{};
+    ASSERT_EQ(input.read_binary(&note, sizeof(note)), sizeof(note));
+    ASSERT_EQ(static_cast<int>(note.p_type), PT_NOTE);
+    ASSERT_TRUE(input.seek(static_cast<int64_t>(note.p_offset), file_pointer::begin));
+
+    Elf64_Nhdr note_header{};
+    ASSERT_EQ(input.read_binary(&note_header, sizeof(note_header)), sizeof(note_header));
+    EXPECT_EQ(static_cast<int>(note_header.n_type), NT_PRPSINFO);
+    EXPECT_EQ(note_header.n_namesz, sizeof("FreeBSD"));
+    char name[sizeof("FreeBSD")]{};
+    ASSERT_EQ(input.read_binary(name, sizeof(name)), sizeof(name));
+    EXPECT_EQ(memory_compare(name, "FreeBSD", sizeof(name)), 0);
+
+    prpsinfo_t info{};
+    ASSERT_EQ(input.read_binary(&info, sizeof(info)), sizeof(info));
+    EXPECT_EQ(info.pr_version, PRPSINFO_VERSION);
+    EXPECT_EQ(info.pr_psinfosz, sizeof(prpsinfo_t));
+    EXPECT_EQ(info.pr_pid, ::getpid());
+    EXPECT_GT(string_length(info.pr_fname), 0U);
+
+    const auto note_prefix = static_cast<int64_t>(sizeof(Elf64_Nhdr) + sizeof("FreeBSD"));
+    const auto prpsinfo_end = static_cast<int64_t>(note.p_offset) + note_prefix +
+                              static_cast<int64_t>((sizeof(prpsinfo_t) + 3U) & ~size_t(3U));
+    ASSERT_TRUE(input.seek(prpsinfo_end, file_pointer::begin));
+
+    Elf64_Nhdr status_header{};
+    ASSERT_EQ(input.read_binary(&status_header, sizeof(status_header)), sizeof(status_header));
+    EXPECT_EQ(static_cast<int>(status_header.n_type), NT_PRSTATUS);
+    EXPECT_EQ(status_header.n_namesz, sizeof("FreeBSD"));
+    prstatus_t status{};
+    ASSERT_EQ(input.read_binary(&status, sizeof(status)), sizeof(status));
+    EXPECT_EQ(status.pr_version, PRSTATUS_VERSION);
+    EXPECT_EQ(status.pr_statussz, sizeof(prstatus_t));
+    EXPECT_EQ(status.pr_gregsetsz, sizeof(gregset_t));
+    EXPECT_GT(status.pr_pid, 0);
+
+    const auto status_end = prpsinfo_end + note_prefix + static_cast<int64_t>((sizeof(prstatus_t) + 3U) & ~size_t(3U));
+    if (input.seek(status_end, file_pointer::begin)) {
+        Elf64_Nhdr fpregs_header{};
+        if (input.read_binary(&fpregs_header, sizeof(fpregs_header)) == sizeof(fpregs_header) &&
+            fpregs_header.n_type == NT_FPREGSET) {
+            EXPECT_EQ(fpregs_header.n_descsz, sizeof(fpregset_t));
+        }
+    }
+#else
+    GTEST_SKIP() << "skip in non-FreeBSD platform";
 #endif
 }
 
@@ -279,7 +357,7 @@ TEST_F(CrashDumpTest, InstallAndUninstallHandlers) {
 }
 
 TEST_F(CrashDumpTest, FatalSignalWritesCore) {
-#if NEFORCE_PLATFORM_LINUX
+#if defined(NEFORCE_PLATFORM_POSIX) && defined(NEFORCE_SUPPORT_NATIVE_DUMP)
     static_cast<void>(filesystem::remove(g_death_marker));
     g_death_directory = directory_;
     g_death_marker = directory_ / path("signal-report.txt");
@@ -304,12 +382,43 @@ TEST_F(CrashDumpTest, FatalSignalWritesCore) {
     EXPECT_TRUE(core.exists());
     EXPECT_GT(static_cast<uint64_t>(filesystem::size(core).bytes()), 0U);
 #else
-    GTEST_SKIP() << "skip in non-Linux platform";
+    GTEST_SKIP() << "skip in platform without POSIX native dump writer";
+#endif
+}
+
+TEST_F(CrashDumpTest, FatalSignalFallsBackWithoutWriter) {
+#if defined(NEFORCE_PLATFORM_POSIX) && !defined(NEFORCE_SUPPORT_NATIVE_DUMP)
+    static_cast<void>(filesystem::remove(g_death_marker));
+    g_death_directory = directory_;
+    g_death_marker = directory_ / path("fallback-report.txt");
+
+    EXPECT_EXIT(
+            {
+                crash_dump::options options;
+                options.directory = g_death_directory;
+                options.file_prefix = "fallback";
+                options.include_memory = false;
+                options.callback = record_crash;
+                crash_dump::install_handlers(options);
+                ::rlimit limit{};
+                limit.rlim_cur = 0;
+                limit.rlim_max = 0;
+                static_cast<void>(::setrlimit(RLIMIT_CORE, &limit));
+                ::raise(SIGSEGV);
+            },
+            ::testing::KilledBySignal(SIGSEGV), "");
+
+    ASSERT_TRUE(g_death_marker.exists());
+    const string recorded = read_all(g_death_marker);
+    EXPECT_TRUE(recorded.contains("fatal signal"));
+    EXPECT_TRUE(recorded.contains("dump-failed"));
+#else
+    GTEST_SKIP() << "skip in platform with a native dump writer";
 #endif
 }
 
 TEST_F(CrashDumpTest, TerminateWritesCore) {
-#if NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     static_cast<void>(filesystem::remove(g_death_marker));
     g_death_directory = directory_;
     g_death_marker = directory_ / path("terminate-report.txt");
@@ -332,11 +441,13 @@ TEST_F(CrashDumpTest, TerminateWritesCore) {
 
     ASSERT_TRUE(g_death_marker.exists());
     const string recorded = read_all(g_death_marker);
-    EXPECT_TRUE(recorded.contains("terminate-"));
     EXPECT_TRUE(recorded.contains("std::terminate: crash dump test"));
+#    if defined(NEFORCE_SUPPORT_NATIVE_DUMP)
+    EXPECT_TRUE(recorded.contains("terminate-"));
     const path core(recorded.substr(0, recorded.find('\n')));
     EXPECT_TRUE(core.exists());
+#    endif
 #else
-    GTEST_SKIP() << "skip in non-Linux platform";
+    GTEST_SKIP() << "skip in non-POSIX platform";
 #endif
 }

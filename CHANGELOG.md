@@ -4,7 +4,7 @@
 
 ### 🚀 New Features
 
-- 新增 `crash_dump` 崩溃转储，统一接管 `terminate`、Linux 致命信号与 Windows 未处理异常过滤器，写出平台原生转储
+- 新增 `crash_dump` 崩溃转储，统一接管 `terminate`、POSIX 致命信号与 Windows 未处理异常过滤器，写出平台原生转储
 - `crash_dump::options` 支持内存捕获开关、数量/字节上限、文件名前缀、失败时回退内核 core，`crash_dump::callback` 在崩溃现场取得单行摘要；`crash_dump::write()` 可随时写出手动转储
 - `process` 新增 `snapshot()` 与 `process::snapshot_entry`：一次枚举全系统进程，给出父进程、状态、线程数、RSS、CPU 时间与启动时刻；Windows 走 Toolhelp 快照，Linux 读 `/proc`
 - `process` 新增 `get_time_info()` / 实例 `get_time_info()` / `current_time_info()`：用户态、内核态 CPU 时间与墙上时间统一为毫秒
@@ -141,6 +141,8 @@
 
 ### 🔧 Improvements
 
+- 新增 `heap_timer`：按到期时间排序的最小堆，插入/取消 O(log n)、取消为惰性删除并自动收缩，提供无锁的 `next_deadline_ns()` 提示供限时停驻使用
+- `virtual_thread` 调度器重构：就绪队列改为无锁队列 + FUTEX 停驻，不再由单把互斥锁保护入队/出队；任务完成时按"是否有等待者"决定是否加锁广播；定时器到期只在工作线程循环内检查、`schedule_after` 只唤醒一个工作线程；批量完成的唤醒按待处理计数合并。空闲 CPU 减半，单次 `yield` 的边际成本上升约 10%
 - `process::check_permission()` Linux 语义与 Windows 对齐：`query_info` 只需进程存在，读/写/终止要求属主或 root，`execute` 恒为 false，`permission::all` 不再因 `/proc/<pid>` 的目录权限而误判
 - `process::get_state()` Linux 把被调试器跟踪的 `t` 状态映射为 `state::stopped`，该枚举值不再恒不可达
 - `process::get_memory_info()` Windows 补 `virtual_size`；`get_name()` 与快照在 Windows 改用宽字符 API，非 ASCII 路径不再乱码
@@ -321,6 +323,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `channel<T>` 的阻塞读写偶发永久阻塞：入队/出队与 `size_`、`closed_` 的变更以及对应的唤醒不在同一把锁内完成，等待线程在"谓词已判定为假、尚未进入条件变量等待"的窗口内会漏掉唤醒，此后写者填满缓冲、读者空转等待，双方互锁；现由 `control_mutex_` 统一保护状态变更与通知
+- 修复 `virtual_thread` 关闭后无法重新启动：`shutdown()` 置位的关闭标志不再复位、已结束的工作线程句柄也未清理，再次 `initialize()` 时新工作线程一进入循环就退出，此后任何挂起的协程都不会被恢复；现由 `start_workers()` 复位关闭标志、`shutdown()` 清理线程句柄
 - 修复 `simd::memory_compare` 在 AVX2 路径上长度 ≥ 128 字节时把不同内存判为相等：四路比较结果用按位或合并，任意一路相等就会掩盖其余三路的差异，改为按位与；字符串比较、原子比较与差量扫描都受影响
 - 修复 `screen::to_string()` 把单元格字符与"终端样式状态"一起比较，导致差量恒判为样式不一致：内容未变化的帧也会全屏重绘并写出全部单元格；现只比较样式字段
 - 修复 Windows 下 `pty` 子进程未挂接到伪控制台导致读不到任何输出：`UpdateProcThreadAttribute` 的 `PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE` 需要传 `HPCON` 句柄值本身，原实现传的是变量地址（`&pseudo`），内核据此拿到的句柄无效，子进程虽能执行并返回正确退出码，但输出不进入伪控制台管道；现改为直接传 `pseudo`

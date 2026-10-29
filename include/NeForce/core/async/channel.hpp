@@ -48,34 +48,24 @@ private:
     condition_variable not_empty_;
     condition_variable not_full_;
 
-    NEFORCE_NODISCARD bool reserve_slot() noexcept {
-        if (capacity_ == capacity_max) {
-            size_.fetch_add(1, memory_order_relaxed);
-            return true;
+    NEFORCE_NODISCARD bool push_locked(T value) noexcept(is_nothrow_move_constructible_v<T>) {
+        if (!queue_.enqueue(_NEFORCE move(value))) {
+            return false;
         }
-        size_t current = size_.load(memory_order_acquire);
-        while (current < capacity_) {
-            if (size_.compare_exchange_weak(current, current + 1, memory_order_acq_rel, memory_order_acquire)) {
-                return true;
-            }
-        }
-        return false;
+        size_.fetch_add(1, memory_order_relaxed);
+        not_empty_.notify_one();
+        return true;
     }
 
-    void release_slot() noexcept { size_.fetch_sub(1, memory_order_acq_rel); }
-
-    NEFORCE_NODISCARD bool push(T value) noexcept(is_nothrow_move_constructible_v<T>) {
-        if (closed_.load(memory_order_acquire)) {
+    NEFORCE_NODISCARD bool pop_locked(T& out) {
+        if (size_.load(memory_order_relaxed) == 0) {
             return false;
         }
-        if (!reserve_slot()) {
+        if (!queue_.try_dequeue(out)) {
             return false;
         }
-        if (!queue_.enqueue(_NEFORCE move(value))) {
-            release_slot();
-            return false;
-        }
-        not_empty_.notify_one();
+        size_.fetch_sub(1, memory_order_relaxed);
+        not_full_.notify_one();
         return true;
     }
 
@@ -100,23 +90,29 @@ public:
      * @brief 尝试发送消息（非阻塞）
      * @param value 要发送的消息
      * @return 成功返回 true；通道已满、已关闭或无缓冲时返回 false
+     * @note 不会等待缓冲区空间，但会与并发的写/读操作互斥
      */
     bool try_write(T value) noexcept(is_nothrow_move_constructible_v<T>) {
         if (capacity_ == 0) {
             return false;
         }
-        return push(_NEFORCE move(value));
+        unique_lock<mutex> lock{control_mutex_};
+        if (closed_.load(memory_order_acquire) || size_.load(memory_order_acquire) >= capacity_) {
+            return false;
+        }
+        return push_locked(_NEFORCE move(value));
     }
 
     /**
      * @brief 发送消息（阻塞直到空间可用或通道关闭）
      * @param value 要发送的消息
-     * @return 成功返回 true；通道关闭返回 false
+     * @return 成功返回 true；通道关闭或消息入队失败返回 false
      * @note 无缓冲通道会等待读者取走消息后才返回
+     * @note 等待期间不持有内部锁
      */
     bool write(T value) {
+        unique_lock<mutex> lock{control_mutex_};
         if (capacity_ == 0) {
-            unique_lock<mutex> lock{control_mutex_};
             not_full_.wait(lock, [this] { return closed_.load(memory_order_acquire) || !handoff_.has_value(); });
             if (closed_.load(memory_order_acquire)) {
                 return false;
@@ -127,32 +123,24 @@ public:
             not_full_.wait(lock, [this] { return closed_.load(memory_order_acquire) || !handoff_.has_value(); });
             return true;
         }
-        for (;;) {
-            if (closed_.load(memory_order_acquire)) {
-                return false;
-            }
-            if (size_.load(memory_order_acquire) >= capacity_) {
-                unique_lock<mutex> lock{control_mutex_};
-                not_full_.wait(lock, [this] {
-                    return closed_.load(memory_order_acquire) || size_.load(memory_order_acquire) < capacity_;
-                });
-                continue;
-            }
-            if (!push(_NEFORCE move(value))) {
-                continue;
-            }
-            return true;
+        not_full_.wait(lock, [this] {
+            return closed_.load(memory_order_acquire) || size_.load(memory_order_acquire) < capacity_;
+        });
+        if (closed_.load(memory_order_acquire)) {
+            return false;
         }
+        return push_locked(_NEFORCE move(value));
     }
 
     /**
      * @brief 尝试读取消息（非阻塞）
      * @param out 输出消息
      * @return 成功返回 true
+     * @note 不会等待新消息，但会与并发的写/读操作互斥
      */
     bool try_read(T& out) {
+        unique_lock<mutex> lock{control_mutex_};
         if (capacity_ == 0) {
-            lock<mutex> guard{control_mutex_};
             if (!handoff_.has_value()) {
                 return false;
             }
@@ -162,22 +150,19 @@ public:
             not_full_.notify_all();
             return true;
         }
-        if (!queue_.try_dequeue(out)) {
-            return false;
-        }
-        release_slot();
-        not_full_.notify_one();
-        return true;
+        return pop_locked(out);
     }
 
     /**
      * @brief 读取消息（阻塞直到有数据或通道关闭）
      * @param out 输出消息
      * @return 成功返回 true；关闭且无数据返回 false
+     * @note 已关闭但仍有缓冲消息时会先取完缓冲消息
+     * @note 等待期间不持有内部锁
      */
     bool read(T& out) {
+        unique_lock<mutex> lock{control_mutex_};
         if (capacity_ == 0) {
-            unique_lock<mutex> lock{control_mutex_};
             not_empty_.wait(lock, [this] { return closed_.load(memory_order_acquire) || handoff_.has_value(); });
             if (!handoff_.has_value()) {
                 return false;
@@ -188,26 +173,16 @@ public:
             not_full_.notify_all();
             return true;
         }
-        for (;;) {
-            if (try_read(out)) {
-                return true;
-            }
-            if (closed_.load(memory_order_acquire)) {
-                return false;
-            }
-            unique_lock<mutex> lock{control_mutex_};
-            not_empty_.wait(lock, [this] {
-                return closed_.load(memory_order_acquire) || size_.load(memory_order_acquire) > 0;
-            });
-            // The queue may have been drained between the predicate and the next try_read;
-            // loop and either dequeue or wait again.
-        }
+        not_empty_.wait(lock,
+                        [this] { return closed_.load(memory_order_acquire) || size_.load(memory_order_acquire) > 0; });
+        return pop_locked(out);
     }
 
     /**
      * @brief 关闭通道
      */
     void close() noexcept {
+        unique_lock<mutex> lock{control_mutex_};
         closed_.store(true, memory_order_release);
         not_empty_.notify_all();
         not_full_.notify_all();

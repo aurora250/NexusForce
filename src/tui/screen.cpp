@@ -1,3 +1,5 @@
+#include <NeForce/core/simd/bytes.hpp>
+#include <NeForce/core/simd/memory.hpp>
 #include <NeForce/tui/screen.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
@@ -44,6 +46,60 @@ namespace {
                a.underlined == b.underlined && a.underlined_double == b.underlined_double && a.blink == b.blink &&
                a.strikethrough == b.strikethrough && a.hyperlink == b.hyperlink &&
                a.foreground.equal_to(b.foreground) && a.background.equal_to(b.background);
+    }
+
+    // The changed cells of a row are found with 16-byte compares instead of scanning the row cell by cell:
+    // a frame that touches a few lines only pays for the touched span.
+    size_t first_changed_byte(const char* left, const char* right, const size_t size) noexcept {
+        size_t i = 0;
+        for (; i + 16 <= size; i += 16) {
+            const int mask =
+                    simd::to_bitmask(simd::match_bytes(simd::loadu_si128(left + i), simd::loadu_si128(right + i)));
+            if (mask != 0xFFFF) {
+                for (int k = 0; k < 16; ++k) {
+                    if ((((~mask) >> k) & 1) != 0) {
+                        return i + static_cast<size_t>(k);
+                    }
+                }
+            }
+        }
+        for (; i < size; ++i) {
+            if (left[i] != right[i]) {
+                return i;
+            }
+        }
+        return size;
+    }
+
+    size_t last_changed_byte(const char* left, const char* right, const size_t size) noexcept {
+        size_t i = size;
+        // Skip equal spans 128 bytes at a time (AVX2), then locate the byte inside the last differing span:
+        // a tail of unchanged cells is the common case in a changed row.
+        while (i >= 128) {
+            if (memory_compare(left + i - 128, right + i - 128, 128) != 0) {
+                break;
+            }
+            i -= 128;
+        }
+        while (i >= 16) {
+            const int mask = simd::to_bitmask(
+                    simd::match_bytes(simd::loadu_si128(left + i - 16), simd::loadu_si128(right + i - 16)));
+            if (mask != 0xFFFF) {
+                for (int k = 15; k >= 0; --k) {
+                    if ((((~mask) >> k) & 1) != 0) {
+                        return i - 16 + static_cast<size_t>(k);
+                    }
+                }
+            }
+            i -= 16;
+        }
+        while (i > 0) {
+            --i;
+            if (left[i] != right[i]) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     void append_cursor_move(string& ss, const int x, const int y) {
@@ -302,8 +358,24 @@ string screen::to_string(const screen& prev) const {
 
     for (int y = 0; y < dimy_ && y < prev.dimy_; ++y) {
         const int row_width = dimx_ < prev.dimx_ ? dimx_ : prev.dimx_;
+        const size_t row = static_cast<size_t>(y) * static_cast<size_t>(dimx_);
         const size_t prev_row = static_cast<size_t>(y) * static_cast<size_t>(prev.dimx_);
-        for (int x = 0; x < row_width;) {
+        const size_t row_bytes = static_cast<size_t>(row_width) * sizeof(cell);
+        const auto* row_left = reinterpret_cast<const char*>(&cells_[row]);
+        const auto* row_right = reinterpret_cast<const char*>(&prev.cells_[prev_row]);
+        // Whole-row equality is the cheapest test for an untouched row (AVX2 compare).
+        // A blank previous frame makes that test useless: nothing can match, so the row is
+        // scanned once for its first and last changed cell instead of being compared twice.
+        if (!prev.blank_ && memory_compare(row_left, row_right, row_bytes) == 0) {
+            continue;
+        }
+        const size_t first_changed = first_changed_byte(row_left, row_right, row_bytes);
+        if (first_changed == row_bytes) {
+            continue;
+        }
+        const int x_begin = static_cast<int>(first_changed / sizeof(cell));
+        const int x_end = static_cast<int>(last_changed_byte(row_left, row_right, row_bytes) / sizeof(cell));
+        for (int x = x_begin; x <= x_end;) {
             const size_t idx = static_cast<size_t>(y) * dimx_ + x;
             const tui::cell& cell = cells_[idx];
 
@@ -315,11 +387,26 @@ string screen::to_string(const screen& prev) const {
             const tui::cell& prev_cell = prev.cells_[prev_row + static_cast<size_t>(x)];
 
             // A cell that already matches the previous frame is already on screen,
-            // but the terminal's current SGR state is shared by all cells:
-            // if this cell's style differs from the state left by an earlier cell it must be re-emitted.
-            if (same_text(cell, prev_cell) && same_style(cell, prev_cell) && same_style(cell, term_state)) {
+            // so the emit decision must not consult the terminal state at all.
+            if (same_text(cell, prev_cell) && same_style(cell, prev_cell)) {
                 ++x;
                 continue;
+            }
+
+            // Emit the longest adjacent run that shares this style:
+            // one cursor move and one style update per run instead of per cell.
+            int run_end = x;
+            while (run_end < x_end) {
+                const auto next_x = static_cast<size_t>(run_end) + 1;
+                const tui::cell& next = cells_[static_cast<size_t>(y) * dimx_ + next_x];
+                if (next.automerge || !same_style(next, cell)) {
+                    break;
+                }
+                const tui::cell& next_prev = prev.cells_[prev_row + next_x];
+                if (same_text(next, next_prev) && same_style(next, next_prev)) {
+                    break;
+                }
+                ++run_end;
             }
 
             if (last_y != y || last_x + 1 != x) {
@@ -329,6 +416,13 @@ string screen::to_string(const screen& prev) const {
                     append_cursor_move(result, x, y);
                 }
             }
+            int run_width = 0;
+            for (int i = x; i <= run_end; ++i) {
+                const tui::cell& glyph = cells_[static_cast<size_t>(y) * dimx_ + i];
+                run_width += max(1, glyph.character.width());
+            }
+            last_x = x + run_width - 1;
+            last_y = y;
 
             update_cell_style(result, term_state, cell);
 
@@ -344,12 +438,11 @@ string screen::to_string(const screen& prev) const {
             term_state.strikethrough = cell.strikethrough;
             term_state.hyperlink = cell.hyperlink;
 
-            result.append(cell.character.data(), cell.character.size());
-            // A wide glyph advances the terminal cursor by two columns;
-            // the continuation cell is skipped above, so track the last occupied terminal column.
-            last_x = x + max(1, cell.character.width()) - 1;
-            last_y = y;
-            ++x;
+            for (int i = x; i <= run_end; ++i) {
+                const tui::cell& glyph = cells_[static_cast<size_t>(y) * dimx_ + i];
+                result.append(glyph.character.data(), glyph.character.size());
+            }
+            x = run_end + 1;
         }
     }
 

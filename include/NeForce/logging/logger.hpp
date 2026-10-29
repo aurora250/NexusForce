@@ -13,7 +13,6 @@
  */
 
 #include "NeForce/core/async/thread_pool.hpp"
-#include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/memory/bounded_queue.hpp"
 #include "NeForce/logging/log_sink.hpp"
 NEFORCE_BEGIN_NAMESPACE__

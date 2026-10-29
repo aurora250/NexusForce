@@ -32,8 +32,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class executor {
 public:
-    /// @brief handler 类型
-    using handler_type = function<void()>;
+    using handler_type = function<void()>; ///< handler 类型
 
     /**
      * @brief 执行器概念基类

@@ -16,6 +16,7 @@
  *  - executor 抽象 + work 守卫
  */
 
+#include "NeForce/core/async/heap_timer.hpp"
 #include "NeForce/core/async/lock_free_queue.hpp"
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/container/flat_unordered_map.hpp"
@@ -233,104 +234,65 @@ private:
 
     using file_completion_cb = function<void(error_code, size_t, void* overlapped)>;
 
-    /// @brief 定时器条目
-    struct timer_entry {
-        size_t id;
-        uint64_t deadline_ms;
-        timer_callback callback;
-        bool operator>(const timer_entry& other) const { return deadline_ms > other.deadline_ms; }
-    };
-
-    /// @brief fd 注册信息
+    /**
+     * @brief fd 注册信息
+     */
     struct fd_info {
         native_handle_type fd;
         epoll_event events;
         fd_callback callback;
     };
 
-    /// @brief 正在运行的标志（run() 中的线程数）
-    atomic<int> running_{0};
-    /// @brief 停止标志
-    atomic<bool> stopped_{false};
-    /// @brief 待处理工作计数
-    atomic<size_t> outstanding_work_{0};
-    /// @brief 通过 add_fd() 注册的 fd 数量
-    atomic<size_t> registered_fds_{0};
-    /// @brief 定时器 ID 计数器
-    size_t next_timer_id_{1};
+    atomic<int> running_{0};             ///< 正在运行的线程数
+    atomic<bool> stopped_{false};        ///< 停止标志
+    atomic<size_t> outstanding_work_{0}; ///< 待处理工作数
+    atomic<size_t> registered_fds_{0};   ///<  add_fd() 注册的 fd 数量
 
-    /// @brief fd → 注册信息映射
-    flat_unordered_map<native_handle_type, fd_info> fd_map_;
-    /// @brief 保护 fd_map_ 的互斥锁
-    mutable mutex fd_mutex_;
-    /// @brief 定时器 min-heap
-    vector<timer_entry> timer_heap_;
-    /// @brief 保护 timer_heap_ 的互斥锁
-    mutable mutex timer_mutex_;
+    flat_unordered_map<native_handle_type, fd_info> fd_map_;       ///< fd 到注册信息映射
+    mutable mutex fd_mutex_;                                       ///< fd_map_ 锁
+    heap_timer timers_;                                            ///< 定时器最小堆
+    flat_unordered_map<uint64_t, timer_callback> timer_callbacks_; ///< 定时器 ID 到回调
 
-    /// @brief 跨线程 post 的 handler 队列
-    lock_free_queue<handler_type> external_queue_;
-    /// @brief post 计数器
-    atomic<size_t> external_queue_count_{0};
+    mutable mutex timer_mutex_;                    ///< timer_callbacks_ 锁
+    lock_free_queue<handler_type> external_queue_; ///< 跨线程 post 的 handler 队列
+    atomic<size_t> external_queue_count_{0};       ///< post 计数器
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    /// @brief IOCP 完成端口句柄
-    void* iocp_handle_;
-    /// @brief 唤醒 monitor 线程的事件
-    void* wake_event_;
-    /// @brief fd → WSA 事件句柄映射
-    flat_unordered_map<native_handle_type, void*> fd_events_;
-    /// @brief 待 monitor 线程安全关闭的 WSAEVENT 句柄
-    vector<void*> pending_close_;
-    /// @brief 后台 WSA 监控线程
-    thread monitor_thread_;
-    /// @brief 监控线程运行标志
-    atomic<bool> monitor_running_{false};
+    void* iocp_handle_;                   ///< IOCP 完成端口句柄
+    void* wake_event_;                    ///< monitor 线程唤醒事件
+    thread monitor_thread_;               ///< WSA 监控线程
+    atomic<bool> monitor_running_{false}; ///< 监控线程运行标志
 
-    /// @brief 文件 I/O 完成回调映射
-    flat_unordered_map<uintptr_t, file_completion_cb> file_completions_;
+    flat_unordered_map<native_handle_type, void*> fd_events_; ///< fd 到 WSA 事件句柄
+    vector<void*> pending_close_;                             ///< WSAEVENT 句柄
+
+    flat_unordered_map<uintptr_t, file_completion_cb> file_completions_; ///< 文件 I/O 完成回调
 
     void monitor_loop();
 
     void register_file_completion(uintptr_t key, file_completion_cb cb);
     void unregister_file_completion(uintptr_t key);
+
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
     // TODO: using neforce::pipe instead
-
-    /// @brief 唤醒管道读端
-    int wake_fd_;
-    /// @brief 唤醒管道写端
-    int wake_write_fd_;
+    int wake_fd_;       ///< 唤醒管道读端
+    int wake_write_fd_; ///< 唤醒管道写端
 #else
-    /// @brief epoll 文件描述符
-    int epoll_fd_;
-    /// @brief 用于唤醒的 eventfd
-    int wake_fd_;
+    int epoll_fd_; ///< epoll 文件描述符
+    int wake_fd_;  ///< 用于唤醒的 eventfd
 #endif
 
-    /// @brief 工作线程列表（run_pool 模式）
-    vector<thread> pool_threads_;
-    /// @brief 保护线程管理的互斥锁
-    mutex pool_mutex_;
+    vector<thread> pool_threads_; ///< 工作线程列表
+    mutex pool_mutex_;            ///< 保护线程管理的互斥锁
 
-    /// @brief 是否存在未完成的用户工作
     NEFORCE_NODISCARD bool has_outstanding_work() const noexcept;
-
-    /// @brief 是否存在任何需要等待的工作
     NEFORCE_NODISCARD bool has_pending_work() const noexcept;
 
-    /// @brief 获取最早到期的定时器截止时间（无锁时返回 max）
-    uint64_t next_timer_deadline() const;
-
-    /// @brief 处理到期定时器
-    /// @param max_count 最多处理的定时器数量（默认无限制）
+    uint64_t next_timer_deadline();
+    bool fire_expired_timer();
     void process_timers(size_t max_count = numeric_traits<size_t>::max());
 
-    /// @brief 唤醒 run() 循环
     void wake() noexcept;
-
-    /// @brief 执行队列中就绪的 handler
-    /// @param max_count 最多执行的 handler 数量（默认 256）
     size_t drain_handlers(size_t max_count = 256);
 };
 

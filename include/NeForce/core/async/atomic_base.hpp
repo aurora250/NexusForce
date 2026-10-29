@@ -495,6 +495,12 @@ NEFORCE_ALWAYS_INLINE_INLINE void atomic_store(volatile T* ptr, remove_volatile_
 #endif
 }
 
+
+#ifdef NEFORCE_COMPILER_GCC
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 /**
  * @brief 原子加载操作
  * @tparam T 数据类型
@@ -516,6 +522,11 @@ NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t<T> atomic_load(const volatile T* 
     return result;
 #endif
 }
+
+#ifdef NEFORCE_COMPILER_GCC
+#    pragma GCC diagnostic pop
+#endif
+
 
 /**
  * @brief 原子交换操作

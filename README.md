@@ -164,15 +164,15 @@ The core components of NexusForce strictly adhere to relevant international stan
 ## 🚀 Features
 
 ### 🔄 Concurrency & Async
-- **`thread_pool`** - NUMA-aware work stealing thread pool with multi-strategy customization; for detailed performance testing, see [thread_pool performance test records](benchmark/async/PERFORMANCE.md)
+- **`thread_pool`** - NUMA-aware work stealing thread pool with multi-strategy customization; for detailed performance testing, see [thread_pool performance test records](benchmark/async/thread_pool/PERFORMANCE.md)
 - **`io_context`** - Async I/O execution context, unified event loop, timer and cancellation model
 - **`cancellation_slot`** - Supports `async_connect` / `async_read` / `async_write` interruptible async I/O
-- **`timer_scheduler` / `basic_timer`** - Timer task scheduling based on red-black tree, supports cancellation flag
+- **`heap_timer` / `tree_timer`** - a shared min-heap and a red-black-tree timer with its scheduler
 - **`async_stream`** - Async stream abstraction interface, unified read/write protocol
 - **`async_read()` / `async_write()`** - Free function combinators, automatic partial read/write retry via `shared_from_this`
 - **`thread_pool_executor`** - Adapts `thread_pool::submit_task()` to standard executor interface
 - **`generator` / `task`** - Coroutine primitives and task generator
-- **`virtual_thread`** - C#-style lightweight coroutines
+- **`virtual_thread`** - C#-style lightweight coroutines; for detailed performance testing, see [virtual thread performance test records](benchmark/async/virtual_thread/PERFORMANCE.md)
 - **`connection` / `signal` / `signal_base`** - Observer pattern signal-slot, `signal_base` provides type-erased base for reflection-driven dynamic connections
 - **`call_once`** - Multi-threaded single-call implementation based on FUTEX
 - **Stop Token** - Cancellable asynchronous operations `stop_token` / `stop_source` / `stop_callback`

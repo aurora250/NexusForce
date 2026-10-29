@@ -11,7 +11,7 @@
 
 #include "NeForce/core/async/lazy_thread.hpp"
 #include "NeForce/core/async/lock_free_queue.hpp"
-#include "NeForce/core/async/timer.hpp"
+#include "NeForce/core/async/tree_timer.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
 #include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
@@ -449,7 +449,7 @@ private:
     };
 
 
-    unique_ptr<timer_scheduler<steady_clock>> timer_;     ///< 定时器调度器（随 start 重建）
+    unique_ptr<tree_timer_scheduler> timer_;              ///< 定时器调度器（随 start 重建）
     unique_ptr<lock_free_queue<task_type>> global_queue_; ///< 全局无锁任务队列
     unique_ptr<lazy_thread> scaler_thread_;               ///< 缓存模式伸缩线程
 

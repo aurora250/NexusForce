@@ -100,54 +100,69 @@ void io_context::monitor_loop() {
 }
 #endif
 
-uint64_t io_context::next_timer_deadline() const {
-    lock<mutex> lk(timer_mutex_);
-    if (timer_heap_.empty()) {
+uint64_t io_context::next_timer_deadline() {
+    steady_clock::time_point deadline;
+    if (!timers_.next_deadline(deadline)) {
         return numeric_traits<uint64_t>::max();
     }
-    return timer_heap_.front().deadline_ms;
+    return static_cast<uint64_t>(time_cast<milliseconds>(deadline.since_epoch()).count());
+}
+
+bool io_context::fire_expired_timer() {
+    // The lock-free hint keeps the common "no timer due" case out of the heap lock.
+    const int64_t hint = timers_.next_deadline_ns();
+    if (hint == 0 || hint > steady_clock::now().since_epoch().count()) {
+        return false;
+    }
+
+    heap_timer::expired_entry expired[1];
+    if (timers_.drain_expired(steady_clock::now(), expired, 1) == 0) {
+        return false;
+    }
+
+    timer_callback callback;
+    {
+        lock<mutex> lk(timer_mutex_);
+        const auto it = timer_callbacks_.find(expired[0].id);
+        if (it != timer_callbacks_.end()) {
+            callback = move(it->second);
+            timer_callbacks_.erase(it);
+        }
+    }
+    if (callback) {
+        callback();
+    }
+    return true;
 }
 
 void io_context::process_timers(const size_t max_count) {
-    unique_lock<mutex> lk(timer_mutex_);
-    const uint64_t n_ms = now_ms();
     size_t count = 0;
-    while (count < max_count && !timer_heap_.empty() && timer_heap_.front().deadline_ms <= n_ms) {
-        pop_heap(timer_heap_.begin(), timer_heap_.end(), greater<timer_entry>());
-        auto entry = move(timer_heap_.back());
-        timer_heap_.pop_back();
-        lk.unlock_quiet();
-        if (entry.callback) {
-            entry.callback();
-        }
+    while (count < max_count && fire_expired_timer()) {
         ++count;
-        lk.lock_quiet();
     }
 }
 
 size_t io_context::schedule_timer(const uint64_t delay_ms, timer_callback handler) {
-    lock<mutex> lk(timer_mutex_);
-    const size_t id = next_timer_id_++;
-    timer_entry entry;
-    entry.id = id;
-    entry.deadline_ms = now_ms() + delay_ms;
-    entry.callback = move(handler);
-    timer_heap_.push_back(entry);
-    push_heap(timer_heap_.begin(), timer_heap_.end(), greater<timer_entry>());
+    const auto deadline = steady_clock::now() + milliseconds(delay_ms);
+    size_t id = 0;
+    {
+        lock<mutex> lk(timer_mutex_);
+        const auto token = timers_.insert(deadline);
+        timer_callbacks_.emplace(token, move(handler));
+        id = static_cast<size_t>(token);
+    }
     wake();
     return id;
 }
 
 bool io_context::cancel_timer(const size_t timer_id) {
-    lock<mutex> lk(timer_mutex_);
-    for (auto it = timer_heap_.begin(); it != timer_heap_.end(); ++it) {
-        if (it->id == timer_id) {
-            timer_heap_.erase(it);
-            make_heap(timer_heap_.begin(), timer_heap_.end(), greater<timer_entry>());
-            return true;
-        }
+    const auto token = static_cast<heap_timer::token>(timer_id);
+    const bool cancelled = timers_.cancel(token);
+    if (cancelled) {
+        lock<mutex> lk(timer_mutex_);
+        timer_callbacks_.erase(token);
     }
-    return false;
+    return cancelled;
 }
 
 size_t io_context::drain_handlers(const size_t max_count) {
@@ -191,8 +206,7 @@ bool io_context::has_outstanding_work() const noexcept {
     if (external_queue_count_.load(memory_order_acquire) != 0) {
         return true;
     }
-    lock<mutex> lk(timer_mutex_);
-    return !timer_heap_.empty();
+    return !timers_.empty();
 }
 
 bool io_context::has_pending_work() const noexcept {
@@ -555,22 +569,8 @@ size_t io_context::run_one(int timeout_ms) {
             }
         }
 
-        {
-            unique_lock<mutex> lk(timer_mutex_);
-            if (!timer_heap_.empty()) {
-                const uint64_t n_ms = now_ms();
-                const uint64_t front_deadline = timer_heap_.front().deadline_ms;
-                if (front_deadline <= n_ms) {
-                    pop_heap(timer_heap_.begin(), timer_heap_.end(), greater<timer_entry>());
-                    const auto entry = move(timer_heap_.back());
-                    timer_heap_.pop_back();
-                    lk.unlock_quiet();
-                    if (entry.callback) {
-                        entry.callback();
-                    }
-                    return 1;
-                }
-            }
+        if (fire_expired_timer()) {
+            return 1;
         }
 
         // return immediately instead of sleeping the timeout.

@@ -970,7 +970,7 @@ curl http://localhost:8080/frontend
 
 ### 崩溃转储（crash_dump）
 
-安装统一的崩溃处理器：未捕获的 C++ 异常、Linux 致命信号与 Windows 未处理异常会被写成平台原生转储（Windows `.dmp`、Linux `.core`），也可以随时主动写出当前进程的转储。
+安装统一的崩溃处理器：未捕获的 C++ 异常、POSIX 致命信号与 Windows 未处理异常会被写成平台原生转储（Windows `.dmp`、Linux / FreeBSD `.core`），也可以随时主动写出当前进程的转储。
 
 ```bash
 ./build/bin/NexusForceCrashDumpExample

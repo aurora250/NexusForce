@@ -11,6 +11,8 @@
 #include <NeForce/core/async/executor.hpp>
 #include <NeForce/core/async/generator.hpp>
 #include <NeForce/core/async/hazard_ptr.hpp>
+#include <NeForce/core/async/heap_timer.hpp>
+#include <NeForce/core/async/tree_timer.hpp>
 #include <NeForce/core/async/io_context.hpp>
 #include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/async/lock_free_queue.hpp>
@@ -1507,19 +1509,17 @@ TEST(ScopeThread, MemberFunctionWithStopToken) {
     EXPECT_TRUE(completed.load());
 }
 
-using steady_scheduler = timer_scheduler<steady_clock>;
-
-TEST(TimerScheduler, AddTaskAndExecute) {
+TEST(TreeTimerScheduler, AddTaskAndExecute) {
     promise<void> done;
-    steady_scheduler sched;
+    tree_timer_scheduler sched;
     sched.add_task(steady_clock::now() + 10_ms, [&] { done.set_value(); });
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
 }
 
-TEST(TimerScheduler, AddMultipleTasksExecuteInOrder) {
+TEST(TreeTimerScheduler, AddMultipleTasksExecuteInOrder) {
     vector<int> order;
     promise<void> done;
-    steady_scheduler sched;
+    tree_timer_scheduler sched;
     auto now = steady_clock::now();
     sched.add_task(now + 5_ms, [&] { order.push_back(1); });
     sched.add_task(now + 3_ms, [&] { order.push_back(0); });
@@ -1534,9 +1534,9 @@ TEST(TimerScheduler, AddMultipleTasksExecuteInOrder) {
     EXPECT_EQ(order[2], 2);
 }
 
-TEST(TimerScheduler, CancelTask) {
+TEST(TreeTimerScheduler, CancelTask) {
     atomic<bool> called{false};
-    steady_scheduler sched;
+    tree_timer_scheduler sched;
     auto id = sched.add_task(steady_clock::now() + 50_ms, [&] { called = true; });
     bool canceled = sched.cancel(id);
     EXPECT_TRUE(canceled);
@@ -1544,9 +1544,9 @@ TEST(TimerScheduler, CancelTask) {
     EXPECT_FALSE(called.load());
 }
 
-TEST(TimerScheduler, CancelAll) {
+TEST(TreeTimerScheduler, CancelAll) {
     atomic<int> count{0};
-    steady_scheduler sched;
+    tree_timer_scheduler sched;
     auto now = steady_clock::now();
     sched.add_task(now + 5_ms, [&] { count.fetch_add(1); });
     sched.add_task(now + 10_ms, [&] { count.fetch_add(1); });
@@ -1556,8 +1556,8 @@ TEST(TimerScheduler, CancelAll) {
     EXPECT_EQ(count.load(), 0);
 }
 
-TEST(TimerScheduler, Size) {
-    steady_scheduler sched;
+TEST(TreeTimerScheduler, Size) {
+    tree_timer_scheduler sched;
     EXPECT_EQ(sched.size(), 0u);
     auto now = steady_clock::now();
     auto id1 = sched.add_task(now + 5_ms, [] {});
@@ -1570,17 +1570,17 @@ TEST(TimerScheduler, Size) {
     EXPECT_EQ(sched.size(), 0u);
 }
 
-TEST(TimerScheduler, ImmediateTask) {
+TEST(TreeTimerScheduler, ImmediateTask) {
     promise<void> done;
-    steady_scheduler sched;
+    tree_timer_scheduler sched;
     sched.add_task(steady_clock::now() - 1_h, [&] { done.set_value(); });
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
 }
 
-TEST(TimerScheduler, DestructorStopsThread) {
+TEST(TreeTimerScheduler, DestructorStopsThread) {
     atomic<bool> finished{false};
     thread stopper([&finished] {
-        steady_scheduler sched;
+        tree_timer_scheduler sched;
         sched.add_task(steady_clock::now() + 1_h, [] {});
         finished.store(true);
     });
@@ -1598,17 +1598,110 @@ TEST(TimerScheduler, DestructorStopsThread) {
     }
 }
 
-TEST(BasicTimer, AsyncWait) {
+TEST(HeapTimer, DrainInDeadlineOrder) {
+    heap_timer timers;
+    const auto now = steady_clock::now();
+    timers.insert(now + 30_ms, 3);
+    timers.insert(now + 10_ms, 1);
+    timers.insert(now + 20_ms, 2);
+    EXPECT_EQ(timers.size(), 3u);
+
+    heap_timer::expired_entry out[8];
+    const size_t count = timers.drain_expired(now + 100_ms, out, 8);
+    ASSERT_EQ(count, 3u);
+    EXPECT_EQ(out[0].payload, 1u);
+    EXPECT_EQ(out[1].payload, 2u);
+    EXPECT_EQ(out[2].payload, 3u);
+    EXPECT_TRUE(timers.empty());
+    EXPECT_EQ(timers.next_deadline_ns(), 0);
+}
+
+TEST(HeapTimer, DrainHonoursLimitAndNow) {
+    heap_timer timers;
+    const auto now = steady_clock::now();
+    timers.insert(now + 10_ms, 1);
+    timers.insert(now + 20_ms, 2);
+    timers.insert(now + 30_ms, 3);
+
+    heap_timer::expired_entry out[8];
+    EXPECT_EQ(timers.drain_expired(now + 15_ms, out, 8), 1u);
+    EXPECT_EQ(out[0].payload, 1u);
+
+    steady_clock::time_point next;
+    ASSERT_TRUE(timers.next_deadline(next));
+    EXPECT_EQ(next, now + 20_ms);
+
+    EXPECT_EQ(timers.drain_expired(now + 100_ms, out, 1), 1u);
+    EXPECT_EQ(out[0].payload, 2u);
+    EXPECT_EQ(timers.size(), 1u);
+}
+
+TEST(HeapTimer, CancelIsLazy) {
+    heap_timer timers;
+    const auto now = steady_clock::now();
+    const auto earliest = timers.insert(now + 10_ms, 1);
+    timers.insert(now + 20_ms, 2);
+    EXPECT_EQ(timers.size(), 2u);
+
+    EXPECT_TRUE(timers.cancel(earliest));
+    EXPECT_FALSE(timers.cancel(earliest));
+    EXPECT_EQ(timers.size(), 1u);
+
+    steady_clock::time_point next;
+    ASSERT_TRUE(timers.next_deadline(next));
+    EXPECT_EQ(next, now + 20_ms);
+    EXPECT_GE(timers.next_deadline_ns(), (now + 20_ms).since_epoch().count());
+
+    heap_timer::expired_entry out[8];
+    EXPECT_EQ(timers.drain_expired(now + 100_ms, out, 8), 1u);
+    EXPECT_EQ(out[0].payload, 2u);
+    EXPECT_FALSE(timers.cancel(earliest));
+}
+
+TEST(HeapTimer, CancelAllAndClear) {
+    heap_timer timers;
+    const auto now = steady_clock::now();
+    const auto first = timers.insert(now + 10_ms, 1);
+    const auto second = timers.insert(now + 20_ms, 2);
+    EXPECT_TRUE(timers.cancel(first));
+    EXPECT_TRUE(timers.cancel(second));
+    EXPECT_TRUE(timers.empty());
+    EXPECT_EQ(timers.next_deadline_ns(), 0);
+
+    timers.insert(now + 10_ms, 3);
+    timers.clear();
+    EXPECT_TRUE(timers.empty());
+    EXPECT_EQ(timers.next_deadline_ns(), 0);
+
+    heap_timer::expired_entry out[8];
+    EXPECT_EQ(timers.drain_expired(now + 100_ms, out, 8), 0u);
+}
+
+TEST(HeapTimer, SameDeadlineKeepsInsertionOrder) {
+    heap_timer timers;
+    const auto deadline = steady_clock::now() + 10_ms;
+    timers.insert(deadline, 1);
+    timers.insert(deadline, 2);
+    timers.insert(deadline, 3);
+
+    heap_timer::expired_entry out[8];
+    ASSERT_EQ(timers.drain_expired(deadline + 1_ms, out, 8), 3u);
+    EXPECT_EQ(out[0].payload, 1u);
+    EXPECT_EQ(out[1].payload, 2u);
+    EXPECT_EQ(out[2].payload, 3u);
+}
+
+TEST(TreeTimer, AsyncWait) {
     promise<void> done;
-    steady_timer timer;
+    tree_timer timer;
     timer.expires_after(10_ms);
     timer.async_wait([&] { done.set_value(); });
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
     EXPECT_FALSE(timer.is_active());
 }
 
-TEST(BasicTimer, Cancel) {
-    steady_timer timer;
+TEST(TreeTimer, Cancel) {
+    tree_timer timer;
     timer.expires_after(50_ms);
     timer.async_wait([] { FAIL(); });
     timer.cancel();
@@ -1617,51 +1710,51 @@ TEST(BasicTimer, Cancel) {
     SUCCEED();
 }
 
-TEST(BasicTimer, ExpiresAt) {
+TEST(TreeTimer, ExpiresAt) {
     auto target = steady_clock::now() + 30_ms;
     promise<void> done;
-    steady_timer timer;
+    tree_timer timer;
     timer.expires_at(target);
     EXPECT_GT(timer.expiry(), steady_clock::now());
     timer.async_wait([&] { done.set_value(); });
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
 }
 
-TEST(BasicTimer, ExpiresFromNow) {
+TEST(TreeTimer, ExpiresFromNow) {
     promise<void> done;
-    steady_timer timer;
+    tree_timer timer;
     timer.expires_from_now(20);
     timer.async_wait([&] { done.set_value(); });
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
 }
 
-TEST(BasicTimer, MoveConstructor) {
+TEST(TreeTimer, MoveConstructor) {
     promise<void> done;
-    steady_timer timer;
+    tree_timer timer;
     timer.expires_after(10_ms);
     timer.async_wait([&] { done.set_value(); });
-    steady_timer moved(move(timer));
+    tree_timer moved(move(timer));
     EXPECT_FALSE(timer.is_active());
     EXPECT_TRUE(moved.is_active());
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
     EXPECT_FALSE(moved.is_active());
 }
 
-TEST(BasicTimer, MoveAssignment) {
+TEST(TreeTimer, MoveAssignment) {
     promise<void> done;
-    steady_timer timer;
+    tree_timer timer;
     timer.expires_after(10_ms);
     timer.async_wait([&] { done.set_value(); });
-    steady_timer target = move(timer);
+    tree_timer target = move(timer);
     EXPECT_FALSE(timer.is_active());
     EXPECT_TRUE(target.is_active());
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
 }
 
-TEST(BasicTimer, DestructorCancelsTask) {
+TEST(TreeTimer, DestructorCancelsTask) {
     atomic<bool> called{false};
     {
-        steady_timer timer;
+        tree_timer timer;
         timer.expires_after(50_ms);
         timer.async_wait([&] { called = true; });
     }
@@ -1669,10 +1762,10 @@ TEST(BasicTimer, DestructorCancelsTask) {
     EXPECT_FALSE(called.load());
 }
 
-TEST(BasicTimer, Reschedule) {
+TEST(TreeTimer, Reschedule) {
     latch done(1);
     int count = 0;
-    steady_timer timer;
+    tree_timer timer;
 
     timer.expires_after(10_s);
     timer.async_wait([&] { ++count; });
@@ -1688,8 +1781,8 @@ TEST(BasicTimer, Reschedule) {
     EXPECT_EQ(count, 1);
 }
 
-TEST(BasicTimer, IsActive) {
-    steady_timer timer;
+TEST(TreeTimer, IsActive) {
+    tree_timer timer;
     EXPECT_FALSE(timer.is_active());
     timer.expires_after(1_h);
     timer.async_wait([] {});
@@ -2389,8 +2482,8 @@ TEST(WorkerContext, ResetClearsAllState) {
     EXPECT_FALSE(ctx.idle_counted);
 }
 
-TEST(TimerScheduler, SpinWindowConfiguration) {
-    timer_scheduler<steady_clock> timer;
+TEST(TreeTimerScheduler, SpinWindowConfiguration) {
+    tree_timer_scheduler timer;
     EXPECT_EQ(time_cast<microseconds>(timer.spin_window()).count(), 100);
 
     timer.set_spin_window(microseconds(0));
@@ -3007,6 +3100,20 @@ TEST(VirtualThread, ConcurrentGetResult) {
     });
     EXPECT_EQ(task.get_result(), 123);
     EXPECT_TRUE(task.is_done());
+}
+
+TEST(VirtualThread, RestartAfterShutdown) {
+    virtual_thread::shutdown();
+    virtual_thread::initialize(2);
+
+    atomic<bool> resumed{false};
+    auto task_body = [&]() -> virtual_thread_task<void> {
+        co_await virtual_thread::yield();
+        resumed.store(true);
+    };
+    auto task = virtual_thread::start(task_body);
+    EXPECT_TRUE(task_done_within(task));
+    EXPECT_TRUE(resumed.load());
 }
 
 #endif
@@ -4125,7 +4232,7 @@ TEST(ChannelTest, CloseWakesReaders) {
     EXPECT_TRUE(ch.is_closed());
 }
 
-TEST(ChannelTest, BlockingWriteRead) { // may block
+TEST(ChannelTest, BlockingWriteRead) {
     channel<int> ch(2);
     atomic<bool> done{false};
 
@@ -4144,6 +4251,70 @@ TEST(ChannelTest, BlockingWriteRead) { // may block
     EXPECT_EQ(sum, 15);
 
     writer.join();
+}
+
+TEST(ChannelTest, ReaderBlocksUntilData) {
+    channel<int> ch(1);
+    atomic<int> received{0};
+
+    thread reader([&]() {
+        int val = 0;
+        if (ch.read(val)) {
+            received.store(val);
+        }
+    });
+
+    this_thread::sleep_for(milliseconds(20));
+    EXPECT_EQ(received.load(), 0);
+
+    EXPECT_TRUE(ch.write(7));
+    reader.join();
+    EXPECT_EQ(received.load(), 7);
+}
+
+TEST(ChannelTest, BlockingBounce) {
+    for (int round = 0; round < 100; ++round) {
+        channel<int> ch(1);
+        thread writer([&ch]() {
+            for (int i = 1; i <= 5; ++i) {
+                ch.write(i);
+            }
+            ch.close();
+        });
+
+        int sum = 0;
+        int val = 0;
+        while (ch.read(val)) {
+            sum += val;
+        }
+        writer.join();
+        ASSERT_EQ(sum, 15);
+    }
+}
+
+TEST(ChannelTest, CloseWakesBlockedWriter) {
+    channel<int> ch(1);
+    ASSERT_TRUE(ch.write(1));
+
+    atomic<bool> returned{false};
+    atomic<bool> written{true};
+    thread writer([&]() {
+        written.store(ch.write(2));
+        returned.store(true);
+    });
+
+    this_thread::sleep_for(milliseconds(20));
+    EXPECT_FALSE(returned.load());
+
+    ch.close();
+    writer.join();
+    EXPECT_TRUE(returned.load());
+    EXPECT_FALSE(written.load());
+
+    int val = 0;
+    EXPECT_TRUE(ch.read(val));
+    EXPECT_EQ(val, 1);
+    EXPECT_FALSE(ch.read(val));
 }
 
 TEST(ChannelTest, CapacityZeroSynchronous) {

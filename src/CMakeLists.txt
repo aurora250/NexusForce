@@ -10,6 +10,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/async_stream.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/futex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/heap_timer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/io_context.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/lazy_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
@@ -22,6 +23,8 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_exit_notifier.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_exit_register.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/tree_timer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/virtual_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/aes256.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/base64.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/chacha20_poly1305.cpp

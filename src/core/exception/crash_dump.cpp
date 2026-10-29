@@ -15,7 +15,8 @@
 #        include <intrin.h>
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
+#    include <cerrno>
 #    include <csignal>
 #    include <sys/resource.h>
 #    include <sys/syscall.h>
@@ -75,7 +76,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LPTOP_LEVEL_EXCEPTION_FILTER g_previous_filter{nullptr};
     bool g_filter_installed{false};
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     constexpr int32_t fatal_signals[] = {SIGABRT, SIGSEGV, SIGILL, SIGFPE, SIGBUS};
     constexpr size_t fatal_signal_count = sizeof(fatal_signals) / sizeof(fatal_signals[0]);
     struct ::sigaction g_previous_actions[fatal_signal_count]{};
@@ -104,7 +105,7 @@ namespace {
         do {
             digits[count++] = static_cast<char>('0' + value % 10U);
             value /= 10U;
-        } while (value != 0U && count < sizeof(digits));
+        } while (value != 0U && count < static_cast<int>(sizeof(digits)));
         size_t position = offset;
         for (int padding = count; padding < width && position + 1 < capacity; ++padding) {
             buffer[position++] = '0';
@@ -159,7 +160,7 @@ namespace {
     };
 
     const char* signal_name(const int32_t number) noexcept {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
         switch (number) {
             case SIGABRT:
                 return "SIGABRT";
@@ -185,12 +186,16 @@ namespace {
         return static_cast<uint32_t>(::GetCurrentThreadId());
 #elif defined(NEFORCE_PLATFORM_LINUX)
         return static_cast<uint32_t>(::syscall(SYS_gettid));
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+        long thread_id = 0;
+        static_cast<void>(::syscall(SYS_thr_self, &thread_id));
+        return static_cast<uint32_t>(thread_id);
 #else
         return 0;
 #endif
     }
 
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     int64_t local_utc_offset_seconds() noexcept {
         const ::time_t now = ::time(nullptr);
         ::tm local{};
@@ -321,7 +326,7 @@ namespace {
                 builder.append(" (");
                 builder.append(signal_name(signal_number));
                 builder.append(")");
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
                 if (signal_info != nullptr) {
                     const auto* info = static_cast<const siginfo_t*>(signal_info);
                     builder.append(" code=");
@@ -428,7 +433,7 @@ namespace {
                  record.ExceptionAddress, &pointers, context, inner);
         immediate_exit(3);
 #else
-#    if defined(NEFORCE_PLATFORM_LINUX)
+#    if defined(NEFORCE_PLATFORM_POSIX)
         ::ucontext_t signal_context{};
         if (::getcontext(&signal_context) == 0) {
             context = &signal_context;
@@ -458,7 +463,7 @@ namespace {
         }
         return EXCEPTION_CONTINUE_SEARCH;
     }
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
     void fatal_signal_handler(const int32_t signal_number, siginfo_t* info, void* context) {
         if (g_in_crash.exchange(true)) {
             ::_exit(128 + signal_number);
@@ -693,7 +698,7 @@ bool crash_dump::install_handlers(const crash_dump::options& options) noexcept {
             }
             installed = true;
         }
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
         if (options.install_signal_handlers) {
             if (options.kernel_core_fallback) {
                 raise_core_limit();
@@ -724,7 +729,7 @@ void crash_dump::uninstall_handlers() noexcept {
             ::SetUnhandledExceptionFilter(g_previous_filter);
             g_filter_installed = false;
         }
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
         if (g_signal_installed) {
             for (size_t index = 0; index < fatal_signal_count; ++index) {
                 static_cast<void>(::sigaction(fatal_signals[index], &g_previous_actions[index], nullptr));
@@ -776,7 +781,7 @@ crash_dump::result crash_dump::write(const crash_dump::options& options) noexcep
         ::CONTEXT win_context{};
         ::RtlCaptureContext(&win_context);
         context = &win_context;
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#elif defined(NEFORCE_PLATFORM_POSIX)
         ::ucontext_t signal_context{};
         if (::getcontext(&signal_context) == 0) {
             context = &signal_context;

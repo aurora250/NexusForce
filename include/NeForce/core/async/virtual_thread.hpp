@@ -15,17 +15,11 @@
 
 #include "NeForce/core/async/coroutine.hpp"
 #ifdef NEFORCE_STANDARD_20
-#    include "NeForce/core/async/atomic.hpp"
 #    include "NeForce/core/async/condition_variable.hpp"
-#    include "NeForce/core/async/mutex.hpp"
-#    include "NeForce/core/async/thread.hpp"
-#    include "NeForce/core/container/priority_queue.hpp"
-#    include "NeForce/core/container/queue.hpp"
-#    include "NeForce/core/container/vector.hpp"
+#    include "NeForce/core/async/heap_timer.hpp"
+#    include "NeForce/core/async/lock_free_queue.hpp"
 #    include "NeForce/core/exception/exception_ptr.hpp"
-#    include "NeForce/core/functional/functor.hpp"
 #    include "NeForce/core/memory/aligned_buffer.hpp"
-#    include "NeForce/core/time/clocks.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -69,9 +63,17 @@ constexpr bool is_virtual_thread_task_v = is_virtual_thread_task<T>::value;
 NEFORCE_BEGIN_INNER__
 
 struct task_shared_state_base {
-    /// @brief 帧所有权标记
-    /// @note 任何把帧交给第三方的挂起点都必须置位，否则拥有者可能销毁一个仍会被恢复的帧
+    /**
+     * @brief 帧所有权标记
+     * @note 任何把帧交给第三方的挂起点都必须置位，否则拥有者可能销毁一个仍会被恢复的帧
+     */
     atomic<bool> detached_{false};
+
+    /**
+     * @brief 是否登记过等待者
+     * @note 无人等待时任务完成只需写 completed_，不必加锁与广播
+     */
+    atomic<bool> has_waiter_{false};
 };
 
 template <typename T>
@@ -79,12 +81,11 @@ struct task_shared_state : task_shared_state_base {
     aligned_buffer<T> result_buffer_;
     bool has_value_{false};
     exception_ptr exception_{nullptr};
-
-    /// 等待此任务的协程句柄
     coroutine_handle<> continuation_{nullptr};
     atomic<bool> completed_{false};
     mutex mtx_;
     condition_variable cv_;
+    uint32_t cv_waiters_{0};
     atomic<unsigned long> ref_count_{1};
 
     void add_ref() noexcept { ref_count_.fetch_add(1, memory_order_relaxed); }
@@ -104,12 +105,11 @@ struct task_shared_state : task_shared_state_base {
 template <>
 struct task_shared_state<void> : task_shared_state_base {
     exception_ptr exception_{nullptr};
-
-    /// 等待此任务的协程句柄
     coroutine_handle<> continuation_{nullptr};
     atomic<bool> completed_{false};
     mutex mtx_;
     condition_variable cv_;
+    uint32_t cv_waiters_{0};
     atomic<unsigned long> ref_count_{1};
 
     void add_ref() noexcept { ref_count_.fetch_add(1, memory_order_relaxed); }
@@ -130,157 +130,87 @@ NEFORCE_END_INNER__
  * @class virtual_thread_scheduler
  * @brief 虚拟线程调度器
  */
-class virtual_thread_scheduler {
+class NEFORCE_API virtual_thread_scheduler {
 private:
-    /**
-     * @struct timer_entry
-     * @brief 定时器条目
-     */
-    struct timer_entry {
-        steady_clock::time_point deadline; ///< 绝对到期时间
-        uint64_t sequence;                 ///< 入队序号
-        coroutine_handle<> handle;         ///< 需要恢复的协程
+    static constexpr size_t timer_batch_size = 32; ///< 单次从定时器堆转入就绪队列的协程上限
 
-        NEFORCE_NODISCARD bool operator>(const timer_entry& other) const noexcept {
-            if (deadline != other.deadline) {
-                return deadline > other.deadline;
-            }
-            return sequence > other.sequence;
+    inline static thread_local bool worker_context_{false}; ///< 当前线程是否为调度器工作线程
+
+    lock_free_queue<coroutine_handle<>> ready_queue_;                         ///< 就绪协程无锁队列
+    heap_timer timers_;                                                       ///< 定时器最小堆
+    atomic<int64_t> pending_{0};                                              ///< 已入队未取出的协程数
+    alignas(alignof(platform_wait_t)) volatile platform_wait_t wake_word_{0}; ///< FUTEX 唤醒字
+    atomic<int32_t> sleepers_{0};                                             ///< 停驻在 wake_word_ 上的工作线程数
+    vector<thread> workers_;                                                  ///< 工作线程池
+    atomic<bool> shutdown_{false};                                            ///< 关闭标志
+
+    void bump_wake_word(const int64_t count) noexcept {
+        atomic_fetch_add(&wake_word_, static_cast<platform_wait_t>(count), memory_order_seq_cst);
+    }
+
+    void notify_waiters(const bool all) noexcept {
+        if (sleepers_.load(memory_order_acquire) == 0) {
+            return;
         }
-    };
+        futex_notify(const_cast<platform_wait_t*>(&wake_word_), all);
+    }
 
-    queue<coroutine_handle<>> task_queue_;                                          ///< 协程任务队列
-    priority_queue<timer_entry, vector<timer_entry>, greater<timer_entry>> timers_; ///< 定时器最小堆
-    uint64_t next_timer_sequence_{0};                                               ///< 定时器序号计数器
-    vector<thread> workers_;                                                        ///< 工作线程池
-    mutex mutex_;                                                                   ///< 保护任务队列与定时器堆的互斥锁
-    condition_variable cv_;                                                         ///< 任务/定时器通知条件变量
-    atomic<bool> shutdown_{false};                                                  ///< 关闭标志
-
-    void pop_expired_timers_locked() {
-        const auto now = steady_clock::now();
-        while (!timers_.empty() && timers_.top().deadline <= now) {
-            task_queue_.push(timers_.top().handle);
-            timers_.pop();
+    void publish_ready(const int64_t count) noexcept {
+        const int64_t pending = pending_.fetch_add(count, memory_order_seq_cst) + count;
+        bump_wake_word(count);
+        if (count > 1 || !worker_context_ || pending > 1) {
+            notify_waiters(count > 1);
         }
     }
+
+    void enqueue_ready(const coroutine_handle<> handle) {
+        if (!handle) {
+            return;
+        }
+        (void) ready_queue_.enqueue(handle);
+        publish_ready(1);
+    }
+
+    bool pop_expired_timers();
+
+    void park();
+
+    void worker_loop();
 
 public:
     /**
      * @brief 获取调度器单例实例
      * @return 调度器引用
      */
-    static virtual_thread_scheduler& get_instance() {
-        static virtual_thread_scheduler instance;
-        return instance;
-    }
+    static virtual_thread_scheduler& get_instance();
+
+    ~virtual_thread_scheduler();
 
     /**
      * @brief 将协程加入调度队列
      * @param handle 协程句柄
      */
-    void schedule(coroutine_handle<> handle) {
-        {
-            lock<mutex> lock(mutex_);
-            task_queue_.push(handle);
-        }
-        cv_.notify_one();
-    }
+    void schedule(coroutine_handle<> handle) { enqueue_ready(handle); }
 
     /**
      * @brief 将协程延迟指定毫秒后加入调度队列
      * @param handle 协程句柄
      * @param delay_ms 延迟毫秒数，非正数表示立即调度
      */
-    void schedule_after(coroutine_handle<> handle, const int64_t delay_ms) {
-        if (delay_ms <= 0) {
-            schedule(handle);
-            return;
-        }
-        {
-            lock<mutex> lock(mutex_);
-            timers_.push(timer_entry{steady_clock::now() + milliseconds(delay_ms), next_timer_sequence_++, handle});
-        }
-        cv_.notify_all();
-    }
+    void schedule_after(coroutine_handle<> handle, int64_t delay_ms);
 
     /**
      * @brief 启动指定数量的工作线程
      * @param num_threads 工作线程数量
      */
-    void start_workers(size_t num_threads) {
-        for (size_t i = 0; i < num_threads; ++i) {
-            workers_.emplace_back([this] { worker_loop(); });
-        }
-    }
+    void start_workers(size_t num_threads);
 
     /**
      * @brief 关闭调度器
      *
-     * 设置关闭标志，唤醒所有工作线程并等待它们退出。
+     * 工作线程退出前会把就绪队列与未到期的定时器全部执行完。
      */
-    void shutdown() {
-        {
-            lock<mutex> lock(mutex_);
-            shutdown_ = true;
-        }
-        cv_.notify_all();
-
-        for (auto& worker: workers_) {
-            if (worker.joinable()) {
-                worker.join();
-            }
-        }
-    }
-
-    /**
-     * @brief 析构函数，自动调用 shutdown()
-     */
-    ~virtual_thread_scheduler() { shutdown(); }
-
-private:
-    /**
-     * @brief 工作线程主循环
-     *
-     * 循环等待任务队列中的协程，取出并恢复执行。
-     */
-    void worker_loop() {
-        while (true) {
-            coroutine_handle<> handle;
-
-            {
-                unique_lock<mutex> lock(mutex_);
-                for (;;) {
-                    pop_expired_timers_locked();
-
-                    if (shutdown_ && task_queue_.empty() && timers_.empty()) {
-                        return;
-                    }
-
-                    if (!task_queue_.empty()) {
-                        handle = task_queue_.front();
-                        task_queue_.pop();
-                        break;
-                    }
-
-                    if (timers_.empty()) {
-                        cv_.wait(lock, [this] { return shutdown_ || !task_queue_.empty() || !timers_.empty(); });
-                        continue;
-                    }
-
-                    const auto deadline = timers_.top().deadline;
-                    cv_.wait_until(lock, deadline, [this, deadline] {
-                        return shutdown_ || !task_queue_.empty() || timers_.empty() ||
-                               timers_.top().deadline != deadline;
-                    });
-                }
-            }
-
-            if (handle) {
-                handle.resume();
-            }
-        }
-    }
+    void shutdown();
 };
 
 
@@ -340,8 +270,7 @@ struct virtual_thread_task<void> {
      * @brief 协程 promise_type，管理任务生命周期与状态
      */
     struct promise_type {
-        /// @brief 标记本 promise 属于 virtual_thread_task
-        static constexpr bool is_virtual_thread_task_promise = true;
+        static constexpr bool is_virtual_thread_task_promise = true; ///< 本 promise 属于 virtual_thread_task
 
         inner::task_shared_state<void>* shared_state_{inner::task_shared_state<void>::create()};
 
@@ -373,11 +302,17 @@ struct virtual_thread_task<void> {
                     auto* state = p.shared_state_;
                     coroutine_handle<> cont{nullptr};
 
-                    {
+                    // Publish completion first, then test the waiter flag:
+                    // a waiter that registers afterwards is guaranteed to observe completed_ below
+                    // (its flag store is seq_cst and precedes its own re-check), while one that
+                    // registered earlier is caught here.
+                    // Without a waiter this skips both the lock and the broadcast.
+                    state->completed_.store(true, memory_order_seq_cst);
+                    if (state->has_waiter_.load(memory_order_seq_cst)) {
                         lock<mutex> lock(state->mtx_);
-                        state->completed_.store(true, memory_order_release);
-                        state->cv_.notify_all();
-
+                        if (state->cv_waiters_ != 0) {
+                            state->cv_.notify_all();
+                        }
                         cont = state->continuation_;
                         state->continuation_ = nullptr;
                     }
@@ -458,9 +393,6 @@ struct virtual_thread_task<void> {
          */
         void unhandled_exception() { shared_state_->exception_ = _NEFORCE current_exception(); }
 
-        /**
-         * @brief 析构时释放共享状态的引用
-         */
         ~promise_type() {
             if (shared_state_ != nullptr) {
                 shared_state_->release();
@@ -471,9 +403,6 @@ struct virtual_thread_task<void> {
     coroutine_handle<promise_type> handle_{nullptr};        ///< 协程句柄
     inner::task_shared_state<void>* shared_state_{nullptr}; ///< 共享状态指针
 
-    /**
-     * @brief 默认构造，创建空任务
-     */
     virtual_thread_task() = default;
 
     /**
@@ -490,11 +419,6 @@ struct virtual_thread_task<void> {
         }
     }
 
-    /**
-     * @brief 析构函数
-     *
-     * 释放共享状态的引用。
-     */
     ~virtual_thread_task() {
         if (handle_) {
             const bool completed = shared_state_ != nullptr && shared_state_->completed_.load(memory_order_acquire);
@@ -511,16 +435,10 @@ struct virtual_thread_task<void> {
     virtual_thread_task(const virtual_thread_task&) = delete;
     virtual_thread_task& operator=(const virtual_thread_task&) = delete;
 
-    /**
-     * @brief 移动构造函数
-     */
     virtual_thread_task(virtual_thread_task&& other) noexcept :
     handle_(_NEFORCE exchange(other.handle_, nullptr)),
     shared_state_(_NEFORCE exchange(other.shared_state_, nullptr)) {}
 
-    /**
-     * @brief 移动赋值运算符
-     */
     virtual_thread_task& operator=(virtual_thread_task&& other) noexcept {
         if (addressof(other) == this) {
             return *this;
@@ -599,7 +517,8 @@ struct virtual_thread_task<void> {
                 return false;
             }
             lock<mutex> lock(state_->mtx_);
-            if (state_->completed_.load(memory_order_acquire)) {
+            state_->has_waiter_.store(true, memory_order_seq_cst);
+            if (state_->completed_.load(memory_order_seq_cst)) {
                 return false;
             }
             inner::detach_continuation_frame(caller);
@@ -631,14 +550,16 @@ struct virtual_thread_task<void> {
 
     /**
      * @brief 阻塞等待任务完成并获取结果
-     *
-     * 若任务未完成，阻塞当前线程直到任务完成。
-     * 若任务抛出异常，在此重新抛出。
      */
     void get_result() {
-        if (!shared_state_->completed_.load(memory_order_acquire)) {
+        if (!shared_state_->completed_.load(memory_order_seq_cst)) {
             unique_lock<mutex> lock(shared_state_->mtx_);
-            shared_state_->cv_.wait(lock, [this] { return shared_state_->completed_.load(memory_order_acquire); });
+            if (!shared_state_->completed_.load(memory_order_seq_cst)) {
+                shared_state_->has_waiter_.store(true, memory_order_seq_cst);
+                ++shared_state_->cv_waiters_;
+                shared_state_->cv_.wait(lock, [this] { return shared_state_->completed_.load(memory_order_seq_cst); });
+                --shared_state_->cv_waiters_;
+            }
         }
         if (shared_state_->exception_) {
             rethrow_exception(shared_state_->exception_);
@@ -672,8 +593,7 @@ struct virtual_thread_task {
      * @brief 协程 promise_type，管理任务生命周期与返回值存储
      */
     struct promise_type {
-        /// @brief 标记本 promise 属于 virtual_thread_task
-        static constexpr bool is_virtual_thread_task_promise = true;
+        static constexpr bool is_virtual_thread_task_promise = true; ///< 本 promise 属于 virtual_thread_task
 
         inner::task_shared_state<T>* shared_state_{inner::task_shared_state<T>::create()};
 
@@ -685,16 +605,8 @@ struct virtual_thread_task {
             return task;
         }
 
-        /**
-         * @brief 初始挂起点 — 不暂停
-         */
         suspend_never initial_suspend() noexcept { return {}; }
 
-        /**
-         * @brief 最终挂起点
-         *
-         * 标记完成、通知等待者、调度 continuation。
-         */
         auto final_suspend() noexcept {
             struct final_awaiter {
                 bool await_ready() noexcept { return false; }
@@ -704,11 +616,12 @@ struct virtual_thread_task {
                     auto* state = p.shared_state_;
                     coroutine_handle<> cont{nullptr};
 
-                    {
+                    state->completed_.store(true, memory_order_seq_cst);
+                    if (state->has_waiter_.load(memory_order_seq_cst)) {
                         lock<mutex> lock(state->mtx_);
-                        state->completed_.store(true, memory_order_release);
-                        state->cv_.notify_all();
-
+                        if (state->cv_waiters_ != 0) {
+                            state->cv_.notify_all();
+                        }
                         cont = state->continuation_;
                         state->continuation_ = nullptr;
                     }
@@ -781,7 +694,7 @@ struct virtual_thread_task {
          * @brief co_return 值，移动存储
          */
         void return_value(T&& value) {
-            ::new (shared_state_->result_buffer_.addr()) T(move(value));
+            ::new (shared_state_->result_buffer_.addr()) T(_NEFORCE move(value));
             shared_state_->has_value_ = true;
         }
 
@@ -793,14 +706,8 @@ struct virtual_thread_task {
             return _NEFORCE forward<Awaiter>(a);
         }
 
-        /**
-         * @brief 未处理异常的捕获入口
-         */
         void unhandled_exception() { shared_state_->exception_ = _NEFORCE current_exception(); }
 
-        /**
-         * @brief 析构时释放共享状态的引用
-         */
         ~promise_type() {
             if (shared_state_) {
                 shared_state_->release();
@@ -811,9 +718,6 @@ struct virtual_thread_task {
     coroutine_handle<promise_type> handle_{nullptr};     ///< 协程句柄
     inner::task_shared_state<T>* shared_state_{nullptr}; ///< 共享状态指针
 
-    /**
-     * @brief 默认构造，创建空任务
-     */
     virtual_thread_task() = default;
 
     /**
@@ -829,9 +733,6 @@ struct virtual_thread_task {
         }
     }
 
-    /**
-     * @brief 析构函数 — 清理未调度的帧，释放共享状态引用
-     */
     ~virtual_thread_task() {
         if (handle_) {
             const bool completed = shared_state_ && shared_state_->completed_.load(memory_order_acquire);
@@ -848,16 +749,10 @@ struct virtual_thread_task {
     virtual_thread_task(const virtual_thread_task&) = delete;
     virtual_thread_task& operator=(const virtual_thread_task&) = delete;
 
-    /**
-     * @brief 移动构造函数
-     */
     virtual_thread_task(virtual_thread_task&& other) noexcept :
     handle_(_NEFORCE exchange(other.handle_, nullptr)),
     shared_state_(_NEFORCE exchange(other.shared_state_, nullptr)) {}
 
-    /**
-     * @brief 移动赋值运算符
-     */
     virtual_thread_task& operator=(virtual_thread_task&& other) noexcept {
         if (addressof(other) == this) {
             return *this;
@@ -936,7 +831,8 @@ struct virtual_thread_task {
                 return false;
             }
             lock<mutex> lock(state_->mtx_);
-            if (state_->completed_.load(memory_order_acquire)) {
+            state_->has_waiter_.store(true, memory_order_seq_cst);
+            if (state_->completed_.load(memory_order_seq_cst)) {
                 return false;
             }
             inner::detach_continuation_frame(caller);
@@ -973,14 +869,19 @@ struct virtual_thread_task {
 
     /**
      * @brief 阻塞获取任务结果
+     * @return 任务的返回值
      *
      * 若任务未完成则阻塞当前线程。任务异常会在此重新抛出。
-     * @return 任务的返回值
      */
     T get_result() {
-        if (!shared_state_->completed_.load(memory_order_acquire)) {
+        if (!shared_state_->completed_.load(memory_order_seq_cst)) {
             unique_lock<mutex> lock(shared_state_->mtx_);
-            shared_state_->cv_.wait(lock, [this] { return shared_state_->completed_.load(memory_order_acquire); });
+            if (!shared_state_->completed_.load(memory_order_seq_cst)) {
+                shared_state_->has_waiter_.store(true, memory_order_seq_cst);
+                ++shared_state_->cv_waiters_;
+                shared_state_->cv_.wait(lock, [this] { return shared_state_->completed_.load(memory_order_seq_cst); });
+                --shared_state_->cv_waiters_;
+            }
         }
         if (shared_state_->exception_) {
             rethrow_exception(shared_state_->exception_);
@@ -1006,7 +907,6 @@ struct virtual_thread_task {
  * @brief 虚拟线程用户门面类
  *
  * 提供启动异步任务、yield、sleep 等操作的静态接口。
- * 不可实例化（构造/析构为 private，仅提供静态方法）。
  */
 class virtual_thread {
 private:

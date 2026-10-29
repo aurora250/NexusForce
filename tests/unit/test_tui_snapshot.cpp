@@ -702,3 +702,16 @@ TEST(TuiScreenDiffTest, RelativeCursorMoveAccountsForCursorColumn) {
     EXPECT_NE(out.find("\033[4C"), string::npos);
     EXPECT_EQ(out.find("\033[5C"), string::npos);
 }
+
+TEST(TuiScreenDiffTest, RelativeCursorMoveAccountsForWideGlyphRun) {
+    screen current(12, 1);
+    screen previous(12, 1);
+    current.fast_cell_at(0, 0).character = "\xe4\xbd\xa0";
+    current.fast_cell_at(1, 0).automerge = true;
+    current.fast_cell_at(5, 0).character = "c";
+
+    const string out = current.to_string(previous);
+    // The wide glyph occupies columns 0-1, so reaching cell 5 needs three columns, not four.
+    EXPECT_NE(out.find("\033[3C"), string::npos);
+    EXPECT_EQ(out.find("\033[4C"), string::npos);
+}

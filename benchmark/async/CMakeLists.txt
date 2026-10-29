@@ -1,4 +1,2 @@
-# ---- Thread Pool ----
-add_nexusforce_benchmark(NexusForceThreadPoolBenchmark
-    thread_pool_benchmark.cpp
-)
+add_subdirectory(thread_pool)
+add_subdirectory(virtual_thread)

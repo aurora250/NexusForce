@@ -19,6 +19,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
+#ifdef NEFORCE_COMPILER_GCC
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 /**
  * @brief 在指定内存位置构造对象
  * @tparam T 要构造的对象类型
@@ -35,6 +40,11 @@ NEFORCE_CONSTEXPR20 T* construct(T* ptr, Args&&... args) noexcept(is_nothrow_con
     static_assert(is_constructible_v<T, Args...>, "T must be constructible with arguments");
     return static_cast<T*>(new (static_cast<void*>(ptr)) T(_NEFORCE forward<Args>(args)...));
 }
+
+#ifdef NEFORCE_COMPILER_GCC
+#    pragma GCC diagnostic pop
+#endif
+
 
 /**
  * @brief 销毁单个对象

@@ -162,15 +162,15 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ## 🚀 特性
 
 ### 🔄 并发与异步 (Async)
-- **`thread_pool`** - 基于 NUMA 感知任务窃取与多策略定制的高性能线程池，性能测试详见 [线程池性能测试记录](benchmark/async/PERFORMANCE.md)
+- **`thread_pool`** - 基于 NUMA 感知任务窃取与多策略定制的高性能线程池，性能测试详见 [线程池性能测试记录](benchmark/async/thread_pool/PERFORMANCE.md)
 - **`io_context`** - 异步 I/O 执行上下文，统一事件循环、定时器与取消模型
 - **`cancellation_slot`** - 支持 `async_connect` / `async_read` / `async_write` 可中断异步 I/O
-- **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度，支持任务取消标志
+- **`heap_timer`/`tree_timer`** - 最小堆与红黑树定时器及其调度器
 - **`async_stream`** - 异步流抽象接口，统一读写协议
 - **`async_read()` / `async_write()`** - 自由函数组合器，基于 `shared_from_this` 自动处理部分读写重试
 - **`thread_pool_executor`** - 将 `thread_pool::submit_task()` 适配为标准 executor 接口
 - **`generator`/`task`** - 协程原语和任务生成器
-- **`virtual_thread`** - C#风格的轻量级协程
+- **`virtual_thread`** - C#风格的轻量级协程，性能测试详见 [虚拟线程性能测试记录](benchmark/async/virtual_thread/PERFORMANCE.md)
 - **`connection`/`signal`/`signal_base`** - 观察者模式的信号槽，`signal_base` 提供类型擦除基类支持反射驱动的动态连接
 - **`call_once`** - 基于FUTEX的多线程单次调用实现
 - **停止令牌** - 可取消的异步操作 `stop_token`/`stop_source`/`stop_callback`

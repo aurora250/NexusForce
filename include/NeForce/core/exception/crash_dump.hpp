@@ -3,7 +3,7 @@
 
 /**
  * @file crash_dump.hpp
- * @brief 跨平台崩溃转储
+ * @brief 崩溃转储
  */
 
 #include "NeForce/core/exception/errc.hpp"
@@ -20,11 +20,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct crash_dump
  * @brief 崩溃转储静态类
  *
- * 把未捕获的 C++ 异常、致命信号（Linux）与未处理的结构化异常（Windows）
+ * 把未捕获的 C++ 异常、致命信号（POSIX）与未处理的结构化异常（Windows）
  * 统一捕获为平台原生的转储文件，并允许在任意时刻主动写出当前进程的转储：
  *
  * - Windows 写出 minidump（`.dmp`），可直接由 WinDbg / Visual Studio 打开；
- * - Linux x86-64 与 AArch64 写出 ELF core（`.core`），可直接由 gdb / lldb 打开；
+ * - Linux 与 FreeBSD 的 x86-64 / AArch64 写出 ELF core（`.core`），可直接由 gdb / lldb 打开；
  * - 其他平台仍会安装处理器，但不写出转储，只把摘要交给回调。
  *
  * 转储写入只使用系统调用与静态缓冲区，不分配堆内存，可以在信号处理函数中执行。
@@ -87,7 +87,7 @@ public:
         uint64_t bytes{0};                         ///< 转储文件字节数
         uint32_t segments{0};                      ///< 写入的内存段数量
         int32_t error{0};                          ///< 失败时的系统错误码
-        int32_t signal_number{0};                  ///< 触发信号（Linux），非信号路径为 0
+        int32_t signal_number{0};                  ///< 触发信号（POSIX），非信号路径为 0
         uint32_t exception_code{0};                ///< 结构化异常码（Windows），其余为 0
         const void* address{nullptr};              ///< 故障地址，未知时为空
     };
@@ -114,10 +114,10 @@ public:
         uint64_t max_file_bytes{2ULL * 1024ULL * 1024ULL * 1024ULL}; ///< 转储文件总字节上限，超出部分截断
 
         bool install_terminate_handler{true}; ///< 是否接管 terminate
-        bool install_signal_handlers{true};   ///< 是否接管致命信号（Linux）
+        bool install_signal_handlers{true};   ///< 是否接管致命信号（POSIX）
         bool install_exception_filter{true};  ///< 是否接管未处理的结构化异常（Windows）
 
-        bool kernel_core_fallback{true};        ///< 写转储失败时是否重置信号并交回内核 core（Linux）
+        bool kernel_core_fallback{true};        ///< 写转储失败时是否重置信号并交回内核 core（POSIX）
         crash_dump::callback callback{nullptr}; ///< 转储完成回调
         void* user_data{nullptr};               ///< 传给回调的用户数据
     };
@@ -133,7 +133,7 @@ public:
      * @brief 当前平台是否内置了转储写入器
      * @return 能否写出与原生格式对应的转储文件
      *
-     * Linux 仅在 x86-64 与 AArch64 上内置 ELF core 写入器；其余架构返回 false，
+     * Linux 与 FreeBSD 仅在 x86-64 与 AArch64 上内置 ELF core 写入器；其余架构返回 false，
      * 此时仍可以安装处理器、取得崩溃摘要并退回内核 core 策略。
      *
      * 等价于 NEFORCE_SUPPORT_NATIVE_DUMP。
@@ -148,7 +148,8 @@ public:
      * 安装 terminate 处理器与平台原生的崩溃处理器，崩溃时写出转储并调用回调。
      * 重复调用会以新的配置覆盖旧配置并再次返回 true。
      *
-     * @note Linux 上崩溃后进程以 `128 + 信号` 退出；Windows 上未处理异常会交回系统默认处理，terminate 路径以退出码 3 结束
+     * @note POSIX 上崩溃后进程以 `128 + 信号` 退出；
+     *       Windows 上未处理异常会交回系统默认处理，terminate 路径以退出码 3 结束
      * @warning 应在创建业务线程之前调用；处理器安装期间不要与崩溃并发执行
      */
     NEFORCE_API static bool install_handlers(const crash_dump::options& options) noexcept;
