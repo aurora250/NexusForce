@@ -74,13 +74,8 @@ namespace {
 
 
 file_mapper::file_mapper(const native_handle_type file_handle) noexcept :
-file_handle_(file_handle)
-#ifdef NEFORCE_PLATFORM_WINDOWS
-,
-mapping_handle_(invalid_handle)
-#endif
-{
-}
+file_handle_(file_handle),
+mapping_handle_(invalid_handle) {}
 
 file_mapper::~file_mapper() { unmap(); }
 
@@ -89,10 +84,11 @@ file_handle_(other.file_handle_),
 ptr_(other.ptr_),
 size_(other.size_),
 offset_(other.offset_),
-access_(other.access_)
+access_(other.access_),
 #ifdef NEFORCE_PLATFORM_WINDOWS
-,
 mapping_handle_(other.mapping_handle_)
+#else
+mapping_handle_(invalid_handle)
 #endif
 {
     other.ptr_ = nullptr;
@@ -127,7 +123,7 @@ file_mapper& file_mapper::operator=(file_mapper&& other) noexcept {
     return *this;
 }
 
-bool file_mapper::map(const size_type offset, size_type size, const file_access access, const file_map_hint hint) {
+bool file_mapper::map(const size_type offset, size_type size, const file_access access, const file_mapper::hint hint) {
     lock<mutex> lk(mutex_);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -177,7 +173,7 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
         }
     }
 
-    if (pfn != nullptr && hint == file_map_hint::sequential) {
+    if (pfn != nullptr && hint == file_mapper::hint::sequential) {
         ::WIN32_MEMORY_RANGE_ENTRY range{ptr_, size};
         pfn(::GetCurrentProcess(), 1, &range, 0);
     }
@@ -219,11 +215,11 @@ bool file_mapper::map(const size_type offset, size_type size, const file_access 
 
     int advice = MADV_NORMAL;
     switch (hint) {
-        case file_map_hint::sequential: {
+        case file_mapper::hint::sequential: {
             advice = MADV_SEQUENTIAL;
             break;
         }
-        case file_map_hint::random: {
+        case file_mapper::hint::random: {
             advice = MADV_RANDOM;
             break;
         }
@@ -311,9 +307,9 @@ bool file_mapper::lock_pages(const bool lock_in_memory) const noexcept {
 #endif
 }
 
-file_mapper::map_info file_mapper::info() const noexcept {
+file_mapper::snapshot file_mapper::get_snapshot() const noexcept {
     lock<mutex> lk(mutex_);
-    map_info mi{};
+    snapshot mi{};
     mi.address = ptr_;
     mi.size = size_;
     mi.offset = offset_;

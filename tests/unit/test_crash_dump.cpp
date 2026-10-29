@@ -7,6 +7,7 @@
 #include <gtest/gtest.h>
 #ifdef NEFORCE_PLATFORM_POSIX
 #    include <sys/resource.h>
+#    include <unistd.h>
 #endif
 #if NEFORCE_SUPPORT_NATIVE_DUMP_LINUX
 #    include <elf.h>
@@ -354,6 +355,29 @@ TEST_F(CrashDumpTest, InstallAndUninstallHandlers) {
     EXPECT_FALSE(crash_dump::handlers_installed());
     crash_dump::uninstall_handlers();
     EXPECT_FALSE(crash_dump::handlers_installed());
+}
+
+TEST_F(CrashDumpTest, UninstallRestoresDefaultSignalAction) {
+#ifdef NEFORCE_PLATFORM_POSIX
+    crash_dump::options options;
+    options.directory = directory_;
+    options.file_prefix = "restored";
+    options.include_memory = false;
+    ASSERT_TRUE(crash_dump::install_handlers(options));
+    ASSERT_TRUE(crash_dump::install_handlers(options));
+    crash_dump::uninstall_handlers();
+    ASSERT_FALSE(crash_dump::handlers_installed());
+
+    const string target = directory_.str();
+    EXPECT_EXIT(
+            {
+                static_cast<void>(::chdir(target.data()));
+                ::raise(SIGSEGV);
+            },
+            ::testing::KilledBySignal(SIGSEGV), "");
+#else
+    GTEST_SKIP() << "skip in non-POSIX platform";
+#endif
 }
 
 TEST_F(CrashDumpTest, FatalSignalWritesCore) {

@@ -5852,6 +5852,188 @@ TEST_F(SysinfoTest, GetCpuInfo_Features_NonEmpty) {
 #endif
 }
 
+TEST_F(SysinfoTest, MachineProfile_ObtainableFieldsPopulated) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& system = inst.get_system_info();
+    EXPECT_GT(system.processor_numbers, 0U);
+    EXPECT_GT(system.page_size, 0U);
+    EXPECT_GT(system.allocation_granularity, 0U);
+    EXPECT_GT(system.min_app_address, 0U);
+    EXPECT_GT(system.max_app_address, 0U);
+    EXPECT_NE(system.active_processor_mask, 0U);
+
+    const auto& cpu = inst.get_cpu_info();
+    EXPECT_FALSE(cpu.brand.empty());
+    EXPECT_GT(cpu.cores, 0U);
+    EXPECT_GT(cpu.logical_processors, 0U);
+    EXPECT_LE(cpu.cores, cpu.logical_processors);
+#if defined(NEFORCE_PLATFORM_LINUX) && (defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_ARM64))
+    EXPECT_FALSE(cpu.features.empty());
+    EXPECT_NE(cpu.simd.features, 0U);
+#endif
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_X86)
+    EXPECT_FALSE(cpu.x86.family.empty());
+    EXPECT_FALSE(cpu.x86.model.empty());
+    EXPECT_FALSE(cpu.x86.stepping.empty());
+    EXPECT_FALSE(cpu.x86.revision.empty());
+    EXPECT_GT(cpu.x86.model_id, 0U);
+#elif defined(NEFORCE_PLATFORM_LINUX) && (defined(NEFORCE_ARCH_ARM64) || defined(NEFORCE_ARCH_ARM))
+    EXPECT_FALSE(cpu.arm.architecture.empty());
+    EXPECT_FALSE(cpu.arm.part.empty());
+    EXPECT_FALSE(cpu.arm.revision.empty());
+#elif defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_RISCV)
+    EXPECT_FALSE(cpu.riscv.isa.empty());
+    EXPECT_FALSE(cpu.riscv.uarch.empty());
+#elif defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_LOONGARCH)
+    EXPECT_FALSE(cpu.loongarch.family.empty());
+    EXPECT_FALSE(cpu.loongarch.revision.empty());
+    EXPECT_FALSE(cpu.loongarch.isa.empty());
+#endif
+
+    const auto& os = inst.get_os_version_info();
+    EXPECT_GT(os.major, 0U);
+    EXPECT_FALSE(os.product_name.empty());
+    EXPECT_FALSE(os.version().empty());
+    EXPECT_NE(inst.get_architecture(), sysinfo::architecture::unknown);
+    EXPECT_FALSE(inst.get_hostname().empty());
+
+    const auto memory = sysinfo::memory_status();
+    EXPECT_GT(memory.total_physical, 0U);
+    const auto disk = sysinfo::disk_status("/");
+    EXPECT_GT(disk.total_bytes, 0U);
+    EXPECT_FALSE(disk.filesystem.empty());
+    EXPECT_FALSE(sysinfo::network_interfaces().empty());
+    EXPECT_FALSE(sysinfo::mount_points().empty());
+}
+
+TEST_F(SysinfoTest, CpuInfo_X86Fields_PopulatedOnX86Linux) {
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_X86)
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+    EXPECT_FALSE(cpu.x86.family.empty());
+    EXPECT_FALSE(cpu.x86.model.empty());
+    EXPECT_FALSE(cpu.x86.stepping.empty());
+    EXPECT_FALSE(cpu.x86.revision.empty());
+    EXPECT_GT(cpu.x86.model_id, 0U);
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_ArmFields_PopulatedOnArm64Linux) {
+#if defined(NEFORCE_PLATFORM_LINUX) && (defined(NEFORCE_ARCH_ARM64) || defined(NEFORCE_ARCH_ARM))
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+    EXPECT_FALSE(cpu.arm.architecture.empty());
+    EXPECT_FALSE(cpu.arm.part.empty());
+    EXPECT_FALSE(cpu.arm.variant.empty());
+    EXPECT_FALSE(cpu.arm.revision.empty());
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_RiscvFields_PopulatedOnRiscvLinux) {
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_RISCV)
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+    EXPECT_FALSE(cpu.riscv.isa.empty());
+    EXPECT_FALSE(cpu.riscv.uarch.empty());
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_LoongarchFields_PopulatedOnLoongarchLinux) {
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_LOONGARCH)
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+    EXPECT_FALSE(cpu.loongarch.family.empty());
+    EXPECT_FALSE(cpu.loongarch.revision.empty());
+    EXPECT_FALSE(cpu.loongarch.isa.empty());
+    EXPECT_GT(cpu.loongarch.tlb_entries, 0U);
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_RiscvFields_DefaultOnOtherArchitectures) {
+#if defined(NEFORCE_PLATFORM_LINUX) && !defined(NEFORCE_ARCH_RISCV)
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+    EXPECT_TRUE(cpu.riscv.isa.empty());
+    EXPECT_TRUE(cpu.riscv.mvendorid.empty());
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_LoongarchFields_DefaultOnOtherArchitectures) {
+#if defined(NEFORCE_PLATFORM_LINUX) && !defined(NEFORCE_ARCH_LOONGARCH)
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+    EXPECT_TRUE(cpu.loongarch.family.empty());
+    EXPECT_EQ(cpu.loongarch.tlb_entries, 0U);
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_X86Fields_DefaultOnArm64Linux) {
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_ARM64)
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+    EXPECT_TRUE(cpu.x86.family.empty());
+    EXPECT_TRUE(cpu.x86.model.empty());
+    EXPECT_TRUE(cpu.x86.code_name.empty());
+    EXPECT_EQ(cpu.x86.model_id, 0U);
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_ArmFields_DefaultOnX86Linux) {
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_X86)
+    const auto& cpu = sysinfo::instance().get_cpu_info();
+    EXPECT_TRUE(cpu.arm.architecture.empty());
+    EXPECT_TRUE(cpu.arm.part.empty());
+    EXPECT_TRUE(cpu.arm.core_name.empty());
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_Features_NonEmptyOnArm64) {
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_ARM64)
+    sysinfo& inst = sysinfo::instance();
+    EXPECT_FALSE(inst.get_cpu_info().features.empty());
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_Vendor_NonEmptyOnX86Linux) {
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_X86)
+    sysinfo& inst = sysinfo::instance();
+    EXPECT_FALSE(inst.get_cpu_info().vendor.empty());
+#endif
+}
+
+TEST_F(SysinfoTest, CpuInfo_CoreTypeCounts_ConsistentWithLogicalProcessors) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& cpu = inst.get_cpu_info();
+    if (cpu.pcore_count != 0 || cpu.ecore_count != 0) {
+        EXPECT_LE(static_cast<uint64_t>(cpu.pcore_count) + cpu.ecore_count, cpu.logical_processors);
+    }
+}
+
+TEST_F(SysinfoTest, HardwareInfo_LlcRingMatchesL3) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& cpu = inst.get_cpu_info();
+    const auto& hardware = inst.get_hardware_info();
+    if (cpu.l3_kib != 0) {
+        EXPECT_FALSE(hardware.memory.llc_ring.empty());
+    }
+}
+
+TEST_F(SysinfoTest, HardwareInfo_DmiFields_AreConsistent) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& hardware = inst.get_hardware_info();
+    if (!hardware.bios.brand.empty()) {
+        EXPECT_FALSE(hardware.bios.version.empty());
+        EXPECT_FALSE(hardware.bios.date.empty());
+    }
+    if (!hardware.board.vendor.empty()) {
+        EXPECT_FALSE(hardware.board.model.empty());
+    }
+}
+
+TEST_F(SysinfoTest, HardwareInfo_MemoryModules_AreConsistentWhenReadable) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& memory = inst.get_hardware_info().memory;
+    if (memory.module_count != 0) {
+        EXPECT_FALSE(memory.type.empty());
+        EXPECT_GT(memory.rated_mts, 0U);
+        EXPECT_GT(memory.configured_mts, 0U);
+        EXPECT_FALSE(memory.channel.empty());
+    }
+}
+
 TEST_F(SysinfoTest, GetOsVersionInfo_Build_NonNegative) {
     sysinfo& inst = sysinfo::instance();
     const auto& os = inst.get_os_version_info();

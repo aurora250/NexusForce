@@ -1,5 +1,6 @@
 #include <NeForce/core/system/stacktrace.hpp>
 #include <NeForce/core/container/flat_unordered_map.hpp>
+#include <NeForce/core/string/format.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/async/mutex.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -64,15 +65,10 @@ namespace {
             return {};
         }
 
-        char cmd[1024];
-        // TODO: using neforce::format instead
-        const int written = ::snprintf(cmd, sizeof(cmd), "addr2line -e '%s' -f -C 0x%zx 2>/dev/null", info.dli_fname,
-                                       static_cast<size_t>(reinterpret_cast<uintptr_t>(addr)));
-        if (written < 0 || static_cast<size_t>(written) >= sizeof(cmd)) {
-            return {};
-        }
+        const string command = format("addr2line -e '{}' -f -C 0x{:x} 2>/dev/null", info.dli_fname,
+                                      static_cast<uint64_t>(reinterpret_cast<uintptr_t>(addr)));
 
-        ::FILE* fp = ::popen(cmd, "r");
+        ::FILE* fp = ::popen(command.data(), "r");
         if (fp == nullptr) {
             return {};
         }

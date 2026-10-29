@@ -6,77 +6,53 @@
 #    include <WinBase.h>
 #    include <handleapi.h>
 #else
-#    include <ctime>
+#    include <NeForce/core/async/condition_variable.hpp>
+#    include <NeForce/core/async/mutex.hpp>
+#    include <NeForce/core/time/clocks.hpp>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-system_event::system_event(bool initial_state, const type t) :
-signaled_(initial_state),
-type_(t) {
+struct system_event::impl {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::BOOL manual = (t == type::manual_reset) ? TRUE : FALSE;
-    handle_ = ::CreateEventW(nullptr, manual, initial_state ? TRUE : FALSE, nullptr);
-    if (handle_ == nullptr) {
-        NEFORCE_THROW_EXCEPTION(system_exception("CreateEvent failed"));
+    void* handle_ = nullptr;
+
+    impl(const bool manual, const bool initial_state) {
+        handle_ = ::CreateEventW(nullptr, manual ? TRUE : FALSE, initial_state ? TRUE : FALSE, nullptr);
+        if (handle_ == nullptr) {
+            NEFORCE_THROW_EXCEPTION(system_exception("CreateEvent failed"));
+        }
+    }
+
+    ~impl() {
+        if (handle_ != nullptr) {
+            ::CloseHandle(handle_);
+        }
     }
 #else
-    auto* const m = ::new (std::nothrow)::pthread_mutex_t;
-    auto* const c = ::new (std::nothrow)::pthread_cond_t;
-    mutex_.reset(m);
-    cond_.reset(c);
+    mutex mutex_;
+    condition_variable condition_;
 
-    if (!mutex_ || !cond_) {
-        mutex_.reset();
-        cond_.reset();
-        NEFORCE_THROW_EXCEPTION(system_exception("Failed to allocate pthread objects"));
+    impl(const bool manual, const bool initial_state) {
+        static_cast<void>(manual);
+        static_cast<void>(initial_state);
     }
 
-    ::pthread_mutexattr_t mutex_attr;
-    ::pthread_mutexattr_init(&mutex_attr);
-    ::pthread_mutexattr_settype(&mutex_attr, PTHREAD_MUTEX_ERRORCHECK);
-    int ret = ::pthread_mutex_init(mutex_.get(), &mutex_attr);
-    ::pthread_mutexattr_destroy(&mutex_attr);
-    if (ret != 0) {
-        mutex_.reset();
-        cond_.reset();
-        NEFORCE_THROW_EXCEPTION(system_exception("pthread_mutex_init failed"));
-    }
-
-    ::pthread_condattr_t cond_attr;
-    ::pthread_condattr_init(&cond_attr);
-    ::pthread_condattr_setclock(&cond_attr, CLOCK_REALTIME);
-    ret = ::pthread_cond_init(cond_.get(), &cond_attr);
-    ::pthread_condattr_destroy(&cond_attr);
-    if (ret != 0) {
-        mutex_.reset();
-        cond_.reset();
-        NEFORCE_THROW_EXCEPTION(system_exception("pthread_cond_init failed"));
-    }
+    ~impl() = default;
 #endif
-}
+};
 
-system_event::~system_event() {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (handle_ != nullptr) {
-        ::CloseHandle(handle_);
-    }
-#endif
-}
+
+system_event::system_event(const bool initial_state, const type t) :
+impl_(make_unique<impl>(t == type::manual_reset, initial_state)),
+signaled_(initial_state),
+type_(t) {}
+
+system_event::~system_event() = default;
 
 system_event::system_event(system_event&& other) noexcept :
-#ifdef NEFORCE_PLATFORM_WINDOWS
-handle_(other.handle_),
+impl_(move(other.impl_)),
 signaled_(other.signaled_),
-type_(other.type_) {
-    other.handle_ = nullptr;
-}
-#else
-mutex_(other.mutex_.release()),
-cond_(other.cond_.release()),
-signaled_(other.signaled_),
-type_(other.type_) {
-}
-#endif
+type_(other.type_) {}
 
 system_event& system_event::operator=(system_event&& other) noexcept {
     if (addressof(other) == this) {
@@ -90,72 +66,50 @@ system_event& system_event::operator=(system_event&& other) noexcept {
 void system_event::set() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     signaled_ = true;
-    ::SetEvent(handle_);
+    ::SetEvent(impl_->handle_);
 #else
-    ::pthread_mutex_lock(mutex_.get());
+    lock<mutex> guard(impl_->mutex_);
     signaled_ = true;
     if (type_ == type::auto_reset) {
-        ::pthread_cond_signal(cond_.get());
+        impl_->condition_.notify_one();
     } else {
-        ::pthread_cond_broadcast(cond_.get());
+        impl_->condition_.notify_all();
     }
-    ::pthread_mutex_unlock(mutex_.get());
 #endif
 }
 
 void system_event::reset() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     signaled_ = false;
-    ::ResetEvent(handle_);
+    ::ResetEvent(impl_->handle_);
 #else
-    ::pthread_mutex_lock(mutex_.get());
+    lock<mutex> guard(impl_->mutex_);
     signaled_ = false;
-    ::pthread_mutex_unlock(mutex_.get());
 #endif
 }
 
 bool system_event::wait(const uint32_t timeout_ms) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const bool result = ::WaitForSingleObject(handle_, timeout_ms) == WAIT_OBJECT_0;
+    const bool result = ::WaitForSingleObject(impl_->handle_, timeout_ms) == WAIT_OBJECT_0;
     if (result && type_ == type::auto_reset) {
         signaled_ = false;
     }
     return result;
 #else
-    ::pthread_mutex_lock(mutex_.get());
+    unique_lock<mutex> guard(impl_->mutex_);
 
     if (signaled_) {
         if (type_ == type::auto_reset) {
             signaled_ = false;
         }
-        ::pthread_mutex_unlock(mutex_.get());
         return true;
     }
 
     if (timeout_ms == numeric_traits<uint32_t>::max()) {
-        while (!signaled_) {
-            (void) ::pthread_cond_wait(cond_.get(), mutex_.get());
-        }
+        impl_->condition_.wait(guard, [this] { return signaled_; });
     } else {
-        ::timespec ts;
-        ::clock_gettime(CLOCK_REALTIME, &ts);
-        ts.tv_sec += timeout_ms / 1000;
-        ts.tv_nsec += static_cast<long>(timeout_ms % 1000) * 1000000;
-        if (ts.tv_nsec >= 1000000000) {
-            ts.tv_sec += 1;
-            ts.tv_nsec -= 1000000000;
-        }
-
-        int ret = 0;
-        while (!signaled_ && ret == 0) {
-            ret = ::pthread_cond_timedwait(cond_.get(), mutex_.get(), &ts);
-            if (ret == EINTR) {
-                ret = 0;
-            }
-        }
-
-        if (ret == ETIMEDOUT && !signaled_) {
-            ::pthread_mutex_unlock(mutex_.get());
+        const auto deadline = system_clock::now() + milliseconds(timeout_ms);
+        if (!impl_->condition_.wait_until(guard, deadline, [this] { return signaled_; })) {
             return false;
         }
     }
@@ -163,11 +117,14 @@ bool system_event::wait(const uint32_t timeout_ms) noexcept {
     if (type_ == type::auto_reset) {
         signaled_ = false;
     }
-    ::pthread_mutex_unlock(mutex_.get());
     return true;
 #endif
 }
 
 bool system_event::try_wait() noexcept { return wait(0); }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+void* system_event::native_handle() const noexcept { return impl_->handle_; }
+#endif
 
 NEFORCE_END_NAMESPACE__

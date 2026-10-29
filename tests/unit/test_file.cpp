@@ -4146,7 +4146,7 @@ TEST_F(FileMapperTest, MapReadOnly) {
     EXPECT_NE(mapper.data(), nullptr);
     EXPECT_GT(mapper.size(), 0);
 
-    auto info = mapper.info();
+    auto info = mapper.get_snapshot();
     EXPECT_TRUE(info.is_mapped);
     EXPECT_EQ(info.access, file_access::read);
     EXPECT_NE(info.address, nullptr);
@@ -4227,7 +4227,7 @@ TEST_F(FileMapperTest, MapSequentialHint) {
     file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_map_hint::sequential));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_mapper::hint::sequential));
     EXPECT_TRUE(mapper.is_mapped());
 }
 
@@ -4238,7 +4238,7 @@ TEST_F(FileMapperTest, MapRandomHint) {
     file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_map_hint::random));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_mapper::hint::random));
     EXPECT_TRUE(mapper.is_mapped());
 }
 
@@ -4249,7 +4249,7 @@ TEST_F(FileMapperTest, MapNormalHint) {
     file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_map_hint::normal));
+    EXPECT_TRUE(mapper.map(0, 0, file_access::read, file_mapper::hint::normal));
     EXPECT_TRUE(mapper.is_mapped());
 }
 
@@ -4476,14 +4476,14 @@ TEST_F(FileMapperTest, Info) {
     file f(p, false, file_access::read, file_shared::share_read);
     file_mapper mapper(f.native_handle());
 
-    auto info1 = mapper.info();
+    auto info1 = mapper.get_snapshot();
     EXPECT_FALSE(info1.is_mapped);
     EXPECT_EQ(info1.address, nullptr);
     EXPECT_EQ(info1.size, 0);
     EXPECT_EQ(info1.offset, 0);
 
     EXPECT_TRUE(mapper.map(8, 32, file_access::read));
-    auto info2 = mapper.info();
+    auto info2 = mapper.get_snapshot();
     EXPECT_TRUE(info2.is_mapped);
     EXPECT_NE(info2.address, nullptr);
     EXPECT_EQ(info2.size, 32);
@@ -5799,7 +5799,7 @@ TEST_F(FileWatcherTest, StartStop) {
     file_watcher watcher(test_dir_, false);
 
     int call_count = 0;
-    auto cb = [&](const path&, file_watch_event) { ++call_count; };
+    auto cb = [&](const path&, file_watcher::event) { ++call_count; };
 
     EXPECT_TRUE(watcher.start(cb));
     EXPECT_TRUE(watcher.is_watching());
@@ -5810,7 +5810,7 @@ TEST_F(FileWatcherTest, StartStop) {
 TEST_F(FileWatcherTest, StartAlreadyWatching) {
     file_watcher watcher(test_dir_, false);
 
-    auto cb = [](const path&, file_watch_event) {};
+    auto cb = [](const path&, file_watcher::event) {};
 
     EXPECT_TRUE(watcher.start(cb));
     EXPECT_FALSE(watcher.start(cb));
@@ -5821,12 +5821,12 @@ TEST_F(FileWatcherTest, FileCreatedEvent) {
     file_watcher watcher(test_dir_, false);
 
     path created_path;
-    file_watch_event captured_event = file_watch_event::accessed;
+    file_watcher::event captured_event = file_watcher::event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
 
-    auto cb = [&](const path& p, file_watch_event e) {
+    auto cb = [&](const path& p, file_watcher::event e) {
         lock<mutex> lk(mtx);
         created_path = p;
         captured_event = e;
@@ -5834,7 +5834,7 @@ TEST_F(FileWatcherTest, FileCreatedEvent) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::created));
 
     auto new_file = get_path("created.txt");
     wait_ms(100);
@@ -5849,7 +5849,7 @@ TEST_F(FileWatcherTest, FileCreatedEvent) {
     watcher.stop();
 
     if (event_received) {
-        EXPECT_EQ(captured_event, file_watch_event::created);
+        EXPECT_EQ(captured_event, file_watcher::event::created);
         EXPECT_EQ(created_path.filename(), "created.txt");
     }
 }
@@ -5861,12 +5861,12 @@ TEST_F(FileWatcherTest, FileDeletedEvent) {
     file_watcher watcher(test_dir_, false);
 
     path deleted_path;
-    file_watch_event captured_event = file_watch_event::accessed;
+    file_watcher::event captured_event = file_watcher::event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
 
-    auto cb = [&](const path& p, file_watch_event e) {
+    auto cb = [&](const path& p, file_watcher::event e) {
         lock<mutex> lk(mtx);
         deleted_path = p;
         captured_event = e;
@@ -5874,7 +5874,7 @@ TEST_F(FileWatcherTest, FileDeletedEvent) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::deleted));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::deleted));
 
     wait_ms(100);
     filesystem::remove(delete_file);
@@ -5887,7 +5887,7 @@ TEST_F(FileWatcherTest, FileDeletedEvent) {
     watcher.stop();
 
     if (event_received) {
-        EXPECT_EQ(captured_event, file_watch_event::deleted);
+        EXPECT_EQ(captured_event, file_watcher::event::deleted);
         EXPECT_EQ(deleted_path.filename(), "to_delete.txt");
     }
 }
@@ -5899,12 +5899,12 @@ TEST_F(FileWatcherTest, FileModifiedEvent) {
     file_watcher watcher(test_dir_, false);
 
     path modified_path;
-    file_watch_event captured_event = file_watch_event::accessed;
+    file_watcher::event captured_event = file_watcher::event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
 
-    auto cb = [&](const path& p, file_watch_event e) {
+    auto cb = [&](const path& p, file_watcher::event e) {
         lock<mutex> lk(mtx);
         modified_path = p;
         captured_event = e;
@@ -5912,7 +5912,7 @@ TEST_F(FileWatcherTest, FileModifiedEvent) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::modified));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::modified));
 
     wait_ms(100);
 
@@ -5929,7 +5929,7 @@ TEST_F(FileWatcherTest, FileModifiedEvent) {
     watcher.stop();
 
     if (event_received) {
-        EXPECT_EQ(captured_event, file_watch_event::modified);
+        EXPECT_EQ(captured_event, file_watcher::event::modified);
     }
 }
 
@@ -5943,12 +5943,12 @@ TEST_F(FileWatcherTest, FileAccessedEvent) {
     file_watcher watcher(test_dir_, false);
 
     path accessed_path;
-    file_watch_event captured_event = file_watch_event::accessed;
+    file_watcher::event captured_event = file_watcher::event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
 
-    auto cb = [&](const path& p, file_watch_event e) {
+    auto cb = [&](const path& p, file_watcher::event e) {
         lock<mutex> lk(mtx);
         accessed_path = p;
         captured_event = e;
@@ -5956,7 +5956,7 @@ TEST_F(FileWatcherTest, FileAccessedEvent) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::accessed));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::accessed));
 
     wait_ms(100);
 
@@ -5981,13 +5981,13 @@ TEST_F(FileWatcherTest, AllEvents) {
     mutex mtx;
     condition_variable cv;
 
-    auto cb = [&](const path&, file_watch_event) {
+    auto cb = [&](const path&, file_watcher::event) {
         lock<mutex> lk(mtx);
         ++call_count;
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::all));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::all));
 
     wait_ms(100);
 
@@ -6013,11 +6013,11 @@ TEST_F(FileWatcherTest, WatchPath) {
 TEST_F(FileWatcherTest, CurrentEvents) {
     file_watcher watcher(test_dir_, false);
 
-    EXPECT_EQ(watcher.current_events(), file_watch_event::all);
+    EXPECT_EQ(watcher.current_events(), file_watcher::event::all);
 
-    auto cb = [](const path&, file_watch_event) {};
-    watcher.start(cb, file_watch_event::created);
-    EXPECT_EQ(watcher.current_events(), file_watch_event::created);
+    auto cb = [](const path&, file_watcher::event) {};
+    watcher.start(cb, file_watcher::event::created);
+    EXPECT_EQ(watcher.current_events(), file_watcher::event::created);
     watcher.stop();
 }
 
@@ -6026,7 +6026,7 @@ TEST_F(FileWatcherTest, IsWatching) {
 
     EXPECT_FALSE(watcher.is_watching());
 
-    auto cb = [](const path&, file_watch_event) {};
+    auto cb = [](const path&, file_watcher::event) {};
     watcher.start(cb);
     EXPECT_TRUE(watcher.is_watching());
     watcher.stop();
@@ -6044,21 +6044,21 @@ TEST_F(FileWatcherTest, IsRecursive) {
 TEST_F(FileWatcherTest, UpdateWatchWhileStopped) {
     file_watcher watcher(test_dir_, false);
 
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::created));
-    EXPECT_EQ(watcher.current_events(), file_watch_event::created);
+    EXPECT_TRUE(watcher.update_watch(file_watcher::event::created));
+    EXPECT_EQ(watcher.current_events(), file_watcher::event::created);
 
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::modified));
-    EXPECT_EQ(watcher.current_events(), file_watch_event::modified);
+    EXPECT_TRUE(watcher.update_watch(file_watcher::event::modified));
+    EXPECT_EQ(watcher.current_events(), file_watcher::event::modified);
 }
 
 TEST_F(FileWatcherTest, UpdateWatchWhileWatching) {
     file_watcher watcher(test_dir_, false);
 
-    auto cb = [](const path&, file_watch_event) {};
-    watcher.start(cb, file_watch_event::created);
+    auto cb = [](const path&, file_watcher::event) {};
+    watcher.start(cb, file_watcher::event::created);
 
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::deleted));
-    EXPECT_EQ(watcher.current_events(), file_watch_event::deleted);
+    EXPECT_TRUE(watcher.update_watch(file_watcher::event::deleted));
+    EXPECT_EQ(watcher.current_events(), file_watcher::event::deleted);
     EXPECT_TRUE(watcher.is_watching());
 
     watcher.stop();
@@ -6067,9 +6067,9 @@ TEST_F(FileWatcherTest, UpdateWatchWhileWatching) {
 TEST_F(FileWatcherTest, UpdateWatchSameValue) {
     file_watcher watcher(test_dir_, false);
 
-    auto cb = [](const path&, file_watch_event) {};
-    watcher.start(cb, file_watch_event::created);
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::created));
+    auto cb = [](const path&, file_watcher::event) {};
+    watcher.start(cb, file_watcher::event::created);
+    EXPECT_TRUE(watcher.update_watch(file_watcher::event::created));
     EXPECT_TRUE(watcher.is_watching());
     watcher.stop();
 }
@@ -6087,7 +6087,7 @@ TEST_F(FileWatcherTest, UpdateRecursiveWhileStopped) {
 TEST_F(FileWatcherTest, UpdateRecursiveWhileWatching) {
     file_watcher watcher(test_dir_, false);
 
-    auto cb = [](const path&, file_watch_event) {};
+    auto cb = [](const path&, file_watcher::event) {};
     watcher.start(cb);
 
     EXPECT_TRUE(watcher.update_recursive(true));
@@ -6100,7 +6100,7 @@ TEST_F(FileWatcherTest, UpdateRecursiveWhileWatching) {
 TEST_F(FileWatcherTest, UpdateRecursiveSameValue) {
     file_watcher watcher(test_dir_, false);
 
-    auto cb = [](const path&, file_watch_event) {};
+    auto cb = [](const path&, file_watcher::event) {};
     watcher.start(cb);
     EXPECT_TRUE(watcher.update_recursive(false));
     EXPECT_TRUE(watcher.is_watching());
@@ -6117,12 +6117,12 @@ TEST_F(FileWatcherTest, UpdateRecursiveWithoutCallback) {
 TEST_F(FileWatcherTest, UpdateWatchWithoutCallback) {
     file_watcher watcher(test_dir_, false);
 
-    EXPECT_TRUE(watcher.update_watch(file_watch_event::created));
-    EXPECT_EQ(watcher.current_events(), file_watch_event::created);
+    EXPECT_TRUE(watcher.update_watch(file_watcher::event::created));
+    EXPECT_EQ(watcher.current_events(), file_watcher::event::created);
 }
 
 TEST_F(FileWatcherTest, DestructorStopsWatching) {
-    auto cb = [](const path&, file_watch_event) {};
+    auto cb = [](const path&, file_watcher::event) {};
 
     {
         file_watcher watcher(test_dir_, false);
@@ -6140,7 +6140,7 @@ TEST_F(FileWatcherTest, MultipleEventsReceived) {
     mutex mtx;
     condition_variable cv;
 
-    auto cb = [&](const path&, file_watch_event) {
+    auto cb = [&](const path&, file_watcher::event) {
         lock<mutex> lk(mtx);
         ++call_count;
         if (call_count >= 2) {
@@ -6148,7 +6148,7 @@ TEST_F(FileWatcherTest, MultipleEventsReceived) {
         }
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::created));
 
     wait_ms(100);
 
@@ -6174,13 +6174,13 @@ TEST_F(FileWatcherTest, SubdirectoryFileCreatedNonRecursive) {
     mutex mtx;
     condition_variable cv;
 
-    auto cb = [&](const path&, file_watch_event) {
+    auto cb = [&](const path&, file_watcher::event) {
         lock<mutex> lk(mtx);
         ++call_count;
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::created));
 
     wait_ms(100);
 
@@ -6203,12 +6203,12 @@ TEST_F(FileWatcherTest, SubdirectoryFileCreatedRecursive) {
     file_watcher watcher(test_dir_, true);
 
     path created_path;
-    file_watch_event captured_event = file_watch_event::accessed;
+    file_watcher::event captured_event = file_watcher::event::accessed;
     mutex mtx;
     condition_variable cv;
     bool event_received = false;
 
-    auto cb = [&](const path& p, file_watch_event e) {
+    auto cb = [&](const path& p, file_watcher::event e) {
         lock<mutex> lk(mtx);
         created_path = p;
         captured_event = e;
@@ -6216,7 +6216,7 @@ TEST_F(FileWatcherTest, SubdirectoryFileCreatedRecursive) {
         cv.notify_one();
     };
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::created));
 
     wait_ms(100);
     filesystem::create_and_write(subdir / path("nested_rec.txt"), "recursive");
@@ -6232,13 +6232,13 @@ TEST_F(FileWatcherTest, SubdirectoryFileCreatedRecursive) {
 TEST_F(FileWatcherTest, StopThenRestart) {
     file_watcher watcher(test_dir_, false);
 
-    auto cb = [](const path&, file_watch_event) {};
+    auto cb = [](const path&, file_watcher::event) {};
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::created));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::created));
     watcher.stop();
     EXPECT_FALSE(watcher.is_watching());
 
-    EXPECT_TRUE(watcher.start(cb, file_watch_event::modified));
+    EXPECT_TRUE(watcher.start(cb, file_watcher::event::modified));
     EXPECT_TRUE(watcher.is_watching());
     watcher.stop();
 }

@@ -11,6 +11,7 @@
 #    include <sys/eventfd.h>
 #endif
 #ifdef NEFORCE_PLATFORM_FREEBSD
+#    include <NeForce/core/system/pipe.hpp>
 #    include <fcntl.h>
 #    include <poll.h>
 #endif
@@ -50,8 +51,87 @@ namespace {
 } // namespace
 
 
+struct io_context::monitor {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-void io_context::monitor_loop() {
+    using file_completion_cb = function<void(error_code, size_t, void* overlapped)>;
+
+    void* iocp_handle_ = nullptr;
+    void* wake_event_ = nullptr;
+    thread monitor_thread_;
+    atomic<bool> monitor_running_{false};
+
+    flat_unordered_map<native_handle_type, void*> fd_events_;
+    vector<void*> pending_close_;
+
+    flat_unordered_map<uintptr_t, file_completion_cb> file_completions_;
+
+    monitor() {
+        iocp_handle_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 0);
+        wake_event_ = ::CreateEventW(nullptr, TRUE, FALSE, nullptr);
+    }
+
+    ~monitor() {
+        bool expected = true;
+        if (monitor_running_.compare_exchange_strong(expected, false, memory_order_acq_rel)) {
+            ::SetEvent(wake_event_);
+            if (monitor_thread_.joinable()) {
+                try {
+                    monitor_thread_.join();
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
+                }
+            }
+        }
+
+        if (iocp_handle_ != nullptr) {
+            ::CloseHandle(iocp_handle_);
+        }
+        if (wake_event_ != nullptr) {
+            ::CloseHandle(wake_event_);
+        }
+        for (const auto& pair: fd_events_) {
+            if (pair.second != nullptr) {
+                ::CloseHandle(pair.second);
+            }
+        }
+        for (void* handle: pending_close_) {
+            ::CloseHandle(handle);
+        }
+        pending_close_.clear();
+    }
+
+    void monitor_loop();
+
+    void register_file_completion(uintptr_t key, file_completion_cb cb) { file_completions_[key] = move(cb); }
+
+    void unregister_file_completion(uintptr_t key) { file_completions_.erase(key); }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    pipe wake_pipe_;
+
+    monitor() { wake_pipe_ = pipe(false, true); }
+#else
+    int epoll_fd_ = -1;
+    int wake_fd_ = -1;
+
+    monitor() {
+        epoll_fd_ = ::epoll_create1(EPOLL_CLOEXEC);
+        wake_fd_ = ::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC | EFD_SEMAPHORE);
+    }
+
+    ~monitor() {
+        if (epoll_fd_ >= 0) {
+            ::close(epoll_fd_);
+        }
+        if (wake_fd_ >= 0) {
+            ::close(wake_fd_);
+        }
+    }
+#endif
+};
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+void io_context::monitor::monitor_loop() {
     while (monitor_running_) {
         unique_lock<mutex> lk(fd_mutex_);
 
@@ -216,39 +296,23 @@ bool io_context::has_pending_work() const noexcept {
     return registered_fds_.load(memory_order_acquire) != 0;
 }
 
-io_context::io_context() {
+io_context::io_context() :
+monitor_(make_unique<monitor>()) {
 #ifdef NEFORCE_PLATFORM_LINUX
-    epoll_fd_ = epoll_create1(EPOLL_CLOEXEC);
-    wake_fd_ = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC | EFD_SEMAPHORE);
-
     ::epoll_event ev{};
     ev.events = static_cast<uint32_t>(epoll_event::in);
-    ev.data.fd = wake_fd_;
-    ::epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, wake_fd_, &ev);
+    ev.data.fd = monitor_->wake_fd_;
+    ::epoll_ctl(monitor_->epoll_fd_, EPOLL_CTL_ADD, monitor_->wake_fd_, &ev);
 
     fd_info wake_info{};
-    wake_info.fd = wake_fd_;
+    wake_info.fd = monitor_->wake_fd_;
     wake_info.events = epoll_event::in;
-    fd_map_[wake_fd_] = move(wake_info);
+    fd_map_[monitor_->wake_fd_] = move(wake_info);
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
-    int fds[2] = {-1, -1};
-    if (::pipe(fds) == 0) {
-        for (const int fd: fds) {
-            const int flags = ::fcntl(fd, F_GETFL);
-            ::fcntl(fd, F_SETFL, flags | O_NONBLOCK);
-            ::fcntl(fd, F_SETFD, FD_CLOEXEC);
-        }
-        wake_fd_ = fds[0];
-        wake_write_fd_ = fds[1];
-
-        fd_info wake_info{};
-        wake_info.fd = wake_fd_;
-        wake_info.events = epoll_event::in;
-        fd_map_[wake_fd_] = move(wake_info);
-    }
-#else
-    iocp_handle_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 0);
-    wake_event_ = ::CreateEventW(nullptr, TRUE, FALSE, nullptr);
+    fd_info wake_info{};
+    wake_info.fd = monitor_->wake_pipe_.native_read_handle();
+    wake_info.events = epoll_event::in;
+    fd_map_[wake_info.fd] = move(wake_info);
 #endif
 }
 
@@ -259,57 +323,7 @@ io_context::~io_context() {
     } catch (const exception& e) {
         NEFORCE_REPORT_EXCEPTION(e);
     }
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    // Stop and join the monitor thread (may have been started lazily by run_one).
-    // Must happen before closing fd events and before ~thread() (which terminate()s if joinable).
-    bool expected_monitor = true;
-    if (monitor_running_.compare_exchange_strong(expected_monitor, false, memory_order_acq_rel)) {
-        ::SetEvent(wake_event_);
-        try {
-            if (monitor_thread_.joinable()) {
-                monitor_thread_.join();
-            }
-            // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (const exception& e) {
-            NEFORCE_REPORT_EXCEPTION(e);
-        }
-    }
-#endif
-
-#ifdef NEFORCE_PLATFORM_LINUX
-    if (epoll_fd_ >= 0) {
-        ::close(epoll_fd_);
-    }
-    if (wake_fd_ >= 0) {
-        ::close(wake_fd_);
-    }
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
-    if (wake_fd_ >= 0) {
-        ::close(wake_fd_);
-    }
-    if (wake_write_fd_ >= 0) {
-        ::close(wake_write_fd_);
-    }
-#else
-    if (iocp_handle_ != nullptr) {
-        ::CloseHandle(iocp_handle_);
-    }
-    if (wake_event_ != nullptr) {
-        ::CloseHandle(wake_event_);
-    }
-    for (const auto& pair: fd_events_) {
-        if (pair.second != nullptr) {
-            ::CloseHandle(pair.second);
-        }
-    }
-    // Close any WSAEVENT handles retired by remove_fd() that
-    // the monitor thread had no chance to close before being joined.
-    for (void* h: pending_close_) {
-        ::CloseHandle(h);
-    }
-    pending_close_.clear();
-#endif
+    // monitor_ stops the Windows monitor thread and closes the platform handles.
 }
 
 void io_context::add_fd(native_handle_type fd, epoll_event events, fd_callback cb, bool edge_triggered) {
@@ -327,7 +341,7 @@ void io_context::add_fd(native_handle_type fd, epoll_event events, fd_callback c
     // (connect: epoll_event::out, then read: epoll_event::in), so this is a routine transition, not an
     // error case.
     const int ctl_op = (fd_map_.contains(fd)) ? EPOLL_CTL_MOD : EPOLL_CTL_ADD;
-    if (::epoll_ctl(epoll_fd_, ctl_op, fd, &ev) != 0) {
+    if (::epoll_ctl(monitor_->epoll_fd_, ctl_op, fd, &ev) != 0) {
         // Silently dropping the registration would make the callback unreachable, which
         // shows up much later as an operation that never completes.
         terminate();
@@ -353,7 +367,7 @@ void io_context::add_fd(native_handle_type fd, epoll_event events, fd_callback c
     fd_map_[fd] = move(info);
     wake();
 #else
-    ::CreateIoCompletionPort(reinterpret_cast<::HANDLE>(fd), iocp_handle_, fd, 0);
+    ::CreateIoCompletionPort(reinterpret_cast<::HANDLE>(fd), monitor_->iocp_handle_, fd, 0);
 
     const ::WSAEVENT wevent = ::WSACreateEvent();
     ::WSAEventSelect(fd, wevent, to_wsa_events(events));
@@ -363,14 +377,14 @@ void io_context::add_fd(native_handle_type fd, epoll_event events, fd_callback c
         // Re-registering the same fd replaces the association;
         // retire the previous event handle so the monitor thread closes it after rebuilding its wait set
         // (it may still be waiting on the old handle right now).
-        const auto prev = fd_events_.find(fd);
-        if (prev != fd_events_.end()) {
+        const auto prev = monitor_->fd_events_.find(fd);
+        if (prev != monitor_->fd_events_.end()) {
             if (prev->second != nullptr && prev->second != wevent) {
-                pending_close_.push_back(prev->second);
+                monitor_->pending_close_.push_back(prev->second);
             }
             prev->second = wevent;
         } else {
-            fd_events_[fd] = wevent;
+            monitor_->fd_events_[fd] = wevent;
         }
 
         fd_info info{};
@@ -383,7 +397,7 @@ void io_context::add_fd(native_handle_type fd, epoll_event events, fd_callback c
         fd_map_[fd] = move(info);
     }
 
-    ::SetEvent(wake_event_);
+    ::SetEvent(monitor_->wake_event_);
 #endif
 }
 
@@ -400,12 +414,12 @@ void io_context::mod_fd(native_handle_type fd, epoll_event events, bool edge_tri
     ::epoll_event ev{};
     ev.events = static_cast<uint32_t>(events | (edge_triggered ? epoll_event::et : epoll_event::none));
     ev.data.fd = fd;
-    ::epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, fd, &ev);
+    ::epoll_ctl(monitor_->epoll_fd_, EPOLL_CTL_MOD, fd, &ev);
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
     wake();
 #else
-    const auto eit = fd_events_.find(fd);
-    if (eit != fd_events_.end() && eit->second != nullptr) {
+    const auto eit = monitor_->fd_events_.find(fd);
+    if (eit != monitor_->fd_events_.end() && eit->second != nullptr) {
         ::WSAEventSelect(fd, eit->second, to_wsa_events(events));
     }
 #endif
@@ -417,16 +431,16 @@ void io_context::remove_fd(native_handle_type fd) {
     if (fd_map_.contains(fd)) {
         fd_map_.erase(fd);
         // The internal wake fd lives in fd_map_ but was never counted.
-        if (fd != wake_fd_) {
+        if (fd != monitor_->wake_fd_) {
             registered_fds_.fetch_sub(1, memory_order_relaxed);
         }
     }
-    ::epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, fd, nullptr);
+    ::epoll_ctl(monitor_->epoll_fd_, EPOLL_CTL_DEL, fd, nullptr);
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
     lock<mutex> lk(fd_mutex_);
     if (fd_map_.contains(fd)) {
         fd_map_.erase(fd);
-        if (fd != wake_fd_) {
+        if (fd != monitor_->wake_pipe_.native_read_handle()) {
             registered_fds_.fetch_sub(1, memory_order_relaxed);
         }
     }
@@ -438,29 +452,29 @@ void io_context::remove_fd(native_handle_type fd) {
         registered_fds_.fetch_sub(1, memory_order_relaxed);
     }
 
-    const auto eit = fd_events_.find(fd);
-    if (eit != fd_events_.end()) {
+    const auto eit = monitor_->fd_events_.find(fd);
+    if (eit != monitor_->fd_events_.end()) {
         ::WSAEventSelect(fd, nullptr, 0);
         if (eit->second != nullptr) {
             // Do not CloseHandle here, the monitor thread may be waiting on this event.
             // Hand it over; the monitor closes it after rebuilding its wait set.
-            pending_close_.push_back(eit->second);
+            monitor_->pending_close_.push_back(eit->second);
         }
-        fd_events_.erase(eit);
+        monitor_->fd_events_.erase(eit);
     }
-    ::SetEvent(wake_event_);
+    ::SetEvent(monitor_->wake_event_);
 #endif
 }
 
 void io_context::wake() noexcept {
 #ifdef NEFORCE_PLATFORM_LINUX
     constexpr uint64_t val = 1;
-    ::write(wake_fd_, &val, sizeof(val));
+    ::write(monitor_->wake_fd_, &val, sizeof(val));
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
     constexpr uint8_t val = 1;
-    ::write(wake_write_fd_, &val, sizeof(val));
+    monitor_->wake_pipe_.write(&val, sizeof(val));
 #else
-    ::PostQueuedCompletionStatus(iocp_handle_, 0, 0, nullptr);
+    ::PostQueuedCompletionStatus(monitor_->iocp_handle_, 0, 0, nullptr);
 #endif
 }
 
@@ -493,11 +507,11 @@ size_t io_context::run() {
 
 #else
     bool expected_monitor = false;
-    if (monitor_running_.compare_exchange_strong(expected_monitor, true, memory_order_acq_rel)) {
+    if (monitor_->monitor_running_.compare_exchange_strong(expected_monitor, true, memory_order_acq_rel)) {
         try {
-            monitor_thread_.start(&io_context::monitor_loop, this);
+            monitor_->monitor_thread_.start(&monitor::monitor_loop, monitor_.get());
         } catch (...) {
-            monitor_running_.store(false, memory_order_release);
+            monitor_->monitor_running_.store(false, memory_order_release);
         }
     }
 
@@ -523,11 +537,11 @@ size_t io_context::run() {
     }
 
     expected_monitor = true;
-    if (monitor_running_.compare_exchange_strong(expected_monitor, false, memory_order_acq_rel)) {
-        ::SetEvent(wake_event_);
+    if (monitor_->monitor_running_.compare_exchange_strong(expected_monitor, false, memory_order_acq_rel)) {
+        ::SetEvent(monitor_->wake_event_);
         try {
-            if (monitor_thread_.joinable()) {
-                monitor_thread_.join();
+            if (monitor_->monitor_thread_.joinable()) {
+                monitor_->monitor_thread_.join();
             }
             // NOLINTNEXTLINE(bugprone-empty-catch)
         } catch (const exception& e) {
@@ -547,11 +561,11 @@ size_t io_context::run_one(int timeout_ms) {
     // run() starts the monitor internally, but direct run_one() callers (e.g. dns_client)
     // also need it — start it lazily on first use.
     bool expected_monitor = false;
-    if (monitor_running_.compare_exchange_strong(expected_monitor, true, memory_order_acq_rel)) {
+    if (monitor_->monitor_running_.compare_exchange_strong(expected_monitor, true, memory_order_acq_rel)) {
         try {
-            monitor_thread_.start(&io_context::monitor_loop, this);
+            monitor_->monitor_thread_.start(&monitor::monitor_loop, monitor_.get());
         } catch (...) {
-            monitor_running_.store(false, memory_order_release);
+            monitor_->monitor_running_.store(false, memory_order_release);
         }
     }
 #endif
@@ -594,7 +608,7 @@ size_t io_context::run_one(int timeout_ms) {
         constexpr int max_events = 128;
         ::epoll_event events[max_events];
 
-        const int n = ::epoll_wait(epoll_fd_, events, max_events, wait_ms);
+        const int n = ::epoll_wait(monitor_->epoll_fd_, events, max_events, wait_ms);
         if (n < 0) {
             if (errno == EINTR) {
                 continue;
@@ -604,9 +618,9 @@ size_t io_context::run_one(int timeout_ms) {
 
         for (int i = 0; i < n; ++i) {
             const int fd = events[i].data.fd;
-            if (fd == wake_fd_) {
+            if (fd == monitor_->wake_fd_) {
                 uint64_t dummy = 0;
-                ::read(wake_fd_, &dummy, sizeof(dummy));
+                ::read(monitor_->wake_fd_, &dummy, sizeof(dummy));
                 continue;
             }
             // Dispatch on a copy: the callback may call remove_fd() or re-register the same fd from inside the callback,
@@ -659,9 +673,9 @@ size_t io_context::run_one(int timeout_ms) {
                 continue;
             }
             const int fd = fds[i];
-            if (fd == wake_fd_) {
+            if (fd == monitor_->wake_pipe_.native_read_handle()) {
                 char buf[64];
-                while (::read(wake_fd_, buf, sizeof(buf)) > 0) {
+                while (monitor_->wake_pipe_.read(buf, sizeof(buf)) > 0) {
                 }
                 continue;
             }
@@ -696,11 +710,11 @@ size_t io_context::run_one(int timeout_ms) {
         ::ULONG_PTR key = 0;
         ::LPOVERLAPPED overlapped = nullptr;
         const ::DWORD t = (wait_ms < 0) ? numeric_traits<::DWORD>::max() : static_cast<::DWORD>(wait_ms);
-        const ::BOOL ok = ::GetQueuedCompletionStatus(iocp_handle_, &bytes, &key, &overlapped, t);
+        const ::BOOL ok = ::GetQueuedCompletionStatus(monitor_->iocp_handle_, &bytes, &key, &overlapped, t);
 
         if (overlapped != nullptr) {
-            const auto fit = file_completions_.find(key);
-            if (fit != file_completions_.end()) {
+            const auto fit = monitor_->file_completions_.find(key);
+            if (fit != monitor_->file_completions_.end()) {
                 error_code ec;
                 if (ok == FALSE && ::GetLastError() != ERROR_OPERATION_ABORTED) {
                     ec = error_code(static_cast<int>(::GetLastError()), error_category::system());
@@ -791,14 +805,5 @@ void io_context::stop() {
 
 io_context::executor io_context::get_executor() noexcept { return executor(*this); }
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-
-void io_context::register_file_completion(const uintptr_t key, file_completion_cb cb) {
-    file_completions_[key] = move(cb);
-}
-
-void io_context::unregister_file_completion(const uintptr_t key) { file_completions_.erase(key); }
-
-#endif
 
 NEFORCE_END_NAMESPACE__

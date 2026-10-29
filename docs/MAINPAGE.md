@@ -136,7 +136,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`thread_pool`** - 基于 NUMA 感知任务窃取与多策略定制的高性能线程池
 - **`io_context`** - 异步 I/O 执行上下文，统一事件循环、定时器与取消模型
 - **`cancellation_slot`** - 支持 `async_connect` / `async_read` / `async_write` 可中断异步 I/O
-- **`heap_timer`/`tree_timer`** - 最小堆与红黑树定时器及其调度器
+- **`heap_timer`** - 最小堆定时器
 - **`async_stream`** - 异步流抽象接口，统一读写协议
 - **`async_read()` / `async_write()`** - 自由函数组合器，基于 `shared_from_this` 自动处理部分读写重试
 - **`thread_pool_executor`** - 将 `thread_pool::submit_task()` 适配为标准 executor 接口

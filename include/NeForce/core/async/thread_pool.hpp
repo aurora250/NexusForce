@@ -10,8 +10,11 @@
  */
 
 #include "NeForce/core/async/lazy_thread.hpp"
+#include "NeForce/core/async/packaged_task.hpp"
+#include "NeForce/core/async/generator.hpp"
 #include "NeForce/core/async/lock_free_queue.hpp"
-#include "NeForce/core/async/tree_timer.hpp"
+#include "NeForce/core/async/condition_variable.hpp"
+#include "NeForce/core/async/heap_timer.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
 #include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
@@ -332,6 +335,38 @@ struct task_info {
     }
 };
 
+
+/**
+ * @struct as_task_t
+ * @brief 以 task 返回结果的提交令牌
+ */
+struct as_task_t {};
+
+/// @brief as_task 常量
+NEFORCE_INLINE17 constexpr as_task_t as_task{};
+
+#ifdef NEFORCE_STANDARD_20
+/**
+ * @brief 把 future 包装为 task
+ * @tparam T 结果类型
+ * @param fut 任务的 future
+ * @return 可被 co_await 的 task
+ */
+template <typename T>
+task<T> make_task_from_future(_NEFORCE future<T> fut) {
+    co_return co_await _NEFORCE move(fut);
+}
+
+/**
+ * @brief 把 void future 包装为 task
+ * @param fut 任务的 future
+ * @return 可被 co_await 的 task
+ */
+inline task<void> make_task_from_future(_NEFORCE future<void> fut) { co_await _NEFORCE move(fut); }
+
+#endif
+
+
 /**
  * @struct submit_result
  * @brief 任务提交结果
@@ -349,6 +384,14 @@ struct submit_result {
      * @return 有效返回true
      */
     NEFORCE_NODISCARD explicit operator bool() const noexcept { return future.valid() && task_info; }
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 以协程方式等待任务结果
+     * @return 协程等待器
+     */
+    auto operator co_await() && { return _NEFORCE move(future).operator co_await(); }
+#endif
 };
 
 
@@ -364,6 +407,97 @@ struct submit_result {
  * - 任务组跟踪
  */
 class NEFORCE_API thread_pool {
+public:
+    /**
+     * @class timer_scheduler
+     * @brief 线程池内的定时调度服务
+     */
+    class NEFORCE_API timer_scheduler {
+    public:
+        using clock_type = steady_clock;           ///< 时钟类型
+        using time_point = clock_type::time_point; ///< 时间点类型
+        using duration = clock_type::duration;     ///< 时长类型
+        using token = heap_timer::token;           ///< 任务标识符类型
+        using handler_type = function<void()>;     ///< 回调函数类型
+
+        timer_scheduler();
+        ~timer_scheduler();
+
+        timer_scheduler(const timer_scheduler&) = delete;
+        timer_scheduler& operator=(const timer_scheduler&) = delete;
+        timer_scheduler(timer_scheduler&&) = delete;
+        timer_scheduler& operator=(timer_scheduler&&) = delete;
+
+        /**
+         * @brief 停止调度线程并等待其结束
+         */
+        void stop();
+
+        /**
+         * @brief 设置到期前自旋守时窗口
+         * @param window 窗口长度，设为 0 表示关闭
+         */
+        void set_spin_window(duration window) noexcept { spin_window_ = window; }
+
+        /**
+         * @brief 查询到期前自旋守时窗口
+         * @return 当前窗口长度
+         */
+        NEFORCE_NODISCARD duration spin_window() const noexcept { return spin_window_; }
+
+        /**
+         * @brief 添加定时任务
+         * @param expire 任务到期时间点
+         * @param handler 任务回调函数
+         * @return 任务标识符，可用于取消任务
+         */
+        token add_task(time_point expire, handler_type&& handler);
+
+        /**
+         * @brief 取消定时任务
+         * @param id 任务标识符
+         * @return 成功标记取消返回 true
+         * @note 若任务已到期并正在执行，会等待该回调结束
+         */
+        bool cancel(token id);
+
+        /**
+         * @brief 取消所有定时任务
+         */
+        void cancel_all();
+
+        /**
+         * @brief 获取当前待处理的任务数量
+         */
+        NEFORCE_NODISCARD size_t size() const;
+
+        /**
+         * @brief 检查任务是否仍在等待执行
+         */
+        NEFORCE_NODISCARD bool is_pending(token id) const;
+
+    private:
+        /**
+         * @struct scheduled_task
+         * @brief 已排期的定时任务
+         */
+        struct scheduled_task {
+            handler_type handler;                    ///< 包装后的回调
+            shared_ptr<atomic<bool>> cancelled;      ///< 取消标志
+            shared_ptr<_NEFORCE promise<void>> done; ///< 执行完成信号
+        };
+
+        void run();
+
+        heap_timer queue_;                                ///< 定时器容器
+        flat_unordered_map<token, scheduled_task> tasks_; ///< 标识符到任务的映射
+        thread worker_;                                   ///< 调度线程
+        duration spin_window_{microseconds(100)};         ///< 到期前自旋守时窗口
+        mutable mutex mutex_;                             ///< 互斥锁
+        condition_variable cv_;                           ///< 条件变量
+        atomic<bool> stopped_{false};                     ///< 停止标志
+    };
+
 public:
     /**
      * @enum pool_mode
@@ -449,7 +583,7 @@ private:
     };
 
 
-    unique_ptr<tree_timer_scheduler> timer_;              ///< 定时器调度器（随 start 重建）
+    unique_ptr<timer_scheduler> timer_;                   ///< 定时调度服务
     unique_ptr<lock_free_queue<task_type>> global_queue_; ///< 全局无锁任务队列
     unique_ptr<lazy_thread> scaler_thread_;               ///< 缓存模式伸缩线程
 
@@ -695,11 +829,27 @@ public:
      * @param args 参数
      * @return 包含future和任务信息的结果
      */
-    template <typename Func, typename... Args>
+    template <typename Func, typename... Args, enable_if_t<!is_same_v<decay_t<Func>, as_task_t>, int> = 0>
     submit_result<invoke_result_t<Func, Args...>> submit_task(Func&& func, Args&&... args) {
         return this->submit_task(static_cast<priority_type>(0), _NEFORCE forward<Func>(func),
                                  _NEFORCE forward<Args>(args)...);
     }
+
+    /**
+     * @brief 以 task 形式提交任务
+     * @tparam Func 可调用类型
+     * @tparam Args 参数类型
+     * @param func 要执行的可调用对象
+     * @param args 可调用对象的参数
+     * @return 结果 task，可被 co_await
+     */
+#ifdef NEFORCE_STANDARD_20
+    template <typename Func, typename... Args>
+    task<invoke_result_t<Func, Args...>> submit_task(as_task_t /*token*/, Func&& func, Args&&... args) {
+        return _NEFORCE make_task_from_future(
+                this->submit_task(_NEFORCE forward<Func>(func), _NEFORCE forward<Args>(args)...).future);
+    }
+#endif
 
     /**
      * @brief 提交延迟任务

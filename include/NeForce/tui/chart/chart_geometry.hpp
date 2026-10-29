@@ -47,12 +47,13 @@ inline double chart_nice_step(const double raw) {
         return 1.0;
     }
     const auto exponent = static_cast<double>(floor(logarithm_10(static_cast<decimal_t>(raw))));
+    const int magnitude = static_cast<int>(absolute(exponent));
     double base = 1.0;
-    const int abs_exp = static_cast<int>(absolute(exponent));
-    if (exponent >= 0.0) {
-        base = power(10.0, static_cast<uint32_t>(abs_exp));
-    } else {
-        base = 1.0 / power(10.0, static_cast<uint32_t>(abs_exp));
+    for (int index = 0; index < magnitude && is_finite(base); ++index) {
+        base *= 10.0;
+    }
+    if (exponent < 0.0) {
+        base = 1.0 / base;
     }
     if (!is_finite(base) || base <= 0.0) {
         return 1.0;

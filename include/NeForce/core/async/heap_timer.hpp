@@ -94,6 +94,13 @@ public:
     size_t drain_expired(const steady_clock::time_point& now, expired_entry* out, size_t max_count);
 
     /**
+     * @brief 判断某个定时项是否仍在等待中
+     * @param id 定时项标识符
+     * @return 尚未触发且未被取消返回 true
+     */
+    NEFORCE_NODISCARD bool contains(token id) const;
+
+    /**
      * @brief 待触发定时项数量
      */
     NEFORCE_NODISCARD size_t size() const;

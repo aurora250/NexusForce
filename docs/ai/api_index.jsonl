@@ -379,7 +379,6 @@
 {"name": "basic_string_iterator", "kind": "struct", "ns": "neforce", "header": "NeForce/core/string/basic_string.hpp", "brief": "字符串迭代器"}
 {"name": "basic_string_view", "kind": "class", "ns": "neforce", "header": "NeForce/core/string/basic_string_view.hpp", "brief": "基本字符串视图模板"}
 {"name": "basic_string_view_iterator", "kind": "struct", "ns": "neforce", "header": "NeForce/core/string/basic_string_view.hpp", "brief": "字符串视图迭代器"}
-{"name": "tree_timer", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/tree_timer.hpp", "brief": "红黑树定时器句柄"}
 {"name": "begin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取容器的起始迭代器"}
 {"name": "begin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取const容器的起始迭代器"}
 {"name": "begin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取数组的起始指针"}
@@ -469,8 +468,6 @@
 {"name": "call_wrapper", "kind": "function", "ns": "neforce", "header": "NeForce/core/functional/call_wrapper.hpp", "brief": ""}
 {"name": "callback_result", "kind": "enum", "ns": "neforce", "header": "NeForce/core/async/signals.hpp", "brief": "回调结果枚举"}
 {"name": "cancellation_slot", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/cancellation_slot.hpp", "brief": "异步操作取消槽"}
-{"name": "cancellation_token", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/generator.hpp", "brief": "取消令牌"}
-{"name": "cancellation_token::check_awaiter", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/generator.hpp", "brief": "取消检查等待器"}
 {"name": "caret_position", "kind": "function", "ns": "neforce::tui", "header": "NeForce/tui/dom/text_layout.hpp", "brief": "计算字节偏移所在的行与列"}
 {"name": "catch", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/standard_allocator.hpp", "brief": ""}
 {"name": "catch_event", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/renderer.hpp", "brief": "在事件传递到子组件前拦截处理"}
@@ -2689,7 +2686,6 @@
 {"name": "std::tuple_size< _NEFORCE pair< T1, T2 > >", "kind": "struct", "ns": "neforce", "header": "NeForce/core/utility/pair.hpp", "brief": ""}
 {"name": "std::tuple_size< _NEFORCE tuple< Types... > >", "kind": "struct", "ns": "neforce", "header": "NeForce/core/utility/tuple.hpp", "brief": ""}
 {"name": "steady_clock", "kind": "struct", "ns": "neforce", "header": "NeForce/core/time/clocks.hpp", "brief": "稳定时钟"}
-{"name": "steady_timer", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/async/tree_timer.hpp", "brief": "基于稳定时钟的定时器"}
 {"name": "stop_callback", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/stop_token.hpp", "brief": "停止回调类模板"}
 {"name": "stop_callback", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/stop_token.hpp", "brief": ""}
 {"name": "stop_source", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/stop_token.hpp", "brief": "停止源类"}
@@ -2860,7 +2856,6 @@
 {"name": "time_cast", "kind": "function", "ns": "neforce", "header": "NeForce/core/time/time_point.hpp", "brief": "时间点类型转换"}
 {"name": "time_point", "kind": "class", "ns": "neforce", "header": "NeForce/core/time/time_point.hpp", "brief": "时间点类模板"}
 {"name": "timed_backoff_spin_policy", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/atomic_timed_wait.hpp", "brief": "带退避策略的定时自旋策略"}
-{"name": "tree_timer_scheduler", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/tree_timer.hpp", "brief": "基于红黑树的定时任务调度器（自带线程）"}
 {"name": "timestamp", "kind": "class", "ns": "neforce", "header": "NeForce/core/time/datetime.hpp", "brief": "时间戳类"}
 {"name": "to_address", "kind": "function", "ns": "neforce", "header": "NeForce/core/iterator/iterator_traits.hpp", "brief": "安全地获取任意指针类型指向的地址"}
 {"name": "to_bitmask", "kind": "function", "ns": "neforce::simd", "header": "NeForce/core/simd/bytes.hpp", "brief": "提取向量中每个字节的最高位，组成 16-bit 掩码"}
@@ -3203,3 +3198,5 @@
 {"name": "zlib_compressor::stream_decompressor", "kind": "class", "ns": "neforce", "header": "NeForce/compress/zlib_compress.hpp", "brief": "流式解压缩器"}
 {"name": "zlib_exception", "kind": "struct", "ns": "neforce", "header": "NeForce/compress/zlib_compress.hpp", "brief": "ZLib操作异常类"}
 {"name": "heap_timer", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/heap_timer.hpp", "brief": "按到期时间排序的最小堆定时器容器"}
+{"name": "as_task_t", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "以 task 返回结果的提交令牌"}
+{"name": "make_task_from_future", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "把 future 包装为可 co_await 的 task"}

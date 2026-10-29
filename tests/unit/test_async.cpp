@@ -12,7 +12,6 @@
 #include <NeForce/core/async/generator.hpp>
 #include <NeForce/core/async/hazard_ptr.hpp>
 #include <NeForce/core/async/heap_timer.hpp>
-#include <NeForce/core/async/tree_timer.hpp>
 #include <NeForce/core/async/io_context.hpp>
 #include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/async/lock_free_queue.hpp>
@@ -395,6 +394,113 @@ TEST(FuturePromise, SetException) {
     p.set_exception(e);
     EXPECT_THROW(f.get(), value_exception);
 }
+
+#ifdef NEFORCE_STANDARD_20
+namespace {
+    struct await_runner {
+        struct promise_type {
+            promise<void> done;
+            await_runner get_return_object() {
+                return await_runner{coroutine_handle<promise_type>::from_promise(*this)};
+            }
+            suspend_always initial_suspend() noexcept { return {}; }
+            suspend_always final_suspend() noexcept { return {}; }
+            void return_void() { done.set_value(); }
+            void unhandled_exception() { done.set_exception(current_exception()); }
+        };
+
+        coroutine_handle<promise_type> handle;
+    };
+} // namespace
+
+TEST(FutureAwait, ValueFromOtherThread) {
+    promise<int> p;
+    auto fut = p.get_future();
+    thread setter([&p] {
+        this_thread::sleep_for(10_ms);
+        p.set_value(42);
+    });
+
+    int value = 0;
+    auto body = [&]() -> await_runner { value = co_await move(fut); };
+    auto runner = body();
+    auto done = runner.handle.promise().done.get_future();
+    runner.handle.resume();
+    EXPECT_EQ(done.wait_for(500_ms), future_status::ready);
+    done.get();
+    runner.handle.destroy();
+    setter.join();
+    EXPECT_EQ(value, 42);
+}
+
+TEST(FutureAwait, AlreadyReadyDoesNotSuspend) {
+    promise<int> p;
+    auto fut = p.get_future();
+    p.set_value(7);
+
+    int value = 0;
+    auto body = [&]() -> await_runner { value = co_await move(fut); };
+    auto runner = body();
+    auto done = runner.handle.promise().done.get_future();
+    runner.handle.resume();
+    EXPECT_EQ(done.wait_for(100_ms), future_status::ready);
+    done.get();
+    runner.handle.destroy();
+    EXPECT_EQ(value, 7);
+}
+
+TEST(FutureAwait, PropagatesException) {
+    promise<int> p;
+    auto fut = p.get_future();
+    thread setter([&p] {
+        this_thread::sleep_for(10_ms);
+        p.set_exception(make_exception_ptr(value_exception("boom")));
+    });
+
+    bool caught = false;
+    auto body = [&]() -> await_runner {
+        try {
+            (void) co_await move(fut);
+        } catch (const value_exception&) {
+            caught = true;
+        }
+    };
+    auto runner = body();
+    auto done = runner.handle.promise().done.get_future();
+    runner.handle.resume();
+    EXPECT_EQ(done.wait_for(500_ms), future_status::ready);
+    done.get();
+    runner.handle.destroy();
+    setter.join();
+    EXPECT_TRUE(caught);
+}
+
+TEST(FutureAwait, VoidAndReference) {
+    int target = 5;
+    promise<int&> ref_p;
+    auto ref_fut = ref_p.get_future();
+    promise<void> void_p;
+    auto void_fut = void_p.get_future();
+
+    int observed = 0;
+    bool void_observed = false;
+    auto body = [&]() -> await_runner {
+        observed = co_await move(ref_fut);
+        co_await move(void_fut);
+        void_observed = true;
+    };
+    auto runner = body();
+    auto done = runner.handle.promise().done.get_future();
+    runner.handle.resume();
+    ref_p.set_value(target);
+    void_p.set_value();
+    EXPECT_EQ(done.wait_for(500_ms), future_status::ready);
+    done.get();
+    runner.handle.destroy();
+    EXPECT_EQ(observed, 5);
+    EXPECT_TRUE(void_observed);
+}
+#endif
 
 TEST(FuturePromise, MoveFuture) {
     promise<int> p;
@@ -1509,17 +1615,17 @@ TEST(ScopeThread, MemberFunctionWithStopToken) {
     EXPECT_TRUE(completed.load());
 }
 
-TEST(TreeTimerScheduler, AddTaskAndExecute) {
+TEST(ThreadPoolTimerScheduler, AddTaskAndExecute) {
     promise<void> done;
-    tree_timer_scheduler sched;
+    thread_pool::timer_scheduler sched;
     sched.add_task(steady_clock::now() + 10_ms, [&] { done.set_value(); });
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
 }
 
-TEST(TreeTimerScheduler, AddMultipleTasksExecuteInOrder) {
+TEST(ThreadPoolTimerScheduler, AddMultipleTasksExecuteInOrder) {
     vector<int> order;
     promise<void> done;
-    tree_timer_scheduler sched;
+    thread_pool::timer_scheduler sched;
     auto now = steady_clock::now();
     sched.add_task(now + 5_ms, [&] { order.push_back(1); });
     sched.add_task(now + 3_ms, [&] { order.push_back(0); });
@@ -1534,9 +1640,9 @@ TEST(TreeTimerScheduler, AddMultipleTasksExecuteInOrder) {
     EXPECT_EQ(order[2], 2);
 }
 
-TEST(TreeTimerScheduler, CancelTask) {
+TEST(ThreadPoolTimerScheduler, CancelTask) {
     atomic<bool> called{false};
-    tree_timer_scheduler sched;
+    thread_pool::timer_scheduler sched;
     auto id = sched.add_task(steady_clock::now() + 50_ms, [&] { called = true; });
     bool canceled = sched.cancel(id);
     EXPECT_TRUE(canceled);
@@ -1544,9 +1650,9 @@ TEST(TreeTimerScheduler, CancelTask) {
     EXPECT_FALSE(called.load());
 }
 
-TEST(TreeTimerScheduler, CancelAll) {
+TEST(ThreadPoolTimerScheduler, CancelAll) {
     atomic<int> count{0};
-    tree_timer_scheduler sched;
+    thread_pool::timer_scheduler sched;
     auto now = steady_clock::now();
     sched.add_task(now + 5_ms, [&] { count.fetch_add(1); });
     sched.add_task(now + 10_ms, [&] { count.fetch_add(1); });
@@ -1556,8 +1662,8 @@ TEST(TreeTimerScheduler, CancelAll) {
     EXPECT_EQ(count.load(), 0);
 }
 
-TEST(TreeTimerScheduler, Size) {
-    tree_timer_scheduler sched;
+TEST(ThreadPoolTimerScheduler, Size) {
+    thread_pool::timer_scheduler sched;
     EXPECT_EQ(sched.size(), 0u);
     auto now = steady_clock::now();
     auto id1 = sched.add_task(now + 5_ms, [] {});
@@ -1570,17 +1676,17 @@ TEST(TreeTimerScheduler, Size) {
     EXPECT_EQ(sched.size(), 0u);
 }
 
-TEST(TreeTimerScheduler, ImmediateTask) {
+TEST(ThreadPoolTimerScheduler, ImmediateTask) {
     promise<void> done;
-    tree_timer_scheduler sched;
+    thread_pool::timer_scheduler sched;
     sched.add_task(steady_clock::now() - 1_h, [&] { done.set_value(); });
     EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
 }
 
-TEST(TreeTimerScheduler, DestructorStopsThread) {
+TEST(ThreadPoolTimerScheduler, DestructorStopsThread) {
     atomic<bool> finished{false};
     thread stopper([&finished] {
-        tree_timer_scheduler sched;
+        thread_pool::timer_scheduler sched;
         sched.add_task(steady_clock::now() + 1_h, [] {});
         finished.store(true);
     });
@@ -1689,106 +1795,6 @@ TEST(HeapTimer, SameDeadlineKeepsInsertionOrder) {
     EXPECT_EQ(out[0].payload, 1u);
     EXPECT_EQ(out[1].payload, 2u);
     EXPECT_EQ(out[2].payload, 3u);
-}
-
-TEST(TreeTimer, AsyncWait) {
-    promise<void> done;
-    tree_timer timer;
-    timer.expires_after(10_ms);
-    timer.async_wait([&] { done.set_value(); });
-    EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
-    EXPECT_FALSE(timer.is_active());
-}
-
-TEST(TreeTimer, Cancel) {
-    tree_timer timer;
-    timer.expires_after(50_ms);
-    timer.async_wait([] { FAIL(); });
-    timer.cancel();
-    EXPECT_FALSE(timer.is_active());
-    this_thread::sleep_for(100_ms);
-    SUCCEED();
-}
-
-TEST(TreeTimer, ExpiresAt) {
-    auto target = steady_clock::now() + 30_ms;
-    promise<void> done;
-    tree_timer timer;
-    timer.expires_at(target);
-    EXPECT_GT(timer.expiry(), steady_clock::now());
-    timer.async_wait([&] { done.set_value(); });
-    EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
-}
-
-TEST(TreeTimer, ExpiresFromNow) {
-    promise<void> done;
-    tree_timer timer;
-    timer.expires_from_now(20);
-    timer.async_wait([&] { done.set_value(); });
-    EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
-}
-
-TEST(TreeTimer, MoveConstructor) {
-    promise<void> done;
-    tree_timer timer;
-    timer.expires_after(10_ms);
-    timer.async_wait([&] { done.set_value(); });
-    tree_timer moved(move(timer));
-    EXPECT_FALSE(timer.is_active());
-    EXPECT_TRUE(moved.is_active());
-    EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
-    EXPECT_FALSE(moved.is_active());
-}
-
-TEST(TreeTimer, MoveAssignment) {
-    promise<void> done;
-    tree_timer timer;
-    timer.expires_after(10_ms);
-    timer.async_wait([&] { done.set_value(); });
-    tree_timer target = move(timer);
-    EXPECT_FALSE(timer.is_active());
-    EXPECT_TRUE(target.is_active());
-    EXPECT_EQ(done.get_future().wait_for(500_ms), future_status::ready);
-}
-
-TEST(TreeTimer, DestructorCancelsTask) {
-    atomic<bool> called{false};
-    {
-        tree_timer timer;
-        timer.expires_after(50_ms);
-        timer.async_wait([&] { called = true; });
-    }
-    this_thread::sleep_for(100_ms);
-    EXPECT_FALSE(called.load());
-}
-
-TEST(TreeTimer, Reschedule) {
-    latch done(1);
-    int count = 0;
-    tree_timer timer;
-
-    timer.expires_after(10_s);
-    timer.async_wait([&] { ++count; });
-
-    timer.cancel();
-    timer.expires_after(100_ms);
-    timer.async_wait([&] {
-        ++count;
-        done.count_down();
-    });
-
-    done.wait();
-    EXPECT_EQ(count, 1);
-}
-
-TEST(TreeTimer, IsActive) {
-    tree_timer timer;
-    EXPECT_FALSE(timer.is_active());
-    timer.expires_after(1_h);
-    timer.async_wait([] {});
-    EXPECT_TRUE(timer.is_active());
-    timer.cancel();
-    EXPECT_FALSE(timer.is_active());
 }
 
 TEST(TaskGroup, IncrementDecrement) {
@@ -1909,6 +1915,44 @@ TEST(ThreadPool, SubmitTaskWithPriority) {
     EXPECT_NE(order.load(), 0);
     pool.stop();
 }
+
+#ifdef NEFORCE_STANDARD_20
+TEST(ThreadPool, SubmitTaskAsTask) {
+    thread_pool pool;
+    pool.start(4);
+    int value = 0;
+    int info_priority = -1;
+    auto body = [&]() -> await_runner {
+        auto submitted = pool.submit_task([] { return 21; });
+        info_priority = static_cast<int>(submitted.task_info->priority);
+        value = co_await _NEFORCE move(submitted);
+    };
+    auto runner = body();
+    auto done = runner.handle.promise().done.get_future();
+    runner.handle.resume();
+    EXPECT_EQ(done.wait_for(1000_ms), future_status::ready);
+    done.get();
+    runner.handle.destroy();
+    pool.stop();
+    EXPECT_EQ(value, 21);
+    EXPECT_GE(info_priority, 0);
+}
+
+TEST(ThreadPool, SubmitTaskTokenReturnsTask) {
+    thread_pool pool;
+    pool.start(4);
+    int value = 0;
+    auto body = [&]() -> await_runner { value = co_await pool.submit_task(as_task, [] { return 7; }); };
+    auto runner = body();
+    auto done = runner.handle.promise().done.get_future();
+    runner.handle.resume();
+    EXPECT_EQ(done.wait_for(1000_ms), future_status::ready);
+    done.get();
+    runner.handle.destroy();
+    pool.stop();
+    EXPECT_EQ(value, 7);
+}
+#endif
 
 TEST(ThreadPool, SubmitAfter) {
     thread_pool pool;
@@ -2482,8 +2526,8 @@ TEST(WorkerContext, ResetClearsAllState) {
     EXPECT_FALSE(ctx.idle_counted);
 }
 
-TEST(TreeTimerScheduler, SpinWindowConfiguration) {
-    tree_timer_scheduler timer;
+TEST(ThreadPoolTimerScheduler, SpinWindowConfiguration) {
+    thread_pool::timer_scheduler timer;
     EXPECT_EQ(time_cast<microseconds>(timer.spin_window()).count(), 100);
 
     timer.set_spin_window(microseconds(0));
@@ -3651,44 +3695,19 @@ TEST(TaskException, PropagationThroughCoAwait) {
     EXPECT_THROW(t.get(), value_exception);
 }
 
-TEST(CancellationToken, NotCancelledByDefault) {
-    cancellation_token token;
-    EXPECT_FALSE(token.is_cancelled());
+TEST(TaskCancellation, SlotMarksTaskCancelled) {
+    stop_source source;
+    cancellation_slot slot(source.get_token());
+    auto t = task_answer();
+    t.set_cancellation_slot(slot);
+    EXPECT_FALSE(t.is_cancelled());
+    source.request_stop();
+    EXPECT_TRUE(t.is_cancelled());
 }
 
-TEST(CancellationToken, CancelSetsFlag) {
-    cancellation_token token;
-    token.cancel();
-    EXPECT_TRUE(token.is_cancelled());
-}
-
-TEST(CancellationToken, CopySharesState) {
-    cancellation_token token1;
-    cancellation_token token2 = token1;
-    token1.cancel();
-    EXPECT_TRUE(token2.is_cancelled());
-}
-
-TEST(CancellationToken, AssignSharesState) {
-    cancellation_token token1;
-    cancellation_token token2;
-    token2 = token1;
-    token1.cancel();
-    EXPECT_TRUE(token2.is_cancelled());
-}
-
-TEST(CancellationToken, CheckAwaiterCancelled) {
-    cancellation_token token;
-    token.cancel();
-    auto awaiter = token.check();
-    EXPECT_TRUE(awaiter.await_ready());
-    EXPECT_THROW(awaiter.await_resume(), neforce::exception);
-}
-
-TEST(CancellationToken, CheckAwaiterNotCancelled) {
-    cancellation_token token;
-    auto awaiter = token.check();
-    EXPECT_FALSE(awaiter.await_ready());
+TEST(TaskCancellation, WithoutSlotNeverCancelled) {
+    auto t = task_answer();
+    EXPECT_FALSE(t.is_cancelled());
 }
 
 TEST(WhenAll, TwoTasks) {

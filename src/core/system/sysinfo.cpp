@@ -1964,11 +1964,8 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
                 const auto* link = reinterpret_cast<const ::sockaddr_dl*>(current->ifa_addr);
                 if (link->sdl_alen == 6) {
                     const auto* hw = reinterpret_cast<const uint8_t*>(LLADDR(link));
-                    char text[18] = {};
-                    // TODO: using neforce::format instead
-                    ::snprintf(text, sizeof(text), "%02X:%02X:%02X:%02X:%02X:%02X", hw[0], hw[1], hw[2], hw[3], hw[4],
-                               hw[5]);
-                    iface.mac = text;
+                    iface.mac = format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", hw[0], hw[1], hw[2], hw[3], hw[4],
+                                       hw[5]);
                 }
             }
             continue;

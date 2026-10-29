@@ -191,6 +191,12 @@ function(nexusforce_compiler_options target)
             )
         endif()
 
+        if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND
+                CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13 AND
+                CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+            target_compile_options(${target} PRIVATE -Wno-stringop-overflow)
+        endif()
+
         if(WIN32 AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
             target_compile_definitions(${target} PRIVATE
                     $<$<CONFIG:Debug>:_DEBUG>

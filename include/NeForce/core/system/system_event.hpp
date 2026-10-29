@@ -8,11 +8,8 @@
  * 此文件提供了系统事件，支持手动重置和自动重置两种模式，可用于线程间同步。
  */
 
+#include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
-#ifdef NEFORCE_PLATFORM_POSIX
-#    include "NeForce/core/memory/unique_ptr.hpp"
-#    include <pthread.h>
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -42,29 +39,9 @@ public:
     };
 
 private:
-#ifdef NEFORCE_PLATFORM_POSIX
-    struct mutex_deleter {
-        void operator()(::pthread_mutex_t* m) const noexcept {
-            ::pthread_mutex_destroy(m);
-            delete m;
-        }
-    };
+    struct impl;
+    unique_ptr<impl> impl_;
 
-    struct cond_deleter {
-        void operator()(::pthread_cond_t* d) const noexcept {
-            ::pthread_cond_destroy(d);
-            delete d;
-        }
-    };
-#endif
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    void* handle_; ///< 事件句柄
-#else
-    // TODO: using neforce::mutex and neforce::condition_variable instead
-    unique_ptr<::pthread_mutex_t, mutex_deleter> mutex_; ///< 互斥锁
-    unique_ptr<::pthread_cond_t, cond_deleter> cond_;    ///< 条件变量
-#endif
     bool signaled_; ///< 信号状态
     type type_;     ///< 事件类型
 
@@ -146,7 +123,7 @@ public:
      * @brief 获取原生事件句柄
      * @return 原生句柄
      */
-    NEFORCE_NODISCARD void* native_handle() const noexcept { return handle_; }
+    NEFORCE_NODISCARD void* native_handle() const noexcept;
 #endif
 };
 

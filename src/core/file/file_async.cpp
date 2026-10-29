@@ -229,7 +229,7 @@ void file_async::release_binding() noexcept {
         return;
     }
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ctx_->unregister_file_completion(reinterpret_cast<uintptr_t>(this));
+    ctx_->monitor_->unregister_file_completion(reinterpret_cast<uintptr_t>(this));
 #else
 #    ifdef NEFORCE_USING_IO_URING
     if (state_ != nullptr) {
@@ -253,12 +253,13 @@ void file_async::ensure_state(io_context& ctx) {
     state_ = make_unique<state>();
 
     const auto key = reinterpret_cast<uintptr_t>(this);
-    const ::HANDLE iocp = ctx_->iocp_handle_;
+    const ::HANDLE iocp = ctx_->monitor_->iocp_handle_;
     const ::HANDLE associated = ::CreateIoCompletionPort(handle_, iocp, key, 0);
     state_->overlapped_capable = (associated != nullptr && associated == iocp);
     state_->ctx = ctx_;
 
-    ctx_->register_file_completion(key, [this](const error_code ec, const size_t bytes, void* const overlapped) {
+    ctx_->monitor_->register_file_completion(key, [this](const error_code ec, const size_t bytes,
+                                                         void* const overlapped) {
         if (state_ == nullptr || overlapped == nullptr) {
             return;
         }

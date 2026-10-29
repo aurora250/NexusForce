@@ -8,14 +8,10 @@
  * 此文件提供了文件系统事件监视功能。
  */
 
-#include "NeForce/core/async/atomic.hpp"
-#include "NeForce/core/async/mutex.hpp"
-#include "NeForce/core/async/thread.hpp"
-#include "NeForce/core/container/flat_unordered_map.hpp"
-#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/file/file_constants.hpp"
 #include "NeForce/core/file/path.hpp"
 #include "NeForce/core/functional/function.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -32,38 +28,30 @@ NEFORCE_BEGIN_NAMESPACE__
  * 当文件被创建、删除、修改、重命名或访问时，触发回调函数。
  */
 class NEFORCE_API file_watcher {
-private:
-    using callback_t = function<void(const path&, file_watch_event)>; ///< 事件回调类型
-
-    path watch_path_;                                        ///< 监视的目录路径
-    bool recursive_;                                         ///< 是否递归监视子目录
-    atomic<bool> watching_{false};                           ///< 是否正在监视
-    atomic<bool> stopping_{false};                           ///< 是否正在停止
-    callback_t callback_;                                    ///< 事件回调函数
-    file_watch_event current_events_{file_watch_event::all}; ///< 当前监视的事件类型
-    vector<char> buffer_;                                    ///< 事件数据缓冲区
-    mutex callback_mutex_;                                   ///< 回调函数互斥锁
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type dir_handle_ = INVALID_HANDLE_VALUE;      ///< 目录句柄
-    native_handle_type completion_port_ = INVALID_HANDLE_VALUE; ///< I/O完成端口
-    ::OVERLAPPED overlapped_{};                                 ///< 重叠I/O结构
-#else
-    native_handle_type inotify_fd_ = -1;              ///< inotify文件描述符
-    native_handle_type watch_descriptor_ = -1;        ///< 监视描述符
-    native_handle_type event_fd_ = -1;                ///< 事件通知文件描述符
-    uint32_t watch_mask_ = 0;                         ///< inotify 事件掩码
-    flat_unordered_map<int, string> linux_watch_map_; ///< watch 描述符 -> 相对 watch_path 的目录
-#endif
-
-    thread watch_thread_; ///< 监视线程
-
+public:
     /**
-     * @brief 监视线程函数
-     *
-     * 阻塞等待文件系统事件，当事件发生时调用回调函数。
+     * @enum event
+     * @brief 文件监视事件枚举
      */
-    void watch_thread_func();
+    enum class event {
+        created = 0x01,  ///< 文件创建事件
+        deleted = 0x02,  ///< 文件删除事件
+        modified = 0x04, ///< 文件修改事件
+        renamed = 0x08,  ///< 文件重命名事件
+        /**
+         * @brief 文件访问事件
+         * @warning FreeBSD 的 kqueue 后端不支持此事件
+         * @warning Windows 上受 NTFS 最后访问时间策略与延迟聚合影响，可能长时间不触发
+         */
+        accessed = 0x10,
+        all = created | deleted | modified | renamed | accessed ///< 所有事件
+    };
+
+private:
+    using callback_t = function<void(const path&, event)>; ///< 事件回调类型
+
+    struct impl;
+    unique_ptr<impl> impl_;
 
 public:
     /**
@@ -83,6 +71,8 @@ public:
 
     file_watcher(const file_watcher&) = delete;
     file_watcher& operator=(const file_watcher&) = delete;
+    file_watcher(file_watcher&&) = delete;
+    file_watcher& operator=(file_watcher&&) = delete;
 
     /**
      * @brief 开始监视
@@ -95,7 +85,7 @@ public:
      *
      * @note 重启 start() 存在短暂的事件窗口，重启期间发生的事件不会被补发。
      */
-    bool start(callback_t callback, file_watch_event events = file_watch_event::all);
+    bool start(callback_t callback, file_watcher::event events = file_watcher::event::all);
 
     /**
      * @brief 停止监视
@@ -108,25 +98,25 @@ public:
      * @brief 获取监视的目录路径
      * @return 目录路径
      */
-    NEFORCE_NODISCARD const path& watch_path() const noexcept { return watch_path_; }
+    NEFORCE_NODISCARD const path& watch_path() const noexcept;
 
     /**
      * @brief 获取当前监视的事件类型
      * @return 事件类型
      */
-    NEFORCE_NODISCARD file_watch_event current_events() const noexcept { return current_events_; }
+    NEFORCE_NODISCARD file_watcher::event current_events() const noexcept;
 
     /**
      * @brief 检查是否正在监视
      * @return 是否正在监视
      */
-    NEFORCE_NODISCARD bool is_watching() const noexcept { return watching_.load(); }
+    NEFORCE_NODISCARD bool is_watching() const noexcept;
 
     /**
      * @brief 检查是否递归监视子目录
      * @return 是否递归
      */
-    NEFORCE_NODISCARD bool is_recursive() const noexcept { return recursive_; }
+    NEFORCE_NODISCARD bool is_recursive() const noexcept;
 
     /**
      * @brief 更新监视的事件类型
@@ -135,7 +125,7 @@ public:
      *
      * 如果正在监视中，会重启监视器以应用新的事件类型。
      */
-    bool update_watch(file_watch_event events);
+    bool update_watch(file_watcher::event events);
 
     /**
      * @brief 更新递归设置

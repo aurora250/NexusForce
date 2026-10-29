@@ -167,7 +167,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`thread_pool`** - NUMA-aware work stealing thread pool with multi-strategy customization; for detailed performance testing, see [thread_pool performance test records](benchmark/async/thread_pool/PERFORMANCE.md)
 - **`io_context`** - Async I/O execution context, unified event loop, timer and cancellation model
 - **`cancellation_slot`** - Supports `async_connect` / `async_read` / `async_write` interruptible async I/O
-- **`heap_timer` / `tree_timer`** - a shared min-heap and a red-black-tree timer with its scheduler
+- **`heap_timer`** - min-heap timer
 - **`async_stream`** - Async stream abstraction interface, unified read/write protocol
 - **`async_read()` / `async_write()`** - Free function combinators, automatic partial read/write retry via `shared_from_this`
 - **`thread_pool_executor`** - Adapts `thread_pool::submit_task()` to standard executor interface

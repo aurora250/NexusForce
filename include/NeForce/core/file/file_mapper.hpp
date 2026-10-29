@@ -49,17 +49,25 @@ public:
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
     /**
-     * @struct map_info
+     * @struct snapshot
      * @brief 映射状态快照
-     *
-     * 提供当前映射状态的完整信息，用于调试和状态查询。
      */
-    struct map_info {
+    struct snapshot {
         void* address = nullptr;                ///< 映射起始地址
         size_type size = 0;                     ///< 映射大小（字节）
         size_type offset = 0;                   ///< 映射起始偏移
         file_access access = file_access::read; ///< 访问权限
         bool is_mapped = false;                 ///< 是否已映射
+    };
+
+    /**
+     * @enum hint
+     * @brief 内存映射文件访问提示枚举
+     */
+    enum class hint {
+        normal = 0, ///< 常规访问模式
+        sequential, ///< 顺序访问模式
+        random      ///< 随机访问模式
     };
 
 private:
@@ -69,10 +77,7 @@ private:
     size_type offset_ = 0;
     file_access access_ = file_access::read;
     mutable mutex mutex_;
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type mapping_handle_ = INVALID_HANDLE_VALUE; ///< 映射句柄
-#endif
+    native_handle_type mapping_handle_;
 
 public:
     /**
@@ -123,7 +128,7 @@ public:
      * @note 写操作可能需要权限。
      */
     bool map(size_type offset = 0, size_type size = 0, file_access access = file_access::read,
-             file_map_hint hint = file_map_hint::sequential);
+             file_mapper::hint hint = file_mapper::hint::sequential);
 
     /**
      * @brief 解除映射
@@ -194,7 +199,7 @@ public:
     /**
      * @brief 获取映射状态快照
      */
-    NEFORCE_NODISCARD map_info info() const noexcept;
+    NEFORCE_NODISCARD snapshot get_snapshot() const noexcept;
 };
 
 /** @} */ // File

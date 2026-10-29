@@ -430,7 +430,8 @@ void share_memory::grow(size_t new_size) {
         }
     }
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
-    // TODO: FreeBSD has no mremap; remap the grown shm object at offset 0.
+    // FreeBSD has no mremap, so the grown object is remapped at offset 0.
+    // The data itself lives in the shm file, so unmapping and mapping again preserves it.
     const size_t fd_new_size = data_offset_ + new_size;
     if (::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == -1) {
         const auto error = last_error();
@@ -445,7 +446,8 @@ void share_memory::grow(size_t new_size) {
             const auto error = last_error();
             NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
         }
-        void* addr = ::mmap(nullptr, fd_new_size, PROT_READ | PROT_WRITE, MAP_SHARED, handle_, 0);
+        const int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
+        void* addr = ::mmap(nullptr, fd_new_size, prot, MAP_SHARED, handle_, 0);
         if (addr == MAP_FAILED) {
             original_mapped_addr_ = nullptr;
             mapped_addr_ = nullptr;

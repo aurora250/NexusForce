@@ -891,7 +891,7 @@ void sleep_for(const duration<Rep, Period> time) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const nanoseconds ns = time.to_nano();
     inner::sleep_for_aux(0, ns.count());
-#elif defined(NEFORCE_PLATFORM_LINUX)
+#else
     const seconds s = time.to_sec();
     const nanoseconds ns(time - s);
     inner::sleep_for_aux(s.count(), ns.count());

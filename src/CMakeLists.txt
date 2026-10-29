@@ -23,7 +23,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_exit_notifier.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_exit_register.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/tree_timer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/timer_scheduler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/virtual_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/aes256.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/base64.cpp

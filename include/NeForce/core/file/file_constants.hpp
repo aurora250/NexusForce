@@ -223,39 +223,6 @@ constexpr file_lock operator&(file_lock a, file_lock b) noexcept {
     return static_cast<file_lock>(static_cast<native_id_type>(a) & static_cast<native_id_type>(b));
 }
 
-
-/**
- * @enum file_watch_event
- * @brief 文件监视事件枚举
- *
- * 定义文件系统监视器可以捕获的事件类型。
- */
-enum class file_watch_event {
-    created = 0x01,  ///< 文件创建事件
-    deleted = 0x02,  ///< 文件删除事件
-    modified = 0x04, ///< 文件修改事件
-    renamed = 0x08,  ///< 文件重命名事件
-    /**
-     * @brief 文件访问事件
-     * @warning Windows 上受 NTFS 最后访问时间策略与延迟聚合影响，可能长时间不触发
-     */
-    accessed = 0x10,
-    all = created | deleted | modified | renamed | accessed ///< 所有事件
-};
-
-
-/**
- * @enum file_map_hint
- * @brief 内存映射文件访问提示枚举
- *
- * 为内存映射文件提供访问模式的提示，用于优化性能。
- */
-enum class file_map_hint {
-    normal = 0, ///< 常规访问模式
-    sequential, ///< 顺序访问模式
-    random      ///< 随机访问模式
-};
-
 /** @} */ // File
 
 NEFORCE_END_NAMESPACE__

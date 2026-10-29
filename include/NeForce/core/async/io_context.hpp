@@ -17,6 +17,7 @@
  */
 
 #include "NeForce/core/async/heap_timer.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/async/lock_free_queue.hpp"
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/container/flat_unordered_map.hpp"
@@ -232,8 +233,6 @@ public:
 private:
     friend class file_async;
 
-    using file_completion_cb = function<void(error_code, size_t, void* overlapped)>;
-
     /**
      * @brief fd 注册信息
      */
@@ -257,30 +256,8 @@ private:
     lock_free_queue<handler_type> external_queue_; ///< 跨线程 post 的 handler 队列
     atomic<size_t> external_queue_count_{0};       ///< post 计数器
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    void* iocp_handle_;                   ///< IOCP 完成端口句柄
-    void* wake_event_;                    ///< monitor 线程唤醒事件
-    thread monitor_thread_;               ///< WSA 监控线程
-    atomic<bool> monitor_running_{false}; ///< 监控线程运行标志
-
-    flat_unordered_map<native_handle_type, void*> fd_events_; ///< fd 到 WSA 事件句柄
-    vector<void*> pending_close_;                             ///< WSAEVENT 句柄
-
-    flat_unordered_map<uintptr_t, file_completion_cb> file_completions_; ///< 文件 I/O 完成回调
-
-    void monitor_loop();
-
-    void register_file_completion(uintptr_t key, file_completion_cb cb);
-    void unregister_file_completion(uintptr_t key);
-
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
-    // TODO: using neforce::pipe instead
-    int wake_fd_;       ///< 唤醒管道读端
-    int wake_write_fd_; ///< 唤醒管道写端
-#else
-    int epoll_fd_; ///< epoll 文件描述符
-    int wake_fd_;  ///< 用于唤醒的 eventfd
-#endif
+    struct monitor;
+    unique_ptr<monitor> monitor_; ///< 事件监控
 
     vector<thread> pool_threads_; ///< 工作线程列表
     mutex pool_mutex_;            ///< 保护线程管理的互斥锁

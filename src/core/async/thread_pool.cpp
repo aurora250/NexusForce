@@ -926,7 +926,7 @@ thread_pool::pool_statistics thread_pool::statistics_unsafe() const {
 }
 
 thread_pool::thread_pool() :
-timer_(make_unique<tree_timer_scheduler>()),
+timer_(make_unique<timer_scheduler>()),
 thread_threshhold_{max_thread_threshhold()} {
     worker_slots_.reserve(thread_threshhold_);
     reset_worker_index(thread_threshhold_);
@@ -1036,7 +1036,7 @@ bool thread_pool::start(const size_t init_thread_size) {
     numa_nodes_ = numa_info.empty() ? nullptr : &numa_info;
 
     global_queue_ = make_unique<lock_free_queue<task_type>>();
-    timer_ = make_unique<tree_timer_scheduler>();
+    timer_ = make_unique<timer_scheduler>();
 
     uint64_t allowed = 0;
     if (!this_thread::affinity(allowed)) {

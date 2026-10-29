@@ -8,10 +8,10 @@
  * 本文件提供了协程的异步工具，包括：
  * - generator<T> 懒序列生成器
  * - task<T> 异步任务
- * - cancellation_token 取消令牌
  * - 组合操作符 (when_all, retry 等)
  */
 
+#include "NeForce/core/async/cancellation_slot.hpp"
 #include "NeForce/core/async/coroutine.hpp"
 #ifdef NEFORCE_STANDARD_20
 #    include "NeForce/core/async/atomic.hpp"
@@ -31,129 +31,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * @addtogroup Coroutine 协程
  * @{
  */
-
-/**
- * @class cancellation_token
- * @brief 取消令牌
- *
- * 用于协程的取消操作，支持多个副本共享同一个取消状态。
- * 可以传递给协程，在适当的位置检查取消状态并抛出异常。
- */
-class cancellation_token {
-public:
-    /**
-     * @struct check_awaiter
-     * @brief 取消检查等待器
-     *
-     * 可在协程中等待此对象，如果已取消则抛出异常。
-     */
-    struct check_awaiter {
-        const cancellation_token* token; ///< 令牌指针
-
-        /**
-         * @brief 检查是否可立即恢复
-         * @return 如果已取消则返回true，表示可以立即恢复（并抛出异常）
-         */
-        NEFORCE_NODISCARD bool await_ready() const noexcept { return token != nullptr && token->is_cancelled(); }
-
-        /**
-         * @brief 暂停协程（实际上从不暂停）
-         * @param h 协程句柄
-         */
-        void await_suspend(coroutine_handle<> h) const noexcept {}
-
-        /**
-         * @brief 恢复时执行的操作
-         * @throws exception 如果已取消则抛出异常
-         */
-        void await_resume() const {
-            if (token != nullptr && token->is_cancelled()) {
-                NEFORCE_THROW_EXCEPTION(exception("Operation cancelled"));
-            }
-        }
-    };
-
-private:
-    struct state {
-        atomic<bool> cancelled{false}; ///< 取消标志
-        atomic<size_t> ref_count{1};   ///< 引用计数
-    };
-    state* state_; ///< 共享状态
-
-    /**
-     * @brief 释放状态引用
-     */
-    void release() {
-        if (state_ != nullptr && state_->ref_count.fetch_sub(1, memory_order_acq_rel) == 1) {
-            delete state_;
-        }
-    }
-
-public:
-    /**
-     * @brief 默认构造函数，创建新的取消令牌
-     */
-    cancellation_token() :
-    state_(new state()) {}
-
-    /**
-     * @brief 拷贝构造函数，共享状态
-     * @param other 另一个取消令牌
-     */
-    cancellation_token(const cancellation_token& other) :
-    state_(other.state_) {
-        if (state_ != nullptr) {
-            state_->ref_count.fetch_add(1, memory_order_relaxed);
-        }
-    }
-
-    /**
-     * @brief 拷贝赋值运算符
-     * @param other 另一个取消令牌
-     * @return 自身引用
-     */
-    cancellation_token& operator=(const cancellation_token& other) {
-        if (addressof(other) == this) {
-            return *this;
-        }
-
-        release();
-        state_ = other.state_;
-        if (state_ != nullptr) {
-            state_->ref_count.fetch_add(1, memory_order_relaxed);
-        }
-        return *this;
-    }
-
-    /**
-     * @brief 析构函数，释放状态
-     */
-    ~cancellation_token() { release(); }
-
-    /**
-     * @brief 请求取消
-     */
-    void cancel() noexcept {
-        if (state_ != nullptr) {
-            state_->cancelled.store(true, memory_order_release);
-        }
-    }
-
-    /**
-     * @brief 检查是否已被取消
-     * @return 是否已被取消
-     */
-    NEFORCE_NODISCARD bool is_cancelled() const noexcept {
-        return state_ != nullptr && state_->cancelled.load(memory_order_acquire);
-    }
-
-    /**
-     * @brief 获取取消检查等待器
-     * @return 检查等待器
-     */
-    NEFORCE_NODISCARD check_awaiter check() const { return check_awaiter{this}; }
-};
-
 
 template <typename T>
 class generator;
@@ -561,10 +438,10 @@ public:
 
         using value_type = T; ///< 任务结果类型别名
 
-        optional<T> result;                  ///< 结果值
-        exception_ptr exception;             ///< 异常指针
-        coroutine_handle<> continuation;     ///< 继续执行的协程
-        cancellation_token* token = nullptr; ///< 取消令牌
+        optional<T> result;              ///< 结果值
+        exception_ptr exception;         ///< 异常指针
+        coroutine_handle<> continuation; ///< 继续执行的协程
+        cancellation_slot slot_;         ///< 取消槽
 
         /**
          * @brief 获取任务对象
@@ -574,15 +451,15 @@ public:
 
         /**
          * @brief 设置取消令牌
-         * @param t 取消令牌指针
+         * @param slot 取消槽
          */
-        void set_cancellation_token(cancellation_token* t) noexcept { token = t; }
+        void set_cancellation_slot(const cancellation_slot& slot) noexcept { slot_ = slot; }
 
         /**
          * @brief 检查是否已取消
          * @return 是否已取消
          */
-        NEFORCE_NODISCARD bool is_cancelled() const noexcept { return token != nullptr && token->is_cancelled(); }
+        NEFORCE_NODISCARD bool is_cancelled() const noexcept { return slot_.is_cancelled(); }
 
         /**
          * @brief 初始暂停点
@@ -730,12 +607,12 @@ public:
     }
 
     /**
-     * @brief 设置取消令牌
-     * @param token 取消令牌
+     * @brief 设置取消槽
+     * @param slot 取消槽
      */
-    void set_cancellation_token(cancellation_token& token) {
+    void set_cancellation_slot(const cancellation_slot& slot) {
         if (handle_) {
-            handle_.promise().set_cancellation_token(&token);
+            handle_.promise().set_cancellation_slot(slot);
         }
     }
 
@@ -758,13 +635,13 @@ public:
 
         exception_ptr exception;
         coroutine_handle<> continuation;
-        cancellation_token* token = nullptr;
+        cancellation_slot slot_; ///< 取消槽
 
         task get_return_object() { return task{coroutine_handle<promise_type>::from_promise(*this)}; }
 
-        void set_cancellation_token(cancellation_token* t) { token = t; }
+        void set_cancellation_slot(const cancellation_slot& slot) { slot_ = slot; }
 
-        NEFORCE_NODISCARD bool is_cancelled() const { return token != nullptr && token->is_cancelled(); }
+        NEFORCE_NODISCARD bool is_cancelled() const { return slot_.is_cancelled(); }
 
         suspend_always initial_suspend() noexcept { return {}; }
 
@@ -859,9 +736,9 @@ public:
         }
     }
 
-    void set_cancellation_token(cancellation_token& token) {
+    void set_cancellation_slot(const cancellation_slot& slot) {
         if (handle_) {
-            handle_.promise().set_cancellation_token(&token);
+            handle_.promise().set_cancellation_slot(slot);
         }
     }
 

@@ -14,6 +14,7 @@
 - `sysinfo` 新增 `cpu_usage_per_core()`、`cpu_usage_breakdown()`、`disk_io_rates()`、`battery_info` / `battery_status()`
 - `sysinfo::network_interface` 新增 `operstate`、`mtu`、`speed_bps` 与收发字节/包/错误/丢包计数
 - `sysinfo::battery_info` 新增 `rate_mw`、`capacity_mwh`、`full_capacity_mwh`；`snapshot_entry` 在 Windows 上填充 `virtual_bytes`
+- `sysinfo::cpu_info` 新增 `riscv` 与 `loongarch`子结构，Linux 从 `/proc/cpuinfo` 填充
 - `sysinfo` 新增 `mount_points()`；Windows 挂载点以卷根目录实现，Linux 读 `/proc/mounts`
 - `sysinfo::disk_info` 新增 `filesystem` 与 `available_bytes`，区分“空闲（含保留块）”与“非特权用户可用”
 - `sysinfo::network_interface` 新增 `index`、`prefix_length`、`is_loopback`：Windows 补子网掩码、MAC 与 IPv6 前缀，Linux 补 MAC 与接口索引且每个接口只保留一条记录
@@ -138,9 +139,15 @@
 - `reconciler` 接入鼠标拖选：左键按下拖动即开始选区，`Ctrl+C` 复制并清空选区，其余按键、滚轮、窗口变化都会丢弃选区；`set_clipboard_writer()` 可接管复制目标
 - `components::composer` 提交时记录历史，单行编辑下 `Up`/`Down` 浏览提交历史（多行时仍由编辑器移动光标）
 - `text_area_view` 新增 `history_previous()` / `history_next()` / `in_history()`：把历史浏览开放给上层组件，方向键可映射到历史
+- `file_watcher` 新增基于 kqueue 的后端，提供创建/删除/修改事件与递归目录监视
+- `arp` 新增基于 BPF 的原始套接字实现，可发送 ARP 请求并解析应答
+- `sysinfo::probe_hardware()` 通过 `sysctl(3)` 与 CPUID 采集 CPU 型号、频率、缓存以及 SMBIOS 中的 BIOS/主板信息
 
 ### 🔧 Improvements
 
+- `future<T>` 支持 `co_await`：完成线程在设置结果后直接恢复等待的协程，值/引用/void 三种特化均可用，`future` 与协程任务由此打通；等待期间共享状态由等待器持有，延迟执行的 future 在 `co_await` 时同步求值
+- `thread_pool::submit_task` 可取 `as_task` 令牌返回 `task<T>`，`submit_result` 本身也可直接 `co_await`，线程池结果与协程任务之间不再需要手工包一层
+- 删除 `cancellation_token`，`task<T>`/`task<void>` 改用 `cancellation_slot`，`set_cancellation_slot()` + `is_cancelled()` 与网络层取消语义一致
 - 新增 `heap_timer`：按到期时间排序的最小堆，插入/取消 O(log n)、取消为惰性删除并自动收缩，提供无锁的 `next_deadline_ns()` 提示供限时停驻使用
 - `virtual_thread` 调度器重构：就绪队列改为无锁队列 + FUTEX 停驻，不再由单把互斥锁保护入队/出队；任务完成时按"是否有等待者"决定是否加锁广播；定时器到期只在工作线程循环内检查、`schedule_after` 只唤醒一个工作线程；批量完成的唤醒按待处理计数合并。空闲 CPU 减半，单次 `yield` 的边际成本上升约 10%
 - `process::check_permission()` Linux 语义与 Windows 对齐：`query_info` 只需进程存在，读/写/终止要求属主或 root，`execute` 恒为 false，`permission::all` 不再因 `/proc/<pid>` 的目录权限而误判
@@ -320,9 +327,14 @@
 - 元素节点改为经 `neforce::memory_pool` 的 `pool_allocator` 分配（`allocate_shared`），去掉手写的线程本地自由链：每帧重建的元素树不再进入系统分配器
 - `screen::clear()` 改为逐格复制一个预置空白单元格，全屏清空不再是每帧的固定开销
 - 布局按可见区裁剪：纵向容器在子项起点越过视口后停止赋值，`scroll_view` 只布局可见行
+- `io_context` 在 FreeBSD 上的唤醒通道改用 `neforce::pipe`，不再自行创建裸管道
+- `io_context` 的监控后端改为 pimpl：IOCP/epoll/kqueue 句柄、WSA 事件表、文件完成回调与 Windows 监控线程移入实现文件，`fd_map_`、定时器与投递队列仍留在类内以保持事件热路径不变
+- `share_memory::grow()` 在 FreeBSD 上通过 `ftruncate` + 重新 `mmap` 增长映射，并保留原保护属性
 
 ### 🐛 Bug Fixes
 
+- 修复重复调用 `crash_dump::install_handlers()` 后 `uninstall_handlers()` 无法恢复原始信号动作：第二次安装把自身处理器当作"先前动作"保存，卸载后处理器仍驻留，后续崩溃会以默认发布状态把 `nexusforce-<UTC时间>-<pid>.core` 写到进程工作目录；现仅在首次安装时保存 `sigaction`，新增"安装两次再卸载后子进程必须按默认动作被信号终止"的回归测试
+- 修复 RISC-V Release 下图表 y 轴只剩 `0`：GCC 13 把该路径的 `power(10.0, n)` 错误内联（`base` 未初始化），`chart_nice_step()` 得到错误步长，`k` / `M` / `G` 紧凑标签失效；现改为在 `chart_nice_step()` 内用乘法循环生成 10 的幂
 - 修复 `channel<T>` 的阻塞读写偶发永久阻塞：入队/出队与 `size_`、`closed_` 的变更以及对应的唤醒不在同一把锁内完成，等待线程在"谓词已判定为假、尚未进入条件变量等待"的窗口内会漏掉唤醒，此后写者填满缓冲、读者空转等待，双方互锁；现由 `control_mutex_` 统一保护状态变更与通知
 - 修复 `virtual_thread` 关闭后无法重新启动：`shutdown()` 置位的关闭标志不再复位、已结束的工作线程句柄也未清理，再次 `initialize()` 时新工作线程一进入循环就退出，此后任何挂起的协程都不会被恢复；现由 `start_workers()` 复位关闭标志、`shutdown()` 清理线程句柄
 - 修复 `simd::memory_compare` 在 AVX2 路径上长度 ≥ 128 字节时把不同内存判为相等：四路比较结果用按位或合并，任意一路相等就会掩盖其余三路的差异，改为按位与；字符串比较、原子比较与差量扫描都受影响

@@ -504,7 +504,11 @@ namespace {
 
         bool installed = true;
         for (size_t index = 0; index < fatal_signal_count; ++index) {
-            installed = ::sigaction(fatal_signals[index], &action, &g_previous_actions[index]) == 0 && installed;
+            // Only the first install may overwrite the saved actions;
+            // otherwise a repeated install would save our own handler and
+            // uninstall could not restore the original disposition.
+            struct ::sigaction* previous = g_signal_installed ? nullptr : &g_previous_actions[index];
+            installed = ::sigaction(fatal_signals[index], &action, previous) == 0 && installed;
         }
         g_signal_installed = true;
         return installed;

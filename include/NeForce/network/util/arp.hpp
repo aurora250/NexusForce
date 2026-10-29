@@ -9,11 +9,9 @@
  * 通过发送ARP请求并接收ARP应答来获取目标主机的MAC地址。
  */
 
+#include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/util/mac_address.hpp"
-#ifdef NEFORCE_PLATFORM_POSIX
-#    include "NeForce/network/socket_base.hpp"
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -35,40 +33,33 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API arp {
 private:
-    // TODO: use pimpl to avoid complex define branch
-
-    string iface_; ///< 网络接口名称
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    bool opened_ = false; ///< 是否已打开
-#else
-    socket_base sock_;      ///< 原始套接字
-    mac_address local_mac_; ///< 本地网卡MAC地址
-    uint32_t local_ip_;     ///< 本地网卡IP地址
-    int ifindex_ = -1;      ///< 网络接口索引
-#endif
-
-#ifdef NEFORCE_PLATFORM_LINUX
-    bool local_info(const char* iface);
-#endif
+    struct impl;
+    unique_ptr<impl> impl_;
 
 public:
-    /**
-     * @brief 默认构造函数
-     */
-    arp() = default;
+    arp();
+    ~arp();
 
     /**
-     * @brief 析构函数
+     * @brief 移动构造函数
+     * @param other 源对象
      */
-    ~arp() = default;
+    arp(arp&& other) noexcept;
+
+    /**
+     * @brief 移动赋值运算符
+     * @param other 源对象
+     * @return 自身引用
+     */
+    arp& operator=(arp&& other) noexcept;
+
+    arp(const arp&) = delete;
+    arp& operator=(const arp&) = delete;
 
     /**
      * @brief 打开ARP解析器
      * @param iface 网络接口名称
      * @return 成功返回true
-     *
-     * 初始化ARP解析器，获取本地网络接口信息。
      */
     bool open(const char* iface = nullptr);
 

@@ -10,6 +10,9 @@
 
 #include "NeForce/core/async/thread_exit_register.hpp"
 #include "NeForce/core/async/atomic_futex.hpp"
+#ifdef NEFORCE_STANDARD_20
+#    include "NeForce/core/async/coroutine.hpp"
+#endif
 #include "NeForce/core/async/call_once.hpp"
 #include "NeForce/core/exception/exception_ptr.hpp"
 #include "NeForce/core/functional/function.hpp"
@@ -335,6 +338,21 @@ struct __future_base {
         atomic_futex<> status{status::not_ready}; ///< 原子状态变量
         atomic_flag retrieved;                    ///< 是否已获取标志
         once_flag flag;                           ///< 一次性标志，用于确保只设置一次结果
+#ifdef NEFORCE_STANDARD_20
+        atomic<void*> continuation_{nullptr}; ///< 等待中的协程恢复入口
+#endif
+
+        /**
+         * @brief 标记结果就绪并恢复等待中的协程
+         */
+        void become_ready() noexcept {
+            status.store_notify_all(status::ready, memory_order_release);
+#ifdef NEFORCE_STANDARD_20
+            if (void* handle = take_continuation()) {
+                coroutine_handle<>::from_address(handle).resume();
+            }
+#endif
+        }
 
     public:
         /**
@@ -345,6 +363,35 @@ struct __future_base {
         state_base(const state_base&) = delete;
         state_base& operator=(const state_base&) = delete;
         virtual ~state_base() = default;
+
+        /**
+         * @brief 结果是否已就绪
+         */
+        NEFORCE_NODISCARD bool is_ready() const noexcept { return status.load(memory_order_acquire) == status::ready; }
+
+        /**
+         * @brief 是否为延迟执行的 future
+         */
+        NEFORCE_NODISCARD bool deferred() const { return is_deferred_future(); }
+
+#ifdef NEFORCE_STANDARD_20
+        /**
+         * @brief 登记协程恢复入口
+         * @param handle 协程句柄地址
+         * @note 同一共享状态只允许一个等待者（future 是独占的）
+         */
+        void set_continuation(void* handle) noexcept { continuation_.store(handle, memory_order_seq_cst); }
+
+        /**
+         * @brief 取走并清空协程恢复入口
+         */
+        NEFORCE_NODISCARD void* take_continuation() noexcept {
+            return continuation_.exchange(nullptr, memory_order_seq_cst);
+        }
+#else
+        void set_continuation(void* /*handle*/) noexcept {}
+        NEFORCE_NODISCARD void* take_continuation() noexcept { return nullptr; }
+#endif
 
         /**
          * @brief 等待结果就绪
@@ -420,7 +467,7 @@ struct __future_base {
             function<PtrType()> func = _NEFORCE forward<Callable>(result_func);
             call_once(flag, &state_base::do_set, this, _NEFORCE addressof(func), _NEFORCE addressof(did_set));
             if (did_set) {
-                status.store_notify_all(status::ready, memory_order_release);
+                become_ready();
             } else if (!ignore_failure) {
                 NEFORCE_THROW_EXCEPTION(future_exception(future_errc_cstr(future_errc::promise_already_satisfied)));
             }
@@ -457,7 +504,7 @@ struct __future_base {
             if (static_cast<bool>(result)) {
                 result->error_ptr = make_exception_ptr(future_exception(future_errc_cstr(future_errc::broken_promise)));
                 result_ptr.swap(result);
-                status.store_notify_all(status::ready, memory_order_release);
+                become_ready();
             }
         }
 
@@ -613,7 +660,7 @@ struct __future_base {
                 auto* const self = static_cast<make_ready*>(ptr);
                 const auto state = self->shared_state.lock();
                 if (state) {
-                    state->status.store_notify_all(status::ready, memory_order_release);
+                    state->become_ready();
                 }
                 delete self;
             }
@@ -774,6 +821,77 @@ public:
 
 protected:
     /**
+     * @brief 取出共享状态
+     * @return 共享状态指针
+     */
+    NEFORCE_NODISCARD state_type take_state() noexcept { return _NEFORCE move(state_ptr); }
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @class awaiter
+     * @brief future 的协程等待器
+     */
+    class awaiter {
+    public:
+        /**
+         * @brief 构造函数
+         * @param state 共享状态
+         */
+        explicit awaiter(state_type state) :
+        state_(_NEFORCE move(state)) {}
+
+        /**
+         * @brief 就绪检查
+         */
+        NEFORCE_NODISCARD bool await_ready() const noexcept { return !state_ || state_->is_ready(); }
+
+        /**
+         * @brief 挂起时登记恢复入口
+         * @param handle 当前协程句柄
+         * @return 需要挂起返回 true
+         */
+        bool await_suspend(coroutine_handle<> handle) {
+            if (!state_) {
+                return false;
+            }
+            if (state_->deferred()) {
+                state_->wait();
+                return false;
+            }
+            state_->set_continuation(handle.address());
+            if (state_->is_ready()) {
+                static_cast<void>(state_->take_continuation());
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         * @brief 恢复时取出结果
+         * @return 结果值
+         * @throw future_exception 共享状态无效时抛出
+         */
+        decltype(auto) await_resume() {
+            state_base::check(state_);
+            result_base& result = state_->wait();
+            if (result.error_ptr != nullptr) {
+                rethrow_exception(result.error_ptr);
+            }
+            if constexpr (is_void_v<Res>) {
+                return;
+            } else if constexpr (is_lvalue_reference_v<Res>) {
+                return static_cast<basic_result<Res>&>(result).get();
+            } else {
+                return _NEFORCE move(static_cast<basic_result<Res>&>(result).value());
+            }
+        }
+
+    private:
+        state_type state_; ///< 共享状态
+    };
+#endif
+
+    /**
      * @brief 获取结果
      * @return 结果引用
      */
@@ -912,6 +1030,15 @@ public:
         return _NEFORCE move(this->get_result().value());
     }
 
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 以协程方式等待结果
+     * @return 协程等待器
+     * @note 只允许对右值 future 使用；等待期间共享状态由等待器持有
+     */
+    typename base_type::awaiter operator co_await() && { return typename base_type::awaiter(this->take_state()); }
+#endif
+
     /**
      * @brief 转换为共享future
      * @return 共享future对象
@@ -963,6 +1090,15 @@ public:
         return this->get_result().get();
     }
 
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 以协程方式等待结果
+     * @return 协程等待器
+     * @note 只允许对右值 future 使用；等待期间共享状态由等待器持有
+     */
+    typename base_type::awaiter operator co_await() && { return typename base_type::awaiter(this->take_state()); }
+#endif
+
     shared_future<Res&> share() noexcept;
 };
 
@@ -1008,6 +1144,15 @@ public:
         base_type::reset reset(*this);
         ignore = this->get_result();
     }
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 以协程方式等待结果
+     * @return 协程等待器
+     * @note 只允许对右值 future 使用；等待期间共享状态由等待器持有
+     */
+    typename base_type::awaiter operator co_await() && { return typename base_type::awaiter(this->take_state()); }
+#endif
 
     shared_future<void> share() noexcept;
 };

@@ -46,8 +46,8 @@ public:
         uintptr_t min_app_address{0};       ///< 应用程序最小地址
         uintptr_t max_app_address{0};       ///< 应用程序最大地址
         uintptr_t active_processor_mask{0}; ///< 活动处理器掩码
-        uint16_t processor_level{0};        ///< 处理器级别
-        uint16_t processor_revision{0};     ///< 处理器修订版本
+        uint16_t processor_level{0};        ///< 处理器级别（Windows）
+        uint16_t processor_revision{0};     ///< 处理器修订版本（Windows）
     };
 
     /**
@@ -154,27 +154,76 @@ public:
     struct cpu_info {
         string vendor;                  ///< 厂商名称
         string brand;                   ///< 型号名称
-        uint32_t max_mhz{0};            ///< 最大频率（MHz），无法获取时为 0
-        uint32_t current_mhz{0};        ///< 采集时刻的频率（MHz），无法获取时为 0，随 refresh() 更新
+        uint32_t max_mhz{0};            ///< 最大频率（MHz）
+        uint32_t current_mhz{0};        ///< 采集时刻的频率（MHz）
         uint32_t cores{0};              ///< 物理核心数
         uint32_t logical_processors{0}; ///< 逻辑处理器数
         string features;                ///< 支持的指令集特性
         simd_info simd;                 ///< 运行时 SIMD 能力
 
-        string family;     ///< 基础 Family
-        string model;      ///< 基础 Model
-        string stepping;   ///< Stepping
-        string ext_family; ///< 扩展 Family
-        string ext_model;  ///< 扩展 Model
-        string revision;   ///< 处理器修订号
-        string core_vid;   ///< 核心电压
-        string technology; ///< 制程工艺
-        string package;    ///< 封装/插槽
-        string code_name;  ///< 核心代号
+        /**
+         * @struct x86_info
+         * @brief x86 专有 CPU 信息
+         */
+        struct x86_info {
+            string family;     ///< 基础 Family
+            string model;      ///< 基础 Model
+            string stepping;   ///< Stepping
+            string ext_family; ///< 扩展 Family
+            string ext_model;  ///< 扩展 Model
+            string revision;   ///< 修订号
+            string core_vid;   ///< 核心电压
+            string technology; ///< 制程工艺
+            string socket;     ///< 封装/插槽
+            string code_name;  ///< 核心代号
 
-        uint32_t model_id{0};                 ///< 完整 Model 编号
-        uint32_t max_tdp_watts{0};            ///< 最大热设计功耗（W），未知为 0
-        uint32_t bus_speed_mhz{0};            ///< 外部时钟/总线频率（MHz）
+            uint32_t model_id{0};      ///< 完整 Model 编号
+            uint32_t max_tdp_watts{0}; ///< 最大热设计功耗（W）
+            uint32_t bus_speed_mhz{0}; ///< 外部时钟/总线频率（MHz）
+        } x86;
+
+        /**
+         * @struct arm_info
+         * @brief ARM64 专有 CPU 信息
+         */
+        struct arm_info {
+            string architecture; ///< CPU architecture
+            string implementer;  ///< CPU implementer
+            string part;         ///< CPU part
+            string variant;      ///< CPU variant
+            string revision;     ///< CPU revision
+            string core_name;    ///< 核心名称
+        } arm;
+
+        /**
+         * @struct riscv_info
+         * @brief RISC-V 专有 CPU 信息
+         */
+        struct riscv_info {
+            string isa;       ///< ISA 字符串
+            string mmu;       ///< MMU 类型
+            string uarch;     ///< 微架构
+            string mvendorid; ///< 厂商 ID
+            string marchid;   ///< 架构 ID
+            string mimpid;    ///< 实现 ID
+        } riscv;
+
+        /**
+         * @struct loongarch_info
+         * @brief LoongArch 专有 CPU 信息
+         */
+        struct loongarch_info {
+            string family;           ///< CPU Family
+            string revision;         ///< CPU Revision
+            string fpu_revision;     ///< FPU Revision
+            string isa;              ///< ISA
+            string address_sizes;    ///< 地址位宽
+            string machine;          ///< 机器型号
+            string system_type;      ///< 系统类型
+            string watchpoint;       ///< 硬件观察点能力
+            uint32_t tlb_entries{0}; ///< TLB 条目数
+        } loongarch;
+
         uint32_t l1_kib{0};                   ///< L1 单实例容量（KiB）
         uint32_t l1_instances{0};             ///< L1 实例数
         uint32_t l1_data_kib{0};              ///< L1 数据缓存单实例容量（KiB）
@@ -203,8 +252,8 @@ public:
         uint32_t major{0};       ///< 主版本号
         uint32_t minor{0};       ///< 次版本号
         uint32_t build{0};       ///< 构建号
-        uint32_t platform_id{0}; ///< 平台ID
-        string csd_version;      ///< 补丁版本
+        uint32_t platform_id{0}; ///< 平台ID（Windows）
+        string csd_version;      ///< 补丁版本（Windows）
         string product_name;     ///< 产品名称
 
         /**
@@ -229,7 +278,7 @@ public:
             string brand;     ///< BIOS 厂商
             string version;   ///< BIOS 版本
             string date;      ///< 发布日期
-            string microcode; ///< CPU 微码版本
+            string microcode; ///< CPU 微码版本（x86）
         } bios;
 
         /**
@@ -249,11 +298,11 @@ public:
          * @brief 内存信息
          */
         struct memory_section {
-            string type;                ///< 内存类型
-            string channel;             ///< 通道与模组数量
-            uint32_t module_count{0};   ///< 已识别模组数
-            uint32_t configured_mts{0}; ///< 实际运行速率（MT/s）
-            uint32_t rated_mts{0};      ///< 模组标称速率（MT/s）
+            string type;                ///< 内存类型（Linux 需 root）
+            string channel;             ///< 通道与模组数量（Linux 需 root）
+            uint32_t module_count{0};   ///< 已识别模组数（Linux 需 root）
+            uint32_t configured_mts{0}; ///< 实际运行速率（MT/s，Linux 需 root）
+            uint32_t rated_mts{0};      ///< 模组标称速率（MT/s，Linux 需 root）
             string timings;             ///< 时序
             string llc_ring;            ///< LLC/环形总线信息
         } memory;
@@ -312,8 +361,8 @@ public:
         bool on_ac{false};                 ///< 是否接入交流电源
         bool charging{false};              ///< 是否正在充电
         float64_t charge_percent{-1.0};    ///< 剩余电量百分比，未知为 -1
-        int64_t remaining_seconds{-1};     ///< 预计可用秒数，未知为 -1
-        float64_t rate_mw{-1.0};           ///< 充放电功率绝对值（毫瓦），未知为 -1
+        int64_t remaining_seconds{-1};     ///< 预计可用秒数，未知为 -1（充电/满电时通常未知）
+        float64_t rate_mw{-1.0};           ///< 充放电功率绝对值（毫瓦），未知为 -1（满电/交流供电时可能未知）
         float64_t capacity_mwh{-1.0};      ///< 当前剩余容量（毫瓦时），未知为 -1
         float64_t full_capacity_mwh{-1.0}; ///< 满电容量（毫瓦时），未知为 -1
         string status;                     ///< "charging"/"discharging"/"full"/"idle"/"unknown"

@@ -88,6 +88,12 @@ size_t heap_timer::drain_expired(const steady_clock::time_point& now, expired_en
     return count;
 }
 
+bool heap_timer::contains(const token id) const {
+    lock<mutex> guard{mutex_};
+    const auto it = states_.find(id);
+    return it != states_.end() && it->second == 0;
+}
+
 size_t heap_timer::size() const {
     lock<mutex> guard{mutex_};
     return live_;
