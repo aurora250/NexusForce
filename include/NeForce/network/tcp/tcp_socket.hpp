@@ -102,7 +102,7 @@ public:
      *
      * 创建TCP协议的socket，使用SOCK_STREAM类型和IPPROTO_TCP协议。
      */
-    void open(ip_family f = ip_family::INET4);
+    void open(ip_family f = ip_family::inet4);
 
     /**
      * @brief 连接到远程服务器

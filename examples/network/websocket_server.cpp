@@ -96,11 +96,11 @@ document.getElementById('input').addEventListener('keypress', (e) => {
 
         // 消息处理器
         session->set_message_handler([session](const string& msg, websocket_opcode opcode) {
-            if (opcode == websocket_opcode::TEXT) {
+            if (opcode == websocket_opcode::text) {
                 printfln("Received text ({} bytes): {}", msg.size(), msg);
                 // Echo消息
                 session->send("Echo: " + msg);
-            } else if (opcode == websocket_opcode::BINARY) {
+            } else if (opcode == websocket_opcode::binary) {
                 printfln("Received binary data ({} bytes)", msg.size());
                 session->send("Binary received: " + to_string(msg.size()) + " bytes");
             }

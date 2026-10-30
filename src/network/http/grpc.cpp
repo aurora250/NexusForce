@@ -65,18 +65,18 @@ void grpc_handler::process_unary(http_request& request, http_response& response,
     const int n = framer_.decode(data, request.body.size(), messages);
 
     if (n < 0) {
-        send_error(response, grpc_status::INVALID_ARGUMENT, "Invalid gRPC frame");
+        send_error(response, grpc_status::invalid_argument, "Invalid gRPC frame");
         return;
     }
     if (n == 0 || messages.empty()) {
-        send_error(response, grpc_status::INVALID_ARGUMENT, "Empty gRPC request");
+        send_error(response, grpc_status::invalid_argument, "Empty gRPC request");
         return;
     }
 
     try {
         auto result = handler(messages[0]);
 
-        response.status = http_status::S2_OK;
+        response.status = http_status::ok;
         response.status_message = "OK";
         response.set_content_type(GRPC_CONTENT_TYPE);
         response.body.assign(reinterpret_cast<const char*>(result.payload.data()), result.payload.size());
@@ -88,7 +88,7 @@ void grpc_handler::process_unary(http_request& request, http_response& response,
         response.trailers["grpc-status"] = "0";
         response.trailers["grpc-message"] = "";
     } catch (const exception& e) {
-        send_error(response, grpc_status::INTERNAL, e.what());
+        send_error(response, grpc_status::internal, e.what());
     }
 }
 
@@ -102,31 +102,31 @@ void grpc_handler::send_error(http_response& response, grpc_status status, const
 
 http_status grpc_handler::grpc_to_http_status(grpc_status status) noexcept {
     switch (status) {
-        case grpc_status::OK:
-            return http_status::S2_OK;
-        case grpc_status::INVALID_ARGUMENT:
-            return http_status::S4_BAD_REQUEST;
-        case grpc_status::NOT_FOUND:
-            return http_status::S4_NOT_FOUND;
-        case grpc_status::PERMISSION_DENIED:
-            return http_status::S4_FORBIDDEN;
-        case grpc_status::UNAUTHENTICATED:
-            return http_status::S4_UNAUTHORIZED;
-        case grpc_status::UNIMPLEMENTED:
-            return http_status::S5_NOT_IMPLEMENTED;
-        case grpc_status::UNAVAILABLE:
-            return http_status::S5_SERVICE_UNAVAILABLE;
-        case grpc_status::DEADLINE_EXCEEDED:
-            return http_status::S4_REQUEST_TIMEOUT;
-        case grpc_status::RESOURCE_EXHAUSTED:
-            return http_status::S4_TOO_MANY_REQUESTS;
-        case grpc_status::ABORTED:
-            return http_status::S4_CONFLICT;
-        case grpc_status::OUT_OF_RANGE:
-            return http_status::S4_BAD_REQUEST;
-        case grpc_status::INTERNAL:
+        case grpc_status::ok:
+            return http_status::ok;
+        case grpc_status::invalid_argument:
+            return http_status::bad_request;
+        case grpc_status::not_found:
+            return http_status::not_found;
+        case grpc_status::permission_denied:
+            return http_status::forbidden;
+        case grpc_status::unauthenticated:
+            return http_status::unauthorized;
+        case grpc_status::unimplemented:
+            return http_status::not_implemented;
+        case grpc_status::unavailable:
+            return http_status::service_unavailable;
+        case grpc_status::deadline_exceeded:
+            return http_status::request_timeout;
+        case grpc_status::resource_exhausted:
+            return http_status::too_many_requests;
+        case grpc_status::aborted:
+            return http_status::conflict;
+        case grpc_status::out_of_range:
+            return http_status::bad_request;
+        case grpc_status::internal:
         default:
-            return http_status::S5_INTERNAL_SERVER_ERROR;
+            return http_status::internal_server_error;
     }
 }
 

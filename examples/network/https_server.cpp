@@ -195,7 +195,7 @@ int main() {
     // =========================================================================
 
     router.set_method_not_allowed_handler([](http_request& req, http_response& res) {
-        res.status = http_status::S4_METHOD_NOT_ALLOWED;
+        res.status = http_status::method_not_allowed;
         json_builder jb;
         jb.begin_object();
         jb.key("error").value("Method Not Allowed");
@@ -207,7 +207,7 @@ int main() {
     });
 
     router.set_not_found_handler([](http_request& req, http_response& res) {
-        res.status = http_status::S4_NOT_FOUND;
+        res.status = http_status::not_found;
         json_builder jb;
         jb.begin_object();
         jb.key("error").value("Not Found");

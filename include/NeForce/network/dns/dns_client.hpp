@@ -55,7 +55,7 @@ public:
      */
     struct config {
         string server{"8.8.8.8"};   ///< DNS服务器地址
-        ports port{ports::DNS};     ///< DNS服务器端口
+        ports port{ports::dns};     ///< DNS服务器端口
         milliseconds timeout{5000}; ///< 单轮查询超时时间
     };
 
@@ -284,7 +284,7 @@ public:
      * @throws dns_exception 查询失败时抛出
      */
     dns_query_result query(string_view domain, dns_record::raw type = dns_record::A,
-                           dns_class qclass = dns_class::INTERNET);
+                           dns_class qclass = dns_class::internet);
 
     /**
      * @brief 异步DNS查询
@@ -296,7 +296,7 @@ public:
     NEFORCE_DEPRECATED_VERSION("query_async(const string&, dns_record::raw, dns_class)", "v2.0.0",
                                "async_query(string_view, dns_record::raw, dns_class, use_future_t)")
     future<dns_query_result> query_async(const string& domain, dns_record::raw type = dns_record::A,
-                                         dns_class qclass = dns_class::INTERNET);
+                                         dns_class qclass = dns_class::internet);
 
     /**
      * @brief 回调异步DNS查询
@@ -445,7 +445,7 @@ public:
      * @return 编码后的DNS查询消息
      */
     static byte_vector build_query(string_view domain, dns_record::raw type = dns_record::A,
-                                   dns_class qclass = dns_class::INTERNET, bool rd = true, bool edns_enable = true,
+                                   dns_class qclass = dns_class::internet, bool rd = true, bool edns_enable = true,
                                    bool dnssec_ok = false, uint16_t edns_payload = edns::DEFAULT_UDP_PAYLOAD,
                                    string_view case_pattern = {});
 

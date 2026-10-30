@@ -207,9 +207,44 @@ http_router::http_handler_t http_router::find_handler(const http_method& method,
     return {};
 }
 
+string http_router::allowed_methods(const string& path) const {
+    string search_path = path;
+    if (!strict_routing && search_path.length() > 1 && search_path.ends_with("/")) {
+        search_path = search_path.head(search_path.length() - 1);
+    }
+
+    string result;
+    for (const auto& route: routes_) {
+        const string& method = route.first;
+        bool matched = false;
+
+        const auto trie_it = tries_.find(method);
+        if (trie_it != tries_.end() && trie_it->second.contains_path(search_path, case_sensitive)) {
+            matched = true;
+        }
+
+        if (!matched) {
+            for (const auto& entry: route.second) {
+                if (entry.is_regex && entry.regex_pattern->match(search_path)) {
+                    matched = true;
+                    break;
+                }
+            }
+        }
+
+        if (matched) {
+            if (!result.empty()) {
+                result += ", ";
+            }
+            result += method;
+        }
+    }
+    return result;
+}
+
 void http_router::setup_default_handlers() {
     not_found_handler_ = [](http_request& request, http_response& response) {
-        response.status = http_status::S4_NOT_FOUND;
+        response.status = http_status::not_found;
         response.status_message = "Not Found";
         response.set_content_type(http_content::HTML_TEXT());
         response.body = "<!DOCTYPE html>"
@@ -221,9 +256,13 @@ void http_router::setup_default_handlers() {
                         "</body></html>";
     };
 
-    method_not_allowed_handler_ = [](http_request& request, http_response& response) {
-        response.status = http_status::S4_METHOD_NOT_ALLOWED;
+    method_not_allowed_handler_ = [this](http_request& request, http_response& response) {
+        response.status = http_status::method_not_allowed;
         response.status_message = "Method Not Allowed";
+        const string allow = allowed_methods(request.path);
+        if (!allow.empty()) {
+            response.set_header("Allow", allow);
+        }
         response.set_content_type(http_content::HTML_TEXT());
         response.body = "<!DOCTYPE html>"
                         "<html><head><title>405 Method Not Allowed</title></head>"
@@ -235,7 +274,7 @@ void http_router::setup_default_handlers() {
     };
 
     exception_handler_ = [](http_request& /*request*/, http_response& response, const exception& /*e*/) {
-        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+        response.status = http_status::internal_server_error;
         response.status_message = "Internal Server Error";
         response.set_content_type(http_content::HTML_TEXT());
         response.body = "<!DOCTYPE html>"
@@ -250,6 +289,7 @@ void http_router::resolve_handler(http_request& request, http_response& response
     const auto handler = find_handler(request.method, request.path, request);
 
     if (handler) {
+        response.status = http_status::ok;
         handler(request, response);
         return;
     }
@@ -310,7 +350,7 @@ http_response http_router::handle_request(http_request& request) {
         if (exception_handler_) {
             exception_handler_(request, response, e);
         } else {
-            response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            response.status = http_status::internal_server_error;
             response.status_message = "Internal Server Error";
             response.set_content_type(http_content::PLAIN_TEXT());
             response.body = "Internal Server Error";
@@ -342,7 +382,7 @@ void http_router::handle_request_async(http_request request, function<void(http_
                         cb(move(response));
                         return;
                     }
-                    response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+                    response.status = http_status::internal_server_error;
                     response.status_message = "Internal Server Error";
                     response.set_content_type(http_content::PLAIN_TEXT());
                     response.body = "Internal Server Error";

@@ -25,7 +25,7 @@ protected:
 
 TEST_F(SqlBuilderTest, DefaultConstructor) {
     sql_builder b;
-    EXPECT_EQ(b.type(), sql_operate::SELECT);
+    EXPECT_EQ(b.type(), sql_operate::select);
     EXPECT_TRUE(b.is_empty());
 }
 
@@ -118,7 +118,7 @@ TEST_F(SqlBuilderTest, FromTableWithAlias) {
 }
 
 TEST_F(SqlBuilderTest, JoinEnumType) {
-    builder.select_all().from("users", "u").join(sql_join::LEFT, "orders", "u.id = orders.user_id");
+    builder.select_all().from("users", "u").join(sql_join::left, "orders", "u.id = orders.user_id");
     EXPECT_EQ(builder.build(), "SELECT * FROM users u LEFT JOIN orders ON u.id = orders.user_id;");
 }
 
@@ -313,12 +313,12 @@ TEST_F(SqlBuilderTest, HavingMultipleConditions) {
 }
 
 TEST_F(SqlBuilderTest, OrderByAsc) {
-    builder.select_all().from("users").order_by("name", sql_order::ASC);
+    builder.select_all().from("users").order_by("name", sql_order::asc);
     EXPECT_EQ(builder.build(), "SELECT * FROM users ORDER BY name ASC;");
 }
 
 TEST_F(SqlBuilderTest, OrderByDesc) {
-    builder.select_all().from("users").order_by("name", sql_order::DESC);
+    builder.select_all().from("users").order_by("name", sql_order::desc);
     EXPECT_EQ(builder.build(), "SELECT * FROM users ORDER BY name DESC;");
 }
 
@@ -385,7 +385,7 @@ TEST_F(SqlBuilderTest, InsertIntoWithFields) {
 
 TEST_F(SqlBuilderTest, InsertIntoTableOnly) {
     builder.insert_into("users");
-    EXPECT_EQ(builder.type(), sql_operate::INSERT);
+    EXPECT_EQ(builder.type(), sql_operate::insert);
 }
 
 TEST_F(SqlBuilderTest, InsertWithColumnsAndValues) {
@@ -451,7 +451,7 @@ TEST_F(SqlBuilderTest, SetDecrementDefault) {
 
 TEST_F(SqlBuilderTest, Remove) {
     builder.remove().delete_from("users");
-    EXPECT_EQ(builder.type(), sql_operate::DELETE);
+    EXPECT_EQ(builder.type(), sql_operate::delete_);
 }
 
 TEST_F(SqlBuilderTest, DeleteFrom) {
@@ -552,7 +552,7 @@ TEST_F(SqlBuilderTest, FromSubqueryWithWhere) {
 TEST_F(SqlBuilderTest, Reset) {
     builder.select("id").from("users").where_eq("status", "'active'");
     builder.reset();
-    EXPECT_EQ(builder.type(), sql_operate::SELECT);
+    EXPECT_EQ(builder.type(), sql_operate::select);
     EXPECT_TRUE(builder.is_empty());
 }
 
@@ -568,15 +568,15 @@ TEST_F(SqlBuilderTest, Table) {
 }
 
 TEST_F(SqlBuilderTest, Type) {
-    EXPECT_EQ(builder.type(), sql_operate::SELECT);
+    EXPECT_EQ(builder.type(), sql_operate::select);
     builder.update("users");
-    EXPECT_EQ(builder.type(), sql_operate::UPDATE);
+    EXPECT_EQ(builder.type(), sql_operate::update);
     builder.reset();
     builder.insert_into("users", {"name"});
-    EXPECT_EQ(builder.type(), sql_operate::INSERT);
+    EXPECT_EQ(builder.type(), sql_operate::insert);
     builder.reset();
     builder.delete_from("users");
-    EXPECT_EQ(builder.type(), sql_operate::DELETE);
+    EXPECT_EQ(builder.type(), sql_operate::delete_);
 }
 
 TEST_F(SqlBuilderTest, ComplexSelectQuery) {
@@ -741,7 +741,7 @@ TEST_F(SqlBuilderTest, UnionAllWithWhere) {
 
 TEST_F(SqlBuilderTest, SetOpPreservesType) {
     builder.select("id").from("users").union_("SELECT id FROM archived");
-    EXPECT_EQ(builder.type(), sql_operate::SELECT);
+    EXPECT_EQ(builder.type(), sql_operate::select);
 }
 
 TEST_F(SqlBuilderTest, SetOpCopyPreserved) {
@@ -1826,56 +1826,56 @@ TEST_F(SqliteFactoryTest, CreateConnectReturnsValidConnection) {
 }
 #endif
 
-TEST_F(SqlBuilderTest, SetDialectDefaultIsGeneric) { EXPECT_EQ(builder.dialect(), sql_dialect::GENERIC); }
+TEST_F(SqlBuilderTest, SetDialectDefaultIsGeneric) { EXPECT_EQ(builder.dialect(), sql_dialect::generic); }
 
 TEST_F(SqlBuilderTest, SetDialectAndGet) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
-    EXPECT_EQ(builder.dialect(), sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
+    EXPECT_EQ(builder.dialect(), sql_dialect::postgresql);
 }
 
 TEST_F(SqlBuilderTest, SetDialectReturnsSelf) {
-    auto& ref = builder.set_dialect(sql_dialect::MYSQL);
+    auto& ref = builder.set_dialect(sql_dialect::mysql);
     EXPECT_EQ(&ref, &builder);
 }
 
 TEST_F(SqlBuilderTest, DialectGenericPlaceholderQmark) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     EXPECT_EQ(builder.placeholder(1), string("?"));
     EXPECT_EQ(builder.placeholder(5), string("?"));
 }
 
 TEST_F(SqlBuilderTest, DialectMysqlPlaceholderQmark) {
-    builder.set_dialect(sql_dialect::MYSQL);
+    builder.set_dialect(sql_dialect::mysql);
     EXPECT_EQ(builder.placeholder(1), string("?"));
     EXPECT_EQ(builder.placeholder(3), string("?"));
 }
 
 TEST_F(SqlBuilderTest, DialectSqlitePlaceholderQmark) {
-    builder.set_dialect(sql_dialect::SQLITE);
+    builder.set_dialect(sql_dialect::sqlite);
     EXPECT_EQ(builder.placeholder(1), string("?"));
 }
 
 TEST_F(SqlBuilderTest, DialectMssqlPlaceholderQmark) {
-    builder.set_dialect(sql_dialect::MSSQL);
+    builder.set_dialect(sql_dialect::mssql);
     EXPECT_EQ(builder.placeholder(1), string("?"));
 }
 
 TEST_F(SqlBuilderTest, DialectPostgresqlPlaceholderDollarN) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     EXPECT_EQ(builder.placeholder(1), string("$1"));
     EXPECT_EQ(builder.placeholder(2), string("$2"));
     EXPECT_EQ(builder.placeholder(5), string("$5"));
 }
 
 TEST_F(SqlBuilderTest, DialectOraclePlaceholderColonN) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     EXPECT_EQ(builder.placeholder(1), string(":1"));
     EXPECT_EQ(builder.placeholder(2), string(":2"));
     EXPECT_EQ(builder.placeholder(10), string(":10"));
 }
 
 TEST_F(SqlBuilderTest, NextPlaceholderAutoIncrement) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     EXPECT_EQ(builder.next_placeholder(), string("?"));
     EXPECT_EQ(builder.next_placeholder(), string("?"));
     EXPECT_EQ(builder.next_placeholder(), string("?"));
@@ -1883,7 +1883,7 @@ TEST_F(SqlBuilderTest, NextPlaceholderAutoIncrement) {
 }
 
 TEST_F(SqlBuilderTest, NextPlaceholderPgIncrement) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     EXPECT_EQ(builder.next_placeholder(), string("$1"));
     EXPECT_EQ(builder.next_placeholder(), string("$2"));
     EXPECT_EQ(builder.next_placeholder(), string("$3"));
@@ -1891,7 +1891,7 @@ TEST_F(SqlBuilderTest, NextPlaceholderPgIncrement) {
 }
 
 TEST_F(SqlBuilderTest, NextPlaceholderOracleIncrement) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     EXPECT_EQ(builder.next_placeholder(), string(":1"));
     EXPECT_EQ(builder.next_placeholder(), string(":2"));
     EXPECT_EQ(builder.next_placeholder(), string(":3"));
@@ -1901,26 +1901,26 @@ TEST_F(SqlBuilderTest, NextPlaceholderOracleIncrement) {
 TEST_F(SqlBuilderTest, ParamCountDefaultZero) { EXPECT_EQ(builder.param_count(), 0u); }
 
 TEST_F(SqlBuilderTest, ParamCountAfterInsertInto) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.insert_into("users", {"name", "email", "age"});
     EXPECT_EQ(builder.param_count(), 3u);
 }
 
 TEST_F(SqlBuilderTest, ParamCountAfterInsertIntoPg) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     builder.insert_into("users", {"name", "email"});
     EXPECT_EQ(builder.param_count(), 2u);
 }
 
 TEST_F(SqlBuilderTest, ParamCountAfterColumns) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.insert_into("users");
     builder.columns({"name", "email", "age", "status"});
     EXPECT_EQ(builder.param_count(), 4u);
 }
 
 TEST_F(SqlBuilderTest, ParamCountAfterSetParam) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.update("users");
     builder.set_param("name");
     builder.set_param("email");
@@ -1929,7 +1929,7 @@ TEST_F(SqlBuilderTest, ParamCountAfterSetParam) {
 }
 
 TEST_F(SqlBuilderTest, ParamCountAfterNextPlaceholder) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.update("users");
     builder.set_param("name");
     builder.set_param("email");
@@ -1945,7 +1945,7 @@ TEST_F(SqlBuilderTest, ParamCountResetsToZero) {
 }
 
 TEST_F(SqlBuilderTest, InsertIntoDialectPgGeneratesDollarN) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     builder.insert_into("users", {"name", "email", "age"});
     string sql = builder.build();
     EXPECT_NE(sql.find("$1"), string::npos);
@@ -1955,7 +1955,7 @@ TEST_F(SqlBuilderTest, InsertIntoDialectPgGeneratesDollarN) {
 }
 
 TEST_F(SqlBuilderTest, InsertIntoDialectOracleGeneratesColonN) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.insert_into("users", {"name", "email"});
     string sql = builder.build();
     EXPECT_NE(sql.find(":1"), string::npos);
@@ -1964,14 +1964,14 @@ TEST_F(SqlBuilderTest, InsertIntoDialectOracleGeneratesColonN) {
 }
 
 TEST_F(SqlBuilderTest, InsertIntoDialectGenericGeneratesQmark) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.insert_into("users", {"name", "email"});
     string sql = builder.build();
     EXPECT_EQ(sql, string("INSERT INTO users (name, email) VALUES (?, ?);"));
 }
 
 TEST_F(SqlBuilderTest, UpdateSetParamDialectAware) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.update("users");
     builder.set_param("name");
     builder.set_param("email");
@@ -1981,7 +1981,7 @@ TEST_F(SqlBuilderTest, UpdateSetParamDialectAware) {
 }
 
 TEST_F(SqlBuilderTest, UpdateSetParamPg) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     builder.update("users");
     builder.set_param("name");
     builder.set_param("email");
@@ -1993,7 +1993,7 @@ TEST_F(SqlBuilderTest, UpdateSetParamPg) {
 }
 
 TEST_F(SqlBuilderTest, UpdateSetParamOracle) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.update("users");
     builder.set_param("name");
     builder.set_param("email");
@@ -2003,14 +2003,14 @@ TEST_F(SqlBuilderTest, UpdateSetParamOracle) {
 }
 
 TEST_F(SqlBuilderTest, DeleteWithPlaceholderDialectAware) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.delete_from("users");
     builder.where_eq("id", builder.placeholder(1));
     EXPECT_EQ(builder.build(), string("DELETE FROM users WHERE id = ?;"));
 }
 
 TEST_F(SqlBuilderTest, DeleteWithPlaceholderPg) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     builder.delete_from("users");
     builder.where_eq("id", builder.placeholder(1));
     string sql = builder.build();
@@ -2018,7 +2018,7 @@ TEST_F(SqlBuilderTest, DeleteWithPlaceholderPg) {
 }
 
 TEST_F(SqlBuilderTest, DeleteWithPlaceholderOracle) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.delete_from("users");
     builder.where_eq("id", builder.placeholder(1));
     string sql = builder.build();
@@ -2026,40 +2026,40 @@ TEST_F(SqlBuilderTest, DeleteWithPlaceholderOracle) {
 }
 
 TEST_F(SqlBuilderTest, DialectCopyConstructorPreservesDialect) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     builder.insert_into("users", {"name"});
     sql_builder copy(builder);
-    EXPECT_EQ(copy.dialect(), sql_dialect::POSTGRESQL);
+    EXPECT_EQ(copy.dialect(), sql_dialect::postgresql);
     EXPECT_EQ(copy.param_count(), builder.param_count());
     EXPECT_NE(copy.build().find("$1"), string::npos);
 }
 
 TEST_F(SqlBuilderTest, DialectCopyAssignmentPreservesDialect) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     builder.insert_into("users", {"name"});
     sql_builder copy;
     copy = builder;
-    EXPECT_EQ(copy.dialect(), sql_dialect::POSTGRESQL);
+    EXPECT_EQ(copy.dialect(), sql_dialect::postgresql);
     EXPECT_EQ(copy.param_count(), builder.param_count());
 }
 
 TEST_F(SqlBuilderTest, DialectMoveConstructorPreservesDialect) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.insert_into("users", {"name"});
     sql_builder moved(move(builder));
-    EXPECT_EQ(moved.dialect(), sql_dialect::ORACLE);
+    EXPECT_EQ(moved.dialect(), sql_dialect::oracle);
 }
 
 TEST_F(SqlBuilderTest, DialectMoveAssignmentPreservesDialect) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.insert_into("users", {"name"});
     sql_builder moved;
     moved = move(builder);
-    EXPECT_EQ(moved.dialect(), sql_dialect::ORACLE);
+    EXPECT_EQ(moved.dialect(), sql_dialect::oracle);
 }
 
 TEST_F(SqlBuilderTest, ResetClearsParamSequence) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.update("users");
     builder.set_param("a");
     builder.set_param("b");
@@ -2070,7 +2070,7 @@ TEST_F(SqlBuilderTest, ResetClearsParamSequence) {
 }
 
 TEST_F(SqlBuilderTest, ColumnsAutoFillDialectPlaceholders) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     builder.insert_into("users");
     builder.columns({"name", "email"});
     string sql = builder.build();
@@ -2079,7 +2079,7 @@ TEST_F(SqlBuilderTest, ColumnsAutoFillDialectPlaceholders) {
 }
 
 TEST_F(SqlBuilderTest, ColumnsDoesNotOverwriteExistingPlaceholders) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.insert_into("users");
     builder.columns({"a"});
     builder.columns({"a", "b"});
@@ -2088,14 +2088,14 @@ TEST_F(SqlBuilderTest, ColumnsDoesNotOverwriteExistingPlaceholders) {
 }
 
 TEST_F(SqlBuilderTest, CreateTableAutoIncrementGeneric) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
     string sql = builder.build();
     EXPECT_NE(sql.find("AUTO_INCREMENT"), string::npos);
 }
 
 TEST_F(SqlBuilderTest, CreateTableAutoIncrementPostgresql) {
-    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.set_dialect(sql_dialect::postgresql);
     builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
     string sql = builder.build();
     EXPECT_EQ(sql.find("AUTO_INCREMENT"), string::npos);
@@ -2103,7 +2103,7 @@ TEST_F(SqlBuilderTest, CreateTableAutoIncrementPostgresql) {
 }
 
 TEST_F(SqlBuilderTest, CreateTableAutoIncrementMssql) {
-    builder.set_dialect(sql_dialect::MSSQL);
+    builder.set_dialect(sql_dialect::mssql);
     builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
     string sql = builder.build();
     EXPECT_EQ(sql.find("AUTO_INCREMENT"), string::npos);
@@ -2111,7 +2111,7 @@ TEST_F(SqlBuilderTest, CreateTableAutoIncrementMssql) {
 }
 
 TEST_F(SqlBuilderTest, CreateTableAutoIncrementOracle) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
     string sql = builder.build();
     EXPECT_EQ(sql.find("AUTO_INCREMENT"), string::npos);
@@ -2119,7 +2119,7 @@ TEST_F(SqlBuilderTest, CreateTableAutoIncrementOracle) {
 }
 
 TEST_F(SqlBuilderTest, SelectLimitGenericUsesLimit) {
-    builder.set_dialect(sql_dialect::GENERIC);
+    builder.set_dialect(sql_dialect::generic);
     builder.select_all().from("users").limit(10).offset(20);
     string sql = builder.build();
     EXPECT_NE(sql.find("LIMIT 10"), string::npos);
@@ -2127,7 +2127,7 @@ TEST_F(SqlBuilderTest, SelectLimitGenericUsesLimit) {
 }
 
 TEST_F(SqlBuilderTest, SelectLimitOracleUsesFetchFirst) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.select_all().from("users").limit(10);
     string sql = builder.build();
     EXPECT_EQ(sql.find("LIMIT"), string::npos);
@@ -2135,7 +2135,7 @@ TEST_F(SqlBuilderTest, SelectLimitOracleUsesFetchFirst) {
 }
 
 TEST_F(SqlBuilderTest, SelectLimitOracleWithOffset) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.select_all().from("users").limit(10).offset(20);
     string sql = builder.build();
     EXPECT_EQ(sql.find("LIMIT"), string::npos);
@@ -2144,7 +2144,7 @@ TEST_F(SqlBuilderTest, SelectLimitOracleWithOffset) {
 }
 
 TEST_F(SqlBuilderTest, SelectPageOracleDoesNotUseLimit) {
-    builder.set_dialect(sql_dialect::ORACLE);
+    builder.set_dialect(sql_dialect::oracle);
     builder.select_all().from("users").page(3, 10);
     string sql = builder.build();
     EXPECT_EQ(sql.find("LIMIT"), string::npos);
@@ -2422,7 +2422,7 @@ TEST_F(SqlMapperTest, InsertSqlDefaultDialect) {
 }
 
 TEST_F(SqlMapperTest, InsertSqlPostgresql) {
-    string sql = sql_mapper<DbTestUser>::insert_sql("", sql_dialect::POSTGRESQL);
+    string sql = sql_mapper<DbTestUser>::insert_sql("", sql_dialect::postgresql);
     EXPECT_NE(sql.find("INSERT INTO tbl_users"), string::npos);
     EXPECT_NE(sql.find("$1"), string::npos);
     EXPECT_NE(sql.find("$2"), string::npos);
@@ -2430,7 +2430,7 @@ TEST_F(SqlMapperTest, InsertSqlPostgresql) {
 }
 
 TEST_F(SqlMapperTest, InsertSqlOracle) {
-    string sql = sql_mapper<DbTestUser>::insert_sql("", sql_dialect::ORACLE);
+    string sql = sql_mapper<DbTestUser>::insert_sql("", sql_dialect::oracle);
     EXPECT_NE(sql.find(":1"), string::npos);
     EXPECT_NE(sql.find(":2"), string::npos);
     EXPECT_EQ(sql.find("?"), string::npos);
@@ -2448,7 +2448,7 @@ TEST_F(SqlMapperTest, UpdateSqlDefaultDialect) {
 }
 
 TEST_F(SqlMapperTest, UpdateSqlPostgresql) {
-    string sql = sql_mapper<DbTestUser>::update_sql("", sql_dialect::POSTGRESQL);
+    string sql = sql_mapper<DbTestUser>::update_sql("", sql_dialect::postgresql);
     EXPECT_NE(sql.find("$"), string::npos);
     EXPECT_EQ(sql.find("?"), string::npos);
 }
@@ -2473,7 +2473,7 @@ TEST_F(SqlMapperTest, DeleteSqlDefaultDialect) {
 }
 
 TEST_F(SqlMapperTest, DeleteSqlPostgresql) {
-    string sql = sql_mapper<DbTestUser>::delete_sql("", sql_dialect::POSTGRESQL);
+    string sql = sql_mapper<DbTestUser>::delete_sql("", sql_dialect::postgresql);
     EXPECT_NE(sql.find("$1"), string::npos);
     EXPECT_EQ(sql.find("?"), string::npos);
 }
@@ -2490,7 +2490,7 @@ TEST_F(SqlMapperTest, SelectByPkSqlDefaultDialect) {
 }
 
 TEST_F(SqlMapperTest, SelectByPkSqlPostgresql) {
-    string sql = sql_mapper<DbTestUser>::select_by_pk_sql("", sql_dialect::POSTGRESQL);
+    string sql = sql_mapper<DbTestUser>::select_by_pk_sql("", sql_dialect::postgresql);
     EXPECT_NE(sql.find("$1"), string::npos);
     EXPECT_EQ(sql.find("?"), string::npos);
 }
@@ -2552,10 +2552,10 @@ TEST_F(SqlMapperTest, CreateTableSqlProductNoAutoIncPk) {
 }
 
 TEST_F(SqlMapperTest, AllPlaceholdersAreDialectConsistentInInsert) {
-    string pg_sql = sql_mapper<DbTestProduct>::insert_sql("", sql_dialect::POSTGRESQL);
+    string pg_sql = sql_mapper<DbTestProduct>::insert_sql("", sql_dialect::postgresql);
     EXPECT_EQ(pg_sql.find("?"), string::npos);
 
-    string oracle_sql = sql_mapper<DbTestProduct>::insert_sql("", sql_dialect::ORACLE);
+    string oracle_sql = sql_mapper<DbTestProduct>::insert_sql("", sql_dialect::oracle);
     EXPECT_EQ(oracle_sql.find("?"), string::npos);
 }
 

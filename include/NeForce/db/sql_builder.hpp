@@ -82,35 +82,23 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-#ifdef DELETE
-#    undef DELETE
-#endif
-
-#ifdef EXCEPT
-#    undef EXCEPT
-#endif
-
-#ifdef INTERSECT
-#    undef INTERSECT
-#endif
-
 /**
  * @enum sql_operate
  * @brief SQL操作类型枚举
  */
 enum class sql_operate : uint8_t {
-    SELECT,       ///< SELECT查询
-    INSERT,       ///< INSERT插入
-    UPDATE,       ///< UPDATE更新
-    DELETE,       ///< DELETE删除
-    DROP_TABLE,   ///< DROP TABLE删除表
-    CREATE_TABLE, ///< CREATE TABLE建表
-    CREATE_VIEW,  ///< CREATE VIEW创建视图
-    DROP_VIEW,    ///< DROP VIEW删除视图
-    ALTER_TABLE,  ///< ALTER TABLE修改表
-    CREATE_INDEX, ///< CREATE INDEX创建索引
-    DROP_INDEX,   ///< DROP INDEX删除索引
-    TRUNCATE      ///< TRUNCATE TABLE截断表
+    select,       ///< SELECT查询
+    insert,       ///< INSERT插入
+    update,       ///< UPDATE更新
+    delete_,      ///< DELETE删除
+    drop_table,   ///< DROP TABLE删除表
+    create_table, ///< CREATE TABLE建表
+    create_view,  ///< CREATE VIEW创建视图
+    drop_view,    ///< DROP VIEW删除视图
+    alter_table,  ///< ALTER TABLE修改表
+    create_index, ///< CREATE INDEX创建索引
+    drop_index,   ///< DROP INDEX删除索引
+    truncate      ///< TRUNCATE TABLE截断表
 };
 
 /**
@@ -118,10 +106,10 @@ enum class sql_operate : uint8_t {
  * @brief JOIN类型枚举
  */
 enum class sql_join : uint8_t {
-    INNER, ///< INNER JOIN
-    LEFT,  ///< LEFT JOIN
-    RIGHT, ///< RIGHT JOIN
-    FULL   ///< FULL JOIN
+    inner, ///< INNER JOIN
+    left,  ///< LEFT JOIN
+    right, ///< RIGHT JOIN
+    full   ///< FULL JOIN
 };
 
 /**
@@ -129,8 +117,8 @@ enum class sql_join : uint8_t {
  * @brief 排序方向枚举
  */
 enum class sql_order : uint8_t {
-    ASC, ///< 升序
-    DESC ///< 降序
+    asc, ///< 升序
+    desc ///< 降序
 };
 
 /**
@@ -140,12 +128,12 @@ enum class sql_order : uint8_t {
  * 不同的数据库在语法和功能上存在差异，选择对应方言可生成最佳兼容的 SQL。
  */
 enum class sql_dialect : uint8_t {
-    GENERIC,    ///< ANSI SQL
-    MYSQL,      ///< MySQL / MariaDB
-    POSTGRESQL, ///< PostgreSQL
-    SQLITE,     ///< SQLite
-    MSSQL,      ///< Microsoft SQL Server
-    ORACLE      ///< Oracle Database
+    generic,    ///< ANSI SQL
+    mysql,      ///< MySQL / MariaDB
+    postgresql, ///< PostgreSQL
+    sqlite,     ///< SQLite
+    mssql,      ///< Microsoft SQL Server
+    oracle      ///< Oracle Database
 };
 
 /**
@@ -153,12 +141,12 @@ enum class sql_dialect : uint8_t {
  * @brief 集合操作类型枚举
  */
 enum class sql_set_op : uint8_t {
-    UNION,         ///< UNION
-    UNION_ALL,     ///< UNION ALL
-    INTERSECT,     ///< INTERSECT
-    INTERSECT_ALL, ///< INTERSECT ALL
-    EXCEPT_,       ///< EXCEPT
-    EXCEPT_ALL     ///< EXCEPT ALL
+    union_,        ///< UNION
+    union_all,     ///< UNION ALL
+    intersect,     ///< INTERSECT
+    intersect_all, ///< INTERSECT ALL
+    except,        ///< EXCEPT
+    except_all     ///< EXCEPT ALL
 };
 
 
@@ -286,8 +274,8 @@ public:
     };
 
 private:
-    sql_operate sql_type_ = sql_operate::SELECT; ///< 当前SQL操作类型
-    sql_dialect dialect_ = sql_dialect::GENERIC; ///< 目标数据库方言
+    sql_operate sql_type_ = sql_operate::select; ///< 当前SQL操作类型
+    sql_dialect dialect_ = sql_dialect::generic; ///< 目标数据库方言
     size_t param_seq_ = 0;                       ///< 参数序号计数器
     string table_;                               ///< 主表名
     string table_alias_;                         ///< 主表别名
@@ -640,7 +628,7 @@ public:
      * @param order 排序方向
      * @return 自身引用
      */
-    sql_builder& order_by(string field, sql_order order = sql_order::ASC);
+    sql_builder& order_by(string field, sql_order order = sql_order::asc);
 
     /**
      * @brief 添加升序排序

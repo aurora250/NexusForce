@@ -88,7 +88,7 @@ struct arp::impl {
 bool arp::impl::local_info(const char* iface) {
     socket_base query_sock;
 
-    const bool res = query_sock.try_open(ip_family::INET4, socket_type::DGRAM);
+    const bool res = query_sock.try_open(ip_family::inet4, socket_type::dgram);
     if (!res) {
         return false;
     }
@@ -295,7 +295,7 @@ bool arp::open(const char* iface) {
         return false;
     }
 
-    const bool res = impl_->sock_.try_open(ip_family::PACKET, socket_type::RAW,
+    const bool res = impl_->sock_.try_open(ip_family::packet, socket_type::raw,
                                            // NOLINTNEXTLINE(clang-analyzer-optin.core.EnumCastOutOfRange)
                                            static_cast<socket_base::protocol>(endian::host_to_network<int>(ETH_P_ARP)));
     if (!res) {

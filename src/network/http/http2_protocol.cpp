@@ -524,7 +524,7 @@ byte_vector http2_framer::encode_data_frame(const http2_data_frame& frame) {
         payload_len += 1 + frame.pad_length;
     }
 
-    byte_vector result = build_frame_header(http2_frame_type::DATA, flags, frame.stream_id, payload_len);
+    byte_vector result = build_frame_header(http2_frame_type::data, flags, frame.stream_id, payload_len);
     if (frame.pad_length > 0) {
         result.push_back(frame.pad_length);
     }
@@ -553,7 +553,7 @@ byte_vector http2_framer::encode_headers_frame(const http2_headers_frame& frame)
         payload_len += 1 + frame.pad_length;
     }
 
-    byte_vector result = build_frame_header(http2_frame_type::HEADERS, flags, frame.stream_id, payload_len);
+    byte_vector result = build_frame_header(http2_frame_type::headers, flags, frame.stream_id, payload_len);
     if (frame.pad_length > 0) {
         result.push_back(frame.pad_length);
     }
@@ -582,7 +582,7 @@ byte_vector http2_framer::encode_push_promise_frame(const http2_push_promise_fra
         payload_len += 1 + frame.pad_length;
     }
 
-    byte_vector result = build_frame_header(http2_frame_type::PUSH_PROMISE, flags, frame.stream_id, payload_len);
+    byte_vector result = build_frame_header(http2_frame_type::push_promise, flags, frame.stream_id, payload_len);
     if (frame.pad_length > 0) {
         result.push_back(frame.pad_length);
     }
@@ -601,7 +601,7 @@ byte_vector http2_framer::encode_push_promise_frame(const http2_push_promise_fra
 }
 
 byte_vector http2_framer::encode_rst_stream_frame(const http2_rst_stream_frame& frame) {
-    byte_vector result = build_frame_header(http2_frame_type::RST_STREAM, 0, frame.stream_id, 4);
+    byte_vector result = build_frame_header(http2_frame_type::rst_stream, 0, frame.stream_id, 4);
     const auto code = static_cast<uint32_t>(frame.error_code);
     result.push_back(static_cast<byte_t>((code >> 24) & 0xFF));
     result.push_back(static_cast<byte_t>((code >> 16) & 0xFF));
@@ -614,7 +614,7 @@ byte_vector http2_framer::encode_settings_frame(const http2_settings_frame& fram
     const uint8_t flags = frame.ack ? HTTP2_FLAG_ACK : 0;
     const size_t payload_len = frame.entries.size() * 6;
 
-    byte_vector result = build_frame_header(http2_frame_type::SETTINGS, flags, 0, payload_len);
+    byte_vector result = build_frame_header(http2_frame_type::settings, flags, 0, payload_len);
     for (const auto& entry: frame.entries) {
         const auto id = static_cast<uint16_t>(entry.id);
         result.push_back(static_cast<byte_t>((id >> 8) & 0xFF));
@@ -629,7 +629,7 @@ byte_vector http2_framer::encode_settings_frame(const http2_settings_frame& fram
 
 byte_vector http2_framer::encode_ping_frame(const http2_ping_frame& frame) {
     const uint8_t flags = frame.ack ? HTTP2_FLAG_ACK : 0;
-    byte_vector result = build_frame_header(http2_frame_type::PING, flags, 0, 8);
+    byte_vector result = build_frame_header(http2_frame_type::ping, flags, 0, 8);
     const uint64_t data = frame.opaque_data;
     for (int i = 7; i >= 0; --i) {
         result.push_back(static_cast<byte_t>((data >> (i * 8)) & 0xFF));
@@ -639,7 +639,7 @@ byte_vector http2_framer::encode_ping_frame(const http2_ping_frame& frame) {
 
 byte_vector http2_framer::encode_goaway_frame(const http2_goaway_frame& frame) {
     const size_t payload_len = 8 + frame.debug_data.size();
-    byte_vector result = build_frame_header(http2_frame_type::GOAWAY, 0, 0, payload_len);
+    byte_vector result = build_frame_header(http2_frame_type::goaway, 0, 0, payload_len);
 
     const uint32_t id = frame.last_stream_id;
     result.push_back(static_cast<byte_t>((id >> 24) & 0x7F));
@@ -658,7 +658,7 @@ byte_vector http2_framer::encode_goaway_frame(const http2_goaway_frame& frame) {
 }
 
 byte_vector http2_framer::encode_window_update_frame(const http2_window_update_frame& frame) {
-    byte_vector result = build_frame_header(http2_frame_type::WINDOW_UPDATE, 0, frame.stream_id, 4);
+    byte_vector result = build_frame_header(http2_frame_type::window_update, 0, frame.stream_id, 4);
     const uint32_t inc = frame.window_size_increment & 0x7FFFFFFF;
     result.push_back(static_cast<byte_t>((inc >> 24) & 0xFF));
     result.push_back(static_cast<byte_t>((inc >> 16) & 0xFF));
@@ -670,7 +670,7 @@ byte_vector http2_framer::encode_window_update_frame(const http2_window_update_f
 byte_vector http2_framer::encode_continuation_frame(const http2_continuation_frame& frame) {
     const uint8_t flags = frame.end_headers ? HTTP2_FLAG_END_HEADERS : 0;
     byte_vector result =
-            build_frame_header(http2_frame_type::CONTINUATION, flags, frame.stream_id, frame.header_block.size());
+            build_frame_header(http2_frame_type::continuation, flags, frame.stream_id, frame.header_block.size());
     result.insert(result.end(), frame.header_block.begin(), frame.header_block.end());
     return result;
 }
@@ -723,59 +723,59 @@ http2_stream::http2_stream(uint32_t stream_id) :
 stream_id_(stream_id) {}
 
 bool http2_stream::can_send_headers() const {
-    return state_ == http2_stream_state::IDLE || state_ == http2_stream_state::RESERVED_LOCAL ||
-           state_ == http2_stream_state::OPEN;
+    return state_ == http2_stream_state::idle || state_ == http2_stream_state::reserved_local ||
+           state_ == http2_stream_state::open;
 }
 
-bool http2_stream::can_send_data() const { return state_ == http2_stream_state::OPEN; }
+bool http2_stream::can_send_data() const { return state_ == http2_stream_state::open; }
 
 bool http2_stream::can_receive() const {
-    return state_ == http2_stream_state::OPEN || state_ == http2_stream_state::HALF_CLOSED_REMOTE;
+    return state_ == http2_stream_state::open || state_ == http2_stream_state::half_closed_remote;
 }
 
 void http2_stream::on_send_headers(bool end_stream) {
-    if (state_ == http2_stream_state::IDLE) {
-        state_ = end_stream ? http2_stream_state::HALF_CLOSED_LOCAL : http2_stream_state::OPEN;
-    } else if (state_ == http2_stream_state::RESERVED_LOCAL) {
-        state_ = end_stream ? http2_stream_state::CLOSED : http2_stream_state::HALF_CLOSED_REMOTE;
+    if (state_ == http2_stream_state::idle) {
+        state_ = end_stream ? http2_stream_state::half_closed_local : http2_stream_state::open;
+    } else if (state_ == http2_stream_state::reserved_local) {
+        state_ = end_stream ? http2_stream_state::closed : http2_stream_state::half_closed_remote;
     }
 }
 
 void http2_stream::on_send_data(bool end_stream) {
     if (end_stream) {
-        if (state_ == http2_stream_state::OPEN) {
-            state_ = http2_stream_state::HALF_CLOSED_LOCAL;
-        } else if (state_ == http2_stream_state::HALF_CLOSED_REMOTE) {
-            state_ = http2_stream_state::CLOSED;
+        if (state_ == http2_stream_state::open) {
+            state_ = http2_stream_state::half_closed_local;
+        } else if (state_ == http2_stream_state::half_closed_remote) {
+            state_ = http2_stream_state::closed;
         }
     }
 }
 
 void http2_stream::on_receive_headers(bool end_stream) {
-    if (state_ == http2_stream_state::IDLE) {
-        state_ = end_stream ? http2_stream_state::HALF_CLOSED_REMOTE : http2_stream_state::OPEN;
-    } else if (state_ == http2_stream_state::RESERVED_REMOTE) {
-        state_ = end_stream ? http2_stream_state::CLOSED : http2_stream_state::HALF_CLOSED_LOCAL;
-    } else if (state_ == http2_stream_state::HALF_CLOSED_LOCAL && end_stream) {
-        state_ = http2_stream_state::CLOSED;
+    if (state_ == http2_stream_state::idle) {
+        state_ = end_stream ? http2_stream_state::half_closed_remote : http2_stream_state::open;
+    } else if (state_ == http2_stream_state::reserved_remote) {
+        state_ = end_stream ? http2_stream_state::closed : http2_stream_state::half_closed_local;
+    } else if (state_ == http2_stream_state::half_closed_local && end_stream) {
+        state_ = http2_stream_state::closed;
     }
 }
 
 void http2_stream::on_receive_data(bool end_stream) {
     if (end_stream) {
-        if (state_ == http2_stream_state::OPEN) {
-            state_ = http2_stream_state::HALF_CLOSED_REMOTE;
-        } else if (state_ == http2_stream_state::HALF_CLOSED_LOCAL) {
-            state_ = http2_stream_state::CLOSED;
+        if (state_ == http2_stream_state::open) {
+            state_ = http2_stream_state::half_closed_remote;
+        } else if (state_ == http2_stream_state::half_closed_local) {
+            state_ = http2_stream_state::closed;
         }
     }
 }
 
-void http2_stream::on_send_rst_stream() { state_ = http2_stream_state::CLOSED; }
+void http2_stream::on_send_rst_stream() { state_ = http2_stream_state::closed; }
 
-void http2_stream::on_receive_rst_stream() { state_ = http2_stream_state::CLOSED; }
+void http2_stream::on_receive_rst_stream() { state_ = http2_stream_state::closed; }
 
-void http2_stream::close() { state_ = http2_stream_state::CLOSED; }
+void http2_stream::close() { state_ = http2_stream_state::closed; }
 
 void http2_stream::consume_local_window(uint32_t amount) {
     if (amount <= local_window_) {
@@ -837,12 +837,12 @@ uint32_t http2_flow_control::window(uint32_t stream_id) const {
 }
 
 http2_settings::http2_settings() {
-    set(http2_settings_id::HEADER_TABLE_SIZE, HTTP2_DEFAULT_HEADER_TABLE_SIZE);
-    set(http2_settings_id::ENABLE_PUSH, 0);
-    set(http2_settings_id::MAX_CONCURRENT_STREAMS, HTTP2_DEFAULT_MAX_CONCURRENT_STREAMS);
-    set(http2_settings_id::INITIAL_WINDOW_SIZE, HTTP2_DEFAULT_INITIAL_WINDOW_SIZE);
-    set(http2_settings_id::MAX_FRAME_SIZE, HTTP2_MAX_FRAME_SIZE);
-    set(http2_settings_id::MAX_HEADER_LIST_SIZE, HTTP2_DEFAULT_MAX_HEADER_LIST_SIZE);
+    set(http2_settings_id::header_table_size, HTTP2_DEFAULT_HEADER_TABLE_SIZE);
+    set(http2_settings_id::enable_push, 0);
+    set(http2_settings_id::max_concurrent_streams, HTTP2_DEFAULT_MAX_CONCURRENT_STREAMS);
+    set(http2_settings_id::initial_window_size, HTTP2_DEFAULT_INITIAL_WINDOW_SIZE);
+    set(http2_settings_id::max_frame_size, HTTP2_MAX_FRAME_SIZE);
+    set(http2_settings_id::max_header_list_size, HTTP2_DEFAULT_MAX_HEADER_LIST_SIZE);
 }
 
 void http2_settings::set(http2_settings_id id, uint32_t value) { params_[static_cast<uint16_t>(id)] = value; }
@@ -852,28 +852,28 @@ uint32_t http2_settings::get(http2_settings_id id) const {
     return (it != params_.end()) ? it->second : 0;
 }
 
-uint32_t http2_settings::header_table_size() const { return get(http2_settings_id::HEADER_TABLE_SIZE); }
-bool http2_settings::enable_push() const { return get(http2_settings_id::ENABLE_PUSH) != 0; }
-uint32_t http2_settings::max_concurrent_streams() const { return get(http2_settings_id::MAX_CONCURRENT_STREAMS); }
-uint32_t http2_settings::initial_window_size() const { return get(http2_settings_id::INITIAL_WINDOW_SIZE); }
-uint32_t http2_settings::max_frame_size() const { return get(http2_settings_id::MAX_FRAME_SIZE); }
-uint32_t http2_settings::max_header_list_size() const { return get(http2_settings_id::MAX_HEADER_LIST_SIZE); }
+uint32_t http2_settings::header_table_size() const { return get(http2_settings_id::header_table_size); }
+bool http2_settings::enable_push() const { return get(http2_settings_id::enable_push) != 0; }
+uint32_t http2_settings::max_concurrent_streams() const { return get(http2_settings_id::max_concurrent_streams); }
+uint32_t http2_settings::initial_window_size() const { return get(http2_settings_id::initial_window_size); }
+uint32_t http2_settings::max_frame_size() const { return get(http2_settings_id::max_frame_size); }
+uint32_t http2_settings::max_header_list_size() const { return get(http2_settings_id::max_header_list_size); }
 
 void http2_settings::apply_remote_settings(const http2_settings_frame& frame) {
     for (const auto& entry: frame.entries) {
         const uint32_t value = entry.value;
         switch (entry.id) {
-            case http2_settings_id::MAX_FRAME_SIZE:
+            case http2_settings_id::max_frame_size:
                 if (value < 16384 || value > 16777215) {
                     continue;
                 }
                 break;
-            case http2_settings_id::ENABLE_PUSH:
+            case http2_settings_id::enable_push:
                 if (value > 1) {
                     continue;
                 }
                 break;
-            case http2_settings_id::INITIAL_WINDOW_SIZE:
+            case http2_settings_id::initial_window_size:
                 if (value > 0x7FFFFFFF) {
                     continue;
                 }

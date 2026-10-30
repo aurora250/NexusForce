@@ -24,7 +24,7 @@ int main() {
 
     // 配置DNS服务器（中国大陆需使用国内DNS）
     client.get_client().set_dns_server(
-            dns_client::config{.server = "114.114.114.114", .port = ports::DNS, .timeout = milliseconds(5000)});
+            dns_client::config{.server = "114.114.114.114", .port = ports::dns, .timeout = milliseconds(5000)});
 
     // ========== GET请求 ==========
     println("=== GET Request ===");

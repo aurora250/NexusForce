@@ -44,69 +44,69 @@ protected:
 };
 
 TEST_F(HttpStatusTest, StatusCodesHaveCorrectValues) {
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S1_CONTINUE), 100u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S1_SWITCHING_PROTOCOLS), 101u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), 200u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_CREATED), 201u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_NO_CONTENT), 204u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_PARTIAL_CONTENT), 206u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S3_MOVED_PERMANENT), 301u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S3_FOUND), 302u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S3_SEE_OTHER), 303u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S3_NOT_MODIFIED), 304u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S3_TEMPORARY_REDIRECT), 307u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S3_PERMANENT_REDIRECT), 308u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_BAD_REQUEST), 400u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_UNAUTHORIZED), 401u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_FORBIDDEN), 403u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_NOT_FOUND), 404u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_METHOD_NOT_ALLOWED), 405u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_REQUEST_TIMEOUT), 408u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_CONFLICT), 409u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_GONE), 410u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_PAYLOAD_TOO_LARGE), 413u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_URI_TOO_LONG), 414u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_UNSUPPORTED_MEDIA_TYPE), 415u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_RANGE_NOT_SATISFIABLE), 416u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_TOO_MANY_REQUESTS), 429u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S5_INTERNAL_SERVER_ERROR), 500u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S5_NOT_IMPLEMENTED), 501u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S5_BAD_GATEWAY), 502u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S5_SERVICE_UNAVAILABLE), 503u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S5_GATEWAY_TIMEOUT), 504u);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S5_HTTP_VERSION_NOT_SUPPORTED), 505u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::continue_), 100u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::switching_protocols), 101u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::ok), 200u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::created), 201u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::no_content), 204u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::partial_content), 206u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::moved_permanent), 301u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::found), 302u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::see_other), 303u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::not_modified), 304u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::temporary_redirect), 307u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::permanent_redirect), 308u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::bad_request), 400u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::unauthorized), 401u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::forbidden), 403u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::not_found), 404u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::method_not_allowed), 405u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::request_timeout), 408u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::conflict), 409u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::gone), 410u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::payload_too_large), 413u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::uri_too_long), 414u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::unsupported_media_type), 415u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::range_not_satisfiable), 416u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::too_many_requests), 429u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::internal_server_error), 500u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::not_implemented), 501u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::bad_gateway), 502u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::service_unavailable), 503u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::gateway_timeout), 504u);
+    EXPECT_EQ(static_cast<uint16_t>(http_status::http_version_not_supported), 505u);
 }
 
 TEST_F(HttpStatusTest, StatusMessageReturnsCorrectText) {
-    EXPECT_EQ(http_status_message(http_status::S2_OK), "OK");
-    EXPECT_EQ(http_status_message(http_status::S4_NOT_FOUND), "Not Found");
-    EXPECT_EQ(http_status_message(http_status::S5_INTERNAL_SERVER_ERROR), "Internal Server Error");
-    EXPECT_EQ(http_status_message(http_status::S3_SEE_OTHER), "See Other");
-    EXPECT_EQ(http_status_message(http_status::S4_CONFLICT), "Conflict");
-    EXPECT_EQ(http_status_message(http_status::S4_GONE), "Gone");
-    EXPECT_EQ(http_status_message(http_status::S4_UNSUPPORTED_MEDIA_TYPE), "Unsupported Media Type");
-    EXPECT_EQ(http_status_message(http_status::S4_RANGE_NOT_SATISFIABLE), "Range Not Satisfiable");
-    EXPECT_EQ(http_status_message(http_status::S5_NOT_IMPLEMENTED), "Not Implemented");
+    EXPECT_EQ(http_status_message(http_status::ok), "OK");
+    EXPECT_EQ(http_status_message(http_status::not_found), "Not Found");
+    EXPECT_EQ(http_status_message(http_status::internal_server_error), "Internal Server Error");
+    EXPECT_EQ(http_status_message(http_status::see_other), "See Other");
+    EXPECT_EQ(http_status_message(http_status::conflict), "Conflict");
+    EXPECT_EQ(http_status_message(http_status::gone), "Gone");
+    EXPECT_EQ(http_status_message(http_status::unsupported_media_type), "Unsupported Media Type");
+    EXPECT_EQ(http_status_message(http_status::range_not_satisfiable), "Range Not Satisfiable");
+    EXPECT_EQ(http_status_message(http_status::not_implemented), "Not Implemented");
 }
 
 TEST_F(HttpStatusTest, FromCodeMapsCorrectly) {
-    EXPECT_EQ(http_status_from_code(200), http_status::S2_OK);
-    EXPECT_EQ(http_status_from_code(404), http_status::S4_NOT_FOUND);
-    EXPECT_EQ(http_status_from_code(303), http_status::S3_SEE_OTHER);
-    EXPECT_EQ(http_status_from_code(409), http_status::S4_CONFLICT);
-    EXPECT_EQ(http_status_from_code(410), http_status::S4_GONE);
-    EXPECT_EQ(http_status_from_code(415), http_status::S4_UNSUPPORTED_MEDIA_TYPE);
-    EXPECT_EQ(http_status_from_code(416), http_status::S4_RANGE_NOT_SATISFIABLE);
-    EXPECT_EQ(http_status_from_code(501), http_status::S5_NOT_IMPLEMENTED);
+    EXPECT_EQ(http_status_from_code(200), http_status::ok);
+    EXPECT_EQ(http_status_from_code(404), http_status::not_found);
+    EXPECT_EQ(http_status_from_code(303), http_status::see_other);
+    EXPECT_EQ(http_status_from_code(409), http_status::conflict);
+    EXPECT_EQ(http_status_from_code(410), http_status::gone);
+    EXPECT_EQ(http_status_from_code(415), http_status::unsupported_media_type);
+    EXPECT_EQ(http_status_from_code(416), http_status::range_not_satisfiable);
+    EXPECT_EQ(http_status_from_code(501), http_status::not_implemented);
 }
 
 TEST_F(HttpStatusTest, UnknownCodeFallsBackToCategory) {
-    EXPECT_EQ(http_status_from_code(199), http_status::S1_CONTINUE);
-    EXPECT_EQ(http_status_from_code(299), http_status::S2_OK);
-    EXPECT_EQ(http_status_from_code(399), http_status::S3_FOUND);
-    EXPECT_EQ(http_status_from_code(499), http_status::S4_BAD_REQUEST);
-    EXPECT_EQ(http_status_from_code(599), http_status::S5_INTERNAL_SERVER_ERROR);
-    EXPECT_EQ(http_status_from_code(999), http_status::S5_INTERNAL_SERVER_ERROR);
+    EXPECT_EQ(http_status_from_code(199), http_status::continue_);
+    EXPECT_EQ(http_status_from_code(299), http_status::ok);
+    EXPECT_EQ(http_status_from_code(399), http_status::found);
+    EXPECT_EQ(http_status_from_code(499), http_status::bad_request);
+    EXPECT_EQ(http_status_from_code(599), http_status::internal_server_error);
+    EXPECT_EQ(http_status_from_code(999), http_status::internal_server_error);
 }
 
 class HttpMethodTest : public ::testing::Test {
@@ -563,12 +563,12 @@ protected:
 TEST_F(HttpResponseTest, DefaultResponseIsPersistentConnection) {
     http_response resp;
     EXPECT_TRUE(resp.header("Connection").empty());
-    EXPECT_EQ(resp.status, http_status::S4_NOT_FOUND);
+    EXPECT_EQ(resp.status, http_status::not_found);
 }
 
 TEST_F(HttpResponseTest, NormalResponseIncludesStatusLine) {
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.body = "Hello";
     auto result = resp.to_string();
@@ -577,7 +577,7 @@ TEST_F(HttpResponseTest, NormalResponseIncludesStatusLine) {
 
 TEST_F(HttpResponseTest, ResponseIncludesContentLength) {
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.body = "ABCDEFG";
     auto result = resp.to_string();
@@ -586,7 +586,7 @@ TEST_F(HttpResponseTest, ResponseIncludesContentLength) {
 
 TEST_F(HttpResponseTest, RedirectResponseUsesCorrectStatus) {
     http_response resp;
-    resp.status = http_status::S3_MOVED_PERMANENT;
+    resp.status = http_status::moved_permanent;
     resp.status_message = "Moved Permanently";
     resp.redirect_url = "https://example.com/new";
     auto result = resp.to_string();
@@ -601,6 +601,54 @@ TEST_F(HttpResponseTest, RedirectResponseExcludesBody) {
     resp.body = "should not appear";
     auto result = resp.to_string();
     EXPECT_FALSE(result.contains("should not appear"));
+}
+
+TEST_F(HttpResponseTest, RedirectWithNonRedirectStatusUsesFoundReason) {
+    http_response resp;
+    resp.status = http_status::ok;
+    resp.status_message = "OK";
+    resp.redirect_url = "https://example.com/new";
+    auto result = resp.to_string();
+    EXPECT_TRUE(result.starts_with("HTTP/1.1 302 Found\r\n"));
+}
+
+TEST_F(HttpResponseTest, NoContentResponseOmitsBody) {
+    http_response resp;
+    resp.status = http_status::no_content;
+    resp.status_message = "No Content";
+    resp.body = "must not be sent";
+    auto result = resp.to_string();
+    EXPECT_TRUE(result.ends_with("\r\n\r\n"));
+    EXPECT_FALSE(result.contains("must not be sent"));
+    EXPECT_FALSE(resp.allows_body());
+}
+
+TEST_F(HttpResponseTest, NotModifiedResponseOmitsBody) {
+    http_response resp;
+    resp.status = http_status::not_modified;
+    resp.status_message = "Not Modified";
+    resp.body = "must not be sent";
+    auto result = resp.to_string();
+    EXPECT_TRUE(result.ends_with("\r\n\r\n"));
+    EXPECT_FALSE(result.contains("must not be sent"));
+}
+
+TEST_F(HttpResponseTest, ContinueResponseHasNoContentLength) {
+    http_response resp;
+    resp.status = http_status::continue_;
+    auto result = resp.to_string();
+    EXPECT_TRUE(result.starts_with("HTTP/1.1 100 Continue\r\n"));
+    EXPECT_FALSE(result.contains("Content-Length"));
+}
+
+TEST_F(HttpResponseTest, TunnelResponseSuppressesContentLength) {
+    http_response resp;
+    resp.status = http_status::ok;
+    resp.status_message = "Connection Established";
+    resp.suppress_content_length = true;
+    auto result = resp.to_string();
+    EXPECT_TRUE(result.starts_with("HTTP/1.1 200 Connection Established\r\n"));
+    EXPECT_FALSE(result.contains("Content-Length"));
 }
 
 TEST_F(HttpResponseTest, SetContentTypeWithContentObject) {
@@ -628,7 +676,7 @@ TEST_F(HttpResponseTest, CookieInResponseIsSerialized) {
 
 TEST_F(HttpResponseTest, NotModifiedNoContentLength) {
     http_response resp;
-    resp.status = http_status::S3_NOT_MODIFIED;
+    resp.status = http_status::not_modified;
     resp.status_message = "Not Modified";
     auto result = resp.to_string();
     EXPECT_FALSE(result.contains("Content-Length"));
@@ -637,7 +685,7 @@ TEST_F(HttpResponseTest, NotModifiedNoContentLength) {
 TEST_F(HttpResponseTest, ResponseVersionMatchesRequest) {
     http_response resp;
     resp.version = "HTTP/1.0";
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     auto result = resp.to_string();
     EXPECT_TRUE(result.starts_with("HTTP/1.0 200 OK"));
@@ -693,37 +741,37 @@ TEST(HttpClientResponseTest, DefaultValues) {
 
 TEST(HttpClientResponseTest, IsSuccessRange) {
     http_client_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     EXPECT_TRUE(resp.is_success());
-    resp.status = http_status::S2_CREATED;
+    resp.status = http_status::created;
     EXPECT_TRUE(resp.is_success());
-    resp.status = http_status::S4_NOT_FOUND;
+    resp.status = http_status::not_found;
     EXPECT_FALSE(resp.is_success());
 }
 
 TEST(HttpClientResponseTest, IsRedirectRange) {
     http_client_response resp;
-    resp.status = http_status::S3_FOUND;
+    resp.status = http_status::found;
     EXPECT_TRUE(resp.is_redirect());
-    resp.status = http_status::S3_MOVED_PERMANENT;
+    resp.status = http_status::moved_permanent;
     EXPECT_TRUE(resp.is_redirect());
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     EXPECT_FALSE(resp.is_redirect());
 }
 
 TEST(HttpClientResponseTest, IsClientErrorRange) {
     http_client_response resp;
-    resp.status = http_status::S4_BAD_REQUEST;
+    resp.status = http_status::bad_request;
     EXPECT_TRUE(resp.is_client_error());
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     EXPECT_FALSE(resp.is_client_error());
 }
 
 TEST(HttpClientResponseTest, IsServerErrorRange) {
     http_client_response resp;
-    resp.status = http_status::S5_INTERNAL_SERVER_ERROR;
+    resp.status = http_status::internal_server_error;
     EXPECT_TRUE(resp.is_server_error());
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     EXPECT_FALSE(resp.is_server_error());
 }
 
@@ -941,6 +989,17 @@ TEST_F(HttpRouterTest, StaticRouteMatchesExactPath) {
     EXPECT_EQ(resp.body, "world");
 }
 
+TEST_F(HttpRouterTest, HandlerWithoutExplicitStatusDefaultsTo200) {
+    router.get("/hello", [](http_request&, http_response& res) { res.body = "world"; });
+
+    http_request req;
+    req.method = http_method::GET();
+    req.path = "/hello";
+    auto resp = router.handle_request(req);
+    EXPECT_EQ(resp.status, http_status::ok);
+    EXPECT_TRUE(resp.to_string().starts_with("HTTP/1.1 200 OK\r\n"));
+}
+
 TEST_F(HttpRouterTest, RouteNotFoundReturns404) {
     http_request req;
     req.method = http_method::GET();
@@ -957,6 +1016,33 @@ TEST_F(HttpRouterTest, PathExistsButMethodDiffersReturns405) {
     req.path = "/resource";
     auto resp = router.handle_request(req);
     EXPECT_EQ(static_cast<uint16_t>(resp.status), 405u);
+}
+
+TEST_F(HttpRouterTest, MethodNotAllowedIncludesAllowHeader) {
+    router.get("/resource", [](http_request&, http_response&) {});
+    router.put("/resource", [](http_request&, http_response&) {});
+
+    http_request req;
+    req.method = http_method::POST();
+    req.path = "/resource";
+    auto resp = router.handle_request(req);
+    ASSERT_EQ(static_cast<uint16_t>(resp.status), 405u);
+
+    const auto allow = resp.header("Allow");
+    EXPECT_TRUE(allow.contains("GET"));
+    EXPECT_TRUE(allow.contains("PUT"));
+    EXPECT_FALSE(allow.contains("POST"));
+}
+
+TEST_F(HttpRouterTest, MethodNotAllowedAllowMatchesParameterizedRoute) {
+    router.get("/users/:id", [](http_request&, http_response&) {});
+
+    http_request req;
+    req.method = http_method::DELETE();
+    req.path = "/users/42";
+    auto resp = router.handle_request(req);
+    ASSERT_EQ(static_cast<uint16_t>(resp.status), 405u);
+    EXPECT_EQ(resp.header("Allow"), "GET");
 }
 
 TEST_F(HttpRouterTest, PathParameterExtraction) {
@@ -983,7 +1069,7 @@ TEST_F(HttpRouterTest, AlphaNumericPathParamWithCamelCase) {
 
 TEST_F(HttpRouterTest, CustomNotFoundHandler) {
     router.set_not_found_handler([](http_request&, http_response& res) {
-        res.status = http_status::S4_NOT_FOUND;
+        res.status = http_status::not_found;
         res.body = "Custom 404";
     });
 
@@ -1541,7 +1627,7 @@ TEST_F(HttpCompressFilterTest, CompressibleContentTypes) {
     req.set_header("Accept-Encoding", "gzip, deflate");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type(http_content::HTML_TEXT());
     resp.body = string(2048, 'A');
@@ -1559,7 +1645,7 @@ TEST_F(HttpCompressFilterTest, SmallBodyBelowMinSizeNotCompressed) {
     req.set_header("Accept-Encoding", "gzip");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type(http_content::HTML_TEXT());
     resp.body = "small";
@@ -1576,7 +1662,7 @@ TEST_F(HttpCompressFilterTest, NoAcceptEncodingSkipsCompression) {
     http_request req;
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type(http_content::HTML_TEXT());
     resp.body = string(2048, 'B');
@@ -1594,7 +1680,7 @@ TEST_F(HttpCompressFilterTest, AlreadyCompressedContentTypeSkipped) {
     req.set_header("Accept-Encoding", "gzip");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type("image/png");
     resp.body = string(2048, 'C');
@@ -1612,7 +1698,7 @@ TEST_F(HttpCompressFilterTest, QZeroRejectsEncoding) {
     req.set_header("Accept-Encoding", "gzip;q=0");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type("text/plain");
     resp.body = string(2048, 'C');
@@ -1630,7 +1716,7 @@ TEST_F(HttpCompressFilterTest, QZeroWithFallback) {
     req.set_header("Accept-Encoding", "gzip;q=0, deflate");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type("text/plain");
     resp.body = string(2048, 'C');
@@ -2199,7 +2285,7 @@ TEST_F(Http2FrameTest, EncodeDecodeDataFrame) {
     bool decoded = false;
     framer.decode_frames(encoded.data(), encoded.size(),
                          [&](http2_frame_type type, uint8_t flags, uint32_t sid, const byte_t*, size_t len) {
-                             if (type == http2_frame_type::DATA && sid == 1) {
+                             if (type == http2_frame_type::data && sid == 1) {
                                  decoded = true;
                                  EXPECT_EQ(len, payload.size());
                                  EXPECT_TRUE(flags & HTTP2_FLAG_END_STREAM);
@@ -2221,7 +2307,7 @@ TEST_F(Http2FrameTest, EncodeDecodeHeadersFrame) {
     bool decoded = false;
     framer.decode_frames(encoded.data(), encoded.size(),
                          [&](http2_frame_type type, uint8_t flags, uint32_t sid, const byte_t*, size_t len) {
-                             if (type == http2_frame_type::HEADERS && sid == 1) {
+                             if (type == http2_frame_type::headers && sid == 1) {
                                  decoded = true;
                                  EXPECT_EQ(len, 1u);
                                  EXPECT_TRUE(flags & HTTP2_FLAG_END_HEADERS);
@@ -2233,8 +2319,8 @@ TEST_F(Http2FrameTest, EncodeDecodeHeadersFrame) {
 
 TEST_F(Http2FrameTest, EncodeDecodeSettingsFrame) {
     http2_settings_frame sf;
-    sf.entries.push_back({http2_settings_id::MAX_CONCURRENT_STREAMS, 100});
-    sf.entries.push_back({http2_settings_id::INITIAL_WINDOW_SIZE, 65535});
+    sf.entries.push_back({http2_settings_id::max_concurrent_streams, 100});
+    sf.entries.push_back({http2_settings_id::initial_window_size, 65535});
 
     auto encoded = framer.encode_settings_frame(sf);
     EXPECT_GT(encoded.size(), 9u);
@@ -2243,7 +2329,7 @@ TEST_F(Http2FrameTest, EncodeDecodeSettingsFrame) {
     bool decoded = false;
     framer.decode_frames(encoded.data(), encoded.size(),
                          [&](http2_frame_type type, uint8_t flags, uint32_t sid, const byte_t*, size_t len) {
-                             if (type == http2_frame_type::SETTINGS) {
+                             if (type == http2_frame_type::settings) {
                                  decoded = true;
                                  EXPECT_EQ(sid, 0u);
                                  EXPECT_EQ(len, 12u);
@@ -2261,7 +2347,7 @@ TEST_F(Http2FrameTest, SettingsAckHasZeroPayload) {
 
     framer.decode_frames(encoded.data(), encoded.size(),
                          [&](http2_frame_type type, uint8_t flags, uint32_t sid, const byte_t*, size_t len) {
-                             EXPECT_EQ(type, http2_frame_type::SETTINGS);
+                             EXPECT_EQ(type, http2_frame_type::settings);
                              EXPECT_TRUE(flags & HTTP2_FLAG_ACK);
                              EXPECT_EQ(len, 0u);
                          });
@@ -2277,7 +2363,7 @@ TEST_F(Http2FrameTest, EncodeDecodePingFrame) {
     bool decoded = false;
     framer.decode_frames(encoded.data(), encoded.size(),
                          [&](http2_frame_type type, uint8_t, uint32_t sid, const byte_t*, size_t len) {
-                             if (type == http2_frame_type::PING) {
+                             if (type == http2_frame_type::ping) {
                                  decoded = true;
                                  EXPECT_EQ(sid, 0u);
                                  EXPECT_EQ(len, 8u);
@@ -2289,7 +2375,7 @@ TEST_F(Http2FrameTest, EncodeDecodePingFrame) {
 TEST_F(Http2FrameTest, EncodeDecodeGoawayFrame) {
     http2_goaway_frame goaway;
     goaway.last_stream_id = 7;
-    goaway.error_code = http2_error::NO_ERROR;
+    goaway.error_code = http2_error::no_error;
 
     auto encoded = framer.encode_goaway_frame(goaway);
     EXPECT_GE(encoded.size(), 9u + 8u);
@@ -2297,7 +2383,7 @@ TEST_F(Http2FrameTest, EncodeDecodeGoawayFrame) {
     bool decoded = false;
     framer.decode_frames(encoded.data(), encoded.size(),
                          [&](http2_frame_type type, uint8_t, uint32_t sid, const byte_t*, size_t len) {
-                             if (type == http2_frame_type::GOAWAY) {
+                             if (type == http2_frame_type::goaway) {
                                  decoded = true;
                                  EXPECT_EQ(sid, 0u);
                                  EXPECT_GE(len, 8u);
@@ -2309,14 +2395,14 @@ TEST_F(Http2FrameTest, EncodeDecodeGoawayFrame) {
 TEST_F(Http2FrameTest, EncodeDecodeRstStreamFrame) {
     http2_rst_stream_frame rst;
     rst.stream_id = 5;
-    rst.error_code = http2_error::CANCEL;
+    rst.error_code = http2_error::cancel;
 
     auto encoded = framer.encode_rst_stream_frame(rst);
     EXPECT_EQ(encoded.size(), 9u + 4u);
 
     framer.decode_frames(encoded.data(), encoded.size(),
                          [&](http2_frame_type type, uint8_t, uint32_t sid, const byte_t*, size_t len) {
-                             EXPECT_EQ(type, http2_frame_type::RST_STREAM);
+                             EXPECT_EQ(type, http2_frame_type::rst_stream);
                              EXPECT_EQ(sid, 5u);
                              EXPECT_EQ(len, 4u);
                          });
@@ -2332,7 +2418,7 @@ TEST_F(Http2FrameTest, EncodeDecodeWindowUpdateFrame) {
 
     framer.decode_frames(encoded.data(), encoded.size(),
                          [&](http2_frame_type type, uint8_t, uint32_t sid, const byte_t*, size_t len) {
-                             EXPECT_EQ(type, http2_frame_type::WINDOW_UPDATE);
+                             EXPECT_EQ(type, http2_frame_type::window_update);
                              EXPECT_EQ(sid, 3u);
                              EXPECT_EQ(len, 4u);
                          });
@@ -2414,35 +2500,35 @@ protected:
 
 TEST_F(Http2StreamTest, NewStreamIsIdle) {
     http2_stream stream(1);
-    EXPECT_EQ(stream.state(), http2_stream_state::IDLE);
+    EXPECT_EQ(stream.state(), http2_stream_state::idle);
     EXPECT_FALSE(stream.is_closed());
 }
 
 TEST_F(Http2StreamTest, ClientSendHeadersOpensStream) {
     http2_stream stream(1);
     stream.on_send_headers(false);
-    EXPECT_EQ(stream.state(), http2_stream_state::OPEN);
+    EXPECT_EQ(stream.state(), http2_stream_state::open);
     EXPECT_TRUE(stream.can_send_data());
 }
 
 TEST_F(Http2StreamTest, SendHeadersWithEndStreamHalfCloses) {
     http2_stream stream(1);
     stream.on_send_headers(true);
-    EXPECT_EQ(stream.state(), http2_stream_state::HALF_CLOSED_LOCAL);
+    EXPECT_EQ(stream.state(), http2_stream_state::half_closed_local);
     EXPECT_FALSE(stream.can_send_data());
 }
 
 TEST_F(Http2StreamTest, ReceiveHeadersOpensStream) {
     http2_stream stream(1);
     stream.on_receive_headers(false);
-    EXPECT_EQ(stream.state(), http2_stream_state::OPEN);
+    EXPECT_EQ(stream.state(), http2_stream_state::open);
     EXPECT_TRUE(stream.can_receive());
 }
 
 TEST_F(Http2StreamTest, ReceiveHeadersWithEndStreamHalfCloses) {
     http2_stream stream(1);
     stream.on_receive_headers(true);
-    EXPECT_EQ(stream.state(), http2_stream_state::HALF_CLOSED_REMOTE);
+    EXPECT_EQ(stream.state(), http2_stream_state::half_closed_remote);
 }
 
 TEST_F(Http2StreamTest, BothSidesEndStreamCloses) {
@@ -2456,7 +2542,7 @@ TEST_F(Http2StreamTest, SendDataWithEndStream) {
     http2_stream stream(1);
     stream.on_send_headers(false);
     stream.on_send_data(true);
-    EXPECT_EQ(stream.state(), http2_stream_state::HALF_CLOSED_LOCAL);
+    EXPECT_EQ(stream.state(), http2_stream_state::half_closed_local);
 }
 
 TEST_F(Http2StreamTest, RstStreamClosesStream) {
@@ -2545,15 +2631,15 @@ TEST_F(Http2SettingsTest, DefaultValues) {
 
 TEST_F(Http2SettingsTest, SetAndGet) {
     http2_settings s;
-    s.set(http2_settings_id::HEADER_TABLE_SIZE, 8192);
-    EXPECT_EQ(s.get(http2_settings_id::HEADER_TABLE_SIZE), 8192u);
+    s.set(http2_settings_id::header_table_size, 8192);
+    EXPECT_EQ(s.get(http2_settings_id::header_table_size), 8192u);
 }
 
 TEST_F(Http2SettingsTest, ApplyRemoteSettings) {
     http2_settings local;
     http2_settings_frame sf;
-    sf.entries.push_back({http2_settings_id::MAX_CONCURRENT_STREAMS, 50});
-    sf.entries.push_back({http2_settings_id::INITIAL_WINDOW_SIZE, 131072});
+    sf.entries.push_back({http2_settings_id::max_concurrent_streams, 50});
+    sf.entries.push_back({http2_settings_id::initial_window_size, 131072});
 
     local.apply_remote_settings(sf);
     EXPECT_EQ(local.max_concurrent_streams(), 50u);
@@ -2684,7 +2770,7 @@ TEST_F(HealthCheckFilterTest, GetHealthzReturnsOk) {
 
     bool cont = hc.pre_filter(req, res);
     EXPECT_FALSE(cont);
-    EXPECT_EQ(res.status, http_status::S2_OK);
+    EXPECT_EQ(res.status, http_status::ok);
     EXPECT_TRUE(res.body.contains("ok"));
     EXPECT_TRUE(res.body.contains("uptime"));
 }
@@ -2733,7 +2819,7 @@ TEST_F(HealthCheckFilterTest, CustomPathWorks) {
 
     bool cont = hc.pre_filter(req, res);
     EXPECT_FALSE(cont);
-    EXPECT_EQ(res.status, http_status::S2_OK);
+    EXPECT_EQ(res.status, http_status::ok);
 }
 
 TEST_F(HealthCheckFilterTest, FailedCheckReturns503) {
@@ -2747,7 +2833,7 @@ TEST_F(HealthCheckFilterTest, FailedCheckReturns503) {
 
     bool cont = hc.pre_filter(req, res);
     EXPECT_FALSE(cont);
-    EXPECT_EQ(res.status, http_status::S5_SERVICE_UNAVAILABLE);
+    EXPECT_EQ(res.status, http_status::service_unavailable);
     EXPECT_TRUE(res.body.contains("unhealthy"));
 }
 
@@ -2763,7 +2849,7 @@ TEST_F(HealthCheckFilterTest, AllChecksPassReturns200) {
 
     bool cont = hc.pre_filter(req, res);
     EXPECT_FALSE(cont);
-    EXPECT_EQ(res.status, http_status::S2_OK);
+    EXPECT_EQ(res.status, http_status::ok);
 }
 
 TEST_F(HealthCheckFilterTest, SimpleModeWithoutDetails) {
@@ -2777,7 +2863,7 @@ TEST_F(HealthCheckFilterTest, SimpleModeWithoutDetails) {
 
     bool cont = hc.pre_filter(req, res);
     EXPECT_FALSE(cont);
-    EXPECT_EQ(res.status, http_status::S2_OK);
+    EXPECT_EQ(res.status, http_status::ok);
     EXPECT_TRUE(res.body.contains("ok"));
 }
 
@@ -2965,17 +3051,17 @@ TEST_F(GrpcTest, MaxReceiveSizeExceeded) {
 }
 
 TEST_F(GrpcTest, GrpcStatusToHttpStatus) {
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::OK), http_status::S2_OK);
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::NOT_FOUND), http_status::S4_NOT_FOUND);
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::UNAUTHENTICATED), http_status::S4_UNAUTHORIZED);
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::INTERNAL), http_status::S5_INTERNAL_SERVER_ERROR);
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::UNAVAILABLE), http_status::S5_SERVICE_UNAVAILABLE);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::ok), http_status::ok);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::not_found), http_status::not_found);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::unauthenticated), http_status::unauthorized);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::internal), http_status::internal_server_error);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::unavailable), http_status::service_unavailable);
 }
 
 TEST_F(GrpcTest, SendErrorSetsTrailers) {
     http_response res;
-    grpc_handler::send_error(res, grpc_status::NOT_FOUND, "Resource missing");
-    EXPECT_EQ(res.status, http_status::S4_NOT_FOUND);
+    grpc_handler::send_error(res, grpc_status::not_found, "Resource missing");
+    EXPECT_EQ(res.status, http_status::not_found);
     EXPECT_EQ(res.trailers["grpc-status"], "5");
     EXPECT_EQ(res.trailers["grpc-message"], "Resource missing");
 }
@@ -2998,7 +3084,7 @@ TEST_F(Http2PushPromiseTest, EncodePushPromiseFrame) {
     EXPECT_GT(frame.size(), 9u + 4u);
 
     http2_frame_header* hdr = reinterpret_cast<http2_frame_header*>(frame.data());
-    EXPECT_EQ(hdr->type, static_cast<uint8_t>(http2_frame_type::PUSH_PROMISE));
+    EXPECT_EQ(hdr->type, static_cast<uint8_t>(http2_frame_type::push_promise));
     EXPECT_EQ(hdr->get_stream_id(), 1u);
 }
 
@@ -3015,7 +3101,7 @@ TEST_F(Http2PushPromiseTest, DecodePushPromiseFrame) {
     bool received = false;
     framer.decode_frames(frame.data(), frame.size(),
                          [&](http2_frame_type type, uint8_t, uint32_t sid, const byte_t*, size_t) {
-                             if (type == http2_frame_type::PUSH_PROMISE) {
+                             if (type == http2_frame_type::push_promise) {
                                  received = true;
                                  EXPECT_EQ(sid, 1u);
                              }
@@ -3031,7 +3117,7 @@ protected:
 
 TEST_F(LoadBalancerTest, SelectBackendRoundRobin) {
     load_balancer lb;
-    lb.set_strategy(lb_strategy::ROUND_ROBIN);
+    lb.set_strategy(lb_strategy::round_robin);
     lb.add_backend({"host1", ports(8080)});
     lb.add_backend({"host2", ports(8080)});
 
@@ -3053,7 +3139,7 @@ TEST_F(LoadBalancerTest, SelectBackendRoundRobin) {
 
 TEST_F(LoadBalancerTest, SelectBackendLeastConnections) {
     load_balancer lb;
-    lb.set_strategy(lb_strategy::LEAST_CONNECTIONS);
+    lb.set_strategy(lb_strategy::least_connections);
     lb.add_backend({"host1", ports(8080)});
     lb.add_backend({"host2", ports(8080)});
     lb.add_backend({"host3", ports(8080)});
@@ -3125,7 +3211,7 @@ TEST_F(LoadBalancerTest, HealthyCountReflectsState) {
 
 TEST_F(LoadBalancerTest, WeightedStrategySelectsByWeight) {
     load_balancer lb;
-    lb.set_strategy(lb_strategy::WEIGHTED);
+    lb.set_strategy(lb_strategy::weighted);
     lb.add_backend({"low", ports(8080), "http", 1});
     lb.add_backend({"high", ports(8080), "http", 100});
 
@@ -3182,7 +3268,7 @@ TEST_F(ReverseProxyFilterTest, ShouldProxyWithPrefix) {
 
     bool cont = proxy.pre_filter(req, res);
     EXPECT_FALSE(cont);
-    EXPECT_EQ(res.status, http_status::S5_BAD_GATEWAY);
+    EXPECT_EQ(res.status, http_status::bad_gateway);
 }
 
 TEST_F(ReverseProxyFilterTest, ShouldNotProxyWithoutPrefix) {
@@ -3206,7 +3292,7 @@ TEST_F(ReverseProxyFilterTest, NoPrefixProxiesEverything) {
 
     bool cont = proxy.pre_filter(req, res);
     EXPECT_FALSE(cont);
-    EXPECT_EQ(res.status, http_status::S5_BAD_GATEWAY);
+    EXPECT_EQ(res.status, http_status::bad_gateway);
 }
 
 class ResponseCacheTest : public ::testing::Test {
@@ -3218,7 +3304,7 @@ protected:
 
 TEST_F(ResponseCacheTest, PutAndGet) {
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.body = "cached content";
     cache_->put("key1", resp, 60_s);
 
@@ -3301,7 +3387,7 @@ protected:
 
 TEST_F(CacheFilterTest, CacheHitReturnsCachedResponse) {
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.body = "cached";
 
     string key = response_cache::build_key(http_method::GET(), "/data");
@@ -3353,7 +3439,7 @@ TEST_F(CacheFilterTest, IfNoneMatchReturns304) {
 
     bool cont = filter_->pre_filter(req, res);
     EXPECT_FALSE(cont);
-    EXPECT_EQ(res.status, http_status::S3_NOT_MODIFIED);
+    EXPECT_EQ(res.status, http_status::not_modified);
 }
 
 TEST_F(CacheFilterTest, PostFilterStoresCachedResponse) {
@@ -3361,7 +3447,7 @@ TEST_F(CacheFilterTest, PostFilterStoresCachedResponse) {
     req.method = http_method::GET();
     req.path = "/stored";
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.body = "store me";
 
     filter_->post_filter(req, resp);
@@ -3500,7 +3586,7 @@ TEST_F(LoggingFilterTest, PostFilterLogsResponse) {
     lf.log_headers = true;
     http_request req;
     http_response res;
-    res.status = http_status::S2_OK;
+    res.status = http_status::ok;
     res.body = "response body";
     lf.post_filter(req, res);
     SUCCEED();
@@ -3750,7 +3836,7 @@ protected:
 TEST_F(Http2FrameEncodeTest, EncodeSettingsFrame) {
     http2_settings_frame sf;
     sf.ack = false;
-    sf.entries = {{http2_settings_id::MAX_CONCURRENT_STREAMS, 128}, {http2_settings_id::INITIAL_WINDOW_SIZE, 131072}};
+    sf.entries = {{http2_settings_id::max_concurrent_streams, 128}, {http2_settings_id::initial_window_size, 131072}};
     auto frame = http2_framer::encode_settings_frame(sf);
     ASSERT_GE(frame.size(), 9u);
     EXPECT_EQ(frame[3], 0x04); // SETTINGS type
@@ -3793,7 +3879,7 @@ TEST_F(Http2FrameEncodeTest, EncodePingAck) {
 TEST_F(Http2FrameEncodeTest, EncodeGoawayFrame) {
     http2_goaway_frame gf;
     gf.last_stream_id = 7;
-    gf.error_code = http2_error::PROTOCOL_ERROR;
+    gf.error_code = http2_error::protocol_error;
     gf.debug_data = {};
     auto frame = http2_framer::encode_goaway_frame(gf);
     ASSERT_GE(frame.size(), 17u); // 9 header + 8 (last_id + error)
@@ -3803,7 +3889,7 @@ TEST_F(Http2FrameEncodeTest, EncodeGoawayFrame) {
 TEST_F(Http2FrameEncodeTest, EncodeRstStreamFrame) {
     http2_rst_stream_frame rf;
     rf.stream_id = 5;
-    rf.error_code = http2_error::CANCEL;
+    rf.error_code = http2_error::cancel;
     auto frame = http2_framer::encode_rst_stream_frame(rf);
     ASSERT_EQ(frame.size(), 13u); // 9 header + 4 error
     EXPECT_EQ(frame[3], 0x03);    // RST_STREAM type
@@ -3903,7 +3989,7 @@ TEST_F(Http2FrameDecodeErrorTest, DecodeMultipleCompleteFrames) {
     framer.decode_frames(combined.data(), combined.size(),
                          [&](http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t*, size_t len) {
                              ++call_count;
-                             EXPECT_EQ(type, http2_frame_type::SETTINGS);
+                             EXPECT_EQ(type, http2_frame_type::settings);
                              EXPECT_EQ(flags & HTTP2_FLAG_ACK, HTTP2_FLAG_ACK);
                              EXPECT_EQ(stream_id, 0u);
                              EXPECT_EQ(len, 0u);
@@ -3938,7 +4024,7 @@ TEST_F(Http2FrameDecodeErrorTest, EncodeDecodeRoundtripDataFrame) {
             encoded.data(), encoded.size(),
             [&](http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t* payload, size_t len) {
                 ++call_count;
-                EXPECT_EQ(type, http2_frame_type::DATA);
+                EXPECT_EQ(type, http2_frame_type::data);
                 EXPECT_TRUE(flags & HTTP2_FLAG_END_STREAM);
                 EXPECT_EQ(stream_id, 3u);
                 EXPECT_EQ(len, 4u);
@@ -3957,7 +4043,7 @@ protected:
 TEST_F(Http2StreamStateTest, NewStreamIsIdle) {
     http2_stream s(1);
     EXPECT_EQ(s.id(), 1u);
-    EXPECT_EQ(s.state(), http2_stream_state::IDLE);
+    EXPECT_EQ(s.state(), http2_stream_state::idle);
     EXPECT_FALSE(s.is_closed());
 }
 
@@ -3971,7 +4057,7 @@ TEST_F(Http2StreamStateTest, IdleStreamCanOnlySendHeaders) {
 TEST_F(Http2StreamStateTest, ReceiveHeadersOpensStream) {
     http2_stream s(1);
     s.on_receive_headers(false);
-    EXPECT_EQ(s.state(), http2_stream_state::OPEN);
+    EXPECT_EQ(s.state(), http2_stream_state::open);
     EXPECT_TRUE(s.can_receive());
     EXPECT_TRUE(s.can_send_headers());
 }
@@ -3979,31 +4065,31 @@ TEST_F(Http2StreamStateTest, ReceiveHeadersOpensStream) {
 TEST_F(Http2StreamStateTest, ReceiveHeadersWithEndStreamGoesHalfClosedRemote) {
     http2_stream s(1);
     s.on_receive_headers(true);
-    EXPECT_EQ(s.state(), http2_stream_state::HALF_CLOSED_REMOTE);
+    EXPECT_EQ(s.state(), http2_stream_state::half_closed_remote);
 }
 
 TEST_F(Http2StreamStateTest, SendHeadersOpensStream) {
     http2_stream s(1);
     s.on_send_headers(false);
-    EXPECT_EQ(s.state(), http2_stream_state::OPEN);
+    EXPECT_EQ(s.state(), http2_stream_state::open);
 }
 
 TEST_F(Http2StreamStateTest, SendHeadersWithEndStreamGoesHalfClosedLocal) {
     http2_stream s(1);
     s.on_send_headers(true);
-    EXPECT_EQ(s.state(), http2_stream_state::HALF_CLOSED_LOCAL);
+    EXPECT_EQ(s.state(), http2_stream_state::half_closed_local);
 }
 
 TEST_F(Http2StreamStateTest, FullLifecycleOpenToClosed) {
     http2_stream s(1);
     s.on_receive_headers(false);
-    EXPECT_EQ(s.state(), http2_stream_state::OPEN);
+    EXPECT_EQ(s.state(), http2_stream_state::open);
     s.on_send_headers(false);
-    EXPECT_EQ(s.state(), http2_stream_state::OPEN);
+    EXPECT_EQ(s.state(), http2_stream_state::open);
     s.on_receive_data(true);
-    EXPECT_EQ(s.state(), http2_stream_state::HALF_CLOSED_REMOTE);
+    EXPECT_EQ(s.state(), http2_stream_state::half_closed_remote);
     s.on_send_data(true);
-    EXPECT_EQ(s.state(), http2_stream_state::CLOSED);
+    EXPECT_EQ(s.state(), http2_stream_state::closed);
     EXPECT_TRUE(s.is_closed());
 }
 
@@ -4028,7 +4114,7 @@ TEST_F(Http2StreamStateTest, CloseMethodSetsClosed) {
     http2_stream s(1);
     s.close();
     EXPECT_TRUE(s.is_closed());
-    EXPECT_EQ(s.state(), http2_stream_state::CLOSED);
+    EXPECT_EQ(s.state(), http2_stream_state::closed);
 }
 
 #ifdef NEFORCE_SUPPORT_ZLIB
@@ -4422,7 +4508,7 @@ TEST_F(HttpClientConfigUnit, ProxySetAndClear) {
 
     client.clear_proxy();
     EXPECT_TRUE(client.get_config().proxy_host.empty());
-    EXPECT_EQ(client.get_config().proxy_port, ports::UNDEF);
+    EXPECT_EQ(client.get_config().proxy_port, ports::undef);
 }
 
 TEST_F(HttpClientConfigUnit, VerifySslSetterUpdatesConfig) {
@@ -4576,7 +4662,7 @@ TEST_F(HttpClientStreamIoTest, ChunkedStreamDeliversBodyIncrementally) {
     const http_client_response response = client.request_stream(make_get_request(server, "/events"), observer);
     server_thread.join();
 
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::ok), static_cast<uint16_t>(response.status));
     EXPECT_EQ(1u, header_calls);
     EXPECT_EQ("text/event-stream", content_type);
     EXPECT_EQ("alphabeta", assembled);
@@ -4614,7 +4700,7 @@ TEST_F(HttpClientStreamIoTest, ContentLengthStreamStopsAtDeclaredLength) {
     const http_client_response response = client.request_stream(make_get_request(server, "/data"), observer);
     server_thread.join();
 
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::ok), static_cast<uint16_t>(response.status));
     EXPECT_EQ("abcdefghi", assembled);
 }
 
@@ -4646,7 +4732,7 @@ TEST_F(HttpClientStreamIoTest, UnframedStreamEndsWhenPeerCloses) {
     const http_client_response response = client.request_stream(make_get_request(server, "/text"), observer);
     server_thread.join();
 
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::ok), static_cast<uint16_t>(response.status));
     EXPECT_EQ("xyz", assembled);
 }
 
@@ -4682,7 +4768,7 @@ TEST_F(HttpClientStreamIoTest, ChunkBoundariesSplitAcrossReadsAreReassembled) {
     const http_client_response response = client.request_stream(make_get_request(server, "/slow"), observer);
     server_thread.join();
 
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::ok), static_cast<uint16_t>(response.status));
     EXPECT_EQ("hello worldabc", assembled);
 }
 
@@ -4728,7 +4814,7 @@ TEST_F(HttpClientStreamIoTest, AbortFromAnotherThreadUnblocksTheStream) {
     EXPECT_TRUE(handle.is_aborted());
     EXPECT_LT(elapsed.count(), 600);
     EXPECT_EQ("alpha", assembled);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::ok), static_cast<uint16_t>(response.status));
     EXPECT_FALSE(response.body.empty() && assembled.empty());
 }
 
@@ -4822,7 +4908,7 @@ TEST_F(HttpClientRetryIoTest, RetryableStatusIsRetriedWhenPolicyAllows) {
     server_thread.join();
 
     EXPECT_EQ(2u, accepts);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::ok), static_cast<uint16_t>(response.status));
     EXPECT_EQ("ok", response.body);
 }
 
@@ -4848,7 +4934,7 @@ TEST_F(HttpClientRetryIoTest, RetryDisabledByDefaultReturnsTheFailure) {
     server_thread.join();
 
     EXPECT_EQ(1u, accepts);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S5_SERVICE_UNAVAILABLE), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::service_unavailable), static_cast<uint16_t>(response.status));
 }
 
 TEST_F(HttpClientRetryIoTest, RetryAfterHeaderIsHonoured) {
@@ -4885,7 +4971,7 @@ TEST_F(HttpClientRetryIoTest, RetryAfterHeaderIsHonoured) {
     server_thread.join();
 
     EXPECT_EQ(2u, accepts);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_OK), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::ok), static_cast<uint16_t>(response.status));
     EXPECT_EQ("hello", response.body);
 }
 
@@ -4915,7 +5001,7 @@ TEST_F(HttpClientRetryIoTest, ClientErrorStatusIsNotRetried) {
     server_thread.join();
 
     EXPECT_EQ(1u, accepts);
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S4_BAD_REQUEST), static_cast<uint16_t>(response.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::bad_request), static_cast<uint16_t>(response.status));
 }
 
 TEST_F(HttpClientRetryIoTest, KeepAliveReusesTheConnectionForConsecutiveRequests) {
@@ -4981,7 +5067,7 @@ TEST_F(HttpClientRetryIoTest, NoContentResponseKeepsConnectionUsable) {
     const http_client_response second = client.get(server.base_url());
     server_thread.join();
 
-    EXPECT_EQ(static_cast<uint16_t>(http_status::S2_NO_CONTENT), static_cast<uint16_t>(first.status));
+    EXPECT_EQ(static_cast<uint16_t>(http_status::no_content), static_cast<uint16_t>(first.status));
     EXPECT_TRUE(first.body.empty());
     EXPECT_EQ("final", second.body);
     EXPECT_EQ(2u, requests_on_one_connection);

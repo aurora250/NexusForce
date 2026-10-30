@@ -8,14 +8,11 @@
  * 提供线程安全、异步信号安全的统一信号管理接口。
  */
 
-#include "NeForce/core/async/atomic.hpp"
-#include "NeForce/core/async/condition_variable.hpp"
-#include "NeForce/core/async/thread.hpp"
-#include "NeForce/core/container/flat_unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
+#include "NeForce/core/time/clocks.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include "NeForce/core/system/system_event.hpp"
 #    include <consoleapi.h>
 #    ifdef NEFORCE_COMPILER_MINGW
 #        include <windef.h>
@@ -56,51 +53,51 @@ public:
      */
     enum class event {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        INTERRUPT = CTRL_C_EVENT,       ///< Ctrl+C中断信号
-        CTRL_BREAK = CTRL_BREAK_EVENT,  ///< Ctrl+Break信号
-        CLOSE = CTRL_CLOSE_EVENT,       ///< 关闭控制台窗口
-        LOGOFF = CTRL_LOGOFF_EVENT,     ///< 用户注销
-        SHUTDOWN = CTRL_SHUTDOWN_EVENT, ///< 系统关机
+        interrupt = CTRL_C_EVENT,       ///< Ctrl+C中断信号
+        ctrl_break = CTRL_BREAK_EVENT,  ///< Ctrl+Break信号
+        close = CTRL_CLOSE_EVENT,       ///< 关闭控制台窗口
+        logoff = CTRL_LOGOFF_EVENT,     ///< 用户注销
+        shutdown = CTRL_SHUTDOWN_EVENT, ///< 系统关机
 
-        TERMINATE = 1000,      ///< 终止信号（模拟SIGTERM）
-        ABORT = 1001,          ///< 中止信号（模拟SIGABRT）
-        ILLEGAL_INSTR = 1002,  ///< 非法指令（模拟SIGILL）
-        FLOATING_POINT = 1003, ///< 浮点异常（模拟SIGFPE）
-        SEGMENT_FAULT = 1004,  ///< 段错误（模拟SIGSEGV）
-        BUS_ERROR = 1005,      ///< 总线错误（模拟SIGBUS）
-        PIPE_BROKEN = 1006,    ///< 管道破裂（模拟SIGPIPE）
-        ALARM = 1007,          ///< 定时器信号（模拟SIGALRM）
-        HANGUP = 1008,         ///< 挂起信号（模拟SIGHUP）
-        USER1 = 1009,          ///< 用户自定义信号1（模拟SIGUSR1）
-        USER2 = 1010,          ///< 用户自定义信号2（模拟SIGUSR2）
+        terminate = 1000,      ///< 终止信号（模拟SIGTERM）
+        abort = 1001,          ///< 中止信号（模拟SIGABRT）
+        illegal_instr = 1002,  ///< 非法指令（模拟SIGILL）
+        floating_point = 1003, ///< 浮点异常（模拟SIGFPE）
+        segment_fault = 1004,  ///< 段错误（模拟SIGSEGV）
+        bus_error = 1005,      ///< 总线错误（模拟SIGBUS）
+        pipe_broken = 1006,    ///< 管道破裂（模拟SIGPIPE）
+        alarm = 1007,          ///< 定时器信号（模拟SIGALRM）
+        hangup = 1008,         ///< 挂起信号（模拟SIGHUP）
+        user1 = 1009,          ///< 用户自定义信号1（模拟SIGUSR1）
+        user2 = 1010,          ///< 用户自定义信号2（模拟SIGUSR2）
 
-        TIMEOUT = 2000,   ///< 超时事件
-        CUSTOM_1 = 2001,  ///< 自定义事件1
-        CUSTOM_2 = 2002,  ///< 自定义事件2
-        FORCE_EXIT = 9999 ///< 强制退出信号
+        timeout = 2000,   ///< 超时事件
+        custom_1 = 2001,  ///< 自定义事件1
+        custom_2 = 2002,  ///< 自定义事件2
+        force_exit = 9999 ///< 强制退出信号
 #else
-        INTERRUPT = SIGINT,      ///< Ctrl+C中断信号
-        TERMINATE = SIGTERM,     ///< 终止信号
-        ABORT = SIGABRT,         ///< 中止信号
-        ILLEGAL_INSTR = SIGILL,  ///< 非法指令
-        FLOATING_POINT = SIGFPE, ///< 浮点异常
-        SEGMENT_FAULT = SIGSEGV, ///< 段错误
-        BUS_ERROR = SIGBUS,      ///< 总线错误
-        PIPE_BROKEN = SIGPIPE,   ///< 管道破裂
-        ALARM = SIGALRM,         ///< 定时器信号
-        HANGUP = SIGHUP,         ///< 挂起信号
-        USER1 = SIGUSR1,         ///< 用户自定义信号1
-        USER2 = SIGUSR2,         ///< 用户自定义信号2
+        interrupt = SIGINT,      ///< Ctrl+C中断信号
+        terminate = SIGTERM,     ///< 终止信号
+        abort = SIGABRT,         ///< 中止信号
+        illegal_instr = SIGILL,  ///< 非法指令
+        floating_point = SIGFPE, ///< 浮点异常
+        segment_fault = SIGSEGV, ///< 段错误
+        bus_error = SIGBUS,      ///< 总线错误
+        pipe_broken = SIGPIPE,   ///< 管道破裂
+        alarm = SIGALRM,         ///< 定时器信号
+        hangup = SIGHUP,         ///< 挂起信号
+        user1 = SIGUSR1,         ///< 用户自定义信号1
+        user2 = SIGUSR2,         ///< 用户自定义信号2
 
-        CTRL_BREAK = 1000, ///< Ctrl+Break（模拟）
-        CLOSE = 1001,      ///< 关闭事件（模拟）
-        LOGOFF = 1002,     ///< 注销事件（模拟）
-        SHUTDOWN = 1003,   ///< 关机事件（模拟）
+        ctrl_break = 1000, ///< Ctrl+Break（模拟）
+        close = 1001,      ///< 关闭事件（模拟）
+        logoff = 1002,     ///< 注销事件（模拟）
+        shutdown = 1003,   ///< 关机事件（模拟）
 
-        TIMEOUT = 2000,   ///< 超时事件
-        CUSTOM_1 = 2001,  ///< 自定义事件1
-        CUSTOM_2 = 2002,  ///< 自定义事件2
-        FORCE_EXIT = 9999 ///< 强制退出信号
+        timeout = 2000,   ///< 超时事件
+        custom_1 = 2001,  ///< 自定义事件1
+        custom_2 = 2002,  ///< 自定义事件2
+        force_exit = 9999 ///< 强制退出信号
 #endif
     };
 
@@ -137,42 +134,15 @@ private:
         timestamp{timestamp} {}
     };
 
-    atomic<bool> running_{false};          ///< 运行标志
-    atomic<bool> force_exit_{false};       ///< 强制退出标志
-    atomic<int> force_exit_timeout_{5000}; ///< 强制退出超时（毫秒）
-
-    atomic<int> guard_count_{0}; // 作用域管理器的引用计数
-
-    mutex mutex_;           ///< 保护共享数据的互斥锁
-    condition_variable cv_; ///< 信号等待条件变量
-
-    flat_unordered_map<event, signal_handler> handlers_; ///< 信号处理函数映射
-    vector<pending_signal> pending_signals_;             ///< 待处理信号队列
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    system_event notify_event_; ///< 事件对象
-#else
-    struct ::sigaction old_actions_[64]{}; ///< 原始的信号处理行为
-#endif
-
-    thread signal_thread_;  ///< 信号处理线程
-    thread timeout_thread_; ///< 超时监控线程
+    struct impl;
+    unique_ptr<impl> impl_;
 
     friend class signal_guard;
 
     system_signal();
 
-    void add_guard_ref() {
-        if (guard_count_++ == 0) {
-            start_monitoring();
-        }
-    }
-
-    void remove_guard_ref() noexcept {
-        if (--guard_count_ == 0) {
-            stop_monitoring();
-        }
-    }
+    void add_guard_ref();
+    void remove_guard_ref() noexcept;
 
     void initialize();
     void cleanup();
@@ -287,11 +257,11 @@ public:
      * @param event 事件
      * @return 是否平台原生信号
      */
-    NEFORCE_NODISCARD static bool is_platform_signal(event event) {
+    NEFORCE_NODISCARD static bool is_platform_signal(event event) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         return static_cast<::DWORD>(event) <= CTRL_SHUTDOWN_EVENT;
 #else
-        int v = static_cast<int>(event);
+        const int v = static_cast<int>(event);
         return v > 0 && v < 64;
 #endif
     }

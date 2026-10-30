@@ -259,7 +259,7 @@ bool cors_filter::pre_filter(http_request& request, http_response& response) {
     response.headers[http_key::Access_Control_Max_Age()] = to_string(max_age.count());
 
     if (request.method.is_options()) {
-        response.status = http_status::S2_NO_CONTENT;
+        response.status = http_status::no_content;
         response.status_message = "No Content";
         return false;
     }
@@ -396,7 +396,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
     const string& req_path = request.path;
 
     if (!is_safe_path(req_path)) {
-        response.status = http_status::S4_FORBIDDEN;
+        response.status = http_status::forbidden;
         response.status_message = "Forbidden";
         response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "Access denied";
@@ -413,7 +413,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
 
         const auto file_size = filesystem::size(file_path);
         if (file_size > max_file_size_) {
-            response.status = http_status::S4_PAYLOAD_TOO_LARGE;
+            response.status = http_status::payload_too_large;
             response.status_message = "Payload Too Large";
             response.set_content_type(http_content::PLAIN_TEXT());
             response.body = "File too large";
@@ -438,7 +438,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
                 auto ranges = parse_ranges(range_header, full_content.size());
 
                 if (ranges.empty()) {
-                    response.status = http_status::S4_RANGE_NOT_SATISFIABLE;
+                    response.status = http_status::range_not_satisfiable;
                     response.status_message = "Range Not Satisfiable";
                     response.set_header("Content-Range", string("bytes */") + to_string(full_content.size()));
                     response.body.clear();
@@ -450,7 +450,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
                     const uint64_t length = r.end - r.start + 1;
                     response.body = full_content.substr(r.start, static_cast<size_t>(length));
 
-                    response.status = http_status::S2_PARTIAL_CONTENT;
+                    response.status = http_status::partial_content;
                     response.status_message = "Partial Content";
                     response.set_header("Content-Range", build_content_range(r, full_content.size()));
                 } else {
@@ -465,16 +465,16 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
                                                                                           static_cast<size_t>(length));
                                                            });
 
-                    response.status = http_status::S2_PARTIAL_CONTENT;
+                    response.status = http_status::partial_content;
                     response.status_message = "Partial Content";
                     response.set_content_type("multipart/byteranges; boundary="_s + boundary);
                 }
             } else {
-                response.status = http_status::S2_OK;
+                response.status = http_status::ok;
                 response.status_message = "OK";
             }
         } else {
-            response.status = http_status::S2_OK;
+            response.status = http_status::ok;
             response.status_message = "OK";
         }
 
@@ -578,7 +578,7 @@ bool authentication_filter::pre_filter(http_request& request, http_response& res
     }
 
     if (!auth_validator_(request)) {
-        response.status = http_status::S4_UNAUTHORIZED;
+        response.status = http_status::unauthorized;
         response.status_message = "Unauthorized";
         response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "Authentication required";

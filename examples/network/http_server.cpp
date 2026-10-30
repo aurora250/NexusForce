@@ -158,7 +158,7 @@ int main() {
     // 登录（设置session用户信息 + 防御Session Fixation）
     router.post("/api/login", [](http_request& req, http_response& res) {
         if (!req.has_session()) {
-            res.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            res.status = http_status::internal_server_error;
             res.body = R"({"error":"Session required"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -284,7 +284,7 @@ if (csrf) document.getElementById('csrf_token').value = csrf.split('=')[1];
     // =========================================================================
 
     router.set_method_not_allowed_handler([](http_request& req, http_response& res) {
-        res.status = http_status::S4_METHOD_NOT_ALLOWED;
+        res.status = http_status::method_not_allowed;
 
         json_builder jb;
         jb.begin_object();
@@ -297,7 +297,7 @@ if (csrf) document.getElementById('csrf_token').value = csrf.split('=')[1];
     });
 
     router.set_not_found_handler([](http_request& req, http_response& res) {
-        res.status = http_status::S4_NOT_FOUND;
+        res.status = http_status::not_found;
 
         json_builder jb;
         jb.begin_object();

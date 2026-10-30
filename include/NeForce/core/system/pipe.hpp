@@ -9,6 +9,7 @@
  */
 
 #include "NeForce/core/exception/system_exception.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -187,14 +188,8 @@ public:
     using native_handle_type = _NEFORCE native_handle_type;
 
 private:
-    native_handle_type handle_;
-    string name_;
-    bool nonblocking_{false};
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    bool is_server_{false};
-#else
-    string fifo_path_;
-#endif
+    struct impl;
+    unique_ptr<impl> impl_;
 
 public:
     /**
@@ -283,19 +278,19 @@ public:
      * @brief 查询是否非阻塞
      * @return 是否非阻塞
      */
-    NEFORCE_NODISCARD bool is_nonblocking() const noexcept { return nonblocking_; }
+    NEFORCE_NODISCARD bool is_nonblocking() const noexcept;
 
     /**
      * @brief 获取管道名称
      * @return 管道名称
      */
-    NEFORCE_NODISCARD const string& name() const noexcept { return name_; }
+    NEFORCE_NODISCARD string_view name() const noexcept;
 
     /**
      * @brief 获取原生句柄
      * @return 原生句柄
      */
-    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept { return handle_; }
+    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept;
 
     /**
      * @brief 删除命名管道（仅 Linux FIFO）

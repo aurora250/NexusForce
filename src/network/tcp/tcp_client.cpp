@@ -11,7 +11,7 @@ bool tcp_client_base::try_connect_to_ip(const string& ip, ports port) {
             return false;
         }
 
-        sock->open(is_ipv6_conn ? ip_family::INET6 : ip_family::INET4);
+        sock->open(is_ipv6_conn ? ip_family::inet6 : ip_family::inet4);
 
         if (!sock->set_send_timeout(send_timeout_) || !sock->set_receive_timeout(recv_timeout_)) {
             sock->close();
@@ -217,7 +217,7 @@ void tcp_client_base::close_connection() noexcept {
 
     socket_.reset();
     connected_host_.clear();
-    connected_port_ = ports::UNDEF;
+    connected_port_ = ports::undef;
 }
 
 void tcp_client_base::disconnect() noexcept {

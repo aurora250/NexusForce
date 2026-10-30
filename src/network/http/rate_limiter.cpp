@@ -103,7 +103,7 @@ bool token_bucket_filter::pre_filter(http_request& request, http_response& respo
     }
 
     if (!limiter_.allow(key, default_rate, default_burst)) {
-        response.status = http_status::S4_TOO_MANY_REQUESTS;
+        response.status = http_status::too_many_requests;
         response.status_message = "Too Many Requests";
         response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "Rate limit exceeded. Please try again later.";

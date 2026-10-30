@@ -393,7 +393,7 @@ TEST_F(SslSocketTest, DefaultConstructorIsNotSsl) {
 
 TEST_F(SslSocketTest, ConstructorFromFd) {
     socket_base base;
-    base.open(ip_family::INET4);
+    base.open(ip_family::inet4);
     auto fd = base.release();
     ssl_socket sock(fd);
     EXPECT_TRUE(sock.is_open());
@@ -402,7 +402,7 @@ TEST_F(SslSocketTest, ConstructorFromFd) {
 
 TEST_F(SslSocketTest, ConstructorFromTcpSocket) {
     tcp_socket tcp;
-    tcp.open(ip_family::INET4);
+    tcp.open(ip_family::inet4);
     ssl_socket ssl(move(tcp));
     EXPECT_TRUE(ssl.is_open());
     ssl.close();
@@ -438,7 +438,7 @@ TEST_F(SslSocketTest, InitClientSslWithoutOpenThrows) {
 
 TEST_F(SslSocketTest, InitServerSslWithInvalidContextThrows) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     ssl_context ctx(ssl_method::tls_server);
     ssl_context moved_from = move(ctx);
     EXPECT_THROW(sock.init_server_ssl(ctx), ssl_exception);
@@ -452,28 +452,28 @@ TEST_F(SslSocketTest, PeerCertificateInfoWithoutSslReturnsEmpty) {
 
 TEST_F(SslSocketTest, SendWithoutSslFallsBackToTcp) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     EXPECT_EQ(sock.send(memory_view<const char>()), 0);
     sock.close();
 }
 
 TEST_F(SslSocketTest, SendEmptyDataReturnsZeroAfterOpen) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     EXPECT_EQ(sock.send(memory_view<const char>()), 0);
     sock.close();
 }
 
 TEST_F(SslSocketTest, ReceiveEmptyBufferReturnsZeroAfterOpen) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     EXPECT_EQ(sock.receive(memory_view<char>()), 0);
     sock.close();
 }
 
 TEST_F(SslSocketTest, ReceiveWithoutSslFallsBackToTcp) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     EXPECT_EQ(sock.receive(memory_view<char>()), 0);
     sock.close();
 }
@@ -485,7 +485,7 @@ TEST_F(SslSocketTest, CloseReturnsTrueWhenAlreadyClosed) {
 
 TEST_F(SslSocketTest, MoveConstructorPreservesOpenState) {
     ssl_socket sock1;
-    sock1.open(ip_family::INET4);
+    sock1.open(ip_family::inet4);
     EXPECT_TRUE(sock1.is_open());
 
     ssl_socket sock2(move(sock1));
@@ -553,7 +553,7 @@ TEST_F(TcpSocketTest, DefaultConstructorIsNotOpen) {
 
 TEST_F(TcpSocketTest, OpenIpv4) {
     tcp_socket sock;
-    EXPECT_NO_THROW(sock.open(ip_family::INET4));
+    EXPECT_NO_THROW(sock.open(ip_family::inet4));
     EXPECT_TRUE(sock.is_open());
     EXPECT_TRUE(sock.is_ipv4());
     sock.close();
@@ -561,7 +561,7 @@ TEST_F(TcpSocketTest, OpenIpv4) {
 
 TEST_F(TcpSocketTest, OpenIpv6) {
     tcp_socket sock;
-    EXPECT_NO_THROW(sock.open(ip_family::INET6));
+    EXPECT_NO_THROW(sock.open(ip_family::inet6));
     EXPECT_TRUE(sock.is_open());
     EXPECT_TRUE(sock.is_ipv6());
     sock.close();
@@ -576,7 +576,7 @@ TEST_F(TcpSocketTest, OpenDefaultIsIpv4) {
 
 TEST_F(TcpSocketTest, ConnectWithInvalidEndpointThrows) {
     tcp_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     ip_address invalid;
     EXPECT_THROW(sock.connect(invalid, milliseconds(1000)), value_exception);
     sock.close();
@@ -584,7 +584,7 @@ TEST_F(TcpSocketTest, ConnectWithInvalidEndpointThrows) {
 
 TEST_F(TcpSocketTest, ConnectWithoutOpenThrows) {
     tcp_socket sock;
-    auto addr = ip_address::loopback(ports(8080u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(8080u), ip_family::inet4);
     EXPECT_THROW(sock.connect(addr, milliseconds(1000)), value_exception);
 }
 
@@ -601,14 +601,14 @@ TEST_F(TcpSocketTest, ReceiveWithoutOpenThrows) {
 
 TEST_F(TcpSocketTest, SendEmptyDataReturnsZero) {
     tcp_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     EXPECT_EQ(sock.send(memory_view<const char>()), 0);
     sock.close();
 }
 
 TEST_F(TcpSocketTest, ReceiveEmptyBufferReturnsZero) {
     tcp_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     EXPECT_EQ(sock.receive(memory_view<char>()), 0);
     sock.close();
 }
@@ -630,8 +630,8 @@ TEST_F(TcpSocketTest, ReceiveAllWithoutOpenThrows) {
 
 TEST_F(TcpSocketTest, ConnectToRefusedPortFails) {
     tcp_socket sock;
-    sock.open(ip_family::INET4);
-    auto addr = ip_address::loopback(ports(12345u), ip_family::INET4);
+    sock.open(ip_family::inet4);
+    auto addr = ip_address::loopback(ports(12345u), ip_family::inet4);
     try {
         bool result = sock.connect(addr, milliseconds(500));
         EXPECT_FALSE(result);
@@ -642,16 +642,16 @@ TEST_F(TcpSocketTest, ConnectToRefusedPortFails) {
 
 TEST_F(TcpSocketTest, DoubleOpenReplacesSocket) {
     tcp_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     EXPECT_TRUE(sock.is_open());
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     EXPECT_TRUE(sock.is_open());
     sock.close();
 }
 
 TEST_F(TcpSocketTest, MoveConstructorTransfersState) {
     tcp_socket sock1;
-    sock1.open(ip_family::INET4);
+    sock1.open(ip_family::inet4);
     EXPECT_TRUE(sock1.is_open());
 
     tcp_socket sock2(move(sock1));
@@ -679,7 +679,7 @@ TEST_F(TcpAcceptorTest, OpenWithInvalidEndpointThrows) {
 
 TEST_F(TcpAcceptorTest, OpenWithAnyPortSucceeds) {
     tcp_acceptor acceptor;
-    auto addr = ip_address::any(ports(0u), ip_family::INET4);
+    auto addr = ip_address::any(ports(0u), ip_family::inet4);
     EXPECT_NO_THROW(acceptor.open(addr, 128));
     EXPECT_TRUE(acceptor.is_open());
     acceptor.close();
@@ -709,7 +709,7 @@ TEST_F(TcpAcceptorTest, AcceptNonblockWithNoPendingConnectionsReturnsNone) {
 
 TEST_F(TcpAcceptorTest, UsingSocketBaseOpenCompiles) {
     tcp_acceptor acceptor;
-    EXPECT_NO_THROW(acceptor.socket_base::open(ip_family::INET4));
+    EXPECT_NO_THROW(acceptor.socket_base::open(ip_family::inet4));
     EXPECT_TRUE(acceptor.is_open());
     acceptor.close();
 }
@@ -1037,7 +1037,7 @@ TEST_F(SslSocketTest, PrepareClientSslWithoutOpenThrows) {
 
 TEST_F(SslSocketTest, PrepareServerSslInvalidContextThrows) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     ssl_context ctx(ssl_method::tls_server);
     ssl_context moved_from = move(ctx);
     (void) moved_from;
@@ -1047,7 +1047,7 @@ TEST_F(SslSocketTest, PrepareServerSslInvalidContextThrows) {
 
 TEST_F(SslSocketTest, PrepareClientSslInvalidContextThrows) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     ssl_context ctx(ssl_method::tls_client);
     ssl_context moved_from = move(ctx);
     (void) moved_from;
@@ -1057,7 +1057,7 @@ TEST_F(SslSocketTest, PrepareClientSslInvalidContextThrows) {
 
 TEST_F(SslSocketTest, PrepareServerSslMarksSslWithoutHandshake) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     ssl_context ctx(ssl_method::tls_server);
     EXPECT_NO_THROW(sock.prepare_server_ssl(ctx));
     EXPECT_TRUE(sock.is_ssl());
@@ -1066,7 +1066,7 @@ TEST_F(SslSocketTest, PrepareServerSslMarksSslWithoutHandshake) {
 
 TEST_F(SslSocketTest, PrepareClientSslWithHostnameMarksSsl) {
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     ssl_context ctx(ssl_method::tls_client);
     EXPECT_NO_THROW(sock.prepare_client_ssl(ctx, "localhost"));
     EXPECT_TRUE(sock.is_ssl());
@@ -1089,7 +1089,7 @@ TEST_F(SslSocketTest, AsyncHandshakeBeforePrepareDeliversError) {
 TEST_F(SslSocketTest, AsyncReadWithoutTlsRoutesToTcpSocket) {
     io_context ioc;
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     char buf[16];
     bool called = false;
     error_code ec;
@@ -1105,7 +1105,7 @@ TEST_F(SslSocketTest, AsyncReadWithoutTlsRoutesToTcpSocket) {
 TEST_F(SslSocketTest, AsyncWriteWithoutTlsRoutesToTcpSocket) {
     io_context ioc;
     ssl_socket sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     bool called = false;
     error_code ec;
     sock.async_write(ioc, {"x", 1}, [&](error_code e, size_t) {
@@ -1177,7 +1177,7 @@ TEST_F(TcpClientTest, AsyncConnectInvalidEndpointDeliversError) {
 
 TEST_F(TcpClientTest, AsyncConnectPreCancelledSlotAborts) {
     tcp_client client(ctx_);
-    auto endpoint = ip_address::loopback(ports(9u), ip_family::INET4);
+    auto endpoint = ip_address::loopback(ports(9u), ip_family::inet4);
 
     stop_source stop_src;
     cancellation_slot slot(stop_src.get_token());
@@ -1196,7 +1196,7 @@ TEST_F(TcpClientTest, AsyncConnectPreCancelledSlotAborts) {
 
 TEST_F(TcpClientTest, AsyncConnectTokenOverloadsCompile) {
     tcp_client client(ctx_);
-    auto endpoint = ip_address::loopback(ports(9u), ip_family::INET4);
+    auto endpoint = ip_address::loopback(ports(9u), ip_family::inet4);
     auto fut = client.async_connect(ctx_, endpoint, use_future);
     EXPECT_TRUE(fut.valid());
     client.async_connect(ctx_, endpoint, detached);

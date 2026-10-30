@@ -375,18 +375,18 @@ void daemon::setup_signal_handlers() {
         request_shutdown();
         return false;
     };
-    mgr.register_handler(system_signal::event::TERMINATE, shutdown_hander);
-    mgr.register_handler(system_signal::event::INTERRUPT, shutdown_hander);
+    mgr.register_handler(system_signal::event::terminate, shutdown_hander);
+    mgr.register_handler(system_signal::event::interrupt, shutdown_hander);
 
-    mgr.register_handler(system_signal::event::HANGUP, [this](system_signal::event, void*) -> bool {
+    mgr.register_handler(system_signal::event::hangup, [this](system_signal::event, void*) -> bool {
         request_reload();
         return true;
     });
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    mgr.register_handler(system_signal::event::CLOSE, shutdown_hander);
-    mgr.register_handler(system_signal::event::SHUTDOWN, shutdown_hander);
-    mgr.register_handler(system_signal::event::LOGOFF, shutdown_hander);
+    mgr.register_handler(system_signal::event::close, shutdown_hander);
+    mgr.register_handler(system_signal::event::shutdown, shutdown_hander);
+    mgr.register_handler(system_signal::event::logoff, shutdown_hander);
 #endif
 }
 

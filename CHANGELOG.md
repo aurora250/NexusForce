@@ -135,6 +135,7 @@
 - 添加流式请求取消句柄 `http_stream_handle`：`abort()` 可跨线程调用，对底层 socket 执行 `shutdown` 立即唤醒阻塞读取；`on_data` 返回 `false` 等价于 `abort()`
 - 添加重试策略 `http_retry_policy`（`config::retry`）：可重试状态码（408/429/500/502/503/504）与传输层失败按倍数退避重试，优先采用响应的 `Retry-After`（秒）作为退避时长，默认不重试
 - `http_client::config` 新增 `keep_alive_idle_timeout` 与 `stream_idle_timeout`：空闲超限的连接主动重连，流式读取期间使用独立的接收超时
+- `http_server_response` 新增 `allows_body()` 与 `suppress_content_length`：按状态码判断是否允许正文，CONNECT 2xx 可显式省略 `Content-Length`
 - 添加屏幕选区 `tui::screen_selection` 与 `paint_selection()` / `selection_text()`：以帧缓冲单元格为坐标跨组件选取，行内尾随空白裁剪、宽字符续列跳过
 - `reconciler` 接入鼠标拖选：左键按下拖动即开始选区，`Ctrl+C` 复制并清空选区，其余按键、滚轮、窗口变化都会丢弃选区；`set_clipboard_writer()` 可接管复制目标
 - `components::composer` 提交时记录历史，单行编辑下 `Up`/`Down` 浏览提交历史（多行时仍由编辑器移动光标）
@@ -333,6 +334,11 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `http_server` 把所有请求解析错误一律返回 400：请求体过大改为 413、未知 `Expect` 改为 417、请求头过大/过多改为 431、不支持的 HTTP 版本改为 505；`100 Continue` 改用 `http_status` 构造，且仅对 HTTP/1.1 请求发送；错误响应统一声明 `Connection: close`
+- 修复 `http_server` 在 HEAD、204/205/304 与 1xx 响应中仍发送正文的问题；CONNECT 2xx 响应不再输出 `Content-Length`
+- 修复 `http_router` 的 405 响应缺少 `Allow` 头：按实际注册的路由（含参数化与正则路由）汇总允许的方法
+- 修复 `http_router` 命中处理器但未显式设置状态码时仍返回默认 404 的问题：匹配成功先置为 `200 OK`，与示例和常见用法一致
+- 修复 `http_response` 重定向状态行不一致：非 3xx 状态码配合 `redirect_url` 时固定输出 `302 Found`，不再出现 `302 OK` 之类的状态码与原因短语错配
 - 修复重复调用 `crash_dump::install_handlers()` 后 `uninstall_handlers()` 无法恢复原始信号动作：第二次安装把自身处理器当作"先前动作"保存，卸载后处理器仍驻留，后续崩溃会以默认发布状态把 `nexusforce-<UTC时间>-<pid>.core` 写到进程工作目录；现仅在首次安装时保存 `sigaction`，新增"安装两次再卸载后子进程必须按默认动作被信号终止"的回归测试
 - 修复 RISC-V Release 下图表 y 轴只剩 `0`：GCC 13 把该路径的 `power(10.0, n)` 错误内联（`base` 未初始化），`chart_nice_step()` 得到错误步长，`k` / `M` / `G` 紧凑标签失效；现改为在 `chart_nice_step()` 内用乘法循环生成 10 的幂
 - 修复 `channel<T>` 的阻塞读写偶发永久阻塞：入队/出队与 `size_`、`closed_` 的变更以及对应的唤醒不在同一把锁内完成，等待线程在"谓词已判定为假、尚未进入条件变量等待"的窗口内会漏掉唤醒，此后写者填满缓冲、读者空转等待，双方互锁；现由 `control_mutex_` 统一保护状态变更与通知

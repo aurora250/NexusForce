@@ -1343,7 +1343,7 @@ vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, 
     futures.reserve(domains.size());
 
     for (const auto& domain: domains) {
-        futures.push_back(async_query(domain.view(), type, dns_class::INTERNET, use_future));
+        futures.push_back(async_query(domain.view(), type, dns_class::internet, use_future));
     }
 
     const auto total_budget =
@@ -1366,7 +1366,7 @@ vector<dns_query_result> dns_client::batch_query(const vector<string>& domains, 
             results.push_back(fut.get());
         } catch (...) {
             dns_query_result failed_result;
-            failed_result.response_code = dns_response::SERVER_FAILURE;
+            failed_result.response_code = dns_response::server_failure;
             results.push_back(failed_result);
         }
     }

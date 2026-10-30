@@ -6,7 +6,7 @@ inline bool network_available() {
     using namespace neforce;
 
     udp_socket sock;
-    if (!sock.try_open(ip_family::INET4, socket_type::DGRAM)) {
+    if (!sock.try_open(ip_family::inet4, socket_type::dgram)) {
         return false;
     }
     sock.set_reuse_address(true);

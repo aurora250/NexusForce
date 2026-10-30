@@ -11,13 +11,13 @@ lb_backend* load_balancer::select_backend() {
     }
 
     switch (strategy_) {
-        case lb_strategy::ROUND_ROBIN:
+        case lb_strategy::round_robin:
             return select_round_robin();
-        case lb_strategy::LEAST_CONNECTIONS:
+        case lb_strategy::least_connections:
             return select_least_connections();
-        case lb_strategy::WEIGHTED:
+        case lb_strategy::weighted:
             return select_weighted();
-        case lb_strategy::RANDOM:
+        case lb_strategy::random:
             return select_random();
     }
     return nullptr;

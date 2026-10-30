@@ -57,10 +57,10 @@ void http2_connection::start() {
     });
 
     http2_settings_frame sf;
-    sf.entries.push_back({http2_settings_id::MAX_CONCURRENT_STREAMS, local_settings_.max_concurrent_streams()});
-    sf.entries.push_back({http2_settings_id::INITIAL_WINDOW_SIZE, local_settings_.initial_window_size()});
-    sf.entries.push_back({http2_settings_id::MAX_FRAME_SIZE, local_settings_.max_frame_size()});
-    sf.entries.push_back({http2_settings_id::HEADER_TABLE_SIZE, local_settings_.header_table_size()});
+    sf.entries.push_back({http2_settings_id::max_concurrent_streams, local_settings_.max_concurrent_streams()});
+    sf.entries.push_back({http2_settings_id::initial_window_size, local_settings_.initial_window_size()});
+    sf.entries.push_back({http2_settings_id::max_frame_size, local_settings_.max_frame_size()});
+    sf.entries.push_back({http2_settings_id::header_table_size, local_settings_.header_table_size()});
     write_frame(framer_.encode_settings_frame(sf));
     flush_writes();
 }
@@ -74,12 +74,12 @@ void http2_connection::on_readable(int /*fd*/, epoll_event /*events*/, error_cod
     byte_t buf[16384];
     const ssize_t n = socket_->receive(memory_view<char>(reinterpret_cast<char*>(buf), sizeof(buf)));
     if (n <= 0) {
-        close_connection(http2_error::INTERNAL_ERROR);
+        close_connection(http2_error::internal_error);
         return;
     }
 
     if (read_buffer_.size() + static_cast<size_t>(n) > MAX_READ_BUFFER_SIZE) {
-        close_connection(http2_error::ENHANCE_YOUR_CALM);
+        close_connection(http2_error::enhance_your_calm);
         return;
     }
 
@@ -89,7 +89,7 @@ void http2_connection::on_readable(int /*fd*/, epoll_event /*events*/, error_cod
         if (read_buffer_.size() >= 24) {
             const string_view received(reinterpret_cast<const char*>(read_buffer_.data()), 24);
             if (received != HTTP2_CLIENT_PREFACE) {
-                close_connection(http2_error::PROTOCOL_ERROR);
+                close_connection(http2_error::protocol_error);
                 return;
             }
             preface_received_ = true;
@@ -99,8 +99,8 @@ void http2_connection::on_readable(int /*fd*/, epoll_event /*events*/, error_cod
             http2_settings_frame server_settings;
             server_settings.ack = false;
             server_settings.entries = {
-                    {http2_settings_id::MAX_CONCURRENT_STREAMS, 100},
-                    {http2_settings_id::INITIAL_WINDOW_SIZE, 65535},
+                    {http2_settings_id::max_concurrent_streams, 100},
+                    {http2_settings_id::initial_window_size, 65535},
             };
             write_frame(http2_framer::encode_settings_frame(server_settings));
         } else {
@@ -129,34 +129,34 @@ void http2_connection::handle_frame(http2_frame_type type, uint8_t flags, uint32
     }
 
     switch (type) {
-        case http2_frame_type::DATA:
+        case http2_frame_type::data:
             handle_data_frame(flags, stream_id, payload, len);
             break;
-        case http2_frame_type::HEADERS:
+        case http2_frame_type::headers:
             handle_headers_frame(flags, stream_id, payload, len);
             break;
-        case http2_frame_type::SETTINGS:
+        case http2_frame_type::settings:
             handle_settings_frame(flags, payload, len);
             break;
-        case http2_frame_type::PING:
+        case http2_frame_type::ping:
             handle_ping_frame(flags, payload, len);
             break;
-        case http2_frame_type::GOAWAY:
+        case http2_frame_type::goaway:
             handle_goaway_frame(payload, len);
             break;
-        case http2_frame_type::RST_STREAM:
+        case http2_frame_type::rst_stream:
             handle_rst_stream_frame(stream_id, payload);
             break;
-        case http2_frame_type::WINDOW_UPDATE:
+        case http2_frame_type::window_update:
             handle_window_update_frame(stream_id, payload);
             break;
-        case http2_frame_type::PRIORITY:
+        case http2_frame_type::priority:
             handle_priority_frame(stream_id, payload, len);
             break;
-        case http2_frame_type::PUSH_PROMISE:
+        case http2_frame_type::push_promise:
             handle_push_promise_frame(stream_id, payload, len);
             break;
-        case http2_frame_type::CONTINUATION:
+        case http2_frame_type::continuation:
             handle_continuation_frame(flags, stream_id, payload, len);
             break;
     }
@@ -165,7 +165,7 @@ void http2_connection::handle_frame(http2_frame_type type, uint8_t flags, uint32
 void http2_connection::handle_data_frame(uint8_t flags, uint32_t stream_id, const byte_t* payload, size_t len) {
     const auto it = pending_.find(stream_id);
     if (it == pending_.end()) {
-        send_rst_stream(stream_id, http2_error::STREAM_CLOSED);
+        send_rst_stream(stream_id, http2_error::stream_closed);
         return;
     }
 
@@ -215,7 +215,7 @@ void http2_connection::handle_headers_frame(uint8_t flags, uint32_t stream_id, c
 
     if (!streams_.contains(stream_id)) {
         if (streams_.size() >= local_settings_.max_concurrent_streams()) {
-            send_rst_stream(stream_id, http2_error::REFUSED_STREAM);
+            send_rst_stream(stream_id, http2_error::refused_stream);
             return;
         }
         auto stream = make_unique<http2_stream>(stream_id);
@@ -258,7 +258,7 @@ void http2_connection::handle_continuation_frame(uint8_t flags, uint32_t stream_
 
     const auto it = pending_.find(stream_id);
     if (it == pending_.end() || !it->second.waiting_continuation) {
-        close_connection(http2_error::PROTOCOL_ERROR);
+        close_connection(http2_error::protocol_error);
         return;
     }
 
@@ -384,14 +384,14 @@ void http2_connection::handle_window_update_frame(uint32_t stream_id, const byte
 
     // RFC 7540 §6.9: WINDOW_UPDATE with increment of 0 is a PROTOCOL_ERROR
     if (increment == 0) {
-        close_connection(http2_error::PROTOCOL_ERROR);
+        close_connection(http2_error::protocol_error);
         return;
     }
 
     // RFC 7540 §6.9: window must not exceed 2^31-1
     const uint32_t current = (stream_id == 0) ? flow_control_.connection_window() : flow_control_.window(stream_id);
     if (static_cast<uint64_t>(current) + increment > 0x7FFFFFFF) {
-        send_goaway(http2_error::FLOW_CONTROL_ERROR);
+        send_goaway(http2_error::flow_control_error);
         return;
     }
 
@@ -549,7 +549,7 @@ void http2_connection::write_frame(const byte_vector& frame) {
     unique_lock<mutex> lk(write_mutex_);
     if (write_buffer_.size() + frame.size() > MAX_WRITE_BUFFER_SIZE) {
         lk.unlock_quiet();
-        close_connection(http2_error::ENHANCE_YOUR_CALM);
+        close_connection(http2_error::enhance_your_calm);
         return;
     }
     write_buffer_.insert(write_buffer_.end(), frame.begin(), frame.end());
@@ -634,7 +634,7 @@ void http2_connection::route_stream(uint32_t stream_id, const vector<hpack_heade
             return;
         }
 
-        if (res.status >= http_status::S1_SWITCHING_PROTOCOLS) {
+        if (res.status >= http_status::switching_protocols) {
             const auto hpack_headers =
                     response_headers_to_hpack(static_cast<int>(static_cast<uint16_t>(res.status)), res.headers);
             self->send_response(stream_id, hpack_headers, res.body, end_stream);

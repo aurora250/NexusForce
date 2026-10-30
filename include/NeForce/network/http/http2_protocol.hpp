@@ -41,52 +41,48 @@ class byte_cursor;
  * @brief HTTP/2 帧类型（RFC 7540 §6）
  */
 enum class http2_frame_type : uint8_t {
-    DATA = 0x0,          ///< 请求/响应体数据
-    HEADERS = 0x1,       ///< 头部块
-    PRIORITY = 0x2,      ///< 流优先级
-    RST_STREAM = 0x3,    ///< 流终止
-    SETTINGS = 0x4,      ///< 连接配置参数
-    PUSH_PROMISE = 0x5,  ///< 服务端推送承诺
-    PING = 0x6,          ///< 连接活性检测
-    GOAWAY = 0x7,        ///< 优雅关闭连接
-    WINDOW_UPDATE = 0x8, ///< 流控窗口更新
-    CONTINUATION = 0x9,  ///< 头部块续帧
+    data = 0x0,          ///< 请求/响应体数据
+    headers = 0x1,       ///< 头部块
+    priority = 0x2,      ///< 流优先级
+    rst_stream = 0x3,    ///< 流终止
+    settings = 0x4,      ///< 连接配置参数
+    push_promise = 0x5,  ///< 服务端推送承诺
+    ping = 0x6,          ///< 连接活性检测
+    goaway = 0x7,        ///< 优雅关闭连接
+    window_update = 0x8, ///< 流控窗口更新
+    continuation = 0x9,  ///< 头部块续帧
 };
-
-#ifdef NO_ERROR
-#    undef NO_ERROR
-#endif
 
 /**
  * @brief HTTP/2 错误码（RFC 7540 §7）
  */
 enum class http2_error : uint32_t {
-    NO_ERROR = 0x0,            ///< 无错误
-    PROTOCOL_ERROR = 0x1,      ///< 协议错误
-    INTERNAL_ERROR = 0x2,      ///< 内部错误
-    FLOW_CONTROL_ERROR = 0x3,  ///< 流控违规
-    SETTINGS_TIMEOUT = 0x4,    ///< SETTINGS 确认超时
-    STREAM_CLOSED = 0x5,       ///< 流已关闭
-    FRAME_SIZE_ERROR = 0x6,    ///< 帧大小错误
-    REFUSED_STREAM = 0x7,      ///< 流被拒绝
-    CANCEL = 0x8,              ///< 流取消
-    COMPRESSION_ERROR = 0x9,   ///< 压缩错误
-    CONNECT_ERROR = 0xA,       ///< CONNECT 错误
-    ENHANCE_YOUR_CALM = 0xB,   ///< 速率过高
-    INADEQUATE_SECURITY = 0xC, ///< 安全不足
-    HTTP_1_1_REQUIRED = 0xD,   ///< 需要 HTTP/1.1
+    no_error = 0x0,            ///< 无错误
+    protocol_error = 0x1,      ///< 协议错误
+    internal_error = 0x2,      ///< 内部错误
+    flow_control_error = 0x3,  ///< 流控违规
+    settings_timeout = 0x4,    ///< SETTINGS 确认超时
+    stream_closed = 0x5,       ///< 流已关闭
+    frame_size_error = 0x6,    ///< 帧大小错误
+    refused_stream = 0x7,      ///< 流被拒绝
+    cancel = 0x8,              ///< 流取消
+    compression_error = 0x9,   ///< 压缩错误
+    connect_error = 0xA,       ///< CONNECT 错误
+    enhance_your_calm = 0xB,   ///< 速率过高
+    inadequate_security = 0xC, ///< 安全不足
+    http_1_1_required = 0xD    ///< 需要 HTTP/1.1
 };
 
 /**
  * @brief HTTP/2 SETTINGS 参数标识符（RFC 7540 §6.5.2）
  */
 enum class http2_settings_id : uint16_t {
-    HEADER_TABLE_SIZE = 0x1,      ///< HPACK 动态表最大大小
-    ENABLE_PUSH = 0x2,            ///< 是否启用服务端推送
-    MAX_CONCURRENT_STREAMS = 0x3, ///< 最大并发流数
-    INITIAL_WINDOW_SIZE = 0x4,    ///< 流级初始窗口大小
-    MAX_FRAME_SIZE = 0x5,         ///< 最大帧负载大小
-    MAX_HEADER_LIST_SIZE = 0x6,   ///< 最大头部列表大小
+    header_table_size = 0x1,      ///< HPACK 动态表最大大小
+    enable_push = 0x2,            ///< 是否启用服务端推送
+    max_concurrent_streams = 0x3, ///< 最大并发流数
+    initial_window_size = 0x4,    ///< 流级初始窗口大小
+    max_frame_size = 0x5,         ///< 最大帧负载大小
+    max_header_list_size = 0x6,   ///< 最大头部列表大小
 };
 
 
@@ -372,13 +368,13 @@ public:
  * @brief HTTP/2 流状态（RFC 7540 §5.1）
  */
 enum class http2_stream_state {
-    IDLE,
-    RESERVED_LOCAL,
-    RESERVED_REMOTE,
-    OPEN,
-    HALF_CLOSED_LOCAL,
-    HALF_CLOSED_REMOTE,
-    CLOSED,
+    idle,
+    reserved_local,
+    reserved_remote,
+    open,
+    half_closed_local,
+    half_closed_remote,
+    closed
 };
 
 /**
@@ -397,7 +393,7 @@ public:
     NEFORCE_NODISCARD bool can_send_headers() const;
     NEFORCE_NODISCARD bool can_send_data() const;
     NEFORCE_NODISCARD bool can_receive() const;
-    NEFORCE_NODISCARD bool is_closed() const noexcept { return state_ == http2_stream_state::CLOSED; }
+    NEFORCE_NODISCARD bool is_closed() const noexcept { return state_ == http2_stream_state::closed; }
 
     void on_send_headers(bool end_stream);
     void on_send_data(bool end_stream);
@@ -418,7 +414,7 @@ private:
     /// @brief 流 ID
     uint32_t stream_id_;
     /// @brief 当前流状态
-    http2_stream_state state_ = http2_stream_state::IDLE;
+    http2_stream_state state_ = http2_stream_state::idle;
     /// @brief 本地流控窗口
     uint32_t local_window_ = HTTP2_DEFAULT_INITIAL_WINDOW_SIZE;
     /// @brief 远端流控窗口

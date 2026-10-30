@@ -16,22 +16,6 @@
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/network/util/network_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
-
-/**
- * @defgroup Exceptions 异常类集
- * @brief 异常类集
- * @{
- */
-
-/**
- * @struct http_exception
- * @extends network_exception
- * @brief HTTP操作异常
- */
-NEFORCE_ERROR_BUILD_NETWORK_CLASS(http_exception, "HTTP Operation Failed.")
-
-/** @} */ // Exceptions
-
 NEFORCE_BEGIN_HTTP__
 
 /**
@@ -164,7 +148,7 @@ NEFORCE_BEGIN_HTTP__
  * |--------------|------|------------------------------------------------|
  * | FIN          | 1    | 是否为消息的最后一帧                           |
  * | RSV1-3       | 3    | 保留位，用于扩展                               |
- * | Opcode       | 4    | 帧类型：Continuation(0)、Text(1)、Binary(2)、Close(8)、Ping(9)、Pong(10) |
+ * | Opcode       | 4    | Continuation(0)、Text(1)、Binary(2)、Close(8)、Ping(9)、Pong(10) |
  * | MASK         | 1    | 客户端到服务器的帧必须设置掩码                 |
  * | Payload len  | 7/7+16/7+64 | 负载长度                                   |
  * | Masking key  | 0/32 | 掩码密钥（仅客户端帧）                         |
@@ -173,7 +157,7 @@ NEFORCE_BEGIN_HTTP__
  * | 状态码 | 名称                      | 说明                           |
  * |--------|---------------------------|--------------------------------|
  * | 1000   | Normal Closure            | 正常关闭                       |
- * | 1001   | Going Away                | 端点离开（如浏览器关闭）       |
+ * | 1001   | Going Away                | 端点离开                      |
  * | 1002   | Protocol Error            | 协议错误                       |
  * | 1003   | Unsupported Data          | 接收到不支持的数据类型         |
  * | 1008   | Policy Violation          | 违反策略                       |
@@ -184,7 +168,7 @@ NEFORCE_BEGIN_HTTP__
  * | 特性              | 规范参数                                  |
  * |-------------------|-------------------------------------------|
  * | HTTP 版本         | HTTP/1.1（RFC 9112）与 HTTP/2（RFC 7540） |
- * | HTTP/2 帧层       | 9 种帧类型：DATA / HEADERS / SETTINGS / PING / GOAWAY / RST_STREAM / WINDOW_UPDATE / PRIORITY / PUSH_PROMISE |
+ * | HTTP/2 帧层       | DATA / HEADERS / SETTINGS / PING / GOAWAY / RST_STREAM / WINDOW_UPDATE / PRIORITY / PUSH_PROMISE |
  * | HPACK 头部压缩    | 静态表 61 项 + 动态表 + Huffman 编码（RFC 7541） |
  * | 头部字段大小写    | 不区分大小写，存储为原始大小写            |
  * | 分块传输编码      | 流式增量 chunked 解析，支持 Trailing Headers |
@@ -207,8 +191,7 @@ NEFORCE_BEGIN_HTTP__
  * @note 本模块的 HTTP 解析器严格遵循 RFC 9112 语法规则，支持分块传输编码（chunked）
  *       和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455
  *       定义的控制帧（Ping/Pong/Close）和分片消息，并支持 RFC 7692 定义的
- *       permessage-deflate 压缩扩展。HTTP/2 协议层提供纯 C++14 同步帧编解码，
- *       传输层由 io_context 驱动。
+ *       permessage-deflate 压缩扩展。HTTP/2 协议层提供同步帧编解码。
  *
  * @warning 生产环境中应始终通过 HTTPS 使用 Secure 属性的 Cookie，
  *          并在敏感路由上启用 CSRF 防护。WebSocket 连接应考虑使用 WSS（WebSocket Secure）。
@@ -237,246 +220,256 @@ NEFORCE_BEGIN_HTTP__
  */
 enum class http_status : uint16_t {
     /**
+     * @brief 0 None
+     * 无状态
+     */
+    none = 0,
+
+    /**
      * @brief 100 Continue
      * 服务器收到请求头，客户端可以继续发送请求体
      */
-    S1_CONTINUE = 100,
+    continue_ = 100,
 
     /**
      * @brief 101 Switching Protocols
      * 同意切换协议
      */
-    S1_SWITCHING_PROTOCOLS = 101,
+    switching_protocols = 101,
 
     /**
      * @brief 200 OK
      * 请求成功
      */
-    S2_OK = 200,
+    ok = 200,
 
     /**
      * @brief 201 Created
      * 请求成功并创建了新资源
      */
-    S2_CREATED = 201,
+    created = 201,
 
     /**
      * @brief 202 Accepted
      * 请求已接受但尚未处理
      */
-    S2_ACCEPTED = 202,
+    accepted = 202,
 
     /**
      * @brief 204 No Content
      * 请求成功但无内容返回
      */
-    S2_NO_CONTENT = 204,
+    no_content = 204,
 
     /**
      * @brief 206 Partial Content
      * 部分请求成功（范围请求）
      */
-    S2_PARTIAL_CONTENT = 206,
+    partial_content = 206,
 
     /**
      * @brief 301 Moved Permanently
      * 资源已永久迁移到新URL
      */
-    S3_MOVED_PERMANENT = 301,
+    moved_permanent = 301,
 
     /**
      * @brief 302 Found
      * 资源临时迁移到新URL
      */
-    S3_FOUND = 302,
+    found = 302,
 
     /**
      * @brief 303 See Other
      * 重定向到另一个URI获取响应
      */
-    S3_SEE_OTHER = 303,
+    see_other = 303,
 
     /**
      * @brief 304 Not Modified
      * 资源未修改，可使用本地缓存
      */
-    S3_NOT_MODIFIED = 304,
+    not_modified = 304,
 
     /**
      * @brief 307 Temporary Redirect
      * 临时重定向
      */
-    S3_TEMPORARY_REDIRECT = 307,
+    temporary_redirect = 307,
 
     /**
      * @brief 308 Permanent Redirect
      * 永久重定向
      */
-    S3_PERMANENT_REDIRECT = 308,
+    permanent_redirect = 308,
 
     /**
      * @brief 400 Bad Request
      * 请求格式错误
      */
-    S4_BAD_REQUEST = 400,
+    bad_request = 400,
 
     /**
      * @brief 401 Unauthorized
      * 需要身份验证
      */
-    S4_UNAUTHORIZED = 401,
+    unauthorized = 401,
 
     /**
      * @brief 403 Forbidden
      * 服务器拒绝请求
      */
-    S4_FORBIDDEN = 403,
+    forbidden = 403,
 
     /**
      * @brief 404 Not Found
      * 请求的资源不存在
      */
-    S4_NOT_FOUND = 404,
+    not_found = 404,
 
     /**
      * @brief 405 Method Not Allowed
      * 请求方法不允许
      */
-    S4_METHOD_NOT_ALLOWED = 405,
+    method_not_allowed = 405,
+
     /**
      * @brief 406 Not Acceptable
      * 无法生成匹配Accept头的内容
      */
-    S4_NOT_ACCEPTABLE = 406,
+    not_acceptable = 406,
 
     /**
      * @brief 407 Proxy Authentication Required
      * 需要通过代理认证
      */
-    S4_PROXY_AUTH_REQUIRED = 407,
+    proxy_auth_required = 407,
 
     /**
      * @brief 408 Request Timeout
      * 客户端请求超时
      */
-    S4_REQUEST_TIMEOUT = 408,
+    request_timeout = 408,
 
     /**
      * @brief 409 Conflict
      * 请求与资源当前状态冲突
      */
-    S4_CONFLICT = 409,
+    conflict = 409,
 
     /**
      * @brief 410 Gone
      * 资源已永久删除
      */
-    S4_GONE = 410,
+    gone = 410,
+
     /**
      * @brief 411 Length Required
      * 请求未指定Content-Length
      */
-    S4_LENGTH_REQUIRED = 411,
+    length_required = 411,
 
     /**
      * @brief 412 Precondition Failed
      * 请求先决条件未满足
      */
-    S4_PRECONDITION_FAILED = 412,
+    precondition_failed = 412,
 
     /**
      * @brief 415 Unsupported Media Type
      * 不支持的媒体格式
      */
-    S4_UNSUPPORTED_MEDIA_TYPE = 415,
+    unsupported_media_type = 415,
 
     /**
      * @brief 416 Range Not Satisfiable
      * 无法满足Range请求
      */
-    S4_RANGE_NOT_SATISFIABLE = 416,
+    range_not_satisfiable = 416,
+
     /**
      * @brief 417 Expectation Failed
      * 无法满足Expect请求头
      */
-    S4_EXPECTATION_FAILED = 417,
+    expectation_failed = 417,
 
     /**
      * @brief 422 Unprocessable Content
      * 请求格式正确但语义有误
      */
-    S4_UNPROCESSABLE_CONTENT = 422,
+    unprocessable_content = 422,
 
     /**
      * @brief 426 Upgrade Required
      * 需要升级协议
      */
-    S4_UPGRADE_REQUIRED = 426,
+    upgrade_required = 426,
 
     /**
      * @brief 413 Payload Too Large
      * 请求体过大
      */
-    S4_PAYLOAD_TOO_LARGE = 413,
+    payload_too_large = 413,
 
     /**
      * @brief 414 URI Too Long
-     * 请求URL过长
+     * 请求URI过长
      */
-    S4_URI_TOO_LONG = 414,
+    uri_too_long = 414,
 
     /**
      * @brief 429 Too Many Requests
      * 请求次数过多
      */
-    S4_TOO_MANY_REQUESTS = 429,
+    too_many_requests = 429,
+
     /**
      * @brief 431 Request Header Fields Too Large
      * 请求头字段过大
      */
-    S4_HEADER_FIELDS_TOO_LARGE = 431,
+    header_fields_too_large = 431,
 
     /**
      * @brief 451 Unavailable For Legal Reasons
      * 因法律原因不可用
      */
-    S4_UNAVAILABLE_FOR_LEGAL_REASONS = 451,
+    unavailable_for_legal_reasons = 451,
 
     /**
      * @brief 500 Internal Server Error
      * 服务器内部错误
      */
-    S5_INTERNAL_SERVER_ERROR = 500,
+    internal_server_error = 500,
 
     /**
      * @brief 502 Bad Gateway
      * 上游服务器响应无效
      */
-    S5_BAD_GATEWAY = 502,
+    bad_gateway = 502,
 
     /**
      * @brief 503 Service Unavailable
      * 服务暂时不可用
      */
-    S5_SERVICE_UNAVAILABLE = 503,
+    service_unavailable = 503,
 
     /**
      * @brief 504 Gateway Timeout
      * 上游服务器响应超时
      */
-    S5_GATEWAY_TIMEOUT = 504,
+    gateway_timeout = 504,
 
     /**
      * @brief 501 Not Implemented
      * 服务器不支持该请求功能
      */
-    S5_NOT_IMPLEMENTED = 501,
+    not_implemented = 501,
 
     /**
      * @brief 505 HTTP Version Not Supported
      * 不支持的HTTP版本
      */
-    S5_HTTP_VERSION_NOT_SUPPORTED = 505
+    http_version_not_supported = 505
 };
 
 NEFORCE_API string http_status_message(http_status status);
@@ -850,5 +843,73 @@ struct NEFORCE_API http_key {
 /** @} */ // Http
 
 NEFORCE_END_HTTP__
+
+
+/**
+ * @addtogroup ErrorCode 错误码
+ * @{
+ */
+
+/**
+ * @class http_error_category
+ * @brief HTTP错误类别
+ *
+ * 将HTTP错误码映射为可读的错误描述信息。
+ */
+class NEFORCE_API http_error_category final : public error_category {
+public:
+    /**
+     * @brief 获取错误类别名称
+     */
+    NEFORCE_NODISCARD const char* name() const noexcept override { return "http"; }
+
+    /**
+     * @brief 获取错误码对应的描述信息
+     * @param ev HTTP错误码
+     * @return 错误描述字符串
+     */
+    NEFORCE_NODISCARD string message(int32_t ev) const override;
+};
+
+/**
+ * @brief 获取HTTP错误类别单例
+ * @return HTTP错误类别引用
+ */
+NEFORCE_API const error_category& http_category() noexcept;
+
+/** @} */ // ErrorCode
+
+/**
+ * @addtogroup Exceptions 异常类集
+ * @{
+ */
+
+/**
+ * @struct http_exception
+ * @extends network_exception
+ * @brief HTTP操作异常
+ */
+struct http_exception final : network_exception {
+    explicit http_exception(const char* info = "HTTP Operation Failed.") noexcept :
+    network_exception(info, error_code(static_cast<int>(http::http_status::none), http_category())) {}
+
+    explicit http_exception(const string& info) noexcept :
+    network_exception(info, error_code(static_cast<int>(http::http_status::none), http_category())) {}
+
+    explicit http_exception(const char* info, const http::http_status code) noexcept :
+    network_exception(info, error_code(static_cast<int>(code), http_category())) {}
+
+    explicit http_exception(const error_code err) :
+    network_exception(err) {}
+    explicit http_exception(const exception& e) :
+    network_exception(e) {}
+
+    ~http_exception() override = default;
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "http_exception"; }
+};
+
+/** @} */ // Exceptions
+
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_HTTP_HTTP_CONSTANTS_HPP__

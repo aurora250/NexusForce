@@ -19,6 +19,10 @@ NEFORCE_BEGIN_HTTP__
 namespace {
     constexpr int max_forward_count = 5;
 
+    NEFORCE_NORETURN void throw_status_error(const http_status status, const char* message) {
+        NEFORCE_THROW_EXCEPTION(http_exception(message, status));
+    }
+
     bool parse_header_value_ci(const string& data, const string_view lower_key, size_t header_end, string& value_out) {
         const string data_lower = string(data.view(0, header_end)).lowercase();
         const size_t pos = data_lower.find(string(lower_key));
@@ -129,11 +133,12 @@ namespace {
     }
 
 
-    void send_response(tcp_socket* client_socket, const http_response& response) {
+    void send_response(tcp_socket* client_socket, const http_response& response, const bool include_body = true) {
         const string header = response.build_header_string();
+        const bool write_body = include_body && response.redirect_url.empty() && response.allows_body();
 
 #ifdef NEFORCE_PLATFORM_LINUX
-        if (!client_socket->is_ssl() && response.redirect_url.empty() && !response.body.empty()) {
+        if (!client_socket->is_ssl() && write_body && !response.body.empty()) {
             ::iovec iov[2];
             iov[0].iov_base = const_cast<char*>(header.data());
             iov[0].iov_len = header.size();
@@ -160,7 +165,7 @@ namespace {
         }
 #endif
 
-        const string data = header + response.body;
+        const string data = write_body ? header + response.body : header;
         client_socket->send_all(memory_view<const char>(data.data(), data.size()));
     }
 
@@ -189,6 +194,7 @@ namespace {
             http_response error_response;
             error_response.status = status;
             error_response.status_message = http_status_message(status);
+            error_response.set_header(http_key::Connection(), "close");
             error_response.set_content_type(http_content::HTML_TEXT());
             error_response.body = "<!DOCTYPE html>"
                                   "<html><head><title>Error</title></head>"
@@ -327,11 +333,18 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
 
         const size_t header_end = request_data.find("\r\n\r\n");
         if (header_end != string::npos) {
+            if (header_end + 4 > max_header_size.bytes()) {
+                throw_status_error(http_status::header_fields_too_large, "Request header too large");
+            }
+
             bool expect_continue = false;
             {
                 string expect_val;
                 if (parse_header_value_ci(request_data, "expect:", header_end, expect_val)) {
-                    expect_continue = expect_val.lowercase() == "100-continue";
+                    if (expect_val.lowercase() != "100-continue") {
+                        throw_status_error(http_status::expectation_failed, "Unsupported Expect header");
+                    }
+                    expect_continue = true;
                 }
             }
 
@@ -342,7 +355,7 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
                 try {
                     content_length = uinteger64::parse(cl_value.view()).value();
                 } catch (...) {
-                    NEFORCE_THROW_EXCEPTION(http_exception("Invalid Content-Length"));
+                    throw_status_error(http_status::bad_request, "Invalid Content-Length");
                 }
             }
 
@@ -355,18 +368,27 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
             const size_t body_start = header_end + 4;
 
             if (expect_continue && (content_length > 0 || is_chunked) && content_length <= max_body_size.bytes()) {
-                static constexpr string_view continue_resp = "HTTP/1.1 100 Continue\r\n\r\n";
-                client_socket->send_all(memory_view<const char>(continue_resp.data(), continue_resp.size()));
+                const size_t request_line_end = request_data.find("\r\n");
+                const bool is_http_1_1 = request_line_end != string::npos &&
+                                         request_data.view(0, request_line_end).ends_with(" HTTP/1.1");
+                if (is_http_1_1) {
+                    http_response continue_response;
+                    continue_response.version = "HTTP/1.1";
+                    continue_response.status = http_status::continue_;
+                    continue_response.headers.clear();
+                    const string continue_head = continue_response.build_header_string();
+                    client_socket->send_all(memory_view<const char>(continue_head.data(), continue_head.size()));
+                }
             }
 
             if (is_chunked) {
                 if (request_data.size() - body_start > max_body_size.bytes()) {
-                    NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
+                    throw_status_error(http_status::payload_too_large, "Request body too large");
                 }
                 while (request_data.find("\r\n0\r\n\r\n", body_start) == string::npos &&
                        request_data.view(body_start) != "0\r\n\r\n") {
                     if (request_data.size() > max_body_size.bytes()) {
-                        NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
+                        throw_status_error(http_status::payload_too_large, "Request body too large");
                     }
                     const ssize_t n = client_socket->receive(memory_view<char>(buffer));
                     if (n <= 0) {
@@ -379,7 +401,7 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
                 request_data += move(decoded);
             } else {
                 if (content_length > max_body_size.bytes()) {
-                    NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
+                    throw_status_error(http_status::payload_too_large, "Request body too large");
                 }
 
                 const size_t body_received = request_data.size() - body_start;
@@ -406,14 +428,18 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
         }
 
         if (request_data.size() > max_header_size.bytes()) {
-            NEFORCE_THROW_EXCEPTION(http_exception("Request header too large"));
+            throw_status_error(http_status::header_fields_too_large, "Request header too large");
         }
     }
 
     http_request request = http_request::parse(request_data.view());
 
+    if (request.version != "HTTP/1.1" && request.version != "HTTP/1.0") {
+        throw_status_error(http_status::http_version_not_supported, "HTTP version not supported");
+    }
+
     if (max_header_count > 0 && request.headers.size() > max_header_count) {
-        NEFORCE_THROW_EXCEPTION(http_exception("Too many request headers"));
+        throw_status_error(http_status::header_fields_too_large, "Too many request headers");
     }
 
     parse_parameters(request);
@@ -519,13 +545,17 @@ void http_server::handle_client(unique_ptr<tcp_socket> client_socket) {
 
             keep_alive = request.is_keep_alive();
         } catch (const http_exception& e) {
-            send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, e.what());
+            if (e.code().value() == 0) {
+                send_error_response(client_socket.get(), http_status::bad_request, e.what());
+            } else {
+                send_error_response(client_socket.get(), static_cast<http_status>(e.code().value()), e.what());
+            }
             keep_alive = false;
         } catch (const exception& e) {
-            send_error_response(client_socket.get(), http_status::S5_INTERNAL_SERVER_ERROR, e.what());
+            send_error_response(client_socket.get(), http_status::internal_server_error, e.what());
             keep_alive = false;
         } catch (...) {
-            send_error_response(client_socket.get(), http_status::S5_INTERNAL_SERVER_ERROR, "Unknown internal error");
+            send_error_response(client_socket.get(), http_status::internal_server_error, "Unknown internal error");
             keep_alive = false;
         }
     }
@@ -556,13 +586,14 @@ bool http_server::try_upgrade(unique_ptr<tcp_socket>& client_socket, http_reques
         if (upgrade_lower == "websocket") {
             const string_view key = request.header("Sec-WebSocket-Key");
             if (key.empty()) {
-                return false;
+                send_error_response(client_socket.get(), http_status::bad_request, "Missing Sec-WebSocket-Key");
+                return true;
             }
 
             string accept = compute_websocket_accept(key);
 
             http_response upgrade_response;
-            upgrade_response.status = http_status::S1_SWITCHING_PROTOCOLS;
+            upgrade_response.status = http_status::switching_protocols;
             upgrade_response.status_message = "Switching Protocols";
             upgrade_response.set_header("Upgrade", "websocket");
             upgrade_response.set_header("Connection", "Upgrade");
@@ -585,7 +616,7 @@ bool http_server::try_upgrade(unique_ptr<tcp_socket>& client_socket, http_reques
     }
 
     http_response not_impl;
-    not_impl.status = http_status::S5_NOT_IMPLEMENTED;
+    not_impl.status = http_status::not_implemented;
     not_impl.status_message = "Not Implemented";
     not_impl.set_content_type(http_content::PLAIN_TEXT());
     not_impl.body = "Unsupported upgrade protocol";
@@ -597,7 +628,7 @@ void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, ht
     const string_view path = request.path.view();
     const size_t colon = path.find(':');
     if (colon == string_view::npos) {
-        send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, "Invalid CONNECT target");
+        send_error_response(client_socket.get(), http_status::bad_request, "Invalid CONNECT target");
         return;
     }
 
@@ -607,21 +638,23 @@ void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, ht
     try {
         port_num = static_cast<uint16_t>(uinteger64::parse(port_str).value());
     } catch (...) {
-        send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, "Invalid port in CONNECT target");
+        send_error_response(client_socket.get(), http_status::bad_request, "Invalid port in CONNECT target");
         return;
     }
 
     tcp_client tunnel(*ctx_);
     tunnel.set_connect_timeout(milliseconds(10000));
     if (!tunnel.connect(host, ports{port_num})) {
-        send_error_response(client_socket.get(), http_status::S5_BAD_GATEWAY, "Failed to connect to tunnel target");
+        send_error_response(client_socket.get(), http_status::bad_gateway, "Failed to connect to tunnel target");
         return;
     }
 
     http_response established;
     established.version = request.version;
-    established.status = http_status::S2_OK;
+    established.status = http_status::ok;
     established.status_message = "Connection Established";
+    established.headers.clear();
+    established.suppress_content_length = true;
     send_response(client_socket.get(), established);
 
     const auto client_fd = client_socket->native_handle();
@@ -711,12 +744,12 @@ void http_server::handle_request_with_forward(tcp_socket& client_socket, http_re
             continue;
         }
 
-        send_response(&client_socket, response);
+        send_response(&client_socket, response, !request.method.is_head());
         break;
     }
 
     if (forward_count >= max_forward_count) {
-        send_error_response(&client_socket, http_status::S5_INTERNAL_SERVER_ERROR, "Too many forwards");
+        send_error_response(&client_socket, http_status::internal_server_error, "Too many forwards");
     }
 }
 
@@ -740,7 +773,7 @@ server_(make_unique<tcp_server>(port, ioc, worker_count)) {
 
         http_response upgrade_resp;
         upgrade_resp.version = request.version;
-        upgrade_resp.status = http_status::S1_SWITCHING_PROTOCOLS;
+        upgrade_resp.status = http_status::switching_protocols;
         upgrade_resp.status_message = "Switching Protocols";
         upgrade_resp.set_header("Connection", "Upgrade");
         upgrade_resp.set_header("Upgrade", "h2c");

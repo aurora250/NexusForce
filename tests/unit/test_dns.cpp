@@ -207,7 +207,7 @@ namespace {
 } // namespace
 
 TEST(DnsMessageBuilding, QueryHeaderFormat) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, false);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, false);
 
     ASSERT_GE(q.size(), sizeof(dns_header) + 13 + 4);
 
@@ -229,7 +229,7 @@ TEST(DnsMessageBuilding, QueryHeaderFormat) {
 }
 
 TEST(DnsMessageBuilding, DomainNameEncoding) {
-    auto q = dns_client::build_query("www.example.com", dns_record::A, dns_class::INTERNET, true, false);
+    auto q = dns_client::build_query("www.example.com", dns_record::A, dns_class::internet, true, false);
 
     size_t offset = sizeof(dns_header);
     EXPECT_EQ(q[offset], 3);
@@ -245,14 +245,14 @@ TEST(DnsMessageBuilding, DomainNameEncoding) {
 }
 
 TEST(DnsMessageBuilding, TrailingDotIsStripped) {
-    auto q1 = dns_client::build_query("example.com.", dns_record::A, dns_class::INTERNET, true, false);
-    auto q2 = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, false);
+    auto q1 = dns_client::build_query("example.com.", dns_record::A, dns_class::internet, true, false);
+    auto q2 = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, false);
     EXPECT_EQ(q1.size(), q2.size());
     EXPECT_TRUE(equal(q1.begin() + 2, q1.end(), q2.begin() + 2));
 }
 
 TEST(DnsMessageBuilding, QueryWithEDNS0) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 1232);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, false, 1232);
 
     const uint16_t arcount = read_be16(q.data() + 10);
     EXPECT_EQ(arcount, 1);
@@ -269,14 +269,14 @@ TEST(DnsMessageBuilding, QueryWithEDNS0) {
 }
 
 TEST(DnsMessageBuilding, QueryWithoutRD) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, false, false);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, false, false);
     const uint16_t flags = read_be16(q.data() + 2);
     EXPECT_EQ(flags & 0x0100, 0);
     EXPECT_EQ(flags & 0x8000, 0);
 }
 
 TEST(DnsMessageBuilding, QueryWithDNSsecOK) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, true, 1232);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, true, 1232);
 
     const uint16_t arcount = read_be16(q.data() + 10);
     ASSERT_EQ(arcount, 1);
@@ -287,12 +287,12 @@ TEST(DnsMessageBuilding, QueryWithDNSsecOK) {
 }
 
 TEST(DnsMessageBuilding, DifferentRecordTypes) {
-    auto q_a = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, false, false);
-    auto q_aaaa = dns_client::build_query("example.com", dns_record::AAAA, dns_class::INTERNET, false, false);
-    auto q_mx = dns_client::build_query("example.com", dns_record::MX, dns_class::INTERNET, false, false);
-    auto q_srv = dns_client::build_query("example.com", dns_record::SRV, dns_class::INTERNET, false, false);
-    auto q_soa = dns_client::build_query("example.com", dns_record::SOA, dns_class::INTERNET, false, false);
-    auto q_txt = dns_client::build_query("example.com", dns_record::TXT, dns_class::INTERNET, false, false);
+    auto q_a = dns_client::build_query("example.com", dns_record::A, dns_class::internet, false, false);
+    auto q_aaaa = dns_client::build_query("example.com", dns_record::AAAA, dns_class::internet, false, false);
+    auto q_mx = dns_client::build_query("example.com", dns_record::MX, dns_class::internet, false, false);
+    auto q_srv = dns_client::build_query("example.com", dns_record::SRV, dns_class::internet, false, false);
+    auto q_soa = dns_client::build_query("example.com", dns_record::SOA, dns_class::internet, false, false);
+    auto q_txt = dns_client::build_query("example.com", dns_record::TXT, dns_class::internet, false, false);
 
     EXPECT_NE(q_a, q_aaaa);
     EXPECT_NE(q_a, q_mx);
@@ -302,10 +302,10 @@ TEST(DnsMessageBuilding, DifferentRecordTypes) {
 }
 
 TEST(DnsMessageBuilding, DifferentClasses) {
-    auto q_in = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, false, false);
-    auto q_ch = dns_client::build_query("example.com", dns_record::A, dns_class::CHAOS, false, false);
-    auto q_hs = dns_client::build_query("example.com", dns_record::A, dns_class::HESIOD, false, false);
-    auto q_any = dns_client::build_query("example.com", dns_record::A, dns_class::ANY, false, false);
+    auto q_in = dns_client::build_query("example.com", dns_record::A, dns_class::internet, false, false);
+    auto q_ch = dns_client::build_query("example.com", dns_record::A, dns_class::chaos, false, false);
+    auto q_hs = dns_client::build_query("example.com", dns_record::A, dns_class::hesiod, false, false);
+    auto q_any = dns_client::build_query("example.com", dns_record::A, dns_class::any, false, false);
 
     EXPECT_NE(q_in, q_ch);
     EXPECT_NE(q_in, q_hs);
@@ -321,7 +321,7 @@ TEST(DnsResponseParsing, BasicAResponse) {
 
     auto result = dns_client::parse_response(resp, 1234);
     EXPECT_TRUE(result.is_success());
-    EXPECT_EQ(result.response_code, dns_response::NON_ERROR);
+    EXPECT_EQ(result.response_code, dns_response::non_error);
     EXPECT_TRUE(result.recursive_available);
     ASSERT_EQ(result.answers.size(), 1);
     EXPECT_EQ(result.answers[0].type, dns_record::A);
@@ -506,7 +506,7 @@ TEST(DnsHeaderFlags, RCODENoError) {
     byte_vector resp(hdr.begin(), hdr.end());
     append_question(resp, "example.com", 1);
     auto result = dns_client::parse_response(resp, 1234);
-    EXPECT_EQ(result.response_code, dns_response::NON_ERROR);
+    EXPECT_EQ(result.response_code, dns_response::non_error);
     EXPECT_TRUE(result.is_success());
 }
 
@@ -515,7 +515,7 @@ TEST(DnsHeaderFlags, RCODEFormatError) {
     byte_vector resp(hdr.begin(), hdr.end());
     append_question(resp, "example.com", 1);
     auto result = dns_client::parse_response(resp, 1234);
-    EXPECT_EQ(result.response_code, dns_response::FORMAT_ERROR);
+    EXPECT_EQ(result.response_code, dns_response::format_error);
     EXPECT_FALSE(result.is_success());
 }
 
@@ -524,7 +524,7 @@ TEST(DnsHeaderFlags, RCODEServerFailure) {
     byte_vector resp(hdr.begin(), hdr.end());
     append_question(resp, "example.com", 1);
     auto result = dns_client::parse_response(resp, 1234);
-    EXPECT_EQ(result.response_code, dns_response::SERVER_FAILURE);
+    EXPECT_EQ(result.response_code, dns_response::server_failure);
 }
 
 TEST(DnsHeaderFlags, RCODENXDomain) {
@@ -532,7 +532,7 @@ TEST(DnsHeaderFlags, RCODENXDomain) {
     byte_vector resp(hdr.begin(), hdr.end());
     append_question(resp, "example.com", 1);
     auto result = dns_client::parse_response(resp, 1234);
-    EXPECT_EQ(result.response_code, dns_response::NAME_ERROR);
+    EXPECT_EQ(result.response_code, dns_response::name_error);
 }
 
 TEST(DnsHeaderFlags, RCODENotImplemented) {
@@ -540,7 +540,7 @@ TEST(DnsHeaderFlags, RCODENotImplemented) {
     byte_vector resp(hdr.begin(), hdr.end());
     append_question(resp, "example.com", 1);
     auto result = dns_client::parse_response(resp, 1234);
-    EXPECT_EQ(result.response_code, dns_response::NOT_IMPLEMENTED);
+    EXPECT_EQ(result.response_code, dns_response::not_implemented);
 }
 
 TEST(DnsHeaderFlags, RCODERefused) {
@@ -548,7 +548,7 @@ TEST(DnsHeaderFlags, RCODERefused) {
     byte_vector resp(hdr.begin(), hdr.end());
     append_question(resp, "example.com", 1);
     auto result = dns_client::parse_response(resp, 1234);
-    EXPECT_EQ(result.response_code, dns_response::REFUSED);
+    EXPECT_EQ(result.response_code, dns_response::refused);
 }
 
 TEST(Edns0, OPTRecordParsing) {
@@ -573,7 +573,7 @@ TEST(Edns0, ExtendedRCODE) {
     append_opt_record(resp, 1232, 1, 0, false);
 
     auto result = dns_client::parse_response(resp, 1234);
-    EXPECT_EQ(result.response_code, dns_response::FORMAT_ERROR);
+    EXPECT_EQ(result.response_code, dns_response::format_error);
     EXPECT_EQ(result.extended_rcode, 1);
     EXPECT_EQ(result.full_rcode(), 17);
 }
@@ -748,7 +748,7 @@ TEST(SectionParsing, EmptyResponseNoError) {
     append_question(resp, "nonexistent.example.com", 1);
 
     auto result = dns_client::parse_response(resp, 1234);
-    EXPECT_EQ(result.response_code, dns_response::NAME_ERROR);
+    EXPECT_EQ(result.response_code, dns_response::name_error);
     EXPECT_TRUE(result.answers.empty());
     EXPECT_FALSE(result.is_success());
 }
@@ -801,7 +801,7 @@ TEST(ClassField, ANYClass) {
 
 TEST(DnsQueryResult, DefaultConstruction) {
     dns_query_result r;
-    EXPECT_EQ(r.response_code, dns_response::NON_ERROR);
+    EXPECT_EQ(r.response_code, dns_response::non_error);
     EXPECT_TRUE(r.is_success());
     EXPECT_FALSE(r.authoritative);
     EXPECT_FALSE(r.truncated);
@@ -813,7 +813,7 @@ TEST(DnsQueryResult, DefaultConstruction) {
 
 TEST(DnsQueryResult, NonSuccessCheck) {
     dns_query_result r;
-    r.response_code = dns_response::SERVER_FAILURE;
+    r.response_code = dns_response::server_failure;
     EXPECT_FALSE(r.is_success());
 }
 
@@ -825,10 +825,10 @@ TEST(DnsRecord, DefaultConstruction) {
 }
 
 TEST(DnsRecord, ValueConstruction) {
-    dns_record r("example.com", dns_record::AAAA, dns_class::INTERNET, 600, "2001:db8::1");
+    dns_record r("example.com", dns_record::AAAA, dns_class::internet, 600, "2001:db8::1");
     EXPECT_EQ(r.name, "example.com");
     EXPECT_EQ(r.type, dns_record::AAAA);
-    EXPECT_EQ(r.class_type, dns_class::INTERNET);
+    EXPECT_EQ(r.class_type, dns_class::internet);
     EXPECT_EQ(r.ttl, 600);
     EXPECT_EQ(r.data, "2001:db8::1");
 }
@@ -846,27 +846,27 @@ TEST(EnumValues, DnsRecordTypes) {
 }
 
 TEST(EnumValues, DnsClass) {
-    EXPECT_EQ(static_cast<uint16_t>(dns_class::INTERNET), 1);
-    EXPECT_EQ(static_cast<uint16_t>(dns_class::CHAOS), 3);
-    EXPECT_EQ(static_cast<uint16_t>(dns_class::HESIOD), 4);
-    EXPECT_EQ(static_cast<uint16_t>(dns_class::ANY), 255);
+    EXPECT_EQ(static_cast<uint16_t>(dns_class::internet), 1);
+    EXPECT_EQ(static_cast<uint16_t>(dns_class::chaos), 3);
+    EXPECT_EQ(static_cast<uint16_t>(dns_class::hesiod), 4);
+    EXPECT_EQ(static_cast<uint16_t>(dns_class::any), 255);
 }
 
 TEST(EnumValues, DnsResponseCodes) {
-    EXPECT_EQ(static_cast<uint8_t>(dns_response::NON_ERROR), 0);
-    EXPECT_EQ(static_cast<uint8_t>(dns_response::FORMAT_ERROR), 1);
-    EXPECT_EQ(static_cast<uint8_t>(dns_response::SERVER_FAILURE), 2);
-    EXPECT_EQ(static_cast<uint8_t>(dns_response::NAME_ERROR), 3);
-    EXPECT_EQ(static_cast<uint8_t>(dns_response::NOT_IMPLEMENTED), 4);
-    EXPECT_EQ(static_cast<uint8_t>(dns_response::REFUSED), 5);
+    EXPECT_EQ(static_cast<uint8_t>(dns_response::non_error), 0);
+    EXPECT_EQ(static_cast<uint8_t>(dns_response::format_error), 1);
+    EXPECT_EQ(static_cast<uint8_t>(dns_response::server_failure), 2);
+    EXPECT_EQ(static_cast<uint8_t>(dns_response::name_error), 3);
+    EXPECT_EQ(static_cast<uint8_t>(dns_response::not_implemented), 4);
+    EXPECT_EQ(static_cast<uint8_t>(dns_response::refused), 5);
 }
 
 TEST(EnumValues, DnsOpcode) {
-    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::QUERY), 0);
-    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::IQUERY), 1);
-    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::STATUS), 2);
-    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::NOTIFY), 4);
-    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::UPDATE), 5);
+    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::query), 0);
+    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::iquery), 1);
+    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::status), 2);
+    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::notify), 4);
+    EXPECT_EQ(static_cast<uint8_t>(dns_opcode::update), 5);
 }
 
 TEST(DnsSrvRecord, DefaultConstruction) {
@@ -926,7 +926,7 @@ TEST(DnsException, ParseErrorCreation) {
 TEST(DnsClientConfig, DefaultConfiguration) {
     dns_client::config cfg;
     EXPECT_EQ(cfg.server, "8.8.8.8");
-    EXPECT_EQ(cfg.port, ports::DNS);
+    EXPECT_EQ(cfg.port, ports::dns);
     EXPECT_EQ(cfg.timeout, milliseconds(5000));
 }
 
@@ -1022,9 +1022,9 @@ TEST(DnsClient, ClearCache) {
 }
 
 TEST(DnsMessageBuilding, CustomEDNSPayloadSize) {
-    auto q512 = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 512);
-    auto q1232 = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 1232);
-    auto q4096 = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 4096);
+    auto q512 = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, false, 512);
+    auto q1232 = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, false, 1232);
+    auto q4096 = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, false, 4096);
 
     for (const auto& q: {q512, q1232, q4096}) {
         const uint16_t arcount = read_be16(q.data() + 10);
@@ -1036,14 +1036,14 @@ TEST(DnsMessageBuilding, CustomEDNSPayloadSize) {
 }
 
 TEST(DnsMessageBuilding, DNSSECFlagInQuery) {
-    auto q_with = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, true, 1232);
+    auto q_with = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, true, 1232);
     auto q_without =
-            dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 1232);
+            dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, false, 1232);
     EXPECT_NE(q_with, q_without);
 }
 
 TEST(DnsMessageBuilding, EDNSDisabledARCountZero) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, false);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, false);
     const uint16_t arcount = read_be16(q.data() + 10);
     EXPECT_EQ(arcount, 0);
 }
@@ -1056,7 +1056,7 @@ TEST(DnsMessageBuilding, QueryForAllRecordTypes) {
     };
 
     for (const auto& [type, name]: types) {
-        auto q = dns_client::build_query("test.example.com", type, dns_class::INTERNET, true, false);
+        auto q = dns_client::build_query("test.example.com", type, dns_class::internet, true, false);
         ASSERT_GE(q.size(), sizeof(dns_header) + 18 + 4) << "Failed for type: " << name.data();
     }
 }
@@ -1492,14 +1492,14 @@ TEST(DnsQueryResult, DefaultUDPPayloadSize) {
 
 TEST(DnsQueryResult, FullRcodeWithOnlyBaseRcode) {
     dns_query_result r;
-    r.response_code = dns_response::REFUSED;
+    r.response_code = dns_response::refused;
     r.extended_rcode = 0;
     EXPECT_EQ(r.full_rcode(), 5);
 }
 
 TEST(DnsQueryResult, FullRcodeWithExtendedBits) {
     dns_query_result r;
-    r.response_code = dns_response::NON_ERROR;
+    r.response_code = dns_response::non_error;
     r.extended_rcode = 0x0F;
     EXPECT_EQ(r.full_rcode(), 0xF0);
 }
@@ -1510,7 +1510,7 @@ TEST(DnsQueryResult, QueryTimeDefault) {
 }
 
 TEST(DnsMessageBuilding, CasePatternApplied) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, false, false,
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, false, false,
                                      edns::DEFAULT_UDP_PAYLOAD, "ExAmPlE.CoM");
 
     size_t offset = sizeof(dns_header);
@@ -1523,8 +1523,8 @@ TEST(DnsMessageBuilding, CasePatternApplied) {
 }
 
 TEST(DnsMessageBuilding, CasePatternDoesNotChangeQuerySize) {
-    auto q1 = dns_client::build_query("www.example.com", dns_record::A, dns_class::INTERNET, true, false);
-    auto q2 = dns_client::build_query("www.example.com", dns_record::A, dns_class::INTERNET, true, false, false,
+    auto q1 = dns_client::build_query("www.example.com", dns_record::A, dns_class::internet, true, false);
+    auto q2 = dns_client::build_query("www.example.com", dns_record::A, dns_class::internet, true, false, false,
                                       edns::DEFAULT_UDP_PAYLOAD, "WwW.ExAmPlE.CoM");
     EXPECT_EQ(q1.size(), q2.size());
 }
@@ -1566,9 +1566,9 @@ TEST(DnsResponseParsing, ZeroX20ValidationIsSkippedWhenEmpty) {
 namespace {
     dns_query_result make_ttl_result(const vector<uint32_t>& ttls, const bool success = true) {
         dns_query_result result;
-        result.response_code = success ? dns_response::NON_ERROR : dns_response::NAME_ERROR;
+        result.response_code = success ? dns_response::non_error : dns_response::name_error;
         for (const uint32_t ttl: ttls) {
-            result.answers.push_back(dns_record("www.example.com", dns_record::A, dns_class::INTERNET, ttl, "1.2.3.4"));
+            result.answers.push_back(dns_record("www.example.com", dns_record::A, dns_class::internet, ttl, "1.2.3.4"));
         }
         return result;
     }

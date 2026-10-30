@@ -232,7 +232,7 @@ void websocket_session::read_loop() {
                 break;
             }
         }
-        do_stop(websocket_status::ABNORMAL_CLOSURE, "Connection lost");
+        do_stop(websocket_status::abnormal_closure, "Connection lost");
     } catch (const exception& e) {
         if (on_error_) {
             try {
@@ -256,18 +256,18 @@ bool websocket_session::read_frame() {
         const bool is_ctrl = (hdr.opcode >= 0x8);
 
         if (hdr.rsv2 || hdr.rsv3) {
-            send_close_frame(websocket_status::PROTOCOL_ERROR, "Reserved bits set");
+            send_close_frame(websocket_status::protocol_error, "Reserved bits set");
             return false;
         }
         if (hdr.rsv1) {
             if (!deflate_config_.active || is_ctrl) {
-                send_close_frame(websocket_status::PROTOCOL_ERROR, "RSV1 set without negotiation");
+                send_close_frame(websocket_status::protocol_error, "RSV1 set without negotiation");
                 return false;
             }
         }
 
         if (is_ctrl && !hdr.fin) {
-            send_close_frame(websocket_status::PROTOCOL_ERROR, "Fragmented control frame");
+            send_close_frame(websocket_status::protocol_error, "Fragmented control frame");
             return false;
         }
 
@@ -287,13 +287,13 @@ bool websocket_session::read_frame() {
         }
 
         if (is_ctrl && payload_len > 125) {
-            send_close_frame(websocket_status::PROTOCOL_ERROR, "Control frame payload too large");
+            send_close_frame(websocket_status::protocol_error, "Control frame payload too large");
             return false;
         }
 
         constexpr uint64_t max_payload_length = 64ULL * 1024ULL * 1024ULL;
         if (payload_len > max_payload_length) {
-            send_close_frame(websocket_status::MESSAGE_TOO_BIG, "Payload exceeds limit");
+            send_close_frame(websocket_status::message_too_big, "Payload exceeds limit");
             return false;
         }
 
@@ -337,10 +337,10 @@ bool websocket_session::read_frame() {
 
 bool websocket_session::dispatch(const websocket_frame_header& hdr, const websocket_opcode opcode, string payload) {
     switch (opcode) {
-        case websocket_opcode::TEXT:
-        case websocket_opcode::BINARY: {
+        case websocket_opcode::text:
+        case websocket_opcode::binary: {
             if (in_fragment_) {
-                send_close_frame(websocket_status::PROTOCOL_ERROR, "New data frame before fragment complete");
+                send_close_frame(websocket_status::protocol_error, "New data frame before fragment complete");
                 return false;
             }
             if (hdr.rsv1 && deflate_decompressor_) {
@@ -370,9 +370,9 @@ bool websocket_session::dispatch(const websocket_frame_header& hdr, const websoc
             }
             return true;
         }
-        case websocket_opcode::CONTINUATION: {
+        case websocket_opcode::continuation: {
             if (!in_fragment_) {
-                send_close_frame(websocket_status::PROTOCOL_ERROR, "Unexpected continuation frame");
+                send_close_frame(websocket_status::protocol_error, "Unexpected continuation frame");
                 return false;
             }
             if (hdr.rsv1 && deflate_decompressor_ && !deflate_fragment_buffer_.empty()) {
@@ -402,21 +402,21 @@ bool websocket_session::dispatch(const websocket_frame_header& hdr, const websoc
             }
             return true;
         }
-        case websocket_opcode::PING: {
-            queue_frame(build_frame(websocket_opcode::PONG, payload, false), true);
+        case websocket_opcode::ping: {
+            queue_frame(build_frame(websocket_opcode::pong, payload, false), true);
             return true;
         }
-        case websocket_opcode::PONG: {
+        case websocket_opcode::pong: {
             last_pong_ms_ = now_ms();
             ping_pending_ = false;
             return true;
         }
-        case websocket_opcode::CLOSE: {
+        case websocket_opcode::close: {
             handle_close_frame(move(payload));
             return false;
         }
         default: {
-            send_close_frame(websocket_status::PROTOCOL_ERROR, "Unknown opcode");
+            send_close_frame(websocket_status::protocol_error, "Unknown opcode");
             return false;
         }
     }
@@ -440,12 +440,12 @@ void websocket_session::deliver_message(const string& data, websocket_opcode opc
 }
 
 void websocket_session::send_close_frame(const websocket_status status, const string& reason) {
-    auto frame = build_frame(websocket_opcode::CLOSE, make_close_payload(status, reason), false);
+    auto frame = build_frame(websocket_opcode::close, make_close_payload(status, reason), false);
     queue_frame(move(frame), true);
 }
 
 void websocket_session::handle_close_frame(string payload) {
-    auto status = websocket_status::NORMAL_CLOSURE;
+    auto status = websocket_status::normal_closure;
     string reason;
 
     if (payload.size() >= 2) {
@@ -476,13 +476,13 @@ void websocket_session::heartbeat_loop() {
             constexpr milliseconds timeout_ms = heartbeat_timeout_sec.to_milli();
 
             if (ping_pending_.load() && elapsed_ms > timeout_ms.count()) {
-                do_stop(websocket_status::ABNORMAL_CLOSURE, "Heartbeat timeout");
+                do_stop(websocket_status::abnormal_closure, "Heartbeat timeout");
                 return;
             }
 
             if (!ping_pending_.load()) {
                 ping_pending_ = true;
-                queue_frame(build_frame(websocket_opcode::PING, "", false), true);
+                queue_frame(build_frame(websocket_opcode::ping, "", false), true);
             }
         }
     } catch (const exception& e) {
@@ -601,7 +601,7 @@ void websocket_session::close(const websocket_status status, const string& reaso
     do_stop(status, reason);
 }
 
-void websocket_session::stop() { do_stop(websocket_status::NORMAL_CLOSURE, "Stopped"); }
+void websocket_session::stop() { do_stop(websocket_status::normal_closure, "Stopped"); }
 
 bool websocket_session::send(const string& data, const websocket_opcode opcode) {
     if (!running_) {
@@ -609,7 +609,7 @@ bool websocket_session::send(const string& data, const websocket_opcode opcode) 
     }
 
 #ifdef NEFORCE_SUPPORT_ZLIB
-    if (deflate_compressor_ && (opcode == websocket_opcode::TEXT || opcode == websocket_opcode::BINARY)) {
+    if (deflate_compressor_ && (opcode == websocket_opcode::text || opcode == websocket_opcode::binary)) {
         try {
             const string compressed = deflate_compressor_->process(data.view(), true);
             if (!compressed.empty()) {
@@ -703,11 +703,11 @@ void websocket_session::try_parse_frames() {
         const bool is_ctrl_ev = (hdr.opcode >= 0x8);
 
         if (hdr.rsv2 || hdr.rsv3) {
-            send_close_frame(websocket_status::PROTOCOL_ERROR, "Reserved bits set");
+            send_close_frame(websocket_status::protocol_error, "Reserved bits set");
             break;
         }
         if (hdr.rsv1 && (!deflate_config_.active || is_ctrl_ev)) {
-            send_close_frame(websocket_status::PROTOCOL_ERROR, "RSV1 set without negotiation");
+            send_close_frame(websocket_status::protocol_error, "RSV1 set without negotiation");
             break;
         }
 
@@ -729,7 +729,7 @@ void websocket_session::try_parse_frames() {
         // 64 MB payload cap — aligned with read_frame()
         constexpr uint64_t max_payload_length = 64ULL * 1024ULL * 1024ULL;
         if (payload_len > max_payload_length) {
-            send_close_frame(websocket_status::MESSAGE_TOO_BIG, "Payload exceeds limit");
+            send_close_frame(websocket_status::message_too_big, "Payload exceeds limit");
             break;
         }
 
@@ -808,13 +808,13 @@ void websocket_session::on_heartbeat_timer() {
     constexpr milliseconds timeout_ms = heartbeat_timeout_sec.to_milli();
 
     if (ping_pending_.load() && elapsed_ms > timeout_ms.count()) {
-        do_stop(websocket_status::ABNORMAL_CLOSURE, "Heartbeat timeout");
+        do_stop(websocket_status::abnormal_closure, "Heartbeat timeout");
         return;
     }
 
     if (!ping_pending_.load()) {
         ping_pending_ = true;
-        queue_frame(build_frame(websocket_opcode::PING, "", false), true);
+        queue_frame(build_frame(websocket_opcode::ping, "", false), true);
     }
 
     auto self = shared_from_this();

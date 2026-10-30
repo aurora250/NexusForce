@@ -298,56 +298,43 @@ pipe::native_handle_type pipe::detach_write_handle() noexcept {
     return handle;
 }
 
+struct named_pipe::impl {
+    native_handle_type handle_ = g_named_invalid_handle;
+    string name_;
+    bool nonblocking_ = false;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    bool is_server_ = false;
+#else
+    string fifo_path_;
+#endif
+};
+
 // NOLINTNEXTLINE(hicpp-use-equals-default,modernize-use-equals-default)
 named_pipe::named_pipe() :
-handle_(g_named_invalid_handle) {}
+impl_(make_unique<impl>()) {}
 
 named_pipe::~named_pipe() { close(); }
 
-named_pipe::named_pipe(named_pipe&& other) noexcept :
-handle_(other.handle_),
-name_(move(other.name_)),
-nonblocking_(other.nonblocking_),
-#ifdef NEFORCE_PLATFORM_WINDOWS
-is_server_(other.is_server_)
-#else
-fifo_path_(move(other.fifo_path_))
-#endif
-{
-    other.handle_ = g_named_invalid_handle;
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    other.is_server_ = false;
-#endif
-}
+named_pipe::named_pipe(named_pipe&& other) noexcept = default;
 
 named_pipe& named_pipe::operator=(named_pipe&& other) noexcept {
-    if (addressof(other) == this) {
-        return *this;
+    if (this != &other) {
+        close();
+        impl_ = move(other.impl_);
     }
-    close();
-
-    handle_ = other.handle_;
-    other.handle_ = g_named_invalid_handle;
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    is_server_ = other.is_server_;
-    other.is_server_ = false;
-#else
-    fifo_path_ = move(other.fifo_path_);
-#endif
-
-    name_ = move(other.name_);
-    nonblocking_ = other.nonblocking_;
     return *this;
 }
 
 bool named_pipe::create(const string& name, const bool nonblocking) {
+    if (!impl_) {
+        return false;
+    }
     if (is_valid()) {
         close();
     }
 
-    name_ = name;
-    nonblocking_ = nonblocking;
+    impl_->name_ = name;
+    impl_->nonblocking_ = nonblocking;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const wstring full_name = LR"(\\.\pipe\)" + character::to_wstring(name.view());
@@ -356,15 +343,15 @@ bool named_pipe::create(const string& name, const bool nonblocking) {
         open_mode |= PIPE_NOWAIT;
     }
 
-    handle_ = ::CreateNamedPipeW(full_name.data(), open_mode, PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT,
-                                 PIPE_UNLIMITED_INSTANCES, 4096, 4096, 0, nullptr);
-    if (handle_ == g_named_invalid_handle) {
+    impl_->handle_ = ::CreateNamedPipeW(full_name.data(), open_mode, PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT,
+                                        PIPE_UNLIMITED_INSTANCES, 4096, 4096, 0, nullptr);
+    if (impl_->handle_ == g_named_invalid_handle) {
         NEFORCE_THROW_EXCEPTION(pipe_exception("CreateNamedPipe failed"));
     }
-    is_server_ = true;
+    impl_->is_server_ = true;
     return true;
 #else
-    fifo_path_ = name;
+    impl_->fifo_path_ = name;
     if (::mkfifo(name.data(), 0666) != 0) {
         if (errno != EEXIST) {
             NEFORCE_THROW_EXCEPTION(pipe_exception("mkfifo failed"));
@@ -375,8 +362,8 @@ bool named_pipe::create(const string& name, const bool nonblocking) {
     if (nonblocking) {
         flags |= O_NONBLOCK;
     }
-    handle_ = ::open(name.data(), flags);
-    if (handle_ == g_named_invalid_handle) {
+    impl_->handle_ = ::open(name.data(), flags);
+    if (impl_->handle_ == g_named_invalid_handle) {
         NEFORCE_THROW_EXCEPTION(pipe_exception("open fifo failed"));
     }
     return true;
@@ -384,11 +371,14 @@ bool named_pipe::create(const string& name, const bool nonblocking) {
 }
 
 bool named_pipe::connect(const string& name, const int timeout_ms) {
+    if (!impl_) {
+        return false;
+    }
     if (is_valid()) {
         close();
     }
 
-    name_ = name;
+    impl_->name_ = name;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const wstring full_name = LR"(\\.\pipe\)" + character::to_wstring(name.view());
@@ -398,20 +388,20 @@ bool named_pipe::connect(const string& name, const int timeout_ms) {
         NEFORCE_THROW_EXCEPTION(pipe_exception("WaitNamedPipe failed"));
     }
 
-    handle_ = ::CreateFileW(full_name.data(), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
-                            FILE_ATTRIBUTE_NORMAL, nullptr);
-    if (handle_ == g_named_invalid_handle) {
+    impl_->handle_ = ::CreateFileW(full_name.data(), GENERIC_READ | GENERIC_WRITE, 0, nullptr, OPEN_EXISTING,
+                                   FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (impl_->handle_ == g_named_invalid_handle) {
         NEFORCE_THROW_EXCEPTION(pipe_exception("Connect to named pipe failed"));
     }
-    is_server_ = false;
+    impl_->is_server_ = false;
     return true;
 #else
     int flags = O_RDWR;
-    if (nonblocking_) {
+    if (impl_->nonblocking_) {
         flags |= O_NONBLOCK;
     }
-    handle_ = ::open(name.data(), flags);
-    if (handle_ == g_named_invalid_handle) {
+    impl_->handle_ = ::open(name.data(), flags);
+    if (impl_->handle_ == g_named_invalid_handle) {
         NEFORCE_THROW_EXCEPTION(pipe_exception("connect fifo failed"));
     }
     return true;
@@ -419,11 +409,14 @@ bool named_pipe::connect(const string& name, const int timeout_ms) {
 }
 
 bool named_pipe::wait_for_client() {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (handle_ == g_named_invalid_handle || !is_server_) {
+    if (!impl_) {
         return false;
     }
-    if (::ConnectNamedPipe(handle_, nullptr) == FALSE) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (impl_->handle_ == g_named_invalid_handle || !impl_->is_server_) {
+        return false;
+    }
+    if (::ConnectNamedPipe(impl_->handle_, nullptr) == FALSE) {
         if (::GetLastError() != ERROR_PIPE_CONNECTED) {
             return false;
         }
@@ -442,22 +435,22 @@ int named_pipe::read(void* buffer, size_t size) noexcept {
     if (buffer == nullptr) {
         return -1;
     }
-    if (handle_ == g_named_invalid_handle) {
+    if (impl_->handle_ == g_named_invalid_handle) {
         return -1;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD result = 0;
-    if (::ReadFile(handle_, buffer, static_cast<::DWORD>(size), &result, nullptr) == FALSE) {
-        if (nonblocking_ && ::GetLastError() == ERROR_NO_DATA) {
+    if (::ReadFile(impl_->handle_, buffer, static_cast<::DWORD>(size), &result, nullptr) == FALSE) {
+        if (impl_->nonblocking_ && ::GetLastError() == ERROR_NO_DATA) {
             return 0;
         }
         return -1;
     }
 #else
-    const ssize_t result = ::read(handle_, buffer, size);
+    const ssize_t result = ::read(impl_->handle_, buffer, size);
     if (result < 0) {
-        if (nonblocking_ && (errno == EAGAIN || errno == EWOULDBLOCK)) {
+        if (impl_->nonblocking_ && (errno == EAGAIN || errno == EWOULDBLOCK)) {
             return 0;
         }
         return -1;
@@ -468,19 +461,19 @@ int named_pipe::read(void* buffer, size_t size) noexcept {
 }
 
 int named_pipe::write(const void* data, size_t size) noexcept {
-    if (handle_ == g_named_invalid_handle) {
+    if (impl_->handle_ == g_named_invalid_handle) {
         return -1;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD result = 0;
-    if (::WriteFile(handle_, data, static_cast<::DWORD>(size), &result, nullptr) == FALSE) {
+    if (::WriteFile(impl_->handle_, data, static_cast<::DWORD>(size), &result, nullptr) == FALSE) {
         return -1;
     }
 #else
-    const ssize_t result = ::write(handle_, data, size);
+    const ssize_t result = ::write(impl_->handle_, data, size);
     if (result < 0) {
-        if (nonblocking_ && (errno == EAGAIN || errno == EWOULDBLOCK)) {
+        if (impl_->nonblocking_ && (errno == EAGAIN || errno == EWOULDBLOCK)) {
             return 0;
         }
         return -1;
@@ -491,41 +484,52 @@ int named_pipe::write(const void* data, size_t size) noexcept {
 }
 
 void named_pipe::close() noexcept {
-    if (handle_ != g_named_invalid_handle) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        ::DisconnectNamedPipe(handle_);
-        ::CloseHandle(handle_);
-#else
-        ::close(handle_);
-#endif
-        handle_ = g_named_invalid_handle;
+    if (impl_ == nullptr) {
+        return;
     }
-    name_.clear();
+    if (impl_->handle_ != g_named_invalid_handle) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        ::DisconnectNamedPipe(impl_->handle_);
+        ::CloseHandle(impl_->handle_);
+#else
+        ::close(impl_->handle_);
+#endif
+        impl_->handle_ = g_named_invalid_handle;
+    }
+    impl_->name_.clear();
 }
 
-bool named_pipe::is_valid() const noexcept { return handle_ != g_named_invalid_handle; }
+bool named_pipe::is_valid() const noexcept { return impl_ && impl_->handle_ != g_named_invalid_handle; }
+
+bool named_pipe::is_nonblocking() const noexcept { return impl_ && impl_->nonblocking_; }
+
+string_view named_pipe::name() const noexcept { return impl_ ? impl_->name_.view() : ""; }
+
+named_pipe::native_handle_type named_pipe::native_handle() const noexcept {
+    return impl_ ? impl_->handle_ : g_named_invalid_handle;
+}
 
 bool named_pipe::set_nonblocking(bool v) noexcept {
-    if (handle_ == g_named_invalid_handle) {
+    if (impl_->handle_ == g_named_invalid_handle) {
         return false;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD mode = PIPE_READMODE_BYTE | (v ? PIPE_NOWAIT : PIPE_WAIT);
-    if (::SetNamedPipeHandleState(handle_, &mode, nullptr, nullptr) == FALSE) {
+    if (::SetNamedPipeHandleState(impl_->handle_, &mode, nullptr, nullptr) == FALSE) {
         return false;
     }
 #else
-    const int flags = ::fcntl(handle_, F_GETFL, 0);
+    const int flags = ::fcntl(impl_->handle_, F_GETFL, 0);
     if (flags < 0) {
         return false;
     }
-    if (::fcntl(handle_, F_SETFL, v ? (flags | O_NONBLOCK) : (flags & ~O_NONBLOCK)) < 0) {
+    if (::fcntl(impl_->handle_, F_SETFL, v ? (flags | O_NONBLOCK) : (flags & ~O_NONBLOCK)) < 0) {
         return false;
     }
 #endif
 
-    nonblocking_ = v;
+    impl_->nonblocking_ = v;
     return true;
 }
 

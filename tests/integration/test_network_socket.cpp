@@ -137,15 +137,15 @@ TEST_F(UdpSocketIntegration, Ipv6LoopbackSendReceive) {
     }
 
     udp_socket server;
-    server.open(ip_family::INET6);
+    server.open(ip_family::inet6);
     server.set_reuse_address(true);
-    auto addr = ip_address::loopback(ports(0u), ip_family::INET6);
+    auto addr = ip_address::loopback(ports(0u), ip_family::inet6);
     server.bind(addr);
     auto bound = server.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
     udp_socket client;
-    client.open(ip_family::INET6);
+    client.open(ip_family::inet6);
 
     const char* msg = "ipv6 udp test";
     ssize_t sent = client.send_to(memory_view<const char>(msg, 14), *bound);
@@ -176,7 +176,7 @@ TEST_F(IcmpSocketIntegration, PingGoogleDns) {
     ASSERT_NO_THROW(sock.open());
     EXPECT_TRUE(sock.is_open());
 
-    auto dest = ip_address::parse("8.8.8.8", ports::UNDEF);
+    auto dest = ip_address::parse("8.8.8.8", ports::undef);
     ASSERT_TRUE(dest.has_value());
 
     auto result = sock.ping(*dest, milliseconds(3000));
@@ -295,7 +295,7 @@ TEST_F(SocketBaseIntegration, OpenTcpAndBindToAnyPort) {
     }
 
     socket_base sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     sock.set_reuse_address(true);
 
     auto addr = ip_address::any();
@@ -304,7 +304,7 @@ TEST_F(SocketBaseIntegration, OpenTcpAndBindToAnyPort) {
     auto local = sock.local_endpoint();
     ASSERT_TRUE(local.has_value());
     EXPECT_TRUE(local->is_ipv4());
-    EXPECT_NE(local->port(), ports::UNDEF);
+    EXPECT_NE(local->port(), ports::undef);
     sock.close();
 }
 
@@ -314,7 +314,7 @@ TEST_F(SocketBaseIntegration, GetOptionOnOpenSocket) {
     }
 
     socket_base sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     sock.set_reuse_address(true);
 
     int val = 0;
@@ -329,7 +329,7 @@ TEST_F(SocketBaseIntegration, NonblockingModeToggle) {
     }
 
     socket_base sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
 
     EXPECT_TRUE(sock.set_nonblocking(true));
     EXPECT_TRUE(sock.set_nonblocking(false));
@@ -342,7 +342,7 @@ TEST_F(SocketBaseIntegration, SoReusePort) {
     }
 
     socket_base sock;
-    sock.open(ip_family::INET4);
+    sock.open(ip_family::inet4);
     sock.set_reuse_port(true);
     sock.close();
 }
@@ -359,7 +359,7 @@ TEST_F(IpSocketIntegration, ConnectToLoopbackWithTcp) {
     }
 
     socket_base server;
-    server.open(ip_family::INET4);
+    server.open(ip_family::inet4);
     server.set_reuse_address(true);
     auto addr = ip_address::loopback();
     server.bind(addr);
@@ -419,7 +419,7 @@ TEST_F(AsyncIcmpIntegration, AsyncPingTimeout) {
     icmp_socket sock;
     ASSERT_NO_THROW(sock.open());
 
-    auto dest = ip_address::parse("192.0.2.1", ports::UNDEF);
+    auto dest = ip_address::parse("192.0.2.1", ports::undef);
     ASSERT_TRUE(dest.has_value());
     bool done = false;
     icmp_socket::ping_result out;

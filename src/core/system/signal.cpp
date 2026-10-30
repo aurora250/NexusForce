@@ -2,6 +2,13 @@
 #include <NeForce/core/exception/terminate.hpp>
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/core/system/signal.hpp>
+#include <NeForce/core/async/atomic.hpp>
+#include <NeForce/core/async/condition_variable.hpp>
+#include <NeForce/core/async/mutex.hpp>
+#include <NeForce/core/async/thread.hpp>
+#include <NeForce/core/container/flat_unordered_map.hpp>
+#include <NeForce/core/time/clocks.hpp>
+#include <NeForce/core/system/system_event.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <windef.h>
 #    include <WinBase.h>
@@ -88,12 +95,30 @@ namespace {
 } // namespace
 
 
-system_signal::system_signal()
+struct system_signal::impl {
+    atomic<bool> running_{false};
+    atomic<bool> force_exit_{false};
+    atomic<int> force_exit_timeout_{5000};
+    atomic<int> guard_count_{0};
+
+    mutex mutex_;
+    condition_variable cv_;
+
+    flat_unordered_map<event, signal_handler> handlers_;
+    vector<pending_signal> pending_signals_;
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
-:
-notify_event_(false, system_event::type::auto_reset)
+    system_event notify_event_{false, system_event::type::auto_reset};
+#else
+    struct ::sigaction old_actions_[64]{};
 #endif
-{
+
+    thread signal_thread_;
+    thread timeout_thread_;
+};
+
+system_signal::system_signal() :
+impl_(make_unique<impl>()) {
     initialize();
 }
 
@@ -107,15 +132,27 @@ system_signal& system_signal::instance() {
     return instance;
 }
 
+void system_signal::add_guard_ref() {
+    if (impl_->guard_count_++ == 0) {
+        start_monitoring();
+    }
+}
+
+void system_signal::remove_guard_ref() noexcept {
+    if (--impl_->guard_count_ == 0) {
+        stop_monitoring();
+    }
+}
+
 void system_signal::initialize() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    g_notify_event = &notify_event_;
+    g_notify_event = &impl_->notify_event_;
     ::SetConsoleCtrlHandler(windows_handler, TRUE);
-    handlers_[event::INTERRUPT] = nullptr;
-    handlers_[event::CTRL_BREAK] = nullptr;
-    handlers_[event::CLOSE] = nullptr;
-    handlers_[event::LOGOFF] = nullptr;
-    handlers_[event::SHUTDOWN] = nullptr;
+    impl_->handlers_[event::interrupt] = nullptr;
+    impl_->handlers_[event::ctrl_break] = nullptr;
+    impl_->handlers_[event::close] = nullptr;
+    impl_->handlers_[event::logoff] = nullptr;
+    impl_->handlers_[event::shutdown] = nullptr;
 #else
     g_signal_pipe = &get_signal_pipe();
     const int read_fd = g_signal_pipe->native_read_handle();
@@ -135,7 +172,7 @@ void system_signal::initialize() {
     constexpr int sigs[] = {SIGINT, SIGTERM, SIGABRT, SIGILL, SIGFPE,  SIGSEGV,
                             SIGBUS, SIGPIPE, SIGALRM, SIGHUP, SIGUSR1, SIGUSR2};
     for (const int sig: sigs) {
-        ::sigaction(sig, &sa, &old_actions_[sig]);
+        ::sigaction(sig, &sa, &impl_->old_actions_[sig]);
     }
 #endif
 }
@@ -146,8 +183,8 @@ void system_signal::cleanup() {
     g_notify_event = nullptr;
 #else
     for (int sig = 1; sig < 64; ++sig) {
-        if (old_actions_[sig].sa_handler != nullptr || old_actions_[sig].sa_flags != 0) {
-            ::sigaction(sig, &old_actions_[sig], nullptr);
+        if (impl_->old_actions_[sig].sa_handler != nullptr || impl_->old_actions_[sig].sa_flags != 0) {
+            ::sigaction(sig, &impl_->old_actions_[sig], nullptr);
         }
     }
 #endif
@@ -157,23 +194,23 @@ void system_signal::register_handler(const event event, signal_handler handler) 
     if (!handler) {
         NEFORCE_THROW_EXCEPTION(system_exception("Signal handler cannot be null"));
     }
-    lock<mutex> lk(mutex_);
-    handlers_[event] = move(handler);
+    lock<mutex> lk(impl_->mutex_);
+    impl_->handlers_[event] = move(handler);
 }
 
 void system_signal::register_handlers(const vector<event>& events, const signal_handler& handler) {
     if (!handler) {
         NEFORCE_THROW_EXCEPTION(system_exception("Signal handler cannot be null"));
     }
-    lock<mutex> lk(mutex_);
+    lock<mutex> lk(impl_->mutex_);
     for (auto e: events) {
-        handlers_[e] = handler;
+        impl_->handlers_[e] = handler;
     }
 }
 
 void system_signal::remove_handler(const event event) {
-    lock<mutex> lk(mutex_);
-    handlers_.erase(event);
+    lock<mutex> lk(impl_->mutex_);
+    impl_->handlers_.erase(event);
 }
 
 system_signal::event system_signal::wait_for_signal(const int timeout_ms) {
@@ -181,73 +218,73 @@ system_signal::event system_signal::wait_for_signal(const int timeout_ms) {
 }
 
 void system_signal::send_signal(const event event, void* context) {
-    lock<mutex> lk(mutex_);
+    lock<mutex> lk(impl_->mutex_);
     send_signal_nolock(event, context);
 }
 
-void system_signal::set_force_exit_timeout(const int timeout_ms) { force_exit_timeout_ = timeout_ms; }
+void system_signal::set_force_exit_timeout(const int timeout_ms) { impl_->force_exit_timeout_ = timeout_ms; }
 
 void system_signal::start_monitoring() {
-    if (running_) {
+    if (impl_->running_) {
         return;
     }
 
-    if (signal_thread_.joinable()) {
-        signal_thread_.join();
+    if (impl_->signal_thread_.joinable()) {
+        impl_->signal_thread_.join();
     }
-    if (timeout_thread_.joinable()) {
-        timeout_thread_.join();
+    if (impl_->timeout_thread_.joinable()) {
+        impl_->timeout_thread_.join();
     }
 
-    running_ = true;
-    force_exit_ = false;
+    impl_->running_ = true;
+    impl_->force_exit_ = false;
 
-    signal_thread_ = thread(&system_signal::signal_thread_func, this);
-    timeout_thread_ = thread(&system_signal::timeout_monitor_thread, this);
+    impl_->signal_thread_ = thread(&system_signal::signal_thread_func, this);
+    impl_->timeout_thread_ = thread(&system_signal::timeout_monitor_thread, this);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::SetThreadPriority(signal_thread_.native_handle(), THREAD_PRIORITY_HIGHEST);
+    ::SetThreadPriority(impl_->signal_thread_.native_handle(), THREAD_PRIORITY_HIGHEST);
 #else
     ::sched_param param;
     param.sched_priority = ::sched_get_priority_max(SCHED_FIFO);
-    ::pthread_setschedparam(signal_thread_.native_handle(), SCHED_FIFO, &param);
+    ::pthread_setschedparam(impl_->signal_thread_.native_handle(), SCHED_FIFO, &param);
 #endif
 }
 
 void system_signal::stop_monitoring() noexcept {
     try {
-        if (guard_count_.load() > 0) {
+        if (impl_->guard_count_.load() > 0) {
             return;
         }
 
-        if (!running_) {
-            if (signal_thread_.joinable()) {
-                signal_thread_.join();
+        if (!impl_->running_) {
+            if (impl_->signal_thread_.joinable()) {
+                impl_->signal_thread_.join();
             }
-            if (timeout_thread_.joinable()) {
-                timeout_thread_.join();
+            if (impl_->timeout_thread_.joinable()) {
+                impl_->timeout_thread_.join();
             }
             return;
         }
 
-        force_exit_ = true;
-        running_ = false;
+        impl_->force_exit_ = true;
+        impl_->running_ = false;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        notify_event_.set();
+        impl_->notify_event_.set();
 #else
         if (g_signal_pipe != nullptr) {
             constexpr int wakeup = -1;
             ::write(g_signal_pipe->native_write_handle(), &wakeup, sizeof(wakeup));
         }
 #endif
-        cv_.notify_all();
+        impl_->cv_.notify_all();
 
-        if (signal_thread_.joinable()) {
-            signal_thread_.join();
+        if (impl_->signal_thread_.joinable()) {
+            impl_->signal_thread_.join();
         }
-        if (timeout_thread_.joinable()) {
-            timeout_thread_.join();
+        if (impl_->timeout_thread_.joinable()) {
+            impl_->timeout_thread_.join();
         }
         // NOLINTNEXTLINE(bugprone-empty-catch)
     } catch (const exception& e) {
@@ -257,18 +294,18 @@ void system_signal::stop_monitoring() noexcept {
 
 void system_signal::reset_force() {
     stop_monitoring();
-    guard_count_ = 0;
-    lock<mutex> lk(mutex_);
-    for (auto it = handlers_.begin(); it != handlers_.end();) {
-        if (it->first >= event::CUSTOM_1) {
-            it = handlers_.erase(it);
+    impl_->guard_count_ = 0;
+    lock<mutex> lk(impl_->mutex_);
+    for (auto it = impl_->handlers_.begin(); it != impl_->handlers_.end();) {
+        if (it->first >= event::custom_1) {
+            it = impl_->handlers_.erase(it);
         } else {
             ++it;
         }
     }
 }
 
-bool system_signal::is_running() const { return running_; }
+bool system_signal::is_running() const { return impl_->running_; }
 
 void system_signal::signal_thread_func() {
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -277,23 +314,23 @@ void system_signal::signal_thread_func() {
     ::pthread_setschedparam(::pthread_self(), SCHED_FIFO, &param);
 #endif
 
-    while (running_) {
+    while (impl_->running_) {
         bool has_signals = false;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        notify_event_.wait(50);
-        if (!running_) {
+        impl_->notify_event_.wait(50);
+        if (!impl_->running_) {
             break;
         }
 
-        while (running_) {
+        while (impl_->running_) {
             const signal_result result = wait_for_signal_internal(0);
-            if (result.event == event::TIMEOUT) {
+            if (result.event == event::timeout) {
                 break;
             }
             has_signals = true;
             process_signal(result.event, result.context);
-            if (result.event == event::FORCE_EXIT) {
+            if (result.event == event::force_exit) {
                 return;
             }
         }
@@ -313,24 +350,24 @@ void system_signal::signal_thread_func() {
             }
             break;
         }
-        if (!running_) {
+        if (!impl_->running_) {
             break;
         }
 
-        while (running_ && ready > 0 && FD_ISSET(read_fd, &rfds)) {
+        while (impl_->running_ && ready > 0 && FD_ISSET(read_fd, &rfds)) {
             int sig = 0;
             const ssize_t n = ::read(read_fd, &sig, sizeof(sig));
 
             if (n == sizeof(sig)) {
                 if (sig == -2) {
-                    while (running_) {
+                    while (impl_->running_) {
                         const signal_result result = wait_for_signal_internal(0);
-                        if (result.event == event::TIMEOUT) {
+                        if (result.event == event::timeout) {
                             break;
                         }
                         has_signals = true;
                         process_signal(result.event, result.context);
-                        if (result.event == event::FORCE_EXIT) {
+                        if (result.event == event::force_exit) {
                             return;
                         }
                     }
@@ -338,7 +375,7 @@ void system_signal::signal_thread_func() {
                     const auto ev = static_cast<system_signal::event>(sig);
                     has_signals = true;
                     process_signal(ev, nullptr);
-                    if (ev == system_signal::event::FORCE_EXIT) {
+                    if (ev == system_signal::event::force_exit) {
                         return;
                     }
                 }
@@ -352,42 +389,42 @@ void system_signal::signal_thread_func() {
         }
 #endif
 
-        if (!has_signals && running_) {
+        if (!has_signals && impl_->running_) {
             signal_handler h;
             {
-                lock<mutex> lk(mutex_);
-                auto it = handlers_.find(event::TIMEOUT);
-                if (it != handlers_.end() && it->second) {
+                lock<mutex> lk(impl_->mutex_);
+                auto it = impl_->handlers_.find(event::timeout);
+                if (it != impl_->handlers_.end() && it->second) {
                     h = it->second;
                 }
             }
             if (h) {
-                h(event::TIMEOUT, nullptr);
+                h(event::timeout, nullptr);
             }
         }
     }
 }
 
 void system_signal::timeout_monitor_thread() {
-    while (running_ && !force_exit_) {
+    while (impl_->running_ && !impl_->force_exit_) {
         this_thread::sleep_for(milliseconds(100));
-        lock<mutex> lk(mutex_);
-        if (pending_signals_.empty()) {
+        lock<mutex> lk(impl_->mutex_);
+        if (impl_->pending_signals_.empty()) {
             continue;
         }
 
-        int timeout = force_exit_timeout_.load();
+        int timeout = impl_->force_exit_timeout_.load();
         auto now = steady_clock::now();
 
-        auto it = remove_if(pending_signals_.begin(), pending_signals_.end(),
+        auto it = remove_if(impl_->pending_signals_.begin(), impl_->pending_signals_.end(),
                             [timeout, now](const pending_signal& ps) -> bool {
                                 const auto age = time_cast<milliseconds>(now - ps.timestamp).count();
                                 return age > timeout;
                             });
-        if (it != pending_signals_.end()) {
-            printcln(color::yellow(), "Removing ", pending_signals_.end() - it, " stale signal(s)");
-            pending_signals_.erase(it, pending_signals_.end());
-            cv_.notify_all();
+        if (it != impl_->pending_signals_.end()) {
+            printcln(color::yellow(), "Removing ", impl_->pending_signals_.end() - it, " stale signal(s)");
+            impl_->pending_signals_.erase(it, impl_->pending_signals_.end());
+            impl_->cv_.notify_all();
         }
     }
 }
@@ -395,9 +432,9 @@ void system_signal::timeout_monitor_thread() {
 void system_signal::process_signal(const event event, void* context) {
     signal_handler h;
     {
-        lock<mutex> lk(mutex_);
-        const auto it = handlers_.find(event);
-        if (it != handlers_.end()) {
+        lock<mutex> lk(impl_->mutex_);
+        const auto it = impl_->handlers_.find(event);
+        if (it != impl_->handlers_.end()) {
             h = it->second;
         }
     }
@@ -413,28 +450,28 @@ void system_signal::process_signal(const event event, void* context) {
                 static_cast<system_signal::event>(SIGTERM);
 #endif
         g_signal_context = nullptr;
-        if (should_exit && event == event::FORCE_EXIT) {
+        if (should_exit && event == event::force_exit) {
             terminate();
         }
         return;
     }
 
     switch (event) {
-        case event::INTERRUPT:
-        case event::TERMINATE:
-        case event::HANGUP:
-        case event::CTRL_BREAK:
-        case event::CLOSE:
-        case event::LOGOFF:
-        case event::SHUTDOWN: {
+        case event::interrupt:
+        case event::terminate:
+        case event::hangup:
+        case event::ctrl_break:
+        case event::close:
+        case event::logoff:
+        case event::shutdown: {
             printcln(color::blue(), "Received termination signal, exiting...");
-            running_ = false;
+            impl_->running_ = false;
             break;
         }
-        case event::SEGMENT_FAULT:
-        case event::ILLEGAL_INSTR:
-        case event::FLOATING_POINT:
-        case event::BUS_ERROR: {
+        case event::segment_fault:
+        case event::illegal_instr:
+        case event::floating_point:
+        case event::bus_error: {
 #ifdef NEFORCE_PLATFORM_WINDOWS
             printcln(color::red(), "Critical error signal received: ", static_cast<int>(event));
             trigger_force_exit();
@@ -443,7 +480,7 @@ void system_signal::process_signal(const event event, void* context) {
             abort();
 #endif
         }
-        case event::ABORT: {
+        case event::abort: {
             printcln(color::red(), "Abort signal received.");
 #ifdef NEFORCE_PLATFORM_WINDOWS
             trigger_force_exit();
@@ -451,34 +488,34 @@ void system_signal::process_signal(const event event, void* context) {
             abort();
 #endif
         }
-        case event::PIPE_BROKEN: {
+        case event::pipe_broken: {
             printcln(color::yellow(), "Broken pipe signal received, ignoring.");
             break;
         }
-        case event::ALARM: {
+        case event::alarm: {
             printcln(color::yellow(), "Alarm signal received.");
             break;
         }
-        case event::USER1: {
+        case event::user1: {
             printcln(color::cyan(), "User signal 1 received.");
             break;
         }
-        case event::USER2: {
+        case event::user2: {
             printcln(color::cyan(), "User signal 2 received.");
             break;
         }
-        case event::TIMEOUT: {
+        case event::timeout: {
             printcln(color::yellow(), "Timeout signal received.");
             break;
         }
-        case event::CUSTOM_1:
-        case event::CUSTOM_2: {
+        case event::custom_1:
+        case event::custom_2: {
             printcln(color::cyan(), "Custom event received: ", static_cast<int>(event));
             break;
         }
-        case event::FORCE_EXIT: {
+        case event::force_exit: {
             printcln(color::red(), "Force exit triggered.");
-            force_exit_ = true;
+            impl_->force_exit_ = true;
             terminate();
         }
         default: {
@@ -490,76 +527,77 @@ void system_signal::process_signal(const event event, void* context) {
 
 void system_signal::trigger_force_exit() {
     bool expected = false;
-    if (force_exit_.compare_exchange_strong(expected, true)) {
-        running_ = false;
-        cv_.notify_all();
+    if (impl_->force_exit_.compare_exchange_strong(expected, true)) {
+        impl_->running_ = false;
+        impl_->cv_.notify_all();
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        notify_event_.set();
+        impl_->notify_event_.set();
 #endif
     }
 }
 
 system_signal::signal_result system_signal::wait_for_signal_internal(const int timeout_ms) {
-    unique_lock<mutex> lk(mutex_);
+    unique_lock<mutex> lk(impl_->mutex_);
     if (timeout_ms >= 0) {
         const auto deadline = steady_clock::now() + milliseconds(timeout_ms);
-        if (!cv_.wait_until(lk, deadline, [this]() { return !pending_signals_.empty() || !running_; })) {
-            return signal_result{event::TIMEOUT, nullptr};
+        if (!impl_->cv_.wait_until(lk, deadline,
+                                   [this]() { return !impl_->pending_signals_.empty() || !impl_->running_; })) {
+            return signal_result{event::timeout, nullptr};
         }
     } else {
-        cv_.wait(lk, [this]() { return !pending_signals_.empty() || !running_; });
+        impl_->cv_.wait(lk, [this]() { return !impl_->pending_signals_.empty() || !impl_->running_; });
     }
 
-    if (!pending_signals_.empty()) {
-        const pending_signal ps = pending_signals_.front();
-        pending_signals_.erase(pending_signals_.begin());
+    if (!impl_->pending_signals_.empty()) {
+        const pending_signal ps = impl_->pending_signals_.front();
+        impl_->pending_signals_.erase(impl_->pending_signals_.begin());
         return signal_result{ps.signal_event, ps.context};
     }
-    return signal_result{event::TIMEOUT, nullptr};
+    return signal_result{event::timeout, nullptr};
 }
 
 system_signal::event system_signal::from_native(int native_signal) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     switch (native_signal) {
         case CTRL_C_EVENT:
-            return event::INTERRUPT;
+            return event::interrupt;
         case CTRL_BREAK_EVENT:
-            return event::CTRL_BREAK;
+            return event::ctrl_break;
         case CTRL_CLOSE_EVENT:
-            return event::CLOSE;
+            return event::close;
         case CTRL_LOGOFF_EVENT:
-            return event::LOGOFF;
+            return event::logoff;
         case CTRL_SHUTDOWN_EVENT:
-            return event::SHUTDOWN;
+            return event::shutdown;
         default:
             return static_cast<event>(native_signal);
     }
 #else
     switch (native_signal) {
         case SIGINT:
-            return event::INTERRUPT;
+            return event::interrupt;
         case SIGTERM:
-            return event::TERMINATE;
+            return event::terminate;
         case SIGABRT:
-            return event::ABORT;
+            return event::abort;
         case SIGILL:
-            return event::ILLEGAL_INSTR;
+            return event::illegal_instr;
         case SIGFPE:
-            return event::FLOATING_POINT;
+            return event::floating_point;
         case SIGSEGV:
-            return event::SEGMENT_FAULT;
+            return event::segment_fault;
         case SIGBUS:
-            return event::BUS_ERROR;
+            return event::bus_error;
         case SIGPIPE:
-            return event::PIPE_BROKEN;
+            return event::pipe_broken;
         case SIGALRM:
-            return event::ALARM;
+            return event::alarm;
         case SIGHUP:
-            return event::HANGUP;
+            return event::hangup;
         case SIGUSR1:
-            return event::USER1;
+            return event::user1;
         case SIGUSR2:
-            return event::USER2;
+            return event::user2;
         default:
             return static_cast<event>(native_signal);
     }
@@ -569,44 +607,44 @@ system_signal::event system_signal::from_native(int native_signal) noexcept {
 int system_signal::to_native(const event e) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     switch (e) {
-        case event::INTERRUPT:
+        case event::interrupt:
             return CTRL_C_EVENT;
-        case event::CTRL_BREAK:
+        case event::ctrl_break:
             return CTRL_BREAK_EVENT;
-        case event::CLOSE:
+        case event::close:
             return CTRL_CLOSE_EVENT;
-        case event::LOGOFF:
+        case event::logoff:
             return CTRL_LOGOFF_EVENT;
-        case event::SHUTDOWN:
+        case event::shutdown:
             return CTRL_SHUTDOWN_EVENT;
         default:
             return -1;
     }
 #else
     switch (e) {
-        case event::INTERRUPT:
+        case event::interrupt:
             return SIGINT;
-        case event::TERMINATE:
+        case event::terminate:
             return SIGTERM;
-        case event::ABORT:
+        case event::abort:
             return SIGABRT;
-        case event::ILLEGAL_INSTR:
+        case event::illegal_instr:
             return SIGILL;
-        case event::FLOATING_POINT:
+        case event::floating_point:
             return SIGFPE;
-        case event::SEGMENT_FAULT:
+        case event::segment_fault:
             return SIGSEGV;
-        case event::BUS_ERROR:
+        case event::bus_error:
             return SIGBUS;
-        case event::PIPE_BROKEN:
+        case event::pipe_broken:
             return SIGPIPE;
-        case event::ALARM:
+        case event::alarm:
             return SIGALRM;
-        case event::HANGUP:
+        case event::hangup:
             return SIGHUP;
-        case event::USER1:
+        case event::user1:
             return SIGUSR1;
-        case event::USER2:
+        case event::user2:
             return SIGUSR2;
         default:
             return -1;
@@ -617,10 +655,10 @@ int system_signal::to_native(const event e) noexcept {
 void system_signal::send_signal_nolock(event event, void* context) {
     send_platform_signal(event);
 
-    pending_signals_.emplace_back(event, context, steady_clock::now());
-    cv_.notify_all();
+    impl_->pending_signals_.emplace_back(event, context, steady_clock::now());
+    impl_->cv_.notify_all();
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    notify_event_.set();
+    impl_->notify_event_.set();
 #else
     constexpr int wakeup = -2;
     if (g_signal_pipe != nullptr) {

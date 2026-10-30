@@ -107,6 +107,7 @@ public:
 
 private:
     NEFORCE_NODISCARD http_handler_t find_handler(const http_method& method, const string& path, http_request& request);
+    NEFORCE_NODISCARD string allowed_methods(const string& path) const;
     void resolve_handler(http_request& request, http_response& response);
 
     void setup_default_handlers();

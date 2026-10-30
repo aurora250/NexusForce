@@ -20,7 +20,7 @@ int main() {
     io_context io_ctx;
 
     dns_client client(
-            dns_client::config{.server = "114.114.114.114", .port = ports::DNS, .timeout = milliseconds(5000)}, io_ctx);
+            dns_client::config{.server = "114.114.114.114", .port = ports::dns, .timeout = milliseconds(5000)}, io_ctx);
     println("DNS Server: 114.114.114.114");
 
     // ========== A记录查询（IPv4） ==========

@@ -145,58 +145,32 @@ namespace {
 } // namespace
 
 
-pty::pty() noexcept :
-handle_(invalid_handle) {}
+struct pty::impl {
+    native_handle_type handle_ = invalid_handle;
+    int child_id_ = 0;
+    int exit_code_ = -1;
+    bool finished_ = false;
+    int columns_ = 80;
+    int rows_ = 24;
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    native_handle_type read_handle_ = invalid_handle;
+    native_handle_type write_handle_ = invalid_handle;
+    native_handle_type process_handle_ = invalid_handle;
+#endif
+};
+
+pty::pty() :
+impl_(make_unique<impl>()) {}
 
 pty::~pty() { close(); }
 
-pty::pty(pty&& other) noexcept :
-handle_(other.handle_),
-child_id_(other.child_id_),
-exit_code_(other.exit_code_),
-finished_(other.finished_),
-columns_(other.columns_),
-rows_(other.rows_)
-#ifdef NEFORCE_PLATFORM_WINDOWS
-,
-read_handle_(other.read_handle_),
-write_handle_(other.write_handle_),
-process_handle_(other.process_handle_)
-#endif
-{
-    other.handle_ = invalid_handle;
-    other.child_id_ = 0;
-    other.finished_ = true;
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    other.read_handle_ = invalid_handle;
-    other.write_handle_ = invalid_handle;
-    other.process_handle_ = invalid_handle;
-#endif
-}
+pty::pty(pty&& other) noexcept = default;
 
 pty& pty::operator=(pty&& other) noexcept {
     if (this != &other) {
         close();
-        handle_ = other.handle_;
-        child_id_ = other.child_id_;
-        exit_code_ = other.exit_code_;
-        finished_ = other.finished_;
-        columns_ = other.columns_;
-        rows_ = other.rows_;
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        read_handle_ = other.read_handle_;
-        write_handle_ = other.write_handle_;
-        process_handle_ = other.process_handle_;
-#endif
-
-        other.handle_ = invalid_handle;
-        other.child_id_ = 0;
-        other.finished_ = true;
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        other.read_handle_ = invalid_handle;
-        other.write_handle_ = invalid_handle;
-        other.process_handle_ = invalid_handle;
-#endif
+        impl_ = move(other.impl_);
     }
     return *this;
 }
@@ -267,8 +241,8 @@ void pty::open(const console_size size) {
         NEFORCE_THROW_EXCEPTION(pty_exception("ConPTY requires Windows 10 1809 or newer"));
     }
 
-    columns_ = max(1, size.width);
-    rows_ = max(1, size.height);
+    impl_->columns_ = max(1, size.width);
+    impl_->rows_ = max(1, size.height);
 
     ::HANDLE input_read = nullptr;
     ::HANDLE input_write = nullptr;
@@ -291,7 +265,8 @@ void pty::open(const console_size size) {
     // The pseudo console owns the child side of both pipes;
     // the parent keeps the write side of the input pipe and the read side of the output pipe.
     ::HANDLE pseudo = nullptr;
-    const ::HRESULT result = conpty().create(console_coord(columns_, rows_), input_read, output_write, 0, &pseudo);
+    const ::HRESULT result =
+            conpty().create(console_coord(impl_->columns_, impl_->rows_), input_read, output_write, 0, &pseudo);
     if (result != S_OK || pseudo == nullptr) {
         ::CloseHandle(input_read);
         ::CloseHandle(input_write);
@@ -305,42 +280,42 @@ void pty::open(const console_size size) {
     ::CloseHandle(input_read);
     ::CloseHandle(output_write);
 
-    handle_ = pseudo;
-    write_handle_ = input_write;
-    read_handle_ = output_read;
+    impl_->handle_ = pseudo;
+    impl_->write_handle_ = input_write;
+    impl_->read_handle_ = output_read;
 #else
-    columns_ = max(1, size.width);
-    rows_ = max(1, size.height);
+    impl_->columns_ = max(1, size.width);
+    impl_->rows_ = max(1, size.height);
 
-    handle_ = ::posix_openpt(O_RDWR | O_NOCTTY);
-    if (handle_ < 0) {
+    impl_->handle_ = ::posix_openpt(O_RDWR | O_NOCTTY);
+    if (impl_->handle_ < 0) {
         NEFORCE_THROW_EXCEPTION(pty_exception("posix_openpt failed"));
     }
-    if (::grantpt(handle_) != 0 || ::unlockpt(handle_) != 0) {
-        ::close(handle_);
-        handle_ = -1;
+    if (::grantpt(impl_->handle_) != 0 || ::unlockpt(impl_->handle_) != 0) {
+        ::close(impl_->handle_);
+        impl_->handle_ = -1;
         NEFORCE_THROW_EXCEPTION(pty_exception("grantpt/unlockpt failed"));
     }
-    (void) set_nonblocking(handle_);
-    apply_window_size(handle_, columns_, rows_);
+    (void) set_nonblocking(impl_->handle_);
+    apply_window_size(impl_->handle_, impl_->columns_, impl_->rows_);
 #endif
 }
 
 void pty::start(const string& executable, const vector<string>& args, const string& work_dir, const vector<string>& env,
                 const bool merged_stderr) {
-    if (handle_ == invalid_handle) {
+    if (impl_->handle_ == invalid_handle) {
         NEFORCE_THROW_EXCEPTION(pty_exception("pseudo terminal is not open"));
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (!finished_ && process_handle_ != nullptr) {
+    if (!impl_->finished_ && impl_->process_handle_ != nullptr) {
         NEFORCE_THROW_EXCEPTION(pty_exception("a child process is already running on this terminal"));
     }
     // A finished child keeps its handle so the exit code stays readable; drop it before the
     // next start() overwrites the field, otherwise every restart leaks one process handle.
-    if (process_handle_ != invalid_handle) {
-        ::CloseHandle(process_handle_);
-        process_handle_ = invalid_handle;
+    if (impl_->process_handle_ != invalid_handle) {
+        ::CloseHandle(impl_->process_handle_);
+        impl_->process_handle_ = invalid_handle;
     }
     // A terminal exposes a single data stream, so stderr is always merged.
     ignore = merged_stderr;
@@ -375,7 +350,7 @@ void pty::start(const string& executable, const vector<string>& args, const stri
     const attribute_guard guard{attributes};
     // UpdateProcThreadAttribute copies cbSize bytes from lpValue; PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE
     // expects the HPCON handle value itself, not the address of the variable holding it.
-    ::HANDLE pseudo = handle_;
+    ::HANDLE pseudo = impl_->handle_;
     if (::UpdateProcThreadAttribute(attributes, 0, PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE, static_cast<::PVOID>(pseudo),
                                     sizeof(pseudo), nullptr, nullptr) == FALSE) {
         NEFORCE_THROW_EXCEPTION(pty_exception(last_error()));
@@ -401,11 +376,11 @@ void pty::start(const string& executable, const vector<string>& args, const stri
     }
 
     ::CloseHandle(info.hThread);
-    process_handle_ = info.hProcess;
-    child_id_ = static_cast<int>(info.dwProcessId);
+    impl_->process_handle_ = info.hProcess;
+    impl_->child_id_ = static_cast<int>(info.dwProcessId);
 
 #else
-    if (!finished_ && child_id_ > 0) {
+    if (!impl_->finished_ && impl_->child_id_ > 0) {
         NEFORCE_THROW_EXCEPTION(pty_exception("a child process is already running on this terminal"));
     }
     // A terminal exposes a single data stream, so stderr is always merged;
@@ -419,7 +394,7 @@ void pty::start(const string& executable, const vector<string>& args, const stri
 
     char slave_buffer[128];
     slave_buffer[0] = '\0';
-    if (::ptsname_r(handle_, slave_buffer, sizeof(slave_buffer)) != 0 || slave_buffer[0] == '\0') {
+    if (::ptsname_r(impl_->handle_, slave_buffer, sizeof(slave_buffer)) != 0 || slave_buffer[0] == '\0') {
         NEFORCE_THROW_EXCEPTION(pty_exception("ptsname failed"));
     }
 
@@ -498,7 +473,7 @@ void pty::start(const string& executable, const vector<string>& args, const stri
         if (slave > STDERR_FILENO) {
             ::close(slave);
         }
-        ::close(handle_);
+        ::close(impl_->handle_);
 
         if (!work_dir.empty() && ::chdir(work_dir.view().data()) != 0) {
             notify_parent(notify[1], errno);
@@ -527,66 +502,66 @@ void pty::start(const string& executable, const vector<string>& args, const stri
         NEFORCE_THROW_EXCEPTION(pty_exception(error));
     }
 
-    child_id_ = pid;
+    impl_->child_id_ = pid;
 
 #endif
 
-    exit_code_ = -1;
-    finished_ = false;
+    impl_->exit_code_ = -1;
+    impl_->finished_ = false;
 }
 
 bool pty::is_running() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (process_handle_ == nullptr || finished_) {
+    if (impl_->process_handle_ == nullptr || impl_->finished_) {
         return false;
     }
-    return ::WaitForSingleObject(process_handle_, 0) == WAIT_TIMEOUT;
+    return ::WaitForSingleObject(impl_->process_handle_, 0) == WAIT_TIMEOUT;
 #else
-    return child_id_ > 0 && !finished_;
+    return impl_->child_id_ > 0 && !impl_->finished_;
 #endif
 }
 
 native_handle_type pty::master_handle() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return read_handle_;
+    return impl_->read_handle_;
 #else
-    return handle_;
+    return impl_->handle_;
 #endif
 }
 
 bool pty::is_master_handle_valid() const noexcept { return master_handle() != invalid_handle; }
 
-native_id_type pty::process_id() const noexcept { return static_cast<native_id_type>(child_id_); }
+native_id_type pty::process_id() const noexcept { return static_cast<native_id_type>(impl_->child_id_); }
 
 string pty::read_available() {
     string result;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (read_handle_ == nullptr) {
+    if (impl_->read_handle_ == nullptr) {
         return result;
     }
 
     char buffer[4096];
     while (true) {
         ::DWORD available = 0;
-        if (::PeekNamedPipe(read_handle_, nullptr, 0, nullptr, &available, nullptr) == FALSE || available == 0) {
+        if (::PeekNamedPipe(impl_->read_handle_, nullptr, 0, nullptr, &available, nullptr) == FALSE || available == 0) {
             break;
         }
         ::DWORD read = 0;
-        if (::ReadFile(read_handle_, buffer, sizeof(buffer), &read, nullptr) == FALSE || read == 0) {
+        if (::ReadFile(impl_->read_handle_, buffer, sizeof(buffer), &read, nullptr) == FALSE || read == 0) {
             break;
         }
         result.append(buffer, static_cast<size_t>(read));
     }
 
 #else
-    if (handle_ < 0) {
+    if (impl_->handle_ < 0) {
         return result;
     }
 
     char buffer[4096];
     while (true) {
-        const auto n = ::read(handle_, buffer, sizeof(buffer));
+        const auto n = ::read(impl_->handle_, buffer, sizeof(buffer));
         if (n > 0) {
             result.append(buffer, static_cast<size_t>(n));
             continue;
@@ -601,63 +576,63 @@ string pty::read_available() {
 
 int pty::read(void* buffer, const size_t size) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (read_handle_ == nullptr || buffer == nullptr || size == 0) {
+    if (impl_->read_handle_ == nullptr || buffer == nullptr || size == 0) {
         return -1;
     }
 
     // A raw ReadFile on a pipe blocks, while the POSIX master is non-blocking. Peek first so
     // both platforms report "nothing available" the same way.
     ::DWORD available = 0;
-    if (::PeekNamedPipe(read_handle_, nullptr, 0, nullptr, &available, nullptr) == FALSE || available == 0) {
+    if (::PeekNamedPipe(impl_->read_handle_, nullptr, 0, nullptr, &available, nullptr) == FALSE || available == 0) {
         return -1;
     }
 
     ::DWORD read = 0;
     const auto wanted = static_cast<::DWORD>(min(static_cast<size_t>(available), size));
-    if (::ReadFile(read_handle_, buffer, wanted, &read, nullptr) == FALSE) {
+    if (::ReadFile(impl_->read_handle_, buffer, wanted, &read, nullptr) == FALSE) {
         return -1;
     }
     return static_cast<int>(read);
 #else
-    if (handle_ < 0) {
+    if (impl_->handle_ < 0) {
         return -1;
     }
-    return static_cast<int>(::read(handle_, buffer, size));
+    return static_cast<int>(::read(impl_->handle_, buffer, size));
 #endif
 }
 
 int pty::write(const string_view data) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (write_handle_ == nullptr || data.empty()) {
+    if (impl_->write_handle_ == nullptr || data.empty()) {
         return 0;
     }
     ::DWORD written = 0;
-    if (::WriteFile(write_handle_, data.data(), static_cast<::DWORD>(data.size()), &written, nullptr) == FALSE) {
+    if (::WriteFile(impl_->write_handle_, data.data(), static_cast<::DWORD>(data.size()), &written, nullptr) == FALSE) {
         return -1;
     }
     return static_cast<int>(written);
 #else
-    if (handle_ < 0 || data.empty()) {
+    if (impl_->handle_ < 0 || data.empty()) {
         return 0;
     }
-    return static_cast<int>(::write(handle_, data.data(), data.size()));
+    return static_cast<int>(::write(impl_->handle_, data.data(), data.size()));
 #endif
 }
 
 void pty::resize(const int columns, const int rows) {
-    columns_ = max(1, columns);
-    rows_ = max(1, rows);
+    impl_->columns_ = max(1, columns);
+    impl_->rows_ = max(1, rows);
 
-    if (handle_ == invalid_handle) {
+    if (impl_->handle_ == invalid_handle) {
         return;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    (void) conpty().resize(handle_, console_coord(columns_, rows_));
+    (void) conpty().resize(impl_->handle_, console_coord(impl_->columns_, impl_->rows_));
 #else
-    apply_window_size(handle_, columns_, rows_);
-    if (child_id_ > 0 && !finished_) {
-        (void) ::kill(-child_id_, SIGWINCH);
+    apply_window_size(impl_->handle_, impl_->columns_, impl_->rows_);
+    if (impl_->child_id_ > 0 && !impl_->finished_) {
+        (void) ::kill(-impl_->child_id_, SIGWINCH);
     }
 #endif
 }
@@ -669,57 +644,57 @@ void pty::terminate(const system_signal::event signal) {
     ignore = signal;
     // A Windows console application has no signal of its own: terminating the process is the
     // only way to interrupt it, and the pseudo console takes the whole process tree with it.
-    if (process_handle_ != nullptr && !finished_) {
-        (void) ::TerminateProcess(process_handle_, 1);
+    if (impl_->process_handle_ != nullptr && !impl_->finished_) {
+        (void) ::TerminateProcess(impl_->process_handle_, 1);
     }
 #else
-    if (child_id_ > 0 && !finished_) {
-        (void) ::kill(-child_id_, static_cast<int>(signal));
-        (void) ::kill(child_id_, static_cast<int>(signal));
+    if (impl_->child_id_ > 0 && !impl_->finished_) {
+        (void) ::kill(-impl_->child_id_, static_cast<int>(signal));
+        (void) ::kill(impl_->child_id_, static_cast<int>(signal));
     }
 #endif
 }
 
-void pty::kill() { terminate(system_signal::event::TERMINATE); }
+void pty::kill() { terminate(system_signal::event::terminate); }
 
 void pty::reap(const bool blocking, const int timeout_ms) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (process_handle_ == nullptr || finished_) {
+    if (impl_->process_handle_ == nullptr || impl_->finished_) {
         return;
     }
 
     const ::DWORD wait_ms = blocking ? (timeout_ms < 0 ? INFINITE : static_cast<::DWORD>(timeout_ms)) : 0;
-    if (::WaitForSingleObject(process_handle_, wait_ms) != WAIT_OBJECT_0) {
+    if (::WaitForSingleObject(impl_->process_handle_, wait_ms) != WAIT_OBJECT_0) {
         return;
     }
 
     ::DWORD code = 0;
-    if (::GetExitCodeProcess(process_handle_, &code) == FALSE) {
+    if (::GetExitCodeProcess(impl_->process_handle_, &code) == FALSE) {
         return;
     }
-    exit_code_ = static_cast<int>(code);
-    finished_ = true;
+    impl_->exit_code_ = static_cast<int>(code);
+    impl_->finished_ = true;
 
 #else
-    if (child_id_ <= 0) {
+    if (impl_->child_id_ <= 0) {
         return;
     }
 
     if (!blocking) {
         int status = 0;
-        const ::pid_t pid = ::waitpid(child_id_, &status, WNOHANG);
-        if (pid == child_id_) {
-            exit_code_ = decode_status(status);
-            finished_ = true;
+        const ::pid_t pid = ::waitpid(impl_->child_id_, &status, WNOHANG);
+        if (pid == impl_->child_id_) {
+            impl_->exit_code_ = decode_status(status);
+            impl_->finished_ = true;
         }
         return;
     }
 
     if (timeout_ms < 0) {
         int status = 0;
-        if (::waitpid(child_id_, &status, 0) == child_id_) {
-            exit_code_ = decode_status(status);
-            finished_ = true;
+        if (::waitpid(impl_->child_id_, &status, 0) == impl_->child_id_) {
+            impl_->exit_code_ = decode_status(status);
+            impl_->finished_ = true;
         }
         return;
     }
@@ -728,10 +703,10 @@ void pty::reap(const bool blocking, const int timeout_ms) {
     int waited = 0;
     while (waited <= timeout_ms) {
         int status = 0;
-        const ::pid_t pid = ::waitpid(child_id_, &status, WNOHANG);
-        if (pid == child_id_) {
-            exit_code_ = decode_status(status);
-            finished_ = true;
+        const ::pid_t pid = ::waitpid(impl_->child_id_, &status, WNOHANG);
+        if (pid == impl_->child_id_) {
+            impl_->exit_code_ = decode_status(status);
+            impl_->finished_ = true;
             return;
         }
         waited += step_ms;
@@ -742,84 +717,87 @@ void pty::reap(const bool blocking, const int timeout_ms) {
 
 int pty::wait(const int timeout_ms) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (process_handle_ == nullptr) {
-        return exit_code_;
+    if (impl_->process_handle_ == nullptr) {
+        return impl_->exit_code_;
     }
 #else
-    if (child_id_ <= 0) {
-        return exit_code_;
+    if (impl_->child_id_ <= 0) {
+        return impl_->exit_code_;
     }
 #endif
-    if (!finished_) {
+    if (!impl_->finished_) {
         reap(true, timeout_ms);
     }
-    return finished_ ? exit_code_ : -1;
+    return impl_->finished_ ? impl_->exit_code_ : -1;
 }
 
-int pty::exit_code() const noexcept { return exit_code_; }
+int pty::exit_code() const noexcept { return impl_->exit_code_; }
 
 bool pty::poll_exit() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (process_handle_ == nullptr) {
+    if (impl_->process_handle_ == nullptr) {
         return true;
     }
 #else
-    if (child_id_ <= 0 || finished_) {
+    if (impl_->child_id_ <= 0 || impl_->finished_) {
         return true;
     }
 #endif
-    if (!finished_) {
+    if (!impl_->finished_) {
         reap(false, 0);
     }
-    return finished_;
+    return impl_->finished_;
 }
 
 void pty::close() noexcept {
-    if (handle_ != invalid_handle) {
+    if (!impl_) {
+        return;
+    }
+    if (impl_->handle_ != invalid_handle) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        conpty().close(handle_);
+        conpty().close(impl_->handle_);
 #else
-        ::close(handle_);
+        ::close(impl_->handle_);
 #endif
-        handle_ = invalid_handle;
+        impl_->handle_ = invalid_handle;
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (process_handle_ != invalid_handle) {
-        if (!finished_) {
+    if (impl_->process_handle_ != invalid_handle) {
+        if (!impl_->finished_) {
             reap(true, 200);
-            if (!finished_) {
-                (void) ::TerminateProcess(process_handle_, 1);
+            if (!impl_->finished_) {
+                (void) ::TerminateProcess(impl_->process_handle_, 1);
                 reap(true, 200);
             }
         }
-        ::CloseHandle(process_handle_);
-        process_handle_ = invalid_handle;
+        ::CloseHandle(impl_->process_handle_);
+        impl_->process_handle_ = invalid_handle;
     }
 
-    if (read_handle_ != invalid_handle) {
-        ::CloseHandle(read_handle_);
-        read_handle_ = invalid_handle;
+    if (impl_->read_handle_ != invalid_handle) {
+        ::CloseHandle(impl_->read_handle_);
+        impl_->read_handle_ = invalid_handle;
     }
-    if (write_handle_ != invalid_handle) {
-        ::CloseHandle(write_handle_);
-        write_handle_ = invalid_handle;
+    if (impl_->write_handle_ != invalid_handle) {
+        ::CloseHandle(impl_->write_handle_);
+        impl_->write_handle_ = invalid_handle;
     }
 
 #else
-    if (child_id_ > 0 && !finished_) {
-        (void) ::kill(-child_id_, SIGTERM);
-        (void) ::kill(child_id_, SIGTERM);
+    if (impl_->child_id_ > 0 && !impl_->finished_) {
+        (void) ::kill(-impl_->child_id_, SIGTERM);
+        (void) ::kill(impl_->child_id_, SIGTERM);
         reap(true, 200);
-        if (!finished_) {
-            (void) ::kill(-child_id_, SIGKILL);
-            (void) ::kill(child_id_, SIGKILL);
+        if (!impl_->finished_) {
+            (void) ::kill(-impl_->child_id_, SIGKILL);
+            (void) ::kill(impl_->child_id_, SIGKILL);
             reap(true, 200);
         }
     }
 #endif
 
-    child_id_ = 0;
+    impl_->child_id_ = 0;
 }
 
 NEFORCE_END_NAMESPACE__

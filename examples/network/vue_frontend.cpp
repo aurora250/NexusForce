@@ -200,7 +200,7 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
     // ===== 登录 =====
     router.post("/api/login", [](http_request& req, http_response& res) {
         if (!req.has_session()) {
-            res.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            res.status = http_status::internal_server_error;
             res.body = R"({"error":"Session support required"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -303,7 +303,7 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
         const auto* user = db.get_user(id);
 
         if (user == nullptr) {
-            res.status = http_status::S4_NOT_FOUND;
+            res.status = http_status::not_found;
             res.body = R"({"error":"User not found"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -324,14 +324,14 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
         const string role = (role_it != req.form_data.end()) ? role_it->second : "viewer";
 
         if (name.empty() || email.empty()) {
-            res.status = http_status::S4_BAD_REQUEST;
+            res.status = http_status::bad_request;
             res.body = R"({"error":"Name and email are required"})";
             res.set_content_type(http_content::JSON_APP());
             return;
         }
 
         const auto user = db.create_user(name, email, role);
-        res.status = http_status::S2_CREATED;
+        res.status = http_status::created;
         res.status_message = "Created";
         res.body = user_to_json(user);
         res.set_content_type(http_content::JSON_APP());
@@ -350,7 +350,7 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
         const string role = (role_it != req.form_data.end()) ? role_it->second : "";
 
         if (!db.update_user(id, name, email, role)) {
-            res.status = http_status::S4_NOT_FOUND;
+            res.status = http_status::not_found;
             res.body = R"({"error":"User not found"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -366,7 +366,7 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
         const int id = to_int32(req.parameter("id"));
 
         if (!db.delete_user(id)) {
-            res.status = http_status::S4_NOT_FOUND;
+            res.status = http_status::not_found;
             res.body = R"({"error":"User not found"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -520,7 +520,7 @@ int main(int argc, char* argv[]) {
     // =========================================================================
 
     router.set_not_found_handler([](http_request& req, http_response& res) {
-        res.status = http_status::S4_NOT_FOUND;
+        res.status = http_status::not_found;
         json_builder jb;
         jb.begin_object();
         jb.key("error").value("Not Found");
@@ -532,7 +532,7 @@ int main(int argc, char* argv[]) {
     });
 
     router.set_method_not_allowed_handler([](http_request& req, http_response& res) {
-        res.status = http_status::S4_METHOD_NOT_ALLOWED;
+        res.status = http_status::method_not_allowed;
         json_builder jb;
         jb.begin_object();
         jb.key("error").value("Method Not Allowed");

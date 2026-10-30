@@ -53,7 +53,7 @@ public:
      * @param f 地址族
      * @throws socket_exception 创建失败时抛出
      */
-    void open(ip_family f = ip_family::INET4);
+    void open(ip_family f = ip_family::inet4);
 
     /**
      * @brief 向指定端点发送数据报

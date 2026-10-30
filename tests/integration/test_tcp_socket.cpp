@@ -156,7 +156,7 @@ TEST_F(TcpAcceptorIntegration, OpenAndBind) {
     auto local = acceptor.local_endpoint();
     ASSERT_TRUE(local.has_value());
     EXPECT_TRUE(local->is_ipv4());
-    EXPECT_NE(local->port(), ports::UNDEF);
+    EXPECT_NE(local->port(), ports::undef);
 
     acceptor.close();
 }

@@ -277,12 +277,12 @@ namespace {
 
     bool is_retryable_status(const http_status status) noexcept {
         switch (status) {
-            case http_status::S4_REQUEST_TIMEOUT:
-            case http_status::S4_TOO_MANY_REQUESTS:
-            case http_status::S5_INTERNAL_SERVER_ERROR:
-            case http_status::S5_BAD_GATEWAY:
-            case http_status::S5_SERVICE_UNAVAILABLE:
-            case http_status::S5_GATEWAY_TIMEOUT:
+            case http_status::request_timeout:
+            case http_status::too_many_requests:
+            case http_status::internal_server_error:
+            case http_status::bad_gateway:
+            case http_status::service_unavailable:
+            case http_status::gateway_timeout:
                 return true;
             default:
                 return false;
@@ -738,7 +738,7 @@ http_client_response http_client::do_request_once(http_client_request request, c
 
     const auto connect_start = steady_clock::now();
     if (!prepare_connection(request)) {
-        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+        response.status = http_status::internal_server_error;
         response.status_message = "Connection failed";
         response.effective_url = req_url.to_string();
         transport_failed = true;
@@ -749,7 +749,7 @@ http_client_response http_client::do_request_once(http_client_request request, c
     const string request_str = build_request_str(request, req_url);
     steady_clock::time_point send_start;
     if (!send_request(request_str.view(), send_start)) {
-        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+        response.status = http_status::internal_server_error;
         response.status_message = "Send failed";
         response.effective_url = req_url.to_string();
         transport_failed = true;
@@ -761,7 +761,7 @@ http_client_response http_client::do_request_once(http_client_request request, c
     auto resp_opt = read_response(receive_start, request.host, request.path, !request.method.is_head());
     if (!resp_opt) {
         client_.disconnect();
-        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+        response.status = http_status::internal_server_error;
         response.status_message = "Receive/Parse failed";
         response.effective_url = req_url.to_string();
         transport_failed = true;
@@ -811,7 +811,7 @@ http_client_response http_client::stream_once(const http_client_request& request
 
     const auto connect_start = steady_clock::now();
     if (!prepare_connection(request)) {
-        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+        response.status = http_status::internal_server_error;
         response.status_message = "Connection failed";
         response.effective_url = req_url.to_string();
         transport_failed = true;
@@ -822,7 +822,7 @@ http_client_response http_client::stream_once(const http_client_request& request
     const string request_str = build_request_str(request, req_url);
     steady_clock::time_point send_start;
     if (!send_request(request_str.view(), send_start)) {
-        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+        response.status = http_status::internal_server_error;
         response.status_message = "Send failed";
         response.effective_url = req_url.to_string();
         transport_failed = true;
@@ -918,7 +918,7 @@ http_client_response http_client::stream_once(const http_client_request& request
     uint64_t raw_read = 0;
     while (header_end == string::npos) {
         if (aborted_by_caller()) {
-            response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            response.status = http_status::internal_server_error;
             response.status_message = "Aborted";
             response.effective_url = req_url.to_string();
             client_.disconnect();
@@ -927,7 +927,7 @@ http_client_response http_client::stream_once(const http_client_request& request
 
         const ssize_t n = receive_chunk(buffer.data(), buffer.size());
         if (n < 0) {
-            response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            response.status = http_status::internal_server_error;
             response.status_message = n == -1 ? "Aborted" : "Receive/Parse failed";
             response.effective_url = req_url.to_string();
             transport_failed = n != -1;
@@ -935,7 +935,7 @@ http_client_response http_client::stream_once(const http_client_request& request
             return response;
         }
         if (n == 0) {
-            response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            response.status = http_status::internal_server_error;
             response.status_message = "Receive/Parse failed";
             response.effective_url = req_url.to_string();
             transport_failed = true;
@@ -949,7 +949,7 @@ http_client_response http_client::stream_once(const http_client_request& request
         header_end = head.find("\r\n\r\n");
 
         if (header_end == string::npos && raw_read > max_size) {
-            response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            response.status = http_status::internal_server_error;
             response.status_message = "Response header too large";
             response.effective_url = req_url.to_string();
             transport_failed = true;
@@ -961,7 +961,7 @@ http_client_response http_client::stream_once(const http_client_request& request
     http_client_response meta;
     size_t body_offset = 0;
     if (!parse_response_head(head.view(), meta, request.host, request.path, body_offset)) {
-        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+        response.status = http_status::internal_server_error;
         response.status_message = "Receive/Parse failed";
         response.effective_url = req_url.to_string();
         transport_failed = true;

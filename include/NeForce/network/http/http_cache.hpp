@@ -21,7 +21,7 @@ NEFORCE_BEGIN_HTTP__
  * @brief 缓存的HTTP响应
  */
 struct cached_response {
-    http_status status{http_status::S2_OK};
+    http_status status{http_status::ok};
     string status_message;
     flat_unordered_map<string, string> headers;
     string body;

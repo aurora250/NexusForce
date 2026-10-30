@@ -122,15 +122,17 @@ public:
      * @brief socket 类型枚举
      */
     enum class type : int32_t {
-        STREAM = SOCK_STREAM,       ///< 流式套接字（TCP）
-        DGRAM = SOCK_DGRAM,         ///< 数据报套接字（UDP）
-        RAW = SOCK_RAW,             ///< 原始套接字
-        RDM = SOCK_RDM,             ///< 可靠数据报套接字
-        SEQPACKET = SOCK_SEQPACKET, ///< 有序分组套接字（SCTP）
+        stream = SOCK_STREAM,       ///< 流式套接字（TCP）
+        dgram = SOCK_DGRAM,         ///< 数据报套接字（UDP）
+        raw = SOCK_RAW,             ///< 原始套接字
+        rdm = SOCK_RDM,             ///< 可靠数据报套接字
+        seqpacket = SOCK_SEQPACKET, ///< 有序分组套接字（SCTP）
+#ifdef NEFORCE_PLATFORM_POSIX
+        cloexec = SOCK_CLOEXEC,   ///< 执行时关闭标志
+        nonblock = SOCK_NONBLOCK, ///< 非阻塞标志
+#endif
 #ifdef NEFORCE_PLATFORM_LINUX
-        CLOEXEC = SOCK_CLOEXEC,   ///< 执行时关闭标志
-        NONBLOCK = SOCK_NONBLOCK, ///< 非阻塞标志
-        DCCP = SOCK_DCCP,         ///< 数据报拥塞控制协议（DCCP）
+        dccp = SOCK_DCCP, ///< 数据报拥塞控制协议（DCCP）
 #endif
     };
 
@@ -140,24 +142,25 @@ public:
      * 封装了底层协议标识常量，用于指定套接字使用的网络协议类型。
      */
     enum class protocol : int32_t {
-        AUTO = 0,            ///< 自动选择协议
-        ICMP = IPPROTO_ICMP, ///< Internet 控制报文协议
-        TCP = IPPROTO_TCP,   ///< 传输控制协议
-        UDP = IPPROTO_UDP,   ///< 用户数据报协议
-        SCTP = IPPROTO_SCTP, ///< 流控制传输协议
-        RAW = IPPROTO_RAW,   ///< 原始 IP 数据包
-        ESP = IPPROTO_ESP,   ///< IPsec 封装安全载荷
-        AH = IPPROTO_AH,     ///< IPsec 认证头
+        auto_ = 0,           ///< 自动选择协议
+        icmp = IPPROTO_ICMP, ///< Internet 控制报文协议
+        tcp = IPPROTO_TCP,   ///< 传输控制协议
+        udp = IPPROTO_UDP,   ///< 用户数据报协议
+        sctp = IPPROTO_SCTP, ///< 流控制传输协议
+        raw = IPPROTO_RAW,   ///< 原始 IP 数据包
+        esp = IPPROTO_ESP,   ///< IPsec 封装安全载荷
+        ah = IPPROTO_AH,     ///< IPsec 认证头
+#ifdef NEFORCE_PLATFORM_POSIX
+        dccp = IPPROTO_DCCP, ///< 数据报拥塞控制协议
+#endif
 #ifdef NEFORCE_PLATFORM_LINUX
-        DCCP = IPPROTO_DCCP, ///< 数据报拥塞控制协议
-
-        IP = ETH_P_IP,       ///< IPv4 以太网帧类型
-        ARP = ETH_P_ARP,     ///< 地址解析协议帧类型
-        IPV6 = ETH_P_IPV6,   ///< IPv6 以太网帧类型
-        LAT = ETH_P_LAT,     ///< 局域传输协议
-        VLAN = ETH_P_8021Q,  ///< IEEE 802.1Q VLAN 标签帧
-        LLDP = ETH_P_LLDP,   ///< 链路层发现协议
-        MPLS = ETH_P_MPLS_UC ///< 多协议标签交换单播
+        ip = ETH_P_IP,       ///< IPv4 以太网帧类型
+        arp = ETH_P_ARP,     ///< 地址解析协议帧类型
+        ipv6 = ETH_P_IPV6,   ///< IPv6 以太网帧类型
+        lat = ETH_P_LAT,     ///< 局域传输协议
+        vlan = ETH_P_8021Q,  ///< IEEE 802.1Q VLAN 标签帧
+        lldp = ETH_P_LLDP,   ///< 链路层发现协议
+        mpls = ETH_P_MPLS_UC ///< 多协议标签交换单播
 #endif
     };
 
@@ -165,8 +168,8 @@ public:
      * @brief 跨平台套接字条目
      */
     struct diag_entry {
-        ip_family family{ip_family::INET4}; ///< IP 族
-        protocol proto{protocol::AUTO};     ///< 协议类型
+        ip_family family{ip_family::inet4}; ///< IP 族
+        protocol proto{protocol::auto_};    ///< 协议类型
         state status{state::unknown};       ///< 连接状态
         string local;                       ///< 本地 endpoint
         string remote;                      ///< 对端 endpoint，格式同上
@@ -244,7 +247,7 @@ public:
      * @throws socket_exception 创建失败时抛出
      * @throws value_exception 地址族无效时抛出
      */
-    void open(ip_family f, type t = type::STREAM, protocol p = protocol::AUTO);
+    void open(ip_family f, type t = type::stream, protocol p = protocol::auto_);
 
     /**
      * @brief 关闭socket
@@ -259,7 +262,7 @@ public:
      * @param p 协议
      * @return 打开成功返回true
      */
-    bool try_open(ip_family f, type t = type::STREAM, protocol p = protocol::AUTO) noexcept;
+    bool try_open(ip_family f, type t = type::stream, protocol p = protocol::auto_) noexcept;
 
     /**
      * @brief 查询是否为非阻塞模式

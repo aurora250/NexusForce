@@ -28,7 +28,7 @@ bool health_check_filter::pre_filter(http_request& request, http_response& respo
     }
 
     response.set_content_type(http_content::JSON_APP());
-    response.status = all_healthy ? http_status::S2_OK : http_status::S5_SERVICE_UNAVAILABLE;
+    response.status = all_healthy ? http_status::ok : http_status::service_unavailable;
     response.status_message = all_healthy ? "OK" : "Service Unavailable";
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
     return false;

@@ -82,7 +82,7 @@ socket_base& socket_base::operator=(socket_base&& other) noexcept {
 }
 
 void socket_base::open(const ip_family f, const type t, const protocol p) {
-    if (f != ip_family::INET4 && f != ip_family::INET6) {
+    if (f != ip_family::inet4 && f != ip_family::inet6) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid address family for socket"));
     }
 
@@ -112,7 +112,7 @@ bool socket_base::close() noexcept {
 }
 
 bool socket_base::try_open(const ip_family f, const type t, const protocol p) noexcept {
-    if (f != ip_family::INET4 && f != ip_family::INET6) {
+    if (f != ip_family::inet4 && f != ip_family::inet6) {
         return false;
     }
 
@@ -576,15 +576,15 @@ string_view socket_base::state_name(const uint8_t raw, const bool udp) noexcept 
 }
 
 optional<vector<socket_base::diag_entry>> socket_base::enumerate_sockets(const ip_family family, const protocol proto) {
-    if (family != ip_family::INET4 && family != ip_family::INET6) {
+    if (family != ip_family::inet4 && family != ip_family::inet6) {
         return none;
     }
-    if (proto != protocol::TCP && proto != protocol::UDP) {
+    if (proto != protocol::tcp && proto != protocol::udp) {
         return none;
     }
 
 #ifdef NEFORCE_PLATFORM_LINUX
-    const bool udp = proto == protocol::UDP;
+    const bool udp = proto == protocol::udp;
     struct request_message {
         ::nlmsghdr header;
         ::inet_diag_req_v2 request;
@@ -593,7 +593,7 @@ optional<vector<socket_base::diag_entry>> socket_base::enumerate_sockets(const i
     message.header.nlmsg_type = SOCK_DIAG_BY_FAMILY;
     message.header.nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
     message.header.nlmsg_seq = 1;
-    message.request.sdiag_family = static_cast<uint8_t>(family == ip_family::INET4 ? AF_INET : AF_INET6);
+    message.request.sdiag_family = static_cast<uint8_t>(family == ip_family::inet4 ? AF_INET : AF_INET6);
     message.request.sdiag_protocol = static_cast<uint8_t>(udp ? IPPROTO_UDP : IPPROTO_TCP);
     message.request.idiag_states = 0xFFFFFFFFU;
 
@@ -654,7 +654,7 @@ optional<vector<socket_base::diag_entry>> socket_base::enumerate_sockets(const i
             char text[INET6_ADDRSTRLEN] = {};
             const uint16_t local_port = endian::network_to_host(socket_info->id.idiag_sport);
             const uint16_t remote_port = endian::network_to_host(socket_info->id.idiag_dport);
-            if (family == ip_family::INET4) {
+            if (family == ip_family::inet4) {
                 ::inet_ntop(AF_INET, socket_info->id.idiag_src, text, sizeof(text));
                 entry.local = format("{}:{}", text, local_port);
                 ::inet_ntop(AF_INET, socket_info->id.idiag_dst, text, sizeof(text));
@@ -669,10 +669,10 @@ optional<vector<socket_base::diag_entry>> socket_base::enumerate_sockets(const i
         }
     }
 #elif defined(NEFORCE_PLATFORM_WINDOWS)
-    const ::ULONG address_family = family == ip_family::INET4 ? AF_INET : AF_INET6;
+    const ::ULONG address_family = family == ip_family::inet4 ? AF_INET : AF_INET6;
     vector<diag_entry> entries;
 
-    if (proto == protocol::TCP) {
+    if (proto == protocol::tcp) {
         ::ULONG size = 0;
         const ::TCP_TABLE_CLASS table_class = TCP_TABLE_OWNER_PID_ALL;
         if (::GetExtendedTcpTable(nullptr, &size, FALSE, address_family, table_class, 0) != ERROR_INSUFFICIENT_BUFFER ||

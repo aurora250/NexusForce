@@ -21,6 +21,7 @@
 
 #include "NeForce/core/async/condition_variable.hpp"
 #include "NeForce/core/async/io_context.hpp"
+#include "NeForce/network/http/http_constants.hpp"
 #include "NeForce/network/http/http_router.hpp"
 #include "NeForce/network/http/session_store.hpp"
 #include "NeForce/network/http/websocket.hpp"
@@ -48,11 +49,13 @@ NEFORCE_BEGIN_HTTP__
  *
  * // 设置路由
  * server.router().get("/", [](http_request& req, http_response& res) {
+ *     res.status = http_status::ok;
  *     res.body = "<h1>Hello World</h1>";
  *     res.set_content_type(http_content::HTML_TEXT());
  * });
  *
  * server.router().get("/api/users", [](http_request& req, http_response& res) {
+ *     res.status = http_status::ok;
  *     res.body = R"({"users": [{"id": 1, "name": "John"}]})";
  *     res.set_content_type(http_content::JSON_APP());
  * });

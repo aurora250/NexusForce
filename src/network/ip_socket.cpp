@@ -2,7 +2,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 void ip_socket::open_ip(const ip_family f, const type t, const protocol p) {
-    if (f != ip_family::INET4 && f != ip_family::INET6) {
+    if (f != ip_family::inet4 && f != ip_family::inet6) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid address family: only INET4 / INET6 are supported"));
     }
 

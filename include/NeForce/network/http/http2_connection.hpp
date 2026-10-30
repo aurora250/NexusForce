@@ -111,7 +111,7 @@ private:
 
     void write_frame(const byte_vector& frame);
     void flush_writes();
-    void close_connection(http2_error error = http2_error::NO_ERROR);
+    void close_connection(http2_error error = http2_error::no_error);
 
 public:
     http2_connection(unique_ptr<tcp_socket> socket, io_context& ctx);
@@ -157,7 +157,7 @@ public:
     /**
      * @brief 发送 GOAWAY 并关闭连接
      */
-    void send_goaway(http2_error error = http2_error::NO_ERROR);
+    void send_goaway(http2_error error = http2_error::no_error);
 
     /**
      * @brief h2c 升级请求注入（RFC 7540 §3.2）

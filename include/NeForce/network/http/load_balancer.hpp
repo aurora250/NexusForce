@@ -26,10 +26,10 @@ NEFORCE_BEGIN_HTTP__
  * @brief 负载均衡策略
  */
 enum class lb_strategy : uint8_t {
-    ROUND_ROBIN,       ///< 轮询
-    LEAST_CONNECTIONS, ///< 最少连接
-    WEIGHTED,          ///< 加权轮询
-    RANDOM             ///< 随机
+    round_robin,       ///< 轮询
+    least_connections, ///< 最少连接
+    weighted,          ///< 加权轮询
+    random             ///< 随机
 };
 
 /**
@@ -81,7 +81,7 @@ public:
 
 private:
     vector<lb_backend> backends_;
-    lb_strategy strategy_{lb_strategy::ROUND_ROBIN};
+    lb_strategy strategy_{lb_strategy::round_robin};
     mutable mutex mutex_;
     atomic<size_t> rr_counter_{0};
 

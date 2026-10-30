@@ -421,8 +421,8 @@ TEST(DnsClientIntegration, QuerySRVRecord) {
         dns_client client(cfg, ioc);
 
         auto result = client.query("_xmpp-server._tcp.gmail.com", dns_record::SRV);
-        EXPECT_TRUE(result.is_success() || result.response_code == dns_response::SERVER_FAILURE ||
-                    result.response_code == dns_response::NAME_ERROR);
+        EXPECT_TRUE(result.is_success() || result.response_code == dns_response::server_failure ||
+                    result.response_code == dns_response::name_error);
     } catch (const exception& e) {
         GTEST_SKIP() << "DNS may failed because timeout: " << e.what();
     }
@@ -813,7 +813,7 @@ TEST(DnsClientIntegration, QueryAsync) {
 
         client.set_max_udp_retries(0);
 
-        auto future = client.async_query("example.com", dns_record::A, dns_class::INTERNET, use_future);
+        auto future = client.async_query("example.com", dns_record::A, dns_class::internet, use_future);
         const auto deadline = steady_clock::now() + milliseconds(5000);
         while (future.wait_for(milliseconds(0)) != future_status::ready) {
             if (steady_clock::now() >= deadline) {
@@ -848,7 +848,7 @@ TEST(DnsClientIntegration, QueryNXDOMAIN) {
         dns_client client(cfg, ioc);
 
         auto result = client.query("this-domain-definitely-does-not-exist-12345.com", dns_record::A);
-        EXPECT_EQ(result.response_code, dns_response::NAME_ERROR);
+        EXPECT_EQ(result.response_code, dns_response::name_error);
         EXPECT_FALSE(result.is_success());
         EXPECT_TRUE(result.answers.empty());
     } catch (const exception& e) {
@@ -946,7 +946,7 @@ TEST(DnsClientIntegration, QueryCHClass) {
         cfg.timeout = milliseconds(5000);
         io_context ioc;
         dns_client client(cfg, ioc);
-        client.query("version.bind", dns_record::TXT, dns_class::CHAOS);
+        client.query("version.bind", dns_record::TXT, dns_class::chaos);
     } catch (const exception& e) {
         GTEST_SKIP() << "DNS may failed because timeout: " << e.what();
     }
@@ -1111,7 +1111,7 @@ TEST(DnsClientIntegration, AsyncQueryCallbackSucceeds) {
         bool called = false;
         error_code ec_result;
         dns_query_result result;
-        client.async_query("cb.example", dns_record::A, dns_class::INTERNET, [&](error_code ec, dns_query_result r) {
+        client.async_query("cb.example", dns_record::A, dns_class::internet, [&](error_code ec, dns_query_result r) {
             called = true;
             ec_result = ec;
             result = move(r);
@@ -1154,7 +1154,7 @@ TEST(DnsClientIntegration, AsyncQueryCancellationAborts) {
         cancellation_slot slot(source.get_token());
         int calls = 0;
         error_code ec_result;
-        client.async_query("cancel.example", dns_record::A, dns_class::INTERNET, slot,
+        client.async_query("cancel.example", dns_record::A, dns_class::internet, slot,
                            [&](error_code ec, dns_query_result) {
                                ++calls;
                                ec_result = ec;
@@ -1188,7 +1188,7 @@ TEST(DnsClientIntegration, AsyncQueryPreCancelledSlot) {
     cancellation_slot slot(source.get_token());
     bool called = false;
     error_code ec_result;
-    client.async_query("precancel.example", dns_record::A, dns_class::INTERNET, slot,
+    client.async_query("precancel.example", dns_record::A, dns_class::internet, slot,
                        [&](error_code ec, dns_query_result) {
                            called = true;
                            ec_result = ec;
@@ -1210,7 +1210,7 @@ TEST(DnsClientIntegration, AsyncQueryDetachedCompletes) {
     io_context ioc;
     dns_client client(cfg, ioc);
 
-    client.async_query("detached.example", dns_record::A, dns_class::INTERNET, detached);
+    client.async_query("detached.example", dns_record::A, dns_class::internet, detached);
 
     const auto wait_until = steady_clock::now() + milliseconds(500);
     while (steady_clock::now() < wait_until) {
@@ -1240,7 +1240,7 @@ TEST(DnsClientIntegration, CacheHitDefersCallback) {
         }
 
         bool called = false;
-        client.async_query("defer.example", dns_record::A, dns_class::INTERNET,
+        client.async_query("defer.example", dns_record::A, dns_class::internet,
                            [&](error_code, dns_query_result) { called = true; });
 
         EXPECT_FALSE(called);
@@ -1350,7 +1350,7 @@ TEST(DnsClientIntegration, AsyncQueryUseAwaitable) {
         error_code ec_result;
         dns_query_result got;
         co_spawn(ioc.get_executor(), [&]() -> awaitable<void> {
-            auto [ec, r] = co_await client.async_query("co.example", dns_record::A, dns_class::INTERNET, use_awaitable);
+            auto [ec, r] = co_await client.async_query("co.example", dns_record::A, dns_class::internet, use_awaitable);
             ec_result = ec;
             got = move(r);
             done = true;

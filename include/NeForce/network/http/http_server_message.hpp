@@ -259,12 +259,12 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
  * http_server_response response;
  *
  * // 设置状态
- * response.status = http_status::S2_OK;
+ * response.status = http_status::ok;
  * response.status_message = "OK";
  *
  * // 设置内容
  * response.body = "<html><body>Hello World</body></html>";
- * response.set_content_type(http_content::HTML());
+ * response.set_content_type(http_content::HTML_TEXT());
  *
  * // 设置Cookie
  * http_cookie cookie;
@@ -282,16 +282,17 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
  * @endcode
  */
 struct NEFORCE_API http_server_response : istringify<http_server_response> {
-    string version{"HTTP/1.1"};                    ///< HTTP版本
-    http_status status{http_status::S4_NOT_FOUND}; ///< HTTP状态码
-    string status_message;                         ///< 状态消息
-    flat_unordered_map<string, string> headers;    ///< 响应头
-    vector<http_cookie> cookies;                   ///< 设置的Cookie
-    string body;                                   ///< 响应正文
-    string redirect_url;                           ///< 重定向URL
-    string forward_path;                           ///< 转发路径
-    flat_unordered_map<string, string> trailers;   ///< Trailer头部
-    bool chunked_encoding{false};                  ///< 是否使用chunked传输编码
+    string version{"HTTP/1.1"};                  ///< HTTP版本
+    http_status status{http_status::not_found};  ///< HTTP状态码
+    string status_message;                       ///< 状态消息
+    flat_unordered_map<string, string> headers;  ///< 响应头
+    vector<http_cookie> cookies;                 ///< 设置的Cookie
+    string body;                                 ///< 响应正文
+    string redirect_url;                         ///< 重定向URL
+    string forward_path;                         ///< 转发路径
+    flat_unordered_map<string, string> trailers; ///< Trailer头部
+    bool chunked_encoding{false};                ///< 是否使用chunked传输编码
+    bool suppress_content_length{false};         ///< 是否禁止输出Content-Length
 
     /**
      * @brief 默认构造函数
@@ -325,6 +326,17 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
      * @return 存在返回true
      */
     NEFORCE_NODISCARD bool has_header(const string& name) const { return headers.find(name) != headers.end(); }
+
+    /**
+     * @brief 检查当前状态码是否允许携带响应正文
+     * @return 允许携带正文返回true
+     *
+     * 1xx、204、205 与 304 响应不允许携带正文（RFC 9110 §6.4.1、§15.3.6）。
+     */
+    NEFORCE_NODISCARD bool allows_body() const noexcept {
+        const auto code = static_cast<uint16_t>(status);
+        return code >= 200 && code != 204 && code != 205 && code != 304;
+    }
 
     /**
      * @brief 设置Content-Type

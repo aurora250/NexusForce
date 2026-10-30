@@ -11,6 +11,7 @@
 #include "NeForce/core/system/console.hpp"
 #include "NeForce/core/system/signal.hpp"
 #include "NeForce/core/exception/system_exception.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -51,7 +52,7 @@ public:
     /**
      * @brief 创建未初始化的伪终端
      */
-    pty() noexcept;
+    pty();
 
     /**
      * @brief 析构
@@ -159,7 +160,7 @@ public:
      *
      * 信号发送给以子进程为组长的整个进程组，避免后代进程逃逸。
      */
-    void terminate(system_signal::event signal = system_signal::event::TERMINATE);
+    void terminate(system_signal::event signal = system_signal::event::terminate);
 
     /**
      * @brief 强制终止子进程
@@ -193,18 +194,8 @@ public:
     void close() noexcept;
 
 private:
-    native_handle_type handle_; ///< 伪终端句柄
-    int child_id_{0};
-    int exit_code_{-1};
-    bool finished_{false};
-    int columns_{80};
-    int rows_{24};
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type read_handle_{nullptr};    ///< 子进程输出句柄
-    native_handle_type write_handle_{nullptr};   ///< 子进程输入句柄
-    native_handle_type process_handle_{nullptr}; ///< 子进程句柄
-#endif
+    struct impl;
+    unique_ptr<impl> impl_;
 
     void reap(bool blocking, int timeout_ms);
 };

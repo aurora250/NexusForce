@@ -39,7 +39,7 @@ int main() {
     router.post("/helloworld.Greeter/SayHello", [](http_request& req, http_response& res) {
         // 验证 Content-Type
         if (!req.content_type().view(0).starts_with("application/grpc")) {
-            res.status = http_status::S4_UNSUPPORTED_MEDIA_TYPE;
+            res.status = http_status::unsupported_media_type;
             res.body = "Content-Type must be application/grpc";
             return;
         }
@@ -50,11 +50,11 @@ int main() {
         const int decoded = framer.decode(reinterpret_cast<const byte_t*>(req.body.data()), req.body.size(), messages);
 
         if (decoded < 0) {
-            grpc_handler::send_error(res, grpc_status::INVALID_ARGUMENT, "Frame too large");
+            grpc_handler::send_error(res, grpc_status::invalid_argument, "Frame too large");
             return;
         }
         if (messages.empty()) {
-            grpc_handler::send_error(res, grpc_status::INVALID_ARGUMENT, "No message received");
+            grpc_handler::send_error(res, grpc_status::invalid_argument, "No message received");
             return;
         }
 
@@ -86,7 +86,7 @@ int main() {
         const int decoded = framer.decode(reinterpret_cast<const byte_t*>(req.body.data()), req.body.size(), messages);
 
         if (decoded <= 0 || messages.empty()) {
-            grpc_handler::send_error(res, grpc_status::INVALID_ARGUMENT, "Invalid request");
+            grpc_handler::send_error(res, grpc_status::invalid_argument, "Invalid request");
             return;
         }
 
@@ -101,7 +101,7 @@ int main() {
             status_json = R"({"status":"SERVING"})";
         } else {
             // 未找到服务 → NOT_FOUND
-            grpc_handler::send_error(res, grpc_status::NOT_FOUND, "Service not found");
+            grpc_handler::send_error(res, grpc_status::not_found, "Service not found");
             return;
         }
 

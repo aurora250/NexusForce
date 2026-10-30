@@ -34,7 +34,7 @@ TEST_F(HttpClientLocalTest, LocalHttpServerSyncAndAsyncRequests) {
 
     http_server server(test_port, server_ctx_, 1);
     server.router().get("/ping", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.status_message = "OK";
         res.body = "pong";
     });
@@ -86,7 +86,7 @@ TEST_F(HttpClientLocalTest, LocalHttpServerAwaitableRequest) {
 
     http_server server(test_port, server_ctx_, 1);
     server.router().get("/aw", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.status_message = "OK";
         res.body = "aw-body";
     });

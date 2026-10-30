@@ -108,7 +108,7 @@ bool cache_filter::pre_filter(http_request& request, http_response& response) {
     if (cached) {
         const auto if_none_match = request.header("If-None-Match");
         if (!if_none_match.empty() && if_none_match == cached->etag) {
-            response.status = http_status::S3_NOT_MODIFIED;
+            response.status = http_status::not_modified;
             response.status_message = "Not Modified";
             response.set_header("ETag", cached->etag);
             return false;
@@ -134,7 +134,7 @@ void cache_filter::post_filter(http_request& request, http_response& response) {
     if (cache_only_get && !request.method.is_get()) {
         return;
     }
-    if (response.status != http_status::S2_OK) {
+    if (response.status != http_status::ok) {
         return;
     }
 

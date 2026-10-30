@@ -89,7 +89,7 @@ void setup_routes(http_router& router) {
         if (task) {
             res.body = serialize::json_serializer::to_string(reflect::meta_any(*task));
         } else {
-            res.status = http_status::S4_NOT_FOUND;
+            res.status = http_status::not_found;
             res.body = R"({"error":"Task not found"})";
         }
         res.set_content_type(http_content::JSON_APP());
@@ -99,7 +99,7 @@ void setup_routes(http_router& router) {
     router.post("/api/tasks", [](http_request& req, http_response& res) {
         auto conn = g_store.get_connection();
         if (!conn) {
-            res.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            res.status = http_status::internal_server_error;
             res.body = R"({"error":"Database unavailable"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -125,7 +125,7 @@ void setup_routes(http_router& router) {
         }
 
         if (title.empty()) {
-            res.status = http_status::S4_BAD_REQUEST;
+            res.status = http_status::bad_request;
             res.body = R"({"error":"title is required"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -145,7 +145,7 @@ void setup_routes(http_router& router) {
         g_ws.broadcast("task_created", t);
         NEFORCE_LOGGER_LOGF_INFO("app.task", "created: id={}", t.id);
 
-        res.status = http_status::S2_CREATED;
+        res.status = http_status::created;
         res.body = serialize::json_serializer::to_string(reflect::meta_any(t));
         res.set_content_type(http_content::JSON_APP());
     });
@@ -154,7 +154,7 @@ void setup_routes(http_router& router) {
     router.post("/api/tasks/:id", [](http_request& req, http_response& res) {
         auto task = g_store.find_by_id(string(req.parameter("id")));
         if (!task) {
-            res.status = http_status::S4_NOT_FOUND;
+            res.status = http_status::not_found;
             res.body = R"({"error":"Task not found"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -162,7 +162,7 @@ void setup_routes(http_router& router) {
 
         auto conn = g_store.get_connection();
         if (!conn) {
-            res.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            res.status = http_status::internal_server_error;
             res.body = R"({"error":"Database unavailable"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -201,7 +201,7 @@ void setup_routes(http_router& router) {
     router.del("/api/tasks/:id", [](http_request& req, http_response& res) {
         auto task = g_store.find_by_id(string(req.parameter("id")));
         if (!task) {
-            res.status = http_status::S4_NOT_FOUND;
+            res.status = http_status::not_found;
             res.body = R"({"error":"Task not found"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -209,7 +209,7 @@ void setup_routes(http_router& router) {
 
         auto conn = g_store.get_connection();
         if (!conn) {
-            res.status = http_status::S5_INTERNAL_SERVER_ERROR;
+            res.status = http_status::internal_server_error;
             res.body = R"({"error":"Database unavailable"})";
             res.set_content_type(http_content::JSON_APP());
             return;
@@ -293,7 +293,7 @@ void setup_routes(http_router& router) {
 
     // ---- 404 / 405 ----
     router.set_not_found_handler([](http_request& req, http_response& res) {
-        res.status = http_status::S4_NOT_FOUND;
+        res.status = http_status::not_found;
         json_builder jb;
         jb.begin_object();
         jb.key("error").value("Not Found");
@@ -304,7 +304,7 @@ void setup_routes(http_router& router) {
     });
 
     router.set_method_not_allowed_handler([](http_request& req, http_response& res) {
-        res.status = http_status::S4_METHOD_NOT_ALLOWED;
+        res.status = http_status::method_not_allowed;
         json_builder jb;
         jb.begin_object();
         jb.key("error").value("Method Not Allowed");

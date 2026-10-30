@@ -161,9 +161,12 @@ string http_response::build_header_string() const {
 
     if (!redirect_url.empty()) {
         const auto code = static_cast<uint16_t>(status);
-        const uint16_t use_code = (code >= 300 && code < 400) ? code : 302;
-        const string use_status_msg = !status_message.empty() ? status_message : http_status_message(status);
-        result += version + " " + _NEFORCE to_string(use_code) + " " + use_status_msg + "\r\n";
+        const bool is_redirect = code >= 300 && code < 400;
+        const http_status effective_status = is_redirect ? status : http_status::found;
+        const string use_status_msg =
+                (is_redirect && !status_message.empty()) ? status_message : http_status_message(effective_status);
+        result += version + " " + _NEFORCE to_string(static_cast<uint16_t>(effective_status)) + " " + use_status_msg +
+                  "\r\n";
         result += "Location: " + redirect_url + "\r\n";
     } else {
         const string use_status_msg = !status_message.empty() ? status_message : http_status_message(status);
@@ -178,10 +181,7 @@ string http_response::build_header_string() const {
         result += "Set-Cookie: " + cookie.to_string() + "\r\n";
     }
 
-    const auto code = static_cast<uint16_t>(status);
-    const bool no_body = (code >= 100 && code < 200) || code == 204 || code == 304;
-
-    if (redirect_url.empty() && !no_body && !has_header(http_key::Content_Length())) {
+    if (redirect_url.empty() && !suppress_content_length && allows_body() && !has_header(http_key::Content_Length())) {
         result += http_key::Content_Length() + ": " + _NEFORCE to_string(body.size()) + "\r\n";
     }
 
@@ -191,7 +191,7 @@ string http_response::build_header_string() const {
 
 string http_response::to_string() const {
     string result = build_header_string();
-    if (redirect_url.empty()) {
+    if (redirect_url.empty() && allows_body()) {
         result += body;
     }
     return result;

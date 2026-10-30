@@ -185,13 +185,13 @@ sql_builder& sql_builder::operator=(const sql_builder& other) {
 }
 
 sql_builder& sql_builder::select(vector<string> fields) {
-    sql_type_ = sql_operate::SELECT;
+    sql_type_ = sql_operate::select;
     ensure_select_data()->fields = move(fields);
     return *this;
 }
 
 sql_builder& sql_builder::select(const std::initializer_list<string> fields) {
-    sql_type_ = sql_operate::SELECT;
+    sql_type_ = sql_operate::select;
     auto* data = ensure_select_data();
     data->fields.clear();
     data->fields.reserve(fields.size());
@@ -202,13 +202,13 @@ sql_builder& sql_builder::select(const std::initializer_list<string> fields) {
 }
 
 sql_builder& sql_builder::select(string field) {
-    sql_type_ = sql_operate::SELECT;
+    sql_type_ = sql_operate::select;
     ensure_select_data()->fields.emplace_back(move(field));
     return *this;
 }
 
 sql_builder& sql_builder::select_all() noexcept {
-    sql_type_ = sql_operate::SELECT;
+    sql_type_ = sql_operate::select;
     if (select_data_) {
         select_data_->fields.clear();
     }
@@ -235,16 +235,16 @@ sql_builder& sql_builder::from(string table, string alias) noexcept {
 sql_builder& sql_builder::join(const sql_join type, string table, string on_condition) {
     string join_str;
     switch (type) {
-        case sql_join::INNER:
+        case sql_join::inner:
             join_str = "INNER JOIN ";
             break;
-        case sql_join::LEFT:
+        case sql_join::left:
             join_str = "LEFT JOIN ";
             break;
-        case sql_join::RIGHT:
+        case sql_join::right:
             join_str = "RIGHT JOIN ";
             break;
-        case sql_join::FULL:
+        case sql_join::full:
             join_str = "FULL JOIN ";
             break;
     }
@@ -254,23 +254,23 @@ sql_builder& sql_builder::join(const sql_join type, string table, string on_cond
 }
 
 sql_builder& sql_builder::join(string table, string on_condition) {
-    return join(sql_join::INNER, move(table), move(on_condition));
+    return join(sql_join::inner, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::left_join(string table, string on_condition) {
-    return join(sql_join::LEFT, move(table), move(on_condition));
+    return join(sql_join::left, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::right_join(string table, string on_condition) {
-    return join(sql_join::RIGHT, move(table), move(on_condition));
+    return join(sql_join::right, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::inner_join(string table, string on_condition) {
-    return join(sql_join::INNER, move(table), move(on_condition));
+    return join(sql_join::inner, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::full_join(string table, string on_condition) {
-    return join(sql_join::FULL, move(table), move(on_condition));
+    return join(sql_join::full, move(table), move(on_condition));
 }
 
 sql_builder& sql_builder::where(string condition) {
@@ -425,14 +425,14 @@ sql_builder& sql_builder::having(string condition) {
 
 
 sql_builder& sql_builder::order_by(string field, const sql_order order) {
-    string order_str = move(field) + (order == sql_order::ASC ? " ASC" : " DESC");
+    string order_str = move(field) + (order == sql_order::asc ? " ASC" : " DESC");
     ensure_select_data()->order_by_clauses.emplace_back(move(order_str));
     return *this;
 }
 
-sql_builder& sql_builder::order_by_asc(string field) { return order_by(move(field), sql_order::ASC); }
+sql_builder& sql_builder::order_by_asc(string field) { return order_by(move(field), sql_order::asc); }
 
-sql_builder& sql_builder::order_by_desc(string field) { return order_by(move(field), sql_order::DESC); }
+sql_builder& sql_builder::order_by_desc(string field) { return order_by(move(field), sql_order::desc); }
 
 sql_builder& sql_builder::limit(const int count) {
     auto* data = ensure_select_data();
@@ -461,7 +461,7 @@ sql_builder& sql_builder::page(const int page_num, const int page_size) {
 }
 
 sql_builder& sql_builder::insert_into(string table, vector<string> fields) {
-    sql_type_ = sql_operate::INSERT;
+    sql_type_ = sql_operate::insert;
     table_ = move(table);
     auto* data = ensure_insert_data();
     data->fields = move(fields);
@@ -475,7 +475,7 @@ sql_builder& sql_builder::insert_into(string table, vector<string> fields) {
 }
 
 sql_builder& sql_builder::insert_into(string table) {
-    sql_type_ = sql_operate::INSERT;
+    sql_type_ = sql_operate::insert;
     table_ = move(table);
     ensure_insert_data();
     return *this;
@@ -531,7 +531,7 @@ sql_builder& sql_builder::columns(vector<string> fields) {
 }
 
 sql_builder& sql_builder::update(string table) {
-    sql_type_ = sql_operate::UPDATE;
+    sql_type_ = sql_operate::update;
     table_ = move(table);
     ensure_update_data();
     return *this;
@@ -560,25 +560,25 @@ sql_builder& sql_builder::set_decrement(string field, const int value) {
 }
 
 sql_builder& sql_builder::remove() {
-    sql_type_ = sql_operate::DELETE;
+    sql_type_ = sql_operate::delete_;
     return *this;
 }
 
 sql_builder& sql_builder::delete_from(string table) {
-    sql_type_ = sql_operate::DELETE;
+    sql_type_ = sql_operate::delete_;
     table_ = move(table);
     return *this;
 }
 
 sql_builder& sql_builder::drop_table(string table) {
-    sql_type_ = sql_operate::DROP_TABLE;
+    sql_type_ = sql_operate::drop_table;
     table_ = move(table);
     drop_if_exists_ = false;
     return *this;
 }
 
 sql_builder& sql_builder::drop_table_if_exists(string table) {
-    sql_type_ = sql_operate::DROP_TABLE;
+    sql_type_ = sql_operate::drop_table;
     table_ = move(table);
     drop_if_exists_ = true;
     return *this;
@@ -708,7 +708,7 @@ string sql_builder::make_cast(string expression, string target_type) {
 }
 
 sql_builder& sql_builder::create_table(string table) {
-    sql_type_ = sql_operate::CREATE_TABLE;
+    sql_type_ = sql_operate::create_table;
     table_ = move(table);
     ensure_create_table_data();
     create_table_data_->if_not_exists = false;
@@ -716,7 +716,7 @@ sql_builder& sql_builder::create_table(string table) {
 }
 
 sql_builder& sql_builder::create_table_if_not_exists(string table) {
-    sql_type_ = sql_operate::CREATE_TABLE;
+    sql_type_ = sql_operate::create_table;
     table_ = move(table);
     ensure_create_table_data();
     create_table_data_->if_not_exists = true;
@@ -724,7 +724,7 @@ sql_builder& sql_builder::create_table_if_not_exists(string table) {
 }
 
 sql_builder& sql_builder::create_temp_table(string table) {
-    sql_type_ = sql_operate::CREATE_TABLE;
+    sql_type_ = sql_operate::create_table;
     table_ = move(table);
     ensure_create_table_data();
     create_table_data_->temporary = true;
@@ -733,7 +733,7 @@ sql_builder& sql_builder::create_temp_table(string table) {
 }
 
 sql_builder& sql_builder::create_temp_table_if_not_exists(string table) {
-    sql_type_ = sql_operate::CREATE_TABLE;
+    sql_type_ = sql_operate::create_table;
     table_ = move(table);
     ensure_create_table_data();
     create_table_data_->temporary = true;
@@ -828,7 +828,7 @@ sql_builder& sql_builder::table_check(string expr) {
 }
 
 sql_builder& sql_builder::alter_table(string table) {
-    sql_type_ = sql_operate::ALTER_TABLE;
+    sql_type_ = sql_operate::alter_table;
     table_ = move(table);
     ensure_alter_table_data();
     return *this;
@@ -893,7 +893,7 @@ sql_builder& sql_builder::drop_constraint(string constraint_name) {
 }
 
 sql_builder& sql_builder::create_view(string view_name, string select_query) {
-    sql_type_ = sql_operate::CREATE_VIEW;
+    sql_type_ = sql_operate::create_view;
     table_ = view_name;
     auto* data = ensure_create_view_data();
     data->view_name = move(view_name);
@@ -903,7 +903,7 @@ sql_builder& sql_builder::create_view(string view_name, string select_query) {
 }
 
 sql_builder& sql_builder::create_or_replace_view(string view_name, string select_query) {
-    sql_type_ = sql_operate::CREATE_VIEW;
+    sql_type_ = sql_operate::create_view;
     table_ = view_name;
     auto* data = ensure_create_view_data();
     data->view_name = move(view_name);
@@ -913,20 +913,20 @@ sql_builder& sql_builder::create_or_replace_view(string view_name, string select
 }
 
 sql_builder& sql_builder::drop_view(string view_name) {
-    sql_type_ = sql_operate::DROP_VIEW;
+    sql_type_ = sql_operate::drop_view;
     table_ = move(view_name);
     return *this;
 }
 
 sql_builder& sql_builder::drop_view_if_exists(string view_name) {
-    sql_type_ = sql_operate::DROP_VIEW;
+    sql_type_ = sql_operate::drop_view;
     table_ = move(view_name);
     drop_if_exists_ = true;
     return *this;
 }
 
 sql_builder& sql_builder::create_index(string index_name, string table, vector<string> columns) {
-    sql_type_ = sql_operate::CREATE_INDEX;
+    sql_type_ = sql_operate::create_index;
     auto* data = ensure_create_index_data();
     data->index_name = move(index_name);
     data->table_name = move(table);
@@ -937,7 +937,7 @@ sql_builder& sql_builder::create_index(string index_name, string table, vector<s
 }
 
 sql_builder& sql_builder::create_unique_index(string index_name, string table, vector<string> columns) {
-    sql_type_ = sql_operate::CREATE_INDEX;
+    sql_type_ = sql_operate::create_index;
     auto* data = ensure_create_index_data();
     data->index_name = move(index_name);
     data->table_name = move(table);
@@ -948,58 +948,58 @@ sql_builder& sql_builder::create_unique_index(string index_name, string table, v
 }
 
 sql_builder& sql_builder::drop_index(string index_name) {
-    sql_type_ = sql_operate::DROP_INDEX;
+    sql_type_ = sql_operate::drop_index;
     table_ = move(index_name);
     drop_if_exists_ = false;
     return *this;
 }
 
 sql_builder& sql_builder::drop_index_if_exists(string index_name) {
-    sql_type_ = sql_operate::DROP_INDEX;
+    sql_type_ = sql_operate::drop_index;
     table_ = move(index_name);
     drop_if_exists_ = true;
     return *this;
 }
 
 sql_builder& sql_builder::truncate(string table) {
-    sql_type_ = sql_operate::TRUNCATE;
+    sql_type_ = sql_operate::truncate;
     table_ = move(table);
     return *this;
 }
 
 sql_builder& sql_builder::union_(string query) {
-    sql_type_ = sql_operate::SELECT;
-    set_operations_.push_back({sql_set_op::UNION, move(query)});
+    sql_type_ = sql_operate::select;
+    set_operations_.push_back({sql_set_op::union_, move(query)});
     return *this;
 }
 
 sql_builder& sql_builder::union_all(string query) {
-    sql_type_ = sql_operate::SELECT;
-    set_operations_.push_back({sql_set_op::UNION_ALL, move(query)});
+    sql_type_ = sql_operate::select;
+    set_operations_.push_back({sql_set_op::union_all, move(query)});
     return *this;
 }
 
 sql_builder& sql_builder::intersect(string query) {
-    sql_type_ = sql_operate::SELECT;
-    set_operations_.push_back({sql_set_op::INTERSECT, move(query)});
+    sql_type_ = sql_operate::select;
+    set_operations_.push_back({sql_set_op::intersect, move(query)});
     return *this;
 }
 
 sql_builder& sql_builder::intersect_all(string query) {
-    sql_type_ = sql_operate::SELECT;
-    set_operations_.push_back({sql_set_op::INTERSECT_ALL, move(query)});
+    sql_type_ = sql_operate::select;
+    set_operations_.push_back({sql_set_op::intersect_all, move(query)});
     return *this;
 }
 
 sql_builder& sql_builder::except_(string query) {
-    sql_type_ = sql_operate::SELECT;
-    set_operations_.push_back({sql_set_op::EXCEPT_, move(query)});
+    sql_type_ = sql_operate::select;
+    set_operations_.push_back({sql_set_op::except, move(query)});
     return *this;
 }
 
 sql_builder& sql_builder::except_all(string query) {
-    sql_type_ = sql_operate::SELECT;
-    set_operations_.push_back({sql_set_op::EXCEPT_ALL, move(query)});
+    sql_type_ = sql_operate::select;
+    set_operations_.push_back({sql_set_op::except_all, move(query)});
     return *this;
 }
 
@@ -1112,7 +1112,7 @@ sql_builder& sql_builder::from_subquery(string subquery, string alias) {
 
 sql_builder& sql_builder::reset() noexcept {
     clear_data();
-    sql_type_ = sql_operate::SELECT;
+    sql_type_ = sql_operate::select;
     table_.clear();
     table_alias_.clear();
     where_conditions_.clear();
@@ -1125,9 +1125,9 @@ sql_builder& sql_builder::reset() noexcept {
 
 string sql_builder::make_placeholder(const size_t index) const {
     switch (dialect_) {
-        case sql_dialect::POSTGRESQL:
+        case sql_dialect::postgresql:
             return "$" + to_string(index);
-        case sql_dialect::ORACLE:
+        case sql_dialect::oracle:
             return ":" + to_string(index);
         default:
             return "?";
@@ -1141,7 +1141,7 @@ string sql_builder::build() const {
 
     string result;
     switch (sql_type_) {
-        case sql_operate::SELECT: {
+        case sql_operate::select: {
             // CTE prepend
             if (!cte_entries_.empty()) {
                 bool has_recursive = false;
@@ -1251,22 +1251,22 @@ string sql_builder::build() const {
             // Set operations (UNION / INTERSECT / EXCEPT)
             for (const auto& sop: set_operations_) {
                 switch (sop.op) {
-                    case sql_set_op::UNION:
+                    case sql_set_op::union_:
                         result += "\nUNION\n";
                         break;
-                    case sql_set_op::UNION_ALL:
+                    case sql_set_op::union_all:
                         result += "\nUNION ALL\n";
                         break;
-                    case sql_set_op::INTERSECT:
+                    case sql_set_op::intersect:
                         result += "\nINTERSECT\n";
                         break;
-                    case sql_set_op::INTERSECT_ALL:
+                    case sql_set_op::intersect_all:
                         result += "\nINTERSECT ALL\n";
                         break;
-                    case sql_set_op::EXCEPT_:
+                    case sql_set_op::except:
                         result += "\nEXCEPT\n";
                         break;
-                    case sql_set_op::EXCEPT_ALL:
+                    case sql_set_op::except_all:
                         result += "\nEXCEPT ALL\n";
                         break;
                 }
@@ -1286,7 +1286,7 @@ string sql_builder::build() const {
 
             // LIMIT & OFFSET / FETCH FIRST
             if (select_data_) {
-                if (select_data_->fetch_count > 0 || dialect_ == sql_dialect::ORACLE) {
+                if (select_data_->fetch_count > 0 || dialect_ == sql_dialect::oracle) {
                     // ANSI SQL:2008 FETCH FIRST syntax (Oracle 12c+ compatible)
                     const int limit =
                             select_data_->fetch_count > 0 ? select_data_->fetch_count : select_data_->limit_count;
@@ -1309,7 +1309,7 @@ string sql_builder::build() const {
 
             break;
         }
-        case sql_operate::INSERT: {
+        case sql_operate::insert: {
             if (!insert_data_ || insert_data_->fields.empty()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("No fields for INSERT"));
             }
@@ -1340,7 +1340,7 @@ string sql_builder::build() const {
             }
             break;
         }
-        case sql_operate::UPDATE: {
+        case sql_operate::update: {
             if (!update_data_ || update_data_->assignments.empty()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("No assignments for UPDATE"));
             }
@@ -1362,7 +1362,7 @@ string sql_builder::build() const {
             }
             break;
         }
-        case sql_operate::DELETE: {
+        case sql_operate::delete_: {
             result += "DELETE FROM " + table_;
             if (!where_conditions_.empty()) {
                 result += " WHERE ";
@@ -1375,7 +1375,7 @@ string sql_builder::build() const {
             }
             break;
         }
-        case sql_operate::CREATE_TABLE: {
+        case sql_operate::create_table: {
             if (!create_table_data_ || create_table_data_->columns.empty()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("No columns for CREATE TABLE"));
             }
@@ -1397,7 +1397,7 @@ string sql_builder::build() const {
 
                 if (col.auto_increment) {
                     switch (dialect_) {
-                        case sql_dialect::POSTGRESQL: {
+                        case sql_dialect::postgresql: {
                             // PostgreSQL: use SERIAL pseudo-type instead of INTEGER AUTO_INCREMENT
                             const auto& t = col.type;
                             if (t == "INTEGER" || t == "INT") {
@@ -1411,10 +1411,10 @@ string sql_builder::build() const {
                             }
                             break;
                         }
-                        case sql_dialect::MSSQL:
+                        case sql_dialect::mssql:
                             result += col.type + " IDENTITY(1,1)";
                             break;
-                        case sql_dialect::ORACLE:
+                        case sql_dialect::oracle:
                             result += col.type + " GENERATED BY DEFAULT AS IDENTITY";
                             break;
                         default:
@@ -1446,7 +1446,7 @@ string sql_builder::build() const {
             result += "\n)";
             break;
         }
-        case sql_operate::CREATE_VIEW: {
+        case sql_operate::create_view: {
             if (!create_view_data_ || create_view_data_->view_query.empty()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("No query for CREATE VIEW"));
             }
@@ -1457,7 +1457,7 @@ string sql_builder::build() const {
             result += "VIEW " + create_view_data_->view_name + " AS\n" + create_view_data_->view_query;
             break;
         }
-        case sql_operate::DROP_VIEW: {
+        case sql_operate::drop_view: {
             result += "DROP VIEW ";
             if (drop_if_exists_) {
                 result += "IF EXISTS ";
@@ -1465,7 +1465,7 @@ string sql_builder::build() const {
             result += table_;
             break;
         }
-        case sql_operate::ALTER_TABLE: {
+        case sql_operate::alter_table: {
             if (!alter_table_data_ || alter_table_data_->actions.empty()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("No actions for ALTER TABLE"));
             }
@@ -1475,7 +1475,7 @@ string sql_builder::build() const {
             }
             break;
         }
-        case sql_operate::CREATE_INDEX: {
+        case sql_operate::create_index: {
             if (!create_index_data_ || create_index_data_->columns.empty()) {
                 NEFORCE_THROW_EXCEPTION(value_exception("No columns for CREATE INDEX"));
             }
@@ -1493,7 +1493,7 @@ string sql_builder::build() const {
             result += ")";
             break;
         }
-        case sql_operate::DROP_INDEX: {
+        case sql_operate::drop_index: {
             result += "DROP INDEX ";
             if (drop_if_exists_) {
                 result += "IF EXISTS ";
@@ -1501,11 +1501,11 @@ string sql_builder::build() const {
             result += table_;
             break;
         }
-        case sql_operate::TRUNCATE: {
+        case sql_operate::truncate: {
             result += "TRUNCATE TABLE " + table_;
             break;
         }
-        case sql_operate::DROP_TABLE: {
+        case sql_operate::drop_table: {
             result += "DROP TABLE ";
             if (drop_if_exists_) {
                 result += "IF EXISTS ";

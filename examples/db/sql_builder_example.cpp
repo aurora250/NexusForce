@@ -96,7 +96,7 @@ int main() {
     // Generic / MySQL / SQLite 使用 ? 占位符
     {
         sql_builder b;
-        b.set_dialect(sql_dialect::GENERIC);
+        b.set_dialect(sql_dialect::generic);
         b.update("users");
         b.set_param("name");
         b.set_param("email");
@@ -107,7 +107,7 @@ int main() {
     // PostgreSQL 使用 $1, $2, $3 占位符
     {
         sql_builder b;
-        b.set_dialect(sql_dialect::POSTGRESQL);
+        b.set_dialect(sql_dialect::postgresql);
         b.update("users");
         b.set_param("name");
         b.set_param("email");
@@ -118,7 +118,7 @@ int main() {
     // Oracle 使用 :1, :2, :3 占位符
     {
         sql_builder b;
-        b.set_dialect(sql_dialect::ORACLE);
+        b.set_dialect(sql_dialect::oracle);
         b.update("users");
         b.set_param("name");
         b.set_param("email");
@@ -129,7 +129,7 @@ int main() {
     // INSERT 自动填充方言占位符
     {
         sql_builder b;
-        b.set_dialect(sql_dialect::POSTGRESQL);
+        b.set_dialect(sql_dialect::postgresql);
         b.insert_into("users", {"name", "email", "age"});
         printfln("PgSQL INSERT: {} (param_count={})", b.build(), b.param_count());
     }
@@ -137,7 +137,7 @@ int main() {
     // 删除语句 + dialect
     {
         sql_builder b;
-        b.set_dialect(sql_dialect::POSTGRESQL);
+        b.set_dialect(sql_dialect::postgresql);
         b.delete_from("users").where_eq("id", b.placeholder(1));
         printfln("PgSQL DELETE: {}", b.build());
     }
@@ -152,29 +152,29 @@ int main() {
         printfln("{}:\n{}\n", label, b.build());
     };
 
-    print_ddl(sql_dialect::GENERIC, "Generic (AUTO_INCREMENT)");
-    print_ddl(sql_dialect::POSTGRESQL, "PgSQL    (SERIAL)");
-    print_ddl(sql_dialect::MSSQL, "MSSQL    (IDENTITY)");
-    print_ddl(sql_dialect::ORACLE, "Oracle   (GENERATED AS IDENTITY)");
+    print_ddl(sql_dialect::generic, "Generic (AUTO_INCREMENT)");
+    print_ddl(sql_dialect::postgresql, "PgSQL    (SERIAL)");
+    print_ddl(sql_dialect::mssql, "MSSQL    (IDENTITY)");
+    print_ddl(sql_dialect::oracle, "Oracle   (GENERATED AS IDENTITY)");
 
     // 方言感知分页
     printcln(color::cyan(), "=== 方言感知分页 ===\n");
 
     {
         sql_builder b;
-        b.set_dialect(sql_dialect::GENERIC);
+        b.set_dialect(sql_dialect::generic);
         b.select_all().from("users").limit(10).offset(20);
         printfln("Generic: {} (LIMIT/OFFSET)", b.build());
     }
     {
         sql_builder b;
-        b.set_dialect(sql_dialect::ORACLE);
+        b.set_dialect(sql_dialect::oracle);
         b.select_all().from("users").limit(10).offset(20);
         printfln("Oracle:  {} (FETCH FIRST)", b.build());
     }
     {
         sql_builder b;
-        b.set_dialect(sql_dialect::ORACLE);
+        b.set_dialect(sql_dialect::oracle);
         b.select_all().from("users").page(3, 10);
         printfln("Oracle page(3,10): {}", b.build());
     }

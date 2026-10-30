@@ -38,6 +38,11 @@
 #    include <sys/wait.h>
 #    include <unistd.h>
 #endif
+#ifdef NEFORCE_PLATFORM_FREEBSD
+#    include <sys/cpuset.h>
+#    include <sys/sysctl.h>
+#    include <sys/user.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -717,7 +722,106 @@ namespace {
         return info;
     }
 
+#    ifdef NEFORCE_PLATFORM_FREEBSD
+    bool freebsd_kinfo(const native_id_type process_id, ::kinfo_proc& out) noexcept {
+        const int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_PID, static_cast<int>(process_id)};
+        ::size_t length = sizeof(out);
+        if (::sysctl(mib, 4, &out, &length, nullptr, 0) != 0 || length < sizeof(out)) {
+            return false;
+        }
+        return out.ki_pid == static_cast<int>(process_id);
+    }
 
+    vector<::kinfo_proc> freebsd_all_procs() {
+        constexpr int mib[3] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL};
+        ::size_t length = 0;
+        if (::sysctl(mib, 3, nullptr, &length, nullptr, 0) != 0 || length == 0) {
+            return {};
+        }
+        length += sizeof(::kinfo_proc) * 8;
+        vector<::kinfo_proc> result(length / sizeof(::kinfo_proc));
+        if (::sysctl(mib, 3, result.data(), &length, nullptr, 0) != 0) {
+            return {};
+        }
+        result.resize(static_cast<size_t>(length) / sizeof(::kinfo_proc));
+        return result;
+    }
+
+    vector<string> freebsd_argv(const native_id_type process_id) {
+        const int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_ARGS, static_cast<int>(process_id)};
+        ::size_t length = 0;
+        if (::sysctl(mib, 4, nullptr, &length, nullptr, 0) != 0 || length == 0) {
+            return {};
+        }
+        string buffer;
+        buffer.resize(static_cast<size_t>(length));
+        if (::sysctl(mib, 4, buffer.data(), &length, nullptr, 0) != 0) {
+            return {};
+        }
+        vector<string> arguments;
+        size_t position = 0;
+        while (position < length) {
+            const char* text = buffer.data() + position;
+            const size_t size = string_length(text);
+            if (size != 0) {
+                arguments.emplace_back(text, size);
+            }
+            position += size + 1;
+        }
+        return arguments;
+    }
+
+    string freebsd_command_line(const native_id_type process_id) {
+        string command;
+        for (const auto& argument: freebsd_argv(process_id)) {
+            if (!command.empty()) {
+                command.push_back(' ');
+            }
+            command += argument;
+        }
+        return command;
+    }
+
+    string freebsd_executable(const native_id_type process_id) {
+        const int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, static_cast<int>(process_id)};
+        char buffer[4096] = {};
+        ::size_t length = sizeof(buffer) - 1;
+        if (::sysctl(mib, 4, buffer, &length, nullptr, 0) != 0) {
+            return {};
+        }
+        return buffer;
+    }
+
+    process::state freebsd_state_of(const int status) noexcept {
+        switch (status) {
+            case 4: // SSTOP
+                return process::state::suspended;
+            case 5: // SZOMB
+                return process::state::exited;
+            case 1: // SIDL
+            case 2: // SRUN
+            case 3: // SSLEEP
+            case 6: // SWAIT
+            case 7: // SLOCK
+                return process::state::running;
+            default:
+                return process::state::unknown;
+        }
+    }
+
+    uint64_t freebsd_timeval_ms(const ::timeval& value) noexcept {
+        return static_cast<uint64_t>(value.tv_sec) * 1000 + static_cast<uint64_t>(value.tv_usec) / 1000;
+    }
+
+    process::io_info freebsd_io_info(const ::kinfo_proc& info) {
+        process::io_info result;
+        result.read_bytes = static_cast<uint64_t>(info.ki_rusage.ru_inblock) * 512;
+        result.write_bytes = static_cast<uint64_t>(info.ki_rusage.ru_oublock) * 512;
+        result.read_operations = static_cast<uint64_t>(info.ki_rusage.ru_inblock);
+        result.write_operations = static_cast<uint64_t>(info.ki_rusage.ru_oublock);
+        return result;
+    }
+#    endif
 #endif
 } // namespace
 
@@ -1883,6 +1987,31 @@ vector<process::snapshot_entry> process::snapshot() {
         }
         out.push_back(move(item));
     }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    const auto page_size = static_cast<uint64_t>(process_page_size());
+    for (const auto& info: freebsd_all_procs()) {
+        if (info.ki_pid == 0) {
+            continue;
+        }
+        snapshot_entry item;
+        item.pid = static_cast<uint32_t>(info.ki_pid);
+        item.parent_pid = static_cast<uint32_t>(info.ki_ppid);
+        item.name = info.ki_comm;
+        item.status = freebsd_state_of(info.ki_stat);
+        item.threads = static_cast<uint32_t>(info.ki_numthreads);
+        item.rss_bytes = static_cast<uint64_t>(info.ki_rssize) * page_size;
+        item.virtual_bytes = static_cast<uint64_t>(info.ki_size);
+        item.user_time_ms = freebsd_timeval_ms(info.ki_rusage.ru_utime);
+        item.system_time_ms = freebsd_timeval_ms(info.ki_rusage.ru_stime);
+        item.start_time_ms = freebsd_timeval_ms(info.ki_start);
+        item.nice = static_cast<int32_t>(static_cast<byte_t>(info.ki_nice));
+        item.kernel_thread = (info.ki_flag & 0x00000200) != 0;
+        item.io = freebsd_io_info(info);
+        item.uid = static_cast<uint32_t>(info.ki_uid);
+        item.user = user_name_of_uid(item.uid);
+        item.command = freebsd_command_line(static_cast<native_id_type>(item.pid));
+        out.push_back(move(item));
+    }
 #endif
     return out;
 }
@@ -1904,10 +2033,16 @@ string process::get_name(const native_id_type process_id) {
     }
     ::CloseHandle(handle);
     return name;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     linux_proc_stat stat_data;
     if (parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
         return move(stat_data.name);
+    }
+    return {};
+#else
+    ::kinfo_proc info{};
+    if (freebsd_kinfo(process_id, info)) {
+        return info.ki_comm;
     }
     return {};
 #endif
@@ -1928,7 +2063,7 @@ string process::get_command_line(native_id_type process_id) {
     string command = query_process_command_line(handle);
     ::CloseHandle(handle);
     return command;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     string command = read_text_file(path("/proc") / to_string(process_id).view() / "cmdline");
     if (command.empty()) {
         return {};
@@ -1939,6 +2074,8 @@ string process::get_command_line(native_id_type process_id) {
         }
     }
     return command.trim();
+#else
+    return freebsd_command_line(process_id);
 #endif
 }
 
@@ -1955,7 +2092,7 @@ string process::get_executable_path(native_id_type process_id) {
     }
     ::CloseHandle(handle);
     return result;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     char buffer[4096] = {};
     const string link = string("/proc/") + to_string(process_id) + "/exe";
     const ssize_t length = ::readlink(link.data(), buffer, sizeof(buffer) - 1);
@@ -1963,6 +2100,8 @@ string process::get_executable_path(native_id_type process_id) {
         return {};
     }
     return {buffer, static_cast<size_t>(length)};
+#else
+    return freebsd_executable(process_id);
 #endif
 }
 
@@ -1985,7 +2124,7 @@ process::time_info process::get_time_info(const native_id_type process_id) {
         info.wall_time_ms = now > started_at ? now - started_at : 0;
     }
     ::CloseHandle(handle);
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     linux_proc_stat stat_data;
     if (!parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
         return info;
@@ -1994,6 +2133,16 @@ process::time_info process::get_time_info(const native_id_type process_id) {
     info.user_time_ms = stat_data.user_ticks * 1000 / ticks;
     info.kernel_time_ms = stat_data.system_ticks * 1000 / ticks;
     const uint64_t started_at = start_time_ms(stat_data.start_ticks);
+    const uint64_t now = unix_time_ms();
+    info.wall_time_ms = now > started_at ? now - started_at : 0;
+#else
+    ::kinfo_proc process_info{};
+    if (!freebsd_kinfo(process_id, process_info)) {
+        return info;
+    }
+    info.user_time_ms = freebsd_timeval_ms(process_info.ki_rusage.ru_utime);
+    info.kernel_time_ms = freebsd_timeval_ms(process_info.ki_rusage.ru_stime);
+    const uint64_t started_at = freebsd_timeval_ms(process_info.ki_start);
     const uint64_t now = unix_time_ms();
     info.wall_time_ms = now > started_at ? now - started_at : 0;
 #endif
@@ -2020,7 +2169,7 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
     }
     mem_info.virtual_size = virtual_size_of(handle);
     ::CloseHandle(handle);
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     linux_proc_stat stat_data;
     if (parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
         mem_info.virtual_size = static_cast<size_t>(stat_data.virtual_bytes);
@@ -2038,6 +2187,13 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
         }
     }
     mem_info.peak_pagefile_usage = 0;
+#else
+    ::kinfo_proc process_info{};
+    if (freebsd_kinfo(process_id, process_info)) {
+        mem_info.virtual_size = static_cast<size_t>(process_info.ki_size);
+        mem_info.working_set_size =
+                static_cast<size_t>(process_info.ki_rssize) * static_cast<size_t>(process_page_size());
+    }
 #endif
     return mem_info;
 }
@@ -2086,10 +2242,19 @@ process::state process::get_state(native_id_type process_id) {
     }
     ::CloseHandle(handle);
     return result;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     linux_proc_stat stat_data;
     if (parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
         return state_from_char(stat_data.state);
+    }
+    if (::kill(process_id, 0) != 0) {
+        return state::exited;
+    }
+    return state::unknown;
+#else
+    ::kinfo_proc process_info{};
+    if (freebsd_kinfo(process_id, process_info)) {
+        return freebsd_state_of(process_info.ki_stat);
     }
     if (::kill(process_id, 0) != 0) {
         return state::exited;
@@ -2146,7 +2311,7 @@ process::privilege_level process::get_privilege_level(native_id_type process_id)
             return privilege_level::unknown;
         }
         return (bIsAdmin == TRUE) ? privilege_level::privileged : privilege_level::not_privileged;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
         const string status = read_text_file(path("/proc") / to_string(process_id).view() / "status");
         size_t position = 0;
         string line;
@@ -2165,6 +2330,12 @@ process::privilege_level process::get_privilege_level(native_id_type process_id)
             }
         }
         return privilege_level::unknown;
+#else
+        ::kinfo_proc process_info{};
+        if (!freebsd_kinfo(process_id, process_info)) {
+            return privilege_level::unknown;
+        }
+        return process_info.ki_uid == 0 ? privilege_level::privileged : privilege_level::not_privileged;
 #endif
     } catch (...) {
         return privilege_level::unknown;
@@ -2194,7 +2365,7 @@ bool process::check_permission(native_id_type process_id, permission perm) {
     }
     ::CloseHandle(handle);
     return true;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const string proc_path = string("/proc/") + to_string(process_id);
     if (::access(proc_path.data(), F_OK) != 0) {
         return false;
@@ -2221,6 +2392,29 @@ bool process::check_permission(native_id_type process_id, permission perm) {
         return false;
     }
     return uid == static_cast<uint32_t>(::geteuid());
+#else
+    ::kinfo_proc process_info{};
+    if (!freebsd_kinfo(process_id, process_info)) {
+        return false;
+    }
+
+    const int value = static_cast<int>(perm);
+    if (value == 0) {
+        return true;
+    }
+    if ((value & static_cast<int>(permission::execute)) != 0) {
+        return false;
+    }
+
+    constexpr int owner_only = static_cast<int>(permission::read) | static_cast<int>(permission::write) |
+                               static_cast<int>(permission::terminate);
+    if ((value & owner_only) == 0) {
+        return true;
+    }
+    if (::geteuid() == 0) {
+        return true;
+    }
+    return process_info.ki_uid == static_cast<uid_t>(::geteuid());
 #endif
 }
 
@@ -2354,7 +2548,7 @@ bool process::relaunch_current() {
     ::CloseHandle(child.hThread);
     ::CloseHandle(child.hProcess);
     return true;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     vector<string> arguments;
     file cmdline{path{"/proc/self/cmdline"}, false, file_access::read};
     if (cmdline.is_opened()) {
@@ -2390,6 +2584,27 @@ bool process::relaunch_current() {
         ::_exit(127);
     }
     return true;
+#else
+    vector<string> arguments = freebsd_argv(current_id());
+    if (arguments.empty()) {
+        return false;
+    }
+    const ::pid_t child = ::fork();
+    if (child < 0) {
+        return false;
+    }
+    if (child == 0) {
+        ::setsid();
+        vector<char*> argv;
+        argv.reserve(arguments.size() + 1);
+        for (auto& argument: arguments) {
+            argv.push_back(argument.data());
+        }
+        argv.push_back(nullptr);
+        ::execv(arguments.front().data(), argv.data());
+        ::_exit(127);
+    }
+    return true;
 #endif
 }
 
@@ -2402,8 +2617,13 @@ process::io_info process::get_io_info(const native_id_type process_id) {
     }
     info = io_info_of_handle(handle);
     ::CloseHandle(handle);
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     info = io_info_from_proc(static_cast<uint32_t>(process_id));
+#else
+    ::kinfo_proc process_info{};
+    if (freebsd_kinfo(process_id, process_info)) {
+        info = freebsd_io_info(process_info);
+    }
 #endif
     return info;
 }
@@ -2426,12 +2646,18 @@ string process::get_user(const native_id_type process_id) {
     string name = user_name_of_handle(handle);
     ::CloseHandle(handle);
     return name;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     uint32_t uid = 0;
     if (!owner_uid_of(static_cast<uint32_t>(process_id), uid)) {
         return {};
     }
     return user_name_of_uid(uid);
+#else
+    ::kinfo_proc process_info{};
+    if (!freebsd_kinfo(process_id, process_info)) {
+        return {};
+    }
+    return user_name_of_uid(static_cast<uint32_t>(process_info.ki_uid));
 #endif
 }
 
@@ -2469,7 +2695,7 @@ vector<process::thread_info> process::threads(const native_id_type process_id) {
         } while (::Thread32Next(snapshot, &entry) == TRUE);
     }
     ::CloseHandle(snapshot);
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     const path task_directory = path("/proc") / to_string(static_cast<uint32_t>(process_id)).view() / "task";
     for (const auto& directory: task_directory.children()) {
         const auto name_view = directory.filename();
@@ -2494,6 +2720,31 @@ vector<process::thread_info> process::threads(const native_id_type process_id) {
         item.user_time_ms = stat_data.user_ticks * 1000 / ticks;
         item.system_time_ms = stat_data.system_ticks * 1000 / ticks;
         item.start_time_ms = start_time_ms(stat_data.start_ticks);
+        out.push_back(move(item));
+    }
+#else
+    const int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_PID | KERN_PROC_INC_THREAD, static_cast<int>(process_id)};
+    ::size_t length = 0;
+    if (::sysctl(mib, 4, nullptr, &length, nullptr, 0) != 0 || length == 0) {
+        return out;
+    }
+    length += sizeof(::kinfo_proc) * 8;
+    vector<::kinfo_proc> entries(length / sizeof(::kinfo_proc));
+    if (::sysctl(mib, 4, entries.data(), &length, nullptr, 0) != 0) {
+        return out;
+    }
+    entries.resize(static_cast<size_t>(length) / sizeof(::kinfo_proc));
+    for (const auto& entry: entries) {
+        if (entry.ki_pid != static_cast<int>(process_id)) {
+            continue;
+        }
+        thread_info item;
+        item.tid = static_cast<uint32_t>(entry.ki_tid);
+        item.name = entry.ki_comm;
+        item.status = freebsd_state_of(entry.ki_stat);
+        item.user_time_ms = freebsd_timeval_ms(entry.ki_rusage.ru_utime);
+        item.system_time_ms = freebsd_timeval_ms(entry.ki_rusage.ru_stime);
+        item.start_time_ms = freebsd_timeval_ms(entry.ki_start);
         out.push_back(move(item));
     }
 #endif
@@ -2613,12 +2864,19 @@ optional<process::priority> process::get_priority(const native_id_type process_i
         return none;
     }
     return level;
-#else
+#elif defined(NEFORCE_PLATFORM_LINUX)
     linux_proc_stat stat_data;
     if (!parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
         return none;
     }
     return priority_from_nice(stat_data.nice);
+#else
+    errno = 0;
+    const int value = ::getpriority(PRIO_PROCESS, process_id);
+    if (value == -1 && errno != 0) {
+        return none;
+    }
+    return priority_from_nice(value);
 #endif
 }
 
@@ -2636,7 +2894,7 @@ bool process::set_priority(const native_id_type process_id, const priority level
     ::CloseHandle(handle);
     return changed;
 #else
-    return ::setpriority(PRIO_PROCESS, static_cast<::id_t>(process_id), nice_for_priority(level)) == 0;
+    return ::setpriority(PRIO_PROCESS, process_id, nice_for_priority(level)) == 0;
 #endif
 }
 
@@ -2660,7 +2918,7 @@ bool process::set_nice(const native_id_type process_id, const int32_t nice) noex
     return set_priority(process_id, level);
 #else
     const int32_t value = nice < -20 ? -20 : (nice > 19 ? 19 : nice);
-    return ::setpriority(PRIO_PROCESS, static_cast<::id_t>(process_id), static_cast<int>(value)) == 0;
+    return ::setpriority(PRIO_PROCESS, process_id, static_cast<int>(value)) == 0;
 #endif
 }
 
@@ -2678,10 +2936,23 @@ optional<uint64_t> process::get_affinity(const native_id_type process_id) {
         return none;
     }
     return static_cast<uint64_t>(process_mask);
-#else
-    cpu_set_t set;
+#elif defined(NEFORCE_PLATFORM_LINUX)
+    ::cpu_set_t set;
     CPU_ZERO(&set);
     if (::sched_getaffinity(static_cast<::pid_t>(process_id), sizeof(set), &set) != 0) {
+        return none;
+    }
+    uint64_t mask = 0;
+    for (int index = 0; index < 64 && index < CPU_SETSIZE; ++index) {
+        if (CPU_ISSET(index, &set)) {
+            mask |= (static_cast<uint64_t>(1) << index);
+        }
+    }
+    return mask;
+#else
+    ::cpuset_t set;
+    CPU_ZERO(&set);
+    if (::cpuset_getaffinity(CPU_LEVEL_WHICH, CPU_WHICH_PID, static_cast<::id_t>(process_id), sizeof(set), &set) != 0) {
         return none;
     }
     uint64_t mask = 0;
@@ -2706,8 +2977,8 @@ bool process::set_affinity(const native_id_type process_id, const uint64_t mask)
     const bool changed = ::SetProcessAffinityMask(handle, static_cast<::DWORD_PTR>(mask)) != 0;
     ::CloseHandle(handle);
     return changed;
-#else
-    cpu_set_t set;
+#elif defined(NEFORCE_PLATFORM_LINUX)
+    ::cpu_set_t set;
     CPU_ZERO(&set);
     for (int index = 0; index < 64 && index < CPU_SETSIZE; ++index) {
         if ((mask & (static_cast<uint64_t>(1) << index)) != 0) {
@@ -2715,6 +2986,16 @@ bool process::set_affinity(const native_id_type process_id, const uint64_t mask)
         }
     }
     return ::sched_setaffinity(static_cast<::pid_t>(process_id), sizeof(set), &set) == 0;
+#else
+    ::cpuset_t set;
+    CPU_ZERO(&set);
+    for (int index = 0; index < 64 && index < CPU_SETSIZE; ++index) {
+        if ((mask & (static_cast<uint64_t>(1) << index)) != 0) {
+            CPU_SET(index, &set);
+        }
+    }
+    return ::cpuset_setaffinity(CPU_LEVEL_WHICH, CPU_WHICH_PID, static_cast<::id_t>(process_id), sizeof(set), &set) ==
+           0;
 #endif
 }
 

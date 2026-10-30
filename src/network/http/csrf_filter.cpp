@@ -72,7 +72,7 @@ bool csrf_filter::pre_filter(http_request& request, http_response& response) {
     }
 
     if (request_token.empty() || request_token != csrf_token) {
-        response.status = http_status::S4_FORBIDDEN;
+        response.status = http_status::forbidden;
         response.status_message = "Forbidden";
         response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "CSRF token validation failed";

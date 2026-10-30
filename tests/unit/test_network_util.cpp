@@ -17,21 +17,21 @@ protected:
 
 TEST_F(PortsTest, DefaultConstructor) {
     ports p;
-    EXPECT_EQ(p.port, ports::UNDEF);
+    EXPECT_EQ(p.port, ports::undef);
     EXPECT_EQ(p.value(), 0u);
     EXPECT_FALSE(static_cast<bool>(p));
 }
 
 TEST_F(PortsTest, EnumConstructor) {
-    ports p(ports::HTTP);
-    EXPECT_EQ(p.port, ports::HTTP);
+    ports p(ports::http);
+    EXPECT_EQ(p.port, ports::http);
     EXPECT_EQ(p.value(), 80u);
     EXPECT_TRUE(static_cast<bool>(p));
 }
 
 TEST_F(PortsTest, Uint16Constructor) {
     ports p(static_cast<uint16_t>(443));
-    EXPECT_EQ(p.port, ports::HTTPS);
+    EXPECT_EQ(p.port, ports::https);
     EXPECT_EQ(p.value(), 443u);
     EXPECT_TRUE(static_cast<bool>(p));
 }
@@ -40,7 +40,7 @@ TEST_F(PortsTest, BoolConversion) {
     ports undef;
     EXPECT_FALSE(static_cast<bool>(undef));
 
-    ports http(ports::HTTP);
+    ports http(ports::http);
     EXPECT_TRUE(static_cast<bool>(http));
 
     ports custom(static_cast<uint16_t>(8080));
@@ -48,13 +48,13 @@ TEST_F(PortsTest, BoolConversion) {
 }
 
 TEST_F(PortsTest, Uint16Conversion) {
-    ports p(ports::SSH);
+    ports p(ports::ssh);
     uint16_t val = static_cast<uint16_t>(p);
     EXPECT_EQ(val, 22u);
 }
 
 TEST_F(PortsTest, ValueMethod) {
-    ports p(ports::DNS);
+    ports p(ports::dns);
     EXPECT_EQ(p.value(), 53u);
 }
 
@@ -62,10 +62,10 @@ TEST_F(PortsTest, IsWellKnown) {
     ports undef;
     EXPECT_TRUE(undef.is_well_known());
 
-    ports http(ports::HTTP);
+    ports http(ports::http);
     EXPECT_TRUE(http.is_well_known());
 
-    ports https(ports::HTTPS);
+    ports https(ports::https);
     EXPECT_TRUE(https.is_well_known());
 
     ports max_well_known(static_cast<uint16_t>(1023));
@@ -77,7 +77,7 @@ TEST_F(PortsTest, IsWellKnown) {
     ports dynamic(static_cast<uint16_t>(49152));
     EXPECT_FALSE(dynamic.is_well_known());
 
-    ports mysql(ports::MYSQL);
+    ports mysql(ports::mysql);
     EXPECT_FALSE(mysql.is_well_known());
 }
 
@@ -85,19 +85,19 @@ TEST_F(PortsTest, IsRegistered) {
     ports undef;
     EXPECT_FALSE(undef.is_registered());
 
-    ports http(ports::HTTP);
+    ports http(ports::http);
     EXPECT_FALSE(http.is_registered());
 
     ports min_registered(static_cast<uint16_t>(1024));
     EXPECT_TRUE(min_registered.is_registered());
 
-    ports mysql(ports::MYSQL);
+    ports mysql(ports::mysql);
     EXPECT_TRUE(mysql.is_registered());
 
-    ports postgresql(ports::POSTGRESQL);
+    ports postgresql(ports::postgresql);
     EXPECT_TRUE(postgresql.is_registered());
 
-    ports redis(ports::REDIS);
+    ports redis(ports::redis);
     EXPECT_TRUE(redis.is_registered());
 
     ports max_registered(static_cast<uint16_t>(49151));
@@ -111,7 +111,7 @@ TEST_F(PortsTest, IsDynamic) {
     ports undef;
     EXPECT_FALSE(undef.is_dynamic());
 
-    ports http(ports::HTTP);
+    ports http(ports::http);
     EXPECT_FALSE(http.is_dynamic());
 
     ports registered(static_cast<uint16_t>(49151));
@@ -125,309 +125,309 @@ TEST_F(PortsTest, IsDynamic) {
 }
 
 TEST_F(PortsTest, ParseHttp) {
-    EXPECT_EQ(ports::parse("http"), ports::HTTP);
-    EXPECT_EQ(ports::parse("HTTP"), ports::HTTP);
-    EXPECT_EQ(ports::parse("Http"), ports::HTTP);
-    EXPECT_EQ(ports::parse("hTtP"), ports::HTTP);
+    EXPECT_EQ(ports::parse("http"), ports::http);
+    EXPECT_EQ(ports::parse("HTTP"), ports::http);
+    EXPECT_EQ(ports::parse("Http"), ports::http);
+    EXPECT_EQ(ports::parse("hTtP"), ports::http);
 }
 
 TEST_F(PortsTest, ParseWs) {
-    EXPECT_EQ(ports::parse("ws"), ports::WS);
-    EXPECT_EQ(ports::parse("WS"), ports::WS);
-    EXPECT_EQ(ports::parse("Ws"), ports::WS);
+    EXPECT_EQ(ports::parse("ws"), ports::ws);
+    EXPECT_EQ(ports::parse("WS"), ports::ws);
+    EXPECT_EQ(ports::parse("Ws"), ports::ws);
 }
 
 TEST_F(PortsTest, ParseHttps) {
-    EXPECT_EQ(ports::parse("https"), ports::HTTPS);
-    EXPECT_EQ(ports::parse("HTTPS"), ports::HTTPS);
-    EXPECT_EQ(ports::parse("Https"), ports::HTTPS);
+    EXPECT_EQ(ports::parse("https"), ports::https);
+    EXPECT_EQ(ports::parse("HTTPS"), ports::https);
+    EXPECT_EQ(ports::parse("Https"), ports::https);
 }
 
 TEST_F(PortsTest, ParseWss) {
-    EXPECT_EQ(ports::parse("wss"), ports::WSS);
-    EXPECT_EQ(ports::parse("WSS"), ports::WSS);
-    EXPECT_EQ(ports::parse("Wss"), ports::WSS);
+    EXPECT_EQ(ports::parse("wss"), ports::wss);
+    EXPECT_EQ(ports::parse("WSS"), ports::wss);
+    EXPECT_EQ(ports::parse("Wss"), ports::wss);
 }
 
 TEST_F(PortsTest, ParseFtp) {
-    EXPECT_EQ(ports::parse("ftp"), ports::FTP);
-    EXPECT_EQ(ports::parse("FTP"), ports::FTP);
+    EXPECT_EQ(ports::parse("ftp"), ports::ftp);
+    EXPECT_EQ(ports::parse("FTP"), ports::ftp);
 }
 
 TEST_F(PortsTest, ParseFtpData) {
-    EXPECT_EQ(ports::parse("ftp-data"), ports::FTP_DATA);
-    EXPECT_EQ(ports::parse("FTP-DATA"), ports::FTP_DATA);
+    EXPECT_EQ(ports::parse("ftp-data"), ports::ftp_data);
+    EXPECT_EQ(ports::parse("FTP-DATA"), ports::ftp_data);
 }
 
 TEST_F(PortsTest, ParseTftp) {
-    EXPECT_EQ(ports::parse("tftp"), ports::TFTP);
-    EXPECT_EQ(ports::parse("TFTP"), ports::TFTP);
+    EXPECT_EQ(ports::parse("tftp"), ports::tftp);
+    EXPECT_EQ(ports::parse("TFTP"), ports::tftp);
 }
 
 TEST_F(PortsTest, ParseSsh) {
-    EXPECT_EQ(ports::parse("ssh"), ports::SSH);
-    EXPECT_EQ(ports::parse("SSH"), ports::SSH);
+    EXPECT_EQ(ports::parse("ssh"), ports::ssh);
+    EXPECT_EQ(ports::parse("SSH"), ports::ssh);
 }
 
 TEST_F(PortsTest, ParseTelnet) {
-    EXPECT_EQ(ports::parse("telnet"), ports::TELNET);
-    EXPECT_EQ(ports::parse("TELNET"), ports::TELNET);
+    EXPECT_EQ(ports::parse("telnet"), ports::telnet);
+    EXPECT_EQ(ports::parse("TELNET"), ports::telnet);
 }
 
 TEST_F(PortsTest, ParseSmtp) {
-    EXPECT_EQ(ports::parse("smtp"), ports::SMTP);
-    EXPECT_EQ(ports::parse("SMTP"), ports::SMTP);
+    EXPECT_EQ(ports::parse("smtp"), ports::smtp);
+    EXPECT_EQ(ports::parse("SMTP"), ports::smtp);
 }
 
 TEST_F(PortsTest, ParseSmtps) {
-    EXPECT_EQ(ports::parse("smtps"), ports::SMTPS);
-    EXPECT_EQ(ports::parse("SMTPS"), ports::SMTPS);
+    EXPECT_EQ(ports::parse("smtps"), ports::smtps);
+    EXPECT_EQ(ports::parse("SMTPS"), ports::smtps);
 }
 
 TEST_F(PortsTest, ParseSmtpSubmit) {
-    EXPECT_EQ(ports::parse("smtp-submit"), ports::SMTP_SUBMIT);
-    EXPECT_EQ(ports::parse("SMTP-SUBMIT"), ports::SMTP_SUBMIT);
-    EXPECT_EQ(ports::parse("submission"), ports::SMTP_SUBMIT);
-    EXPECT_EQ(ports::parse("SUBMISSION"), ports::SMTP_SUBMIT);
+    EXPECT_EQ(ports::parse("smtp-submit"), ports::smtp_submit);
+    EXPECT_EQ(ports::parse("SMTP-SUBMIT"), ports::smtp_submit);
+    EXPECT_EQ(ports::parse("submission"), ports::smtp_submit);
+    EXPECT_EQ(ports::parse("SUBMISSION"), ports::smtp_submit);
 }
 
 TEST_F(PortsTest, ParsePop3) {
-    EXPECT_EQ(ports::parse("pop3"), ports::POP3);
-    EXPECT_EQ(ports::parse("POP3"), ports::POP3);
+    EXPECT_EQ(ports::parse("pop3"), ports::pop3);
+    EXPECT_EQ(ports::parse("POP3"), ports::pop3);
 }
 
 TEST_F(PortsTest, ParsePop3s) {
-    EXPECT_EQ(ports::parse("pop3s"), ports::POP3S);
-    EXPECT_EQ(ports::parse("POP3S"), ports::POP3S);
+    EXPECT_EQ(ports::parse("pop3s"), ports::pop3s);
+    EXPECT_EQ(ports::parse("POP3S"), ports::pop3s);
 }
 
 TEST_F(PortsTest, ParseImap) {
-    EXPECT_EQ(ports::parse("imap"), ports::IMAP);
-    EXPECT_EQ(ports::parse("IMAP"), ports::IMAP);
+    EXPECT_EQ(ports::parse("imap"), ports::imap);
+    EXPECT_EQ(ports::parse("IMAP"), ports::imap);
 }
 
 TEST_F(PortsTest, ParseImaps) {
-    EXPECT_EQ(ports::parse("imaps"), ports::IMAPS);
-    EXPECT_EQ(ports::parse("IMAPS"), ports::IMAPS);
+    EXPECT_EQ(ports::parse("imaps"), ports::imaps);
+    EXPECT_EQ(ports::parse("IMAPS"), ports::imaps);
 }
 
 TEST_F(PortsTest, ParseDns) {
-    EXPECT_EQ(ports::parse("dns"), ports::DNS);
-    EXPECT_EQ(ports::parse("DNS"), ports::DNS);
+    EXPECT_EQ(ports::parse("dns"), ports::dns);
+    EXPECT_EQ(ports::parse("DNS"), ports::dns);
 }
 
 TEST_F(PortsTest, ParseLdap) {
-    EXPECT_EQ(ports::parse("ldap"), ports::LDAP);
-    EXPECT_EQ(ports::parse("LDAP"), ports::LDAP);
+    EXPECT_EQ(ports::parse("ldap"), ports::ldap);
+    EXPECT_EQ(ports::parse("LDAP"), ports::ldap);
 }
 
 TEST_F(PortsTest, ParseLdaps) {
-    EXPECT_EQ(ports::parse("ldaps"), ports::LDAPS);
-    EXPECT_EQ(ports::parse("LDAPS"), ports::LDAPS);
+    EXPECT_EQ(ports::parse("ldaps"), ports::ldaps);
+    EXPECT_EQ(ports::parse("LDAPS"), ports::ldaps);
 }
 
 TEST_F(PortsTest, ParseDhcpServer) {
-    EXPECT_EQ(ports::parse("dhcp-server"), ports::DHCP_SERVER);
-    EXPECT_EQ(ports::parse("DHCP-SERVER"), ports::DHCP_SERVER);
-    EXPECT_EQ(ports::parse("dhcps"), ports::DHCP_SERVER);
-    EXPECT_EQ(ports::parse("DHCPS"), ports::DHCP_SERVER);
+    EXPECT_EQ(ports::parse("dhcp-server"), ports::dhcp_server);
+    EXPECT_EQ(ports::parse("DHCP-SERVER"), ports::dhcp_server);
+    EXPECT_EQ(ports::parse("dhcps"), ports::dhcp_server);
+    EXPECT_EQ(ports::parse("DHCPS"), ports::dhcp_server);
 }
 
 TEST_F(PortsTest, ParseDhcpClient) {
-    EXPECT_EQ(ports::parse("dhcp-client"), ports::DHCP_CLIENT);
-    EXPECT_EQ(ports::parse("DHCP-CLIENT"), ports::DHCP_CLIENT);
-    EXPECT_EQ(ports::parse("dhcpc"), ports::DHCP_CLIENT);
-    EXPECT_EQ(ports::parse("DHCPC"), ports::DHCP_CLIENT);
+    EXPECT_EQ(ports::parse("dhcp-client"), ports::dhcp_client);
+    EXPECT_EQ(ports::parse("DHCP-CLIENT"), ports::dhcp_client);
+    EXPECT_EQ(ports::parse("dhcpc"), ports::dhcp_client);
+    EXPECT_EQ(ports::parse("DHCPC"), ports::dhcp_client);
 }
 
 TEST_F(PortsTest, ParseNtp) {
-    EXPECT_EQ(ports::parse("ntp"), ports::NTP);
-    EXPECT_EQ(ports::parse("NTP"), ports::NTP);
+    EXPECT_EQ(ports::parse("ntp"), ports::ntp);
+    EXPECT_EQ(ports::parse("NTP"), ports::ntp);
 }
 
 TEST_F(PortsTest, ParseSnmp) {
-    EXPECT_EQ(ports::parse("snmp"), ports::SNMP);
-    EXPECT_EQ(ports::parse("SNMP"), ports::SNMP);
+    EXPECT_EQ(ports::parse("snmp"), ports::snmp);
+    EXPECT_EQ(ports::parse("SNMP"), ports::snmp);
 }
 
 TEST_F(PortsTest, ParseSnmpTrap) {
-    EXPECT_EQ(ports::parse("snmp-trap"), ports::SNMP_TRAP);
-    EXPECT_EQ(ports::parse("SNMP-TRAP"), ports::SNMP_TRAP);
-    EXPECT_EQ(ports::parse("snmptrap"), ports::SNMP_TRAP);
-    EXPECT_EQ(ports::parse("SNMPTRAP"), ports::SNMP_TRAP);
+    EXPECT_EQ(ports::parse("snmp-trap"), ports::snmp_trap);
+    EXPECT_EQ(ports::parse("SNMP-TRAP"), ports::snmp_trap);
+    EXPECT_EQ(ports::parse("snmptrap"), ports::snmp_trap);
+    EXPECT_EQ(ports::parse("SNMPTRAP"), ports::snmp_trap);
 }
 
 TEST_F(PortsTest, ParseSmb) {
-    EXPECT_EQ(ports::parse("smb"), ports::SMB);
-    EXPECT_EQ(ports::parse("SMB"), ports::SMB);
-    EXPECT_EQ(ports::parse("cifs"), ports::SMB);
-    EXPECT_EQ(ports::parse("CIFS"), ports::SMB);
+    EXPECT_EQ(ports::parse("smb"), ports::smb);
+    EXPECT_EQ(ports::parse("SMB"), ports::smb);
+    EXPECT_EQ(ports::parse("cifs"), ports::smb);
+    EXPECT_EQ(ports::parse("CIFS"), ports::smb);
 }
 
 TEST_F(PortsTest, ParseMysql) {
-    EXPECT_EQ(ports::parse("mysql"), ports::MYSQL);
-    EXPECT_EQ(ports::parse("MYSQL"), ports::MYSQL);
+    EXPECT_EQ(ports::parse("mysql"), ports::mysql);
+    EXPECT_EQ(ports::parse("MYSQL"), ports::mysql);
 }
 
 TEST_F(PortsTest, ParsePostgresql) {
-    EXPECT_EQ(ports::parse("postgresql"), ports::POSTGRESQL);
-    EXPECT_EQ(ports::parse("POSTGRESQL"), ports::POSTGRESQL);
-    EXPECT_EQ(ports::parse("postgres"), ports::POSTGRESQL);
-    EXPECT_EQ(ports::parse("POSTGRES"), ports::POSTGRESQL);
+    EXPECT_EQ(ports::parse("postgresql"), ports::postgresql);
+    EXPECT_EQ(ports::parse("POSTGRESQL"), ports::postgresql);
+    EXPECT_EQ(ports::parse("postgres"), ports::postgresql);
+    EXPECT_EQ(ports::parse("POSTGRES"), ports::postgresql);
 }
 
 TEST_F(PortsTest, ParseRedis) {
-    EXPECT_EQ(ports::parse("redis"), ports::REDIS);
-    EXPECT_EQ(ports::parse("REDIS"), ports::REDIS);
+    EXPECT_EQ(ports::parse("redis"), ports::redis);
+    EXPECT_EQ(ports::parse("REDIS"), ports::redis);
 }
 
 TEST_F(PortsTest, ParseMongodb) {
-    EXPECT_EQ(ports::parse("mongodb"), ports::MONGODB);
-    EXPECT_EQ(ports::parse("MONGODB"), ports::MONGODB);
-    EXPECT_EQ(ports::parse("mongo"), ports::MONGODB);
-    EXPECT_EQ(ports::parse("MONGO"), ports::MONGODB);
+    EXPECT_EQ(ports::parse("mongodb"), ports::mongodb);
+    EXPECT_EQ(ports::parse("MONGODB"), ports::mongodb);
+    EXPECT_EQ(ports::parse("mongo"), ports::mongodb);
+    EXPECT_EQ(ports::parse("MONGO"), ports::mongodb);
 }
 
 TEST_F(PortsTest, ParseUnknown) {
-    EXPECT_EQ(ports::parse("unknown"), ports::UNDEF);
-    EXPECT_EQ(ports::parse(""), ports::UNDEF);
-    EXPECT_EQ(ports::parse("xyz"), ports::UNDEF);
-    EXPECT_EQ(ports::parse("8080"), ports::UNDEF);
+    EXPECT_EQ(ports::parse("unknown"), ports::undef);
+    EXPECT_EQ(ports::parse(""), ports::undef);
+    EXPECT_EQ(ports::parse("xyz"), ports::undef);
+    EXPECT_EQ(ports::parse("8080"), ports::undef);
 }
 
 TEST_F(PortsTest, ToStringWebSocket) {
-    ports http(ports::HTTP);
+    ports http(ports::http);
     EXPECT_EQ(http.to_string(), "http");
     EXPECT_EQ(http.to_string(false), "http");
     EXPECT_EQ(http.to_string(true), "ws");
 
-    ports https(ports::HTTPS);
+    ports https(ports::https);
     EXPECT_EQ(https.to_string(), "https");
     EXPECT_EQ(https.to_string(false), "https");
     EXPECT_EQ(https.to_string(true), "wss");
 }
 
 TEST_F(PortsTest, ToStringFtp) {
-    ports p(ports::FTP_DATA);
+    ports p(ports::ftp_data);
     EXPECT_EQ(p.to_string(), "ftp-data");
     EXPECT_EQ(p.to_string(true), "ftp-data");
 
-    ports ftp(ports::FTP);
+    ports ftp(ports::ftp);
     EXPECT_EQ(ftp.to_string(), "ftp");
 }
 
 TEST_F(PortsTest, ToStringTftp) {
-    ports p(ports::TFTP);
+    ports p(ports::tftp);
     EXPECT_EQ(p.to_string(), "tftp");
 }
 
 TEST_F(PortsTest, ToStringSsh) {
-    ports p(ports::SSH);
+    ports p(ports::ssh);
     EXPECT_EQ(p.to_string(), "ssh");
 }
 
 TEST_F(PortsTest, ToStringTelnet) {
-    ports p(ports::TELNET);
+    ports p(ports::telnet);
     EXPECT_EQ(p.to_string(), "telnet");
 }
 
 TEST_F(PortsTest, ToStringSmtp) {
-    ports p(ports::SMTP);
+    ports p(ports::smtp);
     EXPECT_EQ(p.to_string(), "smtp");
 }
 
 TEST_F(PortsTest, ToStringSmtps) {
-    ports p(ports::SMTPS);
+    ports p(ports::smtps);
     EXPECT_EQ(p.to_string(), "smtps");
 }
 
 TEST_F(PortsTest, ToStringSmtpSubmit) {
-    ports p(ports::SMTP_SUBMIT);
+    ports p(ports::smtp_submit);
     EXPECT_EQ(p.to_string(), "smtp-submit");
 }
 
 TEST_F(PortsTest, ToStringPop3) {
-    ports p(ports::POP3);
+    ports p(ports::pop3);
     EXPECT_EQ(p.to_string(), "pop3");
 }
 
 TEST_F(PortsTest, ToStringPop3s) {
-    ports p(ports::POP3S);
+    ports p(ports::pop3s);
     EXPECT_EQ(p.to_string(), "pop3s");
 }
 
 TEST_F(PortsTest, ToStringImap) {
-    ports p(ports::IMAP);
+    ports p(ports::imap);
     EXPECT_EQ(p.to_string(), "imap");
 }
 
 TEST_F(PortsTest, ToStringImaps) {
-    ports p(ports::IMAPS);
+    ports p(ports::imaps);
     EXPECT_EQ(p.to_string(), "imaps");
 }
 
 TEST_F(PortsTest, ToStringDns) {
-    ports p(ports::DNS);
+    ports p(ports::dns);
     EXPECT_EQ(p.to_string(), "dns");
 }
 
 TEST_F(PortsTest, ToStringLdap) {
-    ports p(ports::LDAP);
+    ports p(ports::ldap);
     EXPECT_EQ(p.to_string(), "ldap");
 }
 
 TEST_F(PortsTest, ToStringLdaps) {
-    ports p(ports::LDAPS);
+    ports p(ports::ldaps);
     EXPECT_EQ(p.to_string(), "ldaps");
 }
 
 TEST_F(PortsTest, ToStringDhcpServer) {
-    ports p(ports::DHCP_SERVER);
+    ports p(ports::dhcp_server);
     EXPECT_EQ(p.to_string(), "dhcp-server");
 }
 
 TEST_F(PortsTest, ToStringDhcpClient) {
-    ports p(ports::DHCP_CLIENT);
+    ports p(ports::dhcp_client);
     EXPECT_EQ(p.to_string(), "dhcp-client");
 }
 
 TEST_F(PortsTest, ToStringNtp) {
-    ports p(ports::NTP);
+    ports p(ports::ntp);
     EXPECT_EQ(p.to_string(), "ntp");
 }
 
 TEST_F(PortsTest, ToStringSnmp) {
-    ports p(ports::SNMP);
+    ports p(ports::snmp);
     EXPECT_EQ(p.to_string(), "snmp");
 }
 
 TEST_F(PortsTest, ToStringSnmpTrap) {
-    ports p(ports::SNMP_TRAP);
+    ports p(ports::snmp_trap);
     EXPECT_EQ(p.to_string(), "snmp-trap");
 }
 
 TEST_F(PortsTest, ToStringSmb) {
-    ports p(ports::SMB);
+    ports p(ports::smb);
     EXPECT_EQ(p.to_string(), "smb");
 }
 
 TEST_F(PortsTest, ToStringMysql) {
-    ports p(ports::MYSQL);
+    ports p(ports::mysql);
     EXPECT_EQ(p.to_string(), "mysql");
 }
 
 TEST_F(PortsTest, ToStringPostgresql) {
-    ports p(ports::POSTGRESQL);
+    ports p(ports::postgresql);
     EXPECT_EQ(p.to_string(), "postgresql");
 }
 
 TEST_F(PortsTest, ToStringRedis) {
-    ports p(ports::REDIS);
+    ports p(ports::redis);
     EXPECT_EQ(p.to_string(), "redis");
 }
 
 TEST_F(PortsTest, ToStringMongodb) {
-    ports p(ports::MONGODB);
+    ports p(ports::mongodb);
     EXPECT_EQ(p.to_string(), "mongodb");
 }
 
@@ -440,24 +440,24 @@ TEST_F(PortsTest, ToStringUnknown) {
 }
 
 TEST_F(PortsTest, EqualityOperators) {
-    ports lhs(ports::HTTP);
-    ports rhs(ports::HTTP);
-    ports other(ports::HTTPS);
+    ports lhs(ports::http);
+    ports rhs(ports::http);
+    ports other(ports::https);
 
     EXPECT_TRUE(lhs == rhs);
     EXPECT_FALSE(lhs == other);
     EXPECT_TRUE(lhs != other);
     EXPECT_FALSE(lhs != rhs);
 
-    EXPECT_TRUE(lhs == ports::HTTP);
-    EXPECT_FALSE(lhs == ports::HTTPS);
-    EXPECT_TRUE(lhs != ports::HTTPS);
-    EXPECT_FALSE(lhs != ports::HTTP);
+    EXPECT_TRUE(lhs == ports::http);
+    EXPECT_FALSE(lhs == ports::https);
+    EXPECT_TRUE(lhs != ports::https);
+    EXPECT_FALSE(lhs != ports::http);
 
-    EXPECT_TRUE(ports::HTTP == lhs);
-    EXPECT_FALSE(ports::HTTPS == lhs);
-    EXPECT_TRUE(ports::HTTPS != lhs);
-    EXPECT_FALSE(ports::HTTP != lhs);
+    EXPECT_TRUE(ports::http == lhs);
+    EXPECT_FALSE(ports::https == lhs);
+    EXPECT_TRUE(ports::https != lhs);
+    EXPECT_FALSE(ports::http != lhs);
 
     EXPECT_TRUE(lhs == uint16_t(80));
     EXPECT_FALSE(lhs == uint16_t(443));
@@ -475,8 +475,8 @@ TEST_F(PortsTest, EqualityWithUndef) {
     ports undef2;
 
     EXPECT_TRUE(undef1 == undef2);
-    EXPECT_TRUE(undef1 == ports::UNDEF);
-    EXPECT_TRUE(ports::UNDEF == undef1);
+    EXPECT_TRUE(undef1 == ports::undef);
+    EXPECT_TRUE(ports::undef == undef1);
     EXPECT_TRUE(undef1 == uint16_t(0));
     EXPECT_TRUE(uint16_t(0) == undef1);
 
@@ -484,33 +484,33 @@ TEST_F(PortsTest, EqualityWithUndef) {
 }
 
 TEST_F(PortsTest, EqualityWithEnum) {
-    ports lhs(ports::SSH);
-    EXPECT_TRUE(lhs == ports::raw::SSH);
-    EXPECT_FALSE(lhs == ports::raw::TELNET);
-    EXPECT_TRUE(lhs != ports::raw::TELNET);
-    EXPECT_FALSE(lhs != ports::raw::SSH);
+    ports lhs(ports::ssh);
+    EXPECT_TRUE(lhs == ports::raw::ssh);
+    EXPECT_FALSE(lhs == ports::raw::telnet);
+    EXPECT_TRUE(lhs != ports::raw::telnet);
+    EXPECT_FALSE(lhs != ports::raw::ssh);
 
-    EXPECT_TRUE(ports::raw::SSH == lhs);
-    EXPECT_FALSE(ports::raw::TELNET == lhs);
-    EXPECT_TRUE(ports::raw::TELNET != lhs);
-    EXPECT_FALSE(ports::raw::SSH != lhs);
+    EXPECT_TRUE(ports::raw::ssh == lhs);
+    EXPECT_FALSE(ports::raw::telnet == lhs);
+    EXPECT_TRUE(ports::raw::telnet != lhs);
+    EXPECT_FALSE(ports::raw::ssh != lhs);
 }
 
 TEST_F(PortsTest, ConstexprPortValues) {
-    constexpr ports http(ports::HTTP);
+    constexpr ports http(ports::http);
     constexpr ports undef;
     constexpr ports from_uint(static_cast<uint16_t>(22));
 
-    static_assert(http.port == ports::HTTP);
-    static_assert(undef.port == ports::UNDEF);
-    static_assert(from_uint.port == ports::SSH);
+    static_assert(http.port == ports::http);
+    static_assert(undef.port == ports::undef);
+    static_assert(from_uint.port == ports::ssh);
     static_assert(http.value() == 80u);
     static_assert(undef.value() == 0u);
     static_assert(from_uint.value() == 22u);
 }
 
 TEST_F(PortsTest, ConstexprBoolConversion) {
-    constexpr ports http(ports::HTTP);
+    constexpr ports http(ports::http);
     constexpr ports undef;
 
     static_assert(static_cast<bool>(http));
@@ -518,8 +518,8 @@ TEST_F(PortsTest, ConstexprBoolConversion) {
 }
 
 TEST_F(PortsTest, ConstexprRangeChecks) {
-    constexpr ports http(ports::HTTP);
-    constexpr ports mysql(ports::MYSQL);
+    constexpr ports http(ports::http);
+    constexpr ports mysql(ports::mysql);
     constexpr ports dynamic(static_cast<uint16_t>(60000));
 
     static_assert(http.is_well_known());
@@ -536,9 +536,9 @@ TEST_F(PortsTest, ConstexprRangeChecks) {
 }
 
 TEST_F(PortsTest, ConstexprEquality) {
-    constexpr ports lhs(ports::HTTP);
-    constexpr ports rhs(ports::HTTP);
-    constexpr ports other(ports::HTTPS);
+    constexpr ports lhs(ports::http);
+    constexpr ports rhs(ports::http);
+    constexpr ports other(ports::https);
 
     static_assert(lhs == rhs);
     static_assert(lhs != other);
@@ -557,7 +557,7 @@ TEST_F(UrlTest, DefaultConstructor) {
     url u;
     EXPECT_TRUE(u.scheme.empty());
     EXPECT_TRUE(u.host.empty());
-    EXPECT_EQ(u.port, ports::UNDEF);
+    EXPECT_EQ(u.port, ports::undef);
     EXPECT_TRUE(u.path.empty());
     EXPECT_TRUE(u.query.empty());
     EXPECT_TRUE(u.fragment.empty());
@@ -567,7 +567,7 @@ TEST_F(UrlTest, MoveConstructor) {
     url u1;
     u1.scheme = "https";
     u1.host = "example.com";
-    u1.port = ports::HTTPS;
+    u1.port = ports::https;
     u1.path = "/path";
     u1.query = "key=value";
     u1.fragment = "section";
@@ -575,7 +575,7 @@ TEST_F(UrlTest, MoveConstructor) {
     url u2(move(u1));
     EXPECT_EQ(u2.scheme, "https");
     EXPECT_EQ(u2.host, "example.com");
-    EXPECT_EQ(u2.port, ports::HTTPS);
+    EXPECT_EQ(u2.port, ports::https);
     EXPECT_EQ(u2.path, "/path");
     EXPECT_EQ(u2.query, "key=value");
     EXPECT_EQ(u2.fragment, "section");
@@ -636,7 +636,7 @@ TEST_F(UrlTest, ParseBasicHttp) {
     url u = url::parse("http://example.com");
     EXPECT_EQ(u.scheme, "http");
     EXPECT_EQ(u.host, "example.com");
-    EXPECT_EQ(u.port, ports::HTTP);
+    EXPECT_EQ(u.port, ports::http);
     EXPECT_EQ(u.path, "/");
     EXPECT_TRUE(u.query.empty());
     EXPECT_TRUE(u.fragment.empty());
@@ -646,7 +646,7 @@ TEST_F(UrlTest, ParseBasicHttps) {
     url u = url::parse("https://example.com");
     EXPECT_EQ(u.scheme, "https");
     EXPECT_EQ(u.host, "example.com");
-    EXPECT_EQ(u.port, ports::HTTPS);
+    EXPECT_EQ(u.port, ports::https);
     EXPECT_EQ(u.path, "/");
 }
 
@@ -654,7 +654,7 @@ TEST_F(UrlTest, ParseWithPath) {
     url u = url::parse("http://example.com/path/to/resource");
     EXPECT_EQ(u.scheme, "http");
     EXPECT_EQ(u.host, "example.com");
-    EXPECT_EQ(u.port, ports::HTTP);
+    EXPECT_EQ(u.port, ports::http);
     EXPECT_EQ(u.path, "/path/to/resource");
     EXPECT_TRUE(u.query.empty());
     EXPECT_TRUE(u.fragment.empty());
@@ -699,7 +699,7 @@ TEST_F(UrlTest, ParseWithStandardPort) {
     url u = url::parse("https://example.com:443/path");
     EXPECT_EQ(u.scheme, "https");
     EXPECT_EQ(u.host, "example.com");
-    EXPECT_EQ(u.port, ports::HTTPS);
+    EXPECT_EQ(u.port, ports::https);
     EXPECT_EQ(u.path, "/path");
 }
 
@@ -723,7 +723,7 @@ TEST_F(UrlTest, ParseIpv6HostWithoutPort) {
     url u = url::parse("http://[::1]/path");
     EXPECT_EQ(u.scheme, "http");
     EXPECT_EQ(u.host, "::1");
-    EXPECT_EQ(u.port, ports::HTTP);
+    EXPECT_EQ(u.port, ports::http);
     EXPECT_EQ(u.path, "/path");
 }
 
@@ -740,7 +740,7 @@ TEST_F(UrlTest, ParseIpv6HostNoPortPathQueryFragment) {
     url u = url::parse("http://[::1]/path?key=val#frag");
     EXPECT_EQ(u.scheme, "http");
     EXPECT_EQ(u.host, "::1");
-    EXPECT_EQ(u.port, ports::HTTP);
+    EXPECT_EQ(u.port, ports::http);
     EXPECT_EQ(u.path, "/path");
     EXPECT_EQ(u.query, "key=val");
     EXPECT_EQ(u.fragment, "frag");
@@ -766,7 +766,7 @@ TEST_F(UrlTest, ParseFtpScheme) {
     url u = url::parse("ftp://ftp.example.com/files");
     EXPECT_EQ(u.scheme, "ftp");
     EXPECT_EQ(u.host, "ftp.example.com");
-    EXPECT_EQ(u.port, ports::FTP);
+    EXPECT_EQ(u.port, ports::ftp);
     EXPECT_EQ(u.path, "/files");
 }
 
@@ -774,7 +774,7 @@ TEST_F(UrlTest, ParseWsScheme) {
     url u = url::parse("ws://echo.websocket.org");
     EXPECT_EQ(u.scheme, "ws");
     EXPECT_EQ(u.host, "echo.websocket.org");
-    EXPECT_EQ(u.port, ports::WS);
+    EXPECT_EQ(u.port, ports::ws);
     EXPECT_EQ(u.path, "/");
 }
 
@@ -782,7 +782,7 @@ TEST_F(UrlTest, ParseWssScheme) {
     url u = url::parse("wss://echo.websocket.org");
     EXPECT_EQ(u.scheme, "wss");
     EXPECT_EQ(u.host, "echo.websocket.org");
-    EXPECT_EQ(u.port, ports::WSS);
+    EXPECT_EQ(u.port, ports::wss);
     EXPECT_EQ(u.path, "/");
 }
 
@@ -790,7 +790,7 @@ TEST_F(UrlTest, ParseSshScheme) {
     url u = url::parse("ssh://user@host.example.com");
     EXPECT_EQ(u.scheme, "ssh");
     EXPECT_EQ(u.host, "user@host.example.com");
-    EXPECT_EQ(u.port, ports::SSH);
+    EXPECT_EQ(u.port, ports::ssh);
 }
 
 TEST_F(UrlTest, ParseQueryOnly) {
@@ -893,7 +893,7 @@ TEST_F(UrlTest, ToStringUndefPort) {
     url u;
     u.scheme = "custom";
     u.host = "example.com";
-    u.port = ports::UNDEF;
+    u.port = ports::undef;
     u.path = "/test";
     EXPECT_EQ(u.to_string(), "custom://example.com/test");
 }
@@ -1226,7 +1226,7 @@ TEST_F(IpAddressTest, ConstructorFromSockaddrIn) {
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
     EXPECT_FALSE(addr.is_ipv6());
-    EXPECT_EQ(addr.address_family(), ip_family::INET4);
+    EXPECT_EQ(addr.address_family(), ip_family::inet4);
     EXPECT_EQ(addr.port(), ports(8080u));
 }
 
@@ -1240,7 +1240,7 @@ TEST_F(IpAddressTest, ConstructorFromSockaddrIn6) {
     EXPECT_TRUE(addr.is_valid());
     EXPECT_FALSE(addr.is_ipv4());
     EXPECT_TRUE(addr.is_ipv6());
-    EXPECT_EQ(addr.address_family(), ip_family::INET6);
+    EXPECT_EQ(addr.address_family(), ip_family::inet6);
     EXPECT_EQ(addr.port(), ports(443u));
 }
 
@@ -1255,7 +1255,7 @@ TEST_F(IpAddressTest, CopyConstructor) {
 
     EXPECT_TRUE(addr2.is_valid());
     EXPECT_TRUE(addr2.is_ipv4());
-    EXPECT_EQ(addr2.address_family(), ip_family::INET4);
+    EXPECT_EQ(addr2.address_family(), ip_family::inet4);
     EXPECT_EQ(addr2.port(), ports(80u));
     EXPECT_EQ(addr1, addr2);
 }
@@ -1306,36 +1306,36 @@ TEST_F(IpAddressTest, IsValid) {
     ip_address invalid;
     EXPECT_FALSE(invalid.is_valid());
 
-    auto valid = ip_address::loopback(ports(80u), ip_family::INET4);
+    auto valid = ip_address::loopback(ports(80u), ip_family::inet4);
     EXPECT_TRUE(valid.is_valid());
 }
 
 TEST_F(IpAddressTest, IsIpv4) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet4);
     EXPECT_TRUE(addr.is_ipv4());
     EXPECT_FALSE(addr.is_ipv6());
 }
 
 TEST_F(IpAddressTest, IsIpv6) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET6);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet6);
     EXPECT_FALSE(addr.is_ipv4());
     EXPECT_TRUE(addr.is_ipv6());
 }
 
 TEST_F(IpAddressTest, AnyIpv4) {
-    auto addr = ip_address::any(ports(8080u), ip_family::INET4);
+    auto addr = ip_address::any(ports(8080u), ip_family::inet4);
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
-    EXPECT_EQ(addr.address_family(), ip_family::INET4);
+    EXPECT_EQ(addr.address_family(), ip_family::inet4);
     EXPECT_EQ(addr.port(), ports(8080u));
     EXPECT_NE(addr.size(), 0);
 }
 
 TEST_F(IpAddressTest, AnyIpv6) {
-    auto addr = ip_address::any(ports(8443u), ip_family::INET6);
+    auto addr = ip_address::any(ports(8443u), ip_family::inet6);
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv6());
-    EXPECT_EQ(addr.address_family(), ip_family::INET6);
+    EXPECT_EQ(addr.address_family(), ip_family::inet6);
     EXPECT_EQ(addr.port(), ports(8443u));
     EXPECT_NE(addr.size(), 0);
 }
@@ -1343,30 +1343,30 @@ TEST_F(IpAddressTest, AnyIpv6) {
 TEST_F(IpAddressTest, AnyDefaultPort) {
     auto addr = ip_address::any();
     EXPECT_TRUE(addr.is_valid());
-    EXPECT_EQ(addr.port(), ports::UNDEF);
+    EXPECT_EQ(addr.port(), ports::undef);
 }
 
 TEST_F(IpAddressTest, AnyDefaultFamily) {
     auto addr = ip_address::any(ports(80u));
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
-    EXPECT_EQ(addr.address_family(), ip_family::INET4);
+    EXPECT_EQ(addr.address_family(), ip_family::inet4);
 }
 
 TEST_F(IpAddressTest, LoopbackIpv4) {
-    auto addr = ip_address::loopback(ports(22u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(22u), ip_family::inet4);
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
-    EXPECT_EQ(addr.address_family(), ip_family::INET4);
+    EXPECT_EQ(addr.address_family(), ip_family::inet4);
     EXPECT_EQ(addr.port(), ports(22u));
     EXPECT_NE(addr.size(), 0);
 }
 
 TEST_F(IpAddressTest, LoopbackIpv6) {
-    auto addr = ip_address::loopback(ports(443u), ip_family::INET6);
+    auto addr = ip_address::loopback(ports(443u), ip_family::inet6);
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv6());
-    EXPECT_EQ(addr.address_family(), ip_family::INET6);
+    EXPECT_EQ(addr.address_family(), ip_family::inet6);
     EXPECT_EQ(addr.port(), ports(443u));
     EXPECT_NE(addr.size(), 0);
 }
@@ -1374,25 +1374,25 @@ TEST_F(IpAddressTest, LoopbackIpv6) {
 TEST_F(IpAddressTest, LoopbackDefaultPort) {
     auto addr = ip_address::loopback();
     EXPECT_TRUE(addr.is_valid());
-    EXPECT_EQ(addr.port(), ports::UNDEF);
+    EXPECT_EQ(addr.port(), ports::undef);
 }
 
 TEST_F(IpAddressTest, LoopbackDefaultFamily) {
     auto addr = ip_address::loopback(ports(53u));
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
-    EXPECT_EQ(addr.address_family(), ip_family::INET4);
+    EXPECT_EQ(addr.address_family(), ip_family::inet4);
 }
 
 TEST_F(IpAddressTest, DataConstValidIpv4) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet4);
     const ::sockaddr* sa = addr.data();
     EXPECT_NE(sa, nullptr);
     EXPECT_EQ(sa->sa_family, AF_INET);
 }
 
 TEST_F(IpAddressTest, DataConstValidIpv6) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET6);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet6);
     const ::sockaddr* sa = addr.data();
     EXPECT_NE(sa, nullptr);
     EXPECT_EQ(sa->sa_family, AF_INET6);
@@ -1405,7 +1405,7 @@ TEST_F(IpAddressTest, DataConstInvalid) {
 }
 
 TEST_F(IpAddressTest, DataNonConstValid) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet4);
     ::sockaddr* sa = addr.data();
     EXPECT_NE(sa, nullptr);
     EXPECT_EQ(sa->sa_family, AF_INET);
@@ -1418,12 +1418,12 @@ TEST_F(IpAddressTest, DataNonConstInvalid) {
 }
 
 TEST_F(IpAddressTest, SizeIpv4) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet4);
     EXPECT_EQ(addr.size(), static_cast<int>(sizeof(::sockaddr_in)));
 }
 
 TEST_F(IpAddressTest, SizeIpv6) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET6);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet6);
     EXPECT_EQ(addr.size(), static_cast<int>(sizeof(::sockaddr_in6)));
 }
 
@@ -1433,7 +1433,7 @@ TEST_F(IpAddressTest, SizeInvalid) {
 }
 
 TEST_F(IpAddressTest, AddressAccessorIpv4) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet4);
     const auto& var = addr.address();
     EXPECT_TRUE(var.holds_alternative<::sockaddr_in>());
     EXPECT_FALSE(var.holds_alternative<::sockaddr_in6>());
@@ -1441,7 +1441,7 @@ TEST_F(IpAddressTest, AddressAccessorIpv4) {
 }
 
 TEST_F(IpAddressTest, AddressAccessorIpv6) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::INET6);
+    auto addr = ip_address::loopback(ports(80u), ip_family::inet6);
     const auto& var = addr.address();
     EXPECT_FALSE(var.holds_alternative<::sockaddr_in>());
     EXPECT_TRUE(var.holds_alternative<::sockaddr_in6>());
@@ -1455,43 +1455,43 @@ TEST_F(IpAddressTest, AddressAccessorInvalid) {
 }
 
 TEST_F(IpAddressTest, FamilyIpv4) {
-    auto addr = ip_address::loopback(ports::UNDEF, ip_family::INET4);
-    EXPECT_EQ(addr.address_family(), ip_family::INET4);
+    auto addr = ip_address::loopback(ports::undef, ip_family::inet4);
+    EXPECT_EQ(addr.address_family(), ip_family::inet4);
 }
 
 TEST_F(IpAddressTest, FamilyIpv6) {
-    auto addr = ip_address::loopback(ports::UNDEF, ip_family::INET6);
-    EXPECT_EQ(addr.address_family(), ip_family::INET6);
+    auto addr = ip_address::loopback(ports::undef, ip_family::inet6);
+    EXPECT_EQ(addr.address_family(), ip_family::inet6);
 }
 
 TEST_F(IpAddressTest, FamilyInvalid) {
     ip_address addr;
-    EXPECT_EQ(addr.address_family(), ip_family::UNDEF);
+    EXPECT_EQ(addr.address_family(), ip_family::undef);
 }
 
 TEST_F(IpAddressTest, PortIpv4) {
-    auto addr = ip_address::loopback(ports(25u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(25u), ip_family::inet4);
     EXPECT_EQ(addr.port(), ports(25u));
 }
 
 TEST_F(IpAddressTest, PortIpv6) {
-    auto addr = ip_address::loopback(ports(993u), ip_family::INET6);
+    auto addr = ip_address::loopback(ports(993u), ip_family::inet6);
     EXPECT_EQ(addr.port(), ports(993u));
 }
 
 TEST_F(IpAddressTest, PortInvalid) {
     ip_address addr;
-    EXPECT_EQ(addr.port(), ports::UNDEF);
+    EXPECT_EQ(addr.port(), ports::undef);
 }
 
 TEST_F(IpAddressTest, ToStringIpv4) {
-    auto addr = ip_address::loopback(ports(8080u), ip_family::INET4);
+    auto addr = ip_address::loopback(ports(8080u), ip_family::inet4);
     string str = addr.to_string();
     EXPECT_EQ(str, "127.0.0.1:8080");
 }
 
 TEST_F(IpAddressTest, ToStringIpv6) {
-    auto addr = ip_address::loopback(ports(443u), ip_family::INET6);
+    auto addr = ip_address::loopback(ports(443u), ip_family::inet6);
     string str = addr.to_string();
     EXPECT_EQ(str, "[::1]:443");
 }
@@ -1503,13 +1503,13 @@ TEST_F(IpAddressTest, ToStringInvalid) {
 }
 
 TEST_F(IpAddressTest, ToStringAnyIpv4) {
-    auto addr = ip_address::any(ports(80u), ip_family::INET4);
+    auto addr = ip_address::any(ports(80u), ip_family::inet4);
     string str = addr.to_string();
     EXPECT_EQ(str, "0.0.0.0:80");
 }
 
 TEST_F(IpAddressTest, ToStringAnyIpv6) {
-    auto addr = ip_address::any(ports(80u), ip_family::INET6);
+    auto addr = ip_address::any(ports(80u), ip_family::inet6);
     string str = addr.to_string();
     EXPECT_EQ(str, "[::]:80");
 }
@@ -1556,7 +1556,7 @@ TEST_F(IpAddressTest, ParseIpv4DefaultPort) {
     auto result = ip_address::parse("10.0.0.1");
     EXPECT_TRUE(result.has_value());
     EXPECT_TRUE(result->is_ipv4());
-    EXPECT_EQ(result->port(), ports::UNDEF);
+    EXPECT_EQ(result->port(), ports::undef);
 }
 
 TEST_F(IpAddressTest, EqualitySameIpv4) {
@@ -1629,30 +1629,30 @@ TEST_F(IpAddressTest, EqualityOneInvalid) {
 }
 
 TEST_F(IpAddressTest, EqualitySameAddressDifferentObjectOrder) {
-    auto addr1 = ip_address::loopback(ports(80u), ip_family::INET4);
-    auto addr2 = ip_address::loopback(ports(80u), ip_family::INET4);
+    auto addr1 = ip_address::loopback(ports(80u), ip_family::inet4);
+    auto addr2 = ip_address::loopback(ports(80u), ip_family::inet4);
     EXPECT_TRUE(addr1 == addr2);
     EXPECT_TRUE(addr2 == addr1);
 }
 
 TEST_F(IpAddressTest, AnyInvalidFamily) {
-    auto addr = ip_address::any(ports(80u), ip_family::UNDEF);
+    auto addr = ip_address::any(ports(80u), ip_family::undef);
     EXPECT_FALSE(addr.is_valid());
 }
 
 TEST_F(IpAddressTest, LoopbackInvalidFamily) {
-    auto addr = ip_address::loopback(ports(80u), ip_family::UNDEF);
+    auto addr = ip_address::loopback(ports(80u), ip_family::undef);
     EXPECT_FALSE(addr.is_valid());
 }
 
 TEST_F(IpAddressTest, ToStringIpv4WithoutPort) {
-    auto addr = ip_address::parse("192.168.0.1", ports::UNDEF);
+    auto addr = ip_address::parse("192.168.0.1", ports::undef);
     EXPECT_TRUE(addr.has_value());
     EXPECT_EQ(addr->to_string(), "192.168.0.1:0");
 }
 
 TEST_F(IpAddressTest, ToStringIpv6WithoutPort) {
-    auto addr = ip_address::parse("fe80::1", ports::UNDEF);
+    auto addr = ip_address::parse("fe80::1", ports::undef);
     EXPECT_TRUE(addr.has_value());
     EXPECT_EQ(addr->to_string(), "[fe80::1]:0");
 }
@@ -1671,7 +1671,7 @@ TEST_F(IpAddressTest, ParseIpv4Broadcast) {
 }
 
 TEST_F(IpAddressTest, EqualityAfterMove) {
-    auto addr1 = ip_address::loopback(ports(80u), ip_family::INET4);
+    auto addr1 = ip_address::loopback(ports(80u), ip_family::inet4);
     ip_address addr2(move(addr1));
     EXPECT_TRUE(addr2.is_valid());
 }
@@ -2036,7 +2036,7 @@ TEST_F(MacAddressTest, InvalidIpAddressForArpParse) {
 }
 
 TEST_F(MacAddressTest, InvalidIpv6AddressForArpParse) {
-    auto ip = ip_address::parse("::1", ports::UNDEF);
+    auto ip = ip_address::parse("::1", ports::undef);
     EXPECT_TRUE(ip.has_value());
     auto result = mac_address::parse(*ip);
     EXPECT_FALSE(result.has_value());
@@ -2091,7 +2091,7 @@ TEST_F(ArpTest, ResolveInvalidIpReturnsNone) {
 
 TEST_F(ArpTest, ResolveIpv6ReturnsNone) {
     arp resolver;
-    auto ip = ip_address::parse("::1", ports::UNDEF);
+    auto ip = ip_address::parse("::1", ports::undef);
     ASSERT_TRUE(ip.has_value());
     EXPECT_FALSE(resolver.resolve(*ip).has_value());
 }
@@ -2140,7 +2140,7 @@ TEST_F(ArpTest, ResolveLocalhostWithoutOpen) {
         GTEST_SKIP() << "Root privileges required";
     }
     arp resolver;
-    auto ip = ip_address::loopback(ports::UNDEF, ip_family::INET4);
+    auto ip = ip_address::loopback(ports::undef, ip_family::inet4);
     auto result = resolver.resolve(ip, milliseconds(500));
     resolver.close();
 }
@@ -2150,7 +2150,7 @@ TEST_F(ArpTest, ResolveWithZeroTimeout) {
         GTEST_SKIP() << "Root privileges required";
     }
     arp resolver;
-    auto ip = ip_address::parse("8.8.8.8", ports::UNDEF);
+    auto ip = ip_address::parse("8.8.8.8", ports::undef);
     ASSERT_TRUE(ip.has_value());
     auto result = resolver.resolve(*ip, milliseconds(0));
 #ifdef NEFORCE_PLATFORM_WINDOWS

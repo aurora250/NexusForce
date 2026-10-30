@@ -260,7 +260,7 @@ void smtp_socket::do_tls_handshake(const ssl_context& ctx, const string& sni_hos
 }
 
 void smtp_socket::open_and_connect(const ip_address& addr) {
-    open_ip(addr.address_family(), type::STREAM, protocol::TCP);
+    open_ip(addr.address_family(), type::stream, protocol::tcp);
     if (::connect(fd_, addr.data(), addr.size()) != 0) {
         close();
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to SMTP server"));
@@ -474,7 +474,7 @@ struct smtp_socket::async_connect_op : enable_shared_from_this<async_connect_op>
         }
 
         try {
-            sock->open_ip(endpoint.address_family(), socket_type::STREAM, socket_protocol::TCP);
+            sock->open_ip(endpoint.address_family(), socket_type::stream, socket_protocol::tcp);
         } catch (const system_exception& e) {
             fail(e.code());
             return;

@@ -175,11 +175,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * 定义DNS消息的操作类型，指定查询或响应的目的。
  */
 enum class dns_opcode : uint8_t {
-    QUERY = 0,  ///< 标准查询
-    IQUERY = 1, ///< 反向查询
-    STATUS = 2, ///< 服务器状态请求
-    NOTIFY = 4, ///< 区域通知
-    UPDATE = 5  ///< 区域更新
+    query = 0,  ///< 标准查询
+    iquery = 1, ///< 反向查询
+    status = 2, ///< 服务器状态请求
+    notify = 4, ///< 区域通知
+    update = 5  ///< 区域更新
 };
 
 /**
@@ -190,10 +190,10 @@ enum class dns_opcode : uint8_t {
  * 符合 RFC 1035 §3.2.4 和 IANA DNS Parameters 注册表。
  */
 enum class dns_class : uint16_t {
-    INTERNET = 1, ///< Internet (IN)
-    CHAOS = 3,    ///< CHAOS
-    HESIOD = 4,   ///< Hesiod
-    ANY = 255     ///< 任何类
+    internet = 1, ///< Internet (IN)
+    chaos = 3,    ///< CHAOS
+    hesiod = 4,   ///< Hesiod
+    any = 255     ///< 任何类
 };
 
 /**
@@ -203,12 +203,12 @@ enum class dns_class : uint16_t {
  * 定义DNS服务器返回的响应状态码。
  */
 enum class dns_response : uint8_t {
-    NON_ERROR = 0,       ///< 无错误，查询成功
-    FORMAT_ERROR = 1,    ///< 格式错误，服务器无法解析查询
-    SERVER_FAILURE = 2,  ///< 服务器失败，无法处理查询
-    NAME_ERROR = 3,      ///< 名称错误，域名不存在
-    NOT_IMPLEMENTED = 4, ///< 未实现，服务器不支持该查询类型
-    REFUSED = 5          ///< 拒绝，服务器拒绝执行查询
+    non_error = 0,       ///< 无错误，查询成功
+    format_error = 1,    ///< 格式错误，服务器无法解析查询
+    server_failure = 2,  ///< 服务器失败，无法处理查询
+    name_error = 3,      ///< 名称错误，域名不存在
+    not_implemented = 4, ///< 未实现，服务器不支持该查询类型
+    refused = 5          ///< 拒绝，服务器拒绝执行查询
 };
 
 /** @} */ // DNS
@@ -330,7 +330,7 @@ struct dns_query_result {
     vector<dns_record> authorities;                      ///< 权威记录
     vector<dns_record> additional;                       ///< 附加记录
     milliseconds query_time;                             ///< 查询耗时
-    dns_response response_code{dns_response::NON_ERROR}; ///< 响应码
+    dns_response response_code{dns_response::non_error}; ///< 响应码
     uint8_t extended_rcode{0};                           ///< 扩展响应码（EDNS0，RFC 6891）
     uint16_t udp_payload_size{512};                      ///< 服务器支持的UDP载荷大小（EDNS0）
     uint8_t edns_version{0};                             ///< EDNS版本号
@@ -343,7 +343,7 @@ struct dns_query_result {
      * @brief 检查查询是否成功
      * @return 成功返回true
      */
-    NEFORCE_NODISCARD bool is_success() const noexcept { return response_code == dns_response::NON_ERROR; }
+    NEFORCE_NODISCARD bool is_success() const noexcept { return response_code == dns_response::non_error; }
 
     /**
      * @brief 获取完整响应码（含EDNS0扩展位）

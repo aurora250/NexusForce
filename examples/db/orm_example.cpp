@@ -52,8 +52,8 @@ int main() {
     // DML: INSERT 方言差异
     printcln(color::yellow(), "--- INSERT 方言感知占位符 ---");
     printfln("Generic:  {}", sql_mapper<User>::insert_sql());
-    printfln("PgSQL:    {}", sql_mapper<User>::insert_sql("", sql_dialect::POSTGRESQL));
-    printfln("Oracle:   {}", sql_mapper<User>::insert_sql("", sql_dialect::ORACLE));
+    printfln("PgSQL:    {}", sql_mapper<User>::insert_sql("", sql_dialect::postgresql));
+    printfln("Oracle:   {}", sql_mapper<User>::insert_sql("", sql_dialect::oracle));
 
     // DML: UPDATE / DELETE
     printcln(color::yellow(), "\n--- UPDATE / DELETE ---");

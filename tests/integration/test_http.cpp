@@ -130,7 +130,7 @@ protected:
 
 TEST_F(ResponseGenerationTest, FullHtmlResponse) {
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type(http_content::HTML_TEXT());
     resp.body = "<html><body>Hello</body></html>";
@@ -146,7 +146,7 @@ TEST_F(ResponseGenerationTest, FullHtmlResponse) {
 
 TEST_F(ResponseGenerationTest, JsonResponse) {
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type(http_content::JSON_APP());
     resp.body = "{\"status\":\"ok\"}";
@@ -157,7 +157,7 @@ TEST_F(ResponseGenerationTest, JsonResponse) {
 
 TEST_F(ResponseGenerationTest, MultipleCookiesInResponse) {
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
 
     http_cookie c1;
@@ -182,7 +182,7 @@ TEST_F(ResponseGenerationTest, MultipleCookiesInResponse) {
 
 TEST_F(ResponseGenerationTest, PermanentRedirectUsesCorrectStatusCode) {
     http_response resp;
-    resp.status = http_status::S3_MOVED_PERMANENT;
+    resp.status = http_status::moved_permanent;
     resp.status_message = "Moved Permanently";
     resp.redirect_url = "https://new-site.example.com";
 
@@ -193,7 +193,7 @@ TEST_F(ResponseGenerationTest, PermanentRedirectUsesCorrectStatusCode) {
 
 TEST_F(ResponseGenerationTest, TemporaryRedirectUsesCorrectStatusCode) {
     http_response resp;
-    resp.status = http_status::S3_TEMPORARY_REDIRECT;
+    resp.status = http_status::temporary_redirect;
     resp.status_message = "Temporary Redirect";
     resp.redirect_url = "/temporary";
 
@@ -203,7 +203,7 @@ TEST_F(ResponseGenerationTest, TemporaryRedirectUsesCorrectStatusCode) {
 
 TEST_F(ResponseGenerationTest, SeeOtherRedirect) {
     http_response resp;
-    resp.status = http_status::S3_SEE_OTHER;
+    resp.status = http_status::see_other;
     resp.status_message = "See Other";
     resp.redirect_url = "/other";
 
@@ -217,7 +217,7 @@ protected:
 
     void SetUp() override {
         router.get("/api/health", [](http_request&, http_response& res) {
-            res.status = http_status::S2_OK;
+            res.status = http_status::ok;
             res.status_message = "OK";
             res.set_content_type(http_content::JSON_APP());
             res.body = "{\"status\":\"healthy\"}";
@@ -225,14 +225,14 @@ protected:
 
         router.get("/api/users/:userId", [](http_request& req, http_response& res) {
             auto id = req.parameter("userId");
-            res.status = http_status::S2_OK;
+            res.status = http_status::ok;
             res.status_message = "OK";
             res.set_content_type(http_content::JSON_APP());
             res.body = "{\"id\":" + string(id) + ",\"name\":\"User " + string(id) + "\"}";
         });
 
         router.post("/api/users", [](http_request& req, http_response& res) {
-            res.status = http_status::S2_CREATED;
+            res.status = http_status::created;
             res.status_message = "Created";
             res.set_content_type(http_content::JSON_APP());
             res.body = req.body;
@@ -323,7 +323,7 @@ TEST_F(FilterChainIntegrationTest, PreFilterCanStopExecution) {
     class StoppingFilter : public http_filter {
     public:
         bool pre_filter(http_request&, http_response& res) override {
-            res.status = http_status::S4_FORBIDDEN;
+            res.status = http_status::forbidden;
             res.status_message = "Forbidden";
             res.body = "blocked";
             return false;
@@ -461,7 +461,7 @@ TEST_F(HttpServerIntegrationTest, ServerPortConfiguration) {
 TEST_F(HttpServerIntegrationTest, ServerRouterAccess) {
     http_server server(ports{18081}, ctx_);
     server.router().get("/test", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.status_message = "OK";
         res.body = "test ok";
     });
@@ -498,7 +498,7 @@ TEST_F(ClientRequestIntegrationTest, FullRequestConstruction) {
     http_client_request req;
     req.method = http_method::POST();
     req.host = "api.example.com";
-    req.port = ports::HTTP;
+    req.port = ports::http;
     req.path = "/api/v1/submit";
     req.set_header("Authorization", "Bearer token123");
     req.set_header("Content-Type", "application/json");
@@ -522,24 +522,24 @@ protected:
 };
 
 TEST_F(WebSocketIntegrationTest, OpcodeValuesAreCorrect) {
-    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::CONTINUATION), 0x0u);
-    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::TEXT), 0x1u);
-    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::BINARY), 0x2u);
-    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::CLOSE), 0x8u);
-    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::PING), 0x9u);
-    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::PONG), 0xAu);
+    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::continuation), 0x0u);
+    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::text), 0x1u);
+    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::binary), 0x2u);
+    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::close), 0x8u);
+    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::ping), 0x9u);
+    EXPECT_EQ(static_cast<uint8_t>(websocket_opcode::pong), 0xAu);
 }
 
 TEST_F(WebSocketIntegrationTest, FrameHeaderIsPacked) { EXPECT_EQ(sizeof(websocket_frame_header), 2u); }
 
 TEST_F(WebSocketIntegrationTest, CloseStatusValuesAreCorrect) {
-    EXPECT_EQ(static_cast<uint16_t>(websocket_status::NORMAL_CLOSURE), 1000u);
-    EXPECT_EQ(static_cast<uint16_t>(websocket_status::GOING_AWAY), 1001u);
-    EXPECT_EQ(static_cast<uint16_t>(websocket_status::PROTOCOL_ERROR), 1002u);
-    EXPECT_EQ(static_cast<uint16_t>(websocket_status::UNSUPPORTED_DATA), 1003u);
-    EXPECT_EQ(static_cast<uint16_t>(websocket_status::POLICY_VIOLATION), 1008u);
-    EXPECT_EQ(static_cast<uint16_t>(websocket_status::MESSAGE_TOO_BIG), 1009u);
-    EXPECT_EQ(static_cast<uint16_t>(websocket_status::INTERNAL_ERROR), 1011u);
+    EXPECT_EQ(static_cast<uint16_t>(websocket_status::normal_closure), 1000u);
+    EXPECT_EQ(static_cast<uint16_t>(websocket_status::going_away), 1001u);
+    EXPECT_EQ(static_cast<uint16_t>(websocket_status::protocol_error), 1002u);
+    EXPECT_EQ(static_cast<uint16_t>(websocket_status::unsupported_data), 1003u);
+    EXPECT_EQ(static_cast<uint16_t>(websocket_status::policy_violation), 1008u);
+    EXPECT_EQ(static_cast<uint16_t>(websocket_status::message_too_big), 1009u);
+    EXPECT_EQ(static_cast<uint16_t>(websocket_status::internal_error), 1011u);
 }
 
 class EndToEndRouterTest : public ::testing::Test {
@@ -555,12 +555,12 @@ TEST_F(EndToEndRouterTest, RESTfulCRUDFlow) {
     router.get("/items/:id", [&](http_request& req, http_response& res) {
         auto id = string(req.parameter("id"));
         if (db.find(id) != db.end()) {
-            res.status = http_status::S2_OK;
+            res.status = http_status::ok;
             res.status_message = "OK";
             res.set_content_type(http_content::JSON_APP());
             res.body = "{\"id\":\"" + id + "\",\"value\":\"" + db[id] + "\"}";
         } else {
-            res.status = http_status::S4_NOT_FOUND;
+            res.status = http_status::not_found;
             res.status_message = "Not Found";
         }
     });
@@ -568,7 +568,7 @@ TEST_F(EndToEndRouterTest, RESTfulCRUDFlow) {
     router.post("/items/:id", [&](http_request& req, http_response& res) {
         auto id = string(req.parameter("id"));
         db[id] = req.body;
-        res.status = http_status::S2_CREATED;
+        res.status = http_status::created;
         res.status_message = "Created";
         res.body = req.body;
     });
@@ -576,7 +576,7 @@ TEST_F(EndToEndRouterTest, RESTfulCRUDFlow) {
     router.del("/items/:id", [&](http_request& req, http_response& res) {
         auto id = string(req.parameter("id"));
         db.erase(id);
-        res.status = http_status::S2_NO_CONTENT;
+        res.status = http_status::no_content;
         res.status_message = "No Content";
     });
 
@@ -741,7 +741,7 @@ TEST_F(CompressFilterIntegrationTest, GzipEncodingSelected) {
     req.set_header("Accept-Encoding", "gzip, deflate, br");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type(http_content::HTML_TEXT());
     resp.body = string(2048, 'X');
@@ -759,7 +759,7 @@ TEST_F(CompressFilterIntegrationTest, DeflateFallbackWhenNoGzip) {
     req.set_header("Accept-Encoding", "deflate");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.status_message = "OK";
     resp.set_content_type(http_content::PLAIN_TEXT());
     resp.body = string(2048, 'Y');
@@ -1019,7 +1019,7 @@ TEST_F(FilterChainIntegrationTest, RouterWithExceptionHandlerSkipsPostFilters) {
 
     router.use(make_unique<tracker>(&post_filter_called));
     router.set_exception_handler([](http_request&, http_response& res, const exception&) {
-        res.status = http_status::S5_INTERNAL_SERVER_ERROR;
+        res.status = http_status::internal_server_error;
         res.body = "handled";
     });
     router.get("/crash", [](http_request&, http_response&) { throw value_exception("boom"); });
@@ -1162,7 +1162,7 @@ TEST_F(SecurityRouterIntegrationTest, XssProtectionDisabledByDefaultWithRouter) 
     router.use(move(sec));
 
     router.get("/", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.body = "ok";
     });
 
@@ -1181,7 +1181,7 @@ TEST_F(SecurityRouterIntegrationTest, RateLimitWithMiddlewareChain) {
     router.use(move(rl));
 
     router.get("/api", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.body = "data";
     });
 
@@ -1204,7 +1204,7 @@ TEST_F(HealthCheckIntegrationTest, FilterInRouterChain) {
     router.use(move(hc));
 
     router.get("/api", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.body = "api data";
     });
 
@@ -1212,7 +1212,7 @@ TEST_F(HealthCheckIntegrationTest, FilterInRouterChain) {
     req.method = http_method::GET();
     req.path = "/healthz";
     auto resp = router.handle_request(req);
-    EXPECT_EQ(resp.status, http_status::S2_OK);
+    EXPECT_EQ(resp.status, http_status::ok);
     EXPECT_TRUE(resp.body.contains("\"status\":\"ok\""));
     EXPECT_TRUE(resp.body.contains("\"uptime\""));
 
@@ -1233,7 +1233,7 @@ TEST_F(HealthCheckIntegrationTest, FailedCheckAffectsRouter) {
     req.method = http_method::GET();
     req.path = "/healthz";
     auto resp = router.handle_request(req);
-    EXPECT_EQ(resp.status, http_status::S5_SERVICE_UNAVAILABLE);
+    EXPECT_EQ(resp.status, http_status::service_unavailable);
     EXPECT_TRUE(resp.body.contains("unhealthy"));
 }
 
@@ -1373,7 +1373,7 @@ protected:
 };
 
 TEST_F(LoadBalancerIntegrationTest, RoundRobinDistribution) {
-    lb.set_strategy(lb_strategy::ROUND_ROBIN);
+    lb.set_strategy(lb_strategy::round_robin);
 
     auto* b1 = lb.select_backend();
     auto* b2 = lb.select_backend();
@@ -1394,7 +1394,7 @@ TEST_F(LoadBalancerIntegrationTest, RoundRobinDistribution) {
 }
 
 TEST_F(LoadBalancerIntegrationTest, FailureMarksUnhealthy) {
-    lb.set_strategy(lb_strategy::ROUND_ROBIN);
+    lb.set_strategy(lb_strategy::round_robin);
     lb.set_max_failures(2);
 
     auto* b1 = lb.select_backend();
@@ -1409,7 +1409,7 @@ TEST_F(LoadBalancerIntegrationTest, FailureMarksUnhealthy) {
 }
 
 TEST_F(LoadBalancerIntegrationTest, LeastConnectionsStrategy) {
-    lb.set_strategy(lb_strategy::LEAST_CONNECTIONS);
+    lb.set_strategy(lb_strategy::least_connections);
 
     auto* b = lb.select_backend();
     ASSERT_NE(b, nullptr);
@@ -1428,7 +1428,7 @@ TEST_F(LoadBalancerIntegrationTest, BackendHostsSnapshot) {
 }
 
 TEST_F(LoadBalancerIntegrationTest, WeightedStrategySelectsHealthy) {
-    lb.set_strategy(lb_strategy::WEIGHTED);
+    lb.set_strategy(lb_strategy::weighted);
 
     lb.backend_hosts();
 
@@ -1450,7 +1450,7 @@ TEST_F(CacheIntegrationTest, FullCacheLifecycle) {
     string key = response_cache::build_key(http_method::GET(), "/api/users");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.body = R"([{"id":1,"name":"Alice"}])";
     resp.headers["Content-Type"] = "application/json";
     cache.put(key, resp, seconds{30});
@@ -1458,7 +1458,7 @@ TEST_F(CacheIntegrationTest, FullCacheLifecycle) {
     auto cached = cache.get(key);
     ASSERT_TRUE(cached.has_value());
     EXPECT_EQ(cached->body, resp.body);
-    EXPECT_EQ(cached->status, http_status::S2_OK);
+    EXPECT_EQ(cached->status, http_status::ok);
     EXPECT_EQ(cached->headers["Content-Type"], "application/json");
 }
 
@@ -1468,7 +1468,7 @@ TEST_F(CacheIntegrationTest, CacheCleanupRemovesExpired) {
     string key = response_cache::build_key(http_method::GET(), "/temporary");
 
     http_response resp;
-    resp.status = http_status::S2_OK;
+    resp.status = http_status::ok;
     resp.body = "temporary data";
     cache.put(key, resp);
 
@@ -1514,7 +1514,7 @@ TEST_F(CacheIntegrationTest, CacheFilterWithRouter) {
     bool cont1 = raw_cf->pre_filter(req1, resp1);
     EXPECT_TRUE(cont1);
 
-    resp1.status = http_status::S2_OK;
+    resp1.status = http_status::ok;
     resp1.body = "cached content";
     resp1.headers["Cache-Control"] = "public, max-age=60";
 
@@ -1527,7 +1527,7 @@ TEST_F(CacheIntegrationTest, CacheFilterWithRouter) {
     bool cont2 = raw_cf->pre_filter(req2, resp2);
     EXPECT_FALSE(cont2);
     EXPECT_EQ(resp2.body, "cached content");
-    EXPECT_EQ(resp2.status, http_status::S2_OK);
+    EXPECT_EQ(resp2.status, http_status::ok);
 }
 
 class GrpcIntegrationTest : public ::testing::Test {
@@ -1579,11 +1579,11 @@ TEST_F(GrpcIntegrationTest, EncodeMultipleMessages) {
 }
 
 TEST_F(GrpcIntegrationTest, StatusCodeMapping) {
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::OK), http_status::S2_OK);
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::NOT_FOUND), http_status::S4_NOT_FOUND);
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::INTERNAL), http_status::S5_INTERNAL_SERVER_ERROR);
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::UNAUTHENTICATED), http_status::S4_UNAUTHORIZED);
-    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::PERMISSION_DENIED), http_status::S4_FORBIDDEN);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::ok), http_status::ok);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::not_found), http_status::not_found);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::internal), http_status::internal_server_error);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::unauthenticated), http_status::unauthorized);
+    EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::permission_denied), http_status::forbidden);
 }
 
 TEST_F(GrpcIntegrationTest, IncompleteFrameHandling) {
@@ -1804,7 +1804,7 @@ TEST_F(HttpClientLocalServerIntegration, SyncRequestRoundtrip) {
 
     http_server server(test_port, server_ctx_, 1);
     server.router().get("/hello", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.status_message = "OK";
         res.body = "local-hello";
     });
@@ -1835,7 +1835,7 @@ TEST_F(HttpClientLocalServerIntegration, RequestAsyncFuture) {
 
     http_server server(test_port, server_ctx_, 1);
     server.router().get("/async", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.status_message = "OK";
         res.body = "async-body";
     });
@@ -1865,6 +1865,187 @@ TEST_F(HttpClientLocalServerIntegration, RequestAsyncFuture) {
     server.stop();
 }
 
+class HttpServerStatusIntegration : public ::testing::Test {
+protected:
+    static ports allocate_port() {
+        tcp_acceptor tmp;
+        tmp.open(ip_address::loopback());
+        ports port(0u);
+        const auto bound = tmp.local_endpoint();
+        if (bound.has_value()) {
+            port = bound->port();
+        }
+        tmp.close();
+        return port;
+    }
+
+    static string receive_response(tcp_client& client) {
+        const auto data = client.receive_all();
+        return string(data.begin(), data.end());
+    }
+
+    io_context ctx_;
+};
+
+TEST_F(HttpServerStatusIntegration, UnsupportedHttpVersionReturns505) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.router().get("/", [](http_request&, http_response& res) { res.status = http_status::ok; });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    ASSERT_TRUE(client.send_all("GET / HTTP/9.9\r\nHost: test\r\nConnection: close\r\n\r\n"));
+
+    const string response = receive_response(client);
+    EXPECT_TRUE(response.starts_with("HTTP/1.1 505 HTTP Version Not Supported\r\n"));
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, TooManyHeadersReturns431) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.max_header_count = 2;
+    server.router().get("/", [](http_request&, http_response& res) { res.status = http_status::ok; });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    ASSERT_TRUE(client.send_all("GET / HTTP/1.1\r\nHost: test\r\nX-A: 1\r\nX-B: 2\r\nConnection: close\r\n\r\n"));
+
+    const string response = receive_response(client);
+    EXPECT_TRUE(response.starts_with("HTTP/1.1 431 Request Header Fields Too Large\r\n"));
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, OversizedHeadersReturns431) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.max_server_header_size = byte_size(64);
+    server.router().get("/", [](http_request&, http_response& res) { res.status = http_status::ok; });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    ASSERT_TRUE(client.send_all("GET / HTTP/1.1\r\nHost: test\r\nX-Pad: "
+                                "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz\r\nConnection: close\r\n\r\n"));
+
+    const string response = receive_response(client);
+    EXPECT_TRUE(response.starts_with("HTTP/1.1 431 Request Header Fields Too Large\r\n"));
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, UnsupportedExpectReturns417) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.router().post("/", [](http_request&, http_response& res) { res.status = http_status::ok; });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    ASSERT_TRUE(client.send_all("POST / HTTP/1.1\r\nHost: test\r\nExpect: something\r\nContent-Length: 0\r\n"
+                                "Connection: close\r\n\r\n"));
+
+    const string response = receive_response(client);
+    EXPECT_TRUE(response.starts_with("HTTP/1.1 417 Expectation Failed\r\n"));
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, OversizedBodyReturns413) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.max_server_body_size = byte_size(4);
+    server.router().post("/", [](http_request&, http_response& res) { res.status = http_status::ok; });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    ASSERT_TRUE(client.send_all("POST / HTTP/1.1\r\nHost: test\r\nContent-Length: 10\r\n"
+                                "Connection: close\r\n\r\n"));
+
+    const string response = receive_response(client);
+    EXPECT_TRUE(response.starts_with("HTTP/1.1 413 Payload Too Large\r\n"));
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, ExpectContinueSendsInterimResponse) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.router().post("/echo", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.body = "ok";
+    });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    ASSERT_TRUE(client.send_all("POST /echo HTTP/1.1\r\nHost: test\r\nExpect: 100-continue\r\n"
+                                "Content-Length: 4\r\nConnection: close\r\n\r\n"));
+
+    char buffer[1024] = {};
+    const ssize_t received = client.receive(buffer, sizeof(buffer));
+    ASSERT_GT(received, 0);
+    const string interim(buffer, static_cast<size_t>(received));
+    EXPECT_TRUE(interim.starts_with("HTTP/1.1 100 Continue\r\n\r\n"));
+    EXPECT_FALSE(interim.contains("Content-Length"));
+
+    ASSERT_TRUE(client.send_all("body"));
+    const string response = receive_response(client);
+    EXPECT_TRUE(response.starts_with("HTTP/1.1 200 OK\r\n"));
+    EXPECT_TRUE(response.ends_with("ok"));
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, NoContentResponseHasNoBody) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.router().get("/empty", [](http_request&, http_response& res) {
+        res.status = http_status::no_content;
+        res.status_message = "No Content";
+        res.body = "must not be sent";
+    });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    ASSERT_TRUE(client.send_all("GET /empty HTTP/1.1\r\nHost: test\r\nConnection: close\r\n\r\n"));
+
+    const string response = receive_response(client);
+    EXPECT_TRUE(response.starts_with("HTTP/1.1 204 No Content\r\n"));
+    EXPECT_TRUE(response.ends_with("\r\n\r\n"));
+    EXPECT_FALSE(response.contains("must not be sent"));
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, HeadResponseHasNoBody) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.router().head("/head", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.body = "hello";
+    });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    ASSERT_TRUE(client.send_all("HEAD /head HTTP/1.1\r\nHost: test\r\nConnection: close\r\n\r\n"));
+
+    const string response = receive_response(client);
+    EXPECT_TRUE(response.starts_with("HTTP/1.1 200 OK\r\n"));
+    EXPECT_TRUE(response.contains("Content-Length: 5\r\n"));
+    EXPECT_TRUE(response.ends_with("\r\n\r\n"));
+    EXPECT_FALSE(response.ends_with("hello"));
+    server.stop();
+}
+
 #ifdef NEFORCE_STANDARD_20
 TEST_F(HttpClientLocalServerIntegration, RequestAsyncUseAwaitable) {
     ports test_port(0u);
@@ -1880,7 +2061,7 @@ TEST_F(HttpClientLocalServerIntegration, RequestAsyncUseAwaitable) {
 
     http_server server(test_port, server_ctx_, 1);
     server.router().get("/await", [](http_request&, http_response& res) {
-        res.status = http_status::S2_OK;
+        res.status = http_status::ok;
         res.status_message = "OK";
         res.body = "awaitable-body";
     });

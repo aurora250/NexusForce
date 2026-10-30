@@ -305,7 +305,7 @@ public:
      * @param dialect 数据库方言（默认 GENERIC 即 `?`）
      * @return INSERT SQL 字符串
      */
-    static string insert_sql(string_view table_override = "", const sql_dialect dialect = sql_dialect::GENERIC) {
+    static string insert_sql(string_view table_override = "", const sql_dialect dialect = sql_dialect::generic) {
         const string tbl = table_override.empty() ? resolve_table_name() : string(table_override);
 
         const auto props = collect_persistent_props(false);
@@ -328,7 +328,7 @@ public:
      * @return DELETE SQL 字符串
      * @throws value_exception 无主键属性时抛出
      */
-    static string delete_sql(string_view table_override = "", const sql_dialect dialect = sql_dialect::GENERIC) {
+    static string delete_sql(string_view table_override = "", const sql_dialect dialect = sql_dialect::generic) {
         const string tbl = table_override.empty() ? resolve_table_name() : string(table_override);
         const auto* pk = find_pk_prop();
         if (pk == nullptr) {
@@ -349,7 +349,7 @@ public:
      * @return UPDATE SQL 字符串
      * @throws value_exception 无主键属性时抛出
      */
-    static string update_sql(string_view table_override = "", const sql_dialect dialect = sql_dialect::GENERIC) {
+    static string update_sql(string_view table_override = "", const sql_dialect dialect = sql_dialect::generic) {
         const string tbl = table_override.empty() ? resolve_table_name() : string(table_override);
         const auto* pk = find_pk_prop();
         if (pk == nullptr) {
@@ -474,7 +474,7 @@ public:
      * @param dialect 数据库方言
      * @return SELECT ... WHERE pk = placeholder SQL 字符串
      */
-    static string select_by_pk_sql(string_view table_override = "", const sql_dialect dialect = sql_dialect::GENERIC) {
+    static string select_by_pk_sql(string_view table_override = "", const sql_dialect dialect = sql_dialect::generic) {
         const string tbl = table_override.empty() ? resolve_table_name() : string(table_override);
         const auto* pk = find_pk_prop();
         if (pk == nullptr) {

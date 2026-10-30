@@ -127,41 +127,41 @@ struct NEFORCE_API ports : iobject<ports> {
      * @brief 端口号枚举值
      */
     enum raw : uint16_t {
-        UNDEF = 0, ///< 未定义/无效端口
+        undef = 0, ///< 未定义/无效端口
 
-        FTP_DATA = 20,     ///< FTP数据端口
-        FTP = 21,          ///< FTP控制端口
-        SSH = 22,          ///< SSH协议端口
-        TELNET = 23,       ///< Telnet协议端口
-        SMTP = 25,         ///< SMTP协议端口
-        DNS = 53,          ///< DNS协议端口
-        DHCP_SERVER = 67,  ///< DHCP服务器端口
-        DHCP_CLIENT = 68,  ///< DHCP客户端端口
-        TFTP = 69,         ///< TFTP协议端口
-        HTTP = 80,         ///< HTTP协议端口
-        WS = 80,           ///< WebSocket协议端口（与HTTP共用）
-        POP3 = 110,        ///< POP3协议端口
-        NTP = 123,         ///< NTP协议端口
-        IMAP = 143,        ///< IMAP协议端口
-        SNMP = 161,        ///< SNMP协议端口
-        SNMP_TRAP = 162,   ///< SNMP陷阱通知端口
-        LDAP = 389,        ///< LDAP协议端口
-        HTTPS = 443,       ///< HTTPS协议端口
-        WSS = 443,         ///< WebSocket Secure端口（与HTTPS共用）
-        SMB = 445,         ///< SMB/CIFS协议端口
-        SMTPS = 465,       ///< SMTPS协议端口
-        SMTP_SUBMIT = 587, ///< SMTP邮件提交端口
-        LDAPS = 636,       ///< LDAPS协议端口
-        IMAPS = 993,       ///< IMAPS协议端口
-        POP3S = 995,       ///< POP3S协议端口
+        ftp_data = 20,     ///< FTP数据端口
+        ftp = 21,          ///< FTP控制端口
+        ssh = 22,          ///< SSH协议端口
+        telnet = 23,       ///< Telnet协议端口
+        smtp = 25,         ///< SMTP协议端口
+        dns = 53,          ///< DNS协议端口
+        dhcp_server = 67,  ///< DHCP服务器端口
+        dhcp_client = 68,  ///< DHCP客户端端口
+        tftp = 69,         ///< TFTP协议端口
+        http = 80,         ///< HTTP协议端口
+        ws = 80,           ///< WebSocket协议端口
+        pop3 = 110,        ///< POP3协议端口
+        ntp = 123,         ///< NTP协议端口
+        imap = 143,        ///< IMAP协议端口
+        snmp = 161,        ///< SNMP协议端口
+        snmp_trap = 162,   ///< SNMP陷阱通知端口
+        ldap = 389,        ///< LDAP协议端口
+        https = 443,       ///< HTTPS协议端口
+        wss = 443,         ///< WebSocket Secure端口
+        smb = 445,         ///< SMB/CIFS协议端口
+        smtps = 465,       ///< SMTPS协议端口
+        smtp_submit = 587, ///< SMTP邮件提交端口
+        ldaps = 636,       ///< LDAPS协议端口
+        imaps = 993,       ///< IMAPS协议端口
+        pop3s = 995,       ///< POP3S协议端口
 
-        MYSQL = 3306,      ///< MySQL数据库端口
-        POSTGRESQL = 5432, ///< PostgreSQL数据库端口
-        REDIS = 6379,      ///< Redis数据库端口
-        MONGODB = 27017    ///< MongoDB数据库端口
+        mysql = 3306,      ///< MySQL数据库端口
+        postgresql = 5432, ///< PostgreSQL数据库端口
+        redis = 6379,      ///< Redis数据库端口
+        mongodb = 27017    ///< MongoDB数据库端口
     };
 
-    raw port{UNDEF}; ///< 端口值
+    raw port{undef}; ///< 端口值
 
     /**
      * @brief 默认构造函数
@@ -198,7 +198,7 @@ struct NEFORCE_API ports : iobject<ports> {
      *
      * 检查端口是否为undef。
      */
-    constexpr explicit operator bool() const noexcept { return port != ports::UNDEF; }
+    constexpr explicit operator bool() const noexcept { return port != ports::undef; }
 
     /**
      * @brief uint16_t转换运算符

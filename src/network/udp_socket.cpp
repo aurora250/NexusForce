@@ -2,7 +2,7 @@
 #include <NeForce/core/memory/shared_ptr.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-void udp_socket::open(const ip_family f) { open_ip(f, type::DGRAM, protocol::UDP); }
+void udp_socket::open(const ip_family f) { open_ip(f, type::dgram, protocol::udp); }
 
 ssize_t udp_socket::send_to(memory_view<const char> data, const ip_address& endpoint, const int flags) {
     if (!is_open()) {

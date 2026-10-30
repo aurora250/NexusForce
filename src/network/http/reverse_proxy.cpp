@@ -96,7 +96,7 @@ bool reverse_proxy_filter::pre_filter(http_request& request, http_response& resp
 
     const auto backend = select_backend(request);
     if (backend.host.empty()) {
-        response.status = http_status::S5_BAD_GATEWAY;
+        response.status = http_status::bad_gateway;
         response.status_message = "Bad Gateway";
         response.body = "No backend available";
         response.set_content_type(http_content::PLAIN_TEXT());
@@ -107,7 +107,7 @@ bool reverse_proxy_filter::pre_filter(http_request& request, http_response& resp
         const auto backend_resp = forward(backend, request);
         copy_response(backend_resp, response);
     } catch (const exception& e) {
-        response.status = http_status::S5_BAD_GATEWAY;
+        response.status = http_status::bad_gateway;
         response.status_message = "Bad Gateway";
         response.body = string("Proxy error: ") + e.what();
         response.set_content_type(http_content::PLAIN_TEXT());

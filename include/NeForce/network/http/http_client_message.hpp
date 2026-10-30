@@ -48,7 +48,7 @@ public:
     milliseconds connect_time{0};                       ///< 连接建立耗时
     milliseconds send_time{0};                          ///< 发送请求耗时
     milliseconds receive_time{0};                       ///< 接收响应耗时
-    http_status status = http_status::S2_OK;            ///< HTTP状态码
+    http_status status = http_status::ok;               ///< HTTP状态码
     string status_message;                              ///< 状态消息
     flat_unordered_map<string, vector<string>> headers; ///< 响应头
     string body;                                        ///< 响应正文

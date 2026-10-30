@@ -52,22 +52,22 @@ NEFORCE_BEGIN_HTTP__
  * 定义WebSocket协议标准关闭码。
  */
 enum class websocket_status : uint16_t {
-    NORMAL_CLOSURE = 1000,             ///< 正常关闭
-    GOING_AWAY = 1001,                 ///< 端点离开
-    PROTOCOL_ERROR = 1002,             ///< 协议错误
-    UNSUPPORTED_DATA = 1003,           ///< 不支持的数据类型
-    RESERVED = 1004,                   ///< 保留
-    NO_STATUS_RCVD = 1005,             ///< 未收到状态码
-    ABNORMAL_CLOSURE = 1006,           ///< 异常关闭
-    INVALID_FRAME_PAYLOAD_DATA = 1007, ///< 无效帧负载
-    POLICY_VIOLATION = 1008,           ///< 策略违规
-    MESSAGE_TOO_BIG = 1009,            ///< 消息过大
-    MANDATORY_EXT = 1010,              ///< 缺少必要扩展
-    INTERNAL_ERROR = 1011,             ///< 内部错误
-    SERVICE_RESTART = 1012,            ///< 服务重启
-    TRY_AGAIN_LATER = 1013,            ///< 稍后重试
-    BAD_GATEWAY = 1014,                ///< 错误的网关
-    TLS_HANDSHAKE = 1015               ///< TLS握手失败
+    normal_closure = 1000,             ///< 正常关闭
+    going_away = 1001,                 ///< 端点离开
+    protocol_error = 1002,             ///< 协议错误
+    unsupported_data = 1003,           ///< 不支持的数据类型
+    reserved = 1004,                   ///< 保留
+    no_status_rcvd = 1005,             ///< 未收到状态码
+    abnormal_closure = 1006,           ///< 异常关闭
+    invalid_frame_payload_data = 1007, ///< 无效帧负载
+    policy_violation = 1008,           ///< 策略违规
+    message_too_big = 1009,            ///< 消息过大
+    mandatory_ext = 1010,              ///< 缺少必要扩展
+    internal_error = 1011,             ///< 内部错误
+    service_restart = 1012,            ///< 服务重启
+    try_again_later = 1013,            ///< 稍后重试
+    bad_gateway = 1014,                ///< 错误的网关
+    tls_handshake = 1015               ///< TLS握手失败
 };
 
 /**
@@ -77,12 +77,12 @@ enum class websocket_status : uint16_t {
  * 定义WebSocket帧的类型。
  */
 enum class websocket_opcode : uint8_t {
-    CONTINUATION = 0x0, ///< 延续帧
-    TEXT = 0x1,         ///< 文本帧
-    BINARY = 0x2,       ///< 二进制帧
-    CLOSE = 0x8,        ///< 关闭帧
-    PING = 0x9,         ///< Ping帧
-    PONG = 0xA          ///< Pong帧
+    continuation = 0x0, ///< 延续帧
+    text = 0x1,         ///< 文本帧
+    binary = 0x2,       ///< 二进制帧
+    close = 0x8,        ///< 关闭帧
+    ping = 0x9,         ///< Ping帧
+    pong = 0xA          ///< Pong帧
 };
 
 #pragma pack(push, 1)
@@ -189,7 +189,7 @@ public:
      * @param data 消息数据
      * @param opcode 操作码（默认TEXT）
      */
-    void broadcast(const string& data, websocket_opcode opcode = websocket_opcode::TEXT);
+    void broadcast(const string& data, websocket_opcode opcode = websocket_opcode::text);
 
     /**
      * @brief 获取活动会话数量
@@ -255,7 +255,7 @@ private:
     queue<byte_vector> ctrl_queue_;  ///< 控制帧队列（Ping/Pong/Close）
 
     string fragment_buffer_;                                    ///< 分片缓冲区
-    websocket_opcode fragment_opcode_ = websocket_opcode::TEXT; ///< 当前分片类型
+    websocket_opcode fragment_opcode_ = websocket_opcode::text; ///< 当前分片类型
     bool in_fragment_ = false;                                  ///< 是否正在接收分片
 
     atomic<bool> ping_pending_{false}; ///< 是否有待响应的Ping
@@ -322,7 +322,7 @@ public:
      * @param status 关闭状态码（默认NORMAL_CLOSURE）
      * @param reason 关闭原因
      */
-    void close(websocket_status status = websocket_status::NORMAL_CLOSURE, const string& reason = "");
+    void close(websocket_status status = websocket_status::normal_closure, const string& reason = "");
 
     /**
      * @brief 停止会话
@@ -335,14 +335,14 @@ public:
      * @param opcode 操作码（默认TEXT）
      * @return 发送成功返回true
      */
-    bool send(const string& data, websocket_opcode opcode = websocket_opcode::TEXT);
+    bool send(const string& data, websocket_opcode opcode = websocket_opcode::text);
 
     /**
      * @brief 发送二进制消息
      * @param data 消息数据
      * @return 发送成功返回true
      */
-    bool send_binary(const string& data) { return send(data, websocket_opcode::BINARY); }
+    bool send_binary(const string& data) { return send(data, websocket_opcode::binary); }
 
     /**
      * @brief 检查连接是否开启

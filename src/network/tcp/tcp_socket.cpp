@@ -24,7 +24,7 @@ namespace {
 } // namespace
 
 
-void tcp_socket::open(const ip_family f) { open_ip(f, type::STREAM, protocol::TCP); }
+void tcp_socket::open(const ip_family f) { open_ip(f, type::stream, protocol::tcp); }
 
 bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout, bool was_blocking) {
     if (!is_open()) {
