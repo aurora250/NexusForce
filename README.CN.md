@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://vcpkg.io"><img src="https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&logo=vcpkg&logoColor=white" alt="vcpkg"></a>
-  <a href="https://cmake.org"><img src="https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&logo=cmake&logoColor=white" alt="CMake"></a>
+  <a href="https://cmake.org"><img src="https://img.shields.io/badge/CMake-3.21+-064C8B?style=flat-square&logo=cmake&logoColor=white" alt="CMake"></a>
   <a href="https://isocpp.org"><img src="https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&logo=cplusplus&logoColor=white" alt="C++"></a>
   <a href="https://github.com/aurora250/NexusForce/actions/workflows/codeql.yml"><img src="https://github.com/aurora250/NexusForce/workflows/CodeQL%20Analysis/badge.svg" alt="CodeQL"></a>
   <a href="https://clang.llvm.org/docs/ClangFormat.html"><img src="https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&logo=llvm&logoColor=white" alt="Clang Format"></a>
@@ -52,13 +52,50 @@ v1.0.0 开始承诺：**次版本号更新保持 API 兼容，主版本号更新
 
 ## 🖥️ 支持环境
 
-| 项目     | 详情                                                                      |
-|----------|---------------------------------------------------------------------------|
-| 操作系统 | 🪟 WINDOWS / 🐧 LINUX                                                     |
-| 架构     | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                            |
-| 位宽     | 64位                                                                      |
-| 编译器   | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
-| C++ 标准 | 14 / 17 / 20                                                              |
+所有支持组合均为 **64 位**，支持 **C++14 / 17 / 20**。
+
+> 建议使用 C++17 及以上获得最佳的性能体验；使用 C++ 20 体验 NexusForce 高度集成的高性能协程架构。
+
+| 操作系统    | MSVC           | Clang                               | GCC                                 |
+|-------------|----------------|-------------------------------------|-------------------------------------|
+| **Windows** | x86_64 · ARM64 | x86_64 · ARM64                      | —                                   |
+| **Linux**   | —              | x86_64 · ARM64 · RISC-V · LoongArch | x86_64 · ARM64 · RISC-V · LoongArch |
+| **FreeBSD** | —              | x86_64 · ARM64 · RISC-V             | x86_64 · ARM64 · RISC-V             |
+
+### 组合清单
+
+| #  | 操作系统 | 编译器 | 架构      | Target Triple                   | 支持等级 |
+|----|----------|--------|-----------|---------------------------------|----------|
+| 1  | Windows  | MSVC   | x86_64    | `x86_64-pc-windows-msvc`        | Tier 1   |
+| 2  | Windows  | MSVC   | ARM64     | `aarch64-pc-windows-msvc`       | Tier 1   |
+| 3  | Windows  | Clang  | x86_64    | `x86_64-pc-windows-msvc`        | Tier 1   |
+| 4  | Windows  | Clang  | ARM64     | `aarch64-pc-windows-msvc`       | Tier 2   |
+| 5  | Linux    | Clang  | x86_64    | `x86_64-unknown-linux-gnu`      | Tier 1   |
+| 6  | Linux    | Clang  | ARM64     | `aarch64-unknown-linux-gnu`     | Tier 1   |
+| 7  | Linux    | Clang  | RISC-V    | `riscv64-unknown-linux-gnu`     | Tier 1   |
+| 8  | Linux    | Clang  | LoongArch | `loongarch64-unknown-linux-gnu` | Tier 1   |
+| 9  | Linux    | GCC    | x86_64    | `x86_64-unknown-linux-gnu`      | Tier 1   |
+| 10 | Linux    | GCC    | ARM64     | `aarch64-unknown-linux-gnu`     | Tier 1   |
+| 11 | Linux    | GCC    | RISC-V    | `riscv64-unknown-linux-gnu`     | Tier 1   |
+| 12 | Linux    | GCC    | LoongArch | `loongarch64-unknown-linux-gnu` | Tier 1   |
+| 13 | FreeBSD  | Clang  | x86_64    | `x86_64-unknown-freebsd`        | Tier 2   |
+| 14 | FreeBSD  | Clang  | ARM64     | `aarch64-unknown-freebsd`       | Tier 2   |
+| 15 | FreeBSD  | Clang  | RISC-V    | `riscv64-unknown-freebsd`       | Tier 2   |
+| 16 | FreeBSD  | GCC    | x86_64    | `x86_64-unknown-freebsd`        | Tier 2   |
+| 17 | FreeBSD  | GCC    | ARM64     | `aarch64-unknown-freebsd`       | Tier 2   |
+| 18 | FreeBSD  | GCC    | RISC-V    | `riscv64-unknown-freebsd`       | Tier 2   |
+
+> ¹ Windows 上 Clang 指 **ClangCL**。
+> ² RISC-V / LoongArch 需 GCC ≥ 13 或 Clang ≥ 17；FreeBSD GCC 建议 ≥ 13。
+> ³ FreeBSD 的 Clang 链接 libc++，GCC 链接 libstdc++，ABI 不通用，不要在同一进程中混用二者的二进制。
+
+### 支持等级
+
+| 等级   | 含义       |
+|--------|------------|
+| Tier 1 | CI 保证    |
+| Tier 2 | 发布前验证 |
+| Tier 3 | 自行编译   |
 
 > 本库欢迎开发者进行更多环境的兼容性开发，欢迎您进行贡献。
 
@@ -68,14 +105,14 @@ v1.0.0 开始承诺：**次版本号更新保持 API 兼容，主版本号更新
 
 NexusForce 严格遵循现代 C++ 工程最佳实践，通过多层次自动化检查确保代码健壮性与可读性。
 
-| 指标                         | 状态         | 说明                                                  |
-|------------------------------|--------------|-------------------------------------------------------|
-| 📊 **代码规模**              | 30万+ 行     | 核心库源码与头文件 20万+ 行，测试代码 8万+ 行         |
-| 🔒 **CodeQL 安全分析**       | **0 漏洞**   | 全规则集                                              |
-| 🔍 **Clang-Tidy 静态检查**   | **零警告**   | 全规则集                                              |
-| 🎨 **Clang-Format 代码风格** | **强制统一** | 配置严格，格式统一                                    |
-| 💧 **valgrind 内存检查**     | **0 泄漏**   | 全量测试                                              |
-| 🧪 **Sanitizer 检查**        | **已接入**   | ASan / UBSan / TSan 独立 CI 矩阵，编译与运行双覆盖    |
+| 指标                         | 状态         | 说明                                     |
+|------------------------------|--------------|------------------------------------------|
+| 📊 **代码规模**              | 36万+ 行     | 源码与头文件 26万+ 行，测试代码 10万+ 行 |
+| 🔒 **CodeQL 安全分析**       | **0 漏洞**   | 全规则集                                 |
+| 🔍 **Clang-Tidy 静态检查**   | **零警告**   | 全规则集                                 |
+| 🎨 **Clang-Format 代码风格** | **强制统一** | 配置严格，格式统一                       |
+| 💧 **valgrind 内存检查**     | **0 泄漏**   | 全量测试                                 |
+| 🧪 **Sanitizer 检查**        | **已接入**   | ASan / UBSan / TSan 独立 CI 矩阵         |
 
 > [`.clang-tidy`](.clang-tidy) 包含约 60 项显式豁免，[`.clang-format`](.clang-format) 包含多项风格定制。
 > 每一项均针对底层系统编程的固有需求，遵循"默认严格，按需放开"原则。
@@ -205,9 +242,17 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **配置文件解析** - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建
 - **`temp_file`** - 安全的临时文件管理
 
-### 🌐 网络库 (Network)
+### 🌐 高性能网络库 (Network)
+
+HTTP/1.1 530.1k QPS、HTTP/2 1.018M QPS / 3.89 GiB/s、64 KiB 大响应 7.39 GiB/s、
+WebSocket 流水线 910k messages/s、gRPC 流式 918k messages/s、TLS 1.3 keep-alive 338.0k QPS、
+反向代理 158k–175k QPS、同进程 direct-backend 达直连 99.3%。
+覆盖 HTTP/1.1、HTTP/2、WebSocket、gRPC、TLS 与反向代理六类真实协议路径的端到端实测。
+
+HTTP/HTTPS/WS/WSS/gRPC 性能测试详见 [HTTP/HTTPS 性能测试记录](benchmark/network/http/PERFORMANCE.md)
+
 - **HTTP/1.1 服务器** - 完整协议实现：`http_server` / `http_router` / `http_filter` 中间件链
-- **HTTP/2 支持** - 帧层与 HPACK 头部压缩（RFC 7540/7541），9 种帧类型，流状态机，流量控制，TLS+ALPN 协商
+- **HTTP/2 支持** - 帧层与 HPACK 头部压缩（RFC 7540/7541），10 种帧类型，流状态机，流量控制，TLS+ALPN 协商
 - **Radix Tree 路由** - 基于压缩前缀树的 O(k) 路由匹配，支持静态路径、:param 参数、* 通配符、正则回退
 - **HTTP 高级特性** - Range 请求（206 单/多范围）、gzip/deflate 响应压缩、Chunked 分块传输、CONNECT 隧道
 - **`multipart_parser` / `chunked_reader`** - 多部分表单解析与分块传输读取
@@ -300,9 +345,17 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **JSON 序列化器** - 反射驱动的对象↔JSON 序列化与反序列化，递归处理嵌套类型与容器
 - **二进制序列化器** - 大端格式（Magic "NEBF" + 类型表 + 数据段），属性注解控制序列化行为
 - **类型识别** - 基于 type_name 特化 + 编译器函数签名的 hash-based type_id，非侵入式类型注册
-- **反射宏** - `NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` / `SIGNAL` / `ENUM` / `ENUM_VAL` 类体内标记，供 NFRS 扫描器识别
+- **反射宏** - `NEFORCE_REFLECT_OBJ` / `NEFORCE_REFLECT_PROP` / `NEFORCE_REFLECT_PROP_ATTR` / `NEFORCE_REFLECT_FUNC` / `NEFORCE_REFLECT_SIGNAL` / `NEFORCE_REFLECT_ENUM` / `NEFORCE_REFLECT_ENUM_VAL` 类体内标记，供 NFRS 扫描器识别
 
-### 🖥️ 终端UI框架 (TUI)
+### 🖥️ 高性能终端UI框架 (TUI)
+
+40 行全帧渲染 ASCII 3.6 µs / CJK 12.6 µs / 富文本 19.3 µs（240×40），
+帧差量空闲 5.3 µs、单行变化仅多 0.1–0.14 µs，布局命中 60 ns、单点脏 65 ns，
+virtual_list 每可见行 0.42 µs 且与数据量无关，
+最重组合约 0.047 ms/帧，相对 60 fps 有约 350 倍余量。
+
+TUI 渲染性能测试详见 [TUI 性能测试记录](benchmark/tui/PERFORMANCE.md)
+
 - **`application`** - 应用入口，Builder 模式配置（主题/FPS/标题），驱动事件循环与动画计时器
 - **`reconciler`** - 声明式渲染引擎，Cell 级终端帧差分与增量 ANSI 输出，焦点链遍历，鼠标命中测试与滚动条交互
 - **`screen`** - 终端帧缓冲，逐 Cell 差分生成最小 ANSI 转义序列
@@ -361,6 +414,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **终止处理** - 多状态程序终止方式与对应回调
 - **异常/错误码系统** - 自定义的异常与错误码体系
 - **断点处理** - 调试断点触发与处理
+- **崩溃转储** - `crash_dump` 崩溃捕获：Windows 写 minidump（`.dmp`），Linux / FreeBSD x86-64 与 AArch64 写 ELF core（`.core`）
 
 ### 📐 算法库 (Algorithm)
 - **标准算法** - 基于迭代器系统的范围迭代算法
@@ -368,7 +422,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **数值算法** - 数值计算与累加
 - **堆算法** - 堆操作与优先级队列
 - **范围操作** - ranges 支持
-- **链式查询** - 惰性链式算子
+- **链式查询 (C++20)** - 由 `ranges::from(container)` 构造 LINQ / Stream 风格惰性链，例如 `ranges::from(container).filter(...).transform(...).take(...).to_vector()`，示例见 [链式查询示例](examples/iterator/query_example.cpp)
 - **哈希算法** - 多种哈希函数实现
 
 ### 📊 数学库 (Math)
@@ -469,7 +523,7 @@ python ./scripts/install_nexusforce.py --release
 #### 基础链接
 
 ```cmake
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.21)
 project(my_app)
 
 find_package(NexusForce REQUIRED)

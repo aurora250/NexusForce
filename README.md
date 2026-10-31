@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://vcpkg.io"><img src="https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&logo=vcpkg&logoColor=white" alt="vcpkg"></a>
-  <a href="https://cmake.org"><img src="https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&logo=cmake&logoColor=white" alt="CMake"></a>
+  <a href="https://cmake.org"><img src="https://img.shields.io/badge/CMake-3.21+-064C8B?style=flat-square&logo=cmake&logoColor=white" alt="CMake"></a>
   <a href="https://isocpp.org"><img src="https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&logo=cplusplus&logoColor=white" alt="C++"></a>
   <a href="https://github.com/aurora250/NexusForce/actions/workflows/codeql.yml"><img src="https://github.com/aurora250/NexusForce/workflows/CodeQL%20Analysis/badge.svg" alt="CodeQL"></a>
   <a href="https://clang.llvm.org/docs/ClangFormat.html"><img src="https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&logo=llvm&logoColor=white" alt="Clang Format"></a>
@@ -54,13 +54,50 @@ Starting from v1.0.0, we commit to: **minor version updates maintain API compati
 
 ## 🖥️ Supported Environments
 
-| Item            | Details                                                                   |
-|-----------------|---------------------------------------------------------------------------|
-| Platform        | 🪟 WINDOWS / 🐧 LINUX                                                     |
-| Instruction Set | X86 / ARM / RISC-V (LINUX) / LOONGARCH (LINUX)                            |
-| Bit Width       | 64-bit                                                                    |
-| Compiler        | MSVC (Windows) / ClangCL (Windows) / Clang (Windows, Linux) / GCC (Linux) |
-| C++ Standard    | 14 / 17 / 20                                                              |
+Every supported combination is **64-bit** and supports **C++14 / 17 / 20**.
+
+> C++17 or later is recommended for the best performance; use C++20 to experience the tightly integrated high-performance coroutine architecture of NexusForce.
+
+| OS          | MSVC           | Clang                               | GCC                                 |
+|-------------|----------------|-------------------------------------|-------------------------------------|
+| **Windows** | x86_64 · ARM64 | x86_64 · ARM64                      | —                                   |
+| **Linux**   | —              | x86_64 · ARM64 · RISC-V · LoongArch | x86_64 · ARM64 · RISC-V · LoongArch |
+| **FreeBSD** | —              | x86_64 · ARM64 · RISC-V             | x86_64 · ARM64 · RISC-V             |
+
+### Combination List
+
+| #  | OS      | Compiler | Architecture | Target Triple                   | Support Tier |
+|----|---------|----------|--------------|---------------------------------|--------------|
+| 1  | Windows | MSVC     | x86_64       | `x86_64-pc-windows-msvc`        | Tier 1       |
+| 2  | Windows | MSVC     | ARM64        | `aarch64-pc-windows-msvc`       | Tier 1       |
+| 3  | Windows | Clang    | x86_64       | `x86_64-pc-windows-msvc`        | Tier 1       |
+| 4  | Windows | Clang    | ARM64        | `aarch64-pc-windows-msvc`       | Tier 2       |
+| 5  | Linux   | Clang    | x86_64       | `x86_64-unknown-linux-gnu`      | Tier 1       |
+| 6  | Linux   | Clang    | ARM64        | `aarch64-unknown-linux-gnu`     | Tier 1       |
+| 7  | Linux   | Clang    | RISC-V       | `riscv64-unknown-linux-gnu`     | Tier 1       |
+| 8  | Linux   | Clang    | LoongArch    | `loongarch64-unknown-linux-gnu` | Tier 1       |
+| 9  | Linux   | GCC      | x86_64       | `x86_64-unknown-linux-gnu`      | Tier 1       |
+| 10 | Linux   | GCC      | ARM64        | `aarch64-unknown-linux-gnu`     | Tier 1       |
+| 11 | Linux   | GCC      | RISC-V       | `riscv64-unknown-linux-gnu`     | Tier 1       |
+| 12 | Linux   | GCC      | LoongArch    | `loongarch64-unknown-linux-gnu` | Tier 1       |
+| 13 | FreeBSD | Clang    | x86_64       | `x86_64-unknown-freebsd`        | Tier 2       |
+| 14 | FreeBSD | Clang    | ARM64        | `aarch64-unknown-freebsd`       | Tier 2       |
+| 15 | FreeBSD | Clang    | RISC-V       | `riscv64-unknown-freebsd`       | Tier 2       |
+| 16 | FreeBSD | GCC      | x86_64       | `x86_64-unknown-freebsd`        | Tier 2       |
+| 17 | FreeBSD | GCC      | ARM64        | `aarch64-unknown-freebsd`       | Tier 2       |
+| 18 | FreeBSD | GCC      | RISC-V       | `riscv64-unknown-freebsd`       | Tier 2       |
+
+> ¹ Clang on Windows means **ClangCL**.
+> ² RISC-V / LoongArch require GCC ≥ 13 or Clang ≥ 17; GCC on FreeBSD is recommended to be ≥ 13.
+> ³ On FreeBSD, Clang links against libc++, while GCC links against libstdc++; the two ABIs are not interchangeable, so do not mix binaries produced by them in one process.
+
+### Support Tiers
+
+| Tier   | Meaning                   |
+|--------|---------------------------|
+| Tier 1 | Guaranteed by CI          |
+| Tier 2 | Verified before releases  |
+| Tier 3 | Build it yourself         |
 
 > This library welcomes developers to contribute compatibility with more environments. Your contributions are greatly appreciated.
 
@@ -72,12 +109,12 @@ NexusForce strictly adheres to modern C++ engineering best practices, ensuring c
 
 | Metric                            | Status                | Description                                                         |
 |-----------------------------------|-----------------------|---------------------------------------------------------------------|
-| 📊 **Codebase Size**              | 300k+ Lines           | Core library source and headers 200k+ lines, test code 80k+ lines   |
+| 📊 **Codebase Size**              | 360k+ Lines           | Source and headers 260k+ lines, test code 100k+ lines               |
 | 🔒 **CodeQL Security Analysis**   | **0 Vulnerabilities** | Full ruleset                                                        |
 | 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings**     | Full ruleset                                                        |
 | 🎨 **Clang-Format Code Style**    | **Strictly Enforced** | Strict configuration, uniform formatting                            |
 | 💧 **valgrind Memory Check**      | **0 Leaks**           | Full test suite                                                     |
-| 🧪 **Sanitizer Check**            | **Enabled**           | Dedicated ASan / UBSan / TSan CI matrix, covering build and runtime |
+| 🧪 **Sanitizer Check**            | **Enabled**           | Dedicated ASan / UBSan / TSan CI matrix                             |
 
 > [`.clang-tidy`](.clang-tidy) contains approximately 60 explicit exemptions, and [`.clang-format`](.clang-format) includes several style customizations. Each exemption addresses inherent requirements of low-level system programming, adhering to the principle of "strict by default, relaxed as needed."
 
@@ -186,7 +223,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Standard Containers** - `array` / `vector` / `list` / `deque` / `map` / `set` / `unordered_map` / `unordered_set` / `sparse_map` / `sparse_set` / `flat_unordered_map` / `flat_unordered_set`, etc.
 - **`rb_tree`** - Self-balancing binary search tree implementation
 - **`hashtable`** - Separate chaining hash table
-- **`flat_hashtable`** - SwissTable open addressing flat hash table, H2 pre-filtering + SIMD group probing
+- **`flat_hashtable`** - High-performance SwissTable open addressing flat hash table, H2 pre-filtering + SIMD group probing; see [flat hash table performance test records](benchmark/container/PERFORMANCE.md)
 - **`bloom_filter`** - Probabilistic data structure
 - **`lru_cache` / `ttl_cache`** - Cache policies based on Least Recently Used / Time-To-Live
 - **`buffer_chain`** - Zero-copy chained buffer, supports writev aggregated output
@@ -207,9 +244,17 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Config File Parsing** - JSON/TOML/YAML/INI/ENV value system, format parsing and streaming builder
 - **`temp_file`** - Secure temporary file management
 
-### 🌐 Networking
+### 🌐 High-Performance Networking
+
+HTTP/1.1 530.1k QPS, HTTP/2 1.018M QPS / 3.89 GiB/s, 64 KiB large responses 7.39 GiB/s,
+WebSocket pipelining 910k messages/s, gRPC streaming 918k messages/s, TLS 1.3 keep-alive 338.0k QPS,
+reverse proxy 158k–175k QPS, in-process direct-backend reaching 99.3% of direct connections.
+End-to-end measurements across six real protocol paths: HTTP/1.1, HTTP/2, WebSocket, gRPC, TLS and reverse proxy.
+
+See [HTTP/HTTPS performance test records](benchmark/network/http/PERFORMANCE.md) for HTTP/HTTPS/WS/WSS/gRPC benchmarks.
+
 - **HTTP/1.1 Server** - Complete protocol: `http_server` / `http_router` / `http_filter` middleware chain
-- **HTTP/2 Support** - Frame layer & HPACK header compression (RFC 7540/7541), 9 frame types, stream state machine, flow control, TLS+ALPN negotiation
+- **HTTP/2 Support** - Frame layer & HPACK header compression (RFC 7540/7541), 10 frame types, stream state machine, flow control, TLS+ALPN negotiation
 - **Radix Tree Routing** - O(k) route matching via compressed prefix tree, static paths, :param params, * wildcards, regex fallback
 - **HTTP Advanced Features** - Range requests (206 single/multi-range), gzip/deflate response compression, Chunked transfer, CONNECT tunneling
 - **`multipart_parser` / `chunked_reader`** - Multipart form parsing and chunked transfer reading
@@ -302,9 +347,17 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **JSON Serializer** - Reflection-driven object↔JSON serialization/deserialization, recursive nested types and containers
 - **Binary Serializer** - Big-endian format (Magic "NEBF" + type table + data segment), attribute-controlled serialization behavior
 - **Type Identification** - Hash-based type_id via type_name specialization + compiler function signature, non-intrusive type registration
-- **Reflection Macros** - `NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` / `SIGNAL` / `ENUM` / `ENUM_VAL` in-class markers for NFRS scanner recognition
+- **Reflection Macros** - `NEFORCE_REFLECT_OBJ` / `NEFORCE_REFLECT_PROP` / `NEFORCE_REFLECT_PROP_ATTR` / `NEFORCE_REFLECT_FUNC` / `NEFORCE_REFLECT_SIGNAL` / `NEFORCE_REFLECT_ENUM` / `NEFORCE_REFLECT_ENUM_VAL` in-class markers for NFRS scanner recognition
 
-### 🖥️ Terminal UI Framework (TUI)
+### 🖥️ High-Performance Terminal UI Framework (TUI)
+
+40-line full-frame render: ASCII 3.6 µs / CJK 12.6 µs / rich text 19.3 µs (240×40),
+idle frame diff 5.3 µs with only 0.1–0.14 µs extra per changed line, layout hit 60 ns, single dirty cell 65 ns,
+virtual_list 0.42 µs per visible row independent of data size,
+worst-case combination about 0.047 ms/frame — roughly 350× headroom over 60 fps.
+
+See [TUI performance test records](benchmark/tui/PERFORMANCE.md) for TUI rendering benchmarks.
+
 - **`application`** - Application entry point, Builder pattern config (theme/FPS/title), drives event loop and animation timer
 - **`reconciler`** - Declarative rendering engine, cell-level terminal frame diffing with incremental ANSI output, focus chain traversal, mouse hit-testing and scrollbar interaction
 - **`screen`** - Terminal frame buffer, per-cell diffing to produce minimal ANSI escape sequences
@@ -313,6 +366,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`headless`** - Terminal-free driver: fixed size, frame output captured in memory, byte-level input injection; the base for snapshot tests and offscreen rendering
 - **`log_view`** - Chat transcript: variable-height messages, streaming coalescing, bottom-follow and an "N new messages" hint
 - **`composer`** - Input orchestration: multi-line editor + completion popup + hint line, with submit/newline/interrupt semantics
+- **`tool_runner`** - Tool execution component: PTY/pipe child process + per-frame coalesced output + ring trimming + status write-back
 - **`pty` / `process_watcher`** - Pseudo-terminal wrapper and an async child-process watcher that falls back to pipes when no devpts is available
 - **Clipboard / mouse selection** - OSC 52 writes and reads, `text_area` drag selection, `log_view` click-to-select-and-copy, `composer` up/down browsing of submitted history
 - **`element`** - Immutable virtual element tree, 14+ node types, decorator chaining composition, full Flexbox + Gridbox layout
@@ -342,6 +396,12 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Construction/Destruction Tools** - Object lifecycle management
 - **`trace_allocator`** - Memory monitoring for debugging
 - **`standard_allocator`** - Strategy-specialized allocators based on compiler features
+- **`memory_pool` / `pool_allocator`** - High-performance memory pool: zero block-header spans + size classes + thread-local caches, with large objects mapped directly from the OS; see [memory pool performance test records](benchmark/memory/PERFORMANCE.md)
+
+#### Allocator Model
+
+- With `NEXUSFORCE_USING_MEMORY_POOL` enabled (the default), allocations of library containers (`basic_string`, `vector`, etc.) are served by the global memory pool
+- Enable `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` explicitly and link every C++ module that passes ownership across modules against `NexusForceMemoryPoolOverrideStatic` to make the whole process use the global memory pool
 
 ### 📦 Compression
 - **lz4 Compression** - `lz4_compressor` high-speed data compression/decompression
@@ -356,7 +416,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Termination Handling** - Multi-state program termination methods and corresponding callbacks
 - **Exception/Error Code System** - Custom exception and error code system
 - **Breakpoint Handling** - Debug breakpoint triggering and handling
-- **Crash Dump** - `crash_dump` crash capture writing native dump
+- **Crash Dump** - `crash_dump` crash capture: minidump (`.dmp`) on Windows, ELF core (`.core`) on Linux / FreeBSD x86-64 and AArch64
 
 ### 📐 Algorithm Library
 - **Standard Algorithms** - Range iteration algorithms based on iterator system
@@ -364,7 +424,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Numeric Algorithms** - Numerical computation and accumulation
 - **Heap Algorithms** - Heap operations and priority queues
 - **Range Operations** - Ranges library support
-- **Chain Query** - `query` provides LINQ / Stream style lazy chain operators (`ranges::from(container).filter(...).transform(...).take(...).to_vector()`), see [chain query example](examples/iterator/query_example.cpp)
+- **Chain Query (C++20)** - `ranges::from(container)` builds a LINQ / Stream style lazy chain, e.g. `ranges::from(container).filter(...).transform(...).take(...).to_vector()`, see [chain query example](examples/iterator/query_example.cpp)
 - **Hash Algorithms** - Multiple hash function implementations
 
 ### 📊 Math Library
@@ -467,7 +527,7 @@ and use the provided configuration functions to complete compiler options, refle
 #### Basic Linking
 
 ```cmake
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.21)
 project(my_app)
 
 find_package(NexusForce REQUIRED)

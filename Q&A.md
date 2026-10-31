@@ -21,14 +21,14 @@ NexusForce 是一个**功能健全、风格统一、跨平台兼容**的现代 C
 
 **不是。** NexusForce 和 Boost 在哲学上截然不同：
 
-| 维度           | NexusForce                                                | Boost                                                  |
-|----------------|-----------------------------------------------------------|--------------------------------------------------------|
-| 对 std 的态度  | **自研替代** —— 自行实现容器/智能指针/线程/原子等，再扩展 | **扩展/补充** —— 在 std 之上构建，补充标准库没有的功能 |
-| 组件关系       | 组件间深度集成                                            | 各组件相对独立，无跨库集成约定                         |
-| 设计目标       | 统一风格、生产可用、教学可读                              | 极致的泛型编程与编译期能力                             |
-| 代码体积       | 核心约 9 万行                                             | 数千万行（仅头文件）                                   |
-| 学习门槛       | 中等（接近标准库的使用方式）                              | 高（大量模板元编程技巧）                               |
-| 编译速度       | 较快（单个翻译单元）                                      | 慢（深度模板实例化）                                   |
+| 维度          | NexusForce                                                | Boost                                                  |
+|---------------|-----------------------------------------------------------|--------------------------------------------------------|
+| 对 std 的态度 | **自研替代** —— 自行实现容器/智能指针/线程/原子等，再扩展 | **扩展/补充** —— 在 std 之上构建，补充标准库没有的功能 |
+| 组件关系      | 组件间深度集成                                            | 各组件相对独立，无跨库集成约定                         |
+| 设计目标      | 统一风格、生产可用、教学可读                              | 极致的泛型编程与编译期能力                             |
+| 代码体积      | 核心约 28 万行（头文件 + 实现）                           | 数千万行（仅头文件）                                   |
+| 学习门槛      | 中等（接近标准库的使用方式）                              | 高（大量模板元编程技巧）                               |
+| 编译速度      | 较快（单个翻译单元）                                      | 慢（深度模板实例化）                                   |
 
 **选择 NexusForce 的场景**：你需要一个风格统一、开箱即用的全栈 C++ 工具库，且希望源码可读性强、可作为学习参考。
 
@@ -85,7 +85,7 @@ folly 是 Meta（Facebook）开源的 C++ 组件库，在性能追求上有相�
 | 并发       | FUTEX、Hazard Ptr、Lock-Free Queue、Virtual Thread  | Hazard Ptr、原子数据结构、协程（via wangle） |
 | HTTP       | **内置完整 HTTP/1.1 + HTTP/2 + WebSocket**          | Proxygen（独立项目，较重）                   |
 | 反射/ORM   | 完整                                                | 无                                           |
-| 跨平台     | Windows + Linux                                     | 以 Linux 为主（部分功能不支持 Windows）      |
+| 跨平台     | Windows / Linux / FreeBSD（64 位）                  | 以 Linux 为主（部分功能不支持 Windows）      |
 
 **选择 NexusForce 的场景**：需要 Windows 支持、或需要完整的 HTTP/ORM/反射栈。
 
@@ -99,7 +99,7 @@ folly 是 Meta（Facebook）开源的 C++ 组件库，在性能追求上有相�
 
 这是 NexusForce 最根本的设计决策，原因有：
 
-1. **跨平台行为一致性**：不同编译器/版本的行为不一致。自研实现保证 Windows MSVC / Linux GCC / Clang 的行为完全一致。
+1. **跨平台行为一致性**：不同编译器/版本的行为不一致。自研实现保证 Windows MSVC、Linux GCC/Clang、FreeBSD Clang/GCC 的行为完全一致。
 
 2. **深度优化空间**：可以对特定场景做针对性优化。
 
@@ -141,11 +141,11 @@ NexusForce 选择自研 HTTP 协议栈的原因：
 
 1. **HTTP/2 的完整实现**：NexusForce 自研了完整的 HTTP/2 帧层与 HPACK 头部压缩（RFC 7540/7541）。
 
-2. **反射系统集成**：HTTP 路由可以直接通过反射获取类型信息，实现自动的请求体反序列化。
+2. **协议栈自主可控**：HTTP/1.1、HTTP/2、WebSocket、gRPC 与反向代理共用同一套路由、中间件链和 `io_context`，Beast 只覆盖 HTTP/1.1/WebSocket，接入后仍需为 HTTP/2、gRPC 另找实现并统一两套回调模型。
 
 3. **零依赖原则**：引入 Beast 会引入 Boost 整个依赖链（编译时间、二进制体积）。
 
-4. **`io_context` 深度定制**：基于 Linux epoll 边缘触发 + min-heap 定时器，可根据自身需求做针对性优化。
+4. **`io_context` 深度定制**：Linux epoll 边缘触发、FreeBSD poll、Windows IOCP 三套后端，定时器由 `heap_timer` 承担，可根据自身需求做针对性优化。
 
 5. **统一的内存管理**：使用 NexusForce 自己的 `shared_ptr`、`buffer_chain`（零拷贝链式缓冲区）、`byte_cursor`（无拷贝帧解析），与框架内存管理策略完全一致。
 
@@ -155,12 +155,12 @@ NexusForce 选择自研 HTTP 协议栈的原因：
 
 ### Q: ORM 的性能如何？和直接用 SQL 有多大差距？
 
-NexusForce 的 ORM（`sql_mapper` + `repository`）采用**代码生成**而非运行时反射解释——`sql_mapper<T>` 在编译期生成 SQL 语句，运行时仅有参数绑定开销：
+NexusForce 的 ORM（`sql_mapper` + `repository`）**不是编译期代码生成**：`sql_mapper<T>` 在运行时读取 reflect registry 中的 `meta_type`（属性列表、主键/自增/transient 注解、表名），用 `sql_builder` 拼出 DDL/DML；`repository` 再把 SQL 交给 `idb_connect::update()` / `query()` 执行。
 
-- DDL 生成（CREATE TABLE）发生在初始化阶段，不影响请求路径
-- DML 生成在编译期完成模板实例化，运行时仅做字符串拼接（方言占位符替换）
-- `repository` 的 CRUD 方法基于预处理语句，防止 SQL 注入的同时保证查询性能
-- 与手写 SQL 的性能差异主要来自：类型安全的 getter 调用（约 1-2 个虚函数调用级别），在实际数据库 IO 场景下可忽略不计
+- DDL（`create_table_sql()`）在需要时生成一次，可由调用方缓存，不落在请求路径上
+- DML 每次调用都会遍历 `all_properties()` 并构造 SQL 字符串，开销是反射属性遍历（`meta_property::get()` 返回类型擦除的 `meta_any`）+ 字符串拼接，而不是"1-2 个虚函数调用"
+- 需要反复执行同一语句时，用 `idb_connect::prepare_statement()` 返回的 `idb_prepared_statement`（MySQL/PostgreSQL/SQLite 均有实现）把解析与参数绑定从执行路径上拿掉
+- 与手写 SQL 的差距主要就是上述字符串拼接与类型擦除转换；在真实数据库 IO 面前通常可以忽略
 
 ### Q: 支持哪些数据库？如何添加新的数据库后端？
 
@@ -171,9 +171,10 @@ NexusForce 的 ORM（`sql_mapper` + `repository`）采用**代码生成**而非�
 - **Redis**（`redis_connect`）
 
 添加新数据库后端的步骤：
-1. 实现 `idb_connect` 接口（连接管理）
-2. 实现 `idb_result` 接口（结果集封装）
-3. 实现 `idb_prepared_statement` 接口（预处理语句）
+1. 实现 `idb_tb_connect` 或 `idb_kv_connect`（连接管理；SQL 型通常复用 `sql_connect_base`）
+2. 实现 `idb_tb_result` / `idb_kv_result`（结果集封装）
+3. 实现 `idb_prepared_statement`（预处理语句；不支持时返回 `nullptr` 或空实现）
+4. 提供 `idb_factory` 子类，在 `create_connect()` / `create_result()` 中构造上述对象
 
 ---
 
@@ -199,7 +200,7 @@ NexusForce 提供多层次的并发支持：
 
 1. **线程池**（`thread_pool`）：基于任务窃取（work stealing）的多策略线程池，适合 CPU 密集型并行任务。
 
-2. **事件循环**（`io_context`）：Linux epoll 边缘触发 + min-heap 定时器，适合 IO 密集型场景（HTTP 服务器、WebSocket）。
+2. **事件循环**（`io_context`）：跨平台事件循环（Linux epoll / FreeBSD poll / Windows IOCP）+ `heap_timer` 最小堆定时器，适合 IO 密集型场景（HTTP 服务器、WebSocket）。
 
 3. **协程**（coroutine `generator` / `task`）：C++20 协程原语。
 
@@ -217,312 +218,86 @@ NexusForce 提供多层次的并发支持：
 
 ## 技术深度 FAQ
 
-### Q: `hazard_ptr`（危险指针）是如何工作的？
+> 从实现深度与复用价值出发，挑了 10 个组件；每题只回答关键机制，不铺功能清单。
 
-Hazard Pointer 是一种无锁编程中的安全内存回收（SMR）机制。核心思想：
+### Q: `memory_pool` 如何让通用分配接近无锁？
 
-**每个线程持有一个"危险指针"**（`hazard_pointer_record`），当线程要访问某个共享对象时，先将其地址写入自己的 hazard_ptr（memory_order_release），再读取对象。此时即便其他线程删除了该对象，回收器发现 hazard_ptr 仍指向它，就会延迟释放。
-
-```
-读取线程:                           回收线程:
-hazard_ptr.store(ptr, release)      retire(ptr)
-// 屏障                          扫描所有线程的 hazard_ptr
-obj = *ptr                         if ptr 不在任何 hazard_ptr 中:
-hazard_ptr.store(null, release)        delete ptr
-                                   else:
-                                       加入待回收列表（稍后重试）
-```
-
-**`hazard_pointer_domain`** 管理全局的 hazard pointer 记录链表，`hazard_pointer_obj_base` 是所有可通过 hazard pointer 安全回收的对象的基类。
-
-这解决了两个核心问题：
-- **ABA 问题**：CAS 操作前对象被释放又被重新分配，指针值相同但内容已变。hazard pointer 保证被保护的指针在保护期间不会被释放。
-- **use-after-free**：线程读取节点时，节点被另一线程删除。hazard pointer 延迟释放直到没有线程持有该指针。
+- 三层结构：线程本地缓存 → 36 个尺寸类的中央 span 堆 → 操作系统虚拟内存；不超过 16 KiB 的对象走小对象路径，块内不带任何元数据。
+- 尺寸类与归属靠进程级 64 KiB 槽位地址映射表反查，线程缓存按批次搬运，绝大多数分配/释放不触碰中央锁。
+- 大对象直接映射虚拟内存，映射参数记录在区域头部；链接 `NexusForceMemoryPoolOverrideStatic` 可让全进程替换 `operator new/delete`。
 
 ---
 
-### Q: FUTEX 是什么？NexusForce 如何做跨平台 FUTEX 封装？
+### Q: `flat_hashtable` 的 SwissTable 设计为什么快？
 
-**FUTEX**（Fast Userspace muTEX）是 Linux 内核提供的轻量级同步机制。这基于一个核心洞察：大多数锁竞争不会发生，无需每次都陷入内核。
-
-**工作流程**：
-```
-加锁（fast path，用户态）:
-  atomic CAS: 0 → 1  成功 → 直接获取锁，无系统调用
-
-等锁（slow path，内核态）:
-  atomic CAS 失败 → futex(FUTEX_WAIT) → 内核挂起线程
-
-解锁:
-  atomic store: 1 → 0 → futex(FUTEX_WAKE) → 唤醒等待者
-```
-
-**跨平台实现**：
-
-| 操作     | Linux                             | Windows                                         |
-|----------|-----------------------------------|-------------------------------------------------|
-| 等待     | `futex(FUTEX_WAIT)`               | `WaitOnAddress()`                               |
-| 唤醒     | `futex(FUTEX_WAKE)`               | `WakeByAddressSingle()` / `WakeByAddressAll()`  |
-| 定时等待 | `futex(FUTEX_WAIT_BITSET)` + 超时 | `WaitOnAddress()` + 超时                        |
-
-NexusForce 的 `futex` 枚举映射了 Linux FUTEX 的全部 13 种操作码（`WAIT`/`WAKE`/`REQUEUE`/`CMP_REQUEUE`/`WAKE_OP`/`LOCK_PI`/`UNLOCK_PI` 等），加上 `PRIVATE_FLAG` 用于进程内优化。
-
-**`atomic_futex`** 在此基础上实现了一个完整的用户态互斥锁模板（`WaiterBit` 默认为 `0x80000000`）：
-- `wait_until(operand, equal)` —— 等待直到值不等于（或等于）operand
-- `load_and_test_until` —— 循环中设置 WaiterBit → futex_wait → 重新检查，防范假唤醒
-- 同时支持 `system_clock` 和 `steady_clock` 两种超时（后者不受系统时间调整影响）
+- 每个 slot 只占 1 字节元数据：`EMPTY=0x80`、`DELETED=0xFE`、有效标签 0–127 为 7-bit H2；控制块与数据数组分离。
+- 查找先用 H2 过滤，标签命中才访问数据数组比较完整键；SSE2 一次装入 16 字节元数据，单指令得到 16 个候选 slot。
+- 线性探测靠 2 的幂容量做位与，删除留 tombstone；同一实现支撑 `flat_unordered_map` / `flat_unordered_set`。
 
 ---
 
-### Q: `lock_free_queue`（无锁队列）是如何实现线程安全的？
+### Q: `thread_pool` 的工作窃取如何控制窃取成本？
 
-NexusForce 的无锁队列采用**多生产者-多消费者**（MPMC）设计，核心思路是**环形缓冲区 + 原子 CAS 序号抢占**：
-
-1. **环形缓冲区**：底层是一个固定大小的 slot 数组，每个 slot 带有一个原子 turn 序号。生产者/消费者通过原子索引（`tail_`/`head_`）竞争写入/读取位置。
-
-2. **隐式生产者**：每个线程在首次 `try_push` 时自动注册为"隐式生产者"（`thread_exit_listener`），线程退出时通过 `thread_local` 对象析构自动清理，防止死线程占用 slot。
-
-3. **核心技巧**：
-   - `circular_less_than(a, b)` —— 通过有符号差值比较处理 uint64_t 回绕
-   - `ceil_to_pow_2(x)` —— 保证容量为 2 的幂，使取模变为位运算
-   - `align_for<T>` —— 确保每个 slot 对齐到 `alignment_of<T>`，避免 false sharing
-
-4. **性能特性**：无锁意味着没有 mutex 的上下文切换开销，在高竞争场景下吞吐量远超有锁队列。代价是内存序（`memory_order_acquire`/`release`）需要仔细编排以防止 data race。
+- 每个 worker 一条 256 槽环形本地队列：新任务优先入本地队列，溢出才进全局无锁队列；优先级大于 0 的任务走独立的 `priority_queue`。
+- 窃取策略可选 `half` / `fixed_batch` / `single` / `adaptive`（默认自适应批量），且同一时刻最多一半 worker 参与窃取，避免互相踩踏。
+- NUMA 感知：worker 按 NUMA 节点轮转分配，跨节点仅在目标队列比本地候选深 4 个以上时才窃取；另有 CPU 亲和开关与带自旋守时窗口的定时调度器。
 
 ---
 
-### Q: `bloom_filter`（布隆过滤器）的数学原理是什么？
+### Q: `io_context` 怎样把 I/O、定时器、跨线程投递统一到一个循环？
 
-布隆过滤器是一个概率性集合成员查询结构，由 m 位的位数组和 k 个哈希函数组成：
-
-**核心保证**：
-- **假阴性（漏报）**：不可能——已插入元素一定返回 true
-- **假阳性（误报）**：可能——未插入元素可能返回 true
-
-**最优参数推导**（给定预期 n 个元素，目标误报率 p）：
-```
-m = -n × ln(p) / (ln 2)²   （最优位数组大小）
-k = (m / n) × ln 2         （最优哈希函数数量）
-```
-
-**双哈希优化**（Kirsch & Mitzenmacher 2006）：仅计算两个独立哈希 h₁(x) 和 h₂(x)，通过线性组合生成 k 个哈希值：
-```
-g_i(x) = (h₁(x) + i × h₂(x)) mod m,   i = 0..k-1
-```
-要求 h₂(x) 与 m 互质——通过确保 h₂(x) 为奇数来实现。理论证明这与 k 个独立哈希函数具有相同的渐近性能。
-
-**运行中的估算**（设位数组中 1 的比例为 x）：
-```
-当前误报率 ≈ x^k
-当前元素数 ≈ -(m/k) × ln(1 - x)
-```
-
-布隆过滤器被设计用于**缓存穿透防护、LSM-Tree 读放大削减、URL 去重、垃圾邮件过滤**等空间敏感且可容忍少量误报的场景。
+- 后端三选一：Linux epoll（默认边缘触发）、FreeBSD poll、Windows IOCP（辅以 WSA 事件线程）；等待时长取 `heap_timer` 堆顶并截断到 200 ms。
+- 跨线程 `post()` 进入无锁队列，由循环批量 drain；`dispatch()` 在当前线程直接执行；`work` 守卫阻止循环提前退出。
+- 定时器是惰性删除的最小堆：`cancel_timer()` 只打取消标记，到期取出时跳过，避免 O(n) 重排。
+- `strand` 用 CAS 锁 + 无锁队列把回调串行化，协程、定时器与 socket 回调共用同一套调度。
 
 ---
 
-### Q: `radix_router`（Radix Tree 路由）相比正则路由有什么优势？
+### Q: HTTP/2 栈如何兼顾协议完整性与吞吐？
 
-NexusForce 的 HTTP 路由器使用**段式压缩前缀树（Segment-based Trie）**，将 URL 路径按 `/` 分割为段，每段作为一个 Trie 节点：
-
-```
-节点结构:
-  segment          — 当前段名
-  children         — 静态段 → 子节点索引 (unordered_map)
-  param_index      — :param 子节点索引（如 /users/:id）
-  wildcard_index   — * 通配符子节点索引（如 /static/*）
-  handler          — 路由处理器
-```
-
-**匹配优先级**：静态段 > `:param` > `*` 通配符。未匹配时回退到正则路由。
-
-**对比正则路由**：
-
-| 维度            | Radix Tree                | 正则路由                           |
-|-----------------|---------------------------|------------------------------------|
-| 时间复杂度      | O(k)，k = 路径深度        | O(n × r)，n = 路由数，r = 正则回溯 |
-| 内存布局        | 紧凑的 segment→index 映射 | 每个路由一个编译后的正则对象       |
-| 1000 条路由匹配 | ~3-5 次哈希查找           | 可能回溯数千次                     |
-| 插入开销        | O(k)                      | 正则编译 O(正则长度)               |
-| 可预测性        | 确定性的，无回溯          | 依赖正则引擎实现                   |
-
-Radix Tree 路由适合 API 网关和微服务场景（大量精确路由 + 少量参数路由），正则路由适合复杂模式匹配。
+- HPACK 静态表 61 项 + 按 SETTINGS 上限淘汰的动态表，字符串支持 Huffman 编解码；CONTINUATION 帧会挂起并合并回 HEADERS。
+- 连接级与流级双窗口流控：DATA 发送前扣窗口，WINDOW_UPDATE 归还；帧序与流状态由状态机校验。
+- 读写都挂在 `io_context`：读事件内批量解析帧，写回在事件内合并，小响应延迟 flush，单次写体 ≥16 KiB 或积压 ≥1 MiB 才强制写出。
 
 ---
 
-### Q: `buffer_chain` 的零拷贝原理是什么？
+### Q: `virtual_thread` 的协程调度器与线程池是什么关系？
 
-`buffer_chain` 是一个**链式缓冲区**，将多个内存块链接在一起而不执行实际拷贝：
-
-```
-append("HTTP/1.1 200\r\n")
-append(header_block)       ← 指向已有的 header 内存，不拷贝
-append("\r\n")
-append(body_block)         ← 指向已有的 body 内存，不拷贝
-     ↓
-segments_: [{data→"HTTP/1.1 200\r\n", size=15},
-            {data→header_block, size=256},
-            {data→"\r\n", size=2},
-            {data→body_block, size=4096}]
-total_size_: 4369
-```
-
-当真正需要输出时，有两个选项：
-- **`flatten()`** —— 分配到单一 `string` 中（此时才发生拷贝）
-- **`to_iovec()`** —— 构建 POSIX `struct iovec` 数组，直接传给 `writev()` 系统调用，由内核完成分散-聚集 IO（scatter-gather I/O），**全程零拷贝**
-
-这在 HTTP 响应组装中极为关键：响应行 + 多个头部 + 空行 + 正文来自不同内存位置，buffer_chain 避免将它们合并拷贝的 O(n) 开销。
+- `virtual_thread_task<T>` 是 stackless 协程，挂起不占线程栈；调度器单例以 `lock_free_queue<coroutine_handle<>>` 作为就绪队列。
+- sleep 走 `heap_timer`，每轮最多批量转入 32 个到期协程；空闲 worker 停在 FUTEX 唤醒字上，`thread_local` 标记避免“自己唤醒自己”的惊群。
+- `get_result()` 用 mutex + condition_variable 把异步结果桥接给同步调用者；协程之间用 `co_await` 直接传递 continuation。
 
 ---
 
-### Q: `compressed_pair` 是如何利用 EBCO 优化内存的？
+### Q: NFRS 反射系统如何在没有编译器反射的情况下驱动 ORM？
 
-`compressed_pair<IfEmpty, T>` 的核心技巧是**空基类优化**（Empty Base Class Optimization, EBCO）的模板化应用：
-
-```cpp
-// 当 IfEmpty 是空类且非 final 时：
-template <typename IfEmpty, typename T, bool Compressed = is_empty_v<IfEmpty> && !is_final_v<IfEmpty>>
-struct compressed_pair final : IfEmpty, icommon<...> {
-    T value;  // 仅存储 T，IfEmpty 零开销
-};
-```
-
-**压缩条件**：
-- `is_empty_v<IfEmpty>` —— IfEmpty 无成员变量（如无状态比较器、无捕获 lambda）
-- `!is_final_v<IfEmpty>` —— 不能是 final 类（final 类不可继承）
-
-**内存效果对比**：
-```
-struct normal_pair<Empty, int> {   // sizeof = 8 (padding)
-    Empty e;  // sizeof=1（C++ 不允许零尺寸对象）
-    int v;    // sizeof=4, align=4 → 从 offset 4 开始
-};
-
-compressed_pair<Empty, int> {      // sizeof = 4
-    int v;    // 空基类 Empty 占 0 字节
-};
-```
-
-NexusForce 的 `scope_exit` 使用 `compressed_pair<Func, bool>` 同时存储回调函数和活跃标志，无额外内存开销。`memory_view` 使用 `compressed_pair` 存储数据和范围信息。
+- 宏（`NEFORCE_REFLECT_OBJ/PROP/FUNC/SIGNAL/ENUM`）在类体内只留标记；NFRS 扫描头文件，按 mtime 缓存增量生成注册 `.cpp` 并注入目标。
+- 运行时 `registry` 以 `type_id` 为主键：`type_id` 是 `type_name` 特化字符串（或编译器函数签名）的 FNV-64 哈希；`meta_type` 保存属性/函数/构造/枚举/容器信息，值经 `meta_any` 类型擦除。
+- `sql_mapper<T>` 读同一份元数据生成 DDL/DML，`repository` 执行；JSON/二进制序列化与动态信号槽也复用该元数据。
 
 ---
 
-### Q: LRU Cache 的 O(1) 访问是如何实现的？
+### Q: TUI 的差量渲染如何把整屏刷新压到微秒级？
 
-NexusForce 的 `lru_cache<Key, Value>` 通过两个数据结构配合实现 O(1) 的插入和访问：
-
-```
-list<pair<Key, Value>>          — 双向链表（头部=最近使用，尾部=最久未使用）
-unordered_map<Key, list_iterator> — 键→链表节点的 O(1) 映射
-unordered_map<Key, time_point>   — 键→最后访问时间（过期检测）
-```
-
-**操作流程**：
-```
-put(key, value):
-  若 key 已存在 → 更新值并移到链表头部（O(1)）
-  若缓存满 → 移除链表尾部节点（最久未使用），同时从 map 中删除（O(1)）
-  在链表头部插入新节点，map 中记录迭代器（O(1)）
-
-get(key):
-  从 map 查找迭代器（O(1)）
-  移动到链表头部（O(1)）
-  返回 value
-```
-
-**`ttl_cache`** 在此基础上叠加了三个特性：
-- **独立过期时间**：每个 entry 携带 `time_point expiry`
-- **三种刷新策略**：
-  - `never` —— 保持原始过期时间
-  - `on_access` —— 每次访问重置过期时间
-  - `sliding_window` —— 每次访问延长 TTL
-- **后台清理线程**：定时扫描并清除过期项，清理间隔可配置
+- 组件树 → 元素树 → Flexbox/Gridbox 布局 → cell 网格；每帧只比较前后两块屏幕缓冲。
+- 差量按字节扫描：行内用 16 字节 SSE 掩码找首个变化字节，行尾用 AVX2 一次跳过 128 字节相同区段再定位末个变化字节，只对变化区段生成 ANSI。
+- `cell_text` 固定 8 字节保存单码点并缓存显示宽度，整屏比较是连续内存扫描；帧调度经 `strand` 合并，`headless` 后端支持离屏快照。
 
 ---
 
-### Q: `io_context` 的 epoll 边缘触发和 min-heap 定时器是如何配合的？
+### Q: `lock_free_queue` 与 `hazard_ptr` 如何配合实现无锁容器？
 
-`io_context` 是 Reactor 模式的核心，统一了事件循环、定时器与取消模型：
-
-**I/O 多路复用**：
-```
-epoll_create → epoll_ctl(ADD, fd, EPOLLIN|EPOLLET) → epoll_wait(timeout)
-```
-- **边缘触发**（EPOLLET）：仅在状态变化时通知一次，要求回调中必须循环 `read()` 直到 `EAGAIN`，避免事件丢失
-- timeout 由 `next_timer_deadline()` 动态计算：取 min-heap 堆顶定时器的到期时间差
-
-**定时器管理**（min-heap）：
-```
-timer_entry { id, deadline_ms, callback }
-timer_heap_ = min-heap<timer_entry>  ← 堆顶 = 最早到期
-```
-- `schedule_timer(delay_ms, callback)` → push 入堆 → 若新定时器更早到期则 `wake()`
-- `process_timers()` → 弹出所有 `deadline_ms <= now` 的 entry 并执行回调
-- 定时器 ID 单调递增，支持 `cancel_timer(id)` 取消
-
-**跨平台差异**：
-
-| 操作       | Linux          | Windows                             |
-|------------|----------------|-------------------------------------|
-| I/O 监控   | `epoll_wait()` | IOCP（I/O Completion Port）         |
-| 唤醒       | `eventfd`      | 手动重置事件（manual-reset event）  |
+- `lock_free_queue` 是 moodycamel 移植：每生产者一条 SPSC block 子队列，块由无锁 free list 复用；显式 token 与按线程 ID 哈希的隐式生产者并存，支持批量入队/出队。
+- 消费者按轮转配额切换子队列，`try_dequeue` 选最长非空队；隐式生产者由 `thread_exit_notifier` 在退出时回收。
+- 删除节点用 `hazard_ptr`：读侧先 `protect`，写侧 `retire` 到线程本地列表，攒到 100 个再扫描全部 hazard 记录（排序 + 二分），未被保护才析构。
 
 ---
 
-### Q: `virtual_thread` 和操作系统线程的本质区别是什么？
+### Q: `crash_dump` 如何在信号处理函数里安全写出转储？
 
-`virtual_thread<T>` 是 C++20 协程（stackless coroutine）上的抽象层，不是真正的"虚拟线程"（green thread / stackful coroutine）。其核心结构：
-
-```
-task_shared_state<T>:
-  aligned_buffer<T> result_buffer_  — 返回值存储（SBO 优化）
-  exception_ptr exception_          — 异常传播
-  atomic<coroutine_handle<>> continuation_ — 等待者 continuation
-  atomic<bool> completed_           — 任务完成标志
-  mutex + condition_variable        — 阻塞等待 get_result() 的支持
-  atomic<unsigned long> ref_count_  — 引用计数（多等待者安全）
-```
-
-**与 OS 线程的关键区别**：
-
-| 维度     | `virtual_thread`              | `thread`                         |
-|----------|-------------------------------|----------------------------------|
-| 底层机制 | C++20 协程（编译器状态机）    | 操作系统内核线程                 |
-| 栈       | 无独立栈（无栈协程）          | 1MB+ 内核栈                      |
-| 切换开销 | ~函数调用级别                 | ~微秒级（系统调用 + 上下文切换） |
-| 创建数量 | 百万级                        | 数千级                           |
-| 抢占     | 协作式（co_await/co_yield）   | 抢占式（内核调度）               |
-| 阻塞操作 | `get_result()` 阻塞等待线程   | `thread::join()` 阻塞等待线程    |
-
-`virtual_thread` 适合 IO 密集型的"大量等待"场景：网络请求、数据库查询等。CPU 密集型任务应使用 `thread_pool`。
-
----
-
-### Q: Sparse 容器（`sparse_set`/`sparse_map`）的权衡是什么？
-
-NexusForce 的 sparse 系列容器基于**有序 vector + 二分查找**：
-
-```
-sparse_vector<T>:
-  底层: vector<pair<Key, T>>（始终有序）
-  查找: binary_search → O(log n)
-  插入: binary_search + 元素右移 → O(n)
-  迭代: 连续内存遍历 → O(1), cache-friendly
-```
-
-**与传统关联容器对比**：
-
-| 维度     | `sparse_set`                         | `set`（rb_tree）         | `unordered_set`    |
-|----------|--------------------------------------|--------------------------|--------------------|
-| 查找     | O(log n)                             | O(log n)                 | O(1) 平均          |
-| 插入     | O(n)（移动元素）                     | O(log n)                 | O(1) 平均          |
-| 迭代     | **O(1)，连续内存，cache-friendly**   | O(1)，指针追逐           | O(1)，跳跃遍历     |
-| 内存     | **最小**（仅 vector 开销）           | 每个节点 3 个指针 + 颜色 | 桶数组+链表节点    |
-| 最佳场景 | 少量插入、大量遍历                   | 频繁插入/删除            | 纯 O(1) 查找       |
-
-Sparse 容器在"构建一次、查询多次、频繁迭代"的场景（配置表、查找表、索引）中是最佳选择。两个插入策略：
-- `insert_unique` —— 键必须唯一，重复键返回已有元素迭代器
-- `insert_equal` —— 允许重复键（等价于 `sparse_multiset`/`sparse_multimap`）
+- 统一捕获 POSIX 致命信号、未捕获 C++ 异常与 Windows SEH；写入只调用系统调用并使用静态缓冲区，不分配堆。
+- Windows 走 `MiniDumpWriteDump`；Linux/FreeBSD x86-64/AArch64 自写 ELF core（PT_NOTE 放 `NT_PRSTATUS`，PT_LOAD 装可读段）。
+- 文件名 `<prefix>-<日期>-<时间>-<pid>.<ext>`，同秒冲突追加序号；可通过回调取摘要，写入失败还能回退内核 core。
 
 ---
 
