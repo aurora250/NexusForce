@@ -339,7 +339,7 @@ namespace {
                 builder.append_hex(exception_code, 8);
                 break;
             case crash_dump::reason::unhandled_exception:
-                builder.append("std::terminate");
+                builder.append("terminate");
                 break;
             case crash_dump::reason::manual:
             default:

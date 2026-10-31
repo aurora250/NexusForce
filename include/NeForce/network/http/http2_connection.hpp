@@ -70,10 +70,11 @@ private:
     mutex write_mutex_;
     mutable recursive_mutex stream_mutex_; ///< 保护 streams_/pending_/stream_priorities_ 等流状态
 
-    uint32_t connection_consumed_ = 0;                        ///< 连接级已消费窗口（用于 WINDOW_UPDATE 批量发送）
+    uint32_t connection_consumed_ = 0;                        ///< 连接级已消费窗口
     flat_unordered_map<uint32_t, uint32_t> stream_consumed_;  ///< 每流已消费窗口
     flat_unordered_map<uint32_t, uint8_t> stream_priorities_; ///< 每流优先级权重
     uint32_t local_stream_window_ = 65535;                    ///< 本地流初始窗口
+    atomic<int> write_batch_depth_{0};                        ///< 读事件内延迟 flush 深度
 
     stream_handler stream_handler_;
     close_handler close_handler_;
@@ -110,6 +111,9 @@ private:
     void send_window_update(uint32_t stream_id, uint32_t increment);
 
     void write_frame(const byte_vector& frame);
+    void flush_writes_over(size_t threshold);
+    void write_body_frames(uint32_t stream_id, const byte_t* data, size_t len, bool end_stream);
+    void write_header_block(uint32_t stream_id, const byte_vector& header_block, bool end_stream);
     void flush_writes();
     void close_connection(http2_error error = http2_error::no_error);
 
@@ -131,16 +135,39 @@ public:
      * @brief 发送 HTTP 响应（HEADERS + DATA）
      * @param stream_id 流ID
      * @param headers 响应头部
-     * @param body 响应体（可选）
+     * @param body 响应体
      * @param end_stream 是否结束流
      */
-    void send_response(uint32_t stream_id, const vector<hpack_header_field>& headers, const string& body = {},
+    void send_response(uint32_t stream_id, const vector<hpack_header_field>& headers, string_view body = {},
                        bool end_stream = true);
+
+    /**
+     * @brief 发送响应头（不结束流）
+     * @param stream_id 流 ID
+     * @param headers 响应头部
+     * @param end_stream 是否同时结束流
+     */
+    void send_headers(uint32_t stream_id, const vector<hpack_header_field>& headers, bool end_stream = false);
+
+    /**
+     * @brief 发送响应 DATA 帧
+     * @param stream_id 流 ID
+     * @param data 数据
+     * @param end_stream 是否结束流
+     */
+    void send_data(uint32_t stream_id, string_view data, bool end_stream = false);
+
+    /**
+     * @brief 发送尾部 HEADERS 并结束流
+     * @param stream_id 流 ID
+     * @param trailers 尾部字段（不得包含伪头部）
+     */
+    void send_trailers(uint32_t stream_id, const vector<hpack_header_field>& trailers);
 
     /**
      * @brief 发送 PUSH_PROMISE（Server Push）
      * @param stream_id 父流ID
-     * @param promised_stream_id 新承诺的流ID（必须为偶数，服务器发起）
+     * @param promised_stream_id 新承诺的流ID（必须为偶数）
      * @param request_headers 承诺的请求头部
      *
      * 向客户端承诺将推送指定资源，客户端可以选择接受或通过 RST_STREAM 拒绝。
@@ -172,6 +199,17 @@ public:
      * @brief 设置流处理器（收到完整请求时回调）
      */
     void set_stream_handler(stream_handler handler) { stream_handler_ = move(handler); }
+
+    /**
+     * @brief 设置本端允许的最大并发流数
+     * @param value 并发流上限，0 表示不修改
+     * @note 必须在 start() 之前调用，否则 SETTINGS 已发送
+     */
+    void set_max_concurrent_streams(const uint32_t value) {
+        if (value > 0) {
+            local_settings_.set(http2_settings_id::max_concurrent_streams, value);
+        }
+    }
 
     /**
      * @brief 设置路由器（启用自动请求分发）

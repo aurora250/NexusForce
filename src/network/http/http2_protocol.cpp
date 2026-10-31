@@ -209,9 +209,37 @@ namespace {
         return static_cast<uint32_t>(value);
     }
 
+    struct huffman_decode_entry {
+        uint16_t symbol;
+        uint8_t bits;
+    };
+
+    const vector<huffman_decode_entry>& huffman_table_15() {
+        static const vector<huffman_decode_entry> table = [] {
+            constexpr size_t bits_count = 15;
+            constexpr size_t table_size = 1U << bits_count;
+            vector<huffman_decode_entry> result(table_size, huffman_decode_entry{0, 0});
+            for (size_t c = 0; c < 256; ++c) {
+                const auto& hc = HUFFMAN_TABLE[c];
+                if (hc.bits > bits_count) {
+                    continue;
+                }
+                const size_t shift = bits_count - hc.bits;
+                const size_t base = static_cast<size_t>(hc.code) << shift;
+                const size_t count = size_t{1} << shift;
+                for (size_t i = 0; i < count; ++i) {
+                    result[base + i] = {static_cast<uint16_t>(c), hc.bits};
+                }
+            }
+            return result;
+        }();
+        return table;
+    }
+
     string decode_huffman(cbyte_view input) {
         static constexpr uint64_t EOS_CODE = 0x3fffffff;
         static constexpr uint8_t EOS_BITS = 30;
+        static const auto& decode_table = huffman_table_15();
 
         byte_cursor cur(input);
         string result;
@@ -229,6 +257,18 @@ namespace {
             auto eos = cur.try_peek_bits(EOS_BITS);
             if (eos && *eos == EOS_CODE) {
                 return {};
+            }
+
+            if (cur.bits_remaining() >= 15) {
+                auto peeked = cur.try_peek_bits(15);
+                if (peeked) {
+                    const auto& entry = decode_table[*peeked];
+                    if (entry.bits != 0 && entry.bits <= cur.bits_remaining()) {
+                        result += static_cast<char>(entry.symbol);
+                        cur.skip_bits(entry.bits);
+                        continue;
+                    }
+                }
             }
 
             bool matched = false;
@@ -340,6 +380,51 @@ void hpack_encoder::evict_for_size(uint32_t needed) {
 }
 
 int32_t hpack_encoder::find_in_tables(const string& name, const string& value) const {
+    if (name == ":status") {
+        if (value == "200") {
+            return 8;
+        }
+        if (value == "204") {
+            return 9;
+        }
+        if (value == "206") {
+            return 10;
+        }
+        if (value == "304") {
+            return 11;
+        }
+        if (value == "400") {
+            return 12;
+        }
+        if (value == "404") {
+            return 13;
+        }
+        if (value == "500") {
+            return 14;
+        }
+    } else if (name == ":method") {
+        if (value == "GET") {
+            return 2;
+        }
+        if (value == "POST") {
+            return 3;
+        }
+    } else if (name == ":scheme") {
+        if (value == "http") {
+            return 6;
+        }
+        if (value == "https") {
+            return 7;
+        }
+    } else if (name == ":path") {
+        if (value == "/") {
+            return 4;
+        }
+        if (value == "/index.html") {
+            return 5;
+        }
+    }
+
     for (size_t i = 0; i < HPACK_STATIC_TABLE_SIZE; ++i) {
         if (HPACK_STATIC_TABLE()[i].name == name && HPACK_STATIC_TABLE()[i].value == value) {
             return static_cast<int32_t>(i + 1);
@@ -354,6 +439,34 @@ int32_t hpack_encoder::find_in_tables(const string& name, const string& value) c
 }
 
 int32_t hpack_encoder::find_name_in_tables(const string& name) const {
+    if (name == ":authority") {
+        return 1;
+    }
+    if (name == ":method") {
+        return 2;
+    }
+    if (name == ":path") {
+        return 4;
+    }
+    if (name == ":scheme") {
+        return 6;
+    }
+    if (name == ":status") {
+        return 8;
+    }
+    if (name == "content-length") {
+        return 28;
+    }
+    if (name == "content-type") {
+        return 31;
+    }
+    if (name == "date") {
+        return 33;
+    }
+    if (name == "server") {
+        return 54;
+    }
+
     for (size_t i = 0; i < HPACK_STATIC_TABLE_SIZE; ++i) {
         if (HPACK_STATIC_TABLE()[i].name == name) {
             return static_cast<int32_t>(i + 1);

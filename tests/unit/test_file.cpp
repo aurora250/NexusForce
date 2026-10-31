@@ -344,6 +344,17 @@ TEST_F(FileTest, ReadToStringWithSize) {
     EXPECT_EQ(out, "string");
 }
 
+#ifdef NEFORCE_PLATFORM_LINUX
+TEST_F(FileTest, ReadPseudoFileWithZeroSize) {
+    file f(path("/proc/self/status"), false, file_access::read, file_shared::share_read_write,
+           file_creation::open_exist);
+    ASSERT_TRUE(f.is_opened());
+    const string content = f.read();
+    EXPECT_FALSE(content.empty());
+    EXPECT_NE(content.find("Name:"), string::npos);
+}
+#endif
+
 TEST_F(FileTest, ReadWholeFile) {
     auto p = get_test_path("read_all.txt");
     filesystem::create_and_write(p, "entire content");

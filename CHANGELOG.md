@@ -4,7 +4,12 @@
 
 ### 🚀 New Features
 
+- 新增 `unique_function`，仅可移动且类型擦除
+- 新增 `rotating_file`，按大小轮转的原始文件写入器，支持 `rollover` 与 `indexed` 两种命名、`max_files` 保留与显式 `rotate()`
 - 新增 `crash_dump` 崩溃转储，统一接管 `terminate`、POSIX 致命信号与 Windows 未处理异常过滤器，写出平台原生转储
+- `ssl_context` 新增 `enable_session_reuse()` 与 `share()`，`ssl_client` 新增 `ssl_session_cache` 跨连接会话重用；启用 TLS 1.3 session ticket/PSK 缩写握手
+- `ssl_context` 新增 `set_groups()`：可显式选择密钥交换组；默认仅启用 X25519，避免 TLS 1.3 默认混合后量子组给短连接带来的额外开销
+- `ssl_context` 新增 `enable_tls12_short_connection_acceleration()`：显式启用 TLS 1.2 复用短连接加速，默认关闭；启用时自动开启票据复用，仅用于白名单/内部服务并需安全评审
 - `crash_dump::options` 支持内存捕获开关、数量/字节上限、文件名前缀、失败时回退内核 core，`crash_dump::callback` 在崩溃现场取得单行摘要；`crash_dump::write()` 可随时写出手动转储
 - `process` 新增 `snapshot()` 与 `process::snapshot_entry`：一次枚举全系统进程，给出父进程、状态、线程数、RSS、CPU 时间与启动时刻；Windows 走 Toolhelp 快照，Linux 读 `/proc`
 - `process` 新增 `get_time_info()` / 实例 `get_time_info()` / `current_time_info()`：用户态、内核态 CPU 时间与墙上时间统一为毫秒
@@ -136,6 +141,20 @@
 - 添加重试策略 `http_retry_policy`（`config::retry`）：可重试状态码（408/429/500/502/503/504）与传输层失败按倍数退避重试，优先采用响应的 `Retry-After`（秒）作为退避时长，默认不重试
 - `http_client::config` 新增 `keep_alive_idle_timeout` 与 `stream_idle_timeout`：空闲超限的连接主动重连，流式读取期间使用独立的接收超时
 - `http_server_response` 新增 `allows_body()` 与 `suppress_content_length`：按状态码判断是否允许正文，CONNECT 2xx 可显式省略 `Content-Length`
+- `http_server` 新增 `max_keep_alive_requests`：可配置单连接最大 keep-alive 请求数（0 为不限制），默认提高到 1000
+- 反向代理新增后端 `http_client` 连接池：按 backend scheme/host/port 复用 keep-alive 连接，HTTPS 后端同时复用 TLS 连接；新增 `close_idle_connections()` 供停止前释放后端连接
+- `reverse_proxy_filter` 新增按后端 `max_connections_per_backend` / `max_queue_per_backend` 限流与排队，超过上限返回 503
+- `http_client` 新增 `request_fast()` / `request_raw()` 与预序列化请求入口：复用连接池时跳过 URL、Cookie、重定向与重复响应解析
+- `reverse_proxy_filter` 新增 `raw_response_passthrough`、`stats()` 与原始响应透传；默认关闭，启用后后端响应不重新解析/序列化
+- `http2_connection` 新增 `send_headers()` / `send_data()` / `send_trailers()`，支持流式响应与尾部 HEADERS
+- gRPC 新增 `grpc_stream_writer` 与 `grpc_handler::process_server_stream()`，支持 HTTP/2 服务端流
+- 反向代理新增 `enable_thread_local_clients`：每个前端 worker 线程本地复用后端连接，消除每请求池锁与 key 查找
+- 反向代理新增同进程 `direct_backend` 模式，用于本地后端直接处理，绕过第二次 TCP/HTTP；远程代理路径不变
+- `http_server` 新增 `enable_async_http1`：明文 HTTP/1 连接由事件驱动状态机处理，`http_router::handle_request_async_with_request()` 支持异步过滤器与转发；TLS 前端回退同步路径，异步路径不支持 CONNECT/协议升级
+- 新增 `pre_filter_async()` 与事件驱动后端连接池：异步连接、写入、响应头/正文解析与 keep-alive 复用均不阻塞 I/O worker；`https` 后端自动回退到同步转发
+- `reverse_proxy_stats` 新增 `async_requests` / `async_connections` / `async_errors`；异步后端连接池按 backend 复用，支持空闲上限与并发/排队上限
+- `http_server` 新增 `h2_max_concurrent_streams`（默认 100）；HTTP/2 基准扩展到 256 streams/连接
+- `http_server_response` 新增 `body_ref` / `set_body_view()`，外部正文视图可直接参与 `writev`/序列化，避免 64 KiB 响应的一次正文拷贝
 - 添加屏幕选区 `tui::screen_selection` 与 `paint_selection()` / `selection_text()`：以帧缓冲单元格为坐标跨组件选取，行内尾随空白裁剪、宽字符续列跳过
 - `reconciler` 接入鼠标拖选：左键按下拖动即开始选区，`Ctrl+C` 复制并清空选区，其余按键、滚轮、窗口变化都会丢弃选区；`set_clipboard_writer()` 可接管复制目标
 - `components::composer` 提交时记录历史，单行编辑下 `Up`/`Down` 浏览提交历史（多行时仍由编辑器移动光标）
@@ -146,6 +165,30 @@
 
 ### 🔧 Improvements
 
+- `tim_sort` 重写，run 识别、32..64 minrun、二分插入、run 栈合并、最终强制归并与指数搜索 galloping
+- `inplace_merge` 改为稳定缓冲归并，空间 O(N)
+- `http_client::read_response()` 只解析一次响应头，正文直接从读缓冲装配
+- `tcp_client_base` 的 DNS 客户端改为首次域名解析时按需创建，IP 字面量连接不再构造 DNS 客户端
+- `http2_connection::send_response()` 正文参数由 `const string&` 改为 `string_view`；`http_server_response` 新增 `raw_response` / `close_after_send`
+- `grpc_stream_writer` 默认按 16 KiB 聚合 gRPC 帧后一次 DATA 发送，减少逐消息 flush
+- 反向代理缓存后端连接池 key 与 Host 头，`max_idle_connections` 默认提升到 32，降低高并发下的连接新建
+- 反向代理 raw 透传支持 `skip_response_headers_`，无需完整解析/重建正文即可过滤响应头
+- WebSocket 会话启用 `TCP_NODELAY`；事件驱动回调继续由 `event_mutex_` 串行化
+- TLS 客户端在 TCP 建连后、握手前设置 `TCP_NODELAY`，服务端在接受连接后同样设置，避免握手小包受 Nagle 延迟
+- 移除 `ssl_client` 每连接重复设置共享 `SSL_CTX` 的选项与验证模式；验证模式改为在上下文安装时同步，减少共享上下文写入
+- `ssl_session_cache` 改为按端点保存多张单次 session ticket：`acquire()` 取走并移除票据，`store()` 追加新票据，并发短连接不再争抢同一张票据
+- HTTP/2 响应正文支持 `string_view` 零拷贝输入，DATA 帧头与正文一次追加；HPACK 解码新增 15-bit Huffman 查表，静态表常用项走快速索引
+- HTTP/2 服务端按客户端声明的并发流数聚合小于 16 KiB 的响应写回，大正文按流 flush
+- TLS 响应写路径使用 `response.to_string()` 一次构造头+正文，去掉额外的 `header + body` 用户态拼接
+- `http_server` 支持 HTTP/1.1 pipelining：连接内保留未消费的接收缓冲，解析完整请求后批量写回响应；普通单请求路径仍沿用原 writev/TLS 写路径
+- `ssl_context` 默认禁用 TLS 1.0 / 1.1，最低协议版本提升到 TLS 1.2
+- `http_server_request::session` 改为惰性会话句柄：只在 handler 解引用时创建会话，无 Cookie 的无状态请求不再产生会话分配；会话首次创建后由响应补发 `Set-Cookie`
+- `http_server_request::session` 的静态类型由 `http_session*` 变为 `http_session_handle`；`request.session->...` 与 `http_session* s = request.session` 保持可用，`auto* s = request.session` 需改为后者或 `.get()`
+- `http_server::session_manager` 改为读写分离的会话表：查找/存在性检查走共享锁，创建/删除/清理走独占锁，降低 keep-alive 并发下的全局互斥
+- HTTP/1 请求解析改为基于接收缓冲的视图扫描：先只解析请求行与头部，`Expect`/`Content-Length`/`Transfer-Encoding` 通过大小写不敏感的 `string_view` 查找，避免每请求多次整段小写拷贝
+- `sysinfo::hardware_info` 从 `/sys/bus/pci` 与 `pci.ids` 补全 chipset/southbridge，并尝试 EDAC 的 DIMM 类型/通道信息
+- `tui::canvas_chart` 区分真实 0 值与缺失数据：0 值绘制零基线，NaN/gap 不再被误画成 0
+- `file::read()` 对 `stat` 大小为 0 的 procfs/sysfs 伪文件回退到分块流式读取，不再返回空内容
 - `future<T>` 支持 `co_await`：完成线程在设置结果后直接恢复等待的协程，值/引用/void 三种特化均可用，`future` 与协程任务由此打通；等待期间共享状态由等待器持有，延迟执行的 future 在 `co_await` 时同步求值
 - `thread_pool::submit_task` 可取 `as_task` 令牌返回 `task<T>`，`submit_result` 本身也可直接 `co_await`，线程池结果与协程任务之间不再需要手工包一层
 - 删除 `cancellation_token`，`task<T>`/`task<void>` 改用 `cancellation_slot`，`set_cancellation_slot()` + `is_cancelled()` 与网络层取消语义一致
@@ -334,6 +377,16 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `copy` / `copy_backward` / `move` / `move_backward` 连续迭代器快路径：仅同类型 trivially copyable 使用 `memory_move`，非平凡类型逐元素处理
+- 修复 TLS session ticket 复用：`connect()` 在 `post_connect()` 前写入逻辑 host/port，会话缓存 key 不再退化为 `":0"`；TLS 1.3 `NewSessionTicket` 在响应读取后缓存，断开前写入 `ssl_session_cache`
+- 修复 WebSocket 事件驱动模式下 read/write fd 回调可被多个 io_context 工作线程并发进入的问题；会话回调通过 `event_mutex_` 串行化
+- 修复 `ssl_stream::async_handshake()` 完成后未从 `io_context` 注销 fd：握手成功或失败时移除注册，并串行化同一握手的回调
+- 修复异步过滤器链在迁移请求/响应所有权后丢失异步过滤器写入：`next()` 返回前把 `request_own` / `response_own` / `ctx_own` 移回调用方，异步中间件设置的响应不再被同步副本覆盖
+- 修复 `strand` 丢失唤醒：生产者在空队列 `try_pop()` 与释放 `locked_` 之间入队时，其 `drain_one()` 看到锁被占用而返回，原持有者又未复查队列，handler 永久滞留；释放锁后重新检查队列
+- 修复 `tcp_socket` 异步读写使用边缘触发时可能丢失就绪事件：改为水平触发、一次性注册，完成/出错时注销 fd；`EAGAIN` 保持注册并重新武装，避免把伪就绪当成连接错误
+- 修复 HTTP/2 连接使用边缘触发 epoll 但每次只读一次导致的协议帧停滞：改为水平触发，保证后续 TLS 记录/帧能被继续读取
+- 修复新建会话在 handler 写入数据后 `is_new` 被清除、响应漏发 `Set-Cookie` 的问题：请求句柄单独记录“本请求创建了会话”
+- 修复 TCP 服务器接受连接最长延迟 200 ms：监听 fd 的边缘事件可能先被 io_context 工作线程消费，接受线程仍在 `run_one(200)` 中等待；接受线程改为在专属条件变量上等待，事件回调直接唤醒它
 - 修复 `http_server` 把所有请求解析错误一律返回 400：请求体过大改为 413、未知 `Expect` 改为 417、请求头过大/过多改为 431、不支持的 HTTP 版本改为 505；`100 Continue` 改用 `http_status` 构造，且仅对 HTTP/1.1 请求发送；错误响应统一声明 `Connection: close`
 - 修复 `http_server` 在 HEAD、204/205/304 与 1xx 响应中仍发送正文的问题；CONNECT 2xx 响应不再输出 `Content-Length`
 - 修复 `http_router` 的 405 响应缺少 `Allow` 头：按实际注册的路由（含参数化与正则路由）汇总允许的方法

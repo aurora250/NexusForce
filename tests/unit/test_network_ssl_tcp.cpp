@@ -1,5 +1,6 @@
 #include <NeForce/network/ssl/ssl_context.hpp>
 #include <NeForce/network/ssl/ssl_stream.hpp>
+#include <NeForce/network/ssl/ssl_session_cache.hpp>
 #include <NeForce/network/ssl/ssl_socket.hpp>
 #include <NeForce/network/ssl/ssl_acceptor.hpp>
 #include <NeForce/network/tcp/tcp_socket.hpp>
@@ -25,6 +26,49 @@ TEST_F(SslContextTest, DefaultConstructTlsClient) {
     ssl_context ctx(ssl_method::tls_client);
     EXPECT_TRUE(ctx.is_valid());
     EXPECT_NE(ctx.native_handle(), nullptr);
+}
+
+TEST_F(SslContextTest, SetGroupsAcceptsExplicitListAndRejectsEmpty) {
+    ssl_context ctx(ssl_method::tls_client);
+    EXPECT_NO_THROW(ctx.set_groups({"X25519", "P-256"}));
+    EXPECT_THROW(ctx.set_groups({}), value_exception);
+}
+
+TEST_F(SslContextTest, Tls12ShortConnectionAccelerationIsExplicitAndReversible) {
+    ssl_context ctx(ssl_method::tls_client);
+    auto* native = static_cast<SSL_CTX*>(ctx.native_handle());
+    EXPECT_EQ(SSL_CTX_get_options(native) & SSL_OP_NO_TLSv1_3, 0);
+
+    ctx.enable_tls12_short_connection_acceleration();
+    EXPECT_NE(SSL_CTX_get_options(native) & SSL_OP_NO_TLSv1_3, 0);
+
+    ctx.enable_tls12_short_connection_acceleration(false);
+    EXPECT_EQ(SSL_CTX_get_options(native) & SSL_OP_NO_TLSv1_3, 0);
+}
+
+TEST_F(SslContextTest, SessionCacheConsumesEachTicketOncePerEndpoint) {
+    ssl_session_cache cache;
+    auto* first = SSL_SESSION_new();
+    auto* second = SSL_SESSION_new();
+    ASSERT_NE(first, nullptr);
+    ASSERT_NE(second, nullptr);
+
+    cache.store("example.com", ports(443), first);
+    cache.store("example.com", ports(443), second);
+
+    EXPECT_EQ(cache.acquire("example.com", ports(443)), second);
+    EXPECT_EQ(cache.acquire("example.com", ports(443)), first);
+    EXPECT_EQ(cache.acquire("example.com", ports(443)), nullptr);
+    EXPECT_EQ(cache.acquire("example.com", ports(8443)), nullptr);
+
+    const auto stats = cache.stats();
+    EXPECT_EQ(stats.hits, 2);
+    EXPECT_EQ(stats.misses, 2);
+    EXPECT_EQ(stats.stored, 2);
+    EXPECT_EQ(stats.evicted, 0);
+
+    ssl_stream::free_session(first);
+    ssl_stream::free_session(second);
 }
 
 TEST_F(SslContextTest, DefaultConstructDtlsServer) {

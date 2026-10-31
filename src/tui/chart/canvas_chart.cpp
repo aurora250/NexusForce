@@ -137,6 +137,11 @@ void canvas_chart_window::project(const deque<double>& values, const size_t widt
             previous_time = t;
             previous_period = period;
         }
+        for (size_t x = 0; x < width; ++x) {
+            if (!occupied[x]) {
+                out[x].gap = true;
+            }
+        }
         return;
     }
     const size_t stride_value = stride(width);
@@ -166,6 +171,11 @@ void canvas_chart_window::project(const deque<double>& values, const size_t widt
                 range.high = max(range.high, value);
                 range.last = value;
             }
+        }
+    }
+    for (size_t x = 0; x < width; ++x) {
+        if (!occupied[x]) {
+            out[x].gap = true;
         }
     }
 }
@@ -357,7 +367,7 @@ void canvas_chart::raster(int x, int y, int width, int height, const vector<char
         int previous_y = 0;
         for (size_t column = 0; column < columns.size(); ++column) {
             const auto& range = columns[column];
-            if (!range.gap && range.high == 0.0 && range.low == 0.0 && range.last == 0.0) {
+            if (range.gap) {
                 has_previous = false;
                 continue;
             }

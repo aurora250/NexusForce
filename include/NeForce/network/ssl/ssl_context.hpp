@@ -126,6 +126,12 @@ public:
     ssl_context(ssl_context&& other) noexcept;
 
     /**
+     * @brief 共享底层 SSL_CTX 的副本
+     * @return 共享同一 SSL_CTX 的上下文
+     */
+    NEFORCE_NODISCARD ssl_context share() const;
+
+    /**
      * @brief 移动赋值运算符
      * @param other 源对象
      * @return 自身引用
@@ -217,6 +223,16 @@ public:
     void set_cipher_list(const string& ciphers);
 
     /**
+     * @brief 设置密钥交换组列表
+     * @param groups 组名称列表，按优先级排列
+     * @throws ssl_exception 上下文为空或设置失败时抛出
+     * @throws value_exception 组列表为空时抛出
+     *
+     * 默认只启用 X25519，避免 TLS 1.3 默认的混合后量子组在短连接上产生额外的密钥交换开销。
+     */
+    void set_groups(const vector<string>& groups);
+
+    /**
      * @brief 设置密码套件列表（TLS 1.3）
      * @param ciphersuites OpenSSL TLS 1.3密码套件字符串
      * @throws ssl_exception SSL上下文为空或设置失败时抛出
@@ -248,6 +264,25 @@ public:
      * 会话缓存可以提高重复连接的性能。
      */
     void set_session_cache_size(long size);
+
+    /**
+     * @brief 启用会话缓存/票据复用
+     * @param enable 是否启用
+     */
+    void enable_session_reuse(bool enable);
+
+    /**
+     * @brief 启用/关闭 TLS 1.2 复用短连接加速
+     * @param enable 是否启用，默认启用
+     *
+     * 启用时强制最高协议版本为 TLS 1.2，并自动开启会话缓存/票据复用。
+     * TLS 1.2 缩写握手不执行每连接 DHE，因此短连接新建开销明显低于
+     * TLS 1.3 PSK-DHE，但恢复连接不具备每连接前向安全。
+     *
+     * @warning 默认关闭。仅允许白名单/内部服务或已完成安全评审并接受
+     *          安全降级的业务显式启用；不要作为面向公网客户端的默认配置。
+     */
+    void enable_tls12_short_connection_acceleration(bool enable = true);
 
     /**
      * @brief 设置会话超时时间

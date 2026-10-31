@@ -69,6 +69,12 @@ private:
                 });
             } else {
                 self->locked_.store(false, memory_order_release);
+                // A producer can enqueue between the empty try_pop above and the release of locked_.
+                // Its drain_one() then observes the lock held and returns,
+                // so recheck the queue here to avoid losing that wakeup.
+                if (!self->queue_.empty()) {
+                    drain_one(self);
+                }
             }
         }
     };

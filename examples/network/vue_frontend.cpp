@@ -210,7 +210,7 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
         auto it = req.form_data.find("username");
         const string username = (it != req.form_data.end()) ? it->second : "demo";
 
-        auto* sess = req.session;
+        http_session* sess = req.session;
         sess->set("user", username);
         sess->set("role", "admin");
         sess->set("login_time", datetime::now().to_string());
@@ -247,7 +247,7 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
         jb.begin_object();
 
         if (req.has_session()) {
-            auto* sess = req.session;
+            http_session* sess = req.session;
             jb.key("authenticated").value(!sess->get("user").empty());
             jb.key("user").value(sess->get("user"));
             jb.key("role").value(sess->get("role"));

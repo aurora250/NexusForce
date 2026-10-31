@@ -374,7 +374,7 @@ size_t thread_pool::take_batch(worker_context& ctx) {
     }
 
     for (size_t i = 0; i < got; ++i) {
-        ctx.queue.push_back(_NEFORCE move(batch[i]));
+        ctx.queue.push_back(move(batch[i]));
     }
     pending_tasks_.fetch_sub(static_cast<uint32_t>(got), memory_order_acq_rel);
     publish_local_size(ctx);
@@ -551,7 +551,7 @@ size_t thread_pool::acquire_slot() {
     auto slot = make_unique<worker_slot>();
     slot->context = make_unique<worker_context>();
     slot->used = true;
-    worker_slots_.emplace_back(_NEFORCE move(slot));
+    worker_slots_.emplace_back(move(slot));
     return worker_slots_.size() - 1;
 }
 
@@ -574,7 +574,7 @@ bool thread_pool::spawn_worker() {
     worker_index_[slot_index].store(slot->context.get(), memory_order_release);
 
     auto worker_func = [this, slot_index] { thread_function(slot_index); };
-    slot->thread = make_unique<lazy_thread>(_NEFORCE move(worker_func));
+    slot->thread = make_unique<lazy_thread>(move(worker_func));
     slot->thread->start();
     slot->thread->detach();
     return true;
@@ -584,7 +584,7 @@ bool thread_pool::dispatch_task(task_type&& job, const priority_type priority, c
     if (static_cast<uint32_t>(priority) > 0) {
         {
             lock<mutex> lk(priority_mtx_);
-            priority_queue_.emplace(_NEFORCE move(job), priority, info);
+            priority_queue_.emplace(move(job), priority, info);
         }
         priority_pending_.fetch_add(1, memory_order_release);
         const uint32_t priority_before = pending_tasks_.fetch_add(1, memory_order_release);
@@ -596,7 +596,7 @@ bool thread_pool::dispatch_task(task_type&& job, const priority_type priority, c
 
     auto* ctx = get_worker_context();
     if (ctx != nullptr && ctx->queue.remain_size() > 0U) {
-        ctx->queue.push_back(_NEFORCE move(job));
+        ctx->queue.push_back(move(job));
         publish_local_size(*ctx);
         ++total_submitted_tasks_;
         arm_liveness_tick();
@@ -604,7 +604,7 @@ bool thread_pool::dispatch_task(task_type&& job, const priority_type priority, c
     }
 
     const uint32_t pending_before = pending_tasks_.fetch_add(1, memory_order_acq_rel);
-    if (global_queue_ == nullptr || pending_before >= task_threshhold_ || !global_queue_->enqueue(_NEFORCE move(job))) {
+    if (global_queue_ == nullptr || pending_before >= task_threshhold_ || !global_queue_->enqueue(move(job))) {
         pending_tasks_.fetch_sub(1, memory_order_acq_rel);
         return false;
     }
@@ -938,7 +938,7 @@ void thread_pool::reset_worker_index(const size_t capacity) {
     for (size_t i = 0; i < capacity; ++i) {
         atomic<worker_context*> empty;
         empty.store(nullptr, memory_order_relaxed);
-        worker_index_.emplace_back(_NEFORCE move(empty));
+        worker_index_.emplace_back(move(empty));
     }
 }
 

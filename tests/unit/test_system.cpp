@@ -4777,6 +4777,16 @@ TEST_F(ProcessTest, SocketOwners_ContainsBoundSocket) {
 }
 #endif
 
+TEST_F(ProcessTest, ScanSocketOwnersReportsSupport) {
+    const auto scan = process::scan_socket_owners(5000);
+#ifdef NEFORCE_PLATFORM_LINUX
+    EXPECT_TRUE(scan.supported);
+    EXPECT_TRUE(scan.complete);
+#else
+    EXPECT_FALSE(scan.supported);
+#endif
+}
+
 class ShareMemoryTest : public ::testing::Test {
 protected:
     static constexpr const char* test_shm_name = "neforce_test_shm_12345";

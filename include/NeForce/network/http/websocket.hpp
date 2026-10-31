@@ -250,6 +250,7 @@ private:
     bool write_registered_ = false; ///< 是否已注册EPOLLOUT
 
     mutex write_mutex_;              ///< 写队列互斥锁
+    mutex event_mutex_;              ///< 事件驱动回调串行化锁
     condition_variable write_cv_;    ///< 写条件变量
     queue<byte_vector> write_queue_; ///< 普通消息队列
     queue<byte_vector> ctrl_queue_;  ///< 控制帧队列（Ping/Pong/Close）

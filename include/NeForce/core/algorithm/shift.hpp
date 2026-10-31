@@ -41,12 +41,18 @@ NEFORCE_BEGIN_INNER__
  * 使用循环逐个元素复制。
  */
 template <typename Iterator1, typename Iterator2>
-constexpr enable_if_t<!(is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>), Iterator2>
+constexpr enable_if_t<!(is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2> &&
+                        is_same_v<iter_value_t<Iterator1>, iter_value_t<Iterator2>> &&
+                        is_trivially_copyable_v<iter_value_t<Iterator1>>),
+                      Iterator2>
 __copy_aux(Iterator1 first, Iterator1 last,
            Iterator2 result) noexcept(is_nothrow_assignable_v<iter_value_t<Iterator2>, iter_value_t<Iterator1>>) {
     auto n = _NEFORCE distance(first, last);
     for (; n > 0; --n, ++first, ++result) {
-        *result = *first;
+        NEFORCE_IF_CONSTEXPR(is_copy_assignable_v<iter_value_t<Iterator2>>) { *result = *first; }
+        else {
+            *result = _NEFORCE move(*first);
+        }
     }
     return result;
 }
@@ -60,10 +66,13 @@ __copy_aux(Iterator1 first, Iterator1 last,
  * @param result 输出范围起始
  * @return 输出范围结束
  *
- * 使用内存移动优化复制操作。
+ * 仅当源与目标元素类型相同且 trivially copyable 时使用内存移动优化。
  */
 template <typename Iterator1, typename Iterator2>
-constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2>, Iterator2>
+constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2> &&
+                              is_same_v<iter_value_t<Iterator1>, iter_value_t<Iterator2>> &&
+                              is_trivially_copyable_v<iter_value_t<Iterator1>>,
+                      Iterator2>
 __copy_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
     const auto n = static_cast<size_t>(last - first);
     const auto bytes = n * sizeof(iter_value_t<Iterator1>);
@@ -84,7 +93,7 @@ NEFORCE_END_INNER__
  * @return 输出范围结束迭代器
  *
  * 将范围 [first, last) 的元素复制到以 result 开始的位置。
- * 对连续迭代器使用内存移动优化，非连续迭代器使用循环复制。
+ * 对同类型且 trivially copyable 的连续迭代器使用内存移动优化，其余情况逐元素复制。
  */
 template <typename Iterator1, typename Iterator2>
 constexpr Iterator2 copy(Iterator1 first, Iterator1 last,
@@ -195,12 +204,18 @@ NEFORCE_BEGIN_INNER__
  * 从后向前逐个元素复制。
  */
 template <typename Iterator1, typename Iterator2>
-constexpr enable_if_t<!is_ranges_cot_iter_v<Iterator1>, Iterator2>
+constexpr enable_if_t<!is_ranges_cot_iter_v<Iterator1> || !is_ranges_cot_iter_v<Iterator2> ||
+                              !is_same_v<iter_value_t<Iterator1>, iter_value_t<Iterator2>> ||
+                              !is_trivially_copyable_v<iter_value_t<Iterator1>>,
+                      Iterator2>
 __copy_backward_aux(Iterator1 first, Iterator1 last,
                     Iterator2 result) noexcept(is_nothrow_copy_assignable_v<iter_value_t<Iterator1>>) {
     iter_difference_t<Iterator1> n = _NEFORCE distance(first, last);
     for (; n > 0; --n) {
-        *--result = *--last;
+        NEFORCE_IF_CONSTEXPR(is_copy_assignable_v<iter_value_t<Iterator2>>) { *--result = *--last; }
+        else {
+            *--result = _NEFORCE move(*--last);
+        }
     }
     return result;
 }
@@ -214,11 +229,14 @@ __copy_backward_aux(Iterator1 first, Iterator1 last,
  * @param result 输出范围结束
  * @return 输出范围起始
  *
- * 使用内存移动优化反向复制。
+ * 仅当源与目标元素类型相同且 trivially copyable 时使用内存移动优化。
  */
 template <typename Iterator1, typename Iterator2>
-constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1>, Iterator2> __copy_backward_aux(Iterator1 first, Iterator1 last,
-                                                                                      Iterator2 result) noexcept {
+constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2> &&
+                              is_same_v<iter_value_t<Iterator1>, iter_value_t<Iterator2>> &&
+                              is_trivially_copyable_v<iter_value_t<Iterator1>>,
+                      Iterator2>
+__copy_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
     const auto n = static_cast<size_t>(last - first);
     auto dest = _NEFORCE prev(result, n);
     _NEFORCE memory_move(_NEFORCE addressof(*dest), _NEFORCE addressof(*first), n * sizeof(iter_value_t<Iterator1>));
@@ -266,7 +284,10 @@ NEFORCE_BEGIN_INNER__
  * @return 输出范围结束
  */
 template <typename Iterator1, typename Iterator2>
-constexpr enable_if_t<!(is_ranges_cot_iter_v<Iterator1> && is_trivially_copyable_v<iter_value_t<Iterator1>>), Iterator2>
+constexpr enable_if_t<!(is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2> &&
+                        is_same_v<iter_value_t<Iterator1>, iter_value_t<Iterator2>> &&
+                        is_trivially_copyable_v<iter_value_t<Iterator1>>),
+                      Iterator2>
 __move_aux(Iterator1 first, Iterator1 last,
            Iterator2 result) noexcept(is_nothrow_move_assignable_v<iter_value_t<Iterator1>>) {
     iter_difference_t<Iterator1> n = _NEFORCE distance(first, last);
@@ -286,7 +307,10 @@ __move_aux(Iterator1 first, Iterator1 last,
  * @return 输出范围结束
  */
 template <typename Iterator1, typename Iterator2>
-constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_trivially_copyable_v<iter_value_t<Iterator1>>, Iterator2>
+constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2> &&
+                              is_same_v<iter_value_t<Iterator1>, iter_value_t<Iterator2>> &&
+                              is_trivially_copyable_v<iter_value_t<Iterator1>>,
+                      Iterator2>
 __move_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
     const auto n = static_cast<size_t>(last - first);
     _NEFORCE memory_move(_NEFORCE addressof(*result), _NEFORCE addressof(*first), n * sizeof(iter_value_t<Iterator1>));
@@ -333,7 +357,10 @@ NEFORCE_BEGIN_INNER__
  * @return 输出范围起始
  */
 template <typename Iterator1, typename Iterator2>
-constexpr enable_if_t<!(is_ranges_cot_iter_v<Iterator1> && is_trivially_copyable_v<iter_value_t<Iterator1>>), Iterator2>
+constexpr enable_if_t<!(is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2> &&
+                        is_same_v<iter_value_t<Iterator1>, iter_value_t<Iterator2>> &&
+                        is_trivially_copyable_v<iter_value_t<Iterator1>>),
+                      Iterator2>
 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
     for (size_t n = _NEFORCE distance(first, last); n > 0; --n) {
         *--result = _NEFORCE move(*--last);
@@ -351,7 +378,10 @@ __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) {
  * @return 输出范围起始
  */
 template <typename Iterator1, typename Iterator2>
-constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_trivially_copyable_v<iter_value_t<Iterator1>>, Iterator2>
+constexpr enable_if_t<is_ranges_cot_iter_v<Iterator1> && is_ranges_cot_iter_v<Iterator2> &&
+                              is_same_v<iter_value_t<Iterator1>, iter_value_t<Iterator2>> &&
+                              is_trivially_copyable_v<iter_value_t<Iterator1>>,
+                      Iterator2>
 __move_backward_aux(Iterator1 first, Iterator1 last, Iterator2 result) noexcept {
     const auto n = static_cast<size_t>(last - first);
     auto dest = result - n;

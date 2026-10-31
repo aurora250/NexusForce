@@ -20,14 +20,10 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-/**
- * @brief 函数包装器主模板声明
- * @tparam Sign 函数签名类型
- *
- * 提供类型安全的函数包装，支持任意可调用对象。
- */
+/// @cond
 template <typename Sign>
 class function;
+/// @endcond
 
 /// @cond
 NEFORCE_BEGIN_INNER__
@@ -171,6 +167,9 @@ public:
 
         static void destroy(storage_data& data, true_type /*unused*/) { data.access<F>().~F(); }
         static void destroy(storage_data& data, false_type /*unused*/) { delete data.access<F*>(); }
+
+    protected:
+        static void destroy_object(storage_data& data) { destroy(data, storage_()); }
 
     public:
         static bool manage(storage_data& dest, const storage_data& src, const function_operate oper) {

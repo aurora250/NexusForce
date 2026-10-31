@@ -64,6 +64,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/path_tree.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/temp_file.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/file/rotating_file.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/toml/toml_value.cpp
@@ -164,6 +165,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/sni_manager.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_acceptor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_context.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_session_cache.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_exception.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_stream.cpp

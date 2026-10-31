@@ -257,6 +257,7 @@
 {"name": "array< T, 0 >", "kind": "class", "ns": "neforce", "header": "NeForce/core/container/array.hpp", "brief": "大小为0的数组特化"}
 {"name": "array_iterator", "kind": "struct", "ns": "neforce", "header": "NeForce/core/container/array.hpp", "brief": "数组迭代器"}
 {"name": "as_const", "kind": "function", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "将值转换为const引用"}
+{"name": "as_task_t", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "以 task 返回结果的提交令牌"}
 {"name": "assert_stacktrace", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/debug.hpp", "brief": "断言失败时触发 assert 并输出堆栈信息"}
 {"name": "assignable_from", "kind": "concept", "ns": "neforce", "header": "NeForce/core/typeinfo/concepts.hpp", "brief": "检查类型是否可以从另一个类型赋值"}
 {"name": "async", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/async.hpp", "brief": "异步执行函数（指定策略）"}
@@ -665,12 +666,16 @@
 {"name": "cpu_times", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/this_thread.hpp", "brief": "CPU时间信息类"}
 {"name": "crash_dump::callback", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "转储完成后的通知回调"}
 {"name": "crash_dump::format", "kind": "enum", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "转储文件格式"}
+{"name": "crash_dump::handlers_installed", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "查询崩溃处理器是否已安装"}
+{"name": "crash_dump::install_handlers", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "安装崩溃处理器"}
+{"name": "crash_dump::native_format", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "当前平台的原生转储格式"}
+{"name": "crash_dump::native_supported", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "当前平台是否内置了转储写入器"}
 {"name": "crash_dump::options", "kind": "struct", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "崩溃转储的配置"}
+{"name": "crash_dump::reason", "kind": "enum", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "触发转储的原因"}
 {"name": "crash_dump::report", "kind": "struct", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "崩溃处理过程中传给回调的现场摘要"}
 {"name": "crash_dump::result", "kind": "struct", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "一次转储写入的结果"}
-{"name": "crash_dump::native_supported", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "当前平台是否内置了转储写入器"}
-{"name": "crash_dump::handlers_installed", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "查询崩溃处理器是否已安装"}
-{"name": "crash_dump::reason", "kind": "enum", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "触发转储的原因"}
+{"name": "crash_dump::uninstall_handlers", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "卸载崩溃处理器"}
+{"name": "crash_dump::write", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "主动写出当前进程的转储"}
 {"name": "crbegin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取const容器的const反向起始迭代器"}
 {"name": "crbegin", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/type_erase.hpp", "brief": "获取const数组的const反向起始迭代器"}
 {"name": "cref", "kind": "function", "ns": "neforce", "header": "NeForce/core/utility/reference_wrapper.hpp", "brief": "创建const引用包装器"}
@@ -1128,6 +1133,7 @@
 {"name": "hazard_pointer_record", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/hazard_ptr.hpp", "brief": "险象指针记录"}
 {"name": "headless", "kind": "class", "ns": "neforce::tui", "header": "NeForce/tui/headless.hpp", "brief": "无终端应用驱动"}
 {"name": "health_check_filter", "kind": "class", "ns": "neforce::http", "header": "NeForce/network/http/health_check.hpp", "brief": "健康检查端点过滤器"}
+{"name": "heap_timer", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/heap_timer.hpp", "brief": "按到期时间排序的最小堆定时器容器"}
 {"name": "hecto", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/numeric/ratio.hpp", "brief": "百（10^2）"}
 {"name": "hexadecimal", "kind": "struct", "ns": "neforce", "header": "NeForce/core/utility/hexadecimal.hpp", "brief": "十六进制数值包装类"}
 {"name": "highest_set_bit_pos", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/bit.hpp", "brief": "获取最高设置位的位置"}
@@ -1175,6 +1181,7 @@
 {"name": "http_server_request", "kind": "struct", "ns": "neforce::http", "header": "NeForce/network/http/http_server_message.hpp", "brief": "HTTP服务器请求结构"}
 {"name": "http_server_response", "kind": "struct", "ns": "neforce::http", "header": "NeForce/network/http/http_server_message.hpp", "brief": "HTTP服务器响应结构"}
 {"name": "http_session", "kind": "struct", "ns": "neforce::http", "header": "NeForce/network/http/http_session.hpp", "brief": "HTTP会话结构"}
+{"name": "http_session_handle", "kind": "class", "ns": "neforce::http", "header": "NeForce/network/http/http_server_message.hpp", "brief": "惰性会话句柄"}
 {"name": "http_stream_handle", "kind": "class", "ns": "neforce::http", "header": "NeForce/network/http/http_client.hpp", "brief": "流式请求控制句柄"}
 {"name": "http_stream_observer", "kind": "struct", "ns": "neforce::http", "header": "NeForce/network/http/http_client.hpp", "brief": "流式响应观察者"}
 {"name": "iarithmetic", "kind": "struct", "ns": "neforce", "header": "NeForce/core/interface/inumeric.hpp", "brief": "算术运算接口基类"}
@@ -1227,7 +1234,6 @@
 {"name": "insert_iterator", "kind": "class", "ns": "neforce", "header": "NeForce/core/iterator/insert_iterator.hpp", "brief": "指定位置插入迭代器"}
 {"name": "insertion_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "插入排序"}
 {"name": "insertion_sort", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/sort.hpp", "brief": "插入排序"}
-{"name": "crash_dump::install_handlers", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "安装崩溃处理器"}
 {"name": "int128_t", "kind": "struct", "ns": "neforce", "header": "NeForce/core/numeric/int128.hpp", "brief": "128位有符号整数类型"}
 {"name": "int16_t", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/types.hpp", "brief": "16位有符号整数类型"}
 {"name": "int32_t", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/types.hpp", "brief": "32位有符号整数类型"}
@@ -1585,6 +1591,7 @@
 {"name": "make_signed", "kind": "struct", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "将类整数类型转换为对应的有符号类型"}
 {"name": "make_signed< uint128_t >", "kind": "struct", "ns": "neforce", "header": "NeForce/core/numeric/int128.hpp", "brief": ""}
 {"name": "make_signed_t", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/type_traits.hpp", "brief": "make_signed的便捷别名"}
+{"name": "make_task_from_future", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "把 future 包装为可 co_await 的 task"}
 {"name": "make_transaction", "kind": "function", "ns": "neforce", "header": "NeForce/db/scope_transaction.hpp", "brief": "事务守卫的便捷构造函数"}
 {"name": "make_tuple", "kind": "function", "ns": "neforce", "header": "NeForce/core/utility/tuple.hpp", "brief": "从参数创建元组"}
 {"name": "make_unique", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/unique_ptr.hpp", "brief": "创建unique_ptr"}
@@ -1783,7 +1790,6 @@
 {"name": "nano", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/numeric/ratio.hpp", "brief": "纳（10^-9）"}
 {"name": "nanoseconds", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/time/duration.hpp", "brief": "纳秒持续时间"}
 {"name": "narrow_char_traits", "kind": "struct", "ns": "neforce", "header": "NeForce/core/string/char_traits.hpp", "brief": "窄字符特征模板"}
-{"name": "crash_dump::native_format", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "当前平台的原生转储格式"}
 {"name": "native_handle_type", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/types.hpp", "brief": "系统句柄类型"}
 {"name": "native_id_type", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/typeinfo/types.hpp", "brief": "系统ID类型"}
 {"name": "negate", "kind": "struct", "ns": "neforce", "header": "NeForce/core/functional/functor.hpp", "brief": "取负运算仿函数"}
@@ -2491,6 +2497,7 @@
 {"name": "sha256", "kind": "function", "ns": "neforce", "header": "NeForce/core/encrypt/sha256.hpp", "brief": "SHA-256哈希便捷函数（字节向量版本）"}
 {"name": "share_memory", "kind": "class", "ns": "neforce", "header": "NeForce/core/system/share_memory.hpp", "brief": "共享内存管理类"}
 {"name": "share_memory_exception", "kind": "struct", "ns": "neforce", "header": "NeForce/core/system/share_memory.hpp", "brief": "共享内存操作异常"}
+{"name": "shared_function", "kind": "typedef", "ns": "neforce", "header": "NeForce/functional/shared_function.hpp", "brief": "可共享的函数包装器"}
 {"name": "shared_future", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/future.hpp", "brief": "共享future类模板"}
 {"name": "shared_future< Res & >", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/future.hpp", "brief": "引用类型的共享future特化"}
 {"name": "shared_future< void >", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/future.hpp", "brief": "void类型的共享future特化"}
@@ -2626,6 +2633,7 @@
 {"name": "ssl_method", "kind": "enum", "ns": "neforce", "header": "NeForce/network/ssl/ssl_context.hpp", "brief": "SSL/TLS方法类型"}
 {"name": "ssl_option", "kind": "enum", "ns": "neforce", "header": "NeForce/network/ssl/ssl_context.hpp", "brief": "SSL/TLS 选项"}
 {"name": "ssl_server", "kind": "class", "ns": "neforce", "header": "NeForce/network/tcp/tcp_server.hpp", "brief": "SSL/TLS服务器类"}
+{"name": "ssl_session_cache", "kind": "class", "ns": "neforce", "header": "NeForce/network/ssl/ssl_session_cache.hpp", "brief": "跨连接TLS会话缓存"}
 {"name": "ssl_socket", "kind": "class", "ns": "neforce", "header": "NeForce/network/ssl/ssl_socket.hpp", "brief": "SSL/TLS安全Socket类"}
 {"name": "ssl_stream", "kind": "class", "ns": "neforce", "header": "NeForce/network/ssl/ssl_stream.hpp", "brief": "SSL/TLS流封装类"}
 {"name": "ssl_verify", "kind": "enum", "ns": "neforce", "header": "NeForce/network/ssl/ssl_context.hpp", "brief": "SSL/TLS 对等方证书验证标志"}
@@ -3040,11 +3048,11 @@
 {"name": "uninitialized_fill_n", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/uninitialized.hpp", "brief": "在未初始化内存中用指定值填充指定数量的元素"}
 {"name": "uninitialized_move", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/uninitialized.hpp", "brief": "在未初始化内存中移动元素"}
 {"name": "uninitialized_move_n", "kind": "function", "ns": "neforce", "header": "NeForce/core/memory/uninitialized.hpp", "brief": "在未初始化内存中移动指定数量的元素"}
-{"name": "crash_dump::uninstall_handlers", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "卸载崩溃处理器"}
 {"name": "unique", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "根据谓词移除连续重复元素"}
 {"name": "unique", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "移除连续重复元素"}
 {"name": "unique_copy", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "复制唯一元素"}
 {"name": "unique_copy", "kind": "function", "ns": "neforce", "header": "NeForce/core/algorithm/shift.hpp", "brief": "复制唯一元素（使用相等比较）"}
+{"name": "unique_function", "kind": "class", "ns": "neforce", "header": "NeForce/functional/unique_function.hpp", "brief": "仅可移动的函数包装器主模板"}
 {"name": "unique_lock", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/mutex.hpp", "brief": "独占锁管理器模板"}
 {"name": "unique_ptr", "kind": "class", "ns": "neforce", "header": "NeForce/core/memory/unique_ptr.hpp", "brief": "独占智能指针"}
 {"name": "unique_ptr< T[], Deleter >", "kind": "class", "ns": "neforce", "header": "NeForce/core/memory/unique_ptr.hpp", "brief": "数组特化的unique_ptr"}
@@ -3167,7 +3175,6 @@
 {"name": "window", "kind": "function", "ns": "neforce::tui::components", "header": "NeForce/tui/component/window.hpp", "brief": "创建浮动窗口组件"}
 {"name": "window_options", "kind": "struct", "ns": "neforce::tui::components", "header": "NeForce/tui/component/window.hpp", "brief": "窗口配置"}
 {"name": "worker_context", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "工作线程上下文"}
-{"name": "crash_dump::write", "kind": "function", "ns": "neforce", "header": "NeForce/core/exception/crash_dump.hpp", "brief": "主动写出当前进程的转储"}
 {"name": "wstring", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/string/string.hpp", "brief": "宽字符字符串"}
 {"name": "wstring_view", "kind": "typedef", "ns": "neforce", "header": "NeForce/core/string/string_view.hpp", "brief": "宽字符字符串视图"}
 {"name": "wyhash", "kind": "function", "ns": "neforce", "header": "NeForce/core/functional/hash.hpp", "brief": "wyhash 哈希算法"}
@@ -3197,6 +3204,3 @@
 {"name": "zlib_compressor::stream_compressor", "kind": "class", "ns": "neforce", "header": "NeForce/compress/zlib_compress.hpp", "brief": "流式压缩器"}
 {"name": "zlib_compressor::stream_decompressor", "kind": "class", "ns": "neforce", "header": "NeForce/compress/zlib_compress.hpp", "brief": "流式解压缩器"}
 {"name": "zlib_exception", "kind": "struct", "ns": "neforce", "header": "NeForce/compress/zlib_compress.hpp", "brief": "ZLib操作异常类"}
-{"name": "heap_timer", "kind": "class", "ns": "neforce", "header": "NeForce/core/async/heap_timer.hpp", "brief": "按到期时间排序的最小堆定时器容器"}
-{"name": "as_task_t", "kind": "struct", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "以 task 返回结果的提交令牌"}
-{"name": "make_task_from_future", "kind": "function", "ns": "neforce", "header": "NeForce/core/async/thread_pool.hpp", "brief": "把 future 包装为可 co_await 的 task"}

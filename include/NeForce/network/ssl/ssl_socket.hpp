@@ -121,7 +121,7 @@ public:
      * @throws ssl_exception SSL握手失败时抛出
      * @throws value_exception socket未打开时抛出
      */
-    void init_client_ssl(const ssl_context& ctx, const string& hostname = "");
+    void init_client_ssl(const ssl_context& ctx, const string& hostname = "", void* session = nullptr);
 
     /**
      * @brief 准备服务器端 SSL
@@ -281,6 +281,20 @@ public:
      * @return SSL/TLS是否激活
      */
     NEFORCE_NODISCARD bool is_ssl() const noexcept override { return ssl_.has_value(); }
+
+    /**
+     * @brief 当前连接是否复用TLS会话
+     * @return 复用返回true
+     */
+    NEFORCE_NODISCARD bool session_reused() const noexcept { return ssl_.has_value() && ssl_->session_reused(); }
+
+    /**
+     * @brief 处理握手后的会话票据消息
+     *
+     * 短暂切换为非阻塞读取一个字节，让 OpenSSL 处理 TLS 1.3 NewSessionTicket；
+     * 握手完成后、发送应用数据前调用。
+     */
+    void drain_session_tickets();
 
     /**
      * @brief 获取SSL流对象的引用

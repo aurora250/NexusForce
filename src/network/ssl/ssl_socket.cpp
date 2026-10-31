@@ -50,9 +50,10 @@ void ssl_socket::init_server_ssl(const ssl_context& ctx) {
     }
 }
 
-void ssl_socket::init_client_ssl(const ssl_context& ctx, const string& hostname) {
+void ssl_socket::init_client_ssl(const ssl_context& ctx, const string& hostname, void* session) {
     try {
         prepare_client_ssl(ctx, hostname);
+        ssl_->import_session(session);
         ssl_->connect();
     } catch (...) {
         ssl_.reset();
@@ -106,6 +107,17 @@ string ssl_socket::get_alpn_negotiated() const {
         return "";
     }
     return ssl_->alpn_negotiated();
+}
+
+void ssl_socket::drain_session_tickets() {
+    if (!ssl_ || !ssl_->is_valid()) {
+        return;
+    }
+    char discard = 0;
+    const bool was_nonblocking = is_nonblocking();
+    set_nonblocking(true);
+    static_cast<void>(ssl_->read(&discard, 1));
+    set_nonblocking(was_nonblocking);
 }
 
 ssize_t ssl_socket::send(memory_view<const char> data, const int flags) {

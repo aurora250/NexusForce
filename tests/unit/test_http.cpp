@@ -30,6 +30,9 @@
 #include <NeForce/core/async/thread.hpp>
 #include <NeForce/network/tcp/tcp_acceptor.hpp>
 #include <gtest/gtest.h>
+#ifdef NEFORCE_PLATFORM_POSIX
+#    include <sys/socket.h>
+#endif
 using namespace neforce;
 using namespace neforce::http;
 
@@ -266,6 +269,49 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
+
+TEST_F(HttpSessionTest, SessionHandleResolvesOnlyWhenDereferenced) {
+    http_session session;
+    session.id = "lazy";
+    int resolutions = 0;
+
+    http_session_handle handle;
+    handle.set_resolver([&] {
+        ++resolutions;
+        return &session;
+    });
+
+    EXPECT_EQ(resolutions, 0);
+    EXPECT_TRUE(handle == nullptr);
+    EXPECT_FALSE(handle != nullptr);
+    EXPECT_EQ(resolutions, 0);
+    EXPECT_EQ(handle.materialized(), nullptr);
+
+    EXPECT_EQ(handle.get(), &session);
+    EXPECT_EQ(resolutions, 1);
+    EXPECT_EQ(handle.get(), &session);
+    EXPECT_EQ(resolutions, 1);
+
+    handle.reset();
+    EXPECT_EQ(handle.materialized(), nullptr);
+    EXPECT_TRUE(handle == nullptr);
+}
+
+TEST_F(HttpSessionTest, SessionHandlePointerAssignmentDoesNotResolve) {
+    http_session session;
+    int resolutions = 0;
+
+    http_session_handle handle;
+    handle.set_resolver([&] {
+        ++resolutions;
+        return &session;
+    });
+
+    http_session* assigned = &session;
+    handle = assigned;
+    EXPECT_EQ(handle.materialized(), &session);
+    EXPECT_EQ(resolutions, 0);
+}
 
 TEST_F(HttpSessionTest, NewSessionIsValid) {
     http_session s;
@@ -582,6 +628,19 @@ TEST_F(HttpResponseTest, ResponseIncludesContentLength) {
     resp.body = "ABCDEFG";
     auto result = resp.to_string();
     EXPECT_TRUE(result.contains("Content-Length: 7\r\n"));
+}
+
+TEST_F(HttpResponseTest, BodyViewUsesExternalStorageAndLength) {
+    const string payload(65536, 'x');
+    http_response resp;
+    resp.status = http_status::ok;
+    resp.status_message = "OK";
+    resp.set_body_view(payload.view());
+
+    const auto result = resp.to_string();
+    EXPECT_TRUE(result.contains("Content-Length: 65536\r\n"));
+    EXPECT_EQ(resp.body_view().size(), payload.size());
+    EXPECT_TRUE(resp.body.empty());
 }
 
 TEST_F(HttpResponseTest, RedirectResponseUsesCorrectStatus) {
@@ -3057,6 +3116,72 @@ TEST_F(GrpcTest, GrpcStatusToHttpStatus) {
     EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::internal), http_status::internal_server_error);
     EXPECT_EQ(grpc_handler::grpc_to_http_status(grpc_status::unavailable), http_status::service_unavailable);
 }
+
+#ifdef NEFORCE_PLATFORM_POSIX
+TEST_F(GrpcTest, Http2ServerStreamWriterEmitsHeadersDataAndTrailers) {
+    int fds[2];
+    ASSERT_EQ(socketpair(AF_UNIX, SOCK_STREAM, 0, fds), 0);
+    io_context ctx;
+    auto connection = make_unique<http2_connection>(make_unique<tcp_socket>(fds[0]), ctx);
+    grpc_stream_writer writer(*connection, 1);
+    grpc_message message;
+    message.payload = byte_vector{'s', 't', 'r', 'e', 'a', 'm'};
+    writer.start();
+    EXPECT_TRUE(writer.write(message));
+    writer.finish(grpc_status::ok);
+    EXPECT_TRUE(writer.started());
+    EXPECT_TRUE(writer.finished());
+
+    tcp_socket peer(fds[1]);
+    peer.set_receive_timeout(milliseconds(1000));
+    const auto read_frame = [&peer](byte_t& type, byte_t& flags, byte_vector& payload) {
+        byte_t header[9];
+        size_t offset = 0;
+        while (offset < sizeof(header)) {
+            const ssize_t n =
+                    peer.receive(memory_view<char>(reinterpret_cast<char*>(header) + offset, sizeof(header) - offset));
+            if (n <= 0) {
+                return false;
+            }
+            offset += static_cast<size_t>(n);
+        }
+        const uint32_t length =
+                (static_cast<uint32_t>(header[0]) << 16) | (static_cast<uint32_t>(header[1]) << 8) | header[2];
+        type = header[3];
+        flags = header[4];
+        payload.resize(length);
+        offset = 0;
+        while (offset < length) {
+            const ssize_t n =
+                    peer.receive(memory_view<char>(reinterpret_cast<char*>(payload.data()) + offset, length - offset));
+            if (n <= 0) {
+                return false;
+            }
+            offset += static_cast<size_t>(n);
+        }
+        return true;
+    };
+
+    byte_t type = 0;
+    byte_t flags = 0;
+    byte_vector payload;
+    ASSERT_TRUE(read_frame(type, flags, payload));
+    EXPECT_EQ(type, static_cast<byte_t>(http2_frame_type::headers));
+    EXPECT_EQ(flags & HTTP2_FLAG_END_STREAM, 0);
+
+    ASSERT_TRUE(read_frame(type, flags, payload));
+    EXPECT_EQ(type, static_cast<byte_t>(http2_frame_type::data));
+    grpc_framer framer;
+    vector<grpc_message> decoded;
+    ASSERT_EQ(framer.decode(payload.data(), payload.size(), decoded), 1);
+    ASSERT_EQ(decoded.size(), 1u);
+    EXPECT_EQ(decoded.front().payload, message.payload);
+
+    ASSERT_TRUE(read_frame(type, flags, payload));
+    EXPECT_EQ(type, static_cast<byte_t>(http2_frame_type::headers));
+    EXPECT_NE(flags & HTTP2_FLAG_END_STREAM, 0);
+}
+#endif
 
 TEST_F(GrpcTest, SendErrorSetsTrailers) {
     http_response res;

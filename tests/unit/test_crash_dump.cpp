@@ -465,7 +465,7 @@ TEST_F(CrashDumpTest, TerminateWritesCore) {
 
     ASSERT_TRUE(g_death_marker.exists());
     const string recorded = read_all(g_death_marker);
-    EXPECT_TRUE(recorded.contains("std::terminate: crash dump test"));
+    EXPECT_TRUE(recorded.contains("terminate: crash dump test"));
 #    if defined(NEFORCE_SUPPORT_NATIVE_DUMP)
     EXPECT_TRUE(recorded.contains("terminate-"));
     const path core(recorded.substr(0, recorded.find('\n')));

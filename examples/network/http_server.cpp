@@ -80,7 +80,7 @@ int main() {
         // 会话计数器
         int visit_count = 0;
         if (req.has_session()) {
-            auto* sess = req.session;
+            http_session* sess = req.session;
             const auto visits_str = sess->get("visits");
             visit_count = visits_str.empty() ? 0 : to_int32(visits_str);
             visit_count++;
@@ -141,7 +141,7 @@ int main() {
         jb.begin_object();
 
         if (req.has_session()) {
-            auto* sess = req.session;
+            http_session* sess = req.session;
             jb.key("session_id").value(sess->id);
             jb.key("is_new").value(sess->is_new);
             jb.key("max_age").value(static_cast<double>(sess->max_age.count()));
@@ -164,7 +164,7 @@ int main() {
             return;
         }
 
-        auto* sess = req.session;
+        http_session* sess = req.session;
         auto it = req.form_data.find("username");
         const string username = (it != req.form_data.end()) ? it->second : "anonymous";
         sess->set("user", username);

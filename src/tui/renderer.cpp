@@ -1011,7 +1011,7 @@ void renderer::render_glyph_run(const int x, const int y, const int w, const int
         local_offsets.push_back(static_cast<uint32_t>(flat_storage.size()));
         flat = flat_storage.view();
         if (owner != nullptr) {
-            owner->cache_glyph_run(flat_storage, local_offsets, local_cps, _NEFORCE move(local_spans));
+            owner->cache_glyph_run(flat_storage, local_offsets, local_cps, move(local_spans));
             glyph_offsets = &owner->cached_glyph_offsets();
             glyph_cps = &owner->cached_glyph_codepoints();
         } else {

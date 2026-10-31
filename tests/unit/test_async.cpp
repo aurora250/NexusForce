@@ -4044,6 +4044,37 @@ TEST(StrandTest, ForeignExceptionInQueuedHandlerDoesNotLockTheStrand) {
     EXPECT_EQ(ran, 1);
 }
 
+TEST(StrandTest, ConcurrentPostsAreNotLost) {
+    io_context ctx;
+    strand str(ctx);
+    io_context::work guard(ctx);
+
+    constexpr int producer_count = 4;
+    constexpr int per_producer = 5000;
+    constexpr int total = producer_count * per_producer;
+    atomic<int> delivered{0};
+
+    vector<thread> producers;
+    producers.reserve(producer_count);
+    for (int i = 0; i < producer_count; ++i) {
+        producers.emplace_back([&] {
+            for (int j = 0; j < per_producer; ++j) {
+                str.post([&] {
+                    if (delivered.fetch_add(1, memory_order_relaxed) + 1 == total) {
+                        ctx.stop();
+                    }
+                });
+            }
+        });
+    }
+
+    ctx.run();
+    for (auto& producer: producers) {
+        producer.join();
+    }
+    EXPECT_EQ(delivered.load(memory_order_relaxed), total);
+}
+
 TEST(StrandTest, Serialization) {
     io_context ctx;
     strand str(ctx);

@@ -2,6 +2,7 @@
 #include <NeForce/core/system/process.hpp>
 #include <NeForce/core/string/to_numerics.hpp>
 #include <NeForce/core/system/environment.hpp>
+#include <NeForce/core/time/clocks.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
 #    include <NeForce/core/exception/error_code.hpp>
@@ -2751,48 +2752,82 @@ vector<process::thread_info> process::threads(const native_id_type process_id) {
     return out;
 }
 
-map<uint32_t, vector<process::native_id_type>> process::socket_owners() {
-    map<uint32_t, vector<native_id_type>> owners;
+map<uint32_t, vector<process::native_id_type>> process::socket_owners() { return scan_socket_owners().owners; }
+
+process::socket_owner_scan process::scan_socket_owners(const int timeout_ms) {
+    socket_owner_scan result;
 #ifdef NEFORCE_PLATFORM_LINUX
-    for (const auto& directory: path("/proc").children()) {
-        const auto name_view = directory.filename();
-        if (name_view.empty() || name_view[0] < '0' || name_view[0] > '9') {
-            continue;
-        }
-        native_id_type process_id = 0;
-        try {
-            process_id = static_cast<native_id_type>(to_uint64(name_view));
-        } catch (const exception&) {
-            continue;
-        }
-        for (const auto& descriptor: path(directory.str() + "/fd").children()) {
-            char target[256] = {};
-            const ssize_t length = ::readlink(descriptor.str().data(), target, sizeof(target) - 1);
-            if (length <= 0) {
+    const int64_t deadline =
+            timeout_ms >= 0 ? steady_clock::now().since_epoch().to_milli().count() + static_cast<int64_t>(timeout_ms)
+                            : -1;
+
+    try {
+        for (const auto& directory: path("/proc").children()) {
+            if (deadline >= 0 && steady_clock::now().since_epoch().to_milli().count() > deadline) {
+                result.complete = false;
+                break;
+            }
+
+            const auto name_view = directory.filename();
+            if (name_view.empty() || name_view[0] < '0' || name_view[0] > '9') {
                 continue;
             }
-            const string_view text(target, static_cast<size_t>(length));
-            if (!text.starts_with("socket:[")) {
-                continue;
-            }
-            const auto close = text.find(']');
-            if (close == string_view::npos) {
-                continue;
-            }
-            uint32_t inode = 0;
+            native_id_type process_id = 0;
             try {
-                inode = static_cast<uint32_t>(to_uint64(text.substr(8, close - 8)));
+                process_id = static_cast<native_id_type>(to_uint64(name_view));
             } catch (const exception&) {
                 continue;
             }
-            auto& pids = owners[inode];
-            if (pids.empty() || pids.back() != process_id) {
-                pids.push_back(process_id);
+
+            vector<path> descriptors;
+            try {
+                descriptors = path(directory.str() + "/fd").children();
+            } catch (const exception&) {
+                ++result.unreadable_processes;
+                continue;
+            }
+
+            for (const auto& descriptor: descriptors) {
+                if (deadline >= 0 && steady_clock::now().since_epoch().to_milli().count() > deadline) {
+                    result.complete = false;
+                    break;
+                }
+
+                char target[512] = {};
+                const ssize_t length = ::readlink(descriptor.str().data(), target, sizeof(target) - 1);
+                if (length <= 0) {
+                    continue;
+                }
+                const string_view text(target, static_cast<size_t>(length));
+                if (!text.starts_with("socket:[")) {
+                    continue;
+                }
+                const auto close = text.find(']');
+                if (close == string_view::npos) {
+                    continue;
+                }
+                uint32_t inode = 0;
+                try {
+                    inode = static_cast<uint32_t>(to_uint64(text.substr(8, close - 8)));
+                } catch (const exception&) {
+                    continue;
+                }
+                auto& pids = result.owners[inode];
+                if (pids.empty() || pids.back() != process_id) {
+                    pids.push_back(process_id);
+                }
+            }
+            if (!result.complete) {
+                break;
             }
         }
+    } catch (const exception&) {
+        result.complete = false;
     }
+#else
+    result.supported = false;
 #endif
-    return owners;
+    return result;
 }
 
 bool process::send_signal(const native_id_type process_id, const signal sig) noexcept {

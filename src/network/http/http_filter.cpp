@@ -89,7 +89,7 @@ void http_filter_chain::execute_pre_filters_async(http_request& request, http_re
                                                   function<void(bool)> next) {
     const auto* filters = &filters_;
 
-    struct chain_state {
+    struct chain_state : enable_shared_from_this<chain_state> {
         const vector<filter_entry>* filters;
         size_t index = 0;
         http_request* request_raw = nullptr;
@@ -100,6 +100,7 @@ void http_filter_chain::execute_pre_filters_async(http_request& request, http_re
         shared_ptr<http_context> ctx_own;
         function<void(bool)> next;
         bool migrated = false;
+        bool finished = false;
 
         http_request& req() { return migrated ? *request_own : *request_raw; }
         http_response& res() { return migrated ? *response_own : *response_raw; }
@@ -115,9 +116,25 @@ void http_filter_chain::execute_pre_filters_async(http_request& request, http_re
             migrated = true;
         }
 
+        void finish(const bool ok) {
+            if (finished) {
+                return;
+            }
+            finished = true;
+            if (migrated) {
+                *request_raw = move(*request_own);
+                *response_raw = move(*response_own);
+                *ctx_raw = move(*ctx_own);
+            }
+            next(ok);
+        }
+
         void run_next() {
+            if (finished) {
+                return;
+            }
             if (index >= filters->size()) {
-                next(true);
+                finish(true);
                 return;
             }
             const auto& entry = (*filters)[index++];
@@ -128,25 +145,29 @@ void http_filter_chain::execute_pre_filters_async(http_request& request, http_re
             auto* af = dynamic_cast<async_filter*>(entry.filter.get());
             if (af != nullptr) {
                 ensure_ownership();
+                auto self = shared_from_this();
                 try {
-                    af->pre_filter_async(req(), res(), c(), [this](bool ok) {
+                    af->pre_filter_async(req(), res(), c(), [self](bool ok) {
+                        if (self->finished) {
+                            return;
+                        }
                         if (ok) {
-                            run_next();
+                            self->run_next();
                         } else {
-                            next(false);
+                            self->finish(false);
                         }
                     });
                 } catch (...) {
-                    next(false);
+                    finish(false);
                 }
             } else {
                 try {
                     if (!entry.filter->pre_filter(req(), res())) {
-                        next(false);
+                        finish(false);
                         return;
                     }
                 } catch (...) {
-                    next(false);
+                    finish(false);
                     return;
                 }
                 run_next();
@@ -167,7 +188,7 @@ void http_filter_chain::execute_post_filters_async(http_request& request, http_r
                                                    function<void()> next) {
     const auto* filters = &filters_;
 
-    struct chain_state {
+    struct chain_state : enable_shared_from_this<chain_state> {
         const vector<filter_entry>* filters;
         size_t index = 0;
         http_request* request_raw = nullptr;
@@ -178,6 +199,7 @@ void http_filter_chain::execute_post_filters_async(http_request& request, http_r
         shared_ptr<http_context> ctx_own;
         function<void()> next;
         bool migrated = false;
+        bool finished = false;
 
         http_request& req() { return migrated ? *request_own : *request_raw; }
         http_response& res() { return migrated ? *response_own : *response_raw; }
@@ -193,9 +215,25 @@ void http_filter_chain::execute_post_filters_async(http_request& request, http_r
             migrated = true;
         }
 
+        void finish() {
+            if (finished) {
+                return;
+            }
+            finished = true;
+            if (migrated) {
+                *request_raw = move(*request_own);
+                *response_raw = move(*response_own);
+                *ctx_raw = move(*ctx_own);
+            }
+            next();
+        }
+
         void run_next() {
+            if (finished) {
+                return;
+            }
             if (index >= filters->size()) {
-                next();
+                finish();
                 return;
             }
             const auto& entry = (*filters)[index++];
@@ -206,8 +244,13 @@ void http_filter_chain::execute_post_filters_async(http_request& request, http_r
             auto* af = dynamic_cast<async_filter*>(entry.filter.get());
             if (af != nullptr) {
                 ensure_ownership();
+                auto self = shared_from_this();
                 try {
-                    af->post_filter_async(req(), res(), c(), [this](bool) { run_next(); });
+                    af->post_filter_async(req(), res(), c(), [self](bool) {
+                        if (!self->finished) {
+                            self->run_next();
+                        }
+                    });
                 } catch (...) {
                     run_next();
                 }

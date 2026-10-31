@@ -236,6 +236,14 @@ public:
     void handle_request_async(http_request request, function<void(http_response)> cb);
 
     /**
+     * @brief 异步处理请求并保留请求对象
+     * @param request HTTP请求（按值接管）
+     * @param cb 完成回调，参数为请求与响应
+     * @note request 引用仅在回调执行期间有效
+     */
+    void handle_request_async_with_request(http_request request, function<void(http_request&, http_response)> cb);
+
+    /**
      * @brief 检查是否存在指定路由
      * @param method HTTP方法
      * @param path 路由路径

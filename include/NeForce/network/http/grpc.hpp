@@ -12,6 +12,9 @@
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
+class http2_connection;
+struct hpack_header_field;
+
 /**
  * @defgroup gRPC gRPC
  * @brief gRPC协议支持（基于HTTP/2）
@@ -131,6 +134,59 @@ public:
 };
 
 /**
+ * @class grpc_stream_writer
+ * @brief gRPC over HTTP/2 服务端流写入器
+ */
+class NEFORCE_API grpc_stream_writer {
+private:
+    static constexpr size_t FLUSH_THRESHOLD = 16UL * 1024UL; ///< DATA 聚合阈值
+
+    http2_connection& connection_; ///< 所属 HTTP/2 连接
+    uint32_t stream_id_;           ///< 目标流
+    bool started_{false};          ///< 是否已发送响应头
+    bool finished_{false};         ///< 是否已发送尾部
+    byte_vector pending_;          ///< 待发送的连续 gRPC 帧
+
+public:
+    /**
+     * @brief 构造写入器
+     * @param connection HTTP/2 连接
+     * @param stream_id 目标流 ID
+     */
+    grpc_stream_writer(http2_connection& connection, uint32_t stream_id) :
+    connection_(connection),
+    stream_id_(stream_id) {}
+
+    /**
+     * @brief 发送 gRPC 响应头
+     */
+    void start();
+
+    /**
+     * @brief 发送一条 gRPC 消息
+     * @param message 消息
+     * @return 成功返回 true
+     */
+    bool write(const grpc_message& message);
+
+    /**
+     * @brief 立即发送已缓存的 gRPC 帧
+     * @note 未达到 FLUSH_THRESHOLD 时 write() 会缓存，finish() 会自动 flush
+     */
+    void flush();
+
+    /**
+     * @brief 发送尾部并结束流
+     * @param status gRPC 状态
+     * @param message 状态说明
+     */
+    void finish(grpc_status status = grpc_status::ok, const string& message = {});
+
+    NEFORCE_NODISCARD bool started() const noexcept { return started_; }
+    NEFORCE_NODISCARD bool finished() const noexcept { return finished_; }
+};
+
+/**
  * @class grpc_handler
  * @brief gRPC服务处理器基类
  *
@@ -167,6 +223,18 @@ public:
      * 解码请求帧 -> 调用 handler -> 编码响应帧
      */
     void process_unary(http_request& request, http_response& response, unary_handler handler);
+
+    /**
+     * @brief 处理 HTTP/2 服务端流式调用
+     * @param connection HTTP/2 连接
+     * @param stream_id 流 ID
+     * @param data 请求 DATA
+     * @param len 请求长度
+     * @param handler 流处理器，通过 sink 逐条发送响应消息
+     * @note 需要调用方在 http2_connection 的 stream_handler 中接入
+     */
+    static void process_server_stream(http2_connection& connection, uint32_t stream_id, const byte_t* data, size_t len,
+                                      const stream_handler& handler);
 
     /**
      * @brief 发送gRPC错误响应

@@ -74,6 +74,18 @@ protected:
     virtual optional<unique_ptr<tcp_socket>> accept_one() = 0;
 
     /**
+     * @brief 在工作线程中完成客户端协议准备
+     * @param client 已接受的TCP客户端
+     * @return 成功返回true
+     *
+     * SSL服务器在此执行TLS握手，避免握手串行阻塞accept线程。
+     */
+    virtual bool prepare_client(tcp_socket& client) {
+        static_cast<void>(client);
+        return true;
+    }
+
+    /**
      * @brief 创建并配置acceptor
      * @param endpoint 监听地址
      * @param backlog 连接队列大小
@@ -214,6 +226,7 @@ private:
 private:
     void create_acceptor(const ip_address& endpoint, int backlog) override;
     optional<unique_ptr<tcp_socket>> accept_one() override;
+    bool prepare_client(tcp_socket& client) override;
 
 public:
     /**

@@ -645,11 +645,29 @@ public:
     NEFORCE_NODISCARD static vector<thread_info> threads(native_id_type process_id);
 
     /**
+     * @struct socket_owner_scan
+     * @brief socket inode 到属主进程的扫描结果
+     */
+    struct socket_owner_scan {
+        map<uint32_t, vector<native_id_type>> owners; ///< inode 到进程 ID 列表的映射
+        bool complete{true};                          ///< 是否在时限内完成扫描
+        uint64_t unreadable_processes{0};             ///< 无法读取 fd 目录的进程数
+        bool supported{true};                         ///< 当前平台是否支持扫描
+    };
+
+    /**
      * @brief 建立 socket inode 到属主进程的映射
      * @return inode 到进程 ID 列表的映射；Windows 无 inode 概念，返回空映射
      * @note Linux 需要遍历 /proc/<pid>/fd，进程较多时开销明显
      */
     NEFORCE_NODISCARD static map<uint32_t, vector<native_id_type>> socket_owners();
+
+    /**
+     * @brief 扫描 socket inode 到属主进程的映射
+     * @param timeout_ms 扫描时限（毫秒），-1 表示不限制
+     * @return 扫描结果，包含完成状态与不可读进程数
+     */
+    NEFORCE_NODISCARD static socket_owner_scan scan_socket_owners(int timeout_ms = -1);
 
     /**
      * @brief 向指定进程发送信号

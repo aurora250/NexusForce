@@ -228,7 +228,7 @@ method_(method) {
     }
 
     auto* ctx = static_cast<::SSL_CTX*>(ctx_);
-    ::SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3);
+    ::SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1);
 
     if (::SSL_CTX_set_cipher_list(ctx, cipher_list) != 1) {
         ::SSL_CTX_set_cipher_list(ctx, "DEFAULT:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK");
@@ -239,6 +239,7 @@ method_(method) {
                                     "TLS_AES_256_GCM_SHA384:"
                                     "TLS_CHACHA20_POLY1305_SHA256");
 #endif
+    ::SSL_CTX_set1_groups_list(ctx, "X25519");
 
     if (method == ssl_method::tls_client || method == ssl_method::dtls_client) {
         const bool ca_loaded = (::SSL_CTX_set_default_verify_paths(ctx) == 1);
@@ -259,6 +260,16 @@ method_(method) {
 
         ::SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, nullptr);
     }
+}
+
+ssl_context ssl_context::share() const {
+    ssl_context copy(method_, nullptr);
+    copy.ctx_ = ctx_;
+    copy.cert_loaded_ = cert_loaded_;
+    if (copy.ctx_ != nullptr) {
+        ::SSL_CTX_up_ref(static_cast<::SSL_CTX*>(copy.ctx_));
+    }
+    return copy;
 }
 
 ssl_context::~ssl_context() { reset(); }
@@ -390,6 +401,28 @@ void ssl_context::require_client_certificate() {
     ::SSL_CTX_set_verify(static_cast<::SSL_CTX*>(ctx_), SSL_VERIFY_PEER | SSL_VERIFY_FAIL_IF_NO_PEER_CERT, nullptr);
 }
 
+void ssl_context::set_groups(const vector<string>& groups) {
+    if (unlikely(ctx_ == nullptr)) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
+    if (groups.empty()) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Key exchange group list cannot be empty"));
+    }
+    string list;
+    for (const auto& group: groups) {
+        if (group.empty()) {
+            NEFORCE_THROW_EXCEPTION(value_exception("Key exchange group name cannot be empty"));
+        }
+        if (!list.empty()) {
+            list += ":";
+        }
+        list += group;
+    }
+    if (::SSL_CTX_set1_groups_list(static_cast<::SSL_CTX*>(ctx_), list.data()) != 1) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to set key exchange groups"));
+    }
+}
+
 void ssl_context::set_cipher_list(const string& ciphers) {
     if (unlikely(ctx_ == nullptr)) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
@@ -431,6 +464,31 @@ void ssl_context::set_session_cache_size(long size) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
     }
     ::SSL_CTX_sess_set_cache_size(static_cast<::SSL_CTX*>(ctx_), size);
+}
+
+void ssl_context::enable_session_reuse(const bool enable) {
+    if (unlikely(ctx_ == nullptr)) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
+    long mode = SSL_SESS_CACHE_OFF;
+    if (enable) {
+        mode = (method_ == ssl_method::tls_client || method_ == ssl_method::dtls_client) ? SSL_SESS_CACHE_CLIENT
+                                                                                         : SSL_SESS_CACHE_SERVER;
+    }
+    ::SSL_CTX_set_session_cache_mode(static_cast<::SSL_CTX*>(ctx_), mode);
+}
+
+void ssl_context::enable_tls12_short_connection_acceleration(const bool enable) {
+    if (unlikely(ctx_ == nullptr)) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is not initialized"));
+    }
+    auto* ctx = static_cast<::SSL_CTX*>(ctx_);
+    if (enable) {
+        ::SSL_CTX_set_options(ctx, SSL_OP_NO_TLSv1_3);
+        enable_session_reuse(true);
+    } else {
+        ::SSL_CTX_clear_options(ctx, SSL_OP_NO_TLSv1_3);
+    }
 }
 
 void ssl_context::set_timeout(long seconds) {

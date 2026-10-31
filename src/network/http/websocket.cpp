@@ -571,6 +571,11 @@ void websocket_session::start() {
         return;
     }
     last_pong_ms_ = now_ms();
+    try {
+        socket_->set_tcp_nodelay(true);
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (const exception&) {
+    }
 
     if (event_driven_ && ctx_ != nullptr) {
         start_event_driven();
@@ -661,6 +666,7 @@ void websocket_session::start_event_driven() {
 }
 
 void websocket_session::on_readable(int /*fd*/, epoll_event /*events*/, error_code /*ec*/) {
+    lock<mutex> lk(event_mutex_);
     if (!running_) {
         return;
     }

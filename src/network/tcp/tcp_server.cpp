@@ -1,4 +1,10 @@
+#include <NeForce/core/async/mutex.hpp>
 #include <NeForce/network/tcp/tcp_server.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <WinSock2.h>
+#else
+#    include <poll.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -7,102 +13,72 @@ namespace {
 
 
 void tcp_server_base::accept_loop() {
-    if (!acceptor_->set_nonblocking(true)) {
-        {
-            shared_lock<shared_mutex> lock(handler_mutex_);
-            if (exception_handler_) {
-                exception_handler_(socket_exception("Failed to set acceptor to non-blocking mode"));
-            }
-        }
+    if (!acceptor_->set_nonblocking(false)) {
         running_ = false;
         return;
     }
 
     const auto acceptor_fd = static_cast<int>(acceptor_->native_handle());
-    auto fired = make_shared<atomic<bool>>(false);
-    bool fd_registered = false;
-
-    auto register_fd = [&] {
-        if (fd_registered) {
-            ctx_.remove_fd(acceptor_fd);
-            fd_registered = false;
-        }
-        fired->store(false, memory_order_release);
-        ctx_.add_fd(acceptor_fd, epoll_event::in,
-                    [fired](int, epoll_event, error_code) { fired->store(true, memory_order_release); });
-        fd_registered = true;
-    };
-
-    // Initial registration
-    register_fd();
 
     while (running_) {
-        // Wait for accept event via io_context (or timeout after 200ms)
-        ctx_.run_one(200);
-
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        ::WSAPOLLFD pfd{};
+        pfd.fd = static_cast<::SOCKET>(acceptor_fd);
+        pfd.events = POLLIN;
+        const int ready = ::WSAPoll(&pfd, 1, 100);
+#else
+        ::pollfd pfd{};
+        pfd.fd = acceptor_fd;
+        pfd.events = POLLIN;
+        const int ready = ::poll(&pfd, 1, 100);
+#endif
+        if (ready <= 0) {
+            continue;
+        }
         if (!running_) {
             break;
         }
+        try {
+            auto client_opt = accept_one();
+            if (!client_opt) {
+                continue;
+            }
 
-        bool had_accept = fired->exchange(false, memory_order_acq_rel);
-
-        // Accept all pending connections
-        while (running_) {
-            try {
-                auto client_opt = accept_one();
-                if (!client_opt) {
-                    break;
-                }
-
-                client_handler_t handler;
-                {
-                    shared_lock<shared_mutex> lock(handler_mutex_);
-                    handler = client_handler_;
-                }
-
-                if (!handler) {
-                    continue;
-                }
-
-                auto holder = make_shared<unique_ptr<tcp_socket>>(move(*client_opt));
-                ctx_.post([this, handler = move(handler), holder = move(holder)]() mutable {
-                    try {
-                        handler(move(*holder));
-                    } catch (const exception& e) {
-                        if (!running_) {
-                            return;
-                        }
-                        shared_lock<shared_mutex> lock(handler_mutex_);
-                        if (exception_handler_) {
-                            exception_handler_(e);
-                        }
-                    }
-                });
-            } catch (const exception& e) {
-                if (!running_) {
-                    break;
-                }
+            client_handler_t handler;
+            {
                 shared_lock<shared_mutex> lock(handler_mutex_);
-                if (exception_handler_) {
-                    exception_handler_(e);
+                handler = client_handler_;
+            }
+            if (!handler) {
+                continue;
+            }
+
+            auto holder = make_shared<unique_ptr<tcp_socket>>(move(*client_opt));
+            ctx_.post([this, handler = move(handler), holder = move(holder)]() mutable {
+                try {
+                    if (!prepare_client(**holder)) {
+                        return;
+                    }
+                    handler(move(*holder));
+                } catch (const exception& e) {
+                    if (!running_) {
+                        return;
+                    }
+                    shared_lock<shared_mutex> lock(handler_mutex_);
+                    if (exception_handler_) {
+                        exception_handler_(e);
+                    }
                 }
+            });
+        } catch (const exception& e) {
+            if (!running_) {
                 break;
             }
+            shared_lock<shared_mutex> lock(handler_mutex_);
+            if (exception_handler_) {
+                exception_handler_(e);
+            }
         }
-
-        // Edge-triggered epoll requires re-registration after each event batch.
-        // Re-register to catch connections that arrived during accept processing.
-        if (running_ && !had_accept) {
-            // Also flush any io_context handlers that were posted
-            ctx_.poll();
-        }
-        if (running_) {
-            register_fd();
-        }
-    }
-
-    if (fd_registered) {
-        ctx_.remove_fd(acceptor_fd);
     }
 }
 
@@ -276,7 +252,11 @@ optional<unique_ptr<tcp_socket>> ssl_server::accept_one() {
         return none;
     }
     try {
-        return make_unique<ssl_socket>(acc->accept_ssl());
+        auto client = acc->tcp_acceptor::accept();
+        if (!client.is_open()) {
+            return none;
+        }
+        return make_unique<ssl_socket>(move(client));
     } catch (const exception& e) {
         if (running_) {
             shared_lock<shared_mutex> hl(handler_mutex_);
@@ -285,6 +265,26 @@ optional<unique_ptr<tcp_socket>> ssl_server::accept_one() {
             }
         }
         return none;
+    }
+}
+
+bool ssl_server::prepare_client(tcp_socket& client) {
+    auto* ssl_client = dynamic_cast<ssl_socket*>(&client);
+    if (ssl_client == nullptr) {
+        return false;
+    }
+    try {
+        client.set_tcp_nodelay(true);
+        ssl_client->init_server_ssl(ssl_ctx_);
+        return true;
+    } catch (const exception& e) {
+        if (running_) {
+            shared_lock<shared_mutex> hl(handler_mutex_);
+            if (exception_handler_) {
+                exception_handler_(e);
+            }
+        }
+        return false;
     }
 }
 

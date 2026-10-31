@@ -98,6 +98,14 @@ struct http_stream_observer {
 };
 
 /**
+ * @brief 原始后端响应
+ */
+struct http_client_raw_response {
+    string data;            ///< 完整响应头 + 正文原始字节
+    bool keep_alive{false}; ///< 后端连接是否仍可复用
+};
+
+/**
  * @class http_client
  * @brief HTTP客户端类
  *
@@ -199,6 +207,9 @@ private:
 
 private:
     string build_request_str(const http_client_request& req, const url& req_url) const;
+    NEFORCE_NODISCARD string build_fast_request(const http_client_request& req) const;
+    NEFORCE_NODISCARD http_client_raw_response read_raw_response(bool head);
+    bool prepare_connection(const string& scheme, const string& host, ports port);
     bool send_request(string_view request_str, time_point& send_start);
 
     optional<http_client_response> read_response(time_point& receive_start, const string& request_host,
@@ -207,7 +218,9 @@ private:
     void update_cookies(const vector<http_cookie>& resp_cookies, const url& request_url);
     string build_cookie_header(const url& request_url) const;
 
-    bool prepare_connection(const http_client_request& request);
+    bool prepare_connection(const http_client_request& request) {
+        return prepare_connection(request.scheme, request.host, request.port);
+    }
 
     http_client_response do_request_once(http_client_request request, int redirect_count, bool& transport_failed);
     http_client_response do_request(http_client_request request, int redirect_count = 0);
@@ -514,6 +527,36 @@ public:
      * @return 响应对象
      */
     http_client_response request(http_client_request req);
+
+    /**
+     * @brief 连接池内快速请求
+     * @param req 请求
+     * @return 响应
+     *
+     * 不解析响应头/正文，不处理重定向、重试、Cookie；用于透传。
+     */
+    http_client_response request_fast(const http_client_request& req);
+
+    /**
+     * @brief 连接池内原始请求
+     * @param req 请求
+     * @return 原始响应字节与后端连接可复用状态
+     *
+     * 不解析响应头/正文，不处理重定向、重试、Cookie；用于透传。
+     */
+    NEFORCE_NODISCARD http_client_raw_response request_raw(const http_client_request& req);
+
+    /**
+     * @brief 发送已序列化的 HTTP/1.1 请求并读取原始响应
+     * @param scheme 后端 scheme
+     * @param host 后端主机
+     * @param port 后端端口
+     * @param raw_request 完整请求字节
+     * @param head 是否为 HEAD 请求
+     * @return 原始响应字节与连接可复用状态
+     */
+    NEFORCE_NODISCARD http_client_raw_response request_raw(const string& scheme, const string& host, ports port,
+                                                           string_view raw_request, bool head);
 
     /**
      * @brief 下载文件

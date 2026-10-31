@@ -7,7 +7,7 @@ NEFORCE_BEGIN_HTTP__
 namespace {
     constexpr size_t WINDOW_UPDATE_THRESHOLD = 65535;
     constexpr size_t MAX_READ_BUFFER_SIZE = 65536;    // 64 KB
-    constexpr size_t MAX_WRITE_BUFFER_SIZE = 1048576; // 1 MB
+    constexpr size_t MAX_WRITE_BUFFER_SIZE = 4194304; // 4 MB
 
     vector<hpack_header_field> response_headers_to_hpack(int status_code,
                                                          const flat_unordered_map<string, string>& headers) {
@@ -48,13 +48,16 @@ http2_connection::~http2_connection() {
 void http2_connection::start() {
     const int fd = static_cast<int>(socket_->native_handle());
     auto weak_self = weak_from_this();
-    ctx_->add_fd(fd, epoll_event::in, [weak_self](int, epoll_event, error_code) {
-        const auto self = weak_self.lock();
-        if (!self || self->closed_) {
-            return;
-        }
-        self->on_readable(0, epoll_event::none, error_code{});
-    });
+    ctx_->add_fd(
+            fd, epoll_event::in,
+            [weak_self](int, epoll_event, error_code) {
+                const auto self = weak_self.lock();
+                if (!self || self->closed_) {
+                    return;
+                }
+                self->on_readable(0, epoll_event::none, error_code{});
+            },
+            false);
 
     http2_settings_frame sf;
     sf.entries.push_back({http2_settings_id::max_concurrent_streams, local_settings_.max_concurrent_streams()});
@@ -108,9 +111,11 @@ void http2_connection::on_readable(int /*fd*/, epoll_event /*events*/, error_cod
         }
     }
 
+    write_batch_depth_.fetch_add(1, memory_order_relaxed);
     framer_.decode_frames(read_buffer_.data(), read_buffer_.size(),
                           [this](http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t* payload,
                                  size_t len) { handle_frame(type, flags, stream_id, payload, len); });
+    write_batch_depth_.fetch_sub(1, memory_order_relaxed);
 
     // Frame decoder internally buffers incomplete frame data; read_buffer_ can be safely cleared
     read_buffer_.clear();
@@ -436,7 +441,7 @@ void http2_connection::send_push_promise(uint32_t stream_id, uint32_t promised_s
     last_stream_id_ = max(promised_stream_id, last_stream_id_);
 }
 
-void http2_connection::send_response(uint32_t stream_id, const vector<hpack_header_field>& headers, const string& body,
+void http2_connection::send_response(uint32_t stream_id, const vector<hpack_header_field>& headers, string_view body,
                                      bool end_stream) {
     byte_vector header_block = encoder_.encode(headers);
     const uint32_t max_frame = local_settings_.max_frame_size();
@@ -484,25 +489,20 @@ void http2_connection::send_response(uint32_t stream_id, const vector<hpack_head
     if (!body.empty()) {
         const auto* data_ptr = reinterpret_cast<const byte_t*>(body.data());
         size_t remaining = body.size();
-
         while (remaining > 0) {
             uint32_t available = flow_control_.window(stream_id);
             available = min(available, flow_control_.connection_window());
             if (available == 0) {
                 available = 1;
             }
-
-            size_t chunk = (remaining < available) ? remaining : static_cast<size_t>(available);
-            chunk = (chunk > local_settings_.max_frame_size()) ? local_settings_.max_frame_size() : chunk;
-
+            size_t chunk = min<size_t>(remaining, available);
+            chunk = min<size_t>(chunk, local_settings_.max_frame_size());
             http2_data_frame df;
             df.stream_id = stream_id;
             df.end_stream = (chunk >= remaining) && end_stream;
             df.data.assign(data_ptr, data_ptr + chunk);
-
             flow_control_.consume(stream_id, static_cast<uint32_t>(chunk));
             write_frame(framer_.encode_data_frame(df));
-
             data_ptr += chunk;
             remaining -= chunk;
         }
@@ -515,6 +515,119 @@ void http2_connection::send_response(uint32_t stream_id, const vector<hpack_head
             stream_it->second->on_send_data(true);
             if (stream_it->second->is_closed()) {
                 streams_.erase(stream_it);
+                stream_priorities_.erase(stream_id);
+            }
+        }
+    }
+    const bool peer_multiplexes = remote_settings_.max_concurrent_streams() > 1;
+    if (write_batch_depth_.load(memory_order_relaxed) == 0 || body.size() >= 16UL * 1024UL || !peer_multiplexes) {
+        flush_writes();
+    } else {
+        flush_writes_over(1024UL * 1024UL);
+    }
+}
+
+void http2_connection::write_header_block(const uint32_t stream_id, const byte_vector& header_block,
+                                          const bool end_stream) {
+    const uint32_t max_frame = local_settings_.max_frame_size();
+    if (header_block.size() > max_frame) {
+        size_t offset = 0;
+        bool first = true;
+        while (offset < header_block.size()) {
+            const size_t chunk_size = min<size_t>(header_block.size() - offset, max_frame);
+            const bool is_last = (offset + chunk_size >= header_block.size());
+            if (first) {
+                http2_headers_frame hf;
+                hf.stream_id = stream_id;
+                hf.header_block.assign(header_block.begin() + static_cast<ptrdiff_t>(offset),
+                                       header_block.begin() + static_cast<ptrdiff_t>(offset + chunk_size));
+                hf.end_headers = is_last;
+                hf.end_stream = is_last && end_stream;
+                write_frame(framer_.encode_headers_frame(hf));
+                first = false;
+            } else {
+                http2_continuation_frame cf;
+                cf.stream_id = stream_id;
+                cf.header_block.assign(header_block.begin() + static_cast<ptrdiff_t>(offset),
+                                       header_block.begin() + static_cast<ptrdiff_t>(offset + chunk_size));
+                cf.end_headers = is_last;
+                write_frame(framer_.encode_continuation_frame(cf));
+            }
+            offset += chunk_size;
+        }
+        return;
+    }
+
+    http2_headers_frame hf;
+    hf.stream_id = stream_id;
+    hf.header_block = header_block;
+    hf.end_headers = true;
+    hf.end_stream = end_stream;
+    write_frame(framer_.encode_headers_frame(hf));
+}
+
+void http2_connection::send_headers(const uint32_t stream_id, const vector<hpack_header_field>& headers,
+                                    const bool end_stream) {
+    write_header_block(stream_id, encoder_.encode(headers), end_stream);
+    {
+        lock<recursive_mutex> lk(stream_mutex_);
+        const auto it = streams_.find(stream_id);
+        if (it != streams_.end()) {
+            it->second->on_send_headers(false);
+            if (end_stream) {
+                it->second->on_send_data(true);
+            }
+            if (it->second->is_closed()) {
+                streams_.erase(it);
+                stream_priorities_.erase(stream_id);
+            }
+        }
+    }
+    flush_writes();
+}
+
+void http2_connection::send_data(const uint32_t stream_id, const string_view data, const bool end_stream) {
+    const auto* ptr = reinterpret_cast<const byte_t*>(data.data());
+    size_t remaining = data.size();
+    while (remaining > 0) {
+        uint32_t available = flow_control_.window(stream_id);
+        available = min(available, flow_control_.connection_window());
+        if (available == 0) {
+            available = 1;
+        }
+        const size_t chunk = min<size_t>(min<size_t>(remaining, available), local_settings_.max_frame_size());
+        http2_data_frame df;
+        df.stream_id = stream_id;
+        df.end_stream = (chunk >= remaining) && end_stream;
+        df.data.assign(ptr, ptr + chunk);
+        flow_control_.consume(stream_id, static_cast<uint32_t>(chunk));
+        write_frame(framer_.encode_data_frame(df));
+        ptr += chunk;
+        remaining -= chunk;
+    }
+    if (end_stream) {
+        lock<recursive_mutex> lk(stream_mutex_);
+        const auto it = streams_.find(stream_id);
+        if (it != streams_.end()) {
+            it->second->on_send_data(true);
+            if (it->second->is_closed()) {
+                streams_.erase(it);
+                stream_priorities_.erase(stream_id);
+            }
+        }
+    }
+    flush_writes();
+}
+
+void http2_connection::send_trailers(const uint32_t stream_id, const vector<hpack_header_field>& trailers) {
+    write_header_block(stream_id, encoder_.encode(trailers), true);
+    {
+        lock<recursive_mutex> lk(stream_mutex_);
+        const auto it = streams_.find(stream_id);
+        if (it != streams_.end()) {
+            it->second->on_send_data(true);
+            if (it->second->is_closed()) {
+                streams_.erase(it);
                 stream_priorities_.erase(stream_id);
             }
         }
@@ -553,6 +666,59 @@ void http2_connection::write_frame(const byte_vector& frame) {
         return;
     }
     write_buffer_.insert(write_buffer_.end(), frame.begin(), frame.end());
+}
+
+void http2_connection::write_body_frames(const uint32_t stream_id, const byte_t* data, size_t len,
+                                         const bool end_stream) {
+    unique_lock<mutex> lk(write_mutex_);
+    const auto* ptr = data;
+    size_t remaining = len;
+    const uint32_t max_frame = local_settings_.max_frame_size();
+
+    while (remaining > 0) {
+        uint32_t available = flow_control_.window(stream_id);
+        available = min(available, flow_control_.connection_window());
+        if (available == 0) {
+            available = 1;
+        }
+
+        size_t chunk = min<size_t>(remaining, available);
+        chunk = min<size_t>(chunk, max_frame);
+        const size_t frame_size = 9 + chunk;
+        if (write_buffer_.size() + frame_size > MAX_WRITE_BUFFER_SIZE) {
+            lk.unlock_quiet();
+            close_connection(http2_error::enhance_your_calm);
+            return;
+        }
+
+        const size_t offset = write_buffer_.size();
+        write_buffer_.resize(offset + frame_size);
+        auto* out = write_buffer_.data() + offset;
+        out[0] = static_cast<byte_t>((chunk >> 16) & 0xFF);
+        out[1] = static_cast<byte_t>((chunk >> 8) & 0xFF);
+        out[2] = static_cast<byte_t>(chunk & 0xFF);
+        out[3] = static_cast<byte_t>(http2_frame_type::data);
+        out[4] = ((chunk >= remaining) && end_stream) ? HTTP2_FLAG_END_STREAM : 0;
+        out[5] = static_cast<byte_t>((stream_id >> 24) & 0x7F);
+        out[6] = static_cast<byte_t>((stream_id >> 16) & 0xFF);
+        out[7] = static_cast<byte_t>((stream_id >> 8) & 0xFF);
+        out[8] = static_cast<byte_t>(stream_id & 0xFF);
+        memory_copy(out + 9, ptr, chunk);
+
+        flow_control_.consume(stream_id, static_cast<uint32_t>(chunk));
+        ptr += chunk;
+        remaining -= chunk;
+    }
+}
+
+void http2_connection::flush_writes_over(const size_t threshold) {
+    lock<mutex> lk(write_mutex_);
+    if (write_buffer_.size() < threshold) {
+        return;
+    }
+    socket_->send_all(
+            memory_view<const char>(reinterpret_cast<const char*>(write_buffer_.data()), write_buffer_.size()));
+    write_buffer_.clear();
 }
 
 void http2_connection::flush_writes() {
@@ -626,7 +792,6 @@ void http2_connection::route_stream(uint32_t stream_id, const vector<hpack_heade
     if (data != nullptr && data_len > 0) {
         req.body.assign(reinterpret_cast<const char*>(data), data_len);
     }
-
     auto weak_self = weak_from_this();
     router_->handle_request_async(move(req), [weak_self, stream_id, end_stream](http_response res) {
         const auto self = weak_self.lock();
@@ -637,7 +802,7 @@ void http2_connection::route_stream(uint32_t stream_id, const vector<hpack_heade
         if (res.status >= http_status::switching_protocols) {
             const auto hpack_headers =
                     response_headers_to_hpack(static_cast<int>(static_cast<uint16_t>(res.status)), res.headers);
-            self->send_response(stream_id, hpack_headers, res.body, end_stream);
+            self->send_response(stream_id, hpack_headers, res.body_view(), end_stream);
         }
     });
 }

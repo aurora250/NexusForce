@@ -29,6 +29,7 @@ add_executable(NexusForceUnitTests
         test_random.cpp
         test_ranges.cpp
         test_reflect.cpp
+        test_rotating_file.cpp
         test_simd.cpp
         test_sequence_container.cpp
         test_serialize.cpp

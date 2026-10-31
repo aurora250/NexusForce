@@ -1,4 +1,5 @@
 #include <NeForce/core/container/vector.hpp>
+#include <NeForce/core/file/path.hpp>
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/utility/pair.hpp>
 #include <NeForce/core/string/format.hpp>
@@ -1251,6 +1252,180 @@ namespace {
         }
     }
 
+    void fill_linux_edac_memory(sysinfo::hardware_info& hardware) {
+        if (!hardware.memory.type.empty() && !hardware.memory.channel.empty()) {
+            return;
+        }
+        vector<string> types;
+        uint32_t modules = 0;
+        for (uint32_t controller = 0; controller < 16; ++controller) {
+            const string base = format("/sys/devices/system/edac/mc/mc{}", controller);
+            for (uint32_t slot = 0; slot < 16; ++slot) {
+                const string dimm = format("{}/dimm{}", base, slot);
+                string type = read_text((dimm + "/dimm_mem_type").data());
+                string size = read_text((dimm + "/size").data());
+                type.trim();
+                size.trim();
+                if (type.empty() && size.empty()) {
+                    continue;
+                }
+                ++modules;
+                add_unique(types, type);
+            }
+        }
+        if (modules == 0) {
+            return;
+        }
+        if (hardware.memory.type.empty()) {
+            hardware.memory.type = join(types, " / ");
+        }
+        if (hardware.memory.module_count == 0) {
+            hardware.memory.module_count = modules;
+        }
+        if (hardware.memory.channel.empty()) {
+            hardware.memory.channel = modules == 1 ? "Single channel · 1 module" : format("{} modules", modules);
+        }
+    }
+
+    string normalize_pci_id(string value) {
+        value.trim();
+        if (value.view().starts_with("0x") || value.view().starts_with("0X")) {
+            value = value.substr(2);
+        }
+        string result;
+        result.reserve(value.size());
+        for (const char character: value) {
+            result.push_back(character >= 'A' && character <= 'F' ? static_cast<char>(character - 'A' + 'a')
+                                                                  : character);
+        }
+        return result;
+    }
+
+    const string& pci_ids_database() {
+        static const string data = [] {
+            for (const char* file: {"/usr/share/misc/pci.ids", "/usr/share/hwdata/pci.ids", "/usr/share/pci.ids"}) {
+                string text = read_text(file);
+                if (!text.empty()) {
+                    return text;
+                }
+            }
+            return string{};
+        }();
+        return data;
+    }
+
+    string pci_ids_vendor_name(const string& vendor) {
+        const auto& data = pci_ids_database();
+        if (data.empty() || vendor.size() != 4) {
+            return {};
+        }
+        size_t position = 0;
+        string_view line;
+        while (getline(data.view(), position, line)) {
+            if (line.size() < 6 || line[0] == '#' || line[0] == '\t') {
+                continue;
+            }
+            if (line.substr(0, 4) == vendor) {
+                const auto separator = line.find("  ");
+                return separator == string_view::npos ? string{} : string(line.substr(separator + 2));
+            }
+        }
+        return {};
+    }
+
+    string pci_ids_device_name(const string& vendor, const string& device) {
+        const auto& data = pci_ids_database();
+        if (data.empty() || vendor.size() != 4 || device.size() != 4) {
+            return {};
+        }
+        bool in_vendor = false;
+        size_t position = 0;
+        string_view line;
+        while (getline(data.view(), position, line)) {
+            if (line.empty() || line[0] == '#') {
+                continue;
+            }
+            if (line[0] != '\t') {
+                in_vendor = line.size() >= 4 && line.substr(0, 4) == vendor;
+                continue;
+            }
+            if (!in_vendor || line.size() < 7 || line[1] == '\t') {
+                continue;
+            }
+            const string_view id = line.substr(1, 4);
+            if (id == device) {
+                const auto separator = line.find("  ", 1);
+                return separator == string_view::npos ? string{} : string(line.substr(separator + 2));
+            }
+        }
+        return {};
+    }
+
+    string pci_vendor_label(const string& vendor) {
+        if (vendor == "8086") {
+            return "Intel";
+        }
+        if (vendor == "1022") {
+            return "AMD";
+        }
+        const string name = pci_ids_vendor_name(vendor);
+        if (name.empty()) {
+            return vendor;
+        }
+        const auto space = name.find(' ');
+        return space == string::npos ? name : name.substr(0, space);
+    }
+
+    string pci_class_device(const char* root, const char* class_prefix) {
+        for (const auto& entry: path(root).children()) {
+            const string device = entry.str();
+            string pci_class = read_text((device + "/class").data());
+            pci_class.trim();
+            if (!pci_class.view().starts_with(class_prefix)) {
+                continue;
+            }
+            return device;
+        }
+        return {};
+    }
+
+    void fill_linux_chipset(sysinfo::hardware_info& hardware, const sysinfo::cpu_info& cpu) {
+        const string host = pci_class_device("/sys/bus/pci/devices", "0x0600");
+        const string isa = pci_class_device("/sys/bus/pci/devices", "0x0601");
+        const auto identity = [](const string& device) {
+            return pair<string, string>{normalize_pci_id(read_text((device + "/vendor").data())),
+                                        normalize_pci_id(read_text((device + "/device").data()))};
+        };
+        const pair<string, string> host_id = host.empty() ? pair<string, string>{} : identity(host);
+        const pair<string, string> isa_id = isa.empty() ? pair<string, string>{} : identity(isa);
+        const string family = cpu.x86.code_name.empty() ? string{} : cpu.x86.code_name;
+
+        if (!host.empty() && !host_id.first.empty()) {
+            const string vendor_label = pci_vendor_label(host_id.first);
+            const string device_name = pci_ids_device_name(host_id.first, host_id.second);
+            hardware.board.chipset = !device_name.empty() ? format("{} {}", vendor_label, device_name)
+                                                          : format("{} {} host bridge ({}:{})", vendor_label,
+                                                                   family.empty() ? string("PCI") : family,
+                                                                   host_id.first, host_id.second);
+        }
+        if (!isa.empty() && !isa_id.first.empty()) {
+            const string vendor_label = pci_vendor_label(isa_id.first);
+            const string device_name = pci_ids_device_name(isa_id.first, isa_id.second);
+            hardware.board.southbridge =
+                    !device_name.empty() ? format("{} {}", vendor_label, device_name)
+                                         : format("{} {} LPC/ISA bridge ({}:{})", vendor_label,
+                                                  family.empty() ? string("PCI") : family, isa_id.first, isa_id.second);
+        }
+        if (hardware.board.chipset.empty()) {
+            hardware.board.chipset = hardware.board.southbridge;
+        }
+        if (!hardware.board.chipset.empty() || !hardware.board.southbridge.empty()) {
+            if (hardware.board.bus.empty()) {
+                hardware.board.bus = "PCI Express";
+            }
+        }
+    }
+
     void probe_platform(sysinfo::hardware_info& hardware, sysinfo::cpu_info& cpu) {
         fill_cpu_cpuid(cpu);
         const string info = read_text("/proc/cpuinfo");
@@ -1337,6 +1512,8 @@ namespace {
         hardware.board.vendor = dmi_value("board_vendor");
         hardware.board.model = dmi_value("board_name");
         fill_linux_smbios_memory(hardware);
+        fill_linux_edac_memory(hardware);
+        fill_linux_chipset(hardware, cpu);
 
         if (cpu.l3_kib != 0) {
             hardware.memory.llc_ring =

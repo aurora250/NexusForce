@@ -1,3 +1,4 @@
+#include <NeForce/core/memory/shared_ptr.hpp>
 #include <NeForce/network/http/http_router.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
@@ -361,35 +362,44 @@ http_response http_router::handle_request(http_request& request) {
 }
 
 void http_router::handle_request_async(http_request request, function<void(http_response)> cb) {
-    http_response response;
-    if (!request.version.empty()) {
-        response.version = request.version;
+    handle_request_async_with_request(
+            move(request),
+            [cb = move(cb)](http_request& /*request*/, http_response response) mutable { cb(move(response)); });
+}
+
+void http_router::handle_request_async_with_request(http_request request,
+                                                    function<void(http_request&, http_response)> cb) {
+    auto req = make_shared<http_request>(move(request));
+    auto response = make_shared<http_response>();
+    if (!req->version.empty()) {
+        response->version = req->version;
     }
 
     middleware_chain_.execute_pre_filters_async(
-            request, response, request.context, [this, req = move(request), cb, response](bool ok) mutable {
+            *req, *response, req->context, [this, req, response, cb = move(cb)](bool ok) mutable {
                 if (!ok) {
-                    cb(move(response));
+                    cb(*req, move(*response));
                     return;
                 }
 
                 try {
-                    middleware_chain_.execute_filters(req, response);
-                    resolve_handler(req, response);
+                    middleware_chain_.execute_filters(*req, *response);
+                    resolve_handler(*req, *response);
                 } catch (const exception& e) {
                     if (exception_handler_) {
-                        exception_handler_(req, response, e);
-                        cb(move(response));
+                        exception_handler_(*req, *response, e);
+                        cb(*req, move(*response));
                         return;
                     }
-                    response.status = http_status::internal_server_error;
-                    response.status_message = "Internal Server Error";
-                    response.set_content_type(http_content::PLAIN_TEXT());
-                    response.body = "Internal Server Error";
+                    response->status = http_status::internal_server_error;
+                    response->status_message = "Internal Server Error";
+                    response->set_content_type(http_content::PLAIN_TEXT());
+                    response->body = "Internal Server Error";
                 }
 
-                middleware_chain_.execute_post_filters_async(req, response, req.context,
-                                                             [cb, response]() mutable { cb(move(response)); });
+                middleware_chain_.execute_post_filters_async(
+                        *req, *response, req->context,
+                        [req, response, cb = move(cb)]() mutable { cb(*req, move(*response)); });
             });
 }
 

@@ -1,6 +1,8 @@
 #include <NeForce/core/functional/apply.hpp>
 #include <NeForce/core/functional/bind.hpp>
 #include <NeForce/core/functional/function.hpp>
+#include <NeForce/core/functional/shared_function.hpp>
+#include <NeForce/core/functional/unique_function.hpp>
 #include <NeForce/core/functional/hash.hpp>
 #include <NeForce/core/memory/shared_ptr.hpp>
 #include <NeForce/core/string/string.hpp>
@@ -1801,3 +1803,214 @@ TEST_F(HashTest, All64BitAlgorithmsDeterministic) {
 #ifdef NEFORCE_COMPILER_CLANG_CL
 #    pragma clang diagnostic pop
 #endif
+
+namespace {
+
+    int plus_one(int x) { return x + 1; }
+
+    int twice(int x) { return x * 2; }
+
+    struct move_only_adder {
+        unique_ptr<int> offset;
+
+        explicit move_only_adder(int value) :
+        offset(new int(value)) {}
+
+        move_only_adder(move_only_adder&&) = default;
+        move_only_adder& operator=(move_only_adder&&) = default;
+        move_only_adder(const move_only_adder&) = delete;
+        move_only_adder& operator=(const move_only_adder&) = delete;
+
+        int operator()(int x) { return *offset + x; }
+    };
+
+    struct const_multiplier {
+        int operator()(int x) const { return x * 3; }
+    };
+
+    struct mutable_adder {
+        int operator()(int x) { return x + 4; }
+    };
+
+} // namespace
+
+TEST(UniqueFunctionTest, DefaultConstructedIsEmpty) {
+    unique_function<int(int)> f;
+    EXPECT_FALSE(static_cast<bool>(f));
+    EXPECT_TRUE(f == nullptr);
+    EXPECT_TRUE(nullptr == f);
+    EXPECT_FALSE(f != nullptr);
+    EXPECT_FALSE(nullptr != f);
+    EXPECT_EQ(f.target_type(), typeid(void));
+    EXPECT_EQ(f.target<int (*)(int)>(), nullptr);
+    EXPECT_THROW(f(1), memory_exception);
+}
+
+TEST(UniqueFunctionTest, NullptrConstructedIsEmpty) {
+    unique_function<int(int)> f(nullptr);
+    EXPECT_FALSE(static_cast<bool>(f));
+    unique_function<int(int)> g = nullptr;
+    EXPECT_FALSE(static_cast<bool>(g));
+}
+
+TEST(UniqueFunctionTest, WrapsFunctionPointer) {
+    unique_function<int(int)> f = &plus_one;
+    ASSERT_TRUE(static_cast<bool>(f));
+    EXPECT_EQ(f(1), 2);
+    ASSERT_NE(f.target<int (*)(int)>(), nullptr);
+    EXPECT_EQ(*f.target<int (*)(int)>(), &plus_one);
+    EXPECT_EQ(f.target_type(), typeid(int (*)(int)));
+    EXPECT_EQ(f.target<long (*)(long)>(), nullptr);
+}
+
+TEST(UniqueFunctionTest, NullFunctionPointerIsEmpty) {
+    int (*pointer)(int) = nullptr;
+    unique_function<int(int)> f = pointer;
+    EXPECT_FALSE(static_cast<bool>(f));
+}
+
+TEST(UniqueFunctionTest, MovesOnlyTargets) {
+    unique_function<int(int)> f = move_only_adder(10);
+    ASSERT_TRUE(static_cast<bool>(f));
+    EXPECT_EQ(f(5), 15);
+
+    unique_function<int(int)> moved(move(f));
+    EXPECT_FALSE(static_cast<bool>(f));
+    ASSERT_TRUE(static_cast<bool>(moved));
+    EXPECT_EQ(moved(1), 11);
+
+    unique_function<int(int)> assigned;
+    assigned = move(moved);
+    EXPECT_FALSE(static_cast<bool>(moved));
+    ASSERT_TRUE(static_cast<bool>(assigned));
+    EXPECT_EQ(assigned(2), 12);
+}
+
+TEST(UniqueFunctionTest, StoresSmallTrivialCallableInline) {
+    auto subtract_one = [](int x) { return x - 1; };
+    unique_function<int(int)> f = subtract_one;
+    ASSERT_TRUE(static_cast<bool>(f));
+    EXPECT_NE(f.target<decltype(subtract_one)>(), nullptr);
+    EXPECT_EQ(f(3), 2);
+}
+
+TEST(UniqueFunctionTest, ConstSignatureCallsConstTarget) {
+    unique_function<int(int) const> f = const_multiplier{};
+    const auto& reference = f;
+    EXPECT_EQ(reference(2), 6);
+    EXPECT_EQ(f(3), 9);
+}
+
+TEST(UniqueFunctionTest, ConstSignatureRejectsNonConstCallable) {
+    static_assert(!is_constructible_v<unique_function<int(int) const>, mutable_adder>,
+                  "const signature must reject non-const callables");
+    static_assert(is_constructible_v<unique_function<int(int) const>, const_multiplier>,
+                  "const signature must accept const callables");
+    static_assert(is_constructible_v<unique_function<int(int)>, const_multiplier>,
+                  "unqualified signature must accept const callables");
+}
+
+TEST(UniqueFunctionTest, LvalueSignature) {
+    unique_function<int(int)&> f = plus_one;
+    EXPECT_EQ(f(1), 2);
+    static_assert(is_invocable_v<unique_function<int(int)&>&, int>, "lvalue call must work");
+    static_assert(!is_invocable_v<unique_function<int(int)&>&&, int>, "rvalue call must be rejected");
+}
+
+TEST(UniqueFunctionTest, RvalueSignatureMovesTarget) {
+    auto pointer = unique_ptr<int>(new int(42));
+    unique_function<int(int) &&> f = [value = move(pointer)](int add) { return *value + add; };
+    EXPECT_EQ(move(f)(1), 43);
+    static_assert(is_invocable_v<unique_function<int(int) &&>&&, int>, "rvalue call must work");
+    static_assert(!is_invocable_v<unique_function<int(int) &&>&, int>, "lvalue call must be rejected");
+}
+
+TEST(UniqueFunctionTest, NoexceptSignature) {
+#if defined(NEFORCE_STANDARD_17) || defined(NEFORCE_STANDARD_20) || defined(NEFORCE_STANDARD_23)
+    unique_function<int(int) noexcept> f = [](int x) noexcept { return x + 1; };
+    EXPECT_EQ(f(1), 2);
+    static_assert(noexcept(f(1)), "operator() must be noexcept");
+    static_assert(!is_constructible_v<unique_function<int(int) noexcept>, int (*)(int)>,
+                  "noexcept signature must reject throwing callables");
+    static_assert(is_constructible_v<unique_function<int(int)>, int (*)(int)>,
+                  "unqualified signature must accept throwing callables");
+#else
+    GTEST_SKIP() << "noexcept function types require C++17";
+#endif
+}
+
+TEST(UniqueFunctionTest, AssignsCallableAndNullptr) {
+    unique_function<int(int)> f = &plus_one;
+    EXPECT_EQ(f(2), 3);
+
+    f = &twice;
+    EXPECT_EQ(f(2), 4);
+
+    f = [](int x) { return x * 5; };
+    EXPECT_EQ(f(2), 10);
+
+    f = nullptr;
+    EXPECT_FALSE(static_cast<bool>(f));
+    EXPECT_THROW(f(1), memory_exception);
+}
+
+TEST(UniqueFunctionTest, NestedEmptyUniqueFunctionStaysEmpty) {
+    unique_function<int() const> inner;
+    unique_function<int()> outer = move(inner);
+    EXPECT_FALSE(static_cast<bool>(outer));
+
+    unique_function<int() const> source = []() { return 1; };
+    unique_function<int()> target = move(source);
+    ASSERT_TRUE(static_cast<bool>(target));
+    EXPECT_EQ(target(), 1);
+}
+
+TEST(UniqueFunctionTest, SwapsTargets) {
+    unique_function<int(int)> first = &plus_one;
+    unique_function<int(int)> second = &twice;
+    first.swap(second);
+    EXPECT_EQ(first(2), 4);
+    EXPECT_EQ(second(2), 3);
+}
+
+TEST(UniqueFunctionTest, VoidReturnAndMultipleArguments) {
+    unique_function<void(int&, int)> writer = [](int& out, int value) { out = value; };
+    int out = 0;
+    writer(out, 9);
+    EXPECT_EQ(out, 9);
+}
+
+TEST(UniqueFunctionTest, MoveOnlyTypeTraits) {
+    static_assert(!is_constructible_v<unique_function<int(int)>, move_only_adder&>, "must not copy a move-only target");
+    static_assert(is_constructible_v<unique_function<int(int)>, move_only_adder&&>, "must move a move-only target");
+    static_assert(!is_copy_constructible_v<unique_function<int(int)>>, "must not be copyable");
+    static_assert(!is_copy_assignable_v<unique_function<int(int)>>, "must not be copy assignable");
+    static_assert(is_move_constructible_v<unique_function<int(int)>>, "must be movable");
+    static_assert(is_move_assignable_v<unique_function<int(int)>>, "must be move assignable");
+}
+
+TEST(UniqueFunctionTest, MovedFromStateIsEmpty) {
+    unique_function<int(int)> f = &plus_one;
+    unique_function<int(int)> moved(move(f));
+    EXPECT_FALSE(static_cast<bool>(f));
+    EXPECT_EQ(f.target<int (*)(int)>(), nullptr);
+    EXPECT_EQ(f.target_type(), typeid(void));
+    EXPECT_THROW(f(1), memory_exception);
+    EXPECT_EQ(moved(1), 2);
+}
+
+TEST(SharedFunctionTest, IsFunctionAlias) {
+    static_assert(is_same_v<shared_function<int(int)>, function<int(int)>>, "shared_function must alias function");
+    static_assert(is_copy_constructible_v<shared_function<int(int)>>, "shared_function must be copyable");
+}
+
+TEST(SharedFunctionTest, CopiesShareCallableState) {
+    shared_function<int(int)> f = &plus_one;
+    shared_function<int(int)> copy = f;
+    EXPECT_EQ(f(1), 2);
+    EXPECT_EQ(copy(2), 3);
+
+    copy = &twice;
+    EXPECT_EQ(f(1), 2);
+    EXPECT_EQ(copy(1), 2);
+}

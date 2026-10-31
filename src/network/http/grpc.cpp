@@ -1,4 +1,5 @@
 #include <NeForce/network/http/grpc.hpp>
+#include <NeForce/network/http/http2_connection.hpp>
 #include <NeForce/core/exception/exception.hpp>
 #include <NeForce/core/memory/endian.hpp>
 NEFORCE_BEGIN_NAMESPACE__
@@ -89,6 +90,64 @@ void grpc_handler::process_unary(http_request& request, http_response& response,
         response.trailers["grpc-message"] = "";
     } catch (const exception& e) {
         send_error(response, grpc_status::internal, e.what());
+    }
+}
+
+void grpc_stream_writer::start() {
+    if (started_ || finished_) {
+        return;
+    }
+    vector<hpack_header_field> headers;
+    headers.push_back({":status", "200"});
+    headers.push_back({"content-type", string(GRPC_CONTENT_TYPE)});
+    connection_.send_headers(stream_id_, headers, false);
+    started_ = true;
+}
+
+bool grpc_stream_writer::write(const grpc_message& message) {
+    if (finished_) {
+        return false;
+    }
+    if (!started_) {
+        start();
+    }
+    const auto frame = grpc_framer::encode(message);
+    connection_.send_data(stream_id_, string_view(reinterpret_cast<const char*>(frame.data()), frame.size()), false);
+    return true;
+}
+
+void grpc_stream_writer::finish(const grpc_status status, const string& message) {
+    if (finished_) {
+        return;
+    }
+    if (!started_) {
+        start();
+    }
+    vector<hpack_header_field> trailers;
+    trailers.push_back({"grpc-status", to_string(static_cast<int>(status))});
+    trailers.push_back({"grpc-message", message});
+    connection_.send_trailers(stream_id_, trailers);
+    finished_ = true;
+}
+
+void grpc_handler::process_server_stream(http2_connection& connection, const uint32_t stream_id, const byte_t* data,
+                                         const size_t len, const stream_handler& handler) {
+    grpc_stream_writer writer(connection, stream_id);
+    vector<grpc_message> messages;
+    grpc_framer framer;
+    const int decoded = framer.decode(data, len, messages);
+    if (decoded <= 0 || messages.empty()) {
+        writer.start();
+        writer.finish(grpc_status::invalid_argument, "Empty gRPC request");
+        return;
+    }
+    writer.start();
+    try {
+        handler(messages.front(),
+                [&writer](const grpc_message& response) { static_cast<void>(writer.write(response)); });
+        writer.finish(grpc_status::ok);
+    } catch (const exception& e) {
+        writer.finish(grpc_status::internal, e.what());
     }
 }
 

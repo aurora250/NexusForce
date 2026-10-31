@@ -136,7 +136,7 @@ namespace {
                             if (span.link.empty()) {
                                 span.link = node.destination;
                             }
-                            out.push_back(_NEFORCE move(span));
+                            out.push_back(move(span));
                         }
                     }
                     break;
@@ -245,7 +245,7 @@ namespace {
         for (const auto& line: soft.lines) {
             string piece{text.view().substr(line.begin, line.end - line.begin)};
             if (text_display_width(piece.view()) <= width) {
-                lines.push_back(_NEFORCE move(piece));
+                lines.push_back(move(piece));
                 continue;
             }
             // A single word wider than the column: break it per character.
@@ -367,9 +367,9 @@ namespace {
                     cells.push_back(element::text(" " + content + " ", style, style::wrap_mode::none));
                     cells.push_back(element::text("\xe2\x94\x82", styles.gutter, style::wrap_mode::none));
                 }
-                rows.push_back(element::hbox(_NEFORCE move(cells)));
+                rows.push_back(element::hbox(move(cells)));
             }
-            return element::vbox(_NEFORCE move(rows));
+            return element::vbox(move(rows));
         };
 
         elements rows;
@@ -388,7 +388,7 @@ namespace {
         }
         rows.push_back(border_row("\xe2\x94\x94", "\xe2\x94\xb4", "\xe2\x94\x98"));
 
-        element table = element::vbox(_NEFORCE move(rows));
+        element table = element::vbox(move(rows));
         if (opt.width > 0) {
             tui::style width_style;
             width_style.width = style::size_hint{style::size_hint::fixed, opt.width};
@@ -446,9 +446,9 @@ namespace {
                     }
                 }
             }
-            rows.push_back(element::rich_text(_NEFORCE move(spans), opt.style, style::wrap_mode::none));
+            rows.push_back(element::rich_text(move(spans), opt.style, style::wrap_mode::none));
         }
-        return element::vbox(_NEFORCE move(rows));
+        return element::vbox(move(rows));
     }
 
     element render_list(const md_block& list, const markdown_option& opt, const markdown_styles& styles,

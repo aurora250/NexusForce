@@ -167,6 +167,48 @@ void ssl_stream::close() noexcept {
     last_error_.clear();
 }
 
+void* ssl_stream::export_session() const noexcept {
+    if (ssl_ == nullptr) {
+        return nullptr;
+    }
+    return ::SSL_get1_session(static_cast<::SSL*>(ssl_));
+}
+
+bool ssl_stream::session_reused() const noexcept {
+    return ssl_ != nullptr && ::SSL_session_reused(static_cast<::SSL*>(ssl_)) == 1;
+}
+
+bool ssl_stream::session_resumable() const noexcept {
+    if (ssl_ == nullptr) {
+        return false;
+    }
+    ::SSL_SESSION* session = ::SSL_get_session(static_cast<::SSL*>(ssl_));
+    return session != nullptr && ::SSL_SESSION_is_resumable(session) == 1;
+}
+
+void ssl_stream::import_session(void* session) noexcept {
+    if (ssl_ != nullptr && session != nullptr) {
+        ::SSL_set_session(static_cast<::SSL*>(ssl_), static_cast<::SSL_SESSION*>(session));
+    }
+}
+
+void* ssl_stream::duplicate_session(void* session) noexcept {
+    if (session == nullptr) {
+        return nullptr;
+    }
+    auto* ssl_session = static_cast<::SSL_SESSION*>(session);
+    if (::SSL_SESSION_up_ref(ssl_session) != 1) {
+        return nullptr;
+    }
+    return ssl_session;
+}
+
+void ssl_stream::free_session(void* session) noexcept {
+    if (session != nullptr) {
+        ::SSL_SESSION_free(static_cast<::SSL_SESSION*>(session));
+    }
+}
+
 ssize_t ssl_stream::read(void* buffer, const size_t size) {
     if (ssl_ == nullptr) {
         last_error_ = "SSL object not initialized";
@@ -419,6 +461,20 @@ namespace {
         cancellation_slot* cancel_slot{nullptr};
         void* ssl_ptr;
         int fd_{-1};
+        bool registered_{false};
+        atomic<bool> done_{false};
+        mutex mutex_;
+
+        void finish(error_code ec) {
+            if (done_.exchange(true, memory_order_acq_rel)) {
+                return;
+            }
+            if (registered_) {
+                ctx->remove_fd(fd_);
+                registered_ = false;
+            }
+            handler(ec);
+        }
 
         void start() {
             if (cancel_slot != nullptr && cancel_slot->is_cancelled()) {
@@ -431,9 +487,12 @@ namespace {
         }
 
         void do_handshake() {
+            if (done_.load(memory_order_acquire)) {
+                return;
+            }
             const int ret = ::SSL_do_handshake(static_cast<::SSL*>(ssl_ptr));
             if (ret == 1) {
-                handler(error_code{});
+                finish(error_code{});
                 return;
             }
 
@@ -441,31 +500,31 @@ namespace {
             if (err == SSL_ERROR_WANT_READ) {
                 auto self = shared_from_this();
                 if (cancel_slot != nullptr) {
-                    cancel_slot->assign([self]() mutable {
-                        self->ctx->remove_fd(self->fd_);
-                        self->handler(make_operation_aborted());
-                    });
+                    cancel_slot->assign([self]() mutable { self->finish(make_operation_aborted()); });
                 }
                 ctx->add_fd(fd_, epoll_event::in,
                             [self](int /*fd*/, epoll_event /*events*/, error_code ec) { self->on_fd_ready(ec); });
+                registered_ = true;
             } else if (err == SSL_ERROR_WANT_WRITE) {
                 auto self = shared_from_this();
                 if (cancel_slot != nullptr) {
-                    cancel_slot->assign([self]() mutable {
-                        self->ctx->remove_fd(self->fd_);
-                        self->handler(make_operation_aborted());
-                    });
+                    cancel_slot->assign([self]() mutable { self->finish(make_operation_aborted()); });
                 }
                 ctx->add_fd(fd_, epoll_event::out,
                             [self](int /*fd*/, epoll_event /*events*/, error_code ec) { self->on_fd_ready(ec); });
+                registered_ = true;
             } else {
-                handler(error_code(err, ssl_category()));
+                finish(error_code(err, ssl_category()));
             }
         }
 
         void on_fd_ready(error_code ec) {
+            lock<mutex> lk(mutex_);
+            if (done_.load(memory_order_acquire)) {
+                return;
+            }
             if (ec) {
-                handler(ec);
+                finish(ec);
                 return;
             }
             do_handshake();

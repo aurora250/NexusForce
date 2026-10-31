@@ -13,6 +13,7 @@
 #include "NeForce/core/algorithm/heap.hpp"
 #include "NeForce/core/algorithm/merge.hpp"
 #include "NeForce/core/algorithm/partition.hpp"
+#include "NeForce/core/algorithm/search.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -831,37 +832,211 @@ void sort(Iterator first, Iterator last) {
  */
 template <typename Iterator, typename Compare>
 NEFORCE_CONSTEXPR20 void tim_sort(Iterator first, Iterator last, Compare comp) {
+    static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
+
     if (first == last) {
         return;
     }
 
-    constexpr int min_merge = 32;
-    const auto n = _NEFORCE distance(first, last);
-
-    if (n > 0) {
-        Iterator i = first;
-        while (i < last) {
-            auto step = _NEFORCE min(static_cast<decltype(n)>(min_merge), last - i);
-            Iterator end = _NEFORCE next(i, step);
-            _NEFORCE insertion_sort(i, end, comp);
-            i = end;
+    const auto total = _NEFORCE distance(first, last);
+    const auto minrun = [](size_t n) noexcept {
+        size_t remainder = 0;
+        while (n >= 64) {
+            remainder |= n & 1U;
+            n >>= 1U;
         }
+        return n + remainder;
+    }(static_cast<size_t>(total));
+
+    const auto count_run = [&comp](Iterator first, Iterator last) -> Iterator {
+        if (first == last) {
+            return last;
+        }
+        Iterator current = _NEFORCE next(first);
+        if (current == last) {
+            return last;
+        }
+        if (comp(*current, *first)) {
+            do {
+                ++current;
+            } while (current != last && comp(*current, *(current - 1)));
+            _NEFORCE reverse(first, current);
+        } else {
+            do {
+                ++current;
+            } while (current != last && !comp(*current, *(current - 1)));
+        }
+        return current;
+    };
+
+    const auto binary_insertion_sort = [&comp](Iterator first, Iterator last) {
+        if (first == last) {
+            return;
+        }
+        for (Iterator current = _NEFORCE next(first); current != last; ++current) {
+            auto value = _NEFORCE move(*current);
+            Iterator position = _NEFORCE upper_bound(first, current, value, comp);
+            _NEFORCE move_backward(position, current, _NEFORCE next(current));
+            *position = _NEFORCE move(value);
+        }
+    };
+
+    const auto gallop_left = [&comp](Iterator first, Iterator last, const auto& value) -> Iterator {
+        const auto length = _NEFORCE distance(first, last);
+        if (length == 0) {
+            return last;
+        }
+        size_t step = 1;
+        Iterator base = first;
+        while (step < static_cast<size_t>(length) &&
+               comp(*(first + static_cast<iter_difference_t<Iterator>>(step)), value)) {
+            base = first + static_cast<iter_difference_t<Iterator>>(step);
+            step <<= 1U;
+        }
+        const Iterator high = first + _NEFORCE min(static_cast<iter_difference_t<Iterator>>(step), length);
+        return _NEFORCE lower_bound(base, high, value, comp);
+    };
+
+    const auto gallop_right = [&comp](Iterator first, Iterator last, const auto& value) -> Iterator {
+        const auto length = _NEFORCE distance(first, last);
+        if (length == 0) {
+            return last;
+        }
+        size_t step = 1;
+        Iterator base = first;
+        while (step < static_cast<size_t>(length) &&
+               !comp(value, *(first + static_cast<iter_difference_t<Iterator>>(step)))) {
+            base = first + static_cast<iter_difference_t<Iterator>>(step);
+            step <<= 1U;
+        }
+        const Iterator high = first + _NEFORCE min(static_cast<iter_difference_t<Iterator>>(step), length);
+        return _NEFORCE upper_bound(base, high, value, comp);
+    };
+
+    const auto tim_merge = [&comp, &gallop_left, &gallop_right](Iterator first, Iterator middle, Iterator last) {
+        if (first == middle || middle == last) {
+            return;
+        }
+
+        vector<iter_value_t<Iterator>> buffer;
+        const auto left_length = _NEFORCE distance(first, middle);
+        buffer.reserve(static_cast<size_t>(left_length));
+        for (Iterator current = first; current != middle; ++current) {
+            buffer.push_back(_NEFORCE move(*current));
+        }
+
+        size_t min_gallop = 7;
+        size_t left_wins = 0;
+        size_t right_wins = 0;
+        size_t left_index = 0;
+        Iterator right = middle;
+        Iterator output = first;
+
+        while (left_index < buffer.size() && right != last) {
+            if (comp(*right, buffer[left_index])) {
+                *output = _NEFORCE move(*right);
+                ++output;
+                ++right;
+                ++right_wins;
+                left_wins = 0;
+                if (right_wins >= min_gallop) {
+                    const Iterator start = right;
+                    const Iterator cut = gallop_left(right, last, buffer[left_index]);
+                    while (right != cut) {
+                        *output = _NEFORCE move(*right);
+                        ++output;
+                        ++right;
+                    }
+                    const auto block = _NEFORCE distance(start, cut);
+                    min_gallop = block > 1 ? _NEFORCE max<size_t>(1, min_gallop - 1) : min_gallop + 1;
+                    right_wins = 0;
+                }
+            } else {
+                *output = _NEFORCE move(buffer[left_index]);
+                ++output;
+                ++left_index;
+                ++left_wins;
+                right_wins = 0;
+                if (left_wins >= min_gallop) {
+                    const size_t start_index = left_index;
+                    const Iterator cut =
+                            gallop_right(buffer.begin() + static_cast<ptrdiff_t>(left_index), buffer.end(), *right);
+                    const auto cut_index = static_cast<size_t>(cut - buffer.begin());
+                    while (left_index < cut_index) {
+                        *output = _NEFORCE move(buffer[left_index]);
+                        ++output;
+                        ++left_index;
+                    }
+                    const auto block = cut_index - start_index;
+                    min_gallop = block > 1 ? _NEFORCE max<size_t>(1, min_gallop - 1) : min_gallop + 1;
+                    left_wins = 0;
+                }
+            }
+        }
+
+        while (left_index < buffer.size()) {
+            *output = _NEFORCE move(buffer[left_index]);
+            ++output;
+            ++left_index;
+        }
+    };
+
+    struct run {
+        Iterator base;
+        size_t length;
+    };
+    vector<run> runs;
+
+    const auto merge_at = [&runs, &tim_merge](const size_t index) {
+        auto& left = runs[index];
+        auto& right = runs[index + 1];
+        const Iterator end = _NEFORCE next(right.base, static_cast<iter_difference_t<Iterator>>(right.length));
+        tim_merge(left.base, right.base, end);
+        left.length += right.length;
+        runs.erase(runs.begin() + static_cast<ptrdiff_t>(index + 1));
+    };
+
+    const auto collapse = [&runs, &merge_at] {
+        for (;;) {
+            const size_t count = runs.size();
+            if (count < 2) {
+                return;
+            }
+            if (count >= 3 && runs[count - 3].length <= runs[count - 2].length + runs[count - 1].length) {
+                if (runs[count - 3].length < runs[count - 1].length) {
+                    merge_at(count - 3);
+                } else {
+                    merge_at(count - 2);
+                }
+            } else if (runs[count - 2].length <= runs[count - 1].length) {
+                merge_at(count - 2);
+            } else {
+                return;
+            }
+        }
+    };
+
+    Iterator current = first;
+    while (current != last) {
+        Iterator run_end = count_run(current, last);
+        auto run_length = static_cast<size_t>(_NEFORCE distance(current, run_end));
+        if (run_length < minrun) {
+            const auto force = _NEFORCE min(static_cast<size_t>(_NEFORCE distance(current, last)), minrun);
+            run_end = _NEFORCE next(current, static_cast<iter_difference_t<Iterator>>(force));
+            binary_insertion_sort(current, run_end);
+            run_length = force;
+        }
+        runs.push_back(run{current, run_length});
+        current = run_end;
+        collapse();
     }
 
-    for (int size = min_merge; size < n; size *= 2) {
-        for (Iterator left = first; left < last;) {
-            const auto remaining = _NEFORCE distance(left, last);
-            if (remaining <= size) {
-                break;
-            }
-
-            Iterator mid = _NEFORCE next(left, size);
-            Iterator right = _NEFORCE next(left, _NEFORCE min(2 * size, static_cast<int>(remaining)));
-
-            if (mid < right) {
-                _NEFORCE inplace_merge(left, mid, right, comp);
-            }
-            left = right;
+    while (runs.size() > 1) {
+        const size_t count = runs.size();
+        if (count >= 3 && runs[count - 3].length < runs[count - 1].length) {
+            merge_at(count - 3);
+        } else {
+            merge_at(count - 2);
         }
     }
 }

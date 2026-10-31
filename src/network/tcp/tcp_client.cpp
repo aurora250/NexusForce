@@ -2,6 +2,12 @@
 #include <NeForce/network/tcp/tcp_client.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+void tcp_client_base::ensure_dns() const {
+    if (!dns_) {
+        dns_ = make_unique<dns_client>(dns_config_, *dns_ctx_, dns_use_tcp_);
+    }
+}
+
 bool tcp_client_base::try_connect_to_ip(const string& ip, ports port) {
     const bool is_ipv6_conn = ip.contains(':');
 
@@ -12,6 +18,7 @@ bool tcp_client_base::try_connect_to_ip(const string& ip, ports port) {
         }
 
         sock->open(is_ipv6_conn ? ip_family::inet6 : ip_family::inet4);
+        sock->set_tcp_nodelay(true);
 
         if (!sock->set_send_timeout(send_timeout_) || !sock->set_receive_timeout(recv_timeout_)) {
             sock->close();
@@ -135,6 +142,7 @@ bool tcp_client_base::connect(const string& host, ports port) {
         }
     } else {
         try {
+            ensure_dns();
             vector<string> ipv4s, ipv6s;
 
             const auto saved_timeout = dns_->timeout();
@@ -185,10 +193,13 @@ bool tcp_client_base::connect(const string& host, ports port) {
         return false;
     }
 
+    // post_connect() (notably the TLS session cache) needs the logical endpoint
+    // before the TCP connection is established.
+    connected_host_ = host;
+    connected_port_ = port;
+
     for (const auto& ip: ips) {
         if (try_connect_to_ip(ip, port)) {
-            connected_host_ = host;
-            connected_port_ = port;
             if (connect_callback_) {
                 connect_callback_(host, ports(port));
             }
@@ -445,18 +456,24 @@ bool ssl_client::post_connect() {
     if (!ssl_ctx_) {
         return true;
     }
-    ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::peer : ssl_verify::none);
-
     if (!ssl_ctx_->is_valid()) {
         handle_exception(ssl_exception("SSL context is invalid"));
         return false;
     }
 
     try {
+        socket_->set_tcp_nodelay(true);
+
         const string& hostname = sni_hostname_.empty() ? connected_host() : sni_hostname_;
+        void* previous_session = nullptr;
+        if (session_cache_) {
+            previous_session = session_cache_->acquire(hostname, connected_port());
+        }
 
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-        static_cast<ssl_socket*>(socket_.get())->init_client_ssl(*ssl_ctx_, hostname);
+        auto* ssl_sock = static_cast<ssl_socket*>(socket_.get());
+        ssl_sock->init_client_ssl(*ssl_ctx_, hostname, previous_session);
+        ssl_stream::free_session(previous_session);
 
         if (verify_peer_) {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
@@ -477,9 +494,8 @@ bool ssl_client::post_connect() {
 ssl_client::ssl_client(io_context& ioc, ssl_context ctx) :
 tcp_client_base(ioc),
 ssl_ctx_(move(ctx)) {
-    if (ssl_ctx_) {
-        ssl_ctx_->set_options(ssl_option::NO_SSLv2 | ssl_option::NO_SSLv3 | ssl_option::NO_TLSv1 |
-                              ssl_option::NO_TLSv1_1);
+    if (ssl_ctx_ && ssl_ctx_->is_valid()) {
+        ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::peer : ssl_verify::none);
     }
 }
 
@@ -490,8 +506,8 @@ void ssl_client::set_ssl_context(ssl_context ctx) {
     if (!ctx.is_valid()) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
     }
-    ctx.set_options(ssl_option::NO_SSLv2 | ssl_option::NO_SSLv3 | ssl_option::NO_TLSv1 | ssl_option::NO_TLSv1_1);
     ssl_ctx_ = move(ctx);
+    ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::peer : ssl_verify::none);
 }
 
 void ssl_client::set_verify_peer(bool verify) {
@@ -514,6 +530,7 @@ void ssl_client::set_sni_hostname(string hostname) {
 bool ssl_client::load_ca_file(const string& ca_file) {
     if (!ssl_ctx_) {
         ssl_ctx_ = ssl_context(ssl_method::tls_client);
+        ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::peer : ssl_verify::none);
     }
     return ssl_ctx_->load_verify_locations(ca_file, "");
 }
@@ -521,6 +538,7 @@ bool ssl_client::load_ca_file(const string& ca_file) {
 bool ssl_client::load_ca_path(const string& ca_path) {
     if (!ssl_ctx_) {
         ssl_ctx_ = ssl_context(ssl_method::tls_client);
+        ssl_ctx_->set_verify_mode(verify_peer_ ? ssl_verify::peer : ssl_verify::none);
     }
     return ssl_ctx_->load_verify_locations("", ca_path);
 }
@@ -681,6 +699,28 @@ void tcp_client_base::async_write(io_context& ctx, memory_view<const char> buffe
         return;
     }
     socket_->async_write(ctx, buffer, slot, move(handler));
+}
+
+void ssl_client::pre_disconnect() {
+    cache_session();
+    ssl_initialized_ = false;
+}
+
+void ssl_client::cache_session() {
+    if (!session_cache_ || !socket_ || !ssl_initialized_) {
+        return;
+    }
+    auto* ssl_sock = dynamic_cast<ssl_socket*>(socket_.get());
+    if (ssl_sock == nullptr || !ssl_sock->is_ssl()) {
+        return;
+    }
+    if (!ssl_sock->ssl().session_resumable()) {
+        return;
+    }
+    const string& hostname = sni_hostname_.empty() ? connected_host() : sni_hostname_;
+    if (void* session = ssl_sock->ssl().export_session()) {
+        session_cache_->store(hostname, connected_port(), session);
+    }
 }
 
 void ssl_client::begin_async_post_connect(tcp_socket* sock, io_context& ctx, function<void(error_code)> handler) {

@@ -30,7 +30,7 @@ namespace {
 #endif
 
     void deliver_guarded(strand& s, function<void()> handler) {
-        auto holder = make_shared<function<void()>>(_NEFORCE move(handler));
+        auto holder = make_shared<function<void()>>(move(handler));
         // Must use post, cannot dispatch: if called from the input thread,
         // dispatch will execute inline on the current thread,
         // which would run concurrently with flush() on the io_context thread (replacing prev_tree_/prev_layout_).

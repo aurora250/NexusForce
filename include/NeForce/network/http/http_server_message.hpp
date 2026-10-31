@@ -20,6 +20,7 @@
  */
 
 #include "NeForce/core/container/buffer_chain.hpp"
+#include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/utility/any.hpp"
 #include "NeForce/network/http/http_session.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -36,6 +37,91 @@ NEFORCE_BEGIN_HTTP__
  * @addtogroup HTTP HTTP
  * @{
  */
+
+/**
+ * @class http_session_handle
+ * @brief 惰性会话句柄
+ */
+class NEFORCE_API http_session_handle {
+public:
+    /// @brief 会话创建解析器
+    using resolver_t = function<http_session*()>;
+
+    http_session_handle() = default;
+    explicit http_session_handle(http_session* session) noexcept :
+    session_(session) {}
+
+    http_session_handle& operator=(http_session* session) noexcept {
+        session_ = session;
+        created_ = false;
+        return *this;
+    }
+
+    http_session_handle& operator=(nullptr_t) noexcept {
+        reset();
+        return *this;
+    }
+
+    /**
+     * @brief 获取会话，必要时按需创建
+     * @return 会话指针
+     */
+    NEFORCE_NODISCARD http_session* get() {
+        if (session_ == nullptr && resolver_) {
+            session_ = resolver_();
+            created_ = session_ != nullptr;
+        }
+        return session_;
+    }
+
+    /**
+     * @brief 获取已创建的会话，不触发按需创建
+     * @return 已创建的会话指针，未创建返回nullptr
+     */
+    NEFORCE_NODISCARD http_session* materialized() const noexcept { return session_; }
+
+    /**
+     * @brief 检查会话是否由本请求按需创建
+     * @return 本请求创建了会话返回true
+     */
+    NEFORCE_NODISCARD bool created() const noexcept { return created_; }
+
+    /**
+     * @brief 标记会话由本请求创建
+     */
+    void mark_created() noexcept { created_ = true; }
+
+    /**
+     * @brief 设置按需创建解析器
+     * @param resolver 会话解析器
+     */
+    void set_resolver(resolver_t resolver) { resolver_ = _NEFORCE move(resolver); }
+
+    /**
+     * @brief 清空句柄与解析器
+     */
+    void reset() noexcept {
+        session_ = nullptr;
+        created_ = false;
+        resolver_ = resolver_t{};
+    }
+
+    NEFORCE_NODISCARD operator http_session*() { return get(); }
+    NEFORCE_NODISCARD operator const http_session*() const noexcept { return session_; }
+    NEFORCE_NODISCARD http_session* operator->() { return get(); }
+    NEFORCE_NODISCARD const http_session* operator->() const noexcept { return session_; }
+    NEFORCE_NODISCARD http_session& operator*() { return *get(); }
+    NEFORCE_NODISCARD const http_session& operator*() const noexcept { return *session_; }
+
+    NEFORCE_NODISCARD bool operator==(nullptr_t) const noexcept { return session_ == nullptr; }
+    NEFORCE_NODISCARD bool operator!=(nullptr_t) const noexcept { return session_ != nullptr; }
+    NEFORCE_NODISCARD explicit operator bool() const noexcept { return session_ != nullptr; }
+
+private:
+    http_session* session_{nullptr}; ///< 已创建的会话
+    bool created_{false};            ///< 会话是否由本请求创建
+    resolver_t resolver_;            ///< 按需创建解析器
+};
 
 /**
  * @struct http_server_request
@@ -72,7 +158,7 @@ NEFORCE_BEGIN_HTTP__
  *
  * // 获取会话
  * if (request.has_session()) {
- *     auto* session = request.session;
+ *     http_session* session = request.session;
  *     session->touch();
  * }
  * @endcode
@@ -90,8 +176,8 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
     flat_unordered_map<string, string> form_data;  ///< 表单数据
     flat_unordered_map<string, string> trailers;   ///< Trailer头部
 
-    http_session* session = nullptr; ///< 会话对象
-    http_context context;            ///< 请求上下文
+    http_session_handle session; ///< 会话句柄
+    http_context context;        ///< 请求上下文
 
     /**
      * @brief 获取参数值
@@ -152,6 +238,13 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
     }
 
     /**
+     * @brief 按名称获取请求头，名称不区分大小写
+     * @param name 头名称
+     * @return 头值视图，不存在返回空视图
+     */
+    NEFORCE_NODISCARD string_view header_ci(string_view name) const;
+
+    /**
      * @brief 设置请求头
      * @param name 头名称
      * @param value 头值
@@ -169,7 +262,18 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      * @brief 检查是否有关联的有效会话
      * @return 存在有效会话返回true
      */
-    NEFORCE_NODISCARD bool has_session() const noexcept { return session != nullptr && session->is_valid(); }
+    NEFORCE_NODISCARD bool has_session() const noexcept {
+        const auto* current = session.materialized();
+        return current != nullptr && current->is_valid();
+    }
+
+    /**
+     * @brief 设置按需会话创建解析器
+     * @param resolver 会话解析器
+     */
+    void set_session_resolver(http_session_handle::resolver_t resolver) {
+        session.set_resolver(_NEFORCE move(resolver));
+    }
 
     /**
      * @brief 获取Content-Type
@@ -288,11 +392,14 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
     flat_unordered_map<string, string> headers;  ///< 响应头
     vector<http_cookie> cookies;                 ///< 设置的Cookie
     string body;                                 ///< 响应正文
+    memory_view<const char> body_ref;            ///< 外部正文视图
     string redirect_url;                         ///< 重定向URL
     string forward_path;                         ///< 转发路径
     flat_unordered_map<string, string> trailers; ///< Trailer头部
     bool chunked_encoding{false};                ///< 是否使用chunked传输编码
     bool suppress_content_length{false};         ///< 是否禁止输出Content-Length
+    string raw_response;                         ///< 原始 HTTP 响应
+    bool close_after_send{false};                ///< 发送后是否关闭前端连接
 
     /**
      * @brief 默认构造函数
@@ -360,12 +467,27 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
     NEFORCE_NODISCARD string to_string() const;
 
     /**
+     * @brief 获取实际响应正文视图
+     */
+    NEFORCE_NODISCARD string_view body_view() const {
+        return body_ref.empty() ? string_view(body.data(), body.size()) : string_view(body_ref.data(), body_ref.size());
+    }
+
+    /**
+     * @brief 直接引用外部正文，避免拷贝
+     * @param view 正文视图，生命周期必须覆盖响应发送
+     */
+    void set_body_view(string_view view) {
+        body_ref = memory_view<const char>(view.data(), view.size());
+        body.clear();
+    }
+
+    /**
      * @brief 构建响应头字符串
      */
     NEFORCE_NODISCARD string build_header_string() const;
 
-    // TODO: Problem Details (RFC 9457) — add set_problem_detail(type, title, detail, instance) for standardized error
-    // responses
+    // TODO: Problem Details (RFC 9457) — add set_problem_detail(type, title, detail, instance) for standardized error responses
 };
 
 /**

@@ -262,6 +262,43 @@ public:
     NEFORCE_NODISCARD void* native_handle() const noexcept { return ssl_; }
 
     /**
+     * @brief 导出当前会话的独立引用
+     * @return SSL_SESSION 指针，未握手返回 nullptr；需用 free_session 释放
+     */
+    NEFORCE_NODISCARD void* export_session() const noexcept;
+
+    /**
+     * @brief 当前连接是否复用了已有会话
+     * @return 复用了会话返回true
+     */
+    NEFORCE_NODISCARD bool session_reused() const noexcept;
+
+    /**
+     * @brief 当前会话是否可复用
+     * @return 可复用返回true
+     */
+    NEFORCE_NODISCARD bool session_resumable() const noexcept;
+
+    /**
+     * @brief 导入会话用于下次握手
+     * @param session SSL_SESSION 指针（可为 nullptr）
+     */
+    void import_session(void* session) noexcept;
+
+    /**
+     * @brief 增加会话引用
+     * @param session SSL_SESSION 指针
+     * @return 新的独立引用
+     */
+    NEFORCE_NODISCARD static void* duplicate_session(void* session) noexcept;
+
+    /**
+     * @brief 释放会话引用
+     * @param session SSL_SESSION 指针
+     */
+    static void free_session(void* session) noexcept;
+
+    /**
      * @brief 释放SSL对象所有权
      * @return SSL指针
      *

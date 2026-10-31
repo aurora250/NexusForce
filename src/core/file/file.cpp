@@ -562,7 +562,31 @@ string file::read() const {
 
     const uint64_t file_size = size64();
     if (file_size == 0) {
-        return {};
+        // Procfs and sysfs report a zero size while still yielding data on read.
+        const difference_type current_pos = tell();
+        if (current_pos < 0) {
+            set_last_error();
+            return {};
+        }
+
+        string content;
+        constexpr size_type chunk = 65536;
+        constexpr size_t max_stream_bytes = 64UL * 1024UL * 1024UL;
+        while (content.size() < max_stream_bytes) {
+            const string part = read(chunk);
+            if (part.empty()) {
+                break;
+            }
+            content.append(part);
+            if (part.size() < chunk) {
+                break;
+            }
+        }
+
+        if (!seek(current_pos, file_pointer::begin)) {
+            set_last_error();
+        }
+        return content;
     }
 
     const difference_type current_pos = tell();

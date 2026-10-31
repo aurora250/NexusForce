@@ -19,6 +19,7 @@
  */
 
 #include "NeForce/network/dns/dns_client.hpp"
+#include "NeForce/network/ssl/ssl_session_cache.hpp"
 #include "NeForce/network/ssl/ssl_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -41,8 +42,11 @@ public:
     using disconnect_callback_t = function<void()>;                  ///< 断开回调类型
 
 protected:
-    unique_ptr<dns_client> dns_;    ///< DNS解析客户端
-    unique_ptr<tcp_socket> socket_; ///< TCP socket
+    mutable unique_ptr<dns_client> dns_; ///< DNS解析客户端
+    io_context* dns_ctx_{nullptr};       ///< DNS 客户端使用的执行上下文
+    dns_client::config dns_config_;      ///< 自定义 DNS 配置
+    bool dns_use_tcp_{false};            ///< DNS 是否使用 TCP
+    unique_ptr<tcp_socket> socket_;      ///< TCP socket
 
     string connected_host_;                    ///< 已连接的主机名
     ports connected_port_;                     ///< 已连接的端口
@@ -102,6 +106,11 @@ protected:
     bool try_connect_to_ip(const string& ip, ports port);
 
     /**
+     * @brief 按需创建 DNS 客户端
+     */
+    void ensure_dns() const;
+
+    /**
      * @brief 需要时执行重连
      * @return 重连成功返回true
      */
@@ -128,7 +137,7 @@ public:
      * @param ctx 异步 I/O 执行上下文
      */
     explicit tcp_client_base(io_context& ctx) :
-    dns_(make_unique<dns_client>(dns_client::config{}, ctx)) {}
+    dns_ctx_(&ctx) {}
 
     /**
      * @brief 构造函数（带DNS客户端）
@@ -137,7 +146,9 @@ public:
      * @param use_tcp DNS是否使用TCP
      */
     explicit tcp_client_base(dns_client::config cfg, io_context& ctx, bool use_tcp = false) :
-    dns_(make_unique<dns_client>(_NEFORCE move(cfg), ctx, use_tcp)) {}
+    dns_ctx_(&ctx),
+    dns_config_(_NEFORCE move(cfg)),
+    dns_use_tcp_(use_tcp) {}
 
     /**
      * @brief 析构函数
@@ -243,7 +254,11 @@ public:
      * @brief 设置DNS服务器配置
      * @param cfg DNS配置
      */
-    void set_dns_server(dns_client::config cfg) { dns_->set_config(move(cfg)); }
+    void set_dns_server(dns_client::config cfg) {
+        dns_config_ = move(cfg);
+        ensure_dns();
+        dns_->set_config(dns_config_);
+    }
 
     /**
      * @brief 设置异常处理器
@@ -390,13 +405,19 @@ public:
      * @brief 获取DNS客户端
      * @return DNS客户端引用
      */
-    NEFORCE_NODISCARD dns_client& get_dns_client() noexcept { return *dns_; }
+    NEFORCE_NODISCARD dns_client& get_dns_client() {
+        ensure_dns();
+        return *dns_;
+    }
 
     /**
      * @brief 获取DNS客户端常量引用
      * @return DNS客户端常量引用
      */
-    NEFORCE_NODISCARD const dns_client& get_dns_client() const noexcept { return *dns_; }
+    NEFORCE_NODISCARD const dns_client& get_dns_client() const {
+        ensure_dns();
+        return *dns_;
+    }
 
     /**
      * @brief 异步连接
@@ -645,16 +666,18 @@ protected:
  */
 class NEFORCE_API ssl_client final : public tcp_client_base {
 private:
-    optional<ssl_context> ssl_ctx_; ///< SSL上下文
-    string sni_hostname_;           ///< SNI主机名
-    bool verify_peer_ = true;       ///< 是否验证对等方证书
-    bool ssl_initialized_ = false;  ///< SSL是否已初始化
+    optional<ssl_context> ssl_ctx_;               ///< SSL上下文
+    string sni_hostname_;                         ///< SNI主机名
+    bool verify_peer_ = true;                     ///< 是否验证对等方证书
+    bool ssl_initialized_ = false;                ///< SSL是否已初始化
+    shared_ptr<ssl_session_cache> session_cache_; ///< 跨连接TLS会话缓存
 
 protected:
     unique_ptr<tcp_socket> create_socket() override { return make_unique<ssl_socket>(); }
 
     bool post_connect() override;
-    void pre_disconnect() override { ssl_initialized_ = false; }
+    void pre_disconnect() override;
+    void cache_session();
     void begin_async_post_connect(tcp_socket* sock, io_context& ctx, function<void(error_code)> handler) override;
 
 public:
@@ -671,6 +694,8 @@ public:
      * @param ctx SSL上下文
      */
     explicit ssl_client(io_context& ioc, ssl_context ctx);
+
+    ~ssl_client() override { cache_session(); }
 
     /**
      * @brief 设置SSL上下文
@@ -738,6 +763,12 @@ public:
      * @return 已初始化返回true
      */
     NEFORCE_NODISCARD bool is_ssl_initialized() const noexcept { return ssl_initialized_; }
+
+    /**
+     * @brief 设置跨连接TLS会话缓存
+     * @param cache 会话缓存
+     */
+    void set_session_cache(shared_ptr<ssl_session_cache> cache) { session_cache_ = _NEFORCE move(cache); }
 
     /**
      * @brief 获取SSL socket引用

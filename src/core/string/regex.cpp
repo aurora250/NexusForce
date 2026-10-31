@@ -332,7 +332,7 @@ void regex_iterator::find_next() {
         if (next_pos_ > subject_.length()) {
             next_pos_ = subject_.length() + 1;
         }
-        current_ = _NEFORCE move(result);
+        current_ = move(result);
     } else {
         current_ = match_result{};
         done_ = true;

@@ -90,7 +90,7 @@ thread_pool::timer_scheduler::token thread_pool::timer_scheduler::add_task(time_
 
     auto flag = make_shared<atomic<bool>>(false);
     auto done = make_shared<_NEFORCE promise<void>>();
-    handler_type wrapped = [flag, h = _NEFORCE move(handler), done]() {
+    handler_type wrapped = [flag, h = move(handler), done]() {
         if (!flag->load(memory_order_acquire)) {
             h();
         }
@@ -98,7 +98,7 @@ thread_pool::timer_scheduler::token thread_pool::timer_scheduler::add_task(time_
     };
 
     const token id = queue_.insert(expire);
-    tasks_.emplace(id, scheduled_task{_NEFORCE move(wrapped), _NEFORCE move(flag), _NEFORCE move(done)});
+    tasks_.emplace(id, scheduled_task{move(wrapped), move(flag), move(done)});
 
     if (is_earliest) {
         cv_.notify_one();
@@ -123,7 +123,7 @@ bool thread_pool::timer_scheduler::cancel(const token id) {
     }
 
     // Already drained: the handler is running (or about to run). Wait until it finishes.
-    const auto done = _NEFORCE move(it->second.done);
+    const auto done = move(it->second.done);
     lock.unlock_quiet();
     if (done) {
         done->get_future().wait();

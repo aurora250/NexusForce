@@ -543,7 +543,7 @@ bool theme_catalog::register_theme(const string_view json) {
             return true;
         }
     }
-    user_themes_.push_back(pair<string, theme>{_NEFORCE move(name), *palette});
+    user_themes_.push_back(pair<string, theme>{move(name), *palette});
     return true;
 }
 

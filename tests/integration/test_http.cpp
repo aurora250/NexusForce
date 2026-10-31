@@ -1333,6 +1333,267 @@ TEST_F(ReverseProxyIntegrationTest, PathPrefixMatching) {
     EXPECT_FALSE(cont);
 }
 
+TEST_F(ReverseProxyIntegrationTest, ReusesBackendConnectionForMultipleRequests) {
+    io_context backend_ctx;
+    http_server backend(ports(0), backend_ctx, 1);
+    backend.max_keep_alive_requests = 0;
+    backend.router().get("/bench", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.body = "pong";
+    });
+    ASSERT_TRUE(backend.start());
+
+    io_context proxy_ctx;
+    http_server proxy(ports(0), proxy_ctx, 1);
+    auto proxy_filter = make_unique<reverse_proxy_filter>(proxy_ctx, "127.0.0.1", backend.port());
+    auto* proxy_filter_ptr = proxy_filter.get();
+    proxy.router().use(move(proxy_filter));
+    ASSERT_TRUE(proxy.start());
+
+    io_context client_ctx;
+    http_client client(client_ctx);
+    const string url = "http://127.0.0.1:" + to_string(proxy.port().value()) + "/bench";
+    for (int i = 0; i < 4; ++i) {
+        auto response = client.get(url);
+        ASSERT_TRUE(response.is_success());
+        EXPECT_EQ(response.body, "pong");
+    }
+
+    client.close();
+    proxy_filter_ptr->close_idle_connections();
+    proxy.stop();
+    backend.stop();
+}
+
+TEST_F(ReverseProxyIntegrationTest, RawResponsePassthroughPreservesBodyAndConnection) {
+    io_context backend_ctx;
+    http_server backend(ports(0), backend_ctx, 1);
+    backend.max_keep_alive_requests = 0;
+    backend.router().get("/raw", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.set_header("X-Backend", "raw");
+        res.set_header("X-Backend-Skip", "hidden");
+        res.body = "raw-body";
+    });
+    ASSERT_TRUE(backend.start());
+
+    io_context proxy_ctx;
+    http_server proxy(ports(0), proxy_ctx, 1);
+    auto proxy_filter = make_unique<reverse_proxy_filter>(proxy_ctx, "127.0.0.1", backend.port());
+    auto* proxy_filter_ptr = proxy_filter.get();
+    proxy_filter->raw_response_passthrough = true;
+    proxy_filter->add_skip_response_header("X-Backend-Skip");
+    proxy.router().use(move(proxy_filter));
+    ASSERT_TRUE(proxy.start());
+
+    io_context client_ctx;
+    http_client client(client_ctx);
+    const string url = "http://127.0.0.1:" + to_string(proxy.port().value()) + "/raw";
+    for (int i = 0; i < 4; ++i) {
+        auto response = client.get(url);
+        ASSERT_TRUE(response.is_success());
+        EXPECT_EQ(response.body, "raw-body");
+        EXPECT_EQ(response.header("X-Backend"), "raw");
+        EXPECT_TRUE(response.header("X-Backend-Skip").empty());
+    }
+
+    client.close();
+    proxy_filter_ptr->close_idle_connections();
+    proxy.stop();
+    backend.stop();
+}
+
+
+TEST_F(ReverseProxyIntegrationTest, AsyncBackendConcurrentDirect) {
+    io_context backend_ctx;
+    http_server backend(ports(0), backend_ctx, 4);
+    backend.enable_async_http1 = true;
+    backend.max_keep_alive_requests = 0;
+    backend.router().get("/async", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.body = "async-pong";
+    });
+    ASSERT_TRUE(backend.start());
+
+    const string url = "http://127.0.0.1:" + to_string(backend.port().value()) + "/async";
+    vector<thread> clients;
+    atomic<int> failures{0};
+    for (int i = 0; i < 8; ++i) {
+        clients.emplace_back([url, &failures] {
+            io_context client_ctx;
+            http_client client(client_ctx);
+            for (int j = 0; j < 200; ++j) {
+                auto response = client.get(url);
+                if (!response.is_success() || response.body != "async-pong") {
+                    ++failures;
+                }
+            }
+            client.close();
+        });
+    }
+    for (auto& t: clients) {
+        t.join();
+    }
+    EXPECT_EQ(failures.load(), 0);
+    backend.stop();
+}
+
+TEST_F(ReverseProxyIntegrationTest, AsyncRemoteProxyForwardsKeepAlive) {
+    io_context backend_ctx;
+    http_server backend(ports(0), backend_ctx, 1);
+    backend.max_keep_alive_requests = 0;
+    backend.router().get("/async", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.set_header("X-Async-Backend", "yes");
+        res.set_header("X-Async-Skip", "hidden");
+        res.body = "async-pong";
+    });
+    ASSERT_TRUE(backend.start());
+
+    io_context proxy_ctx;
+    http_server proxy(ports(0), proxy_ctx, 1);
+    proxy.enable_async_http1 = true;
+    auto proxy_filter = make_unique<reverse_proxy_filter>(proxy_ctx, "127.0.0.1", backend.port());
+    auto* proxy_filter_ptr = proxy_filter.get();
+    proxy_filter->add_skip_response_header("X-Async-Skip");
+    proxy.router().use(move(proxy_filter));
+    ASSERT_TRUE(proxy.start());
+
+    io_context client_ctx;
+    http_client client(client_ctx);
+    const string url = "http://127.0.0.1:" + to_string(proxy.port().value()) + "/async";
+    for (int i = 0; i < 4; ++i) {
+        auto response = client.get(url);
+        ASSERT_TRUE(response.is_success());
+        EXPECT_EQ(response.body, "async-pong");
+        EXPECT_EQ(response.header("X-Async-Backend"), "yes");
+        EXPECT_TRUE(response.header("X-Async-Skip").empty());
+    }
+
+    const auto stats = proxy_filter_ptr->stats();
+    EXPECT_EQ(stats.async_requests, 4u);
+    EXPECT_EQ(stats.requests, 4u);
+    EXPECT_GE(stats.async_connections, 1u);
+    EXPECT_EQ(stats.async_errors, 0u);
+
+    client.close();
+    proxy_filter_ptr->close_idle_connections();
+    proxy.stop();
+    backend.stop();
+}
+
+
+TEST_F(ReverseProxyIntegrationTest, AsyncRemoteProxyConcurrentClients) {
+    io_context backend_ctx;
+    http_server backend(ports(0), backend_ctx, 4);
+    backend.enable_async_http1 = true;
+    backend.max_keep_alive_requests = 0;
+    backend.router().get("/async", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.set_header("X-Async-Skip", "hidden");
+        res.body = "async-pong";
+    });
+    ASSERT_TRUE(backend.start());
+
+    io_context proxy_ctx;
+    http_server proxy(ports(0), proxy_ctx, 4);
+    proxy.enable_async_http1 = true;
+    proxy.max_keep_alive_requests = 0;
+    auto proxy_filter = make_unique<reverse_proxy_filter>(proxy_ctx, "127.0.0.1", backend.port());
+    proxy_filter->raw_response_passthrough = true;
+    proxy_filter->add_skip_response_header("X-Async-Skip");
+    proxy.router().use(move(proxy_filter));
+    ASSERT_TRUE(proxy.start());
+
+    const string url = "http://127.0.0.1:" + to_string(proxy.port().value()) + "/async";
+    vector<thread> clients;
+    clients.reserve(8);
+    atomic<int> failures{0};
+    for (int i = 0; i < 8; ++i) {
+        clients.emplace_back([url, &failures] {
+            io_context client_ctx;
+            http_client client(client_ctx);
+            for (int j = 0; j < 200; ++j) {
+                auto response = client.get(url);
+                if (!response.is_success() || response.body != "async-pong") {
+                    ++failures;
+                }
+            }
+            client.close();
+        });
+    }
+    for (auto& t: clients) {
+        t.join();
+    }
+    EXPECT_EQ(failures.load(), 0);
+
+    proxy.stop();
+    backend.stop();
+}
+
+TEST_F(ReverseProxyIntegrationTest, AsyncRemoteProxyForwardsPostBodyAndRawResponse) {
+    io_context backend_ctx;
+    http_server backend(ports(0), backend_ctx, 1);
+    backend.max_keep_alive_requests = 0;
+    backend.router().post("/echo", [](http_request& req, http_response& res) {
+        res.status = http_status::ok;
+        res.set_header("X-Echo-Length", to_string(req.body.size()));
+        res.body = req.body;
+    });
+    ASSERT_TRUE(backend.start());
+
+    io_context proxy_ctx;
+    http_server proxy(ports(0), proxy_ctx, 1);
+    proxy.enable_async_http1 = true;
+    auto proxy_filter = make_unique<reverse_proxy_filter>(proxy_ctx, "127.0.0.1", backend.port());
+    auto* proxy_filter_ptr = proxy_filter.get();
+    proxy_filter->raw_response_passthrough = true;
+    proxy.router().use(move(proxy_filter));
+    ASSERT_TRUE(proxy.start());
+
+    io_context client_ctx;
+    http_client client(client_ctx);
+    const string url = "http://127.0.0.1:" + to_string(proxy.port().value()) + "/echo";
+    for (int i = 0; i < 3; ++i) {
+        const string body = "payload-" + to_string(i);
+        auto response = client.post(url, body);
+        ASSERT_TRUE(response.is_success());
+        EXPECT_EQ(response.body, body);
+        EXPECT_EQ(response.header("X-Echo-Length"), to_string(body.size()));
+    }
+
+    client.close();
+    proxy_filter_ptr->close_idle_connections();
+    proxy.stop();
+    backend.stop();
+}
+
+TEST_F(ReverseProxyIntegrationTest, DirectBackendBypassesNetwork) {
+    io_context proxy_ctx;
+    http_server proxy(ports(0), proxy_ctx, 1);
+    auto proxy_filter = make_unique<reverse_proxy_filter>(proxy_ctx);
+    proxy_filter->direct_backend = [](http_request&, http_response& response) {
+        response.status = http_status::ok;
+        response.set_header("X-Direct-Backend", "1");
+        response.body = "direct-body";
+    };
+    auto* proxy_filter_ptr = proxy_filter.get();
+    proxy.router().use(move(proxy_filter));
+    ASSERT_TRUE(proxy.start());
+
+    io_context client_ctx;
+    http_client client(client_ctx);
+    const string url = "http://127.0.0.1:" + to_string(proxy.port().value()) + "/direct";
+    auto response = client.get(url);
+    ASSERT_TRUE(response.is_success());
+    EXPECT_EQ(response.body, "direct-body");
+    EXPECT_EQ(response.header("X-Direct-Backend"), "1");
+    EXPECT_EQ(proxy_filter_ptr->stats().direct_requests, 1u);
+
+    client.close();
+    proxy.stop();
+}
+
 TEST_F(ReverseProxyIntegrationTest, NonMatchingPathBypasses) {
     reverse_proxy_filter proxy(ctx_);
     proxy.set_path_prefix("/api/");
@@ -2021,6 +2282,90 @@ TEST_F(HttpServerStatusIntegration, NoContentResponseHasNoBody) {
     EXPECT_TRUE(response.starts_with("HTTP/1.1 204 No Content\r\n"));
     EXPECT_TRUE(response.ends_with("\r\n\r\n"));
     EXPECT_FALSE(response.contains("must not be sent"));
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, LazySessionIsCreatedOnlyWhenAccessed) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.router().get("/stateless", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.body = "stateless";
+    });
+    server.router().get("/stateful", [](http_request& req, http_response& res) {
+        http_session* session = req.session;
+        session->set("hit", "1");
+        res.status = http_status::ok;
+        res.body = "stateful";
+    });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    http_client client(client_ctx);
+    const string base_url = "http://127.0.0.1:" + to_string(port.value());
+
+    auto stateless_response = client.get(base_url + "/stateless");
+    ASSERT_TRUE(stateless_response.is_success());
+    EXPECT_FALSE(stateless_response.has_header("Set-Cookie"));
+
+    auto stateful_response = client.get(base_url + "/stateful");
+    ASSERT_TRUE(stateful_response.is_success());
+    EXPECT_TRUE(stateful_response.has_header("Set-Cookie"));
+
+    client.close();
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, SequentialNewConnectionsAreAcceptedPromptly) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.router().get("/ping", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.body = "pong";
+    });
+    ASSERT_TRUE(server.start());
+
+    const auto begin = steady_clock::now();
+    for (int i = 0; i < 8; ++i) {
+        io_context client_ctx;
+        http_client client(client_ctx);
+        auto response = client.get("http://127.0.0.1:" + to_string(port.value()) + "/ping");
+        ASSERT_TRUE(response.is_success());
+        EXPECT_EQ(response.body, "pong");
+    }
+    const auto elapsed_ms = duration<double, milli>(steady_clock::now() - begin).count();
+    EXPECT_LT(elapsed_ms, 800.0);
+
+    server.stop();
+}
+
+TEST_F(HttpServerStatusIntegration, PipelinedRequestsAreAnsweredInOneConnection) {
+    const ports port = allocate_port();
+    http_server server(port, ctx_, 1);
+    server.router().get("/ping", [](http_request&, http_response& res) {
+        res.status = http_status::ok;
+        res.body = "pong";
+    });
+    ASSERT_TRUE(server.start());
+
+    io_context client_ctx;
+    tcp_client client(client_ctx);
+    ASSERT_TRUE(client.connect("127.0.0.1", port));
+    const string request = "GET /ping HTTP/1.1\r\nHost: test\r\nConnection: keep-alive\r\n\r\n";
+    ASSERT_TRUE(client.send_all((request + request + request).view()));
+
+    string received;
+    char buffer[4096];
+    while (received.find("HTTP/1.1 200") == string::npos ||
+           received.find("HTTP/1.1 200", received.find("HTTP/1.1 200") + 1) == string::npos ||
+           received.find("HTTP/1.1 200", received.find("HTTP/1.1 200", received.find("HTTP/1.1 200") + 1) + 1) ==
+                   string::npos) {
+        const ssize_t n = client.receive(buffer, sizeof(buffer));
+        ASSERT_GT(n, 0);
+        received.append(buffer, static_cast<size_t>(n));
+    }
+
+    client.disconnect();
     server.stop();
 }
 

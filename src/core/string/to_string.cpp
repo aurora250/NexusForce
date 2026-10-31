@@ -181,7 +181,7 @@ namespace {
         wider.reserve(digits.size() + 1);
         wider += '1';
         wider += digits;
-        digits = _NEFORCE move(wider);
+        digits = move(wider);
     }
 
     bool float_round_up(const string& digits, const size_t drop, const bool sticky) {

@@ -594,13 +594,17 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
             if (body_received < meta.content_length) {
                 return none;
             }
-        } else if (meta.chunked) {
+            meta.body.assign(response_data.data() + body_start, static_cast<size_t>(meta.content_length));
+            return meta;
+        }
+
+        if (meta.chunked) {
             while (true) {
                 if (response_data.find("0\r\n\r\n", body_start) != string::npos) {
                     break;
                 }
                 if (response_data.size() >= config_.max_response_size.bytes()) {
-                    break;
+                    return none;
                 }
 
                 const ssize_t n = client_.receive(buffer.data(), buffer.size());
@@ -609,24 +613,26 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
                 }
                 response_data.append(buffer.data(), n);
             }
-        } else {
-            while (response_data.size() < config_.max_response_size.bytes()) {
-                const ssize_t n = client_.receive(buffer.data(), buffer.size());
-                if (n <= 0) {
-                    break;
-                }
-                response_data.append(buffer.data(), n);
-            }
-            if (response_data.size() >= config_.max_response_size.bytes()) {
+            string decoded;
+            if (!parse_chunked_body(response_data.view(body_start), decoded)) {
                 return none;
             }
+            meta.body = move(decoded);
+            return meta;
         }
 
-        http_client_response final_response;
-        if (!parse_response(response_data.view(), final_response, request_host, request_path)) {
+        while (response_data.size() < config_.max_response_size.bytes()) {
+            const ssize_t n = client_.receive(buffer.data(), buffer.size());
+            if (n <= 0) {
+                break;
+            }
+            response_data.append(buffer.data(), n);
+        }
+        if (response_data.size() >= config_.max_response_size.bytes()) {
             return none;
         }
-        return final_response;
+        meta.body.assign(response_data.data() + body_start, response_data.size() - body_start);
+        return meta;
 
     } catch (const exception& e) {
         if (error_callback_) {
@@ -661,8 +667,8 @@ bool http_client::ensure_connected(const string& host, const ports port, const b
     }
 }
 
-bool http_client::prepare_connection(const http_client_request& request) {
-    const bool need_ssl = (request.scheme == "https");
+bool http_client::prepare_connection(const string& scheme, const string& host, const ports port) {
+    const bool need_ssl = scheme == "https";
     if (need_ssl && !client_.has_ssl_context()) {
         if (client_.is_connected()) {
             client_.disconnect();
@@ -671,7 +677,7 @@ bool http_client::prepare_connection(const http_client_request& request) {
         client_.set_verify_peer(config_.verify_ssl);
         client_.set_ssl_context(move(ctx));
     }
-    return ensure_connected(request.host, request.port, need_ssl);
+    return ensure_connected(host, port, need_ssl);
 }
 
 milliseconds http_client::retry_backoff(const uint16_t attempt, const http_client_response& response) const {
@@ -1496,6 +1502,292 @@ bool http_client::download_file(const string& url, path output, const bool is_bi
         }
         return false;
     }
+}
+
+string http_client::build_fast_request(const http_client_request& req) const {
+    const bool use_ssl = req.scheme == "https";
+    string request_str;
+    request_str.reserve(512 + req.path.size() + req.body.size());
+    request_str += req.method.method();
+    request_str += " ";
+    request_str += req.path;
+    request_str += " ";
+    request_str += req.version;
+    request_str += "\r\nHost: ";
+    request_str += req.host;
+    const bool default_port = (use_ssl && req.port == 443) || (!use_ssl && req.port == 80);
+    if (!default_port) {
+        request_str += ":";
+        request_str += to_string(req.port.value());
+    }
+    request_str += "\r\n";
+
+    for (const auto& kv: req.headers) {
+        const auto& key = kv.first;
+        if (key.compare_ignore_case("host") == 0 || key.compare_ignore_case("cookie") == 0 ||
+            key.compare_ignore_case("content-length") == 0) {
+            continue;
+        }
+        request_str += key;
+        request_str += ": ";
+        request_str += kv.second;
+        request_str += "\r\n";
+    }
+    if (!req.body.empty()) {
+        request_str += "Content-Length: ";
+        request_str += to_string(req.body.size());
+        request_str += "\r\n";
+    }
+    request_str += "Connection: keep-alive\r\n\r\n";
+    if (!req.body.empty()) {
+        request_str += req.body;
+    }
+
+    return request_str;
+}
+
+http_client_raw_response http_client::read_raw_response(const bool head) {
+    http_client_raw_response result;
+    string data;
+    data.reserve(1024);
+    thread_local vector<char> buffer;
+    if (buffer.size() < config_.buffer_size.bytes()) {
+        buffer.resize(config_.buffer_size.bytes());
+    }
+
+    size_t header_end = string::npos;
+    while (header_end == string::npos) {
+        const ssize_t n = client_.receive(buffer.data(), buffer.size());
+        if (n <= 0) {
+            return result;
+        }
+        data.append(buffer.data(), static_cast<size_t>(n));
+        header_end = data.find("\r\n\r\n");
+        if (header_end == string::npos && data.size() > config_.max_response_size.bytes()) {
+            return result;
+        }
+    }
+
+    const size_t body_start = header_end + 4;
+    bool chunked = false;
+    bool close_after = false;
+    bool has_content_length = false;
+    uint64_t content_length = 0;
+    int status_code = 0;
+
+    const string_view head_block(data.data(), header_end);
+    size_t line_end = head_block.find("\r\n");
+    if (line_end == string::npos) {
+        return result;
+    }
+    const string_view status_line = head_block.head(line_end);
+    const size_t first_space = status_line.find(' ');
+    if (first_space != string::npos) {
+        const size_t second_space = status_line.find(' ', first_space + 1);
+        const string_view code_text = second_space == string::npos
+                                              ? status_line.tail(first_space + 1)
+                                              : status_line.substr(first_space + 1, second_space - first_space - 1);
+        try {
+            status_code = static_cast<int>(uinteger16::parse(code_text).value());
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (const exception& e) {
+            NEFORCE_REPORT_EXCEPTION(e);
+        }
+    }
+
+    size_t pos = line_end + 2;
+    while (pos < head_block.size()) {
+        const size_t next = head_block.find("\r\n", pos);
+        const string_view line =
+                head_block.substr(pos, next == string_view::npos ? head_block.size() - pos : next - pos);
+        if (line.empty()) {
+            break;
+        }
+        const size_t colon = line.find(':');
+        if (colon != string_view::npos) {
+            const string_view name = line.head(colon).trim();
+            const string_view value = line.tail(colon + 1).trim();
+            if (name.compare_ignore_case("content-length") == 0) {
+                try {
+                    content_length = uinteger64::parse(value).value();
+                    has_content_length = true;
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (const exception& e) {
+                    NEFORCE_REPORT_EXCEPTION(e);
+                }
+            } else if (name.compare_ignore_case("transfer-encoding") == 0) {
+                chunked = value.contains("chunked");
+            } else if (name.compare_ignore_case("connection") == 0) {
+                close_after = string(value).lowercase().contains("close");
+            }
+        }
+        pos = next == string_view::npos ? head_block.size() : next + 2;
+    }
+
+    result.keep_alive = !close_after;
+    const bool no_body = head || status_code == 204 || status_code == 304 || (status_code >= 100 && status_code < 200);
+
+    if (no_body) {
+        result.data = move(data);
+        return result;
+    }
+
+    if (chunked) {
+        const auto chunked_complete = [&data, body_start]() {
+            size_t pos = body_start;
+            for (;;) {
+                const size_t eol = data.find("\r\n", pos);
+                if (eol == string::npos) {
+                    return false;
+                }
+                string_view line(data.data() + pos, eol - pos);
+                const size_t semicolon = line.find(';');
+                if (semicolon != string_view::npos) {
+                    line = line.head(semicolon);
+                }
+                size_t size = 0;
+                try {
+                    size = hexadecimal::parse(line.trim()).value();
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (const exception&) {
+                    return false;
+                }
+                pos = eol + 2;
+                if (size == 0) {
+                    if (data.size() < pos + 2) {
+                        return false;
+                    }
+                    if (data.compare(pos, 2, "\r\n") == 0) {
+                        return true;
+                    }
+                    return data.find("\r\n\r\n", pos) != string::npos;
+                }
+                if (size > data.size() - pos || data.size() - pos - size < 2) {
+                    return false;
+                }
+                pos += size + 2;
+            }
+        };
+
+        while (!chunked_complete()) {
+            if (data.size() > config_.max_response_size.bytes()) {
+                return result;
+            }
+            const ssize_t n = client_.receive(buffer.data(), buffer.size());
+            if (n <= 0) {
+                return result;
+            }
+            data.append(buffer.data(), static_cast<size_t>(n));
+        }
+        result.data = move(data);
+        return result;
+    }
+
+    if (has_content_length) {
+        if (content_length > config_.max_response_size.bytes()) {
+            return result;
+        }
+        while (data.size() - body_start < content_length) {
+            const ssize_t n = client_.receive(buffer.data(), buffer.size());
+            if (n <= 0) {
+                return result;
+            }
+            data.append(buffer.data(), static_cast<size_t>(n));
+        }
+        data.resize(body_start + static_cast<size_t>(content_length));
+        result.data = move(data);
+        return result;
+    }
+
+    result.keep_alive = false;
+    while (data.size() < config_.max_response_size.bytes()) {
+        const ssize_t n = client_.receive(buffer.data(), buffer.size());
+        if (n <= 0) {
+            break;
+        }
+        data.append(buffer.data(), static_cast<size_t>(n));
+    }
+    if (data.size() >= config_.max_response_size.bytes()) {
+        return http_client_raw_response{};
+    }
+    result.data = move(data);
+    return result;
+}
+
+http_client_raw_response http_client::request_raw(const http_client_request& req) {
+    if (!prepare_connection(req)) {
+        return http_client_raw_response{};
+    }
+
+    const string request_str = build_fast_request(req);
+    time_point send_start;
+    if (!send_request(request_str.view(), send_start)) {
+        client_.disconnect();
+        return http_client_raw_response{};
+    }
+
+    auto result = read_raw_response(req.method.is_head());
+    last_activity_ = steady_clock::now();
+    if (!result.keep_alive) {
+        client_.disconnect();
+    }
+    return result;
+}
+
+http_client_raw_response http_client::request_raw(const string& scheme, const string& host, const ports port,
+                                                  const string_view raw_request, const bool head) {
+    http_client_raw_response result;
+    if (!prepare_connection(scheme, host, port)) {
+        return result;
+    }
+
+    time_point send_start;
+    if (!send_request(raw_request, send_start)) {
+        client_.disconnect();
+        return result;
+    }
+
+    result = read_raw_response(head);
+    last_activity_ = steady_clock::now();
+    if (!result.keep_alive) {
+        client_.disconnect();
+    }
+    return result;
+}
+
+http_client_response http_client::request_fast(const http_client_request& req) {
+    http_client_response response;
+    if (!prepare_connection(req)) {
+        response.status = http_status::internal_server_error;
+        response.status_message = "Connection failed";
+        return response;
+    }
+
+    const string request_str = build_fast_request(req);
+
+    time_point send_start;
+    if (!send_request(request_str.view(), send_start)) {
+        response.status = http_status::internal_server_error;
+        response.status_message = "Send failed";
+        client_.disconnect();
+        return response;
+    }
+
+    time_point receive_start;
+    auto received = read_response(receive_start, req.host, req.path, !req.method.is_head());
+    if (!received) {
+        client_.disconnect();
+        response.status = http_status::internal_server_error;
+        response.status_message = "Receive/Parse failed";
+        return response;
+    }
+
+    response = move(*received);
+    last_activity_ = steady_clock::now();
+    if (string(response.header("Connection")).lowercase().contains("close")) {
+        client_.disconnect();
+    }
+    return response;
 }
 
 http_client_response http_client::request(http_client_request req) { return do_request(move(req), 0); }

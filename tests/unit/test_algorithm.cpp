@@ -4,6 +4,7 @@
 #include <NeForce/core/container/list.hpp>
 #include <NeForce/core/container/vector.hpp>
 #include <NeForce/core/iterator/insert_iterator.hpp>
+#include <NeForce/core/string/format.hpp>
 #include <NeForce/core/string/string.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
@@ -3285,4 +3286,77 @@ TEST(TimSortTest, ExactlyMultiplesOfMinRun) {
     sort(expected.begin(), expected.end());
     tim_sort(v.begin(), v.end());
     EXPECT_EQ(v, expected);
+}
+
+TEST(TimSortTest, NonTrivialStrings) {
+    for (int n = 0; n <= 200; ++n) {
+        vector<string> values;
+        values.reserve(static_cast<size_t>(n));
+        for (int i = 0; i < n; ++i) {
+            values.push_back(format("{}-{}", (i * 37) % 17, i));
+        }
+        tim_sort(values.begin(), values.end(), [](const string& left, const string& right) { return left < right; });
+        for (int i = 1; i < n; ++i) {
+            ASSERT_LE(values[i - 1], values[i]) << "n=" << n << " i=" << i;
+        }
+    }
+}
+
+TEST(InplaceMergeTest, NonTrivialStrings) {
+    vector<string> values;
+    for (int i = 0; i < 32; ++i) {
+        values.push_back(format("{}-{}", (i * 37) % 17, i));
+    }
+    for (int i = 0; i < 3; ++i) {
+        values.push_back(format("{}-{}", (i * 11 + 3) % 17, 32 + i));
+    }
+    insertion_sort(values.begin(), values.begin() + 32,
+                   [](const string& left, const string& right) { return left < right; });
+    insertion_sort(values.begin() + 32, values.end(),
+                   [](const string& left, const string& right) { return left < right; });
+    inplace_merge(values.begin(), values.begin() + 32, values.end(),
+                  [](const string& left, const string& right) { return left < right; });
+    for (size_t i = 1; i < values.size(); ++i) {
+        ASSERT_LE(values[i - 1], values[i]) << "i=" << i;
+    }
+}
+
+TEST(CopyBackwardTest, NonTrivialStrings) {
+    vector<string> values;
+    for (int i = 0; i < 32; ++i) {
+        values.push_back(format("value-{}", i));
+    }
+    const auto expected = values;
+    copy_backward(values.begin(), values.begin() + 31, values.end());
+    EXPECT_EQ(values[0], expected[0]);
+    for (size_t i = 1; i < values.size(); ++i) {
+        EXPECT_EQ(values[i], expected[i - 1]) << "i=" << i;
+    }
+}
+
+
+TEST(CopyTest, NonTrivialStrings) {
+    vector<string> source;
+    vector<string> destination;
+    for (int i = 0; i < 16; ++i) {
+        source.push_back(format("value-{}", i));
+    }
+    destination.resize(source.size());
+    copy(source.begin(), source.end(), destination.begin());
+    EXPECT_EQ(source, destination);
+}
+
+
+TEST(TimSortTest, GallopingBlocks) {
+    vector<int> values;
+    for (int block = 0; block < 80; ++block) {
+        const int base = (block % 2 == 0) ? 0 : 10000;
+        for (int i = 0; i < 125; ++i) {
+            values.push_back(base + block * 125 + i);
+        }
+    }
+    auto expected = values;
+    sort(expected.begin(), expected.end());
+    tim_sort(values.begin(), values.end());
+    EXPECT_EQ(values, expected);
 }

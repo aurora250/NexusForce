@@ -21,6 +21,7 @@
 
 #include "NeForce/core/async/condition_variable.hpp"
 #include "NeForce/core/async/io_context.hpp"
+#include "NeForce/core/async/shared_mutex.hpp"
 #include "NeForce/network/http/http_constants.hpp"
 #include "NeForce/network/http/http_router.hpp"
 #include "NeForce/network/http/session_store.hpp"
@@ -29,6 +30,9 @@
 #include "NeForce/network/tcp/tcp_server.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
+
+class http2_connection;
+class async_http1_session;
 
 /**
  * @addtogroup HTTP HTTP
@@ -83,7 +87,8 @@ public:
      */
     struct NEFORCE_API session_manager {
         unordered_map<string, http_session> sessions_; ///< 会话存储
-        mutable mutex mutex_;                          ///< 会话互斥锁
+        mutable shared_mutex mutex_;                   ///< 会话表锁
+        mutex cleanup_mutex_;                          ///< 清理线程锁
         condition_variable cv_;                        ///< 条件变量
         atomic<bool> cleanup_running_;                 ///< 清理线程运行标志
         thread cleanup_thread_;                        ///< 清理线程
@@ -110,14 +115,14 @@ public:
     };
 
 private:
-    io_context* ctx_{nullptr};           ///< 异步 I/O 执行上下文
-    unique_ptr<tcp_server_base> server_; ///< TCP/SSL服务器
-    vector<thread> h2c_threads_;         ///< h2c升级连接的线程
-    mutable mutex h2c_mutex_;            ///< 保护h2c列表
-    http_router router_;                 ///< HTTP路由器
-    websocket_server ws_server_;         ///< WebSocket服务器
-    session_manager session_manager_;    ///< 会话管理器
-    sni_manager sni_;                    ///< SNI证书管理器
+    io_context* ctx_{nullptr};                            ///< 异步 I/O 执行上下文
+    unique_ptr<tcp_server_base> server_;                  ///< TCP/SSL服务器
+    vector<shared_ptr<http2_connection>> h2_connections_; ///< 活跃的HTTP/2连接
+    mutable mutex h2c_mutex_;                             ///< 保护h2c列表
+    http_router router_;                                  ///< HTTP路由器
+    websocket_server ws_server_;                          ///< WebSocket服务器
+    session_manager session_manager_;                     ///< 会话管理器
+    sni_manager sni_;                                     ///< SNI证书管理器
 
     http_cookie_name cookie_name_{http_cookie_name::JSESSIONID()}; ///< 会话Cookie名称
     unique_ptr<http::session_store> session_store_;                ///< 可插拔会话存储后端
@@ -127,10 +132,7 @@ private:
 
     static http_request parse_request(tcp_socket* client_socket, session_manager& manager, const http_cookie_name& name,
                                       byte_size max_header_size, byte_size max_body_size, size_t max_header_count,
-                                      milliseconds body_read_timeout);
-
-    static http_session* get_or_create_session(http_request& request, bool create, session_manager& manager,
-                                               const http_cookie_name& name);
+                                      milliseconds body_read_timeout, string& pending);
 
 public:
     byte_size max_server_header_size{16_KB}; ///< 最大请求头大小
@@ -138,10 +140,20 @@ public:
     bool enable_websocket{true};             ///< 是否启用WebSocket
     bool enable_connect{true};               ///< 是否启用CONNECT隧道
 
-    size_t max_connections_per_ip{0};      ///< 每IP最大连接数（0=不限制）
-    size_t max_header_count{100};          ///< 最大请求头数量
-    size_t max_h2c_upgrades{32};           ///< 最大h2c升级连接数
-    milliseconds body_read_timeout{30000}; ///< 请求体读取超时（毫秒）
+    /**
+     * @brief 是否启用事件驱动 HTTP/1 连接循环
+     * @note 仅对明文 TCP 连接生效；TLS 前端仍走同步循环
+     * @note `max_connections_per_ip > 0` 时回退同步循环
+     * @note 启用后 HTTP/1 CONNECT 与协议升级（WebSocket/h2c）不可用
+     */
+    bool enable_async_http1{false};
+
+    size_t max_connections_per_ip{0};        ///< 每IP最大连接数（0=不限制）
+    size_t max_header_count{100};            ///< 最大请求头数量
+    size_t max_keep_alive_requests{1000};    ///< 单连接最大keep-alive请求数（0=不限制）
+    size_t max_h2c_upgrades{32};             ///< 最大h2c升级连接数
+    uint32_t h2_max_concurrent_streams{100}; ///< HTTP/2 单连接最大并发流数
+    milliseconds body_read_timeout{30000};   ///< 请求体读取超时（毫秒）
 
     // TODO: HTTP/3 (QUIC) protocol support — integrate QUIC transport (RFC 9114) for 0-RTT, reduced head-of-line blocking
     // TODO: Configuration file support — load server settings from YAML/JSON config files (port, SSL, worker_count, limits)
@@ -152,10 +164,16 @@ public:
 private:
     unordered_map<string, function<bool(http_request&, tcp_socket*)>> upgrade_handlers_;
 
+    friend class async_http1_session;
+
+    struct async_forward_state;
+
     void handle_client(unique_ptr<tcp_socket> client_socket);
+    void handle_client_async(unique_ptr<tcp_socket> client_socket);
+    void handle_request_with_forward_async(http_request request, function<void(http_request&, http_response)> cb);
     bool try_upgrade(unique_ptr<tcp_socket>& client_socket, http_request& request);
     void handle_connect(const unique_ptr<tcp_socket>& client_socket, http_request& request);
-    void handle_request_with_forward(tcp_socket& client_socket, http_request& request, http_session* sess);
+    http_response handle_request_with_forward(http_request& request);
 
 public:
     /**

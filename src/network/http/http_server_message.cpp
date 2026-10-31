@@ -30,6 +30,28 @@ namespace {
 } // namespace
 
 
+string_view http_request::header_ci(const string_view name) const {
+    for (const auto& header: headers) {
+        if (header.first.size() != name.size()) {
+            continue;
+        }
+        bool equal = true;
+        for (size_t i = 0; i < name.size(); ++i) {
+            const auto lhs = header.first[i] >= 'A' && header.first[i] <= 'Z' ? static_cast<char>(header.first[i] + 32)
+                                                                              : header.first[i];
+            const auto rhs = name[i] >= 'A' && name[i] <= 'Z' ? static_cast<char>(name[i] + 32) : name[i];
+            if (lhs != rhs) {
+                equal = false;
+                break;
+            }
+        }
+        if (equal) {
+            return header.second.view();
+        }
+    }
+    return "";
+}
+
 string_view http_request::client_ip() const {
     const auto xff = header("X-Forwarded-For");
     if (!xff.empty()) {
@@ -182,7 +204,7 @@ string http_response::build_header_string() const {
     }
 
     if (redirect_url.empty() && !suppress_content_length && allows_body() && !has_header(http_key::Content_Length())) {
-        result += http_key::Content_Length() + ": " + _NEFORCE to_string(body.size()) + "\r\n";
+        result += http_key::Content_Length() + ": " + _NEFORCE to_string(body_view().size()) + "\r\n";
     }
 
     result += "\r\n";
@@ -192,7 +214,7 @@ string http_response::build_header_string() const {
 string http_response::to_string() const {
     string result = build_header_string();
     if (redirect_url.empty() && allows_body()) {
-        result += body;
+        result += body_view();
     }
     return result;
 }
