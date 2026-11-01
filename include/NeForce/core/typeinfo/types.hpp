@@ -84,7 +84,7 @@ using int32_t = int;
  * @typedef int64_t
  * @brief 64位有符号整数类型
  *
- * Linux为long，Windows为long long
+ * POSIX为long，Windows为long long
  */
 using int64_t =
 #ifdef NEFORCE_PLATFORM_POSIX64
@@ -115,7 +115,7 @@ using uint32_t = unsigned int;
  * @typedef uint64_t
  * @brief 64位无符号整数类型
  *
- * Linux为unsigned long，Windows为unsigned long long
+ * POSIX为unsigned long，Windows为unsigned long long
  */
 using uint64_t =
 #ifdef NEFORCE_PLATFORM_POSIX64

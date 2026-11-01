@@ -123,8 +123,12 @@ bool system_event::wait(const uint32_t timeout_ms) noexcept {
 
 bool system_event::try_wait() noexcept { return wait(0); }
 
+void* system_event::native_handle() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-void* system_event::native_handle() const noexcept { return impl_->handle_; }
+    return impl_->handle_;
+#else
+    return nullptr;
 #endif
+}
 
 NEFORCE_END_NAMESPACE__

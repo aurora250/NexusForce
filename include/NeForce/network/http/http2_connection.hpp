@@ -43,7 +43,7 @@ NEFORCE_BEGIN_HTTP__
  * 使用 io_context 驱动异步 I/O。
  * 继承 enable_shared_from_this 以支持异步回调生命周期安全。
  */
-class http2_connection : public enable_shared_from_this<http2_connection> {
+class NEFORCE_API http2_connection : public enable_shared_from_this<http2_connection> {
 public:
     using stream_handler = function<void(uint32_t stream_id, const vector<hpack_header_field>& headers,
                                          const byte_t* data, size_t data_len, bool end_stream)>;
@@ -235,6 +235,7 @@ public:
     const http2_settings& remote_settings() const noexcept { return remote_settings_; }
 
     bool is_closed() const noexcept { return closed_; }
+
     uint32_t last_stream_id() const noexcept { return last_stream_id_; }
 
     void stop();

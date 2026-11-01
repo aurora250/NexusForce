@@ -271,7 +271,7 @@ void screen::update_cell_style(string& ss, const cell& prev, const cell& next) c
         }
     }
 
-    if (next.italic ^ prev.italic) {
+    if ((next.italic ^ prev.italic) != 0) {
         ss += next.italic ? "\033[3m" : "\033[23m";
     }
 
@@ -286,15 +286,15 @@ void screen::update_cell_style(string& ss, const cell& prev, const cell& next) c
         }
     }
 
-    if (next.blink ^ prev.blink) {
+    if ((next.blink ^ prev.blink) != 0) {
         ss += next.blink ? "\033[5m" : "\033[25m";
     }
 
-    if (next.inverted ^ prev.inverted) {
+    if ((next.inverted ^ prev.inverted) != 0) {
         ss += next.inverted ? "\033[7m" : "\033[27m";
     }
 
-    if (next.strikethrough ^ prev.strikethrough) {
+    if ((next.strikethrough ^ prev.strikethrough) != 0) {
         ss += next.strikethrough ? "\033[9m" : "\033[29m";
     }
 

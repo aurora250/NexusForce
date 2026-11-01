@@ -1270,8 +1270,8 @@ bool file::prefetch(const size_type hint_size) const {
         const ::HMODULE h_kernel32 = ::GetModuleHandleW(L"kernel32.dll");
         if (h_kernel32 != nullptr) {
             using PFN_PrefetchVirtualMemory =
-                    ::BOOL(__stdcall*)(::HANDLE h_process, ::ULONG_PTR number_of_entries,
-                                       ::PWIN32_MEMORY_RANGE_ENTRY virtual_addresses, ::ULONG flags);
+                    ::BOOL(WINAPI*)(::HANDLE h_process, ::ULONG_PTR number_of_entries,
+                                    ::PWIN32_MEMORY_RANGE_ENTRY virtual_addresses, ::ULONG flags);
 
             static auto pfn_prefetch_virtual_memory =
                     reinterpret_cast<PFN_PrefetchVirtualMemory>(::GetProcAddress(h_kernel32, "PrefetchVirtualMemory"));

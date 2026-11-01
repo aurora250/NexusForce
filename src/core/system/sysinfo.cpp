@@ -737,7 +737,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         const ::HMODULE ntdll = ::GetModuleHandleW(L"ntdll.dll");
         if (ntdll != nullptr) {
-            using RtlGetVersionPtr = ::NTSTATUS(__stdcall*)(::LPOSVERSIONINFOW);
+            using RtlGetVersionPtr = ::NTSTATUS(WINAPI*)(::LPOSVERSIONINFOW);
             const auto RtlGetVersion = reinterpret_cast<RtlGetVersionPtr>(::GetProcAddress(ntdll, "RtlGetVersion"));
 
             ::OSVERSIONINFOW version_info = {sizeof(version_info)};

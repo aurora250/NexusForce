@@ -118,13 +118,12 @@ public:
      */
     NEFORCE_NODISCARD type event_type() const noexcept { return type_; }
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
     /**
      * @brief 获取原生事件句柄
      * @return 原生句柄
+     * @note 仅 Windows 提供事件句柄
      */
     NEFORCE_NODISCARD void* native_handle() const noexcept;
-#endif
 };
 
 /** @} */ // SystemEvent

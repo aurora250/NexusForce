@@ -45,7 +45,7 @@ namespace {
         }
     }
 
-    ::BOOL __stdcall windows_handler(unsigned long event_id) {
+    ::BOOL WINAPI windows_handler(unsigned long event_id) {
         if (g_notify_event != nullptr) {
             system_signal::instance().send_signal(map_win_event(event_id));
         }

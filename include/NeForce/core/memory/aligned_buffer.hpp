@@ -53,7 +53,7 @@ struct aligned_buffer : aligned_storage<sizeof(T), alignof(T)> {
      * @brief 获取缓冲区的原始地址
      * @return 指向缓冲区内存的void指针
      */
-    void* addr() noexcept { return static_cast<void*>(&storage); }
+    NEFORCE_NODISCARD void* addr() noexcept { return static_cast<void*>(&storage); }
 
     /**
      * @brief 获取缓冲区的原始常量地址
@@ -67,13 +67,13 @@ struct aligned_buffer : aligned_storage<sizeof(T), alignof(T)> {
      *
      * 将原始内存解释为类型T的指针，但不构造对象。
      */
-    T* ptr() noexcept { return static_cast<T*>(addr()); }
+    NEFORCE_NODISCARD T* ptr() noexcept { return static_cast<T*>(addr()); }
 
     /**
      * @brief 获取缓冲区的类型化常量指针
      * @return 指向缓冲区内存的const T类型指针
      */
-    const T* ptr() const noexcept { return static_cast<const T*>(addr()); }
+    NEFORCE_NODISCARD const T* ptr() const noexcept { return static_cast<const T*>(addr()); }
 };
 
 /** @} */ // AlignedBuffer
