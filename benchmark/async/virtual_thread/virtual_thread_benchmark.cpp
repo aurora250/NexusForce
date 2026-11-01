@@ -157,7 +157,7 @@ namespace {
             suspend_always initial_suspend() noexcept { return {}; }
             suspend_always final_suspend() noexcept { return {}; }
             void return_void() noexcept {}
-            void unhandled_exception() { terminate(); }
+            void unhandled_exception() { neforce::terminate(); }
         };
 
         coroutine_handle<promise_type> handle;

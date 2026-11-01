@@ -189,9 +189,9 @@ private:
  * @brief 像素/字符单元
  */
 struct cell {
-    cell_text character;        ///< 显示的字形
-    _NEFORCE color foreground;  ///< 前景色
-    _NEFORCE color background;  ///< 背景色
+    cell_text character;            ///< 显示的字形
+    _NEFORCE color foreground;      ///< 前景色
+    _NEFORCE color background;      ///< 背景色
     uint16_t bold : 1;              ///< 粗体
     uint16_t dim : 1;               ///< 暗色
     uint16_t italic : 1;            ///< 斜体

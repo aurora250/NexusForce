@@ -649,7 +649,12 @@ namespace {
         if (descriptor >= 0) {
             const bool sent = ::syscall(SYS_pidfd_send_signal, descriptor, native_signal, nullptr, 0) == 0;
             ::close(descriptor);
-            return sent;
+            if (sent) {
+                return true;
+            }
+            // Fall through to kill(2): pidfd_open can succeed while pidfd_send_signal is unavailable
+            // (old kernels, seccomp filters, or a tracer that does not implement the syscall).
+            // Reporting failure there would drop the signal even though kill(2) can still deliver it.
         }
 #    endif
         return ::kill(process_id, native_signal) == 0;
