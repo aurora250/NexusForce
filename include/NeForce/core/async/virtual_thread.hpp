@@ -134,8 +134,6 @@ class NEFORCE_API virtual_thread_scheduler {
 private:
     static constexpr size_t timer_batch_size = 32; ///< 单次从定时器堆转入就绪队列的协程上限
 
-    inline static thread_local bool worker_context_{false}; ///< 当前线程是否为调度器工作线程
-
     lock_free_queue<coroutine_handle<>> ready_queue_;                         ///< 就绪协程无锁队列
     heap_timer timers_;                                                       ///< 定时器最小堆
     atomic<int64_t> pending_{0};                                              ///< 已入队未取出的协程数
@@ -143,6 +141,8 @@ private:
     atomic<int32_t> sleepers_{0};                                             ///< 停驻在 wake_word_ 上的工作线程数
     vector<thread> workers_;                                                  ///< 工作线程池
     atomic<bool> shutdown_{false};                                            ///< 关闭标志
+
+    static bool& worker_context() noexcept;
 
     void bump_wake_word(const int64_t count) noexcept {
         atomic_fetch_add(&wake_word_, static_cast<platform_wait_t>(count), memory_order_seq_cst);
@@ -158,7 +158,7 @@ private:
     void publish_ready(const int64_t count) noexcept {
         const int64_t pending = pending_.fetch_add(count, memory_order_seq_cst) + count;
         bump_wake_word(count);
-        if (count > 1 || !worker_context_ || pending > 1) {
+        if (count > 1 || !worker_context() || pending > 1) {
             notify_waiters(count > 1);
         }
     }

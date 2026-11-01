@@ -520,10 +520,11 @@ void http2_connection::send_response(uint32_t stream_id, const vector<hpack_head
         }
     }
     const bool peer_multiplexes = remote_settings_.max_concurrent_streams() > 1;
-    if (write_batch_depth_.load(memory_order_relaxed) == 0 || body.size() >= 16UL * 1024UL || !peer_multiplexes) {
+    if (write_batch_depth_.load(memory_order_relaxed) == 0 || body.size() >= static_cast<size_t>(16UL) * 1024UL ||
+        !peer_multiplexes) {
         flush_writes();
     } else {
-        flush_writes_over(1024UL * 1024UL);
+        flush_writes_over(static_cast<size_t>(1024UL) * 1024UL);
     }
 }
 

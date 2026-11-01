@@ -12,7 +12,7 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
 namespace {
-    constexpr size_t async_backend_buffer_size = 16UL * 1024UL;
+    constexpr size_t async_backend_buffer_size = static_cast<size_t>(16UL) * 1024UL;
 
     NEFORCE_NODISCARD bool ascii_icontains(const string_view haystack, const string_view needle) noexcept {
         if (needle.size() > haystack.size()) {
@@ -279,7 +279,7 @@ namespace {
             size_t max_connections{0};
             size_t max_queue{0};
             size_t max_idle{32};
-            size_t max_response_size{64UL * 1024UL * 1024UL};
+            size_t max_response_size{static_cast<size_t>(64UL) * 1024UL * 1024UL};
             bool verify_ssl{true};
             milliseconds connect_timeout{5000};
             milliseconds receive_timeout{30000};
@@ -512,7 +512,7 @@ namespace {
                 for (;;) {
                     const size_t header_end = buffer_.find("\r\n\r\n");
                     if (header_end == string::npos) {
-                        if (buffer_.size() > 64UL * 1024UL) {
+                        if (buffer_.size() > static_cast<size_t>(64UL) * 1024UL) {
                             fail(error_code(static_cast<int>(errc::value_too_large), error_category::system()));
                             return;
                         }

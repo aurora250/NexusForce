@@ -8,6 +8,9 @@
 
 #include "NeForce/core/exception/errc.hpp"
 #include "NeForce/core/file/path.hpp"
+#ifdef exception_code
+#    undef exception_code
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -127,7 +130,7 @@ public:
      * @brief 平台原生的转储格式
      * @return Windows 返回 format::minidump，其余平台返回 format::elf_core
      */
-    NEFORCE_NODISCARD NEFORCE_API static crash_dump::format native_format() noexcept;
+    NEFORCE_NODISCARD static crash_dump::format native_format() noexcept;
 
     /**
      * @brief 当前平台是否内置了转储写入器
@@ -138,7 +141,7 @@ public:
      *
      * 等价于 NEFORCE_SUPPORT_NATIVE_DUMP。
      */
-    NEFORCE_NODISCARD NEFORCE_API static bool native_supported() noexcept;
+    NEFORCE_NODISCARD static bool native_supported() noexcept;
 
     /**
      * @brief 安装崩溃处理器
@@ -152,7 +155,7 @@ public:
      *       Windows 上未处理异常会交回系统默认处理，terminate 路径以退出码 3 结束
      * @warning 应在创建业务线程之前调用；处理器安装期间不要与崩溃并发执行
      */
-    NEFORCE_API static bool install_handlers(const crash_dump::options& options) noexcept;
+    static bool install_handlers(const crash_dump::options& options) noexcept;
 
     /**
      * @brief 卸载崩溃处理器
@@ -160,13 +163,13 @@ public:
      * 恢复安装前的 terminate 处理器、信号动作与未处理异常过滤器。
      * 未安装时调用无副作用。
      */
-    NEFORCE_API static void uninstall_handlers() noexcept;
+    static void uninstall_handlers() noexcept;
 
     /**
      * @brief 查询崩溃处理器是否已安装
      * @return 已安装返回 true
      */
-    NEFORCE_NODISCARD NEFORCE_API static bool handlers_installed() noexcept;
+    NEFORCE_NODISCARD static bool handlers_installed() noexcept;
 
     /**
      * @brief 主动写出当前进程的转储
@@ -178,7 +181,7 @@ public:
      * @note 成功后同样会调用 options.callback，进程继续运行
      * @note 该函数可在业务代码中用于诊断快照；不要求安装处理器
      */
-    NEFORCE_NODISCARD NEFORCE_API static crash_dump::result write(const crash_dump::options& options) noexcept;
+    NEFORCE_NODISCARD static crash_dump::result write(const crash_dump::options& options) noexcept;
 };
 
 

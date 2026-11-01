@@ -88,8 +88,9 @@ public:
     bool enable_thread_local_clients{true}; ///< 前端 worker 线程本地复用后端连接（仅 max_connections_per_backend=0 时）
     bool enable_async_backend{true};        ///< 是否为 async_filter 提供事件驱动后端
     size_t async_max_idle_connections{32};  ///< 异步后端连接池空闲连接上限
-    size_t async_max_response_size{64UL * 1024UL * 1024UL}; ///< 异步后端响应最大字节数
-    direct_backend_handler direct_backend;                  ///< 同进程直接后端，为空时走远程代理
+    direct_backend_handler direct_backend;  ///< 同进程直接后端，为空时走远程代理
+
+    size_t async_max_response_size{static_cast<size_t>(64UL) * 1024UL * 1024UL}; ///< 异步后端响应最大字节数
 
     /**
      * @brief 构造函数

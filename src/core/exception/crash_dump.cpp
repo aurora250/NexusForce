@@ -9,7 +9,15 @@
 #include <exception>
 #include "crash_dump_native.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <windows.h>
+#    include <winerror.h>
+#    include <handleapi.h>
+#    include <fileapi.h>
+#    include <sysinfoapi.h>
+#    include <stringapiset.h>
+#    include <errhandlingapi.h>
+#    include <timezoneapi.h>
+#    include <verrsrc.h>
+#    include <windef.h>
 #    include <DbgHelp.h>
 #    ifdef NEFORCE_COMPILER_MSVC
 #        include <intrin.h>
@@ -424,7 +432,7 @@ namespace {
         ::RtlCaptureContext(&win_context);
         ::EXCEPTION_RECORD record{};
         record.ExceptionCode = 0xE0004E46U;
-        record.ExceptionAddress = reinterpret_cast<void*>(_ReturnAddress());
+        record.ExceptionAddress = static_cast<void*>(::_ReturnAddress());
         ::EXCEPTION_POINTERS pointers{};
         pointers.ExceptionRecord = &record;
         pointers.ContextRecord = &win_context;
@@ -544,7 +552,7 @@ bool write_native_dump(const native_dump_request& request, native_dump_result& r
     ::SYSTEMTIME stamp{};
     ::GetLocalTime(&stamp);
 
-    ::HANDLE file = INVALID_HANDLE_VALUE;
+    auto* file = INVALID_HANDLE_VALUE;
     for (int attempt = 0; attempt < 32; ++attempt) {
         size_t offset = 0;
         path[0] = '\0';
@@ -591,9 +599,8 @@ bool write_native_dump(const native_dump_request& request, native_dump_result& r
         return false;
     }
 
-    ::MINIDUMP_TYPE type =
-            static_cast<::MINIDUMP_TYPE>(::MiniDumpNormal | ::MiniDumpWithThreadInfo | ::MiniDumpWithUnloadedModules |
-                                         ::MiniDumpWithProcessThreadData);
+    auto type = static_cast<::MINIDUMP_TYPE>(::MiniDumpNormal | ::MiniDumpWithThreadInfo |
+                                             ::MiniDumpWithUnloadedModules | ::MiniDumpWithProcessThreadData);
     if (request.include_memory) {
         type = static_cast<::MINIDUMP_TYPE>(type | ::MiniDumpWithDataSegs | ::MiniDumpWithIndirectlyReferencedMemory |
                                             ::MiniDumpScanMemory);
@@ -609,17 +616,49 @@ bool write_native_dump(const native_dump_request& request, native_dump_result& r
         exception_pointer = &exception_information;
     }
 
-    const ::BOOL written = ::MiniDumpWriteDump(::GetCurrentProcess(), ::GetCurrentProcessId(), file, type,
-                                               exception_pointer, nullptr, nullptr);
+    ::BOOL written = ::MiniDumpWriteDump(::GetCurrentProcess(), ::GetCurrentProcessId(), file, type, exception_pointer,
+                                         nullptr, nullptr);
+    uint64_t bytes = 0;
+    if (written != FALSE) {
+        ::LARGE_INTEGER size{};
+        if (::GetFileSizeEx(file, &size) != FALSE) {
+            bytes = static_cast<uint64_t>(size.QuadPart);
+        }
+    }
+
+    bool truncated = false;
+    if (written != FALSE && request.include_memory && request.max_file_bytes != 0 && bytes > request.max_file_bytes) {
+        // dbghelp offers no byte-level memory trimming, so a memory-bearing dump that
+        // exceeds the caller's budget falls back to a compact dump without memory.
+        ::CloseHandle(file);
+        file = ::CreateFileW(wide_path, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+        if (file == INVALID_HANDLE_VALUE) {
+            result.error = static_cast<int32_t>(::GetLastError());
+            result.file[0] = '\0';
+            return false;
+        }
+        constexpr auto compact =
+                static_cast<::MINIDUMP_TYPE>(::MiniDumpNormal | ::MiniDumpWithThreadInfo |
+                                             ::MiniDumpWithUnloadedModules | ::MiniDumpWithProcessThreadData);
+        written = ::MiniDumpWriteDump(::GetCurrentProcess(), ::GetCurrentProcessId(), file, compact, exception_pointer,
+                                      nullptr, nullptr);
+        if (written != FALSE) {
+            truncated = true;
+            bytes = 0;
+            ::LARGE_INTEGER size{};
+            if (::GetFileSizeEx(file, &size) != FALSE) {
+                bytes = static_cast<uint64_t>(size.QuadPart);
+            }
+        }
+    }
+
     if (written == FALSE) {
         result.error = static_cast<int32_t>(::GetLastError());
         result.file[0] = '\0';
     } else {
-        ::LARGE_INTEGER size{};
-        if (::GetFileSizeEx(file, &size) != FALSE) {
-            result.bytes = static_cast<uint64_t>(size.QuadPart);
-        }
+        result.bytes = bytes;
         result.written = true;
+        result.truncated = truncated;
         copy_detail(result.file, sizeof(result.file), path);
     }
     ::CloseHandle(file);

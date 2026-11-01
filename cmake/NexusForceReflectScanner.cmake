@@ -50,16 +50,29 @@ function(nexusforce_reflect_scan)
     )
 
     if(CMAKE_CROSSCOMPILING AND NOT CMAKE_CROSSCOMPILING_EMULATOR)
-        if(NOT NEXUSFORCE_HOST_NFRS)
-            # Reuse an NFRS from any native build tree of this source tree; the scanner only
-            # reads the headers, so a host binary built for any architecture works.
+        if(NOT NEXUSFORCE_HOST_NFRS AND DEFINED ENV{NEXUSFORCE_HOST_NFRS})
+            set(NEXUSFORCE_HOST_NFRS "$ENV{NEXUSFORCE_HOST_NFRS}" CACHE FILEPATH
+                "Host NFRS executable used for reflection generation when cross-compiling without an emulator"
+                FORCE)
+        endif()
+
+        if(NEXUSFORCE_HOST_NFRS)
+            if(NOT EXISTS "${NEXUSFORCE_HOST_NFRS}")
+                message(FATAL_ERROR "nexusforce_reflect_scan: NEXUSFORCE_HOST_NFRS points at a missing file: "
+                                    "${NEXUSFORCE_HOST_NFRS}")
+            endif()
+        else()
             file(GLOB __nfrs_host_candidates
                 "${CMAKE_SOURCE_DIR}/cmake-build-*/bin/*/NFRS"
+                "${CMAKE_SOURCE_DIR}/cmake-build-*/bin/*/NFRS.exe"
                 "${CMAKE_SOURCE_DIR}/build*/bin/*/NFRS"
+                "${CMAKE_SOURCE_DIR}/build*/bin/*/NFRS.exe"
+                "${CMAKE_SOURCE_DIR}/out/build/*/bin/*/NFRS"
+                "${CMAKE_SOURCE_DIR}/out/build/*/bin/*/NFRS.exe"
             )
             foreach(__nfrs_host_candidate IN LISTS __nfrs_host_candidates)
-                # The candidate must actually be executable on this host; a FreeBSD or
-                # otherwise incompatible binary reports an exec error instead of an exit code.
+                # The candidate must actually be executable on this host;
+                # a binary of the target architecture is rejected by the loader and reports an error instead of an exit code.
                 execute_process(COMMAND "${__nfrs_host_candidate}" RESULT_VARIABLE __nfrs_host_probe
                                 OUTPUT_QUIET ERROR_QUIET)
                 if(__nfrs_host_probe MATCHES "^[0-9]+$")
@@ -71,10 +84,12 @@ function(nexusforce_reflect_scan)
                 endif()
             endforeach()
         endif()
+
         if(NOT NEXUSFORCE_HOST_NFRS)
-            message(FATAL_ERROR "nexusforce_reflect_scan: cross-compiling without an emulator needs a host NFRS. "
-                                "Configure with -DNEXUSFORCE_HOST_NFRS=<host NFRS executable> "
-                                "(for example build it once with a native configuration and target NFRS).")
+            message(FATAL_ERROR "nexusforce_reflect_scan: cross-compiling without an emulator needs a host NFRS, and none "
+                                "was found in any native build tree of ${CMAKE_SOURCE_DIR}. Build one once "
+                                "(cmake --build <native build dir> --target NFRS) or pass "
+                                "-DNEXUSFORCE_HOST_NFRS=<host NFRS executable>.")
         endif()
         set(__nfrs_dependency "${NEXUSFORCE_HOST_NFRS}")
         set(__nfrs_command

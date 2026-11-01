@@ -139,7 +139,7 @@ public:
  */
 class NEFORCE_API grpc_stream_writer {
 private:
-    static constexpr size_t FLUSH_THRESHOLD = 16UL * 1024UL; ///< DATA 聚合阈值
+    static constexpr size_t FLUSH_THRESHOLD = static_cast<size_t>(16UL) * 1024UL; ///< DATA 聚合阈值
 
     http2_connection& connection_; ///< 所属 HTTP/2 连接
     uint32_t stream_id_;           ///< 目标流

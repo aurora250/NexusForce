@@ -88,8 +88,11 @@ Every supported combination is **64-bit** and supports **C++14 / 17 / 20**.
 | 18 | FreeBSD | GCC      | RISC-V       | `riscv64-unknown-freebsd`       | Tier 2       |
 
 > ¹ Clang on Windows means **ClangCL**.
+> 
 > ² RISC-V / LoongArch require GCC ≥ 13 or Clang ≥ 17; GCC on FreeBSD is recommended to be ≥ 13.
-> ³ On FreeBSD, Clang links against libc++, while GCC links against libstdc++; the two ABIs are not interchangeable, so do not mix binaries produced by them in one process.
+> 
+> ³ On FreeBSD, Clang links against libc++, while GCC links against libstdc++; 
+> the two ABIs are not interchangeable, so do not mix binaries produced by them in one process.
 
 ### Support Tiers
 

@@ -11,12 +11,24 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
+    // Windows / Linux
+    template <typename T, typename U>
+    enable_if_t<is_integral_v<T>, uint64_t> id_cast(const U id) noexcept {
+        return static_cast<uint64_t>(id);
+    }
+
+    // FreeBSD
+    template <typename T, typename U>
+    enable_if_t<!is_integral_v<T>, uint64_t> id_cast(const U id) noexcept {
+        return static_cast<uint64_t>(reinterpret_cast<uintptr_t>(id));
+    }
+
     uint16_t generate_dns_client_id() {
         thread_local random_mt tls_random;
         thread_local bool seeded = false;
         if (!seeded) {
             const auto seed = static_cast<uint64_t>(steady_clock::now().since_epoch().count()) ^
-                              static_cast<uint64_t>(reinterpret_cast<uintptr_t>(this_thread::id().native_handle()));
+                              id_cast<thread::id::native_id_type>(this_thread::id().native_handle());
             tls_random.set_seed(seed);
             seeded = true;
         }

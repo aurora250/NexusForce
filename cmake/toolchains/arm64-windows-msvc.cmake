@@ -4,7 +4,7 @@
 set(CMAKE_SYSTEM_NAME Windows)
 set(CMAKE_SYSTEM_PROCESSOR ARM64)
 
-if(DEFINED ENV{VCToolsInstallDir})
+if(DEFINED ENV{VCToolsInstallDir} AND NOT "$ENV{VCToolsInstallDir}" STREQUAL "")
     cmake_path(SET _vctools "$ENV{VCToolsInstallDir}")
 else()
     foreach(_vs_base IN ITEMS
@@ -12,9 +12,18 @@ else()
         "C:/Program Files/Microsoft Visual Studio/2022/Enterprise"
         "C:/Program Files/Microsoft Visual Studio/2022/Community")
         if(EXISTS "${_vs_base}/VC/Auxiliary/Build/vcvarsall.bat")
+            # Several toolsets can be installed side by side, and only the newer ones ship the
+            # ARM64 cross compiler, so pick the highest version that actually has it instead of
+            # whichever directory happens to sort first.
             file(GLOB _msvc_dirs "${_vs_base}/VC/Tools/MSVC/*")
-            if(_msvc_dirs)
-                list(GET _msvc_dirs 0 _vctools)
+            list(SORT _msvc_dirs COMPARE NATURAL ORDER DESCENDING)
+            foreach(_msvc_dir IN LISTS _msvc_dirs)
+                if(EXISTS "${_msvc_dir}/bin/Hostx64/arm64/cl.exe")
+                    cmake_path(SET _vctools "${_msvc_dir}")
+                    break()
+                endif()
+            endforeach()
+            if(_vctools)
                 break()
             endif()
         endif()

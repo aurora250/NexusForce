@@ -6,6 +6,11 @@ namespace {
 } // namespace
 
 
+bool& virtual_thread_scheduler::worker_context() noexcept {
+    thread_local bool worker_context{false};
+    return worker_context;
+}
+
 virtual_thread_scheduler& virtual_thread_scheduler::get_instance() {
     static virtual_thread_scheduler instance;
     return instance;
@@ -93,7 +98,7 @@ void virtual_thread_scheduler::park() {
 }
 
 void virtual_thread_scheduler::worker_loop() {
-    worker_context_ = true;
+    worker_context() = true;
     for (;;) {
         if (pending_.load(memory_order_acquire) != 0) {
             coroutine_handle<> handle;
@@ -117,7 +122,7 @@ void virtual_thread_scheduler::worker_loop() {
         }
 
         if (shutdown_.load(memory_order_acquire) && timers_.empty()) {
-            worker_context_ = false;
+            worker_context() = false;
             return;
         }
 

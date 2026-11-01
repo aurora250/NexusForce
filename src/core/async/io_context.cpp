@@ -53,8 +53,7 @@ namespace {
 
 struct io_context::monitor {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    using file_completion_cb = function<void(error_code, size_t, void* overlapped)>;
-
+    io_context* owner_ = nullptr;
     void* iocp_handle_ = nullptr;
     void* wake_event_ = nullptr;
     thread monitor_thread_;
@@ -63,7 +62,7 @@ struct io_context::monitor {
     flat_unordered_map<native_handle_type, void*> fd_events_;
     vector<void*> pending_close_;
 
-    flat_unordered_map<uintptr_t, file_completion_cb> file_completions_;
+    flat_unordered_map<uintptr_t, file_completion_callback> file_completions_;
 
     monitor() {
         iocp_handle_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 0);
@@ -103,7 +102,7 @@ struct io_context::monitor {
 
     void monitor_loop();
 
-    void register_file_completion(uintptr_t key, file_completion_cb cb) { file_completions_[key] = move(cb); }
+    void register_file_completion(uintptr_t key, file_completion_callback cb) { file_completions_[key] = move(cb); }
 
     void unregister_file_completion(uintptr_t key) { file_completions_.erase(key); }
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
@@ -133,7 +132,7 @@ struct io_context::monitor {
 #ifdef NEFORCE_PLATFORM_WINDOWS
 void io_context::monitor::monitor_loop() {
     while (monitor_running_) {
-        unique_lock<mutex> lk(fd_mutex_);
+        unique_lock<mutex> lk(owner_->fd_mutex_);
 
         // Close handles retired by remove_fd(). They are swapped out under the lock and
         // closed only after the wait set below has been rebuilt, so a handle is never
@@ -296,9 +295,25 @@ bool io_context::has_pending_work() const noexcept {
     return registered_fds_.load(memory_order_acquire) != 0;
 }
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
+void* io_context::iocp_handle() const noexcept { return monitor_ ? monitor_->iocp_handle_ : nullptr; }
+
+void io_context::register_file_completion(uintptr_t key, file_completion_callback callback) {
+    monitor_->register_file_completion(key, move(callback));
+}
+
+void io_context::unregister_file_completion(uintptr_t key) noexcept {
+    if (monitor_) {
+        monitor_->unregister_file_completion(key);
+    }
+}
+#endif
+
 io_context::io_context() :
 monitor_(make_unique<monitor>()) {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    monitor_->owner_ = this;
+#elif defined(NEFORCE_PLATFORM_LINUX)
     ::epoll_event ev{};
     ev.events = static_cast<uint32_t>(epoll_event::in);
     ev.data.fd = monitor_->wake_fd_;

@@ -47,70 +47,22 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Install Dependencies
-        run: sudo apt-get update && sudo apt-get install -y bear libtirpc-dev libc++abi-dev liburing-dev
-
-      - name: Setup vcpkg
-        id: vcpkg
-        uses: ./.github/actions/setup-vcpkg
-
+      # Manual extraction runs one CodeQL extractor per translation unit. With ~240
+      # template-heavy library TUs the resulting database made the analysis step exceed the
+      # 360 minute job limit while the build itself reported success, so the job was killed
+      # with no failing step to point at. "none" has CodeQL parse the paths declared in
+      # codeql-config.yml directly: no build, no bear, no vcpkg bootstrap, and no per-TU
+      # extraction. Trade-off: less interprocedural dataflow than a traced build provides,
+      # which is the documented path for repositories that cannot fit manual mode in the
+      # job limit.
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           queries: security-and-quality
-          build-mode: manual
+          build-mode: none
           tools: latest
           config-file: .github/codeql/codeql-config.yml
-
-      - name: Capture Build with Bear
-        run: |
-          BUILD_DIR=$(mktemp -d)
-          echo "BUILD_DIR=$BUILD_DIR" >> $GITHUB_ENV
-
-          bear -- cmake -S . -B "$BUILD_DIR" \
-            -DCMAKE_BUILD_TYPE=Debug \
-            -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake \
-            -DVCPKG_TARGET_TRIPLET=x64-linux \
-            -DNEXUSFORCE_BUILD_DOCS=OFF \
-            -DNEXUSFORCE_BUILD_TESTS=OFF || true
-
-          bear -- cmake --build "$BUILD_DIR" -j$(nproc) || true
-
-          if [ -f compile_commands.json ]; then
-            echo "✅ compile_commands.json generated successfully"
-            echo "=== Files captured (first 10) ==="
-
-            set +e
-            cat compile_commands.json | grep -o '"file": "[^"]*"' | head -10
-            set -e
-            echo "================================="
-
-            TOTAL=$(cat compile_commands.json | grep -o '"file": "[^"]*"' | wc -l)
-            echo "Total files captured: $TOTAL"
-          else
-            echo "⚠️ compile_commands.json not found"
-          fi
-
-          rm -rf "$BUILD_DIR"
-        shell: bash
-
-      - name: Save vcpkg binary cache
-        uses: ./.github/actions/save-vcpkg-cache
-        with:
-          cache-key: ${{ steps.vcpkg.outputs.cache-key }}
-          cache-hit: ${{ steps.vcpkg.outputs.cache-hit }}
-          binary-cache: ${{ steps.vcpkg.outputs.binary-cache }}
-          tool-cache-key: ${{ steps.vcpkg.outputs.tool-cache-key }}
-          tool-cache-hit: ${{ steps.vcpkg.outputs.tool-cache-hit }}
-          vcpkg-tool-cache-path: ${{ steps.vcpkg.outputs.vcpkg-tool-cache-path }}
-
-      - name: Clean Environment for CodeQL
-        run: |
-          unset CODEQL_PATH
-          unset CODEQL_DIST
-          unset CODEQL_JAVA_HOME
-        shell: bash
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4

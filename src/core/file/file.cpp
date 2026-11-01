@@ -571,7 +571,8 @@ string file::read() const {
 
         string content;
         constexpr size_type chunk = 65536;
-        constexpr size_t max_stream_bytes = 64UL * 1024UL * 1024UL;
+        constexpr size_t max_stream_bytes = static_cast<size_t>(64UL) * 1024UL * 1024UL;
+
         while (content.size() < max_stream_bytes) {
             const string part = read(chunk);
             if (part.empty()) {
@@ -1089,6 +1090,17 @@ bool file::seek(const difference_type distance, file_pointer method) const {
     // buffered writes re-anchor at the file end inside write(),
     // so arbitrary seeks only ever affect reads (and thus enable whole-file reads on append handles).
 
+    // Flush pending buffered writes before computing any target position.
+    // size64() and tell() only see bytes that reached the OS, so seeking to
+    // "end" with a dirty buffer would otherwise rewind to the physical end and
+    // overwrite the buffered record.
+    if (write_buffer_pos_ > 0) {
+        if (!flush_write_buffer()) {
+            set_last_error();
+            return false;
+        }
+    }
+
     const difference_type current_logical_pos = tell();
     if (current_logical_pos < 0) {
         set_last_error();
@@ -1125,16 +1137,8 @@ bool file::seek(const difference_type distance, file_pointer method) const {
         return false;
     }
 
-    if (write_buffer_pos_ > 0) {
-        if (!flush_write_buffer()) {
-            set_last_error();
-            return false;
-        }
-    }
-
     read_buffer_pos_ = 0;
     read_buffer_size_ = 0;
-
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::LARGE_INTEGER li{};
     li.QuadPart = target_pos;

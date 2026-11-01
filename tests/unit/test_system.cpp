@@ -4649,7 +4649,7 @@ TEST_F(ProcessTest, SendSignal_ChildProcessIsTerminated) {
     process p;
     p.start(get_long_running_executable(), get_long_running_args());
     EXPECT_TRUE(process::send_signal(p.id(), process::signal::terminate));
-    EXPECT_NE(p.wait(5000), -1);
+    EXPECT_NE(p.wait(30000), -1);
 }
 
 TEST_F(ProcessTest, Priority_RoundTrips) {

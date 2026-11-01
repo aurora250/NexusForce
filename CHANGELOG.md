@@ -473,6 +473,7 @@
 - 修复 `hashtable::bucket_index()` 调用 `bucket_index_key()` 时漏传桶数参数（模板成员未被实例化而长期潜伏）
 - 修复浮点定点格式化在二进制指数非负的整数值上小数点位置错误：原先按已放大 10^p 处理而把整数末几位误作小数，导致绝对值大于 2^52 的值（如 1e308、DBL_MAX）整数部分被截断
 - 修复 UTF-16 代理对在批量解码中折叠为单个码点时的差分一致性（新增单元测试覆盖）
+- 修复 TUI `cell` 样式位域的存储单元未初始化：9 个 `bool : 1` 只写入自身位，单元内剩余 7 位保持未初始化，而整行差量比较按字节 `memory_compare` 读取这些位，Valgrind 报未初始化读取；位域改用 `uint16_t` 基类型并以显式保留位填满存储单元，`cell_text` 的未用字形字节在赋值与清空时一并清零
 - 修复 `ssl_socket` 异步读写绕过 TLS 层的缺陷，现按 TLS 激活状态路由至 `ssl_stream`
 - 修复 Windows `io_context` 事件注册缺失 FD_CONNECT / FD_CLOSE 使非阻塞 connect 的完成或失败通知不被注册/映射
 - 修复 Windows `io_context` WSAEVENT 句柄生命周期竞态：`remove_fd()` 在监视线程 `WSAWaitForMultipleEvents` 等待期间直接 `CloseHandle`
@@ -573,6 +574,8 @@
 - 修复 TUI 超长单行输入时光标消失，光标绘制不再越过输入框内边界
 - 修复 TUI 渲染器把控制字符原样写入 cell 网格，会破坏整帧的字符对齐：现值一律渲染为空白，并按一列测量宽度
 - 修复 `strand` 的 handler 抛异常会让串行化锁永久保持在置位状态，其后所有 `post`/`dispatch` 只入队永不执行：`dispatch()` 现在先复位锁、推进队列，再把异常抛回调用者；`drain_one()` 的投递回调吞掉异常后继续排空
+- 修复 `cmake/toolchains/arm64-windows-msvc.cmake` 在未设置 `VCToolsInstallDir` 时选中目录中排序最旧、不含 ARM64 编译器的 MSVC 工具集：改为在候选工具集里选择含 `bin/Hostx64/arm64/cl.exe` 的最高版本
+- 修复 `crash_dump` Windows 写入器忽略 `max_file_bytes` 与 `max_segments`：内存转储超过字节上限时退化为不附带内存的紧凑转储并标记 `truncated`
 
 ### 📚 Documentation
 

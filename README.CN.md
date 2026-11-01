@@ -86,7 +86,9 @@ v1.0.0 开始承诺：**次版本号更新保持 API 兼容，主版本号更新
 | 18 | FreeBSD  | GCC    | RISC-V    | `riscv64-unknown-freebsd`       | Tier 2   |
 
 > ¹ Windows 上 Clang 指 **ClangCL**。
+> 
 > ² RISC-V / LoongArch 需 GCC ≥ 13 或 Clang ≥ 17；FreeBSD GCC 建议 ≥ 13。
+> 
 > ³ FreeBSD 的 Clang 链接 libc++，GCC 链接 libstdc++，ABI 不通用，不要在同一进程中混用二者的二进制。
 
 ### 支持等级

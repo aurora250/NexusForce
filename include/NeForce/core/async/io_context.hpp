@@ -233,6 +233,13 @@ public:
 private:
     friend class file_async;
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    using file_completion_callback = function<void(error_code, size_t, void*)>;
+    NEFORCE_NODISCARD void* iocp_handle() const noexcept;
+    void register_file_completion(uintptr_t key, file_completion_callback callback);
+    void unregister_file_completion(uintptr_t key) noexcept;
+#endif
+
     /**
      * @brief fd 注册信息
      */

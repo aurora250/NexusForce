@@ -543,7 +543,7 @@ public:
     server_(server),
     socket_(move(socket)),
     ctx_(&ctx) {
-        read_buffer_.resize(16UL * 1024UL);
+        read_buffer_.resize(static_cast<size_t>(16UL) * 1024UL);
     }
 
     void start() {

@@ -39,9 +39,9 @@ TEST(TerminateTest, TerminateCallsHandlerAndAborts) {
 
 TEST(TerminateTest, GetTerminateReturnsInstalledHandler) {
     const auto previous = get_terminate();
-    set_terminate([]() {});
+    neforce::set_terminate([]() {});
     EXPECT_NE(get_terminate(), nullptr);
-    set_terminate(previous);
+    neforce::set_terminate(previous);
     EXPECT_EQ(get_terminate(), previous);
 }
 

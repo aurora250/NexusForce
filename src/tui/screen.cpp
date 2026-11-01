@@ -166,7 +166,7 @@ cell& surface::cell_at(const int x, const int y) {
 
 void surface::clear() {
     // One prepared blank cell copied per position:
-    // reset() plus a string assignment costs several times more than a 52-byte copy.
+    // reset() plus a string assignment costs several times more than a 44-byte copy.
     static const cell blank = [] {
         cell value;
         value.reset();

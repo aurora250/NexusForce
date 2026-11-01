@@ -73,8 +73,8 @@ struct canvas_chart_style {
     /**
      * @brief 从 DOM chart 主题派生 canvas 样式
      */
-    NEFORCE_NODISCARD static canvas_chart_style from_theme(const theme& value, string symbol = "braille",
-                                                           bool gradient = true);
+    NEFORCE_NODISCARD NEFORCE_API static canvas_chart_style from_theme(const theme& value, string symbol = "braille",
+                                                                       bool gradient = true);
 };
 
 /**

@@ -91,6 +91,9 @@ public:
      */
     void set(const codepoint& cp, const int width) noexcept {
         length_ = static_cast<uint8_t>(cp.write_utf8(bytes_));
+        for (size_t i = length_; i < sizeof(bytes_); ++i) {
+            bytes_[i] = 0;
+        }
         width_ = static_cast<int8_t>(width);
     }
 
@@ -103,6 +106,9 @@ public:
         for (size_t i = 0; i < size; ++i) {
             bytes_[i] = text[i];
         }
+        for (size_t i = size; i < sizeof(bytes_); ++i) {
+            bytes_[i] = 0;
+        }
         length_ = static_cast<uint8_t>(size);
         width_ = static_cast<int8_t>(size == 0 ? 0 : text_display_width(view()));
     }
@@ -111,6 +117,9 @@ public:
      * @brief 清空字形
      */
     void clear() noexcept {
+        for (auto& byte: bytes_) {
+            byte = 0;
+        }
         length_ = 0;
         width_ = 0;
     }
@@ -183,17 +192,18 @@ struct cell {
     cell_text character;        ///< 显示的字形
     _NEFORCE color foreground;  ///< 前景色
     _NEFORCE color background;  ///< 背景色
-    bool bold : 1;              ///< 粗体
-    bool dim : 1;               ///< 暗色
-    bool italic : 1;            ///< 斜体
-    bool inverted : 1;          ///< 反色
-    bool underlined : 1;        ///< 单下划线
-    bool underlined_double : 1; ///< 双下划线
-    bool blink : 1;             ///< 闪烁
-    bool strikethrough : 1;     ///< 删除线
-    bool automerge : 1;         ///< 相邻同内容自动融合
-    uint8_t hyperlink = 0;      ///< 超链接 ID（0 表示无链接）
-    uint8_t reserved_ = 0;      ///< 填充字节
+    uint16_t bold : 1;              ///< 粗体
+    uint16_t dim : 1;               ///< 暗色
+    uint16_t italic : 1;            ///< 斜体
+    uint16_t inverted : 1;          ///< 反色
+    uint16_t underlined : 1;        ///< 单下划线
+    uint16_t underlined_double : 1; ///< 双下划线
+    uint16_t blink : 1;             ///< 闪烁
+    uint16_t strikethrough : 1;     ///< 删除线
+    uint16_t automerge : 1;         ///< 相邻同内容自动融合
+    uint16_t reserved_bits_ : 7;    ///< （保留对齐）
+    uint8_t hyperlink = 0;          ///< 超链接 ID（0 表示无链接）
+    uint8_t reserved_ = 0;          ///< 填充字节
 
     cell() noexcept :
     bold(false),
@@ -204,13 +214,15 @@ struct cell {
     underlined_double(false),
     blink(false),
     strikethrough(false),
-    automerge(false) {}
+    automerge(false),
+    reserved_bits_(0) {}
 
     /**
      * @brief 重置所有样式为默认值
      */
     void reset() noexcept {
         bold = dim = italic = inverted = underlined = underlined_double = blink = strikethrough = automerge = false;
+        reserved_bits_ = 0;
         hyperlink = 0;
         foreground = _NEFORCE color{};
         background = _NEFORCE color{0, 0, 0, 0};

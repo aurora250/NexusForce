@@ -31,15 +31,15 @@ namespace {
     system_signal::event map_win_event(unsigned long event_id) {
         switch (event_id) {
             case CTRL_C_EVENT:
-                return system_signal::event::INTERRUPT;
+                return system_signal::event::interrupt;
             case CTRL_BREAK_EVENT:
-                return system_signal::event::CTRL_BREAK;
+                return system_signal::event::ctrl_break;
             case CTRL_CLOSE_EVENT:
-                return system_signal::event::CLOSE;
+                return system_signal::event::close;
             case CTRL_LOGOFF_EVENT:
-                return system_signal::event::LOGOFF;
+                return system_signal::event::logoff;
             case CTRL_SHUTDOWN_EVENT:
-                return system_signal::event::SHUTDOWN;
+                return system_signal::event::shutdown;
             default:
                 return static_cast<system_signal::event>(event_id);
         }

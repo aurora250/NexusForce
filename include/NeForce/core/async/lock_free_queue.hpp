@@ -81,9 +81,15 @@ NEFORCE_BEGIN_INNER__
 
 NEFORCE_INLINE17 constexpr thread::id invalid_thread_id_zero;
 
+#if defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_LINUX)
+constexpr thread::id invalid_thread_id_max() noexcept {
+    return thread::id{numeric_traits<thread::id::native_id_type>::max()};
+}
+#else
 NEFORCE_ALWAYS_INLINE_INLINE thread::id invalid_thread_id_max() noexcept {
     return thread::id{reinterpret_cast<thread::id::native_id_type>(~static_cast<uintptr_t>(0))};
 }
+#endif
 
 template <typename T>
 struct const_numeric_max {

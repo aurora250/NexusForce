@@ -1,6 +1,6 @@
 {
   "name": "nexusforce-install-consumer",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Third-party consumer used by .github/workflows/install.yml",
   "builtin-baseline": "62159a45e18f3a9ac0548628dcaf74fcb60c6ff9",
   "dependencies": [
@@ -11,9 +11,13 @@
       ]
     },
     "libpq",
-    "libmysql",
+    {
+      "name": "libmysql",
+      "platform": "!freebsd"
+    },
     "zlib",
     "lz4",
+    "zstd",
     "sqlite3",
     {
       "name": "sqlcipher",
@@ -40,7 +44,10 @@
     "mysql": {
       "description": "MySQL support",
       "dependencies": [
-        "libmysql"
+        {
+          "name": "libmysql",
+          "platform": "!freebsd"
+        }
       ]
     },
     "sqlite3": {
@@ -71,6 +78,12 @@
       "description": "lz4 compression support",
       "dependencies": [
         "lz4"
+      ]
+    },
+    "zstd": {
+      "description": "zstd compression support",
+      "dependencies": [
+        "zstd"
       ]
     },
     "openssl": {
@@ -111,6 +124,7 @@
     "redis",
     "zlib",
     "lz4",
+    "zstd",
     "openssl",
     "pcre2",
     "icu",
