@@ -422,12 +422,17 @@ void reconciler::flush() {
         // without this every cell that did not change would be skipped and stay empty.
         prev_screen_.clear();
     }
-    if (synchronized_output_) {
-        output += "\033[?2026h";
-    }
-    output += current_screen_.to_string(prev_screen_);
-    if (synchronized_output_) {
-        output += "\033[?2026l";
+    const string diff = current_screen_.to_string(prev_screen_);
+    if (repaint_all || !diff.empty()) {
+        // An idle frame must not emit a bare begin/end synchronized-output pair:
+        // some terminals present on every pair even when no cell changed.
+        if (synchronized_output_) {
+            output += "\033[?2026h";
+        }
+        output += diff;
+        if (synchronized_output_) {
+            output += "\033[?2026l";
+        }
     }
 
     prev_screen_ = current_screen_;

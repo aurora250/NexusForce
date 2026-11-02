@@ -52,10 +52,28 @@ if [ -z "${DEP}" ]; then
     exit 1
 fi
 
+# The build tree may embed either an absolute install name or @rpath; resolve
+# both to the actual dylib so the relative rpath can be computed.
+if [[ "${DEP}" == @rpath/* ]]; then
+    CONFIG_DIR="$(basename "$(dirname "${BIN}")")"
+    DEP_FILE="${BUILD}/lib/${CONFIG_DIR}/$(basename "${DEP}")"
+    if [ ! -e "${DEP_FILE}" ]; then
+        DEP_FILE="$(find "${BUILD}/lib" -name "$(basename "${DEP}")" | head -1)"
+    fi
+    if [ -z "${DEP_FILE}" ]; then
+        echo "error: cannot resolve ${DEP} under ${BUILD}/lib" >&2
+        exit 1
+    fi
+else
+    DEP_FILE="${DEP}"
+fi
+
 PATCHED="${BIN}.darling"
 cp "${BIN}" "${PATCHED}"
-"${INSTALL_NAME_TOOL}" -change "${DEP}" "@rpath/$(basename "${DEP}")" "${PATCHED}"
-RELATIVE_LIB="$(realpath --relative-to="$(dirname "${PATCHED}")" "$(dirname "${DEP}")")"
+if [[ "${DEP}" != @rpath/* ]]; then
+    "${INSTALL_NAME_TOOL}" -change "${DEP}" "@rpath/$(basename "${DEP}")" "${PATCHED}"
+fi
+RELATIVE_LIB="$(realpath --relative-to="$(dirname "${PATCHED}")" "$(dirname "${DEP_FILE}")")"
 "${INSTALL_NAME_TOOL}" -add_rpath "@loader_path/${RELATIVE_LIB}" "${PATCHED}" 2>/dev/null || true
 
 # Tests resolve these paths through the compile-time absolute path; inside
@@ -68,9 +86,16 @@ PLUGIN="$(find "${BUILD}/lib" -type f -path '*/plugins/*' 2>/dev/null | head -1)
 if [ -n "${PLUGIN}" ]; then
     PLUGIN_DEP="$("${OTOOL}" -L "${PLUGIN}" | awk '/libNexusForce/{print $1; exit}')"
     if [ -n "${PLUGIN_DEP}" ]; then
-        "${INSTALL_NAME_TOOL}" -change "${PLUGIN_DEP}" "@rpath/$(basename "${PLUGIN_DEP}")" "${PLUGIN}"
-        RELATIVE_PLUGIN_LIB="$(realpath --relative-to="$(dirname "${PLUGIN}")" "$(dirname "${PLUGIN_DEP}")")"
-        "${INSTALL_NAME_TOOL}" -add_rpath "@loader_path/${RELATIVE_PLUGIN_LIB}" "${PLUGIN}" 2>/dev/null || true
+        if [[ "${PLUGIN_DEP}" == @rpath/* ]]; then
+            PLUGIN_DEP_FILE="$(find "${BUILD}/lib" -name "$(basename "${PLUGIN_DEP}")" | head -1)"
+        else
+            PLUGIN_DEP_FILE="${PLUGIN_DEP}"
+            "${INSTALL_NAME_TOOL}" -change "${PLUGIN_DEP}" "@rpath/$(basename "${PLUGIN_DEP}")" "${PLUGIN}"
+        fi
+        if [ -n "${PLUGIN_DEP_FILE}" ]; then
+            RELATIVE_PLUGIN_LIB="$(realpath --relative-to="$(dirname "${PLUGIN}")" "$(dirname "${PLUGIN_DEP_FILE}")")"
+            "${INSTALL_NAME_TOOL}" -add_rpath "@loader_path/${RELATIVE_PLUGIN_LIB}" "${PLUGIN}" 2>/dev/null || true
+        fi
     fi
     export NEFORCE_TEST_PLUGIN_PATH="/Volumes/SystemRoot${PLUGIN}"
 fi

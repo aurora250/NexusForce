@@ -95,7 +95,8 @@ struct numeric_int_base : numeric_base {
     static constexpr bool is_integer = true;     ///< 是整数类型
     static constexpr bool is_specialized = true; ///< 是特化版本
     static constexpr int radix = 2;              ///< 整数类型的基数为2
-#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_PLATFORM_MACOS)
+#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_PLATFORM_MACOS) || \
+        (defined(NEFORCE_PLATFORM_FREEBSD) && defined(NEFORCE_ARCH_X86))
     static constexpr bool traps = true; ///< 整数异常陷阱（x86 libc++）
 #endif
 };
@@ -118,7 +119,7 @@ struct numeric_float_base : numeric_base {
     static constexpr bool is_signed = true;                           ///< 浮点数是有符号的
     static constexpr bool is_specialized = true;                      ///< 是特化版本
     static constexpr int radix = 2;                                   ///< 浮点数的基数为2
-#if defined(NEFORCE_ARCH_ARM) && defined(NEFORCE_PLATFORM_MACOS)
+#if defined(NEFORCE_ARCH_ARM) && defined(NEFORCE_PLATFORM_BSD_LIKE)
     static constexpr bool tinyness_before = true; ///< 舍入前检测下溢（arm64 libc++）
 #endif
 };

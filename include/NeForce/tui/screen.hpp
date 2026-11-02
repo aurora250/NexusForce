@@ -411,6 +411,8 @@ public:
      * @return ANSI 转义序列字符串
      *
      * 比较当前帧与上一帧的每个 cell，仅输出变化的样式和字符，最小化终端写入量。
+     *
+     * @note 内容与光标状态都没有变化时返回空串，调用方应跳过写入和同步输出包裹
      */
     NEFORCE_NODISCARD string to_string(const screen& prev) const;
 

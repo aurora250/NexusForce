@@ -148,14 +148,18 @@ public:
          * @param value 系统信号
          * @return 信号通知
          */
-        NEFORCE_NODISCARD static constexpr notification from_signal(const signal value) noexcept { return notification{value}; }
+        NEFORCE_NODISCARD static constexpr notification from_signal(const signal value) noexcept {
+            return notification{value};
+        }
 
         /**
          * @brief 从本地事件创建通知
          * @param value 本地事件
          * @return 事件通知
          */
-        NEFORCE_NODISCARD static constexpr notification from_event(const event value) noexcept { return notification{value}; }
+        NEFORCE_NODISCARD static constexpr notification from_event(const event value) noexcept {
+            return notification{value};
+        }
 
         /**
          * @brief 是否为系统信号通知

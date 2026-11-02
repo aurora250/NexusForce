@@ -576,13 +576,22 @@ TEST(TuiTextInputCursorTest, CaretFollowsWrappedLine) {
     EXPECT_EQ(scr.fast_cell_at(8, 2).character, "\xe2\x96\x8c");
 }
 
-TEST(TuiScreenCursorTest, HiddenCursorEmitsHideSequenceOnly) {
+TEST(TuiScreenCursorTest, IdleScreenProducesNoOutput) {
     screen scr(10, 3);
     screen prev(10, 3);
 
     const string out = scr.to_string(prev);
-    EXPECT_TRUE(out.find("\033[?25l"_sv) != string::npos);
-    EXPECT_TRUE(out.find("\033[?25h"_sv) == string::npos);
+    EXPECT_TRUE(out.empty());
+}
+
+TEST(TuiScreenCursorTest, HiddenCursorEmitsHideSequenceWhenContentChanges) {
+    screen scr(10, 3);
+    screen prev(10, 3);
+    scr.fast_cell_at(0, 0).character = "x";
+
+    const string out = scr.to_string(prev);
+    EXPECT_TRUE(out.find("\033[?25l"_sv) != string_view::npos);
+    EXPECT_TRUE(out.find("\033[?25h"_sv) == string_view::npos);
 }
 
 TEST(TuiScreenCursorTest, VisibleCursorEmitsPositionShapeAndShow) {

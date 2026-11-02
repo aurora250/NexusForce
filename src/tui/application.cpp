@@ -218,6 +218,7 @@ void application::schedule_resize_check() {
         }
         if (input_driver::check_resize_flag() || console_.is_terminal_resized()) {
             reconiler_->mark_dirty();
+            reconiler_->flush();
         }
         schedule_resize_check();
     });

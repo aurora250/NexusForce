@@ -77,6 +77,8 @@ size_t headless::pump(const size_t max_rounds) {
 }
 
 void headless::render() {
+    // `ansi()` describes the most recent flush, not the most recent non-empty flush.
+    ansi_.clear();
     reconciler_->mark_dirty();
     reconciler_->flush();
     if (recorder_ != nullptr) {

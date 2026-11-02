@@ -348,10 +348,10 @@ void screen::append_cursor(string& ss) const {
 string screen::to_string(const screen& prev) const {
     string result;
     result.reserve(static_cast<size_t>(dimx_) * dimy_ * 4);
-    result += "\033[?25l";
 
     int last_x = -1;
     int last_y = -1;
+    bool changed = false;
 
     tui::cell term_state;
     term_state.reset();
@@ -423,6 +423,7 @@ string screen::to_string(const screen& prev) const {
             }
             last_x = x + run_width - 1;
             last_y = y;
+            changed = true;
 
             update_cell_style(result, term_state, cell);
 
@@ -446,10 +447,20 @@ string screen::to_string(const screen& prev) const {
         }
     }
 
-    result += "\033[0m";
-    append_cursor(result);
+    const bool cursor_visible = cursor_.shape != tui::cursor::shape::hidden;
+    const bool cursor_changed = cursor_.shape != prev.cursor_.shape ||
+                                (cursor_visible && (cursor_.x != prev.cursor_.x || cursor_.y != prev.cursor_.y));
+    if (!changed && !cursor_changed) {
+        return {};
+    }
 
-    return result;
+    string output;
+    output.reserve(result.size() + 32);
+    output += "\033[?25l";
+    output += result;
+    output += "\033[0m";
+    append_cursor(output);
+    return output;
 }
 
 NEFORCE_END_TUI__

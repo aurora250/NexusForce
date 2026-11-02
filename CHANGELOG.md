@@ -378,6 +378,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 TUI 空闲帧仍向终端写入 `?25l`、`0m` 与 DEC 2026 同步输出包裹的问题：`screen::to_string()` 在内容和光标都未变化时返回空串，`reconciler` 不再为空差量生成同步标记；无动画应用可用 `with_fps(0)` 完全事件驱动
+- 修复 `application` 在 `with_fps(0)` 时终端尺寸变化只标脏不刷新：`schedule_resize_check()` 检测到 resized 后立即 flush
 - 修复 `vector` 默认构造立即分配 1 个元素的问题：空向量不再持有未初始化缓冲区，首次插入时才分配，降低小对象池的分配抖动
 - 修复 `io_context::run()` 在仅有注册 fd、无未完成 handler 时提前返回：循环条件改用 `has_pending_work()`，异步 connect/read/write 不会因工作计数归零而被提前结束
 - 修复 `awaitable` 完成与 `co_await` 挂起之间的竞态（丢失唤醒/未同步的 ready 标志）：完成路径与 `await_suspend` 统一加锁，完成值在恢复前可见

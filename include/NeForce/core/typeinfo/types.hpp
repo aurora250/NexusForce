@@ -157,21 +157,14 @@ using decimal_t = long double;
 
 #if defined(NEFORCE_ARCH_BITS_64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 
-/**
- * @typedef size_t
- * @brief 无符号大小类型
- *
- * 64位下为平台原生 size_t
- * （Linux / FreeBSD / macOS 为 unsigned long，Windows 为 unsigned long long）。
- */
-using size_t = uint64_t;
-
 #    ifdef NEFORCE_PLATFORM_MACOS
+using size_t = unsigned long;
 using ssize_t = long;
 using ptrdiff_t = long;
 using intptr_t = long;
 using uintptr_t = unsigned long;
 #    else
+using size_t = uint64_t;
 using ssize_t = int64_t;
 using ptrdiff_t = int64_t;
 using intptr_t = int64_t;

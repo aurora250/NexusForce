@@ -893,6 +893,17 @@ TEST(TuiStreamingTextTest, RenderShowsCommittedText) {
     EXPECT_EQ(app.plaintext(), "abc");
 }
 
+TEST(TuiReconcilerTest, IdleFrameProducesNoOutput) {
+    fixed_root holder;
+    holder.content = element::text("hi");
+
+    headless app(&holder, 6, 2);
+    app.render();
+    app.render();
+
+    EXPECT_TRUE(app.ansi().empty());
+}
+
 TEST(TuiReconcilerTest, InvalidateForcesFullRepaint) {
     fixed_root holder;
     holder.content = element::text("hi");

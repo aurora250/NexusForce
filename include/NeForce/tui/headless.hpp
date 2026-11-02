@@ -115,7 +115,7 @@ public:
 
     /**
      * @brief 获取最近一帧的 ANSI 输出
-     * @return 最近一次 flush 写入的 ANSI 字符串
+     * @return 最近一次 render 产生的 ANSI 字符串；无单元格变化时为空
      */
     NEFORCE_NODISCARD const string& ansi() const noexcept { return ansi_; }
 

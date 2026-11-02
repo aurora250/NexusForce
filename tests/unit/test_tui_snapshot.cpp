@@ -216,6 +216,7 @@ TEST(TuiHeadlessTest, SynchronizedOutputCanBeDisabled) {
 
     headless app(&holder, 4, 2);
     app.pipeline().set_synchronized_output(false);
+    holder.content = element::text("bye");
     app.render();
 
     EXPECT_TRUE(app.ansi().view().find("\033[?2026h"_sv) == string_view::npos);
