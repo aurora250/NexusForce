@@ -95,8 +95,8 @@ struct numeric_int_base : numeric_base {
     static constexpr bool is_integer = true;     ///< 是整数类型
     static constexpr bool is_specialized = true; ///< 是特化版本
     static constexpr int radix = 2;              ///< 整数类型的基数为2
-#ifdef NEFORCE_COMPILER_GNUC
-    static constexpr bool traps = true; ///< GCC编译器通常捕获算术异常
+#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_PLATFORM_MACOS)
+    static constexpr bool traps = true; ///< 整数异常陷阱（x86 libc++）
 #endif
 };
 
@@ -118,6 +118,9 @@ struct numeric_float_base : numeric_base {
     static constexpr bool is_signed = true;                           ///< 浮点数是有符号的
     static constexpr bool is_specialized = true;                      ///< 是特化版本
     static constexpr int radix = 2;                                   ///< 浮点数的基数为2
+#if defined(NEFORCE_ARCH_ARM) && defined(NEFORCE_PLATFORM_MACOS)
+    static constexpr bool tinyness_before = true; ///< 舍入前检测下溢（arm64 libc++）
+#endif
 };
 
 NEFORCE_END_INNER__
@@ -335,9 +338,12 @@ public:
     static constexpr int digits10 = 18;
 };
 
-#ifdef NEFORCE_PLATFORM_POSIX64
+#if defined(NEFORCE_PLATFORM_POSIX64) && !defined(NEFORCE_PLATFORM_MACOS)
 template <>
 class numeric_traits<long long> : public numeric_traits<int64_t> {};
+#elif defined(NEFORCE_PLATFORM_POSIX64)
+template <>
+class numeric_traits<long> : public numeric_traits<int64_t> {};
 #else
 template <>
 class numeric_traits<long> : public numeric_traits<int32_t> {};
@@ -435,9 +441,12 @@ public:
     static constexpr int digits10 = 19;
 };
 
-#ifdef NEFORCE_PLATFORM_POSIX64
+#if defined(NEFORCE_PLATFORM_POSIX64) && !defined(NEFORCE_PLATFORM_MACOS)
 template <>
 class numeric_traits<unsigned long long> : public numeric_traits<uint64_t> {};
+#elif defined(NEFORCE_PLATFORM_POSIX64)
+template <>
+class numeric_traits<unsigned long> : public numeric_traits<uint64_t> {};
 #else
 template <>
 class numeric_traits<unsigned long> : public numeric_traits<uint32_t> {};

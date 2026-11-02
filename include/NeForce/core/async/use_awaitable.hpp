@@ -12,6 +12,7 @@
 #include "NeForce/core/async/async_result.hpp"
 #ifdef NEFORCE_STANDARD_20
 #    include "NeForce/core/async/coroutine.hpp"
+#    include "NeForce/core/async/mutex.hpp"
 #    include "NeForce/core/exception/exception_ptr.hpp"
 #    include "NeForce/core/utility/tuple.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -50,6 +51,14 @@ private:
         bool ready{false};                        ///< 是否已完成
         exception_ptr exception{nullptr};         ///< 完成异常
         coroutine_handle<> continuation{nullptr}; ///< 挂起的协程句柄
+        mutex mtx;                                ///< 保护 data/ready/exception/continuation
+
+        coroutine_handle<> complete() noexcept {
+            ready = true;
+            const auto cont = continuation;
+            continuation = nullptr;
+            return cont;
+        }
     };
 
     shared_ptr<state> state_; ///< 共享状态
@@ -89,9 +98,13 @@ public:
                 shared_ptr<awaitable::state> state;
                 NEFORCE_NODISCARD bool await_ready() const noexcept { return false; }
                 void await_suspend(coroutine_handle<> h) noexcept {
-                    state->ready = true;
-                    if (state->continuation) {
-                        state->continuation.resume();
+                    coroutine_handle<> cont{nullptr};
+                    {
+                        lock<mutex> lk(state->mtx);
+                        cont = state->complete();
+                    }
+                    if (cont) {
+                        cont.resume();
                     }
                     h.destroy();
                 }
@@ -107,10 +120,14 @@ public:
         template <typename U>
         void return_value(U&& value) {
             static_assert(sizeof...(Args) == 1, "awaitable with multiple results cannot be a coroutine return type");
-            _NEFORCE get<0>(state_->data) = _NEFORCE forward<U>(value);
-            state_->ready = true;
-            if (state_->continuation) {
-                state_->continuation.resume();
+            coroutine_handle<> cont{nullptr};
+            {
+                lock<mutex> lk(state_->mtx);
+                _NEFORCE get<0>(state_->data) = _NEFORCE forward<U>(value);
+                cont = state_->complete();
+            }
+            if (cont) {
+                cont.resume();
             }
         }
 
@@ -118,10 +135,14 @@ public:
          * @brief 协程异常捕获
          */
         void unhandled_exception() {
-            state_->exception = current_exception();
-            state_->ready = true;
-            if (state_->continuation) {
-                state_->continuation.resume();
+            coroutine_handle<> cont{nullptr};
+            {
+                lock<mutex> lk(state_->mtx);
+                state_->exception = current_exception();
+                cont = state_->complete();
+            }
+            if (cont) {
+                cont.resume();
             }
         }
     };
@@ -139,10 +160,14 @@ public:
      * @param args 异步操作的结果参数
      */
     void set_value(Args... args) {
-        state_->data = _NEFORCE make_tuple(_NEFORCE move(args)...);
-        state_->ready = true;
-        if (state_->continuation) {
-            state_->continuation.resume();
+        coroutine_handle<> cont{nullptr};
+        {
+            lock<mutex> lk(state_->mtx);
+            state_->data = _NEFORCE make_tuple(_NEFORCE move(args)...);
+            cont = state_->complete();
+        }
+        if (cont) {
+            cont.resume();
         }
     }
 
@@ -150,16 +175,27 @@ public:
      * @brief 设置异常
      */
     void set_exception(exception_ptr e) {
-        state_->exception = _NEFORCE move(e);
-        state_->ready = true;
-        if (state_->continuation) {
-            state_->continuation.resume();
+        coroutine_handle<> cont{nullptr};
+        {
+            lock<mutex> lk(state_->mtx);
+            state_->exception = _NEFORCE move(e);
+            cont = state_->complete();
+        }
+        if (cont) {
+            cont.resume();
         }
     }
 
     NEFORCE_NODISCARD bool await_ready() const noexcept { return state_->ready; }
 
-    void await_suspend(coroutine_handle<> h) noexcept { state_->continuation = h; }
+    bool await_suspend(coroutine_handle<> h) noexcept {
+        lock<mutex> lk(state_->mtx);
+        if (state_->ready) {
+            return false;
+        }
+        state_->continuation = h;
+        return true;
+    }
 
     /**
      * @brief 协程恢复时的结果获取
@@ -222,6 +258,14 @@ private:
         bool ready_{false};
         exception_ptr exception_{nullptr};
         coroutine_handle<> continuation_{nullptr};
+        mutex mtx;
+
+        coroutine_handle<> complete() noexcept {
+            ready_ = true;
+            const auto cont = continuation_;
+            continuation_ = nullptr;
+            return cont;
+        }
     };
     shared_ptr<state> state_;
 
@@ -241,9 +285,13 @@ public:
      * @brief 标记完成
      */
     void set_value() {
-        state_->ready_ = true;
-        if (state_->continuation_) {
-            state_->continuation_.resume();
+        coroutine_handle<> cont{nullptr};
+        {
+            lock<mutex> lk(state_->mtx);
+            cont = state_->complete();
+        }
+        if (cont) {
+            cont.resume();
         }
     }
 
@@ -251,15 +299,27 @@ public:
      * @brief 设置异常
      */
     void set_exception(exception_ptr e) {
-        state_->exception_ = move(e);
-        state_->ready_ = true;
-        if (state_->continuation_) {
-            state_->continuation_.resume();
+        coroutine_handle<> cont{nullptr};
+        {
+            lock<mutex> lk(state_->mtx);
+            state_->exception_ = move(e);
+            cont = state_->complete();
+        }
+        if (cont) {
+            cont.resume();
         }
     }
 
     NEFORCE_NODISCARD bool await_ready() const noexcept { return state_->ready_; }
-    void await_suspend(coroutine_handle<> h) noexcept { state_->continuation_ = h; }
+
+    bool await_suspend(coroutine_handle<> h) noexcept {
+        lock<mutex> lk(state_->mtx);
+        if (state_->ready_) {
+            return false;
+        }
+        state_->continuation_ = h;
+        return true;
+    }
 
     void await_resume() {
         if (state_->exception_) {
@@ -282,9 +342,13 @@ struct awaitable<void>::promise_type {
             shared_ptr<awaitable<void>::state> state;
             NEFORCE_NODISCARD bool await_ready() const noexcept { return false; }
             void await_suspend(coroutine_handle<> h) noexcept {
-                state->ready_ = true;
-                if (state->continuation_) {
-                    state->continuation_.resume();
+                coroutine_handle<> cont{nullptr};
+                {
+                    lock<mutex> lk(state->mtx);
+                    cont = state->complete();
+                }
+                if (cont) {
+                    cont.resume();
                 }
                 h.destroy();
             }
@@ -295,8 +359,15 @@ struct awaitable<void>::promise_type {
 
     void return_void() noexcept {}
     void unhandled_exception() {
-        state_->exception_ = current_exception();
-        state_->ready_ = true;
+        coroutine_handle<> cont{nullptr};
+        {
+            lock<mutex> lk(state_->mtx);
+            state_->exception_ = current_exception();
+            cont = state_->complete();
+        }
+        if (cont) {
+            cont.resume();
+        }
     }
 };
 

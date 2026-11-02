@@ -35,7 +35,6 @@ namespace {
     using inner::native_dump_result;
 
     constexpr size_t max_segment_capacity = 4096;
-    constexpr uint64_t max_segment_bytes = 512UL * 1024UL * 1024UL;
     constexpr size_t max_process_args = 80;
 
 #    if defined(NEFORCE_SUPPORT_NATIVE_DUMP_LINUX)
@@ -85,7 +84,7 @@ namespace {
         uint64_t file_count{0};
         uint64_t file_name_bytes{0};
 #    else
-        char vmmap[max_vmmap_bytes + 1]{};
+        alignas(8) char vmmap[max_vmmap_bytes + 1]{};
 #    endif
     };
 
@@ -409,8 +408,8 @@ namespace {
                (size >= 6 && string_compare(path, "/proc/", 6) == 0);
     }
 
-    void parse_map_line(writer_state& current, char* line, const bool include_memory,
-                        const uint32_t max_segments) noexcept {
+    void parse_map_line(writer_state& current, char* line, const bool include_memory, const uint32_t max_segments,
+                        const uint64_t max_segment_bytes) noexcept {
         const char* cursor = line;
         uint64_t start = 0;
         uint64_t end = 0;
@@ -450,7 +449,7 @@ namespace {
             current.truncated = true;
             return;
         }
-        if (include_memory && length > max_segment_bytes) {
+        if (include_memory && max_segment_bytes != 0 && length > max_segment_bytes) {
             current.truncated = true;
             return;
         }
@@ -503,7 +502,7 @@ namespace {
                 }
                 const bool last = *end == '\0';
                 *end = '\0';
-                parse_map_line(current, cursor, request.include_memory, max_segments);
+                parse_map_line(current, cursor, request.include_memory, max_segments, request.max_segment_bytes);
                 if (last) {
                     break;
                 }
@@ -800,7 +799,8 @@ namespace {
             }
             const uint64_t length = end - start;
             if (current.segment_count >= max_segment_capacity ||
-                (request.include_memory && (current.segment_count >= max_segments || length > max_segment_bytes))) {
+                (request.include_memory && (current.segment_count >= max_segments ||
+                                            (request.max_segment_bytes != 0 && length > request.max_segment_bytes)))) {
                 current.truncated = true;
                 continue;
             }

@@ -377,8 +377,11 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
     }
 
     bool ok = true;
+#    ifndef NEFORCE_PLATFORM_MACOS
     bool use_range = true;
+#    endif
     for (;;) {
+#    ifndef NEFORCE_PLATFORM_MACOS
         if (use_range) {
             // fall back to the user-space loop when unsupported.
             const ssize_t copied = ::copy_file_range(src_fd, nullptr, dst_fd, nullptr, 64U << 20, 0);
@@ -395,6 +398,7 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
             ok = false;
             break;
         }
+#    endif
 
         char buf[256U << 10];
         for (;;) {
@@ -430,7 +434,11 @@ bool filesystem::copy(const path& from, const path& to, const bool overwrite) {
 
     if (ok) {
         ::fchmod(dst_fd, st.st_mode & 0777);
+#    ifdef NEFORCE_PLATFORM_MACOS
+        const ::timespec times[2] = {st.st_atimespec, st.st_mtimespec};
+#    else
         const ::timespec times[2] = {st.st_atim, st.st_mtim};
+#    endif
         ::futimens(dst_fd, times);
     }
 

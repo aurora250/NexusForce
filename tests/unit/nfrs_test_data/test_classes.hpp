@@ -63,10 +63,10 @@ struct NFRSTestWithFunc {
 struct NFRSTestWithSignal {
     NEFORCE_REFLECT_OBJ(NFRSTestWithSignal)
     NEFORCE_REFLECT_PROP(int, value)
-    NEFORCE_REFLECT_SIGNAL(signal<int>, onChanged)
+    NEFORCE_REFLECT_SIGNAL(neforce::signal<int>, onChanged)
 
     int value = 0;
-    signal<int> onChanged;
+    neforce::signal<int> onChanged;
 };
 
 // --- class with compound attrs ---

@@ -25,16 +25,17 @@ NEFORCE_INLINE17 constexpr size_t native_dump_path_capacity = 2048;
  * 字符串指针指向调用方保证在调用期间有效的缓冲区，写入器不会保存它们。
  */
 struct native_dump_request {
-    const char* directory{nullptr};   ///< 输出目录，绝对路径
-    const char* prefix{nullptr};      ///< 文件名前缀，已去除路径分隔符
-    bool include_memory{false};       ///< 是否附带内存内容
-    uint32_t max_segments{2048};      ///< 内存段数量上限
-    uint64_t max_file_bytes{0};       ///< 文件总字节上限，0 表示不限制
-    int32_t signal_number{0};         ///< 触发信号，非信号路径为 0
-    const void* signal_info{nullptr}; ///< siginfo_t（POSIX）
-    const void* context{nullptr};     ///< ucontext_t（POSIX）或 CONTEXT（Windows）
-    uint32_t thread_id{0};            ///< 崩溃线程 ID
-    int64_t utc_offset_seconds{0};    ///< 本地时间相对 UTC 的偏移（POSIX）
+    const char* directory{nullptr};                         ///< 输出目录，绝对路径
+    const char* prefix{nullptr};                            ///< 文件名前缀，已去除路径分隔符
+    bool include_memory{false};                             ///< 是否附带内存内容
+    uint32_t max_segments{2048};                            ///< 内存段数量上限
+    uint64_t max_segment_bytes{512ULL * 1024ULL * 1024ULL}; ///< 单个内存段字节上限，0 表示不限制
+    uint64_t max_file_bytes{0};                             ///< 文件总字节上限，0 表示不限制
+    int32_t signal_number{0};                               ///< 触发信号，非信号路径为 0
+    const void* signal_info{nullptr};                       ///< siginfo_t（POSIX）
+    const void* context{nullptr};                           ///< ucontext_t（POSIX）或 CONTEXT（Windows）
+    uint32_t thread_id{0};                                  ///< 崩溃线程 ID
+    int64_t utc_offset_seconds{0};                          ///< 本地时间相对 UTC 的偏移（POSIX）
 };
 
 /**

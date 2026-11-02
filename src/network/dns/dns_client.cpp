@@ -1145,11 +1145,6 @@ dns_query_result dns_client::query(const string_view domain, const dns_record::r
     return fut.get();
 }
 
-future<dns_query_result> dns_client::query_async(const string& domain, const dns_record::raw type,
-                                                 const dns_class qclass) {
-    return async_query(domain.view(), type, qclass, use_future);
-}
-
 vector<string> dns_client::resolve_a(const string_view domain) {
     string current_domain = domain;
     int cname_hops = 0;

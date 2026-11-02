@@ -200,6 +200,9 @@ void sleep_for_ns(uint64_t ns) noexcept {
 bool set_affinity(const size_t cpu_mask) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::SetThreadAffinityMask(::GetCurrentThread(), static_cast<::DWORD_PTR>(cpu_mask)) != 0;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    static_cast<void>(cpu_mask);
+    return false;
 #else
     ::cpu_set_t cpuset;
     CPU_ZERO(&cpuset);
@@ -221,6 +224,9 @@ bool affinity(uint64_t& affi) noexcept {
     ::SetThreadAffinityMask(::GetCurrentThread(), mask);
     affi = static_cast<uint64_t>(mask);
     return true;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    static_cast<void>(affi);
+    return false;
 #else
     ::cpu_set_t cpuset{};
     CPU_ZERO(&cpuset);

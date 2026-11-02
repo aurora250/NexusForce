@@ -4791,7 +4791,12 @@ TEST_F(HttpClientStreamIoTest, ChunkedStreamDeliversBodyIncrementally) {
     EXPECT_EQ(1u, header_calls);
     EXPECT_EQ("text/event-stream", content_type);
     EXPECT_EQ("alphabeta", assembled);
+#ifdef NEFORCE_PLATFORM_FREEBSD
+    // TCP may coalesce the two small writes before the loopback reader runs.
+    EXPECT_GE(chunks.size(), 1u);
+#else
     EXPECT_GE(chunks.size(), 2u);
+#endif
     EXPECT_TRUE(response.body.empty());
 }
 
@@ -4917,15 +4922,19 @@ TEST_F(HttpClientStreamIoTest, AbortFromAnotherThreadUnblocksTheStream) {
 
     http_client client(ctx_);
     string assembled;
+    atomic<bool> got_data{false};
     http_stream_observer observer;
     observer.on_data = [&](const string_view data) {
         assembled += data;
+        got_data.store(true, memory_order_release);
         return true;
     };
 
     http_stream_handle handle;
-    thread aborter([&handle] {
-        this_thread::sleep_for_ms(100);
+    thread aborter([&handle, &got_data] {
+        for (int attempt = 0; attempt < 500 && !got_data.load(memory_order_acquire); ++attempt) {
+            this_thread::sleep_for_ms(1);
+        }
         handle.abort();
     });
 
@@ -4981,7 +4990,12 @@ TEST_F(HttpClientStreamIoTest, ReturningFalseFromCallbackStopsTheStream) {
     server_thread.join();
 
     EXPECT_EQ(1u, calls);
+#ifdef NEFORCE_PLATFORM_FREEBSD
+    // Nagle/delayed-ACK can coalesce the two writes before the first read returns.
+    EXPECT_TRUE(assembled == "alpha" || assembled == "alphabeta");
+#else
     EXPECT_EQ("alpha", assembled);
+#endif
     EXPECT_TRUE(handle.is_aborted());
     EXPECT_LT(elapsed.count(), 600);
 }

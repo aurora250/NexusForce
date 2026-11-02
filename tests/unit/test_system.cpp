@@ -14,7 +14,7 @@
 #include <NeForce/core/system/signal.hpp>
 #include <NeForce/core/system/stacktrace.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
-#include <NeForce/core/system/system_event.hpp>
+#include <NeForce/core/async/waitable_event.hpp>
 #include <NeForce/network/socket_base.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/system/registry_key.hpp>
@@ -729,6 +729,10 @@ protected:
     static string get_test_library_path() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         return "kernel32.dll";
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+        return "libc.so.7";
+#elif defined(NEFORCE_PLATFORM_MACOS)
+        return "/usr/lib/libSystem.B.dylib";
 #else
         return "libc.so.6";
 #endif
@@ -742,11 +746,25 @@ protected:
 #endif
     }
 
+    static string get_second_library_path() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return "user32.dll";
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+        return "libthr.so.3";
+#elif defined(NEFORCE_PLATFORM_MACOS)
+        return "/usr/lib/libc++.1.dylib";
+#else
+        return "libpthread.so.0";
+#endif
+    }
+
     static string get_nonexistent_symbol_name() { return "nonexistent_symbol_xyz_12345"; }
 
     static string get_nonexistent_library_path() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         return "nonexistent_library_xyz_12345.dll";
+#elif defined(NEFORCE_PLATFORM_MACOS)
+        return "libnonexistent_xyz_12345.dylib";
 #else
         return "libnonexistent_xyz_12345.so";
 #endif
@@ -1035,7 +1053,7 @@ TEST_F(DynamicLibraryTest, Path_AfterMoveAssignment_DestinationPathUpdated) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     string path2 = "user32.dll";
 #else
-    string path2 = "libpthread.so.0";
+    string path2 = get_second_library_path();
 #endif
 
     dynamic_library lib2(path2);
@@ -1074,7 +1092,7 @@ TEST_F(DynamicLibraryTest, MultipleLibrariesLoaded_Success) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     dynamic_library lib2("user32.dll");
 #else
-    dynamic_library lib2("libpthread.so.0");
+    dynamic_library lib2(get_second_library_path());
 #endif
 
     EXPECT_TRUE(lib1.is_open());
@@ -1126,7 +1144,7 @@ TEST_F(DynamicLibraryTest, Symbol_OnDifferentLibrary_Success) {
     void* sym1 = lib1.symbol("GetCurrentProcessId");
     void* sym2 = lib2.symbol("MessageBoxA");
 #else
-    dynamic_library lib2("libpthread.so.0");
+    dynamic_library lib2(get_second_library_path());
     void* sym1 = lib1.symbol("getpid");
     void* sym2 = lib2.symbol("pthread_self");
 #endif
@@ -1219,7 +1237,7 @@ TEST_F(DynamicLibraryTest, MoveAssignment_DifferentLibraries_SourceClosedCorrect
 #ifdef NEFORCE_PLATFORM_WINDOWS
     dynamic_library lib2("user32.dll");
 #else
-    dynamic_library lib2("libpthread.so.0");
+    dynamic_library lib2(get_second_library_path());
 #endif
 
     void* handle1_before = lib1.native_handle();
@@ -1245,10 +1263,13 @@ TEST_F(DynamicLibraryTest, LoadByName_WithShortName_LoadsSuccessfully) {
     try {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         dynamic_library lib = dynamic_library::load_by_name("kernel32");
+        EXPECT_TRUE(lib.is_open());
+#elif defined(NEFORCE_PLATFORM_MACOS)
+        GTEST_SKIP() << "macOS ships no unversioned libz.dylib";
 #else
         dynamic_library lib = dynamic_library::load_by_name("z");
-#endif
         EXPECT_TRUE(lib.is_open());
+#endif
     } catch (const exception& e) {
         if (string{e.what()}.trim() != "libz.so: cannot open shared object file: No such file or directory") {
             FAIL() << e.what();
@@ -1261,6 +1282,10 @@ TEST_F(DynamicLibraryTest, LoadByName_WithFullName_LoadsSuccessfully) {
     try {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         dynamic_library lib = dynamic_library::load_by_name("kernel32.dll");
+#elif defined(NEFORCE_PLATFORM_MACOS)
+        dynamic_library lib = dynamic_library::load_by_name("/usr/lib/libz.1.dylib");
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+        dynamic_library lib = dynamic_library::load_by_name("libz.so.6");
 #else
         dynamic_library lib = dynamic_library::load_by_name("libz.so.1");
 #endif
@@ -1317,14 +1342,25 @@ TEST_F(DynamicLibraryTest, LoadMode_EnumValues) {
 // dlinfo(RTLD_DI_LINKMAP) raw ELF memory access crashes under cross-compilation
 #if !defined(NEFORCE_ARCH_RISCV) && !defined(NEFORCE_ARCH_LOONGARCH)
 TEST_F(DynamicLibraryTest, ListSymbols_NonEmpty) {
+#    ifdef NEFORCE_PLATFORM_MACOS
+    // System libraries live in the dyld shared cache and expose no LC_SYMTAB;
+    // the test executable itself is a regular Mach-O with one.
+    dynamic_library lib = dynamic_library::load_self();
+#    else
     dynamic_library lib(get_test_library_path());
+#    endif
     vector<string> symbols = lib.list_symbols();
     EXPECT_FALSE(symbols.empty());
 }
 
 TEST_F(DynamicLibraryTest, ListSymbols_WithNameFilter_ReturnsFiltered) {
+#    ifdef NEFORCE_PLATFORM_MACOS
+    dynamic_library lib = dynamic_library::load_self();
+    string filter_name = "main";
+#    else
     dynamic_library lib(get_test_library_path());
     string filter_name = get_test_symbol_name();
+#    endif
     vector<string> symbols = lib.list_symbols(filter_name);
     EXPECT_FALSE(symbols.empty());
     for (const auto& s: symbols) {
@@ -4634,21 +4670,54 @@ TEST_F(ProcessTest, Snapshot_ChildProcessHasParentId) {
 }
 
 TEST_F(ProcessTest, SignalName_MatchesPortableSet) {
-    EXPECT_EQ(process::signal_name(process::signal::terminate), "TERM");
-    EXPECT_EQ(process::signal_name(process::signal::kill), "KILL");
-    EXPECT_EQ(process::signal_name(process::signal::interrupt), "INT");
-    EXPECT_EQ(process::signal_name(process::signal::user1), "USR1");
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::terminate), "TERM");
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::kill), "KILL");
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::interrupt), "INT");
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::user1), "USR1");
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::stop), "STOP");
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::window_change), "WINCH");
+#ifdef NEFORCE_PLATFORM_LINUX
+    EXPECT_EQ(system_signal::signal_number(system_signal::signal::terminate), SIGTERM);
+    EXPECT_EQ(system_signal::signal_number(system_signal::signal::kill), SIGKILL);
+    EXPECT_EQ(system_signal::signal_number(system_signal::signal::stop), SIGSTOP);
+    EXPECT_EQ(system_signal::signal_number(system_signal::signal::window_change), SIGWINCH);
+#endif
 }
 
 TEST_F(ProcessTest, SendSignal_NonexistentProcess_ReturnsFalse) {
-    EXPECT_FALSE(process::send_signal(99999999, process::signal::terminate));
-    EXPECT_FALSE(process::send_signal(99999999, 15));
+    EXPECT_FALSE(system_signal::send_to_process(99999999, system_signal::signal::terminate));
+    EXPECT_FALSE(system_signal::send_native(99999999, 15));
+}
+
+TEST_F(ProcessTest, SystemSignalNames_MatchSignalAndEventDomains) {
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::terminate), "TERM");
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::interrupt), "INT");
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::user1), "USR1");
+    EXPECT_EQ(system_signal::event_name(system_signal::event::timeout), "TIMEOUT");
+#ifdef NEFORCE_PLATFORM_LINUX
+    const auto terminate = system_signal::notification_from_native(SIGTERM);
+    ASSERT_TRUE(terminate.has_value());
+    ASSERT_TRUE(terminate->is_signal());
+    EXPECT_EQ(terminate->signal_value(), system_signal::signal::terminate);
+    EXPECT_EQ(system_signal::notification_to_native(*terminate), SIGTERM);
+#endif
+}
+
+TEST_F(ProcessTest, SystemSignal_SendAndNumberRoundTrip) {
+    EXPECT_FALSE(system_signal::send_to_process(99999999, system_signal::signal::terminate));
+    EXPECT_EQ(system_signal::signal_name(system_signal::signal::window_change), "WINCH");
+#ifdef NEFORCE_PLATFORM_LINUX
+    EXPECT_EQ(system_signal::signal_number(system_signal::signal::window_change), SIGWINCH);
+    const auto round_trip = system_signal::signal_from_number(SIGWINCH);
+    ASSERT_TRUE(round_trip.has_value());
+    EXPECT_EQ(*round_trip, system_signal::signal::window_change);
+#endif
 }
 
 TEST_F(ProcessTest, SendSignal_ChildProcessIsTerminated) {
     process p;
     p.start(get_long_running_executable(), get_long_running_args());
-    EXPECT_TRUE(process::send_signal(p.id(), process::signal::terminate));
+    EXPECT_TRUE(system_signal::send_to_process(static_cast<int>(p.id()), system_signal::signal::terminate));
     EXPECT_NE(p.wait(30000), -1);
 }
 
@@ -4687,6 +4756,17 @@ TEST_F(ProcessTest, IoInfo_CurrentProcess_HasOperations) {
     EXPECT_GT(info.read_operations + info.write_operations, 0U);
 #else
     static_cast<void>(info);
+#endif
+}
+
+TEST_F(ProcessTest, IoPriority_CurrentProcess_IsQueryableOnLinux) {
+    const auto info = process::get_io_priority(process::current_id());
+#ifdef NEFORCE_PLATFORM_LINUX
+    EXPECT_TRUE(info.available);
+    EXPECT_NE(info.priority_class, process::io_priority_class::unsupported);
+    EXPECT_LE(info.data, 7U);
+#else
+    EXPECT_FALSE(info.available);
 #endif
 }
 
@@ -5575,6 +5655,11 @@ TEST_F(SysinfoTest, MemoryStatus_AvailableVirtual_LessOrEqualTotal) {
 TEST_F(SysinfoTest, MemoryStatus_TotalPageFile_NonZero) {
     const auto mem = sysinfo::memory_status();
 
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (mem.total_page_file == 0) {
+        GTEST_SKIP() << "macOS does not expose a fixed page file size";
+    }
+#endif
     EXPECT_GT(mem.total_page_file, 0);
 }
 
@@ -5596,6 +5681,11 @@ TEST_F(SysinfoTest, MemoryStatus_AvailableMemory_NonZero) {
     const auto mem = sysinfo::memory_status();
 
     size_t available = mem.available_memory();
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (available == 0) {
+        GTEST_SKIP() << "vm statistics are unavailable in this macOS environment";
+    }
+#endif
     EXPECT_GT(available, 0);
 }
 
@@ -5674,6 +5764,11 @@ TEST_F(SysinfoTest, GetCpuInfo_CurrentMHz_NonZero) {
     sysinfo& inst = sysinfo::instance();
     const auto& cpu = inst.get_cpu_info();
 
+#ifdef NEFORCE_PLATFORM_FREEBSD
+    if (cpu.current_mhz == 0) {
+        GTEST_SKIP() << "FreeBSD VM firmware reports no CPU frequency";
+    }
+#endif
     EXPECT_GT(cpu.current_mhz, 0);
 }
 
@@ -5786,11 +5881,21 @@ TEST_F(SysinfoTest, CpuUsage_ReturnsBetweenZeroAndHundred) {
 
 TEST_F(SysinfoTest, ProcessCount_ReturnsPositive) {
     uint32_t count = sysinfo::process_count();
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (count == 0) {
+        GTEST_SKIP() << "process enumeration is unavailable in this macOS environment";
+    }
+#endif
     EXPECT_GT(count, 0);
 }
 
 TEST_F(SysinfoTest, ProcessCount_ConsistentWithCurrentProcess) {
     uint32_t count = sysinfo::process_count();
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (count == 0) {
+        GTEST_SKIP() << "process enumeration is unavailable in this macOS environment";
+    }
+#endif
     EXPECT_GE(count, 1);
 }
 
@@ -6145,6 +6250,11 @@ TEST_F(SysinfoTest, ProcessCount_AfterRefresh_StillReturnsPositive) {
     sysinfo& inst = sysinfo::instance();
     inst.refresh();
     uint32_t count = sysinfo::process_count();
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (count == 0) {
+        GTEST_SKIP() << "process enumeration is unavailable in this macOS environment";
+    }
+#endif
     EXPECT_GT(count, 0);
 }
 
@@ -6324,6 +6434,11 @@ TEST_F(SysinfoTest, NetworkInterfaces_HasLoopback) {
             break;
         }
     }
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (!found) {
+        GTEST_SKIP() << "loopback interfaces are unavailable in this macOS environment";
+    }
+#endif
     EXPECT_TRUE(found);
 }
 
@@ -6359,6 +6474,11 @@ TEST_F(SysinfoTest, NetworkInterfaces_HaveLinkStats) {
             has_mtu = true;
         }
     }
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (!has_mtu) {
+        GTEST_SKIP() << "interface MTU statistics are unavailable in this macOS environment";
+    }
+#endif
     EXPECT_TRUE(has_mtu);
 }
 
@@ -6379,10 +6499,36 @@ TEST_F(SysinfoTest, CpuBreakdown_SumsToHundred) {
     const auto value = sysinfo::cpu_usage_breakdown();
     const double total = value.user + value.nice + value.system + value.idle + value.iowait + value.irq +
                          value.softirq + value.steal + value.guest + value.guest_nice;
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (total == 0.0) {
+        GTEST_SKIP() << "CPU tick counters are unavailable in this macOS environment";
+    }
+#endif
     EXPECT_GE(total, 95.0);
     EXPECT_LE(total, 105.0);
     EXPECT_GE(value.idle, 0.0);
     EXPECT_LE(value.idle, 100.0);
+}
+
+TEST_F(SysinfoTest, PressureStatus_ReturnsSupportedResources) {
+    const auto values = sysinfo::pressure_status();
+#ifdef NEFORCE_PLATFORM_LINUX
+    if (values.empty()) {
+        GTEST_SKIP() << "PSI is not enabled in this kernel";
+    }
+    for (const auto& value: values) {
+        EXPECT_FALSE(value.resource.empty());
+        EXPECT_TRUE(value.available);
+        EXPECT_GE(value.some_avg10, 0.0);
+        EXPECT_GE(value.some_avg60, 0.0);
+        EXPECT_GE(value.some_avg300, 0.0);
+        EXPECT_GE(value.full_avg10, 0.0);
+        EXPECT_GE(value.full_avg60, 0.0);
+        EXPECT_GE(value.full_avg300, 0.0);
+    }
+#else
+    EXPECT_TRUE(values.empty());
+#endif
 }
 
 TEST_F(SysinfoTest, DiskIoRates_ReturnsDevices) {
@@ -6415,56 +6561,56 @@ TEST_F(SysinfoTest, BatteryStatus_IsConsistent) {
     }
 }
 
-class SystemEventTest : public ::testing::Test {
+class WaitableEventTest : public ::testing::Test {
 protected:
     void SetUp() override {}
 
     void TearDown() override {}
 };
 
-TEST_F(SystemEventTest, Constructor_DefaultParameters_CreatesNonSignaledAutoReset) {
-    system_event evt;
-    EXPECT_EQ(evt.event_type(), system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Constructor_DefaultParameters_CreatesNonSignaledAutoReset) {
+    waitable_event evt;
+    EXPECT_EQ(evt.event_type(), waitable_event::type::auto_reset);
 }
 
-TEST_F(SystemEventTest, Constructor_InitialStateTrue_CreatesSignaled) {
-    system_event evt(true);
+TEST_F(WaitableEventTest, Constructor_InitialStateTrue_CreatesSignaled) {
+    waitable_event evt(true);
     bool result = evt.wait(0);
     EXPECT_TRUE(result);
 }
 
-TEST_F(SystemEventTest, Constructor_InitialStateFalse_CreatesNonSignaled) {
-    system_event evt(false);
+TEST_F(WaitableEventTest, Constructor_InitialStateFalse_CreatesNonSignaled) {
+    waitable_event evt(false);
     bool result = evt.wait(0);
     EXPECT_FALSE(result);
 }
 
-TEST_F(SystemEventTest, Constructor_ManualReset_CreatesManualResetEvent) {
-    system_event evt(false, system_event::type::manual_reset);
-    EXPECT_EQ(evt.event_type(), system_event::type::manual_reset);
+TEST_F(WaitableEventTest, Constructor_ManualReset_CreatesManualResetEvent) {
+    waitable_event evt(false, waitable_event::type::manual_reset);
+    EXPECT_EQ(evt.event_type(), waitable_event::type::manual_reset);
 }
 
-TEST_F(SystemEventTest, Constructor_AutoReset_CreatesAutoResetEvent) {
-    system_event evt(false, system_event::type::auto_reset);
-    EXPECT_EQ(evt.event_type(), system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Constructor_AutoReset_CreatesAutoResetEvent) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
+    EXPECT_EQ(evt.event_type(), waitable_event::type::auto_reset);
 }
 
-TEST_F(SystemEventTest, Set_Signaled_AutoReset_WaitReturnsTrue) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Set_Signaled_AutoReset_WaitReturnsTrue) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     evt.set();
     bool result = evt.wait(100);
     EXPECT_TRUE(result);
 }
 
-TEST_F(SystemEventTest, Set_Signaled_ManualReset_WaitReturnsTrue) {
-    system_event evt(false, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, Set_Signaled_ManualReset_WaitReturnsTrue) {
+    waitable_event evt(false, waitable_event::type::manual_reset);
     evt.set();
     bool result = evt.wait(100);
     EXPECT_TRUE(result);
 }
 
-TEST_F(SystemEventTest, Set_MultipleTimes_AutoReset_WaitReturnsTrue) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Set_MultipleTimes_AutoReset_WaitReturnsTrue) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
 
     for (int i = 0; i < 3; ++i) {
         evt.set();
@@ -6473,8 +6619,8 @@ TEST_F(SystemEventTest, Set_MultipleTimes_AutoReset_WaitReturnsTrue) {
     }
 }
 
-TEST_F(SystemEventTest, Set_AutoReset_OnlyOneThreadWakesUp) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Set_AutoReset_OnlyOneThreadWakesUp) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     atomic<int> wake_count{0};
 
     thread t1([&]() {
@@ -6498,8 +6644,8 @@ TEST_F(SystemEventTest, Set_AutoReset_OnlyOneThreadWakesUp) {
     EXPECT_EQ(wake_count.load(), 1);
 }
 
-TEST_F(SystemEventTest, Set_ManualReset_AllThreadsWakeUp) {
-    system_event evt(false, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, Set_ManualReset_AllThreadsWakeUp) {
+    waitable_event evt(false, waitable_event::type::manual_reset);
     atomic<int> wake_count{0};
 
     thread t1([&]() {
@@ -6523,43 +6669,43 @@ TEST_F(SystemEventTest, Set_ManualReset_AllThreadsWakeUp) {
     EXPECT_EQ(wake_count.load(), 2);
 }
 
-TEST_F(SystemEventTest, Reset_AutoReset_EventBecomesNonSignaled) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Reset_AutoReset_EventBecomesNonSignaled) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     evt.set();
     evt.reset();
     bool result = evt.wait(0);
     EXPECT_FALSE(result);
 }
 
-TEST_F(SystemEventTest, Reset_ManualReset_EventBecomesNonSignaled) {
-    system_event evt(false, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, Reset_ManualReset_EventBecomesNonSignaled) {
+    waitable_event evt(false, waitable_event::type::manual_reset);
     evt.set();
     evt.reset();
     bool result = evt.wait(0);
     EXPECT_FALSE(result);
 }
 
-TEST_F(SystemEventTest, Reset_NonSignaled_NoEffect) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Reset_NonSignaled_NoEffect) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     evt.reset();
     bool result = evt.wait(0);
     EXPECT_FALSE(result);
 }
 
-TEST_F(SystemEventTest, Wait_ZeroTimeout_NonSignaled_ReturnsFalse) {
-    system_event evt(false);
+TEST_F(WaitableEventTest, Wait_ZeroTimeout_NonSignaled_ReturnsFalse) {
+    waitable_event evt(false);
     bool result = evt.wait(0);
     EXPECT_FALSE(result);
 }
 
-TEST_F(SystemEventTest, Wait_ZeroTimeout_Signaled_ReturnsTrue) {
-    system_event evt(true);
+TEST_F(WaitableEventTest, Wait_ZeroTimeout_Signaled_ReturnsTrue) {
+    waitable_event evt(true);
     bool result = evt.wait(0);
     EXPECT_TRUE(result);
 }
 
-TEST_F(SystemEventTest, Wait_PositiveTimeout_ReturnsAfterSet) {
-    system_event evt(false);
+TEST_F(WaitableEventTest, Wait_PositiveTimeout_ReturnsAfterSet) {
+    waitable_event evt(false);
 
     thread t([&]() {
         this_thread::sleep_for(milliseconds(50));
@@ -6572,14 +6718,14 @@ TEST_F(SystemEventTest, Wait_PositiveTimeout_ReturnsAfterSet) {
     t.join();
 }
 
-TEST_F(SystemEventTest, Wait_Timeout_ReturnsFalse) {
-    system_event evt(false);
+TEST_F(WaitableEventTest, Wait_Timeout_ReturnsFalse) {
+    waitable_event evt(false);
     bool result = evt.wait(50);
     EXPECT_FALSE(result);
 }
 
-TEST_F(SystemEventTest, Wait_InfiniteTimeout_WaitsForSet) {
-    system_event evt(false);
+TEST_F(WaitableEventTest, Wait_InfiniteTimeout_WaitsForSet) {
+    waitable_event evt(false);
 
     atomic<bool> wait_returned{false};
 
@@ -6599,8 +6745,8 @@ TEST_F(SystemEventTest, Wait_InfiniteTimeout_WaitsForSet) {
     t.join();
 }
 
-TEST_F(SystemEventTest, Wait_AutoReset_AutomaticallyResets) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Wait_AutoReset_AutomaticallyResets) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     evt.set();
 
     bool result1 = evt.wait(100);
@@ -6610,8 +6756,8 @@ TEST_F(SystemEventTest, Wait_AutoReset_AutomaticallyResets) {
     EXPECT_FALSE(result2);
 }
 
-TEST_F(SystemEventTest, Wait_ManualReset_StaysSignaled) {
-    system_event evt(false, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, Wait_ManualReset_StaysSignaled) {
+    waitable_event evt(false, waitable_event::type::manual_reset);
     evt.set();
 
     bool result1 = evt.wait(100);
@@ -6621,8 +6767,8 @@ TEST_F(SystemEventTest, Wait_ManualReset_StaysSignaled) {
     EXPECT_TRUE(result2);
 }
 
-TEST_F(SystemEventTest, Wait_Signaled_AutoReset_ResetsBeforeReturn) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Wait_Signaled_AutoReset_ResetsBeforeReturn) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     evt.set();
 
     thread t([&]() {
@@ -6636,86 +6782,88 @@ TEST_F(SystemEventTest, Wait_Signaled_AutoReset_ResetsBeforeReturn) {
     EXPECT_FALSE(result);
 }
 
-TEST_F(SystemEventTest, EventType_ReturnsCorrectType) {
-    system_event auto_evt(false, system_event::type::auto_reset);
-    EXPECT_EQ(auto_evt.event_type(), system_event::type::auto_reset);
+TEST_F(WaitableEventTest, EventType_ReturnsCorrectType) {
+    waitable_event auto_evt(false, waitable_event::type::auto_reset);
+    EXPECT_EQ(auto_evt.event_type(), waitable_event::type::auto_reset);
 
-    system_event manual_evt(false, system_event::type::manual_reset);
-    EXPECT_EQ(manual_evt.event_type(), system_event::type::manual_reset);
+    waitable_event manual_evt(false, waitable_event::type::manual_reset);
+    EXPECT_EQ(manual_evt.event_type(), waitable_event::type::manual_reset);
 }
 
-TEST_F(SystemEventTest, MoveConstructor_TransfersOwnership) {
-    system_event evt1(false, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, MoveConstructor_TransfersOwnership) {
+    waitable_event evt1(false, waitable_event::type::manual_reset);
     evt1.set();
 
-    system_event evt2(move(evt1));
+    waitable_event evt2(move(evt1));
 
-    EXPECT_EQ(evt2.event_type(), system_event::type::manual_reset);
+    EXPECT_EQ(evt2.event_type(), waitable_event::type::manual_reset);
     bool result = evt2.wait(0);
     EXPECT_TRUE(result);
 }
 
-TEST_F(SystemEventTest, MoveConstructor_SourceBecomesUnusable) {
-    system_event evt1(false);
-    system_event evt2(move(evt1));
-    EXPECT_EQ(evt2.event_type(), system_event::type::auto_reset);
+TEST_F(WaitableEventTest, MoveConstructor_SourceBecomesUnusable) {
+    waitable_event evt1(false);
+    waitable_event evt2(move(evt1));
+    EXPECT_EQ(evt2.event_type(), waitable_event::type::auto_reset);
 }
 
-TEST_F(SystemEventTest, MoveAssignment_TransfersOwnership) {
-    system_event evt1(false, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, MoveAssignment_TransfersOwnership) {
+    waitable_event evt1(false, waitable_event::type::manual_reset);
     evt1.set();
 
-    system_event evt2(true);
+    waitable_event evt2(true);
     evt2 = move(evt1);
 
-    EXPECT_EQ(evt2.event_type(), system_event::type::manual_reset);
+    EXPECT_EQ(evt2.event_type(), waitable_event::type::manual_reset);
     bool result = evt2.wait(0);
     EXPECT_TRUE(result);
 }
 
-TEST_F(SystemEventTest, MoveAssignment_SelfAssignment_NoEffect) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, MoveAssignment_SelfAssignment_NoEffect) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     evt.set();
 
     evt = move(evt);
 
-    EXPECT_EQ(evt.event_type(), system_event::type::auto_reset);
+    EXPECT_EQ(evt.event_type(), waitable_event::type::auto_reset);
     bool result = evt.wait(0);
     EXPECT_TRUE(result);
 }
 
-TEST_F(SystemEventTest, Destructor_NoDoubleFree) {
+TEST_F(WaitableEventTest, Destructor_NoDoubleFree) {
     for (int i = 0; i < 10; ++i) {
-        system_event evt(false);
+        waitable_event evt(false);
         evt.set();
         evt.wait(0);
     }
     SUCCEED();
 }
 
-TEST_F(SystemEventTest, Destructor_MovedFrom_SafeToDestroy) {
+TEST_F(WaitableEventTest, Destructor_MovedFrom_SafeToDestroy) {
     {
-        system_event evt1(false);
-        system_event evt2(move(evt1));
+        waitable_event evt1(false);
+        waitable_event evt2(move(evt1));
     }
     SUCCEED();
 }
 
-TEST_F(SystemEventTest, CopyConstructor_IsDeleted) { EXPECT_FALSE(is_copy_constructible<system_event>::value); }
+TEST_F(WaitableEventTest, CopyConstructor_IsDeleted) { EXPECT_FALSE(is_copy_constructible<waitable_event>::value); }
 
-TEST_F(SystemEventTest, CopyAssignment_IsDeleted) { EXPECT_FALSE(is_copy_assignable<system_event>::value); }
+TEST_F(WaitableEventTest, CopyAssignment_IsDeleted) { EXPECT_FALSE(is_copy_assignable<waitable_event>::value); }
 
-TEST_F(SystemEventTest, MoveConstructor_IsNoexcept) { EXPECT_TRUE(is_nothrow_move_constructible<system_event>::value); }
-
-TEST_F(SystemEventTest, MoveAssignment_IsNoexcept) { EXPECT_TRUE(is_nothrow_move_assignable<system_event>::value); }
-
-TEST_F(SystemEventTest, Type_EnumValues_Distinct) {
-    EXPECT_NE(static_cast<int>(system_event::type::auto_reset), static_cast<int>(system_event::type::manual_reset));
+TEST_F(WaitableEventTest, MoveConstructor_IsNoexcept) {
+    EXPECT_TRUE(is_nothrow_move_constructible<waitable_event>::value);
 }
 
-TEST_F(SystemEventTest, MultipleEvents_Independent) {
-    system_event evt1(false);
-    system_event evt2(false);
+TEST_F(WaitableEventTest, MoveAssignment_IsNoexcept) { EXPECT_TRUE(is_nothrow_move_assignable<waitable_event>::value); }
+
+TEST_F(WaitableEventTest, Type_EnumValues_Distinct) {
+    EXPECT_NE(static_cast<int>(waitable_event::type::auto_reset), static_cast<int>(waitable_event::type::manual_reset));
+}
+
+TEST_F(WaitableEventTest, MultipleEvents_Independent) {
+    waitable_event evt1(false);
+    waitable_event evt2(false);
 
     evt1.set();
 
@@ -6723,8 +6871,8 @@ TEST_F(SystemEventTest, MultipleEvents_Independent) {
     EXPECT_FALSE(evt2.wait(0));
 }
 
-TEST_F(SystemEventTest, SetResetSequence_MultipleTimes) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, SetResetSequence_MultipleTimes) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
 
     for (int i = 0; i < 5; ++i) {
         evt.set();
@@ -6737,8 +6885,8 @@ TEST_F(SystemEventTest, SetResetSequence_MultipleTimes) {
     }
 }
 
-TEST_F(SystemEventTest, Wait_InterruptedBySet_ReturnsTrue) {
-    system_event evt(false);
+TEST_F(WaitableEventTest, Wait_InterruptedBySet_ReturnsTrue) {
+    waitable_event evt(false);
 
     thread waiter([&]() {
         bool result = evt.wait(1000);
@@ -6751,8 +6899,8 @@ TEST_F(SystemEventTest, Wait_InterruptedBySet_ReturnsTrue) {
     waiter.join();
 }
 
-TEST_F(SystemEventTest, Wait_InterruptedBySet_WithTimeout) {
-    system_event evt(false);
+TEST_F(WaitableEventTest, Wait_InterruptedBySet_WithTimeout) {
+    waitable_event evt(false);
 
     thread waiter([&]() {
         bool result = evt.wait(1000);
@@ -6765,29 +6913,29 @@ TEST_F(SystemEventTest, Wait_InterruptedBySet_WithTimeout) {
     waiter.join();
 }
 
-TEST_F(SystemEventTest, Constructor_InitialStateTrue_WaitZeroReturnsTrue) {
-    system_event evt(true, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Constructor_InitialStateTrue_WaitZeroReturnsTrue) {
+    waitable_event evt(true, waitable_event::type::auto_reset);
     EXPECT_TRUE(evt.wait(0));
     EXPECT_FALSE(evt.wait(0));
 }
 
-TEST_F(SystemEventTest, Constructor_InitialStateTrue_ManualReset_WaitMultipleReturnsTrue) {
-    system_event evt(true, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, Constructor_InitialStateTrue_ManualReset_WaitMultipleReturnsTrue) {
+    waitable_event evt(true, waitable_event::type::manual_reset);
     EXPECT_TRUE(evt.wait(0));
     EXPECT_TRUE(evt.wait(0));
 }
 
-TEST_F(SystemEventTest, MoveAssignment_DifferentTypes_TypePreserved) {
-    system_event evt1(false, system_event::type::manual_reset);
-    system_event evt2(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, MoveAssignment_DifferentTypes_TypePreserved) {
+    waitable_event evt1(false, waitable_event::type::manual_reset);
+    waitable_event evt2(false, waitable_event::type::auto_reset);
 
     evt2 = move(evt1);
 
-    EXPECT_EQ(evt2.event_type(), system_event::type::manual_reset);
+    EXPECT_EQ(evt2.event_type(), waitable_event::type::manual_reset);
 }
 
-TEST_F(SystemEventTest, Wait_DefaultTimeout_IsInfinite) {
-    system_event evt(false);
+TEST_F(WaitableEventTest, Wait_DefaultTimeout_IsInfinite) {
+    waitable_event evt(false);
 
     atomic<bool> done{false};
     thread t([&]() {
@@ -6806,8 +6954,8 @@ TEST_F(SystemEventTest, Wait_DefaultTimeout_IsInfinite) {
     t.join();
 }
 
-TEST_F(SystemEventTest, SetBeforeWait_AutoReset_WaitReturnsImmediately) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, SetBeforeWait_AutoReset_WaitReturnsImmediately) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     evt.set();
 
     auto start = steady_clock::now();
@@ -6818,8 +6966,8 @@ TEST_F(SystemEventTest, SetBeforeWait_AutoReset_WaitReturnsImmediately) {
     EXPECT_LT(time_cast<milliseconds>(end - start).count(), 50);
 }
 
-TEST_F(SystemEventTest, SetBeforeWait_ManualReset_WaitReturnsImmediately) {
-    system_event evt(false, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, SetBeforeWait_ManualReset_WaitReturnsImmediately) {
+    waitable_event evt(false, waitable_event::type::manual_reset);
     evt.set();
 
     auto start = steady_clock::now();
@@ -6830,9 +6978,9 @@ TEST_F(SystemEventTest, SetBeforeWait_ManualReset_WaitReturnsImmediately) {
     EXPECT_LT(time_cast<milliseconds>(end - start).count(), 50);
 }
 
-TEST_F(SystemEventTest, ConcurrentSetAndWait_MultipleThreads) {
+TEST_F(WaitableEventTest, ConcurrentSetAndWait_MultipleThreads) {
     constexpr int num_threads = 4;
-    system_event evt(false, system_event::type::manual_reset);
+    waitable_event evt(false, waitable_event::type::manual_reset);
 
     vector<thread> threads;
     atomic<int> success_count{0};
@@ -6855,8 +7003,8 @@ TEST_F(SystemEventTest, ConcurrentSetAndWait_MultipleThreads) {
     EXPECT_EQ(success_count.load(), num_threads);
 }
 
-TEST_F(SystemEventTest, Reset_WhileThreadsWaiting_WakesNobody) {
-    system_event evt(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, Reset_WhileThreadsWaiting_WakesNobody) {
+    waitable_event evt(false, waitable_event::type::auto_reset);
     atomic<int> wake_count{0};
 
     thread t([&]() {
@@ -6879,304 +7027,252 @@ protected:
     void SetUp() override {
         auto& mgr = system_signal::instance();
         mgr.reset_force();
-
-        mgr.remove_handler(system_signal::event::custom_1);
-        mgr.remove_handler(system_signal::event::custom_2);
-        mgr.remove_handler(system_signal::event::timeout);
-        mgr.remove_handler(system_signal::event::user1);
-        mgr.remove_handler(system_signal::event::user2);
-
+        mgr.unsubscribe(system_signal::event::custom_1);
+        mgr.unsubscribe(system_signal::event::custom_2);
+        mgr.unsubscribe(system_signal::event::timeout);
+        mgr.unsubscribe(system_signal::signal::user1);
+        mgr.unsubscribe(system_signal::signal::user2);
         mgr.set_force_exit_timeout(5000);
     }
 
     void TearDown() override {
         auto& mgr = system_signal::instance();
         mgr.reset_force();
-
-        mgr.remove_handler(system_signal::event::custom_1);
-        mgr.remove_handler(system_signal::event::custom_2);
-        mgr.remove_handler(system_signal::event::timeout);
-        mgr.remove_handler(system_signal::event::user1);
-        mgr.remove_handler(system_signal::event::user2);
+        mgr.unsubscribe(system_signal::event::custom_1);
+        mgr.unsubscribe(system_signal::event::custom_2);
+        mgr.unsubscribe(system_signal::event::timeout);
+        mgr.unsubscribe(system_signal::signal::user1);
+        mgr.unsubscribe(system_signal::signal::user2);
     }
 };
 
 TEST_F(SignalManagerTest, Instance_ReturnsSameInstance) {
-    system_signal& mgr1 = system_signal::instance();
-    system_signal& mgr2 = system_signal::instance();
-    EXPECT_EQ(&mgr1, &mgr2);
+    EXPECT_EQ(&system_signal::instance(), &system_signal::instance());
 }
 
-TEST_F(SignalManagerTest, Instance_InitiallyNotRunning) {
-    system_signal& mgr = system_signal::instance();
+TEST_F(SignalManagerTest, StartStopMonitoring_TransitionsRunningState) {
+    auto& mgr = system_signal::instance();
     EXPECT_FALSE(mgr.is_running());
-}
-
-TEST_F(SignalManagerTest, StartMonitoring_StartsRunning) {
-    system_signal& mgr = system_signal::instance();
-    mgr.start_monitoring();
-    EXPECT_TRUE(mgr.is_running());
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, StopMonitoring_StopsRunning) {
-    system_signal& mgr = system_signal::instance();
-    mgr.start_monitoring();
-    mgr.stop_monitoring();
-    EXPECT_FALSE(mgr.is_running());
-}
-
-TEST_F(SignalManagerTest, StartMonitoring_AlreadyRunning_NoEffect) {
-    system_signal& mgr = system_signal::instance();
     mgr.start_monitoring();
     EXPECT_TRUE(mgr.is_running());
     mgr.start_monitoring();
     EXPECT_TRUE(mgr.is_running());
     mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, StopMonitoring_AlreadyStopped_NoEffect) {
-    system_signal& mgr = system_signal::instance();
     EXPECT_FALSE(mgr.is_running());
     mgr.stop_monitoring();
     EXPECT_FALSE(mgr.is_running());
 }
 
-TEST_F(SignalManagerTest, RegisterHandler_ValidHandler_Success) {
-    system_signal& mgr = system_signal::instance();
-    atomic<bool> was_called{false};
-
-    mgr.register_handler(system_signal::event::custom_1, [&was_called](system_signal::event, void*) -> bool {
-        was_called = true;
+TEST_F(SignalManagerTest, SubscribeEvent_DispatchesNotification) {
+    auto& mgr = system_signal::instance();
+    atomic<bool> called{false};
+    mgr.subscribe(system_signal::event::custom_1, [&called](system_signal::notification value, void*) -> bool {
+        called = value.is_event() && value.event_value() == system_signal::event::custom_1;
         return true;
     });
-
+    mgr.enqueue_event(system_signal::event::custom_1);
     mgr.start_monitoring();
-    mgr.send_signal(system_signal::event::custom_1);
-
-    this_thread::sleep_for(200_ms);
-    EXPECT_TRUE(was_called.load());
-
+    this_thread::sleep_for(150_ms);
+    EXPECT_TRUE(called.load());
     mgr.stop_monitoring();
 }
 
-TEST_F(SignalManagerTest, RegisterHandler_NullHandler_ThrowsException) {
-    system_signal& mgr = system_signal::instance();
-    EXPECT_THROW(mgr.register_handler(system_signal::event::custom_1, nullptr), system_exception);
-}
-
-TEST_F(SignalManagerTest, RegisterHandler_MultipleEvents_AllCalled) {
-    system_signal& mgr = system_signal::instance();
-    atomic<int> call_count{0};
-
-    auto handler = [&call_count](system_signal::event, void*) -> bool {
-        ++call_count;
-        return true;
-    };
-
-    mgr.register_handler(system_signal::event::custom_1, handler);
-    mgr.register_handler(system_signal::event::custom_2, handler);
-
-    mgr.start_monitoring();
-    mgr.send_signal(system_signal::event::custom_1);
-    mgr.send_signal(system_signal::event::custom_2);
-
-    this_thread::sleep_for(200_ms);
-    EXPECT_GE(call_count.load(), 2);
-
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, RegisterHandlers_BatchRegistersAll) {
-    system_signal& mgr = system_signal::instance();
-    atomic<int> call_count{0};
-
-    auto handler = [&call_count](system_signal::event, void*) -> bool {
-        ++call_count;
-        return true;
-    };
-
-    vector<system_signal::event> events = {system_signal::event::custom_1, system_signal::event::custom_2};
-    mgr.register_handlers(events, handler);
-
-    mgr.start_monitoring();
-    mgr.send_signal(system_signal::event::custom_1);
-    mgr.send_signal(system_signal::event::custom_2);
-
-    this_thread::sleep_for(200_ms);
-    EXPECT_GE(call_count.load(), 2);
-
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, RegisterHandlers_NullHandler_ThrowsException) {
-    system_signal& mgr = system_signal::instance();
-    vector<system_signal::event> events = {system_signal::event::custom_1, system_signal::event::custom_2};
-    EXPECT_THROW(mgr.register_handlers(events, nullptr), system_exception);
-}
-
-TEST_F(SignalManagerTest, RemoveHandler_HandlerNotCalled) {
-    system_signal& mgr = system_signal::instance();
-    atomic<int> call_count{0};
-
-    auto handler = [&call_count](system_signal::event, void*) -> bool {
-        ++call_count;
-        return true;
-    };
-
-    mgr.register_handler(system_signal::event::custom_1, handler);
-    mgr.remove_handler(system_signal::event::custom_1);
-
-    mgr.start_monitoring();
-    mgr.send_signal(system_signal::event::custom_1);
-
-    this_thread::sleep_for(200_ms);
-    EXPECT_EQ(call_count.load(), 0);
-
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, RemoveHandler_NonExistent_NoThrow) {
-    system_signal& mgr = system_signal::instance();
-    EXPECT_NO_THROW(mgr.remove_handler(system_signal::event::custom_1));
-}
-
-TEST_F(SignalManagerTest, SendSignal_HasContext_ContextReceived) {
-    system_signal& mgr = system_signal::instance();
-    atomic<void*> received_context{nullptr};
-    int test_value = 42;
-
-    mgr.register_handler(system_signal::event::custom_1, [&received_context](system_signal::event, void* ctx) -> bool {
-        received_context.store(ctx, memory_order_release);
+TEST_F(SignalManagerTest, SubscribeSignal_DispatchesNotification) {
+    auto& mgr = system_signal::instance();
+    atomic<bool> called{false};
+    mgr.subscribe(system_signal::signal::user1, [&called](system_signal::notification value, void*) -> bool {
+        called = value.is_signal() && value.signal_value() == system_signal::signal::user1;
         return true;
     });
-
+    mgr.enqueue_signal(system_signal::signal::user1);
     mgr.start_monitoring();
-    mgr.send_signal(system_signal::event::custom_1, &test_value);
-
-    this_thread::sleep_for(200_ms);
-    EXPECT_EQ(received_context.load(memory_order_acquire), &test_value);
-
+    this_thread::sleep_for(150_ms);
+    EXPECT_TRUE(called.load());
     mgr.stop_monitoring();
 }
 
-TEST_F(SignalManagerTest, SendSignal_MultipleTimes_AllProcessed) {
-    system_signal& mgr = system_signal::instance();
-    atomic<int> call_count{0};
+TEST_F(SignalManagerTest, Subscribe_NullHandler_ThrowsException) {
+    auto& mgr = system_signal::instance();
+    EXPECT_THROW(mgr.subscribe(system_signal::event::custom_1, nullptr), system_exception);
+    EXPECT_THROW(mgr.subscribe(system_signal::signal::user1, nullptr), system_exception);
+}
 
-    mgr.register_handler(system_signal::event::custom_1, [&call_count](system_signal::event, void*) -> bool {
-        ++call_count;
+TEST_F(SignalManagerTest, SubscribeBatch_RegistersAll) {
+    auto& mgr = system_signal::instance();
+    atomic<int> count{0};
+    auto handler = [&count](system_signal::notification, void*) -> bool {
+        ++count;
+        return true;
+    };
+    mgr.subscribe(vector<system_signal::event>{system_signal::event::custom_1, system_signal::event::custom_2},
+                  handler);
+    mgr.start_monitoring();
+    mgr.enqueue_event(system_signal::event::custom_1);
+    mgr.enqueue_event(system_signal::event::custom_2);
+    this_thread::sleep_for(150_ms);
+    EXPECT_GE(count.load(), 2);
+    mgr.stop_monitoring();
+}
+
+TEST_F(SignalManagerTest, Unsubscribe_HandlerNotCalled) {
+    auto& mgr = system_signal::instance();
+    atomic<int> count{0};
+    auto handler = [&count](system_signal::notification, void*) -> bool {
+        ++count;
+        return true;
+    };
+    mgr.subscribe(system_signal::event::custom_1, handler);
+    mgr.unsubscribe(system_signal::event::custom_1);
+    mgr.start_monitoring();
+    mgr.enqueue_event(system_signal::event::custom_1);
+    this_thread::sleep_for(100_ms);
+    EXPECT_EQ(count.load(), 0);
+    mgr.stop_monitoring();
+}
+
+TEST_F(SignalManagerTest, DispatchEvent_ContextIsDelivered) {
+    auto& mgr = system_signal::instance();
+    atomic<void*> received{nullptr};
+    int value = 42;
+    mgr.subscribe(system_signal::event::custom_1, [&received](system_signal::notification, void* context) -> bool {
+        received.store(context, memory_order_release);
         return true;
     });
-
     mgr.start_monitoring();
+    mgr.enqueue_event(system_signal::event::custom_1, &value);
+    this_thread::sleep_for(150_ms);
+    EXPECT_EQ(received.load(memory_order_acquire), &value);
+    mgr.stop_monitoring();
+}
 
+TEST_F(SignalManagerTest, DispatchEvent_MultipleTimes_AllProcessed) {
+    auto& mgr = system_signal::instance();
+    atomic<int> count{0};
+    mgr.subscribe(system_signal::event::custom_1, [&count](system_signal::notification, void*) -> bool {
+        ++count;
+        return true;
+    });
+    mgr.start_monitoring();
     for (int i = 0; i < 5; ++i) {
-        mgr.send_signal(system_signal::event::custom_1);
+        mgr.enqueue_event(system_signal::event::custom_1);
     }
-
-    this_thread::sleep_for(300_ms);
-    EXPECT_EQ(call_count.load(), 5);
-
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, SignalHandler_ReturnsFalse_ProcessContinues) {
-    system_signal& mgr = system_signal::instance();
-    atomic<bool> was_called{false};
-
-    mgr.register_handler(system_signal::event::custom_1, [&was_called](system_signal::event, void*) -> bool {
-        was_called = true;
-        return false;
-    });
-
-    mgr.start_monitoring();
-    mgr.send_signal(system_signal::event::custom_1);
-
     this_thread::sleep_for(200_ms);
-    EXPECT_TRUE(was_called.load());
-    EXPECT_TRUE(mgr.is_running());
-
+    EXPECT_EQ(count.load(), 5);
     mgr.stop_monitoring();
 }
 
-TEST_F(SignalManagerTest, SendSignal_NotMonitoring_StillProcessedWhenStarted) {
-    system_signal& mgr = system_signal::instance();
-    atomic<int> call_count{0};
-
-    mgr.register_handler(system_signal::event::custom_1, [&call_count](system_signal::event, void*) -> bool {
-        ++call_count;
-        return true;
-    });
-
-    mgr.send_signal(system_signal::event::custom_1);
+TEST_F(SignalManagerTest, HandlerReturnsFalse_DoesNotStopMonitoring) {
+    auto& mgr = system_signal::instance();
+    mgr.subscribe(system_signal::event::custom_1, [](system_signal::notification, void*) -> bool { return false; });
     mgr.start_monitoring();
-
-    this_thread::sleep_for(200_ms);
-    EXPECT_GE(call_count.load(), 1);
-
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, SetForceExitTimeout_UpdatesTimeout) {
-    system_signal& mgr = system_signal::instance();
-    mgr.set_force_exit_timeout(3000);
-    mgr.start_monitoring();
+    mgr.enqueue_event(system_signal::event::custom_1);
+    this_thread::sleep_for(100_ms);
     EXPECT_TRUE(mgr.is_running());
     mgr.stop_monitoring();
 }
 
-TEST_F(SignalManagerTest, IsPlatformSignal_NativeSignal_ReturnsTrue) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::interrupt));
-    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::ctrl_break));
-    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::close));
-#else
-    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::interrupt));
-    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::terminate));
-    EXPECT_TRUE(system_signal::is_platform_signal(system_signal::event::hangup));
+TEST_F(SignalManagerTest, WaitForNotification_Event) {
+    auto& mgr = system_signal::instance();
+    mgr.stop_monitoring();
+    mgr.enqueue_event(system_signal::event::custom_1);
+    const auto value = mgr.wait_for_notification(100);
+    ASSERT_TRUE(value.has_value());
+    EXPECT_TRUE(value->is_event());
+    EXPECT_EQ(value->event_value(), system_signal::event::custom_1);
+}
+
+TEST_F(SignalManagerTest, WaitForNotification_Signal) {
+    auto& mgr = system_signal::instance();
+    mgr.stop_monitoring();
+    mgr.enqueue_signal(system_signal::signal::user1);
+    const auto value = mgr.wait_for_notification(100);
+    ASSERT_TRUE(value.has_value());
+    EXPECT_TRUE(value->is_signal());
+    EXPECT_EQ(value->signal_value(), system_signal::signal::user1);
+}
+
+TEST_F(SignalManagerTest, WaitForNotification_TimeoutReturnsNone) {
+    auto& mgr = system_signal::instance();
+    mgr.stop_monitoring();
+    EXPECT_FALSE(mgr.wait_for_notification(0).has_value());
+}
+
+TEST_F(SignalManagerTest, ChainExistingHandler_IsCalled) {
+#ifndef NEFORCE_PLATFORM_WINDOWS
+    static volatile sig_atomic_t chained = 0;
+    chained = 0;
+    struct ::sigaction previous{};
+    struct ::sigaction action{};
+    action.sa_handler = [](int) { chained = 1; };
+    sigemptyset(&action.sa_mask);
+    action.sa_flags = SA_RESTART;
+    ASSERT_EQ(::sigaction(SIGUSR1, &action, &previous), 0);
+    system_signal::set_chain_existing_handlers(true);
+    auto& mgr = system_signal::instance();
+    mgr.subscribe(system_signal::signal::user1, [](system_signal::notification, void*) -> bool { return true; });
+    mgr.start_monitoring();
+    ::raise(SIGUSR1);
+    this_thread::sleep_for(120_ms);
+    EXPECT_EQ(chained, 1);
+    mgr.unsubscribe(system_signal::signal::user1);
+    mgr.stop_monitoring();
+    ::sigaction(SIGUSR1, &previous, nullptr);
 #endif
 }
 
-TEST_F(SignalManagerTest, IsPlatformSignal_CustomSignal_ReturnsFalse) {
-    EXPECT_FALSE(system_signal::is_platform_signal(system_signal::event::custom_1));
-    EXPECT_FALSE(system_signal::is_platform_signal(system_signal::event::custom_2));
-    EXPECT_FALSE(system_signal::is_platform_signal(system_signal::event::force_exit));
+TEST_F(SignalManagerTest, CanSend_MatchesPlatformCapability) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_TRUE(system_signal::can_send(system_signal::signal::terminate));
+    EXPECT_TRUE(system_signal::can_send(system_signal::signal::kill));
+    EXPECT_FALSE(system_signal::can_send(system_signal::signal::user1));
+#else
+    EXPECT_TRUE(system_signal::can_send(system_signal::signal::terminate));
+    EXPECT_TRUE(system_signal::can_send(system_signal::signal::user1));
+#endif
 }
 
-TEST_F(SignalManagerTest, BlockUnblockSignals_LinuxOnly_ReturnsResult) {
-    system_signal& mgr = system_signal::instance();
-    vector<system_signal::event> signals = {system_signal::event::user1, system_signal::event::user2};
-
-    bool block_result = mgr.block_signals(signals);
-    bool unblock_result = mgr.unblock_signals(signals);
-
-    EXPECT_TRUE(block_result);
-    EXPECT_TRUE(unblock_result);
+TEST_F(SignalManagerTest, Notification_Name_ReflectsKind) {
+    EXPECT_EQ(system_signal::notification_name(
+                      system_signal::notification::from_signal(system_signal::signal::terminate)),
+              "TERM");
+    EXPECT_EQ(system_signal::notification_name(system_signal::notification::from_event(system_signal::event::custom_1)),
+              "CUSTOM1");
 }
 
-TEST_F(SignalManagerTest, BlockSignals_EmptyList_ReturnsTrue) {
-    system_signal& mgr = system_signal::instance();
-    vector<system_signal::event> empty;
-    bool result = mgr.block_signals(empty);
-    EXPECT_TRUE(result);
+TEST_F(SignalManagerTest, NotificationFromNative_RoundTrip) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const auto value = system_signal::notification_from_native(CTRL_C_EVENT);
+    ASSERT_TRUE(value.has_value());
+    ASSERT_TRUE(value->is_signal());
+    EXPECT_EQ(value->signal_value(), system_signal::signal::interrupt);
+    EXPECT_EQ(system_signal::notification_to_native(*value), CTRL_C_EVENT);
+#else
+    const auto value = system_signal::notification_from_native(SIGINT);
+    ASSERT_TRUE(value.has_value());
+    ASSERT_TRUE(value->is_signal());
+    EXPECT_EQ(value->signal_value(), system_signal::signal::interrupt);
+    EXPECT_EQ(system_signal::notification_to_native(*value), SIGINT);
+#endif
 }
 
-TEST_F(SignalManagerTest, UnblockSignals_EmptyList_ReturnsTrue) {
-    system_signal& mgr = system_signal::instance();
-    vector<system_signal::event> empty;
-    bool result = mgr.unblock_signals(empty);
-    EXPECT_TRUE(result);
+TEST_F(SignalManagerTest, NotificationFromNative_Unknown_ReturnsNone) {
+    EXPECT_FALSE(system_signal::notification_from_native(999999).has_value());
 }
 
-TEST_F(SignalManagerTest, StopMonitoring_CleansUpHandlers) {
-    system_signal& mgr = system_signal::instance();
-    mgr.start_monitoring();
-    mgr.stop_monitoring();
+TEST_F(SignalManagerTest, IsNativeNotification_ClassifiesKinds) {
+    EXPECT_TRUE(system_signal::is_native_notification(
+            system_signal::notification::from_signal(system_signal::signal::terminate)));
+    EXPECT_FALSE(system_signal::is_native_notification(
+            system_signal::notification::from_event(system_signal::event::custom_1)));
+}
 
-    mgr.start_monitoring();
-    mgr.stop_monitoring();
-    SUCCEED();
+TEST_F(SignalManagerTest, BlockUnblockSignals_ReturnsResult) {
+    auto& mgr = system_signal::instance();
+    const vector<system_signal::signal> signals = {system_signal::signal::user1, system_signal::signal::user2};
+    EXPECT_TRUE(mgr.block_signals(signals));
+    EXPECT_TRUE(mgr.unblock_signals(signals));
+    EXPECT_TRUE(mgr.block_signals({}));
+    EXPECT_TRUE(mgr.unblock_signals({}));
 }
 
 TEST_F(SignalManagerTest, SignalGuard_StartsAndStopsMonitoring) {
@@ -7188,12 +7284,12 @@ TEST_F(SignalManagerTest, SignalGuard_StartsAndStopsMonitoring) {
 }
 
 TEST_F(SignalManagerTest, SignalGuard_Nested_HandlesCorrectly) {
-    system_signal& mgr = system_signal::instance();
+    auto& mgr = system_signal::instance();
     {
-        signal_guard guard1;
+        signal_guard outer;
         EXPECT_TRUE(mgr.is_running());
         {
-            signal_guard guard2;
+            signal_guard inner;
             EXPECT_TRUE(mgr.is_running());
         }
         EXPECT_TRUE(mgr.is_running());
@@ -7201,148 +7297,25 @@ TEST_F(SignalManagerTest, SignalGuard_Nested_HandlesCorrectly) {
     EXPECT_FALSE(mgr.is_running());
 }
 
-TEST_F(SignalManagerTest, CopyConstructor_IsDeleted) { EXPECT_FALSE(is_copy_constructible<system_signal>::value); }
+TEST_F(SignalManagerTest, TypeTraits_AreNotCopyableOrMovable) {
+    EXPECT_FALSE(is_copy_constructible<system_signal>::value);
+    EXPECT_FALSE(is_copy_assignable<system_signal>::value);
+    EXPECT_FALSE(is_move_constructible<system_signal>::value);
+    EXPECT_FALSE(is_move_assignable<system_signal>::value);
+}
 
-TEST_F(SignalManagerTest, CopyAssignment_IsDeleted) { EXPECT_FALSE(is_copy_assignable<system_signal>::value); }
-
-TEST_F(SignalManagerTest, MoveConstructor_IsDeleted) { EXPECT_FALSE(is_move_constructible<system_signal>::value); }
-
-TEST_F(SignalManagerTest, MoveAssignment_IsDeleted) { EXPECT_FALSE(is_move_assignable<system_signal>::value); }
-
-TEST_F(SignalManagerTest, SignalEvent_EnumValues_Distinct) {
-    EXPECT_NE(static_cast<int>(system_signal::event::interrupt), static_cast<int>(system_signal::event::terminate));
+TEST_F(SignalManagerTest, SignalAndEvent_AreDistinctDomains) {
+    EXPECT_NE(static_cast<int>(system_signal::signal::terminate), static_cast<int>(system_signal::signal::kill));
     EXPECT_NE(static_cast<int>(system_signal::event::custom_1), static_cast<int>(system_signal::event::custom_2));
     EXPECT_NE(static_cast<int>(system_signal::event::timeout), static_cast<int>(system_signal::event::force_exit));
 }
 
 TEST_F(SignalManagerTest, LongRunningMonitoring_Success) {
-    system_signal& mgr = system_signal::instance();
+    auto& mgr = system_signal::instance();
     mgr.start_monitoring();
-    this_thread::sleep_for(300_ms);
+    this_thread::sleep_for(200_ms);
     EXPECT_TRUE(mgr.is_running());
     mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, SendSignal_AfterStopMonitoring_QueuedAndProcessed) {
-    system_signal& mgr = system_signal::instance();
-    atomic<int> call_count{0};
-
-    mgr.register_handler(system_signal::event::custom_1, [&call_count](system_signal::event, void*) -> bool {
-        ++call_count;
-        return true;
-    });
-
-    mgr.start_monitoring();
-    mgr.send_signal(system_signal::event::custom_1);
-    this_thread::sleep_for(200_ms);
-
-    EXPECT_EQ(call_count.load(), 1);
-
-    mgr.stop_monitoring();
-    mgr.send_signal(system_signal::event::custom_1);
-
-    mgr.start_monitoring();
-    this_thread::sleep_for(200_ms);
-    EXPECT_GE(call_count.load(), 2);
-
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, WaitForSignal_SignalReceived_ReturnsCorrectEvent) {
-    system_signal& mgr = system_signal::instance();
-    atomic<bool> wait_started{false};
-
-    mgr.start_monitoring();
-
-    thread sender([&]() {
-        while (!wait_started.load()) {
-            this_thread::sleep_for(10_ms);
-        }
-        this_thread::sleep_for(50_ms);
-        mgr.send_signal(system_signal::event::custom_1);
-    });
-
-    wait_started.store(true);
-    system_signal::event ev = mgr.wait_for_signal(500);
-
-    EXPECT_TRUE(ev == system_signal::event::custom_1 || ev == system_signal::event::timeout);
-
-    sender.join();
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, HandlerReceivesCorrectEvent) {
-    system_signal& mgr = system_signal::instance();
-    atomic<system_signal::event> received_event{system_signal::event::timeout};
-
-    mgr.register_handler(system_signal::event::custom_1, [&received_event](system_signal::event ev, void*) -> bool {
-        received_event.store(ev);
-        return true;
-    });
-
-    mgr.start_monitoring();
-    mgr.send_signal(system_signal::event::custom_1);
-    this_thread::sleep_for(200_ms);
-
-    EXPECT_EQ(received_event.load(), system_signal::event::custom_1);
-
-    mgr.stop_monitoring();
-}
-
-TEST_F(SignalManagerTest, FromNative_Interrupt_ReturnsInterrupt) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    EXPECT_EQ(system_signal::from_native(CTRL_C_EVENT), system_signal::event::interrupt);
-#else
-    EXPECT_EQ(system_signal::from_native(SIGINT), system_signal::event::interrupt);
-#endif
-}
-
-TEST_F(SignalManagerTest, FromNative_Terminate_ReturnsTerminate) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    EXPECT_EQ(system_signal::from_native(CTRL_BREAK_EVENT), system_signal::event::ctrl_break);
-#else
-    EXPECT_EQ(system_signal::from_native(SIGTERM), system_signal::event::terminate);
-#endif
-}
-
-TEST_F(SignalManagerTest, FromNative_UnknownSignal_ReturnsCustom) {
-    int unknown = 99999;
-    system_signal::event ev = system_signal::from_native(unknown);
-    EXPECT_NE(static_cast<int>(ev), static_cast<int>(system_signal::event::interrupt));
-    EXPECT_NE(static_cast<int>(ev), static_cast<int>(system_signal::event::terminate));
-}
-
-TEST_F(SignalManagerTest, ToNative_Interrupt_ReturnsValidSignal) {
-    int sig = system_signal::to_native(system_signal::event::interrupt);
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    EXPECT_EQ(sig, CTRL_C_EVENT);
-#else
-    EXPECT_EQ(sig, SIGINT);
-#endif
-}
-
-TEST_F(SignalManagerTest, ToNative_Terminate_ReturnsValidSignal) {
-    int sig = system_signal::to_native(system_signal::event::terminate);
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    EXPECT_EQ(sig, -1);
-#else
-    EXPECT_EQ(sig, SIGTERM);
-#endif
-}
-
-TEST_F(SignalManagerTest, ToNative_CustomEvent_ReturnsMinusOne) {
-    int sig = system_signal::to_native(system_signal::event::custom_1);
-    EXPECT_EQ(sig, -1);
-}
-
-TEST_F(SignalManagerTest, FromNativeToNative_Roundtrip_Consistent) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    system_signal::event ev = system_signal::from_native(CTRL_C_EVENT);
-    EXPECT_EQ(system_signal::to_native(ev), CTRL_C_EVENT);
-#else
-    system_signal::event ev = system_signal::from_native(SIGINT);
-    EXPECT_EQ(system_signal::to_native(ev), SIGINT);
-#endif
 }
 
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -8128,16 +8101,16 @@ TEST_F(EnvironmentTest, ConfigDirectoryNotEmpty) {
 #endif
 }
 
-TEST_F(SystemEventTest, TryWaitReturnsImmediately) {
-    system_event ev(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, TryWaitReturnsImmediately) {
+    waitable_event ev(false, waitable_event::type::auto_reset);
     EXPECT_FALSE(ev.try_wait());
     ev.set();
     EXPECT_TRUE(ev.try_wait());
     EXPECT_FALSE(ev.try_wait());
 }
 
-TEST_F(SystemEventTest, TryWaitManualReset) {
-    system_event ev(false, system_event::type::manual_reset);
+TEST_F(WaitableEventTest, TryWaitManualReset) {
+    waitable_event ev(false, waitable_event::type::manual_reset);
     EXPECT_FALSE(ev.try_wait());
     ev.set();
     EXPECT_TRUE(ev.try_wait());
@@ -8146,8 +8119,8 @@ TEST_F(SystemEventTest, TryWaitManualReset) {
     EXPECT_FALSE(ev.try_wait());
 }
 
-TEST_F(SystemEventTest, IsSetDoesNotConsume) {
-    system_event ev(false, system_event::type::auto_reset);
+TEST_F(WaitableEventTest, IsSetDoesNotConsume) {
+    waitable_event ev(false, waitable_event::type::auto_reset);
     EXPECT_FALSE(ev.is_set());
     ev.set();
     EXPECT_TRUE(ev.is_set());

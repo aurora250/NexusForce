@@ -132,7 +132,7 @@ uint64_t extract_bits(uint64_t& buffer, size_t& available, Engine& engine, const
         const size_t take = (count - filled < available) ? (count - filled) : available;
         const uint64_t mask = (take >= 64) ? ~static_cast<uint64_t>(0) : ((static_cast<uint64_t>(1) << take) - 1);
         value |= (buffer & mask) << (count - filled - take);
-        buffer >>= take;
+        buffer = take >= 64 ? 0 : (buffer >> take);
         available -= take;
         filled += take;
     }

@@ -24,7 +24,7 @@
 #    include <sys/eventfd.h>
 #    include <sys/inotify.h>
 #endif
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 #    include <fcntl.h>
 #    include <sys/event.h>
 #endif
@@ -325,7 +325,7 @@ void file_watcher::impl::stop() {
 }
 
 void file_watcher::impl::watch_thread_func() {
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
     struct ::kevent events[64];
     while (!stopping_.load(memory_order_acquire)) {
         const ::timespec timeout{0, 50'000'000L};
@@ -624,7 +624,7 @@ void file_watcher::impl::watch_thread_func() {
 #endif
 }
 
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 bool file_watcher::impl::kqueue_add_watch(const string& relative, const bool directory) {
     string full = watch_path_.str();
     if (!relative.empty()) {

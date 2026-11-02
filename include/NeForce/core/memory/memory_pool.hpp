@@ -128,6 +128,7 @@ public:
         bool thread_cache_enabled = true;             ///< 是否启用线程本地缓存
         bool region_cache_enabled = true;             ///< 是否启用大对象区域复用缓存
         bool purge_on_empty = false;                  ///< 是否在 span 完全空闲时立即归还操作系统
+        bool double_free_detection = true;            ///< 是否在释放时检测重复释放
     };
 
     /**
@@ -161,6 +162,7 @@ public:
         size_t os_unmap_calls = 0;             ///< 归还操作系统的次数
         class_statistics classes[class_count]; ///< 各尺寸类统计
         size_t foreign_releases = 0;           ///< 收到非本池所有指针的释放次数
+        size_t double_free_releases = 0;       ///< 检测到的重复释放次数
     };
 
 public:
@@ -220,6 +222,9 @@ public:
                     cache.entries[class_index].list = *static_cast<void**>(block);
                     --cache.entries[class_index].count;
                     cache.last_claim = reinterpret_cast<uintptr_t>(block);
+                    if (options_.double_free_detection) {
+                        mark_block_live(block);
+                    }
                     return block;
                 }
                 return allocate_small(cache, class_index);
@@ -264,6 +269,12 @@ public:
      * @return 自本实例构造以来收到的不属于本池的指针释放次数
      */
     NEFORCE_NODISCARD size_t foreign_release_count() const noexcept;
+
+    /**
+     * @brief 查询重复释放的检测次数
+     * @return 自本实例构造以来检测到的重复释放次数
+     */
+    NEFORCE_NODISCARD size_t double_free_count() const noexcept;
 
     /**
      * @brief 归还当前线程的缓存
@@ -322,6 +333,20 @@ public:
     }
 
 private:
+    static constexpr uint64_t free_block_magic = 0x4E4652454544424CULL; ///< 空闲块标记 "NFREEDBL"
+
+    static void mark_block_free(void* block) noexcept {
+        *reinterpret_cast<uint64_t*>(static_cast<char*>(block) + sizeof(void*)) = free_block_magic;
+    }
+
+    static void mark_block_live(void* block) noexcept {
+        *reinterpret_cast<uint64_t*>(static_cast<char*>(block) + sizeof(void*)) = 0;
+    }
+
+    static bool block_is_free(const void* block) noexcept {
+        return *reinterpret_cast<const uint64_t*>(static_cast<const char*>(block) + sizeof(void*)) == free_block_magic;
+    }
+
     /**
      * @struct region_header
      * @brief 大对象区域头部
@@ -432,6 +457,7 @@ private:
     atomic<size_t> os_map_calls_;
     atomic<size_t> os_unmap_calls_;
     atomic<size_t> foreign_releases_;
+    atomic<size_t> double_free_releases_;
 };
 
 /**

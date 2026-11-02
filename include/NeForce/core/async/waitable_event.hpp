@@ -1,33 +1,34 @@
-#ifndef NEFORCE_CORE_SYSTEM_SYSTEM_EVENT_HPP__
-#define NEFORCE_CORE_SYSTEM_SYSTEM_EVENT_HPP__
+#ifndef NEFORCE_CORE_ASYNC_WAITABLE_EVENT_HPP__
+#define NEFORCE_CORE_ASYNC_WAITABLE_EVENT_HPP__
 
 /**
- * @file system_event.hpp
- * @brief 系统事件同步原语
+ * @file waitable_event.hpp
+ * @brief 可等待事件同步原语
  *
- * 此文件提供了系统事件，支持手动重置和自动重置两种模式，可用于线程间同步。
+ * 此文件提供了可等待事件，支持手动重置和自动重置两种模式，可用于线程间同步。
  */
 
+#include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup SystemEvent 系统事件
- * @brief 系统事件实现
+ * @defgroup WaitableEvent 可等待事件
+ * @brief 可等待事件实现
  * @{
  */
 
 /**
- * @class system_event
- * @brief 系统事件类
+ * @class waitable_event
+ * @brief 可等待事件类
  *
  * 提供线程同步的事件对象，使用场景：
  * - 线程间通知
  * - 生产者-消费者模式
  * - 工作队列通知
  */
-class NEFORCE_API system_event {
+class NEFORCE_API waitable_event {
 public:
     /**
      * @enum type
@@ -42,8 +43,8 @@ private:
     struct impl;
     unique_ptr<impl> impl_;
 
-    bool signaled_; ///< 信号状态
-    type type_;     ///< 事件类型
+    atomic<bool> signaled_; ///< 事件置位状态
+    type type_;             ///< 事件类型
 
 public:
     /**
@@ -52,28 +53,28 @@ public:
      * @param t 事件类型
      * @throws system_exception 创建失败时抛出
      */
-    explicit system_event(bool initial_state = false, type t = type::auto_reset);
+    explicit waitable_event(bool initial_state = false, type t = type::auto_reset);
 
     /**
      * @brief 析构函数
      */
-    ~system_event();
+    ~waitable_event();
 
-    system_event(const system_event&) = delete;
-    system_event& operator=(const system_event&) = delete;
+    waitable_event(const waitable_event&) = delete;
+    waitable_event& operator=(const waitable_event&) = delete;
 
     /**
      * @brief 移动构造函数
      * @param other 源对象
      */
-    system_event(system_event&& other) noexcept;
+    waitable_event(waitable_event&& other) noexcept;
 
     /**
      * @brief 移动赋值运算符
      * @param other 源对象
      * @return 自身引用
      */
-    system_event& operator=(system_event&& other) noexcept;
+    waitable_event& operator=(waitable_event&& other) noexcept;
 
     /**
      * @brief 设置事件为有信号状态
@@ -96,7 +97,7 @@ public:
      * 对于自动重置事件，唤醒后事件自动重置。
      * 对于手动重置事件，唤醒后事件保持有信号状态。
      */
-    bool wait(uint32_t timeout_ms = numeric_traits<uint32_t>::max()) noexcept;
+    bool wait(uint32_t timeout_ms = numeric_traits<uint32_t>::max());
 
     /**
      * @brief 尝试获取事件（非阻塞）
@@ -104,13 +105,13 @@ public:
      *
      * 对于自动重置事件，成功时自动重置为无信号状态。
      */
-    bool try_wait() noexcept;
+    bool try_wait();
 
     /**
      * @brief 查询事件是否处于有信号状态
      * @return 是否已设置
      */
-    NEFORCE_NODISCARD bool is_set() const noexcept { return signaled_; }
+    NEFORCE_NODISCARD bool is_set() const noexcept;
 
     /**
      * @brief 获取事件类型
@@ -129,4 +130,4 @@ public:
 /** @} */ // SystemEvent
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_SYSTEM_SYSTEM_EVENT_HPP__
+#endif // NEFORCE_CORE_ASYNC_WAITABLE_EVENT_HPP__

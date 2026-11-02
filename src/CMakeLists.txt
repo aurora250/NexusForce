@@ -101,7 +101,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/sysinfo.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/system_event.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/waitable_event.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/clocks.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/time/datetime.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/typeinfo/check_type.cpp
@@ -301,7 +301,7 @@ if (WIN32)
             VERSION ${NEXUSFORCE_VERSION}
             SOVERSION ${NEXUSFORCE_VERSION_MAJOR}
     )
-elseif(UNIX AND NOT APPLE)
+elseif(UNIX)
     set_target_properties(NexusForce PROPERTIES
             CXX_STANDARD ${CMAKE_CXX_STANDARD}
             CXX_STANDARD_REQUIRED ON
@@ -337,11 +337,24 @@ if(WIN32)
             bcrypt cfgmgr32 Crypt32 DbgHelp iphlpapi Psapi pdh powrprof
             SetupAPI Shell32 synchronization Wbemuuid ws2_32 wsock32
     )
-elseif(UNIX AND NOT APPLE)
+elseif(APPLE)
+    # macOS deprecates the unnamed POSIX semaphore API and libc++ turns the
+    # deprecation into an error under -Werror.
+    target_compile_options(NexusForce PRIVATE -Wno-deprecated-declarations)
+    # Installed dylibs must be relocatable; the build tree keeps its absolute
+    # install name so examples can run from the build directory.
+    set_target_properties(NexusForce PROPERTIES INSTALL_NAME_DIR "@rpath")
+    # libSystem already provides pthread, dl and the backtrace symbols; there
+    # is no separate libatomic or librt to link.
+    target_link_libraries(NexusForce PUBLIC "-framework Security")
+    if(NEXUSFORCE_USING_IO_URING)
+        message(STATUS "io_uring is Linux-only; related functionality is disabled on macOS")
+    endif()
+elseif(UNIX)
     if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
         # FreeBSD's libc already provides the atomic builtins; there is no libatomic.
         # backtrace() lives in libexecinfo, so consumers of the library need it as well.
-        target_link_libraries(NexusForce PUBLIC pthread execinfo)
+        target_link_libraries(NexusForce PUBLIC pthread execinfo devstat)
     else()
         target_link_libraries(NexusForce PUBLIC
                 atomic pthread

@@ -84,10 +84,11 @@ using int32_t = int;
  * @typedef int64_t
  * @brief 64位有符号整数类型
  *
- * POSIX为long，Windows为long long
+ * Linux / FreeBSD 的 POSIX64 为 long，macOS 与 Windows 为 long long，
+ * 与各平台系统头文件中的 int64_t 保持同一类型。
  */
 using int64_t =
-#ifdef NEFORCE_PLATFORM_POSIX64
+#if defined(NEFORCE_PLATFORM_POSIX64) && !defined(NEFORCE_PLATFORM_MACOS)
         long;
 #else
         long long;
@@ -115,10 +116,11 @@ using uint32_t = unsigned int;
  * @typedef uint64_t
  * @brief 64位无符号整数类型
  *
- * POSIX为unsigned long，Windows为unsigned long long
+ * Linux / FreeBSD 的 POSIX64 为 unsigned long，macOS 与 Windows 为
+ * unsigned long long，与各平台系统头文件中的 uint64_t 保持同一类型。
  */
 using uint64_t =
-#ifdef NEFORCE_PLATFORM_POSIX64
+#if defined(NEFORCE_PLATFORM_POSIX64) && !defined(NEFORCE_PLATFORM_MACOS)
         unsigned long;
 #else
         unsigned long long;
@@ -159,41 +161,22 @@ using decimal_t = long double;
  * @typedef size_t
  * @brief 无符号大小类型
  *
- * 64位下为为uint64_t，32位下为uint32_t。文档以64位平台为例。
+ * 64位下为平台原生 size_t
+ * （Linux / FreeBSD / macOS 为 unsigned long，Windows 为 unsigned long long）。
  */
 using size_t = uint64_t;
 
-/**
- * @typedef ssize_t
- * @brief 有符号大小类型
- *
- * 64位下为为int64_t，32位下为int32_t。文档以64位平台为例。
- */
+#    ifdef NEFORCE_PLATFORM_MACOS
+using ssize_t = long;
+using ptrdiff_t = long;
+using intptr_t = long;
+using uintptr_t = unsigned long;
+#    else
 using ssize_t = int64_t;
-
-/**
- * @typedef ptrdiff_t
- * @brief 指针差类型
- *
- * 64位下为为int64_t，32位下为int32_t。文档以64位平台为例。
- */
 using ptrdiff_t = int64_t;
-
-/**
- * @typedef intptr_t
- * @brief 可容纳指针的有符号整数类型
- *
- * 64位下为为int64_t，32位下为int32_t。文档以64位平台为例。
- */
 using intptr_t = int64_t;
-
-/**
- * @typedef uintptr_t
- * @brief 可容纳指针的无符号整数类型
- *
- * 64位下为为uint64_t，32位下为uint32_t。文档以64位平台为例。
- */
 using uintptr_t = uint64_t;
+#    endif
 
 #else
 

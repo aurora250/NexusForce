@@ -58,7 +58,9 @@
 #include "NeForce/core/memory/construct.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
-#include <malloc.h>
+#ifndef NEFORCE_PLATFORM_MACOS
+#    include <malloc.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

@@ -19,7 +19,7 @@
 #    include <linux/if_packet.h>
 #    include <linux/if.h>
 #endif
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 #    include <ifaddrs.h>
 #    include <net/bpf.h>
 #    include <net/ethernet.h>
@@ -75,7 +75,7 @@ struct arp::impl {
     socket_base sock_;
 
     bool local_info(const char* iface);
-#    elif defined(NEFORCE_PLATFORM_FREEBSD)
+#    elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     int bpf_fd_ = -1;
 
     bool local_info(const char* iface);
@@ -161,7 +161,7 @@ bool arp::impl::local_info(const char* iface) {
 #endif
 
 
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 bool arp::impl::local_info(const char* iface) {
     ::ifaddrs* list = nullptr;
     if (::getifaddrs(&list) != 0) {
@@ -247,7 +247,7 @@ bool arp::open(const char* iface) {
     impl_->opened_ = true;
     return true;
 
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     if (impl_->bpf_fd_ >= 0) {
         return true;
     }
@@ -325,7 +325,7 @@ bool arp::open(const char* iface) {
 void arp::close() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     impl_->opened_ = false;
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     if (impl_->bpf_fd_ >= 0) {
         ::close(impl_->bpf_fd_);
         impl_->bpf_fd_ = -1;
@@ -381,7 +381,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     const uint32_t target_ip = target.address().get<::sockaddr_in>().sin_addr.s_addr;
     memory_copy(arp_pkt->target_ip, &target_ip, 4);
 
-#    ifdef NEFORCE_PLATFORM_FREEBSD
+#    ifdef NEFORCE_PLATFORM_BSD_LIKE
     if (impl_->bpf_fd_ < 0 && !open(impl_->iface_.empty() ? nullptr : impl_->iface_.data())) {
         return none;
     }

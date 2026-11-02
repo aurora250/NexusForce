@@ -16,6 +16,9 @@ extern "C" {
 extern char** environ;
 }
 #endif
+#ifdef NEFORCE_PLATFORM_MACOS
+#    include <crt_externs.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -103,7 +106,11 @@ flat_unordered_map<string, string> environment::all_envs() {
     }
     ::FreeEnvironmentStringsW(env_block);
 #else
+#    ifdef NEFORCE_PLATFORM_MACOS
+    for (char** env = *::_NSGetEnviron(); *env != nullptr; env++) {
+#    else
     for (char** env = ::environ; *env != nullptr; env++) {
+#    endif
         const string_view env_str(*env);
         const size_t eq_pos = env_str.find('=');
         if (eq_pos != string::npos) {

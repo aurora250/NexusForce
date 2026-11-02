@@ -290,6 +290,11 @@ bool thread::set_name(native_handle_type handle, const char* name) {
     }
 #    endif
     return false;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    if (handle != ::pthread_self()) {
+        return false;
+    }
+    return ::pthread_setname_np(name) == 0;
 #else
     return ::pthread_setname_np(handle, name) == 0;
 #endif

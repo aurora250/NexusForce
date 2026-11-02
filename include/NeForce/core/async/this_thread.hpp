@@ -56,10 +56,14 @@ NEFORCE_BEGIN_THIS_THREAD__
  * @return 当前线程运行的CPU核心编号
  *
  * 返回当前线程正在运行的CPU核心的逻辑编号。
+ *
+ * @note macOS 不提供公开的线程到核心映射接口
  */
 NEFORCE_ALWAYS_INLINE_INLINE int64_t current_cpu() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return static_cast<int64_t>(::GetCurrentProcessorNumber());
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    return -1;
 #else
     return static_cast<int64_t>(::sched_getcpu());
 #endif

@@ -1923,9 +1923,9 @@ TEST(HexadecimalTest, ConstructFromIntTypes) {
 }
 
 TEST(HexadecimalTest, ConstructFromInt64) {
-    hexadecimal h(int64_t(-1));
+    hexadecimal h(uint64_t(-1));
     EXPECT_EQ(h.value(), -1);
-    hexadecimal h2(0xABCDEF123456);
+    hexadecimal h2(int64_t(0xABCDEF123456LL));
     EXPECT_EQ(h2.value(), 0xABCDEF123456);
 }
 

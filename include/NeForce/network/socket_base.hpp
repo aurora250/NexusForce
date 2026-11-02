@@ -14,6 +14,9 @@
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <linux/if_ether.h>
 #endif
+#ifdef NEFORCE_PLATFORM_POSIX
+#    include <sys/select.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -127,7 +130,7 @@ public:
         raw = SOCK_RAW,             ///< 原始套接字
         rdm = SOCK_RDM,             ///< 可靠数据报套接字
         seqpacket = SOCK_SEQPACKET, ///< 有序分组套接字（SCTP）
-#ifdef NEFORCE_PLATFORM_POSIX
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
         cloexec = SOCK_CLOEXEC,   ///< 执行时关闭标志
         nonblock = SOCK_NONBLOCK, ///< 非阻塞标志
 #endif
@@ -150,7 +153,7 @@ public:
         raw = IPPROTO_RAW,   ///< 原始 IP 数据包
         esp = IPPROTO_ESP,   ///< IPsec 封装安全载荷
         ah = IPPROTO_AH,     ///< IPsec 认证头
-#ifdef NEFORCE_PLATFORM_POSIX
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
         dccp = IPPROTO_DCCP, ///< 数据报拥塞控制协议
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX

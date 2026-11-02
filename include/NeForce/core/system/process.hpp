@@ -155,22 +155,6 @@ public:
     };
 
     /**
-     * @enum signal
-     * @brief 跨平台进程信号
-     */
-    enum class signal : int32_t {
-        terminate, ///< 请求终止
-        kill,      ///< 强制终止
-        interrupt, ///< 中断（LINUX）
-        quit,      ///< 退出（LINUX）
-        hangup,    ///< 挂断（LINUX）
-        stop,      ///< 暂停（LINUX）
-        resume,    ///< 继续（LINUX）
-        user1,     ///< 用户信号 1（LINUX）
-        user2      ///< 用户信号 2（LINUX）
-    };
-
-    /**
      * @enum priority
      * @brief 进程调度优先级
      */
@@ -193,6 +177,28 @@ public:
         uint64_t read_operations{0};  ///< 读操作次数
         uint64_t write_operations{0}; ///< 写操作次数
         uint64_t other_bytes{0};      ///< 其它 I/O 字节（Windows）
+    };
+
+    /**
+     * @enum io_priority_class
+     * @brief 进程 I/O 调度优先级类别
+     */
+    enum class io_priority_class {
+        none,        ///< 未设置
+        realtime,    ///< 实时
+        best_effort, ///< 尽力而为
+        idle,        ///< 空闲
+        unsupported  ///< 平台不支持
+    };
+
+    /**
+     * @struct io_priority_info
+     * @brief 进程 I/O 优先级
+     */
+    struct io_priority_info {
+        bool available{false};                                            ///< 是否成功查询
+        io_priority_class priority_class{io_priority_class::unsupported}; ///< 优先级类别
+        uint16_t data{0};                                                 ///< 类别内的优先级数据
     };
 
     /**
@@ -630,6 +636,13 @@ public:
     NEFORCE_NODISCARD static io_info current_io_info();
 
     /**
+     * @brief 查询任意进程的 I/O 优先级
+     * @param process_id 目标进程 ID
+     * @return I/O 优先级
+     */
+    NEFORCE_NODISCARD static io_priority_info get_io_priority(native_id_type process_id);
+
+    /**
      * @brief 查询任意进程的属主用户名
      * @param process_id 目标进程 ID
      * @return 用户名，无法解析时返回空字符串
@@ -668,30 +681,6 @@ public:
      * @return 扫描结果，包含完成状态与不可读进程数
      */
     NEFORCE_NODISCARD static socket_owner_scan scan_socket_owners(int timeout_ms = -1);
-
-    /**
-     * @brief 向指定进程发送信号
-     * @param process_id 目标进程 ID
-     * @param sig 跨平台信号
-     * @return 发送成功返回 true
-     * @note Linux 使用 pidfd 避免 PID 复用竞态；Windows 只映射 terminate/kill
-     */
-    static bool send_signal(native_id_type process_id, signal sig) noexcept;
-
-    /**
-     * @brief 向指定进程发送平台原生信号
-     * @param process_id 目标进程 ID
-     * @param native_signal 原生信号编号（POSIX），Windows 只接受 9 与 15
-     * @return 发送成功返回 true
-     */
-    static bool send_signal(native_id_type process_id, int native_signal) noexcept;
-
-    /**
-     * @brief 获取信号的名称
-     * @param sig 跨平台信号
-     * @return 不含 SIG 前缀的名称，如 "TERM"
-     */
-    NEFORCE_NODISCARD static string_view signal_name(signal sig) noexcept;
 
     /**
      * @brief 查询进程调度优先级

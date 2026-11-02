@@ -44,6 +44,11 @@
 #    include <sys/sysctl.h>
 #    include <sys/user.h>
 #endif
+#ifdef NEFORCE_PLATFORM_MACOS
+#    include <libproc.h>
+#    include <sys/proc.h>
+#    include <sys/sysctl.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -615,51 +620,6 @@ namespace {
         }
     }
 
-    int native_signal_of(const process::signal sig) noexcept {
-        switch (sig) {
-            case process::signal::terminate:
-                return SIGTERM;
-            case process::signal::kill:
-                return SIGKILL;
-            case process::signal::interrupt:
-                return SIGINT;
-            case process::signal::quit:
-                return SIGQUIT;
-            case process::signal::hangup:
-                return SIGHUP;
-            case process::signal::stop:
-                return SIGSTOP;
-            case process::signal::resume:
-                return SIGCONT;
-            case process::signal::user1:
-                return SIGUSR1;
-            case process::signal::user2:
-                return SIGUSR2;
-            default:
-                return 0;
-        }
-    }
-
-    bool send_native_signal(const int process_id, const int native_signal) noexcept {
-        if (process_id <= 0 || native_signal <= 0) {
-            return false;
-        }
-#    ifdef SYS_pidfd_open
-        const int descriptor = static_cast<int>(::syscall(SYS_pidfd_open, process_id, 0));
-        if (descriptor >= 0) {
-            const bool sent = ::syscall(SYS_pidfd_send_signal, descriptor, native_signal, nullptr, 0) == 0;
-            ::close(descriptor);
-            if (sent) {
-                return true;
-            }
-            // Fall through to kill(2): pidfd_open can succeed while pidfd_send_signal is unavailable
-            // (old kernels, seccomp filters, or a tracer that does not implement the syscall).
-            // Reporting failure there would drop the signal even though kill(2) can still deliver it.
-        }
-#    endif
-        return ::kill(process_id, native_signal) == 0;
-    }
-
     string user_name_of_uid(const uint32_t uid) {
         char buffer[16384] = {};
         ::passwd entry{};
@@ -739,7 +699,7 @@ namespace {
     }
 
     vector<::kinfo_proc> freebsd_all_procs() {
-        constexpr int mib[3] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL};
+        int mib[3] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL};
         ::size_t length = 0;
         if (::sysctl(mib, 3, nullptr, &length, nullptr, 0) != 0 || length == 0) {
             return {};
@@ -826,6 +786,101 @@ namespace {
         result.read_operations = static_cast<uint64_t>(info.ki_rusage.ru_inblock);
         result.write_operations = static_cast<uint64_t>(info.ki_rusage.ru_oublock);
         return result;
+    }
+#    endif
+
+#    ifdef NEFORCE_PLATFORM_MACOS
+    bool darwin_bsd_info(const native_id_type process_id, ::proc_bsdinfo& out) noexcept {
+        const int size = ::proc_pidinfo(static_cast<int>(process_id), PROC_PIDTBSDINFO, 0, &out, sizeof(out));
+        return size == static_cast<int>(sizeof(out)) && out.pbi_pid == static_cast<uint32_t>(process_id);
+    }
+
+    bool darwin_task_info(const native_id_type process_id, ::proc_taskinfo& out) noexcept {
+        const int size = ::proc_pidinfo(static_cast<int>(process_id), PROC_PIDTASKINFO, 0, &out, sizeof(out));
+        return size == static_cast<int>(sizeof(out));
+    }
+
+    process::state darwin_state_of(const uint32_t status) noexcept {
+        switch (status) {
+            case SIDL:
+            case SRUN:
+            case SSLEEP:
+                return process::state::running;
+            case SSTOP:
+                return process::state::suspended;
+            case SZOMB:
+                return process::state::exited;
+            default:
+                return process::state::unknown;
+        }
+    }
+
+    string darwin_name(const native_id_type process_id) {
+        ::proc_bsdinfo info{};
+        if (!darwin_bsd_info(process_id, info)) {
+            return {};
+        }
+        if (info.pbi_name[0] != '\0') {
+            return info.pbi_name;
+        }
+        return info.pbi_comm;
+    }
+
+    vector<string> darwin_argv(const native_id_type process_id) {
+        int mib[3] = {CTL_KERN, KERN_PROCARGS2, static_cast<int>(process_id)};
+        ::size_t length = 0;
+        if (::sysctl(mib, 3, nullptr, &length, nullptr, 0) != 0 || length <= sizeof(int)) {
+            return {};
+        }
+        vector<char> buffer(length + 1, 0);
+        if (::sysctl(mib, 3, buffer.data(), &length, nullptr, 0) != 0) {
+            return {};
+        }
+
+        int argc = 0;
+        memory_copy(&argc, buffer.data(), sizeof(argc));
+        if (argc <= 0) {
+            return {};
+        }
+
+        size_t position = sizeof(argc);
+        while (position < length && buffer[position] != '\0') {
+            ++position;
+        }
+        while (position < length && buffer[position] == '\0') {
+            ++position;
+        }
+
+        vector<string> arguments;
+        for (int index = 0; index < argc && position < length; ++index) {
+            const char* text = buffer.data() + position;
+            const size_t size = string_length(text);
+            if (size != 0) {
+                arguments.emplace_back(text, size);
+            }
+            position += size + 1;
+        }
+        return arguments;
+    }
+
+    string darwin_command_line(const native_id_type process_id) {
+        string command;
+        for (const auto& argument: darwin_argv(process_id)) {
+            if (!command.empty()) {
+                command.push_back(' ');
+            }
+            command += argument;
+        }
+        return command;
+    }
+
+    string darwin_executable(const native_id_type process_id) {
+        char buffer[PROC_PIDPATHINFO_MAXSIZE] = {};
+        const int size = ::proc_pidpath(static_cast<int>(process_id), buffer, sizeof(buffer));
+        if (size <= 0) {
+            return {};
+        }
+        return {buffer, static_cast<size_t>(size)};
     }
 #    endif
 #endif
@@ -1300,10 +1355,19 @@ void process::start(const string& executable, const vector<string>& args) {
     }
 
     int notify_fds[2] = {-1, -1};
+#    ifdef NEFORCE_PLATFORM_MACOS
+    if (::pipe(notify_fds) == -1) {
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(process_exception(error));
+    }
+    ::fcntl(notify_fds[0], F_SETFD, FD_CLOEXEC);
+    ::fcntl(notify_fds[1], F_SETFD, FD_CLOEXEC);
+#    else
     if (::pipe2(notify_fds, O_CLOEXEC) == -1) {
         const auto error = last_error();
         NEFORCE_THROW_EXCEPTION(process_exception(error));
     }
+#    endif
 
     const ::pid_t pid = ::fork();
     if (pid < 0) {
@@ -1993,6 +2057,50 @@ vector<process::snapshot_entry> process::snapshot() {
         }
         out.push_back(move(item));
     }
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    int mib[3] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL};
+    ::size_t length = 0;
+    if (::sysctl(mib, 3, nullptr, &length, nullptr, 0) != 0 || length == 0) {
+        return out;
+    }
+    length += sizeof(::kinfo_proc) * 16;
+    vector<::kinfo_proc> entries(length / sizeof(::kinfo_proc));
+    if (::sysctl(mib, 3, entries.data(), &length, nullptr, 0) != 0) {
+        return out;
+    }
+    entries.resize(length / sizeof(::kinfo_proc));
+
+    for (const auto& entry: entries) {
+        const auto process_id = static_cast<native_id_type>(entry.kp_proc.p_pid);
+        if (process_id == 0) {
+            continue;
+        }
+        snapshot_entry item;
+        item.pid = static_cast<uint32_t>(process_id);
+        item.parent_pid = static_cast<uint32_t>(entry.kp_eproc.e_ppid);
+        item.name = entry.kp_proc.p_comm;
+        item.status = darwin_state_of(static_cast<uint32_t>(entry.kp_proc.p_stat));
+        item.nice = entry.kp_proc.p_nice;
+        item.kernel_thread = (entry.kp_proc.p_flag & P_SYSTEM) != 0;
+
+        ::proc_taskinfo task{};
+        if (darwin_task_info(process_id, task)) {
+            item.threads = static_cast<uint32_t>(task.pti_threadnum);
+            item.rss_bytes = task.pti_resident_size;
+            item.virtual_bytes = task.pti_virtual_size;
+            item.user_time_ms = task.pti_total_user / 1'000'000ULL;
+            item.system_time_ms = task.pti_total_system / 1'000'000ULL;
+        }
+
+        ::proc_bsdinfo bsd{};
+        if (darwin_bsd_info(process_id, bsd)) {
+            item.uid = static_cast<uint32_t>(bsd.pbi_uid);
+            item.user = user_name_of_uid(item.uid);
+            item.start_time_ms = bsd.pbi_start_tvsec * 1000ULL + bsd.pbi_start_tvusec / 1000ULL;
+        }
+        item.command = darwin_command_line(process_id);
+        out.push_back(move(item));
+    }
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
     const auto page_size = static_cast<uint64_t>(process_page_size());
     for (const auto& info: freebsd_all_procs()) {
@@ -2045,6 +2153,8 @@ string process::get_name(const native_id_type process_id) {
         return move(stat_data.name);
     }
     return {};
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    return darwin_name(process_id);
 #else
     ::kinfo_proc info{};
     if (freebsd_kinfo(process_id, info)) {
@@ -2080,6 +2190,8 @@ string process::get_command_line(native_id_type process_id) {
         }
     }
     return command.trim();
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    return darwin_command_line(process_id);
 #else
     return freebsd_command_line(process_id);
 #endif
@@ -2106,6 +2218,8 @@ string process::get_executable_path(native_id_type process_id) {
         return {};
     }
     return {buffer, static_cast<size_t>(length)};
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    return darwin_executable(process_id);
 #else
     return freebsd_executable(process_id);
 #endif
@@ -2139,6 +2253,19 @@ process::time_info process::get_time_info(const native_id_type process_id) {
     info.user_time_ms = stat_data.user_ticks * 1000 / ticks;
     info.kernel_time_ms = stat_data.system_ticks * 1000 / ticks;
     const uint64_t started_at = start_time_ms(stat_data.start_ticks);
+    const uint64_t now = unix_time_ms();
+    info.wall_time_ms = now > started_at ? now - started_at : 0;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    ::proc_bsdinfo bsd{};
+    if (!darwin_bsd_info(process_id, bsd)) {
+        return info;
+    }
+    ::proc_taskinfo task{};
+    if (darwin_task_info(process_id, task)) {
+        info.user_time_ms = task.pti_total_user / 1'000'000ULL;
+        info.kernel_time_ms = task.pti_total_system / 1'000'000ULL;
+    }
+    const uint64_t started_at = bsd.pbi_start_tvsec * 1000ULL + bsd.pbi_start_tvusec / 1000ULL;
     const uint64_t now = unix_time_ms();
     info.wall_time_ms = now > started_at ? now - started_at : 0;
 #else
@@ -2193,6 +2320,13 @@ process::memory_info process::get_memory_info(native_id_type process_id) {
         }
     }
     mem_info.peak_pagefile_usage = 0;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    ::proc_taskinfo task{};
+    if (darwin_task_info(process_id, task)) {
+        mem_info.virtual_size = static_cast<size_t>(task.pti_virtual_size);
+        mem_info.working_set_size = static_cast<size_t>(task.pti_resident_size);
+        mem_info.peak_working_set_size = mem_info.working_set_size;
+    }
 #else
     ::kinfo_proc process_info{};
     if (freebsd_kinfo(process_id, process_info)) {
@@ -2252,6 +2386,15 @@ process::state process::get_state(native_id_type process_id) {
     linux_proc_stat stat_data;
     if (parse_proc_stat(static_cast<uint32_t>(process_id), stat_data)) {
         return state_from_char(stat_data.state);
+    }
+    if (::kill(process_id, 0) != 0) {
+        return state::exited;
+    }
+    return state::unknown;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    ::proc_bsdinfo bsd{};
+    if (darwin_bsd_info(process_id, bsd)) {
+        return darwin_state_of(bsd.pbi_status);
     }
     if (::kill(process_id, 0) != 0) {
         return state::exited;
@@ -2336,6 +2479,12 @@ process::privilege_level process::get_privilege_level(native_id_type process_id)
             }
         }
         return privilege_level::unknown;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+        ::proc_bsdinfo bsd{};
+        if (!darwin_bsd_info(process_id, bsd)) {
+            return privilege_level::unknown;
+        }
+        return bsd.pbi_uid == 0 ? privilege_level::privileged : privilege_level::not_privileged;
 #else
         ::kinfo_proc process_info{};
         if (!freebsd_kinfo(process_id, process_info)) {
@@ -2398,6 +2547,29 @@ bool process::check_permission(native_id_type process_id, permission perm) {
         return false;
     }
     return uid == static_cast<uint32_t>(::geteuid());
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    ::proc_bsdinfo bsd{};
+    if (!darwin_bsd_info(process_id, bsd)) {
+        return false;
+    }
+
+    const int value = static_cast<int>(perm);
+    if (value == 0) {
+        return true;
+    }
+    if ((value & static_cast<int>(permission::execute)) != 0) {
+        return false;
+    }
+
+    constexpr int owner_only = static_cast<int>(permission::read) | static_cast<int>(permission::write) |
+                               static_cast<int>(permission::terminate);
+    if ((value & owner_only) == 0) {
+        return true;
+    }
+    if (::geteuid() == 0) {
+        return true;
+    }
+    return bsd.pbi_uid == static_cast<uid_t>(::geteuid());
 #else
     ::kinfo_proc process_info{};
     if (!freebsd_kinfo(process_id, process_info)) {
@@ -2590,7 +2762,28 @@ bool process::relaunch_current() {
         ::_exit(127);
     }
     return true;
-#else
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    vector<string> arguments = darwin_argv(current_id());
+    if (arguments.empty()) {
+        return false;
+    }
+    const ::pid_t child = ::fork();
+    if (child < 0) {
+        return false;
+    }
+    if (child == 0) {
+        ::setsid();
+        vector<char*> argv;
+        argv.reserve(arguments.size() + 1);
+        for (auto& argument: arguments) {
+            argv.push_back(argument.data());
+        }
+        argv.push_back(nullptr);
+        ::execv(arguments.front().data(), argv.data());
+        ::_exit(127);
+    }
+    return true;
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
     vector<string> arguments = freebsd_argv(current_id());
     if (arguments.empty()) {
         return false;
@@ -2625,6 +2818,8 @@ process::io_info process::get_io_info(const native_id_type process_id) {
     ::CloseHandle(handle);
 #elif defined(NEFORCE_PLATFORM_LINUX)
     info = io_info_from_proc(static_cast<uint32_t>(process_id));
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    static_cast<void>(process_id);
 #else
     ::kinfo_proc process_info{};
     if (freebsd_kinfo(process_id, process_info)) {
@@ -2635,6 +2830,36 @@ process::io_info process::get_io_info(const native_id_type process_id) {
 }
 
 process::io_info process::current_io_info() { return get_io_info(current_id()); }
+
+process::io_priority_info process::get_io_priority(const native_id_type process_id) {
+    io_priority_info info;
+#ifdef NEFORCE_PLATFORM_LINUX
+    const long value = ::syscall(SYS_ioprio_get, 1, process_id);
+    if (value < 0) {
+        return info;
+    }
+    info.available = true;
+    const int priority_class = static_cast<int>((value >> 13) & 0x7);
+    info.data = static_cast<uint16_t>(value & 0x1FFF);
+    switch (priority_class) {
+        case 1:
+            info.priority_class = io_priority_class::realtime;
+            break;
+        case 2:
+            info.priority_class = io_priority_class::best_effort;
+            break;
+        case 3:
+            info.priority_class = io_priority_class::idle;
+            break;
+        default:
+            info.priority_class = io_priority_class::none;
+            break;
+    }
+#else
+    static_cast<void>(process_id);
+#endif
+    return info;
+}
 
 process::io_info process::get_io_info() const {
     if (!started_) {
@@ -2658,6 +2883,12 @@ string process::get_user(const native_id_type process_id) {
         return {};
     }
     return user_name_of_uid(uid);
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    ::proc_bsdinfo bsd{};
+    if (!darwin_bsd_info(process_id, bsd)) {
+        return {};
+    }
+    return user_name_of_uid(static_cast<uint32_t>(bsd.pbi_uid));
 #else
     ::kinfo_proc process_info{};
     if (!freebsd_kinfo(process_id, process_info)) {
@@ -2726,6 +2957,33 @@ vector<process::thread_info> process::threads(const native_id_type process_id) {
         item.user_time_ms = stat_data.user_ticks * 1000 / ticks;
         item.system_time_ms = stat_data.system_ticks * 1000 / ticks;
         item.start_time_ms = start_time_ms(stat_data.start_ticks);
+        out.push_back(move(item));
+    }
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    vector<uint64_t> thread_ids(1024, 0);
+    const int bytes = ::proc_pidinfo(static_cast<int>(process_id), PROC_PIDLISTTHREADS, 0, thread_ids.data(),
+                                     static_cast<int>(thread_ids.size() * sizeof(uint64_t)));
+    if (bytes <= 0) {
+        return out;
+    }
+    const size_t count = static_cast<size_t>(bytes) / sizeof(uint64_t);
+    for (size_t index = 0; index < count; ++index) {
+        const uint64_t thread_id = thread_ids[index];
+        if (thread_id == 0) {
+            continue;
+        }
+        ::proc_threadinfo thread_data{};
+        const int size = ::proc_pidinfo(static_cast<int>(process_id), PROC_PIDTHREADINFO, thread_id, &thread_data,
+                                        sizeof(thread_data));
+        if (size != static_cast<int>(sizeof(thread_data))) {
+            continue;
+        }
+        thread_info item;
+        item.tid = static_cast<uint32_t>(thread_id);
+        item.name = thread_data.pth_name;
+        item.status = state::running;
+        item.user_time_ms = thread_data.pth_user_time / 1'000'000ULL;
+        item.system_time_ms = thread_data.pth_system_time / 1'000'000ULL;
         out.push_back(move(item));
     }
 #else
@@ -2835,59 +3093,6 @@ process::socket_owner_scan process::scan_socket_owners(const int timeout_ms) {
     return result;
 }
 
-bool process::send_signal(const native_id_type process_id, const signal sig) noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (sig != signal::terminate && sig != signal::kill) {
-        return false;
-    }
-    const ::HANDLE handle = ::OpenProcess(PROCESS_TERMINATE, FALSE, static_cast<::DWORD>(process_id));
-    if (handle == nullptr) {
-        return false;
-    }
-    const bool sent = ::TerminateProcess(handle, 1) != 0;
-    ::CloseHandle(handle);
-    return sent;
-#else
-    return send_native_signal(static_cast<int>(process_id), native_signal_of(sig));
-#endif
-}
-
-bool process::send_signal(const native_id_type process_id, const int native_signal) noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (native_signal == 9 || native_signal == 15) {
-        return send_signal(process_id, signal::kill);
-    }
-    return false;
-#else
-    return send_native_signal(static_cast<int>(process_id), native_signal);
-#endif
-}
-
-string_view process::signal_name(const signal sig) noexcept {
-    switch (sig) {
-        case signal::terminate:
-            return "TERM";
-        case signal::kill:
-            return "KILL";
-        case signal::interrupt:
-            return "INT";
-        case signal::quit:
-            return "QUIT";
-        case signal::hangup:
-            return "HUP";
-        case signal::stop:
-            return "STOP";
-        case signal::resume:
-            return "CONT";
-        case signal::user1:
-            return "USR1";
-        case signal::user2:
-            return "USR2";
-        default:
-            return "UNKNOWN";
-    }
-}
-
 optional<process::priority> process::get_priority(const native_id_type process_id) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::HANDLE handle = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
@@ -2989,6 +3194,9 @@ optional<uint64_t> process::get_affinity(const native_id_type process_id) {
         }
     }
     return mask;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    static_cast<void>(process_id);
+    return none;
 #else
     ::cpuset_t set;
     CPU_ZERO(&set);
@@ -3026,6 +3234,9 @@ bool process::set_affinity(const native_id_type process_id, const uint64_t mask)
         }
     }
     return ::sched_setaffinity(static_cast<::pid_t>(process_id), sizeof(set), &set) == 0;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    static_cast<void>(process_id);
+    return false;
 #else
     ::cpuset_t set;
     CPU_ZERO(&set);

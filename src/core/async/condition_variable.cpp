@@ -76,7 +76,7 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const bool is_monotoni
         return cv_status::timeout;
     }
     terminate();
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     ::timespec ts{};
     if (is_monotonic) {
         ::timespec mono{};

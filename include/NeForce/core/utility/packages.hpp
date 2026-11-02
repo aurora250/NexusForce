@@ -230,13 +230,22 @@ __NEFORCE_BUILD_INTEGER_STRUCT(u, U, 64)
 using byte = uinteger8;
 
 
-#ifdef NEFORCE_PLATFORM_POSIX64
+#if defined(NEFORCE_PLATFORM_POSIX64) && !defined(NEFORCE_PLATFORM_MACOS)
 template <>
 struct package<long long> {
     using type = integer64;
 };
 template <>
 struct package<unsigned long long> {
+    using type = uinteger64;
+};
+#elif defined(NEFORCE_PLATFORM_POSIX64)
+template <>
+struct package<long> {
+    using type = integer64;
+};
+template <>
+struct package<unsigned long> {
     using type = uinteger64;
 };
 #else

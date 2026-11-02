@@ -2340,7 +2340,8 @@ TEST_F(VectorTest, DefaultConstructor) {
     vector<int> v;
     EXPECT_TRUE(v.empty());
     EXPECT_EQ(v.size(), 0);
-    EXPECT_GE(v.capacity(), 1);
+    EXPECT_EQ(v.capacity(), 0);
+    EXPECT_EQ(v.data(), nullptr);
 }
 
 TEST_F(VectorTest, ConstructorWithSize) {
@@ -2543,7 +2544,7 @@ TEST_F(VectorTest, MaxSize) {
 
 TEST_F(VectorTest, Capacity) {
     vector<int> v;
-    EXPECT_GE(v.capacity(), 1);
+    EXPECT_EQ(v.capacity(), 0);
     v.reserve(100);
     EXPECT_GE(v.capacity(), 100);
 }

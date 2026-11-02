@@ -2,6 +2,7 @@
 #include <NeForce/core/exception/system_exception.hpp>
 #include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/core/file/path.hpp>
+#include <NeForce/core/system/environment.hpp>
 #include <NeForce/plugin/iplugin.hpp>
 #include <NeForce/plugin/plugin_entry.hpp>
 #include <NeForce/plugin/plugin_manager.hpp>
@@ -45,7 +46,10 @@ namespace {
         void TearDown() override { plugin_manager::instance().shutdown_all(); }
 
         static const string& plugin_path() {
-            static const string value = NEFORCE_TEST_PLUGIN_PATH;
+            static const string value = [] {
+                const string override_path = environment::get("NEFORCE_TEST_PLUGIN_PATH");
+                return override_path.empty() ? string{NEFORCE_TEST_PLUGIN_PATH} : override_path;
+            }();
             return value;
         }
     };
@@ -373,6 +377,9 @@ TEST_F(PluginManagerTest, LoadPluginsIgnoresNonLibraryFiles) {
 }
 
 TEST_F(PluginManagerTest, LoadPluginsLoadsEveryLibraryInDirectory) {
+    if (environment::get("NEFORCE_DARLING") == "1") {
+        GTEST_SKIP() << "copied modules cannot resolve their @rpath dependencies under Darling";
+    }
     const path dir = path::temp_directory_path() / path("neforce_plugin_load_dir");
     filesystem::remove_all(dir);
     ASSERT_TRUE(filesystem::create_directories(dir));

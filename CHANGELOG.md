@@ -165,6 +165,7 @@
 
 ### 🔧 Improvements
 
+- `system_event` 重命名为 `waitable_event`，修复 `is_set()` 数据竞争、Windows 原生句柄状态查询、POSIX 超时使用 `steady_clock`，并为 moved-from 对象增加保护
 - `tim_sort` 重写，run 识别、32..64 minrun、二分插入、run 栈合并、最终强制归并与指数搜索 galloping
 - `inplace_merge` 改为稳定缓冲归并，空间 O(N)
 - `http_client::read_response()` 只解析一次响应头，正文直接从读缓冲装配
@@ -377,6 +378,18 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `vector` 默认构造立即分配 1 个元素的问题：空向量不再持有未初始化缓冲区，首次插入时才分配，降低小对象池的分配抖动
+- 修复 `io_context::run()` 在仅有注册 fd、无未完成 handler 时提前返回：循环条件改用 `has_pending_work()`，异步 connect/read/write 不会因工作计数归零而被提前结束
+- 修复 `awaitable` 完成与 `co_await` 挂起之间的竞态（丢失唤醒/未同步的 ready 标志）：完成路径与 `await_suspend` 统一加锁，完成值在恢复前可见
+- 修复 `tcp_socket` 异步 connect 完成路径不注销 fd，导致 `io_context::run()` 永久等待已完成的 fd；同时移除连接进行中过早读取 `SO_ERROR` 判成功的快速路径
+- 修复 `tcp_socket::send/receive` 未重试 `EINTR`，FreeBSD 上服务端 `recv` 被信号打断后提前断开连接
+- 修复 macOS 运行时信息：`sysinfo` 的内存/交换分区/进程数/每核与总体 CPU 时间改用 `sysctl`、`host_processor_info` 与 `libproc` 回退；网卡通过 `AF_LINK`/`if_data` 补齐 MAC、MTU、速率与收发统计；`hw.cpufrequency` 不可信时从 CPU 品牌串解析频率
+- 修复 macOS `dynamic_library::list_symbols()`：Mach-O 符号名索引增加 `strsize` 边界检查
+- 修复 macOS 线程命名：`pthread_setname_np` 只能设置当前线程，非当前线程返回 `false`
+- 修复 `XXH32`/`XXH64` 在零长度输入上的空指针运算与尾块长度计算（`end` 指针改为剩余字节计数），并修复 `extract_bits` 在取 64 位时的 `>> 64` 未定义移位
+- 修复 FreeBSD 核心转储解析 `kern.proc.vmmap` 时对未对齐 `kinfo_vmentry` 的访问（缓冲区按 8 字节对齐）
+- 修复 FreeBSD 上 `dynamic_library::list_symbols()` 段错误：`DT_STRTAB`/`DT_SYMTAB`/`DT_HASH`/`DT_GNU_HASH` 在 FreeBSD 上保持相对加载基址的偏移，现按 `l_addr` 归一化后再解引用；`program_location()` 改用 `KERN_PROC_PATHNAME`
+- 修复 FreeBSD 上 `futex_notify()` 唤醒错误的等待者造成永久挂起：实现共用单个全局条件变量，`notify_one` 可能把唤醒交给另一个地址上的等待线程，被唤醒者复查自己的值未变后继续睡眠；现 FreeBSD 分支统一 `broadcast`，由各等待者复查自身地址
 - 修复 `copy` / `copy_backward` / `move` / `move_backward` 连续迭代器快路径：仅同类型 trivially copyable 使用 `memory_move`，非平凡类型逐元素处理
 - 修复 TLS session ticket 复用：`connect()` 在 `post_connect()` 前写入逻辑 host/port，会话缓存 key 不再退化为 `":0"`；TLS 1.3 `NewSessionTicket` 在响应读取后缓存，断开前写入 `ssl_session_cache`
 - 修复 WebSocket 事件驱动模式下 read/write fd 回调可被多个 io_context 工作线程并发进入的问题；会话回调通过 `event_mutex_` 串行化

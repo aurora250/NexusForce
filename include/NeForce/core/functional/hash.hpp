@@ -497,12 +497,12 @@ NEFORCE_CONSTEXPR14 uint32_t XXH32(const void* input, size_t len, uint32_t seed 
 
     hash += static_cast<uint32_t>(len);
 
-    const byte_t* end = static_cast<const byte_t*>(input) + len;
-    for (; p + 4 <= end; p += 4) {
+    size_t remaining = len - static_cast<size_t>(p - static_cast<const byte_t*>(input));
+    for (; remaining >= 4; remaining -= 4, p += 4) {
         hash += endian::read_le32(p) * PRIME32_3;
         hash = rotate_l32(hash, 17) * PRIME32_4;
     }
-    switch (len & 3) {
+    switch (remaining) {
         case 3:
             hash += static_cast<uint32_t>(p[2]) * PRIME32_5;
             hash = rotate_l32(hash, 11) * PRIME32_1;
@@ -577,8 +577,8 @@ NEFORCE_CONSTEXPR14 uint64_t XXH64(const void* input, size_t len, uint64_t seed 
 
     hash += static_cast<uint64_t>(len);
 
-    const byte_t* end = static_cast<const byte_t*>(input) + len;
-    for (; p + 8 <= end; p += 8) {
+    size_t remaining = len - static_cast<size_t>(p - static_cast<const byte_t*>(input));
+    for (; remaining >= 8; remaining -= 8, p += 8) {
         uint64_t k1 = endian::read_le64(p);
         k1 *= PRIME64_2;
         k1 = rotate_l64(k1, 31);
@@ -586,11 +586,11 @@ NEFORCE_CONSTEXPR14 uint64_t XXH64(const void* input, size_t len, uint64_t seed 
         hash ^= k1;
         hash = rotate_l64(hash, 27) * PRIME64_1 + PRIME64_4;
     }
-    for (; p + 4 <= end; p += 4) {
+    for (; remaining >= 4; remaining -= 4, p += 4) {
         hash ^= static_cast<uint64_t>(endian::read_le32(p)) * PRIME64_1;
         hash = rotate_l64(hash, 23) * PRIME64_2 + PRIME64_3;
     }
-    switch (len & 3) {
+    switch (remaining) {
         case 3:
             hash ^= static_cast<uint64_t>(p[2]) * PRIME64_5;
             hash = rotate_l64(hash, 11) * PRIME64_1;

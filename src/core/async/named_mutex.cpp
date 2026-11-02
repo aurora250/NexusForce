@@ -65,7 +65,9 @@ name_(name) {
         ::pthread_mutexattr_t attr;
         ::pthread_mutexattr_init(&attr);
         ::pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
+#    ifndef NEFORCE_PLATFORM_MACOS
         ::pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
+#    endif
         ::pthread_mutex_init(static_cast<pthread_mutex_t*>(mapped_addr_), &attr);
         ::pthread_mutexattr_destroy(&attr);
     }
@@ -144,9 +146,13 @@ void named_mutex::lock() {
         NEFORCE_THROW_EXCEPTION(share_memory_exception("named_mutex: not initialized"));
     }
     const int ret = ::pthread_mutex_lock(static_cast<pthread_mutex_t*>(mapped_addr_));
+#    ifndef NEFORCE_PLATFORM_MACOS
     if (ret == EOWNERDEAD) {
         ::pthread_mutex_consistent(static_cast<pthread_mutex_t*>(mapped_addr_));
     }
+#    else
+    static_cast<void>(ret);
+#    endif
 #endif
 }
 
@@ -164,9 +170,11 @@ bool named_mutex::try_lock() {
     if (ret == EBUSY) {
         return false;
     }
+#    ifndef NEFORCE_PLATFORM_MACOS
     if (ret == EOWNERDEAD) {
         ::pthread_mutex_consistent(static_cast<pthread_mutex_t*>(mapped_addr_));
     }
+#    endif
     return (ret == 0 || ret == EOWNERDEAD);
 #endif
 }

@@ -99,18 +99,50 @@
 #endif
 
 
-#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
-#    define NEFORCE_PLATFORM_POSIX
-#    if defined(NEFORCE_PLATFORM_LINUX64) || defined(NEFORCE_PLATFORM_FREEBSD64)
-#        define NEFORCE_PLATFORM_POSIX64
-#    endif
-#    if defined(NEFORCE_PLATFORM_LINUX32) || defined(NEFORCE_PLATFORM_FREEBSD32)
-#        define NEFORCE_PLATFORM_POSIX32
+#if defined(__APPLE__) && defined(__MACH__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @def NEFORCE_PLATFORM_MACOS
+ * @brief 定义在macOS平台编译
+ */
+#    define NEFORCE_PLATFORM_MACOS 1
+
+#    if defined(__LP64__) || defined(_LP64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+/**
+ * @def NEFORCE_PLATFORM_MACOS64
+ * @brief 定义在64位macOS平台编译
+ */
+#        define NEFORCE_PLATFORM_MACOS64 1
+#    else
+/**
+ * @def NEFORCE_PLATFORM_MACOS32
+ * @brief 定义在32位macOS平台编译
+ */
+#        define NEFORCE_PLATFORM_MACOS32 1
 #    endif
 #endif
 
 
-#if !(defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD))
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
+#    define NEFORCE_PLATFORM_POSIX
+#    if defined(NEFORCE_PLATFORM_LINUX64) || defined(NEFORCE_PLATFORM_FREEBSD64) || defined(NEFORCE_PLATFORM_MACOS64)
+#        define NEFORCE_PLATFORM_POSIX64
+#    endif
+#    if defined(NEFORCE_PLATFORM_LINUX32) || defined(NEFORCE_PLATFORM_FREEBSD32) || defined(NEFORCE_PLATFORM_MACOS32)
+#        define NEFORCE_PLATFORM_POSIX32
+#    endif
+#endif
+
+#if defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
+/**
+ * @def NEFORCE_PLATFORM_BSD_LIKE
+ * @brief 定义在使用BSD风格POSIX接口的平台编译
+ */
+#    define NEFORCE_PLATFORM_BSD_LIKE 1
+#endif
+
+
+#if !(defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD) || \
+      defined(NEFORCE_PLATFORM_MACOS))
 #    error "NeForce: 不支持的操作系统"
 #endif
 

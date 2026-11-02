@@ -83,7 +83,7 @@ public:
         return false;
     }
 
-    void on_animation(int64_t delta) override {
+    void on_animation(neforce::int64_t delta) override {
         ignore = delta;
         if (!streaming_) {
             return;
@@ -101,7 +101,7 @@ private:
     tool_runner* runner_ = nullptr;
 
     string reply_text_;
-    uint64_t stream_message_ = 0;
+    neforce::uint64_t stream_message_ = 0;
     size_t stream_pos_ = 0;
     size_t stream_tick_ = 0;
     bool streaming_ = false;
@@ -139,7 +139,7 @@ private:
     }
 
     void emit(log_role role, const string& text) {
-        const uint64_t id = log_->append(role, text);
+        const neforce::uint64_t id = log_->append(role, text);
         log_->finish(id);
     }
 

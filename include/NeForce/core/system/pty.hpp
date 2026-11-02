@@ -160,7 +160,7 @@ public:
      *
      * 信号发送给以子进程为组长的整个进程组，避免后代进程逃逸。
      */
-    void terminate(system_signal::event signal = system_signal::event::terminate);
+    void terminate(system_signal::signal signal = system_signal::signal::terminate);
 
     /**
      * @brief 强制终止子进程

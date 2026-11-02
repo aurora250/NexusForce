@@ -213,6 +213,8 @@ TEST_F(CrashDumpTest, ManualDumpUsesFreebsdNotes) {
     ASSERT_EQ(input.read_binary(&status_header, sizeof(status_header)), sizeof(status_header));
     EXPECT_EQ(static_cast<int>(status_header.n_type), NT_PRSTATUS);
     EXPECT_EQ(status_header.n_namesz, sizeof("FreeBSD"));
+    char status_name[sizeof("FreeBSD")]{};
+    ASSERT_EQ(input.read_binary(status_name, sizeof(status_name)), sizeof(status_name));
     prstatus_t status{};
     ASSERT_EQ(input.read_binary(&status, sizeof(status)), sizeof(status));
     EXPECT_EQ(status.pr_version, PRSTATUS_VERSION);
@@ -270,6 +272,29 @@ TEST_F(CrashDumpTest, ManualDumpIncludesMemoryWithinLimits) {
     EXPECT_LE(result.segments, 2U);
     EXPECT_LE(static_cast<uint64_t>(filesystem::size(result.file).bytes()), 8ULL * 1024ULL * 1024ULL);
     EXPECT_TRUE(result.truncated);
+}
+
+TEST_F(CrashDumpTest, ManualDumpHonorsSegmentByteLimit) {
+#if !defined(NEFORCE_SUPPORT_NATIVE_DUMP_LINUX) && !defined(NEFORCE_SUPPORT_NATIVE_DUMP_FREEBSD)
+    GTEST_SKIP() << "the segment byte limit only applies to ELF core writers";
+#else
+    crash_dump::options options;
+    options.directory = directory_;
+    options.file_prefix = "segment-limit";
+    options.include_memory = true;
+    options.max_segments = 4096;
+    options.max_segment_bytes = 4096;
+    options.max_file_bytes = 4ULL * 1024ULL * 1024ULL;
+
+    const auto result = crash_dump::write(options);
+    if (!native_writer_available()) {
+        EXPECT_FALSE(result.written);
+        return;
+    }
+    ASSERT_TRUE(result.written);
+    EXPECT_TRUE(result.truncated);
+    EXPECT_LE(static_cast<uint64_t>(filesystem::size(result.file).bytes()), 8ULL * 1024ULL * 1024ULL);
+#endif
 }
 
 TEST_F(CrashDumpTest, ManualDumpFailsForMissingDirectory) {

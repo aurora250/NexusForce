@@ -43,6 +43,26 @@ bool semaphore::try_acquire_for_impl(const milliseconds timeout) noexcept {
     return result == WAIT_OBJECT_0;
 }
 #else
+#    ifdef NEFORCE_PLATFORM_MACOS
+bool semaphore::try_acquire_for_impl(const nanoseconds timeout) noexcept {
+    const ::timespec deadline = relative_to_timespec(timeout);
+    for (;;) {
+        if (::sem_trywait(&sem_) == 0) {
+            return true;
+        }
+        if (errno != EAGAIN && errno != EINTR) {
+            return false;
+        }
+        ::timespec now{};
+        ::clock_gettime(CLOCK_REALTIME, &now);
+        if (now.tv_sec > deadline.tv_sec || (now.tv_sec == deadline.tv_sec && now.tv_nsec >= deadline.tv_nsec)) {
+            return false;
+        }
+        const ::timespec pause{0, 1'000'000L};
+        ::nanosleep(&pause, nullptr);
+    }
+}
+#    else
 bool semaphore::try_acquire_for_impl(const nanoseconds timeout) noexcept {
     const ::timespec ts = relative_to_timespec(timeout);
     int ret = 0;
@@ -51,6 +71,7 @@ bool semaphore::try_acquire_for_impl(const nanoseconds timeout) noexcept {
     } while (ret == -1 && errno == EINTR);
     return ret == 0;
 }
+#    endif
 #endif
 
 semaphore::semaphore(const long initial, const long maximum) {

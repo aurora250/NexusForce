@@ -7,13 +7,13 @@
 #include <NeForce/network/tcp/tcp_acceptor.hpp>
 #include <NeForce/network/udp_socket.hpp>
 #include <gtest/gtest.h>
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <unistd.h>
 #endif
 using namespace neforce;
 
 bool has_root() {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     return ::geteuid() == 0;
 #else
     return true;

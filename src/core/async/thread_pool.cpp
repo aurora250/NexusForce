@@ -282,6 +282,12 @@ optional<thread_pool::task_type> thread_pool::take_task(worker_context& self) {
         return task;
     }
 
+    // Priority tasks that were already dequeued must finish before normal work starts,
+    // otherwise a fast producer can interleave normal tasks with the tail of the priority batch.
+    if (priority_active_.load(memory_order_acquire) != 0U) {
+        return none;
+    }
+
     if (!self.queue.empty()) {
         task = self.queue.try_pop();
         publish_local_size(self);
@@ -421,11 +427,24 @@ optional<thread_pool::task_type> thread_pool::try_take_priority() {
         return none;
     }
 
-    auto task = priority_queue_.top().task;
+    task_type raw = priority_queue_.top().task;
     priority_queue_.pop();
     priority_pending_.fetch_sub(1, memory_order_acq_rel);
     pending_tasks_.fetch_sub(1, memory_order_acq_rel);
-    return task;
+    priority_active_.fetch_add(1, memory_order_acq_rel);
+    return task_type([this, raw = move(raw)]() mutable {
+        struct active_guard {
+            thread_pool* pool;
+
+            ~active_guard() {
+                if (pool->priority_active_.fetch_sub(1, memory_order_acq_rel) == 1U) {
+                    pool->wake_word_.fetch_add(1, memory_order_release);
+                    pool->wake_word_.notify_all();
+                }
+            }
+        } guard{this};
+        raw();
+    });
 }
 
 optional<thread_pool::task_type> thread_pool::try_steal_task(worker_context& ctx) {
@@ -1052,6 +1071,7 @@ bool thread_pool::start(const size_t init_thread_size) {
 
     pending_tasks_.store(0, memory_order_relaxed);
     priority_pending_.store(0, memory_order_relaxed);
+    priority_active_.store(0, memory_order_relaxed);
     wake_word_.store(0, memory_order_relaxed);
     warm_deadline_ns_.store(0, memory_order_relaxed);
     warm_owner_.store(-1, memory_order_relaxed);
@@ -1146,6 +1166,7 @@ thread_pool::pool_statistics thread_pool::stop() {
     next_task_id_.store(0, memory_order_relaxed);
     pending_tasks_.store(0, memory_order_relaxed);
     priority_pending_.store(0, memory_order_relaxed);
+    priority_active_.store(0, memory_order_relaxed);
     wake_word_.store(0, memory_order_relaxed);
     warm_deadline_ns_.store(0, memory_order_relaxed);
     warm_owner_.store(-1, memory_order_relaxed);

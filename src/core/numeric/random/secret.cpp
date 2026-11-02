@@ -32,10 +32,16 @@ bool secret::system_supported() {
     return NT_SUCCESS(status);
 #else
     uint8_t probe = 0;
+#    ifdef NEFORCE_PLATFORM_MACOS
+    if (::getentropy(&probe, sizeof(probe)) == 0) {
+        return true;
+    }
+#    else
     const ssize_t ret = ::getrandom(&probe, sizeof(probe), 0);
     if (ret == 1) {
         return true;
     }
+#    endif
     const int fd = ::open("/dev/urandom", O_RDONLY);
     if (fd == -1) {
         return false;
@@ -61,6 +67,13 @@ void secret::get_random_bytes(byte_t* buffer, const size_t length) {
 
     while (bytes_filled < length) {
         const size_t chunk = (length - bytes_filled > 256) ? 256 : (length - bytes_filled);
+#    ifdef NEFORCE_PLATFORM_MACOS
+        if (::getentropy(buffer + bytes_filled, chunk) == 0) {
+            bytes_filled += chunk;
+            continue;
+        }
+        break;
+#    else
         const ssize_t ret = ::getrandom(buffer + bytes_filled, chunk, 0);
 
         if (ret > 0) {
@@ -77,6 +90,7 @@ void secret::get_random_bytes(byte_t* buffer, const size_t length) {
             }
             NEFORCE_THROW_EXCEPTION(device_exception("getrandom failed with unexpected error"));
         }
+#    endif
     }
 
     if (bytes_filled >= length) {

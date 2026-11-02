@@ -388,6 +388,24 @@ public:
     };
 
     /**
+     * @struct pressure_info
+     * @brief 系统资源压力信息
+     */
+    struct pressure_info {
+        string resource;            ///< 资源名称（cpu/memory/io）
+        bool available{false};      ///< PSI 是否可用
+        float64_t some_avg10{0.0};  ///< 至少一个任务受影响的 10 秒平均值（%）
+        float64_t some_avg60{0.0};  ///< 至少一个任务受影响的 60 秒平均值（%）
+        float64_t some_avg300{0.0}; ///< 至少一个任务受影响的 300 秒平均值（%）
+        uint64_t some_total_us{0};  ///< 至少一个任务受影响的总时间（微秒）
+        float64_t full_avg10{0.0};  ///< 所有任务受影响的 10 秒平均值（%）
+        float64_t full_avg60{0.0};  ///< 所有任务受影响的 60 秒平均值（%）
+        float64_t full_avg300{0.0}; ///< 所有任务受影响的 300 秒平均值（%）
+        uint64_t full_total_us{0};  ///< 所有任务受影响的总时间（微秒）
+        bool has_full{false};       ///< 当前资源是否提供 full 指标
+    };
+
+    /**
      * @struct disk_io_info
      * @brief 磁盘 I/O 速率
      */
@@ -608,6 +626,12 @@ public:
      * @note 基于两次调用的差值，首次调用返回空或全 0；需要读取 /proc/diskstats 或 PDH
      */
     NEFORCE_NODISCARD static vector<disk_io_info> disk_io_rates();
+
+    /**
+     * @brief 获取系统资源压力（PSI）
+     * @return CPU、内存、I/O 压力列表；平台不支持或内核未启用 PSI 时为空
+     */
+    NEFORCE_NODISCARD static vector<pressure_info> pressure_status();
 
     /**
      * @brief 获取系统运行时间

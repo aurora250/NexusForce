@@ -488,14 +488,9 @@ public:
     /**
      * @brief 默认构造函数
      *
-     * 构造一个空向量，初始容量为1。
+     * 构造一个空向量，不分配任何存储。
      */
-    NEFORCE_CONSTEXPR20 vector() {
-        constexpr size_type init_cap = 1;
-        pointer result = pair_.get_base().allocate(init_cap);
-        finish_ = start_ = result;
-        pair_.value = finish_ + init_cap;
-    }
+    NEFORCE_CONSTEXPR20 vector() = default;
 
     /**
      * @brief 构造包含n个默认构造元素的向量
@@ -845,7 +840,7 @@ public:
      * @return 元素数量
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type size() const noexcept {
-        return static_cast<size_type>(finish_ - start_);
+        return start_ == nullptr ? 0 : static_cast<size_type>(finish_ - start_);
     }
 
     /**
@@ -859,7 +854,7 @@ public:
      * @return 已分配内存可容纳的元素数量
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type capacity() const noexcept {
-        return static_cast<size_type>(pair_.value - start_);
+        return start_ == nullptr ? 0 : static_cast<size_type>(pair_.value - start_);
     }
 
     /**

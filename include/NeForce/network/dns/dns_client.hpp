@@ -287,18 +287,6 @@ public:
                            dns_class qclass = dns_class::internet);
 
     /**
-     * @brief 异步DNS查询
-     * @param domain 域名
-     * @param type 记录类型
-     * @param qclass 查询类
-     * @return future对象，可等待查询结果
-     */
-    NEFORCE_DEPRECATED_VERSION("query_async(const string&, dns_record::raw, dns_class)", "v2.0.0",
-                               "async_query(string_view, dns_record::raw, dns_class, use_future_t)")
-    future<dns_query_result> query_async(const string& domain, dns_record::raw type = dns_record::A,
-                                         dns_class qclass = dns_class::internet);
-
-    /**
      * @brief 回调异步DNS查询
      * @param domain 域名
      * @param type 记录类型

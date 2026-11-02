@@ -659,6 +659,38 @@ TEST(MemoryPool, ForeignReleaseIsCountedInReleaseBuilds) {
 #endif
 }
 
+TEST(MemoryPool, DoubleFreeIsDetectedAndIgnored) {
+    memory_pool pool;
+    void* block = pool.allocate(16);
+    ASSERT_NE(block, nullptr);
+    pool.deallocate(block);
+    const size_t active_after_first = pool.stats().active_bytes;
+    pool.deallocate(block);
+    EXPECT_EQ(pool.double_free_count(), 1U);
+    EXPECT_EQ(pool.stats().double_free_releases, 1U);
+    EXPECT_EQ(pool.stats().active_bytes, active_after_first);
+
+    void* reused = pool.allocate(16);
+    ASSERT_NE(reused, nullptr);
+    EXPECT_TRUE(pool.owns(reused));
+    pool.deallocate(reused);
+    pool.flush_thread_cache();
+    EXPECT_TRUE(pool.verify());
+}
+
+TEST(MemoryPool, ReallocationClearsDoubleFreeMarker) {
+    memory_pool pool;
+    void* block = pool.allocate(16);
+    ASSERT_NE(block, nullptr);
+    pool.deallocate(block);
+    void* reused = pool.allocate(16);
+    ASSERT_NE(reused, nullptr);
+    pool.deallocate(reused);
+    EXPECT_EQ(pool.double_free_count(), 0U);
+    pool.flush_thread_cache();
+    EXPECT_TRUE(pool.verify());
+}
+
 TEST(MemoryPoolSizeClassLookup, MatchesSmallestSufficientClassForEveryRequest) {
     for (size_t bytes = 0; bytes <= 40000; ++bytes) {
         const size_t request = bytes == 0 ? 1 : bytes;

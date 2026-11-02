@@ -60,7 +60,8 @@ v1.0.0 开始承诺：**次版本号更新保持 API 兼容，主版本号更新
 |-------------|----------------|-------------------------------------|-------------------------------------|
 | **Windows** | x86_64 · ARM64 | x86_64 · ARM64                      | —                                   |
 | **Linux**   | —              | x86_64 · ARM64 · RISC-V · LoongArch | x86_64 · ARM64 · RISC-V · LoongArch |
-| **FreeBSD** | —              | x86_64 · ARM64 · RISC-V             | x86_64 · ARM64 · RISC-V             |
+| **macOS**   | —              | x86_64 · ARM64                      | —                                   |
+| **FreeBSD** | —              | x86_64 · ARM64                      | x86_64 · ARM64                      |
 
 ### 组合清单
 
@@ -71,19 +72,19 @@ v1.0.0 开始承诺：**次版本号更新保持 API 兼容，主版本号更新
 | 3  | Windows  | Clang  | x86_64    | `x86_64-pc-windows-msvc`        | Tier 1   |
 | 4  | Windows  | Clang  | ARM64     | `aarch64-pc-windows-msvc`       | Tier 2   |
 | 5  | Linux    | Clang  | x86_64    | `x86_64-unknown-linux-gnu`      | Tier 1   |
-| 6  | Linux    | Clang  | ARM64     | `aarch64-unknown-linux-gnu`     | Tier 1   |
-| 7  | Linux    | Clang  | RISC-V    | `riscv64-unknown-linux-gnu`     | Tier 1   |
-| 8  | Linux    | Clang  | LoongArch | `loongarch64-unknown-linux-gnu` | Tier 1   |
+| 6  | Linux    | Clang  | ARM64     | `aarch64-unknown-linux-gnu`     | Tier 2   |
+| 7  | Linux    | Clang  | RISC-V    | `riscv64-unknown-linux-gnu`     | Tier 2   |
+| 8  | Linux    | Clang  | LoongArch | `loongarch64-unknown-linux-gnu` | Tier 2   |
 | 9  | Linux    | GCC    | x86_64    | `x86_64-unknown-linux-gnu`      | Tier 1   |
 | 10 | Linux    | GCC    | ARM64     | `aarch64-unknown-linux-gnu`     | Tier 1   |
 | 11 | Linux    | GCC    | RISC-V    | `riscv64-unknown-linux-gnu`     | Tier 1   |
 | 12 | Linux    | GCC    | LoongArch | `loongarch64-unknown-linux-gnu` | Tier 1   |
+| 19 | macOS    | Clang  | ARM64     | `arm64-apple-darwin25.5`        | Tier 1   |
+| 20 | macOS    | Clang  | x86_64    | `x86_64-apple-darwin25.5`       | Tier 2   |
 | 13 | FreeBSD  | Clang  | x86_64    | `x86_64-unknown-freebsd`        | Tier 2   |
 | 14 | FreeBSD  | Clang  | ARM64     | `aarch64-unknown-freebsd`       | Tier 2   |
-| 15 | FreeBSD  | Clang  | RISC-V    | `riscv64-unknown-freebsd`       | Tier 2   |
 | 16 | FreeBSD  | GCC    | x86_64    | `x86_64-unknown-freebsd`        | Tier 2   |
 | 17 | FreeBSD  | GCC    | ARM64     | `aarch64-unknown-freebsd`       | Tier 2   |
-| 18 | FreeBSD  | GCC    | RISC-V    | `riscv64-unknown-freebsd`       | Tier 2   |
 
 > ¹ Windows 上 Clang 指 **ClangCL**。
 > 

@@ -14,6 +14,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 namespace {
     constexpr uint32_t g_region_flag_cached = 0x1U;                        // 大对象区域已进入复用缓存
+    constexpr uint32_t g_region_flag_free = 0x2U;                          // 大对象区域已处于空闲状态
     constexpr size_t g_max_request = static_cast<size_t>(1) << 46;         // 单次请求的字节数上限
     constexpr size_t g_slot_shift = 16;                                    // 地址映射表槽位位移（64 KiB）
     constexpr size_t g_span_header_size = 64;                              // span 头部占用字节数，块区从此偏移开始
@@ -567,6 +568,7 @@ void memory_pool::initialize(const options& opts) noexcept {
     os_map_calls_.store(0, memory_order_relaxed);
     os_unmap_calls_.store(0, memory_order_relaxed);
     foreign_releases_.store(0, memory_order_relaxed);
+    double_free_releases_.store(0, memory_order_relaxed);
     registry_slot_ = registry_insert(this, id_);
 }
 
@@ -580,6 +582,8 @@ uint32_t memory_pool::id() const noexcept { return id_; }
 const memory_pool::options& memory_pool::config() const noexcept { return options_; }
 
 size_t memory_pool::foreign_release_count() const noexcept { return foreign_releases_.load(memory_order_relaxed); }
+
+size_t memory_pool::double_free_count() const noexcept { return double_free_releases_.load(memory_order_relaxed); }
 
 memory_pool::thread_cache& memory_pool::current_cache() noexcept {
     struct holder {
@@ -689,6 +693,9 @@ void* memory_pool::allocate_small(thread_cache& cache, const size_t class_index)
         cache.entries[class_index].list = *static_cast<void**>(block);
         --cache.entries[class_index].count;
         cache.last_claim = reinterpret_cast<uintptr_t>(block);
+        if (options_.double_free_detection) {
+            mark_block_live(block);
+        }
         return block;
     }
     void* block = refill(cache, class_index);
@@ -722,6 +729,9 @@ memory_pool::span_header* memory_pool::create_span(const size_t class_index) noe
     for (size_t index = state.block_count; index > 0; --index) {
         void* block_ptr = area + (index - 1) * block;
         *static_cast<void**>(block_ptr) = head;
+        if (options_.double_free_detection) {
+            mark_block_free(block_ptr);
+        }
         head = block_ptr;
     }
     span->free_head = head;
@@ -836,6 +846,9 @@ void* memory_pool::refill(thread_cache& cache, const size_t class_index) noexcep
 
     cache.entries[class_index].list = taken > 1 ? *static_cast<void**>(batch) : nullptr;
     cache.entries[class_index].count = taken - 1;
+    if (options_.double_free_detection) {
+        mark_block_live(batch);
+    }
     return batch;
 }
 
@@ -983,6 +996,10 @@ void memory_pool::deallocate(void* ptr, const size_t bytes) noexcept {
     thread_cache& cache = current_cache();
     if (options_.thread_cache_enabled && cache.last_claim == reinterpret_cast<uintptr_t>(ptr) &&
         cache.owner_id == id_) {
+        if (options_.double_free_detection && block_is_free(ptr)) {
+            double_free_releases_.fetch_add(1, memory_order_relaxed);
+            return;
+        }
         cache.last_claim = 0;
         const auto* span = reinterpret_cast<const span_header*>(slot_address(reinterpret_cast<uintptr_t>(ptr)));
         NEFORCE_DEBUG_VERIFY(span->magic == g_span_magic && span->owner_id == id_ && span->class_index < class_count,
@@ -994,6 +1011,9 @@ void memory_pool::deallocate(void* ptr, const size_t bytes) noexcept {
         *static_cast<void**>(ptr) = cache.entries[class_index].list;
         cache.entries[class_index].list = ptr;
         ++cache.entries[class_index].count;
+        if (options_.double_free_detection) {
+            mark_block_free(ptr);
+        }
         return;
     }
     map_view view;
@@ -1025,7 +1045,14 @@ void memory_pool::deallocate(void* ptr, const size_t bytes) noexcept {
     }
 
     const size_t class_index = view.class_index;
+    if (options_.double_free_detection && block_is_free(ptr)) {
+        double_free_releases_.fetch_add(1, memory_order_relaxed);
+        return;
+    }
     if (!options_.thread_cache_enabled) {
+        if (options_.double_free_detection) {
+            mark_block_free(ptr);
+        }
         return_blocks(class_index, ptr, 1);
         return;
     }
@@ -1039,6 +1066,9 @@ void memory_pool::deallocate(void* ptr, const size_t bytes) noexcept {
     *static_cast<void**>(ptr) = cache.entries[class_index].list;
     cache.entries[class_index].list = ptr;
     ++cache.entries[class_index].count;
+    if (options_.double_free_detection) {
+        mark_block_free(ptr);
+    }
 }
 
 void* memory_pool::allocate_large(const size_t bytes, const size_t align) noexcept {
@@ -1065,7 +1095,7 @@ void* memory_pool::allocate_large(const size_t bytes, const size_t align) noexce
                 }
                 slot.region = nullptr;
                 slot.region_size = 0;
-                region->flags &= ~g_region_flag_cached;
+                region->flags &= ~(g_region_flag_cached | g_region_flag_free);
                 region->next = nullptr;
             }
         }
@@ -1138,7 +1168,7 @@ memory_pool::region_header* memory_pool::take_region_locked(const size_t need) n
     if (region_cache_count_ != 0) {
         --region_cache_count_;
     }
-    region->flags &= ~g_region_flag_cached;
+    region->flags &= ~(g_region_flag_cached | g_region_flag_free);
     region->next = nullptr;
     return region;
 }
@@ -1166,7 +1196,7 @@ bool memory_pool::keep_region_locked(region_header* region) noexcept {
     if (slot >= region_cache_slots) {
         return false;
     }
-    region->flags |= g_region_flag_cached;
+    region->flags |= g_region_flag_cached | g_region_flag_free;
     region->next = nullptr;
     region_cache_[slot].region = region;
     region_cache_[slot].region_size = static_cast<size_t>(region->region_size);
@@ -1207,7 +1237,12 @@ void memory_pool::deallocate_large(region_header* region) noexcept {
         NEFORCE_DEBUG_VERIFY(false, "memory pool received an invalid region.");
         return;
     }
+    if (options_.double_free_detection && (region->flags & g_region_flag_free) != 0) {
+        double_free_releases_.fetch_add(1, memory_order_relaxed);
+        return;
+    }
     map_retire(reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(region->base) + region->payload_offset));
+    region->flags |= g_region_flag_free;
     const auto region_size = static_cast<size_t>(region->region_size);
     if (options_.region_cache_enabled && thread_region_fits(region_size)) {
         thread_cache& cache = current_cache();
@@ -1220,9 +1255,9 @@ void memory_pool::deallocate_large(region_header* region) noexcept {
                 --cache.region_count;
                 slot.region = nullptr;
                 slot.region_size = 0;
-                replaced->flags &= ~g_region_flag_cached;
+                replaced->flags &= ~(g_region_flag_cached | g_region_flag_free);
             }
-            region->flags |= g_region_flag_cached;
+            region->flags |= g_region_flag_cached | g_region_flag_free;
             region->next = nullptr;
             slot.region = region;
             slot.region_size = region_size;
@@ -1424,6 +1459,7 @@ memory_pool::statistics memory_pool::stats() noexcept {
     result.os_map_calls = os_map_calls_.load(memory_order_relaxed);
     result.os_unmap_calls = os_unmap_calls_.load(memory_order_relaxed);
     result.foreign_releases = foreign_releases_.load(memory_order_relaxed);
+    result.double_free_releases = double_free_releases_.load(memory_order_relaxed);
     return result;
 }
 

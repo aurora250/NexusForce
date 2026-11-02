@@ -429,8 +429,8 @@ void share_memory::grow(size_t new_size) {
             mutex_handle_ = ::CreateMutexW(nullptr, FALSE, mutex_name.data());
         }
     }
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
-    // FreeBSD has no mremap, so the grown object is remapped at offset 0.
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
+    // FreeBSD and macOS have no mremap, so the grown object is remapped at offset 0.
     // The data itself lives in the shm file, so unmapping and mapping again preserves it.
     const size_t fd_new_size = data_offset_ + new_size;
     if (::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == -1) {
@@ -499,9 +499,13 @@ void share_memory::lock() {
 #else
     auto* header = static_cast<shm_header*>(original_mapped_addr_);
     const int ret = ::pthread_mutex_lock(&header->mutex);
+#    ifndef NEFORCE_PLATFORM_MACOS
     if (ret == EOWNERDEAD) {
         ::pthread_mutex_consistent(&header->mutex);
     }
+#    else
+    static_cast<void>(ret);
+#    endif
 #endif
 }
 
@@ -535,9 +539,11 @@ bool share_memory::try_lock() {
     if (ret == EBUSY) {
         return false;
     }
+#    ifndef NEFORCE_PLATFORM_MACOS
     if (ret == EOWNERDEAD) {
         ::pthread_mutex_consistent(&header->mutex);
     }
+#    endif
     return (ret == 0 || ret == EOWNERDEAD);
 #endif
 }
@@ -614,7 +620,9 @@ void* share_memory::map(size_t offset, const size_t length) {
                 ::pthread_mutexattr_t attr;
                 ::pthread_mutexattr_init(&attr);
                 ::pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
+#    ifndef NEFORCE_PLATFORM_MACOS
                 ::pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
+#    endif
                 ::pthread_mutex_init(&header->mutex, &attr);
                 ::pthread_mutexattr_destroy(&attr);
                 mutex_owner_ = true;

@@ -27,7 +27,7 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 namespace {
     ::pthread_mutex_t& futex_mutex() noexcept {
         static ::pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
@@ -77,7 +77,7 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
     }
     return false;
 
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     const auto* word = static_cast<const volatile platform_wait_t*>(addr);
     ::pthread_mutex_lock(&futex_mutex());
     bool timed_out = false;
@@ -120,7 +120,7 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
             terminate();
         }
     }
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     const auto* word = static_cast<const volatile platform_wait_t*>(addr);
     ::pthread_mutex_lock(&futex_mutex());
     while (*word == value) {
@@ -149,13 +149,14 @@ void futex_notify(void* addr, const bool all) noexcept {
     } else {
         ::WakeByAddressSingle(p);
     }
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
+    (void) addr;
+    // A single global condition variable serves every address,
+    // so signalling one waiter can hand the wake-up to a thread waiting on a different word and strand the intended one.
+    // Broadcast is the only correct mapping; each waiter re-checks its own word.
+    (void) all;
     ::pthread_mutex_lock(&futex_mutex());
-    if (all) {
-        ::pthread_cond_broadcast(&futex_cond());
-    } else {
-        ::pthread_cond_signal(&futex_cond());
-    }
+    ::pthread_cond_broadcast(&futex_cond());
     ::pthread_mutex_unlock(&futex_mutex());
 #else
     ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wake_private),

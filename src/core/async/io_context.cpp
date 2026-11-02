@@ -10,7 +10,7 @@
 #    include <sys/epoll.h>
 #    include <sys/eventfd.h>
 #endif
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 #    include <NeForce/core/system/pipe.hpp>
 #    include <fcntl.h>
 #    include <poll.h>
@@ -105,7 +105,7 @@ struct io_context::monitor {
     void register_file_completion(uintptr_t key, file_completion_callback cb) { file_completions_[key] = move(cb); }
 
     void unregister_file_completion(uintptr_t key) { file_completions_.erase(key); }
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     pipe wake_pipe_;
 
     monitor() { wake_pipe_ = pipe(false, true); }
@@ -323,7 +323,7 @@ monitor_(make_unique<monitor>()) {
     wake_info.fd = monitor_->wake_fd_;
     wake_info.events = epoll_event::in;
     fd_map_[monitor_->wake_fd_] = move(wake_info);
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     fd_info wake_info{};
     wake_info.fd = monitor_->wake_pipe_.native_read_handle();
     wake_info.events = epoll_event::in;
@@ -370,7 +370,7 @@ void io_context::add_fd(native_handle_type fd, epoll_event events, fd_callback c
         registered_fds_.fetch_add(1, memory_order_relaxed);
     }
     fd_map_[fd] = move(info);
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     lock<mutex> lk(fd_mutex_);
     fd_info info{};
     info.fd = fd;
@@ -430,7 +430,7 @@ void io_context::mod_fd(native_handle_type fd, epoll_event events, bool edge_tri
     ev.events = static_cast<uint32_t>(events | (edge_triggered ? epoll_event::et : epoll_event::none));
     ev.data.fd = fd;
     ::epoll_ctl(monitor_->epoll_fd_, EPOLL_CTL_MOD, fd, &ev);
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     wake();
 #else
     const auto eit = monitor_->fd_events_.find(fd);
@@ -451,7 +451,7 @@ void io_context::remove_fd(native_handle_type fd) {
         }
     }
     ::epoll_ctl(monitor_->epoll_fd_, EPOLL_CTL_DEL, fd, nullptr);
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     lock<mutex> lk(fd_mutex_);
     if (fd_map_.contains(fd)) {
         fd_map_.erase(fd);
@@ -485,7 +485,7 @@ void io_context::wake() noexcept {
 #ifdef NEFORCE_PLATFORM_LINUX
     constexpr uint64_t val = 1;
     ::write(monitor_->wake_fd_, &val, sizeof(val));
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     constexpr uint8_t val = 1;
     monitor_->wake_pipe_.write(&val, sizeof(val));
 #else
@@ -497,7 +497,7 @@ size_t io_context::run() {
     running_.fetch_add(1, memory_order_relaxed);
     size_t total = 0;
 
-#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_BSD_LIKE)
     while (!stopped_.load(memory_order_acquire)) {
         const uint64_t deadline = next_timer_deadline();
 
@@ -513,7 +513,7 @@ size_t io_context::run() {
             }
         }
 
-        if (!has_outstanding_work()) {
+        if (!has_pending_work()) {
             break;
         }
 
@@ -654,7 +654,7 @@ size_t io_context::run_one(int timeout_ms) {
             }
         }
 
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
         vector<::pollfd> pfds;
         vector<native_handle_type> fds;
         {

@@ -13,7 +13,10 @@ using namespace neforce;
 using namespace neforce::tui;
 
 namespace {
-    theme test_theme() { return make_palette(theme_palette_id::dark); }
+    const theme& test_theme() {
+        static const theme value = make_palette(theme_palette_id::dark);
+        return value;
+    }
 
     screen render_screen(const element& tree, const int w, const int h, const theme& t = dark_theme) {
         screen scr(w, h);

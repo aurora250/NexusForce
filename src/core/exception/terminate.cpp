@@ -37,9 +37,11 @@
 #        endif
 #    endif
 #endif
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 #    include <csignal>
+#    include <signal.h>
 #    include <pthread.h>
+#    include <time.h>
 #    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -121,7 +123,7 @@ namespace {
         return a0;
     }
 #    endif
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     long syscall_exit(const int status) noexcept { ::_exit(status); }
     long syscall_exit_group(const int status) noexcept { ::_exit(status); }
 #endif
@@ -249,12 +251,12 @@ void abort() noexcept {
     ::TerminateProcess(::GetCurrentProcess(), 3);
 #else
     ::sigset_t mask;
-    ::sigemptyset(&mask);
+    sigemptyset(&mask);
     ::pthread_sigmask(SIG_SETMASK, &mask, nullptr);
 
     struct ::sigaction sa;
     sa.sa_handler = SIG_DFL;
-    ::sigemptyset(&sa.sa_mask);
+    sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;
 
     struct ::sigaction old_sa;

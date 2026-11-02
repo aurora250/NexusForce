@@ -170,7 +170,7 @@ public:
                 root_props);
     }
 
-    void on_animation(int64_t delta) override {
+    void on_animation(neforce::int64_t delta) override {
         int flash = btn_flash_->value();
         if (flash > 0) {
             flash -= static_cast<int>(delta);

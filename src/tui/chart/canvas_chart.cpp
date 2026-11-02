@@ -265,7 +265,7 @@ void canvas_chart::raster(const int x, const int y, const int width, const int h
         effective.samples = spec.stream_samples;
         for (const auto& series: spec.series) {
             if (series.stream != nullptr) {
-                effective.end = max(effective.end, series.stream->size());
+                effective.end = max<uint64_t>(effective.end, static_cast<uint64_t>(series.stream->size()));
             }
         }
     }

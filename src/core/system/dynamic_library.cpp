@@ -8,14 +8,23 @@
 #ifdef NEFORCE_PLATFORM_POSIX
 #    include <climits>
 #    include <dlfcn.h>
-#    include <elf.h>
-#    include <link.h>
 #    include <unistd.h>
 #endif
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
+#    include <elf.h>
+#    include <link.h>
+#endif
 #ifdef NEFORCE_PLATFORM_FREEBSD
+#    include <sys/sysctl.h>
+#    include <sys/types.h>
 #    ifndef ElfW
 #        define ElfW(type) Elf64_##type
 #    endif
+#endif
+#ifdef NEFORCE_PLATFORM_MACOS
+#    include <mach-o/dyld.h>
+#    include <mach-o/loader.h>
+#    include <mach-o/nlist.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -52,7 +61,9 @@ void dynamic_library::open() {
         flags |= RTLD_GLOBAL;
     }
     if ((mode_val & static_cast<int>(load_mode::deep_bind)) != 0) {
+#    if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
         flags |= RTLD_DEEPBIND;
+#    endif
     }
 
     handle_ = ::dlopen(path_.data(), flags);
@@ -176,9 +187,15 @@ dynamic_library dynamic_library::load_by_name(const string& name, load_mode mode
         if (!name.starts_with("lib")) {
             resolved_name = "lib" + name;
         }
+#    ifdef NEFORCE_PLATFORM_MACOS
+        if (name.size() < 6 || (!name.ends_with(".dylib") && !name.contains(".dylib."))) {
+            resolved_name += ".dylib";
+        }
+#    else
         if (name.size() < 3 || (!name.ends_with(".so") && !name.contains(".so."))) {
             resolved_name += ".so";
         }
+#    endif
 #endif
     }
     return {resolved_name, mode};
@@ -190,14 +207,19 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
         return symbols;
     }
 
-#ifdef NEFORCE_PLATFORM_POSIX
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
     ::link_map* lm = nullptr;
     // NOLINTNEXTLINE(bugprone-multi-level-implicit-pointer-conversion)
     if (::dlinfo(handle_, RTLD_DI_LINKMAP, static_cast<void*>(&lm)) != 0 || lm == nullptr) {
         return symbols;
     }
 
-    const auto* dyn = reinterpret_cast<const ElfW(Dyn)*>(lm->l_ld);
+    const auto* dyn = reinterpret_cast<const ::ElfW(Dyn)*>(lm->l_ld);
+    const auto bias = reinterpret_cast<uintptr_t>(lm->l_addr);
+    // rtld leaves the dynamic string/symbol/hash pointers relative to
+    // the load bias on some POSIX targets (FreeBSD),
+    // while others hand out fully relocated addresses.
+    const auto relocate = [bias](const uintptr_t value) noexcept { return value >= bias ? value : value + bias; };
     const char* strtab = nullptr;
     const ::ElfW(Sym)* symtab = nullptr;
     const ::ElfW(Word)* hash_table = nullptr;
@@ -206,16 +228,19 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
 
     for (; dyn->d_tag != DT_NULL; ++dyn) {
         if (dyn->d_tag == DT_STRTAB) {
-            strtab = reinterpret_cast<const char*>(dyn->d_un.d_ptr);
+            strtab = reinterpret_cast<const char*>(relocate(static_cast<uintptr_t>(dyn->d_un.d_ptr)));
         } else if (dyn->d_tag == DT_SYMTAB) {
-            symtab = reinterpret_cast<const ElfW(Sym)*>(dyn->d_un.d_ptr);
+            symtab = reinterpret_cast<const ElfW(Sym)*>(relocate(static_cast<uintptr_t>(dyn->d_un.d_ptr)));
         } else if (dyn->d_tag == DT_SYMENT) {
             syment = dyn->d_un.d_val;
         } else if (dyn->d_tag == DT_HASH) {
-            hash_table = reinterpret_cast<const ElfW(Word)*>(dyn->d_un.d_ptr);
+            hash_table = reinterpret_cast<const ElfW(Word)*>(relocate(static_cast<uintptr_t>(dyn->d_un.d_ptr)));
         } else if (dyn->d_tag == DT_GNU_HASH) {
-            gnu_hash_table = reinterpret_cast<const ElfW(Word)*>(dyn->d_un.d_ptr);
+            gnu_hash_table = reinterpret_cast<const ElfW(Word)*>(relocate(static_cast<uintptr_t>(dyn->d_un.d_ptr)));
         }
+    }
+    if (syment == 0) {
+        syment = sizeof(::ElfW(Sym));
     }
 
     size_t nchain = 0;
@@ -259,7 +284,55 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
             }
         }
     }
-#else
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    const uint32_t image_count = ::_dyld_image_count();
+    for (uint32_t image_index = 0; image_index < image_count; ++image_index) {
+        const char* image_name = ::_dyld_get_image_name(image_index);
+        if (image_name == nullptr) {
+            continue;
+        }
+        if (!path_.empty() && string_view(image_name).find(path_.view()) == string_view::npos) {
+            continue;
+        }
+
+        const auto* header = reinterpret_cast<const ::mach_header_64*>(::_dyld_get_image_header(image_index));
+        if (header == nullptr || header->magic != MH_MAGIC_64) {
+            continue;
+        }
+
+        const auto* command = reinterpret_cast<const ::load_command*>(header + 1);
+        const ::symtab_command* symtab = nullptr;
+        for (uint32_t index = 0; index < header->ncmds; ++index) {
+            if (command->cmd == LC_SYMTAB) {
+                symtab = reinterpret_cast<const ::symtab_command*>(command);
+                break;
+            }
+            command =
+                    reinterpret_cast<const ::load_command*>(reinterpret_cast<const char*>(command) + command->cmdsize);
+        }
+        if (symtab == nullptr) {
+            continue;
+        }
+
+        const auto* symbols_table =
+                reinterpret_cast<const ::nlist_64*>(reinterpret_cast<const char*>(header) + symtab->symoff);
+        const char* string_table = reinterpret_cast<const char*>(header) + symtab->stroff;
+        for (uint32_t index = 0; index < symtab->nsyms; ++index) {
+            const ::nlist_64& entry = symbols_table[index];
+            if (entry.n_un.n_strx == 0 || entry.n_un.n_strx >= symtab->strsize || (entry.n_type & N_STAB) != 0 ||
+                (entry.n_type & N_EXT) == 0 || (entry.n_type & N_TYPE) != N_SECT) {
+                continue;
+            }
+            const string_view symbol_name{string_table + entry.n_un.n_strx};
+            if (symbol_name.empty()) {
+                continue;
+            }
+            if (name_filter.empty() || symbol_name.find(name_filter.view()) != string_view::npos) {
+                symbols.push_back(symbol_name);
+            }
+        }
+    }
+#elif defined(NEFORCE_PLATFORM_WINDOWS)
     if (handle_ == nullptr) {
         return symbols;
     }
@@ -312,6 +385,25 @@ string dynamic_library::program_location() {
         return "";
     }
     return wcharacter::to_string({buffer, len});
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    constexpr int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, -1};
+    char buffer[PATH_MAX] = {};
+    size_t len = sizeof(buffer) - 1;
+    if (::sysctl(mib, 4, buffer, &len, nullptr, 0) != 0) {
+        return "";
+    }
+    return {buffer};
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    uint32_t size = 0;
+    ::_NSGetExecutablePath(nullptr, &size);
+    if (size == 0) {
+        return "";
+    }
+    vector<char> buffer(static_cast<size_t>(size), 0);
+    if (::_NSGetExecutablePath(buffer.data(), &size) != 0) {
+        return "";
+    }
+    return {buffer.data()};
 #else
     char buffer[PATH_MAX];
     const ssize_t len = ::readlink("/proc/self/exe", buffer, sizeof(buffer) - 1);

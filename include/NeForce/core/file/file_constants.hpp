@@ -159,9 +159,13 @@ enum class file_attri : native_id_type {
     device = S_IFBLK | S_IFCHR,                     ///< 设备文件
     reparse_point = S_IFLNK,                        ///< 符号链接
     overlapped = 0,                                 ///< Linux不支持异步I/O标志
-    no_buffering = O_DIRECT,                        ///< 直接I/O
-    write_through = O_SYNC,                         ///< 同步写入
-    others = 0                                      ///< 其他属性
+#    if defined(NEFORCE_PLATFORM_MACOS)
+    no_buffering = 0, ///< macOS 无 O_DIRECT
+#    else
+    no_buffering = O_DIRECT, ///< 直接I/O
+#    endif
+    write_through = O_SYNC, ///< 同步写入
+    others = 0              ///< 其他属性
 #endif
 };
 

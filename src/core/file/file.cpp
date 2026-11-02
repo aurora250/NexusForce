@@ -328,6 +328,11 @@ bool file::flush() noexcept {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return ::FlushFileBuffers(handle_) != 0;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    if (::fcntl(handle_, F_FULLFSYNC) == 0) {
+        return true;
+    }
+    return ::fsync(handle_) == 0;
 #else
     return ::fdatasync(handle_) == 0;
 #endif
@@ -1293,12 +1298,19 @@ bool file::prefetch(const size_type hint_size) const {
 #else
     const difference_type current_pos = tell();
     if (current_pos >= 0) {
+#    ifdef NEFORCE_PLATFORM_MACOS
+        const ::radvisory advice{static_cast<::off_t>(current_pos), static_cast<int>(prefetch_size)};
+        if (::fcntl(handle_, F_RDADVISE, &advice) != 0) {
+            last_error_code_ = last_error();
+        }
+#    else
         const int advice_result =
                 ::posix_fadvise(handle_, current_pos, static_cast<difference_type>(prefetch_size), POSIX_FADV_WILLNEED);
 
         if (advice_result != 0) {
             last_error_code_ = static_cast<errc>(advice_result);
         }
+#    endif
     }
     return fill_read_buffer();
 #endif

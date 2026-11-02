@@ -11,6 +11,7 @@ on:
       - 'tools/**'
       - 'benchmark/**'
       - 'cmake/**'
+      - 'scripts/**'
       - 'CMakeLists.txt'
       - 'vcpkg.json'
       - 'config.json'
@@ -25,6 +26,7 @@ on:
       - 'tools/**'
       - 'benchmark/**'
       - 'cmake/**'
+      - 'scripts/**'
       - 'CMakeLists.txt'
       - 'vcpkg.json'
       - 'config.json'
@@ -126,6 +128,11 @@ jobs:
             config: cross-arm64
             cppstd: 20
 
+          - os: macos-14
+            compiler: clang
+            config: macos-arm64
+            cppstd: 20
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -204,6 +211,11 @@ jobs:
         shell: bash
         run: pip install ninja
 
+      - name: Install Ninja (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: brew install ninja
+
       - name: CMake configure
         shell: bash
         run: |
@@ -281,6 +293,19 @@ jobs:
             pool-tls-global-dynamic)
               FLAGS+=(
                 -DCMAKE_CXX_FLAGS=-DNEFORCE_MEMORY_POOL_TLS_GLOBAL_DYNAMIC
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            macos-arm64)
+              FLAGS+=(
+                -DNEXUSFORCE_ENABLE_POSTGRESQL=OFF
+                -DNEXUSFORCE_ENABLE_MYSQL=OFF
+                -DNEXUSFORCE_ENABLE_SQLITE3=OFF
+                -DNEXUSFORCE_ENABLE_REDIS=OFF
+                -DNEXUSFORCE_ENABLE_LZ4=OFF
+                -DNEXUSFORCE_ENABLE_ZSTD=OFF
+                -DNEXUSFORCE_ENABLE_ICU=OFF
                 -DNEXUSFORCE_BUILD_EXAMPLES=OFF
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
               )
@@ -385,6 +410,22 @@ jobs:
 
           exit $BUILD_EXIT
 
+      - name: Run death and signal tests (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          ./build/bin/Release/NexusForceUnitTests \
+            --gtest_color=no \
+            --gtest_filter='*Death*:TerminateTest.*:CrashDumpTest.*'
+
+      - name: Run remaining unit tests (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          ./build/bin/Release/NexusForceUnitTests \
+            --gtest_color=no \
+            --gtest_filter='-*Death*:TerminateTest.*:CrashDumpTest.*'
+
       - name: Check the allocator boundary (Windows)
         if: runner.os == 'Windows' && matrix.compiler == 'msvc' && matrix.config == 'full'
         shell: bash
@@ -440,6 +481,27 @@ jobs:
 
           echo "the allocator boundary holds: NexusForce.dll exports the pool but no allocation operators"
 
+      - name: Run unit tests
+        if: ${{ !startsWith(matrix.config, 'cross-') && matrix.config != 'minimal' && matrix.config != 'sqlcipher' }}
+        timeout-minutes: 30
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            exe=build/bin/Release/NexusForceUnitTests.exe
+          else
+            exe=build/bin/Release/NexusForceUnitTests
+          fi
+          "$exe" --gtest_color=no --gtest_output=xml:test-results.xml
+
+      - name: Upload unit test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}-${{ matrix.compiler }}-${{ matrix.config }}
+          path: test-results.xml
+          if-no-files-found: ignore
+
       - name: Save vcpkg binary cache
         uses: ./.github/actions/save-vcpkg-cache
         with:
@@ -460,6 +522,213 @@ jobs:
           echo "| 配置 | ${{ matrix.config }} |" >> $GITHUB_STEP_SUMMARY
           echo "| C++ 标准 | ${{ matrix.cppstd }} |" >> $GITHUB_STEP_SUMMARY
         shell: bash
+
+  freebsd:
+    name: "freebsd · ${{ matrix.arch }} · C++20 · qemu"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x64
+            triplet: x64-freebsd
+            toolchain: x86_64-freebsd-clang.cmake
+            release_path: amd64
+            qemu_packages: qemu-system-x86
+
+          - arch: arm64
+            triplet: arm64-freebsd
+            toolchain: arm64-freebsd-clang.cmake
+            release_path: arm64/aarch64
+            qemu_packages: qemu-system-arm qemu-efi-aarch64
+
+    env:
+      FREEBSD_VERSION: "14.4"
+      FREEBSD_MIRROR: "https://mirror.nju.edu.cn/freebsd"
+      VM_DIR: ${{ github.workspace }}/.ci/freebsd/vm-${{ matrix.arch }}
+      SYSROOT: ${{ github.workspace }}/.ci/freebsd/sysroot-${{ matrix.arch }}
+      VCPKG_INSTALLED: ${{ github.workspace }}/.ci/freebsd/vcpkg-${{ matrix.arch }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install QEMU and cross toolchain
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            cmake ninja-build clang-19 lld-19 rsync xz-utils pkg-config \
+            cloud-image-utils openssh-client qemu-utils \
+            ${{ matrix.qemu_packages }}
+          sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 100
+          sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 100
+
+      - name: Setup vcpkg
+        id: vcpkg
+        uses: ./.github/actions/setup-vcpkg
+
+      - name: Restore FreeBSD sysroot
+        id: sysroot-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.SYSROOT }}
+          key: freebsd-sysroot-${{ env.FREEBSD_VERSION }}-${{ matrix.arch }}-${{ hashFiles('cmake/toolchains/*freebsd*.cmake') }}
+
+      - name: Prepare FreeBSD sysroot
+        if: steps.sysroot-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p "$SYSROOT"
+          curl -fSL --retry 5 --retry-delay 3 \
+            "$FREEBSD_MIRROR/releases/${{ matrix.release_path }}/$FREEBSD_VERSION-RELEASE/base.txz" \
+            -o /tmp/base.txz
+          tar -xJf /tmp/base.txz -C "$SYSROOT"
+
+      - name: Save FreeBSD sysroot
+        if: steps.sysroot-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.SYSROOT }}
+          key: freebsd-sysroot-${{ env.FREEBSD_VERSION }}-${{ matrix.arch }}-${{ hashFiles('cmake/toolchains/*freebsd*.cmake') }}
+
+      - name: Restore FreeBSD QEMU VM image and configuration
+        id: vm-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.VM_DIR }}
+          key: freebsd-vm-${{ env.FREEBSD_VERSION }}-${{ matrix.arch }}-${{ hashFiles('scripts/ci/freebsd-qemu.sh') }}
+
+      - name: Prepare and provision FreeBSD QEMU VM
+        if: steps.vm-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" provision \
+            "$VM_DIR" "$VM_DIR/id_ed25519" 2222
+
+      - name: Save FreeBSD QEMU VM image and configuration
+        if: steps.vm-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.VM_DIR }}
+          key: freebsd-vm-${{ env.FREEBSD_VERSION }}-${{ matrix.arch }}-${{ hashFiles('scripts/ci/freebsd-qemu.sh') }}
+
+      - name: Restore FreeBSD vcpkg dependencies
+        id: vcpkg-installed-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.VCPKG_INSTALLED }}
+          key: freebsd-vcpkg-${{ matrix.triplet }}-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json', 'cmake/triplets/*freebsd*.cmake', 'cmake/toolchains/*freebsd*.cmake') }}
+
+      - name: Build host NFRS
+        run: |
+          set -euo pipefail
+          cmake -B build-host -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" \
+            -DNEXUSFORCE_BUILD_DOCS=OFF \
+            -DNEXUSFORCE_BUILD_TESTS=OFF \
+            -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
+            -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+          cmake --build build-host --target NFRS --parallel 2
+          HOST_NFRS=$(find build-host/bin -type f -name NFRS | head -1)
+          test -n "$HOST_NFRS"
+          echo "NEXUSFORCE_HOST_NFRS=$PWD/$HOST_NFRS" >> "$GITHUB_ENV"
+
+      - name: Configure FreeBSD cross build
+        run: |
+          set -euo pipefail
+          cmake -B build-freebsd -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" \
+            -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE="$PWD/cmake/toolchains/${{ matrix.toolchain }}" \
+            -DVCPKG_OVERLAY_TRIPLETS="$PWD/cmake/triplets" \
+            -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }} \
+            -DVCPKG_INSTALLED_DIR="$VCPKG_INSTALLED" \
+            -DFREEBSD_SYSROOT="$SYSROOT" \
+            -DNEXUSFORCE_HOST_NFRS="$NEXUSFORCE_HOST_NFRS" \
+            -DNEXUSFORCE_BUILD_DOCS=OFF \
+            -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
+            -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+
+      - name: Build FreeBSD unit tests
+        run: cmake --build build-freebsd --target NexusForceUnitTests --parallel 2
+
+      - name: Save FreeBSD vcpkg dependencies
+        if: steps.vcpkg-installed-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.VCPKG_INSTALLED }}
+          key: freebsd-vcpkg-${{ matrix.triplet }}-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json', 'cmake/triplets/*freebsd*.cmake', 'cmake/toolchains/*freebsd*.cmake') }}
+
+      - name: Save vcpkg binary cache
+        uses: ./.github/actions/save-vcpkg-cache
+        with:
+          cache-key: ${{ steps.vcpkg.outputs.cache-key }}
+          cache-hit: ${{ steps.vcpkg.outputs.cache-hit }}
+          binary-cache: ${{ steps.vcpkg.outputs.binary-cache }}
+          tool-cache-key: ${{ steps.vcpkg.outputs.tool-cache-key }}
+          tool-cache-hit: ${{ steps.vcpkg.outputs.tool-cache-hit }}
+          vcpkg-tool-cache-path: ${{ steps.vcpkg.outputs.vcpkg-tool-cache-path }}
+
+      - name: Boot FreeBSD QEMU VM
+        run: |
+          set -euo pipefail
+          scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" boot \
+            "$VM_DIR" "$VM_DIR/id_ed25519" 2222
+          scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" wait \
+            "$VM_DIR" "$VM_DIR/id_ed25519" 2222 tester
+
+      - name: Copy FreeBSD test binaries into the VM
+        run: |
+          set -euo pipefail
+          SSH=(ssh -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -p 2222)
+          SCP=(scp -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -P 2222)
+          TEST_BIN=$(find build-freebsd/bin -type f -name NexusForceUnitTests | head -1)
+          LIB=$(find build-freebsd/lib -type f -name 'libNexusForced.so.*.*' | head -1)
+          PLUGIN=$(find build-freebsd/lib -type f -name NexusForceTestPlugin.so | head -1)
+          test -n "$TEST_BIN" && test -n "$LIB" && test -n "$PLUGIN"
+          PLUGIN_DST="$PWD/$PLUGIN"
+          "${SSH[@]}" root@127.0.0.1 "mkdir -p /tmp/nf/bin /tmp/nf/lib '$(dirname "$PLUGIN_DST")'"
+          "${SCP[@]}" "$TEST_BIN" tester@127.0.0.1:/tmp/nf/bin/
+          "${SCP[@]}" "$LIB" tester@127.0.0.1:/tmp/nf/lib/libNexusForced.so.2
+          "${SCP[@]}" "$PLUGIN" tester@127.0.0.1:/tmp/nf/NexusForceTestPlugin.so
+          "${SSH[@]}" root@127.0.0.1 "cp /tmp/nf/NexusForceTestPlugin.so '$PLUGIN_DST' && chmod 644 '$PLUGIN_DST'"
+
+      - name: Run FreeBSD unit tests under QEMU
+        run: |
+          set +e
+          SSH=(ssh -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -p 2222)
+          SCP=(scp -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -P 2222)
+          "${SSH[@]}" tester@127.0.0.1 \
+            "cd /tmp/nf && LD_LIBRARY_PATH=/tmp/nf/lib timeout 3600 ./bin/NexusForceUnitTests --gtest_color=no --gtest_output=xml:/tmp/nf/results.xml"
+          status=$?
+          "${SCP[@]}" tester@127.0.0.1:/tmp/nf/results.xml "freebsd-${{ matrix.arch }}-test-results.xml" || true
+          scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" poweroff \
+            "$VM_DIR" "$VM_DIR/id_ed25519" 2222 || true
+          cp "$VM_DIR/serial.log" "freebsd-${{ matrix.arch }}-serial.log" 2>/dev/null || true
+          exit $status
+
+      - name: Upload FreeBSD test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freebsd-${{ matrix.arch }}-test-results
+          path: |
+            freebsd-${{ matrix.arch }}-test-results.xml
+            freebsd-${{ matrix.arch }}-serial.log
+          if-no-files-found: ignore
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "| 项目 | 值 |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|------|----|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| 平台 | FreeBSD ${{ env.FREEBSD_VERSION }} ${{ matrix.arch }} · QEMU TCG |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| 依赖 | vcpkg ${{ matrix.triplet }}（交叉） |" >> "$GITHUB_STEP_SUMMARY"
 
   allocator:
     name: "allocator · global new/delete override (gcc · Release)"

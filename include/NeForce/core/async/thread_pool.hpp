@@ -619,6 +619,12 @@ private:
      */
     atomic<uint32_t> priority_pending_{0};
 
+    /**
+     * @brief 正在执行的高优先级任务数
+     * @note 大于零时工作线程不取普通任务，保证高优先级任务先完成
+     */
+    atomic<uint32_t> priority_active_{0};
+
     atomic<int32_t> warm_owner_{-1}; ///< 预热线程编号
 
     /**

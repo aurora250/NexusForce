@@ -114,6 +114,7 @@ public:
         bool include_memory{true};                                ///< 是否附带内存内容；关闭后无法回溯栈
 
         uint32_t max_segments{2048};                                 ///< 内存段数量上限，超出部分截断
+        uint64_t max_segment_bytes{512ULL * 1024ULL * 1024ULL};      ///< 单个内存段字节上限，超出部分截断
         uint64_t max_file_bytes{2ULL * 1024ULL * 1024ULL * 1024ULL}; ///< 转储文件总字节上限，超出部分截断
 
         bool install_terminate_handler{true}; ///< 是否接管 terminate

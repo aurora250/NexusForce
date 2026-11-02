@@ -14,7 +14,7 @@
 #if defined(NEFORCE_PLATFORM_POSIX) && defined(NEFORCE_ARCH_X86)
 #    include <cpuid.h>
 #endif
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#if defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
 #    include <sys/sysctl.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -1523,7 +1523,7 @@ namespace {
 
 #endif // NEFORCE_PLATFORM_LINUX
 
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#if defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
     int sysctl_value_of(const char* name) noexcept {
         int value = 0;
         ::size_t length = sizeof(value);
@@ -1590,13 +1590,14 @@ namespace {
     }
 #    endif
 
+#    ifdef NEFORCE_PLATFORM_FREEBSD
     void probe_platform(sysinfo::hardware_info& hardware, sysinfo::cpu_info& cpu) {
-#    if defined(NEFORCE_ARCH_X86)
+#        if defined(NEFORCE_ARCH_X86)
         fill_cpu_cpuid(cpu);
         fill_cpu_instructions(cpu);
         fill_cpuid_caches(cpu);
         apply_cpu_metadata(cpu);
-#    endif
+#        endif
 
         cpu.brand = sysctl_string_of("hw.model");
         if (cpu.brand.empty()) {
@@ -1631,6 +1632,57 @@ namespace {
         if (hardware.board.model.empty()) {
             hardware.board.model = sysctl_string_of("kenv.smbios.system.product");
         }
+
+        if (cpu.l3_kib != 0) {
+            hardware.memory.llc_ring =
+                    cpu.l3_kib >= 1024 ? format("{} MiB L3", cpu.l3_kib / 1024) : format("{} KiB L3", cpu.l3_kib);
+        }
+    }
+#    endif // NEFORCE_PLATFORM_FREEBSD
+#endif
+
+#ifdef NEFORCE_PLATFORM_MACOS
+    uint64_t sysctl_u64_of(const char* name) noexcept {
+        uint64_t value = 0;
+        ::size_t length = sizeof(value);
+        if (::sysctlbyname(name, &value, &length, nullptr, 0) != 0) {
+            return 0;
+        }
+        return value;
+    }
+
+    void probe_platform(sysinfo::hardware_info& hardware, sysinfo::cpu_info& cpu) {
+#    if defined(NEFORCE_ARCH_X86)
+        fill_cpu_cpuid(cpu);
+        fill_cpu_instructions(cpu);
+        fill_cpuid_caches(cpu);
+        apply_cpu_metadata(cpu);
+#    endif
+
+        cpu.brand = sysctl_string_of("machdep.cpu.brand_string");
+        if (cpu.brand.empty()) {
+            cpu.brand = sysctl_string_of("hw.model");
+        }
+
+        cpu.logical_processors = static_cast<uint32_t>(sysctl_value_of("hw.ncpu"));
+        const int physical = sysctl_value_of("hw.physicalcpu");
+        cpu.cores = physical > 0 ? static_cast<uint32_t>(physical) : cpu.logical_processors;
+
+        const uint64_t frequency = sysctl_u64_of("hw.cpufrequency");
+        if (frequency >= 100'000'000ULL) {
+            cpu.max_mhz = static_cast<uint32_t>(frequency / 1000000ULL);
+        }
+        if (cpu.max_mhz < 100U) {
+            cpu.max_mhz = 0;
+            const uint32_t parsed = sysinfo::parse_brand_frequency(cpu.brand.view());
+            if (parsed >= 100U) {
+                cpu.max_mhz = parsed;
+            }
+        }
+
+        cpu.l1_kib = static_cast<uint32_t>(sysctl_u64_of("hw.l1icachesize") / 1024ULL);
+        cpu.l2_kib = static_cast<uint32_t>(sysctl_u64_of("hw.l2cachesize") / 1024ULL);
+        cpu.l3_kib = static_cast<uint32_t>(sysctl_u64_of("hw.l3cachesize") / 1024ULL);
 
         if (cpu.l3_kib != 0) {
             hardware.memory.llc_ring =

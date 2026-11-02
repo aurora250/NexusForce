@@ -14,7 +14,7 @@
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/system/process.hpp"
 #include "NeForce/core/system/signal.hpp"
-#include "NeForce/core/system/system_event.hpp"
+#include "NeForce/core/async/waitable_event.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -119,8 +119,8 @@ private:
 
     unique_ptr<signal_guard> signal_guard_;
 
-    system_event shutdown_event_{false, system_event::type::manual_reset};
-    system_event reload_event_{false, system_event::type::auto_reset};
+    waitable_event shutdown_event_{false, waitable_event::type::manual_reset};
+    waitable_event reload_event_{false, waitable_event::type::auto_reset};
 
     mutable mutex children_mutex_;
     flat_unordered_map<string, child_entry> children_;

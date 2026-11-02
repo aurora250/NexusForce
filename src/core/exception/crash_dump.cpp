@@ -28,7 +28,9 @@
 #    include <csignal>
 #    include <sys/resource.h>
 #    include <sys/syscall.h>
-#    include <ucontext.h>
+#    if !defined(NEFORCE_PLATFORM_MACOS)
+#        include <ucontext.h>
+#    endif
 #    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -39,6 +41,7 @@ namespace {
     constexpr size_t summary_capacity = 1024;
     constexpr size_t detail_capacity = 256;
     constexpr size_t default_max_segments = 2048;
+    constexpr uint64_t default_max_segment_bytes = 512ULL * 1024ULL * 1024ULL;
     constexpr uint64_t default_max_file_bytes = 2ULL * 1024ULL * 1024ULL * 1024ULL;
 
     using inner::native_dump_path_capacity;
@@ -53,6 +56,7 @@ namespace {
         const char* prefix{nullptr};
         bool include_memory{false};
         uint32_t max_segments{static_cast<uint32_t>(default_max_segments)};
+        uint64_t max_segment_bytes{default_max_segment_bytes};
         uint64_t max_file_bytes{default_max_file_bytes};
         bool kernel_core_fallback{true};
         int64_t utc_offset_seconds{0};
@@ -65,6 +69,7 @@ namespace {
         char prefix[prefix_capacity]{};
         bool include_memory{false};
         uint32_t max_segments{static_cast<uint32_t>(default_max_segments)};
+        uint64_t max_segment_bytes{default_max_segment_bytes};
         uint64_t max_file_bytes{default_max_file_bytes};
         bool kernel_core_fallback{true};
         int64_t utc_offset_seconds{0};
@@ -262,6 +267,7 @@ namespace {
 
         g_published.include_memory = options.include_memory;
         g_published.max_segments = options.max_segments;
+        g_published.max_segment_bytes = options.max_segment_bytes;
         g_published.max_file_bytes = options.max_file_bytes;
         g_published.kernel_core_fallback = options.kernel_core_fallback;
         g_published.utc_offset_seconds = local_utc_offset_seconds();
@@ -276,6 +282,7 @@ namespace {
         setup.prefix = g_published.prefix[0] != '\0' ? g_published.prefix : "nexusforce";
         setup.include_memory = g_published.include_memory;
         setup.max_segments = g_published.max_segments;
+        setup.max_segment_bytes = g_published.max_segment_bytes;
         setup.max_file_bytes = g_published.max_file_bytes;
         setup.kernel_core_fallback = g_published.kernel_core_fallback;
         setup.utc_offset_seconds = g_published.utc_offset_seconds;
@@ -300,6 +307,7 @@ namespace {
         request.prefix = setup.prefix;
         request.include_memory = setup.include_memory;
         request.max_segments = setup.max_segments;
+        request.max_segment_bytes = setup.max_segment_bytes;
         request.max_file_bytes = setup.max_file_bytes;
         request.signal_number = signal_number;
         request.signal_info = signal_info;
@@ -441,11 +449,13 @@ namespace {
                  record.ExceptionAddress, &pointers, context, inner);
         immediate_exit(3);
 #else
-#    if defined(NEFORCE_PLATFORM_POSIX)
+#    if defined(NEFORCE_PLATFORM_POSIX) && !defined(NEFORCE_PLATFORM_MACOS)
         ::ucontext_t signal_context{};
         if (::getcontext(&signal_context) == 0) {
             context = &signal_context;
         }
+#    endif
+#    if defined(NEFORCE_PLATFORM_POSIX)
         signal_number = SIGABRT;
 #    endif
         run_dump(setup, crash_dump::reason::unhandled_exception, signal_number, 0, nullptr, nullptr, context, inner);
@@ -483,11 +493,11 @@ namespace {
         if (!result.written && setup.kernel_core_fallback) {
             struct ::sigaction default_action{};
             default_action.sa_handler = SIG_DFL;
-            ::sigemptyset(&default_action.sa_mask);
+            sigemptyset(&default_action.sa_mask);
             ::sigaction(signal_number, &default_action, nullptr);
             ::sigset_t unblock{};
-            ::sigemptyset(&unblock);
-            ::sigaddset(&unblock, signal_number);
+            sigemptyset(&unblock);
+            sigaddset(&unblock, signal_number);
             // NOLINTNEXTLINE(concurrency-mt-unsafe)
             ::sigprocmask(SIG_UNBLOCK, &unblock, nullptr);
             ::raise(signal_number);
@@ -506,8 +516,8 @@ namespace {
 
         struct ::sigaction action{};
         action.sa_sigaction = fatal_signal_handler;
-        ::sigemptyset(&action.sa_mask);
-        ::sigfillset(&action.sa_mask);
+        sigemptyset(&action.sa_mask);
+        sigfillset(&action.sa_mask);
         action.sa_flags = SA_SIGINFO | SA_ONSTACK | SA_RESETHAND;
 
         bool installed = true;
@@ -813,6 +823,7 @@ crash_dump::result crash_dump::write(const crash_dump::options& options) noexcep
         setup.prefix = prefix_buffer;
         setup.include_memory = options.include_memory;
         setup.max_segments = options.max_segments;
+        setup.max_segment_bytes = options.max_segment_bytes;
         setup.max_file_bytes = options.max_file_bytes;
         setup.kernel_core_fallback = options.kernel_core_fallback;
         setup.utc_offset_seconds = local_utc_offset_seconds();
@@ -824,7 +835,7 @@ crash_dump::result crash_dump::write(const crash_dump::options& options) noexcep
         ::CONTEXT win_context{};
         ::RtlCaptureContext(&win_context);
         context = &win_context;
-#elif defined(NEFORCE_PLATFORM_POSIX)
+#elif defined(NEFORCE_PLATFORM_POSIX) && !defined(NEFORCE_PLATFORM_MACOS)
         ::ucontext_t signal_context{};
         if (::getcontext(&signal_context) == 0) {
             context = &signal_context;

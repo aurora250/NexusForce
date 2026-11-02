@@ -37,9 +37,6 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i8(uint8_t c) noexcept {
 #endif
 }
 
-NEFORCE_DEPRECATED_VERSION("fill_byte", "v2.0.0", "fill_i8")
-NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_byte(uint8_t c) noexcept { return fill_i8(c); }
-
 /**
  * @brief 将单 16-bit 值广播到 128-bit SIMD 向量的全部 8 个位置
  * @param v 源值

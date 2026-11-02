@@ -10,7 +10,8 @@
 #    ifdef min
 #        undef min
 #    endif
-#else
+#endif
+#ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/exception/error_code.hpp>
 #    include <csignal>
 #    include <fcntl.h>
@@ -109,7 +110,7 @@ pipe& pipe::operator=(pipe&& other) noexcept {
 }
 
 void pipe::ignore_sigpipe() noexcept {
-#ifdef NEFORCE_PLATFORM_LINUX
+#ifdef NEFORCE_PLATFORM_POSIX
     ::signal(SIGPIPE, SIG_IGN);
 #endif
 }

@@ -11,7 +11,10 @@
 #endif
 
 namespace tui_snapshot {
-    inline neforce::string directory() { return NEFORCE_SNAPSHOT_DIR; }
+    inline neforce::string directory() {
+        const neforce::string override_dir = neforce::environment::get("NEFORCE_SNAPSHOT_DIR");
+        return override_dir.empty() ? neforce::string{NEFORCE_SNAPSHOT_DIR} : override_dir;
+    }
 
     inline neforce::string path_for(const neforce::string& name) { return directory() + "/" + name + ".snap"; }
 

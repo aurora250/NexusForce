@@ -2,6 +2,7 @@
 #include <NeForce/core/container/flat_unordered_map.hpp>
 #include <NeForce/core/container/map.hpp>
 #include <NeForce/core/utility/tuple.hpp>
+#include <NeForce/core/string/to_numerics.hpp>
 #include <NeForce/core/string/to_string.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/utility/packages.hpp>
@@ -33,7 +34,6 @@
 #    include <net/if.h>
 #    include <arpa/inet.h>
 #    include <netinet/in.h>
-#    include <sys/auxv.h>
 #    include <sys/statvfs.h>
 #    include <sys/utsname.h>
 #    include <unistd.h>
@@ -47,12 +47,30 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <netpacket/packet.h>
+#    include <sys/auxv.h>
 #    include <sys/sysinfo.h>
 #endif
 #ifdef NEFORCE_PLATFORM_FREEBSD
+#    include <devstat.h>
+#    include <net/if.h>
+#    include <sys/auxv.h>
 #    include <net/if_dl.h>
+#    include <net/if_var.h>
+#    include <sys/mount.h>
 #    include <sys/sysctl.h>
 #    include <sys/time.h>
+#    include <sys/user.h>
+#endif
+#ifdef NEFORCE_PLATFORM_MACOS
+#    include <net/if_dl.h>
+#    include <net/if_var.h>
+#    include <sys/mount.h>
+#    include <sys/sysctl.h>
+#    include <sys/time.h>
+#    include <mach/mach.h>
+#    include <mach/mach_host.h>
+#    include <mach/processor_info.h>
+#    include <libproc.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -252,6 +270,7 @@ namespace {
     }
 
     void fill_network_stats(sysinfo::network_interface& iface) {
+#    ifdef NEFORCE_PLATFORM_LINUX
         const string base = "/sys/class/net/" + iface.name + "/";
         iface.mtu = read_number_file(base + "mtu");
         const uint64_t speed = read_number_file(base + "speed");
@@ -268,6 +287,11 @@ namespace {
         if (iface.operstate.empty()) {
             iface.operstate = iface.is_up ? "up" : "down";
         }
+#    else
+        if (iface.operstate.empty()) {
+            iface.operstate = iface.is_up ? "up" : "down";
+        }
+#    endif
     }
 
     sysinfo::battery_info read_battery_linux() {
@@ -559,6 +583,50 @@ namespace {
             if (cpu_info.max_mhz != 0 && cpu_info.current_mhz == 0) {
                 cpu_info.current_mhz = cpu_info.max_mhz;
             }
+        }
+
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+        char model[256] = {};
+        size_t model_length = sizeof(model) - 1;
+        if (::sysctlbyname("hw.model", model, &model_length, nullptr, 0) == 0) {
+            cpu_info.brand = model;
+            cpu_info.brand.trim();
+        }
+        if (cpu_info.brand.contains("Intel")) {
+            cpu_info.vendor = "GenuineIntel";
+        } else if (cpu_info.brand.contains("AMD")) {
+            cpu_info.vendor = "AuthenticAMD";
+        }
+        int clock_rate = 0;
+        size_t clock_length = sizeof(clock_rate);
+        if (::sysctlbyname("hw.clockrate", &clock_rate, &clock_length, nullptr, 0) == 0 && clock_rate > 0) {
+            cpu_info.max_mhz = static_cast<uint32_t>(clock_rate);
+            cpu_info.current_mhz = static_cast<uint32_t>(clock_rate);
+        }
+        int current_frequency = 0;
+        size_t frequency_length = sizeof(current_frequency);
+        if (::sysctlbyname("dev.cpu.0.freq", &current_frequency, &frequency_length, nullptr, 0) == 0 &&
+            current_frequency > 0) {
+            cpu_info.current_mhz = static_cast<uint32_t>(current_frequency);
+        }
+        cpu_info.logical_processors = static_cast<uint32_t>(::sysconf(_SC_NPROCESSORS_ONLN));
+        cpu_info.cores = cpu_info.logical_processors;
+        int physical_cores = 0;
+        size_t cores_length = sizeof(physical_cores);
+        if (::sysctlbyname("kern.smp.cores", &physical_cores, &cores_length, nullptr, 0) == 0 && physical_cores > 0) {
+            cpu_info.cores = static_cast<uint32_t>(physical_cores);
+        }
+        char features[256] = {};
+        size_t features_length = sizeof(features) - 1;
+        if (::sysctlbyname("hw.features", features, &features_length, nullptr, 0) == 0) {
+            cpu_info.features = features;
+        }
+        if (cpu_info.features.empty()) {
+#    ifdef NEFORCE_ARCH_AARCH64
+            cpu_info.features = "neon";
+#    else
+            cpu_info.features = "sse2";
+#    endif
         }
 
 #else
@@ -995,13 +1063,13 @@ void sysinfo::init() {
     ::utsname uname_data{};
     if (::uname(&uname_data) == 0) {
         const string& machine = uname_data.machine;
-        if (machine == "x86_64") {
+        if (machine == "x86_64" || machine == "amd64") {
             architecture_ = architecture::x64;
         } else if (machine == "i686" || machine == "i386") {
             architecture_ = architecture::x86;
         } else if (machine == "arm" || machine == "armv7l") {
             architecture_ = architecture::arm;
-        } else if (machine == "aarch64") {
+        } else if (machine == "aarch64" || machine == "arm64") {
             architecture_ = architecture::arm64;
         } else if (machine == "riscv32") {
             architecture_ = architecture::riscv32;
@@ -1160,6 +1228,50 @@ sysinfo::memory_info sysinfo::memory_status() {
     if (::GetPerformanceInfo(&performance, sizeof(performance)) == TRUE) {
         info.cached_physical = static_cast<uint64_t>(performance.SystemCache) * performance.PageSize;
     }
+
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    uint64_t physmem = 0;
+    ::size_t length = sizeof(physmem);
+    if (::sysctlbyname("hw.memsize", &physmem, &length, nullptr, 0) == 0) {
+        info.total_physical = physmem;
+    }
+
+    const auto page_size = static_cast<uint64_t>(::vm_page_size);
+    uint64_t free_pages = 0;
+    uint64_t inactive_pages = 0;
+    uint64_t purgeable_pages = 0;
+    length = sizeof(free_pages);
+    const int free_status = ::sysctlbyname("vm.page_free_count", &free_pages, &length, nullptr, 0);
+    length = sizeof(inactive_pages);
+    const int inactive_status = ::sysctlbyname("vm.page_inactive_count", &inactive_pages, &length, nullptr, 0);
+    length = sizeof(purgeable_pages);
+    ::sysctlbyname("vm.page_purgeable_count", &purgeable_pages, &length, nullptr, 0);
+
+    if (free_status == 0 && inactive_status == 0 && (free_pages + inactive_pages) != 0) {
+        info.available_physical = (free_pages + inactive_pages) * page_size;
+        info.cached_physical = purgeable_pages * page_size;
+    } else {
+        ::vm_statistics64_data_t vm_stats{};
+        ::mach_msg_type_number_t vm_count = HOST_VM_INFO64_COUNT;
+        if (::host_statistics64(::mach_host_self(), HOST_VM_INFO64, reinterpret_cast<::host_info64_t>(&vm_stats),
+                                &vm_count) == KERN_SUCCESS) {
+            info.available_physical =
+                    (static_cast<uint64_t>(vm_stats.free_count) + static_cast<uint64_t>(vm_stats.inactive_count)) *
+                    page_size;
+            info.cached_physical = (static_cast<uint64_t>(vm_stats.purgeable_count) +
+                                    static_cast<uint64_t>(vm_stats.external_page_count)) *
+                                   page_size;
+        }
+    }
+
+    struct ::xsw_usage swap{};
+    length = sizeof(swap);
+    if (::sysctlbyname("vm.swapusage", &swap, &length, nullptr, 0) == 0) {
+        info.total_page_file = swap.xsu_total;
+        info.available_page_file = swap.xsu_avail;
+    }
+    info.total_virtual = info.total_physical + info.total_page_file;
+    info.available_virtual = info.available_physical + info.available_page_file;
 
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
     uint64_t physmem = 0;
@@ -1393,9 +1505,28 @@ sysinfo::simd_info sysinfo::probe_simd() {
             info.features |= static_cast<uint32_t>(simd_instruction::neon);
         }
 #        endif
+#    elif defined(NEFORCE_PLATFORM_MACOS)
+        info.features |= static_cast<uint32_t>(simd_instruction::neon);
+#        if defined(NEFORCE_ARCH_AARCH64)
+        info.features |= static_cast<uint32_t>(simd_instruction::aes);
+        info.features |= static_cast<uint32_t>(simd_instruction::pclmulqdq);
+#        endif
 #    elif defined(NEFORCE_PLATFORM_FREEBSD)
         unsigned long hwcap = 0;
         ::elf_aux_info(AT_HWCAP, &hwcap, sizeof(hwcap));
+#        if defined(NEFORCE_ARCH_AARCH64)
+        // ASIMD/NEON is mandatory on ARMv8, and firmware may not expose AT_HWCAP.
+        info.features |= static_cast<uint32_t>(simd_instruction::neon);
+        if ((hwcap & (1UL << 1)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::neon);
+        }
+        if ((hwcap & (1UL << 3)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::aes);
+        }
+        if ((hwcap & (1UL << 4)) != 0) {
+            info.features |= static_cast<uint32_t>(simd_instruction::pclmulqdq);
+        }
+#        endif
 #    else
         // Linux UAPI HWCAP bits: NEON(12) on arm32, ASIMD(1), AES(3), PMULL(4), SVE(22) on aarch64.
         const unsigned long hwcap = ::getauxval(AT_HWCAP);
@@ -1495,6 +1626,93 @@ vector<float64_t> sysinfo::cpu_usage_per_core() {
     }
     previous_idle = move(idles);
     previous_total = move(totals);
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    static vector<uint64_t> previous_total;
+    static vector<uint64_t> previous_idle;
+
+    natural_t cpu_count = 0;
+    processor_info_array_t processor_info = nullptr;
+    mach_msg_type_number_t processor_info_count = 0;
+    if (::host_processor_info(::mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &cpu_count, &processor_info,
+                              &processor_info_count) != KERN_SUCCESS ||
+        processor_info == nullptr || cpu_count == 0) {
+        return usage;
+    }
+
+    const auto* loads = reinterpret_cast<const ::processor_cpu_load_info_data_t*>(processor_info);
+    vector<uint64_t> totals(static_cast<size_t>(cpu_count), 0);
+    vector<uint64_t> idles(static_cast<size_t>(cpu_count), 0);
+    for (natural_t index = 0; index < cpu_count; ++index) {
+        totals[index] = loads[index].cpu_ticks[CPU_STATE_USER] + loads[index].cpu_ticks[CPU_STATE_SYSTEM] +
+                        loads[index].cpu_ticks[CPU_STATE_NICE] + loads[index].cpu_ticks[CPU_STATE_IDLE];
+        idles[index] = loads[index].cpu_ticks[CPU_STATE_IDLE];
+    }
+    ::vm_deallocate(::mach_task_self(), reinterpret_cast<::vm_address_t>(processor_info),
+                    processor_info_count * sizeof(::integer_t));
+
+    usage.assign(cpu_count, 0.0);
+    if (previous_total.size() != totals.size() || previous_idle.size() != idles.size()) {
+        previous_total = move(totals);
+        previous_idle = move(idles);
+        return usage;
+    }
+    for (size_t index = 0; index < totals.size(); ++index) {
+        if (totals[index] <= previous_total[index] || idles[index] < previous_idle[index]) {
+            continue;
+        }
+        const uint64_t total_delta = totals[index] - previous_total[index];
+        const uint64_t idle_delta = idles[index] - previous_idle[index];
+        if (total_delta > idle_delta) {
+            usage[index] =
+                    100.0 * static_cast<float64_t>(total_delta - idle_delta) / static_cast<float64_t>(total_delta);
+        }
+    }
+    previous_total = move(totals);
+    previous_idle = move(idles);
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    static vector<uint64_t> previous_total;
+    static vector<uint64_t> previous_idle;
+    size_t length = 0;
+    if (::sysctlbyname("kern.cp_times", nullptr, &length, nullptr, 0) != 0 || length == 0) {
+        return usage;
+    }
+    vector<int64_t> counters(static_cast<size_t>(length) / sizeof(int64_t));
+    if (::sysctlbyname("kern.cp_times", counters.data(), &length, nullptr, 0) != 0) {
+        return usage;
+    }
+    const size_t cores = counters.size() / CPUSTATES;
+    if (cores == 0) {
+        return usage;
+    }
+    vector<uint64_t> totals(cores, 0);
+    vector<uint64_t> idles(cores, 0);
+    for (size_t core = 0; core < cores; ++core) {
+        uint64_t total = 0;
+        for (size_t state = 0; state < CPUSTATES; ++state) {
+            total += static_cast<uint64_t>(counters[core * CPUSTATES + state]);
+        }
+        totals[core] = total;
+        idles[core] = static_cast<uint64_t>(counters[core * CPUSTATES + CP_IDLE]);
+    }
+    usage.assign(cores, 0.0);
+    if (previous_total.size() != totals.size() || previous_idle.size() != idles.size()) {
+        previous_total = move(totals);
+        previous_idle = move(idles);
+        return usage;
+    }
+    for (size_t index = 0; index < cores; ++index) {
+        if (totals[index] <= previous_total[index] || idles[index] < previous_idle[index]) {
+            continue;
+        }
+        const uint64_t total_delta = totals[index] - previous_total[index];
+        const uint64_t idle_delta = idles[index] - previous_idle[index];
+        if (total_delta > idle_delta) {
+            usage[index] =
+                    100.0 * static_cast<float64_t>(total_delta - idle_delta) / static_cast<float64_t>(total_delta);
+        }
+    }
+    previous_total = move(totals);
+    previous_idle = move(idles);
 #else
     static vector<uint64_t> previous_total;
     static vector<uint64_t> previous_idle;
@@ -1678,6 +1896,85 @@ sysinfo::cpu_breakdown_info sysinfo::cpu_usage_breakdown() {
     result.system = privileged_delta > interrupt_delta + dpc_delta
                             ? static_cast<float64_t>(privileged_delta - interrupt_delta - dpc_delta) * scale
                             : 0.0;
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    natural_t cpu_count = 0;
+    processor_info_array_t processor_info = nullptr;
+    mach_msg_type_number_t processor_info_count = 0;
+    if (::host_processor_info(::mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &cpu_count, &processor_info,
+                              &processor_info_count) != KERN_SUCCESS ||
+        processor_info == nullptr || cpu_count == 0) {
+        return result;
+    }
+
+    const auto* loads = reinterpret_cast<const ::processor_cpu_load_info_data_t*>(processor_info);
+    uint64_t user = 0;
+    uint64_t system = 0;
+    uint64_t idle = 0;
+    for (natural_t index = 0; index < cpu_count; ++index) {
+        user += static_cast<uint64_t>(loads[index].cpu_ticks[CPU_STATE_USER]) +
+                static_cast<uint64_t>(loads[index].cpu_ticks[CPU_STATE_NICE]);
+        system += static_cast<uint64_t>(loads[index].cpu_ticks[CPU_STATE_SYSTEM]);
+        idle += static_cast<uint64_t>(loads[index].cpu_ticks[CPU_STATE_IDLE]);
+    }
+    ::vm_deallocate(::mach_task_self(), reinterpret_cast<::vm_address_t>(processor_info),
+                    processor_info_count * sizeof(::integer_t));
+
+    const vector<uint64_t> current{user, system, 0, idle};
+    if (previous_fields.size() != current.size()) {
+        previous_fields = current;
+        return result;
+    }
+    uint64_t deltas[4] = {};
+    uint64_t total_delta = 0;
+    for (size_t index = 0; index < current.size(); ++index) {
+        if (current[index] >= previous_fields[index]) {
+            deltas[index] = current[index] - previous_fields[index];
+        }
+        total_delta += deltas[index];
+    }
+    previous_fields = current;
+    if (total_delta == 0) {
+        return result;
+    }
+    const float64_t scale = 100.0 / static_cast<float64_t>(total_delta);
+    result.user = static_cast<float64_t>(deltas[0]) * scale;
+    result.system = static_cast<float64_t>(deltas[1]) * scale;
+    result.idle = static_cast<float64_t>(deltas[3]) * scale;
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    long fields[CPUSTATES] = {};
+    size_t length = sizeof(fields);
+    if (::sysctlbyname("kern.cp_time", fields, &length, nullptr, 0) != 0) {
+        return result;
+    }
+    const auto user = static_cast<uint64_t>(fields[CP_USER]) + static_cast<uint64_t>(fields[CP_NICE]);
+    const auto system = static_cast<uint64_t>(fields[CP_SYS]);
+    const auto irq = static_cast<uint64_t>(fields[CP_INTR]);
+    const auto idle = static_cast<uint64_t>(fields[CP_IDLE]);
+    const vector<uint64_t> current{user, system, irq, idle};
+    if (previous_fields.size() != current.size()) {
+        previous_fields = current;
+        return result;
+    }
+    uint64_t deltas[4] = {};
+    uint64_t total_delta = 0;
+    for (size_t index = 0; index < current.size(); ++index) {
+        if (current[index] >= previous_fields[index]) {
+            deltas[index] = current[index] - previous_fields[index];
+        }
+        total_delta += deltas[index];
+    }
+    previous_fields = current;
+    if (total_delta == 0) {
+        return result;
+    }
+    const float64_t scale = 100.0 / static_cast<float64_t>(total_delta);
+    const auto clamp_percent = [](const float64_t value) noexcept {
+        return value < 0.0 ? 0.0 : (value > 100.0 ? 100.0 : value);
+    };
+    result.user = clamp_percent(static_cast<float64_t>(deltas[0]) * scale);
+    result.system = clamp_percent(static_cast<float64_t>(deltas[1]) * scale);
+    result.irq = clamp_percent(static_cast<float64_t>(deltas[2]) * scale);
+    result.idle = clamp_percent(static_cast<float64_t>(deltas[3]) * scale);
 #else
     const string content = read_file_all("/proc/stat");
     if (content.empty()) {
@@ -1757,6 +2054,19 @@ uint32_t sysinfo::process_count() {
         }
         processes.resize(processes.size() * 2);
     }
+#elif defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
+    int mib[3] = {CTL_KERN, KERN_PROC, KERN_PROC_ALL};
+    size_t length = 0;
+    if (::sysctl(mib, 3, nullptr, &length, nullptr, 0) == 0 && length > 0) {
+        return static_cast<uint32_t>(length / sizeof(::kinfo_proc));
+    }
+#    ifdef NEFORCE_PLATFORM_MACOS
+    const int bytes = ::proc_listpids(PROC_ALL_PIDS, 0, nullptr, 0);
+    if (bytes > 0) {
+        return static_cast<uint32_t>(bytes / static_cast<int>(sizeof(::pid_t)));
+    }
+#    endif
+    return 0;
 #else
     uint32_t count = 0;
     ::DIR* directory = ::opendir("/proc");
@@ -1841,7 +2151,14 @@ sysinfo::disk_info sysinfo::disk_status(const string& path) {
     info.free_bytes = static_cast<uint64_t>(value.f_bfree) * block_size;
     info.available_bytes = static_cast<uint64_t>(value.f_bavail) * block_size;
     info.used_bytes = info.total_bytes - info.free_bytes;
+#    ifdef NEFORCE_PLATFORM_FREEBSD
+    struct ::statfs stats{};
+    if (::statfs(target.data(), &stats) == 0) {
+        info.filesystem = stats.f_fstypename;
+    }
+#    else
     info.filesystem = filesystem_type_of(target);
+#    endif
 #endif
 
     return info;
@@ -1958,7 +2275,7 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
             continue;
         }
 #    endif
-#    ifdef NEFORCE_PLATFORM_FREEBSD
+#    if defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
         if (current->ifa_addr->sa_family == AF_LINK) {
             if (iface.mac.empty()) {
                 const auto* link = reinterpret_cast<const ::sockaddr_dl*>(current->ifa_addr);
@@ -1968,6 +2285,24 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
                                        hw[5]);
                 }
             }
+            if (current->ifa_data != nullptr) {
+                const auto* data = static_cast<const ::if_data*>(current->ifa_data);
+                iface.mtu = data->ifi_mtu;
+                iface.speed_bps = data->ifi_baudrate;
+                iface.rx_bytes = data->ifi_ibytes;
+                iface.tx_bytes = data->ifi_obytes;
+                iface.rx_packets = data->ifi_ipackets;
+                iface.tx_packets = data->ifi_opackets;
+                iface.rx_errors = data->ifi_ierrors;
+                iface.tx_errors = data->ifi_oerrors;
+                iface.rx_dropped = data->ifi_iqdrops;
+#        ifdef NEFORCE_PLATFORM_FREEBSD
+                iface.tx_dropped = data->ifi_oqdrops;
+#        else
+                iface.tx_dropped = 0;
+#        endif
+            }
+            iface.operstate = iface.is_up ? "up" : "down";
             continue;
         }
 #    endif
@@ -2039,7 +2374,7 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
 uint64_t sysinfo::uptime_seconds() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     return static_cast<uint64_t>(::GetTickCount64()) / 1000;
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
     ::timeval boot_time{};
     ::size_t length = sizeof(boot_time);
     if (::sysctlbyname("kern.boottime", &boot_time, &length, nullptr, 0) != 0) {
@@ -2158,6 +2493,73 @@ vector<sysinfo::disk_io_info> sysinfo::disk_io_rates() {
         }
         value.busy_percent = iterator->second < 0.0 ? 0.0 : (iterator->second > 100.0 ? 100.0 : iterator->second);
     }
+    for (auto iterator = entries.begin(); iterator != entries.end(); ++iterator) {
+        result.push_back(move(iterator->second));
+    }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    struct ::statinfo stats{};
+    static_cast<void>(::devstat_getdevs(nullptr, &stats));
+    if (stats.dinfo == nullptr || stats.dinfo->numdevs <= 0) {
+        char disks[512] = {};
+        size_t disks_length = sizeof(disks) - 1;
+        if (::sysctlbyname("kern.disks", disks, &disks_length, nullptr, 0) == 0) {
+            const string_view list = disks;
+            size_t position = 0;
+            string_view token;
+            while (getline(list, position, token, is_space<char>)) {
+                if (token.empty()) {
+                    continue;
+                }
+                disk_io_info value;
+                value.name = string(token);
+                result.push_back(move(value));
+            }
+        }
+        return result;
+    }
+    ::timespec now_time{};
+    ::clock_gettime(CLOCK_MONOTONIC, &now_time);
+    const uint64_t now =
+            static_cast<uint64_t>(now_time.tv_sec) * 1000ULL + static_cast<uint64_t>(now_time.tv_nsec) / 1000000ULL;
+    const uint64_t elapsed = previous_ms != 0 && now > previous_ms ? now - previous_ms : 0;
+    map<string, disk_io_info> entries;
+    flat_unordered_map<string, tuple<uint64_t, uint64_t, uint64_t>> next;
+    for (int index = 0; index < stats.dinfo->numdevs; ++index) {
+        const auto& device = stats.dinfo->devices[index];
+        if ((device.device_type & DEVSTAT_TYPE_PASS) != 0) {
+            continue;
+        }
+        const string name = format("{}{}", device.device_name, device.unit_number);
+        const uint64_t read_bytes = device.bytes[DEVSTAT_READ];
+        const uint64_t write_bytes = device.bytes[DEVSTAT_WRITE];
+        const uint64_t busy_ms =
+                static_cast<uint64_t>(device.busy_time.sec) * 1000ULL +
+                static_cast<uint64_t>((static_cast<unsigned __int128>(device.busy_time.frac) * 1000) >> 64);
+        disk_io_info value;
+        value.name = name;
+        if (elapsed > 0) {
+            const auto found = previous.find(name);
+            if (found != previous.end()) {
+                if (read_bytes >= get<0>(found->second)) {
+                    value.read_bytes_per_second = static_cast<float64_t>(read_bytes - get<0>(found->second)) * 1000.0 /
+                                                  static_cast<float64_t>(elapsed);
+                }
+                if (write_bytes >= get<1>(found->second)) {
+                    value.write_bytes_per_second = static_cast<float64_t>(write_bytes - get<1>(found->second)) *
+                                                   1000.0 / static_cast<float64_t>(elapsed);
+                }
+                if (busy_ms >= get<2>(found->second)) {
+                    const float64_t percent = static_cast<float64_t>(busy_ms - get<2>(found->second)) * 100.0 /
+                                              static_cast<float64_t>(elapsed);
+                    value.busy_percent = percent < 0.0 ? 0.0 : (percent > 100.0 ? 100.0 : percent);
+                }
+            }
+        }
+        next[name] = {read_bytes, write_bytes, busy_ms};
+        entries[name] = move(value);
+    }
+    previous = move(next);
+    previous_ms = now;
     for (auto iterator = entries.begin(); iterator != entries.end(); ++iterator) {
         result.push_back(move(iterator->second));
     }
@@ -2327,9 +2729,110 @@ vector<sysinfo::mount_point> sysinfo::mount_points() {
         out.push_back(move(item));
     }
     return out;
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    vector<mount_point> out;
+    struct ::statfs* entries = nullptr;
+    const int count = ::getmntinfo(&entries, MNT_NOWAIT);
+    if (count <= 0 || entries == nullptr) {
+        return out;
+    }
+    for (int index = 0; index < count; ++index) {
+        mount_point item;
+        item.source = entries[index].f_mntfromname;
+        item.target = entries[index].f_mntonname;
+        item.filesystem = entries[index].f_fstypename;
+        const uint64_t block_size =
+                entries[index].f_bsize != 0 ? static_cast<uint64_t>(entries[index].f_bsize) : 4096ULL;
+        item.total_bytes = static_cast<uint64_t>(entries[index].f_blocks) * block_size;
+        item.free_bytes = static_cast<uint64_t>(entries[index].f_bfree) * block_size;
+        item.available_bytes = static_cast<uint64_t>(entries[index].f_bavail) * block_size;
+        out.push_back(move(item));
+    }
+    return out;
 #else
     return read_mount_entries();
 #endif
+}
+
+vector<sysinfo::pressure_info> sysinfo::pressure_status() {
+    vector<pressure_info> out;
+#ifdef NEFORCE_PLATFORM_LINUX
+    for (const string_view resource: {"cpu", "memory", "io"}) {
+        const string text = read_file_all((string("/proc/pressure/") + resource).data());
+        if (text.empty()) {
+            continue;
+        }
+        pressure_info info;
+        info.resource = resource;
+        info.available = true;
+        size_t position = 0;
+        while (position < text.size()) {
+            size_t end = text.find('\n', position);
+            if (end == string::npos) {
+                end = text.size();
+            }
+            const string_view line(text.data() + position, end - position);
+            position = end + 1;
+            const bool has_some = line.size() >= 5 && line.starts_with("some ");
+            const bool has_full = line.size() >= 5 && line.starts_with("full ");
+            if (!has_some && !has_full) {
+                continue;
+            }
+            const auto read_value = [&line](const char* key) -> float64_t {
+                const size_t key_position = line.find(key);
+                if (key_position == string_view::npos) {
+                    return 0.0;
+                }
+                const size_t value_begin = key_position + string_view(key).size();
+                size_t value_end = value_begin;
+                while (value_end < line.size() && line[value_end] != ' ') {
+                    ++value_end;
+                }
+                if (value_end <= value_begin) {
+                    return 0.0;
+                }
+                try {
+                    return to_float64(line.substr(value_begin, value_end - value_begin));
+                } catch (...) {
+                    return 0.0;
+                }
+            };
+            const auto read_total = [&line]() -> uint64_t {
+                constexpr string_view key = "total=";
+                const size_t key_position = line.find(key);
+                if (key_position == string_view::npos) {
+                    return 0;
+                }
+                const size_t value_begin = key_position + key.size();
+                size_t value_end = value_begin;
+                while (value_end < line.size() && line[value_end] != ' ') {
+                    ++value_end;
+                }
+                if (value_end <= value_begin) {
+                    return 0;
+                }
+                try {
+                    return static_cast<uint64_t>(to_uint64(line.substr(value_begin, value_end - value_begin)));
+                } catch (...) {
+                    return 0;
+                }
+            };
+            if (has_some) {
+                info.some_avg10 = read_value("avg10=");
+                info.some_avg60 = read_value("avg60=");
+                info.some_avg300 = read_value("avg300=");
+                info.some_total_us = read_total();
+            } else {
+                info.full_avg10 = read_value("avg10=");
+                info.full_avg60 = read_value("avg60=");
+                info.full_avg300 = read_value("avg300=");
+                info.full_total_us = read_total();
+            }
+        }
+        out.push_back(move(info));
+    }
+#endif
+    return out;
 }
 
 

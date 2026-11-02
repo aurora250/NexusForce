@@ -64,7 +64,7 @@ public:
         unix = AF_UNIX,    ///< Unix 域套接字
         inet4 = AF_INET,   ///< IPv4 互联网协议族
         inet6 = AF_INET6,  ///< IPv6 互联网协议族
-#ifdef NEFORCE_PLATFORM_POSIX
+#if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
         netlink = AF_NETLINK,     ///< 内核用户空间通信
         bluetooth = AF_BLUETOOTH, ///< 蓝牙通信协议族
 #endif

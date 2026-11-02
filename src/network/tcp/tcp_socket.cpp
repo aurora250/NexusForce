@@ -142,7 +142,14 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const int flags) {
     const int send_flags = flags;
 #endif
 
-    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), send_flags);
+    ssize_t result = 0;
+    do {
+        result = ::send(fd_, data.data(), static_cast<int>(data.size()), send_flags);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    } while (false);
+#else
+    } while (result < 0 && errno == EINTR);
+#endif
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to send data"));
     }
@@ -169,7 +176,14 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const milliseconds 
     const int send_flags = flags;
 #endif
 
-    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), send_flags);
+    ssize_t result = 0;
+    do {
+        result = ::send(fd_, data.data(), static_cast<int>(data.size()), send_flags);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    } while (false);
+#else
+    } while (result < 0 && errno == EINTR);
+#endif
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to send data"));
     }
@@ -184,7 +198,14 @@ ssize_t tcp_socket::receive(memory_view<char> buffer, const int flags) {
         return 0;
     }
 
-    const ssize_t result = ::recv(fd_, buffer.data(), static_cast<int>(buffer.size()), flags);
+    ssize_t result = 0;
+    do {
+        result = ::recv(fd_, buffer.data(), static_cast<int>(buffer.size()), flags);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    } while (false);
+#else
+    } while (result < 0 && errno == EINTR);
+#endif
     if (result < 0) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         const int err = ::WSAGetLastError();
@@ -304,29 +325,11 @@ namespace {
                     self->on_ready(ec);
                 }
             });
-
-            int optval = 0;
-            ::socklen_t optlen = sizeof(optval);
-            if (sock->get_option(SOL_SOCKET, SO_ERROR, &optval, &optlen)) {
-                bool still_in_progress = false;
-#ifdef NEFORCE_PLATFORM_WINDOWS
-                still_in_progress = (optval == WSAEWOULDBLOCK || optval == WSAEINPROGRESS);
-#else
-                still_in_progress = (optval == EINPROGRESS);
-#endif
-                if (!still_in_progress) {
-                    bool expected = false;
-                    if (fired_.compare_exchange_strong(expected, true)) {
-                        ctx->remove_fd(sock->native_handle());
-                        restore_blocking();
-                        handler(error_code(optval, error_category::system()));
-                    }
-                }
-            }
         }
 
         void on_ready(error_code ec) {
             if (ec) {
+                ctx->remove_fd(sock->native_handle());
                 restore_blocking();
                 handler(ec);
                 return;
@@ -335,9 +338,11 @@ namespace {
             int optval = 0;
             ::socklen_t optlen = sizeof(optval);
             if (sock->get_option(SOL_SOCKET, SO_ERROR, &optval, &optlen) && optval == 0) {
+                ctx->remove_fd(sock->native_handle());
                 restore_blocking();
                 handler(error_code{});
             } else {
+                ctx->remove_fd(sock->native_handle());
                 restore_blocking();
                 handler(error_code(optval != 0 ? optval : network_exception::last_error().value(),
                                    error_category::system()));

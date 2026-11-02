@@ -441,10 +441,19 @@ void pty::start(const string& executable, const vector<string>& args, const stri
     }
 
     int notify[2] = {-1, -1};
+#    ifdef NEFORCE_PLATFORM_MACOS
+    if (::pipe(notify) == -1) {
+        ::close(slave);
+        NEFORCE_THROW_EXCEPTION(pty_exception(last_error()));
+    }
+    ::fcntl(notify[0], F_SETFD, FD_CLOEXEC);
+    ::fcntl(notify[1], F_SETFD, FD_CLOEXEC);
+#    else
     if (::pipe2(notify, O_CLOEXEC) == -1) {
         ::close(slave);
         NEFORCE_THROW_EXCEPTION(pty_exception(last_error()));
     }
+#    endif
 
     const ::pid_t pid = ::fork();
     if (pid < 0) {
@@ -639,7 +648,7 @@ void pty::resize(const int columns, const int rows) {
 
 void pty::send_control(const char byte) { (void) write(string_view(&byte, 1)); }
 
-void pty::terminate(const system_signal::event signal) {
+void pty::terminate(const system_signal::signal signal) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ignore = signal;
     // A Windows console application has no signal of its own: terminating the process is the
@@ -649,13 +658,14 @@ void pty::terminate(const system_signal::event signal) {
     }
 #else
     if (impl_->child_id_ > 0 && !impl_->finished_) {
-        (void) ::kill(-impl_->child_id_, static_cast<int>(signal));
-        (void) ::kill(impl_->child_id_, static_cast<int>(signal));
+        const int native_signal = system_signal::signal_number(signal);
+        (void) ::kill(-impl_->child_id_, native_signal);
+        (void) ::kill(impl_->child_id_, native_signal);
     }
 #endif
 }
 
-void pty::kill() { terminate(system_signal::event::terminate); }
+void pty::kill() { terminate(system_signal::signal::kill); }
 
 void pty::reap(const bool blocking, const int timeout_ms) {
 #ifdef NEFORCE_PLATFORM_WINDOWS

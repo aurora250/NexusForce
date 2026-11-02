@@ -371,22 +371,22 @@ void daemon::check_and_restart_children() {
 void daemon::setup_signal_handlers() {
     auto& mgr = system_signal::instance();
 
-    const auto shutdown_hander = [this](system_signal::event, void*) -> bool {
+    const auto shutdown_hander = [this](system_signal::notification, void*) -> bool {
         request_shutdown();
         return false;
     };
-    mgr.register_handler(system_signal::event::terminate, shutdown_hander);
-    mgr.register_handler(system_signal::event::interrupt, shutdown_hander);
+    mgr.subscribe(system_signal::signal::terminate, shutdown_hander);
+    mgr.subscribe(system_signal::signal::interrupt, shutdown_hander);
 
-    mgr.register_handler(system_signal::event::hangup, [this](system_signal::event, void*) -> bool {
+    mgr.subscribe(system_signal::signal::hangup, [this](system_signal::notification, void*) -> bool {
         request_reload();
         return true;
     });
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    mgr.register_handler(system_signal::event::close, shutdown_hander);
-    mgr.register_handler(system_signal::event::shutdown, shutdown_hander);
-    mgr.register_handler(system_signal::event::logoff, shutdown_hander);
+    mgr.subscribe(system_signal::event::close, shutdown_hander);
+    mgr.subscribe(system_signal::event::shutdown, shutdown_hander);
+    mgr.subscribe(system_signal::event::logoff, shutdown_hander);
 #endif
 }
 
