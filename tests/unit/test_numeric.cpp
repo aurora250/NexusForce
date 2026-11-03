@@ -80,8 +80,9 @@ TYPED_TEST(NumericTraitsConsistencyTest, QuietNaNValue) {
     } else {
         static_assert(Traits::quiet_nan() == StdLimits::quiet_NaN(), "quiet_NaN mismatch");
     }
-#endif
+#else
     GTEST_SKIP() << "skip under C++17";
+#endif
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, SignalingNaNValue) {
@@ -94,8 +95,9 @@ TYPED_TEST(NumericTraitsConsistencyTest, SignalingNaNValue) {
     } else {
         static_assert(Traits::quiet_nan() == StdLimits::quiet_NaN(), "signaling_NaN mismatch");
     }
-#endif
+#else
     GTEST_SKIP() << "skip under C++17";
+#endif
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, IsInteger) {
@@ -200,25 +202,10 @@ TYPED_TEST(NumericTraitsConsistencyTest, IsIec559) {
     static_assert(Traits::is_iec559 == StdLimits::is_iec559, "is_iec559 mismatch");
 }
 
-template <typename T>
-constexpr bool traps_equal_impl(false_type) {
-    return numeric_traits<T>::traps == std::numeric_limits<T>::traps;
-}
-template <typename T>
-constexpr bool traps_equal_impl(true_type) {
-    return true;
-}
-
-template <typename T>
-constexpr bool traps_equal() {
-    return traps_equal_impl<T>(is_same<T, bool>{});
-}
-
 TYPED_TEST(NumericTraitsConsistencyTest, Traps) {
-    static_assert(traps_equal<TypeParam>(), "Traits::traps not equal with StdLimits::traps");
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::traps, StdLimits::traps);
+    static_assert(Traits::traps == StdLimits::traps, "traps mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, HasDenorm) {

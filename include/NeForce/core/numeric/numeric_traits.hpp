@@ -244,6 +244,9 @@ public:
     NEFORCE_NODISCARD static constexpr bool quiet_nan() noexcept { return false; }
     NEFORCE_NODISCARD static constexpr bool signaling_nan() noexcept { return false; }
 
+#if defined(NEFORCE_PLATFORM_BSD_LIKE) && defined(NEFORCE_ARCH_X86)
+    static constexpr bool traps = false;
+#endif
     static constexpr int digits = 1;
 };
 
@@ -460,7 +463,8 @@ class numeric_traits<unsigned long> : public numeric_traits<uint32_t> {};
 template <>
 class numeric_traits<char>;
 
-#if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_LOONGARCH) || defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_MACOS)
+#if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_LOONGARCH) || defined(NEFORCE_PLATFORM_WINDOWS) || \
+        defined(NEFORCE_PLATFORM_MACOS)
 template <>
 class numeric_traits<char> : public numeric_traits<int8_t> {};
 #else
@@ -613,7 +617,8 @@ public:
     static constexpr int min_exponent10 = -307;
 };
 
-#if (defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_PLATFORM_BSD_LIKE)) || defined(NEFORCE_PLATFORM_FREEBSD) || (defined(NEFORCE_PLATFORM_MACOS) && defined(NEFORCE_ARCH_X86))
+#if (defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_PLATFORM_BSD_LIKE)) || defined(NEFORCE_PLATFORM_FREEBSD) || \
+        (defined(NEFORCE_PLATFORM_MACOS) && defined(NEFORCE_ARCH_X86))
 /**
  * @brief 扩展精度浮点数类型的数值特征特化
  * @note MSVC的long double等同于double；GNUC则使用更大的数值范围特征。

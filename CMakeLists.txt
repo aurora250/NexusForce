@@ -94,6 +94,15 @@ project(NexusForce
         VERSION ${NEXUSFORCE_VERSION}
         LANGUAGES CXX
 )
+# An empty CMAKE_BUILD_TYPE (for example a CLion profile whose Build type is "Default") defines
+# neither NDEBUG nor CONFIG=Debug. Debug-only death tests are then compiled in while
+# NEFORCE_DEBUG_VERIFY is compiled out, and they fail with "failed to die". Default to Release for
+# single-config generators; multi-config generators select a configuration explicitly.
+if((NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "None") AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+    message(STATUS "CMAKE_BUILD_TYPE not set; defaulting to Release")
+endif()
+
 
 
 include(GNUInstallDirs)
@@ -112,6 +121,26 @@ else()
     message(WARNING "vcpkg toolchain not detected. Please set CMAKE_TOOLCHAIN_FILE to use vcpkg-managed dependencies.")
     message(STATUS "Example: -DCMAKE_TOOLCHAIN_FILE=[vcpkg-root]/scripts/buildsystems/vcpkg.cmake")
     message(STATUS "")
+endif()
+
+# CMake keeps the detected system/processor in the build directory. Reusing a build directory with
+# a different cross toolchain leaves CMAKE_SYSTEM_PROCESSOR at the old architecture, after which
+# architecture-specific flags such as -mavx2 are passed to an aarch64 compiler. Detect this instead
+# of reporting the compiler's "unsupported option" errors.
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND DEFINED VCPKG_TARGET_TRIPLET)
+    if(VCPKG_TARGET_TRIPLET MATCHES "^arm64" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64|ARM64)$")
+        message(FATAL_ERROR "Stale build directory: VCPKG_TARGET_TRIPLET=${VCPKG_TARGET_TRIPLET} but "
+                            "CMAKE_SYSTEM_PROCESSOR=${CMAKE_SYSTEM_PROCESSOR}. Delete ${CMAKE_BINARY_DIR} "
+                            "and configure again with the aarch64 toolchain.")
+    elseif(VCPKG_TARGET_TRIPLET MATCHES "^riscv64" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(riscv64|RISCV64)$")
+        message(FATAL_ERROR "Stale build directory: VCPKG_TARGET_TRIPLET=${VCPKG_TARGET_TRIPLET} but "
+                            "CMAKE_SYSTEM_PROCESSOR=${CMAKE_SYSTEM_PROCESSOR}. Delete ${CMAKE_BINARY_DIR} "
+                            "and configure again with the riscv64 toolchain.")
+    elseif(VCPKG_TARGET_TRIPLET MATCHES "^loongarch64" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(loongarch64|LOONGARCH64)$")
+        message(FATAL_ERROR "Stale build directory: VCPKG_TARGET_TRIPLET=${VCPKG_TARGET_TRIPLET} but "
+                            "CMAKE_SYSTEM_PROCESSOR=${CMAKE_SYSTEM_PROCESSOR}. Delete ${CMAKE_BINARY_DIR} "
+                            "and configure again with the loongarch64 toolchain.")
+    endif()
 endif()
 
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64|ARM64)$")
@@ -209,6 +238,13 @@ option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"                   $
 option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                          ${CONFIG_USING_INTEL_TSX})
 option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher"                          ${CONFIG_USING_SQLCIPHER})
 option(NEXUSFORCE_USING_IO_URING    "Using io uring"                           ${CONFIG_USING_IO_URING})
+
+# io_uring is a Linux host facility and is not available in cross sysroots. Linking the host
+# liburing.so into a foreign-architecture library fails with "file in wrong format".
+if(CMAKE_CROSSCOMPILING AND NEXUSFORCE_USING_IO_URING)
+    set(NEXUSFORCE_USING_IO_URING OFF CACHE BOOL "Using io uring" FORCE)
+    message(STATUS "io_uring disabled for cross-compilation")
+endif()
 option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"                ${CONFIG_USING_AES_NI})
 option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"                  ${CONFIG_USING_PCLMUL})
 
@@ -226,6 +262,15 @@ option(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE
 option(NEXUSFORCE_OVERRIDE_TEST_WITH_SHARED_GTEST
         "Build the allocator override test against a shared GTest (rejected by the Windows debug heap)" OFF)
 
+
+# NEXUSFORCE_SIMD_LEVEL is cached and architecture-specific (AVX2 for x64, BASELINE/SVE for
+# aarch64). Reusing a build directory after an architecture switch must not carry the old level
+# over; drop it once the detected architecture actually changes.
+if(DEFINED NEXUSFORCE_LAST_ARCH AND NOT NEXUSFORCE_LAST_ARCH STREQUAL NEXUSFORCE_ARCH)
+    unset(NEXUSFORCE_SIMD_LEVEL CACHE)
+endif()
+set(NEXUSFORCE_LAST_ARCH "${NEXUSFORCE_ARCH}" CACHE INTERNAL
+    "architecture used when the cached SIMD level was last validated")
 
 if(DEFINED CONFIG_SIMD_LEVEL)
     set(NEXUSFORCE_SIMD_LEVEL_DEFAULT "${CONFIG_SIMD_LEVEL}")
@@ -333,6 +378,34 @@ include(cmake/NexusForceClangFormat.cmake)
 include(cmake/NexusForceClangTidy.cmake)
 include(cmake/NexusForceClean.cmake)
 
+
+# Reusing one build directory for two vcpkg triplets leaves package discovery caches pointing into
+# the previous triplet's vcpkg_installed tree. CMake trusts cached absolute library paths and then
+# creates imported targets whose locations do not apply to the active configuration. Drop only
+# cache entries whose value points into a different triplet directory.
+if(DEFINED VCPKG_TARGET_TRIPLET)
+    if(DEFINED NEXUSFORCE_LAST_VCPKG_TARGET_TRIPLET)
+        set(_nf_last_vcpkg_triplet "${NEXUSFORCE_LAST_VCPKG_TARGET_TRIPLET}")
+    else()
+        set(_nf_last_vcpkg_triplet "")
+    endif()
+
+    if(NOT _nf_last_vcpkg_triplet STREQUAL VCPKG_TARGET_TRIPLET)
+        get_cmake_property(_nf_cache_vars CACHE_VARIABLES)
+        foreach(_nf_var IN LISTS _nf_cache_vars)
+            if(DEFINED ${_nf_var} AND "${${_nf_var}}" MATCHES "/vcpkg_installed/([^/]+)/")
+                if(NOT CMAKE_MATCH_1 STREQUAL VCPKG_TARGET_TRIPLET)
+                    unset(${_nf_var} CACHE)
+                endif()
+            endif()
+        endforeach()
+        set(NEXUSFORCE_LAST_VCPKG_TARGET_TRIPLET "${VCPKG_TARGET_TRIPLET}" CACHE INTERNAL
+            "vcpkg triplet used when package discovery caches were last normalized")
+        unset(_nf_cache_vars)
+        unset(_nf_var)
+    endif()
+    unset(_nf_last_vcpkg_triplet)
+endif()
 
 add_subdirectory(src)
 add_subdirectory(tools)

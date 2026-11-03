@@ -31,6 +31,7 @@ on:
       - 'config.json'
       - '.github/workflows/install.yml'
       - '.github/actions/setup-vcpkg/**'
+      - '.github/actions/save-vcpkg-cache/**'
   pull_request:
     branches: [ dev ]
     paths:
@@ -46,6 +47,7 @@ on:
       - 'config.json'
       - '.github/workflows/install.yml'
       - '.github/actions/setup-vcpkg/**'
+      - '.github/actions/save-vcpkg-cache/**'
   workflow_dispatch:
 
 jobs:
@@ -59,16 +61,14 @@ jobs:
         include:
           - os: ubuntu-24.04
             compiler: clang
+            triplet: x64-linux
           - os: windows-latest
             compiler: msvc
+            triplet: x64-windows
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup vcpkg
-        id: vcpkg
-        uses: ./.github/actions/setup-vcpkg
 
       - name: Install toolchain
         if: runner.os == 'Linux'
@@ -81,6 +81,13 @@ jobs:
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: amd64
+
+      - name: Setup vcpkg
+        id: vcpkg
+        uses: ./.github/actions/setup-vcpkg
+        with:
+          triplet: ${{ matrix.triplet }}
+          image: ${{ matrix.os }}
 
       - name: Install Ninja (Windows)
         if: runner.os == 'Windows'
@@ -472,7 +479,7 @@ jobs:
         uses: ./.github/actions/save-vcpkg-cache
         with:
           cache-key: ${{ steps.vcpkg.outputs.cache-key }}
-          cache-hit: ${{ steps.vcpkg.outputs.cache-hit }}
+          archive-fingerprint: ${{ steps.vcpkg.outputs.archive-fingerprint }}
           binary-cache: ${{ steps.vcpkg.outputs.binary-cache }}
           tool-cache-key: ${{ steps.vcpkg.outputs.tool-cache-key }}
           tool-cache-hit: ${{ steps.vcpkg.outputs.tool-cache-hit }}

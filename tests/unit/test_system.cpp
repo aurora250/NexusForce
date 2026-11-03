@@ -30,6 +30,30 @@
 #endif
 using namespace neforce;
 
+#if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_LOONGARCH)
+#    include <cstdio>
+#    include <cstring>
+
+namespace {
+    bool cpuinfo_has_loongarch_fields() {
+        ::FILE* file = ::fopen("/proc/cpuinfo", "r");
+        if (file == nullptr) {
+            return false;
+        }
+        char line[4096];
+        bool found = false;
+        while (::fgets(line, sizeof(line), file) != nullptr) {
+            if (::strstr(line, "CPU Family") != nullptr) {
+                found = true;
+                break;
+            }
+        }
+        ::fclose(file);
+        return found;
+    }
+} // namespace
+#endif
+
 class CmdlineTest : public ::testing::Test {
 protected:
     void SetUp() override { cmdline_ = cmdline(); }
@@ -6008,9 +6032,11 @@ TEST_F(SysinfoTest, MachineProfile_ObtainableFieldsPopulated) {
     EXPECT_FALSE(cpu.riscv.isa.empty());
     EXPECT_FALSE(cpu.riscv.uarch.empty());
 #elif defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_LOONGARCH)
-    EXPECT_FALSE(cpu.loongarch.family.empty());
-    EXPECT_FALSE(cpu.loongarch.revision.empty());
-    EXPECT_FALSE(cpu.loongarch.isa.empty());
+    if (cpuinfo_has_loongarch_fields()) {
+        EXPECT_FALSE(cpu.loongarch.family.empty());
+        EXPECT_FALSE(cpu.loongarch.revision.empty());
+        EXPECT_FALSE(cpu.loongarch.isa.empty());
+    }
 #endif
 
     const auto& os = inst.get_os_version_info();
@@ -6060,6 +6086,9 @@ TEST_F(SysinfoTest, CpuInfo_RiscvFields_PopulatedOnRiscvLinux) {
 
 TEST_F(SysinfoTest, CpuInfo_LoongarchFields_PopulatedOnLoongarchLinux) {
 #if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_LOONGARCH)
+    if (!cpuinfo_has_loongarch_fields()) {
+        GTEST_SKIP() << "host /proc/cpuinfo does not expose LoongArch fields (qemu-user or container)";
+    }
     const auto& cpu = sysinfo::instance().get_cpu_info();
     EXPECT_FALSE(cpu.loongarch.family.empty());
     EXPECT_FALSE(cpu.loongarch.revision.empty());

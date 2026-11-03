@@ -16,6 +16,8 @@ on:
       - 'vcpkg.json'
       - 'config.json'
       - '.github/workflows/build-verify.yml'
+      - '.github/actions/setup-vcpkg/**'
+      - '.github/actions/save-vcpkg-cache/**'
   pull_request:
     branches: [ dev ]
     paths:
@@ -31,6 +33,8 @@ on:
       - 'vcpkg.json'
       - 'config.json'
       - '.github/workflows/build-verify.yml'
+      - '.github/actions/setup-vcpkg/**'
+      - '.github/actions/save-vcpkg-cache/**'
   workflow_dispatch:
 
 jobs:
@@ -41,99 +45,169 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Windows: x64 MSVC/ClangCL builds and the native Windows 11 ARM64 runner.
           - os: windows-latest
             compiler: msvc
             config: full
+            triplet: x64-windows
             cppstd: 20
           - os: windows-latest
             compiler: msvc
             config: minimal
+            triplet: x64-windows
             cppstd: 14
           - os: windows-latest
             compiler: msvc
             config: sqlcipher
+            triplet: x64-windows
             cppstd: 20
 
-          - os: windows-latest
+          - os: windows-11-arm
             compiler: msvc
-            config: cross-arm64-msvc
+            config: full
+            triplet: arm64-windows
+            vcpkg_install_options: --allow-unsupported
+            cppstd: 20
+
+          - os: windows-11-arm
+            compiler: clang-cl
+            config: full
+            triplet: arm64-windows
+            clang_target: aarch64-pc-windows-msvc
+            vcpkg_install_options: --allow-unsupported
             cppstd: 20
 
           - os: windows-2022
             compiler: clang-cl
             config: full
+            triplet: x64-windows
             cppstd: 20
           - os: windows-2022
             compiler: clang-cl
             config: minimal
+            triplet: x64-windows
             cppstd: 17
 
+          # Ubuntu native: GCC and Clang, feature matrix.
           - os: ubuntu-24.04
             compiler: gcc
             config: full
+            triplet: x64-linux
             cppstd: 20
           - os: ubuntu-24.04
             compiler: gcc
             config: minimal
+            triplet: x64-linux
             cppstd: 14
           - os: ubuntu-24.04
             compiler: gcc
             config: all-db
+            triplet: x64-linux
             cppstd: 20
 
           - os: ubuntu-24.04
             compiler: clang
             config: full
+            triplet: x64-linux
             cppstd: 20
           - os: ubuntu-24.04
             compiler: clang
             config: minimal
+            triplet: x64-linux
             cppstd: 17
           - os: ubuntu-24.04
             compiler: clang
             config: no-compress
+            triplet: x64-linux
             cppstd: 20
 
           - os: ubuntu-24.04
             compiler: clang
             config: no-icu
+            triplet: x64-linux
             cppstd: 20
 
           - os: ubuntu-24.04
             compiler: clang
             config: no-locale
+            triplet: x64-linux
             cppstd: 20
 
           - os: ubuntu-24.04
             compiler: clang
             config: pool-off
+            triplet: x64-linux
             cppstd: 20
           - os: ubuntu-24.04
             compiler: clang
             config: pool-tls-global-dynamic
+            triplet: x64-linux
             cppstd: 20
 
+          # Linux cross builds: GCC and Clang toolchains for the three non-x64 targets.
           - os: ubuntu-24.04
             compiler: gcc
             config: cross-riscv64
+            triplet: riscv64-linux
+            toolchain: riscv64-linux-gnu.cmake
+            cross_deps: minimal
             cppstd: 20
 
           - os: ubuntu-24.04
             compiler: gcc
             config: cross-loongarch64
+            triplet: loongarch64-linux
+            toolchain: loongarch64-linux-gnu.cmake
+            cross_deps: minimal
             cppstd: 20
 
           - os: ubuntu-24.04
             compiler: gcc
             config: cross-arm64
+            triplet: arm64-linux
+            toolchain: aarch64-linux-gnu.cmake
+            cross_deps: full
             cppstd: 20
 
+          - os: ubuntu-24.04
+            compiler: clang
+            config: cross-arm64-clang
+            triplet: arm64-linux
+            toolchain: aarch64-linux-clang.cmake
+            cross_deps: full
+            cppstd: 20
+
+          - os: ubuntu-24.04
+            compiler: clang
+            config: cross-riscv64-clang
+            triplet: riscv64-linux
+            toolchain: riscv64-linux-clang.cmake
+            cross_deps: minimal
+            cppstd: 20
+
+          - os: ubuntu-24.04
+            compiler: clang
+            config: cross-loongarch64-clang
+            triplet: loongarch64-linux
+            toolchain: loongarch64-linux-clang.cmake
+            cross_deps: minimal
+            cppstd: 20
+
+          # Native macOS runners (arm64 and Intel).
           - os: macos-14
             compiler: clang
             config: macos-arm64
+            triplet: arm64-osx
+            cppstd: 20
+
+          - os: macos-15-intel
+            compiler: clang
+            config: macos-x64
+            triplet: x64-osx
             cppstd: 20
 
     steps:
+      # Toolchain, compiler environment and third-party dependencies.
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -170,20 +244,51 @@ jobs:
             g++-aarch64-linux-gnu        \
             g++-riscv64-linux-gnu        \
             g++-14-loongarch64-linux-gnu \
+            lld \
             qemu-user-static
 
       - name: Setup LoongArch compiler symlinks
-        if: matrix.config == 'cross-loongarch64'
+        if: startsWith(matrix.config, 'cross-loongarch64')
         run: |
+          # Ubuntu ships different cross-GCC major versions across releases. Pick whichever
+          # versioned driver is actually installed instead of hardcoding -14, which leaves broken
+          # symlinks when only -13 is present.
           for tool in gcc g++ gfortran; do
-            sudo ln -sf loongarch64-linux-gnu-${tool}-14 /usr/bin/loongarch64-linux-gnu-${tool}
+            target=""
+            for version in 14 13 12; do
+              candidate="/usr/bin/loongarch64-linux-gnu-${tool}-${version}"
+              if [ -x "$candidate" ]; then
+                target="loongarch64-linux-gnu-${tool}-${version}"
+                break
+              fi
+            done
+            if [ -n "$target" ]; then
+              sudo ln -sf "$target" "/usr/bin/loongarch64-linux-gnu-${tool}"
+            fi
           done
           sudo rm -f /usr/bin/loongarch64-linux-gnu-ld
           sudo ln -sf loongarch64-linux-gnu-ld.bfd /usr/bin/loongarch64-linux-gnu-ld
 
+      - name: Setup MSVC environment (Windows)
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.os == 'windows-11-arm' && 'arm64' || 'amd64' }}
+
+      - name: Install system dependencies (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          # vcpkg ports built with configure (e.g. libpq) need autoconf from the host.
+          brew install ninja autoconf automake libtool pkg-config
+
+      # vcpkg must run after the compiler environment and be the last writer of VCPKG_ROOT.
       - name: Setup vcpkg
         id: vcpkg
         uses: ./.github/actions/setup-vcpkg
+        with:
+          triplet: ${{ matrix.triplet }}
+          image: ${{ matrix.os }}${{ startsWith(matrix.config, 'cross-') && matrix.compiler == 'clang' && '-clang' || '' }}
 
       - name: Setup vcpkg cross-compilation patches
         if: runner.os == 'Linux' && startsWith(matrix.config, 'cross-')
@@ -200,23 +305,20 @@ jobs:
             fi
           done
 
-      - name: Setup MSVC environment (Windows)
-        if: runner.os == 'Windows'
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: ${{ matrix.config == 'cross-arm64-msvc' && 'amd64_arm64' || 'amd64' }}
-
       - name: Install Ninja (Windows)
         if: runner.os == 'Windows'
         shell: bash
-        run: pip install ninja
-
-      - name: Install system dependencies (macOS)
-        if: runner.os == 'macOS'
-        shell: bash
         run: |
-          # vcpkg ports built with configure (e.g. libpq) need autoconf from the host.
-          brew install ninja autoconf automake libtool pkg-config
+          if [ "${{ matrix.os }}" = "windows-11-arm" ]; then
+            # The ARM64 image ships Ninja with Visual Studio; Chocolatey provides an
+            # x64 binary if it is missing, which Windows 11 ARM runs under emulation.
+            if ! command -v ninja >/dev/null 2>&1; then
+              choco install ninja -y
+            fi
+            ninja --version
+          else
+            pip install ninja
+          fi
 
       - name: CMake configure
         shell: bash
@@ -299,7 +401,7 @@ jobs:
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
               )
               ;;
-            macos-arm64)
+            macos-arm64|macos-x64)
               FLAGS+=(
                 -DNEXUSFORCE_ENABLE_POSTGRESQL=OFF
                 -DNEXUSFORCE_ENABLE_MYSQL=OFF
@@ -312,89 +414,63 @@ jobs:
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
               )
               ;;
-            cross-riscv64)
+            cross-*)
               FLAGS+=(
-                -DVCPKG_TARGET_TRIPLET=riscv64-linux
-                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/riscv64-linux-gnu.cmake
-                -DNEXUSFORCE_ENABLE_POSTGRESQL=OFF
-                -DNEXUSFORCE_ENABLE_MYSQL=OFF
-                -DNEXUSFORCE_ENABLE_SQLITE3=OFF
-                -DNEXUSFORCE_ENABLE_REDIS=OFF
-                -DNEXUSFORCE_ENABLE_ZLIB=OFF
-                -DNEXUSFORCE_ENABLE_LZ4=OFF
+                -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
+                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/${{ matrix.toolchain }}
                 -DNEXUSFORCE_BUILD_TESTS=OFF
                 -DNEXUSFORCE_BUILD_EXAMPLES=OFF
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
               )
-              ;;
-            cross-loongarch64)
-              FLAGS+=(
-                -DVCPKG_TARGET_TRIPLET=loongarch64-linux
-                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/loongarch64-linux-gnu.cmake
-                -DNEXUSFORCE_ENABLE_POSTGRESQL=OFF
-                -DNEXUSFORCE_ENABLE_MYSQL=OFF
-                -DNEXUSFORCE_ENABLE_SQLITE3=OFF
-                -DNEXUSFORCE_ENABLE_REDIS=OFF
-                -DNEXUSFORCE_ENABLE_ZLIB=OFF
-                -DNEXUSFORCE_ENABLE_LZ4=OFF
-                -DNEXUSFORCE_BUILD_TESTS=OFF
-                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
-                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
-              )
-              ;;
-            cross-arm64)
-              FLAGS+=(
-                -DVCPKG_TARGET_TRIPLET=arm64-linux
-                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/aarch64-linux-gnu.cmake
-                -DNEXUSFORCE_BUILD_TESTS=OFF
-                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
-                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
-              )
-              ;;
-            cross-arm64-msvc)
-              FLAGS+=(
-                -DVCPKG_TARGET_TRIPLET=arm64-windows
-                -DVCPKG_INSTALL_OPTIONS=--allow-unsupported
-                -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE=${GITHUB_WORKSPACE}/cmake/toolchains/arm64-windows-msvc.cmake
-                -DNEXUSFORCE_BUILD_TESTS=OFF
-                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
-                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
-              )
+              if [ "${{ matrix.cross_deps }}" = "minimal" ]; then
+                FLAGS+=(
+                  -DNEXUSFORCE_ENABLE_POSTGRESQL=OFF
+                  -DNEXUSFORCE_ENABLE_MYSQL=OFF
+                  -DNEXUSFORCE_ENABLE_SQLITE3=OFF
+                  -DNEXUSFORCE_ENABLE_REDIS=OFF
+                  -DNEXUSFORCE_ENABLE_ZLIB=OFF
+                  -DNEXUSFORCE_ENABLE_LZ4=OFF
+                )
+              fi
               ;;
           esac
 
-          if [ "${{ runner.os }}" = "Windows" ]; then
-            if [ "${{ matrix.compiler }}" = "clang-cl" ]; then
-              cmake -B build -G Ninja \
-                -DCMAKE_C_COMPILER=clang-cl \
-                -DCMAKE_CXX_COMPILER=clang-cl \
-                -DCMAKE_BUILD_TYPE=Release \
-                "${FLAGS[@]}"
-            else
-              cmake -B build -G Ninja \
-                -DCMAKE_BUILD_TYPE=Release \
-                "${FLAGS[@]}"
+          if [ -n "${{ matrix.vcpkg_install_options }}" ]; then
+            FLAGS+=(-DVCPKG_INSTALL_OPTIONS=${{ matrix.vcpkg_install_options }})
+          fi
+
+          COMPILER_FLAGS=()
+          if [ "${{ runner.os }}" = "Windows" ] && [ "${{ matrix.compiler }}" = "clang-cl" ]; then
+            COMPILER_FLAGS+=(
+              -DCMAKE_C_COMPILER=clang-cl
+              -DCMAKE_CXX_COMPILER=clang-cl
+            )
+            if [ -n "${{ matrix.clang_target }}" ]; then
+              COMPILER_FLAGS+=(
+                -DCMAKE_C_COMPILER_TARGET=${{ matrix.clang_target }}
+                -DCMAKE_CXX_COMPILER_TARGET=${{ matrix.clang_target }}
+              )
             fi
-          else
-            if [[ "${{ matrix.config }}" == cross-* ]]; then
-              cmake -B build -G Ninja \
-                -DCMAKE_BUILD_TYPE=Release \
-                "${FLAGS[@]}"
-            elif [ "${{ matrix.compiler }}" = "clang" ]; then
-              cmake -B build -G Ninja \
-                -DCMAKE_C_COMPILER=clang \
-                -DCMAKE_CXX_COMPILER=clang++ \
-                -DCMAKE_BUILD_TYPE=Release \
-                "${FLAGS[@]}"
+          elif [ "${{ runner.os }}" != "Windows" ] && [[ "${{ matrix.config }}" != cross-* ]]; then
+            if [ "${{ matrix.compiler }}" = "clang" ]; then
+              COMPILER_FLAGS+=(
+                -DCMAKE_C_COMPILER=clang
+                -DCMAKE_CXX_COMPILER=clang++
+              )
             else
-              cmake -B build -G Ninja \
-                -DCMAKE_C_COMPILER=gcc \
-                -DCMAKE_CXX_COMPILER=g++ \
-                -DCMAKE_BUILD_TYPE=Release \
-                "${FLAGS[@]}"
+              COMPILER_FLAGS+=(
+                -DCMAKE_C_COMPILER=gcc
+                -DCMAKE_CXX_COMPILER=g++
+              )
             fi
           fi
 
+          cmake -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            "${COMPILER_FLAGS[@]}" \
+            "${FLAGS[@]}"
+
+      # Build, verify ABI boundaries, and run tests.
       - name: Build
         shell: bash
         run: |
@@ -414,18 +490,22 @@ jobs:
 
       - name: Run death and signal tests (macOS)
         if: runner.os == 'macOS'
+        timeout-minutes: 30
         shell: bash
         run: |
           ./build/bin/Release/NexusForceUnitTests \
             --gtest_color=no \
+            --gtest_output=xml:test-results-death.xml \
             --gtest_filter='*Death*:TerminateTest.*:CrashDumpTest.*'
 
       - name: Run remaining unit tests (macOS)
         if: runner.os == 'macOS'
+        timeout-minutes: 30
         shell: bash
         run: |
           ./build/bin/Release/NexusForceUnitTests \
             --gtest_color=no \
+            --gtest_output=xml:test-results.xml \
             --gtest_filter='-*Death*:TerminateTest.*:CrashDumpTest.*'
 
       - name: Check the allocator boundary (Windows)
@@ -484,7 +564,7 @@ jobs:
           echo "the allocator boundary holds: NexusForce.dll exports the pool but no allocation operators"
 
       - name: Run unit tests
-        if: ${{ !startsWith(matrix.config, 'cross-') && matrix.config != 'minimal' && matrix.config != 'sqlcipher' }}
+        if: ${{ runner.os != 'macOS' && !startsWith(matrix.config, 'cross-') && matrix.config != 'minimal' && matrix.config != 'sqlcipher' }}
         timeout-minutes: 30
         shell: bash
         run: |
@@ -496,19 +576,20 @@ jobs:
           fi
           "$exe" --gtest_color=no --gtest_output=xml:test-results.xml
 
+      # Results, cache and job summary.
       - name: Upload unit test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.os }}-${{ matrix.compiler }}-${{ matrix.config }}
-          path: test-results.xml
+          path: test-results*.xml
           if-no-files-found: ignore
 
       - name: Save vcpkg binary cache
         uses: ./.github/actions/save-vcpkg-cache
         with:
           cache-key: ${{ steps.vcpkg.outputs.cache-key }}
-          cache-hit: ${{ steps.vcpkg.outputs.cache-hit }}
+          archive-fingerprint: ${{ steps.vcpkg.outputs.archive-fingerprint }}
           binary-cache: ${{ steps.vcpkg.outputs.binary-cache }}
           tool-cache-key: ${{ steps.vcpkg.outputs.tool-cache-key }}
           tool-cache-hit: ${{ steps.vcpkg.outputs.tool-cache-hit }}
@@ -526,9 +607,9 @@ jobs:
         shell: bash
 
   freebsd:
-    name: "freebsd · ${{ matrix.arch }} · C++20 · qemu"
+    name: "freebsd · ${{ matrix.arch }} · C++20 · qemu (clang + gcc)"
     runs-on: ubuntu-24.04
-    timeout-minutes: 240
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       matrix:
@@ -570,6 +651,9 @@ jobs:
       - name: Setup vcpkg
         id: vcpkg
         uses: ./.github/actions/setup-vcpkg
+        with:
+          triplet: ${{ matrix.triplet }}
+          image: freebsd-${{ env.FREEBSD_VERSION }}-${{ matrix.arch }}
 
       - name: Restore FreeBSD sysroot
         id: sysroot-cache
@@ -671,7 +755,7 @@ jobs:
         uses: ./.github/actions/save-vcpkg-cache
         with:
           cache-key: ${{ steps.vcpkg.outputs.cache-key }}
-          cache-hit: ${{ steps.vcpkg.outputs.cache-hit }}
+          archive-fingerprint: ${{ steps.vcpkg.outputs.archive-fingerprint }}
           binary-cache: ${{ steps.vcpkg.outputs.binary-cache }}
           tool-cache-key: ${{ steps.vcpkg.outputs.tool-cache-key }}
           tool-cache-hit: ${{ steps.vcpkg.outputs.tool-cache-hit }}
@@ -690,10 +774,30 @@ jobs:
           set -euo pipefail
           SSH=(ssh -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -p 2222)
           SCP=(scp -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -P 2222)
+
+          echo "FreeBSD build artefacts:"
+          find build-freebsd/bin build-freebsd/lib -maxdepth 4 -type f             \( -name NexusForceUnitTests -o -name 'libNexusForced.so*' -o -name NexusForceTestPlugin.so \) \
+            -printf '  %p\n' || true
+
           TEST_BIN=$(find build-freebsd/bin -type f -name NexusForceUnitTests | head -1)
           LIB=$(find build-freebsd/lib -type f -name 'libNexusForced.so.*.*' | head -1)
           PLUGIN=$(find build-freebsd/lib -type f -name NexusForceTestPlugin.so | head -1)
-          test -n "$TEST_BIN" && test -n "$LIB" && test -n "$PLUGIN"
+
+          # Do not use 'test -n a && test -n b': a failing non-final command in an
+          # AND list is ignored by set -e, so an empty path reached scp below.
+          if [ -z "$TEST_BIN" ]; then
+            echo "::error::NexusForceUnitTests was not produced under build-freebsd/bin"
+            exit 1
+          fi
+          if [ -z "$LIB" ]; then
+            echo "::error::libNexusForced.so.* was not produced under build-freebsd/lib"
+            exit 1
+          fi
+          if [ -z "$PLUGIN" ]; then
+            echo "::error::NexusForceTestPlugin.so was not produced under build-freebsd/lib"
+            exit 1
+          fi
+
           PLUGIN_DST="$PWD/$PLUGIN"
           "${SSH[@]}" root@127.0.0.1 "mkdir -p /tmp/nf/bin /tmp/nf/lib '$(dirname "$PLUGIN_DST")' && chown -R tester /tmp/nf"
           "${SCP[@]}" "$TEST_BIN" tester@127.0.0.1:/tmp/nf/bin/
@@ -710,8 +814,6 @@ jobs:
             "cd /tmp/nf && LD_LIBRARY_PATH=/tmp/nf/lib timeout 3600 ./bin/NexusForceUnitTests --gtest_color=no --gtest_output=xml:/tmp/nf/results.xml"
           status=$?
           "${SCP[@]}" tester@127.0.0.1:/tmp/nf/results.xml "freebsd-${{ matrix.arch }}-test-results.xml" || true
-          bash scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" poweroff \
-            "$VM_DIR" "$VM_DIR/id_ed25519" 2222 || true
           cp "$VM_DIR/serial.log" "freebsd-${{ matrix.arch }}-serial.log" 2>/dev/null || true
           exit $status
 
@@ -725,12 +827,39 @@ jobs:
             freebsd-${{ matrix.arch }}-serial.log
           if-no-files-found: ignore
 
+      - name: Build and run FreeBSD GCC unit tests
+        run: |
+          bash scripts/ci/freebsd-gcc.sh \
+            "${{ matrix.arch }}" "$VM_DIR" 2222 "$PWD" "$VCPKG_INSTALLED" "${{ matrix.triplet }}"
+
+      - name: Collect FreeBSD GCC logs
+        if: always()
+        run: |
+          cp "$VM_DIR/serial.log" "freebsd-gcc-${{ matrix.arch }}-serial.log" 2>/dev/null || true
+
+      - name: Upload FreeBSD GCC test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: freebsd-gcc-${{ matrix.arch }}-test-results
+          path: |
+            freebsd-gcc-${{ matrix.arch }}-test-results.xml
+            freebsd-gcc-${{ matrix.arch }}-serial.log
+          if-no-files-found: ignore
+
+      - name: Power off FreeBSD QEMU VM
+        if: always()
+        run: |
+          bash scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" poweroff \
+            "$VM_DIR" "$VM_DIR/id_ed25519" 2222 || true
+
       - name: Summary
         if: always()
         run: |
           echo "| 项目 | 值 |" >> "$GITHUB_STEP_SUMMARY"
           echo "|------|----|" >> "$GITHUB_STEP_SUMMARY"
           echo "| 平台 | FreeBSD ${{ env.FREEBSD_VERSION }} ${{ matrix.arch }} · QEMU TCG |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| 编译器 | clang（交叉）+ gcc 13（VM 内原生） |" >> "$GITHUB_STEP_SUMMARY"
           echo "| 依赖 | vcpkg ${{ matrix.triplet }}（交叉） |" >> "$GITHUB_STEP_SUMMARY"
 
   allocator:
@@ -758,6 +887,9 @@ jobs:
       - name: Setup vcpkg
         id: vcpkg
         uses: ./.github/actions/setup-vcpkg
+        with:
+          triplet: x64-linux
+          image: ubuntu-24.04
 
       - name: CMake configure
         shell: bash
@@ -817,7 +949,7 @@ jobs:
         uses: ./.github/actions/save-vcpkg-cache
         with:
           cache-key: ${{ steps.vcpkg.outputs.cache-key }}
-          cache-hit: ${{ steps.vcpkg.outputs.cache-hit }}
+          archive-fingerprint: ${{ steps.vcpkg.outputs.archive-fingerprint }}
           binary-cache: ${{ steps.vcpkg.outputs.binary-cache }}
           tool-cache-key: ${{ steps.vcpkg.outputs.tool-cache-key }}
           tool-cache-hit: ${{ steps.vcpkg.outputs.tool-cache-hit }}

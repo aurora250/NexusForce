@@ -1,18 +1,18 @@
 name: "Save vcpkg cache"
 description: >-
-  Save the caches setup-vcpkg restored, once the build has populated them. Only the default branch
-  writes entries: caches written by a pull request are invisible to every other run, yet they count
-  against the same repository cache quota, so writing them evicts the entries the default branch
-  depends on.
+  Save the archive set restored by setup-vcpkg once the build has finished, but only when this run
+  actually added packages to it. The final key carries a fingerprint of the archive directory, so a
+  runner image that changes its compiler produces a new immutable entry instead of silently failing
+  to update the old one. Only the default branch writes entries: caches written by a pull request are
+  invisible to every other run, yet they count against the same repository cache quota.
 
 inputs:
   cache-key:
-    description: "cache-key reported by setup-vcpkg"
+    description: "ABI namespace key reported by setup-vcpkg"
     required: true
-  cache-hit:
-    description: "cache-hit reported by setup-vcpkg; an exact hit needs no save"
-    required: false
-    default: "false"
+  archive-fingerprint:
+    description: "Archive fingerprint captured after restore by setup-vcpkg"
+    required: true
   binary-cache:
     description: "binary-cache reported by setup-vcpkg, so the cached path has a single definition"
     required: true
@@ -31,6 +31,11 @@ inputs:
     required: false
     default: "true"
 
+outputs:
+  save-key:
+    description: "Key the archive cache was saved under, when one was written"
+    value: "${{ steps.gate.outputs.save-key }}"
+
 runs:
   using: "composite"
   steps:
@@ -38,42 +43,64 @@ runs:
       id: gate
       shell: bash
       env:
-        CACHE_HIT: ${{ inputs.cache-hit }}
-        TOOL_CACHE_HIT: ${{ inputs.tool-cache-hit }}
+        ARCHIVE_FINGERPRINT: ${{ inputs.archive-fingerprint }}
         ENABLED: ${{ inputs.enabled }}
         DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         CACHE_KEY: ${{ inputs.cache-key }}
+        BINARY_CACHE_INPUT: ${{ inputs.binary-cache }}
         TOOL_CACHE_KEY: ${{ inputs.tool-cache-key }}
+        TOOL_CACHE_HIT: ${{ inputs.tool-cache-hit }}
         TOOL_CACHE_PATH: ${{ inputs.vcpkg-tool-cache-path }}
       run: |
         set -euo pipefail
 
+        hash_stdin() {
+          if command -v sha256sum >/dev/null 2>&1; then
+            sha256sum
+          else
+            shasum -a 256
+          fi
+        }
+
+        cache_fingerprint() {
+          local dir="$1"
+          (cd "$dir" && find . -type f -name '*.zip' -print | LC_ALL=C sort | hash_stdin | cut -c1-16)
+        }
+
+        echo "archives=false" >> "$GITHUB_OUTPUT"
+        echo "tool=false" >> "$GITHUB_OUTPUT"
+
         if [ "$ENABLED" != "true" ]; then
-          echo "archives=false" >> "$GITHUB_OUTPUT"
-          echo "tool=false" >> "$GITHUB_OUTPUT"
           echo "cache save disabled for this run"
           exit 0
         fi
 
         if [ "$GITHUB_REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
-          echo "archives=false" >> "$GITHUB_OUTPUT"
-          echo "tool=false" >> "$GITHUB_OUTPUT"
           echo "$GITHUB_REF is not the default branch, restore-only run"
           exit 0
         fi
 
-        if [ "$CACHE_HIT" = "true" ]; then
-          echo "archives=false" >> "$GITHUB_OUTPUT"
-          echo "exact archive cache hit for $GITHUB_REF, nothing to save"
+        cache="${BINARY_CACHE_INPUT/#\~/$HOME}"
+        mkdir -p "$cache"
+        current="$(cache_fingerprint "$cache")"
+        echo "restored archive fingerprint: ${ARCHIVE_FINGERPRINT}"
+        echo "current archive fingerprint:  ${current}"
+
+        if [ "$current" = "$ARCHIVE_FINGERPRINT" ]; then
+          echo "archive set unchanged, nothing to save"
         else
+          # The namespace is stable; the fingerprint makes the key unique per archive generation.
+          # A newer runner image can therefore publish its ABI set without fighting the immutable
+          # entry written by an older image.
+          save_key="${CACHE_KEY}-${current}"
           echo "archives=true" >> "$GITHUB_OUTPUT"
-          echo "saving archive cache key: $CACHE_KEY"
+          echo "save-key=${save_key}" >> "$GITHUB_OUTPUT"
+          echo "saving archive cache key: ${save_key}"
         fi
 
         # The tool tree key does not depend on the manifest, so once it exists every later run
         # restores it and there is nothing to upload.
         if [ "$TOOL_CACHE_HIT" = "true" ]; then
-          echo "tool=false" >> "$GITHUB_OUTPUT"
           echo "tool tree restored, nothing to save"
         else
           echo "tool=true" >> "$GITHUB_OUTPUT"
@@ -82,13 +109,15 @@ runs:
 
     - name: Save vcpkg binary cache
       if: steps.gate.outputs.archives == 'true'
+      continue-on-error: true
       uses: actions/cache/save@v4
       with:
         path: ${{ inputs.binary-cache }}
-        key: ${{ inputs.cache-key }}
+        key: ${{ steps.gate.outputs.save-key }}
 
     - name: Save vcpkg tool tree
       if: steps.gate.outputs.tool == 'true'
+      continue-on-error: true
       uses: actions/cache/save@v4
       with:
         path: ${{ inputs.vcpkg-tool-cache-path }}

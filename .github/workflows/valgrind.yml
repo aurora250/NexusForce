@@ -50,6 +50,9 @@ jobs:
       - name: Setup vcpkg
         id: vcpkg
         uses: ./.github/actions/setup-vcpkg
+        with:
+          triplet: x64-linux
+          image: ubuntu-24.04
 
       - name: Configure and Build
         run: |
@@ -57,7 +60,7 @@ jobs:
           cd build
           cmake .. \
             -DCMAKE_BUILD_TYPE=Debug \
-            -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake \
+            -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" \
             -DVCPKG_TARGET_TRIPLET=x64-linux \
             -DNEXUSFORCE_BUILD_DOCS=OFF \
             -DNEXUSFORCE_BUILD_TESTS=ON
@@ -67,7 +70,7 @@ jobs:
         uses: ./.github/actions/save-vcpkg-cache
         with:
           cache-key: ${{ steps.vcpkg.outputs.cache-key }}
-          cache-hit: ${{ steps.vcpkg.outputs.cache-hit }}
+          archive-fingerprint: ${{ steps.vcpkg.outputs.archive-fingerprint }}
           binary-cache: ${{ steps.vcpkg.outputs.binary-cache }}
           tool-cache-key: ${{ steps.vcpkg.outputs.tool-cache-key }}
           tool-cache-hit: ${{ steps.vcpkg.outputs.tool-cache-hit }}

@@ -1,9 +1,10 @@
 name: "Setup vcpkg"
 description: >-
-  Restore vcpkg's tool tree and binary archive cache, then check the tool out at the baseline pinned
-  in vcpkg.json and bootstrap it. Every workflow must use this action instead of its own cache step:
-  the cache keys and the cached paths then have exactly one definition, which keeps all workflows
-  sharing single entries instead of writing competing ones.
+  Restore the pinned vcpkg tool tree and the ABI-scoped binary archive cache, check the tool out at
+  the baseline pinned in vcpkg.json and bootstrap it. Every workflow must use this action instead of
+  its own cache step: the cache keys, the variant identity and the cached paths then have exactly
+  one definition. On Windows, call this action after ilammy/msvc-dev-cmd: the cache namespace reads
+  VCToolsVersion/VSCMD_VER and the action must be the last writer of VCPKG_ROOT.
 
 inputs:
   vcpkg-root:
@@ -14,14 +15,28 @@ inputs:
     description: "Directory holding vcpkg's binary archive cache"
     required: false
     default: "~/.cache/vcpkg/archives"
+  triplet:
+    description: >-
+      vcpkg triplet this job consumes. Together with the runner image and the manifest hash it
+      selects one ABI namespace; cache entries from other triplets must never be restored.
+    required: true
+  image:
+    description: >-
+      Runner image identity, normally matrix.os. Distinguishes windows-latest from windows-2022 and
+      macOS/Ubuntu image generations, whose compilers produce different package ABIs.
+    required: false
+    default: ""
 
 outputs:
   cache-key:
-    description: "Key of the binary archive cache entry, to be handed to save-vcpkg-cache"
+    description: "Base key of this ABI namespace; save-vcpkg-cache appends the archive fingerprint"
     value: "${{ steps.key.outputs.cache-key }}"
-  cache-hit:
-    description: "Whether the exact binary archive cache entry was restored"
-    value: "${{ steps.restore.outputs.cache-hit }}"
+  restore-key:
+    description: "Non-existent lookup key used to force restore-keys matching of the newest entry"
+    value: "${{ steps.key.outputs.restore-key }}"
+  archive-fingerprint:
+    description: "Fingerprint of the restored archive set, used to detect packages built by this run"
+    value: "${{ steps.prepare.outputs.archive-fingerprint }}"
   tool-cache-key:
     description: "Key of the tool tree cache entry, to be handed to save-vcpkg-cache"
     value: "${{ steps.key.outputs.tool-cache-key }}"
@@ -41,24 +56,88 @@ outputs:
 runs:
   using: "composite"
   steps:
-    # Archives change with the manifest: builtin-baseline selects the port versions and dependencies
-    # select the ports. Triplets are deliberately absent from that key - one archives directory holds
-    # the archives of every triplet, so a single entry per runner platform serves native and cross
-    # builds alike.
+    # A vcpkg binary archive is addressed by its package ABI. That ABI depends on the manifest,
+    # the triplet, the compiler/toolset and the toolchain files - not just on the runner OS. A key
+    # made from RUNNER_OS/RUNNER_ARCH alone is therefore shared by windows-latest and windows-2022,
+    # by MSVC and clang-cl, by native and cross builds and by every VS image revision; those jobs
+    # then restore a key that contains no archive they can use.
     #
-    # The tool tree is keyed by platform only and versioned by hand: its content does not depend on
-    # the manifest, so keying it by one would store another full clone per vcpkg.json edit.
+    # The key below names one ABI namespace. The archive set inside a namespace can still grow when
+    # a runner image updates its compiler, so the exact cache key is completed only after the build
+    # with the fingerprint of the archive directory (save-vcpkg-cache). Restores use the namespace
+    # prefix and always take the newest entry; immutable GitHub cache entries never block updates.
     - name: Resolve cache keys
       id: key
       shell: bash
+      env:
+        TRIPLET_INPUT: ${{ inputs.triplet }}
+        IMAGE_INPUT: ${{ inputs.image }}
       run: |
         set -euo pipefail
-        if command -v sha256sum >/dev/null 2>&1; then
-          hash=$(sha256sum "$GITHUB_WORKSPACE/vcpkg.json" | cut -c1-16)
-        else
-          hash=$(shasum -a 256 "$GITHUB_WORKSPACE/vcpkg.json" | cut -c1-16)
+
+        hash_stdin() {
+          if command -v sha256sum >/dev/null 2>&1; then
+            sha256sum
+          else
+            shasum -a 256
+          fi
+        }
+
+        triplet="${TRIPLET_INPUT:?setup-vcpkg requires a vcpkg triplet}"
+        image="${IMAGE_INPUT:-$RUNNER_OS}"
+
+        # The compiler that vcpkg actually invokes is an ABI input. Capture its identity before the
+        # install so image/toolset generations do not race for one namespace, then keep the
+        # fingerprint mechanism for packages added inside a generation.
+        case "$RUNNER_OS" in
+          Windows)
+            toolset="${VCToolsVersion:-unknown}-${VSCMD_VER:-unknown}"
+            ;;
+          Darwin)
+            toolset="$(clang++ --version 2>/dev/null | head -1)-$(xcrun --show-sdk-version 2>/dev/null || true)"
+            ;;
+          *)
+            case "$triplet" in
+              riscv64-linux) cc=riscv64-linux-gnu-g++ ;;
+              loongarch64-linux) cc=loongarch64-linux-gnu-g++ ;;
+              arm64-linux) cc=aarch64-linux-gnu-g++ ;;
+              *-freebsd) cc=clang++ ;;
+              *) cc=c++ ;;
+            esac
+            toolset="$("$cc" --version 2>/dev/null | head -1)"
+            ;;
+        esac
+        toolset_hash="$(printf '%s' "$toolset" | hash_stdin | cut -c1-12)"
+
+        # Hash the manifest and the files that change port or triplet semantics. Hashing via stdin
+        # avoids GNU coreutils prefixing the line with a backslash when the workspace path contains
+        # backslashes on Windows.
+        workspace="$GITHUB_WORKSPACE"
+        if command -v cygpath >/dev/null 2>&1; then
+          workspace="$(cygpath -u "$workspace")"
         fi
-        echo "cache-key=${RUNNER_OS}-${RUNNER_ARCH}-vcpkg-archives-${hash}" >> "$GITHUB_OUTPUT"
+
+        manifest_hash="$(
+          cd "$workspace"
+          {
+            cat vcpkg.json
+            if [ -f vcpkg-configuration.json ]; then
+              printf '\nFILE:vcpkg-configuration.json\n'
+              cat vcpkg-configuration.json
+            fi
+            for dir in cmake/triplets cmake/toolchains; do
+              [ -d "$dir" ] || continue
+              find "$dir" -type f -print | LC_ALL=C sort | while IFS= read -r file; do
+                printf '\nFILE:%s\n' "$file"
+                cat "$file"
+              done
+            done
+          } | hash_stdin | cut -c1-16
+        )"
+
+        base_key="${RUNNER_OS}-${RUNNER_ARCH}-${image}-${triplet}-${toolset_hash}-${manifest_hash}"
+        echo "cache-key=${base_key}" >> "$GITHUB_OUTPUT"
+        echo "restore-key=${base_key}-lookup" >> "$GITHUB_OUTPUT"
         echo "tool-cache-key=${RUNNER_OS}-${RUNNER_ARCH}-vcpkg-tool-v3" >> "$GITHUB_OUTPUT"
 
     - name: Restore vcpkg tool tree
@@ -72,10 +151,12 @@ runs:
       id: restore
       uses: actions/cache/restore@v4
       with:
+        # The lookup key is never written; restore-keys resolves it to the newest entry in this
+        # ABI namespace. An exact-match key would pin the cache to one toolset forever.
         path: ${{ inputs.binary-cache }}
-        key: ${{ steps.key.outputs.cache-key }}
+        key: ${{ steps.key.outputs.restore-key }}
         restore-keys: |
-          ${{ runner.os }}-${{ runner.arch }}-vcpkg-archives-
+          ${{ steps.key.outputs.cache-key }}-
 
     - name: Check out vcpkg at the pinned baseline
       id: prepare
@@ -85,6 +166,19 @@ runs:
         BINARY_CACHE_INPUT: ${{ inputs.binary-cache }}
       run: |
         set -euo pipefail
+
+        hash_stdin() {
+          if command -v sha256sum >/dev/null 2>&1; then
+            sha256sum
+          else
+            shasum -a 256
+          fi
+        }
+
+        cache_fingerprint() {
+          local dir="$1"
+          (cd "$dir" && find . -type f -name '*.zip' -print | LC_ALL=C sort | hash_stdin | cut -c1-16)
+        }
 
         root="${VCPKG_ROOT_INPUT/#\~/$HOME}"
         cache="${BINARY_CACHE_INPUT/#\~/$HOME}"
@@ -106,6 +200,10 @@ runs:
           git -C "$root" fetch --unshallow
         fi
 
+        # Remove tracked modifications left by earlier workflow steps (for example the LoongArch
+        # patch to vcpkg's linux toolchain) before moving to the pinned baseline.
+        git -C "$root" reset --hard >/dev/null 2>&1 || true
+
         if ! git -C "$root" checkout --detach "$baseline" 2>/dev/null; then
           git -C "$root" fetch origin "$baseline"
           git -C "$root" checkout --detach "$baseline"
@@ -126,6 +224,8 @@ runs:
         fi
 
         mkdir -p "$cache"
+        fingerprint="$(cache_fingerprint "$cache")"
+        echo "archive-fingerprint=$fingerprint" >> "$GITHUB_OUTPUT"
 
         # Values written to GITHUB_ENV and GITHUB_PATH are handed to native processes verbatim - the
         # shell only rewrites command line arguments - so on Windows both the tool root and the cache
@@ -144,3 +244,4 @@ runs:
         echo "vcpkg-root=$root" >> "$GITHUB_OUTPUT"
         echo "vcpkg root: $export_root at $(git -C "$root" rev-parse --short HEAD)"
         echo "vcpkg binary cache: $cache"
+        echo "archive fingerprint: $fingerprint"

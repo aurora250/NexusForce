@@ -165,6 +165,7 @@
 
 ### 🔧 Improvements
 
+- vcpkg 缓存改为按 ABI 命名空间（runner 镜像、triplet、manifest/toolchain）恢复，并按归档目录指纹保存新条目
 - `system_event` 重命名为 `waitable_event`，修复 `is_set()` 数据竞争、Windows 原生句柄状态查询、POSIX 超时使用 `steady_clock`，并为 moved-from 对象增加保护
 - `tim_sort` 重写，run 识别、32..64 minrun、二分插入、run 栈合并、最终强制归并与指数搜索 galloping
 - `inplace_merge` 改为稳定缓冲归并，空间 O(N)
@@ -378,6 +379,7 @@
 
 ### 🐛 Bug Fixes
 
+- 修复空 `CMAKE_BUILD_TYPE` 时 Debug death tests 被编译、但 `NEFORCE_STATE_DEBUG` 未启用导致 `failed to die` 的问题；单配置生成器在未指定构建类型时默认 `Release`
 - 修复 `pipe` 默认构造函数用圆括号初始化 C 数组成员，AppleClang 报 `array initializer must be an initializer list`；改用花括号初始化
 - 修复 `file_watcher` Windows 后端停止监视时内核仍可能引用已退栈的 `OVERLAPPED`：取消与完成回收改由监视线程自身完成，`stop()` 只负责唤醒
 - 修复 TUI 空闲帧仍向终端写入 `?25l`、`0m` 与 DEC 2026 同步输出包裹的问题：`screen::to_string()` 在内容和光标都未变化时返回空串，`reconciler` 不再为空差量生成同步标记；无动画应用可用 `with_fps(0)` 完全事件驱动

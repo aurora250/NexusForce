@@ -1445,7 +1445,10 @@ namespace {
         if (cpu.vendor.empty()) {
             cpu.vendor = arm_implementer_name(cpu.arm.implementer);
         }
-        cpu.features = arm_instructions(cpuinfo_field(info, "Features"));
+        const string arm_features = cpuinfo_field(info, "Features");
+        if (!arm_features.empty()) {
+            cpu.features = arm_instructions(arm_features);
+        }
 #    elif defined(NEFORCE_ARCH_RISCV)
         cpu.riscv.isa = cpuinfo_field(info, "isa");
         cpu.riscv.mmu = cpuinfo_field(info, "mmu");
@@ -1456,7 +1459,9 @@ namespace {
         if (cpu.brand.empty()) {
             cpu.brand = cpu.riscv.uarch;
         }
-        cpu.features = riscv_instructions(cpu.riscv.isa);
+        if (!cpu.riscv.isa.empty()) {
+            cpu.features = riscv_instructions(cpu.riscv.isa);
+        }
 #    elif defined(NEFORCE_ARCH_LOONGARCH)
         cpu.loongarch.family = cpuinfo_field(info, "CPU Family");
         cpu.loongarch.revision = cpuinfo_field(info, "CPU Revision");
@@ -1473,7 +1478,10 @@ namespace {
         if (cpu.brand.empty()) {
             cpu.brand = cpu.loongarch.family;
         }
-        cpu.features = loongarch_instructions(cpuinfo_field(info, "Features"));
+        const string loongarch_features = cpuinfo_field(info, "Features");
+        if (!loongarch_features.empty()) {
+            cpu.features = loongarch_instructions(loongarch_features);
+        }
 #    else
         cpu.features = linux_instructions(cpuinfo_field(info, "flags"));
 #    endif
