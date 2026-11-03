@@ -695,7 +695,7 @@ jobs:
           PLUGIN=$(find build-freebsd/lib -type f -name NexusForceTestPlugin.so | head -1)
           test -n "$TEST_BIN" && test -n "$LIB" && test -n "$PLUGIN"
           PLUGIN_DST="$PWD/$PLUGIN"
-          "${SSH[@]}" root@127.0.0.1 "mkdir -p /tmp/nf/bin /tmp/nf/lib '$(dirname "$PLUGIN_DST")'"
+          "${SSH[@]}" root@127.0.0.1 "mkdir -p /tmp/nf/bin /tmp/nf/lib '$(dirname "$PLUGIN_DST")' && chown -R tester /tmp/nf"
           "${SCP[@]}" "$TEST_BIN" tester@127.0.0.1:/tmp/nf/bin/
           "${SCP[@]}" "$LIB" tester@127.0.0.1:/tmp/nf/lib/libNexusForced.so.2
           "${SCP[@]}" "$PLUGIN" tester@127.0.0.1:/tmp/nf/NexusForceTestPlugin.so

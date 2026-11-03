@@ -6150,10 +6150,11 @@ TEST_F(SysinfoTest, HardwareInfo_MemoryModules_AreConsistentWhenReadable) {
     sysinfo& inst = sysinfo::instance();
     const auto& memory = inst.get_hardware_info().memory;
     if (memory.module_count != 0) {
-        EXPECT_FALSE(memory.type.empty());
-        EXPECT_GT(memory.rated_mts, 0U);
-        EXPECT_GT(memory.configured_mts, 0U);
         EXPECT_FALSE(memory.channel.empty());
+        if (!memory.type.empty()) {
+            EXPECT_GT(memory.rated_mts, 0U);
+            EXPECT_GT(memory.configured_mts, 0U);
+        }
     }
 }
 

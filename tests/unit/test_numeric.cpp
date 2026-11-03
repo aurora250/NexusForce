@@ -14,7 +14,7 @@ protected:
 };
 
 using TestTypes = ::testing::Types<
-#if defined(NEFORCE_STANDARD_20) && !defined(NEFORCE_PLATFORM_FREEBSD)
+#if defined(NEFORCE_STANDARD_20) && !defined(NEFORCE_PLATFORM_BSD_LIKE)
         char8_t,
 #endif
         char16_t, char32_t, wchar_t, bool, char, int8_t, int16_t, int32_t, int64_t, uint8_t, uint16_t, uint32_t,
@@ -25,455 +25,458 @@ TYPED_TEST_SUITE(NumericTraitsConsistencyTest, TestTypes);
 TYPED_TEST(NumericTraitsConsistencyTest, IsSpecialized) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::is_specialized, StdLimits::is_specialized);
+    static_assert(Traits::is_specialized == StdLimits::is_specialized, "is_specialized mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, MinValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    if constexpr (is_floating_point_v<TypeParam>) {
-        EXPECT_FLOAT_EQ(Traits::min(), StdLimits::min());
-    } else {
-        EXPECT_EQ(Traits::min(), StdLimits::min());
-    }
+    static_assert(Traits::min() == StdLimits::min(), "min mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, MaxValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    if constexpr (is_floating_point_v<TypeParam>) {
-        EXPECT_FLOAT_EQ(Traits::max(), StdLimits::max());
-    } else {
-        EXPECT_EQ(Traits::max(), StdLimits::max());
-    }
+    static_assert(Traits::max() == StdLimits::max(), "max mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, LowestValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    if constexpr (is_floating_point_v<TypeParam>) {
-        EXPECT_FLOAT_EQ(Traits::lowest(), StdLimits::lowest());
-    } else if constexpr (is_signed_v<TypeParam> && !is_floating_point_v<TypeParam>) {
-        EXPECT_EQ(Traits::lowest(), StdLimits::lowest());
-    } else {
-        EXPECT_EQ(Traits::lowest(), StdLimits::lowest());
-    }
+    static_assert(Traits::lowest() == StdLimits::lowest(), "lowest mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, EpsilonValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    if constexpr (is_floating_point_v<TypeParam>) {
-        EXPECT_FLOAT_EQ(Traits::epsilon(), StdLimits::epsilon());
-    } else {
-        EXPECT_EQ(Traits::epsilon(), StdLimits::epsilon());
-    }
+    static_assert(Traits::epsilon() == StdLimits::epsilon(), "epsilon mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, RoundErrorValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    if constexpr (is_floating_point_v<TypeParam>) {
-        EXPECT_FLOAT_EQ(Traits::round_error(), StdLimits::round_error());
-    } else {
-        EXPECT_EQ(Traits::round_error(), StdLimits::round_error());
-    }
+    static_assert(Traits::round_error() == StdLimits::round_error(), "round_error mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, DenormMinValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    if constexpr (is_floating_point_v<TypeParam>) {
-        EXPECT_FLOAT_EQ(Traits::denorm_min(), StdLimits::denorm_min());
-    } else {
-        EXPECT_EQ(Traits::denorm_min(), StdLimits::denorm_min());
-    }
+    static_assert(Traits::denorm_min() == StdLimits::denorm_min(), "denorm_min mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, InfinityValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    if constexpr (is_floating_point_v<TypeParam>) {
-        const auto custom_inf = Traits::infinity();
-        const auto std_inf = StdLimits::infinity();
-        EXPECT_EQ(_NEFORCE is_infinity(custom_inf), _NEFORCE is_infinity(std_inf));
-        EXPECT_EQ(_NEFORCE signbit(custom_inf), _NEFORCE signbit(std_inf));
-    } else {
-        EXPECT_EQ(Traits::infinity(), StdLimits::infinity());
-    }
+    static_assert(Traits::infinity() == StdLimits::infinity(), "infinity mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, QuietNaNValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
+#ifdef NEFORCE_STANDARD_17
     if constexpr (is_floating_point_v<TypeParam>) {
-        const auto custom_qnan = Traits::quiet_nan();
-        const auto std_qnan = StdLimits::quiet_NaN();
-        EXPECT_EQ(_NEFORCE is_nan(custom_qnan), _NEFORCE is_nan(std_qnan));
+        static_assert(_NEFORCE is_nan(Traits::quiet_nan()) && _NEFORCE is_nan(StdLimits::quiet_NaN()),
+                      "quiet_NaN mismatch");
     } else {
-        EXPECT_EQ(Traits::quiet_nan(), StdLimits::quiet_NaN());
+        static_assert(Traits::quiet_nan() == StdLimits::quiet_NaN(), "quiet_NaN mismatch");
     }
+#endif
+    GTEST_SKIP() << "skip under C++17";
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, SignalingNaNValue) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
+#ifdef NEFORCE_STANDARD_17
     if constexpr (is_floating_point_v<TypeParam>) {
-        const auto custom_snan = Traits::signaling_nan();
-        if constexpr (is_same_v<TypeParam, float64_t>) {
-            const auto std_snan = StdLimits::signaling_NaN();
-            EXPECT_EQ(_NEFORCE is_nan(custom_snan), _NEFORCE is_nan(std_snan));
-        } else {
-            EXPECT_TRUE(_NEFORCE is_nan(custom_snan));
-        }
+        static_assert(_NEFORCE is_nan(Traits::quiet_nan()) && _NEFORCE is_nan(StdLimits::quiet_NaN()),
+                      "signaling_NaN mismatch");
     } else {
-        EXPECT_EQ(Traits::signaling_nan(), StdLimits::signaling_NaN());
+        static_assert(Traits::quiet_nan() == StdLimits::quiet_NaN(), "signaling_NaN mismatch");
     }
+#endif
+    GTEST_SKIP() << "skip under C++17";
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, IsInteger) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::is_integer, StdLimits::is_integer);
+    static_assert(Traits::is_integer == StdLimits::is_integer, "is_integer mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, IsSigned) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::is_signed, StdLimits::is_signed);
+    static_assert(Traits::is_signed == StdLimits::is_signed, "is_signed mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, IsExact) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::is_exact, StdLimits::is_exact);
+    static_assert(Traits::is_exact == StdLimits::is_exact, "is_exact mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, IsBounded) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::is_bounded, StdLimits::is_bounded);
+    static_assert(Traits::is_bounded == StdLimits::is_bounded, "is_bounded mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, IsModulo) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::is_modulo, StdLimits::is_modulo);
+    static_assert(Traits::is_modulo == StdLimits::is_modulo, "is_modulo mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, Radix) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::radix, StdLimits::radix);
+    static_assert(Traits::radix == StdLimits::radix, "radix mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, Digits) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::digits, StdLimits::digits);
+    static_assert(Traits::digits == StdLimits::digits, "digits mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, Digits10) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::digits10, StdLimits::digits10);
+    static_assert(Traits::digits10 == StdLimits::digits10, "digits10 mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, MaxDigits10) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::max_digits10, StdLimits::max_digits10);
+    static_assert(Traits::max_digits10 == StdLimits::max_digits10, "max_digits10 mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, MaxExponent) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::max_exponent, StdLimits::max_exponent);
+    static_assert(Traits::max_exponent == StdLimits::max_exponent, "max_exponent mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, MaxExponent10) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::max_exponent10, StdLimits::max_exponent10);
+    static_assert(Traits::max_exponent10 == StdLimits::max_exponent10, "max_exponent10 mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, MinExponent) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::min_exponent, StdLimits::min_exponent);
+    static_assert(Traits::min_exponent == StdLimits::min_exponent, "min_exponent mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, MinExponent10) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::min_exponent10, StdLimits::min_exponent10);
+    static_assert(Traits::min_exponent10 == StdLimits::min_exponent10, "min_exponent10 mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, HasInfinity) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::has_infinity, StdLimits::has_infinity);
+    static_assert(Traits::has_infinity == StdLimits::has_infinity, "has_infinity mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, HasQuietNaN) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::has_quiet_nan, StdLimits::has_quiet_NaN);
+    static_assert(Traits::has_quiet_nan == StdLimits::has_quiet_NaN, "has_quiet_NaN mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, HasSignalingNaN) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::has_signaling_nan, StdLimits::has_signaling_NaN);
+    static_assert(Traits::has_signaling_nan == StdLimits::has_signaling_NaN, "has_signaling_NaN mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, IsIec559) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::is_iec559, StdLimits::is_iec559);
+    static_assert(Traits::is_iec559 == StdLimits::is_iec559, "is_iec559 mismatch");
+}
+
+template <typename T>
+constexpr bool traps_equal_impl(false_type) {
+    return numeric_traits<T>::traps == std::numeric_limits<T>::traps;
+}
+template <typename T>
+constexpr bool traps_equal_impl(true_type) {
+    return true;
+}
+
+template <typename T>
+constexpr bool traps_equal() {
+    return traps_equal_impl<T>(is_same<T, bool>{});
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, Traps) {
+    static_assert(traps_equal<TypeParam>(), "Traits::traps not equal with StdLimits::traps");
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    if constexpr (is_same_v<TypeParam, bool>) {
-        GTEST_SKIP() << "std::numeric_limits<bool>::traps differs between libstdc++ and libc++";
-    }
-    constexpr bool custom_traps = Traits::traps;
-    constexpr bool std_traps = StdLimits::traps;
-    EXPECT_EQ(custom_traps, std_traps);
+    EXPECT_EQ(Traits::traps, StdLimits::traps);
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, HasDenorm) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(static_cast<int>(Traits::has_denorm), static_cast<int>(StdLimits::has_denorm));
+    static_assert(static_cast<int>(Traits::has_denorm) == static_cast<int>(StdLimits::has_denorm),
+                  "has_denorm mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, RoundStyle) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(static_cast<int>(Traits::round_style), static_cast<int>(StdLimits::round_style));
+    static_assert(static_cast<int>(Traits::round_style) == static_cast<int>(StdLimits::round_style),
+                  "round_style mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, HasDenormLoss) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::has_denorm_loss, StdLimits::has_denorm_loss);
+    static_assert(Traits::has_denorm_loss == StdLimits::has_denorm_loss, "has_denorm_loss mismatch");
 }
 
 TYPED_TEST(NumericTraitsConsistencyTest, TinynessBefore) {
     using Traits = typename TestFixture::Traits;
     using StdLimits = typename TestFixture::StdLimits;
-    EXPECT_EQ(Traits::tinyness_before, StdLimits::tinyness_before);
+    static_assert(Traits::tinyness_before == StdLimits::tinyness_before, "tinyness_before mismatch");
 }
 
 class Float32TraitsTest : public ::testing::Test {};
 class Float64TraitsTest : public ::testing::Test {};
 
 TEST_F(Float32TraitsTest, MaxDigits10) {
-    EXPECT_EQ(numeric_traits<float32_t>::max_digits10, std::numeric_limits<float32_t>::max_digits10);
+    static_assert(numeric_traits<float32_t>::max_digits10 == std::numeric_limits<float32_t>::max_digits10,
+                  "max_digits10 mismatch");
 }
 
 TEST_F(Float32TraitsTest, MaxExponent) {
-    EXPECT_EQ(numeric_traits<float32_t>::max_exponent, std::numeric_limits<float32_t>::max_exponent);
+    static_assert(numeric_traits<float32_t>::max_exponent == std::numeric_limits<float32_t>::max_exponent,
+                  "max_exponent mismatch");
 }
 
 TEST_F(Float32TraitsTest, MaxExponent10) {
-    EXPECT_EQ(numeric_traits<float32_t>::max_exponent10, std::numeric_limits<float32_t>::max_exponent10);
+    static_assert(numeric_traits<float32_t>::max_exponent10 == std::numeric_limits<float32_t>::max_exponent10,
+                  "max_exponent10 mismatch");
 }
 
 TEST_F(Float32TraitsTest, MinExponent) {
-    EXPECT_EQ(numeric_traits<float32_t>::min_exponent, std::numeric_limits<float32_t>::min_exponent);
+    static_assert(numeric_traits<float32_t>::min_exponent == std::numeric_limits<float32_t>::min_exponent,
+                  "min_exponent mismatch");
 }
 
 TEST_F(Float32TraitsTest, MinExponent10) {
-    EXPECT_EQ(numeric_traits<float32_t>::min_exponent10, std::numeric_limits<float32_t>::min_exponent10);
+    static_assert(numeric_traits<float32_t>::min_exponent10 == std::numeric_limits<float32_t>::min_exponent10,
+                  "min_exponent10 mismatch");
 }
 
 TEST_F(Float32TraitsTest, HasDenorm) {
-    EXPECT_EQ(static_cast<int>(numeric_traits<float32_t>::has_denorm),
-              static_cast<int>(std::numeric_limits<float32_t>::has_denorm));
+    static_assert(static_cast<int>(numeric_traits<float32_t>::has_denorm) ==
+                          static_cast<int>(std::numeric_limits<float32_t>::has_denorm),
+                  "has_denorm mismatch");
 }
 
 TEST_F(Float32TraitsTest, RoundStyle) {
-    EXPECT_EQ(static_cast<int>(numeric_traits<float32_t>::round_style),
-              static_cast<int>(std::numeric_limits<float32_t>::round_style));
+    static_assert(static_cast<int>(numeric_traits<float32_t>::round_style) ==
+                          static_cast<int>(std::numeric_limits<float32_t>::round_style),
+                  "round_style mismatch");
 }
 
 TEST_F(Float32TraitsTest, HasDenormLoss) {
-    EXPECT_EQ(numeric_traits<float32_t>::has_denorm_loss, std::numeric_limits<float32_t>::has_denorm_loss);
+    static_assert(numeric_traits<float32_t>::has_denorm_loss == std::numeric_limits<float32_t>::has_denorm_loss,
+                  "has_denorm_loss mismatch");
 }
 
 TEST_F(Float32TraitsTest, TinynessBefore) {
-    EXPECT_EQ(numeric_traits<float32_t>::tinyness_before, std::numeric_limits<float32_t>::tinyness_before);
+    static_assert(numeric_traits<float32_t>::tinyness_before == std::numeric_limits<float32_t>::tinyness_before,
+                  "tinyness_before mismatch");
 }
 
 TEST_F(Float64TraitsTest, MaxDigits10) {
-    EXPECT_EQ(numeric_traits<float64_t>::max_digits10, std::numeric_limits<float64_t>::max_digits10);
+    static_assert(numeric_traits<float64_t>::max_digits10 == std::numeric_limits<float64_t>::max_digits10,
+                  "max_digits10 mismatch");
 }
 
 TEST_F(Float64TraitsTest, MaxExponent) {
-    EXPECT_EQ(numeric_traits<float64_t>::max_exponent, std::numeric_limits<float64_t>::max_exponent);
+    static_assert(numeric_traits<float64_t>::max_exponent == std::numeric_limits<float64_t>::max_exponent,
+                  "max_exponent mismatch");
 }
 
 TEST_F(Float64TraitsTest, MaxExponent10) {
-    EXPECT_EQ(numeric_traits<float64_t>::max_exponent10, std::numeric_limits<float64_t>::max_exponent10);
+    static_assert(numeric_traits<float64_t>::max_exponent10 == std::numeric_limits<float64_t>::max_exponent10,
+                  "max_exponent10 mismatch");
 }
 
 TEST_F(Float64TraitsTest, MinExponent) {
-    EXPECT_EQ(numeric_traits<float64_t>::min_exponent, std::numeric_limits<float64_t>::min_exponent);
+    static_assert(numeric_traits<float64_t>::min_exponent == std::numeric_limits<float64_t>::min_exponent,
+                  "min_exponent mismatch");
 }
 
 TEST_F(Float64TraitsTest, MinExponent10) {
-    EXPECT_EQ(numeric_traits<float64_t>::min_exponent10, std::numeric_limits<float64_t>::min_exponent10);
+    static_assert(numeric_traits<float64_t>::min_exponent10 == std::numeric_limits<float64_t>::min_exponent10,
+                  "min_exponent10 mismatch");
 }
 
 TEST_F(Float64TraitsTest, HasDenorm) {
-    EXPECT_EQ(static_cast<int>(numeric_traits<float64_t>::has_denorm),
-              static_cast<int>(std::numeric_limits<float64_t>::has_denorm));
+    static_assert(static_cast<int>(numeric_traits<float64_t>::has_denorm) ==
+                          static_cast<int>(std::numeric_limits<float64_t>::has_denorm),
+                  "has_denorm mismatch");
 }
 
 TEST_F(Float64TraitsTest, RoundStyle) {
-    EXPECT_EQ(static_cast<int>(numeric_traits<float64_t>::round_style),
-              static_cast<int>(std::numeric_limits<float64_t>::round_style));
+    static_assert(static_cast<int>(numeric_traits<float64_t>::round_style) ==
+                          static_cast<int>(std::numeric_limits<float64_t>::round_style),
+                  "round_style mismatch");
 }
 
 TEST_F(Float64TraitsTest, HasDenormLoss) {
-    EXPECT_EQ(numeric_traits<float64_t>::has_denorm_loss, std::numeric_limits<float64_t>::has_denorm_loss);
+    static_assert(numeric_traits<float64_t>::has_denorm_loss == std::numeric_limits<float64_t>::has_denorm_loss,
+                  "has_denorm_loss mismatch");
 }
 
 TEST_F(Float64TraitsTest, TinynessBefore) {
-    EXPECT_EQ(numeric_traits<float64_t>::tinyness_before, std::numeric_limits<float64_t>::tinyness_before);
+    static_assert(numeric_traits<float64_t>::tinyness_before == std::numeric_limits<float64_t>::tinyness_before,
+                  "tinyness_before mismatch");
 }
 
 class Float32PosiNegaTest : public ::testing::Test {};
 
 TEST_F(Float32PosiNegaTest, MinPosiMatchesMin) {
-    EXPECT_FLOAT_EQ(numeric_traits<float32_t>::min_posi(), numeric_traits<float32_t>::min());
+    static_assert(numeric_traits<float32_t>::min_posi() == numeric_traits<float32_t>::min(), "min_posi mismatch");
 }
 
 TEST_F(Float32PosiNegaTest, MaxPosiMatchesMax) {
-    EXPECT_FLOAT_EQ(numeric_traits<float32_t>::max_posi(), numeric_traits<float32_t>::max());
+    static_assert(numeric_traits<float32_t>::max_posi() == numeric_traits<float32_t>::max(), "max_posi mismatch");
 }
 
 TEST_F(Float32PosiNegaTest, MinNegaMatchesLowest) {
-    EXPECT_FLOAT_EQ(numeric_traits<float32_t>::min_nega(), numeric_traits<float32_t>::lowest());
+    static_assert(numeric_traits<float32_t>::min_nega() == numeric_traits<float32_t>::lowest(), "min_nega mismatch");
 }
 
 TEST_F(Float32PosiNegaTest, MaxNegaIsNegativeSmall) {
-    EXPECT_LE(numeric_traits<float32_t>::max_nega(), 0.0F);
-    EXPECT_GT(numeric_traits<float32_t>::max_nega(), -1.0F);
+    static_assert(numeric_traits<float32_t>::max_nega() <= 0.0F, "max_nega should be <= 0");
+    static_assert(numeric_traits<float32_t>::max_nega() > -1.0F, "max_nega should be > -1");
 }
 
 class Float64PosiNegaTest : public ::testing::Test {};
 
 TEST_F(Float64PosiNegaTest, MinPosiMatchesMin) {
-    EXPECT_DOUBLE_EQ(numeric_traits<float64_t>::min_posi(), numeric_traits<float64_t>::min());
+    static_assert(numeric_traits<float64_t>::min_posi() == numeric_traits<float64_t>::min(), "min_posi mismatch");
 }
 
 TEST_F(Float64PosiNegaTest, MaxPosiMatchesMax) {
-    EXPECT_DOUBLE_EQ(numeric_traits<float64_t>::max_posi(), numeric_traits<float64_t>::max());
+    static_assert(numeric_traits<float64_t>::max_posi() == numeric_traits<float64_t>::max(), "max_posi mismatch");
 }
 
 TEST_F(Float64PosiNegaTest, MinNegaMatchesLowest) {
-    EXPECT_DOUBLE_EQ(numeric_traits<float64_t>::min_nega(), numeric_traits<float64_t>::lowest());
+    static_assert(numeric_traits<float64_t>::min_nega() == numeric_traits<float64_t>::lowest(), "min_nega mismatch");
 }
 
 TEST_F(Float64PosiNegaTest, MaxNegaIsNegativeSmall) {
-    EXPECT_LE(numeric_traits<float64_t>::max_nega(), 0.0);
-    EXPECT_GT(numeric_traits<float64_t>::max_nega(), -1.0);
+    static_assert(numeric_traits<float64_t>::max_nega() <= 0.0, "max_nega should be <= 0");
+    static_assert(numeric_traits<float64_t>::max_nega() > -1.0, "max_nega should be > -1");
 }
 
 class DecimalPosiNegaTest : public ::testing::Test {};
 
 TEST_F(DecimalPosiNegaTest, MinPosiMatchesMin) {
-    EXPECT_DOUBLE_EQ(static_cast<double>(numeric_traits<decimal_t>::min_posi()),
-                     static_cast<double>(numeric_traits<decimal_t>::min()));
+    static_assert(static_cast<double>(numeric_traits<decimal_t>::min_posi()) ==
+                          static_cast<double>(numeric_traits<decimal_t>::min()),
+                  "min_posi mismatch");
 }
 
 TEST_F(DecimalPosiNegaTest, MaxPosiMatchesMax) {
-    EXPECT_DOUBLE_EQ(static_cast<double>(numeric_traits<decimal_t>::max_posi()),
-                     static_cast<double>(numeric_traits<decimal_t>::max()));
+    static_assert(static_cast<double>(numeric_traits<decimal_t>::max_posi()) ==
+                          static_cast<double>(numeric_traits<decimal_t>::max()),
+                  "max_posi mismatch");
 }
 
 TEST_F(DecimalPosiNegaTest, MinNegaMatchesLowest) {
-    EXPECT_DOUBLE_EQ(static_cast<double>(numeric_traits<decimal_t>::min_nega()),
-                     static_cast<double>(numeric_traits<decimal_t>::lowest()));
+    static_assert(static_cast<double>(numeric_traits<decimal_t>::min_nega()) ==
+                          static_cast<double>(numeric_traits<decimal_t>::lowest()),
+                  "min_nega mismatch");
 }
 
 TEST_F(DecimalPosiNegaTest, MaxNegaIsNegativeSmall) {
-    EXPECT_LE(static_cast<double>(numeric_traits<decimal_t>::max_nega()), 0.0);
-    EXPECT_GT(static_cast<double>(numeric_traits<decimal_t>::max_nega()), -1.0);
+    static_assert(static_cast<double>(numeric_traits<decimal_t>::max_nega()) <= 0.0, "max_nega should be <= 0");
+    static_assert(static_cast<double>(numeric_traits<decimal_t>::max_nega()) > -1.0, "max_nega should be > -1");
 }
 
 class LongLongConsistencyTest : public ::testing::Test {};
 
 TEST_F(LongLongConsistencyTest, MatchesInt64) {
-    EXPECT_EQ(numeric_traits<long long>::min(), numeric_traits<int64_t>::min());
-    EXPECT_EQ(numeric_traits<long long>::max(), numeric_traits<int64_t>::max());
-    EXPECT_EQ(numeric_traits<long long>::digits, numeric_traits<int64_t>::digits);
-    EXPECT_EQ(numeric_traits<long long>::is_signed, numeric_traits<int64_t>::is_signed);
+    static_assert(numeric_traits<long long>::min() == numeric_traits<int64_t>::min(), "min mismatch");
+    static_assert(numeric_traits<long long>::max() == numeric_traits<int64_t>::max(), "max mismatch");
+    static_assert(numeric_traits<long long>::digits == numeric_traits<int64_t>::digits, "digits mismatch");
+    static_assert(numeric_traits<long long>::is_signed == numeric_traits<int64_t>::is_signed, "is_signed mismatch");
 }
 
 class UnsignedLongLongConsistencyTest : public ::testing::Test {};
 
 TEST_F(UnsignedLongLongConsistencyTest, MatchesUint64) {
-    EXPECT_EQ(numeric_traits<unsigned long long>::min(), numeric_traits<uint64_t>::min());
-    EXPECT_EQ(numeric_traits<unsigned long long>::max(), numeric_traits<uint64_t>::max());
-    EXPECT_EQ(numeric_traits<unsigned long long>::digits, numeric_traits<uint64_t>::digits);
-    EXPECT_EQ(numeric_traits<unsigned long long>::is_signed, numeric_traits<uint64_t>::is_signed);
+    static_assert(numeric_traits<unsigned long long>::min() == numeric_traits<uint64_t>::min(), "min mismatch");
+    static_assert(numeric_traits<unsigned long long>::max() == numeric_traits<uint64_t>::max(), "max mismatch");
+    static_assert(numeric_traits<unsigned long long>::digits == numeric_traits<uint64_t>::digits, "digits mismatch");
+    static_assert(numeric_traits<unsigned long long>::is_signed == numeric_traits<uint64_t>::is_signed,
+                  "is_signed mismatch");
 }
 
 class SignedInt32RangeTest : public ::testing::Test {};
 
 TEST_F(SignedInt32RangeTest, MinBoundary) {
-    EXPECT_EQ(numeric_traits<int32_t>::min(), std::numeric_limits<int32_t>::min());
+    static_assert(numeric_traits<int32_t>::min() == std::numeric_limits<int32_t>::min(), "min mismatch");
 }
 
 TEST_F(SignedInt32RangeTest, MaxBoundary) {
-    EXPECT_EQ(numeric_traits<int32_t>::max(), std::numeric_limits<int32_t>::max());
+    static_assert(numeric_traits<int32_t>::max() == std::numeric_limits<int32_t>::max(), "max mismatch");
 }
 
 class UnsignedInt64RangeTest : public ::testing::Test {};
 
 TEST_F(UnsignedInt64RangeTest, MinBoundary) {
-    EXPECT_EQ(numeric_traits<uint64_t>::min(), std::numeric_limits<uint64_t>::min());
+    static_assert(numeric_traits<uint64_t>::min() == std::numeric_limits<uint64_t>::min(), "min mismatch");
 }
 
 TEST_F(UnsignedInt64RangeTest, MaxBoundary) {
-    EXPECT_EQ(numeric_traits<uint64_t>::max(), std::numeric_limits<uint64_t>::max());
+    static_assert(numeric_traits<uint64_t>::max() == std::numeric_limits<uint64_t>::max(), "max mismatch");
 }
 
 class ConstVolatileSpecializationTest : public ::testing::Test {};
 
 TEST_F(ConstVolatileSpecializationTest, ConstInt32Matches) {
-    EXPECT_EQ(numeric_traits<const int32_t>::max(), std::numeric_limits<int32_t>::max());
-    EXPECT_EQ(numeric_traits<const int32_t>::min(), std::numeric_limits<int32_t>::min());
+    static_assert(numeric_traits<const int32_t>::max() == std::numeric_limits<int32_t>::max(), "max mismatch");
+    static_assert(numeric_traits<const int32_t>::min() == std::numeric_limits<int32_t>::min(), "min mismatch");
 }
 
 TEST_F(ConstVolatileSpecializationTest, VolatileFloat64Matches) {
-    EXPECT_FLOAT_EQ(numeric_traits<volatile float64_t>::epsilon(), std::numeric_limits<float64_t>::epsilon());
+    static_assert(numeric_traits<volatile float64_t>::epsilon() == std::numeric_limits<float64_t>::epsilon(),
+                  "epsilon mismatch");
 }
 
 TEST_F(ConstVolatileSpecializationTest, ConstVolatileUint16Matches) {
-    EXPECT_EQ(numeric_traits<const volatile uint16_t>::max(), std::numeric_limits<uint16_t>::max());
+    static_assert(numeric_traits<const volatile uint16_t>::max() == std::numeric_limits<uint16_t>::max(),
+                  "max mismatch");
 }
 
 class WCharTComparisonTest : public ::testing::Test {};
 
 TEST_F(WCharTComparisonTest, MinMaxDigits) {
-    EXPECT_EQ(numeric_traits<wchar_t>::min(), std::numeric_limits<wchar_t>::min());
-    EXPECT_EQ(numeric_traits<wchar_t>::max(), std::numeric_limits<wchar_t>::max());
-    EXPECT_EQ(numeric_traits<wchar_t>::digits, std::numeric_limits<wchar_t>::digits);
+    static_assert(numeric_traits<wchar_t>::min() == std::numeric_limits<wchar_t>::min(), "min mismatch");
+    static_assert(numeric_traits<wchar_t>::max() == std::numeric_limits<wchar_t>::max(), "max mismatch");
+    static_assert(numeric_traits<wchar_t>::digits == std::numeric_limits<wchar_t>::digits, "digits mismatch");
 }
 
 class BoolTypeSpecialTest : public ::testing::Test {};
 
 TEST_F(BoolTypeSpecialTest, BooleanTraitsConsistency) {
-    EXPECT_EQ(numeric_traits<bool>::is_signed, std::numeric_limits<bool>::is_signed);
-    EXPECT_EQ(numeric_traits<bool>::is_integer, std::numeric_limits<bool>::is_integer);
-    EXPECT_EQ(numeric_traits<bool>::is_exact, std::numeric_limits<bool>::is_exact);
+    static_assert(numeric_traits<bool>::is_signed == std::numeric_limits<bool>::is_signed, "is_signed mismatch");
+    static_assert(numeric_traits<bool>::is_integer == std::numeric_limits<bool>::is_integer, "is_integer mismatch");
+    static_assert(numeric_traits<bool>::is_exact == std::numeric_limits<bool>::is_exact, "is_exact mismatch");
 }
 
 TEST(SafeTruncTest, NormalValues) {

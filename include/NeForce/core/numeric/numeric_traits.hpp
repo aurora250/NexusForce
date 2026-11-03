@@ -460,7 +460,7 @@ class numeric_traits<unsigned long> : public numeric_traits<uint32_t> {};
 template <>
 class numeric_traits<char>;
 
-#if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_LOONGARCH)
+#if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_LOONGARCH) || defined(NEFORCE_PLATFORM_WINDOWS)
 template <>
 class numeric_traits<char> : public numeric_traits<int8_t> {};
 #else
@@ -549,14 +549,14 @@ public:
 #ifdef NEFORCE_COMPILER_GCC
         return __builtin_nanf("");
 #else
-        return __builtin_nan("0");
+        return __builtin_nanf("0");
 #endif
     }
     NEFORCE_NODISCARD static constexpr float32_t signaling_nan() noexcept {
 #ifdef NEFORCE_COMPILER_GCC
         return __builtin_nansf("");
 #else
-        return __builtin_nans("1");
+        return __builtin_nansf("1");
 #endif
     }
 
@@ -613,7 +613,7 @@ public:
     static constexpr int min_exponent10 = -307;
 };
 
-#ifdef NEFORCE_COMPILER_GNUC
+#if defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_PLATFORM_MACOS)
 /**
  * @brief 扩展精度浮点数类型的数值特征特化
  * @note MSVC的long double等同于double；GNUC则使用更大的数值范围特征。
