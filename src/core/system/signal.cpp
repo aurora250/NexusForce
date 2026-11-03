@@ -734,9 +734,19 @@ bool system_signal::send_native(const int process_id, const int native_signal) n
 #endif
 }
 
-void system_signal::set_chain_existing_handlers(const bool enabled) noexcept { g_chain_enabled = enabled ? 1 : 0; }
+void system_signal::set_chain_existing_handlers(const bool enabled) noexcept {
+#ifndef NEFORCE_PLATFORM_WINDOWS
+    g_chain_enabled = enabled ? 1 : 0;
+#endif
+}
 
-bool system_signal::chain_existing_handlers() noexcept { return g_chain_enabled != 0; }
+bool system_signal::chain_existing_handlers() noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    return false;
+#else
+    return g_chain_enabled != 0;
+#endif
+}
 
 bool system_signal::can_send(const signal sig) noexcept { return signal_number(sig) > 0; }
 

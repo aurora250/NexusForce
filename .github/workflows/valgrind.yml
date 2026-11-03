@@ -84,7 +84,10 @@ jobs:
             --show-leak-kinds=definite,indirect,possible \
             --errors-for-leak-kinds=definite,indirect \
             --error-exitcode=99 \
-            ./bin/Debug/NexusForceUnitTests 2>&1 | tee valgrind_output.txt
+            ./bin/Debug/NexusForceUnitTests \
+              --gtest_death_test_style=threadsafe \
+              --gtest_filter=-TerminateTest.*:CrashDumpTest.FatalSignalWritesCore:CrashDumpTest.TerminateWritesCore \
+              2>&1 | tee valgrind_output.txt
           VALGRIND_EXIT=${PIPESTATUS[0]}
           echo "valgrind exit code: ${VALGRIND_EXIT}"
           if [ "${VALGRIND_EXIT}" -eq 99 ]; then

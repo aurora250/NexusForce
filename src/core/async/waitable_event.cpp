@@ -136,11 +136,9 @@ bool waitable_event::is_set() const noexcept {
     if (impl_ == nullptr) {
         return false;
     }
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    return ::WaitForSingleObject(impl_->handle_, 0) == WAIT_OBJECT_0;
-#else
+    // WaitForSingleObject(0) would consume the signal of an auto-reset event,
+    // so both platforms report the tracked state instead (set/reset/wait/try_wait keep it exact).
     return signaled_.load(memory_order_acquire);
-#endif
 }
 
 void* waitable_event::native_handle() const noexcept {

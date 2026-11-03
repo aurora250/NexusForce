@@ -544,7 +544,7 @@ size_t io_context::run() {
             }
         }
 
-        if (!has_outstanding_work()) {
+        if (!has_pending_work()) {
             break;
         }
 

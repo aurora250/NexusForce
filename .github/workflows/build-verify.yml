@@ -211,10 +211,12 @@ jobs:
         shell: bash
         run: pip install ninja
 
-      - name: Install Ninja (macOS)
+      - name: Install system dependencies (macOS)
         if: runner.os == 'macOS'
         shell: bash
-        run: brew install ninja
+        run: |
+          # vcpkg ports built with configure (e.g. libpq) need autoconf from the host.
+          brew install ninja autoconf automake libtool pkg-config
 
       - name: CMake configure
         shell: bash
@@ -604,7 +606,7 @@ jobs:
         if: steps.vm-cache.outputs.cache-hit != 'true'
         run: |
           set -euo pipefail
-          scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" provision \
+          bash scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" provision \
             "$VM_DIR" "$VM_DIR/id_ed25519" 2222
 
       - name: Save FreeBSD QEMU VM image and configuration
@@ -677,9 +679,9 @@ jobs:
       - name: Boot FreeBSD QEMU VM
         run: |
           set -euo pipefail
-          scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" boot \
+          bash scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" boot \
             "$VM_DIR" "$VM_DIR/id_ed25519" 2222
-          scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" wait \
+          bash scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" wait \
             "$VM_DIR" "$VM_DIR/id_ed25519" 2222 tester
 
       - name: Copy FreeBSD test binaries into the VM
@@ -707,7 +709,7 @@ jobs:
             "cd /tmp/nf && LD_LIBRARY_PATH=/tmp/nf/lib timeout 3600 ./bin/NexusForceUnitTests --gtest_color=no --gtest_output=xml:/tmp/nf/results.xml"
           status=$?
           "${SCP[@]}" tester@127.0.0.1:/tmp/nf/results.xml "freebsd-${{ matrix.arch }}-test-results.xml" || true
-          scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" poweroff \
+          bash scripts/ci/freebsd-qemu.sh "${{ matrix.arch }}" poweroff \
             "$VM_DIR" "$VM_DIR/id_ed25519" 2222 || true
           cp "$VM_DIR/serial.log" "freebsd-${{ matrix.arch }}-serial.log" 2>/dev/null || true
           exit $status
