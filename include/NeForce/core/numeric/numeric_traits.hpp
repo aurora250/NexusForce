@@ -95,8 +95,8 @@ struct numeric_int_base : numeric_base {
     static constexpr bool is_integer = true;     ///< 是整数类型
     static constexpr bool is_specialized = true; ///< 是特化版本
     static constexpr int radix = 2;              ///< 整数类型的基数为2
-#if defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_PLATFORM_MACOS) || \
-        (defined(NEFORCE_PLATFORM_FREEBSD) && defined(NEFORCE_ARCH_X86))
+#if (defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_PLATFORM_BSD_LIKE)) || \
+        (defined(NEFORCE_PLATFORM_BSD_LIKE) && defined(NEFORCE_ARCH_X86))
     static constexpr bool traps = true; ///< 整数异常陷阱（x86 libc++）
 #endif
 };
@@ -460,7 +460,7 @@ class numeric_traits<unsigned long> : public numeric_traits<uint32_t> {};
 template <>
 class numeric_traits<char>;
 
-#if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_LOONGARCH) || defined(NEFORCE_PLATFORM_WINDOWS)
+#if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_LOONGARCH) || defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_MACOS)
 template <>
 class numeric_traits<char> : public numeric_traits<int8_t> {};
 #else
@@ -499,7 +499,7 @@ class numeric_traits<wchar_t>;
 template <>
 class numeric_traits<wchar_t> : public numeric_traits<uint16_t> {};
 #elif defined(NEFORCE_PLATFORM_POSIX)
-#    ifdef NEFORCE_ARCH_ARM
+#    if defined(NEFORCE_ARCH_ARM) && !defined(NEFORCE_PLATFORM_MACOS)
 template <>
 class numeric_traits<wchar_t> : public numeric_traits<uint32_t> {};
 #    else
@@ -613,7 +613,7 @@ public:
     static constexpr int min_exponent10 = -307;
 };
 
-#if defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_PLATFORM_MACOS)
+#if (defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_PLATFORM_BSD_LIKE)) || defined(NEFORCE_PLATFORM_FREEBSD) || (defined(NEFORCE_PLATFORM_MACOS) && defined(NEFORCE_ARCH_X86))
 /**
  * @brief 扩展精度浮点数类型的数值特征特化
  * @note MSVC的long double等同于double；GNUC则使用更大的数值范围特征。
@@ -625,10 +625,18 @@ public:
         return 3.36210314311209350626267781732175260e-4932L;
     }
     NEFORCE_NODISCARD static constexpr decimal_t max_posi() noexcept {
+#    if (defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_LINUX)) && !defined(NEFORCE_ARCH_X86)
+        return 1.18973149535723176508575932662800702e+4932L;
+#    else
         return 1.18973149535723176502126385303097021e+4932L;
+#    endif
     }
     NEFORCE_NODISCARD static constexpr decimal_t min_nega() noexcept {
+#    if (defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_LINUX)) && !defined(NEFORCE_ARCH_X86)
+        return -1.18973149535723176508575932662800702e+4932L;
+#    else
         return -1.18973149535723176502126385303097021e+4932L;
+#    endif
     }
     NEFORCE_NODISCARD static constexpr decimal_t max_nega() noexcept {
         return -3.36210314311209350626267781732175260e-4932L;
@@ -646,7 +654,13 @@ public:
 #    endif
     }
     NEFORCE_NODISCARD static constexpr decimal_t round_error() noexcept { return 0.5L; }
-    NEFORCE_NODISCARD static constexpr decimal_t denorm_min() noexcept { return 3.64519953188247460253e-4951L; }
+    NEFORCE_NODISCARD static constexpr decimal_t denorm_min() noexcept {
+#    if ((defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_LINUX)) && !defined(NEFORCE_ARCH_X86))
+        return 6.47517511943802511092443895822764655e-4966L;
+#    else
+        return 3.64519953188247460253e-4951L;
+#    endif
+    }
 
     NEFORCE_NODISCARD static constexpr decimal_t infinity() noexcept { return __builtin_huge_vall(); }
     NEFORCE_NODISCARD static constexpr decimal_t quiet_nan() noexcept { return __builtin_nanl(""); }

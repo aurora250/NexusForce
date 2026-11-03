@@ -81,12 +81,12 @@ Every supported combination is **64-bit** and supports **C++14 / 17 / 20**.
 | 10 | Linux   | GCC      | ARM64        | `aarch64-unknown-linux-gnu`     | Tier 1       |
 | 11 | Linux   | GCC      | RISC-V       | `riscv64-unknown-linux-gnu`     | Tier 1       |
 | 12 | Linux   | GCC      | LoongArch    | `loongarch64-unknown-linux-gnu` | Tier 1       |
-| 19 | macOS   | Clang    | ARM64        | `arm64-apple-darwin25.5`        | Tier 1       |
-| 20 | macOS   | Clang    | x86_64       | `x86_64-apple-darwin25.5`       | Tier 2       |
-| 13 | FreeBSD | Clang    | x86_64       | `x86_64-unknown-freebsd`        | Tier 2       |
-| 14 | FreeBSD | Clang    | ARM64        | `aarch64-unknown-freebsd`       | Tier 2       |
-| 16 | FreeBSD | GCC      | x86_64       | `x86_64-unknown-freebsd`        | Tier 2       |
-| 17 | FreeBSD | GCC      | ARM64        | `aarch64-unknown-freebsd`       | Tier 2       |
+| 13 | macOS   | Clang    | ARM64        | `arm64-apple-darwin25.5`        | Tier 1       |
+| 14 | macOS   | Clang    | x86_64       | `x86_64-apple-darwin25.5`       | Tier 2       |
+| 15 | FreeBSD | Clang    | x86_64       | `x86_64-unknown-freebsd`        | Tier 2       |
+| 16 | FreeBSD | Clang    | ARM64        | `aarch64-unknown-freebsd`       | Tier 2       |
+| 17 | FreeBSD | GCC      | x86_64       | `x86_64-unknown-freebsd`        | Tier 2       |
+| 18 | FreeBSD | GCC      | ARM64        | `aarch64-unknown-freebsd`       | Tier 2       |
 
 > ¹ Clang on Windows means **ClangCL**.
 > 
