@@ -129,7 +129,7 @@ qemu_command() {
     "$qemu" "${args[@]}" \
         -drive "file=$vm_dir/disk.qcow2,if=virtio,cache=unsafe" \
         -drive "file=$vm_dir/seed.iso,media=cdrom,readonly=on" \
-        -netdev "$net" -device virtio-net-pci,netdev=n0 \
+        -netdev "$net" -device virtio-net-pci,netdev=n0,romfile= \
         -display none -serial "file:$vm_dir/serial.log" -daemonize
 }
 

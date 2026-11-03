@@ -32,7 +32,13 @@ set(CMAKE_SYSTEM_NAME FreeBSD)
 set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 set(CMAKE_SYSTEM_PROCESSOR x86_64)
 
-set(FREEBSD_SYSROOT "/opt/freebsd/sysroot" CACHE PATH "FreeBSD sysroot created from base.txz")
+# vcpkg's compiler probe re-invokes CMake without the caller's -D flags; fall back to
+# the exported FREEBSD_SYSROOT so the sysroot is also found in those nested builds.
+if(NOT DEFINED FREEBSD_SYSROOT AND DEFINED ENV{FREEBSD_SYSROOT})
+    set(FREEBSD_SYSROOT "$ENV{FREEBSD_SYSROOT}" CACHE PATH "FreeBSD sysroot created from base.txz")
+else()
+    set(FREEBSD_SYSROOT "/opt/freebsd/sysroot" CACHE PATH "FreeBSD sysroot created from base.txz")
+endif()
 set(FREEBSD_TARGET_VERSION "14.4" CACHE STRING "FreeBSD release used for the clang target triple")
 
 if(NOT EXISTS "${FREEBSD_SYSROOT}/usr/include/stdio.h")

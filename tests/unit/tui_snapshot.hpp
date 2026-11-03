@@ -38,10 +38,22 @@ namespace tui_snapshot {
     }
 
     inline neforce::string normalize(neforce::string text) {
-        while (!text.empty() && (text.back() == '\n' || text.back() == '\r')) {
-            text.pop_back();
+        neforce::string unified;
+        unified.reserve(text.size());
+        for (size_t i = 0; i < text.size(); ++i) {
+            if (text[i] == '\r') {
+                if (i + 1 < text.size() && text[i + 1] == '\n') {
+                    continue;
+                }
+                unified.push_back('\n');
+                continue;
+            }
+            unified.push_back(text[i]);
         }
-        return text;
+        while (!unified.empty() && unified.back() == '\n') {
+            unified.pop_back();
+        }
+        return unified;
     }
 
     inline ::testing::AssertionResult check(const neforce::string& name, const neforce::string& actual_raw) {

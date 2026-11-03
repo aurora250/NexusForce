@@ -6141,8 +6141,8 @@ TEST_F(SysinfoTest, HardwareInfo_DmiFields_AreConsistent) {
         EXPECT_FALSE(hardware.bios.version.empty());
         EXPECT_FALSE(hardware.bios.date.empty());
     }
-    if (!hardware.board.vendor.empty()) {
-        EXPECT_FALSE(hardware.board.model.empty());
+    if (!hardware.board.model.empty()) {
+        EXPECT_FALSE(hardware.board.vendor.empty());
     }
 }
 

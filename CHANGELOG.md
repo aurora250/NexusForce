@@ -378,6 +378,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `pipe` 默认构造函数用圆括号初始化 C 数组成员，AppleClang 报 `array initializer must be an initializer list`；改用花括号初始化
+- 修复 `file_watcher` Windows 后端停止监视时内核仍可能引用已退栈的 `OVERLAPPED`：取消与完成回收改由监视线程自身完成，`stop()` 只负责唤醒
 - 修复 TUI 空闲帧仍向终端写入 `?25l`、`0m` 与 DEC 2026 同步输出包裹的问题：`screen::to_string()` 在内容和光标都未变化时返回空串，`reconciler` 不再为空差量生成同步标记；无动画应用可用 `with_fps(0)` 完全事件驱动
 - 修复 `application` 在 `with_fps(0)` 时终端尺寸变化只标脏不刷新：`schedule_resize_check()` 检测到 resized 后立即 flush
 - 修复 `vector` 默认构造立即分配 1 个元素的问题：空向量不再持有未初始化缓冲区，首次插入时才分配，降低小对象池的分配抖动

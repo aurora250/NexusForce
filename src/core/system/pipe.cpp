@@ -38,7 +38,7 @@ namespace {
 
 
 pipe::pipe() noexcept :
-handles_(g_invalid_handle, g_invalid_handle) {}
+handles_{g_invalid_handle, g_invalid_handle} {}
 
 pipe::pipe(const bool inheritable, const bool nonblocking) {
 #ifdef NEFORCE_PLATFORM_WINDOWS

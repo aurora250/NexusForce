@@ -266,11 +266,11 @@ void file_watcher::impl::stop() {
     stopping_.store(true);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    // The watcher thread cancels its own pending ReadDirectoryChangesW and reaps the completion before returning,
+    // so the OVERLAPPED is never freed while the kernel still references it.
+    // Here it is enough to wake the thread.
     if (completion_port_ != INVALID_HANDLE_VALUE) {
         ::PostQueuedCompletionStatus(completion_port_, 0, 0, nullptr);
-    }
-    if (dir_handle_ != INVALID_HANDLE_VALUE) {
-        ::CancelIoEx(dir_handle_, nullptr);
     }
 #elif defined(NEFORCE_PLATFORM_LINUX)
     if (event_fd_ != -1) {
@@ -505,6 +505,22 @@ void file_watcher::impl::watch_thread_func() {
                                              recursive_ ? TRUE : FALSE, notify_filter, &bytes_returned,
                                              &local_overlapped, nullptr);
             if (result == FALSE) {
+                break;
+            }
+        }
+    }
+
+    // Cancellation is asynchronous:
+    // reap the completion of the pending read before the stack OVERLAPPED and its event are released,
+    // otherwise the kernel may still write through them after this thread returns.
+    if (::CancelIoEx(dir_handle_, &local_overlapped) != FALSE) {
+        for (;;) {
+            ::DWORD drain_bytes = 0;
+            ::ULONG_PTR drain_key = 0;
+            ::LPOVERLAPPED drain_overlapped = nullptr;
+            const ::BOOL drained =
+                    ::GetQueuedCompletionStatus(completion_port_, &drain_bytes, &drain_key, &drain_overlapped, 1000);
+            if (drain_overlapped == &local_overlapped || drained == FALSE) {
                 break;
             }
         }
