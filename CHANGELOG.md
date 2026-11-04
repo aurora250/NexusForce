@@ -206,7 +206,6 @@
 - `tui::chart` 饼图/环形图改为 2x2 子单元象限抗锯齿，边沿支持双 slice 前背景色
 - `band` 在未显式设置 `bg` 时保持透明，不再默认填充 `theme.bg`
 - `code_block` 支持继承 `code_style.bg`，不再固定 `#1a1a1e`
-- `channel<T>` 数据面改用 `lock_free_queue`（MPMC），无缓冲模式保留同步握手；容量边界仍由条件变量等待
 - `http_client` 默认开启连接复用：连续请求不再重复握手，响应带 `Connection: close` 时仍会主动断开
 - `http_client` 的 `HEAD`、`204`、`304` 与 1xx 响应不再尝试读取正文，避免复用连接被后续请求阻塞
 - 重定向跟随会带上目标 scheme：`http -> https` 跳转不再被当作明文 HTTP 重放
@@ -379,6 +378,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `channel` 在内存池关闭（pool-off）时多生产者/多消费者测试触发堆损坏：通道本已由 `control_mutex_` 串行化，内部改用互斥保护的 `deque` 存储，移除不必要的无锁队列路径
+- 修复 `future` 完成与 `co_await` 挂起之间的恢复竞态：完成侧等待 `await_suspend` 确认挂起后再恢复协程，避免在挂起准备完成前恢复同一协程帧
 - 修复空 `CMAKE_BUILD_TYPE` 时 Debug death tests 被编译、但 `NEFORCE_STATE_DEBUG` 未启用导致 `failed to die` 的问题；单配置生成器在未指定构建类型时默认 `Release`
 - 修复 `pipe` 默认构造函数用圆括号初始化 C 数组成员，AppleClang 报 `array initializer must be an initializer list`；改用花括号初始化
 - 修复 `file_watcher` Windows 后端停止监视时内核仍可能引用已退栈的 `OVERLAPPED`：取消与完成回收改由监视线程自身完成，`stop()` 只负责唤醒
@@ -413,7 +414,6 @@
 - 修复 `http_response` 重定向状态行不一致：非 3xx 状态码配合 `redirect_url` 时固定输出 `302 Found`，不再出现 `302 OK` 之类的状态码与原因短语错配
 - 修复重复调用 `crash_dump::install_handlers()` 后 `uninstall_handlers()` 无法恢复原始信号动作：第二次安装把自身处理器当作"先前动作"保存，卸载后处理器仍驻留，后续崩溃会以默认发布状态把 `nexusforce-<UTC时间>-<pid>.core` 写到进程工作目录；现仅在首次安装时保存 `sigaction`，新增"安装两次再卸载后子进程必须按默认动作被信号终止"的回归测试
 - 修复 RISC-V Release 下图表 y 轴只剩 `0`：GCC 13 把该路径的 `power(10.0, n)` 错误内联（`base` 未初始化），`chart_nice_step()` 得到错误步长，`k` / `M` / `G` 紧凑标签失效；现改为在 `chart_nice_step()` 内用乘法循环生成 10 的幂
-- 修复 `channel<T>` 的阻塞读写偶发永久阻塞：入队/出队与 `size_`、`closed_` 的变更以及对应的唤醒不在同一把锁内完成，等待线程在"谓词已判定为假、尚未进入条件变量等待"的窗口内会漏掉唤醒，此后写者填满缓冲、读者空转等待，双方互锁；现由 `control_mutex_` 统一保护状态变更与通知
 - 修复 `virtual_thread` 关闭后无法重新启动：`shutdown()` 置位的关闭标志不再复位、已结束的工作线程句柄也未清理，再次 `initialize()` 时新工作线程一进入循环就退出，此后任何挂起的协程都不会被恢复；现由 `start_workers()` 复位关闭标志、`shutdown()` 清理线程句柄
 - 修复 `simd::memory_compare` 在 AVX2 路径上长度 ≥ 128 字节时把不同内存判为相等：四路比较结果用按位或合并，任意一路相等就会掩盖其余三路的差异，改为按位与；字符串比较、原子比较与差量扫描都受影响
 - 修复 `screen::to_string()` 把单元格字符与"终端样式状态"一起比较，导致差量恒判为样式不一致：内容未变化的帧也会全屏重绘并写出全部单元格；现只比较样式字段

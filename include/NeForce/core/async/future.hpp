@@ -8,6 +8,7 @@
  * 此文件提供了future的实现作为异步结果的消费者。
  */
 
+#include "NeForce/core/async/this_thread.hpp"
 #include "NeForce/core/async/thread_exit_register.hpp"
 #include "NeForce/core/async/atomic_futex.hpp"
 #ifdef NEFORCE_STANDARD_20
@@ -340,6 +341,7 @@ struct __future_base {
         once_flag flag;                           ///< 一次性标志，用于确保只设置一次结果
 #ifdef NEFORCE_STANDARD_20
         atomic<void*> continuation_{nullptr}; ///< 等待中的协程恢复入口
+        atomic<bool> suspended_{false};       ///< 等待协程是否已确认挂起
 #endif
 
         /**
@@ -349,6 +351,9 @@ struct __future_base {
             status.store_notify_all(status::ready, memory_order_release);
 #ifdef NEFORCE_STANDARD_20
             if (void* handle = take_continuation()) {
+                while (!suspended_.load(memory_order_acquire)) {
+                    this_thread::yield();
+                }
                 coroutine_handle<>::from_address(handle).resume();
             }
 #endif
@@ -383,6 +388,11 @@ struct __future_base {
         void set_continuation(void* handle) noexcept { continuation_.store(handle, memory_order_seq_cst); }
 
         /**
+         * @brief 标记等待协程已经完成挂起准备
+         */
+        void mark_suspended() noexcept { suspended_.store(true, memory_order_release); }
+
+        /**
          * @brief 取走并清空协程恢复入口
          */
         NEFORCE_NODISCARD void* take_continuation() noexcept {
@@ -390,6 +400,7 @@ struct __future_base {
         }
 #else
         void set_continuation(void* /*handle*/) noexcept {}
+        void mark_suspended() noexcept {}
         NEFORCE_NODISCARD void* take_continuation() noexcept { return nullptr; }
 #endif
 
@@ -860,9 +871,11 @@ protected:
             }
             state_->set_continuation(handle.address());
             if (state_->is_ready()) {
-                static_cast<void>(state_->take_continuation());
-                return false;
+                if (state_->take_continuation() != nullptr) {
+                    return false;
+                }
             }
+            state_->mark_suspended();
             return true;
         }
 

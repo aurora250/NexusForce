@@ -301,9 +301,25 @@ jobs:
           for triplet in riscv64 loongarch64; do
             TRIPLET_FILE="$VCPKG_ROOT/triplets/community/${triplet}-linux.cmake"
             if [ ! -f "$TRIPLET_FILE" ]; then
-              printf 'set(VCPKG_TARGET_ARCHITECTURE %s)\nset(VCPKG_CRT_LINKAGE dynamic)\nset(VCPKG_LIBRARY_LINKAGE static)\nset(VCPKG_CMAKE_SYSTEM_NAME Linux)\n' "$triplet" | sudo tee "$TRIPLET_FILE" > /dev/null
+              # libmysql auto-selects lld when available; lld rejects GCC's exception
+              # tables on LoongArch, so keep that port on GNU ld.
+              {
+                printf 'set(VCPKG_TARGET_ARCHITECTURE %s)\n' "$triplet"
+                printf 'set(VCPKG_CRT_LINKAGE dynamic)\n'
+                printf 'set(VCPKG_LIBRARY_LINKAGE static)\n'
+                printf 'set(VCPKG_CMAKE_SYSTEM_NAME Linux)\n'
+                printf 'set(VCPKG_CMAKE_CONFIGURE_OPTIONS "-DUSE_LD_LLD=OFF")\n'
+                printf 'set(VCPKG_LINKER_FLAGS "-fuse-ld=bfd")\n'
+              } | sudo tee "$TRIPLET_FILE" > /dev/null
             fi
           done
+          LOONG_TRIPLET="$VCPKG_ROOT/triplets/community/loongarch64-linux.cmake"
+          if ! grep -q 'VCPKG_CMAKE_CONFIGURE_OPTIONS' "$LOONG_TRIPLET"; then
+            printf 'set(VCPKG_CMAKE_CONFIGURE_OPTIONS "-DUSE_LD_LLD=OFF")\n' | sudo tee -a "$LOONG_TRIPLET" > /dev/null
+          fi
+          if ! grep -q 'VCPKG_LINKER_FLAGS' "$LOONG_TRIPLET"; then
+            printf 'set(VCPKG_LINKER_FLAGS "-fuse-ld=bfd")\n' | sudo tee -a "$LOONG_TRIPLET" > /dev/null
+          fi
 
       - name: Install Ninja (Windows)
         if: runner.os == 'Windows'
@@ -642,7 +658,7 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends \
-            cmake ninja-build clang-19 lld-19 rsync xz-utils pkg-config \
+            cmake ninja-build clang-19 lld-19 rsync xz-utils pkg-config libtirpc-dev \
             cloud-image-utils openssh-client qemu-utils \
             ${{ matrix.qemu_packages }}
           sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 100

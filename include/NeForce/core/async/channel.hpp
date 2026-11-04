@@ -11,7 +11,7 @@
 
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/condition_variable.hpp"
-#include "NeForce/core/async/lock_free_queue.hpp"
+#include "NeForce/core/container/deque.hpp"
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -40,7 +40,7 @@ template <typename T>
 class channel {
 private:
     size_t capacity_;
-    lock_free_queue<T> queue_;
+    deque<T> queue_;
     atomic<size_t> size_{0};
     atomic<bool> closed_{false};
     optional<T> handoff_;
@@ -48,22 +48,19 @@ private:
     condition_variable not_empty_;
     condition_variable not_full_;
 
-    NEFORCE_NODISCARD bool push_locked(T value) noexcept(is_nothrow_move_constructible_v<T>) {
-        if (!queue_.enqueue(_NEFORCE move(value))) {
-            return false;
-        }
+    NEFORCE_NODISCARD bool push_locked(T value) {
+        queue_.push_back(_NEFORCE move(value));
         size_.fetch_add(1, memory_order_relaxed);
         not_empty_.notify_one();
         return true;
     }
 
     NEFORCE_NODISCARD bool pop_locked(T& out) {
-        if (size_.load(memory_order_relaxed) == 0) {
+        if (queue_.empty()) {
             return false;
         }
-        if (!queue_.try_dequeue(out)) {
-            return false;
-        }
+        out = _NEFORCE move(queue_.front());
+        queue_.pop_front();
         size_.fetch_sub(1, memory_order_relaxed);
         not_full_.notify_one();
         return true;
@@ -75,8 +72,7 @@ public:
      * @param capacity 通道容量，0 表示无缓冲，capacity_max 表示无上限
      */
     explicit channel(size_t capacity = capacity_max) :
-    capacity_(capacity),
-    queue_(capacity == capacity_max ? 1024 : (capacity == 0 ? 32 : capacity)) {}
+    capacity_(capacity) {}
 
     channel(const channel&) = delete;
     channel& operator=(const channel&) = delete;

@@ -426,7 +426,7 @@ TEST(FutureAwait, ValueFromOtherThread) {
     auto runner = body();
     auto done = runner.handle.promise().done.get_future();
     runner.handle.resume();
-    EXPECT_EQ(done.wait_for(500_ms), future_status::ready);
+    ASSERT_EQ(done.wait_for(500_ms), future_status::ready);
     done.get();
     runner.handle.destroy();
     setter.join();
@@ -443,7 +443,7 @@ TEST(FutureAwait, AlreadyReadyDoesNotSuspend) {
     auto runner = body();
     auto done = runner.handle.promise().done.get_future();
     runner.handle.resume();
-    EXPECT_EQ(done.wait_for(100_ms), future_status::ready);
+    ASSERT_EQ(done.wait_for(100_ms), future_status::ready);
     done.get();
     runner.handle.destroy();
     EXPECT_EQ(value, 7);
@@ -468,7 +468,7 @@ TEST(FutureAwait, PropagatesException) {
     auto runner = body();
     auto done = runner.handle.promise().done.get_future();
     runner.handle.resume();
-    EXPECT_EQ(done.wait_for(500_ms), future_status::ready);
+    ASSERT_EQ(done.wait_for(500_ms), future_status::ready);
     done.get();
     runner.handle.destroy();
     setter.join();
@@ -494,7 +494,7 @@ TEST(FutureAwait, VoidAndReference) {
     runner.handle.resume();
     ref_p.set_value(target);
     void_p.set_value();
-    EXPECT_EQ(done.wait_for(500_ms), future_status::ready);
+    ASSERT_EQ(done.wait_for(500_ms), future_status::ready);
     done.get();
     runner.handle.destroy();
     EXPECT_EQ(observed, 5);
@@ -1539,17 +1539,18 @@ TEST(ScopeThread, Swap) {
 }
 
 TEST(ScopeThread, Detach) {
-    atomic<bool> ran{false};
+    auto done = make_shared<promise<void>>();
+    auto finished = done->get_future();
     {
-        scope_thread st([&ran] {
+        scope_thread st([done] {
             this_thread::sleep_for(milliseconds(50));
-            ran.store(true);
+            done->set_value();
         });
         st.detach();
         EXPECT_FALSE(st.joinable());
     }
-    this_thread::sleep_for(milliseconds(100));
-    EXPECT_TRUE(ran.load());
+    ASSERT_EQ(finished.wait_for(5000_ms), future_status::ready);
+    finished.get();
 }
 
 TEST(ScopeThread, GetStopSource) {
@@ -1930,7 +1931,7 @@ TEST(ThreadPool, SubmitTaskAsTask) {
     auto runner = body();
     auto done = runner.handle.promise().done.get_future();
     runner.handle.resume();
-    EXPECT_EQ(done.wait_for(1000_ms), future_status::ready);
+    ASSERT_EQ(done.wait_for(1000_ms), future_status::ready);
     done.get();
     runner.handle.destroy();
     pool.stop();
@@ -1946,7 +1947,7 @@ TEST(ThreadPool, SubmitTaskTokenReturnsTask) {
     auto runner = body();
     auto done = runner.handle.promise().done.get_future();
     runner.handle.resume();
-    EXPECT_EQ(done.wait_for(1000_ms), future_status::ready);
+    ASSERT_EQ(done.wait_for(1000_ms), future_status::ready);
     done.get();
     pool.stop();
     runner.handle.destroy();
