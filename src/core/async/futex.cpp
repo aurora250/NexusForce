@@ -29,7 +29,8 @@
 #    include <sys/umtx.h>
 #endif
 #ifdef NEFORCE_PLATFORM_MACOS
-extern "C" int __ulock_wait(::uint32_t operation, void* addr, ::uint64_t value, ::uint32_t timeout_us);
+extern "C" int __ulock_wait2(::uint32_t operation, void* addr, ::uint64_t value, ::uint64_t timeout_ns,
+                             ::uint64_t value2);
 extern "C" int __ulock_wake(::uint32_t operation, void* addr, ::uint64_t wake_value);
 #    ifndef UL_COMPARE_AND_WAIT
 #        define UL_COMPARE_AND_WAIT 1
@@ -40,7 +41,7 @@ extern "C" int __ulock_wake(::uint32_t operation, void* addr, ::uint64_t wake_va
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-#if defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
+#if defined(NEFORCE_PLATFORM_MACOS)
 namespace {
     bool relative_timeout_ns(const bool is_monotonic, const int64_t sec, const int64_t ns, uint64_t& out) noexcept {
         ::timespec now{};
@@ -82,28 +83,23 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
         const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value), nullptr, nullptr);
         return ret == 0 || errno != ETIMEDOUT;
     }
-    uint64_t remaining = 0;
-    relative_timeout_ns(is_monotonic, sec, ns, remaining);
-    if (remaining == 0) {
-        remaining = 1;
-    }
-    ::timespec timeout{static_cast<::time_t>(remaining / 1000000000ULL), static_cast<long>(remaining % 1000000000ULL)};
+    ::_umtx_time timeout{};
+    timeout._timeout = ::timespec{static_cast<::time_t>(sec), static_cast<long>(ns)};
+    timeout._flags = UMTX_ABSTIME;
+    timeout._clockid = is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME;
     const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value),
                                reinterpret_cast<void*>(static_cast<uintptr_t>(sizeof(timeout))), &timeout);
     return ret == 0 || errno != ETIMEDOUT;
 
 #elif defined(NEFORCE_PLATFORM_MACOS)
-    uint32_t timeout_us = 0;
+    uint64_t timeout_ns = 0;
     if (has_timeout) {
-        uint64_t remaining = 0;
-        relative_timeout_ns(is_monotonic, sec, ns, remaining);
-        remaining /= 1000ULL;
-        if (remaining == 0) {
-            remaining = 1;
+        relative_timeout_ns(is_monotonic, sec, ns, timeout_ns);
+        if (timeout_ns == 0) {
+            timeout_ns = 1;
         }
-        timeout_us = static_cast<uint32_t>(min<uint64_t>(remaining, numeric_traits<uint32_t>::max()));
     }
-    const int ret = ::__ulock_wait(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), timeout_us);
+    const int ret = ::__ulock_wait2(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), timeout_ns, 0);
     return ret == 0 || errno != ETIMEDOUT;
 
 #else
@@ -146,7 +142,7 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
     }
 #elif defined(NEFORCE_PLATFORM_MACOS)
     for (;;) {
-        const int ret = ::__ulock_wait(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), 0);
+        const int ret = ::__ulock_wait2(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), 0, 0);
         if (ret == 0 || errno == EAGAIN) {
             return;
         }

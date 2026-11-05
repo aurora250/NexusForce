@@ -470,7 +470,7 @@ private:
     /**
      * @brief 取节点在全局链表中的后继
      * @param n 节点
-     * @return 后继节点
+     * @return 后继节点（去掉最低位标记）
      */
     NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE static link_type next_of(const link_type n) noexcept {
         return reinterpret_cast<link_type>(reinterpret_cast<uintptr_t>(n->next) & ~static_cast<uintptr_t>(1));
@@ -530,15 +530,16 @@ private:
     }
 
     /**
-     * @brief 把节点插入到指定桶链表尾部之后
-     * @param run_tail 该桶链表当前尾节点
+     * @brief 把节点插入到指定节点之后（同一桶链表内）
+     * @param anchor 插入位置的前一个节点
      * @param n 新节点
      */
-    void link_run_back(const link_type run_tail, const link_type n) noexcept {
-        link_type after = next_of(run_tail);
-        set_next(n, after, run_end(run_tail));
-        set_next(run_tail, n, false);
-        n->prev = run_tail;
+    void link_run_back(const link_type anchor, const link_type n) noexcept {
+        const bool anchor_end = run_end(anchor);
+        link_type after = next_of(anchor);
+        set_next(n, after, anchor_end);
+        n->prev = anchor;
+        set_next(anchor, n, false);
         if (after != nullptr) {
             after->prev = n;
         } else {
@@ -600,6 +601,7 @@ private:
     link_type new_node(Args&&... args) {
         link_type n = pair_.get_base().allocate();
         n->next = nullptr;
+        n->prev = nullptr;
         try {
             _NEFORCE construct(&n->data, _NEFORCE forward<Args>(args)...);
         } catch (...) {
@@ -652,22 +654,24 @@ private:
     pair<iterator, bool> insert_unique_noresize(link_type ptr) {
         const size_type n = hashtable::bucket_index_value(ptr->data, buckets_.size());
 
+        link_type last = nullptr;
         for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
             if (equals_(extracter_(cur->data), extracter_(ptr->data))) {
                 hashtable::delete_node(ptr);
                 return {iterator(cur, this), false};
             }
+            last = cur;
             if (hashtable::run_end(cur)) {
                 break;
             }
         }
 
-        if (buckets_[n] != nullptr) {
-            hashtable::link_run_front(buckets_[n], ptr);
+        if (last != nullptr) {
+            hashtable::link_run_back(last, ptr);
         } else {
             hashtable::link_new_run(ptr);
+            buckets_[n] = ptr;
         }
-        buckets_[n] = ptr;
         ++size_;
         return {iterator(ptr, this), true};
     }
@@ -681,10 +685,12 @@ private:
         const size_type n = hashtable::bucket_index_value(ptr->data, buckets_.size());
 
         link_type last_equal = nullptr;
+        link_type last = nullptr;
         for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
             if (equals_(extracter_(cur->data), extracter_(ptr->data))) {
                 last_equal = cur;
             }
+            last = cur;
             if (hashtable::run_end(cur)) {
                 break;
             }
@@ -692,9 +698,8 @@ private:
 
         if (last_equal != nullptr) {
             hashtable::link_run_back(last_equal, ptr);
-        } else if (buckets_[n] != nullptr) {
-            hashtable::link_run_front(buckets_[n], ptr);
-            buckets_[n] = ptr;
+        } else if (last != nullptr) {
+            hashtable::link_run_back(last, ptr);
         } else {
             hashtable::link_new_run(ptr);
             buckets_[n] = ptr;

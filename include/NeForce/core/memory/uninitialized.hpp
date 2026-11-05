@@ -226,7 +226,48 @@ NEFORCE_CONSTEXPR20 void uninitialized_fill(Iterator first, Iterator last, const
 NEFORCE_BEGIN_INNER__
 
 /**
- * @brief 未初始化填充n个元素辅助函数（平凡可复制类型版本）
+ * @brief 未初始化填充n个元素辅助函数（连续迭代器、平凡可复制类型版本）
+ * @tparam Iterator 迭代器类型
+ * @tparam T 值类型
+ * @param first 起始位置
+ * @param n 要填充的元素数量
+ * @param x 要填充的值
+ * @return 填充后的结束迭代器
+ *
+ * 填充值为重复字节模式时直接按字节填充，否则先构造首元素再按 2 的幂次批量复制。
+ */
+template <typename Iterator, typename T,
+          enable_if_t<is_ranges_cot_iter_v<Iterator> && is_trivially_copyable_v<iter_value_t<Iterator>>, int> = 0>
+NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, const T& x) {
+    using element_t = iter_value_t<Iterator>;
+    if (n == 0) {
+        return first;
+    }
+    auto* dest = _NEFORCE addressof(*first);
+    const auto* raw = reinterpret_cast<const byte_t*>(_NEFORCE addressof(x));
+    bool uniform = true;
+    for (size_t i = 1; i < sizeof(element_t); ++i) {
+        if (raw[i] != raw[0]) {
+            uniform = false;
+            break;
+        }
+    }
+    if (uniform) {
+        _NEFORCE memory_set(dest, raw[0], n * sizeof(element_t));
+        return first + n;
+    }
+    _NEFORCE construct(dest, x);
+    size_t filled = 1;
+    while (filled < n) {
+        const size_t chunk = (filled < n - filled) ? filled : (n - filled);
+        _NEFORCE memory_copy(dest + filled, dest, chunk * sizeof(element_t));
+        filled += chunk;
+    }
+    return first + n;
+}
+
+/**
+ * @brief 未初始化填充n个元素辅助函数（非连续迭代器、平凡可复制类型版本）
  * @tparam Iterator 迭代器类型
  * @tparam T 值类型
  * @param first 起始位置
@@ -234,7 +275,8 @@ NEFORCE_BEGIN_INNER__
  * @param x 要填充的值
  * @return 填充后的结束迭代器
  */
-template <typename Iterator, typename T, enable_if_t<is_trivially_copyable_v<iter_value_t<Iterator>>, int> = 0>
+template <typename Iterator, typename T,
+          enable_if_t<!is_ranges_cot_iter_v<Iterator> && is_trivially_copyable_v<iter_value_t<Iterator>>, int> = 0>
 NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n, const T& x) {
     Iterator cur = first;
     for (size_t i = 0; i != n; ++i, ++cur) {

@@ -165,6 +165,11 @@
 
 ### 🔧 Improvements
 
+- 内存池的大对象区域缓存改为按尺寸淘汰：缓存已满时用更大的区域替换更小的区域（仅当新区域不小于被替换区域的两倍），使 4 MiB 级别的缓冲在反复分配/释放时不再每次重新映射并重演全量缺页
+- `vector` 追加快路径与扩容路径分离：容量足够时只做「构造 + 指针自增」，扩容进入冷路径；`push_back` / `emplace_back` 的 `const&`、`&&` 重载直达快路径，转发模板仅用于多参数构造
+- `vector::insert`（单元素）对 trivially copyable 类型改为一次 `memory_move` 完成后半段搬移，非平凡类型仍走 `emplace`
+- `uninitialized_fill_n` 对连续迭代器 + trivially copyable 类型新增批量路径：填充值为重复字节模式时直接 `memory_set`，否则构造首元素后按 2 的幂次 `memory_copy`，`resize` / `assign(n, v)` / count-insert 不再逐元素 `placement new`
+- `vector::reserve` 拆分为内联快路径（容量足够直接返回）与 `reserve_slow` 冷路径
 - `hash` 的整数（含字符、枚举）特化与标准库对齐为恒等映射，链地址哈希表因而省去每次查找/插入的位混合开销；需要低位扩散的组件自行混合
 - `hashtable`（链地址）改为"桶内链表 + 全局插入序双向链表"共享同一后继指针：迭代由按桶序跳访节点改为沿插入序前进，遍历局部性显著改善，且 `erase(iterator)` 由遍历桶链表变为 O(1) 摘链
 - `flat_hashtable` 的 `probe_find` 命中路径延迟计算 EMPTY 掩码（命中首个候选槽即返回），省去一次向量比较与一次掩码提取
@@ -381,6 +386,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 FreeBSD/macOS futex 超时：FreeBSD 使用带 `UMTX_ABSTIME` 的 `_umtx_time` 绝对超时，macOS 使用 64 位纳秒相对超时的 `__ulock_wait2`，并避免等待错误直接 `terminate()`
+- 修复 macOS 测试作业安装全量默认 vcpkg features 导致 ICU 下载 504：按 macOS 配置只安装 openssl/pcre2/zlib/gtest
 - 修复 `memory_move` 在源与目标区间重叠时仍走 `memory_copy_large`（该路径按 32 字节对齐头部整块存储，会覆盖尚未读取的源数据）造成的**静默数据损坏**：仅当两段区间不重叠时才使用批量传送，重叠时回退到逐块加载/存储的 SIMD 循环
 - 修复 BSD-like futex 仅使用全局 `pthread_cond` 的问题：FreeBSD 使用 `_umtx_op`，macOS 使用 `__ulock_wait`/`__ulock_wake` 按地址等待唤醒；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
 - 修复 macOS `dynamic_library::list_symbols()` 对主可执行文件/共享缓存镜像的 Mach-O 边界处理：始终处理主镜像、按路径过滤其它镜像，并限制字符串表读取长度

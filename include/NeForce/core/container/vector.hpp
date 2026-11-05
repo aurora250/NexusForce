@@ -484,6 +484,63 @@ private:
         _NEFORCE swap(pair_.value, other.pair_.value);
     }
 
+    NEFORCE_CONSTEXPR20 void insert_one(const size_type index, const value_type& value, true_type /*unused*/) {
+        _NEFORCE memory_move(start_ + index + 1, start_ + index, (size() - index) * sizeof(value_type));
+        _NEFORCE construct(start_ + index, value);
+        ++finish_;
+    }
+
+    NEFORCE_CONSTEXPR20 void insert_one(const size_type index, value_type&& value, true_type /*unused*/) {
+        _NEFORCE memory_move(start_ + index + 1, start_ + index, (size() - index) * sizeof(value_type));
+        _NEFORCE construct(start_ + index, _NEFORCE move(value));
+        ++finish_;
+    }
+
+    NEFORCE_CONSTEXPR20 void insert_one(const size_type index, const value_type& value, false_type /*unused*/) {
+        vector::emplace(begin() + index, value);
+    }
+
+    NEFORCE_CONSTEXPR20 void insert_one(const size_type index, value_type&& value, false_type /*unused*/) {
+        vector::emplace(begin() + index, _NEFORCE move(value));
+    }
+
+    NEFORCE_NOINLINE NEFORCE_COLD NEFORCE_CONSTEXPR20 void insert_slow(iterator position, const value_type& value) {
+        vector::emplace(position, value);
+    }
+
+    NEFORCE_NOINLINE NEFORCE_COLD NEFORCE_CONSTEXPR20 void insert_slow(iterator position, value_type&& value) {
+        vector::emplace(position, _NEFORCE move(value));
+    }
+
+    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void reserve_slow(const size_type n) {
+        size_type new_capacity = _NEFORCE max(static_cast<size_type>(capacity() * 1.5), n);
+        pointer new_start = pair_.get_base().allocate(new_capacity);
+        pointer new_finish = new_start;
+
+        try {
+            new_finish = _NEFORCE uninitialized_move(start_, finish_, new_start);
+        } catch (...) {
+            _NEFORCE destroy(new_start, new_finish);
+            pair_.get_base().deallocate(new_start, new_capacity);
+            throw;
+        }
+
+        _NEFORCE destroy(start_, finish_);
+        deallocate();
+        start_ = new_start;
+        finish_ = new_finish;
+        pair_.value = start_ + new_capacity;
+    }
+
+    NEFORCE_NOINLINE NEFORCE_CONSTEXPR20 void emplace_back_slow(value_type value) {
+        vector::emplace(end(), _NEFORCE move(value));
+    }
+
+    template <typename... Args>
+    NEFORCE_NOINLINE NEFORCE_COLD NEFORCE_CONSTEXPR20 void emplace_back_slow(Args&&... args) {
+        vector::emplace(end(), _NEFORCE forward<Args>(args)...);
+    }
+
 public:
     /**
      * @brief 默认构造函数
@@ -955,27 +1012,9 @@ public:
      */
     NEFORCE_CONSTEXPR20 void reserve(const size_type n) {
         NEFORCE_DEBUG_VERIFY(n < max_size(), "vector reserve out of allocate bounds.");
-        if (capacity() >= n) {
-            return;
+        if (capacity() < n) {
+            vector::reserve_slow(n);
         }
-
-        size_type new_capacity = _NEFORCE max(static_cast<size_type>(capacity() * 1.5), n);
-        pointer new_start = pair_.get_base().allocate(new_capacity);
-        pointer new_finish = new_start;
-
-        try {
-            new_finish = _NEFORCE uninitialized_move(start_, finish_, new_start);
-        } catch (...) {
-            _NEFORCE destroy(new_start, new_finish);
-            pair_.get_base().deallocate(new_start, new_capacity);
-            throw;
-        }
-
-        _NEFORCE destroy(start_, finish_);
-        deallocate();
-        start_ = new_start;
-        finish_ = new_finish;
-        pair_.value = start_ + new_capacity;
     }
 
     /**
@@ -1046,18 +1085,36 @@ public:
         pair_.value = new_start + new_cap;
     }
 
+    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void emplace_back(const value_type& value) {
+        if (finish_ == pair_.value) {
+            vector::emplace_back_slow(value);
+            return;
+        }
+        _NEFORCE construct(finish_, value);
+        ++finish_;
+    }
+
+    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void emplace_back(value_type&& value) {
+        if (finish_ == pair_.value) {
+            vector::emplace_back_slow(_NEFORCE move(value));
+            return;
+        }
+        _NEFORCE construct(finish_, _NEFORCE move(value));
+        ++finish_;
+    }
+
     /**
      * @brief 在末尾构造元素
      * @tparam Args 构造参数类型
      * @param args 构造参数
      */
     template <typename... Args>
-    NEFORCE_CONSTEXPR20 void emplace_back(Args&&... args) {
+    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void emplace_back(Args&&... args) {
         if (finish_ != pair_.value) {
             _NEFORCE construct(finish_, _NEFORCE forward<Args>(args)...);
             ++finish_;
         } else {
-            vector::emplace(end(), _NEFORCE forward<Args>(args)...);
+            vector::emplace_back_slow(_NEFORCE forward<Args>(args)...);
         }
     }
 
@@ -1065,13 +1122,27 @@ public:
      * @brief 在末尾拷贝插入元素
      * @param value 要插入的值
      */
-    NEFORCE_CONSTEXPR20 void push_back(const T& value) { vector::emplace_back(value); }
+    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void push_back(const T& value) {
+        if (finish_ == pair_.value) {
+            vector::emplace_back_slow(value);
+            return;
+        }
+        _NEFORCE construct(finish_, value);
+        ++finish_;
+    }
 
     /**
      * @brief 在末尾移动插入元素
      * @param value 要插入的值
      */
-    NEFORCE_CONSTEXPR20 void push_back(T&& value) { vector::emplace_back(_NEFORCE move(value)); }
+    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void push_back(T&& value) {
+        if (finish_ == pair_.value) {
+            vector::emplace_back_slow(_NEFORCE move(value));
+            return;
+        }
+        _NEFORCE construct(finish_, _NEFORCE move(value));
+        ++finish_;
+    }
 
     /**
      * @brief 移除末尾元素
@@ -1153,8 +1224,18 @@ public:
      * @return 指向插入元素的迭代器
      */
     NEFORCE_CONSTEXPR20 iterator insert(iterator position, const value_type& value) {
-        size_type n = position - begin();
-        vector::emplace(position, value);
+        const auto n = static_cast<size_type>(position - begin());
+        if (finish_ != pair_.value) {
+            if (n == size()) {
+                _NEFORCE construct(finish_, value);
+                ++finish_;
+            } else {
+                vector::insert_one(n, value,
+                                   conditional_t<is_trivially_copyable_v<value_type>, true_type, false_type>{});
+            }
+        } else {
+            vector::insert_slow(position, value);
+        }
         return begin() + n;
     }
 
@@ -1165,8 +1246,18 @@ public:
      * @return 指向插入元素的迭代器
      */
     NEFORCE_CONSTEXPR20 iterator insert(iterator position, value_type&& value) {
-        size_type n = position - begin();
-        vector::emplace(position, _NEFORCE move(value));
+        const auto n = static_cast<size_type>(position - begin());
+        if (finish_ != pair_.value) {
+            if (n == size()) {
+                _NEFORCE construct(finish_, _NEFORCE move(value));
+                ++finish_;
+            } else {
+                vector::insert_one(n, _NEFORCE move(value),
+                                   conditional_t<is_trivially_copyable_v<value_type>, true_type, false_type>{});
+            }
+        } else {
+            vector::insert_slow(position, _NEFORCE move(value));
+        }
         return begin() + n;
     }
 

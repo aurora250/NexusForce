@@ -428,6 +428,8 @@ jobs:
                 -DNEXUSFORCE_ENABLE_ICU=OFF
                 -DNEXUSFORCE_BUILD_EXAMPLES=OFF
                 -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+                -DVCPKG_MANIFEST_NO_DEFAULT_FEATURES=ON
+                "-DVCPKG_MANIFEST_FEATURES=openssl;pcre2;zlib;gtest"
               )
               ;;
             cross-*)

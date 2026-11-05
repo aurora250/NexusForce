@@ -1173,14 +1173,8 @@ memory_pool::region_header* memory_pool::take_region_locked(const size_t need) n
     return region;
 }
 
-bool memory_pool::keep_region_locked(region_header* region) noexcept {
-    for (size_t index = 0; index < region_cache_slots; ++index) {
-        if (region_cache_[index].region == region) {
-        }
-    }
-    if (region_cache_count_ >= options_.max_cached_regions) {
-        return false;
-    }
+bool memory_pool::keep_region_locked(region_header* region, region_header*& evicted) noexcept {
+    evicted = nullptr;
     const size_t direct = region_bucket_of(region->region_size, g_region_cache_buckets);
     size_t slot = region_cache_slots;
     if (direct < region_cache_slots && region_cache_[direct].region == nullptr) {
@@ -1193,8 +1187,34 @@ bool memory_pool::keep_region_locked(region_header* region) noexcept {
             }
         }
     }
-    if (slot >= region_cache_slots) {
-        return false;
+    const size_t limit =
+            options_.max_cached_regions < region_cache_slots ? options_.max_cached_regions : region_cache_slots;
+    if (slot >= region_cache_slots || region_cache_count_ >= limit) {
+        // The cache is full: a substantially smaller region is evicted so that an expensive mapping
+        // (large buffers re-fault every page when dropped) is kept instead of a cheap one.
+        size_t victim = region_cache_slots;
+        for (size_t index = 0; index < region_cache_slots; ++index) {
+            if (region_cache_[index].region == nullptr) {
+                continue;
+            }
+            if (region_cache_[index].region_size * 2 > static_cast<size_t>(region->region_size)) {
+                continue;
+            }
+            if (victim >= region_cache_slots || region_cache_[index].region_size < region_cache_[victim].region_size) {
+                victim = index;
+            }
+        }
+        if (victim >= region_cache_slots) {
+            return false;
+        }
+        evicted = region_cache_[victim].region;
+        evicted->flags &= ~(g_region_flag_cached | g_region_flag_free);
+        if (region_cache_count_ != 0) {
+            --region_cache_count_;
+        }
+        region_cache_[victim].region = nullptr;
+        region_cache_[victim].region_size = 0;
+        slot = victim;
     }
     region->flags |= g_region_flag_cached | g_region_flag_free;
     region->next = nullptr;
@@ -1274,9 +1294,13 @@ void memory_pool::deallocate_large(region_header* region) noexcept {
 
 void memory_pool::return_region(region_header* region) noexcept {
     bool cached = false;
+    region_header* evicted = nullptr;
     if (options_.region_cache_enabled) {
         scoped_spinlock guard(region_lock_);
-        cached = keep_region_locked(region);
+        cached = keep_region_locked(region, evicted);
+    }
+    if (evicted != nullptr) {
+        release_region(evicted);
     }
     if (!cached) {
         release_region(region);

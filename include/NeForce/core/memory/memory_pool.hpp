@@ -408,7 +408,7 @@ private:
     void* allocate_large(size_t bytes, size_t align) noexcept;
     void deallocate_large(region_header* region) noexcept;
     region_header* take_region_locked(size_t need) noexcept;
-    bool keep_region_locked(region_header* region) noexcept;
+    bool keep_region_locked(region_header* region, region_header*& evicted) noexcept;
     void return_region(region_header* region) noexcept;
     void release_region(region_header* region) noexcept;
     void* allocate_small(thread_cache& cache, size_t class_index) noexcept;
