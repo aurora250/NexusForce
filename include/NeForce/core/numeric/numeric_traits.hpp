@@ -95,9 +95,10 @@ struct numeric_int_base : numeric_base {
     static constexpr bool is_integer = true;     ///< 是整数类型
     static constexpr bool is_specialized = true; ///< 是特化版本
     static constexpr int radix = 2;              ///< 整数类型的基数为2
-#if (defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_PLATFORM_BSD_LIKE)) || \
-        (defined(NEFORCE_PLATFORM_BSD_LIKE) && defined(NEFORCE_ARCH_X86)) ||   \
-        (defined(NEFORCE_COMPILER_MSVC) && defined(_MSVC_STL_VERSION) && _MSVC_STL_VERSION >= 145)
+#if (defined(NEFORCE_COMPILER_GNUC) && !defined(NEFORCE_PLATFORM_BSD_LIKE)) ||                        \
+        (defined(NEFORCE_PLATFORM_BSD_LIKE) && defined(NEFORCE_ARCH_X86)) ||                          \
+        (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86) && defined(_MSVC_STL_VERSION) && \
+         _MSVC_STL_VERSION >= 145)
     static constexpr bool traps = true; ///< 整数异常陷阱（x86 libc++）
 #endif
 };

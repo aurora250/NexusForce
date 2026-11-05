@@ -561,8 +561,7 @@ namespace {
                 line[static_cast<size_t>(index)].glyph.empty()) {
                 --index;
             }
-            if (index >= 0 && static_cast<size_t>(index) < line.size() &&
-                !line[static_cast<size_t>(index)].glyph.empty()) {
+            if (static_cast<size_t>(index) < line.size() && !line[static_cast<size_t>(index)].glyph.empty()) {
                 line[static_cast<size_t>(index)].glyph.append(bytes);
             }
         }
@@ -1390,11 +1389,43 @@ namespace {
         return !data.classes.empty();
     }
 
-    bool layout_class_diagram(class_data& data, mermaid_art& art) {
-        const size_t count = data.classes.size();
-        if (count == 0) {
-            return false;
+    size_t next_unvisited(const vector<vector<size_t>>& outgoing, const vector<bool>& visited, const size_t current) {
+        for (const size_t successor: outgoing[current]) {
+            if (!visited[successor]) {
+                return successor;
+            }
         }
+        return string_view::npos;
+    }
+
+    vector<size_t> layered_order(const vector<vector<size_t>>& outgoing) {
+        const size_t count = outgoing.size();
+        vector<size_t> order;
+        vector<bool> visited(count, false);
+        order.reserve(count);
+        for (size_t i = 0; i < count; ++i) {
+            if (visited[i]) {
+                continue;
+            }
+            size_t current = i;
+            while (current != string_view::npos && !visited[current]) {
+                visited[current] = true;
+                order.push_back(current);
+                current = next_unvisited(outgoing, visited, current);
+            }
+        }
+        return order;
+    }
+
+    vector<size_t> order_positions(const vector<size_t>& order) {
+        vector<size_t> position(order.size(), string_view::npos);
+        for (size_t i = 0; i < order.size(); ++i) {
+            position[order[i]] = i;
+        }
+        return position;
+    }
+
+    vector<class_relation> collect_class_relations(const class_data& data) {
         vector<class_relation> relations;
         for (const raw_class_relation& raw: data.raw_relations) {
             const size_t from = find_class(data, raw.from_name.view());
@@ -1413,158 +1444,195 @@ namespace {
             relation.dotted = raw.dotted;
             relations.push_back(move(relation));
         }
+        return relations;
+    }
 
-        vector<vector<size_t>> outgoing(count);
-        for (const class_relation& relation: relations) {
-            outgoing[relation.from].push_back(relation.to);
-        }
-        vector<size_t> order;
-        vector<bool> visited(count, false);
-        order.reserve(count);
-        for (size_t i = 0; i < count; ++i) {
-            if (visited[i]) {
-                continue;
-            }
-            size_t current = i;
-            while (current != string_view::npos && !visited[current]) {
-                visited[current] = true;
-                order.push_back(current);
-                size_t next = string_view::npos;
-                for (const size_t successor: outgoing[current]) {
-                    if (!visited[successor]) {
-                        next = successor;
-                        break;
-                    }
-                }
-                current = next;
-            }
-        }
+    struct class_metrics {
+        int box_width = 0;
+        vector<int> tops;
+        vector<int> heights;
+    };
 
-        vector<size_t> position(count, string_view::npos);
-        for (size_t i = 0; i < order.size(); ++i) {
-            position[order[i]] = i;
-        }
-
-        int box_width = 8;
+    class_metrics measure_class_boxes(const class_data& data, const vector<size_t>& order) {
+        class_metrics metrics;
+        metrics.box_width = 8;
         for (const class_box& box: data.classes) {
-            box_width = max(box_width, stacked_box_content_width(box.name.view(), box.members) + 4);
+            metrics.box_width = max(metrics.box_width, stacked_box_content_width(box.name.view(), box.members) + 4);
         }
-        vector<int> tops(count, 0);
-        vector<int> heights(count, 3);
+        const size_t count = data.classes.size();
+        metrics.tops.assign(count, 0);
+        metrics.heights.assign(count, 3);
         int cursor = 0;
         for (const size_t index: order) {
             stacked_box probe;
             probe.title = data.classes[index].name;
             probe.members = data.classes[index].members;
-            tops[index] = cursor;
-            heights[index] = stacked_box_height(probe);
-            cursor += heights[index] + 4;
+            metrics.tops[index] = cursor;
+            metrics.heights[index] = stacked_box_height(probe);
+            cursor += metrics.heights[index] + 4;
         }
+        return metrics;
+    }
 
-        struct relation_group {
-            size_t upper = 0;
-            size_t lower = 0;
-            relation_head head = relation_head::none;
-            bool dotted = false;
-            bool head_at_top = false;
-            string label;
-        };
-        vector<relation_group> groups;
-        vector<relation_group> bypass_groups;
-        for (const class_relation& relation: relations) {
-            const size_t from_position = position[relation.from];
-            const size_t to_position = position[relation.to];
-            if (from_position == string_view::npos || to_position == string_view::npos) {
-                continue;
-            }
-            size_t upper = 0;
-            size_t lower = 0;
-            bool bypass = false;
-            if (from_position + 1 == to_position) {
-                upper = relation.from;
-                lower = relation.to;
-            } else if (to_position + 1 == from_position) {
-                upper = relation.to;
-                lower = relation.from;
-            } else if (from_position < to_position) {
-                upper = relation.from;
-                lower = relation.to;
-                bypass = true;
-            } else if (to_position < from_position) {
-                upper = relation.to;
-                lower = relation.from;
-                bypass = true;
-            } else {
-                continue;
-            }
-            if (bypass && bypass_groups.size() >= MERMAID_MAX_BYPASS_RELATIONS) {
-                continue;
-            }
-            const size_t head_box = relation.head == relation_head::arrow ? relation.to : relation.from;
-            const bool head_at_top = head_box == upper;
-            vector<relation_group>& target_groups = bypass ? bypass_groups : groups;
-            bool merged = false;
-            for (relation_group& group: target_groups) {
-                if (group.upper == upper && group.lower == lower) {
-                    if (!relation.label.empty()) {
-                        if (!group.label.empty()) {
-                            group.label += ", ";
-                        }
-                        group.label += relation.label;
-                    }
-                    merged = true;
-                    break;
-                }
-            }
-            if (merged) {
-                continue;
-            }
-            relation_group group;
-            group.upper = upper;
-            group.lower = lower;
-            group.head = relation.head;
-            group.dotted = relation.dotted;
-            group.head_at_top = head_at_top;
-            group.label = relation.label;
-            target_groups.push_back(move(group));
+    struct class_group {
+        size_t upper = 0;
+        size_t lower = 0;
+        relation_head head = relation_head::none;
+        bool dotted = false;
+        bool head_at_top = false;
+        string label;
+    };
+
+    struct class_endpoint {
+        size_t upper = 0;
+        size_t lower = 0;
+        bool bypass = false;
+    };
+
+    optional<class_endpoint> class_endpoint_for(const class_relation& relation, const vector<size_t>& position) {
+        const size_t from_position = position[relation.from];
+        const size_t to_position = position[relation.to];
+        if (from_position == string_view::npos || to_position == string_view::npos || from_position == to_position) {
+            return none;
         }
+        const bool from_first = from_position < to_position;
+        const size_t upper = from_first ? relation.from : relation.to;
+        const size_t lower = from_first ? relation.to : relation.from;
+        return class_endpoint{upper, lower, lower - upper != 1};
+    }
 
-        art_canvas canvas;
-        for (size_t i = 0; i < count; ++i) {
+    vector<class_group>* class_groups_for(vector<class_group>& groups, vector<class_group>& bypass_groups,
+                                          const bool bypass) {
+        if (bypass && bypass_groups.size() >= MERMAID_MAX_BYPASS_RELATIONS) {
+            return nullptr;
+        }
+        return bypass ? &bypass_groups : &groups;
+    }
+
+    class_group* find_class_group(vector<class_group>& groups, const size_t upper, const size_t lower) {
+        for (class_group& group: groups) {
+            if (group.upper == upper && group.lower == lower) {
+                return &group;
+            }
+        }
+        return nullptr;
+    }
+
+    void merge_class_label(class_group& group, const class_relation& relation) {
+        if (relation.label.empty()) {
+            return;
+        }
+        if (!group.label.empty()) {
+            group.label += ", ";
+        }
+        group.label += relation.label;
+    }
+
+    void append_class_group(vector<class_group>& groups, vector<class_group>& bypass_groups,
+                            const class_relation& relation, const vector<size_t>& position) {
+        const auto endpoint = class_endpoint_for(relation, position);
+        if (!endpoint) {
+            return;
+        }
+        vector<class_group>* target_groups = class_groups_for(groups, bypass_groups, endpoint->bypass);
+        if (target_groups == nullptr) {
+            return;
+        }
+        if (class_group* existing = find_class_group(*target_groups, endpoint->upper, endpoint->lower)) {
+            merge_class_label(*existing, relation);
+            return;
+        }
+        const size_t head_box = relation.head == relation_head::arrow ? relation.to : relation.from;
+        class_group group;
+        group.upper = endpoint->upper;
+        group.lower = endpoint->lower;
+        group.head = relation.head;
+        group.dotted = relation.dotted;
+        group.head_at_top = head_box == endpoint->upper;
+        group.label = relation.label;
+        target_groups->push_back(move(group));
+    }
+
+    void draw_class_boxes(art_canvas& canvas, const class_data& data, const class_metrics& metrics) {
+        for (size_t i = 0; i < data.classes.size(); ++i) {
             stacked_box box;
             box.title = data.classes[i].name;
             box.members = data.classes[i].members;
             box.left = 0;
-            box.top = tops[i];
-            box.width = box_width;
+            box.top = metrics.tops[i];
+            box.width = metrics.box_width;
             draw_stacked_box(canvas, box);
         }
-        for (const relation_group& group: groups) {
-            const int upper_bottom = tops[group.upper] + heights[group.upper] - 1;
-            draw_relation_connector(canvas, box_width / 2, upper_bottom + 1, 4, group.dotted, group.head,
+    }
+
+    void draw_class_connectors(art_canvas& canvas, const class_metrics& metrics, const vector<class_group>& groups) {
+        for (const class_group& group: groups) {
+            const int upper_bottom = metrics.tops[group.upper] + metrics.heights[group.upper] - 1;
+            draw_relation_connector(canvas, metrics.box_width / 2, upper_bottom + 1, 4, group.dotted, group.head,
                                     group.head_at_top, group.label.view());
         }
-        int bypass_label_width = 0;
-        int adjacent_label_width = 0;
-        for (const relation_group& group: bypass_groups) {
-            bypass_label_width = max(bypass_label_width, text_display_width(group.label.view()));
+    }
+
+    int class_bypass_label_width(const vector<class_group>& bypass_groups) {
+        int width = 0;
+        for (const class_group& group: bypass_groups) {
+            width = max(width, text_display_width(group.label.view()));
         }
-        for (const relation_group& group: groups) {
-            adjacent_label_width = max(adjacent_label_width, text_display_width(group.label.view()));
+        return width;
+    }
+
+    int class_adjacent_label_width(const vector<class_group>& groups) {
+        int width = 0;
+        for (const class_group& group: groups) {
+            width = max(width, text_display_width(group.label.view()));
         }
-        const int bypass_spacing = max(4, bypass_label_width + 3);
-        const int bypass_base = max(box_width + 2, box_width / 2 + 3 + adjacent_label_width);
+        return width;
+    }
+
+    void draw_class_bypasses(art_canvas& canvas, const class_metrics& metrics, const vector<class_group>& groups,
+                             const vector<class_group>& bypass_groups) {
+        const int bypass_spacing = max(4, class_bypass_label_width(bypass_groups) + 3);
+        const int bypass_base =
+                max(metrics.box_width + 2, metrics.box_width / 2 + 3 + class_adjacent_label_width(groups));
         for (size_t lane = 0; lane < bypass_groups.size(); ++lane) {
-            const relation_group& group = bypass_groups[lane];
+            const class_group& group = bypass_groups[lane];
             bypass_style style;
             style.dotted = group.dotted;
             style.head = group.head;
             style.marker_at_source = group.head_at_top;
             style.label = group.label;
-            draw_bypass_relation(canvas, bypass_base + static_cast<int>(lane) * bypass_spacing, box_width,
-                                 tops[group.upper] + 1, tops[group.lower] + 1, style);
+            draw_bypass_relation(canvas, bypass_base + static_cast<int>(lane) * bypass_spacing, metrics.box_width,
+                                 metrics.tops[group.upper] + 1, metrics.tops[group.lower] + 1, style);
         }
-        art = build_art(canvas);
+    }
+
+    mermaid_art render_class_diagram(const class_data& data, const class_metrics& metrics,
+                                     const vector<class_group>& groups, const vector<class_group>& bypass_groups) {
+        art_canvas canvas;
+        draw_class_boxes(canvas, data, metrics);
+        draw_class_connectors(canvas, metrics, groups);
+        draw_class_bypasses(canvas, metrics, groups, bypass_groups);
+        return build_art(canvas);
+    }
+
+    bool layout_class_diagram(class_data& data, mermaid_art& art) {
+        if (data.classes.empty()) {
+            return false;
+        }
+        const vector<class_relation> relations = collect_class_relations(data);
+        vector<vector<size_t>> outgoing(data.classes.size());
+        for (const class_relation& relation: relations) {
+            outgoing[relation.from].push_back(relation.to);
+        }
+        const vector<size_t> order = layered_order(outgoing);
+        const vector<size_t> position = order_positions(order);
+        const class_metrics metrics = measure_class_boxes(data, order);
+        vector<class_group> groups;
+        vector<class_group> bypass_groups;
+        for (const class_relation& relation: relations) {
+            append_class_group(groups, bypass_groups, relation, position);
+        }
+        art = render_class_diagram(data, metrics, groups, bypass_groups);
         return !art.lines.empty();
     }
 
@@ -1820,10 +1888,7 @@ namespace {
         canvas.put_text(row, start, text, role);
     }
 
-    bool layout_er_diagram(er_data& data, mermaid_art& art) {
-        if (data.entities.empty() && data.raw_relations.empty()) {
-            return false;
-        }
+    vector<er_relation> collect_er_relations(er_data& data) {
         vector<er_relation> relations;
         for (const er_raw_relation& raw: data.raw_relations) {
             const size_t from = ensure_er_entity(data, raw.from_name.view());
@@ -1843,145 +1908,130 @@ namespace {
             relation.dotted = raw.dotted;
             relations.push_back(move(relation));
         }
-        const size_t count = data.entities.size();
+        return relations;
+    }
 
-        vector<vector<size_t>> outgoing(count);
-        for (const er_relation& relation: relations) {
-            outgoing[relation.from].push_back(relation.to);
-        }
-        vector<size_t> order;
-        vector<bool> visited(count, false);
-        order.reserve(count);
-        for (size_t i = 0; i < count; ++i) {
-            if (visited[i]) {
-                continue;
-            }
-            size_t current = i;
-            while (current != string_view::npos && !visited[current]) {
-                visited[current] = true;
-                order.push_back(current);
-                size_t next = string_view::npos;
-                for (const size_t successor: outgoing[current]) {
-                    if (!visited[successor]) {
-                        next = successor;
-                        break;
-                    }
-                }
-                current = next;
-            }
-        }
-        vector<size_t> position(count, string_view::npos);
-        for (size_t i = 0; i < order.size(); ++i) {
-            position[order[i]] = i;
-        }
-
-        int box_width = 8;
+    class_metrics measure_er_boxes(const er_data& data, const vector<size_t>& order) {
+        class_metrics metrics;
+        metrics.box_width = 8;
         for (const er_entity& entity: data.entities) {
-            box_width = max(box_width, stacked_box_content_width(entity.title.view(), entity.attributes) + 4);
+            metrics.box_width =
+                    max(metrics.box_width, stacked_box_content_width(entity.title.view(), entity.attributes) + 4);
         }
-        vector<int> tops(count, 0);
-        vector<int> heights(count, 3);
+        const size_t count = data.entities.size();
+        metrics.tops.assign(count, 0);
+        metrics.heights.assign(count, 3);
         int cursor = 0;
         for (const size_t index: order) {
             stacked_box probe;
             probe.title = data.entities[index].title;
             probe.members = data.entities[index].attributes;
-            tops[index] = cursor;
-            heights[index] = stacked_box_height(probe);
-            cursor += heights[index] + 4;
+            metrics.tops[index] = cursor;
+            metrics.heights[index] = stacked_box_height(probe);
+            cursor += metrics.heights[index] + 4;
         }
+        return metrics;
+    }
 
-        struct er_group {
-            size_t upper = 0;
-            size_t lower = 0;
-            string label;
-            string from_cardinality;
-            string to_cardinality;
-            bool dotted = false;
-        };
+    struct er_group {
+        size_t upper = 0;
+        size_t lower = 0;
+        string label;
+        string from_cardinality;
+        string to_cardinality;
+        bool dotted = false;
+    };
 
-        vector<er_group> groups;
-        vector<er_group> bypass_groups;
+    struct er_endpoint {
+        size_t upper = 0;
+        size_t lower = 0;
+        string upper_cardinality;
+        string lower_cardinality;
+        bool bypass = false;
+    };
 
-        for (const er_relation& relation: relations) {
-            const size_t from_position = position[relation.from];
-            const size_t to_position = position[relation.to];
-            if (from_position == string_view::npos || to_position == string_view::npos) {
-                continue;
-            }
-            size_t upper = 0;
-            size_t lower = 0;
-            string upper_cardinality;
-            string lower_cardinality;
-            bool bypass = false;
-            if (from_position + 1 == to_position) {
-                upper = relation.from;
-                lower = relation.to;
-                upper_cardinality = relation.from_cardinality;
-                lower_cardinality = relation.to_cardinality;
-            } else if (to_position + 1 == from_position) {
-                upper = relation.to;
-                lower = relation.from;
-                upper_cardinality = relation.to_cardinality;
-                lower_cardinality = relation.from_cardinality;
-            } else if (from_position < to_position) {
-                upper = relation.from;
-                lower = relation.to;
-                upper_cardinality = relation.from_cardinality;
-                lower_cardinality = relation.to_cardinality;
-                bypass = true;
-            } else if (to_position < from_position) {
-                upper = relation.to;
-                lower = relation.from;
-                upper_cardinality = relation.to_cardinality;
-                lower_cardinality = relation.from_cardinality;
-                bypass = true;
-            } else {
-                continue;
-            }
-            if (bypass && bypass_groups.size() >= MERMAID_MAX_BYPASS_RELATIONS) {
-                continue;
-            }
-            vector<er_group>& target_groups = bypass ? bypass_groups : groups;
-            bool merged = false;
-            for (er_group& group: target_groups) {
-                if (group.upper == upper && group.lower == lower) {
-                    if (!relation.label.empty()) {
-                        if (!group.label.empty()) {
-                            group.label += ", ";
-                        }
-                        group.label += relation.label;
-                    }
-                    merged = true;
-                    break;
-                }
-            }
-            if (merged) {
-                continue;
-            }
-            er_group group;
-            group.upper = upper;
-            group.lower = lower;
-            group.label = relation.label;
-            group.from_cardinality = move(upper_cardinality);
-            group.to_cardinality = move(lower_cardinality);
-            group.dotted = relation.dotted;
-            target_groups.push_back(move(group));
+    optional<er_endpoint> er_endpoint_for(const er_relation& relation, const vector<size_t>& position) {
+        const size_t from_position = position[relation.from];
+        const size_t to_position = position[relation.to];
+        if (from_position == string_view::npos || to_position == string_view::npos || from_position == to_position) {
+            return none;
         }
+        const bool from_first = from_position < to_position;
+        er_endpoint endpoint;
+        endpoint.upper = from_first ? relation.from : relation.to;
+        endpoint.lower = from_first ? relation.to : relation.from;
+        endpoint.upper_cardinality = from_first ? relation.from_cardinality : relation.to_cardinality;
+        endpoint.lower_cardinality = from_first ? relation.to_cardinality : relation.from_cardinality;
+        endpoint.bypass = endpoint.lower - endpoint.upper != 1;
+        return endpoint;
+    }
 
-        art_canvas canvas;
-        for (size_t i = 0; i < count; ++i) {
+    vector<er_group>* er_groups_for(vector<er_group>& groups, vector<er_group>& bypass_groups, const bool bypass) {
+        if (bypass && bypass_groups.size() >= MERMAID_MAX_BYPASS_RELATIONS) {
+            return nullptr;
+        }
+        return bypass ? &bypass_groups : &groups;
+    }
+
+    er_group* find_er_group(vector<er_group>& groups, const size_t upper, const size_t lower) {
+        for (er_group& group: groups) {
+            if (group.upper == upper && group.lower == lower) {
+                return &group;
+            }
+        }
+        return nullptr;
+    }
+
+    void merge_er_label(er_group& group, const er_relation& relation) {
+        if (relation.label.empty()) {
+            return;
+        }
+        if (!group.label.empty()) {
+            group.label += ", ";
+        }
+        group.label += relation.label;
+    }
+
+    void append_er_group(vector<er_group>& groups, vector<er_group>& bypass_groups, const er_relation& relation,
+                         const vector<size_t>& position) {
+        auto endpoint = er_endpoint_for(relation, position);
+        if (!endpoint) {
+            return;
+        }
+        vector<er_group>* target_groups = er_groups_for(groups, bypass_groups, endpoint->bypass);
+        if (target_groups == nullptr) {
+            return;
+        }
+        if (er_group* existing = find_er_group(*target_groups, endpoint->upper, endpoint->lower)) {
+            merge_er_label(*existing, relation);
+            return;
+        }
+        er_group group;
+        group.upper = endpoint->upper;
+        group.lower = endpoint->lower;
+        group.label = relation.label;
+        group.from_cardinality = move(endpoint->upper_cardinality);
+        group.to_cardinality = move(endpoint->lower_cardinality);
+        group.dotted = relation.dotted;
+        target_groups->push_back(move(group));
+    }
+
+    void draw_er_boxes(art_canvas& canvas, const er_data& data, const class_metrics& metrics) {
+        for (size_t i = 0; i < data.entities.size(); ++i) {
             stacked_box box;
             box.title = data.entities[i].title;
             box.members = data.entities[i].attributes;
             box.left = 0;
-            box.top = tops[i];
-            box.width = box_width;
+            box.top = metrics.tops[i];
+            box.width = metrics.box_width;
             draw_stacked_box(canvas, box);
         }
-        const int center = box_width / 2;
+    }
+
+    void draw_er_connectors(art_canvas& canvas, const class_metrics& metrics, const vector<er_group>& groups) {
+        const int center = metrics.box_width / 2;
         for (const er_group& group: groups) {
-            const int upper_bottom = tops[group.upper] + heights[group.upper] - 1;
+            const int upper_bottom = metrics.tops[group.upper] + metrics.heights[group.upper] - 1;
             const int gap_top = upper_bottom + 1;
             draw_relation_connector(canvas, center, gap_top, 4, group.dotted, relation_head::arrow, false,
                                     group.label.view());
@@ -1990,18 +2040,30 @@ namespace {
             put_right_aligned_text(canvas, gap_top + 3, center - 1, group.to_cardinality.view(),
                                    mermaid_role::edge_label);
         }
-        int bypass_text_width = 0;
-        int adjacent_label_width = 0;
+    }
+
+    int er_bypass_width(const vector<er_group>& bypass_groups) {
+        int width = 0;
         for (const er_group& group: bypass_groups) {
-            bypass_text_width = max(bypass_text_width, text_display_width(group.label.view()));
-            bypass_text_width = max(bypass_text_width, text_display_width(group.from_cardinality.view()));
-            bypass_text_width = max(bypass_text_width, text_display_width(group.to_cardinality.view()));
+            width = max(width, text_display_width(group.label.view()));
+            width = max(width, text_display_width(group.from_cardinality.view()));
+            width = max(width, text_display_width(group.to_cardinality.view()));
         }
+        return width;
+    }
+
+    int er_adjacent_width(const vector<er_group>& groups) {
+        int width = 0;
         for (const er_group& group: groups) {
-            adjacent_label_width = max(adjacent_label_width, text_display_width(group.label.view()));
+            width = max(width, text_display_width(group.label.view()));
         }
-        const int bypass_spacing = max(4, bypass_text_width + 3);
-        const int bypass_base = max(box_width + 2, box_width / 2 + 3 + adjacent_label_width);
+        return width;
+    }
+
+    void draw_er_bypasses(art_canvas& canvas, const class_metrics& metrics, const vector<er_group>& groups,
+                          const vector<er_group>& bypass_groups) {
+        const int bypass_spacing = max(4, er_bypass_width(bypass_groups) + 3);
+        const int bypass_base = max(metrics.box_width + 2, metrics.box_width / 2 + 3 + er_adjacent_width(groups));
         for (size_t lane = 0; lane < bypass_groups.size(); ++lane) {
             const er_group& group = bypass_groups[lane];
             bypass_style style;
@@ -2011,10 +2073,38 @@ namespace {
             style.label = group.label;
             style.source_cardinality = group.from_cardinality;
             style.target_cardinality = group.to_cardinality;
-            draw_bypass_relation(canvas, bypass_base + static_cast<int>(lane) * bypass_spacing, box_width,
-                                 tops[group.upper] + 1, tops[group.lower] + 1, style);
+            draw_bypass_relation(canvas, bypass_base + static_cast<int>(lane) * bypass_spacing, metrics.box_width,
+                                 metrics.tops[group.upper] + 1, metrics.tops[group.lower] + 1, style);
         }
-        art = build_art(canvas);
+    }
+
+    mermaid_art render_er_diagram(const er_data& data, const class_metrics& metrics, const vector<er_group>& groups,
+                                  const vector<er_group>& bypass_groups) {
+        art_canvas canvas;
+        draw_er_boxes(canvas, data, metrics);
+        draw_er_connectors(canvas, metrics, groups);
+        draw_er_bypasses(canvas, metrics, groups, bypass_groups);
+        return build_art(canvas);
+    }
+
+    bool layout_er_diagram(er_data& data, mermaid_art& art) {
+        if (data.entities.empty() && data.raw_relations.empty()) {
+            return false;
+        }
+        const vector<er_relation> relations = collect_er_relations(data);
+        vector<vector<size_t>> outgoing(data.entities.size());
+        for (const er_relation& relation: relations) {
+            outgoing[relation.from].push_back(relation.to);
+        }
+        const vector<size_t> order = layered_order(outgoing);
+        const vector<size_t> position = order_positions(order);
+        const class_metrics metrics = measure_er_boxes(data, order);
+        vector<er_group> groups;
+        vector<er_group> bypass_groups;
+        for (const er_relation& relation: relations) {
+            append_er_group(groups, bypass_groups, relation, position);
+        }
+        art = render_er_diagram(data, metrics, groups, bypass_groups);
         return !art.lines.empty();
     }
 

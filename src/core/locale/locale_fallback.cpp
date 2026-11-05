@@ -767,38 +767,56 @@ namespace {
         return result;
     }
 
+    using date_pattern_member = string_view locale_data::calendar_style::*;
+
+    struct date_pattern_entry {
+        locale::date_style style;
+        date_pattern_member member;
+    };
+
     NEFORCE_NODISCARD string_view date_pattern_of(const locale_data::calendar_style& style,
                                                   const locale::date_style kind) noexcept {
-        switch (kind) {
-            case locale::date_style::none:
-                return nullptr;
-            case locale::date_style::long_fmt:
-                return style.long_date;
-            case locale::date_style::medium:
-                return style.medium_date;
-            case locale::date_style::short_fmt:
-                return style.short_date;
-            case locale::date_style::full:
-            case locale::date_style::relative:
-                return style.full_date;
+        if (kind == locale::date_style::none) {
+            return nullptr;
+        }
+        static const date_pattern_entry entries[] = {
+                {locale::date_style::full, &locale_data::calendar_style::full_date},
+                {locale::date_style::long_fmt, &locale_data::calendar_style::long_date},
+                {locale::date_style::medium, &locale_data::calendar_style::medium_date},
+                {locale::date_style::short_fmt, &locale_data::calendar_style::short_date},
+                {locale::date_style::relative, &locale_data::calendar_style::full_date},
+        };
+        for (const date_pattern_entry& entry: entries) {
+            if (entry.style == kind) {
+                return style.*(entry.member);
+            }
         }
         return style.medium_date;
     }
 
+    using time_pattern_member = string_view locale_data::calendar_style::*;
+
+    struct time_pattern_entry {
+        locale::time_style style;
+        time_pattern_member member;
+    };
+
     NEFORCE_NODISCARD string_view time_pattern_of(const locale_data::calendar_style& style,
                                                   const locale::time_style kind) noexcept {
-        switch (kind) {
-            case locale::time_style::none:
-                return nullptr;
-            case locale::time_style::long_fmt:
-                return style.long_time;
-            case locale::time_style::medium:
-                return style.medium_time;
-            case locale::time_style::short_fmt:
-                return style.short_time;
-            case locale::time_style::full:
-            case locale::time_style::relative:
-                return style.full_time;
+        if (kind == locale::time_style::none) {
+            return nullptr;
+        }
+        static const time_pattern_entry entries[] = {
+                {locale::time_style::full, &locale_data::calendar_style::full_time},
+                {locale::time_style::long_fmt, &locale_data::calendar_style::long_time},
+                {locale::time_style::medium, &locale_data::calendar_style::medium_time},
+                {locale::time_style::short_fmt, &locale_data::calendar_style::short_time},
+                {locale::time_style::relative, &locale_data::calendar_style::full_time},
+        };
+        for (const time_pattern_entry& entry: entries) {
+            if (entry.style == kind) {
+                return style.*(entry.member);
+            }
         }
         return style.medium_time;
     }

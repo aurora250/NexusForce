@@ -400,13 +400,28 @@ namespace {
     struct await_runner {
         struct promise_type {
             promise<void> done;
+            exception_ptr error;
+
+            struct final_awaiter {
+                bool await_ready() noexcept { return false; }
+                void await_suspend(coroutine_handle<promise_type> handle) noexcept {
+                    auto& promise = handle.promise();
+                    if (promise.error) {
+                        promise.done.set_exception(promise.error);
+                    } else {
+                        promise.done.set_value();
+                    }
+                }
+                void await_resume() noexcept {}
+            };
+
             await_runner get_return_object() {
                 return await_runner{coroutine_handle<promise_type>::from_promise(*this)};
             }
             suspend_always initial_suspend() noexcept { return {}; }
-            suspend_always final_suspend() noexcept { return {}; }
-            void return_void() { done.set_value(); }
-            void unhandled_exception() { done.set_exception(current_exception()); }
+            final_awaiter final_suspend() noexcept { return {}; }
+            void return_void() {}
+            void unhandled_exception() { error = current_exception(); }
         };
 
         coroutine_handle<promise_type> handle;

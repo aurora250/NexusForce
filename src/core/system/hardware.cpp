@@ -1216,9 +1216,7 @@ namespace {
                 }
                 if (capacity != 0) {
                     ++modules;
-                    if (length > 0x12) {
-                        add_unique(types, memory_type_name(byte_at(cursor + 0x12)));
-                    }
+                    add_unique(types, memory_type_name(byte_at(cursor + 0x12)));
                     const uint32_t speed = word_at(cursor + 0x15);
                     const uint32_t configured = length >= 0x22 ? word_at(cursor + 0x20) : 0;
                     rated_mts = speed > rated_mts ? speed : rated_mts;

@@ -530,7 +530,7 @@ namespace {
             return 0;
         }
         const double ratio = static_cast<double>(x - geom.plot_x) / static_cast<double>(max(1, geom.plot_w - 1));
-        int index = static_cast<int>(round(ratio * static_cast<double>(count - 1)));
+        int index = static_cast<int>(round(static_cast<decimal_t>(ratio) * static_cast<decimal_t>(count - 1)));
         index = max(0, min(index, static_cast<int>(count) - 1));
         return index;
     }
@@ -1111,9 +1111,8 @@ namespace {
         }
         const size_t count = model.categories;
         const double zero_row = zero_row_f(spec, model, scale, geom);
-        const int reveal =
-                min(geom.plot_w,
-                    max(0, static_cast<int>(ceil(static_cast<double>(geom.plot_w) * static_cast<double>(eased)))));
+        const int reveal = min(geom.plot_w, max(0, static_cast<int>(ceil(static_cast<decimal_t>(geom.plot_w) *
+                                                                         static_cast<decimal_t>(eased)))));
         for (size_t j = spec.series.size(); j-- > 0;) {
             const auto& series = spec.series[j];
             if (series.values.empty()) {
@@ -1636,8 +1635,8 @@ namespace {
         const _NEFORCE color low = _NEFORCE color::lerp(t.bg, high, 0.1);
         const double span = max(1e-9, scale.max - scale.min);
         const size_t total_cells = static_cast<size_t>(geom.heat_rows) * static_cast<size_t>(geom.heat_cols);
-        const auto visible = static_cast<size_t>(
-                ceil(static_cast<double>(total_cells) * static_cast<double>(clamp01(static_cast<double>(eased)))));
+        const auto visible = static_cast<size_t>(ceil(static_cast<decimal_t>(total_cells) *
+                                                      static_cast<decimal_t>(clamp01(static_cast<double>(eased)))));
         style label_style{};
         label_style.fg = t.get(theme_role::subtle);
         for (int row = 0; row < geom.heat_rows; ++row) {
@@ -2188,7 +2187,7 @@ void chart_component::set_spec(chart_spec spec) {
 void chart_component::set_progress(const float progress) {
     const auto value = static_cast<float>(clamp01(static_cast<double>(progress)));
     animating_ = false;
-    if (value == progress_) {
+    if (value <= progress_ && value >= progress_) {
         return;
     }
     progress_ = value;
@@ -2371,7 +2370,9 @@ optional<size_t> chart_component::hit_test(const int x, const int y) const {
         if (spokes == 0) {
             return none;
         }
-        auto spoke = static_cast<size_t>(round(angle / (chart_pi * 2.0) * static_cast<double>(spokes)));
+        auto spoke =
+                static_cast<size_t>(round(static_cast<decimal_t>(angle) / (static_cast<decimal_t>(chart_pi) * 2.0L) *
+                                          static_cast<decimal_t>(spokes)));
         spoke %= spokes;
         return spoke;
     }

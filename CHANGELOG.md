@@ -378,6 +378,9 @@
 
 ### 🐛 Bug Fixes
 
+- 修复协程测试 `await_runner` 在 `return_void` 阶段就发布完成、主线程可能在协程到达 final suspend 前销毁帧的问题：完成/异常改由 `final_awaiter::await_suspend` 在协程已挂起后发布，避免 macOS ARM64 上的挂起/堆损坏
+- 修复 FreeBSD CI 在 Release 构建下仍查找 Debug 后缀 `libNexusForced.so` 的问题：按实际 `libNexusForce*.so.*.*` 拷贝并以 SONAME `libNexusForce.so.2` 放入 VM
+- 修复 CodeQL 报告的图表缩放乘法在转换为 `decimal_t` 前以较窄类型计算的问题，并清理动态库/硬件/流程图中的恒真比较、浮点相等比较、可简化的 switch 与过大函数块
 - 修复 `channel` 在内存池关闭（pool-off）时多生产者/多消费者测试触发堆损坏：通道本已由 `control_mutex_` 串行化，内部改用互斥保护的 `deque` 存储，移除不必要的无锁队列路径
 - 修复 `future` 完成与 `co_await` 挂起之间的恢复竞态：完成侧等待 `await_suspend` 确认挂起后再恢复协程，避免在挂起准备完成前恢复同一协程帧
 - 修复空 `CMAKE_BUILD_TYPE` 时 Debug death tests 被编译、但 `NEFORCE_STATE_DEBUG` 未启用导致 `failed to die` 的问题；单配置生成器在未指定构建类型时默认 `Release`

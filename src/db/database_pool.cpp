@@ -6,6 +6,41 @@
 #include <NeForce/db/sqlite/sqlite_connect.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    struct database_factory_entry {
+        db_type type;
+        unique_ptr<idb_factory> (*create)(const db_config&);
+    };
+
+    unique_ptr<idb_factory> make_database_factory(const db_type type, const db_config& config) {
+        static const database_factory_entry entries[] = {
+#ifdef NEFORCE_SUPPORT_MYSQL
+                {db_type::mysql,
+                 [](const db_config& cfg) -> unique_ptr<idb_factory> { return make_unique<mysql_factory>(cfg); }},
+#endif
+#ifdef NEFORCE_SUPPORT_SQLITE3
+                {db_type::sqlite3,
+                 [](const db_config& cfg) -> unique_ptr<idb_factory> { return make_unique<sqlite_factory>(cfg); }},
+#endif
+#ifdef NEFORCE_SUPPORT_HIREDIS
+                {db_type::redis,
+                 [](const db_config& cfg) -> unique_ptr<idb_factory> { return make_unique<redis_factory>(cfg); }},
+#endif
+#ifdef NEFORCE_SUPPORT_POSTGRESQL
+                {db_type::postgresql,
+                 [](const db_config& cfg) -> unique_ptr<idb_factory> { return make_unique<pgsql_factory>(cfg); }},
+#endif
+                {static_cast<db_type>(0), nullptr},
+        };
+        for (const database_factory_entry& entry: entries) {
+            if (entry.create != nullptr && entry.type == type) {
+                return entry.create(config);
+            }
+        }
+        NEFORCE_THROW_EXCEPTION(value_exception("Unsupported database type"));
+    }
+} // namespace
+
 database_pool::database_pool(const db_type type, const db_config& config, const pool_config& pool_config) :
 config_(config),
 pool_cfg_(pool_config) {
@@ -16,30 +51,7 @@ pool_cfg_(pool_config) {
     pool_cfg_.init_size = max(pool_cfg_.init_size, pool_cfg_.min_size);
     pool_cfg_.init_size = min(pool_cfg_.init_size, pool_cfg_.max_size);
 
-    switch (type) {
-#ifdef NEFORCE_SUPPORT_MYSQL
-        case db_type::mysql:
-            factory_ = make_unique<mysql_factory>(config);
-            break;
-#endif
-#ifdef NEFORCE_SUPPORT_SQLITE3
-        case db_type::sqlite3:
-            factory_ = make_unique<sqlite_factory>(config);
-            break;
-#endif
-#ifdef NEFORCE_SUPPORT_HIREDIS
-        case db_type::redis:
-            factory_ = make_unique<redis_factory>(config);
-            break;
-#endif
-#ifdef NEFORCE_SUPPORT_POSTGRESQL
-        case db_type::postgresql:
-            factory_ = make_unique<pgsql_factory>(config);
-            break;
-#endif
-        default:
-            NEFORCE_THROW_EXCEPTION(value_exception("Unsupported database type"));
-    }
+    factory_ = make_database_factory(type, config);
 
     size_t created = 0;
     size_t consecutive_failures = 0;

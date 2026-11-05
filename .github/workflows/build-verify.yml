@@ -792,11 +792,11 @@ jobs:
           SCP=(scp -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -P 2222)
 
           echo "FreeBSD build artefacts:"
-          find build-freebsd/bin build-freebsd/lib -maxdepth 4 -type f             \( -name NexusForceUnitTests -o -name 'libNexusForced.so*' -o -name NexusForceTestPlugin.so \) \
+          find build-freebsd/bin build-freebsd/lib -maxdepth 4 -type f             \( -name NexusForceUnitTests -o -name 'libNexusForce*.so*' -o -name NexusForceTestPlugin.so \) \
             -printf '  %p\n' || true
 
           TEST_BIN=$(find build-freebsd/bin -type f -name NexusForceUnitTests | head -1)
-          LIB=$(find build-freebsd/lib -type f -name 'libNexusForced.so.*.*' | head -1)
+          LIB=$(find build-freebsd/lib -type f -name 'libNexusForce*.so.*.*' | head -1)
           PLUGIN=$(find build-freebsd/lib -type f -name NexusForceTestPlugin.so | head -1)
 
           # Do not use 'test -n a && test -n b': a failing non-final command in an
@@ -806,7 +806,7 @@ jobs:
             exit 1
           fi
           if [ -z "$LIB" ]; then
-            echo "::error::libNexusForced.so.* was not produced under build-freebsd/lib"
+            echo "::error::libNexusForce*.so.* was not produced under build-freebsd/lib"
             exit 1
           fi
           if [ -z "$PLUGIN" ]; then
@@ -817,7 +817,7 @@ jobs:
           PLUGIN_DST="$PWD/$PLUGIN"
           "${SSH[@]}" root@127.0.0.1 "mkdir -p /tmp/nf/bin /tmp/nf/lib '$(dirname "$PLUGIN_DST")' && chown -R tester /tmp/nf"
           "${SCP[@]}" "$TEST_BIN" tester@127.0.0.1:/tmp/nf/bin/
-          "${SCP[@]}" "$LIB" tester@127.0.0.1:/tmp/nf/lib/libNexusForced.so.2
+          "${SCP[@]}" "$LIB" tester@127.0.0.1:/tmp/nf/lib/libNexusForce.so.2
           "${SCP[@]}" "$PLUGIN" tester@127.0.0.1:/tmp/nf/NexusForceTestPlugin.so
           "${SSH[@]}" root@127.0.0.1 "cp /tmp/nf/NexusForceTestPlugin.so '$PLUGIN_DST' && chmod 644 '$PLUGIN_DST'"
 

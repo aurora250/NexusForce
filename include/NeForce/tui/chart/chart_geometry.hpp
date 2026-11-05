@@ -200,7 +200,7 @@ inline int chart_row_for_fraction(const double fraction, const int top, const in
     }
     ratio = ratio <= 0.0 ? 0.0 : (ratio >= 1.0 ? 1.0 : ratio);
     const double position = inverted ? 1.0 - ratio : ratio;
-    return top + static_cast<int>(round(position * static_cast<double>(usable)));
+    return top + static_cast<int>(round(static_cast<decimal_t>(position) * static_cast<decimal_t>(usable)));
 }
 
 /**

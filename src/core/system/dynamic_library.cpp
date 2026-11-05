@@ -273,7 +273,7 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
         nchain = static_cast<size_t>(max_idx) + 1;
     }
 
-    if (strtab != nullptr && symtab != nullptr && syment > 0 && nchain > 0) {
+    if (strtab != nullptr && symtab != nullptr && nchain > 0) {
         for (size_t i = 1; i < nchain; ++i) {
             const auto* sym = reinterpret_cast<const ::ElfW(Sym)*>(reinterpret_cast<const char*>(symtab) + i * syment);
             string_view sym_name = strtab + sym->st_name;
