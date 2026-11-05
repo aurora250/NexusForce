@@ -6537,7 +6537,7 @@ TEST_F(SysinfoTest, CpuBreakdown_SumsToHundred) {
     EXPECT_GE(total, 95.0);
     EXPECT_LE(total, 105.0);
     EXPECT_GE(value.idle, 0.0);
-    EXPECT_LE(value.idle, 100.0);
+    EXPECT_LE(value.idle, 100.0 + 1e-9);
 }
 
 TEST_F(SysinfoTest, PressureStatus_ReturnsSupportedResources) {

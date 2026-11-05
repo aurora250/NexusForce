@@ -23,36 +23,36 @@
 #    include <cerrno>
 #    include <unistd.h>
 #    include <ctime>
-#    include <pthread.h>
+#endif
+#ifdef NEFORCE_PLATFORM_FREEBSD
+#    include <sys/types.h>
+#    include <sys/umtx.h>
+#endif
+#ifdef NEFORCE_PLATFORM_MACOS
+extern "C" int __ulock_wait(::uint32_t operation, void* addr, ::uint64_t value, ::uint32_t timeout_us);
+extern "C" int __ulock_wake(::uint32_t operation, void* addr, ::uint64_t wake_value);
+#    ifndef UL_COMPARE_AND_WAIT
+#        define UL_COMPARE_AND_WAIT 1
+#    endif
+#    ifndef ULF_WAKE_ALL
+#        define ULF_WAKE_ALL 0x00000100
+#    endif
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-#ifdef NEFORCE_PLATFORM_BSD_LIKE
+#if defined(NEFORCE_PLATFORM_FREEBSD) || defined(NEFORCE_PLATFORM_MACOS)
 namespace {
-    ::pthread_mutex_t& futex_mutex() noexcept {
-        static ::pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER;
-        return m;
-    }
-
-    ::pthread_cond_t& futex_cond() noexcept {
-        static ::pthread_cond_t c = PTHREAD_COND_INITIALIZER;
-        return c;
-    }
-
-    ::timespec futex_deadline(const bool is_monotonic, const int64_t sec, const int64_t ns) noexcept {
-        if (!is_monotonic) {
-            return ::timespec{static_cast<::time_t>(sec), static_cast<long>(ns)};
+    bool relative_timeout_ns(const bool is_monotonic, const int64_t sec, const int64_t ns, uint64_t& out) noexcept {
+        ::timespec now{};
+        if (::clock_gettime(is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME, &now) != 0) {
+            out = 0;
+            return false;
         }
-        ::timespec mono{};
-        ::timespec real{};
-        ::clock_gettime(CLOCK_MONOTONIC, &mono);
-        ::clock_gettime(CLOCK_REALTIME, &real);
-        int64_t delta =
-                (sec - static_cast<int64_t>(mono.tv_sec)) * 1000000000LL + (ns - static_cast<int64_t>(mono.tv_nsec));
-        delta = max<int64_t>(delta, 0);
-        const int64_t total =
-                static_cast<int64_t>(real.tv_sec) * 1000000000LL + static_cast<int64_t>(real.tv_nsec) + delta;
-        return ::timespec{static_cast<::time_t>(total / 1000000000LL), static_cast<long>(total % 1000000000LL)};
+        const int64_t deadline_ns = sec * 1000000000LL + ns;
+        const int64_t now_ns = static_cast<int64_t>(now.tv_sec) * 1000000000LL + static_cast<int64_t>(now.tv_nsec);
+        const int64_t remaining = deadline_ns > now_ns ? deadline_ns - now_ns : 0;
+        out = static_cast<uint64_t>(remaining);
+        return true;
     }
 } // namespace
 #endif
@@ -77,21 +77,35 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
     }
     return false;
 
-#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
-    const auto* word = static_cast<const volatile platform_wait_t*>(addr);
-    ::pthread_mutex_lock(&futex_mutex());
-    bool timed_out = false;
-    const ::timespec deadline = futex_deadline(is_monotonic, sec, ns);
-    while (*word == value) {
-        if (!has_timeout) {
-            ::pthread_cond_wait(&futex_cond(), &futex_mutex());
-        } else if (::pthread_cond_timedwait(&futex_cond(), &futex_mutex(), &deadline) == ETIMEDOUT) {
-            timed_out = true;
-            break;
-        }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    if (!has_timeout) {
+        const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value), nullptr, nullptr);
+        return ret == 0 || errno != ETIMEDOUT;
     }
-    ::pthread_mutex_unlock(&futex_mutex());
-    return !timed_out;
+    uint64_t remaining = 0;
+    relative_timeout_ns(is_monotonic, sec, ns, remaining);
+    if (remaining == 0) {
+        remaining = 1;
+    }
+    ::timespec timeout{static_cast<::time_t>(remaining / 1000000000ULL), static_cast<long>(remaining % 1000000000ULL)};
+    const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value),
+                               reinterpret_cast<void*>(static_cast<uintptr_t>(sizeof(timeout))), &timeout);
+    return ret == 0 || errno != ETIMEDOUT;
+
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    uint32_t timeout_us = 0;
+    if (has_timeout) {
+        uint64_t remaining = 0;
+        relative_timeout_ns(is_monotonic, sec, ns, remaining);
+        remaining /= 1000ULL;
+        if (remaining == 0) {
+            remaining = 1;
+        }
+        timeout_us = static_cast<uint32_t>(min<uint64_t>(remaining, numeric_traits<uint32_t>::max()));
+    }
+    const int ret = ::__ulock_wait(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), timeout_us);
+    return ret == 0 || errno != ETIMEDOUT;
+
 #else
     int oper = FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG;
     if (!is_monotonic) {
@@ -120,13 +134,28 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
             terminate();
         }
     }
-#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
-    const auto* word = static_cast<const volatile platform_wait_t*>(addr);
-    ::pthread_mutex_lock(&futex_mutex());
-    while (*word == value) {
-        ::pthread_cond_wait(&futex_cond(), &futex_mutex());
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    for (;;) {
+        const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value), nullptr, nullptr);
+        if (ret == 0 || errno == EAGAIN) {
+            return;
+        }
+        if (errno != EINTR) {
+            terminate();
+            return;
+        }
     }
-    ::pthread_mutex_unlock(&futex_mutex());
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    for (;;) {
+        const int ret = ::__ulock_wait(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), 0);
+        if (ret == 0 || errno == EAGAIN) {
+            return;
+        }
+        if (errno != EINTR) {
+            terminate();
+            return;
+        }
+    }
 #else
     const auto err =
             ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wait_private), value, nullptr);
@@ -149,15 +178,12 @@ void futex_notify(void* addr, const bool all) noexcept {
     } else {
         ::WakeByAddressSingle(p);
     }
-#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
-    (void) addr;
-    // A single global condition variable serves every address,
-    // so signalling one waiter can hand the wake-up to a thread waiting on a different word and strand the intended one.
-    // Broadcast is the only correct mapping; each waiter re-checks its own word.
-    (void) all;
-    ::pthread_mutex_lock(&futex_mutex());
-    ::pthread_cond_broadcast(&futex_cond());
-    ::pthread_mutex_unlock(&futex_mutex());
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    (void) ::_umtx_op(addr, UMTX_OP_WAKE,
+                      all ? static_cast<::u_long>(numeric_traits<int32_t>::max()) : static_cast<::u_long>(1), nullptr,
+                      nullptr);
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    (void) ::__ulock_wake(UL_COMPARE_AND_WAIT | (all ? ULF_WAKE_ALL : 0), addr, 0);
 #else
     ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wake_private),
               all ? numeric_traits<platform_wait_t>::max() : 1);

@@ -289,11 +289,15 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
 #elif defined(NEFORCE_PLATFORM_MACOS)
     const uint32_t image_count = ::_dyld_image_count();
     for (uint32_t image_index = 0; image_index < image_count; ++image_index) {
+        const bool main_image = image_index == 0;
+        if (!main_image && path_.empty()) {
+            continue;
+        }
         const char* image_name = ::_dyld_get_image_name(image_index);
         if (image_name == nullptr) {
             continue;
         }
-        if (!path_.empty() && string_view(image_name).find(path_.view()) == string_view::npos) {
+        if (!main_image && !path_.empty() && string_view(image_name).find(path_.view()) == string_view::npos) {
             continue;
         }
 
@@ -325,10 +329,16 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
                 (entry.n_type & N_EXT) == 0 || (entry.n_type & N_TYPE) != N_SECT) {
                 continue;
             }
-            const string_view symbol_name{string_table + entry.n_un.n_strx};
-            if (symbol_name.empty()) {
+            const char* const symbol_start = string_table + entry.n_un.n_strx;
+            const size_t symbol_limit = static_cast<size_t>(symtab->strsize - entry.n_un.n_strx);
+            size_t symbol_length = 0;
+            while (symbol_length < symbol_limit && symbol_start[symbol_length] != '\0') {
+                ++symbol_length;
+            }
+            if (symbol_length == 0) {
                 continue;
             }
+            const string_view symbol_name{symbol_start, symbol_length};
             if (name_filter.empty() || symbol_name.find(name_filter.view()) != string_view::npos) {
                 symbols.push_back(symbol_name);
             }

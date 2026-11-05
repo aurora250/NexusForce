@@ -465,10 +465,11 @@ TEST_F(FunctionTest, ReturnTypeReference) {
 }
 
 TEST_F(FunctionTest, ReturnTypeConstReference) {
-    const int val = 42;
+    int val = 42;
     function<const int&()> f([&val]() -> const int& { return val; });
     const int& result = f();
     EXPECT_EQ(result, 42);
+    EXPECT_EQ(&result, &val);
 }
 
 TEST_F(FunctionTest, MultipleEmptyAssignments) {

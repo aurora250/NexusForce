@@ -378,6 +378,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 BSD-like futex 仅使用全局 `pthread_cond` 的问题：FreeBSD 使用 `_umtx_op`，macOS 使用 `__ulock_wait`/`__ulock_wake` 按地址等待唤醒；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
+- 修复 macOS `dynamic_library::list_symbols()` 对主可执行文件/共享缓存镜像的 Mach-O 边界处理：始终处理主镜像、按路径过滤其它镜像，并限制字符串表读取长度
 - 修复 MSVC ARM64 上 `function<const T&()>` 将引用按整数返回的问题：引用返回类型改为携带对象地址的类型擦除调用，函数入口解引用后再返回
 - 修复 macOS `dynamic_library::load_self().list_symbols()` 扫描 dyld shared-cache 镜像时使用无效 LC_SYMTAB 文件偏移导致段错误：load_self 记录主程序路径以只扫描主可执行文件
 - 修复协程测试 `await_runner` 在 `return_void` 阶段就发布完成、主线程可能在协程到达 final suspend 前销毁帧的问题：完成/异常改由 `final_awaiter::await_suspend` 在协程已挂起后发布，避免 macOS ARM64 上的挂起/堆损坏

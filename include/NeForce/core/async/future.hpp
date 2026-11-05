@@ -8,7 +8,6 @@
  * 此文件提供了future的实现作为异步结果的消费者。
  */
 
-#include "NeForce/core/async/this_thread.hpp"
 #include "NeForce/core/async/thread_exit_register.hpp"
 #include "NeForce/core/async/atomic_futex.hpp"
 #ifdef NEFORCE_STANDARD_20
@@ -341,7 +340,6 @@ struct __future_base {
         once_flag flag;                           ///< 一次性标志，用于确保只设置一次结果
 #ifdef NEFORCE_STANDARD_20
         atomic<void*> continuation_{nullptr}; ///< 等待中的协程恢复入口
-        atomic<bool> suspended_{false};       ///< 等待协程是否已确认挂起
 #endif
 
         /**
@@ -351,9 +349,6 @@ struct __future_base {
             status.store_notify_all(status::ready, memory_order_release);
 #ifdef NEFORCE_STANDARD_20
             if (void* handle = take_continuation()) {
-                while (!suspended_.load(memory_order_acquire)) {
-                    this_thread::yield();
-                }
                 coroutine_handle<>::from_address(handle).resume();
             }
 #endif
@@ -381,16 +376,25 @@ struct __future_base {
 
 #ifdef NEFORCE_STANDARD_20
         /**
-         * @brief 登记协程恢复入口
+         * @brief 尝试登记协程恢复入口
          * @param handle 协程句柄地址
+         * @return 登记成功返回 true
          * @note 同一共享状态只允许一个等待者（future 是独占的）
          */
-        void set_continuation(void* handle) noexcept { continuation_.store(handle, memory_order_seq_cst); }
+        NEFORCE_NODISCARD bool try_set_continuation(void* handle) noexcept {
+            void* expected = nullptr;
+            return continuation_.compare_exchange_strong(expected, handle, memory_order_seq_cst);
+        }
 
         /**
-         * @brief 标记等待协程已经完成挂起准备
+         * @brief 尝试撤销自己的协程恢复入口
+         * @param handle 协程句柄地址
+         * @return 撤销成功返回 true；false 表示完成侧已经取走入口
          */
-        void mark_suspended() noexcept { suspended_.store(true, memory_order_release); }
+        NEFORCE_NODISCARD bool clear_continuation(void* handle) noexcept {
+            void* expected = handle;
+            return continuation_.compare_exchange_strong(expected, nullptr, memory_order_seq_cst);
+        }
 
         /**
          * @brief 取走并清空协程恢复入口
@@ -399,8 +403,8 @@ struct __future_base {
             return continuation_.exchange(nullptr, memory_order_seq_cst);
         }
 #else
-        void set_continuation(void* /*handle*/) noexcept {}
-        void mark_suspended() noexcept {}
+        NEFORCE_NODISCARD bool try_set_continuation(void* /*handle*/) noexcept { return false; }
+        NEFORCE_NODISCARD bool clear_continuation(void* /*handle*/) noexcept { return false; }
         NEFORCE_NODISCARD void* take_continuation() noexcept { return nullptr; }
 #endif
 
@@ -869,13 +873,14 @@ protected:
                 state_->wait();
                 return false;
             }
-            state_->set_continuation(handle.address());
+            if (!state_->try_set_continuation(handle.address())) {
+                return false;
+            }
             if (state_->is_ready()) {
-                if (state_->take_continuation() != nullptr) {
+                if (state_->clear_continuation(handle.address())) {
                     return false;
                 }
             }
-            state_->mark_suspended();
             return true;
         }
 
