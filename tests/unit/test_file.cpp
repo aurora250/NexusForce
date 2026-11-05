@@ -2093,6 +2093,7 @@ protected:
             filesystem::remove_all(test_dir_);
         }
         filesystem::create_directories(test_dir_);
+        test_dir_ = test_dir_.canonical();
 
         filesystem::create_directories(test_dir_ / path("empty_dir"));
         filesystem::create_directories(test_dir_ / path("sub1"));

@@ -230,6 +230,63 @@ public:
     NEFORCE_NODISCARD bool empty() const { return manager_ == nullptr; }
 };
 
+
+/**
+ * @struct __function_invoker_result
+ * @brief 类型擦除调用的返回载体
+ *
+ * MSVC ARM64 在返回引用时存在调用约定问题；
+ * 引用返回值改为传递对象地址，由 function::operator() 解引用，避免把地址当作整数返回。
+ */
+template <typename Res>
+struct __function_invoker_result {
+    using type = Res;
+};
+
+template <typename Res>
+struct __function_invoker_result<Res&> {
+    using type = Res*;
+};
+
+template <typename Res, typename F, typename... Args>
+struct __function_invoker {
+    static Res invoke(F* target, Args... args) {
+        return _NEFORCE invoke_r<Res>(*target, _NEFORCE forward<Args>(args)...);
+    }
+};
+
+template <typename Res, typename F, typename... Args>
+struct __function_invoker<Res&, F, Args...> {
+    static Res* invoke(F* target, Args... args) {
+        return _NEFORCE addressof(_NEFORCE invoke_r<Res&>(*target, _NEFORCE forward<Args>(args)...));
+    }
+};
+
+
+template <typename Res>
+struct __function_invoker_access {
+    template <typename Fn>
+    static Res get(Fn&& fn) {
+        return fn();
+    }
+};
+
+template <typename Res>
+struct __function_invoker_access<Res&> {
+    template <typename Fn>
+    static Res& get(Fn&& fn) {
+        return *fn();
+    }
+};
+
+template <>
+struct __function_invoker_access<void> {
+    template <typename Fn>
+    static void get(Fn&& fn) {
+        fn();
+    }
+};
+
 /**
  * @class __function_manage_handler
  * @brief 函数管理处理器模板
@@ -261,8 +318,8 @@ public:
         return false;
     }
 
-    static Res invoke(const storage_data& f, Args... args) {
-        return _NEFORCE invoke_r<Res>(*base_type::get_pointer(f), _NEFORCE forward<Args>(args)...);
+    static typename __function_invoker_result<Res>::type invoke(const storage_data& f, Args... args) {
+        return __function_invoker<Res, F, Args...>::invoke(base_type::get_pointer(f), _NEFORCE forward<Args>(args)...);
     }
 
     template <typename Fn>
@@ -298,7 +355,8 @@ NEFORCE_END_INNER__
 template <typename Res, typename... Args>
 class function<Res(Args...)> : inner::__function_base {
 private:
-    using invoker_type = Res (*)(const inner::storage_data&, Args...); ///< 调用器类型
+    using invoker_type = typename inner::__function_invoker_result<Res>::type (*)(const inner::storage_data&,
+                                                                                  Args...); ///< 调用器类型
 
 private:
     invoker_type invoker_ = nullptr; ///< 调用器函数指针
@@ -472,7 +530,8 @@ public:
         if (empty()) {
             NEFORCE_THROW_EXCEPTION(memory_exception("functional pointing to null."));
         }
-        return invoker_(func_, _NEFORCE forward<Args>(args)...);
+        return inner::__function_invoker_access<Res>::get(
+                [&]() { return invoker_(func_, _NEFORCE forward<Args>(args)...); });
     }
 
     /**

@@ -170,7 +170,9 @@ dynamic_library dynamic_library::load_self() {
     lib.load_mode_ = load_mode::default_;
 #else
     lib.handle_ = ::dlopen(nullptr, RTLD_LAZY | RTLD_LOCAL);
-    lib.path_ = "";
+    // Keep the main executable path so list_symbols() can skip dyld shared-cache images,
+    // whose LC_SYMTAB offsets are not valid against the loaded image base.
+    lib.path_ = program_location();
     lib.load_mode_ = load_mode::default_;
 #endif
     return lib;

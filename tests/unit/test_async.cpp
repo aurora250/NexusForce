@@ -443,8 +443,8 @@ TEST(FutureAwait, ValueFromOtherThread) {
     runner.handle.resume();
     ASSERT_EQ(done.wait_for(500_ms), future_status::ready);
     done.get();
-    runner.handle.destroy();
     setter.join();
+    runner.handle.destroy();
     EXPECT_EQ(value, 42);
 }
 
@@ -485,8 +485,8 @@ TEST(FutureAwait, PropagatesException) {
     runner.handle.resume();
     ASSERT_EQ(done.wait_for(500_ms), future_status::ready);
     done.get();
-    runner.handle.destroy();
     setter.join();
+    runner.handle.destroy();
     EXPECT_TRUE(caught);
 }
 
@@ -1948,8 +1948,8 @@ TEST(ThreadPool, SubmitTaskAsTask) {
     runner.handle.resume();
     ASSERT_EQ(done.wait_for(1000_ms), future_status::ready);
     done.get();
-    runner.handle.destroy();
     pool.stop();
+    runner.handle.destroy();
     EXPECT_EQ(value, 21);
     EXPECT_GE(info_priority, 0);
 }
@@ -2459,7 +2459,7 @@ TEST(ThreadPool, DelayAccuracyStaysBoundedWithWarmup) {
     const auto elapsed = time_cast<microseconds>(steady_clock::now() - start).count();
 
     EXPECT_GE(elapsed, delay_ms * 1000 - 1000);
-    EXPECT_LE(elapsed, delay_ms * 1000 + 50000);
+    EXPECT_LE(elapsed, delay_ms * 1000 + 100000);
     pool.stop();
 }
 

@@ -378,6 +378,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 MSVC ARM64 上 `function<const T&()>` 将引用按整数返回的问题：引用返回类型改为携带对象地址的类型擦除调用，函数入口解引用后再返回
+- 修复 macOS `dynamic_library::load_self().list_symbols()` 扫描 dyld shared-cache 镜像时使用无效 LC_SYMTAB 文件偏移导致段错误：load_self 记录主程序路径以只扫描主可执行文件
 - 修复协程测试 `await_runner` 在 `return_void` 阶段就发布完成、主线程可能在协程到达 final suspend 前销毁帧的问题：完成/异常改由 `final_awaiter::await_suspend` 在协程已挂起后发布，避免 macOS ARM64 上的挂起/堆损坏
 - 修复 FreeBSD CI 在 Release 构建下仍查找 Debug 后缀 `libNexusForced.so` 的问题：按实际 `libNexusForce*.so.*.*` 拷贝并以 SONAME `libNexusForce.so.2` 放入 VM
 - 修复 CodeQL 报告的图表缩放乘法在转换为 `decimal_t` 前以较窄类型计算的问题，并清理动态库/硬件/流程图中的恒真比较、浮点相等比较、可简化的 switch 与过大函数块

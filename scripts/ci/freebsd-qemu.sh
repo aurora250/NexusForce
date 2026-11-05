@@ -21,7 +21,7 @@ case "$arch" in
         qemu=qemu-system-x86_64
         image_arch=amd64
         image_name="FreeBSD-${version}-RELEASE-amd64-BASIC-CLOUDINIT-ufs.qcow2.xz"
-        machine_args=(-machine q35 -accel tcg,thread=multi -cpu qemu64 -smp 2 -m 2048
+        machine_args=(-machine q35 -accel tcg,thread=multi -cpu max -smp 2 -m 2048
                       -object rng-random,filename=/dev/urandom,id=rng0
                       -device virtio-rng-pci,rng=rng0)
         ;;
