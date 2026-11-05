@@ -29,12 +29,14 @@ TEST(TerminateTest, ImmediateExitStatus) { EXPECT_EXIT(immediate_exit(7), ::test
 TEST(TerminateTest, QuickExitStatus) { EXPECT_EXIT(neforce::quick_exit(99), ::testing::ExitedWithCode(99), ".*"); }
 
 TEST(TerminateTest, TerminateCallsHandlerAndAborts) {
+    const auto previous = neforce::get_terminate();
     neforce::set_terminate([]() { eprint("custom_terminate"); });
 #ifdef NEFORCE_PLATFORM_WINDOWS
     EXPECT_EXIT(neforce::terminate(), ::testing::ExitedWithCode(3), "custom_terminate");
 #else
     EXPECT_EXIT(neforce::terminate(), ::testing::KilledBySignal(SIGABRT), "custom_terminate");
 #endif
+    neforce::set_terminate(previous);
 }
 
 TEST(TerminateTest, GetTerminateReturnsInstalledHandler) {

@@ -315,6 +315,23 @@ private:
     }
 
     /**
+     * @brief 计算键的混合哈希值
+     * @param key 键
+     * @return 用于定位槽位与 H2 标签的哈希值
+     */
+    NEFORCE_NODISCARD size_type mixed_hash(const key_type& key) const noexcept(is_nothrow_hashable_v<key_type>) {
+        auto h = static_cast<size_t>(hasher_(key));
+#ifdef NEFORCE_ARCH_BITS_64
+        h *= 0x9E3779B97F4A7C15ULL;
+        h ^= h >> 32;
+#else
+        h *= 0x9E3779B9U;
+        h ^= h >> 16;
+#endif
+        return h;
+    }
+
+    /**
      * @brief 从哈希值计算初始探测索引（H1）
      * @param hash 哈希值
      * @return 初始槽位索引
@@ -563,7 +580,6 @@ private:
             }
 
             int match = simd::to_bitmask(simd::match_bytes(meta_vec, h2_vec));
-            const int empty_mask = simd::to_bitmask(simd::match_bytes(meta_vec, empty_vec));
 
             while (match != 0) {
                 const int bit = countr_zero(static_cast<uintptr_t>(match));
@@ -574,7 +590,7 @@ private:
                 match &= (match - 1);
             }
 
-            if (empty_mask != 0) {
+            if (simd::to_bitmask(simd::match_bytes(meta_vec, empty_vec)) != 0) {
                 return npos;
             }
             idx = (idx + FLAT_HT_GROUP) & (capacity_ - 1);
@@ -701,7 +717,7 @@ private:
             for (size_t i = 0; i < old_capacity; ++i) {
                 if (old_metadata[i] != FLAT_HT_EMPTY && old_metadata[i] != FLAT_HT_DELETED) {
                     const key_type& key = extracter_(old_data[i]);
-                    const size_t hash = hasher_(key);
+                    const size_t hash = mixed_hash(key);
                     const byte_t h2 = hash_to_h2(hash);
                     const size_t h1 = (hash >> 7) & (new_capacity - 1);
 
@@ -1444,7 +1460,7 @@ public:
 
         value_type tmp(_NEFORCE forward<Args>(args)...);
         const key_type& key = extracter_(tmp);
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         const byte_t h2 = hash_to_h2(hash);
 
 #ifdef NEFORCE_SIMD_SSE2
@@ -1481,7 +1497,7 @@ public:
 
         value_type tmp(_NEFORCE forward<Args>(args)...);
         const key_type& key = extracter_(tmp);
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         const byte_t h2 = hash_to_h2(hash);
         const size_t h1 = hash_to_index(hash);
 
@@ -1644,7 +1660,7 @@ public:
             return 0;
         }
 
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         const byte_t h2 = hash_to_h2(hash);
         size_t idx = hash_to_index(hash);
         size_type erased = 0;
@@ -1797,7 +1813,7 @@ public:
         if (capacity_ == 0) {
             return end();
         }
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         const size_type idx = probe_find(hash, key, hash_to_h2(hash));
         return idx == npos ? end() : iterator(idx, this);
     }
@@ -1811,7 +1827,7 @@ public:
         if (capacity_ == 0) {
             return cend();
         }
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         const size_type idx = probe_find(hash, key, hash_to_h2(hash));
         return idx == npos ? cend() : const_iterator(idx, this);
     }
@@ -1825,7 +1841,7 @@ public:
         if (capacity_ == 0) {
             return 0;
         }
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         return probe_count(hash, key, hash_to_h2(hash));
     }
 
@@ -1838,7 +1854,7 @@ public:
         if (capacity_ == 0) {
             return false;
         }
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         return probe_find(hash, key, hash_to_h2(hash)) != npos;
     }
 
@@ -1851,7 +1867,7 @@ public:
         if (capacity_ == 0) {
             return {end(), end()};
         }
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         const byte_t h2 = hash_to_h2(hash);
         size_t idx = hash_to_index(hash);
 
@@ -1898,7 +1914,7 @@ public:
         if (capacity_ == 0) {
             return {cend(), cend()};
         }
-        const size_t hash = hasher_(key);
+        const size_t hash = mixed_hash(key);
         const byte_t h2 = hash_to_h2(hash);
         size_t idx = hash_to_index(hash);
 

@@ -165,6 +165,9 @@
 
 ### 🔧 Improvements
 
+- `hash` 的整数（含字符、枚举）特化与标准库对齐为恒等映射，链地址哈希表因而省去每次查找/插入的位混合开销；需要低位扩散的组件自行混合
+- `hashtable`（链地址）改为"桶内链表 + 全局插入序双向链表"共享同一后继指针：迭代由按桶序跳访节点改为沿插入序前进，遍历局部性显著改善，且 `erase(iterator)` 由遍历桶链表变为 O(1) 摘链
+- `flat_hashtable` 的 `probe_find` 命中路径延迟计算 EMPTY 掩码（命中首个候选槽即返回），省去一次向量比较与一次掩码提取
 - vcpkg 缓存改为按 ABI 命名空间（runner 镜像、triplet、manifest/toolchain）恢复，并按归档目录指纹保存新条目
 - `system_event` 重命名为 `waitable_event`，修复 `is_set()` 数据竞争、Windows 原生句柄状态查询、POSIX 超时使用 `steady_clock`，并为 moved-from 对象增加保护
 - `tim_sort` 重写，run 识别、32..64 minrun、二分插入、run 栈合并、最终强制归并与指数搜索 galloping
@@ -378,6 +381,7 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `memory_move` 在源与目标区间重叠时仍走 `memory_copy_large`（该路径按 32 字节对齐头部整块存储，会覆盖尚未读取的源数据）造成的**静默数据损坏**：仅当两段区间不重叠时才使用批量传送，重叠时回退到逐块加载/存储的 SIMD 循环
 - 修复 BSD-like futex 仅使用全局 `pthread_cond` 的问题：FreeBSD 使用 `_umtx_op`，macOS 使用 `__ulock_wait`/`__ulock_wake` 按地址等待唤醒；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
 - 修复 macOS `dynamic_library::list_symbols()` 对主可执行文件/共享缓存镜像的 Mach-O 边界处理：始终处理主镜像、按路径过滤其它镜像，并限制字符串表读取长度
 - 修复 MSVC ARM64 上 `function<const T&()>` 将引用按整数返回的问题：引用返回类型改为携带对象地址的类型擦除调用，函数入口解引用后再返回

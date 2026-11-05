@@ -144,7 +144,8 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename T>
 struct hashtable_node {
-    hashtable_node* next = nullptr; ///< 指向下一个节点的指针
+    hashtable_node* next = nullptr; ///< 全局链表后继指针，最低位用作"所在桶链表结束"标记
+    hashtable_node* prev = nullptr; ///< 全局链表前驱指针
     T data;                         ///< 节点存储的数据
 
     /**
@@ -184,7 +185,6 @@ private:
     using node_type = hashtable_node<value_type>; ///< 节点类型
 
     node_type* current_ = nullptr;              ///< 当前节点指针
-    size_type bucket_ = 0;                      ///< 当前桶索引
     const container_type* container_ = nullptr; ///< 关联容器指针
 
     template <typename, typename, typename, typename, typename, typename>
@@ -202,12 +202,10 @@ public:
     /**
      * @brief 构造函数
      * @param ptr 节点指针
-     * @param bucket 桶索引
      * @param ht 哈希表指针
      */
-    hashtable_iterator(node_type* ptr, const size_type bucket, const HashTable* ht) :
+    hashtable_iterator(node_type* ptr, const HashTable* ht) :
     current_(ptr),
-    bucket_(bucket),
     container_(ht) {}
 
     /**
@@ -216,24 +214,15 @@ public:
      */
     NEFORCE_NODISCARD reference dereference() const noexcept {
         NEFORCE_DEBUG_VERIFY(current_ && container_, "Attempting to dereference on a null pointer");
-        NEFORCE_DEBUG_VERIFY(bucket_ < container_->buckets_.size() && 0 <= bucket_,
-                             "Attempting to dereference out of boundary");
         return current_->data;
     }
 
     /**
      * @brief 递增操作
-     *
-     * 移动到当前链表的下一个节点，如果当前链表结束，则查找下一个非空桶。
      */
     void increment() noexcept {
         NEFORCE_DEBUG_VERIFY(current_ && container_, "Attempting to increment a null pointer");
-        current_ = current_->next;
-        if (current_ == nullptr) {
-            while (current_ == nullptr && ++bucket_ < container_->buckets_.size()) {
-                current_ = container_->buckets_[bucket_];
-            }
-        }
+        current_ = container_type::next_of(current_);
     }
 
     /**
@@ -256,7 +245,10 @@ public:
      * @brief 获取桶索引
      * @return 当前桶索引
      */
-    NEFORCE_NODISCARD size_type bucket() const noexcept { return bucket_; }
+    NEFORCE_NODISCARD size_type bucket() const noexcept {
+        NEFORCE_DEBUG_VERIFY(container_ != nullptr, "Attempting to access bucket of a null iterator");
+        return container_->bucket_index(container_->extracter_(current_->data));
+    }
 
     /**
      * @brief 获取关联容器
@@ -430,6 +422,8 @@ private:
     using bucket_container = vector<link_type, bucket_allocator>;
 
     bucket_container buckets_{};                                                 ///< 桶数组
+    link_type head_ = nullptr;                                                   ///< 全局链表首节点
+    link_type tail_ = nullptr;                                                   ///< 全局链表尾节点
     size_type size_ = 0;                                                         ///< 元素数量
     hasher hasher_{};                                                            ///< 哈希函数对象
     key_equal equals_{};                                                         ///< 键相等比较对象
@@ -471,6 +465,105 @@ private:
     void initialize_buckets(const size_type n) {
         const size_type n_buckets = next_size(n);
         buckets_.assign(n_buckets, nullptr);
+    }
+
+    /**
+     * @brief 取节点在全局链表中的后继
+     * @param n 节点
+     * @return 后继节点
+     */
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE static link_type next_of(const link_type n) noexcept {
+        return reinterpret_cast<link_type>(reinterpret_cast<uintptr_t>(n->next) & ~static_cast<uintptr_t>(1));
+    }
+
+    /**
+     * @brief 判断节点是否为其所属桶链表的最后一个
+     * @param n 节点
+     * @return 是否桶链表结束
+     */
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE static bool run_end(const link_type n) noexcept {
+        return (reinterpret_cast<uintptr_t>(n->next) & static_cast<uintptr_t>(1)) != 0;
+    }
+
+    /**
+     * @brief 设置节点的全局后继与桶链表结束标记
+     * @param n 节点
+     * @param nxt 后继节点
+     * @param is_end 是否为所属桶链表的最后一个
+     */
+    NEFORCE_ALWAYS_INLINE_INLINE static void set_next(const link_type n, const link_type nxt,
+                                                      const bool is_end) noexcept {
+        n->next =
+                reinterpret_cast<link_type>(reinterpret_cast<uintptr_t>(nxt) | static_cast<uintptr_t>(is_end ? 1 : 0));
+    }
+
+    /**
+     * @brief 把节点作为一个新桶链表追加到全局链表尾部
+     * @param n 节点
+     */
+    void link_new_run(const link_type n) noexcept {
+        set_next(n, nullptr, true);
+        n->prev = tail_;
+        if (tail_ != nullptr) {
+            set_next(tail_, n, true);
+        } else {
+            head_ = n;
+        }
+        tail_ = n;
+    }
+
+    /**
+     * @brief 把节点插入到指定桶链表头部之前
+     * @param run_head 该桶链表当前头节点
+     * @param n 新节点
+     */
+    void link_run_front(const link_type run_head, const link_type n) noexcept {
+        link_type before = run_head->prev;
+        set_next(n, run_head, false);
+        n->prev = before;
+        run_head->prev = n;
+        if (before != nullptr) {
+            set_next(before, n, run_end(before));
+        } else {
+            head_ = n;
+        }
+    }
+
+    /**
+     * @brief 把节点插入到指定桶链表尾部之后
+     * @param run_tail 该桶链表当前尾节点
+     * @param n 新节点
+     */
+    void link_run_back(const link_type run_tail, const link_type n) noexcept {
+        link_type after = next_of(run_tail);
+        set_next(n, after, run_end(run_tail));
+        set_next(run_tail, n, false);
+        n->prev = run_tail;
+        if (after != nullptr) {
+            after->prev = n;
+        } else {
+            tail_ = n;
+        }
+    }
+
+    /**
+     * @brief 从全局链表摘除节点
+     * @param n 节点
+     */
+    void unlink_node(const link_type n) noexcept {
+        link_type before = n->prev;
+        link_type after = next_of(n);
+        const bool end = run_end(n);
+        if (before != nullptr) {
+            set_next(before, after, run_end(before) || end);
+        } else {
+            head_ = after;
+        }
+        if (after != nullptr) {
+            after->prev = before;
+        } else {
+            tail_ = before;
+        }
     }
 
     /**
@@ -531,16 +624,18 @@ private:
      */
     void copy_from(const hashtable& other) {
         buckets_.assign(other.buckets_.size(), nullptr);
+        head_ = nullptr;
+        tail_ = nullptr;
         try {
-            for (size_type i = 0; i < other.buckets_.size(); ++i) {
-                if (link_type cur = other.buckets_[i]) {
-                    link_type copy = hashtable::new_node(cur->data);
-                    buckets_[i] = copy;
-                    for (link_type next = cur->next; next != nullptr; cur = next, next = cur->next) {
-                        copy->next = hashtable::new_node(next->data);
-                        copy = copy->next;
-                    }
+            for (link_type cur = other.head_; cur != nullptr; cur = hashtable::next_of(cur)) {
+                const size_type n = hashtable::bucket_index_value(cur->data, buckets_.size());
+                link_type copy = hashtable::new_node(cur->data);
+                if (buckets_[n] != nullptr) {
+                    hashtable::link_run_front(buckets_[n], copy);
+                } else {
+                    hashtable::link_new_run(copy);
                 }
+                buckets_[n] = copy;
             }
             size_ = other.size_;
         } catch (...) {
@@ -557,20 +652,24 @@ private:
     pair<iterator, bool> insert_unique_noresize(link_type ptr) {
         const size_type n = hashtable::bucket_index_value(ptr->data, buckets_.size());
 
-        node_type** buckets_ptr = &buckets_[n];
-        while (*buckets_ptr != nullptr) {
-            if (equals_(extracter_((*buckets_ptr)->data), extracter_(ptr->data))) {
-                link_type existing = *buckets_ptr;
+        for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
+            if (equals_(extracter_(cur->data), extracter_(ptr->data))) {
                 hashtable::delete_node(ptr);
-                return {iterator(existing, n, this), false};
+                return {iterator(cur, this), false};
             }
-            buckets_ptr = &(*buckets_ptr)->next;
+            if (hashtable::run_end(cur)) {
+                break;
+            }
         }
 
-        ptr->next = nullptr;
-        *buckets_ptr = ptr;
+        if (buckets_[n] != nullptr) {
+            hashtable::link_run_front(buckets_[n], ptr);
+        } else {
+            hashtable::link_new_run(ptr);
+        }
+        buckets_[n] = ptr;
         ++size_;
-        return {iterator{ptr, n, this}, true};
+        return {iterator(ptr, this), true};
     }
 
     /**
@@ -580,25 +679,28 @@ private:
      */
     iterator insert_equal_noresize(link_type ptr) {
         const size_type n = hashtable::bucket_index_value(ptr->data, buckets_.size());
-        link_type first = buckets_[n];
 
-        link_type prev = nullptr;
-        link_type cur = first;
-        while (cur != nullptr && equals_(extracter_(cur->data), extracter_(ptr->data))) {
-            prev = cur;
-            cur = cur->next;
+        link_type last_equal = nullptr;
+        for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
+            if (equals_(extracter_(cur->data), extracter_(ptr->data))) {
+                last_equal = cur;
+            }
+            if (hashtable::run_end(cur)) {
+                break;
+            }
         }
 
-        if (prev != nullptr) {
-            prev->next = ptr;
-            ptr->next = cur;
+        if (last_equal != nullptr) {
+            hashtable::link_run_back(last_equal, ptr);
+        } else if (buckets_[n] != nullptr) {
+            hashtable::link_run_front(buckets_[n], ptr);
+            buckets_[n] = ptr;
         } else {
-            ptr->next = first;
+            hashtable::link_new_run(ptr);
             buckets_[n] = ptr;
         }
-
         ++size_;
-        return {ptr, n, this};
+        return iterator(ptr, this);
     }
 
     /**
@@ -669,79 +771,6 @@ private:
             hashtable::insert_equal_noresize(tmp);
         }
         return;
-    }
-
-    /**
-     * @brief 删除桶中从开头到指定节点的节点
-     * @param bucket 桶索引
-     * @param last 结束节点（不删除）
-     * @return 删除的节点数量
-     */
-    size_type erase_bucket_to_node(size_type bucket, link_type last) noexcept {
-        size_type count = 0;
-        link_type curr = buckets_[bucket];
-        while (curr != nullptr && curr != last) {
-            link_type next = curr->next;
-            hashtable::delete_node(curr);
-            curr = next;
-            ++count;
-        }
-        buckets_[bucket] = last;
-        return count;
-    }
-
-    /**
-     * @brief 删除桶中指定范围内的节点
-     * @param bucket 桶索引
-     * @param first 起始节点
-     * @param last 结束节点（不删除）
-     * @return 删除的节点数量
-     */
-    size_type erase_bucket_range(size_type bucket, link_type first, link_type last) noexcept {
-        size_type count = 0;
-        if (first == nullptr) {
-            return 0;
-        }
-
-        if (buckets_[bucket] == first) {
-            count += hashtable::erase_bucket_to_node(bucket, last);
-        } else {
-            link_type prev = buckets_[bucket];
-            while (prev != nullptr && prev->next != first) {
-                prev = prev->next;
-            }
-            if (prev == nullptr) {
-                return 0;
-            }
-
-            link_type curr = first;
-            while (curr != nullptr && curr != last) {
-                link_type next = curr->next;
-                prev->next = next;
-                hashtable::delete_node(curr);
-                curr = next;
-                ++count;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * @brief 删除桶中的所有节点
-     * @param bucket 桶索引
-     * @return 删除的节点数量
-     */
-    size_type erase_bucket_completely(size_type bucket) noexcept {
-        size_type count = 0;
-        link_type curr = buckets_[bucket];
-        while (curr != nullptr) {
-            link_type next = curr->next;
-            hashtable::delete_node(curr);
-            curr = next;
-            ++count;
-        }
-        buckets_[bucket] = nullptr;
-        return count;
     }
 
     /**
@@ -846,11 +875,11 @@ private:
     }
 
     static iterator to_iterator(const const_iterator& iter) noexcept {
-        return iterator(const_cast<node_type*>(iter.base()), iter.bucket(), iter.container());
+        return iterator(const_cast<node_type*>(iter.base()), iter.container());
     }
 
     static const_iterator to_const_iterator(const iterator& iter) noexcept {
-        return const_iterator(const_cast<node_type*>(iter.base()), iter.bucket(), iter.container());
+        return const_iterator(const_cast<node_type*>(iter.base()), iter.container());
     }
 
     void copy_assign_impl(const hashtable& other, true_type /*pocca*/) {
@@ -893,7 +922,11 @@ private:
         _NEFORCE swap(extracter_, other.extracter_);
         pair_.swap(other.pair_);
         buckets_ = _NEFORCE move(other.buckets_);
+        head_ = other.head_;
+        tail_ = other.tail_;
         size_ = other.size_;
+        other.head_ = nullptr;
+        other.tail_ = nullptr;
         other.size_ = 0;
     }
 
@@ -903,6 +936,8 @@ private:
             _NEFORCE swap(equals_, other.equals_);
             _NEFORCE swap(extracter_, other.extracter_);
             buckets_.swap(other.buckets_);
+            _NEFORCE swap(head_, other.head_);
+            _NEFORCE swap(tail_, other.tail_);
             _NEFORCE swap(size_, other.size_);
             _NEFORCE swap(pair_.value, other.pair_.value);
         } else {
@@ -927,6 +962,8 @@ private:
         _NEFORCE swap(equals_, other.equals_);
         _NEFORCE swap(extracter_, other.extracter_);
         buckets_.swap(other.buckets_);
+        _NEFORCE swap(head_, other.head_);
+        _NEFORCE swap(tail_, other.tail_);
         _NEFORCE swap(size_, other.size_);
         pair_.swap(other.pair_);
     }
@@ -939,6 +976,8 @@ private:
         _NEFORCE swap(equals_, other.equals_);
         _NEFORCE swap(extracter_, other.extracter_);
         buckets_.swap(other.buckets_);
+        _NEFORCE swap(head_, other.head_);
+        _NEFORCE swap(tail_, other.tail_);
         _NEFORCE swap(size_, other.size_);
     }
 
@@ -1017,11 +1056,15 @@ public:
      */
     hashtable(hashtable&& other) noexcept(noexcept(hashtable::swap(other))) :
     buckets_(_NEFORCE move(other.buckets_)),
+    head_(other.head_),
+    tail_(other.tail_),
     size_(other.size_),
     hasher_(_NEFORCE move(other.hasher_)),
     equals_(_NEFORCE move(other.equals_)),
     extracter_(_NEFORCE move(other.extracter_)),
     pair_(_NEFORCE move(other.pair_)) {
+        other.head_ = nullptr;
+        other.tail_ = nullptr;
         other.size_ = 0;
     }
 
@@ -1152,20 +1195,13 @@ public:
      * @brief 获取起始迭代器
      * @return 指向第一个元素的迭代器
      */
-    NEFORCE_NODISCARD iterator begin() noexcept {
-        for (size_type n = 0; n < buckets_.size(); ++n) {
-            if (buckets_[n] != nullptr) {
-                return iterator(buckets_[n], n, this);
-            }
-        }
-        return end();
-    }
+    NEFORCE_NODISCARD iterator begin() noexcept { return iterator(head_, this); }
 
     /**
      * @brief 获取结束迭代器
      * @return 指向末尾的迭代器
      */
-    NEFORCE_NODISCARD iterator end() noexcept { return iterator(nullptr, 0, this); }
+    NEFORCE_NODISCARD iterator end() noexcept { return iterator(nullptr, this); }
 
     /**
      * @brief 获取常量起始迭代器
@@ -1183,20 +1219,13 @@ public:
      * @brief 获取常量起始迭代器
      * @return 指向第一个元素的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cbegin() const noexcept {
-        for (size_type n = 0; n < buckets_.size(); ++n) {
-            if (buckets_[n] != nullptr) {
-                return const_iterator(buckets_[n], n, this);
-            }
-        }
-        return cend();
-    }
+    NEFORCE_NODISCARD const_iterator cbegin() const noexcept { return const_iterator(head_, this); }
 
     /**
      * @brief 获取常量结束迭代器
      * @return 指向末尾的常量迭代器
      */
-    NEFORCE_NODISCARD const_iterator cend() const noexcept { return const_iterator(nullptr, 0, this); }
+    NEFORCE_NODISCARD const_iterator cend() const noexcept { return const_iterator(nullptr, this); }
 
     /**
      * @brief 获取元素数量
@@ -1251,9 +1280,13 @@ public:
      * @return 桶中的元素数量
      */
     NEFORCE_NODISCARD size_type bucket_size(size_type index) const noexcept {
+        NEFORCE_DEBUG_VERIFY(index < buckets_.size(), "hashtable bucket index out of range");
         size_type result = 0;
-        for (link_type cur = buckets_[index]; cur != nullptr; cur = cur->next) {
-            result++;
+        for (link_type cur = buckets_[index]; cur != nullptr; cur = hashtable::next_of(cur)) {
+            ++result;
+            if (hashtable::run_end(cur)) {
+                break;
+            }
         }
         return result;
     }
@@ -1298,36 +1331,27 @@ public:
      * @param new_size 目标桶数量
      */
     void rehash(const size_type new_size) {
-        const auto min_buckets_for_size =
-                static_cast<size_type>(_NEFORCE ceil(static_cast<double>(size_) / max_load_factor()));
-        const size_type target = _NEFORCE max(new_size, min_buckets_for_size);
-        const size_type old_size = buckets_.size();
-
-        if (target <= old_size) {
+        const size_type target = max(new_size, static_cast<size_type>(static_cast<float>(size_) / max_load_factor()));
+        if (target <= buckets_.size()) {
             return;
         }
+        const size_type n = next_size(target);
+        bucket_container new_buckets(n, nullptr, bucket_allocator(pair_.get_base()));
 
-        const size_type n = hashtable::next_size(target);
-        if (n < target) {
-            NEFORCE_THROW_EXCEPTION(value_exception("hashtable size exceeds max count"));
-        }
-
-        bucket_container new_buckets(n, nullptr, buckets_.get_allocator());
-
-        for (size_type bucket = 0; bucket < old_size; ++bucket) {
-            link_type cur = buckets_[bucket];
-            while (cur != nullptr) {
-                link_type next = cur->next;
-                const size_type new_bucket = hashtable::bucket_index_value(cur->data, n);
-
-                cur->next = new_buckets[new_bucket];
-                new_buckets[new_bucket] = cur;
-
-                cur = next;
+        link_type old_head = head_;
+        head_ = nullptr;
+        tail_ = nullptr;
+        for (link_type cur = old_head; cur != nullptr;) {
+            link_type next_node = hashtable::next_of(cur);
+            const size_type b = hashtable::bucket_index_value(cur->data, n);
+            if (new_buckets[b] != nullptr) {
+                hashtable::link_run_front(new_buckets[b], cur);
+            } else {
+                hashtable::link_new_run(cur);
             }
-            buckets_[bucket] = nullptr;
+            new_buckets[b] = cur;
+            cur = next_node;
         }
-
         buckets_.swap(new_buckets);
     }
 
@@ -1452,35 +1476,30 @@ public:
      * @return 删除的元素数量
      */
     size_type erase(const key_type& key) noexcept(is_nothrow_hashable_v<key_type>) {
+        if (buckets_.empty()) {
+            return 0;
+        }
         const size_type n = hashtable::bucket_index_key(key, buckets_.size());
-        link_type first = buckets_[n];
         size_type erased = 0;
+        link_type cur = buckets_[n];
 
-        if (first != nullptr) {
-            link_type cur = first;
-            link_type next = cur->next;
-
-            while (next != nullptr) {
-                if (equals_(extracter_(next->data), key)) {
-                    cur->next = next->next;
-                    hashtable::delete_node(next);
-                    next = cur->next;
-                    ++erased;
-                    --size_;
-                } else {
-                    cur = next;
-                    next = cur->next;
+        while (cur != nullptr) {
+            link_type nxt = hashtable::next_of(cur);
+            const bool stop = hashtable::run_end(cur);
+            if (equals_(extracter_(cur->data), key)) {
+                if (buckets_[n] == cur) {
+                    buckets_[n] = stop ? nullptr : nxt;
                 }
-            }
-
-            if (equals_(extracter_(first->data), key)) {
-                buckets_[n] = first->next;
-                hashtable::delete_node(first);
+                hashtable::unlink_node(cur);
+                hashtable::delete_node(cur);
                 ++erased;
                 --size_;
             }
+            if (stop) {
+                break;
+            }
+            cur = nxt;
         }
-
         return erased;
     }
 
@@ -1493,41 +1512,19 @@ public:
         if (position.current_ == nullptr || position.container_ != this) {
             return end();
         }
+        link_type p = position.current_;
+        const size_type n = hashtable::bucket_index_value(p->data, buckets_.size());
+        link_type nxt = hashtable::next_of(p);
+        const bool stop = hashtable::run_end(p);
 
-        const size_type n = position.bucket_;
-        link_type const p = position.current_;
-        link_type next_node = p->next;
-
-        link_type prev = nullptr;
-        link_type curr = buckets_[n];
-        while (curr != nullptr && curr != p) {
-            prev = curr;
-            curr = curr->next;
+        if (buckets_[n] == p) {
+            buckets_[n] = stop ? nullptr : nxt;
         }
-
-        if (curr == nullptr) {
-            return end();
-        }
-
-        if (prev == nullptr) {
-            buckets_[n] = next_node;
-        } else {
-            prev->next = next_node;
-        }
-
+        hashtable::unlink_node(p);
         hashtable::delete_node(p);
         --size_;
 
-        if (next_node != nullptr) {
-            return iterator(next_node, n, this);
-        }
-
-        for (size_type bucket = n + 1; bucket < buckets_.size(); ++bucket) {
-            if (buckets_[bucket] != nullptr) {
-                return iterator(buckets_[bucket], bucket, this);
-            }
-        }
-        return end();
+        return nxt == nullptr ? end() : iterator(nxt, this);
     }
 
     /**
@@ -1540,26 +1537,13 @@ public:
         if (first == last) {
             return last;
         }
-
         if (first.container_ != this || (last.container_ != this && last != end())) {
             return end();
         }
-
-        size_type count_erased = 0;
-
-        if (first.bucket_ == last.bucket_) {
-            count_erased = hashtable::erase_bucket_range(first.bucket_, first.current_, last.current_);
-        } else {
-            count_erased += hashtable::erase_bucket_range(first.bucket_, first.current_, nullptr);
-            for (size_type bucket = first.bucket_ + 1; bucket < last.bucket_; ++bucket) {
-                count_erased += hashtable::erase_bucket_completely(bucket);
-            }
-            if (last.bucket_ < buckets_.size()) {
-                count_erased += hashtable::erase_bucket_range(last.bucket_, buckets_[last.bucket_], last.current_);
-            }
+        while (first != last) {
+            first = hashtable::erase(first);
         }
-        size_ -= count_erased;
-        return last;
+        return first;
     }
 
     /**
@@ -1586,13 +1570,15 @@ public:
      * @brief 清空哈希表
      */
     void clear() noexcept {
+        link_type cur = head_;
+        while (cur != nullptr) {
+            link_type nxt = hashtable::next_of(cur);
+            hashtable::delete_node(cur);
+            cur = nxt;
+        }
+        head_ = nullptr;
+        tail_ = nullptr;
         for (size_type i = 0; i < buckets_.size(); ++i) {
-            link_type cur = buckets_[i];
-            while (cur != nullptr) {
-                link_type next = cur->next;
-                hashtable::delete_node(cur);
-                cur = next;
-            }
             buckets_[i] = nullptr;
         }
         size_ = 0;
@@ -1607,11 +1593,13 @@ public:
         if (buckets_.empty()) {
             return end();
         }
-
-        size_type n = hashtable::bucket_index_key(key, buckets_.size());
-        for (link_type first = buckets_[n]; first != nullptr; first = first->next) {
-            if (equals_(extracter_(first->data), key)) {
-                return iterator(first, n, this);
+        const size_type n = hashtable::bucket_index_key(key, buckets_.size());
+        for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
+            if (equals_(extracter_(cur->data), key)) {
+                return iterator(cur, this);
+            }
+            if (hashtable::run_end(cur)) {
+                break;
             }
         }
         return end();
@@ -1626,11 +1614,13 @@ public:
         if (buckets_.empty()) {
             return cend();
         }
-
-        size_type n = hashtable::bucket_index_key(key, buckets_.size());
-        for (link_type first = buckets_[n]; first != nullptr; first = first->next) {
-            if (equals_(extracter_(first->data), key)) {
-                return const_iterator(first, n, this);
+        const size_type n = hashtable::bucket_index_key(key, buckets_.size());
+        for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
+            if (equals_(extracter_(cur->data), key)) {
+                return const_iterator(cur, this);
+            }
+            if (hashtable::run_end(cur)) {
+                break;
             }
         }
         return cend();
@@ -1647,9 +1637,12 @@ public:
         }
         const size_type n = hashtable::bucket_index_key(key, buckets_.size());
         size_type result = 0;
-        for (link_type cur = buckets_[n]; cur != nullptr; cur = cur->next) {
+        for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
             if (equals_(extracter_(cur->data), key)) {
                 ++result;
+            }
+            if (hashtable::run_end(cur)) {
+                break;
             }
         }
         return result;
@@ -1673,39 +1666,26 @@ public:
         if (buckets_.empty()) {
             return {end(), end()};
         }
-
         const size_type n = hashtable::bucket_index_key(key, buckets_.size());
-
-        link_type first = buckets_[n];
-        while (first && !equals_(extracter_(first->data), key)) {
-            first = first->next;
+        link_type first = nullptr;
+        link_type last = nullptr;
+        for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
+            if (equals_(extracter_(cur->data), key)) {
+                if (first == nullptr) {
+                    first = cur;
+                }
+                last = cur;
+            } else if (first != nullptr) {
+                break;
+            }
+            if (hashtable::run_end(cur)) {
+                break;
+            }
         }
-
         if (first == nullptr) {
             return {end(), end()};
         }
-
-        link_type last = first;
-        while (last && equals_(extracter_(last->data), key)) {
-            last = last->next;
-        }
-
-        iterator second_it;
-        if (last != nullptr) {
-            second_it = iterator(last, n, this);
-        } else {
-            size_type next_bucket = n + 1;
-            while (next_bucket < buckets_.size() && buckets_[next_bucket] == nullptr) {
-                ++next_bucket;
-            }
-            if (next_bucket < buckets_.size()) {
-                second_it = iterator(buckets_[next_bucket], next_bucket, this);
-            } else {
-                second_it = end();
-            }
-        }
-
-        return {iterator(first, n, this), second_it};
+        return {iterator(first, this), iterator(hashtable::next_of(last), this)};
     }
 
     /**
@@ -1717,39 +1697,26 @@ public:
         if (buckets_.empty()) {
             return {cend(), cend()};
         }
-
         const size_type n = hashtable::bucket_index_key(key, buckets_.size());
-
-        link_type first = buckets_[n];
-        while (first && !equals_(extracter_(first->data), key)) {
-            first = first->next;
+        link_type first = nullptr;
+        link_type last = nullptr;
+        for (link_type cur = buckets_[n]; cur != nullptr; cur = hashtable::next_of(cur)) {
+            if (equals_(extracter_(cur->data), key)) {
+                if (first == nullptr) {
+                    first = cur;
+                }
+                last = cur;
+            } else if (first != nullptr) {
+                break;
+            }
+            if (hashtable::run_end(cur)) {
+                break;
+            }
         }
-
         if (first == nullptr) {
             return {cend(), cend()};
         }
-
-        link_type last = first;
-        while (last && equals_(extracter_(last->data), key)) {
-            last = last->next;
-        }
-
-        const_iterator second_it;
-        if (last != nullptr) {
-            second_it = const_iterator(last, n, this);
-        } else {
-            size_type next_bucket = n + 1;
-            while (next_bucket < buckets_.size() && buckets_[next_bucket] == nullptr) {
-                ++next_bucket;
-            }
-            if (next_bucket < buckets_.size()) {
-                second_it = const_iterator(buckets_[next_bucket], next_bucket, this);
-            } else {
-                second_it = cend();
-            }
-        }
-
-        return {const_iterator(first, n, this), second_it};
+        return {const_iterator(first, this), const_iterator(hashtable::next_of(last), this)};
     }
 
     /**

@@ -210,7 +210,7 @@ private:
      * 使用双哈希技术生成k个哈希值。
      */
     pair<size_t, size_t> hash_values(const T& key) const noexcept {
-        size_t h1 = hasher_(key);
+        size_t h1 = low_level_hash(static_cast<size_t>(hasher_(key)));
         size_t h2 = rotate_l(h1, 17);
         if (h2 == 0) {
             h2 = 1;

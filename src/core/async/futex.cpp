@@ -141,7 +141,6 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
             return;
         }
         if (errno != EINTR) {
-            terminate();
             return;
         }
     }
@@ -152,7 +151,6 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
             return;
         }
         if (errno != EINTR) {
-            terminate();
             return;
         }
     }

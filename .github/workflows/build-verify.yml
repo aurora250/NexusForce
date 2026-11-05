@@ -481,10 +481,27 @@ jobs:
             fi
           fi
 
-          cmake -B build -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release \
-            "${COMPILER_FLAGS[@]}" \
-            "${FLAGS[@]}"
+          CONFIGURE_LOG=$(mktemp)
+          for attempt in 1 2 3; do
+            set +e
+            cmake -B build -G Ninja \
+              -DCMAKE_BUILD_TYPE=Release \
+              "${COMPILER_FLAGS[@]}" \
+              "${FLAGS[@]}" 2>&1 | tee "$CONFIGURE_LOG"
+            configure_status=${PIPESTATUS[0]}
+            set -e
+            if [ "$configure_status" -eq 0 ]; then
+              break
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              exit "$configure_status"
+            fi
+            if ! grep -qE 'curl operation failed|Couldn.t resolve|BUILD_FAILED' "$CONFIGURE_LOG"; then
+              exit "$configure_status"
+            fi
+            echo "::warning::CMake configure failed on a transient vcpkg download; retrying (attempt $attempt/3)"
+            sleep 10
+          done
 
       # Build, verify ABI boundaries, and run tests.
       - name: Build
@@ -725,6 +742,19 @@ jobs:
           path: ${{ env.VCPKG_INSTALLED }}
           key: freebsd-vcpkg-${{ matrix.triplet }}-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json', 'cmake/triplets/*freebsd*.cmake', 'cmake/toolchains/*freebsd*.cmake') }}
 
+      - name: Use baseline SIMD for FreeBSD x64 QEMU
+        if: matrix.arch == 'x64'
+        run: |
+          python3 - <<'PY'
+          import json
+          with open('config.json', encoding='utf-8') as handle:
+              config = json.load(handle)
+          config['simd']['x64'] = 'BASELINE'
+          with open('config.json', 'w', encoding='utf-8') as handle:
+              json.dump(config, handle, indent=2)
+              handle.write('\n')
+          PY
+
       - name: Build host NFRS
         run: |
           set -euo pipefail
@@ -795,9 +825,9 @@ jobs:
           find build-freebsd/bin build-freebsd/lib -maxdepth 4 -type f             \( -name NexusForceUnitTests -o -name 'libNexusForce*.so*' -o -name NexusForceTestPlugin.so \) \
             -printf '  %p\n' || true
 
-          TEST_BIN=$(find build-freebsd/bin -type f -name NexusForceUnitTests | head -1)
-          LIB=$(find build-freebsd/lib -type f -name 'libNexusForce*.so.*.*' | head -1)
-          PLUGIN=$(find build-freebsd/lib -type f -name NexusForceTestPlugin.so | head -1)
+          TEST_BIN=$(find build-freebsd/bin -type f -name NexusForceUnitTests -print -quit)
+          LIB=$(find build-freebsd/lib -type f -name 'libNexusForce*.so.*.*' -print -quit)
+          PLUGIN=$(find build-freebsd/lib -type f -name NexusForceTestPlugin.so -print -quit)
 
           # Do not use 'test -n a && test -n b': a failing non-final command in an
           # AND list is ignored by set -e, so an empty path reached scp below.

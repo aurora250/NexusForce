@@ -1638,10 +1638,13 @@ TEST_F(HashTest, IntegerHashDeterministic) {
     EXPECT_EQ(hash<unsigned long long>()(123456789ULL), hash<unsigned long long>()(123456789ULL));
 }
 
-TEST_F(HashTest, IntegerHashNonZero) {
-    EXPECT_NE(hash<int>()(0), static_cast<size_t>(0));
-    EXPECT_NE(hash<char>()(0), static_cast<size_t>(0));
-    EXPECT_NE(hash<unsigned short>()(0), static_cast<size_t>(0));
+TEST_F(HashTest, IntegerHashIsIdentityLikeStd) {
+    EXPECT_EQ(hash<int>()(0), static_cast<size_t>(0));
+    EXPECT_EQ(hash<int>()(42), static_cast<size_t>(42));
+    EXPECT_EQ(hash<int>()(-1), static_cast<size_t>(-1));
+    EXPECT_EQ(hash<char>()(7), static_cast<size_t>(7));
+    EXPECT_EQ(hash<unsigned short>()(65535), static_cast<size_t>(65535));
+    EXPECT_EQ(hash<long long>()(-123456789LL), static_cast<size_t>(-123456789LL));
 }
 
 TEST_F(HashTest, FloatHashDeterministic) {

@@ -5501,6 +5501,30 @@ TEST_F(FlatUnorderedMapTest, CopyAndMoveKeepsStorageBalanced) {
     EXPECT_EQ(counting_state().live(), 0);
 }
 
+TEST_F(FlatUnorderedMapTest, StructuredKeysStayDistributed) {
+    flat_unordered_map<int, int> map;
+    constexpr int count = 2048;
+    for (int i = 0; i < count; ++i) {
+        map[i << 12] = i;
+    }
+    EXPECT_EQ(map.size(), static_cast<size_t>(count));
+    size_t iterated = 0;
+    for (const auto& kv: map) {
+        EXPECT_EQ(kv.second, kv.first >> 12);
+        ++iterated;
+    }
+    EXPECT_EQ(iterated, static_cast<size_t>(count));
+    for (int i = 0; i < count; ++i) {
+        const auto it = map.find(i << 12);
+        ASSERT_NE(it, map.end()) << "key " << (i << 12);
+        EXPECT_EQ(it->second, i);
+    }
+    for (int i = 0; i < count; ++i) {
+        EXPECT_TRUE(map.erase(i << 12));
+    }
+    EXPECT_TRUE(map.empty());
+}
+
 TEST_F(FlatUnorderedMapTest, RepeatedFillEraseCyclesKeepCapacityBounded) {
     flat_unordered_map<int, int> map(256);
     const size_t capacity = map.capacity();

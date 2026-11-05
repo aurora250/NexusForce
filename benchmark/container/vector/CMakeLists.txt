@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceVectorBenchmark vector_benchmark.cpp)

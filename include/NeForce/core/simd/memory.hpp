@@ -768,7 +768,9 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size
 #if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                                               \
         (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
          !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER))
-        if (count >= 4096) {
+        const auto dest_addr = reinterpret_cast<uintptr_t>(d);
+        const auto src_addr = reinterpret_cast<uintptr_t>(s);
+        if (count >= 4096 && (dest_addr + count <= src_addr || src_addr + count <= dest_addr)) {
             return memory_copy_large(dest, src, count);
         }
 #endif

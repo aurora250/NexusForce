@@ -286,12 +286,10 @@ struct hash<bool> {
     NEFORCE_NODISCARD constexpr size_t operator()(const bool x) const noexcept { return x ? 0x9e3779b9 : 0x7f4a7c15; }
 };
 
-#define __NEFORCE_BUILD_INTEGER_HASH_STRUCT(OPT)                                    \
-    template <>                                                                     \
-    struct hash<OPT> {                                                              \
-        NEFORCE_NODISCARD constexpr size_t operator()(const OPT x) const noexcept { \
-            return low_level_hash(static_cast<size_t>(x));                          \
-        }                                                                           \
+#define __NEFORCE_BUILD_INTEGER_HASH_STRUCT(OPT)                                                                     \
+    template <>                                                                                                      \
+    struct hash<OPT> {                                                                                               \
+        NEFORCE_NODISCARD constexpr size_t operator()(const OPT x) const noexcept { return static_cast<size_t>(x); } \
     };
 
 NEFORCE_MACRO_RANGE_CHARS(__NEFORCE_BUILD_INTEGER_HASH_STRUCT)

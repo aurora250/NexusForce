@@ -2859,6 +2859,57 @@ TEST_F(VectorTest, EraseAll) {
     EXPECT_EQ(it, v.end());
 }
 
+TEST_F(VectorTest, EraseAtBeginLargeVectorKeepsDataIntact) {
+    constexpr size_t n = 100000;
+    vector<int> v(n);
+    for (size_t i = 0; i < n; ++i) {
+        v[i] = static_cast<int>(i);
+    }
+
+    v.erase(v.begin());
+
+    ASSERT_EQ(v.size(), n - 1);
+    for (size_t i = 0; i < v.size(); ++i) {
+        if (v[i] != static_cast<int>(i + 1)) {
+            ADD_FAILURE() << "mismatch at " << i;
+            break;
+        }
+    }
+}
+
+TEST_F(VectorTest, EraseAllButLastLargeVectorKeepsDataIntact) {
+    constexpr size_t n = 70000;
+    vector<int> v(n);
+    for (size_t i = 0; i < n; ++i) {
+        v[i] = static_cast<int>(i * 3 + 1);
+    }
+
+    v.erase(v.begin(), v.end() - 1);
+
+    ASSERT_EQ(v.size(), 1);
+    EXPECT_EQ(v[0], static_cast<int>((n - 1) * 3 + 1));
+}
+
+TEST_F(VectorTest, InsertAtBeginLargeVectorKeepsDataIntact) {
+    constexpr size_t n = 100000;
+    vector<int> v;
+    v.reserve(n + 1);
+    for (size_t i = 0; i < n; ++i) {
+        v.push_back(static_cast<int>(i));
+    }
+
+    v.insert(v.begin(), -1);
+
+    ASSERT_EQ(v.size(), n + 1);
+    EXPECT_EQ(v[0], -1);
+    for (size_t i = 1; i < v.size(); ++i) {
+        if (v[i] != static_cast<int>(i - 1)) {
+            ADD_FAILURE() << "mismatch at " << i;
+            break;
+        }
+    }
+}
+
 TEST_F(VectorTest, ShrinkToFit) {
     vector<int> v;
     v.reserve(100);

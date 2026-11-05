@@ -363,6 +363,58 @@ TEST(MemoryMove, Nullptr) {
     EXPECT_EQ(_NEFORCE memory_move(buf, nullptr, 4), nullptr);
 }
 
+TEST(MemoryMove, LargeOverlapDestBeforeSrc) {
+    constexpr size_t n = 100000;
+    std::vector<int> buf(n);
+    for (size_t i = 0; i < n; ++i) {
+        buf[i] = static_cast<int>(i);
+    }
+
+    _NEFORCE memory_move(buf.data(), buf.data() + 1, (n - 1) * sizeof(int));
+
+    for (size_t i = 0; i + 1 < n; ++i) {
+        if (buf[i] != static_cast<int>(i + 1)) {
+            ADD_FAILURE() << "mismatch at " << i;
+            break;
+        }
+    }
+}
+
+TEST(MemoryMove, LargeOverlapDestBeforeSrcUnaligned) {
+    constexpr size_t n = 65536;
+    std::vector<char> storage(n + 64);
+    char* const buf = storage.data() + 1;
+    for (size_t i = 0; i < n; ++i) {
+        buf[i] = static_cast<char>(i & 0x7F);
+    }
+
+    _NEFORCE memory_move(buf, buf + 7, n - 7);
+
+    for (size_t i = 0; i + 7 < n; ++i) {
+        if (buf[i] != static_cast<char>((i + 7) & 0x7F)) {
+            ADD_FAILURE() << "mismatch at " << i;
+            break;
+        }
+    }
+}
+
+TEST(MemoryMove, LargeOverlapDestAfterSrc) {
+    constexpr size_t n = 100000;
+    std::vector<int> buf(n);
+    for (size_t i = 0; i < n; ++i) {
+        buf[i] = static_cast<int>(i);
+    }
+
+    _NEFORCE memory_move(buf.data() + 1, buf.data(), (n - 1) * sizeof(int));
+
+    for (size_t i = 1; i < n; ++i) {
+        if (buf[i] != static_cast<int>(i - 1)) {
+            ADD_FAILURE() << "mismatch at " << i;
+            break;
+        }
+    }
+}
+
 TEST(MemorySet, Basic) {
     char buf[5];
     EXPECT_EQ(_NEFORCE memory_set(buf, 'X', 5), buf);

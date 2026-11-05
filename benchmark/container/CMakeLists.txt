@@ -1,4 +1,2 @@
-# ---- Hashtable Comparison ----
-add_nexusforce_benchmark(NexusForceHashtableBenchmark
-    hashtable_benchmark.cpp
-)
+add_subdirectory(hashtable)
+add_subdirectory(vector)
