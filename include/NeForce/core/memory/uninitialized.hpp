@@ -244,17 +244,22 @@ NEFORCE_CONSTEXPR20 Iterator __uninitialized_fill_n_aux(Iterator first, size_t n
         return first;
     }
     auto* dest = _NEFORCE addressof(*first);
-    const auto* raw = reinterpret_cast<const byte_t*>(_NEFORCE addressof(x));
-    bool uniform = true;
-    for (size_t i = 1; i < sizeof(element_t); ++i) {
-        if (raw[i] != raw[0]) {
-            uniform = false;
-            break;
+    // Scalar types have no padding bytes, so their object representation may be
+    // repeated verbatim. Other trivially copyable types can hold uninitialised
+    // padding; scanning it would read indeterminate bytes, so copy element by element.
+    NEFORCE_IF_CONSTEXPR(is_scalar_v<element_t> && sizeof(element_t) <= 8) {
+        const auto* raw = reinterpret_cast<const byte_t*>(_NEFORCE addressof(x));
+        bool uniform = true;
+        for (size_t i = 1; i < sizeof(element_t); ++i) {
+            if (raw[i] != raw[0]) {
+                uniform = false;
+                break;
+            }
         }
-    }
-    if (uniform) {
-        _NEFORCE memory_set(dest, raw[0], n * sizeof(element_t));
-        return first + n;
+        if (uniform) {
+            _NEFORCE memory_set(dest, raw[0], n * sizeof(element_t));
+            return first + n;
+        }
     }
     _NEFORCE construct(dest, x);
     size_t filled = 1;

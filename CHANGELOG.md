@@ -386,10 +386,11 @@
 
 ### 🐛 Bug Fixes
 
-- 修复 FreeBSD/macOS futex 超时：FreeBSD 使用带 `UMTX_ABSTIME` 的 `_umtx_time` 绝对超时，macOS 使用 64 位纳秒相对超时的 `__ulock_wait2`，并避免等待错误直接 `terminate()`
+- 修复 macOS / FreeBSD 带超时的 futex 等待无法超时导致进程永久挂起：定时等待改用进程内条件变量与显式绝对截止时间，未定时等待仍使用平台 syscall；同时规避 `__ulock_wait2` 超时返回值语义与 `_umtx_time` 时间语义在两个平台上的差异
+- 修复 `uninitialized_fill_n` 的按字节填充快路径读取含 padding 的平凡可复制类型未初始化字节；该快路径仅对标量类型启用，其余类型回退到构造首元素后批量复制
 - 修复 macOS 测试作业安装全量默认 vcpkg features 导致 ICU 下载 504：按 macOS 配置只安装 openssl/pcre2/zlib/gtest
 - 修复 `memory_move` 在源与目标区间重叠时仍走 `memory_copy_large`（该路径按 32 字节对齐头部整块存储，会覆盖尚未读取的源数据）造成的**静默数据损坏**：仅当两段区间不重叠时才使用批量传送，重叠时回退到逐块加载/存储的 SIMD 循环
-- 修复 BSD-like futex 仅使用全局 `pthread_cond` 的问题：FreeBSD 使用 `_umtx_op`，macOS 使用 `__ulock_wait`/`__ulock_wake` 按地址等待唤醒；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
+- 修复 BSD-like futex 的等待与唤醒路径：未定时等待使用 `_umtx_op`（FreeBSD）/`__ulock_wait2`（macOS）按地址等待唤醒，定时等待使用进程内条件变量与绝对截止时间；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
 - 修复 macOS `dynamic_library::list_symbols()` 对主可执行文件/共享缓存镜像的 Mach-O 边界处理：始终处理主镜像、按路径过滤其它镜像，并限制字符串表读取长度
 - 修复 MSVC ARM64 上 `function<const T&()>` 将引用按整数返回的问题：引用返回类型改为携带对象地址的类型擦除调用，函数入口解引用后再返回
 - 修复 macOS `dynamic_library::load_self().list_symbols()` 扫描 dyld shared-cache 镜像时使用无效 LC_SYMTAB 文件偏移导致段错误：load_self 记录主程序路径以只扫描主可执行文件

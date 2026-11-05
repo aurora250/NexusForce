@@ -24,6 +24,10 @@
 #    include <unistd.h>
 #    include <ctime>
 #endif
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
+#    include <cstdint>
+#    include <pthread.h>
+#endif
 #ifdef NEFORCE_PLATFORM_FREEBSD
 #    include <sys/types.h>
 #    include <sys/umtx.h>
@@ -41,19 +45,75 @@ extern "C" int __ulock_wake(::uint32_t operation, void* addr, ::uint64_t wake_va
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-#if defined(NEFORCE_PLATFORM_MACOS)
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 namespace {
-    bool relative_timeout_ns(const bool is_monotonic, const int64_t sec, const int64_t ns, uint64_t& out) noexcept {
-        ::timespec now{};
-        if (::clock_gettime(is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME, &now) != 0) {
-            out = 0;
+    ::pthread_mutex_t& timed_wait_mutex() noexcept {
+        static ::pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+        return mutex;
+    }
+
+    ::pthread_cond_t& timed_wait_cond() noexcept {
+        static ::pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+        return cond;
+    }
+
+    int& timed_waiter_count() noexcept {
+        static int count = 0;
+        return count;
+    }
+
+    bool realtime_deadline(const bool is_monotonic, const int64_t sec, const int64_t ns, ::timespec& out) noexcept {
+        if (!is_monotonic) {
+            out = ::timespec{static_cast<::time_t>(sec), static_cast<long>(ns)};
+            return true;
+        }
+        ::timespec mono{};
+        ::timespec real{};
+        if (::clock_gettime(CLOCK_MONOTONIC, &mono) != 0 || ::clock_gettime(CLOCK_REALTIME, &real) != 0) {
             return false;
         }
-        const int64_t deadline_ns = sec * 1000000000LL + ns;
-        const int64_t now_ns = static_cast<int64_t>(now.tv_sec) * 1000000000LL + static_cast<int64_t>(now.tv_nsec);
-        const int64_t remaining = deadline_ns > now_ns ? deadline_ns - now_ns : 0;
-        out = static_cast<uint64_t>(remaining);
+        int64_t remaining =
+                (sec - static_cast<int64_t>(mono.tv_sec)) * 1000000000LL + (ns - static_cast<int64_t>(mono.tv_nsec));
+        if (remaining < 0) {
+            remaining = 0;
+        }
+        const int64_t total =
+                static_cast<int64_t>(real.tv_sec) * 1000000000LL + static_cast<int64_t>(real.tv_nsec) + remaining;
+        out = ::timespec{static_cast<::time_t>(total / 1000000000LL), static_cast<long>(total % 1000000000LL)};
         return true;
+    }
+
+    void wake_timed_waiters() noexcept {
+        if (__atomic_load_n(&timed_waiter_count(), __ATOMIC_SEQ_CST) <= 0) {
+            return;
+        }
+        ::pthread_mutex_lock(&timed_wait_mutex());
+        ::pthread_cond_broadcast(&timed_wait_cond());
+        ::pthread_mutex_unlock(&timed_wait_mutex());
+    }
+
+    // macOS and FreeBSD timeouts disagree on the timeout unit and on how ETIMEDOUT is
+    // reported, so timed waits use one process wide condition variable with an explicit
+    // realtime deadline. Untimed waits keep using the platform syscall.
+    bool wait_on_timed_cond(void* addr, const platform_wait_t value, const bool is_monotonic, const int64_t sec,
+                            const int64_t ns) noexcept {
+        __atomic_add_fetch(&timed_waiter_count(), 1, __ATOMIC_SEQ_CST);
+        ::pthread_mutex_lock(&timed_wait_mutex());
+        const auto* word = reinterpret_cast<const int*>(addr);
+        bool woken = __atomic_load_n(word, __ATOMIC_SEQ_CST) != value;
+        while (!woken) {
+            ::timespec deadline{};
+            if (!realtime_deadline(is_monotonic, sec, ns, deadline)) {
+                break;
+            }
+            if (::pthread_cond_timedwait(&timed_wait_cond(), &timed_wait_mutex(), &deadline) == ETIMEDOUT) {
+                break;
+            }
+            woken = __atomic_load_n(word, __ATOMIC_SEQ_CST) != value;
+        }
+        ::pthread_mutex_unlock(&timed_wait_mutex());
+        __atomic_sub_fetch(&timed_waiter_count(), 1, __ATOMIC_SEQ_CST);
+        return woken;
     }
 } // namespace
 #endif
@@ -83,24 +143,14 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
         const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value), nullptr, nullptr);
         return ret == 0 || errno != ETIMEDOUT;
     }
-    ::_umtx_time timeout{};
-    timeout._timeout = ::timespec{static_cast<::time_t>(sec), static_cast<long>(ns)};
-    timeout._flags = UMTX_ABSTIME;
-    timeout._clockid = is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME;
-    const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value),
-                               reinterpret_cast<void*>(static_cast<uintptr_t>(sizeof(timeout))), &timeout);
-    return ret == 0 || errno != ETIMEDOUT;
+    return wait_on_timed_cond(addr, value, is_monotonic, sec, ns);
 
 #elif defined(NEFORCE_PLATFORM_MACOS)
-    uint64_t timeout_ns = 0;
-    if (has_timeout) {
-        relative_timeout_ns(is_monotonic, sec, ns, timeout_ns);
-        if (timeout_ns == 0) {
-            timeout_ns = 1;
-        }
+    if (!has_timeout) {
+        const int ret = ::__ulock_wait2(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), 0, 0);
+        return ret == 0 || errno != ETIMEDOUT;
     }
-    const int ret = ::__ulock_wait2(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), timeout_ns, 0);
-    return ret == 0 || errno != ETIMEDOUT;
+    return wait_on_timed_cond(addr, value, is_monotonic, sec, ns);
 
 #else
     int oper = FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG;
@@ -176,8 +226,10 @@ void futex_notify(void* addr, const bool all) noexcept {
     (void) ::_umtx_op(addr, UMTX_OP_WAKE,
                       all ? static_cast<::u_long>(numeric_traits<int32_t>::max()) : static_cast<::u_long>(1), nullptr,
                       nullptr);
+    wake_timed_waiters();
 #elif defined(NEFORCE_PLATFORM_MACOS)
     (void) ::__ulock_wake(UL_COMPARE_AND_WAIT | (all ? ULF_WAKE_ALL : 0), addr, 0);
+    wake_timed_waiters();
 #else
     ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wake_private),
               all ? numeric_traits<platform_wait_t>::max() : 1);

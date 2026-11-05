@@ -523,6 +523,15 @@ jobs:
 
           exit $BUILD_EXIT
 
+      - name: Quick timeout smoke tests (macOS)
+        if: runner.os == 'macOS'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          ./build/bin/Release/NexusForceUnitTests \
+            --gtest_color=no \
+            --gtest_filter='Wait.*:FutureAwait.*:ThreadPool.*:ThreadPoolTimerScheduler.*:ChannelTest.*'
+
       - name: Run death and signal tests (macOS)
         if: runner.os == 'macOS'
         timeout-minutes: 30
