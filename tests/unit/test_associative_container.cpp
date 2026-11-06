@@ -854,6 +854,86 @@ TEST_F(SetTest, Swap) {
     EXPECT_EQ(s2.size(), 3);
 }
 
+TEST_F(SetTest, ReinsertAfterEraseKeepsNodeSlabConsistent) {
+    set<int> s;
+    for (int round = 0; round < 4; ++round) {
+        for (int i = 0; i < 512; ++i) {
+            s.insert(i);
+        }
+        EXPECT_EQ(s.size(), 512);
+        for (int i = 0; i < 512; i += 2) {
+            EXPECT_EQ(s.erase(i), 1);
+        }
+        EXPECT_EQ(s.size(), 256);
+        for (int i = 0; i < 512; i += 2) {
+            s.insert(i);
+        }
+        EXPECT_EQ(s.size(), 512);
+        for (int i = 0; i < 512; ++i) {
+            EXPECT_EQ(s.count(i), 1);
+        }
+        s.clear();
+        EXPECT_TRUE(s.empty());
+    }
+}
+
+TEST_F(SetTest, CopyAndMoveCarryNodeSlabCorrectly) {
+    set<int> s;
+    for (int i = 0; i < 256; ++i) {
+        s.insert(i);
+    }
+    for (int i = 0; i < 256; i += 3) {
+        s.erase(i);
+    }
+
+    set<int> copy(s);
+    EXPECT_EQ(copy.size(), s.size());
+    for (int i = 0; i < 256; ++i) {
+        EXPECT_EQ(copy.count(i), s.count(i));
+    }
+
+    set<int> moved(_NEFORCE move(s));
+    EXPECT_EQ(moved.size(), copy.size());
+    for (int i = 0; i < 256; ++i) {
+        EXPECT_EQ(moved.count(i), copy.count(i));
+    }
+
+    set<int> assigned;
+    assigned = copy;
+    EXPECT_EQ(assigned.size(), copy.size());
+
+    set<int> move_assigned;
+    move_assigned = _NEFORCE move(copy);
+    EXPECT_EQ(move_assigned.size(), assigned.size());
+}
+
+TEST_F(SetTest, SwapWithPartialTreesKeepsAllElements) {
+    set<int> s1;
+    set<int> s2;
+    for (int i = 0; i < 200; ++i) {
+        s1.insert(i);
+        s2.insert(1000 + i);
+    }
+    for (int i = 0; i < 200; i += 2) {
+        s1.erase(i);
+    }
+
+    s1.swap(s2);
+
+    EXPECT_EQ(s1.size(), 200);
+    EXPECT_EQ(s2.size(), 100);
+    for (int i = 0; i < 200; ++i) {
+        EXPECT_EQ(s1.count(1000 + i), 1);
+    }
+    for (int i = 1; i < 200; i += 2) {
+        EXPECT_EQ(s2.count(i), 1);
+    }
+
+    s1.clear();
+    EXPECT_TRUE(s1.empty());
+    EXPECT_EQ(s2.size(), 100);
+}
+
 TEST_F(SetTest, EqualTo) {
     set<int> s1 = {1, 2, 3};
     set<int> s2 = {1, 2, 3};

@@ -650,6 +650,11 @@ private:
     KeyOfValue extracter_{};                                                        ///< 值提取键函数对象
     compressed_pair<allocator_type, size_t> size_pair_{default_construct_tag{}, 0}; ///< 压缩存储分配器和大小
 
+    link_type free_nodes_ = nullptr;  ///< 空闲节点链
+    link_type node_chunks_ = nullptr; ///< 节点块链
+
+    static constexpr size_t node_chunk_size = 64; ///< 单次向分配器申请的节点数
+
     template <bool, typename>
     friend struct rb_tree_iterator;
 
@@ -771,14 +776,44 @@ private:
      */
     template <typename... Args>
     link_type create_node(Args&&... args) {
-        link_type tmp = size_pair_.get_base().allocate();
+        if (free_nodes_ == nullptr) {
+            rb_tree::reserve_nodes();
+        }
+        link_type tmp = free_nodes_;
+        free_nodes_ = rb_tree::right(tmp);
         try {
             _NEFORCE construct(&tmp->data, _NEFORCE forward<Args>(args)...);
         } catch (...) {
-            rb_tree::destroy_node(tmp);
+            rb_tree::right(tmp) = free_nodes_;
+            free_nodes_ = tmp;
             throw;
         }
         return tmp;
+    }
+
+    /**
+     * @brief 申请一批节点并把它们串入空闲链
+     */
+    void reserve_nodes() {
+        link_type chunk = size_pair_.get_base().allocate(node_chunk_size + 1);
+        rb_tree::right(chunk) = node_chunks_;
+        node_chunks_ = chunk;
+        for (size_t i = node_chunk_size; i >= 1; --i) {
+            rb_tree::right(chunk + i) = free_nodes_;
+            free_nodes_ = chunk + i;
+        }
+    }
+
+    /**
+     * @brief 归还全部节点块
+     */
+    void release_nodes() noexcept {
+        while (node_chunks_ != nullptr) {
+            link_type chunk = node_chunks_;
+            node_chunks_ = rb_tree::right(chunk);
+            size_pair_.get_base().deallocate(chunk, node_chunk_size + 1);
+        }
+        free_nodes_ = nullptr;
     }
 
     /**
@@ -803,7 +838,34 @@ private:
             return;
         }
         _NEFORCE destroy(&ptr->data);
-        size_pair_.get_base().deallocate(ptr);
+        rb_tree::right(ptr) = free_nodes_;
+        free_nodes_ = ptr;
+    }
+
+    iterator link_left(link_type parent, link_type ptr) {
+        rb_tree::left(parent) = ptr;
+        if (parent == leftmost()) {
+            leftmost() = ptr;
+        }
+        rb_tree::parent(ptr) = parent;
+        rb_tree::left(ptr) = nullptr;
+        rb_tree::right(ptr) = nullptr;
+        rb_tree_insert_rebalance(ptr, header_->parent_);
+        ++size_pair_.value;
+        return iterator(ptr, this);
+    }
+
+    iterator link_right(link_type parent, link_type ptr) {
+        rb_tree::right(parent) = ptr;
+        if (parent == rightmost()) {
+            rightmost() = ptr;
+        }
+        rb_tree::parent(ptr) = parent;
+        rb_tree::left(ptr) = nullptr;
+        rb_tree::right(ptr) = nullptr;
+        rb_tree_insert_rebalance(ptr, header_->parent_);
+        ++size_pair_.value;
+        return iterator(ptr, this);
     }
 
     /**
@@ -980,6 +1042,8 @@ private:
         _NEFORCE swap(size_pair_, other.size_pair_);
         _NEFORCE swap(key_compare_, other.key_compare_);
         _NEFORCE swap(extracter_, other.extracter_);
+        _NEFORCE swap(free_nodes_, other.free_nodes_);
+        _NEFORCE swap(node_chunks_, other.node_chunks_);
     }
 
     void move_assign_impl(rb_tree&& other, false_type /*pocma*/) {
@@ -988,6 +1052,8 @@ private:
             _NEFORCE swap(size_pair_.value, other.size_pair_.value);
             _NEFORCE swap(key_compare_, other.key_compare_);
             _NEFORCE swap(extracter_, other.extracter_);
+            _NEFORCE swap(free_nodes_, other.free_nodes_);
+            _NEFORCE swap(node_chunks_, other.node_chunks_);
         } else {
             clear();
             try {
@@ -1009,6 +1075,8 @@ private:
         _NEFORCE swap(size_pair_, other.size_pair_);
         _NEFORCE swap(key_compare_, other.key_compare_);
         _NEFORCE swap(extracter_, other.extracter_);
+        _NEFORCE swap(free_nodes_, other.free_nodes_);
+        _NEFORCE swap(node_chunks_, other.node_chunks_);
     }
 
     void swap_impl(rb_tree& other, false_type /*pocs*/) noexcept(is_nothrow_swappable_v<Compare> &&
@@ -1017,6 +1085,8 @@ private:
                              "swap requires equal allocators when POCS is false");
         _NEFORCE swap(header_, other.header_);
         _NEFORCE swap(size_pair_.value, other.size_pair_.value);
+        _NEFORCE swap(free_nodes_, other.free_nodes_);
+        _NEFORCE swap(node_chunks_, other.node_chunks_);
         _NEFORCE swap(key_compare_, other.key_compare_);
         _NEFORCE swap(extracter_, other.extracter_);
     }
@@ -1066,9 +1136,13 @@ public:
     header_(_NEFORCE move(other.header_)),
     key_compare_(_NEFORCE move(other.key_compare_)),
     extracter_(_NEFORCE move(other.extracter_)),
-    size_pair_(_NEFORCE move(other.size_pair_)) {
+    size_pair_(_NEFORCE move(other.size_pair_)),
+    free_nodes_(other.free_nodes_),
+    node_chunks_(other.node_chunks_) {
         other.header_ = nullptr;
         other.size_pair_.value = 0;
+        other.free_nodes_ = nullptr;
+        other.node_chunks_ = nullptr;
     }
 
     /**
@@ -1153,6 +1227,7 @@ public:
      */
     ~rb_tree() {
         clear();
+        rb_tree::release_nodes();
         if (header_) {
             size_pair_.get_base().deallocate(header_);
         }
@@ -1299,19 +1374,19 @@ public:
         link_type tmp = rb_tree::create_node(_NEFORCE forward<Args>(args)...);
         node_guard guard(this, tmp);
 
-        if (position.node_ == header_->left_) {
-            if (size() > 0 && key_compare_(rb_tree::key(tmp), rb_tree::key(position.node_))) {
+        if (position.node_ == header_) {
+            if (!empty() && key_compare_(rb_tree::key(rightmost()), rb_tree::key(tmp))) {
                 guard.release();
-                return rb_tree::insert_into(position.node_, position.node_, tmp);
+                return rb_tree::link_right(rightmost(), tmp);
             }
             guard.release();
             return rb_tree::insert_unique(tmp).first;
         }
 
-        if (position.node_ == header_) {
-            if (key_compare_(rb_tree::key(rightmost()), rb_tree::key(tmp))) {
+        if (position.node_ == header_->left_) {
+            if (!empty() && key_compare_(rb_tree::key(tmp), rb_tree::key(position.node_))) {
                 guard.release();
-                return rb_tree::insert_into(nullptr, rightmost(), tmp);
+                return rb_tree::link_left(link_type(position.node_), tmp);
             }
             guard.release();
             return rb_tree::insert_unique(tmp).first;
@@ -1528,6 +1603,7 @@ public:
         root() = nullptr;
         rightmost() = header_;
         size_pair_.value = 0;
+        rb_tree::release_nodes();
     }
 
     /**
@@ -1576,6 +1652,25 @@ public:
             return cend();
         }
         return const_iterator(y, this);
+    }
+
+    /**
+     * @brief 判断是否存在指定键的元素
+     * @param key 要查找的键
+     * @return 存在返回 true
+     */
+    NEFORCE_NODISCARD bool contains(const key_type& key) const noexcept(is_nothrow_copy_constructible_v<Key>) {
+        link_type y = header_;
+        link_type x = root();
+        while (x != nullptr) {
+            if (!key_compare_(rb_tree::key(x), key)) {
+                y = x;
+                x = rb_tree::left(x);
+            } else {
+                x = rb_tree::right(x);
+            }
+        }
+        return y != header_ && !key_compare_(key, rb_tree::key(y));
     }
 
     /**

@@ -25,18 +25,8 @@
 #    include <ctime>
 #endif
 #ifdef NEFORCE_PLATFORM_BSD_LIKE
+#    include <cstdint>
 #    include <pthread.h>
-#endif
-#ifdef NEFORCE_PLATFORM_MACOS
-extern "C" int __ulock_wait2(::uint32_t operation, void* addr, ::uint64_t value, ::uint64_t timeout_ns,
-                             ::uint64_t value2);
-extern "C" int __ulock_wake(::uint32_t operation, void* addr, ::uint64_t wake_value);
-#    ifndef UL_COMPARE_AND_WAIT
-#        define UL_COMPARE_AND_WAIT 1
-#    endif
-#    ifndef ULF_WAKE_ALL
-#        define ULF_WAKE_ALL 0x00000100
-#    endif
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -87,10 +77,10 @@ namespace {
         ::pthread_mutex_unlock(&timed_wait_mutex());
     }
 
-    // macOS and FreeBSD timeout reporting is not reliable through the platform wait interfaces,
-    // so timed waits use one process wide condition variable with an explicit realtime deadline.
-    // FreeBSD also uses it for untimed waits because umtx wakeups are not reliable under QEMU;
-    // macOS untimed waits stay on __ulock_wait2.
+    // macOS and FreeBSD wait/wake interfaces are not reliable under QEMU and the
+    // macOS ARM64 runner. Route every BSD-like wait through one process wide
+    // condition variable with an explicit realtime deadline. This is slower than
+    // the native futex path but has a single, auditable wake-up and timeout path.
     bool wait_on_timed_cond(void* addr, const platform_wait_t value, const bool is_monotonic, const int64_t sec,
                             const int64_t ns) noexcept {
         __atomic_add_fetch(&timed_waiter_count(), 1, __ATOMIC_SEQ_CST);
@@ -155,8 +145,8 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
 
 #elif defined(NEFORCE_PLATFORM_MACOS)
     if (!has_timeout) {
-        const int ret = ::__ulock_wait2(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), 0, 0);
-        return ret == 0 || errno != ETIMEDOUT;
+        wait_on_cond(addr, value);
+        return true;
     }
     return wait_on_timed_cond(addr, value, is_monotonic, sec, ns);
 
@@ -191,15 +181,7 @@ void futex_wait(void* addr, platform_wait_t value) noexcept {
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
     wait_on_cond(addr, value);
 #elif defined(NEFORCE_PLATFORM_MACOS)
-    for (;;) {
-        const int ret = ::__ulock_wait2(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), 0, 0);
-        if (ret == 0 || errno == EAGAIN) {
-            return;
-        }
-        if (errno != EINTR) {
-            return;
-        }
-    }
+    wait_on_cond(addr, value);
 #else
     const auto err =
             ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wait_private), value, nullptr);
@@ -227,7 +209,8 @@ void futex_notify(void* addr, const bool all) noexcept {
     (void) all;
     wake_timed_waiters();
 #elif defined(NEFORCE_PLATFORM_MACOS)
-    (void) ::__ulock_wake(UL_COMPARE_AND_WAIT | (all ? ULF_WAKE_ALL : 0), addr, 0);
+    (void) addr;
+    (void) all;
     wake_timed_waiters();
 #else
     ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wake_private),

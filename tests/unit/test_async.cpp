@@ -2348,7 +2348,7 @@ TEST(ThreadPool, IdlePoolPicksUpWorkAfterWorkersPark) {
 }
 
 TEST(ThreadPool, HighPriorityRunsBeforeLowPriority) {
-    constexpr size_t thread_count = 4;
+    const size_t thread_count = min<size_t>(4, thread_pool::max_thread_threshhold());
     constexpr int64_t high_count = 100;
     constexpr int64_t low_count = 100;
 
@@ -2369,7 +2369,8 @@ TEST(ThreadPool, HighPriorityRunsBeforeLowPriority) {
         futures.push_back(move(res.future));
     }
 
-    EXPECT_TRUE(wait_until_true([&gate_engaged] { return gate_engaged.load() == static_cast<int64_t>(thread_count); }));
+    EXPECT_TRUE(wait_until_true(
+            [&gate_engaged, thread_count] { return gate_engaged.load() == static_cast<int64_t>(thread_count); }));
 
     atomic<int64_t> high_done{0};
     atomic<int64_t> low_before_high{0};
@@ -2402,6 +2403,9 @@ TEST(ThreadPool, HighPriorityRunsBeforeLowPriority) {
 TEST(ThreadPool, CachedModeScalesWithBacklog) {
     thread_pool pool;
     pool.set_mode(thread_pool::pool_mode::cached);
+    if (pool.max_thread_threshhold() <= 2U) {
+        GTEST_SKIP() << "requires more than two CPUs";
+    }
     EXPECT_GT(pool.max_thread_threshhold(), 2u);
     EXPECT_TRUE(pool.set_thread_threshhold(8));
     pool.start(1);

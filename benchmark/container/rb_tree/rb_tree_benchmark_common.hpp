@@ -1,3 +1,5 @@
+#ifndef NEFORCE_BENCHMARK_RB_TREE_COMMON_HPP__
+#define NEFORCE_BENCHMARK_RB_TREE_COMMON_HPP__
 #include <benchmark/benchmark.h>
 #include <NeForce/core/container/map.hpp>
 #include <NeForce/core/container/set.hpp>
@@ -503,52 +505,5 @@ static void BM_StdMap_Iterate(benchmark::State& state) {
     BM_Tree_Map_Iterate<std_map_t>(state, m);
 }
 
-// ============================================================
-// Registration
-// ============================================================
 
-#define TREE_ARGS Args({1 << 10})->Args({1 << 15})->Args({1 << 18})->Args({1 << 20})
-
-BENCHMARK(BM_NfSet_Insert)->TREE_ARGS->Unit(benchmark::kMillisecond);
-BENCHMARK(BM_StdSet_Insert)->TREE_ARGS->Unit(benchmark::kMillisecond);
-
-BENCHMARK(BM_NfSet_InsertHint)->TREE_ARGS->Unit(benchmark::kMillisecond);
-BENCHMARK(BM_StdSet_InsertHint)->TREE_ARGS->Unit(benchmark::kMillisecond);
-
-BENCHMARK(BM_NfSet_Emplace)->TREE_ARGS->Unit(benchmark::kMillisecond);
-BENCHMARK(BM_StdSet_Emplace)->TREE_ARGS->Unit(benchmark::kMillisecond);
-
-BENCHMARK(BM_NfSet_Find)->TREE_ARGS->Unit(benchmark::kNanosecond);
-BENCHMARK(BM_StdSet_Find)->TREE_ARGS->Unit(benchmark::kNanosecond);
-
-BENCHMARK(BM_NfSet_FindMiss)->TREE_ARGS->Unit(benchmark::kNanosecond);
-BENCHMARK(BM_StdSet_FindMiss)->TREE_ARGS->Unit(benchmark::kNanosecond);
-
-BENCHMARK(BM_NfSet_Erase)->TREE_ARGS->Unit(benchmark::kMillisecond);
-BENCHMARK(BM_StdSet_Erase)->TREE_ARGS->Unit(benchmark::kMillisecond);
-
-BENCHMARK(BM_NfSet_Iterate)->TREE_ARGS->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_StdSet_Iterate)->TREE_ARGS->Unit(benchmark::kMicrosecond);
-
-BENCHMARK(BM_NfSet_Count)->TREE_ARGS->Unit(benchmark::kNanosecond);
-BENCHMARK(BM_StdSet_Count)->TREE_ARGS->Unit(benchmark::kNanosecond);
-
-BENCHMARK(BM_NfSet_LowerBound)->TREE_ARGS->Unit(benchmark::kNanosecond);
-BENCHMARK(BM_StdSet_LowerBound)->TREE_ARGS->Unit(benchmark::kNanosecond);
-
-BENCHMARK(BM_NfSet_EqualRange)->TREE_ARGS->Unit(benchmark::kNanosecond);
-BENCHMARK(BM_StdSet_EqualRange)->TREE_ARGS->Unit(benchmark::kNanosecond);
-
-BENCHMARK(BM_NfSet_Copy)->TREE_ARGS->Unit(benchmark::kMillisecond);
-BENCHMARK(BM_StdSet_Copy)->TREE_ARGS->Unit(benchmark::kMillisecond);
-
-BENCHMARK(BM_NfMap_Emplace)->TREE_ARGS->Unit(benchmark::kMillisecond);
-BENCHMARK(BM_StdMap_Emplace)->TREE_ARGS->Unit(benchmark::kMillisecond);
-
-BENCHMARK(BM_NfMap_Find)->TREE_ARGS->Unit(benchmark::kNanosecond);
-BENCHMARK(BM_StdMap_Find)->TREE_ARGS->Unit(benchmark::kNanosecond);
-
-BENCHMARK(BM_NfMap_Iterate)->TREE_ARGS->Unit(benchmark::kMicrosecond);
-BENCHMARK(BM_StdMap_Iterate)->TREE_ARGS->Unit(benchmark::kMicrosecond);
-
-BENCHMARK_MAIN();
+#endif // NEFORCE_BENCHMARK_RB_TREE_COMMON_HPP__

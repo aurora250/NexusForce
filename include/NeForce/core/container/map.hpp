@@ -496,7 +496,7 @@ public:
      * @param key 要统计的键
      * @return 匹配的元素数量
      */
-    NEFORCE_NODISCARD size_type count(const key_type& key) const { return tree_.find(key) == tree_.cend() ? 0 : 1; }
+    NEFORCE_NODISCARD size_type count(const key_type& key) const { return tree_.contains(key) ? 1 : 0; }
 
     /**
      * @brief 获取第一个不小于指定键的元素位置

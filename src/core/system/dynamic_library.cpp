@@ -25,6 +25,9 @@
 #    include <mach-o/dyld.h>
 #    include <mach-o/loader.h>
 #    include <mach-o/nlist.h>
+#    ifndef MH_DYLIB_IN_CACHE
+#        define MH_DYLIB_IN_CACHE 0x80000000
+#    endif
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -303,6 +306,9 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
 
         const auto* header = reinterpret_cast<const ::mach_header_64*>(::_dyld_get_image_header(image_index));
         if (header == nullptr || header->magic != MH_MAGIC_64) {
+            continue;
+        }
+        if ((header->flags & MH_DYLIB_IN_CACHE) != 0) {
             continue;
         }
 

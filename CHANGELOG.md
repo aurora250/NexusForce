@@ -165,6 +165,9 @@
 
 ### 🔧 Improvements
 
+- `rb_tree` 提示插入的 `end()` / `begin()` 两条常见路径改走直达链接（`link_right` / `link_left`），省去一次重复的键比较与分支
+- `rb_tree` 内置节点块缓存：一次向分配器申请 64 个节点并串成空闲链，插入/拷贝从空闲链取节点、删除/清空归还空闲链，`clear()` 与析构时统一归还节点块；每节点一次分配/释放降为每 64 个节点一次，插入、原地构造、拷贝、删除的每节点分配开销基本消除
+- `rb_tree` 新增 `contains()`：单次下界搜索 + 一次等值比较，不构造迭代器；`set` / `map` 的 `count` 改走 `contains()`，唯一键容器判定不再构造并比较两个迭代器
 - `rb_tree::count`（多键容器路径）改为一次下界搜索 + 后继线性扫描，替代下界、上界、区间距离三次遍历
 - `rb_tree::find` 去掉临时迭代器构造与一次冗余比较，命中时直接返回节点
 - 内存池的大对象区域缓存改为按尺寸淘汰：缓存已满时用更大的区域替换更小的区域（仅当新区域不小于被替换区域的两倍），使 4 MiB 级别的缓冲在反复分配/释放时不再每次重新映射并重演全量缺页
@@ -388,11 +391,14 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `thread_pool::start()` 请求的线程数超过 CPU 阈值时等待永远不会出现的 worker（FreeBSD QEMU 只有 2 vCPU，`start(4)` 永久阻塞在 `attached_workers_.wait`）：启动线程数按阈值截断，只等待实际 spawn 成功的 worker，并使用有截止时间的启动屏障
+- 修复依赖固定 4 个 worker 的 `ThreadPool.HighPriorityRunsBeforeLowPriority` 与依赖超过 2 CPU 的 `ThreadPool.CachedModeScalesWithBacklog` 在 2 vCPU FreeBSD 上的测试假设
+- 修复 macOS `dynamic_library::list_symbols()` 在 `libSystem.B.dylib` 等 dyld shared cache 镜像上读取无效 `LC_SYMTAB` 偏移导致段错误的问题：跳过带 `MH_DYLIB_IN_CACHE` 标志的镜像
 - 修复 BSD-like 超时等待在每次 `pthread_cond_timedwait` 返回后重新计算相对截止时间、导致 spurious wakeup 不断延长超时的问题：realtime 截止时间改为进入循环前只计算一次
 - 修复 `uninitialized_fill_n` 的按字节填充快路径读取含 padding 的平凡可复制类型未初始化字节；该快路径仅对标量类型启用，其余类型回退到构造首元素后批量复制
 - 修复 macOS 测试作业安装全量默认 vcpkg features 导致 ICU 下载 504：按 macOS 配置只安装 openssl/pcre2/zlib/gtest
 - 修复 `memory_move` 在源与目标区间重叠时仍走 `memory_copy_large`（该路径按 32 字节对齐头部整块存储，会覆盖尚未读取的源数据）造成的**静默数据损坏**：仅当两段区间不重叠时才使用批量传送，重叠时回退到逐块加载/存储的 SIMD 循环
-- 修复 BSD-like futex 的等待与唤醒路径：未定时等待使用 `_umtx_op`（FreeBSD）/`__ulock_wait2`（macOS）按地址等待唤醒，定时等待使用进程内条件变量与绝对截止时间；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
+- 修复 BSD-like futex 的等待与唤醒路径：macOS/FreeBSD 统一使用进程内条件变量（固定绝对截止时间、broadcast 唤醒）作为回退，避免 `_umtx_op`/`__ulock` 在 QEMU 与 macOS ARM64 上的超时和唤醒差异；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
 - 修复 macOS `dynamic_library::list_symbols()` 对主可执行文件/共享缓存镜像的 Mach-O 边界处理：始终处理主镜像、按路径过滤其它镜像，并限制字符串表读取长度
 - 修复 MSVC ARM64 上 `function<const T&()>` 将引用按整数返回的问题：引用返回类型改为携带对象地址的类型擦除调用，函数入口解引用后再返回
 - 修复 macOS `dynamic_library::load_self().list_symbols()` 扫描 dyld shared-cache 镜像时使用无效 LC_SYMTAB 文件偏移导致段错误：load_self 记录主程序路径以只扫描主可执行文件

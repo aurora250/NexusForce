@@ -1085,20 +1085,26 @@ bool thread_pool::start(const size_t init_thread_size) {
     thread_pool_id_generator::reset_id();
     scaler_stop_.store(false, memory_order_relaxed);
 
-    init_thread_size_ = init_thread_size;
+    // The pool must not promise more workers than its configured CPU threshold;
+    // otherwise start() waits forever for workers that can never be spawned.
+    init_thread_size_ = min(init_thread_size, thread_threshhold_);
     is_running_.store(true, memory_order_release);
 
+    size_t spawned = 0;
     for (size_t i = 0; i < init_thread_size_; ++i) {
         if (!spawn_worker()) {
             break;
         }
+        ++spawned;
     }
 
-    // Ready barrier instead of a fixed sleep: wait until every worker registered.
+    // Ready barrier: only wait for workers that were actually spawned. A timed
+    // sleep loop is used instead of an untimed atomic wait so a failed attach
+    // cannot block start() past its deadline.
     const auto deadline = steady_clock::now() + seconds(2);
     uint32_t attached = attached_workers_.load(memory_order_acquire);
-    while (attached < init_thread_size_ && steady_clock::now() < deadline) {
-        attached_workers_.wait(attached, memory_order_acquire);
+    while (attached < spawned && steady_clock::now() < deadline) {
+        this_thread::sleep_for(milliseconds(1));
         attached = attached_workers_.load(memory_order_acquire);
     }
 
