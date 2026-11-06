@@ -20,6 +20,7 @@ endmacro()
 
 add_subdirectory(async)
 add_subdirectory(container)
+add_subdirectory(file)
 add_subdirectory(iterator)
 add_subdirectory(memory)
 add_subdirectory(network)

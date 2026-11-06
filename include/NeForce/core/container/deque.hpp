@@ -767,6 +767,131 @@ private:
     }
 
     /**
+     * @brief 析构区间内的元素（可平凡析构类型）
+     */
+    void destroy_range(const iterator& /*first*/, const iterator& /*last*/, true_type /*trivial*/) noexcept {}
+
+    /**
+     * @brief 析构区间内的元素（非平凡析构类型）
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     */
+    void destroy_range(const iterator& first, const iterator& last, false_type /*trivial*/) {
+        for (iterator it = first; it != last; ++it) {
+            _NEFORCE destroy(it.current_);
+        }
+    }
+
+    /**
+     * @brief 按元素析构特性析构区间
+     * @param first 起始迭代器
+     * @param last 结束迭代器
+     */
+    void destroy_range(const iterator& first, const iterator& last) {
+        deque::destroy_range(first, last, is_trivially_destructible<value_type>{});
+    }
+
+    /**
+     * @brief 析构全部元素（可平凡析构类型，无需逐个析构）
+     */
+    void destroy_all(true_type /*trivial*/) noexcept { finish_ = start_; }
+
+    /**
+     * @brief 析构全部元素（非平凡析构类型，按缓冲区整段析构）
+     */
+    void destroy_all(false_type /*trivial*/) {
+        for (map_pointer cur = start_.node_ + 1; cur < finish_.node_; ++cur) {
+            _NEFORCE destroy(*cur, *cur + buffer_size);
+        }
+
+        if (start_.node_ == finish_.node_) {
+            _NEFORCE destroy(start_.current_, finish_.current_);
+        } else {
+            _NEFORCE destroy(start_.current_, start_.last_);
+            _NEFORCE destroy(finish_.first_, finish_.current_);
+        }
+        finish_ = start_;
+    }
+
+    /**
+     * @brief 把区间 [first, last) 搬移到 dst
+     * @param dst 目标起点
+     * @param first 源区间起点
+     * @param last 源区间终点
+     */
+    void move_range(iterator dst, iterator first, const iterator last) {
+        deque::move_range_impl(dst, first, last, is_trivially_copyable<value_type>{});
+    }
+
+    /**
+     * @brief 可平凡复制类型的整段搬移
+     * @param dst 目标起点
+     * @param first 源区间起点
+     * @param last 源区间终点
+     */
+    void move_range_impl(iterator dst, iterator first, const iterator last, true_type /*trivial*/) {
+        if (first == last) {
+            return;
+        }
+        if (dst < first) {
+            while (first != last) {
+                difference_type n = first.last_ - first.current_;
+                const difference_type dest_room = dst.last_ - dst.current_;
+                const difference_type remain = last - first;
+                n = min(n, dest_room);
+                n = min(n, remain);
+                if (n == 0) {
+                    n = 1;
+                }
+                _NEFORCE memory_move(dst.current_, first.current_, static_cast<size_t>(n) * sizeof(value_type));
+                first.advance(n);
+                dst.advance(n);
+            }
+        } else {
+            iterator src = last;
+            iterator out = dst + (last - first);
+            while (src != first) {
+                difference_type n = src.current_ - src.first_;
+                const difference_type dest_room = out.current_ - out.first_;
+                const difference_type remain = src - first;
+                n = min(n, dest_room);
+                n = min(n, remain);
+                if (n == 0) {
+                    n = 1;
+                }
+                src.advance(-n);
+                out.advance(-n);
+                _NEFORCE memory_move(out.current_, src.current_, static_cast<size_t>(n) * sizeof(value_type));
+            }
+        }
+    }
+
+    /**
+     * @brief 非平凡类型的逐元素搬移
+     * @param dst 目标起点
+     * @param first 源区间起点
+     * @param last 源区间终点
+     */
+    void move_range_impl(iterator dst, iterator first, const iterator last, false_type /*trivial*/) {
+        if (first == last) {
+            return;
+        }
+        if (dst < first) {
+            for (; first != last; ++first, ++dst) {
+                *dst = _NEFORCE move(*first);
+            }
+        } else {
+            iterator src = last;
+            iterator out = dst + (last - first);
+            while (src != first) {
+                --src;
+                --out;
+                *out = _NEFORCE move(*src);
+            }
+        }
+    }
+
+    /**
      * @brief 插入单个元素辅助函数
      * @tparam Args 构造参数类型
      * @param position 插入位置
@@ -775,15 +900,13 @@ private:
      */
     template <typename... Args>
     iterator insert_aux(iterator position, Args&&... args) noexcept(is_nothrow_move_assignable_v<value_type>) {
-        size_type index = position - start_;
+        const size_type index = position - start_;
 
         if (index < size() / 2) {
             deque::emplace_front(front());
 
             iterator new_pos = start_ + index;
-            if (new_pos != finish_ - 1) {
-                _NEFORCE copy_backward(new_pos, finish_ - 1, finish_);
-            }
+            deque::move_range(start_ + 1, start_ + 2, new_pos + 1);
 
             _NEFORCE destroy(new_pos.current_);
             _NEFORCE construct(new_pos.current_, _NEFORCE forward<Args>(args)...);
@@ -792,9 +915,7 @@ private:
             deque::emplace_back(back());
 
             iterator new_pos = start_ + index;
-            if (new_pos != start_) {
-                _NEFORCE copy_backward(start_, new_pos, new_pos + 1);
-            }
+            deque::move_range(new_pos + 1, new_pos, finish_ - 1);
 
             _NEFORCE destroy(new_pos.current_);
             _NEFORCE construct(new_pos.current_, _NEFORCE forward<Args>(args)...);
@@ -1509,10 +1630,10 @@ public:
         iterator next = _NEFORCE next(position);
         const size_type dest_before = position - start_;
         if (dest_before < size() / 2) {
-            _NEFORCE copy_backward(start_, position, next);
+            deque::move_range(start_ + 1, start_, position);
             deque::pop_front();
         } else {
-            _NEFORCE copy(next, finish_, position);
+            deque::move_range(position, next, finish_);
             deque::pop_back();
         }
         return start_ + dest_before;
@@ -1533,14 +1654,14 @@ public:
         const size_type len = last - first;
         const size_type dist_before = first - start_;
         if (dist_before < (size() - len) / 2) {
-            _NEFORCE copy_backward(start_, first, last);
+            deque::move_range(start_ + len, start_, first);
             iterator new_start = start_ + len;
-            _NEFORCE destroy(start_.current_, new_start.current_);
+            deque::destroy_range(start_, new_start);
             start_ = new_start;
         } else {
-            _NEFORCE copy(last, finish_, first);
+            deque::move_range(first, last, finish_);
             iterator new_finish = finish_ - len;
-            _NEFORCE destroy(new_finish.current_, finish_.current_);
+            deque::destroy_range(new_finish, finish_);
             finish_ = new_finish;
         }
         return start_ + dist_before;
@@ -1574,17 +1695,7 @@ public:
      * 销毁所有元素，释放所有缓冲区，重置迭代器。
      */
     void clear() noexcept(is_nothrow_destructible_v<value_type>) {
-        for (map_pointer cur = start_.node_ + 1; cur < finish_.node_; ++cur) {
-            _NEFORCE destroy(*cur, *cur + buffer_size);
-        }
-
-        if (start_.node_ == finish_.node_) {
-            _NEFORCE destroy(start_.current_, finish_.current_);
-        } else {
-            _NEFORCE destroy(start_.current_, start_.last_);
-            _NEFORCE destroy(finish_.first_, finish_.current_);
-        }
-
+        deque::destroy_all(is_trivially_destructible<value_type>{});
         shrink_to_fit();
         finish_ = start_;
     }

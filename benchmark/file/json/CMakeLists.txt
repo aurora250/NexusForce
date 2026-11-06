@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceJsonBenchmark json_benchmark.cpp)

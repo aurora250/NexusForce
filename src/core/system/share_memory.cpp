@@ -15,6 +15,7 @@
 #ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/async/atomic_base.hpp>
 #    include <NeForce/core/exception/error_code.hpp>
+#    include <cstddef>
 #    include <fcntl.h>
 #    include <pthread.h>
 #    include <sys/mman.h>
@@ -27,7 +28,8 @@ namespace {
 #ifdef NEFORCE_PLATFORM_POSIX
     struct shm_header {
         ::pthread_mutex_t mutex;
-        int ready; /**< 0=uninit, 1=initing, 2=ready */
+        int ready;        /**< 0=uninit, 1=initing, 2=ready */
+        size_t data_size; /**< requested data capacity, excluding page-rounded slack */
     };
 
     constexpr size_t k_header_size = (sizeof(shm_header) + 63) & ~size_t{63};
@@ -42,6 +44,29 @@ namespace {
             return "/" + name;
         }
         return name;
+    }
+
+    size_t page_size_or_default() noexcept {
+        static const size_t page = sysinfo::instance().get_system_info().page_size;
+        return page == 0 ? 4096U : page;
+    }
+
+    size_t align_up(const size_t value, const size_t alignment) noexcept {
+        return ((value + alignment - 1U) / alignment) * alignment;
+    }
+
+    void store_data_size(const int fd, const size_t size) noexcept {
+        constexpr auto offset = static_cast<::off_t>(offsetof(shm_header, data_size));
+        (void) ::pwrite(fd, &size, sizeof(size), offset);
+    }
+
+    size_t load_data_size(const int fd) noexcept {
+        size_t size = 0;
+        constexpr auto offset = static_cast<::off_t>(offsetof(shm_header, data_size));
+        if (::pread(fd, &size, sizeof(size), offset) != static_cast<::ssize_t>(sizeof(size))) {
+            return 0;
+        }
+        return size;
     }
 #endif
 
@@ -247,7 +272,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
 #else
     const string shm_name = normalize_name(name);
 
-    data_offset_ = k_header_size;
+    data_offset_ = align_up(k_header_size, page_size_or_default());
 
     int flags = (access == access_mode::read_only) ? O_RDONLY : O_RDWR;
 
@@ -272,6 +297,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
             NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
         }
         size_ = size;
+        store_data_size(handle_, size_);
     } else if (mode == open_mode::open_only) {
         handle_ = ::shm_open(shm_name.data(), flags, 0666);
         if (handle_ == g_invalid_handle) {
@@ -293,7 +319,8 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
             NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory exists but has insufficient size"));
         }
 
-        size_ = static_cast<size_t>(stat_buf.st_size) - data_offset_;
+        const size_t stored_size = load_data_size(handle_);
+        size_ = stored_size != 0 ? stored_size : static_cast<size_t>(stat_buf.st_size) - data_offset_;
     } else {
         if (size == 0) {
             handle_ = ::shm_open(shm_name.data(), flags, 0666);
@@ -316,7 +343,8 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
                 NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory exists but has insufficient size"));
             }
 
-            size_ = static_cast<size_t>(stat_buf.st_size) - data_offset_;
+            const size_t stored_size = load_data_size(handle_);
+            size_ = stored_size != 0 ? stored_size : static_cast<size_t>(stat_buf.st_size) - data_offset_;
         } else {
             handle_ = ::shm_open(shm_name.data(), flags | O_CREAT, 0666);
             if (handle_ == g_invalid_handle) {
@@ -343,8 +371,10 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
                     NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
                 }
                 size_ = size;
+                store_data_size(handle_, size_);
             } else {
-                size_ = static_cast<size_t>(stat_buf.st_size) - data_offset_;
+                const size_t stored_size = load_data_size(handle_);
+                size_ = stored_size != 0 ? stored_size : static_cast<size_t>(stat_buf.st_size) - data_offset_;
             }
         }
     }
@@ -432,13 +462,14 @@ void share_memory::grow(size_t new_size) {
 #elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     // FreeBSD and macOS have no mremap, so the grown object is remapped at offset 0.
     // The data itself lives in the shm file, so unmapping and mapping again preserves it.
-    const size_t fd_new_size = data_offset_ + new_size;
+    const size_t fd_new_size = align_up(data_offset_ + new_size, page_size_or_default());
     if (::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == -1) {
         const auto error = last_error();
         NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
     }
 
     size_ = new_size;
+    store_data_size(handle_, size_);
 
     if (mapped_addr_ != nullptr) {
         const size_t old_size = internal_mapped_size_;
@@ -617,7 +648,7 @@ void* share_memory::map(size_t offset, const size_t length) {
         } else {
             int expected = 0;
             if (atomic_cmpexch_strong(&header->ready, &expected, 1, memory_order::acquire, memory_order::relaxed)) {
-                ::pthread_mutexattr_t attr;
+                ::pthread_mutexattr_t attr{};
                 ::pthread_mutexattr_init(&attr);
                 ::pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
 #    ifndef NEFORCE_PLATFORM_MACOS

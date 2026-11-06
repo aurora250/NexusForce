@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceFormatBenchmark format_benchmark.cpp)

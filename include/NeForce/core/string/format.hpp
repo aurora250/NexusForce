@@ -71,26 +71,49 @@ struct format_options {
 /// @cond
 NEFORCE_BEGIN_INNER__
 
-NEFORCE_CONSTEXPR20 string uint_to_string_base(uint64_t value, const int base, const bool uppercase) {
+NEFORCE_CONSTEXPR20 size_t write_uint_base(char* buffer, uint64_t value, const int base, const bool uppercase) {
     if (value == 0) {
-        return "0";
+        buffer[0] = '0';
+        return 1;
     }
 
-    string result;
-    result.reserve(20);
-
-    constexpr auto digits_lower = "0123456789abcdef";
-    constexpr auto digits_upper = "0123456789ABCDEF";
-    const auto* digits = uppercase ? digits_upper : digits_lower;
-
-    while (value > 0) {
-        const uint64_t remainder = value % base;
-        value /= base;
-        result.push_back(digits[remainder]);
+    size_t len = 0;
+    if (base == 10) {
+        while (value >= 100) {
+            const auto remainder = static_cast<uint32_t>(value % 100U);
+            value /= 100U;
+            buffer[len++] = static_cast<char>('0' + remainder % 10U);
+            buffer[len++] = static_cast<char>('0' + remainder / 10U);
+        }
+        if (value >= 10) {
+            buffer[len++] = static_cast<char>('0' + value % 10U);
+            buffer[len++] = static_cast<char>('0' + value / 10U);
+        } else {
+            buffer[len++] = static_cast<char>('0' + value);
+        }
+    } else {
+        constexpr string_view digits_lower = "0123456789abcdef";
+        constexpr string_view digits_upper = "0123456789ABCDEF";
+        const string_view digits = uppercase ? digits_upper : digits_lower;
+        const auto radix = static_cast<uint64_t>(base);
+        while (value != 0) {
+            buffer[len++] = digits[value % radix];
+            value /= radix;
+        }
     }
 
-    result.reverse();
-    return result;
+    for (size_t i = 0, j = len - 1; i < j; ++i, --j) {
+        const char c = buffer[i];
+        buffer[i] = buffer[j];
+        buffer[j] = c;
+    }
+    return len;
+}
+
+NEFORCE_CONSTEXPR20 string uint_to_string_base(uint64_t value, const int base, const bool uppercase) {
+    char buffer[64];
+    const size_t len = write_uint_base(buffer, value, base, uppercase);
+    return string(buffer, len);
 }
 
 constexpr format_align to_number_alignment(const char c) {
@@ -230,33 +253,43 @@ constexpr format_options parse_number_format(const string_view& fmt_str) {
 }
 
 
-NEFORCE_CONSTEXPR20 string apply_format_options(string raw, const format_options& options,
-                                                const bool is_numeric = false) {
+NEFORCE_CONSTEXPR20 void apply_format_options_into(string& out, const string_view raw, const format_options& options,
+                                                   const bool is_numeric = false) {
     if (options.width <= 0 && !options.show_sign && !options.space_sign && !(options.alternate && is_numeric)) {
-        return raw;
+        out.append(raw.data(), raw.size());
+        return;
     }
 
-    char existing_sign = '\0';
-    if (!raw.empty() && (raw[0] == '-' || raw[0] == '+' || raw[0] == ' ')) {
-        char sign = raw[0];
-        raw = raw.tail(1);
-        existing_sign = sign;
+    const char* body = raw.data();
+    size_t body_len = raw.size();
+
+    char sign_char = '\0';
+    if (body_len != 0 && (body[0] == '-' || body[0] == '+' || body[0] == ' ')) {
+        sign_char = body[0];
+        ++body;
+        --body_len;
     }
 
-    string prefix;
+    char prefix_buffer[2] = {'\0', '\0'};
+    size_t prefix_len = 0;
     if (options.alternate && is_numeric) {
         switch (options.type) {
             case format_type::hex: {
-                prefix = options.uppercase ? "0X" : "0x";
+                prefix_buffer[0] = '0';
+                prefix_buffer[1] = options.uppercase ? 'X' : 'x';
+                prefix_len = 2;
                 break;
             }
             case format_type::binary: {
-                prefix = options.uppercase ? "0B" : "0b";
+                prefix_buffer[0] = '0';
+                prefix_buffer[1] = options.uppercase ? 'B' : 'b';
+                prefix_len = 2;
                 break;
             }
             case format_type::octal: {
-                if (raw.empty() || raw[0] != '0') {
-                    prefix = "0";
+                if (body_len == 0 || body[0] != '0') {
+                    prefix_buffer[0] = '0';
+                    prefix_len = 1;
                 }
                 break;
             }
@@ -266,72 +299,81 @@ NEFORCE_CONSTEXPR20 string apply_format_options(string raw, const format_options
         }
     }
 
-    string sign_str;
-    if (existing_sign == '-') {
-        sign_str = "-";
-    } else if (options.show_sign) {
-        sign_str = "+";
-    } else if (options.space_sign) {
-        sign_str = " ";
+    if (sign_char == '\0') {
+        if (options.show_sign) {
+            sign_char = '+';
+        } else if (options.space_sign) {
+            sign_char = ' ';
+        }
     }
 
-    const size_t content_len = sign_str.size() + prefix.size() + raw.size();
+    const size_t sign_len = (sign_char != '\0') ? 1 : 0;
+    const size_t content_len = sign_len + prefix_len + body_len;
     const size_t target_width = (options.width > 0) ? static_cast<size_t>(options.width) : 0;
-
     const size_t pad_total = (content_len < target_width) ? target_width - content_len : 0;
+    const char fill_char = options.fill;
 
     format_align align = options.align;
     if (align == format_align::default_) {
         align = is_numeric ? format_align::right : format_align::left;
     }
-
     if (options.zero_pad && is_numeric && align == format_align::right) {
         align = format_align::numeric;
     }
 
-    if (align == format_align::numeric && is_numeric) {
-        const char fill_char = options.fill;
-        string result;
-        result.reserve(target_width > 0 ? target_width : content_len);
-        result += sign_str;
-        result += prefix;
-        for (size_t i = 0; i < pad_total; ++i) {
-            result += fill_char;
+    const auto append_padding = [&out, fill_char](const size_t count) {
+        if (count != 0) {
+            out.append(count, fill_char);
         }
-        result += raw;
-        return result;
-    }
-
-    const char fill_char = options.fill;
-    string left_pad;
-    string right_pad;
+    };
+    const auto append_content = [&out, &body, body_len, &prefix_buffer, prefix_len, sign_char, sign_len] {
+        if (sign_len != 0) {
+            out += sign_char;
+        }
+        if (prefix_len != 0) {
+            out.append(prefix_buffer, prefix_len);
+        }
+        out.append(body, body_len);
+    };
 
     switch (align) {
-        case format_align::left: {
-            right_pad = string(pad_total, fill_char);
-            break;
-        }
         case format_align::center: {
             const size_t left_count = pad_total / 2;
-            const size_t right_count = pad_total - left_count;
-            left_pad = string(left_count, fill_char);
-            right_pad = string(right_count, fill_char);
+            append_padding(left_count);
+            append_content();
+            append_padding(pad_total - left_count);
+            break;
+        }
+        case format_align::numeric: {
+            if (sign_len != 0) {
+                out += sign_char;
+            }
+            if (prefix_len != 0) {
+                out.append(prefix_buffer, prefix_len);
+            }
+            append_padding(pad_total);
+            out.append(body, body_len);
+            break;
+        }
+        case format_align::left: {
+            append_content();
+            append_padding(pad_total);
             break;
         }
         case format_align::right:
         default: {
-            left_pad = string(pad_total, fill_char);
+            append_padding(pad_total);
+            append_content();
             break;
         }
     }
+}
 
+NEFORCE_CONSTEXPR20 string apply_format_options(string raw, const format_options& options,
+                                                const bool is_numeric = false) {
     string result;
-    result.reserve(target_width > 0 ? target_width : content_len);
-    result += left_pad;
-    result += sign_str;
-    result += prefix;
-    result += raw;
-    result += right_pad;
+    result.reserve(raw.size() + (options.width > 0 ? static_cast<size_t>(options.width) : 0));
+    apply_format_options_into(result, raw.view(), options, is_numeric);
     return result;
 }
 
@@ -643,6 +685,193 @@ consteval bool validate_format_string(const char (&fmt)[N]) noexcept {
 
 #endif
 
+struct format_arg_integral final {};
+struct format_arg_float final {};
+struct format_arg_text final {};
+struct format_arg_other final {};
+
+template <typename T, typename = void>
+struct format_arg_kind {
+    using type = format_arg_other;
+};
+
+template <typename T>
+struct format_arg_kind<T, enable_if_t<is_standard_integral_v<T> && !is_same_v<T, bool> && !is_same_v<T, char>>> {
+    using type = format_arg_integral;
+};
+
+template <typename T>
+struct format_arg_kind<T, enable_if_t<is_floating_point_v<T>>> {
+    using type = format_arg_float;
+};
+
+template <>
+struct format_arg_kind<string> {
+    using type = format_arg_text;
+};
+
+template <>
+struct format_arg_kind<string_view> {
+    using type = format_arg_text;
+};
+
+template <>
+struct format_arg_kind<const char*> {
+    using type = format_arg_text;
+};
+
+template <>
+struct format_arg_kind<char*> {
+    using type = format_arg_text;
+};
+
+NEFORCE_CONSTEXPR20 void append_text_with_options(string& out, string_view value, const format_options& options) {
+    if (options.precision >= 0 && value.size() > static_cast<size_t>(options.precision)) {
+        value = value.substr(0, static_cast<size_t>(options.precision));
+    }
+    apply_format_options_into(out, value, options, false);
+}
+
+NEFORCE_CONSTEXPR20 void append_arg_impl(string& out, const string_view value, const format_options& options,
+                                         format_arg_text /*unused*/) {
+    append_text_with_options(out, value, options);
+}
+
+NEFORCE_CONSTEXPR20 void append_arg_impl(string& out, const string& value, const format_options& options,
+                                         format_arg_text /*unused*/) {
+    append_text_with_options(out, value.view(), options);
+}
+
+NEFORCE_CONSTEXPR20 void append_arg_impl(string& out, const char* value, const format_options& options,
+                                         format_arg_text /*unused*/) {
+    if (value == nullptr) {
+        append_text_with_options(out, string_view("nullptr"), options);
+        return;
+    }
+    append_text_with_options(out, string_view(value), options);
+}
+
+NEFORCE_CONSTEXPR20 void append_arg_impl(string& out, char* value, const format_options& options,
+                                         format_arg_text /*unused*/) {
+    append_text_with_options(out, string_view(value), options);
+}
+
+template <typename T>
+NEFORCE_CONSTEXPR20 void append_arg_impl(string& out, const T& value, const format_options& options,
+                                         format_arg_integral /*unused*/) {
+    if (options.type == format_type::char_) {
+        const char character = static_cast<char>(value);
+        apply_format_options_into(out, string_view(&character, 1), options, false);
+        return;
+    }
+#ifdef NEFORCE_SUPPORT_LOCALE
+    if (options.loc != nullptr && options.type == format_type::default_) {
+        out += options.loc->format_number(static_cast<int64_t>(value));
+        return;
+    }
+#endif
+    using unsigned_type = make_unsigned_t<T>;
+    const bool is_negative = is_signed_v<T> && (value < 0);
+    const auto magnitude =
+            is_negative ? static_cast<uint64_t>(static_cast<unsigned_type>(0 - static_cast<unsigned_type>(value)))
+                        : static_cast<uint64_t>(static_cast<unsigned_type>(value));
+    int base = 10;
+    switch (options.type) {
+        case format_type::binary: {
+            base = 2;
+            break;
+        }
+        case format_type::octal: {
+            base = 8;
+            break;
+        }
+        case format_type::hex: {
+            base = 16;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    char buffer[32];
+    size_t len = 0;
+    if (is_negative) {
+        buffer[len++] = '-';
+    }
+    len += write_uint_base(buffer + len, magnitude, base, options.uppercase);
+    apply_format_options_into(out, string_view(buffer, len), options, true);
+}
+
+template <typename T>
+NEFORCE_CONSTEXPR20 void append_arg_impl(string& out, const T& value, const format_options& options,
+                                         format_arg_float /*unused*/) {
+#ifdef NEFORCE_SUPPORT_LOCALE
+    if (options.loc != nullptr && (options.type == format_type::default_ || options.type == format_type::fixed ||
+                                   options.type == format_type::general)) {
+        const int precision = (options.precision >= 0) ? options.precision : 2;
+        out += options.loc->format_number(static_cast<double>(value), precision);
+        return;
+    }
+#endif
+    const int precision = (options.precision >= 0) ? options.precision : 6;
+    string raw;
+    switch (options.type) {
+        case format_type::scientific: {
+            raw = _NEFORCE to_string_scientific(value, precision);
+            break;
+        }
+        case format_type::fixed: {
+            raw = _NEFORCE to_string_fixed(value, precision);
+            break;
+        }
+        default: {
+            raw = _NEFORCE to_string_general(value, precision);
+            break;
+        }
+    }
+    if (options.uppercase) {
+        for (auto& c: raw) {
+            if (c == 'e') {
+                c = 'E';
+                break;
+            }
+        }
+    }
+    apply_format_options_into(out, raw.view(), options, true);
+}
+
+template <typename T>
+NEFORCE_CONSTEXPR20 void append_arg_impl(string& out, const T& value, const format_options& options,
+                                         format_arg_other /*unused*/) {
+    out += formatter<decay_t<T>>()(value, options);
+}
+
+template <typename T>
+NEFORCE_CONSTEXPR20 void append_arg(string& out, const T& value, const format_options& options) {
+    append_arg_impl(out, value, options, typename format_arg_kind<decay_t<T>>::type{});
+}
+
+template <size_t I, typename Tuple>
+NEFORCE_CONSTEXPR20 enable_if_t<I == tuple_size_v<Tuple>, void>
+format_get_and_append(string& out, const size_t idx, const Tuple& args, const format_options& opts) {
+    (void) out;
+    (void) idx;
+    (void) args;
+    (void) opts;
+    NEFORCE_THROW_EXCEPTION(value_exception("Format argument index out of range"));
+}
+
+template <size_t I, typename Tuple>
+NEFORCE_CONSTEXPR20 enable_if_t<(I < tuple_size_v<Tuple>), void>
+format_get_and_append(string& out, const size_t idx, const Tuple& args, const format_options& opts) {
+    if (idx == I) {
+        append_arg(out, _NEFORCE get<I>(args), opts);
+        return;
+    }
+    format_get_and_append<I + 1, Tuple>(out, idx, args, opts);
+    return;
+}
+
 /**
  * @brief 从tuple中按运行时索引获取参数并应用formatter
  *
@@ -773,7 +1002,7 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
                 NEFORCE_THROW_EXCEPTION(value_exception("Format argument index out of range"));
             }
 
-            out += inner::format_get_and_apply<0, Tuple>(arg_idx, args, opts);
+            inner::format_get_and_append<0, Tuple>(out, arg_idx, args, opts);
         } else if (fmt[pos] == '}') {
             if (pos + 1 < fmt.size() && fmt[pos + 1] == '}') {
                 out += '}';

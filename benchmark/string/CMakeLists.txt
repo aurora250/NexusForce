@@ -12,3 +12,6 @@ add_nexusforce_benchmark(NexusForceRegexBenchmark
 add_nexusforce_benchmark(NexusForceStringBuilderBenchmark
     string_builder_benchmark.cpp
 )
+
+# ---- Format ----
+add_subdirectory(format)

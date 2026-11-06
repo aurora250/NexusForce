@@ -13,6 +13,7 @@
 #endif
 #ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/exception/error_code.hpp>
+#    include <NeForce/core/utility/packages.hpp>
 #    include <fcntl.h>
 #    include <pthread.h>
 #    include <sys/mman.h>
@@ -20,6 +21,20 @@
 #    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
+
+#ifdef NEFORCE_PLATFORM_POSIX
+namespace {
+    string shm_name_for(const string& name) {
+        uint64_t hash = 1469598103934665603ULL;
+        for (const char ch: name) {
+            hash ^= static_cast<uint64_t>(static_cast<byte_t>(ch));
+            hash *= 1099511628211ULL;
+        }
+        return "/nf_mtx_" + to_string(hash);
+    }
+} // namespace
+#endif
+
 
 named_mutex::named_mutex(const string& name, const bool create) :
 name_(name) {
@@ -33,7 +48,7 @@ name_(name) {
         NEFORCE_THROW_EXCEPTION(share_memory_exception("named_mutex: failed to create/open"));
     }
 #else
-    shm_name_ = "/neforce_named_mutex_" + name;
+    shm_name_ = shm_name_for(name);
     if (create) {
         shm_fd_ = ::shm_open(shm_name_.data(), O_CREAT | O_RDWR, 0666);
         if (shm_fd_ < 0) {
@@ -204,7 +219,7 @@ bool named_mutex::remove(const string& name) {
     ignore = name;
     return true;
 #else
-    const string shm_name = "/neforce_named_mutex_" + name;
+    const string shm_name = shm_name_for(name);
     return ::shm_unlink(shm_name.data()) == 0;
 #endif
 }

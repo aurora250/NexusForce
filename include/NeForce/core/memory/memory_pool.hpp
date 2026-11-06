@@ -120,8 +120,8 @@ public:
         size_t thread_cache_batch = 32;               ///< 与中央堆交互时每次搬运的块数下限
         size_t thread_cache_bytes = 4096;             ///< 每个尺寸类在线程缓存中保留的字节目标，决定搬运批量
         size_t thread_cache_max_bytes = 1U << 20;     ///< 每个尺寸类线程缓存容量的字节上限，决定溢出阈值
-        size_t max_empty_spans = 1;                   ///< 每个尺寸类缓存的完全空闲 span 数下限
-        size_t max_empty_span_bytes = 2U << 20;       ///< 全池保留完全空闲 span 的字节预算
+        size_t max_empty_spans = 2;                   ///< 每个尺寸类缓存的完全空闲 span 数下限
+        size_t max_empty_span_bytes = 8U << 20;       ///< 全池保留完全空闲 span 的字节预算
         size_t max_cached_regions = 8;                ///< 全池大对象区域缓存条目数上限
         size_t thread_region_bytes = 256U << 10;      ///< 线程保留单个大对象区域的载荷字节上限
         size_t thread_region_budget_bytes = 2U << 20; ///< 线程保留大对象区域的映射字节总预算

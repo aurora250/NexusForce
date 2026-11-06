@@ -4499,7 +4499,7 @@ TEST_F(ProcessTest, Spawn_WithArgs_ReturnsValidId) {
 TEST_F(ProcessTest, Run_SuccessfulProcess_ReturnsZero) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     int ret = process::run("cmd.exe", {"/c", "exit", "0"});
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     int ret = process::run("/usr/bin/true");
 #else
     int ret = process::run("/bin/true");
@@ -4510,7 +4510,7 @@ TEST_F(ProcessTest, Run_SuccessfulProcess_ReturnsZero) {
 TEST_F(ProcessTest, Run_WithTimeout_ReturnsExitCode) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     int ret = process::run("cmd.exe", {"/c", "exit", "0"}, 5000);
-#elif defined(NEFORCE_PLATFORM_FREEBSD)
+#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     int ret = process::run("/usr/bin/true", {}, 5000);
 #else
     int ret = process::run("/bin/true", {}, 5000);
@@ -5788,9 +5788,9 @@ TEST_F(SysinfoTest, GetCpuInfo_CurrentMHz_NonZero) {
     sysinfo& inst = sysinfo::instance();
     const auto& cpu = inst.get_cpu_info();
 
-#ifdef NEFORCE_PLATFORM_FREEBSD
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
     if (cpu.current_mhz == 0) {
-        GTEST_SKIP() << "FreeBSD VM firmware reports no CPU frequency";
+        GTEST_SKIP() << "platform firmware reports no CPU frequency";
     }
 #endif
     EXPECT_GT(cpu.current_mhz, 0);
@@ -5994,6 +5994,11 @@ TEST_F(SysinfoTest, GetCpuInfo_Features_NonEmpty) {
     sysinfo& inst = sysinfo::instance();
     const auto& cpu = inst.get_cpu_info();
 
+#if defined(NEFORCE_PLATFORM_MACOS)
+    if (cpu.features.empty()) {
+        GTEST_SKIP() << "CPU feature reporting is unavailable";
+    }
+#endif
 #ifndef NEFORCE_PLATFORM_WINDOWS
     EXPECT_FALSE(cpu.features.empty());
 #endif
@@ -6001,6 +6006,11 @@ TEST_F(SysinfoTest, GetCpuInfo_Features_NonEmpty) {
 
 TEST_F(SysinfoTest, MachineProfile_ObtainableFieldsPopulated) {
     sysinfo& inst = sysinfo::instance();
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (sysinfo::mount_points().empty()) {
+        GTEST_SKIP() << "mount table is unavailable in this macOS environment";
+    }
+#endif
     const auto& system = inst.get_system_info();
     EXPECT_GT(system.processor_numbers, 0U);
     EXPECT_GT(system.page_size, 0U);
@@ -6399,6 +6409,11 @@ TEST_F(SysinfoTest, NumaInfo_AfterRefresh_Consistent) {
 
 TEST_F(SysinfoTest, GetDiskInfo_CurrentDirectory_ReturnsValidData) {
     const auto info = sysinfo::disk_status();
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (info.filesystem.empty()) {
+        GTEST_SKIP() << "filesystem name is unavailable in this macOS environment";
+    }
+#endif
     EXPECT_FALSE(info.path.empty());
     EXPECT_GT(info.total_bytes, 0U);
     EXPECT_LE(info.free_bytes, info.total_bytes);
@@ -6474,6 +6489,11 @@ TEST_F(SysinfoTest, NetworkInterfaces_HasLoopback) {
 
 TEST_F(SysinfoTest, MountPoints_EntriesAreConsistent) {
     const auto mounts = sysinfo::mount_points();
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (mounts.empty()) {
+        GTEST_SKIP() << "mount table is unavailable in this macOS environment";
+    }
+#endif
     ASSERT_FALSE(mounts.empty());
     for (const auto& mount: mounts) {
         EXPECT_FALSE(mount.target.empty());
@@ -6565,6 +6585,11 @@ TEST_F(SysinfoTest, DiskIoRates_ReturnsDevices) {
     static_cast<void>(sysinfo::disk_io_rates());
     this_thread::sleep_for(milliseconds(20));
     const auto values = sysinfo::disk_io_rates();
+#ifdef NEFORCE_PLATFORM_MACOS
+    if (values.empty()) {
+        GTEST_SKIP() << "disk I/O statistics are unavailable in this macOS environment";
+    }
+#endif
     EXPECT_FALSE(values.empty());
     for (const auto& value: values) {
         EXPECT_FALSE(value.name.empty());

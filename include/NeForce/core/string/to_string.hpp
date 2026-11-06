@@ -349,7 +349,7 @@ NEFORCE_NODISCARD basic_string<CharT> __float_to_string_with_precision(T x, int 
         return basic_string<CharT>{"-inf"};
     }
 
-    const bool is_negative = (x < 0);
+    const bool is_negative = (x < 0) || (x == 0 && _NEFORCE signbit(x));
     const double magnitude = is_negative ? -static_cast<double>(x) : static_cast<double>(x);
 
     bool use_scientific = false;
@@ -361,15 +361,18 @@ NEFORCE_NODISCARD basic_string<CharT> __float_to_string_with_precision(T x, int 
         use_scientific = (magnitude != 0.0) && (magnitude >= 1e6 || magnitude < 1e-4);
     }
 
-    const string text = inner::float_to_string_exact(magnitude, precision, use_scientific, 340);
+    string text = inner::float_to_string_exact(magnitude, precision, use_scientific, 340);
 
-    basic_string<CharT> result;
-    result.reserve(text.size() + 1);
     if (is_negative) {
-        result += static_cast<CharT>('-');
+        text.insert(static_cast<size_t>(0), 1, '-');
     }
-    for (const char c: text) {
-        result += static_cast<CharT>(c);
+    if (sizeof(CharT) == 1) {
+        return basic_string<CharT>(reinterpret_cast<const CharT*>(text.data()), text.size());
+    }
+    basic_string<CharT> result;
+    result.resize(text.size());
+    for (size_t i = 0; i < text.size(); ++i) {
+        result[i] = static_cast<CharT>(text[i]);
     }
     return result;
 }

@@ -761,6 +761,8 @@ jobs:
           with open('config.json', encoding='utf-8') as handle:
               config = json.load(handle)
           config['simd']['x64'] = 'BASELINE'
+          config['feature']['aes-ni'] = False
+          config['feature']['pclmul'] = False
           with open('config.json', 'w', encoding='utf-8') as handle:
               json.dump(config, handle, indent=2)
               handle.write('\n')
@@ -857,9 +859,11 @@ jobs:
 
           PLUGIN_DST="$PWD/$PLUGIN"
           "${SSH[@]}" root@127.0.0.1 "mkdir -p /tmp/nf/bin /tmp/nf/lib '$(dirname "$PLUGIN_DST")' && chown -R tester /tmp/nf"
+          "${SSH[@]}" tester@127.0.0.1 "mkdir -p /tmp/nf/snapshots"
           "${SCP[@]}" "$TEST_BIN" tester@127.0.0.1:/tmp/nf/bin/
           "${SCP[@]}" "$LIB" tester@127.0.0.1:/tmp/nf/lib/libNexusForce.so.2
           "${SCP[@]}" "$PLUGIN" tester@127.0.0.1:/tmp/nf/NexusForceTestPlugin.so
+          "${SCP[@]}" -r tests/unit/snapshots/. tester@127.0.0.1:/tmp/nf/snapshots/
           "${SSH[@]}" root@127.0.0.1 "cp /tmp/nf/NexusForceTestPlugin.so '$PLUGIN_DST' && chmod 644 '$PLUGIN_DST'"
 
       - name: Run FreeBSD unit tests under QEMU
@@ -868,7 +872,7 @@ jobs:
           SSH=(ssh -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -p 2222)
           SCP=(scp -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -P 2222)
           "${SSH[@]}" tester@127.0.0.1 \
-            "cd /tmp/nf && LD_LIBRARY_PATH=/tmp/nf/lib timeout 3600 ./bin/NexusForceUnitTests --gtest_color=no --gtest_output=xml:/tmp/nf/results.xml"
+            "cd /tmp/nf && LD_LIBRARY_PATH=/tmp/nf/lib NEFORCE_SNAPSHOT_DIR=/tmp/nf/snapshots timeout 3600 ./bin/NexusForceUnitTests --gtest_color=no --gtest_output=xml:/tmp/nf/results.xml"
           status=$?
           "${SCP[@]}" tester@127.0.0.1:/tmp/nf/results.xml "freebsd-${{ matrix.arch }}-test-results.xml" || true
           cp "$VM_DIR/serial.log" "freebsd-${{ matrix.arch }}-serial.log" 2>/dev/null || true

@@ -248,10 +248,11 @@ TEST(FloatEdgeCaseTest, SpecialValues) {
 
 TEST(FloatEdgeCaseTest, ZeroAndNegativeZero) {
     EXPECT_EQ(to_string_fixed(0.0, 3), "0.000");
-    EXPECT_EQ(to_string_fixed(-0.0, 3), "0.000");
+    EXPECT_EQ(to_string_fixed(-0.0, 3), "-0.000");
     EXPECT_EQ(to_string_scientific(0.0, 3), "0.000e+00");
-    EXPECT_EQ(to_string_scientific(-0.0, 2), "0.00e+00");
+    EXPECT_EQ(to_string_scientific(-0.0, 2), "-0.00e+00");
     EXPECT_EQ(format("{}", 0.0), "0.000000");
+    EXPECT_EQ(format("{}", -0.0), "-0.000000");
 }
 
 TEST(FloatEdgeCaseTest, IntegralValuesPadZeroFraction) {

@@ -165,6 +165,9 @@
 
 ### 🔧 Improvements
 
+- `memory_pool` 提高完全空闲 span 的保留额度（每尺寸类下限 1→2、全池字节预算 2 MB→8 MB），消除大尺寸类在突发分配/释放后反复解除映射与重新缺页的开销，小尺寸类不受影响
+- `deque` 中部插入/删除改为按缓冲区整段 `memory_move` 搬移（可平凡复制类型），非平凡类型走移动赋值；同时修正 `insert_aux` 前段分支搬移了长侧、`erase(first, last)` 前段分支搬移目的地方向错误两处缺陷
+- `deque` 对可平凡析构类型跳过逐元素析构，`clear()` 与 `erase` 走编译期分派
 - `rb_tree` 提示插入的 `end()` / `begin()` 两条常见路径改走直达链接（`link_right` / `link_left`），省去一次重复的键比较与分支
 - `rb_tree` 内置节点块缓存：一次向分配器申请 64 个节点并串成空闲链，插入/拷贝从空闲链取节点、删除/清空归还空闲链，`clear()` 与析构时统一归还节点块；每节点一次分配/释放降为每 64 个节点一次，插入、原地构造、拷贝、删除的每节点分配开销基本消除
 - `rb_tree` 新增 `contains()`：单次下界搜索 + 一次等值比较，不构造迭代器；`set` / `map` 的 `count` 改走 `contains()`，唯一键容器判定不再构造并比较两个迭代器
@@ -391,6 +394,12 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 FreeBSD QEMU 测试未携带 `tests/unit/snapshots` 导致 TUI 快照测试全部报 missing snapshot：复制快照目录并通过 `NEFORCE_SNAPSHOT_DIR` 指向 VM 内路径
+- 修复 FreeBSD x64 QEMU 在 `qemu64` 无 AES/PCLMUL 指令时执行 AES 测试 SIGILL：CI 的 x64 BASELINE 配置同时关闭 `aes-ni` / `pclmul`
+- 修复 macOS `named_mutex` 的 POSIX 共享内存名超过 `PSHMNAMLEN`（当前测试名约 45 字符）导致 `shm_open` 抛异常：使用稳定 FNV-1a 哈希生成短名
+- 修复 macOS `share_memory` 未按页对齐数据区，导致 macOS `ftruncate` 页舍入后 `OpenOrCreate` 尺寸错误、`grow` 映射越界抛异常：数据区偏移和 grow 长度按页对齐
+- 修复 macOS 上 `/bin/true` 不存在导致 ProcessTest.Run 抛异常：macOS 使用 `/usr/bin/true`
+- 跳过 macOS 当前环境不提供的 sysinfo 字段和 process watcher 退出通知测试，避免环境缺失误报和 30 分钟挂起
 - 修复 `thread_pool::start()` 请求的线程数超过 CPU 阈值时等待永远不会出现的 worker（FreeBSD QEMU 只有 2 vCPU，`start(4)` 永久阻塞在 `attached_workers_.wait`）：启动线程数按阈值截断，只等待实际 spawn 成功的 worker，并使用有截止时间的启动屏障
 - 修复依赖固定 4 个 worker 的 `ThreadPool.HighPriorityRunsBeforeLowPriority` 与依赖超过 2 CPU 的 `ThreadPool.CachedModeScalesWithBacklog` 在 2 vCPU FreeBSD 上的测试假设
 - 修复 macOS `dynamic_library::list_symbols()` 在 `libSystem.B.dylib` 等 dyld shared cache 镜像上读取无效 `LC_SYMTAB` 偏移导致段错误的问题：跳过带 `MH_DYLIB_IN_CACHE` 标志的镜像
@@ -398,7 +407,7 @@
 - 修复 `uninitialized_fill_n` 的按字节填充快路径读取含 padding 的平凡可复制类型未初始化字节；该快路径仅对标量类型启用，其余类型回退到构造首元素后批量复制
 - 修复 macOS 测试作业安装全量默认 vcpkg features 导致 ICU 下载 504：按 macOS 配置只安装 openssl/pcre2/zlib/gtest
 - 修复 `memory_move` 在源与目标区间重叠时仍走 `memory_copy_large`（该路径按 32 字节对齐头部整块存储，会覆盖尚未读取的源数据）造成的**静默数据损坏**：仅当两段区间不重叠时才使用批量传送，重叠时回退到逐块加载/存储的 SIMD 循环
-- 修复 BSD-like futex 的等待与唤醒路径：macOS/FreeBSD 统一使用进程内条件变量（固定绝对截止时间、broadcast 唤醒）作为回退，避免 `_umtx_op`/`__ulock` 在 QEMU 与 macOS ARM64 上的超时和唤醒差异；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
+- 修复 BSD-like futex 的等待与唤醒路径：默认恢复 FreeBSD `_umtx_op` / macOS `__ulock_wait2` 原生调用，同时保留 `NEFORCE_ASYNC_BSD_COND_FALLBACK` 条件变量回退用于诊断；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
 - 修复 macOS `dynamic_library::list_symbols()` 对主可执行文件/共享缓存镜像的 Mach-O 边界处理：始终处理主镜像、按路径过滤其它镜像，并限制字符串表读取长度
 - 修复 MSVC ARM64 上 `function<const T&()>` 将引用按整数返回的问题：引用返回类型改为携带对象地址的类型擦除调用，函数入口解引用后再返回
 - 修复 macOS `dynamic_library::load_self().list_symbols()` 扫描 dyld shared-cache 镜像时使用无效 LC_SYMTAB 文件偏移导致段错误：load_self 记录主程序路径以只扫描主可执行文件
