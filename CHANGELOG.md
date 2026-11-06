@@ -165,6 +165,8 @@
 
 ### 🔧 Improvements
 
+- `rb_tree::count`（多键容器路径）改为一次下界搜索 + 后继线性扫描，替代下界、上界、区间距离三次遍历
+- `rb_tree::find` 去掉临时迭代器构造与一次冗余比较，命中时直接返回节点
 - 内存池的大对象区域缓存改为按尺寸淘汰：缓存已满时用更大的区域替换更小的区域（仅当新区域不小于被替换区域的两倍），使 4 MiB 级别的缓冲在反复分配/释放时不再每次重新映射并重演全量缺页
 - `vector` 追加快路径与扩容路径分离：容量足够时只做「构造 + 指针自增」，扩容进入冷路径；`push_back` / `emplace_back` 的 `const&`、`&&` 重载直达快路径，转发模板仅用于多参数构造
 - `vector::insert`（单元素）对 trivially copyable 类型改为一次 `memory_move` 完成后半段搬移，非平凡类型仍走 `emplace`
@@ -386,7 +388,7 @@
 
 ### 🐛 Bug Fixes
 
-- 修复 macOS / FreeBSD 带超时的 futex 等待无法超时导致进程永久挂起：定时等待改用进程内条件变量与显式绝对截止时间，未定时等待仍使用平台 syscall；同时规避 `__ulock_wait2` 超时返回值语义与 `_umtx_time` 时间语义在两个平台上的差异
+- 修复 BSD-like 超时等待在每次 `pthread_cond_timedwait` 返回后重新计算相对截止时间、导致 spurious wakeup 不断延长超时的问题：realtime 截止时间改为进入循环前只计算一次
 - 修复 `uninitialized_fill_n` 的按字节填充快路径读取含 padding 的平凡可复制类型未初始化字节；该快路径仅对标量类型启用，其余类型回退到构造首元素后批量复制
 - 修复 macOS 测试作业安装全量默认 vcpkg features 导致 ICU 下载 504：按 macOS 配置只安装 openssl/pcre2/zlib/gtest
 - 修复 `memory_move` 在源与目标区间重叠时仍走 `memory_copy_large`（该路径按 32 字节对齐头部整块存储，会覆盖尚未读取的源数据）造成的**静默数据损坏**：仅当两段区间不重叠时才使用批量传送，重叠时回退到逐块加载/存储的 SIMD 循环

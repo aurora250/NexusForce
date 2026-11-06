@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceRBTreeBenchmark rb_tree_benchmark.cpp)

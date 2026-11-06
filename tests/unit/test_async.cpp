@@ -614,6 +614,26 @@ TEST(Wait, WaitForTimeout) {
     EXPECT_EQ(status, future_status::timeout);
 }
 
+TEST(Wait, TimeoutNotExtendedBySpuriousWakeups) {
+    promise<int> p;
+    future<int> f = p.get_future();
+    platform_wait_t dummy = 0;
+    thread notifier([&dummy] {
+        for (int attempt = 0; attempt < 100; ++attempt) {
+            futex_notify(&dummy, true);
+            this_thread::sleep_for(milliseconds(5));
+        }
+    });
+
+    const auto start = steady_clock::now();
+    const auto status = f.wait_for(milliseconds(50));
+    const auto elapsed = steady_clock::now() - start;
+    notifier.join();
+
+    EXPECT_EQ(status, future_status::timeout);
+    EXPECT_LT(elapsed, milliseconds(400));
+}
+
 TEST(Wait, WaitForReadyAfterSet) {
     promise<int> p;
     future<int> f = p.get_future();
@@ -1987,7 +2007,9 @@ TEST(ThreadPool, SubmitEvery) {
     pool.start(2);
     atomic<int> count{0};
     auto token = pool.submit_every(30, [&count] { count.fetch_add(1); });
-    this_thread::sleep_for(80_ms);
+    for (int attempt = 0; attempt < 100 && count.load() == 0; ++attempt) {
+        this_thread::sleep_for(10_ms);
+    }
     pool.cancel_periodic_task(token);
     this_thread::sleep_for(40_ms);
     int final_count = count.load();

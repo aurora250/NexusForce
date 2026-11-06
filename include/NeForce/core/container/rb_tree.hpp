@@ -716,6 +716,25 @@ private:
      */
     static link_type& parent(link_type ptr) noexcept { return reinterpret_cast<link_type&>(ptr->parent_); }
 
+    static link_type successor(link_type ptr) noexcept {
+        if (ptr->right_ != nullptr) {
+            ptr = reinterpret_cast<link_type>(ptr->right_);
+            while (ptr->left_ != nullptr) {
+                ptr = reinterpret_cast<link_type>(ptr->left_);
+            }
+            return ptr;
+        }
+        base_ptr parent = ptr->parent_;
+        while (ptr == parent->right_) {
+            ptr = reinterpret_cast<link_type>(parent);
+            parent = parent->parent_;
+        }
+        if (ptr->right_ != parent) {
+            ptr = reinterpret_cast<link_type>(parent);
+        }
+        return ptr;
+    }
+
     /**
      * @brief 从节点提取键
      * @param ptr 节点指针
@@ -1529,11 +1548,10 @@ public:
             }
         }
 
-        iterator j(y, this);
-        if (j == end()) {
+        if (y == header_ || key_compare_(key, rb_tree::key(y))) {
             return end();
         }
-        return key_compare_(key, rb_tree::key(y)) ? end() : j;
+        return iterator(y, this);
     }
 
     /**
@@ -1554,11 +1572,10 @@ public:
             }
         }
 
-        const_iterator j(y, this);
-        if (j == cend()) {
+        if (y == header_ || key_compare_(key, rb_tree::key(y))) {
             return cend();
         }
-        return key_compare_(key, rb_tree::key(y)) ? cend() : j;
+        return const_iterator(y, this);
     }
 
     /**
@@ -1567,8 +1584,25 @@ public:
      * @return 匹配的元素数量
      */
     NEFORCE_NODISCARD size_type count(const key_type& key) const {
-        pair<const_iterator, const_iterator> p = rb_tree::equal_range(key);
-        const size_type n = _NEFORCE distance(p.first, p.second);
+        link_type y = header_;
+        link_type x = root();
+        while (x != nullptr) {
+            if (!key_compare_(rb_tree::key(x), key)) {
+                y = x;
+                x = rb_tree::left(x);
+            } else {
+                x = rb_tree::right(x);
+            }
+        }
+        if (y == header_ || key_compare_(key, rb_tree::key(y))) {
+            return 0;
+        }
+        size_type n = 1;
+        y = rb_tree::successor(y);
+        while (y != header_ && !key_compare_(key, rb_tree::key(y))) {
+            ++n;
+            y = rb_tree::successor(y);
+        }
         return n;
     }
 

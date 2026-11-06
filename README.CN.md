@@ -222,7 +222,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📦 容器 (Container)
 - **标准容器** - `array`/`vector`/`list`/`deque`/`map`/`set`/`unordered_map`/`unordered_set`/`sparse_map`/`sparse_set`/`flat_unordered_map`/`flat_unordered_set` 等
-- **`rb_tree`** - 自平衡二叉搜索树实现
+- **`rb_tree`** - 自平衡二叉搜索树，性能测试详见 [红黑树性能测试记录](benchmark/container/rb_tree/PERFORMANCE.md)
 - **`hashtable`** - 链地址法哈希表
 - **`flat_hashtable`** - 高性能 SwissTable 开放寻址平坦哈希表，H2 预过滤 + SIMD 批量探测，性能测试详见 [平坦哈希表性能测试记录](benchmark/container/hashtable/PERFORMANCE.md)
 - **`bloom_filter`** - 概率性数据结构

@@ -225,7 +225,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 ### 📦 Containers
 - **Standard Containers** - `array` / `vector` / `list` / `deque` / `map` / `set` / `unordered_map` / `unordered_set` / `sparse_map` / `sparse_set` / `flat_unordered_map` / `flat_unordered_set`, etc.
-- **`rb_tree`** - Self-balancing binary search tree implementation
+- **`rb_tree`** - Self-balancing binary search tree implementation, backing `set` / `map`; see [RB tree performance test records](benchmark/container/rb_tree/PERFORMANCE.md)
 - **`hashtable`** - Separate chaining hash table
 - **`flat_hashtable`** - High-performance SwissTable open addressing flat hash table, H2 pre-filtering + SIMD group probing; see [flat hash table performance test records](benchmark/container/hashtable/PERFORMANCE.md)
 - **`bloom_filter`** - Probabilistic data structure
