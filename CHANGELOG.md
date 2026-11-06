@@ -394,8 +394,6 @@
 
 ### 🐛 Bug Fixes
 
-- 修复 FreeBSD QEMU 测试未携带 `tests/unit/snapshots` 导致 TUI 快照测试全部报 missing snapshot：复制快照目录并通过 `NEFORCE_SNAPSHOT_DIR` 指向 VM 内路径
-- 修复 FreeBSD x64 QEMU 在 `qemu64` 无 AES/PCLMUL 指令时执行 AES 测试 SIGILL：CI 的 x64 BASELINE 配置同时关闭 `aes-ni` / `pclmul`
 - 修复 macOS `named_mutex` 的 POSIX 共享内存名超过 `PSHMNAMLEN`（当前测试名约 45 字符）导致 `shm_open` 抛异常：使用稳定 FNV-1a 哈希生成短名
 - 修复 macOS `share_memory` 未按页对齐数据区，导致 macOS `ftruncate` 页舍入后 `OpenOrCreate` 尺寸错误、`grow` 映射越界抛异常：数据区偏移和 grow 长度按页对齐
 - 修复 macOS 上 `/bin/true` 不存在导致 ProcessTest.Run 抛异常：macOS 使用 `/usr/bin/true`

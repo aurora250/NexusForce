@@ -25,12 +25,7 @@ NEFORCE_BEGIN_NAMESPACE__
 #ifdef NEFORCE_PLATFORM_POSIX
 namespace {
     string shm_name_for(const string& name) {
-        uint64_t hash = 1469598103934665603ULL;
-        for (const char ch: name) {
-            hash ^= static_cast<uint64_t>(static_cast<byte_t>(ch));
-            hash *= 1099511628211ULL;
-        }
-        return "/nf_mtx_" + to_string(hash);
+        return "/nf_mtx_" + to_string(FNV_hash_string64(name.data(), name.size()));
     }
 } // namespace
 #endif
