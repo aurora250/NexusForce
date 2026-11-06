@@ -21,8 +21,7 @@
 | 262144 |    0.475 ns |    0.474 ns |    0.213 ns |   2.233× |     2.227× |
 | 1048576 |    0.497 ns |    0.493 ns |    0.215 ns |   2.311× |     2.288× |
 
-- `nf` 为 `std::vector` 的 1.76 ~ 2.31×；`nf_sa`（同一 `std::allocator`）为 1.81 ~ 2.29×，说明差距来自容器实现而非分配器
-- 1M 一档 `nf` 明显落后于 `nf_sa`：默认分配器在 4 MiB 缓冲上的分配成本高于 `std::allocator`
+- `nf` 为 `std::vector` 的 1.76 ~ 2.31×；`nf_sa`（同一 `std::allocator`）同为 1.81 ~ 2.29×，说明差距来自容器实现而非分配器
 - 快路径与扩容路径已分离：容量足够时为「构造 + 指针自增」，容量耗尽时才进入冷路径
 
 ### 追加性能 (`push_back`，无预留)
@@ -154,32 +153,6 @@ build/bin/Release/NexusForceVectorBenchmark --benchmark_repetitions=3 --benchmar
 ```
 
 > 跨平台横比只看比值列（`nf/std`），绝对值随平台与编译器差异较大。
-
----
-
-## 架构特性矩阵
-
-| 特性         | neforce::vector                              | std::vector (libstdc++)        |
-|--------------|:--------------------------------------------:|:------------------------------:|
-| 元素搬移     | trivially copyable → `memory_move`（AVX2 128 B / SSE2 展开） | `memmove` |
-| 批量填充     | 重复字节模式 → `memory_set`，否则首元素 + 2 的幂次批量复制 | `memset` 级批量填充 |
-| 单元素插入   | trivially copyable → 一次整段搬移；否则 `emplace` | 一次 `memmove` + 构造 |
-| 追加快路径   | 容量足够时为「构造 + 指针自增」，扩容走冷路径 | `NOINLINE` 的 `_M_realloc_insert`，快路径内联 |
-| 增长率       | `emplace` 重分配 `2 × size`；`reserve` 取 `max(1.5 × capacity, n)` | `2 × size` |
-| 默认分配器   | `neforce::allocator` → 内存池                | `std::allocator` → `operator new` |
-| 调试检查     | `NEFORCE_DEBUG_VERIFY`（Release 编译期移除） | `_GLIBCXX_ASSERTIONS`（默认关） |
-| 迭代器       | 连续迭代器包装，Release 下等价指针           | 连续迭代器（`__normal_iterator`） |
-
----
-
-## 场景推荐
-
-| 场景                  | 推荐实现                          | 原因                                   |
-|-----------------------|-----------------------------------|----------------------------------------|
-| 遍历 / 随机访问       | 两者等价                          | 均退化为指针运算（0.97 ~ 1.03×）       |
-| 中间插入 / 删除       | 两者等价                          | 由整段搬移主导（≈1.0×）                |
-| 大批量追加            | 优先 `reserve` + 批量构造，避免逐元素 `push_back` | 逐元素追加目前为 `std` 的 1.76 ~ 2.31× |
-| 非平凡元素（字符串等）| 两者等价                          | 容器侧只承担搬移（1.0 ~ 1.3×）          |
 
 ---
 
