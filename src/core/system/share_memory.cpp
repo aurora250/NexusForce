@@ -464,8 +464,82 @@ void share_memory::grow(size_t new_size) {
             mutex_handle_ = ::CreateMutexW(nullptr, FALSE, mutex_name.data());
         }
     }
-#elif defined(NEFORCE_PLATFORM_BSD_LIKE)
-    // FreeBSD and macOS have no mremap, so the grown object is remapped at offset 0.
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    // macOS only allows ftruncate() once, when the POSIX shm object is first created.
+    // Recreate the object with the same name, copy the old payload and remap it.
+    const bool was_mapped = mapped_addr_ != nullptr;
+    if (access_mode_ == access_mode::read_only) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("Cannot grow read-only shared memory"));
+    }
+
+    vector<char> saved_data;
+    if (size_ != 0) {
+        saved_data.reserve(size_);
+        if (mapped_addr_ != nullptr) {
+            const size_t copy_size = mapped_size_ < size_ ? mapped_size_ : size_;
+            saved_data.assign(static_cast<const char*>(mapped_addr_),
+                              static_cast<const char*>(mapped_addr_) + copy_size);
+            saved_data.resize(size_);
+            if (::munmap(original_mapped_addr_, internal_mapped_size_) != 0) {
+                const auto error = last_error();
+                NEFORCE_THROW_EXCEPTION(share_memory_exception("grow unmap: " + error.message()));
+            }
+        } else {
+            const size_t old_map_size = align_up(data_offset_ + size_, page_size_or_default());
+            void* old_base = ::mmap(nullptr, old_map_size, PROT_READ, MAP_SHARED, handle_, 0);
+            if (old_base == MAP_FAILED) {
+                const auto error = last_error();
+                NEFORCE_THROW_EXCEPTION(share_memory_exception("grow mmap(old): " + error.message()));
+            }
+            saved_data.assign(static_cast<const char*>(old_base) + data_offset_,
+                              static_cast<const char*>(old_base) + data_offset_ + size_);
+            (void) ::munmap(old_base, old_map_size);
+        }
+    }
+
+    original_mapped_addr_ = nullptr;
+    mapped_addr_ = nullptr;
+    mapped_size_ = 0;
+    internal_mapped_size_ = 0;
+
+    const string shm_name = normalize_name(name_);
+    if (::close(handle_) != 0) {
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("grow close: " + error.message()));
+    }
+    handle_ = g_invalid_handle;
+    if (::shm_unlink(shm_name.data()) != 0) {
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("grow unlink: " + error.message()));
+    }
+
+    handle_ = ::shm_open(shm_name.data(), O_CREAT | O_EXCL | O_RDWR, 0666);
+    if (handle_ == g_invalid_handle) {
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("grow shm_open: " + error.message()));
+    }
+
+    data_offset_ = align_up(k_header_size, page_size_or_default());
+    const size_t fd_new_size = align_up(data_offset_ + new_size, page_size_or_default());
+    if (::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == -1) {
+        const auto error = last_error();
+        ::close(handle_);
+        handle_ = g_invalid_handle;
+        ::shm_unlink(shm_name.data());
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("grow ftruncate: " + error.message()));
+    }
+
+    size_ = new_size;
+    store_data_size(handle_, size_);
+    map();
+    if (!saved_data.empty()) {
+        memory_copy(mapped_addr_, saved_data.data(), saved_data.size());
+    }
+    if (was_mapped == false) {
+        unmap();
+    }
+#elif defined(NEFORCE_PLATFORM_FREEBSD)
+    // FreeBSD can grow a POSIX shm object in place with ftruncate().
     // The data itself lives in the shm file, so unmapping and mapping again preserves it.
     const bool was_mapped = mapped_addr_ != nullptr;
     void* old_mapping = original_mapped_addr_;
