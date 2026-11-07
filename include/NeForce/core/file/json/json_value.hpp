@@ -157,7 +157,7 @@ enum class json_kind : uint8_t {
  * @class json_value
  * @brief JSON DOM 值，16 字节、平凡可析构、无虚函数
  */
-class json_value {
+class NEFORCE_API json_value {
 public:
     /**
      * @brief 构造空值
@@ -373,7 +373,7 @@ private:
  * @struct json_member
  * @brief JSON 对象的一个成员
  */
-struct json_member {
+struct NEFORCE_API json_member {
     /// 内联键最大字节数
     static constexpr uint32_t inline_key_capacity = 8;
 
@@ -460,7 +460,7 @@ struct json_member {
  * @class json_bool
  * @brief 布尔视图
  */
-class json_bool {
+class NEFORCE_API json_bool {
 public:
     /**
      * @brief 获取布尔值
@@ -486,7 +486,7 @@ private:
  * @class json_number
  * @brief 数值视图，保留整数/无符号整数/浮点三种来源
  */
-class json_number {
+class NEFORCE_API json_number {
 public:
     /**
      * @brief 以浮点形式获取数值
@@ -539,7 +539,7 @@ private:
  * @class json_string
  * @brief 字符串视图
  */
-class json_string {
+class NEFORCE_API json_string {
 public:
     /**
      * @brief 获取字符串内容
@@ -584,7 +584,7 @@ private:
  * @class json_array
  * @brief 数组只读视图
  */
-class json_array {
+class NEFORCE_API json_array {
 public:
     /**
      * @brief 兼容旧写法的成员访问运算符
@@ -617,7 +617,7 @@ public:
      * @brief 获取元素区间
      * @return 自身引用
      */
-    NEFORCE_NODISCARD const json_array& get_elements() const noexcept { return *this; }
+    NEFORCE_NODISCARD json_array get_elements() const noexcept { return *this; }
 
     /**
      * @brief 起始迭代器
@@ -646,7 +646,7 @@ private:
  * @class json_object
  * @brief 对象只读视图
  */
-class json_object {
+class NEFORCE_API json_object {
 public:
     /**
      * @brief 兼容旧写法的成员访问运算符
@@ -695,7 +695,7 @@ public:
      * @brief 获取成员区间
      * @return 自身引用
      */
-    NEFORCE_NODISCARD const json_object& get_members() const noexcept { return *this; }
+    NEFORCE_NODISCARD json_object get_members() const noexcept { return *this; }
 
     /**
      * @brief 起始迭代器
@@ -725,7 +725,7 @@ private:
  * @class json_document
  * @brief 拥有 DOM 内存的 JSON 文档，可移动不可拷贝
  */
-class json_document {
+class NEFORCE_API json_document {
 public:
     json_document() noexcept = default;
     ~json_document() = default;
@@ -943,7 +943,7 @@ inline const json_value* json_object::get_member(const string_view key) const no
  * @class json_object_mut
  * @brief 对象可变视图，用于构建 DOM
  */
-class json_object_mut {
+class NEFORCE_API json_object_mut {
 public:
     /**
      * @brief 追加一个成员
@@ -1008,7 +1008,7 @@ private:
  * @class json_array_mut
  * @brief 数组可变视图，用于构建 DOM
  */
-class json_array_mut {
+class NEFORCE_API json_array_mut {
 public:
     /**
      * @brief 追加一个元素

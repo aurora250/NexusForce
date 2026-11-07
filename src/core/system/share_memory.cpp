@@ -476,7 +476,7 @@ void share_memory::grow(size_t new_size) {
     if (!truncated && was_mapped) {
         if (::munmap(old_mapping, old_mapping_size) != 0) {
             const auto error = last_error();
-            NEFORCE_THROW_EXCEPTION(share_memory_exception("grow unmap: " + error));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception("grow unmap: " + error.message()));
         }
         original_mapped_addr_ = nullptr;
         mapped_addr_ = nullptr;
@@ -487,7 +487,7 @@ void share_memory::grow(size_t new_size) {
     }
     if (!truncated) {
         const auto error = last_error();
-        NEFORCE_THROW_EXCEPTION(share_memory_exception("grow ftruncate: " + error));
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("grow ftruncate: " + error.message()));
     }
 
     size_ = new_size;
@@ -498,7 +498,7 @@ void share_memory::grow(size_t new_size) {
         void* addr = ::mmap(nullptr, fd_new_size, prot, MAP_SHARED, handle_, 0);
         if (addr == MAP_FAILED) {
             const auto error = last_error();
-            NEFORCE_THROW_EXCEPTION(share_memory_exception("grow mmap: " + error));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception("grow mmap: " + error.message()));
         }
         if (old_mapping != nullptr) {
             (void) ::munmap(old_mapping, old_mapping_size);
