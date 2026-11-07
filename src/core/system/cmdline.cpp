@@ -339,27 +339,25 @@ void cmdline::load_config(const string& config_path, const string& section) {
         }
     } else if (ext == ".json") {
         json_parser parser(content);
-        auto root = parser.parse();
+        json_document root = parser.parse();
         const json_value* current = root.get();
         if (!section.empty()) {
-            const auto* root_obj = dynamic_cast<const json_object*>(current);
-            if (root_obj != nullptr) {
-                for (const auto& member: root_obj->get_members()) {
-                    if (member.first == section) {
-                        current = member.second.get();
-                        break;
-                    }
+            const json_object root_obj = current->as_object();
+            for (const auto& member: root_obj.get_members()) {
+                if (member.key() == section) {
+                    current = &member.value;
+                    break;
                 }
             }
         }
-        const auto* obj = dynamic_cast<const json_object*>(current);
-        if (obj != nullptr) {
-            for (const auto& member: obj->get_members()) {
-                const string val_str = member.second->to_string();
+        const json_object obj = current->as_object();
+        if (!obj.empty()) {
+            for (const auto& member: obj.get_members()) {
+                string val_str = member.value.to_string();
                 if (val_str.size() >= 2 && val_str.front() == '"' && val_str.back() == '"') {
-                    config_values[member.first] = val_str.substr(1, val_str.size() - 2);
+                    config_values[string(member.key())] = val_str.substr(1, val_str.size() - 2);
                 } else {
-                    config_values[member.first] = val_str;
+                    config_values[string(member.key())] = move(val_str);
                 }
             }
         }

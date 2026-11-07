@@ -420,7 +420,7 @@ namespace {
         }
 
         uint64_t hi = 0;
-        uint64_t lo = _NEFORCE __umul128(mantissa, k_pow10[scale], &hi);
+        uint64_t lo = __umul128(mantissa, k_pow10[scale], &hi);
 
         tail_kind = 0;
         if (exponent >= 0) {

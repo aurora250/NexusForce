@@ -492,27 +492,26 @@ bool theme_catalog::register_theme(const string_view json) {
     if (!parsed.has_value() || parsed->get() == nullptr) {
         return false;
     }
-    const auto* root = parsed->get()->as_object();
-    if (root == nullptr) {
+    const json_object root = parsed->get()->as_object();
+    if (root.empty()) {
         return false;
     }
     const auto* base_value = root->get_member(string{"base"});
-    if (base_value == nullptr || base_value->as_string() == nullptr) {
+    if (base_value == nullptr || !base_value->is_string()) {
         return false;
     }
-    const string& base_name = base_value->as_string()->get_value();
+    const string base_name(base_value->as_string().get_value());
     auto palette = make_palette(string_view{base_name.data(), base_name.size()});
     if (!palette.has_value()) {
         return false;
     }
 
     string name;
-    if (const auto* name_value = root->get_member(string{"name"});
-        name_value != nullptr && name_value->as_string() != nullptr) {
-        name = name_value->as_string()->get_value();
+    if (const auto* name_value = root->get_member(string{"name"}); name_value != nullptr && name_value->is_string()) {
+        name = name_value->as_string().get_value();
     } else if (const auto* display = root->get_member(string{"displayName"});
-               display != nullptr && display->as_string() != nullptr) {
-        name = to_lower(display->as_string()->get_value().view());
+               display != nullptr && display->is_string()) {
+        name = to_lower(display->as_string().get_value());
         for (char& c: name) {
             if (c == ' ') {
                 c = '-';
@@ -524,13 +523,14 @@ bool theme_catalog::register_theme(const string_view json) {
     }
 
     if (const auto* colors = root->get_member(string{"colors"}); colors != nullptr) {
-        if (const auto* color_object = colors->as_object(); color_object != nullptr) {
-            for (const auto& entry: color_object->get_members()) {
-                const auto role = parse_theme_role(entry.first.view());
-                if (!role.has_value() || entry.second == nullptr || entry.second->as_string() == nullptr) {
+        const json_object color_object = colors->as_object();
+        {
+            for (const auto& entry: color_object.get_members()) {
+                const auto role = parse_theme_role(entry.key());
+                if (!role.has_value() || !entry.value.is_string()) {
                     continue;
                 }
-                if (const auto parsed_color = parse_color(entry.second->as_string()->get_value().view())) {
+                if (const auto parsed_color = parse_color(entry.value.as_string().get_value())) {
                     palette->set(*role, *parsed_color);
                 }
             }

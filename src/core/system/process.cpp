@@ -363,13 +363,13 @@ namespace {
 
     size_t virtual_size_of(const ::HANDLE process_handle) noexcept {
         size_t total = 0;
-        const unsigned char* address = nullptr;
+        const byte_t* address = nullptr;
         ::MEMORY_BASIC_INFORMATION info{};
         while (::VirtualQueryEx(process_handle, address, &info, sizeof(info)) == sizeof(info)) {
             if (info.State != MEM_FREE) {
                 total += static_cast<size_t>(info.RegionSize);
             }
-            const auto* next = static_cast<const unsigned char*>(info.BaseAddress) + info.RegionSize;
+            const auto* next = static_cast<const byte_t*>(info.BaseAddress) + info.RegionSize;
             if (next <= address) {
                 break;
             }

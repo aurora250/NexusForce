@@ -60,7 +60,7 @@ TEST_F(JsonSerializerTest, SerializeSimpleObject) {
     meta->get_property("value")->set(raw, reflect::meta_any(3.14));
 
     auto json = json_serializer::serialize(obj);
-    ASSERT_NE(json, nullptr);
+    ASSERT_TRUE(json);
     EXPECT_TRUE(json->is_object());
 }
 
@@ -80,7 +80,6 @@ TEST_F(JsonSerializerTest, SerializeToString) {
 TEST_F(JsonSerializerTest, SerializeEmptyObject) {
     reflect::meta_any empty;
     auto json = json_serializer::serialize(empty);
-    ASSERT_NE(json, nullptr);
     EXPECT_TRUE(json->is_null());
 }
 
@@ -102,7 +101,7 @@ TEST_F(JsonSerializerTest, DeserializeRoundTrip) {
 
     auto json = json_serializer::serialize(obj);
 
-    auto restored = json_serializer::deserialize(*json, *meta);
+    auto restored = json_serializer::deserialize(json.root(), *meta);
     EXPECT_TRUE(restored.has_value());
 
     void* restored_raw = restored.raw();

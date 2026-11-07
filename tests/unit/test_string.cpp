@@ -2,6 +2,7 @@
 #include <NeForce/core/string/char_types.hpp>
 #include <NeForce/core/string/string.hpp>
 #include <NeForce/core/string/to_numerics.hpp>
+#include <NeForce/core/string/to_string.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
@@ -141,6 +142,55 @@ TEST_F(ToFloat64Test, InvalidString) { EXPECT_THROW(ignore = to_float64("xyz"), 
 TEST_F(ToFloat64Test, OverflowToInfinity) { EXPECT_TRUE(is_infinity(to_float64("1e400"))); }
 
 TEST_F(ToFloat64Test, UnderflowToZero) { EXPECT_DOUBLE_EQ(to_float64("1e-400"), 0.0); }
+
+TEST_F(ToFloat64Test, CorrectlyRounded) {
+    struct case_type {
+        string_view text;
+        uint64_t bits;
+    };
+
+    static const case_type cases[] = {
+            {"52.285", 0x404A247AE147AE14ULL},
+            {"0.1", 0x3FB999999999999AULL},
+            {"1e22", 0x4480F0CF064DD592ULL},
+            {"1e23", 0x44B52D02C7E14AF6ULL},
+            {"1.5e300", 0x7E41EB2D66005835ULL},
+            {"2.2250738585072011e-308", 0x000FFFFFFFFFFFFFULL},
+            {"2.2250738585072014e-308", 0x0010000000000000ULL},
+            {"2.4703282292062327e-324", 0x0000000000000000ULL},
+            {"2.4703282292062328e-324", 0x0000000000000001ULL},
+            {"4.9406564584124654e-324", 0x0000000000000001ULL},
+            {"1.7976931348623157e308", 0x7FEFFFFFFFFFFFFFULL},
+            {"1.7976931348623158e308", 0x7FEFFFFFFFFFFFFFULL},
+            {"1.7976931348623159e308", 0x7FF0000000000000ULL},
+            {"1.0000000000000000000000000000000000001", 0x3FF0000000000000ULL},
+            {"12345678901234567890123456789", 0x45C3F20D99235F65ULL},
+            {"0.0000000000000000000000000000000000000001", 0x37A16C262777579CULL},
+    };
+    for (const case_type& item: cases) {
+        const double value = to_float64(item.text);
+        uint64_t bits = 0;
+        memory_copy(&bits, &value, sizeof(bits));
+        EXPECT_EQ(bits, item.bits) << item.text.data();
+    }
+}
+
+TEST_F(ToFloat64Test, NegativeIsSymmetric) {
+    EXPECT_EQ(to_float64("-52.285"), -to_float64("52.285"));
+    EXPECT_EQ(to_float64("-1e-320"), -to_float64("1e-320"));
+    EXPECT_TRUE(is_infinity(to_float64("-1e400")));
+}
+
+TEST_F(ToFloat64Test, RoundTripsShortestRepr) {
+    const double values[] = {
+            1e30,      1e-30,  1.7976931348623157e308, 2.2250738585072014e-308, 4.9406564584124654e-324, 0.1, 52.285,
+            1.0 / 3.0, 1e-320, 9007199254740992.0};
+    for (const double value: values) {
+        string text;
+        inner::append_float_shortest(text, value);
+        EXPECT_EQ(to_float64(string_view(text.data(), text.size())), value) << text.data();
+    }
+}
 
 TEST_F(ToDecimalTest, BasicConversion) {
     EXPECT_EQ(to_decimal("0"), decimal_t(0));

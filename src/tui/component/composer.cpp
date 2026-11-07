@@ -112,7 +112,7 @@ bool composer::extract_query(string& query) const {
         if (previous == ' ' || previous == '\t' || previous == '\n') {
             return false;
         }
-        const auto as_char32 = static_cast<char32_t>(static_cast<unsigned char>(previous));
+        const auto as_char32 = static_cast<char32_t>(static_cast<byte_t>(previous));
         if (as_char32 == opt_.trigger) {
             break;
         }

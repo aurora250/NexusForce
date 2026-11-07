@@ -1032,7 +1032,7 @@ bool sys_console::kbhit() noexcept {
     new_tio.c_cc[VTIME] = 0;
     ::tcsetattr(in_, TCSANOW, &new_tio);
 
-    unsigned char ch = 0;
+    byte_t ch = 0;
     const ssize_t n = ::read(in_, &ch, 1);
     ::tcsetattr(in_, TCSANOW, &old_tio);
 
@@ -1067,7 +1067,7 @@ int sys_console::getch() noexcept {
     new_tio.c_cc[VTIME] = 0;
     ::tcsetattr(in_, TCSANOW, &new_tio);
 
-    unsigned char ch = 0;
+    byte_t ch = 0;
     ssize_t n = ::read(in_, &ch, 1);
     while (n == -1 && errno == EINTR) {
         n = ::read(in_, &ch, 1);

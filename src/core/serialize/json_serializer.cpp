@@ -117,11 +117,11 @@ namespace {
 
         void* raw_ptr = instance.raw();
 
-        for (const auto& json_member: obj.get_members()) {
-            const auto& member_name = json_member.first;
-            const auto& member_value = json_member.second;
+        for (const auto& member: obj.get_members()) {
+            const auto member_name = member.key();
+            const auto* member_value = &member.value;
 
-            const auto* prop = type.get_property(member_name.view());
+            const auto* prop = type.get_property(member_name);
             if (prop == nullptr) {
                 continue;
             }
@@ -131,9 +131,8 @@ namespace {
             if (member_value->is_null()) {
                 prop_value = reflect::meta_any{};
             } else if (member_value->is_number()) {
-                const auto* num_val = member_value->as_number();
-                if (num_val != nullptr) {
-                    const auto num = num_val->get_value();
+                {
+                    const auto num = member_value->as_number().get_value();
                     const auto prop_tid = prop->type_id();
 
                     if (prop_tid == reflect::type_id_for<double>()) {
@@ -150,15 +149,9 @@ namespace {
                     }
                 }
             } else if (member_value->is_bool()) {
-                const auto* bool_val = member_value->as_bool();
-                if (bool_val != nullptr) {
-                    prop_value = reflect::meta_any(bool_val->get_value());
-                }
+                prop_value = reflect::meta_any(member_value->as_bool().get_value());
             } else if (member_value->is_string()) {
-                const auto* str_val = member_value->as_string();
-                if (str_val != nullptr) {
-                    prop_value = reflect::meta_any(str_val->get_value());
-                }
+                prop_value = reflect::meta_any(string(member_value->as_string().get_value()));
             } else if (member_value->is_object()) {
                 const auto prop_tid = prop->type_id();
                 const auto* prop_meta = reflect::registry::instance().find(prop_tid);
@@ -168,7 +161,7 @@ namespace {
                     } else {
                         prop_value =
                                 // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-                                deserialize_object(static_cast<const json_object&>(*member_value), *prop_meta, ctx);
+                                deserialize_object(member_value->as_object(), *prop_meta, ctx);
                     }
                 }
             } else if (member_value->is_array()) {
@@ -190,15 +183,11 @@ namespace {
             return {};
         }
         if (value.is_bool()) {
-            const auto* bv = value.as_bool();
-            if (bv != nullptr) {
-                return {bv->get_value()};
-            }
+            return {value.as_bool().get_value()};
         }
         if (value.is_number()) {
-            const auto* nv = value.as_number();
-            if (nv != nullptr) {
-                const auto num = nv->get_value();
+            {
+                const auto num = value.as_number().get_value();
                 if (expected_tid == reflect::type_id_for<int>()) {
                     return {static_cast<int>(num)};
                 }
@@ -212,19 +201,16 @@ namespace {
             }
         }
         if (value.is_string()) {
-            const auto* sv = value.as_string();
-            if (sv != nullptr) {
-                return {sv->get_value()};
-            }
+            return {string(value.as_string().get_value())};
         }
         return {};
     }
 } // namespace
 
 
-unique_ptr<json_value> json_serializer::serialize(const reflect::meta_any& obj, const serialize_context& ctx) {
+json_document json_serializer::serialize(const reflect::meta_any& obj, const serialize_context& ctx) {
     if (!obj.has_value()) {
-        return make_unique<json_null>();
+        return json_document();
     }
 
     const auto tid = obj.type_id();
@@ -240,8 +226,8 @@ unique_ptr<json_value> json_serializer::serialize(const reflect::meta_any& obj, 
 }
 
 string json_serializer::to_string(const reflect::meta_any& obj, const serialize_context& ctx) {
-    const auto value = serialize(obj, ctx);
-    return value ? value->to_string() : string{};
+    const json_document document = serialize(obj, ctx);
+    return document->to_string();
 }
 
 reflect::meta_any json_serializer::deserialize(const json_value& value, const reflect::meta_type& type,
@@ -258,23 +244,23 @@ reflect::meta_any json_serializer::deserialize(const json_value& value, const re
 
         void* container_ptr = instance.raw();
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-        const auto& arr = static_cast<const json_array&>(value);
+        const json_array arr = value.as_array();
         const auto& elements = arr.get_elements();
         const auto elem_tid = type.element_type_id();
 
         for (const auto& elem: elements) {
             reflect::meta_any elem_value;
 
-            if (elem->is_null()) {
+            if (elem.is_null()) {
                 elem_value = reflect::meta_any{};
-            } else if (elem->is_object()) {
+            } else if (elem.is_object()) {
                 const auto* elem_meta = reflect::registry::instance().find(elem_tid);
                 if (elem_meta != nullptr) {
                     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-                    elem_value = deserialize_object(static_cast<const json_object&>(*elem), *elem_meta, ctx);
+                    elem_value = deserialize_object(elem.as_object(), *elem_meta, ctx);
                 }
             } else {
-                elem_value = deserialize_primitive(*elem, elem_tid);
+                elem_value = deserialize_primitive(elem, elem_tid);
             }
 
             type.container_push_back(container_ptr, elem_value);
@@ -287,18 +273,17 @@ reflect::meta_any json_serializer::deserialize(const json_value& value, const re
         NEFORCE_THROW_EXCEPTION(deserialize_exception("Expected JSON object for reflected type deserialization"));
     }
 
-    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return deserialize_object(static_cast<const json_object&>(value), type, ctx);
+    return deserialize_object(value.as_object(), type, ctx);
 }
 
 reflect::meta_any json_serializer::from_string(const string& json_str, const reflect::meta_type& type,
                                                const serialize_context& ctx) {
     json_parser parser{json_str};
-    const auto root = parser.parse();
-    if (root == nullptr) {
+    const json_document root = parser.parse();
+    if (root->is_null()) {
         NEFORCE_THROW_EXCEPTION(deserialize_exception("Failed to parse JSON string"));
     }
-    return deserialize(*root, type, ctx);
+    return deserialize(root.root(), type, ctx);
 }
 
 NEFORCE_END_SERIALIZE__

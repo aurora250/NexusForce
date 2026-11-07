@@ -3,13 +3,9 @@
 
 /**
  * @file json_builder.hpp
- * @brief JSON配置格式构建器
- *
- * 此文件提供了JSON配置格式的流式构建器实现。
- * 支持链式调用和函数式编程方式构建JSON格式。
+ * @brief JSON 文档构建器
  */
 
-#include "NeForce/core/container/stack.hpp"
 #include "NeForce/core/file/json/json_value.hpp"
 #include "NeForce/core/functional/function.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -26,316 +22,210 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @class json_builder
- * @brief JSON配置构建器
- *
- * 提供流式接口构建JSON配置格式，支持以下特性：
- * - 链式调用构建对象和数组
- * - 自动类型转换（整数、浮点数、布尔值、字符串）
- * - 函数式构建嵌套结构
- * - 集合类型自动转换（可迭代对象、映射表）
- * - 上下文管理（自动维护当前对象/数组状态）
+ * @brief 流式构建 JSON 文档
  */
 class NEFORCE_API json_builder {
-private:
-    /**
-     * @enum range_type
-     * @brief 上下文类型枚举
-     */
-    enum range_type {
-        object,
-        array
-    };
-
-    /**
-     * @struct frame
-     * @brief 上下文帧结构
-     *
-     * 保存当前构建的上下文信息，用于维护对象/数组的嵌套关系。
-     */
-    struct frame {
-        range_type type = object; ///< 上下文类型
-        union {
-            json_object* object_ptr = nullptr; ///< 当前对象指针
-            json_array* array_ptr;             ///< 当前数组指针
-        };
-
-        frame() = default;
-        frame(const range_type t, json_object* obj) :
-        type(t),
-        object_ptr(obj) {}
-        frame(const range_type t, json_array* arr) :
-        type(t),
-        array_ptr(arr) {}
-
-        frame(const frame&) = default;
-        frame& operator=(const frame&) = default;
-        frame(frame&&) noexcept = default;
-        frame& operator=(frame&&) noexcept = default;
-        ~frame() = default;
-    };
-
-    stack<frame> contexts_;       ///< 上下文栈
-    unique_ptr<json_value> root_; ///< 根节点
-    string current_key_;          ///< 当前对象的键名
-
-private:
-    /**
-     * @brief 值设置的通用实现
-     * @tparam T JSON值类型
-     * @param value 要设置的值指针
-     * @return 自身引用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
-     *
-     * 根据当前上下文决定值的放置位置：
-     * - 顶层：设置为根节点
-     * - 数组中：作为新元素添加
-     * - 对象中：与当前键名配对添加
-     */
-    template <typename T>
-    json_builder& value_impl(unique_ptr<T> value) {
-        if (contexts_.empty()) {
-            if (root_) {
-                NEFORCE_THROW_EXCEPTION(json_exception("Multiple root values not allowed"));
-            }
-            root_ = _NEFORCE move(value);
-        } else {
-            const auto& top = contexts_.top();
-            if (top.type == array) {
-                top.array_ptr->add_element(_NEFORCE move(value));
-            } else if (top.type == object) {
-                if (current_key_.empty()) {
-                    NEFORCE_THROW_EXCEPTION(json_exception("No key set for value in object"));
-                }
-                top.object_ptr->add_member(current_key_, _NEFORCE move(value));
-                current_key_.clear();
-            }
-        }
-        return *this;
-    }
-
-    /**
-     * @brief 可迭代类型的分派函数
-     * @tparam Iterable 可迭代类型
-     * @param iterable 可迭代对象
-     * @return 自身引用
-     */
-    template <typename Iterable>
-    enable_if_t<is_iterable_v<Iterable>, json_builder&> value_iterable_dispatch(const Iterable& iterable) {
-        return this->value_iterable_impl(iterable);
-    }
-
-    /**
-     * @brief 映射表类型的实现（转换为JSON对象）
-     * @tparam Map 映射表类型
-     * @param maplike 映射表对象
-     * @return 自身引用
-     */
-    template <typename Map>
-    enable_if_t<is_maplike_v<Map>, json_builder&> value_iterable_impl(const Map& maplike) {
-        begin_object();
-        for (const auto& pair: maplike) {
-            this->key(pair.first).value(pair.second);
-        }
-        end_object();
-        return *this;
-    }
-
-    /**
-     * @brief 一般可迭代类型的实现（转换为JSON数组）
-     * @tparam Iterable 可迭代类型
-     * @param iterable 可迭代对象
-     * @return 自身引用
-     */
-    template <typename Iterable>
-    enable_if_t<!is_maplike_v<Iterable>, json_builder&> value_iterable_impl(const Iterable& iterable) {
-        begin_array();
-        for (const auto& element: iterable) {
-            this->value(element);
-        }
-        end_array();
-        return *this;
-    }
-
 public:
     json_builder() = default;
     ~json_builder() = default;
 
     json_builder(const json_builder&) = delete;
     json_builder& operator=(const json_builder&) = delete;
-
-    json_builder(json_builder&& other) noexcept = default;
-    json_builder& operator=(json_builder&& other) noexcept = default;
+    json_builder(json_builder&&) noexcept = default;
+    json_builder& operator=(json_builder&&) noexcept = default;
 
     /**
-     * @brief 开始一个JSON对象
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当根节点已存在或键名缺失时抛出
-     *
-     * 创建一个新的JSON对象，并压入上下文栈。
-     * 如果当前在顶层，该对象将成为根节点；
-     * 否则作为当前上下文的值添加。
+     * @brief 开始一个对象
+     * @return 自身引用
+     * @throws json_exception 层级不匹配时抛出
      */
     json_builder& begin_object();
 
     /**
-     * @brief 开始一个JSON数组
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当根节点已存在或键名缺失时抛出
-     *
-     * 创建一个新的JSON数组，并压入上下文栈。
-     * 如果当前在顶层，该数组将成为根节点；
-     * 否则作为当前上下文的值添加。
+     * @brief 开始一个数组
+     * @return 自身引用
+     * @throws json_exception 层级不匹配时抛出
      */
     json_builder& begin_array();
 
     /**
-     * @brief 结束当前JSON对象
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当没有对象可关闭或存在未完成的键值对时抛出
-     *
-     * 弹出上下文栈顶的对象，返回上一层。
-     * 必须与 begin_object 配对使用。
+     * @brief 结束当前对象
+     * @return 自身引用
+     * @throws json_exception 层级不匹配时抛出
      */
     json_builder& end_object();
 
     /**
-     * @brief 结束当前JSON数组
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当没有数组可关闭时抛出
-     *
-     * 弹出上下文栈顶的数组，返回上一层。
-     * 必须与 begin_array 配对使用。
+     * @brief 结束当前数组
+     * @return 自身引用
+     * @throws json_exception 层级不匹配时抛出
      */
     json_builder& end_array();
 
     /**
-     * @brief 设置当前对象的键名
-     * @param key 键名
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当不在对象上下文中或键名已设置时抛出
-     *
-     * 为后续的值设置键名，仅在对象上下文中有效。
+     * @brief 设置下一个成员的键
+     * @param key 键
+     * @return 自身引用
+     * @throws json_exception 当前不在对象内时抛出
      */
     json_builder& key(const string& key);
 
     /**
-     * @brief 设置null值
-     * @param np 空指针标记
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
+     * @brief 设置下一个成员的键
+     * @param key 键
+     * @return 自身引用
      */
-    json_builder& value(nullptr_t np) { return value_impl(make_unique<json_null>()); }
+    json_builder& key(const char* key) { return this->key(string(key)); }
 
     /**
-     * @brief 设置字符串值
-     * @param value 字符串值
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
+     * @brief 设置下一个成员的键
+     * @param key 键视图
+     * @return 自身引用
      */
-    json_builder& value(const string& value) { return value_impl(make_unique<json_string>(value)); }
+    json_builder& key(const string_view key) { return this->key(string(key)); }
 
     /**
-     * @brief 设置C字符串值
-     * @param value C字符串
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
+     * @brief 写入空值
+     * @return 自身引用
      */
-    json_builder& value(const char* value) { return this->value(string(value)); }
+    json_builder& value(nullptr_t) { return this->value(json_value::make_null()); }
 
     /**
-     * @brief 设置字符串视图值
-     * @param value 字符串视图
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
+     * @brief 写入字符串
+     * @param text 字符串
+     * @return 自身引用
      */
-    json_builder& value(const string_view value) { return this->value(string(value)); }
+    json_builder& value(const string& text) { return this->value_string(string_view(text.data(), text.size())); }
 
     /**
-     * @brief 设置双精度浮点数值
-     * @param value 双精度浮点数
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
+     * @brief 写入字符串
+     * @param text 字符串
+     * @return 自身引用
      */
-    json_builder& value(const double value) { return value_impl(make_unique<json_number>(value)); }
+    json_builder& value(const char* text) { return this->value_string(string_view(text)); }
 
     /**
-     * @brief 设置32位整数值
-     * @param value 整数
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
+     * @brief 写入字符串
+     * @param text 字符串视图
+     * @return 自身引用
      */
-    json_builder& value(const int32_t value) {
-        return value_impl(make_unique<json_number>(static_cast<double>(value)));
+    json_builder& value(const string_view text) { return this->value_string(text); }
+
+    /**
+     * @brief 写入浮点数
+     * @param number 浮点值
+     * @return 自身引用
+     */
+    json_builder& value(const float64_t number) { return this->value(json_value::make_real(number)); }
+
+    /**
+     * @brief 写入浮点数
+     * @param number 浮点值
+     * @return 自身引用
+     */
+    json_builder& value(const float32_t number) { return this->value(static_cast<float64_t>(number)); }
+
+    /**
+     * @brief 写入有符号整数
+     * @param number 整数值
+     * @return 自身引用
+     */
+    json_builder& value(const int64_t number) { return this->value(json_value::make_integer(number)); }
+
+    /**
+     * @brief 写入有符号整数
+     * @param number 整数值
+     * @return 自身引用
+     */
+    json_builder& value(const int32_t number) { return this->value(static_cast<int64_t>(number)); }
+
+    /**
+     * @brief 写入无符号整数
+     * @param number 无符号整数值
+     * @return 自身引用
+     */
+    json_builder& value(const uint64_t number) { return this->value(json_value::make_uinteger(number)); }
+
+    /**
+     * @brief 写入布尔值
+     * @param state 布尔值
+     * @return 自身引用
+     */
+    json_builder& value(const bool state) { return this->value(json_value::make_bool(state)); }
+
+    /**
+     * @brief 写入已构造的值
+     * @param value 值
+     * @return 自身引用
+     */
+    json_builder& value(const json_value& value);
+
+    /**
+     * @brief 写入映射表，转换为 JSON 对象
+     * @tparam Map 映射表类型
+     * @param table 映射表
+     * @return 自身引用
+     */
+    template <typename Map, enable_if_t<is_iterable_v<Map> && is_maplike_v<Map>, int> = 0>
+    json_builder& value(const Map& table) {
+        this->begin_object();
+        for (const auto& pair: table) {
+            this->key(pair.first).value(pair.second);
+        }
+        this->end_object();
+        return *this;
     }
 
     /**
-     * @brief 设置64位整数值
-     * @param value 双精度浮点数
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
-     */
-    json_builder& value(const int64_t value) {
-        return value_impl(make_unique<json_number>(static_cast<double>(value)));
-    }
-
-    /**
-     * @brief 设置布尔值
-     * @param value 布尔值
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
-     */
-    json_builder& value(const bool value) { return value_impl(make_unique<json_bool>(value)); }
-
-    /**
-     * @brief 设置已构建的JSON值
-     * @param value JSON值指针
-     * @return 自身引用，支持链式调用
-     * @throws json_exception 当上下文无效或键名缺失时抛出
-     */
-    json_builder& value(unique_ptr<json_value>&& value) { return value_impl(_NEFORCE move(value)); }
-
-    /**
-     * @brief 设置可迭代对象的值
+     * @brief 写入可迭代对象，转换为 JSON 数组
      * @tparam Iterable 可迭代类型
      * @param iterable 可迭代对象
-     * @return 自身引用，支持链式调用
-     *
-     * 根据类型自动转换为JSON对象或数组：
-     * - 映射表类型转换为对象
-     * - 其他可迭代类型转换为数组
+     * @return 自身引用
      */
-    template <typename Iterable>
+    template <typename Iterable, enable_if_t<is_iterable_v<Iterable> && !is_maplike_v<Iterable>, int> = 0>
     json_builder& value(const Iterable& iterable) {
-        return this->value_iterable_dispatch(iterable);
+        this->begin_array();
+        for (const auto& element: iterable) {
+            this->value(element);
+        }
+        this->end_array();
+        return *this;
     }
 
     /**
-     * @brief 使用函数式方式构建对象值
-     * @param build_func 构建函数，接收json_builder引用
-     * @return 自身引用，支持链式调用
-     *
-     * 在独立的作用域内构建一个对象，构建完成后自动闭合。
+     * @brief 用回调构建一个对象
+     * @param build_func 构建函数
+     * @return 自身引用
      */
     json_builder& value_object(const function<void(json_builder&)>& build_func);
 
     /**
-     * @brief 使用函数式方式构建数组值
-     * @param build_func 构建函数，接收json_builder引用
-     * @return 自身引用，支持链式调用
-     *
-     * 在独立的作用域内构建一个数组，构建完成后自动闭合。
+     * @brief 用回调构建一个数组
+     * @param build_func 构建函数
+     * @return 自身引用
      */
     json_builder& value_array(const function<void(json_builder&)>& build_func);
 
     /**
-     * @brief 构建JSON文档
-     * @return 构建完成的JSON值根节点
-     * @throws json_exception 当存在未闭合的结构或未完成的键值对时抛出
-     *
-     * 完成构建过程，返回构建好的JSON值。
-     * 调用前必须确保所有对象/数组都已闭合，且没有未完成的键值对。
+     * @brief 完成构建
+     * @return 构建出的文档
+     * @throws json_exception 容器未闭合时抛出
      */
-    unique_ptr<json_value> build();
+    json_document build();
+
+private:
+    struct frame {
+        bool is_object = false;     ///< 是否为对象
+        json_value* node = nullptr; ///< 容器节点
+        string pending_key;         ///< 待写入成员的键
+    };
+
+    json_builder& value_string(string_view text);
+    void push_value(json_value value);
+
+    vector<frame> frames_;   ///< 容器栈
+    json_document document_; ///< 承载 arena 与根值
+    bool has_root_ = false;  ///< 根值是否已就绪
 };
 
 /** @} */ // JsonConfig

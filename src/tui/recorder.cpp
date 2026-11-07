@@ -120,7 +120,7 @@ bool recorder::save(const path& file_path) const {
 replay_report recorder::replay(const string_view text, headless& app, const size_t max_details) {
     replay_report report;
 
-    unique_ptr<json_value> root;
+    json_document root;
     try {
         const string document(text);
         json_parser parser(document);
@@ -131,36 +131,35 @@ replay_report recorder::replay(const string_view text, headless& app, const size
         return report;
     }
 
-    const auto* object = root != nullptr ? root->as_object() : nullptr;
-    if (object == nullptr) {
+    const json_object object = root->as_object();
+    if (object.empty()) {
         ++report.mismatches;
         report.mismatch_details.push_back("recording root is not an object");
         return report;
     }
 
     if (const auto* records = object->get_member("records"); records != nullptr) {
-        const auto* array = records->as_array();
-        if (array == nullptr) {
+        const json_array array = records->as_array();
+        if (array.empty()) {
             ++report.mismatches;
             report.mismatch_details.push_back("recording has no records array");
             return report;
         }
 
         size_t seq = 0;
-        for (size_t i = 0; i < array->size(); ++i) {
-            const auto* entry = array->get_element(i);
-            const auto* item = entry != nullptr ? entry->as_object() : nullptr;
-            if (item == nullptr) {
+        for (size_t i = 0; i < array.size(); ++i) {
+            const auto* entry = array.get_element(i);
+            if (entry == nullptr || !entry->is_object()) {
                 continue;
             }
-            const auto* kind_value = item->get_member("t");
-            const auto* payload = item->get_member("v");
-            const string kind = kind_value != nullptr && kind_value->as_string() != nullptr
-                                        ? kind_value->as_string()->get_value()
+            const json_object item = entry->as_object();
+            const auto* kind_value = item.get_member("t");
+            const auto* payload = item.get_member("v");
+            const string kind = kind_value != nullptr && kind_value->is_string()
+                                        ? string(kind_value->as_string().get_value())
                                         : string();
-            const string value = payload != nullptr && payload->as_string() != nullptr
-                                         ? payload->as_string()->get_value()
-                                         : string();
+            const string value =
+                    payload != nullptr && payload->is_string() ? string(payload->as_string().get_value()) : string();
 
             ++report.events;
             if (kind_of(kind.view()) == 'i') {

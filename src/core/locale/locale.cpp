@@ -557,28 +557,28 @@ u32string locale::to_ucs4(const string& mb) const {
             } else if (c < 0xE0) {
                 cp = static_cast<char32_t>(c & 0x1F) << 6;
                 if (i + 1 < mb.size()) {
-                    cp |= static_cast<unsigned char>(mb[i + 1]) & 0x3F;
+                    cp |= static_cast<byte_t>(mb[i + 1]) & 0x3F;
                 }
                 i += 2;
             } else if (c < 0xF0) {
                 cp = static_cast<char32_t>(c & 0x0F) << 12;
                 if (i + 1 < mb.size()) {
-                    cp |= (static_cast<unsigned char>(mb[i + 1]) & 0x3F) << 6;
+                    cp |= (static_cast<byte_t>(mb[i + 1]) & 0x3F) << 6;
                 }
                 if (i + 2 < mb.size()) {
-                    cp |= static_cast<unsigned char>(mb[i + 2]) & 0x3F;
+                    cp |= static_cast<byte_t>(mb[i + 2]) & 0x3F;
                 }
                 i += 3;
             } else {
                 cp = static_cast<char32_t>(c & 0x07) << 18;
                 if (i + 1 < mb.size()) {
-                    cp |= (static_cast<unsigned char>(mb[i + 1]) & 0x3F) << 12;
+                    cp |= (static_cast<byte_t>(mb[i + 1]) & 0x3F) << 12;
                 }
                 if (i + 2 < mb.size()) {
-                    cp |= (static_cast<unsigned char>(mb[i + 2]) & 0x3F) << 6;
+                    cp |= (static_cast<byte_t>(mb[i + 2]) & 0x3F) << 6;
                 }
                 if (i + 3 < mb.size()) {
-                    cp |= static_cast<unsigned char>(mb[i + 3]) & 0x3F;
+                    cp |= static_cast<byte_t>(mb[i + 3]) & 0x3F;
                 }
                 i += 4;
             }

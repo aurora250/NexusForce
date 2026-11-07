@@ -3,10 +3,7 @@
 
 /**
  * @file json_parser.hpp
- * @brief JSON配置解析器
- *
- * 此文件提供了JSON配置格式的解析器实现。
- * 提供完整的语法分析和错误处理机制。
+ * @brief JSON 解析器
  */
 
 #include "NeForce/core/file/json/json_value.hpp"
@@ -25,142 +22,95 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @class json_parser
- * @brief JSON配置解析器
- *
- * 采用递归下降解析算法。
- * 解析过程会维护行号和列号信息，便于错误定位。
- *
- * 解析符合ECMA-404 JSON标准的格式，支持以下特性：
- * - 对象（Object）：键值对集合
- * - 数组（Array）：有序值列表
- * - 字符串（String）：双引号包裹的Unicode字符序列
- * - 数字（Number）：整数和浮点数
- * - 布尔值（Boolean）：true/false
- * - null值
+ * @brief JSON 解析器
  */
 class NEFORCE_API json_parser {
-private:
-    string text_;    ///< 待解析的JSON文本
-    size_t len_;     ///< 文本长度
-    size_t pos_ = 0; ///< 当前解析位置
-
-    /**
-     * @brief 跳过空白字符
-     *
-     * 跳过空格、制表符、换行符等空白字符。
-     */
-    void skip_space() noexcept;
-
-    /**
-     * @brief 获取当前字符
-     * @return 当前位置的字符，若已到末尾返回'\0'
-     */
-    NEFORCE_NODISCARD char current() const noexcept;
-
-    /**
-     * @brief 检查是否已到末尾
-     * @return 是否已到文件末尾
-     */
-    NEFORCE_NODISCARD bool eof() const noexcept;
-
-    /**
-     * @brief 解析JSON字符串
-     * @return 解析得到的字符串值
-     * @throws json_exception 当字符串格式错误或未正确终止时抛出
-     *
-     * 解析双引号包裹的字符串，支持转义序列
-     */
-    unique_ptr<json_string> parse_string();
-
-    /**
-     * @brief 解析JSON数字
-     * @return 解析得到的数字值
-     * @throws json_exception 当数字格式无效时抛出
-     *
-     * 支持的数字格式：
-     * - 整数：123, -456
-     * - 浮点数：3.14, -0.5
-     * - 科学计数法：1e10, 2.5e-3
-     */
-    unique_ptr<json_number> parse_number();
-
-    /**
-     * @brief 解析JSON关键字
-     * @return 解析得到的关键字值
-     * @throws json_exception 当遇到无效关键字时抛出
-     *
-     * 支持的关键字：
-     * - true：布尔值true
-     * - false：布尔值false
-     * - null：空值
-     */
-    unique_ptr<json_value> parse_keyword();
-
-    /**
-     * @brief 解析JSON数组
-     * @return 解析得到的数组对象
-     * @throws json_exception 当数组格式错误时抛出
-     *
-     * 数组格式：[value1, value2, ...]
-     * 数组元素可以是任意有效的JSON值类型。
-     * 数组可以为空：[]
-     */
-    unique_ptr<json_array> parse_array();
-
-    /**
-     * @brief 解析JSON对象
-     * @return 解析得到的对象
-     * @throws json_exception 当对象格式错误时抛出
-     *
-     * 对象格式：{"key1": value1, "key2": value2, ...}
-     * 键必须是字符串，值可以是任意有效的JSON值类型。
-     * 对象可以为空：{}
-     */
-    unique_ptr<json_object> parse_object();
-
-    /**
-     * @brief 解析任意JSON值
-     * @return 解析得到的JSON值
-     * @throws json_exception 当遇到无效字符时抛出
-     *
-     * 根据当前字符决定解析的具体类型：
-     * - '{'：解析对象
-     * - '['：解析数组
-     * - '"'：解析字符串
-     * - 数字或负号：解析数字
-     * - 't'/'f'/'n'：解析关键字
-     */
-    unique_ptr<json_value> parse_value();
-
 public:
     /**
-     * @brief 构造函数
-     * @param text 待解析的JSON字符串
-     *
-     * 初始化解析器，准备开始解析。
+     * @brief 构造零拷贝解析器
+     * @param text 输入文本
+     * @note text 生命周期需覆盖文档使用期
+     */
+    explicit json_parser(const string_view text) noexcept :
+    text_(text) {}
+
+    /**
+     * @brief 构造自包含解析器
+     * @param text 输入文本
+     * @note 解析器持有 text 副本
      */
     explicit json_parser(string text) noexcept :
-    text_(_NEFORCE move(text)),
-    len_(text_.size()) {}
+    owned_(move(text)),
+    owning_(true) {
+        text_ = string_view(owned_.data(), owned_.size());
+    }
+
+    ~json_parser() = default;
+
+    json_parser(const json_parser&) = delete;
+    json_parser& operator=(const json_parser&) = delete;
 
     /**
-     * @brief 执行解析
-     * @return 解析完成的JSON值根节点
-     * @throws json_exception 当解析过程中遇到语法错误时抛出
-     *
-     * 解析整个JSON文本，构建完整的JSON值树。
-     * 解析完成后会检查是否还有未处理的字符。
+     * @brief 解析整份文本
+     * @return 解析出的文档
+     * @throws json_exception 语法错误或存在尾随内容时抛出
      */
-    unique_ptr<json_value> parse();
+    json_document parse();
 
     /**
-     * @brief 尝试执行解析
-     * @return 解析结果的可选对象
-     *
-     * 如果解析成功返回包含JSON值的optional，
-     * 如果解析失败返回空的optional。
+     * @brief 尝试解析整份文本
+     * @return 成功时返回文档，失败时返回空
      */
-    optional<unique_ptr<json_value>> try_parse();
+    optional<json_document> try_parse() noexcept;
+
+private:
+    static constexpr size_t hint_depth = 24;
+    static constexpr uint8_t hint_confirm_times = 2;
+
+    json_value parse_value(json_document& doc, const char*& cursor, const char* end, size_t depth);
+    json_value parse_object(json_document& doc, const char*& cursor, const char* end, size_t depth);
+    json_value parse_array(json_document& doc, const char*& cursor, const char* end, size_t depth);
+    json_value parse_string(json_document& doc, const char*& cursor, const char* end);
+    json_value parse_number(json_document& doc, const char*& cursor, const char* end);
+    json_value parse_keyword(json_document& doc, const char*& cursor, const char* end);
+
+    NEFORCE_NODISCARD size_t reserve_hint(const uint16_t* counts, const uint8_t* confirms,
+                                          size_t depth) const noexcept {
+        if (depth >= hint_depth || confirms[depth] < hint_confirm_times) {
+            return 0;
+        }
+        return counts[depth];
+    }
+
+    void update_reserve_hint(uint16_t* counts, uint8_t* confirms, size_t depth, size_t count) noexcept {
+        if (depth >= hint_depth) {
+            return;
+        }
+        if (counts[depth] == count) {
+            if (confirms[depth] < hint_confirm_times) {
+                ++confirms[depth];
+            }
+            return;
+        }
+        counts[depth] = count <= 65535 ? static_cast<uint16_t>(count) : 0;
+        confirms[depth] = 0;
+    }
+
+    void decode_string(const char* begin, const char* finish, string& out);
+
+    NEFORCE_NODISCARD size_t offset_of(const char* cursor) const noexcept {
+        return static_cast<size_t>(cursor - text_.data());
+    }
+
+    string decode_scratch_;                    ///< 转义解码缓冲区
+    uint16_t object_sizes_[hint_depth] = {};   ///< 各深度最近一次对象的成员个数
+    uint16_t array_sizes_[hint_depth] = {};    ///< 各深度最近一次数组的元素个数
+    uint8_t object_confirms_[hint_depth] = {}; ///< 对象尺寸的连续命中次数
+    uint8_t array_confirms_[hint_depth] = {};  ///< 数组尺寸的连续命中次数
+    string_view text_;                         ///< 输入视图
+    string owned_;                             ///< 自包含模式下的输入副本
+    size_t position_ = 0;                      ///< 出错时记录的扫描位置
+    bool owning_ = false;                      ///< 是否为自包含模式
 };
 
 /** @} */ // JsonConfig

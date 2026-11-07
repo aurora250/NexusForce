@@ -328,7 +328,7 @@ void regex_iterator::find_next() {
 
     auto result = regex_->search(subject_, next_pos_);
     if (result.matched()) {
-        next_pos_ = result.position() + _NEFORCE max(result.length(), static_cast<size_t>(1));
+        next_pos_ = result.position() + max(result.length(), static_cast<size_t>(1));
         if (next_pos_ > subject_.length()) {
             next_pos_ = subject_.length() + 1;
         }

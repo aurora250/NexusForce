@@ -188,7 +188,7 @@ string url::encode(const string_view str, const bool encode_slash) {
     for (const char c: str) {
         if (should_encode(c, encode_slash)) {
             result += '%';
-            const auto uc = static_cast<unsigned char>(c);
+            const auto uc = static_cast<byte_t>(c);
             constexpr string_view hex{"0123456789ABCDEF"};
             result += hex[uc >> 4];
             result += hex[uc & 0x0F];
@@ -240,7 +240,7 @@ string url::encode_form(const string_view str) {
             result += '+';
         } else {
             result += '%';
-            const auto uc = static_cast<unsigned char>(c);
+            const auto uc = static_cast<byte_t>(c);
             constexpr string_view hex{"0123456789ABCDEF"};
             result += hex[uc >> 4];
             result += hex[uc & 0x0F];

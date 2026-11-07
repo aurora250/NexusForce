@@ -1,413 +1,518 @@
-#include <NeForce/core/file/json/json_parser.hpp>
-#include <NeForce/core/memory/bit.hpp>
-#include <NeForce/core/simd/types.hpp>
-#include <NeForce/core/string/codepoint.hpp>
-#include <NeForce/core/utility/hexadecimal.hpp>
-#include <NeForce/core/utility/packages.hpp>
+#include "NeForce/core/file/json/json_parser.hpp"
+#include "NeForce/core/memory/bit.hpp"
+#include "NeForce/core/memory/memory.hpp"
+#include "NeForce/core/numeric/numeric_traits.hpp"
+#include "NeForce/core/string/to_numerics.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-void json_parser::skip_space() noexcept {
-#ifdef NEFORCE_SIMD_AVX2
-    while (pos_ + 32 <= len_) {
-        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-        simd::vec256_t ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\v')));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\f')));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
-        const int mask = ::_mm256_movemask_epi8(ws);
-        if (mask == -1) {
-            pos_ += 32;
-        } else {
-            pos_ += static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask)));
-            return;
+namespace {
+    constexpr double k_pow10[] = {1e0,  1e1,  1e2,  1e3,  1e4,  1e5,  1e6,  1e7,  1e8,  1e9,  1e10, 1e11,
+                                  1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19, 1e20, 1e21, 1e22};
+
+    constexpr uint64_t k_exact_mantissa = 1ULL << 53;
+    constexpr uint64_t k_magnitude_limit = 1844674407370955161ULL;
+    constexpr uint64_t k_magnitude_last = 5;
+    constexpr int k_fast_digits = 18;
+
+    NEFORCE_NODISCARD uint64_t special_mask(const uint64_t word) noexcept {
+        constexpr uint64_t ones = 0x0101010101010101ULL;
+        constexpr uint64_t highs = 0x8080808080808080ULL;
+        constexpr uint64_t quotes = 0x2222222222222222ULL;
+        constexpr uint64_t slashes = 0x5C5C5C5C5C5C5C5CULL;
+        constexpr uint64_t controls = 0xE0E0E0E0E0E0E0E0ULL;
+        const auto has_zero = [](const uint64_t value) { return (value - ones) & ~value & highs; };
+        return has_zero(word ^ quotes) | has_zero(word ^ slashes) | has_zero(word & controls);
+    }
+
+    NEFORCE_NODISCARD const char* skip_space(const char* cursor, const char* end) noexcept {
+        if (cursor == end) {
+            return cursor;
         }
-    }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-    while (pos_ + 16 <= len_) {
-        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-        simd::vec128_t ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\v')));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\f')));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
-        const int mask = ::_mm_movemask_epi8(ws);
-        if (mask == 0xFFFF) {
-            pos_ += 16;
-        } else {
-            // NOLINTNEXTLINE(bugprone-misplaced-widening-cast)
-            pos_ += static_cast<size_t>(countr_zero(static_cast<uintptr_t>(~mask)));
-            return;
+        const char first = *cursor;
+        if (first != ' ' && first != '\t' && first != '\n' && first != '\r') {
+            return cursor;
         }
-    }
-#endif
-    while (pos_ < len_ && is_space(text_[pos_])) {
-        pos_++;
-    }
-}
-
-char json_parser::current() const noexcept {
-    if (pos_ < len_) {
-        return text_[pos_];
-    }
-    return '\0';
-}
-
-bool json_parser::eof() const noexcept { return pos_ >= len_; }
-
-unique_ptr<json_string> json_parser::parse_string() {
-    pos_++;
-    string result;
-
-    while (pos_ < len_) {
-#ifdef NEFORCE_SIMD_AVX2
-        while (pos_ + 32 <= len_) {
-            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
-            const simd::vec256_t is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
-            const simd::vec256_t is_ctrl = ::_mm256_cmpeq_epi8(::_mm256_min_epu8(v, ::_mm256_set1_epi8(0x1F)), v);
-            const simd::vec256_t special = ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), is_ctrl);
-            const int mask = ::_mm256_movemask_epi8(special);
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 32);
-                pos_ += 32;
-            } else {
-                const int advance = countr_zero(static_cast<unsigned>(mask));
-                if (advance > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance));
-                    pos_ += static_cast<size_t>(advance);
-                }
+        ++cursor;
+        while (cursor != end) {
+            const char c = *cursor;
+            if (c != ' ' && c != '\t' && c != '\n' && c != '\r') {
                 break;
             }
+            ++cursor;
         }
-        if (pos_ >= len_) {
-            break;
+        return cursor;
+    }
+
+    int hex_value(const char c) noexcept {
+        if (c >= '0' && c <= '9') {
+            return c - '0';
         }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-        while (pos_ + 16 <= len_) {
-            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
-            const simd::vec128_t is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
-            const simd::vec128_t is_ctrl = ::_mm_cmpeq_epi8(::_mm_min_epu8(v, ::_mm_set1_epi8(0x1F)), v);
-            const simd::vec128_t special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_ctrl);
-            const int mask = ::_mm_movemask_epi8(special);
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 16);
-                pos_ += 16;
-            } else {
-                const int advance = countr_zero(static_cast<uintptr_t>(mask));
-                if (advance > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance));
-                    pos_ += static_cast<size_t>(advance);
+        if (c >= 'a' && c <= 'f') {
+            return c - 'a' + 10;
+        }
+        if (c >= 'A' && c <= 'F') {
+            return c - 'A' + 10;
+        }
+        return -1;
+    }
+
+    void append_utf8(string& out, const unsigned int code_point) {
+        if (code_point <= 0x7F) {
+            out += static_cast<char>(code_point);
+        } else if (code_point <= 0x7FF) {
+            out += static_cast<char>(0xC0 | (code_point >> 6));
+            out += static_cast<char>(0x80 | (code_point & 0x3F));
+        } else if (code_point <= 0xFFFF) {
+            out += static_cast<char>(0xE0 | (code_point >> 12));
+            out += static_cast<char>(0x80 | ((code_point >> 6) & 0x3F));
+            out += static_cast<char>(0x80 | (code_point & 0x3F));
+        } else {
+            out += static_cast<char>(0xF0 | (code_point >> 18));
+            out += static_cast<char>(0x80 | ((code_point >> 12) & 0x3F));
+            out += static_cast<char>(0x80 | ((code_point >> 6) & 0x3F));
+            out += static_cast<char>(0x80 | (code_point & 0x3F));
+        }
+    }
+
+    enum class scan_status : uint8_t {
+        ok,
+        control_character,
+        unterminated
+    };
+
+    NEFORCE_NODISCARD scan_status scan_string(const char*& cursor, const char* end, const char*& begin,
+                                              const char*& finish, bool& escaped) noexcept {
+        ++cursor;
+        begin = cursor;
+        escaped = false;
+        while (true) {
+            if (end - cursor >= 8) {
+                uint64_t word = 0;
+                memory_copy(&word, cursor, sizeof(word));
+                const uint64_t mask = special_mask(word);
+                if (mask == 0) {
+                    cursor += 8;
+                    continue;
                 }
+                const size_t offset = static_cast<size_t>(countr_zero(static_cast<uintptr_t>(mask))) >> 3;
+                if (offset != 0) {
+                    cursor += offset;
+                }
+            } else if (cursor == end) {
+                return scan_status::unterminated;
+            }
+            const char c = *cursor;
+            if (c == '"') {
+                finish = cursor;
+                ++cursor;
+                return scan_status::ok;
+            }
+            if (c == '\\') {
+                escaped = true;
+                ++cursor;
+                if (cursor != end) {
+                    ++cursor;
+                }
+                continue;
+            }
+            if (static_cast<unsigned char>(c) < 0x20) {
+                return scan_status::control_character;
+            }
+            ++cursor;
+        }
+    }
+} // namespace
+
+
+void json_parser::decode_string(const char* begin, const char* finish, string& out) {
+    out.clear();
+    out.reserve(static_cast<size_t>(finish - begin));
+    for (const char* cursor = begin; cursor != finish; ++cursor) {
+        const char c = *cursor;
+        if (c != '\\') {
+            out += c;
+            continue;
+        }
+        ++cursor;
+        if (cursor == finish) {
+            position_ = offset_of(cursor);
+            NEFORCE_THROW_EXCEPTION(json_exception("JSON invalid escape."));
+        }
+        switch (*cursor) {
+            case '"':
+                out += '"';
+                break;
+            case '\\':
+                out += '\\';
+                break;
+            case '/':
+                out += '/';
+                break;
+            case 'b':
+                out += '\b';
+                break;
+            case 'f':
+                out += '\f';
+                break;
+            case 'n':
+                out += '\n';
+                break;
+            case 'r':
+                out += '\r';
+                break;
+            case 't':
+                out += '\t';
+                break;
+            case 'u': {
+                if (finish - cursor < 5) {
+                    position_ = offset_of(cursor);
+                    NEFORCE_THROW_EXCEPTION(json_exception("JSON invalid unicode escape."));
+                }
+                unsigned int code = 0;
+                for (int k = 1; k <= 4; ++k) {
+                    const int v = hex_value(cursor[k]);
+                    if (v < 0) {
+                        position_ = offset_of(cursor);
+                        NEFORCE_THROW_EXCEPTION(json_exception("JSON invalid unicode escape."));
+                    }
+                    code = (code << 4) | static_cast<unsigned int>(v);
+                }
+                cursor += 4;
+                if (code >= 0xD800 && code <= 0xDBFF) {
+                    if (finish - cursor <= 6 || cursor[1] != '\\' || cursor[2] != 'u') {
+                        position_ = offset_of(cursor);
+                        NEFORCE_THROW_EXCEPTION(json_exception("JSON unpaired high surrogate."));
+                    }
+                    unsigned int low = 0;
+                    for (int k = 3; k <= 6; ++k) {
+                        const int v = hex_value(cursor[k]);
+                        if (v < 0) {
+                            position_ = offset_of(cursor);
+                            NEFORCE_THROW_EXCEPTION(json_exception("JSON invalid unicode escape."));
+                        }
+                        low = (low << 4) | static_cast<unsigned int>(v);
+                    }
+                    if (low < 0xDC00 || low > 0xDFFF) {
+                        position_ = offset_of(cursor);
+                        NEFORCE_THROW_EXCEPTION(json_exception("JSON invalid low surrogate."));
+                    }
+                    code = 0x10000 + ((code - 0xD800) << 10) + (low - 0xDC00);
+                    cursor += 6;
+                } else if (code >= 0xDC00 && code <= 0xDFFF) {
+                    position_ = offset_of(cursor);
+                    NEFORCE_THROW_EXCEPTION(json_exception("JSON unpaired low surrogate."));
+                }
+                append_utf8(out, code);
                 break;
             }
-        }
-        if (pos_ >= len_) {
-            break;
-        }
-#endif
-        const char c = text_[pos_++];
-        if (c == '"') {
-            return make_unique<json_string>(move(result));
-        }
-        if (c == '\\') {
-            if (pos_ >= len_) {
-                NEFORCE_THROW_EXCEPTION(json_exception("Unterminated escape sequence in string"));
-            }
-            const char esc = text_[pos_++];
-            switch (esc) {
-                case '"':
-                    result += '"';
-                    break;
-                case '\\':
-                    result += '\\';
-                    break;
-                case '/':
-                    result += '/';
-                    break;
-                case 'b':
-                    result += '\b';
-                    break;
-                case 'f':
-                    result += '\f';
-                    break;
-                case 'n':
-                    result += '\n';
-                    break;
-                case 'r':
-                    result += '\r';
-                    break;
-                case 't':
-                    result += '\t';
-                    break;
-                case 'u': {
-                    if (pos_ + 4 > len_) {
-                        NEFORCE_THROW_EXCEPTION(json_exception("Unterminated unicode escape sequence"));
-                    }
-                    const string_view hex_str = text_.view(pos_, 4);
-                    for (size_t i = 0; i < 4; i++) {
-                        if (!is_xdigit(hex_str[i])) {
-                            NEFORCE_THROW_EXCEPTION(json_exception("Invalid unicode escape sequence"));
-                        }
-                    }
-                    pos_ += 4;
-                    try {
-                        const uint32_t cp_val = static_cast<uint32_t>(hexadecimal(hex_str).value());
-                        const auto high = static_cast<char16_t>(cp_val);
-
-                        if (codepoint::is_high_surrogate(high)) {
-                            if (pos_ + 6 <= len_ && text_[pos_] == '\\' && text_[pos_ + 1] == 'u') {
-                                const string_view hex_str2 = text_.view(pos_ + 2, 4);
-                                bool valid_low = true;
-                                for (size_t i = 0; i < 4 && valid_low; i++) {
-                                    if (!is_xdigit(hex_str2[i])) {
-                                        valid_low = false;
-                                    }
-                                }
-                                if (valid_low) {
-                                    const uint32_t low_val = static_cast<uint32_t>(hexadecimal(hex_str2).value());
-                                    const auto low = static_cast<char16_t>(low_val);
-                                    if (codepoint::is_low_surrogate(low)) {
-                                        pos_ += 6;
-                                        codepoint::combine_surrogates(high, low).append_to(result);
-                                        break;
-                                    }
-                                }
-                            }
-                            NEFORCE_THROW_EXCEPTION(json_exception("Unpaired high surrogate in unicode escape"));
-                        }
-                        if (codepoint::is_low_surrogate(high)) {
-                            NEFORCE_THROW_EXCEPTION(json_exception("Unpaired low surrogate in unicode escape"));
-                        }
-                        if (!codepoint::is_valid_codepoint(cp_val)) {
-                            NEFORCE_THROW_EXCEPTION(json_exception("Unicode codepoint out of range"));
-                        }
-                        codepoint{cp_val}.append_to(result);
-                    } catch (const exception&) {
-                        throw;
-                    } catch (...) {
-                        NEFORCE_THROW_EXCEPTION(json_exception("Invalid unicode escape value"));
-                    }
-                    break;
-                }
-                default:
-                    NEFORCE_THROW_EXCEPTION(json_exception("Invalid escape sequence in string"));
-            }
-        } else if (static_cast<uint8_t>(c) < 0x20) {
-            NEFORCE_THROW_EXCEPTION(json_exception("Unescaped control character in string"));
-        } else {
-            result += c;
+            default:
+                position_ = offset_of(cursor);
+                NEFORCE_THROW_EXCEPTION(json_exception("JSON invalid escape."));
         }
     }
-    NEFORCE_THROW_EXCEPTION(json_exception("Unterminated string"));
-    unreachable();
 }
 
-unique_ptr<json_number> json_parser::parse_number() {
-    const size_t start = pos_;
-    if (current() == '-') {
-        pos_++;
+json_value json_parser::parse_string(json_document& doc, const char*& cursor, const char* end) {
+    if (cursor == end || *cursor != '"') {
+        position_ = offset_of(cursor);
+        NEFORCE_THROW_EXCEPTION(json_exception("JSON string expected."));
     }
-    if (current() == '0') {
-        pos_++;
-        if (pos_ < len_ && text_[pos_] == '.') {
-            pos_++;
-            if (pos_ >= len_ || !is_digit(text_[pos_])) {
-                NEFORCE_THROW_EXCEPTION(json_exception("Invalid decimal part"));
-            }
-            while (pos_ < len_ && is_digit(text_[pos_])) {
-                pos_++;
-            }
-        } else if (pos_ < len_ && is_digit(text_[pos_])) {
-            NEFORCE_THROW_EXCEPTION(json_exception("Leading zeros are not allowed"));
+    const char* begin = nullptr;
+    const char* finish = nullptr;
+    bool escaped = false;
+    const scan_status status = scan_string(cursor, end, begin, finish, escaped);
+    if (status != scan_status::ok) {
+        position_ = offset_of(cursor);
+        if (status == scan_status::control_character) {
+            NEFORCE_THROW_EXCEPTION(json_exception("JSON string contains control character."));
         }
-    } else if (is_digit(current())) {
-        while (pos_ < len_ && is_digit(text_[pos_])) {
-            pos_++;
+        NEFORCE_THROW_EXCEPTION(json_exception("JSON string not terminated."));
+    }
+    const string_view text(begin, static_cast<size_t>(finish - begin));
+    if (!escaped) {
+        if (owning_) {
+            return doc.make_string_value(text);
         }
-        if (pos_ < len_ && text_[pos_] == '.') {
-            pos_++;
-            if (pos_ >= len_ || !is_digit(text_[pos_])) {
-                NEFORCE_THROW_EXCEPTION(json_exception("Invalid decimal part"));
-            }
-            while (pos_ < len_ && is_digit(text_[pos_])) {
-                pos_++;
-            }
+        return json_value::make_string(text);
+    }
+    decode_string(begin, finish, decode_scratch_);
+    return doc.make_string_value(string_view(decode_scratch_.data(), decode_scratch_.size()));
+}
+
+json_value json_parser::parse_number(json_document&, const char*& cursor, const char* end) {
+    const char* const begin = cursor;
+    bool negative = false;
+    if (*cursor == '-') {
+        negative = true;
+        ++cursor;
+    }
+    if (cursor == end || !is_digit(*cursor)) {
+        position_ = offset_of(cursor);
+        NEFORCE_THROW_EXCEPTION(json_exception("JSON invalid number."));
+    }
+
+    uint64_t significand = 0;
+    int exponent = 0;
+    bool overflow = false;
+    bool truncated = false;
+    bool real = false;
+
+    if (*cursor == '0') {
+        ++cursor;
+        if (cursor != end && is_digit(*cursor)) {
+            position_ = offset_of(cursor);
+            NEFORCE_THROW_EXCEPTION(json_exception("JSON number has leading zero."));
         }
     } else {
-        NEFORCE_THROW_EXCEPTION(json_exception("Invalid number format"));
-    }
-
-    if (pos_ < len_ && (text_[pos_] == 'e' || text_[pos_] == 'E')) {
-        pos_++;
-        if (pos_ < len_ && (text_[pos_] == '+' || text_[pos_] == '-')) {
-            pos_++;
+        int budget = k_fast_digits;
+        while (budget != 0 && cursor != end && is_digit(*cursor)) {
+            significand = significand * 10 + static_cast<uint64_t>(*cursor - '0');
+            --budget;
+            ++cursor;
         }
-        if (pos_ >= len_ || !is_digit(text_[pos_])) {
-            NEFORCE_THROW_EXCEPTION(json_exception("Invalid exponent part"));
+        while (cursor != end && is_digit(*cursor)) {
+            const auto digit = static_cast<uint64_t>(*cursor - '0');
+            if (overflow) {
+                ++exponent;
+                truncated = truncated || digit != 0;
+            } else if (significand > k_magnitude_limit ||
+                       (significand == k_magnitude_limit && digit > k_magnitude_last)) {
+                overflow = true;
+                ++exponent;
+                truncated = digit != 0;
+            } else {
+                significand = significand * 10 + digit;
+            }
+            ++cursor;
         }
-        while (pos_ < len_ && is_digit(text_[pos_])) {
-            pos_++;
+    }
+
+    if (cursor != end && *cursor == '.') {
+        real = true;
+        ++cursor;
+        if (cursor == end || !is_digit(*cursor)) {
+            position_ = offset_of(cursor);
+            NEFORCE_THROW_EXCEPTION(json_exception("JSON fraction requires digits."));
+        }
+        while (cursor != end && is_digit(*cursor)) {
+            const auto digit = static_cast<uint64_t>(*cursor - '0');
+            if (overflow) {
+                truncated = truncated || digit != 0;
+            } else if (significand > k_magnitude_limit ||
+                       (significand == k_magnitude_limit && digit > k_magnitude_last)) {
+                overflow = true;
+                truncated = digit != 0;
+            } else {
+                significand = significand * 10 + digit;
+                --exponent;
+            }
+            ++cursor;
         }
     }
 
-    try {
-        double value = float64::parse(text_.view(start, pos_ - start)).value();
-        return make_unique<json_number>(value);
-    } catch (...) {
-        NEFORCE_THROW_EXCEPTION(json_exception("Invalid number value"));
-    }
-    unreachable();
-}
-
-unique_ptr<json_value> json_parser::parse_keyword() {
-    const size_t start = pos_;
-    while (pos_ < len_ && is_alpha(text_[pos_])) {
-        pos_++;
-    }
-
-    const string_view keyword = text_.view(start, pos_ - start);
-    if (keyword == "true") {
-        return make_unique<json_bool>(true);
-    }
-    if (keyword == "false") {
-        return make_unique<json_bool>(false);
-    }
-    if (keyword == "null") {
-        return make_unique<json_null>();
-    }
-    NEFORCE_THROW_EXCEPTION(json_exception("Invalid keyword"));
-    unreachable();
-}
-
-unique_ptr<json_array> json_parser::parse_array() {
-    pos_++;
-    auto array = make_unique<json_array>();
-
-    skip_space();
-    if (current() == ']') {
-        pos_++;
-        return array;
+    if (cursor != end && (*cursor == 'e' || *cursor == 'E')) {
+        real = true;
+        ++cursor;
+        bool exponent_negative = false;
+        if (cursor != end && (*cursor == '+' || *cursor == '-')) {
+            exponent_negative = *cursor == '-';
+            ++cursor;
+        }
+        if (cursor == end || !is_digit(*cursor)) {
+            position_ = offset_of(cursor);
+            NEFORCE_THROW_EXCEPTION(json_exception("JSON exponent requires digits."));
+        }
+        int written = 0;
+        while (cursor != end && is_digit(*cursor)) {
+            if (written < 100000) {
+                written = written * 10 + (*cursor - '0');
+            }
+            ++cursor;
+        }
+        exponent += exponent_negative ? -written : written;
     }
 
-    while (true) {
-        skip_space();
-        auto element = parse_value();
-        array->add_element(move(element));
-        skip_space();
-
-        if (current() == ']') {
-            pos_++;
-            break;
-        } else if (current() == ',') {
-            pos_++;
-            skip_space();
+    if (!real && !overflow) {
+        constexpr auto int_max = static_cast<uint64_t>(numeric_traits<int64_t>::max());
+        if (negative) {
+            if (significand <= int_max + 1ULL) {
+                return json_value::make_integer(static_cast<int64_t>(0ULL - significand));
+            }
+        } else if (significand <= int_max) {
+            return json_value::make_integer(static_cast<int64_t>(significand));
         } else {
-            NEFORCE_THROW_EXCEPTION(json_exception("Expected comma or closing bracket in array"));
+            return json_value::make_uinteger(significand);
         }
     }
-    return array;
+
+    if (!overflow && !truncated && significand <= k_exact_mantissa && exponent >= -22 && exponent <= 22) {
+        auto value = static_cast<double>(significand);
+        value = exponent >= 0 ? value * k_pow10[exponent] : value / k_pow10[-exponent];
+        return json_value::make_real(negative ? -value : value);
+    }
+    const string_view text(begin, static_cast<size_t>(cursor - begin));
+    double converted = 0.0;
+    if (inner::parse_double_exact(text, converted)) {
+        return json_value::make_real(converted);
+    }
+    return json_value::make_real(to_float64(text));
 }
 
-unique_ptr<json_object> json_parser::parse_object() {
-    pos_++;
-    auto object = make_unique<json_object>();
-
-    skip_space();
-    if (current() == '}') {
-        pos_++;
-        return object;
-    }
-
-    while (true) {
-        skip_space();
-        if (current() != '"') {
-            NEFORCE_THROW_EXCEPTION(json_exception("Expected string key in object"));
-        }
-        const auto key_obj = parse_string();
-        string key = key_obj->get_value();
-
-        skip_space();
-        if (current() != ':') {
-            NEFORCE_THROW_EXCEPTION(json_exception("Expected colon after key in object"));
-        }
-        pos_++;
-        skip_space();
-
-        auto value = parse_value();
-        object->add_member(key, move(value));
-
-        skip_space();
-        if (current() == '}') {
-            pos_++;
+json_value json_parser::parse_keyword(json_document&, const char*& cursor, const char* end) {
+    const auto remaining = static_cast<size_t>(end - cursor);
+    switch (*cursor) {
+        case 't':
+            if (remaining >= 4 && cursor[1] == 'r' && cursor[2] == 'u' && cursor[3] == 'e') {
+                cursor += 4;
+                return json_value::make_bool(true);
+            }
             break;
-        } else if (current() == ',') {
-            pos_++;
-            skip_space();
-        } else {
-            NEFORCE_THROW_EXCEPTION(json_exception("Expected comma or closing brace in object"));
-        }
+        case 'f':
+            if (remaining >= 5 && cursor[1] == 'a' && cursor[2] == 'l' && cursor[3] == 's' && cursor[4] == 'e') {
+                cursor += 5;
+                return json_value::make_bool(false);
+            }
+            break;
+        case 'n':
+            if (remaining >= 4 && cursor[1] == 'u' && cursor[2] == 'l' && cursor[3] == 'l') {
+                cursor += 4;
+                return json_value::make_null();
+            }
+            break;
+        default:
+            break;
     }
-
-    return object;
+    position_ = offset_of(cursor);
+    NEFORCE_THROW_EXCEPTION(json_exception("JSON invalid keyword."));
 }
 
-unique_ptr<json_value> json_parser::parse_value() {
-    skip_space();
-    if (eof()) {
-        NEFORCE_THROW_EXCEPTION(json_exception("Unexpected end of input"));
+json_value json_parser::parse_array(json_document& doc, const char*& cursor, const char* end, const size_t depth) {
+    ++cursor;
+    json_value* node = doc.new_container(false, reserve_hint(array_sizes_, array_confirms_, depth));
+    const char* body = skip_space(cursor, end);
+    if (body != end && *body == ']') {
+        cursor = body + 1;
+        update_reserve_hint(array_sizes_, array_confirms_, depth, 0);
+        return *node;
     }
+    while (true) {
+        doc.array_append(*node, parse_value(doc, cursor, end, depth + 1));
+        cursor = skip_space(cursor, end);
+        if (cursor != end && *cursor == ',') {
+            ++cursor;
+            continue;
+        }
+        if (cursor != end && *cursor == ']') {
+            ++cursor;
+            break;
+        }
+        position_ = offset_of(cursor);
+        NEFORCE_THROW_EXCEPTION(json_exception("JSON array not terminated."));
+    }
+    update_reserve_hint(array_sizes_, array_confirms_, depth, node->element_count());
+    return *node;
+}
 
-    const char c = current();
-    switch (c) {
+json_value json_parser::parse_object(json_document& doc, const char*& cursor, const char* end, const size_t depth) {
+    ++cursor;
+    json_value* node = doc.new_container(true, reserve_hint(object_sizes_, object_confirms_, depth));
+    const char* body = skip_space(cursor, end);
+    if (body != end && *body == '}') {
+        cursor = body + 1;
+        update_reserve_hint(object_sizes_, object_confirms_, depth, 0);
+        return *node;
+    }
+    while (true) {
+        cursor = skip_space(cursor, end);
+        if (cursor == end || *cursor != '"') {
+            position_ = offset_of(cursor);
+            NEFORCE_THROW_EXCEPTION(json_exception("JSON object key expected."));
+        }
+        const char* key_begin = nullptr;
+        const char* key_finish = nullptr;
+        bool key_escaped = false;
+        const scan_status key_status = scan_string(cursor, end, key_begin, key_finish, key_escaped);
+        if (key_status != scan_status::ok) {
+            position_ = offset_of(cursor);
+            if (key_status == scan_status::control_character) {
+                NEFORCE_THROW_EXCEPTION(json_exception("JSON string contains control character."));
+            }
+            NEFORCE_THROW_EXCEPTION(json_exception("JSON string not terminated."));
+        }
+        string_view key;
+        if (key_escaped) {
+            decode_string(key_begin, key_finish, decode_scratch_);
+            key = doc.store_string(string_view(decode_scratch_.data(), decode_scratch_.size()));
+        } else {
+            key = string_view(key_begin, static_cast<size_t>(key_finish - key_begin));
+        }
+        cursor = skip_space(cursor, end);
+        if (cursor == end || *cursor != ':') {
+            position_ = offset_of(cursor);
+            NEFORCE_THROW_EXCEPTION(json_exception("JSON object key not followed by colon."));
+        }
+        ++cursor;
+        const json_value value = parse_value(doc, cursor, end, depth + 1);
+        doc.object_append(*node, key, value, owning_);
+        cursor = skip_space(cursor, end);
+        if (cursor != end && *cursor == ',') {
+            ++cursor;
+            continue;
+        }
+        if (cursor != end && *cursor == '}') {
+            ++cursor;
+            break;
+        }
+        position_ = offset_of(cursor);
+        NEFORCE_THROW_EXCEPTION(json_exception("JSON object not terminated."));
+    }
+    update_reserve_hint(object_sizes_, object_confirms_, depth, node->element_count());
+    return *node;
+}
+
+json_value json_parser::parse_value(json_document& doc, const char*& cursor, const char* end, const size_t depth) {
+    cursor = skip_space(cursor, end);
+    if (cursor == end) {
+        position_ = offset_of(cursor);
+        NEFORCE_THROW_EXCEPTION(json_exception("JSON value expected."));
+    }
+    switch (*cursor) {
         case '{':
-            return parse_object();
+            return parse_object(doc, cursor, end, depth);
         case '[':
-            return parse_array();
+            return parse_array(doc, cursor, end, depth);
         case '"':
-            return parse_string();
-        case '-':
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-            return parse_number();
+            return parse_string(doc, cursor, end);
         case 't':
         case 'f':
         case 'n':
-            return parse_keyword();
+            return parse_keyword(doc, cursor, end);
         default:
-            NEFORCE_THROW_EXCEPTION(json_exception("Unexpected character"));
+            return parse_number(doc, cursor, end);
     }
-    unreachable();
 }
 
-
-unique_ptr<json_value> json_parser::parse() {
-    auto value = parse_value();
-    skip_space();
-    if (!eof()) {
-        NEFORCE_THROW_EXCEPTION(json_exception("Unexpected characters after JSON value"));
+json_document json_parser::parse() {
+    json_document doc;
+    doc.reserve(text_.size() * 3 + 65536);
+    const char* data = text_.data();
+    const char* end = data + text_.size();
+    const char* cursor = data;
+    const json_value value = parse_value(doc, cursor, end, 0);
+    cursor = skip_space(cursor, end);
+    if (cursor != end) {
+        position_ = offset_of(cursor);
+        NEFORCE_THROW_EXCEPTION(json_exception("JSON trailing content."));
     }
-    return value;
+    doc.root_ = value;
+    return doc;
 }
 
-optional<unique_ptr<json_value>> json_parser::try_parse() {
+optional<json_document> json_parser::try_parse() noexcept {
     try {
-        return parse();
+        return optional<json_document>(parse());
     } catch (...) {
-        return {};
+        return optional<json_document>();
     }
 }
 

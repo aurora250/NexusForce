@@ -35,7 +35,7 @@ public:
      * @param ctx 序列化上下文
      * @return JSON 值树的根节点
      */
-    static unique_ptr<json_value> serialize(const reflect::meta_any& obj, const serialize_context& ctx = {});
+    static json_document serialize(const reflect::meta_any& obj, const serialize_context& ctx = {});
 
     /**
      * @brief 将反射对象序列化为 JSON 字符串

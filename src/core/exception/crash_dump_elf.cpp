@@ -317,7 +317,7 @@ namespace {
         return true;
     }
 
-    constexpr unsigned char elf_osabi() noexcept {
+    constexpr byte_t elf_osabi() noexcept {
 #    if defined(NEFORCE_SUPPORT_NATIVE_DUMP_FREEBSD)
         return ELFOSABI_FREEBSD;
 #    else

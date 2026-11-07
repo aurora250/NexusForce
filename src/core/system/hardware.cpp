@@ -447,7 +447,7 @@ namespace {
             return;
         }
         if (::GetLogicalProcessorInformationEx(::RelationCache, buffer, &size) == TRUE) {
-            auto* cursor = reinterpret_cast<unsigned char*>(buffer);
+            auto* cursor = reinterpret_cast<byte_t*>(buffer);
             const auto* end = cursor + size;
             while (cursor + sizeof(::SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX) <= end) {
                 const auto* info = reinterpret_cast<::SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*>(cursor);
@@ -493,7 +493,7 @@ namespace {
         }
         vector<pair<uint8_t, uint32_t>> classes;
         if (::GetLogicalProcessorInformationEx(::RelationProcessorCore, buffer, &size) == TRUE) {
-            auto* cursor = reinterpret_cast<unsigned char*>(buffer);
+            auto* cursor = reinterpret_cast<byte_t*>(buffer);
             auto* end = cursor + size;
             while (cursor + sizeof(::SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX) <= end) {
                 auto* info = reinterpret_cast<::SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*>(cursor);

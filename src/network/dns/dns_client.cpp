@@ -66,7 +66,7 @@ namespace {
     template <typename T>
     T read_network_be(const byte_vector& data, const size_t offset) {
         T value;
-        _NEFORCE memory_copy(&value, &data[offset], sizeof(T));
+        memory_copy(&value, &data[offset], sizeof(T));
         return endian::network_to_host(value);
     }
 

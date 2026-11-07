@@ -10,13 +10,13 @@
 using namespace neforce;
 
 namespace {
-    const json_object* load_db_config() {
+    const json_document& load_db_config() {
         static string content;
-        static unique_ptr<json_value> root;
+        static json_document root;
         static bool tried = false;
 
         if (tried) {
-            return root ? root->as_object() : nullptr;
+            return root;
         }
         tried = true;
 
@@ -29,43 +29,39 @@ namespace {
         }
 
         if (content.empty()) {
-            return nullptr;
+            return root;
         }
 
         try {
             json_parser parser{content};
             root = parser.parse();
-            return root->as_object();
         } catch (...) {
-            return nullptr;
         }
+        return root;
     }
 
-    db_config make_config(const json_object* json, const char* section) {
-        if (json == nullptr) {
+    db_config make_config(const json_document& json, const char* section) {
+        if (!json) {
             return {};
         }
 
-        auto* sec = json->get_member(section);
-        if (sec == nullptr) {
+        const json_value* sec = json->as_object().get_member(section);
+        if (sec == nullptr || !sec->is_object()) {
             return {};
         }
-        auto* obj = sec->as_object();
-        if (obj == nullptr) {
-            return {};
-        }
+        const json_object obj = sec->as_object();
 
         db_config config;
         auto set_str = [&](const char* key, string& target) {
-            auto* v = obj->get_member(key);
+            const json_value* v = obj.get_member(key);
             if (v != nullptr && v->is_string()) {
-                target = v->as_string()->get_value();
+                target = v->as_string().get_value();
             }
         };
         auto set_port = [&](const char* key) {
-            auto* v = obj->get_member(key);
+            const json_value* v = obj.get_member(key);
             if (v != nullptr && v->is_number()) {
-                config.port = ports{static_cast<uint16_t>(v->as_number()->get_value())};
+                config.port = ports{static_cast<uint16_t>(v->as_number().get_value())};
             }
         };
 
@@ -90,7 +86,7 @@ protected:
     sqlite_connect conn;
 
     void SetUp() override {
-        auto* json = load_db_config();
+        const json_document& json = load_db_config();
         config = make_config(json, "sqlite");
         if (config.database.empty()) {
             config = db_config::for_sqlite(":memory:");
@@ -339,7 +335,7 @@ protected:
     db_config config;
 
     void SetUp() override {
-        auto* json = load_db_config();
+        const json_document& json = load_db_config();
         config = make_config(json, "sqlite");
         if (config.database.empty()) {
             config = db_config::for_sqlite(":memory:");
@@ -396,7 +392,7 @@ protected:
     mysql_connect conn;
 
     void SetUp() override {
-        auto* json = load_db_config();
+        const json_document& json = load_db_config();
         config = make_config(json, "mysql");
         if (config.database.empty()) {
             config = db_config::for_mysql("testdb");
@@ -513,7 +509,7 @@ protected:
     db_config config;
 
     void SetUp() override {
-        auto* json = load_db_config();
+        const json_document& json = load_db_config();
         config = make_config(json, "mysql");
         if (config.database.empty()) {
             config = db_config::for_mysql("testdb");
@@ -562,7 +558,7 @@ protected:
     pgsql_connect conn;
 
     void SetUp() override {
-        auto* json = load_db_config();
+        const json_document& json = load_db_config();
         config = make_config(json, "postgresql");
         if (config.database.empty()) {
             config = db_config::for_postgresql("testdb");
@@ -686,7 +682,7 @@ protected:
     db_config config;
 
     void SetUp() override {
-        auto* json = load_db_config();
+        const json_document& json = load_db_config();
         config = make_config(json, "postgresql");
         if (config.database.empty()) {
             config = db_config::for_postgresql("testdb");
@@ -734,7 +730,7 @@ protected:
     redis_connect conn;
 
     void SetUp() override {
-        auto* json = load_db_config();
+        const json_document& json = load_db_config();
         config = make_config(json, "redis");
         if (config.database.empty()) {
             config = db_config::for_redis("0");
@@ -854,7 +850,7 @@ protected:
     db_config config;
 
     void SetUp() override {
-        auto* json = load_db_config();
+        const json_document& json = load_db_config();
         config = make_config(json, "redis");
         if (config.database.empty()) {
             config = db_config::for_redis("0");

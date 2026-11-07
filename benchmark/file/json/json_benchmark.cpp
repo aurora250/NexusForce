@@ -109,12 +109,12 @@ namespace {
         return docs;
     }
 
-    unique_ptr<json_value> parse_text(const string& text) noexcept {
+    bool parse_text(const string& text, json_document& doc) noexcept {
         try {
-            json_parser parser(text);
-            return parser.parse();
+            doc = json_parser{string_view(text.data(), text.size())}.parse();
+            return true;
         } catch (...) {
-            return nullptr;
+            return false;
         }
     }
 } // namespace
@@ -124,8 +124,8 @@ static void BM_JsonParse(benchmark::State& state) {
     const auto& doc = docs[static_cast<size_t>(state.range(0))];
     size_t parsed = 0;
     for (auto _: state) {
-        json_parser parser(doc.text);
-        auto root = parser.parse();
+        json_parser parser{string_view(doc.text.data(), doc.text.size())};
+        json_document root = parser.parse();
         benchmark::DoNotOptimize(root);
         ++parsed;
     }
@@ -138,7 +138,7 @@ static void BM_JsonTryParse(benchmark::State& state) {
     const auto& doc = docs[static_cast<size_t>(state.range(0))];
     size_t parsed = 0;
     for (auto _: state) {
-        json_parser parser(doc.text);
+        json_parser parser{string_view(doc.text.data(), doc.text.size())};
         auto root = parser.try_parse();
         benchmark::DoNotOptimize(root);
         ++parsed;
@@ -150,8 +150,8 @@ static void BM_JsonTryParse(benchmark::State& state) {
 static void BM_JsonSerialize(benchmark::State& state) {
     const auto docs = documents();
     const auto& doc = docs[static_cast<size_t>(state.range(0))];
-    auto root = parse_text(doc.text);
-    if (root == nullptr) {
+    json_document root;
+    if (!parse_text(doc.text, root)) {
         state.SkipWithError("parse failed");
         return;
     }
@@ -166,13 +166,13 @@ static void BM_JsonSerialize(benchmark::State& state) {
 static void BM_JsonSerializeIndent(benchmark::State& state) {
     const auto docs = documents();
     const auto& doc = docs[static_cast<size_t>(state.range(0))];
-    auto root = parse_text(doc.text);
-    if (root == nullptr) {
+    json_document root;
+    if (!parse_text(doc.text, root)) {
         state.SkipWithError("parse failed");
         return;
     }
     for (auto _: state) {
-        string out = root->to_indent_string();
+        string out = root->to_indented_string();
         benchmark::DoNotOptimize(out);
     }
     state.SetBytesProcessed(state.iterations() * static_cast<int64_t>(doc.text.size()));
@@ -184,7 +184,7 @@ static void BM_JsonRoundTrip(benchmark::State& state) {
     const auto& doc = docs[static_cast<size_t>(state.range(0))];
     size_t parsed = 0;
     for (auto _: state) {
-        json_parser parser(doc.text);
+        json_parser parser{string_view(doc.text.data(), doc.text.size())};
         auto root = parser.parse();
         string out = root->to_string();
         benchmark::DoNotOptimize(out);
@@ -204,7 +204,7 @@ static void BM_JsonBuild(benchmark::State& state) {
             builder.key(key).value(static_cast<int64_t>(i * 3));
         }
         builder.end_object();
-        auto root = builder.build();
+        json_document root = builder.build();
         benchmark::DoNotOptimize(root);
     }
     state.SetItemsProcessed(state.iterations() * static_cast<int64_t>(fields));
@@ -212,19 +212,15 @@ static void BM_JsonBuild(benchmark::State& state) {
 
 static void BM_JsonObjectLookup(benchmark::State& state) {
     const auto fields = static_cast<size_t>(state.range(0));
-    auto root = parse_text(make_flat_object(fields));
-    if (root == nullptr) {
+    json_document root;
+    if (!parse_text(make_flat_object(fields), root)) {
         state.SkipWithError("parse failed");
         return;
     }
-    const auto* object = root->as_object();
-    if (object == nullptr) {
-        state.SkipWithError("root is not an object");
-        return;
-    }
+    const json_object object = root->as_object();
     const string probe_key = format("key{0}", static_cast<int64_t>(fields / 2));
     for (auto _: state) {
-        const json_value* member = object->get_member(probe_key);
+        const json_value* member = object.get_member(probe_key);
         benchmark::DoNotOptimize(member);
     }
     state.SetItemsProcessed(state.iterations());
@@ -232,20 +228,16 @@ static void BM_JsonObjectLookup(benchmark::State& state) {
 
 static void BM_JsonStringExtract(benchmark::State& state) {
     const auto fields = static_cast<size_t>(state.range(0));
-    auto root = parse_text(make_string_object(fields, 32));
-    if (root == nullptr) {
+    json_document root;
+    if (!parse_text(make_string_object(fields, 32), root)) {
         state.SkipWithError("parse failed");
         return;
     }
-    const auto* object = root->as_object();
-    if (object == nullptr) {
-        state.SkipWithError("root is not an object");
-        return;
-    }
+    const json_object object = root->as_object();
     for (auto _: state) {
         size_t total = 0;
-        for (const auto& kv: object->get_members()) {
-            total += kv.second->as_string()->get_value().size();
+        for (const json_member& member: object.get_members()) {
+            total += member.value.as_string().get_value().size();
         }
         benchmark::DoNotOptimize(total);
     }

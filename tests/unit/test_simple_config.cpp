@@ -2,8 +2,10 @@
 #include <NeForce/core/file/env/env_parser.hpp>
 #include <NeForce/core/file/ini/ini_builder.hpp>
 #include <NeForce/core/file/ini/ini_parser.hpp>
+#include <NeForce/core/container/flat_unordered_map.hpp>
 #include <NeForce/core/file/json/json_builder.hpp>
 #include <NeForce/core/file/json/json_parser.hpp>
+#include <NeForce/core/string/format.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -1708,932 +1710,837 @@ TEST_F(IniBuilderTest, BuildEndSectionResetsToGlobal) {
 }
 
 
+namespace {
+    string int_text(const int value) {
+        string result;
+        format_to(result, "{0}", value);
+        return result;
+    }
+} // namespace
+
+
 class JsonValueTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
 };
 
-TEST_F(JsonValueTest, JsonNullType) {
-    json_null null_val;
-    EXPECT_EQ(null_val.type(), json_value::Null);
-    EXPECT_TRUE(null_val.is_null());
-    EXPECT_FALSE(null_val.is_bool());
-    EXPECT_FALSE(null_val.is_number());
-    EXPECT_FALSE(null_val.is_string());
-    EXPECT_FALSE(null_val.is_object());
-    EXPECT_FALSE(null_val.is_array());
+TEST_F(JsonValueTest, ValueLayoutIsCompact) {
+    EXPECT_EQ(sizeof(json_value), 16u);
+    EXPECT_EQ(sizeof(json_member), 32u);
 }
 
-TEST_F(JsonValueTest, JsonNullAsNull) {
-    json_null null_val;
-    EXPECT_NE(null_val.as_null(), nullptr);
-    EXPECT_EQ(null_val.as_bool(), nullptr);
-    EXPECT_EQ(null_val.as_number(), nullptr);
-    EXPECT_EQ(null_val.as_string(), nullptr);
-    EXPECT_EQ(null_val.as_object(), nullptr);
-    EXPECT_EQ(null_val.as_array(), nullptr);
+TEST_F(JsonValueTest, JsonNullType) {
+    const json_value value = json_value::make_null();
+    EXPECT_EQ(value.kind(), json_kind::null_);
+    EXPECT_TRUE(value.is_null());
+    EXPECT_FALSE(value.is_bool());
+    EXPECT_FALSE(value.is_number());
+    EXPECT_FALSE(value.is_string());
+    EXPECT_FALSE(value.is_object());
+    EXPECT_FALSE(value.is_array());
 }
+
+TEST_F(JsonValueTest, JsonNullToString) { EXPECT_EQ(json_value::make_null().to_string(), "null"); }
 
 TEST_F(JsonValueTest, JsonBoolType) {
-    json_bool bool_true(true);
-    json_bool bool_false(false);
+    const json_value true_value = json_value::make_bool(true);
+    const json_value false_value = json_value::make_bool(false);
 
-    EXPECT_EQ(bool_true.type(), json_value::Bool);
-    EXPECT_EQ(bool_false.type(), json_value::Bool);
-
-    EXPECT_TRUE(bool_true.is_bool());
-    EXPECT_FALSE(bool_true.is_null());
-    EXPECT_FALSE(bool_true.is_number());
-    EXPECT_FALSE(bool_true.is_string());
-    EXPECT_FALSE(bool_true.is_object());
-    EXPECT_FALSE(bool_true.is_array());
-}
-
-TEST_F(JsonValueTest, JsonBoolGetValue) {
-    json_bool bool_true(true);
-    json_bool bool_false(false);
-
-    EXPECT_TRUE(bool_true.get_value());
-    EXPECT_FALSE(bool_false.get_value());
-}
-
-TEST_F(JsonValueTest, JsonBoolAsBool) {
-    json_bool bool_val(true);
-    EXPECT_NE(bool_val.as_bool(), nullptr);
-    EXPECT_EQ(bool_val.as_null(), nullptr);
-    EXPECT_EQ(bool_val.as_number(), nullptr);
-    EXPECT_EQ(bool_val.as_string(), nullptr);
-    EXPECT_EQ(bool_val.as_object(), nullptr);
-    EXPECT_EQ(bool_val.as_array(), nullptr);
+    EXPECT_EQ(true_value.kind(), json_kind::boolean);
+    EXPECT_TRUE(true_value.is_bool());
+    EXPECT_FALSE(true_value.is_null());
+    EXPECT_FALSE(true_value.is_number());
+    EXPECT_TRUE(true_value.as_bool().get_value());
+    EXPECT_FALSE(false_value.as_bool().get_value());
+    EXPECT_EQ(true_value.to_string(), "true");
+    EXPECT_EQ(false_value.to_string(), "false");
 }
 
 TEST_F(JsonValueTest, JsonNumberType) {
-    json_number num(3.14);
-    EXPECT_EQ(num.type(), json_value::Number);
-    EXPECT_TRUE(num.is_number());
-    EXPECT_FALSE(num.is_null());
-    EXPECT_FALSE(num.is_bool());
-    EXPECT_FALSE(num.is_string());
-    EXPECT_FALSE(num.is_object());
-    EXPECT_FALSE(num.is_array());
+    const json_value integer = json_value::make_integer(42);
+    const json_value real = json_value::make_real(3.14);
+
+    EXPECT_EQ(integer.kind(), json_kind::integer);
+    EXPECT_TRUE(integer.is_number());
+    EXPECT_FALSE(integer.is_null());
+    EXPECT_FALSE(integer.is_bool());
+    EXPECT_FALSE(integer.is_string());
+    EXPECT_EQ(integer.as_number().as_integer(), 42);
+    EXPECT_TRUE(integer.as_number().is_integral());
+
+    EXPECT_EQ(real.kind(), json_kind::real);
+    EXPECT_DOUBLE_EQ(real.as_number().get_value(), 3.14);
+    EXPECT_FALSE(real.as_number().is_integral());
 }
 
-TEST_F(JsonValueTest, JsonNumberGetValue) {
-    json_number num_int(42.0);
-    json_number num_float(3.14);
-    json_number num_neg(-1.5);
-
-    EXPECT_DOUBLE_EQ(num_int.get_value(), 42.0);
-    EXPECT_DOUBLE_EQ(num_float.get_value(), 3.14);
-    EXPECT_DOUBLE_EQ(num_neg.get_value(), -1.5);
-}
-
-TEST_F(JsonValueTest, JsonNumberAsNumber) {
-    json_number num(0.0);
-    EXPECT_NE(num.as_number(), nullptr);
-    EXPECT_EQ(num.as_null(), nullptr);
-    EXPECT_EQ(num.as_bool(), nullptr);
-    EXPECT_EQ(num.as_string(), nullptr);
-    EXPECT_EQ(num.as_object(), nullptr);
-    EXPECT_EQ(num.as_array(), nullptr);
+TEST_F(JsonValueTest, JsonUintegerExact) {
+    const uint64_t big = 18446744073709551615ULL;
+    const json_value value = json_value::make_uinteger(big);
+    EXPECT_EQ(value.kind(), json_kind::uinteger);
+    EXPECT_EQ(value.as_number().as_uinteger(), big);
+    EXPECT_EQ(value.to_string(), "18446744073709551615");
 }
 
 TEST_F(JsonValueTest, JsonStringType) {
-    json_string str("hello");
-    EXPECT_EQ(str.type(), json_value::String);
-    EXPECT_TRUE(str.is_string());
-    EXPECT_FALSE(str.is_null());
-    EXPECT_FALSE(str.is_bool());
-    EXPECT_FALSE(str.is_number());
-    EXPECT_FALSE(str.is_object());
-    EXPECT_FALSE(str.is_array());
+    const char* literal = "hello";
+    const json_value value = json_value::make_string(literal);
+
+    EXPECT_EQ(value.kind(), json_kind::string);
+    EXPECT_TRUE(value.is_string());
+    EXPECT_EQ(value.as_string().get_value(), "hello");
+    EXPECT_EQ(value.as_string().data(), literal);
+    EXPECT_EQ(value.to_string(), "\"hello\"");
 }
 
-TEST_F(JsonValueTest, JsonStringGetValue) {
-    json_string str("test_string");
-    EXPECT_EQ(str.get_value(), "test_string");
+TEST_F(JsonValueTest, JsonIntegerToString) {
+    EXPECT_EQ(json_value::make_integer(42).to_string(), "42");
+    EXPECT_EQ(json_value::make_integer(-9223372036854775807LL).to_string(), "-9223372036854775807");
+    EXPECT_EQ(json_value::make_integer(-9223372036854775807LL - 1).to_string(), "-9223372036854775808");
 }
 
-TEST_F(JsonValueTest, JsonStringAsString) {
-    json_string str("value");
-    EXPECT_NE(str.as_string(), nullptr);
-    EXPECT_EQ(str.as_null(), nullptr);
-    EXPECT_EQ(str.as_bool(), nullptr);
-    EXPECT_EQ(str.as_number(), nullptr);
-    EXPECT_EQ(str.as_object(), nullptr);
-    EXPECT_EQ(str.as_array(), nullptr);
+TEST_F(JsonValueTest, JsonStringElementCount) {
+    const json_value borrowed = json_value::make_string("borrowed text");
+    EXPECT_EQ(borrowed.element_count(), 13u);
+    EXPECT_EQ(borrowed.as_string().size(), 13u);
+
+    json_document doc;
+    const json_value inlined = doc.make_string_value(string_view("inlined"));
+    EXPECT_EQ(inlined.element_count(), 7u);
+    EXPECT_EQ(inlined.as_string().size(), 7u);
+    EXPECT_EQ(inlined.to_string(), "\"inlined\"");
 }
 
-TEST_F(JsonValueTest, JsonObjectType) {
-    json_object obj;
-    EXPECT_EQ(obj.type(), json_value::Object);
-    EXPECT_TRUE(obj.is_object());
-    EXPECT_FALSE(obj.is_null());
-    EXPECT_FALSE(obj.is_bool());
-    EXPECT_FALSE(obj.is_number());
-    EXPECT_FALSE(obj.is_string());
-    EXPECT_FALSE(obj.is_array());
+TEST_F(JsonValueTest, JsonRealToString) {
+    json_document doc;
+    doc.root() = json_value::make_real(3.14);
+    EXPECT_EQ(doc->to_string(), "3.14");
+
+    doc.root() = json_value::make_real(0.5);
+    EXPECT_EQ(doc->to_string(), "0.5");
+
+    doc.root() = json_value::make_real(-1.5);
+    EXPECT_EQ(doc->to_string(), "-1.5");
+
+    doc.root() = json_value::make_real(2.0);
+    EXPECT_EQ(doc->to_string(), "2.0");
+
+    doc.root() = json_value::make_real(0.0);
+    EXPECT_EQ(doc->to_string(), "0.0");
 }
 
-TEST_F(JsonValueTest, JsonObjectAsObject) {
-    json_object obj;
-    EXPECT_NE(obj.as_object(), nullptr);
-    EXPECT_EQ(obj.as_null(), nullptr);
-    EXPECT_EQ(obj.as_bool(), nullptr);
-    EXPECT_EQ(obj.as_number(), nullptr);
-    EXPECT_EQ(obj.as_string(), nullptr);
-    EXPECT_EQ(obj.as_array(), nullptr);
+TEST_F(JsonValueTest, JsonRealRoundTrip) {
+    const double values[] = {3.14, 0.5, -1.5, 2.0, 1234.5, 0.1, 1e-7, -7.25e-9, 9007199254740992.0, 1e22};
+    for (const double value: values) {
+        json_document doc;
+        doc.root() = json_value::make_real(value);
+        const string text = doc->to_string();
+        const json_document parsed = json_parser{string_view(text.data(), text.size())}.parse();
+        EXPECT_EQ(parsed->kind(), json_kind::real) << text.data();
+        EXPECT_TRUE(parsed->as_number().get_value() == value) << text.data();
+    }
 }
 
-TEST_F(JsonValueTest, JsonObjectAddAndGetMember) {
-    json_object obj;
-    obj.add_member("key1", make_unique<json_string>("value1"));
-    obj.add_member("key2", make_unique<json_number>(42.0));
-
-    const json_value* member1 = obj.get_member("key1");
-    ASSERT_NE(member1, nullptr);
-    EXPECT_TRUE(member1->is_string());
-    EXPECT_EQ(member1->as_string()->get_value(), "value1");
-
-    const json_value* member2 = obj.get_member("key2");
-    ASSERT_NE(member2, nullptr);
-    EXPECT_TRUE(member2->is_number());
-    EXPECT_DOUBLE_EQ(member2->as_number()->get_value(), 42.0);
-
-    const json_value* missing = obj.get_member("nonexistent");
-    EXPECT_EQ(missing, nullptr);
+TEST_F(JsonValueTest, JsonRealExtremeExponentRoundTrip) {
+    const double values[] = {1e30, 1e-30, 1.7976931348623157e308, 2.2250738585072014e-308, 4.9406564584124654e-324};
+    for (const double value: values) {
+        json_document doc;
+        doc.root() = json_value::make_real(value);
+        const string text = doc->to_string();
+        const json_document parsed = json_parser{string_view(text.data(), text.size())}.parse();
+        const double back = parsed->as_number().get_value();
+        uint64_t expected = 0;
+        uint64_t actual = 0;
+        memory_copy(&expected, &value, sizeof(expected));
+        memory_copy(&actual, &back, sizeof(actual));
+        EXPECT_EQ(actual, expected) << text.data();
+    }
 }
 
-TEST_F(JsonValueTest, JsonObjectGetMembers) {
-    json_object obj;
-    obj.add_member("a", make_unique<json_null>());
-    obj.add_member("b", make_unique<json_bool>(true));
-
-    const auto& members = obj.get_members();
-    EXPECT_EQ(members.size(), 2);
+TEST_F(JsonValueTest, JsonStringEscapedToString) {
+    const json_value value = json_value::make_string("a\"b\\c\nd\te");
+    EXPECT_EQ(value.to_string(), "\"a\\\"b\\\\c\\nd\\te\"");
 }
 
-TEST_F(JsonValueTest, JsonObjectMoveConstructor) {
-    json_object obj;
-    obj.add_member("key", make_unique<json_number>(1.0));
-
-    json_object moved_obj(move(obj));
-    const json_value* member = moved_obj.get_member("key");
-    ASSERT_NE(member, nullptr);
-    EXPECT_DOUBLE_EQ(member->as_number()->get_value(), 1.0);
+TEST_F(JsonValueTest, JsonStringControlCharacterToString) {
+    const char raw[] = {'a', char(0x01), '\0'};
+    const json_value value = json_value::make_string(string_view(raw, 2));
+    EXPECT_EQ(value.to_string(), "\"a\\u0001\"");
 }
 
-TEST_F(JsonValueTest, JsonObjectMoveAssignment) {
-    json_object obj1;
-    obj1.add_member("key1", make_unique<json_number>(1.0));
+TEST_F(JsonValueTest, JsonObjectAndArrayKind) {
+    json_document doc;
+    const json_value* node = doc.new_container(true);
+    EXPECT_TRUE(node->is_object());
+    EXPECT_EQ(node->element_count(), 0u);
+    EXPECT_EQ(node->to_string(), "{}");
 
-    json_object obj2;
-    obj2.add_member("key2", make_unique<json_number>(2.0));
-
-    obj2 = move(obj1);
-    const json_value* member = obj2.get_member("key1");
-    ASSERT_NE(member, nullptr);
-    EXPECT_DOUBLE_EQ(member->as_number()->get_value(), 1.0);
-    EXPECT_EQ(obj2.get_member("key2"), nullptr);
+    const json_value* elements = doc.new_container(false);
+    EXPECT_TRUE(elements->is_array());
+    EXPECT_EQ(elements->to_string(), "[]");
 }
 
-TEST_F(JsonValueTest, JsonArrayType) {
-    json_array arr;
-    EXPECT_EQ(arr.type(), json_value::Array);
-    EXPECT_TRUE(arr.is_array());
-    EXPECT_FALSE(arr.is_null());
-    EXPECT_FALSE(arr.is_bool());
-    EXPECT_FALSE(arr.is_number());
-    EXPECT_FALSE(arr.is_string());
-    EXPECT_FALSE(arr.is_object());
+TEST_F(JsonValueTest, JsonNumberViewMissingValue) {
+    const json_number value = json_value::make_integer(7).as_number();
+    EXPECT_EQ(value.as_integer(), 7);
+    EXPECT_DOUBLE_EQ(value.get_value(), 7.0);
 }
 
-TEST_F(JsonValueTest, JsonArrayAsArray) {
-    json_array arr;
-    EXPECT_NE(arr.as_array(), nullptr);
-    EXPECT_EQ(arr.as_null(), nullptr);
-    EXPECT_EQ(arr.as_bool(), nullptr);
-    EXPECT_EQ(arr.as_number(), nullptr);
-    EXPECT_EQ(arr.as_string(), nullptr);
-    EXPECT_EQ(arr.as_object(), nullptr);
-}
-
-TEST_F(JsonValueTest, JsonArrayAddAndGetElement) {
-    json_array arr;
-    arr.add_element(make_unique<json_number>(1.0));
-    arr.add_element(make_unique<json_number>(2.0));
-    arr.add_element(make_unique<json_number>(3.0));
-
-    EXPECT_EQ(arr.size(), 3);
-
-    const json_value* elem0 = arr.get_element(0);
-    ASSERT_NE(elem0, nullptr);
-    EXPECT_DOUBLE_EQ(elem0->as_number()->get_value(), 1.0);
-
-    const json_value* elem1 = arr.get_element(1);
-    ASSERT_NE(elem1, nullptr);
-    EXPECT_DOUBLE_EQ(elem1->as_number()->get_value(), 2.0);
-
-    const json_value* elem2 = arr.get_element(2);
-    ASSERT_NE(elem2, nullptr);
-    EXPECT_DOUBLE_EQ(elem2->as_number()->get_value(), 3.0);
-
-    const json_value* out_of_bounds = arr.get_element(100);
-    EXPECT_EQ(out_of_bounds, nullptr);
-}
-
-TEST_F(JsonValueTest, JsonArrayGetElements) {
-    json_array arr;
-    arr.add_element(make_unique<json_bool>(true));
-    arr.add_element(make_unique<json_bool>(false));
-
-    const auto& elements = arr.get_elements();
-    EXPECT_EQ(elements.size(), 2);
-}
-
-TEST_F(JsonValueTest, JsonArrayMoveConstructor) {
-    json_array arr;
-    arr.add_element(make_unique<json_number>(42.0));
-
-    json_array moved_arr(move(arr));
-    EXPECT_EQ(moved_arr.size(), 1);
-    EXPECT_DOUBLE_EQ(moved_arr.get_element(0)->as_number()->get_value(), 42.0);
-}
-
-TEST_F(JsonValueTest, JsonArrayMoveAssignment) {
-    json_array arr1;
-    arr1.add_element(make_unique<json_number>(1.0));
-
-    json_array arr2;
-    arr2.add_element(make_unique<json_number>(2.0));
-
-    arr2 = move(arr1);
-    EXPECT_EQ(arr2.size(), 1);
-    EXPECT_DOUBLE_EQ(arr2.get_element(0)->as_number()->get_value(), 1.0);
-}
-
-TEST_F(JsonValueTest, JsonValueIsTypeNull) {
-    json_null null_val;
-    json_bool bool_val(true);
-    json_number num_val(0.0);
-    json_string str_val("");
-    json_object obj_val;
-    json_array arr_val;
-
-    EXPECT_TRUE(null_val.is_null());
-    EXPECT_FALSE(bool_val.is_null());
-    EXPECT_FALSE(num_val.is_null());
-    EXPECT_FALSE(str_val.is_null());
-    EXPECT_FALSE(obj_val.is_null());
-    EXPECT_FALSE(arr_val.is_null());
-}
-
-TEST_F(JsonValueTest, JsonValueIsTypeBool) {
-    json_null null_val;
-    json_bool bool_val(true);
-    json_number num_val(0.0);
-    json_string str_val("");
-    json_object obj_val;
-    json_array arr_val;
-
-    EXPECT_FALSE(null_val.is_bool());
-    EXPECT_TRUE(bool_val.is_bool());
-    EXPECT_FALSE(num_val.is_bool());
-    EXPECT_FALSE(str_val.is_bool());
-    EXPECT_FALSE(obj_val.is_bool());
-    EXPECT_FALSE(arr_val.is_bool());
-}
-
-TEST_F(JsonValueTest, JsonValueIsTypeNumber) {
-    json_null null_val;
-    json_bool bool_val(true);
-    json_number num_val(0.0);
-    json_string str_val("");
-    json_object obj_val;
-    json_array arr_val;
-
-    EXPECT_FALSE(null_val.is_number());
-    EXPECT_FALSE(bool_val.is_number());
-    EXPECT_TRUE(num_val.is_number());
-    EXPECT_FALSE(str_val.is_number());
-    EXPECT_FALSE(obj_val.is_number());
-    EXPECT_FALSE(arr_val.is_number());
-}
-
-TEST_F(JsonValueTest, JsonValueIsTypeString) {
-    json_null null_val;
-    json_bool bool_val(true);
-    json_number num_val(0.0);
-    json_string str_val("");
-    json_object obj_val;
-    json_array arr_val;
-
-    EXPECT_FALSE(null_val.is_string());
-    EXPECT_FALSE(bool_val.is_string());
-    EXPECT_FALSE(num_val.is_string());
-    EXPECT_TRUE(str_val.is_string());
-    EXPECT_FALSE(obj_val.is_string());
-    EXPECT_FALSE(arr_val.is_string());
-}
-
-TEST_F(JsonValueTest, JsonValueIsTypeObject) {
-    json_null null_val;
-    json_bool bool_val(true);
-    json_number num_val(0.0);
-    json_string str_val("");
-    json_object obj_val;
-    json_array arr_val;
-
-    EXPECT_FALSE(null_val.is_object());
-    EXPECT_FALSE(bool_val.is_object());
-    EXPECT_FALSE(num_val.is_object());
-    EXPECT_FALSE(str_val.is_object());
-    EXPECT_TRUE(obj_val.is_object());
-    EXPECT_FALSE(arr_val.is_object());
-}
-
-TEST_F(JsonValueTest, JsonValueIsTypeArray) {
-    json_null null_val;
-    json_bool bool_val(true);
-    json_number num_val(0.0);
-    json_string str_val("");
-    json_object obj_val;
-    json_array arr_val;
-
-    EXPECT_FALSE(null_val.is_array());
-    EXPECT_FALSE(bool_val.is_array());
-    EXPECT_FALSE(num_val.is_array());
-    EXPECT_FALSE(str_val.is_array());
-    EXPECT_FALSE(obj_val.is_array());
-    EXPECT_TRUE(arr_val.is_array());
-}
-
-TEST_F(JsonValueTest, ToStringNull) {
-    json_null null_val;
-    EXPECT_EQ(null_val.to_string(), "null");
-}
-
-TEST_F(JsonValueTest, ToStringBool) {
-    json_bool bool_true(true);
-    json_bool bool_false(false);
-
-    EXPECT_EQ(bool_true.to_string(), "true");
-    EXPECT_EQ(bool_false.to_string(), "false");
-}
-
-TEST_F(JsonValueTest, ToStringNumber) {
-    json_number num_int(42.0);
-    json_number num_float(3.14);
-    json_number num_neg(-1.0);
-
-    EXPECT_EQ(num_int.to_string(), "42");
-    EXPECT_EQ(num_float.to_string(), "3.14");
-    EXPECT_EQ(num_neg.to_string(), "-1");
-}
-
-TEST_F(JsonValueTest, ToStringString) {
-    json_string str("hello world");
-    EXPECT_EQ(str.to_string(), "\"hello world\"");
-}
-
-TEST_F(JsonValueTest, ToStringEmptyArray) {
-    json_array arr;
-    EXPECT_EQ(arr.to_string(), "[]");
-}
-
-TEST_F(JsonValueTest, ToStringArrayWithElements) {
-    json_array arr;
-    arr.add_element(make_unique<json_number>(1.0));
-    arr.add_element(make_unique<json_number>(2.0));
-    arr.add_element(make_unique<json_number>(3.0));
-
-    EXPECT_EQ(arr.to_string(), "[1,2,3]");
-}
-
-TEST_F(JsonValueTest, ToStringEmptyObject) {
-    json_object obj;
-    EXPECT_EQ(obj.to_string(), "{}");
-}
-
-TEST_F(JsonValueTest, ToStringObjectWithMembers) {
-    json_object obj;
-    obj.add_member("name", make_unique<json_string>("John"));
-    obj.add_member("age", make_unique<json_number>(30.0));
-
-    string result = obj.to_string();
-    EXPECT_TRUE(result.find("\"name\":\"John\"") != string::npos);
-    EXPECT_TRUE(result.find("\"age\":30") != string::npos);
-}
-
-TEST_F(JsonValueTest, ToIndentStringNull) {
-    json_null null_val;
-    EXPECT_EQ(null_val.to_indent_string(), "null");
-}
-
-TEST_F(JsonValueTest, ToIndentStringBool) {
-    json_bool bool_val(true);
-    EXPECT_EQ(bool_val.to_indent_string(), "true");
-}
-
-TEST_F(JsonValueTest, ToIndentStringNumber) {
-    json_number num(42.0);
-    EXPECT_EQ(num.to_indent_string(), "42");
-}
-
-TEST_F(JsonValueTest, ToIndentStringString) {
-    json_string str("test");
-    EXPECT_EQ(str.to_indent_string(), "\"test\"");
-}
-
-TEST_F(JsonValueTest, ToIndentStringEmptyArray) {
-    json_array arr;
-    EXPECT_EQ(arr.to_indent_string(), "[]");
-}
-
-TEST_F(JsonValueTest, ToIndentStringArrayWithElements) {
-    json_array arr;
-    arr.add_element(make_unique<json_number>(1.0));
-    arr.add_element(make_unique<json_number>(2.0));
-
-    string result = arr.to_indent_string();
-    EXPECT_NE(result.find("[\n"), string::npos);
-    EXPECT_NE(result.find("1"), string::npos);
-    EXPECT_NE(result.find("2"), string::npos);
-    EXPECT_NE(result.find("\n]"), string::npos);
-}
-
-TEST_F(JsonValueTest, ToIndentStringEmptyObject) {
-    json_object obj;
-    EXPECT_EQ(obj.to_indent_string(), "{}");
-}
-
-TEST_F(JsonValueTest, ToIndentStringObjectWithMembers) {
-    json_object obj;
-    obj.add_member("key", make_unique<json_string>("value"));
-
-    string result = obj.to_indent_string();
-    EXPECT_NE(result.find("{\n"), string::npos);
-    EXPECT_NE(result.find("\"key\""), string::npos);
-    EXPECT_NE(result.find("\"value\""), string::npos);
-    EXPECT_NE(result.find("\n}"), string::npos);
-}
-
-TEST_F(JsonValueTest, ToStringEscapedString) {
-    json_string str("line1\nline2\ttext\"quote\"");
-    string result = str.to_string();
-    EXPECT_NE(result.find("\\n"), string::npos);
-    EXPECT_NE(result.find("\\t"), string::npos);
-    EXPECT_NE(result.find("\\\""), string::npos);
-}
-
-TEST_F(JsonValueTest, ToIndentStringEscapedString) {
-    json_string str("line1\nline2");
-    string result = str.to_indent_string();
-    EXPECT_NE(result.find("\\n"), string::npos);
-}
-
-
-class JsonParserTest : public ::testing::Test {
+class JsonObjectTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
 };
 
+TEST_F(JsonObjectTest, AddAndGetMember) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    object.add_member("name", json_value::make_string("nexus"));
+    object.add_member("id", json_value::make_integer(42));
+
+    ASSERT_EQ(doc->as_object().size(), 2u);
+    ASSERT_NE(doc->as_object().get_member("name"), nullptr);
+    EXPECT_EQ(doc->as_object().get_member("name")->as_string().get_value(), "nexus");
+    EXPECT_EQ(doc->as_object().get_member("id")->as_number().as_integer(), 42);
+    EXPECT_EQ(doc->as_object().get_member("missing"), nullptr);
+}
+
+TEST_F(JsonObjectTest, GetMemberKeyOverloads) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    object.add_member("key", json_value::make_bool(true));
+
+    const json_object view = doc->as_object();
+    const string key("key");
+    EXPECT_NE(view.get_member(key), nullptr);
+    EXPECT_NE(view.get_member("key"), nullptr);
+    EXPECT_NE(view.get_member(string_view("key")), nullptr);
+    EXPECT_EQ(view.get_member(string("other")), nullptr);
+}
+
+TEST_F(JsonObjectTest, GetMembersIteration) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    object.add_member("a", json_value::make_integer(1));
+    object.add_member("b", json_value::make_integer(2));
+    object.add_member("c", json_value::make_integer(3));
+
+    int64_t sum = 0;
+    size_t count = 0;
+    for (const json_member& member: doc->as_object().get_members()) {
+        sum += member.value.as_number().as_integer();
+        ++count;
+        EXPECT_FALSE(member.key().empty());
+    }
+    EXPECT_EQ(count, 3u);
+    EXPECT_EQ(sum, 6);
+}
+
+TEST_F(JsonObjectTest, InsertionOrderPreserved) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    object.add_member("first", json_value::make_integer(1));
+    object.add_member("second", json_value::make_integer(2));
+
+    auto it = doc->as_object().begin();
+    EXPECT_EQ(it->key(), "first");
+    ++it;
+    EXPECT_EQ(it->key(), "second");
+}
+
+TEST_F(JsonObjectTest, InlineKeyAndArenaKey) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    object.add_member("short", json_value::make_integer(1));
+    object.add_member("a_key_longer_than_eight_bytes", json_value::make_integer(2));
+
+    const json_object view = doc->as_object();
+    auto it = view.begin();
+    EXPECT_TRUE(it->key_inlined());
+    EXPECT_EQ(it->key(), "short");
+    ++it;
+    EXPECT_FALSE(it->key_inlined());
+    EXPECT_EQ(it->key(), "a_key_longer_than_eight_bytes");
+    EXPECT_NE(view.get_member("a_key_longer_than_eight_bytes"), nullptr);
+}
+
+TEST_F(JsonObjectTest, LargeMemberLookup) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    for (int i = 0; i < 600; ++i) {
+        object.add_member(string("key") + int_text(i), json_value::make_integer(i));
+    }
+    ASSERT_EQ(doc->as_object().size(), 600u);
+
+    for (int i = 0; i < 600; ++i) {
+        const json_value* value = doc->as_object().get_member(string("key") + int_text(i));
+        ASSERT_NE(value, nullptr);
+        EXPECT_EQ(value->as_number().as_integer(), i);
+    }
+    EXPECT_EQ(doc->as_object().get_member("key600"), nullptr);
+}
+
+TEST_F(JsonObjectTest, KeyPrefixFiltersLookups) {
+    const json_member member = [] {
+        json_member result;
+        result.assign_key("hash");
+        return result;
+    }();
+    EXPECT_EQ(member.key_prefix, json_member::prefix_of("hash"));
+    EXPECT_NE(member.key_prefix, json_member::prefix_of("hasj"));
+    EXPECT_FALSE(member.key_equal(json_member::prefix_of("hasj"), "hasj"));
+    EXPECT_TRUE(member.key_equal(json_member::prefix_of("hash"), "hash"));
+
+    json_member short_key;
+    short_key.assign_key("ab");
+    EXPECT_EQ(short_key.key_prefix, json_member::prefix_of("ab"));
+    EXPECT_TRUE(short_key.key_equal(json_member::prefix_of("ab"), "ab"));
+    EXPECT_FALSE(short_key.key_equal(json_member::prefix_of("ab_"), "ab_"));
+
+    json_member long_key;
+    long_key.assign_key("a-longer-key");
+    EXPECT_FALSE(long_key.key_inlined());
+    EXPECT_TRUE(long_key.key_equal(json_member::prefix_of("a-longer-key"), "a-longer-key"));
+    EXPECT_FALSE(long_key.key_equal(json_member::prefix_of("a-longer-kez"), "a-longer-kez"));
+}
+
+TEST_F(JsonObjectTest, ReservePreallocatesMembers) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    doc.object_reserve(doc.root(), 8);
+    for (int i = 0; i < 8; ++i) {
+        object.add_member(string("key") + int_text(i), json_value::make_integer(i));
+    }
+    EXPECT_EQ(object.size(), 8u);
+    for (int i = 0; i < 8; ++i) {
+        EXPECT_EQ(object.as_object().get_member(string("key") + int_text(i))->as_number().as_integer(), i);
+    }
+
+    object.add_member("extra", json_value::make_integer(99));
+    EXPECT_EQ(object.size(), 9u);
+    EXPECT_EQ(object.as_object().get_member("extra")->as_number().as_integer(), 99);
+    EXPECT_EQ(object.as_object().get_member("key7")->as_number().as_integer(), 7);
+    EXPECT_EQ(doc.root().element_count(), 9u);
+}
+
+TEST_F(JsonObjectTest, ReserveIgnoresUnsupportedCounts) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    doc.object_reserve(doc.root(), 0);
+    doc.object_reserve(doc.root(), 70000);
+    object.add_member("a", json_value::make_integer(1));
+    doc.object_reserve(doc.root(), 4);
+    object.add_member("b", json_value::make_integer(2));
+    EXPECT_EQ(object.size(), 2u);
+    EXPECT_EQ(doc.root().to_string(), R"({"a":1,"b":2})");
+}
+
+TEST_F(JsonObjectTest, ObjectToString) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    object.add_member("id", json_value::make_integer(1));
+    object.add_member("name", json_value::make_string("nexus"));
+
+    EXPECT_EQ(doc->to_string(), "{\"id\":1,\"name\":\"nexus\"}");
+}
+
+TEST_F(JsonObjectTest, NestedObject) {
+    json_document doc;
+    json_object_mut root = doc.make_object();
+    json_object_mut inner = doc.new_object();
+    inner.add_member("leaf", json_value::make_bool(true));
+    root.add_member("inner", inner.to_value());
+
+    EXPECT_EQ(doc->to_string(), "{\"inner\":{\"leaf\":true}}");
+    EXPECT_TRUE(doc->as_object().get_member("inner")->as_object().get_member("leaf")->as_bool().get_value());
+}
+
+TEST_F(JsonObjectTest, DocumentMoveConstructor) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    object.add_member("key", json_value::make_integer(7));
+
+    json_document moved(move(doc));
+    ASSERT_NE(moved->as_object().get_member("key"), nullptr);
+    EXPECT_EQ(moved->as_object().get_member("key")->as_number().as_integer(), 7);
+}
+
+TEST_F(JsonObjectTest, DocumentMoveAssignment) {
+    json_document doc;
+    doc.make_object().add_member("key", json_value::make_integer(7));
+
+    json_document other;
+    other = move(doc);
+    ASSERT_NE(other->as_object().get_member("key"), nullptr);
+    EXPECT_EQ(other->as_object().get_member("key")->as_number().as_integer(), 7);
+}
+
+class JsonArrayTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(JsonArrayTest, AddAndGetElement) {
+    json_document doc;
+    json_array_mut array = doc.make_array();
+    array.add_element(json_value::make_integer(1));
+    array.add_element(json_value::make_string("two"));
+    array.add_element(json_value::make_bool(false));
+
+    ASSERT_EQ(doc->as_array().size(), 3u);
+    EXPECT_EQ(doc->as_array().get_element(0)->as_number().as_integer(), 1);
+    EXPECT_EQ(doc->as_array().get_element(1)->as_string().get_value(), "two");
+    EXPECT_FALSE(doc->as_array().get_element(2)->as_bool().get_value());
+    EXPECT_EQ(doc->as_array().get_element(3), nullptr);
+}
+
+TEST_F(JsonArrayTest, GetElementsIteration) {
+    json_document doc;
+    json_array_mut array = doc.make_array();
+    for (int i = 0; i < 5; ++i) {
+        array.add_element(json_value::make_integer(i));
+    }
+
+    int64_t sum = 0;
+    for (const json_value& element: doc->as_array().get_elements()) {
+        sum += element.as_number().as_integer();
+    }
+    EXPECT_EQ(sum, 10);
+}
+
+TEST_F(JsonArrayTest, LargeArrayGrowth) {
+    json_document doc;
+    json_array_mut array = doc.make_array();
+    for (int i = 0; i < 1000; ++i) {
+        array.add_element(json_value::make_integer(i));
+    }
+    ASSERT_EQ(doc->as_array().size(), 1000u);
+    EXPECT_EQ(doc->as_array().get_element(0)->as_number().as_integer(), 0);
+    EXPECT_EQ(doc->as_array().get_element(511)->as_number().as_integer(), 511);
+    EXPECT_EQ(doc->as_array().get_element(999)->as_number().as_integer(), 999);
+}
+
+TEST_F(JsonArrayTest, ReservePreallocatesElements) {
+    json_document doc;
+    json_array_mut array = doc.make_array();
+    doc.array_reserve(doc.root(), 5);
+    for (int i = 0; i < 9; ++i) {
+        array.add_element(json_value::make_integer(i));
+    }
+    EXPECT_EQ(array.size(), 9u);
+    EXPECT_EQ(doc.root().to_string(), "[0,1,2,3,4,5,6,7,8]");
+    EXPECT_EQ(doc.root().element_count(), 9u);
+}
+
+TEST_F(JsonArrayTest, ArrayToString) {
+    json_document doc;
+    json_array_mut array = doc.make_array();
+    array.add_element(json_value::make_integer(1));
+    array.add_element(json_value::make_integer(2));
+
+    EXPECT_EQ(doc->to_string(), "[1,2]");
+}
+
+TEST_F(JsonArrayTest, NestedArray) {
+    json_document doc;
+    json_array_mut root = doc.make_array();
+    json_array_mut inner = doc.new_array();
+    inner.add_element(json_value::make_integer(1));
+    root.add_element(inner.to_value());
+    root.add_element(json_value::make_integer(2));
+
+    EXPECT_EQ(doc->to_string(), "[[1],2]");
+    EXPECT_EQ(doc->as_array().get_element(0)->as_array().size(), 1u);
+}
+
+TEST_F(JsonArrayTest, ArrayOfObjects) {
+    json_document doc;
+    json_array_mut root = doc.make_array();
+    for (int i = 0; i < 3; ++i) {
+        json_object_mut object = doc.new_object();
+        object.add_member("id", json_value::make_integer(i));
+        root.add_element(object.to_value());
+    }
+
+    EXPECT_EQ(doc->as_array().size(), 3u);
+    for (size_t i = 0; i < 3; ++i) {
+        const json_value* element = doc->as_array().get_element(i);
+        ASSERT_NE(element, nullptr);
+        EXPECT_EQ(element->as_object().get_member("id")->as_number().as_integer(), static_cast<int64_t>(i));
+    }
+}
+
+class JsonSerializeTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(JsonSerializeTest, ToIndentedString) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    object.add_member("id", json_value::make_integer(1));
+    object.add_member("name", json_value::make_string("nexus"));
+
+    EXPECT_EQ(doc->to_indented_string(), "{\n  \"id\": 1,\n  \"name\": \"nexus\"\n}");
+    EXPECT_EQ(doc->to_indented_string(4), "{\n    \"id\": 1,\n    \"name\": \"nexus\"\n}");
+}
+
+TEST_F(JsonSerializeTest, ToIndentedStringArray) {
+    json_document doc;
+    json_array_mut array = doc.make_array();
+    array.add_element(json_value::make_integer(1));
+    array.add_element(json_value::make_integer(2));
+
+    EXPECT_EQ(doc->to_indented_string(2), "[\n  1,\n  2\n]");
+}
+
+TEST_F(JsonSerializeTest, ToIndentedStringEmptyContainers) {
+    json_document object_doc;
+    object_doc.make_object();
+    EXPECT_EQ(object_doc->to_indented_string(), "{}");
+
+    json_document array_doc;
+    array_doc.make_array();
+    EXPECT_EQ(array_doc->to_indented_string(), "[]");
+}
+
+TEST_F(JsonSerializeTest, ToIndentedStringNested) {
+    json_document doc;
+    json_object_mut object = doc.make_object();
+    json_array_mut array = doc.new_array();
+    array.add_element(json_value::make_integer(1));
+    object.add_member("list", array.to_value());
+
+    EXPECT_EQ(doc->to_indented_string(2), "{\n  \"list\": [\n    1\n  ]\n}");
+}
+
+class JsonParserTest : public ::testing::Test {
+protected:
+    static json_document parse_text(const string_view text) {
+        json_parser parser(text);
+        return parser.parse();
+    }
+
+    static json_document parse_owned(string text) {
+        json_parser parser(move(text));
+        return parser.parse();
+    }
+
+    static json_document parse_text(const string& text) { return parse_text(string_view(text.data(), text.size())); }
+
+    static json_document parse_text(const char* text) { return parse_text(string_view(text)); }
+};
+
 TEST_F(JsonParserTest, ParseNull) {
-    json_parser parser("null");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_null());
+    const json_document doc = parse_text("null");
+    EXPECT_TRUE(doc->is_null());
 }
 
-TEST_F(JsonParserTest, ParseTrue) {
-    json_parser parser("true");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_bool());
-    EXPECT_TRUE(result->as_bool()->get_value());
-}
+TEST_F(JsonParserTest, ParseTrue) { EXPECT_TRUE(parse_text("true").root().as_bool().get_value()); }
 
-TEST_F(JsonParserTest, ParseFalse) {
-    json_parser parser("false");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_bool());
-    EXPECT_FALSE(result->as_bool()->get_value());
-}
+TEST_F(JsonParserTest, ParseFalse) { EXPECT_FALSE(parse_text("false").root().as_bool().get_value()); }
 
 TEST_F(JsonParserTest, ParseInteger) {
-    json_parser parser("42");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 42.0);
+    const json_document doc = parse_text("42");
+    EXPECT_TRUE(doc->is_number());
+    EXPECT_EQ(doc->as_number().as_integer(), 42);
 }
 
-TEST_F(JsonParserTest, ParseNegativeInteger) {
-    json_parser parser("-42");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), -42.0);
+TEST_F(JsonParserTest, ParseNegativeInteger) { EXPECT_EQ(parse_text("-42")->as_number().as_integer(), -42); }
+
+TEST_F(JsonParserTest, ParseInt64Boundary) {
+    const json_document min_doc = parse_text("-9223372036854775808");
+    EXPECT_EQ(min_doc->as_number().as_integer(), -9223372036854775807LL - 1);
+
+    const json_document max_doc = parse_text("9223372036854775807");
+    EXPECT_EQ(max_doc->as_number().as_integer(), 9223372036854775807LL);
+}
+
+TEST_F(JsonParserTest, ParseUint64Boundary) {
+    const json_document doc = parse_text("18446744073709551615");
+    EXPECT_EQ(doc->kind(), json_kind::uinteger);
+    EXPECT_EQ(doc->as_number().as_uinteger(), 18446744073709551615ULL);
+}
+
+TEST_F(JsonParserTest, ParseLargeIntegerKeepsPrecision) {
+    const json_document doc = parse_text("9007199254740993");
+    EXPECT_EQ(doc->kind(), json_kind::integer);
+    EXPECT_EQ(doc->as_number().as_integer(), 9007199254740993LL);
+    EXPECT_EQ(doc->to_string(), "9007199254740993");
 }
 
 TEST_F(JsonParserTest, ParseFloat) {
-    json_parser parser("3.14");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 3.14);
+    const json_document doc = parse_text("3.14");
+    EXPECT_TRUE(doc->is_number());
+    EXPECT_EQ(doc->kind(), json_kind::real);
+    EXPECT_DOUBLE_EQ(doc->as_number().get_value(), 3.14);
 }
 
-TEST_F(JsonParserTest, ParseNegativeFloat) {
-    json_parser parser("-3.14");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), -3.14);
-}
+TEST_F(JsonParserTest, ParseNegativeFloat) { EXPECT_DOUBLE_EQ(parse_text("-1.5")->as_number().get_value(), -1.5); }
 
 TEST_F(JsonParserTest, ParseExponentNumber) {
-    json_parser parser("1e10");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 1e10);
+    EXPECT_DOUBLE_EQ(parse_text("1e3")->as_number().get_value(), 1000.0);
+    EXPECT_DOUBLE_EQ(parse_text("1E3")->as_number().get_value(), 1000.0);
+    EXPECT_DOUBLE_EQ(parse_text("1e-2")->as_number().get_value(), 0.01);
+    EXPECT_DOUBLE_EQ(parse_text("1e+2")->as_number().get_value(), 100.0);
+    EXPECT_DOUBLE_EQ(parse_text("2.5e2")->as_number().get_value(), 250.0);
 }
 
-TEST_F(JsonParserTest, ParseExponentNegativeNumber) {
-    json_parser parser("2.5e-3");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 2.5e-3);
+TEST_F(JsonParserTest, ParseShortestDecimalIsExact) {
+    const json_document doc = parse_text("52.285");
+    EXPECT_TRUE(doc->as_number().get_value() == 52.285);
+    EXPECT_EQ(doc->to_string(), "52.285");
+
+    const json_document negative = parse_text("-956.084");
+    EXPECT_TRUE(negative->as_number().get_value() == -956.084);
+
+    const json_document exponent = parse_text("1.5e-43");
+    EXPECT_DOUBLE_EQ(exponent->as_number().get_value(), 1.5e-43);
 }
 
-TEST_F(JsonParserTest, ParseExponentPositiveNumber) {
-    json_parser parser("1.5e+3");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 1.5e+3);
-}
-
-TEST_F(JsonParserTest, ParseNumberStartingWithZero) {
-    json_parser parser("0.5");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 0.5);
+TEST_F(JsonParserTest, ParseZeroNumber) {
+    EXPECT_EQ(parse_text("0")->as_number().as_integer(), 0);
+    EXPECT_EQ(parse_text("-0")->as_number().as_integer(), 0);
+    EXPECT_DOUBLE_EQ(parse_text("0.0")->as_number().get_value(), 0.0);
 }
 
 TEST_F(JsonParserTest, ParseEmptyString) {
-    json_parser parser("\"\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_string());
-    EXPECT_EQ(result->as_string()->get_value(), "");
+    const json_document doc = parse_text("\"\"");
+    EXPECT_TRUE(doc->is_string());
+    EXPECT_TRUE(doc->as_string().get_value().empty());
 }
 
-TEST_F(JsonParserTest, ParseSimpleString) {
-    json_parser parser("\"hello\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_string());
-    EXPECT_EQ(result->as_string()->get_value(), "hello");
-}
+TEST_F(JsonParserTest, ParseSimpleString) { EXPECT_EQ(parse_text("\"hello\"")->as_string().get_value(), "hello"); }
 
 TEST_F(JsonParserTest, ParseStringWithSpaces) {
-    json_parser parser("\"hello world\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_string());
-    EXPECT_EQ(result->as_string()->get_value(), "hello world");
+    EXPECT_EQ(parse_text("\"hello world\"")->as_string().get_value(), "hello world");
 }
 
-TEST_F(JsonParserTest, ParseEmptyArray) {
-    json_parser parser("[]");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 0);
+TEST_F(JsonParserTest, ParseLongStringIsArenaBacked) {
+    const string_view text("\"a string much longer than fourteen bytes\"");
+    const json_document doc = parse_owned(string(text.data(), text.size()));
+    EXPECT_EQ(doc->as_string().get_value(), "a string much longer than fourteen bytes");
 }
 
-TEST_F(JsonParserTest, ParseArrayWithSingleElement) {
-    json_parser parser("[42]");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 1);
-    EXPECT_DOUBLE_EQ(result->as_array()->get_element(0)->as_number()->get_value(), 42.0);
-}
-
-TEST_F(JsonParserTest, ParseArrayWithMultipleElements) {
-    json_parser parser("[1, 2, 3]");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 3);
-    EXPECT_DOUBLE_EQ(result->as_array()->get_element(0)->as_number()->get_value(), 1.0);
-    EXPECT_DOUBLE_EQ(result->as_array()->get_element(1)->as_number()->get_value(), 2.0);
-    EXPECT_DOUBLE_EQ(result->as_array()->get_element(2)->as_number()->get_value(), 3.0);
-}
-
-TEST_F(JsonParserTest, ParseArrayWithMixedTypes) {
-    json_parser parser("[null, true, 42, \"text\"]");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 4);
-    EXPECT_TRUE(result->as_array()->get_element(0)->is_null());
-    EXPECT_TRUE(result->as_array()->get_element(1)->as_bool()->get_value());
-    EXPECT_DOUBLE_EQ(result->as_array()->get_element(2)->as_number()->get_value(), 42.0);
-    EXPECT_EQ(result->as_array()->get_element(3)->as_string()->get_value(), "text");
-}
-
-TEST_F(JsonParserTest, ParseEmptyObject) {
-    json_parser parser("{}");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    EXPECT_EQ(result->as_object()->get_members().size(), 0);
-}
-
-TEST_F(JsonParserTest, ParseObjectWithSingleMember) {
-    json_parser parser("{\"key\": \"value\"}");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    const json_value* member = result->as_object()->get_member("key");
-    ASSERT_NE(member, nullptr);
-    EXPECT_EQ(member->as_string()->get_value(), "value");
-}
-
-TEST_F(JsonParserTest, ParseObjectWithMultipleMembers) {
-    json_parser parser("{\"name\": \"John\", \"age\": 30}");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    EXPECT_EQ(result->as_object()->get_member("name")->as_string()->get_value(), "John");
-    EXPECT_DOUBLE_EQ(result->as_object()->get_member("age")->as_number()->get_value(), 30.0);
-}
-
-TEST_F(JsonParserTest, ParseNestedObject) {
-    json_parser parser("{\"outer\": {\"inner\": 42}}");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    const json_value* outer = result->as_object()->get_member("outer");
-    ASSERT_NE(outer, nullptr);
-    EXPECT_TRUE(outer->is_object());
-    EXPECT_DOUBLE_EQ(outer->as_object()->get_member("inner")->as_number()->get_value(), 42.0);
-}
-
-TEST_F(JsonParserTest, ParseNestedArray) {
-    json_parser parser("[[1, 2], [3, 4]]");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 2);
-    EXPECT_TRUE(result->as_array()->get_element(0)->is_array());
-    EXPECT_TRUE(result->as_array()->get_element(1)->is_array());
-}
-
-TEST_F(JsonParserTest, TryParseValid) {
-    json_parser parser("42");
-    auto result = parser.try_parse();
-    EXPECT_TRUE(result.has_value());
-    EXPECT_DOUBLE_EQ(result.value()->as_number()->get_value(), 42.0);
-}
-
-TEST_F(JsonParserTest, TryParseInvalid) {
-    json_parser parser("invalid");
-    auto result = parser.try_parse();
-    EXPECT_FALSE(result.has_value());
-}
-
-TEST_F(JsonParserTest, ParseInvalidThrows) {
-    json_parser parser("invalid");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseIncompleteObjectThrows) {
-    json_parser parser("{");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseIncompleteArrayThrows) {
-    json_parser parser("[");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseMissingColonThrows) {
-    json_parser parser("{\"key\" \"value\"}");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseMissingCommaInArrayThrows) {
-    json_parser parser("[1 2]");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseMissingCommaInObjectThrows) {
-    json_parser parser("{\"a\": 1 \"b\": 2}");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseExtraCharactersThrows) {
-    json_parser parser("42 extra");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseUnterminatedStringThrows) {
-    json_parser parser("\"hello");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseInvalidNumberFormatThrows) {
-    json_parser parser("01");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseLeadingZerosThrows) {
-    json_parser parser("007");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseNegativeLeadingZerosThrows) {
-    json_parser parser("-01");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseZeroNumberValid) {
-    json_parser parser("0");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 0.0);
-}
-
-TEST_F(JsonParserTest, ParseStringEscapeNewline) {
-    json_parser parser("\"hello\\nworld\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "hello\nworld");
-}
-
-TEST_F(JsonParserTest, ParseStringEscapeTab) {
-    json_parser parser("\"hello\\tworld\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "hello\tworld");
-}
-
-TEST_F(JsonParserTest, ParseStringEscapeBackslash) {
-    json_parser parser("\"hello\\\\world\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "hello\\world");
-}
-
-TEST_F(JsonParserTest, ParseStringEscapeQuote) {
-    json_parser parser("\"hello\\\"world\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "hello\"world");
-}
-
-TEST_F(JsonParserTest, ParseStringEscapeSlash) {
-    json_parser parser("\"hello\\/world\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "hello/world");
-}
-
-TEST_F(JsonParserTest, ParseStringEscapeBackspace) {
-    json_parser parser("\"hello\\bworld\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "hello\bworld");
-}
-
-TEST_F(JsonParserTest, ParseStringEscapeFormfeed) {
-    json_parser parser("\"hello\\fworld\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "hello\fworld");
-}
-
-TEST_F(JsonParserTest, ParseStringEscapeCarriageReturn) {
-    json_parser parser("\"hello\\rworld\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "hello\rworld");
+TEST_F(JsonParserTest, ParseStringEscapeSequences) {
+    EXPECT_EQ(parse_text("\"a\\nb\"")->as_string().get_value(), "a\nb");
+    EXPECT_EQ(parse_text("\"a\\tb\"")->as_string().get_value(), "a\tb");
+    EXPECT_EQ(parse_text("\"a\\\\b\"")->as_string().get_value(), "a\\b");
+    EXPECT_EQ(parse_text("\"a\\\"b\"")->as_string().get_value(), "a\"b");
+    EXPECT_EQ(parse_text("\"a\\/b\"")->as_string().get_value(), "a/b");
+    EXPECT_EQ(parse_text("\"a\\bb\"")->as_string().get_value(), "a\bb");
+    EXPECT_EQ(parse_text("\"a\\fb\"")->as_string().get_value(), "a\fb");
+    EXPECT_EQ(parse_text("\"a\\rb\"")->as_string().get_value(), "a\rb");
 }
 
 TEST_F(JsonParserTest, ParseStringUnicodeEscape) {
-    json_parser parser("\"\\u0048\\u0065\\u006C\\u006C\\u006F\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "Hello");
+    EXPECT_EQ(parse_text("\"\\u00e9\"")->as_string().get_value(), "\xC3\xA9");
 }
 
-TEST_F(JsonParserTest, ParseStringInvalidEscapeThrows) {
-    json_parser parser("\"\\x\"");
-    EXPECT_THROW(parser.parse(), json_exception);
+TEST_F(JsonParserTest, ParseStringUnicodeSurrogatePair) {
+    EXPECT_EQ(parse_text("\"\\uD83D\\uDE00\"")->as_string().get_value(), "\xF0\x9F\x98\x80");
 }
 
-TEST_F(JsonParserTest, ParseStringControlCharacterThrows) {
-    string s = "\"hello\x01world\"";
-    json_parser parser(s);
-    EXPECT_THROW(parser.parse(), json_exception);
+TEST_F(JsonParserTest, ParseEmptyArray) {
+    const json_document doc = parse_text("[]");
+    EXPECT_TRUE(doc->is_array());
+    EXPECT_EQ(doc->as_array().size(), 0u);
 }
 
-TEST_F(JsonParserTest, ParseStringControlCharacterTabThrows) {
-    string s = "\"hello\x09world\"";
-    json_parser parser(s);
-    EXPECT_THROW(parser.parse(), json_exception);
+TEST_F(JsonParserTest, ParseArrayWithSingleElement) {
+    const json_document doc = parse_text("[1]");
+    ASSERT_EQ(doc->as_array().size(), 1u);
+    EXPECT_EQ(doc->as_array().get_element(0)->as_number().as_integer(), 1);
 }
 
-TEST_F(JsonParserTest, ParseStringUnpairedHighSurrogateThrows) {
-    json_parser parser("\"\\uD800\"");
-    EXPECT_THROW(parser.parse(), json_exception);
+TEST_F(JsonParserTest, ParseArrayWithMultipleElements) {
+    const json_document doc = parse_text("[1, 2, 3]");
+    ASSERT_EQ(doc->as_array().size(), 3u);
+    for (size_t i = 0; i < 3; ++i) {
+        EXPECT_EQ(doc->as_array().get_element(i)->as_number().as_integer(), static_cast<int64_t>(i + 1));
+    }
 }
 
-TEST_F(JsonParserTest, ParseStringUnpairedLowSurrogateThrows) {
-    json_parser parser("\"\\uDC00\"");
-    EXPECT_THROW(parser.parse(), json_exception);
+TEST_F(JsonParserTest, ParseArrayWithMixedTypes) {
+    const json_document doc = parse_text("[1, \"two\", true, null, 3.5]");
+    ASSERT_EQ(doc->as_array().size(), 5u);
+    EXPECT_TRUE(doc->as_array().get_element(0)->is_number());
+    EXPECT_TRUE(doc->as_array().get_element(1)->is_string());
+    EXPECT_TRUE(doc->as_array().get_element(2)->is_bool());
+    EXPECT_TRUE(doc->as_array().get_element(3)->is_null());
+    EXPECT_DOUBLE_EQ(doc->as_array().get_element(4)->as_number().get_value(), 3.5);
 }
 
-TEST_F(JsonParserTest, ParseStringUnicodeSurrogateBoundaryValid) {
-    json_parser parser("\"\\uD7FF\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_FALSE(result->as_string()->get_value().empty());
+TEST_F(JsonParserTest, ParseEmptyObject) {
+    const json_document doc = parse_text("{}");
+    EXPECT_TRUE(doc->is_object());
+    EXPECT_EQ(doc->as_object().size(), 0u);
 }
 
-TEST_F(JsonParserTest, ParseStringUnicodeValidAboveSurrogate) {
-    json_parser parser("\"\\uE000\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_FALSE(result->as_string()->get_value().empty());
+TEST_F(JsonParserTest, ParseObjectWithSingleMember) {
+    const json_document doc = parse_text("{\"key\": 1}");
+    ASSERT_EQ(doc->as_object().size(), 1u);
+    EXPECT_EQ(doc->as_object().get_member("key")->as_number().as_integer(), 1);
 }
 
-TEST_F(JsonParserTest, ParseEmptyInputThrows) {
-    json_parser parser("");
-    EXPECT_THROW(parser.parse(), json_exception);
+TEST_F(JsonParserTest, ParseObjectWithMultipleMembers) {
+    const json_document doc = parse_text("{\"a\": 1, \"b\": 2, \"c\": 3}");
+    ASSERT_EQ(doc->as_object().size(), 3u);
+    EXPECT_EQ(doc->as_object().get_member("a")->as_number().as_integer(), 1);
+    EXPECT_EQ(doc->as_object().get_member("b")->as_number().as_integer(), 2);
+    EXPECT_EQ(doc->as_object().get_member("c")->as_number().as_integer(), 3);
 }
 
-TEST_F(JsonParserTest, ParseOnlySpacesThrows) {
-    json_parser parser("   ");
-    EXPECT_THROW(parser.parse(), json_exception);
+TEST_F(JsonParserTest, ParseNestedObject) {
+    const json_document doc = parse_text("{\"outer\": {\"inner\": true}}");
+    EXPECT_TRUE(doc->as_object().get_member("outer")->as_object().get_member("inner")->as_bool().get_value());
 }
 
-TEST_F(JsonParserTest, ParseObjectWithNestedArray) {
-    json_parser parser("{\"data\": [1, 2, 3]}");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    const json_value* data = result->as_object()->get_member("data");
-    ASSERT_NE(data, nullptr);
-    EXPECT_TRUE(data->is_array());
-    EXPECT_EQ(data->as_array()->size(), 3);
+TEST_F(JsonParserTest, ParseNestedArray) {
+    const json_document doc = parse_text("[[1, 2], [3, [4]]]");
+    ASSERT_EQ(doc->as_array().size(), 2u);
+    EXPECT_EQ(doc->as_array().get_element(0)->as_array().size(), 2u);
+    EXPECT_EQ(doc->as_array().get_element(1)->as_array().get_element(1)->as_array().size(), 1u);
 }
 
-TEST_F(JsonParserTest, ParseArrayOfObjects) {
-    json_parser parser("[{\"a\": 1}, {\"b\": 2}]");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 2);
-    EXPECT_TRUE(result->as_array()->get_element(0)->is_object());
-    EXPECT_TRUE(result->as_array()->get_element(1)->is_object());
+TEST_F(JsonParserTest, ParseLargeDocument) {
+    string text = "[";
+    for (int i = 0; i < 2000; ++i) {
+        if (i != 0) {
+            text += ',';
+        }
+        text += int_text(i);
+    }
+    text += ']';
+
+    const json_document doc = parse_text(text);
+    ASSERT_EQ(doc->as_array().size(), 2000u);
+    EXPECT_EQ(doc->as_array().get_element(1999)->as_number().as_integer(), 1999);
+    EXPECT_EQ(doc->to_string(), text);
 }
 
 TEST_F(JsonParserTest, ParseComplexNestedJson) {
-    string json = R"({
-        "name": "John",
-        "age": 30,
-        "isStudent": false,
-        "scores": [95, 87, 92],
-        "address": {
-            "street": "123 Main St",
-            "city": "New York"
-        },
-        "graduated": null
-    })";
-    json_parser parser(json);
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    EXPECT_EQ(result->as_object()->get_member("name")->as_string()->get_value(), "John");
-    EXPECT_DOUBLE_EQ(result->as_object()->get_member("age")->as_number()->get_value(), 30.0);
-    EXPECT_FALSE(result->as_object()->get_member("isStudent")->as_bool()->get_value());
-    EXPECT_EQ(result->as_object()->get_member("scores")->as_array()->size(), 3);
-    EXPECT_NE(result->as_object()->get_member("address"), nullptr);
-    EXPECT_TRUE(result->as_object()->get_member("graduated")->is_null());
+    const char* text = "{\"id\": 42, \"tags\": [\"a\", \"b\"], \"meta\": {\"ok\": true, \"ratio\": 0.5},"
+                       " \"nil\": null, \"neg\": -7}";
+    const json_document doc = parse_text(text);
+    EXPECT_EQ(doc->as_object().get_member("id")->as_number().as_integer(), 42);
+    EXPECT_EQ(doc->as_object().get_member("tags")->as_array().size(), 2u);
+    EXPECT_TRUE(doc->as_object().get_member("meta")->as_object().get_member("ok")->as_bool().get_value());
+    EXPECT_DOUBLE_EQ(doc->as_object().get_member("meta")->as_object().get_member("ratio")->as_number().get_value(),
+                     0.5);
+    EXPECT_TRUE(doc->as_object().get_member("nil")->is_null());
+    EXPECT_EQ(doc->as_object().get_member("neg")->as_number().as_integer(), -7);
 }
 
+TEST_F(JsonParserTest, ParseRoundTripIsStable) {
+    const string_view text("{\"a\":[1,2,{\"b\":\"c\"}],\"d\":true}");
+    const json_document first = parse_text(text);
+    const string serialized = first->to_string();
+    const json_document second = parse_text(string_view(serialized.data(), serialized.size()));
+    EXPECT_EQ(second->to_string(), serialized);
+    EXPECT_EQ(serialized, text);
+}
+
+TEST_F(JsonParserTest, ParseZeroCopyBorrowsInput) {
+    const char* text = "[\"borrowed\"]";
+    const json_document doc = parse_text(string_view(text));
+    EXPECT_EQ(doc->as_array().get_element(0)->as_string().data(), text + 2);
+}
+
+TEST_F(JsonParserTest, ParseOwnedIsSelfContained) {
+    json_document doc;
+    {
+        string source("{\"short\":\"tiny\",\"long\":\"a value well beyond fourteen bytes\"}");
+        doc = parse_owned(move(source));
+    }
+    EXPECT_EQ(doc->as_object().get_member("short")->as_string().get_value(), "tiny");
+    EXPECT_EQ(doc->as_object().get_member("long")->as_string().get_value(), "a value well beyond fourteen bytes");
+    EXPECT_EQ(doc->to_string(), "{\"short\":\"tiny\",\"long\":\"a value well beyond fourteen bytes\"}");
+}
+
+TEST_F(JsonParserTest, TryParseValid) {
+    json_parser parser(string_view("{\"a\": 1}"));
+    const optional<json_document> result = parser.try_parse();
+    EXPECT_TRUE(result.has_value());
+}
+
+TEST_F(JsonParserTest, TryParseInvalid) {
+    json_parser parser(string_view("{invalid}"));
+    EXPECT_FALSE(parser.try_parse().has_value());
+}
+
+TEST_F(JsonParserTest, ParseInvalidThrows) {
+    EXPECT_THROW((void) parse_text("invalid"), json_exception);
+    EXPECT_THROW((void) parse_text(""), json_exception);
+    EXPECT_THROW((void) parse_text("   "), json_exception);
+    EXPECT_THROW((void) parse_text("-"), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseIncompleteContainerThrows) {
+    EXPECT_THROW((void) parse_text("{\"a\": 1"), json_exception);
+    EXPECT_THROW((void) parse_text("[1, 2"), json_exception);
+    EXPECT_THROW((void) parse_text("{"), json_exception);
+    EXPECT_THROW((void) parse_text("["), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseMissingColonThrows) { EXPECT_THROW((void) parse_text("{\"key\" 1}"), json_exception); }
+
+TEST_F(JsonParserTest, ParseMissingCommaThrows) {
+    EXPECT_THROW((void) parse_text("[1 2]"), json_exception);
+    EXPECT_THROW((void) parse_text("{\"a\": 1 \"b\": 2}"), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseExtraCharactersThrows) {
+    EXPECT_THROW((void) parse_text("null null"), json_exception);
+    EXPECT_THROW((void) parse_text("{} []"), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseUnterminatedStringThrows) {
+    EXPECT_THROW((void) parse_text("\"unterminated"), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseInvalidEscapeThrows) { EXPECT_THROW((void) parse_text("\"\\x\""), json_exception); }
+
+TEST_F(JsonParserTest, ParseInvalidUnicodeEscapeThrows) {
+    EXPECT_THROW((void) parse_text("\"\\u00zz\""), json_exception);
+    EXPECT_THROW((void) parse_text("\"\\u12\""), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseControlCharacterThrows) {
+    EXPECT_THROW((void) parse_text("\"a\nb\""), json_exception);
+    EXPECT_THROW((void) parse_text("\"a\x01b\""), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseUnpairedSurrogateThrows) {
+    EXPECT_THROW((void) parse_text("\"\\uD83D\""), json_exception);
+    EXPECT_THROW((void) parse_text("\"\\uD83Dx\""), json_exception);
+    EXPECT_THROW((void) parse_text("\"\\uDE00\""), json_exception);
+    EXPECT_THROW((void) parse_text("\"\\uD83D\\u0041\""), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseInvalidNumberThrows) {
+    EXPECT_THROW((void) parse_text("01"), json_exception);
+    EXPECT_THROW((void) parse_text("-01"), json_exception);
+    EXPECT_THROW((void) parse_text("1."), json_exception);
+    EXPECT_THROW((void) parse_text("1e"), json_exception);
+    EXPECT_THROW((void) parse_text("1e+"), json_exception);
+    EXPECT_THROW((void) parse_text(".5"), json_exception);
+    EXPECT_THROW((void) parse_text("+1"), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseInvalidKeywordThrows) {
+    EXPECT_THROW((void) parse_text("tru"), json_exception);
+    EXPECT_THROW((void) parse_text("nul"), json_exception);
+    EXPECT_THROW((void) parse_text("True"), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseWhitespaceTolerant) {
+    const json_document doc = parse_text("\n\t {  \"a\" :\r\n [ 1 , 2 ] } \n");
+    ASSERT_EQ(doc->as_object().size(), 1u);
+    EXPECT_EQ(doc->as_object().get_member("a")->as_array().size(), 2u);
+}
 
 class JsonBuilderTest : public ::testing::Test {
 protected:
@@ -2643,294 +2550,186 @@ protected:
 
 TEST_F(JsonBuilderTest, BuildNull) {
     json_builder builder;
-    auto result = builder.value(nullptr).build();
-    ASSERT_NE(result, nullptr);
+    const json_document result = builder.value(nullptr).build();
     EXPECT_TRUE(result->is_null());
+    EXPECT_EQ(result->to_string(), "null");
 }
 
-TEST_F(JsonBuilderTest, BuildBoolTrue) {
-    json_builder builder;
-    auto result = builder.value(true).build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_bool());
-    EXPECT_TRUE(result->as_bool()->get_value());
-}
+TEST_F(JsonBuilderTest, BuildBool) {
+    json_builder true_builder;
+    EXPECT_TRUE(true_builder.value(true).build()->as_bool().get_value());
 
-TEST_F(JsonBuilderTest, BuildBoolFalse) {
-    json_builder builder;
-    auto result = builder.value(false).build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_bool());
-    EXPECT_FALSE(result->as_bool()->get_value());
+    json_builder false_builder;
+    EXPECT_FALSE(false_builder.value(false).build()->as_bool().get_value());
 }
 
 TEST_F(JsonBuilderTest, BuildInt) {
     json_builder builder;
-    auto result = builder.value(42).build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 42.0);
+    const json_document result = builder.value(42).build();
+    EXPECT_EQ(result->kind(), json_kind::integer);
+    EXPECT_EQ(result->as_number().as_integer(), 42);
 }
 
 TEST_F(JsonBuilderTest, BuildDouble) {
     json_builder builder;
-    auto result = builder.value(3.14).build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_number());
-    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 3.14);
+    const json_document result = builder.value(3.14).build();
+    EXPECT_EQ(result->kind(), json_kind::real);
+    EXPECT_DOUBLE_EQ(result->as_number().get_value(), 3.14);
 }
 
 TEST_F(JsonBuilderTest, BuildString) {
     json_builder builder;
-    auto result = builder.value(string("hello")).build();
-    ASSERT_NE(result, nullptr);
+    const json_document result = builder.value(string("hello")).build();
     EXPECT_TRUE(result->is_string());
-    EXPECT_EQ(result->as_string()->get_value(), "hello");
+    EXPECT_EQ(result->as_string().get_value(), "hello");
 }
 
 TEST_F(JsonBuilderTest, BuildCString) {
     json_builder builder;
-    auto result = builder.value("hello").build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_string());
-    EXPECT_EQ(result->as_string()->get_value(), "hello");
+    const json_document result = builder.value("hello").build();
+    EXPECT_EQ(result->as_string().get_value(), "hello");
+}
+
+TEST_F(JsonBuilderTest, BuildStringView) {
+    json_builder builder;
+    const json_document result = builder.value(string_view("view")).build();
+    EXPECT_EQ(result->as_string().get_value(), "view");
+}
+
+TEST_F(JsonBuilderTest, BuildStringSurvivesTemporarySource) {
+    json_document result;
+    {
+        const string temporary("a temporary string value");
+        json_builder builder;
+        result = builder.value(temporary).build();
+    }
+    EXPECT_EQ(result->as_string().get_value(), "a temporary string value");
 }
 
 TEST_F(JsonBuilderTest, BuildEmptyObject) {
     json_builder builder;
-    builder.begin_object();
-    builder.end_object();
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
+    const json_document result = builder.begin_object().end_object().build();
     EXPECT_TRUE(result->is_object());
-    EXPECT_EQ(result->as_object()->get_members().size(), 0);
+    EXPECT_EQ(result->to_string(), "{}");
 }
 
 TEST_F(JsonBuilderTest, BuildObjectWithMembers) {
     json_builder builder;
-    builder.begin_object();
-    builder.key("name").value(string("John"));
-    builder.key("age").value(30);
-    builder.end_object();
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    EXPECT_EQ(result->as_object()->get_member("name")->as_string()->get_value(), "John");
-    EXPECT_DOUBLE_EQ(result->as_object()->get_member("age")->as_number()->get_value(), 30.0);
+    const json_document result =
+            builder.begin_object().key("id").value(1).key("name").value("nexus").end_object().build();
+    ASSERT_EQ(result->as_object().size(), 2u);
+    EXPECT_EQ(result->as_object().get_member("id")->as_number().as_integer(), 1);
+    EXPECT_EQ(result->as_object().get_member("name")->as_string().get_value(), "nexus");
 }
 
 TEST_F(JsonBuilderTest, BuildEmptyArray) {
     json_builder builder;
-    builder.begin_array();
-    builder.end_array();
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
+    const json_document result = builder.begin_array().end_array().build();
     EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 0);
+    EXPECT_EQ(result->to_string(), "[]");
 }
 
 TEST_F(JsonBuilderTest, BuildArrayWithElements) {
     json_builder builder;
-    builder.begin_array();
-    builder.value(1);
-    builder.value(2);
-    builder.value(3);
-    builder.end_array();
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 3);
-    EXPECT_DOUBLE_EQ(result->as_array()->get_element(0)->as_number()->get_value(), 1.0);
-    EXPECT_DOUBLE_EQ(result->as_array()->get_element(1)->as_number()->get_value(), 2.0);
-    EXPECT_DOUBLE_EQ(result->as_array()->get_element(2)->as_number()->get_value(), 3.0);
+    const json_document result = builder.begin_array().value(1).value(2).value(3).end_array().build();
+    ASSERT_EQ(result->as_array().size(), 3u);
+    EXPECT_EQ(result->as_array().get_element(2)->as_number().as_integer(), 3);
 }
 
 TEST_F(JsonBuilderTest, BuildNestedObject) {
     json_builder builder;
-    builder.begin_object();
-    builder.key("data").begin_object();
-    builder.key("value").value(42);
-    builder.end_object();
-    builder.end_object();
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    const json_value* data = result->as_object()->get_member("data");
-    ASSERT_NE(data, nullptr);
-    EXPECT_TRUE(data->is_object());
-    EXPECT_DOUBLE_EQ(data->as_object()->get_member("value")->as_number()->get_value(), 42.0);
+    const json_document result = builder.begin_object()
+                                         .key("outer")
+                                         .value_object([](json_builder& inner) { inner.key("inner").value(true); })
+                                         .end_object()
+                                         .build();
+    EXPECT_TRUE(result->as_object().get_member("outer")->as_object().get_member("inner")->as_bool().get_value());
 }
 
 TEST_F(JsonBuilderTest, BuildNestedArray) {
     json_builder builder;
-    builder.begin_array();
-    builder.begin_array();
-    builder.value(1);
-    builder.value(2);
-    builder.end_array();
-    builder.begin_array();
-    builder.value(3);
-    builder.value(4);
-    builder.end_array();
-    builder.end_array();
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 2);
-    EXPECT_TRUE(result->as_array()->get_element(0)->is_array());
-    EXPECT_TRUE(result->as_array()->get_element(1)->is_array());
+    const json_document result = builder.begin_array()
+                                         .value_array([](json_builder& inner) { inner.value(1).value(2); })
+                                         .value(3)
+                                         .end_array()
+                                         .build();
+    ASSERT_EQ(result->as_array().size(), 2u);
+    EXPECT_EQ(result->as_array().get_element(0)->as_array().size(), 2u);
 }
 
-TEST_F(JsonBuilderTest, BuildObjectInArray) {
+TEST_F(JsonBuilderTest, BuildMixedNested) {
     json_builder builder;
-    builder.begin_array();
-    builder.begin_object();
-    builder.key("a").value(1);
-    builder.end_object();
-    builder.begin_object();
-    builder.key("b").value(2);
-    builder.end_object();
-    builder.end_array();
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 2);
-    EXPECT_TRUE(result->as_array()->get_element(0)->is_object());
-    EXPECT_TRUE(result->as_array()->get_element(1)->is_object());
+    const json_document result = builder.begin_object()
+                                         .key("list")
+                                         .begin_array()
+                                         .begin_object()
+                                         .key("k")
+                                         .value(1)
+                                         .end_object()
+                                         .end_array()
+                                         .end_object()
+                                         .build();
+    EXPECT_EQ(result->to_string(), "{\"list\":[{\"k\":1}]}");
 }
 
-TEST_F(JsonBuilderTest, BuildArrayInObject) {
+TEST_F(JsonBuilderTest, BuildUnclosedContainerThrows) {
     json_builder builder;
     builder.begin_object();
-    builder.key("items").begin_array();
-    builder.value(1);
-    builder.value(2);
-    builder.end_array();
-    builder.end_object();
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    const json_value* items = result->as_object()->get_member("items");
-    ASSERT_NE(items, nullptr);
-    EXPECT_TRUE(items->is_array());
-    EXPECT_EQ(items->as_array()->size(), 2);
-}
-
-TEST_F(JsonBuilderTest, BuildValueObjectFunction) {
-    json_builder builder;
-    builder.value_object([](json_builder& inner) {
-        inner.key("x").value(10);
-        inner.key("y").value(20);
-    });
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    EXPECT_DOUBLE_EQ(result->as_object()->get_member("x")->as_number()->get_value(), 10.0);
-    EXPECT_DOUBLE_EQ(result->as_object()->get_member("y")->as_number()->get_value(), 20.0);
-}
-
-TEST_F(JsonBuilderTest, BuildValueArrayFunction) {
-    json_builder builder;
-    builder.value_array([](json_builder& inner) {
-        inner.value(1);
-        inner.value(2);
-        inner.value(3);
-    });
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_array());
-    EXPECT_EQ(result->as_array()->size(), 3);
-}
-
-TEST_F(JsonBuilderTest, BuildComplexStructure) {
-    json_builder builder;
-    builder.begin_object();
-    builder.key("name").value(string("John"));
-    builder.key("age").value(30);
-    builder.key("scores").begin_array();
-    builder.value(95);
-    builder.value(87);
-    builder.value(92);
-    builder.end_array();
-    builder.key("address").begin_object();
-    builder.key("street").value(string("123 Main St"));
-    builder.key("city").value(string("New York"));
-    builder.end_object();
-    builder.key("graduated").value(nullptr);
-    builder.end_object();
-
-    auto result = builder.build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_object());
-    EXPECT_EQ(result->as_object()->get_member("name")->as_string()->get_value(), "John");
-    EXPECT_DOUBLE_EQ(result->as_object()->get_member("age")->as_number()->get_value(), 30.0);
-    EXPECT_EQ(result->as_object()->get_member("scores")->as_array()->size(), 3);
-    EXPECT_NE(result->as_object()->get_member("address"), nullptr);
-    EXPECT_TRUE(result->as_object()->get_member("graduated")->is_null());
-}
-
-TEST_F(JsonBuilderTest, BuildWithoutEndThrows) {
-    json_builder builder;
-    builder.begin_object();
-    EXPECT_THROW(builder.build(), json_exception);
-}
-
-TEST_F(JsonBuilderTest, BuildWithoutValueThrows) {
-    json_builder builder;
-    EXPECT_THROW(builder.build(), json_exception);
+    EXPECT_THROW((void) builder.build(), json_exception);
 }
 
 TEST_F(JsonBuilderTest, KeyOutsideObjectThrows) {
     json_builder builder;
     builder.begin_array();
-    EXPECT_THROW(builder.key("test"), json_exception);
+    EXPECT_THROW((void) builder.key("k"), json_exception);
 }
 
-TEST_F(JsonBuilderTest, EndObjectWithoutBeginThrows) {
+TEST_F(JsonBuilderTest, EndMismatchThrows) {
     json_builder builder;
-    EXPECT_THROW(builder.end_object(), json_exception);
+    builder.begin_object();
+    EXPECT_THROW((void) builder.end_array(), json_exception);
 }
 
-TEST_F(JsonBuilderTest, EndArrayWithoutBeginThrows) {
+TEST_F(JsonBuilderTest, BuildFromContainers) {
+    flat_unordered_map<string, string> table;
+    table.emplace("host", "localhost");
+    table.emplace("port", "8080");
+    vector<int32_t> numbers;
+    numbers.push_back(1);
+    numbers.push_back(2);
+    numbers.push_back(3);
+
     json_builder builder;
-    EXPECT_THROW(builder.end_array(), json_exception);
+    builder.begin_object();
+    builder.key("headers").value(table);
+    builder.key("list").value(numbers);
+    builder.end_object();
+
+    json_document doc = builder.build();
+    const json_object root = doc->as_object();
+    ASSERT_NE(root.get_member("headers"), nullptr);
+    const json_object headers = root.get_member("headers")->as_object();
+    EXPECT_EQ(headers.size(), 2u);
+    ASSERT_NE(headers.get_member("host"), nullptr);
+    EXPECT_EQ(headers.get_member("host")->as_string().get_value(), "localhost");
+    ASSERT_NE(headers.get_member("port"), nullptr);
+    EXPECT_EQ(headers.get_member("port")->as_string().get_value(), "8080");
+
+    ASSERT_NE(root.get_member("list"), nullptr);
+    const json_array list = root.get_member("list")->as_array();
+    ASSERT_EQ(list.size(), 3u);
+    for (size_t i = 0; i < list.size(); ++i) {
+        EXPECT_EQ(list.get_element(i)->as_number().as_integer(), static_cast<int64_t>(i + 1));
+    }
 }
 
-TEST_F(JsonBuilderTest, EndObjectMismatchArrayThrows) {
+TEST_F(JsonBuilderTest, BuildLargeArray) {
     json_builder builder;
     builder.begin_array();
-    EXPECT_THROW(builder.end_object(), json_exception);
-}
-
-TEST_F(JsonBuilderTest, EndArrayMismatchObjectThrows) {
-    json_builder builder;
-    builder.begin_object();
-    EXPECT_THROW(builder.end_array(), json_exception);
-}
-
-TEST_F(JsonBuilderTest, KeyWithoutValueThrows) {
-    json_builder builder;
-    builder.begin_object();
-    builder.key("name");
-    EXPECT_THROW(builder.end_object(), json_exception);
-}
-
-TEST_F(JsonParserTest, ParseStringUnicodeSurrogatePairValid) {
-    json_parser parser("\"\\uD83D\\uDE00\"");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->as_string()->get_value(), "\xF0\x9F\x98\x80");
-}
-
-TEST_F(JsonParserTest, ParseStringUnicodeHighSurrogateNotFollowedByLowThrows) {
-    json_parser parser("\"\\uD83Dx\"");
-    EXPECT_THROW(parser.parse(), json_exception);
-}
-
-TEST_F(JsonBuilderTest, MultiValueDispatchesToNull) {
-    json_builder builder;
-    nullptr_t np = nullptr;
-    auto result = builder.value(np).build();
-    ASSERT_NE(result, nullptr);
-    EXPECT_TRUE(result->is_null());
+    for (int i = 0; i < 500; ++i) {
+        builder.value(i);
+    }
+    const json_document result = builder.end_array().build();
+    ASSERT_EQ(result->as_array().size(), 500u);
+    EXPECT_EQ(result->as_array().get_element(499)->as_number().as_integer(), 499);
 }

@@ -165,6 +165,16 @@
 
 ### 🔧 Improvements
 
+- JSON DOM 重构为 16 字节内联标签联合 `json_value`，只读视图 `json_bool` / `json_number` / `json_string` / `json_array` / `json_object` 按值传递，`json_document` 拥有 `json_arena` 与根值
+- JSON 字符串支持 14 字节内联存储：短字符串不再分配，长字符串复制进 arena；对象键 ≤8 字节内联，超过则按需复制；`json_member` 保持 32 字节并携带 4 字节键前缀
+- JSON 解析支持零拷贝：`json_parser(string_view)` 让未转义字符串直接指向输入缓冲，`json_parser(string)` 则持有副本并把字符串物化进 arena，文档自包含
+- JSON 容器容量由元素个数按 2 的幂推导，不再额外保存容量字段；最近一次容器分配通过 `json_arena::try_extend` 原地扩容，扩容不再复制旧数组，扩容路径的 arena 浪费随之消失
+- JSON 解析器把数组/对象直接写入文档 arena，去掉每层容器先收集到临时 `vector` 再整体复制的两趟做法
+- JSON 对象成员查找先比较键长度与 4 字节前缀，命中后再比较剩余字节；内联键的尾字节比较最多 4 字节，长键才走整段比较
+- JSON 序列化热路径重写：整数改用两位十进制展开，浮点先走精确短小数快速展开，短键与冒号合并为一次写入，字符串转义识别改为 8 字节 SWAR 扫描 + 整段拷贝，输出按顶层子节点数预留容量
+- JSON 对象序列化的内联键走 8 字节整字拷贝，长键与需要转义的键回退到栈缓冲拼装；数字直接写入游标缓冲
+- JSON 解析的整数溢出判定改为与预计算阈值比较，去掉每位一次的除法
+- JSON 字符串扫描改为整词优先：8 字节掩码一次定位第一个引号、反斜杠或控制字符，短键不再有任何逐字节循环；数字改为语法扫描同时累加尾数与十进制指数，实数不再二次扫描；键索引去掉解析期的哈希计算，纯解析场景每键少一次哈希
 - `sparse_vector` 的 `count` / `equal_range` / `erase(key)` 由「下界 + 上界两次二分」改为「一次下界 + 等值区间扫描」：唯一键容器下少一次 log n 级二分
 - `memory_pool` 提高完全空闲 span 的保留额度（每尺寸类下限 1→2、全池字节预算 2 MB→8 MB），消除大尺寸类在突发分配/释放后反复解除映射与重新缺页的开销，小尺寸类不受影响
 - `deque` 中部插入/删除改为按缓冲区整段 `memory_move` 搬移（可平凡复制类型），非平凡类型走移动赋值；同时修正 `insert_aux` 前段分支搬移了长侧、`erase(first, last)` 前段分支搬移目的地方向错误两处缺陷
@@ -395,10 +405,8 @@
 
 ### 🐛 Bug Fixes
 
+- `to_float64` / `to_float32` 的指数缩放由"超出 ±32 直接返回 inf/0"改为按 1e22 分块缩放，修复 `1e239` 被解析为 `inf`、`1.5e-43` 被解析为 `0` 的问题；指针标识符位数超出范围时仍走原有边界判定
 - 修复 macOS arm64 上 `share_memory` 的 `OpenOrCreate` 返回页大小、`grow` 抛异常的问题：header 的 `data_size` 改为通过 header 页映射读写，映射长度和 `munmap` 长度按页对齐，grow 先解除旧映射再 `ftruncate`
-- macOS 跳过不支持进程亲和性的 `ProcessTest.Affinity_RoundTrips`，并跳过依赖进程退出通知的 `TuiToolRunnerTest` 两个用例
-- 放宽 macOS 慢速 runner 上 `ThreadPool.DelayAccuracyStaysBoundedWithWarmup` 的调度抖动余量
-- FreeBSD QEMU VM 内存从 2 GB 提升到 4 GB，GCC 原生构建并行度从 4 降到 2，避免 `cc1plus` 被 OOM kill
 - 修复 macOS `named_mutex` 的 POSIX 共享内存名超过 `PSHMNAMLEN`（当前测试名约 45 字符）导致 `shm_open` 抛异常：使用稳定 FNV-1a 哈希生成短名
 - 修复 macOS `share_memory` 未按页对齐数据区，导致 macOS `ftruncate` 页舍入后 `OpenOrCreate` 尺寸错误、`grow` 映射越界抛异常：数据区偏移和 grow 长度按页对齐
 - 修复 macOS 上 `/bin/true` 不存在导致 ProcessTest.Run 抛异常：macOS 使用 `/usr/bin/true`

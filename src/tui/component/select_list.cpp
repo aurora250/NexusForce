@@ -15,10 +15,10 @@ namespace {
         for (size_t i = 0; i + needle.size() <= raw.size(); ++i) {
             bool match = true;
             for (size_t j = 0; j < needle.size(); ++j) {
-                const auto a = static_cast<unsigned char>(raw[i + j]);
-                const auto b = static_cast<unsigned char>(needle[j]);
-                const unsigned char la = (a >= 'A' && a <= 'Z') ? static_cast<unsigned char>(a - 'A' + 'a') : a;
-                const unsigned char lb = (b >= 'A' && b <= 'Z') ? static_cast<unsigned char>(b - 'A' + 'a') : b;
+                const auto a = static_cast<byte_t>(raw[i + j]);
+                const auto b = static_cast<byte_t>(needle[j]);
+                const byte_t la = (a >= 'A' && a <= 'Z') ? static_cast<byte_t>(a - 'A' + 'a') : a;
+                const byte_t lb = (b >= 'A' && b <= 'Z') ? static_cast<byte_t>(b - 'A' + 'a') : b;
                 if (la != lb) {
                     match = false;
                     break;

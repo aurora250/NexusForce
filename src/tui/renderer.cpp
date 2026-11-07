@@ -1116,7 +1116,7 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
     bool plain = wm == style::wrap_mode::none && scroll_row == 0 && w > 0 && h > 0;
     if (plain) {
         for (size_t i = 0; i < raw.size(); ++i) {
-            const auto ch = static_cast<unsigned char>(raw[i]);
+            const auto ch = static_cast<byte_t>(raw[i]);
             if (ch >= 0x80 || ch == '\n') {
                 plain = false;
                 break;
@@ -1130,7 +1130,7 @@ void renderer::render_text_block(const int x, const int y, const int w, const in
         int cx = x;
         const int limit = x + w;
         for (size_t i = 0; i < raw.size() && cx < limit; ++i) {
-            const auto ch = static_cast<unsigned char>(raw[i]);
+            const auto ch = static_cast<byte_t>(raw[i]);
             cx += draw_glyph(cx, y, codepoint(static_cast<char32_t>(ch)), 1, stamp, nullptr);
         }
         if (out_end_x != nullptr) {

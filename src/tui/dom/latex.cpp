@@ -52,7 +52,7 @@ namespace {
     bool is_word(const char character) noexcept { return is_alpha_or_digit(character) || character == '_'; }
 
     size_t codepoint_bytes(const char lead) noexcept {
-        const auto value = static_cast<unsigned char>(lead);
+        const auto value = static_cast<byte_t>(lead);
         if ((value & 0x80U) == 0) {
             return 1;
         }
@@ -2013,7 +2013,7 @@ namespace {
             size_t end = value.size();
             while (end > 0) {
                 size_t start = end - 1;
-                while (start > 0 && (static_cast<unsigned char>(value[start]) & 0xC0U) == 0x80U) {
+                while (start > 0 && (static_cast<byte_t>(value[start]) & 0xC0U) == 0x80U) {
                     --start;
                 }
                 if (!is_js_space(decode_codepoint(value, start))) {

@@ -9,8 +9,9 @@
  * 支持整数、浮点数的转换，包括进制转换和错误处理。
  */
 
-#include "NeForce/core/numeric/math.hpp"
+#include "NeForce/core/exception/debug.hpp"
 #include "NeForce/core/numeric/int128.hpp"
+#include "NeForce/core/numeric/math.hpp"
 #include "NeForce/core/string/string_view.hpp"
 #ifdef max
 #    undef max
@@ -22,6 +23,16 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /// @cond
 NEFORCE_BEGIN_INNER__
+
+NEFORCE_NODISCARD NEFORCE_API bool parse_double_exact(string_view text, double& value) noexcept;
+
+NEFORCE_NODISCARD inline bool parse_exact_float(const string_view, float32_t&) noexcept { return false; }
+
+NEFORCE_NODISCARD inline bool parse_exact_float(const string_view text, float64_t& value) noexcept {
+    return parse_double_exact(text, value);
+}
+
+NEFORCE_NODISCARD inline bool parse_exact_float(const string_view, decimal_t&) noexcept { return false; }
 
 /**
  * @brief 将字符串转换为有符号整数
@@ -452,25 +463,44 @@ constexpr enable_if_t<is_floating_point_v<T>, T> str_to_floats(const string_view
         }
     }
 
+    if (has_digits && !is_constant_evaluated()) {
+        T precise = static_cast<T>(0);
+        if (parse_exact_float(string_view(start_conversion, static_cast<size_t>(p - start_conversion)), precise)) {
+            if (endptr) {
+                *endptr = const_cast<char*>(p);
+            }
+            return precise;
+        }
+    }
+
     T result = significand;
 
     if (exponent != 0) {
         constexpr int max_exp = numeric_traits<T>::max_exponent10 + 50;
         constexpr int min_exp = numeric_traits<T>::min_exponent10 - 50;
-        constexpr int max_table_exp = 32;
+        constexpr int chunk_exp = 22;
 
-        if (exponent > max_exp || exponent > max_table_exp) {
+        if (exponent > max_exp) {
             if (endptr) {
                 *endptr = const_cast<char*>(p);
             }
             return (sign > 0) ? numeric_traits<T>::infinity() : -numeric_traits<T>::infinity();
-        } else if (exponent < min_exp || exponent < -max_table_exp) {
+        } else if (exponent < min_exp) {
             if (endptr) {
                 *endptr = const_cast<char*>(p);
             }
             return static_cast<T>(0);
         } else {
-            result *= fast_pow10<T>(exponent);
+            int remaining = exponent;
+            while (remaining > chunk_exp) {
+                result *= static_cast<T>(1e22);
+                remaining -= chunk_exp;
+            }
+            while (remaining < -chunk_exp) {
+                result /= static_cast<T>(1e22);
+                remaining += chunk_exp;
+            }
+            result *= fast_pow10<T>(remaining);
         }
     }
 

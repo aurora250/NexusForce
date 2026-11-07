@@ -8,7 +8,7 @@ namespace {
         if (pos >= s.size()) {
             return s.size();
         }
-        const auto b = static_cast<unsigned char>(s[pos]);
+        const auto b = static_cast<byte_t>(s[pos]);
         if ((b & 0x80) == 0) {
             return pos + 1;
         }
@@ -29,7 +29,7 @@ namespace {
             return 0;
         }
         size_t p = pos - 1;
-        while (p > 0 && (static_cast<unsigned char>(s[p]) & 0xC0) == 0x80) {
+        while (p > 0 && (static_cast<byte_t>(s[p]) & 0xC0) == 0x80) {
             --p;
         }
         return p;
