@@ -3,6 +3,7 @@
 #include <benchmark/benchmark.h>
 #include <NeForce/core/container/map.hpp>
 #include <NeForce/core/container/set.hpp>
+#include <NeForce/core/container/sparse_set.hpp>
 #include <NeForce/core/container/vector.hpp>
 #include <map>
 #include <set>
@@ -14,6 +15,7 @@ namespace {
     using mapped_t = int;
 
     using nf_set_t = neforce::set<key_t>;
+    using nf_sparse_t = neforce::sparse_set<key_t>;
     using std_set_t = std::set<key_t>;
     using nf_map_t = neforce::map<key_t, mapped_t>;
     using std_map_t = std::map<key_t, mapped_t>;

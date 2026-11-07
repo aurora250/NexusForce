@@ -323,6 +323,36 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string __int_to_string_dispatch(T x) {
 string NEFORCE_API float_to_string_exact(double value, int precision, bool use_scientific, int max_scale);
 
 /**
+ * @brief 浮点数的最短往返表示
+ * @param value 浮点数
+ * @return 最短且可精确回读的十进制字符串
+ */
+NEFORCE_NODISCARD string NEFORCE_API float_to_string_shortest(double value);
+
+/**
+ * @brief 浮点数按有效数字格式化
+ * @param value 浮点数
+ * @param precision 有效数字位数
+ * @return 去掉尾零的十进制字符串
+ */
+NEFORCE_NODISCARD string NEFORCE_API float_to_string_sig(double value, int precision);
+
+/**
+ * @brief 把浮点数的最短往返表示追加到字符串
+ * @param out 目标字符串
+ * @param value 浮点数
+ */
+void NEFORCE_API append_float_shortest(string& out, double value);
+
+/**
+ * @brief 把浮点数按有效数字格式化后追加到字符串
+ * @param out 目标字符串
+ * @param value 浮点数
+ * @param precision 有效数字位数
+ */
+void NEFORCE_API append_float_sig(string& out, double value, int precision);
+
+/**
  * @brief 将浮点数转换为字符串
  * @tparam CharT 字符类型
  * @tparam T 浮点数类型

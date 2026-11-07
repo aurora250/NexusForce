@@ -36,6 +36,14 @@ jobs:
       contents: read
       security-events: write
 
+    # Overlay-base databases are write-only for this repository: their cache key
+    # includes the commit SHA and workflow run id, so every run writes a new entry
+    # that a later run cannot restore. They only exist to speed up PR overlay
+    # analysis, but the repository's useful vcpkg caches compete for the same
+    # 10 GB Actions cache quota. Disable overlay analysis to stop the leak.
+    env:
+      CODEQL_ACTION_OVERLAY_ANALYSIS: "false"
+
     strategy:
       fail-fast: false
       matrix:

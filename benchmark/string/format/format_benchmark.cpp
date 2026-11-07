@@ -18,6 +18,7 @@ namespace {
     const char* g_user = "alice";
     const unsigned g_mask = 0xDEADBEEFU;
     const double g_pi = 3.141592653589793;
+    const double g_third = 1.0 / 3.0;
 
 } // namespace
 
@@ -52,6 +53,22 @@ BENCHMARK(BM_NfFormat_IntegerHex)->Unit(benchmark::kNanosecond);
 // ============================================================
 // 2. Floating point
 // ============================================================
+
+static void BM_NfFormat_DoubleDefault(benchmark::State& state) {
+    for (auto _: state) {
+        auto out = format("{}", g_third);
+        benchmark::DoNotOptimize(out);
+    }
+}
+BENCHMARK(BM_NfFormat_DoubleDefault)->Unit(benchmark::kNanosecond);
+
+static void BM_NfFormat_DoubleGeneral(benchmark::State& state) {
+    for (auto _: state) {
+        auto out = format("{:g}", g_third);
+        benchmark::DoNotOptimize(out);
+    }
+}
+BENCHMARK(BM_NfFormat_DoubleGeneral)->Unit(benchmark::kNanosecond);
 
 static void BM_NfFormat_DoubleFixed(benchmark::State& state) {
     for (auto _: state) {
@@ -160,6 +177,22 @@ static void BM_StdFormat_IntegerHex(benchmark::State& state) {
     }
 }
 BENCHMARK(BM_StdFormat_IntegerHex)->Unit(benchmark::kNanosecond);
+
+static void BM_StdFormat_DoubleDefault(benchmark::State& state) {
+    for (auto _: state) {
+        auto out = std::format("{}", g_third);
+        benchmark::DoNotOptimize(out);
+    }
+}
+BENCHMARK(BM_StdFormat_DoubleDefault)->Unit(benchmark::kNanosecond);
+
+static void BM_StdFormat_DoubleGeneral(benchmark::State& state) {
+    for (auto _: state) {
+        auto out = std::format("{:g}", g_third);
+        benchmark::DoNotOptimize(out);
+    }
+}
+BENCHMARK(BM_StdFormat_DoubleGeneral)->Unit(benchmark::kNanosecond);
 
 static void BM_StdFormat_DoubleFixed(benchmark::State& state) {
     for (auto _: state) {

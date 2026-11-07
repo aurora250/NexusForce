@@ -165,6 +165,7 @@
 
 ### 🔧 Improvements
 
+- `sparse_vector` 的 `count` / `equal_range` / `erase(key)` 由「下界 + 上界两次二分」改为「一次下界 + 等值区间扫描」：唯一键容器下少一次 log n 级二分
 - `memory_pool` 提高完全空闲 span 的保留额度（每尺寸类下限 1→2、全池字节预算 2 MB→8 MB），消除大尺寸类在突发分配/释放后反复解除映射与重新缺页的开销，小尺寸类不受影响
 - `deque` 中部插入/删除改为按缓冲区整段 `memory_move` 搬移（可平凡复制类型），非平凡类型走移动赋值；同时修正 `insert_aux` 前段分支搬移了长侧、`erase(first, last)` 前段分支搬移目的地方向错误两处缺陷
 - `deque` 对可平凡析构类型跳过逐元素析构，`clear()` 与 `erase` 走编译期分派
@@ -405,7 +406,7 @@
 - 修复 `uninitialized_fill_n` 的按字节填充快路径读取含 padding 的平凡可复制类型未初始化字节；该快路径仅对标量类型启用，其余类型回退到构造首元素后批量复制
 - 修复 macOS 测试作业安装全量默认 vcpkg features 导致 ICU 下载 504：按 macOS 配置只安装 openssl/pcre2/zlib/gtest
 - 修复 `memory_move` 在源与目标区间重叠时仍走 `memory_copy_large`（该路径按 32 字节对齐头部整块存储，会覆盖尚未读取的源数据）造成的**静默数据损坏**：仅当两段区间不重叠时才使用批量传送，重叠时回退到逐块加载/存储的 SIMD 循环
-- 修复 BSD-like futex 的等待与唤醒路径：默认恢复 FreeBSD `_umtx_op` / macOS `__ulock_wait2` 原生调用，同时保留 `NEFORCE_ASYNC_BSD_COND_FALLBACK` 条件变量回退用于诊断；future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
+- 修复 BSD-like futex 的等待与唤醒路径：无超时等待使用 FreeBSD `_umtx_op` / macOS `__ulock_wait2` 原生调用，定时等待保留固定 deadline 的条件变量回退；定义 `NEFORCE_ASYNC_BSD_COND_FALLBACK` 可让无超时路径也走条件变量。future continuation 改为原子 CAS 发布/撤销，移除 `suspended_` 自旋和同步等待 fallback
 - 修复 macOS `dynamic_library::list_symbols()` 对主可执行文件/共享缓存镜像的 Mach-O 边界处理：始终处理主镜像、按路径过滤其它镜像，并限制字符串表读取长度
 - 修复 MSVC ARM64 上 `function<const T&()>` 将引用按整数返回的问题：引用返回类型改为携带对象地址的类型擦除调用，函数入口解引用后再返回
 - 修复 macOS `dynamic_library::load_self().list_symbols()` 扫描 dyld shared-cache 镜像时使用无效 LC_SYMTAB 文件偏移导致段错误：load_self 记录主程序路径以只扫描主可执行文件

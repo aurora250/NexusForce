@@ -469,7 +469,12 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
             case format_type::decimal:
             case format_type::default_:
             default: {
-                raw = _NEFORCE to_string_general(value, prec);
+                if (options.type == format_type::default_ && options.precision < 0) {
+                    raw = _NEFORCE inner::float_to_string_shortest(static_cast<double>(value));
+                } else {
+                    raw = _NEFORCE inner::float_to_string_sig(static_cast<double>(value),
+                                                              options.precision >= 0 ? options.precision : 6);
+                }
                 break;
             }
         }
@@ -825,7 +830,23 @@ NEFORCE_CONSTEXPR20 void append_arg_impl(string& out, const T& value, const form
             break;
         }
         default: {
-            raw = _NEFORCE to_string_general(value, precision);
+            if (options.type == format_type::default_ && options.precision < 0) {
+                if (options.width <= 0 && !options.show_sign && !options.space_sign && !options.alternate &&
+                    !options.uppercase) {
+                    inner::append_float_shortest(out, static_cast<double>(value));
+                    return;
+                }
+                raw = _NEFORCE inner::float_to_string_shortest(static_cast<double>(value));
+            } else {
+                if (options.width <= 0 && !options.show_sign && !options.space_sign && !options.alternate &&
+                    !options.uppercase) {
+                    inner::append_float_sig(out, static_cast<double>(value),
+                                            options.precision >= 0 ? options.precision : 6);
+                    return;
+                }
+                raw = _NEFORCE inner::float_to_string_sig(static_cast<double>(value),
+                                                          options.precision >= 0 ? options.precision : 6);
+            }
             break;
         }
     }
@@ -1085,7 +1106,7 @@ NEFORCE_CONSTEXPR20 void format_to(string& out, const char (&fmt)[N], Args&&... 
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string format(const string_view fmt, Args&&... args) {
     string result;
-    result.reserve(fmt.size() + sizeof...(Args) * 8);
+    result.reserve(fmt.size() + (sizeof...(Args) > 1 ? (sizeof...(Args) - 1) * 8 : 0));
     _NEFORCE format_to(result, fmt, _NEFORCE forward<Args>(args)...);
     return result;
 }

@@ -630,6 +630,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Save vcpkg binary cache
+        if: always() && steps.vcpkg.outputs.cache-key != ''
         uses: ./.github/actions/save-vcpkg-cache
         with:
           cache-key: ${{ steps.vcpkg.outputs.cache-key }}
@@ -811,6 +812,7 @@ jobs:
           key: freebsd-vcpkg-${{ matrix.triplet }}-${{ hashFiles('vcpkg.json', 'vcpkg-configuration.json', 'cmake/triplets/*freebsd*.cmake', 'cmake/toolchains/*freebsd*.cmake') }}
 
       - name: Save vcpkg binary cache
+        if: always() && steps.vcpkg.outputs.cache-key != ''
         uses: ./.github/actions/save-vcpkg-cache
         with:
           cache-key: ${{ steps.vcpkg.outputs.cache-key }}
@@ -1007,6 +1009,7 @@ jobs:
           echo "the library exports the pool singleton and does not replace the global operators"
 
       - name: Save vcpkg binary cache
+        if: always() && steps.vcpkg.outputs.cache-key != ''
         uses: ./.github/actions/save-vcpkg-cache
         with:
           cache-key: ${{ steps.vcpkg.outputs.cache-key }}

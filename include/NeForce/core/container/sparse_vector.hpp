@@ -182,10 +182,7 @@ public:
  * @tparam Compare 键比较函数对象
  * @tparam Alloc 分配器类型
  *
- * 稀疏向量是一种基于有序平坦数组的关联容器底层实现。
- * 使用二分查找提供对数时间复杂度的查找操作。
- *
- * @note 稀疏向量在插入/删除时需要移动元素，但迭代性能优异，缓存友好，适用于查找频繁、修改较少且需要有序遍历的场景。
+ * 稀疏向量是一种基于有序平坦数组的关联容器。
  */
 template <typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator<Value>>
 class sparse_vector : public icollector<sparse_vector<Key, Value, KeyOfValue, Compare, Alloc>> {
@@ -264,6 +261,15 @@ private:
             }
         }
         return lo;
+    }
+
+    NEFORCE_NODISCARD size_type equal_range_end(const size_type first, const key_type& key) const {
+        const size_type n = data_.size();
+        size_type i = first;
+        while (i < n && !key_compare_(key, key_of(data_[i]))) {
+            ++i;
+        }
+        return i;
     }
 
     /**
@@ -711,9 +717,9 @@ public:
      * @return 删除的元素数量
      */
     size_type erase(const key_type& key) {
-        size_type lo = lower_bound_index(key);
-        size_type hi = upper_bound_index(key);
-        size_type n = hi - lo;
+        const size_type lo = lower_bound_index(key);
+        const size_type hi = equal_range_end(lo, key);
+        const size_type n = hi - lo;
         if (n > 0) {
             data_.erase(data_.begin() + static_cast<difference_type>(lo),
                         data_.begin() + static_cast<difference_type>(hi));
@@ -758,7 +764,7 @@ public:
      * @return 指向第一个匹配元素的迭代器，未找到则返回end()
      */
     NEFORCE_NODISCARD iterator find(const key_type& key) {
-        size_type pos = lower_bound_index(key);
+        const size_type pos = lower_bound_index(key);
         if (pos < data_.size() && !key_compare_(key, key_of(data_[pos]))) {
             return iterator(pos, this);
         }
@@ -771,7 +777,7 @@ public:
      * @return 指向第一个匹配元素的常量迭代器，未找到则返回cend()
      */
     NEFORCE_NODISCARD const_iterator find(const key_type& key) const {
-        size_type pos = lower_bound_index(key);
+        const size_type pos = lower_bound_index(key);
         if (pos < data_.size() && !key_compare_(key, key_of(data_[pos]))) {
             return const_iterator(pos, this);
         }
@@ -784,7 +790,9 @@ public:
      * @return 匹配的元素数量
      */
     NEFORCE_NODISCARD size_type count(const key_type& key) const {
-        return upper_bound_index(key) - lower_bound_index(key);
+        const size_type lo = lower_bound_index(key);
+        const size_type hi = equal_range_end(lo, key);
+        return hi - lo;
     }
 
     /**
@@ -834,7 +842,9 @@ public:
      * @return 包含lower_bound和upper_bound的pair
      */
     NEFORCE_NODISCARD pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
-        return pair<const_iterator, const_iterator>(lower_bound(key), upper_bound(key));
+        const size_type lo = lower_bound_index(key);
+        return pair<const_iterator, const_iterator>(const_iterator(lo, this),
+                                                    const_iterator(equal_range_end(lo, key), this));
     }
 
     /**

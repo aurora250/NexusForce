@@ -45,10 +45,11 @@ extern "C" int __ulock_wake(::uint32_t operation, void* addr, ::uint64_t wake_va
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-// Native FreeBSD umtx / macOS ulock is the default.
-// Define NEFORCE_ASYNC_BSD_COND_FALLBACK to build the diagnostic condition-variable path
-// instead when a host's wait/wake notifications are known to be broken.
-#if defined(NEFORCE_PLATFORM_BSD_LIKE) && defined(NEFORCE_ASYNC_BSD_COND_FALLBACK)
+// Untimed waits use native FreeBSD umtx / macOS ulock. Timed waits use the
+// process-wide condition-variable fallback because the native timeout paths are
+// not reliable on the QEMU/macOS runners. Define
+// NEFORCE_ASYNC_BSD_COND_FALLBACK to route untimed waits through that fallback too.
+#ifdef NEFORCE_PLATFORM_BSD_LIKE
 namespace {
     ::pthread_mutex_t& timed_wait_mutex() noexcept {
         static ::pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -121,6 +122,7 @@ namespace {
         return woken;
     }
 
+#    ifdef NEFORCE_ASYNC_BSD_COND_FALLBACK
     void wait_on_cond(void* addr, const platform_wait_t value) noexcept {
         __atomic_add_fetch(&timed_waiter_count(), 1, __ATOMIC_SEQ_CST);
         ::pthread_mutex_lock(&timed_wait_mutex());
@@ -131,23 +133,7 @@ namespace {
         ::pthread_mutex_unlock(&timed_wait_mutex());
         __atomic_sub_fetch(&timed_waiter_count(), 1, __ATOMIC_SEQ_CST);
     }
-} // namespace
-#endif
-
-#if defined(NEFORCE_PLATFORM_MACOS) && !defined(NEFORCE_ASYNC_BSD_COND_FALLBACK)
-namespace {
-    bool relative_timeout_ns(const bool is_monotonic, const int64_t sec, const int64_t ns, uint64_t& out) noexcept {
-        ::timespec now{};
-        if (::clock_gettime(is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME, &now) != 0) {
-            out = 0;
-            return false;
-        }
-        const int64_t deadline_ns = sec * 1000000000LL + ns;
-        const int64_t now_ns = static_cast<int64_t>(now.tv_sec) * 1000000000LL + static_cast<int64_t>(now.tv_nsec);
-        const int64_t remaining = deadline_ns > now_ns ? deadline_ns - now_ns : 0;
-        out = static_cast<uint64_t>(remaining);
-        return true;
-    }
+#    endif
 } // namespace
 #endif
 
@@ -172,44 +158,28 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
     return false;
 
 #elif defined(NEFORCE_PLATFORM_FREEBSD)
-#    ifdef NEFORCE_ASYNC_BSD_COND_FALLBACK
     if (!has_timeout) {
+#    ifdef NEFORCE_ASYNC_BSD_COND_FALLBACK
         wait_on_cond(addr, value);
         return true;
-    }
-    return wait_on_timed_cond(addr, value, is_monotonic, sec, ns);
 #    else
-    if (!has_timeout) {
         const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value), nullptr, nullptr);
         return ret == 0 || errno != ETIMEDOUT;
-    }
-    ::_umtx_time timeout{};
-    timeout._timeout = ::timespec{static_cast<::time_t>(sec), static_cast<long>(ns)};
-    timeout._flags = UMTX_ABSTIME;
-    timeout._clockid = is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME;
-    const int ret = ::_umtx_op(addr, UMTX_OP_WAIT_UINT, static_cast<::u_long>(value),
-                               reinterpret_cast<void*>(static_cast<uintptr_t>(sizeof(timeout))), &timeout);
-    return ret == 0 || errno != ETIMEDOUT;
 #    endif
-
-#elif defined(NEFORCE_PLATFORM_MACOS)
-#    ifdef NEFORCE_ASYNC_BSD_COND_FALLBACK
-    if (!has_timeout) {
-        wait_on_cond(addr, value);
-        return true;
     }
     return wait_on_timed_cond(addr, value, is_monotonic, sec, ns);
+
+#elif defined(NEFORCE_PLATFORM_MACOS)
+    if (!has_timeout) {
+#    ifdef NEFORCE_ASYNC_BSD_COND_FALLBACK
+        wait_on_cond(addr, value);
+        return true;
 #    else
-    uint64_t timeout_ns = 0;
-    if (has_timeout) {
-        relative_timeout_ns(is_monotonic, sec, ns, timeout_ns);
-        if (timeout_ns == 0) {
-            timeout_ns = 1;
-        }
-    }
-    const int ret = ::__ulock_wait2(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), timeout_ns, 0);
-    return ret == 0 || errno != ETIMEDOUT;
+        const int ret = ::__ulock_wait2(UL_COMPARE_AND_WAIT, addr, static_cast<uint64_t>(value), 0, 0);
+        return ret == 0 || errno != ETIMEDOUT;
 #    endif
+    }
+    return wait_on_timed_cond(addr, value, is_monotonic, sec, ns);
 
 #else
     int oper = FUTEX_WAIT_BITSET | FUTEX_PRIVATE_FLAG;
@@ -298,6 +268,7 @@ void futex_notify(void* addr, const bool all) noexcept {
     (void) ::_umtx_op(addr, UMTX_OP_WAKE,
                       all ? static_cast<::u_long>(numeric_traits<int32_t>::max()) : static_cast<::u_long>(1), nullptr,
                       nullptr);
+    wake_timed_waiters();
 #    endif
 #elif defined(NEFORCE_PLATFORM_MACOS)
 #    ifdef NEFORCE_ASYNC_BSD_COND_FALLBACK
@@ -306,6 +277,7 @@ void futex_notify(void* addr, const bool all) noexcept {
     wake_timed_waiters();
 #    else
     (void) ::__ulock_wake(UL_COMPARE_AND_WAIT | (all ? ULF_WAKE_ALL : 0), addr, 0);
+    wake_timed_waiters();
 #    endif
 #else
     ::syscall(SYS_futex, addr, static_cast<platform_wait_t>(futex_wait_flags::wake_private),
