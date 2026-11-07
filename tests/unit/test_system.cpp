@@ -4760,6 +4760,9 @@ TEST_F(ProcessTest, Priority_NonexistentProcess_ReturnsNone) {
 }
 
 TEST_F(ProcessTest, Affinity_RoundTrips) {
+#ifdef NEFORCE_PLATFORM_MACOS
+    GTEST_SKIP() << "macOS does not expose a process affinity mask";
+#endif
     const auto current = process::current_id();
     const auto mask = process::get_affinity(current);
     ASSERT_TRUE(mask.has_value());

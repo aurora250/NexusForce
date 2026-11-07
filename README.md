@@ -301,10 +301,8 @@ See [HTTP/HTTPS performance test records](benchmark/network/http/PERFORMANCE.md)
 ### 🔤 String Processing
 - **PCRE2 Regular Expressions** - Efficient regex matching with JIT support `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`, supports copy
 - **Unicode Support** - UTF conversion system, codepoint operation class `codepoint`, UTF-8 codepoint iterator `utf8_iterator` / `utf8_view`
-- **`formatter`/`format`** - Type-safe formatted output, supports positional params `{0}` `{1}` and named params `format_named()`
+- **`formatter`/`format`** - Type-safe formatted output, supports positional params `{0}` `{1}` and named params `format_named()`, see [format performance test records](benchmark/string/format/PERFORMANCE.md)
 - **`string_view`** - Extensive use of string views for optimized operations
-- **Numeric Conversion** - Extensible string-to-number and number-to-string conversion system
-- **Boyer-Moore-Horspool** - Narrow character substring search acceleration
 
 ### ⚙️ System Interface
 - **`process`** - Process creation and control

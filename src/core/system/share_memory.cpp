@@ -56,16 +56,21 @@ namespace {
     }
 
     void store_data_size(const int fd, const size_t size) noexcept {
-        constexpr auto offset = static_cast<::off_t>(offsetof(shm_header, data_size));
-        (void) ::pwrite(fd, &size, sizeof(size), offset);
+        void* base = ::mmap(nullptr, page_size_or_default(), PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+        if (base == MAP_FAILED) {
+            return;
+        }
+        static_cast<shm_header*>(base)->data_size = size;
+        (void) ::munmap(base, page_size_or_default());
     }
 
     size_t load_data_size(const int fd) noexcept {
-        size_t size = 0;
-        constexpr auto offset = static_cast<::off_t>(offsetof(shm_header, data_size));
-        if (::pread(fd, &size, sizeof(size), offset) != static_cast<::ssize_t>(sizeof(size))) {
+        void* base = ::mmap(nullptr, page_size_or_default(), PROT_READ, MAP_SHARED, fd, 0);
+        if (base == MAP_FAILED) {
             return 0;
         }
+        const size_t size = static_cast<const shm_header*>(base)->data_size;
+        (void) ::munmap(base, page_size_or_default());
         return size;
     }
 #endif
@@ -462,6 +467,18 @@ void share_memory::grow(size_t new_size) {
 #elif defined(NEFORCE_PLATFORM_BSD_LIKE)
     // FreeBSD and macOS have no mremap, so the grown object is remapped at offset 0.
     // The data itself lives in the shm file, so unmapping and mapping again preserves it.
+    const bool was_mapped = mapped_addr_ != nullptr;
+    if (was_mapped) {
+        if (::munmap(original_mapped_addr_, internal_mapped_size_) != 0) {
+            const auto error = last_error();
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
+        }
+        original_mapped_addr_ = nullptr;
+        mapped_addr_ = nullptr;
+        mapped_size_ = 0;
+        internal_mapped_size_ = 0;
+    }
+
     const size_t fd_new_size = align_up(data_offset_ + new_size, page_size_or_default());
     if (::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == -1) {
         const auto error = last_error();
@@ -471,17 +488,10 @@ void share_memory::grow(size_t new_size) {
     size_ = new_size;
     store_data_size(handle_, size_);
 
-    if (mapped_addr_ != nullptr) {
-        const size_t old_size = internal_mapped_size_;
-        if (::munmap(original_mapped_addr_, old_size) != 0) {
-            const auto error = last_error();
-            NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
-        }
+    if (was_mapped) {
         const int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
         void* addr = ::mmap(nullptr, fd_new_size, prot, MAP_SHARED, handle_, 0);
         if (addr == MAP_FAILED) {
-            original_mapped_addr_ = nullptr;
-            mapped_addr_ = nullptr;
             const auto error = last_error();
             NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
         }
@@ -630,7 +640,7 @@ void* share_memory::map(size_t offset, const size_t length) {
 #else
     const int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
 
-    const size_t total_map = data_offset_ + offset + map_length;
+    const size_t total_map = align_up(data_offset_ + offset + map_length, page_size_or_default());
     original_mapped_addr_ = ::mmap(nullptr, total_map, prot, MAP_SHARED, handle_, 0);
 
     if (original_mapped_addr_ == MAP_FAILED) {

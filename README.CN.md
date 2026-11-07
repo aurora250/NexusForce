@@ -298,10 +298,8 @@ HTTP/HTTPS/WS/WSS/gRPC 性能测试详见 [HTTP/HTTPS 性能测试记录](benchm
 ### 🔤 字符串处理 (String)
 - **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`，支持拷贝
 - **Unicode 支持** - UTF 转换系统、码点操作类 `codepoint`、UTF-8 码点迭代器 `utf8_iterator` / `utf8_view`
-- **`formatter`/`format`** - 类型安全的格式化输出，支持位置参数 `{0}` `{1}` 和命名参数 `format_named()`
+- **`formatter`/`format`** - 高性能的类型安全格式化输出，支持位置参数 `{0}` `{1}` 和命名参数 `format_named()`，性能测试详见 [格式化性能测试记录](benchmark/string/format/PERFORMANCE.md)
 - **`string_view`** - 大量使用字符串视图优化操作
-- **数值转换** - 可扩展的字符串与数值互转体系
-- **Boyer-Moore-Horspool** - 窄字符子串搜索加速
 
 ### ⚙️ 系统接口 (System)
 - **`process`** - 进程创建与控制

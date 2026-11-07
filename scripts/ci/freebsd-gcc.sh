@@ -90,7 +90,7 @@ rm -f "${patched}"
         -DNEXUSFORCE_BUILD_DOCS=OFF \
         -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
         -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
-    cmake --build ${remote_build} --target NexusForceUnitTests --parallel 4
+    cmake --build ${remote_build} --target NexusForceUnitTests --parallel 2
 "
 
 set +e

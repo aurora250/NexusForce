@@ -495,6 +495,7 @@ namespace {
         char digits[24]{};
         size_t len = 0;
         int exponent = 0; ///< value = digits * 10^exponent
+        bool force_scientific = false;
     };
 
     size_t fixed_text_length(const shortest_digits& value) noexcept;
@@ -943,27 +944,57 @@ namespace {
 
         const uint64_t vr = shift_right_192(x_hi, x_mid, shift);
         const bool vr_exact = (x_lo == 0) && ((x_mid & low_mask) == 0);
+        const bool accept_bounds = (m2 & 1) == 0;
 
         uint64_t up_hi = x_hi;
         uint64_t up_mid = x_mid;
         uint64_t up_lo = x_lo;
         add_table(up_hi, up_mid, up_lo, entry, false);
         const uint64_t vp = shift_right_192(up_hi, up_mid, shift);
+        const bool vp_exact = (up_lo == 0) && ((up_mid & low_mask) == 0);
 
         uint64_t vm = 0;
+        bool vm_exact = false;
         if (half_lower_bound) {
             uint64_t down_hi = (x_hi << 1) | (x_mid >> 63);
             uint64_t down_mid = (x_mid << 1) | (x_lo >> 63);
             uint64_t down_lo = x_lo << 1;
             add_table(down_hi, down_mid, down_lo, entry, true);
             vm = shift_right_192(down_hi, down_mid, shift + 1);
+            const int extra_bits = shift + 1 - 64;
+            const uint64_t extra_mask = extra_bits >= 64 ? ~0ULL : ((1ULL << extra_bits) - 1ULL);
+            vm_exact = (down_lo == 0) && ((down_mid & extra_mask) == 0);
         } else {
             uint64_t down_hi = x_hi;
             uint64_t down_mid = x_mid;
             uint64_t down_lo = x_lo;
             add_table(down_hi, down_mid, down_lo, entry, true);
             vm = shift_right_192(down_hi, down_mid, shift);
+            vm_exact = (down_lo == 0) && ((down_mid & low_mask) == 0);
         }
+
+        const uint64_t lo_min = vm + ((vm_exact && accept_bounds) ? 0 : 1);
+        const uint64_t hi_max = vp - ((vp_exact && !accept_bounds) ? 1 : 0);
+
+        static constexpr uint64_t powers_of_ten[] = {1ULL,
+                                                     10ULL,
+                                                     100ULL,
+                                                     1000ULL,
+                                                     10000ULL,
+                                                     100000ULL,
+                                                     1000000ULL,
+                                                     10000000ULL,
+                                                     100000000ULL,
+                                                     1000000000ULL,
+                                                     10000000000ULL,
+                                                     100000000000ULL,
+                                                     1000000000000ULL,
+                                                     10000000000000ULL,
+                                                     100000000000000ULL,
+                                                     1000000000000000ULL,
+                                                     10000000000000000ULL,
+                                                     100000000000000000ULL,
+                                                     1000000000000000000ULL};
 
         uint64_t scaled = vr;
         uint64_t upper = vp;
@@ -984,6 +1015,34 @@ namespace {
                 ++scaled;
             }
         }
+
+        const bool peeled_valid =
+                vr == 0 || (scaled * powers_of_ten[removed] >= lo_min && scaled * powers_of_ten[removed] <= hi_max);
+        if (!peeled_valid) {
+            for (size_t k = 18; k-- > 0;) {
+                const uint64_t power = powers_of_ten[k];
+                const uint64_t quotient = vr / power;
+                const uint64_t remainder = vr % power;
+                const uint64_t half = power / 2;
+                uint64_t candidate = quotient;
+                if (k != 0) {
+                    if (remainder > half) {
+                        ++candidate;
+                    } else if (remainder == half && (!vr_exact || (quotient % 2) != 0)) {
+                        ++candidate;
+                    }
+                }
+                if (candidate == 0) {
+                    continue;
+                }
+                const uint64_t scaled_candidate = candidate * power;
+                if (scaled_candidate >= lo_min && scaled_candidate <= hi_max) {
+                    scaled = candidate;
+                    removed = k;
+                    break;
+                }
+            }
+        }
         while (scaled != 0 && scaled % 10 == 0) {
             scaled /= 10;
             ++removed;
@@ -993,33 +1052,103 @@ namespace {
 
         if (ieee_exponent >= 1076) {
             // |v| >= 2^53：ulp >= 1
-            const int exponent_of_first = static_cast<int>(out.len) - 1 + out.exponent;
+            const int decimal_exponent = static_cast<int>(out.len) - 1 + out.exponent;
+            if (decimal_exponent > 21) {
+                out.force_scientific = true;
+                return;
+            }
+
+            char integer_digits[32];
+            size_t integer_len = 0;
+            int kind = 0;
+            float_scaled_floor(m2, e2, 0, integer_digits, integer_len, kind);
+            const uint64_t half_ulp = 1ULL << (e2 - 1);
+            const bool inclusive = (m2 & 1) == 0;
+
+            size_t shortest = integer_len;
+            for (size_t k = 1; k < integer_len; ++k) {
+                bool all_zero = true;
+                for (size_t i = 0; i < k && all_zero; ++i) {
+                    all_zero = integer_digits[integer_len - 1 - i] == '0';
+                }
+                bool ok = all_zero;
+                if (!ok) {
+                    if (k > 7) {
+                        break;
+                    }
+                    uint64_t low = 0;
+                    uint64_t place = 1;
+                    for (size_t i = 0; i < k; ++i) {
+                        low += static_cast<uint64_t>(integer_digits[integer_len - 1 - i] - '0') * place;
+                        place *= 10;
+                    }
+                    const uint64_t up_side = place - low;
+                    const uint64_t deviation = low < up_side ? low : up_side;
+                    ok = deviation < half_ulp || (deviation == half_ulp && inclusive);
+                }
+                if (ok) {
+                    shortest = integer_len - k;
+                } else {
+                    break;
+                }
+            }
+
+            size_t fixed_len_digits = integer_len;
+            int fixed_exp = 0;
+            while (fixed_len_digits > 1 && integer_digits[fixed_len_digits - 1] == '0') {
+                --fixed_len_digits;
+                ++fixed_exp;
+            }
+            const size_t fixed_length = fixed_len_digits + static_cast<size_t>(fixed_exp);
             size_t exponent_digits = 2;
-            int magnitude = exponent_of_first >= 0 ? exponent_of_first : -exponent_of_first;
+            int magnitude = decimal_exponent >= 0 ? decimal_exponent : -decimal_exponent;
             while (magnitude >= 100) {
                 magnitude /= 10;
                 ++exponent_digits;
             }
-            const size_t scientific_length = out.len + 3 + exponent_digits;
-            const size_t fixed_length = static_cast<size_t>(exponent_of_first) + 1;
-            if (fixed_length <= scientific_length && fixed_length + 1 <= sizeof(out.digits)) {
-                char integer_digits[32];
-                size_t integer_len = 0;
-                int kind = 0;
-                float_scaled_floor(m2, e2, 0, integer_digits, integer_len, kind);
-                int integer_exponent = 0;
-                while (integer_len > 1 && integer_digits[integer_len - 1] == '0') {
-                    --integer_len;
-                    ++integer_exponent;
+            const size_t scientific_length = shortest + 3 + exponent_digits;
+
+            if (fixed_length <= scientific_length) {
+                out.len = fixed_len_digits;
+                for (size_t i = 0; i < fixed_len_digits; ++i) {
+                    out.digits[i] = integer_digits[i];
                 }
-                if (integer_len + 1 <= sizeof(out.digits)) {
-                    out.len = integer_len;
-                    for (size_t i = 0; i < integer_len; ++i) {
-                        out.digits[i] = integer_digits[i];
+                out.exponent = fixed_exp;
+                return;
+            }
+
+            const size_t drop = integer_len - shortest;
+            uint64_t tail = 0;
+            uint64_t place = 1;
+            for (size_t i = 0; i < drop && i < 19; ++i) {
+                tail += static_cast<uint64_t>(integer_digits[integer_len - 1 - i] - '0') * place;
+                place *= 10;
+            }
+            const bool round_up = drop > 19 ? false : (tail * 2 > place || (tail * 2 == place && !inclusive));
+            out.len = shortest;
+            for (size_t i = 0; i < shortest; ++i) {
+                out.digits[i] = integer_digits[i];
+            }
+            if (round_up) {
+                size_t position = out.len;
+                while (position > 0 && out.digits[position - 1] == '9') {
+                    out.digits[position - 1] = '0';
+                    --position;
+                }
+                if (position == 0) {
+                    for (size_t i = out.len; i > 0; --i) {
+                        out.digits[i] = out.digits[i - 1];
                     }
-                    out.exponent = integer_exponent;
+                    out.digits[0] = '1';
+                    ++out.len;
+                } else {
+                    ++out.digits[position - 1];
                 }
             }
+            while (out.len > 1 && out.digits[out.len - 1] == '0') {
+                --out.len;
+            }
+            out.exponent = decimal_exponent - static_cast<int>(out.len) + 1;
         }
     }
 
@@ -1129,7 +1258,9 @@ namespace {
         size_t len = 0;
         const int exponent_of_first = static_cast<int>(value.len) - 1 + value.exponent;
 
-        if (significant_limit < 0 && !force_scientific && !force_fixed) {
+        if (value.force_scientific) {
+            force_scientific = true;
+        } else if (significant_limit < 0 && !force_scientific && !force_fixed) {
             force_scientific = scientific_text_length(value) < fixed_text_length(value);
         }
 

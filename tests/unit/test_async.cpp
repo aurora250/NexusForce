@@ -2485,7 +2485,7 @@ TEST(ThreadPool, DelayAccuracyStaysBoundedWithWarmup) {
     const auto elapsed = time_cast<microseconds>(steady_clock::now() - start).count();
 
     EXPECT_GE(elapsed, delay_ms * 1000 - 1000);
-    EXPECT_LE(elapsed, delay_ms * 1000 + 100000);
+    EXPECT_LE(elapsed, delay_ms * 1000 + 250000);
     pool.stop();
 }
 

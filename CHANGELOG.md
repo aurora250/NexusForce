@@ -395,6 +395,10 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 macOS arm64 上 `share_memory` 的 `OpenOrCreate` 返回页大小、`grow` 抛异常的问题：header 的 `data_size` 改为通过 header 页映射读写，映射长度和 `munmap` 长度按页对齐，grow 先解除旧映射再 `ftruncate`
+- macOS 跳过不支持进程亲和性的 `ProcessTest.Affinity_RoundTrips`，并跳过依赖进程退出通知的 `TuiToolRunnerTest` 两个用例
+- 放宽 macOS 慢速 runner 上 `ThreadPool.DelayAccuracyStaysBoundedWithWarmup` 的调度抖动余量
+- FreeBSD QEMU VM 内存从 2 GB 提升到 4 GB，GCC 原生构建并行度从 4 降到 2，避免 `cc1plus` 被 OOM kill
 - 修复 macOS `named_mutex` 的 POSIX 共享内存名超过 `PSHMNAMLEN`（当前测试名约 45 字符）导致 `shm_open` 抛异常：使用稳定 FNV-1a 哈希生成短名
 - 修复 macOS `share_memory` 未按页对齐数据区，导致 macOS `ftruncate` 页舍入后 `OpenOrCreate` 尺寸错误、`grow` 映射越界抛异常：数据区偏移和 grow 长度按页对齐
 - 修复 macOS 上 `/bin/true` 不存在导致 ProcessTest.Run 抛异常：macOS 使用 `/usr/bin/true`
