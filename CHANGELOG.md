@@ -406,7 +406,7 @@
 ### 🐛 Bug Fixes
 
 - `to_float64` / `to_float32` 的指数缩放由"超出 ±32 直接返回 inf/0"改为按 1e22 分块缩放，修复 `1e239` 被解析为 `inf`、`1.5e-43` 被解析为 `0` 的问题；指针标识符位数超出范围时仍走原有边界判定
-- 修复 macOS arm64 上 `share_memory` 的 `OpenOrCreate` 返回页大小、`grow` 抛异常的问题：header 的 `data_size` 改为通过 header 页映射读写，映射长度和 `munmap` 长度按页对齐，grow 先解除旧映射再 `ftruncate`
+- 修复 macOS arm64 上 `share_memory` 的 `OpenOrCreate` 返回页大小、`grow` 抛异常的问题：header 的 `data_size` 改为通过 header 页映射读写，映射长度和 `munmap` 长度按页对齐，grow 优先在旧映射存在时 `ftruncate`，失败再解除映射重试并可回退
 - 修复 macOS `named_mutex` 的 POSIX 共享内存名超过 `PSHMNAMLEN`（当前测试名约 45 字符）导致 `shm_open` 抛异常：使用稳定 FNV-1a 哈希生成短名
 - 修复 macOS `share_memory` 未按页对齐数据区，导致 macOS `ftruncate` 页舍入后 `OpenOrCreate` 尺寸错误、`grow` 映射越界抛异常：数据区偏移和 grow 长度按页对齐
 - 修复 macOS 上 `/bin/true` 不存在导致 ProcessTest.Run 抛异常：macOS 使用 `/usr/bin/true`

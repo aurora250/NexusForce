@@ -26,13 +26,17 @@ NEFORCE_BEGIN_INNER__
 
 NEFORCE_NODISCARD NEFORCE_API bool parse_double_exact(string_view text, double& value) noexcept;
 
-NEFORCE_NODISCARD inline bool parse_exact_float(const string_view, float32_t&) noexcept { return false; }
+NEFORCE_NODISCARD inline bool parse_exact_float(const string_view /*unused*/, float32_t& /*unused*/) noexcept {
+    return false;
+}
 
 NEFORCE_NODISCARD inline bool parse_exact_float(const string_view text, float64_t& value) noexcept {
     return parse_double_exact(text, value);
 }
 
-NEFORCE_NODISCARD inline bool parse_exact_float(const string_view, decimal_t&) noexcept { return false; }
+NEFORCE_NODISCARD inline bool parse_exact_float(const string_view /*unused*/, decimal_t& /*unused*/) noexcept {
+    return false;
+}
 
 /**
  * @brief 将字符串转换为有符号整数

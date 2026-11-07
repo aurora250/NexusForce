@@ -88,7 +88,7 @@ namespace {
             if (!(scaled <= 9007199254740992.0)) {
                 break;
             }
-            const auto units = static_cast<uint64_t>(scaled + 0.5);
+            const auto units = static_cast<uint64_t>(round(scaled));
             if (units > (1ULL << 53)) {
                 continue;
             }
@@ -340,7 +340,7 @@ namespace {
                 head[count++] = '"';
                 const size_t length = key.size();
                 uint64_t word = 0;
-                memory_copy(&word, &member.key_data, sizeof(word));
+                memory_copy(&word, static_cast<const void*>(&member.key_data), sizeof(word));
                 const uint64_t mask =
                         length == 8 ? ~static_cast<uint64_t>(0) : ((static_cast<uint64_t>(1) << (length * 8)) - 1);
                 const uint64_t probe = (word & mask) | (~mask & 0x7878787878787878ULL);
@@ -455,7 +455,7 @@ namespace {
     size_t reserve_hint(const json_value& value) noexcept {
         constexpr size_t base = 256;
         constexpr size_t per_child = 32;
-        constexpr size_t limit = 64 * 1024;
+        constexpr size_t limit = static_cast<size_t>(64) * 1024;
         size_t children = 0;
         if (value.is_object() || value.is_array()) {
             children = value.element_count();
@@ -646,8 +646,8 @@ void json_member::assign_key(const string_view text) noexcept {
             key_prefix = 0;
             return;
         }
-        memory_copy(&key_data, text.data(), text.size());
-        memory_copy(&key_prefix, &key_data, key_prefix_size);
+        memory_copy(static_cast<void*>(&key_data), text.data(), text.size());
+        memory_copy(&key_prefix, static_cast<const void*>(&key_data), key_prefix_size);
         if (length < key_prefix_size) {
             key_prefix &= (1U << (length * 8)) - 1U;
         }

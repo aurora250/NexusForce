@@ -5495,7 +5495,11 @@ TEST_F(ShareMemoryTest, Grow_IncreasesSize) {
     EXPECT_EQ(shm.size(), test_size);
 
     size_t new_size = test_size * 2;
-    shm.grow(new_size);
+    try {
+        shm.grow(new_size);
+    } catch (const exception& e) {
+        FAIL() << "grow failed: " << e.what();
+    }
     EXPECT_EQ(shm.size(), new_size);
     EXPECT_TRUE(shm.is_mapped());
 }
@@ -5507,7 +5511,11 @@ TEST_F(ShareMemoryTest, Grow_PreservesData) {
     data[0] = 0x12345678;
 
     size_t new_size = test_size * 2;
-    shm.grow(new_size);
+    try {
+        shm.grow(new_size);
+    } catch (const exception& e) {
+        FAIL() << "grow failed: " << e.what();
+    }
     auto* data2 = shm.data<int>();
     EXPECT_EQ(data2[0], 0x12345678);
 }
@@ -5588,7 +5596,11 @@ TEST_F(ShareMemoryTest, Unlock_WithoutLock_NoThrow) {
 TEST_F(ShareMemoryTest, Grow_AfterMap_PreservesMapping) {
     share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
     shm.map();
-    shm.grow(test_size * 2);
+    try {
+        shm.grow(test_size * 2);
+    } catch (const exception& e) {
+        FAIL() << "grow failed: " << e.what();
+    }
     EXPECT_TRUE(shm.is_mapped());
     EXPECT_GE(shm.mapped_size(), test_size * 2 - 1);
 }

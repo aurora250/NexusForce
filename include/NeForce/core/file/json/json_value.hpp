@@ -147,6 +147,12 @@ enum class json_kind : uint8_t {
     object    ///< 对象
 };
 
+
+#ifdef NEFORCE_COMPILER_GCC
+#    pragma GCC diagnostic push
+#    pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif
+
 /**
  * @class json_value
  * @brief JSON DOM 值，16 字节、平凡可析构、无虚函数
@@ -353,10 +359,14 @@ private:
 
         } inl_; ///< 内联形态
 
-    } storage_; ///< 值存储;
+    } storage_{}; ///< 值存储
 
     static_assert(sizeof(storage_form) == 16, "storage_form must stay 16 bytes");
 };
+
+#ifdef NEFORCE_COMPILER_GCC
+#    pragma GCC diagnostic pop
+#endif
 
 
 /**

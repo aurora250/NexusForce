@@ -219,11 +219,11 @@
 | 场景                     | 推荐实现                         | 原因                                                        |
 |------------------------|--------------------------------|-----------------------------------------------------------|
 | 范围 / 等值区间查询      | `neforce::set` / `neforce::map`  | `equal_range` 快 1.5 ~ 2.0×，`lower_bound` 快 1.0 ~ 1.2×    |
-| 未命中查找为主           | `sparse_vector` / `neforce::set` | 二分查找 0.52 ~ 0.73×（相对 rb_tree）；rb_tree 亦快于 `std` |
+| 未命中查找为主           | `neforce::sparse_vector` / `neforce::set` | 二分查找 0.52 ~ 0.73×（相对 rb_tree）；rb_tree 亦快于 `std` |
 | 命中查找为主             | `neforce::set` / `neforce::map`  | rb_tree 快 1.1 ~ 1.5×（sparse 的二分在大数组上缓存不友好）  |
 | 计数（`count`）          | `neforce::set`                   | 0.60 ~ 1.00×，唯一键容器只需一次下界搜索                    |
-| 全量遍历                 | **`sparse_vector`**              | 0.01 ~ 0.03×（连续内存，~100× 于 rb_tree）                  |
-| 批量构建 / 整表复制      | **`sparse_vector`**              | 升序构建 0.16×、拷贝构造 0.00×（整段内存复制）              |
+| 全量遍历                 | `neforce::sparse_vector`              | 0.01 ~ 0.03×（连续内存，~100× 于 rb_tree）                  |
+| 批量构建 / 整表复制      | `neforce::sparse_vector`              | 升序构建 0.16×、拷贝构造 0.00×（整段内存复制）              |
 | 高频随机插入 / 删除      | `neforce::set` / `std::set`      | sparse 为 O(n) 搬移，64K 规模已慢 10×                       |
 | 迭代不失效（边遍历边改） | `neforce::set` / `std::set`      | sparse 修改即全部迭代器失效                                 |
 

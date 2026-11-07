@@ -239,7 +239,7 @@ json_value json_parser::parse_string(json_document& doc, const char*& cursor, co
     return doc.make_string_value(string_view(decode_scratch_.data(), decode_scratch_.size()));
 }
 
-json_value json_parser::parse_number(json_document&, const char*& cursor, const char* end) {
+json_value json_parser::parse_number(json_document& /*unused*/, const char*& cursor, const char* end) {
     const char* const begin = cursor;
     bool negative = false;
     if (*cursor == '-') {
@@ -358,7 +358,7 @@ json_value json_parser::parse_number(json_document&, const char*& cursor, const 
     return json_value::make_real(to_float64(text));
 }
 
-json_value json_parser::parse_keyword(json_document&, const char*& cursor, const char* end) {
+json_value json_parser::parse_keyword(json_document& /*unused*/, const char*& cursor, const char* end) {
     const auto remaining = static_cast<size_t>(end - cursor);
     switch (*cursor) {
         case 't':

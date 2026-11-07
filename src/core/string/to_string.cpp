@@ -961,7 +961,7 @@ namespace {
             uint64_t down_lo = x_lo << 1;
             add_table(down_hi, down_mid, down_lo, entry, true);
             vm = shift_right_192(down_hi, down_mid, shift + 1);
-            const int extra_bits = shift + 1 - 64;
+            const uint32_t extra_bits = static_cast<uint32_t>(shift + 1) - 64U;
             const uint64_t extra_mask = extra_bits >= 64 ? ~0ULL : ((1ULL << extra_bits) - 1ULL);
             vm_exact = (down_lo == 0) && ((down_mid & extra_mask) == 0);
         } else {

@@ -4181,6 +4181,17 @@ NEFORCE_INLINE17 constexpr bool is_decrementible_v = is_decrementible<Iterator>:
 #endif
 
 
+/// @cond
+NEFORCE_BEGIN_INNER__
+template <typename Container, typename = void>
+struct __begin_incrementible : false_type {};
+
+template <typename Container>
+struct __begin_incrementible<Container, void_t<decltype(declval<Container>().begin())>>
+: is_incrementible<decltype(declval<Container>().begin())> {};
+NEFORCE_END_INNER__
+/// @endcond
+
 /**
  * @struct is_iterable
  * @brief 判断类型是否可迭代
@@ -4191,8 +4202,8 @@ NEFORCE_INLINE17 constexpr bool is_decrementible_v = is_decrementible<Iterator>:
  * 2. begin()返回的迭代器可以递增
  */
 template <typename Container>
-struct is_iterable : bool_constant<inner::__has_valid_begin_end<Container>::value &&
-                                   is_incrementible<decltype(declval<Container>().begin())>::value> {};
+struct is_iterable
+: bool_constant<inner::__has_valid_begin_end<Container>::value && inner::__begin_incrementible<Container>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**
@@ -4218,6 +4229,13 @@ private:
 public:
     static constexpr bool value = decltype(__test<T>(0))::value;
 };
+
+template <typename Map, bool = is_iterable<Map>::value>
+struct __is_maplike_impl : false_type {};
+
+template <typename Map>
+struct __is_maplike_impl<Map, true>
+: bool_constant<__has_first_and_second<decltype(*declval<decltype(declval<Map>().begin())>())>::value> {};
 NEFORCE_END_INNER__
 /// @endcond
 
@@ -4231,9 +4249,7 @@ NEFORCE_END_INNER__
  * 2. 迭代器的解引用结果具有first和second成员
  */
 template <typename Map>
-struct is_maplike
-: bool_constant<is_iterable<Map>::value &&
-                inner::__has_first_and_second<decltype(*declval<decltype(declval<Map>().begin())>())>::value> {};
+struct is_maplike : bool_constant<inner::__is_maplike_impl<Map>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**

@@ -468,21 +468,26 @@ void share_memory::grow(size_t new_size) {
     // FreeBSD and macOS have no mremap, so the grown object is remapped at offset 0.
     // The data itself lives in the shm file, so unmapping and mapping again preserves it.
     const bool was_mapped = mapped_addr_ != nullptr;
-    if (was_mapped) {
-        if (::munmap(original_mapped_addr_, internal_mapped_size_) != 0) {
+    void* old_mapping = original_mapped_addr_;
+    const size_t old_mapping_size = internal_mapped_size_;
+    const size_t fd_new_size = align_up(data_offset_ + new_size, page_size_or_default());
+
+    bool truncated = ::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == 0;
+    if (!truncated && was_mapped) {
+        if (::munmap(old_mapping, old_mapping_size) != 0) {
             const auto error = last_error();
-            NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception("grow unmap: " + error));
         }
         original_mapped_addr_ = nullptr;
         mapped_addr_ = nullptr;
         mapped_size_ = 0;
         internal_mapped_size_ = 0;
+        old_mapping = nullptr;
+        truncated = ::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == 0;
     }
-
-    const size_t fd_new_size = align_up(data_offset_ + new_size, page_size_or_default());
-    if (::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == -1) {
+    if (!truncated) {
         const auto error = last_error();
-        NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("grow ftruncate: " + error));
     }
 
     size_ = new_size;
@@ -493,7 +498,10 @@ void share_memory::grow(size_t new_size) {
         void* addr = ::mmap(nullptr, fd_new_size, prot, MAP_SHARED, handle_, 0);
         if (addr == MAP_FAILED) {
             const auto error = last_error();
-            NEFORCE_THROW_EXCEPTION(share_memory_exception(error));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception("grow mmap: " + error));
+        }
+        if (old_mapping != nullptr) {
+            (void) ::munmap(old_mapping, old_mapping_size);
         }
         original_mapped_addr_ = addr;
         mapped_addr_ = static_cast<char*>(original_mapped_addr_) + data_offset_;
