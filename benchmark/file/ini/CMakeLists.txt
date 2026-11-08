@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceIniBenchmark ini_benchmark.cpp)

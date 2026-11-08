@@ -1,8 +1,15 @@
-#include <NeForce/core/file/env/env_builder.hpp>
-#include <NeForce/core/utility/packages.hpp>
+#include "NeForce/core/file/env/env_builder.hpp"
+#include "NeForce/core/string/to_string.hpp"
+#include "NeForce/core/utility/packages.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-env_builder::env_builder() { root_ = make_unique<env_document>(); }
+void env_builder::test_exception() const {
+    if (current_key_.empty()) {
+        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
+    }
+}
+
+env_builder::env_builder() = default;
 
 env_builder& env_builder::key(string key) noexcept {
     current_key_ = move(key);
@@ -10,107 +17,56 @@ env_builder& env_builder::key(string key) noexcept {
 }
 
 env_builder& env_builder::unquoted() noexcept {
-    current_quote_type_ = env_variable::None;
+    quote_ = env_variable::None;
     return *this;
 }
 
 env_builder& env_builder::single_quoted() noexcept {
-    current_quote_type_ = env_variable::Single;
+    quote_ = env_variable::Single;
     return *this;
 }
 
 env_builder& env_builder::double_quoted() noexcept {
-    current_quote_type_ = env_variable::Double;
+    quote_ = env_variable::Double;
     return *this;
 }
 
 env_builder& env_builder::exported(const bool exported) noexcept {
-    current_exported_ = exported;
+    exported_ = exported;
     return *this;
 }
 
-env_builder& env_builder::value(string value) {
-    if (current_key_.empty()) {
-        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
-    }
-
-    root_->set_variable(current_key_, move(value), current_quote_type_, current_exported_);
+env_builder& env_builder::assign(string value) {
+    test_exception();
+    document_.set_variable(string_view(current_key_.data(), current_key_.size()),
+                           string_view(value.data(), value.size()), quote_, exported_);
     current_key_.clear();
-    current_quote_type_ = env_variable::None;
-    current_exported_ = false;
+    quote_ = env_variable::None;
+    exported_ = false;
     return *this;
 }
 
-env_builder& env_builder::value(const int value) {
-    if (current_key_.empty()) {
-        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
-    }
+env_builder& env_builder::value(string value) { return assign(move(value)); }
 
-    root_->set_variable(current_key_, to_string(value), current_quote_type_, current_exported_);
-    current_key_.clear();
-    current_quote_type_ = env_variable::None;
-    current_exported_ = false;
-    return *this;
-}
+env_builder& env_builder::value(const int value) { return assign(to_string(value)); }
 
-env_builder& env_builder::value(const int64_t value) {
-    if (current_key_.empty()) {
-        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
-    }
+env_builder& env_builder::value(const int64_t value) { return assign(to_string(value)); }
 
-    root_->set_variable(current_key_, to_string(value), current_quote_type_, current_exported_);
-    current_key_.clear();
-    current_quote_type_ = env_variable::None;
-    current_exported_ = false;
-    return *this;
-}
+env_builder& env_builder::value(const double value) { return assign(to_string(value)); }
 
-env_builder& env_builder::value(const double value) {
-    if (current_key_.empty()) {
-        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
-    }
-
-    root_->set_variable(current_key_, to_string(value), current_quote_type_, current_exported_);
-    current_key_.clear();
-    current_quote_type_ = env_variable::None;
-    current_exported_ = false;
-    return *this;
-}
-
-env_builder& env_builder::value(const bool value) {
-    if (current_key_.empty()) {
-        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
-    }
-
-    root_->set_variable(current_key_, to_string(value), current_quote_type_, current_exported_);
-    current_key_.clear();
-    current_quote_type_ = env_variable::None;
-    current_exported_ = false;
-    return *this;
-}
+env_builder& env_builder::value(const bool value) { return assign(to_string(value)); }
 
 env_builder& env_builder::value(const double value, const int precision) {
-    if (current_key_.empty()) {
-        NEFORCE_THROW_EXCEPTION(env_exception("No key set for value"));
-    }
-
-    root_->set_variable(current_key_, to_string_with_precision(value, precision), current_quote_type_,
-                        current_exported_);
-
-    current_key_.clear();
-    current_quote_type_ = env_variable::None;
-    current_exported_ = false;
-    return *this;
+    return assign(to_string_with_precision(value, precision));
 }
 
 env_builder& env_builder::comment(string text) {
-    root_->add_comment(move(text));
+    document_.add_comment(string_view(text.data(), text.size()));
     return *this;
 }
 
 env_builder& env_builder::blank_line() {
-    static string empty{};
-    root_->add_comment(empty);
+    document_.add_comment(string_view());
     return *this;
 }
 
@@ -128,6 +84,6 @@ env_builder& env_builder::add_export(string key, string value) {
     return this->exported().key(move(key)).value(move(value));
 }
 
-unique_ptr<env_document> env_builder::build() noexcept { return move(root_); }
+env_document env_builder::build() noexcept { return move(document_); }
 
 NEFORCE_END_NAMESPACE__

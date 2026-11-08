@@ -1,232 +1,222 @@
-#include <NeForce/core/file/env/env_parser.hpp>
-#include <NeForce/core/utility/packages.hpp>
+#include "NeForce/core/file/env/env_parser.hpp"
+#include "NeForce/core/utility/packages.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    bool is_comment_line(const string_view line) noexcept { return line.trim().starts_with('#'); }
-
-    bool is_blank_line(const string_view line) noexcept { return line.trim().empty(); }
-
-    string parse_unquoted_value(const string& line, size_t& pos) {
-        string result;
-        while (pos < line.size()) {
-            const char c = line[pos];
-            if (c == ' ' || c == '	' || c == '#') {
-                break;
-            }
-            result += c;
-            pos++;
-        }
-        return move(result);
+    NEFORCE_NODISCARD string_view trimmed(const char* begin, const char* end) noexcept {
+        return string_view(begin, static_cast<size_t>(end - begin)).trim();
     }
 
-    string parse_single_quoted_value(const string& line, size_t& pos) {
-        pos++;
-        string result;
-
-        while (pos < line.size()) {
-            const char c = line[pos];
-            if (c == '\'') {
-                if (pos + 3 < line.size() && line[pos + 1] == '\\' && line[pos + 2] == '\'' && line[pos + 3] == '\'') {
-                    result += '\'';
-                    pos += 4;
-                } else {
-                    pos++;
-                    break;
-                }
-            } else {
-                result += c;
-                pos++;
-            }
-        }
-
-        return move(result);
+    NEFORCE_NODISCARD bool starts_with_export(const string_view text) noexcept {
+        return text.size() >= 7 && text[0] == 'e' && text[1] == 'x' && text[2] == 'p' && text[3] == 'o' &&
+               text[4] == 'r' && text[5] == 't' && text[6] == ' ';
     }
 
-    string parse_double_quoted_value(const string& line, size_t& pos) {
-        pos++;
-        string result;
-
-        while (pos < line.size()) {
-            const char c = line[pos];
-            if (c == '\\' && pos + 1 < line.size()) {
-                pos++;
-                const char next = line[pos];
-                switch (next) {
-                    case 'n':
-                        result += '\n';
-                        break;
-                    case 'r':
-                        result += '\r';
-                        break;
-                    case 't':
-                        result += '\t';
-                        break;
-                    case '\\':
-                        result += '\\';
-                        break;
-                    case '"':
-                        result += '"';
-                        break;
-                    case '$':
-                        result += '$';
-                        break;
-                    case '`':
-                        result += '`';
-                        break;
-                    default:
-                        result += '\\';
-                        result += next;
-                        break;
-                }
-                pos++;
-            } else if (c == '"') {
-                pos++;
-                break;
-            } else {
-                result += c;
-                pos++;
-            }
+    NEFORCE_NODISCARD char escaped_char(const char next) noexcept {
+        switch (next) {
+            case 'n':
+                return '\n';
+            case 'r':
+                return '\r';
+            case 't':
+                return '\t';
+            case '\\':
+                return '\\';
+            case '"':
+                return '"';
+            case '$':
+                return '$';
+            case '`':
+                return '`';
+            default:
+                return '\0';
         }
-
-        return move(result);
-    }
-
-    bool parse_variable_line(const string& line, string& name, unique_ptr<env_variable>& variable) {
-        size_t pos = 0;
-        string trimmed = line;
-        trimmed.trim();
-
-        bool is_exported = false;
-        if (trimmed.starts_with("export ")) {
-            is_exported = true;
-            trimmed = trimmed.tail(7).trim();
-        }
-        const size_t eq_pos = trimmed.find('=');
-        if (eq_pos == string::npos) {
-            return false;
-        }
-        name = trimmed.head(eq_pos).trim();
-        if (name.empty()) {
-            return false;
-        }
-
-        pos = eq_pos + 1;
-        while (pos < trimmed.size() && (trimmed[pos] == ' ' || trimmed[pos] == '\t')) {
-            pos++;
-        }
-        if (pos >= trimmed.size()) {
-            variable = make_unique<env_variable>("", env_variable::None, is_exported);
-            return true;
-        }
-
-        string value;
-        env_variable::quote_type qt = env_variable::None;
-
-        const char first_char = trimmed[pos];
-        if (first_char == '\'') {
-            qt = env_variable::Single;
-            value = parse_single_quoted_value(trimmed, pos);
-        } else if (first_char == '"') {
-            qt = env_variable::Double;
-            value = parse_double_quoted_value(trimmed, pos);
-        } else {
-            qt = env_variable::None;
-            value = parse_unquoted_value(trimmed, pos);
-        }
-
-        variable = make_unique<env_variable>(value, qt, is_exported);
-        return true;
     }
 } // namespace
 
 
-void env_parser::skip_whitespace() noexcept {
-    while (pos_ < len_ && (text_[pos_] == ' ' || text_[pos_] == '	')) {
-        advance();
-    }
-}
+env_parser::env_parser(const string_view text) noexcept :
+text_(text),
+cursor_(text.data()),
+end_(text.data() == nullptr ? nullptr : text.data() + text.size()) {}
 
-void env_parser::skip_line() noexcept {
-    while (!eof() && current() != '\n') {
-        advance();
-    }
-    if (current() == '\n') {
-        advance();
-    }
-}
+env_parser::env_parser(string text) :
+owned_(move(text)),
+text_(owned_.data(), owned_.size()),
+cursor_(owned_.data()),
+end_(owned_.data() + owned_.size()),
+owning_(true) {}
 
-char env_parser::current() const noexcept {
-    if (pos_ < len_) {
-        return text_[pos_];
+env_parser::env_parser(const char* text) :
+env_parser(string(text)) {}
+
+string_view env_parser::parse_quoted(const char* begin, const char* end, env_quote& quote, bool& decoded) {
+    const char delimiter = *begin;
+    quote = delimiter == '\'' ? env_quote::single : env_quote::double_quote;
+    const char* cursor = begin + 1;
+    const char* content_begin = cursor;
+    const char* content_end = cursor;
+    bool escaped = false;
+    if (delimiter == '\'') {
+        while (cursor < end) {
+            if (*cursor == '\'') {
+                if (cursor + 3 < end && cursor[1] == '\\' && cursor[2] == '\'' && cursor[3] == '\'') {
+                    escaped = true;
+                    cursor += 4;
+                    continue;
+                }
+                content_end = cursor;
+                break;
+            }
+            ++cursor;
+        }
+        if (cursor >= end) {
+            content_end = end;
+        }
+        if (!escaped) {
+            decoded = false;
+            return string_view(content_begin, static_cast<size_t>(content_end - content_begin));
+        }
+        decoded = true;
+        scratch_.clear();
+        cursor = content_begin;
+        while (cursor < content_end) {
+            if (*cursor == '\'' && cursor + 3 < content_end && cursor[1] == '\\' && cursor[2] == '\'' &&
+                cursor[3] == '\'') {
+                scratch_ += '\'';
+                cursor += 4;
+            } else {
+                scratch_ += *cursor;
+                ++cursor;
+            }
+        }
+        return string_view(scratch_.data(), scratch_.size());
     }
-    return '\0';
-}
-
-char env_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) {
-        return text_[pos_ + offset];
+    while (cursor < end) {
+        if (*cursor == '\\' && cursor + 1 < end) {
+            escaped = true;
+            cursor += 2;
+            continue;
+        }
+        if (*cursor == '"') {
+            content_end = cursor;
+            break;
+        }
+        ++cursor;
     }
-    return '\0';
-}
-
-bool env_parser::eof() const noexcept { return pos_ >= len_; }
-
-void env_parser::advance() noexcept {
-    if (pos_ < len_) {
-        if (text_[pos_] == '\n') {
-            line_++;
-            column_ = 1;
+    if (cursor >= end) {
+        content_end = end;
+    }
+    if (!escaped) {
+        decoded = false;
+        return string_view(content_begin, static_cast<size_t>(content_end - content_begin));
+    }
+    decoded = true;
+    scratch_.clear();
+    cursor = content_begin;
+    while (cursor < content_end) {
+        if (*cursor == '\\' && cursor + 1 < content_end) {
+            const char next = cursor[1];
+            const char ch = escaped_char(next);
+            if (static_cast<int>(decoded) != '\0') {
+                scratch_ += ch;
+            } else {
+                scratch_ += '\\';
+                scratch_ += next;
+            }
+            cursor += 2;
         } else {
-            column_++;
+            scratch_ += *cursor;
+            ++cursor;
         }
-        pos_++;
     }
+    return string_view(scratch_.data(), scratch_.size());
 }
 
-void env_parser::parse_line(const string& line) const {
-    const auto view = line.view();
-    if (is_blank_line(view)) {
+void env_parser::parse_line(const char* begin, const char* end) {
+    const string_view line = trimmed(begin, end);
+    if (line.empty()) {
         return;
     }
-    if (is_comment_line(view)) {
-        const string_view comment = view.trim();
-        if (comment.size() > 1) {
-            root_->add_comment(comment.tail(1).trim());
+    if (line.front() == '#') {
+        if (line.size() > 1) {
+            document_.add_comment_impl(trimmed(line.data() + 1, line.data() + line.size()), owning_);
         }
         return;
     }
 
-    string name;
-    unique_ptr<env_variable> variable;
-    if (parse_variable_line(line, name, variable)) {
-        root_->add_variable(name, move(variable));
-    }
-}
-
-unique_ptr<env_document> env_parser::parse() {
-    string line;
-
-    while (!eof()) {
-        line.clear();
-        while (!eof() && current() != '\n') {
-            line += current();
-            advance();
-        }
-        if (current() == '\n') {
-            advance();
-        }
-        parse_line(line);
+    string_view content = line;
+    bool exported = false;
+    if (starts_with_export(content)) {
+        exported = true;
+        content = trimmed(content.data() + 7, content.data() + content.size());
     }
 
-    return move(root_);
+    const char* equal = content.data();
+    const char* limit = content.data() + content.size();
+    while (equal < limit && *equal != '=') {
+        ++equal;
+    }
+    if (equal == limit) {
+        return;
+    }
+    const string_view name = trimmed(content.data(), equal);
+    if (name.empty()) {
+        return;
+    }
+
+    const char* value_begin = equal + 1;
+    while (value_begin < limit && (*value_begin == ' ' || *value_begin == '\t')) {
+        ++value_begin;
+    }
+
+    env_quote quote = env_quote::none;
+    string_view value;
+    bool decoded = false;
+    if (value_begin >= limit) {
+        value = string_view();
+    } else if (*value_begin == '\'' || *value_begin == '"') {
+        value = parse_quoted(value_begin, limit, quote, decoded);
+    } else {
+        const char* value_end = value_begin;
+        while (value_end < limit && *value_end != ' ' && *value_end != '\t' && *value_end != '#') {
+            ++value_end;
+        }
+        value = string_view(value_begin, static_cast<size_t>(value_end - value_begin));
+    }
+
+    if (decoded) {
+        value = document_.store_string(value);
+    }
+    document_.set_variable_impl(name, value, quote, exported, owning_);
 }
 
-optional<unique_ptr<env_document>> env_parser::try_parse() {
+env_document env_parser::parse() {
+    if (cursor_ == nullptr) {
+        return move(document_);
+    }
+    while (cursor_ < end_) {
+        const char* line_begin = cursor_;
+        while (cursor_ < end_ && *cursor_ != '\n') {
+            ++cursor_;
+        }
+        const char* line_end = cursor_;
+        if (cursor_ < end_) {
+            ++cursor_;
+        }
+        if (line_end > line_begin && line_end[-1] == '\r') {
+            --line_end;
+        }
+        parse_line(line_begin, line_end);
+    }
+    return move(document_);
+}
+
+optional<env_document> env_parser::try_parse() noexcept {
     try {
-        return parse();
+        return optional<env_document>(parse());
     } catch (...) {
-        return {};
+        return optional<env_document>();
     }
 }
 

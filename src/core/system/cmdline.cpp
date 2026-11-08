@@ -409,8 +409,7 @@ void cmdline::load_config(const string& config_path, const string& section) {
         env_document doc = parser.parse();
         for (const env_member& entry: doc.get_variables()) {
             const env_variable variable = entry.variable();
-            config_values[string(entry.key().data(), entry.key().size())] =
-                    string(variable.data(), variable.size());
+            config_values[string(entry.key().data(), entry.key().size())] = string(variable.data(), variable.size());
         }
     } else {
         NEFORCE_THROW_EXCEPTION(cmdline_exception(("Unsupported config file format: " + ext).data()));

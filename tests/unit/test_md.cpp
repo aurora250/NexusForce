@@ -11,7 +11,7 @@ namespace {
     string dump_node(const md_inline& node) {
         switch (node.kind) {
             case md_inline_kind::text: {
-                return string("t(\"") + escape(node.text) + "\")";
+                return string("t(\"") + escape(node.alt()) + "\")";
             }
             case md_inline_kind::strong: {
                 return "strong(" + dump(node.children) + ")";
@@ -23,17 +23,17 @@ namespace {
                 return "del(" + dump(node.children) + ")";
             }
             case md_inline_kind::code: {
-                return string("code(\"") + escape(node.text) + "\")";
+                return string("code(\"") + escape(node.alt()) + "\")";
             }
             case md_inline_kind::link: {
-                string result = "link(" + dump(node.children) + "->" + string(node.destination);
-                if (!node.title.empty()) {
-                    result += " \"" + string(node.title) + "\"";
+                string result = "link(" + dump(node.link_children()) + "->" + string(node.destination());
+                if (!node.title().empty()) {
+                    result += " \"" + string(node.title()) + "\"";
                 }
                 return result + ")";
             }
             case md_inline_kind::image: {
-                return string("img(\"") + escape(node.text) + "\"->" + string(node.destination) + ")";
+                return string("img(\"") + escape(node.alt()) + "\"->" + string(node.destination()) + ")";
             }
             case md_inline_kind::autolink: {
                 return string("auto(") + string(node.text) + ")";
@@ -102,13 +102,13 @@ namespace {
                 break;
             }
             case md_block_kind::code_block: {
-                out += pad + "code(fenced=" + to_string(static_cast<int64_t>(block.fenced)) +
-                       ",lang=" + (block.language) + ",info=" + (block.info) + ") [" + escape((block.literal)) + "]\n";
+                out += pad + "code(fenced=" + to_string(static_cast<int64_t>(block.fenced())) +
+                       ",lang=" + (block.language()) + ",info=" + (block.info()) + ") [" + escape((block.literal())) + "]\n";
                 break;
             }
             case md_block_kind::html_block: {
-                out += pad + "html" + to_string(static_cast<int64_t>(block.html_type)) + " [" +
-                       escape((block.literal)) + "]\n";
+                out += pad + "html" + to_string(static_cast<int64_t>(block.html_type())) + " [" +
+                       escape((block.literal())) + "]\n";
                 break;
             }
             case md_block_kind::thematic_break: {
@@ -142,11 +142,11 @@ namespace {
             }
             case md_block_kind::table: {
                 out += pad + "table align=";
-                for (const auto& align: block.alignments) {
+                for (const auto& align: block.alignments()) {
                     out += align_char(align);
                 }
-                out += " header=[" + dump_cells(block.header) + "]\n";
-                for (const auto& row: block.rows) {
+                out += " header=[" + dump_cells(block.header()) + "]\n";
+                for (const auto& row: block.rows()) {
                     out += pad + "  row=[" + dump_cells(row) + "]\n";
                 }
                 break;
@@ -218,24 +218,24 @@ TEST(MdParseTest, FencedCodeKeepsInfoAndLanguage) {
     ASSERT_EQ(document.blocks.size(), 1U);
     const auto& code = document.blocks[0];
     EXPECT_EQ(code.kind, md_block_kind::code_block);
-    EXPECT_TRUE(code.fenced);
-    EXPECT_EQ((code.info), "cpp extra");
-    EXPECT_EQ((code.language), "cpp");
-    EXPECT_EQ((code.literal), "int a = 1;\n");
+    EXPECT_TRUE(code.fenced());
+    EXPECT_EQ((code.info()), "cpp extra");
+    EXPECT_EQ((code.language()), "cpp");
+    EXPECT_EQ((code.literal()), "int a = 1;\n");
 }
 
 TEST(MdParseTest, FenceRequiresMatchingLengthAndChar) {
     const auto document = parse_doc("````\n```\nstill code\n````");
 
     ASSERT_EQ(document.blocks.size(), 1U);
-    EXPECT_EQ((document.blocks[0].literal), "```\nstill code\n");
+    EXPECT_EQ((document.blocks[0].literal()), "```\nstill code\n");
 }
 
 TEST(MdParseTest, UnterminatedFenceConsumesRestOfDocument) {
     const auto document = parse_doc("```\nbody\nmore");
 
     ASSERT_EQ(document.blocks.size(), 1U);
-    EXPECT_EQ((document.blocks[0].literal), "body\nmore\n");
+    EXPECT_EQ((document.blocks[0].literal()), "body\nmore\n");
 }
 
 TEST(MdParseTest, IndentedCodeBlockIsRecognized) {
@@ -243,42 +243,42 @@ TEST(MdParseTest, IndentedCodeBlockIsRecognized) {
 
     ASSERT_EQ(document.blocks.size(), 1U);
     EXPECT_EQ(document.blocks[0].kind, md_block_kind::code_block);
-    EXPECT_FALSE(document.blocks[0].fenced);
-    EXPECT_EQ((document.blocks[0].literal), "line one\nline two\n");
+    EXPECT_FALSE(document.blocks[0].fenced());
+    EXPECT_EQ((document.blocks[0].literal()), "line one\nline two\n");
 }
 
 TEST(MdParseTest, HtmlBlockTypes) {
     const auto comment = parse_doc("<!-- c -->\ntext");
     ASSERT_GE(comment.blocks.size(), 1U);
     EXPECT_EQ(comment.blocks[0].kind, md_block_kind::html_block);
-    EXPECT_EQ(comment.blocks[0].html_type, 2);
+    EXPECT_EQ(comment.blocks[0].html_type(), 2);
 
     const auto pre = parse_doc("<pre>\ncode\n</pre>\n\nafter");
     ASSERT_EQ(pre.blocks.size(), 2U);
-    EXPECT_EQ(pre.blocks[0].html_type, 1);
+    EXPECT_EQ(pre.blocks[0].html_type(), 1);
     EXPECT_EQ(pre.blocks[1].kind, md_block_kind::paragraph);
 
     const auto block_tag = parse_doc("<div>\nraw\n</div>");
     ASSERT_EQ(block_tag.blocks.size(), 1U);
-    EXPECT_EQ(block_tag.blocks[0].html_type, 6);
+    EXPECT_EQ(block_tag.blocks[0].html_type(), 6);
 
     const auto custom = parse_doc("<custom-tag attr=\"1\">\n\npara");
     ASSERT_EQ(custom.blocks.size(), 2U);
-    EXPECT_EQ(custom.blocks[0].html_type, 7);
+    EXPECT_EQ(custom.blocks[0].html_type(), 7);
 }
 
 TEST(MdParseTest, HtmlBlockProcessingInstructionAndDeclaration) {
     const auto pi = parse_doc("<?php echo 1; ?>\n\ntext");
     ASSERT_EQ(pi.blocks.size(), 2U);
-    EXPECT_EQ(pi.blocks[0].html_type, 3);
+    EXPECT_EQ(pi.blocks[0].html_type(), 3);
 
     const auto declaration = parse_doc("<!DOCTYPE html>\n\ntext");
     ASSERT_EQ(declaration.blocks.size(), 2U);
-    EXPECT_EQ(declaration.blocks[0].html_type, 4);
+    EXPECT_EQ(declaration.blocks[0].html_type(), 4);
 
     const auto cdata = parse_doc("<![CDATA[ raw ]]>\n\ntext");
     ASSERT_EQ(cdata.blocks.size(), 2U);
-    EXPECT_EQ(cdata.blocks[0].html_type, 5);
+    EXPECT_EQ(cdata.blocks[0].html_type(), 5);
 }
 
 TEST(MdParseTest, HtmlBlockCanBeDisabled) {
@@ -396,17 +396,17 @@ TEST(MdParseTest, TildeFenceIsSupported) {
     const auto document = parse_doc("~~~py\nx = 1\n~~~");
 
     ASSERT_EQ(document.blocks.size(), 1U);
-    EXPECT_TRUE(document.blocks[0].fenced);
-    EXPECT_EQ(document.blocks[0].fence_char, '~');
-    EXPECT_EQ((document.blocks[0].language), "py");
+    EXPECT_TRUE(document.blocks[0].fenced());
+    EXPECT_EQ(document.blocks[0].fence_char(), '~');
+    EXPECT_EQ((document.blocks[0].language()), "py");
 }
 
 TEST(MdParseTest, EscapedPipeStaysInsideTableCell) {
     const auto document = parse_doc("| a \\| b | c |\n| --- | --- |\n| 1 | 2 |");
 
     ASSERT_EQ(document.blocks.size(), 1U);
-    ASSERT_EQ(document.blocks[0].header.size(), 2U);
-    EXPECT_EQ((md_plain_text(document.blocks[0].header[0])), "a | b");
+    ASSERT_EQ(document.blocks[0].header().size(), 2U);
+    EXPECT_EQ((md_plain_text(document.blocks[0].header()[0])), "a | b");
 }
 
 TEST(MdParseTest, PipeTableWithAlignment) {
@@ -415,12 +415,12 @@ TEST(MdParseTest, PipeTableWithAlignment) {
     ASSERT_EQ(document.blocks.size(), 1U);
     const auto& table = document.blocks[0];
     EXPECT_EQ(table.kind, md_block_kind::table);
-    ASSERT_EQ(table.alignments.size(), 3U);
-    EXPECT_EQ(table.alignments[0], md_align::left);
-    EXPECT_EQ(table.alignments[1], md_align::center);
-    EXPECT_EQ(table.alignments[2], md_align::right);
-    EXPECT_EQ((md_plain_text(table.header[1])), "b");
-    EXPECT_EQ((md_plain_text(table.rows[0][2])), "3");
+    ASSERT_EQ(table.alignments().size(), 3U);
+    EXPECT_EQ(table.alignments()[0], md_align::left);
+    EXPECT_EQ(table.alignments()[1], md_align::center);
+    EXPECT_EQ(table.alignments()[2], md_align::right);
+    EXPECT_EQ((md_plain_text(table.header()[1])), "b");
+    EXPECT_EQ((md_plain_text(table.rows()[0][2])), "3");
 }
 
 TEST(MdParseTest, TableRequiresMatchingDelimiterCount) {

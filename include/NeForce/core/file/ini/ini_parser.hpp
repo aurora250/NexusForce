@@ -3,11 +3,10 @@
 
 /**
  * @file ini_parser.hpp
- * @brief INI配置解析器
+ * @brief INI 解析器
  *
- * 此文件提供了INI配置格式的解析器实现。
- * 支持解析INI格式，包括节(section)、键值对、注释等元素。
- * 提供完整的语法分析和错误处理机制。
+ * 指针游标单趟扫描，属性键与值默认直接引用输入缓冲区；
+ * 输入为 string 时由解析器持有并复制到 arena，保证文档自包含。
  */
 
 #include "NeForce/core/file/ini/ini_value.hpp"
@@ -26,112 +25,61 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @class ini_parser
- * @brief INI配置解析器
+ * @brief INI 配置解析器
  *
- * 解析INI格式，支持以下特性：
- * - 节定义（[section]格式）
- * - 键值对（key=value格式）
- * - 注释（支持;和#开头的行）
- * - 空白行处理
- * - 引号包裹的值
- * - 值前后的空白字符修剪
- *
- * 解析过程会维护行号和列号信息，便于错误定位。
+ * 支持以下特性：
+ * - 节定义（[section]）
+ * - 键值对（key = value）
+ * - 注释行（; 或 #）
+ * - 空行与值两侧空白
+ * - 单引号或双引号包裹的值
+ * - 同一节的重复键由后者覆盖
+ * - 同名节重复出现时重置该节
  */
 class NEFORCE_API ini_parser {
 private:
-    string text_;       ///< 待解析的文本内容
-    size_t len_;        ///< 文本长度
-    size_t pos_ = 0;    ///< 当前解析位置
-    size_t line_ = 1;   ///< 当前行号
-    size_t column_ = 1; ///< 当前列号
+    string owned_;                 ///< 拥有模式下的输入文本
+    string_view text_;             ///< 输入视图
+    const char* cursor_ = nullptr; ///< 当前扫描位置
+    const char* end_ = nullptr;    ///< 扫描结束位置
+    bool owning_ = false;          ///< 是否复制键值到文档内存
 
-    unique_ptr<ini_document> root_;          ///< 解析结果文档
-    ini_section* current_section_ = nullptr; ///< 当前正在解析的节
+    ini_document document_;               ///< 解析结果
+    ini_section_data* current_ = nullptr; ///< 当前节
 
-    /**
-     * @brief 跳过空白字符
-     *
-     * 跳过空格、制表符等空白字符，更新位置信息。
-     */
-    void skip_whitespace() noexcept;
-
-    /**
-     * @brief 跳过当前行
-     *
-     * 从当前位置跳过直到行尾，包括换行符。
-     */
-    void skip_line() noexcept;
-
-    /**
-     * @brief 获取当前字符
-     * @return 当前位置的字符，若已到末尾返回'\0'
-     */
-    NEFORCE_NODISCARD char current() const noexcept;
-
-    /**
-     * @brief 预取字符
-     * @param offset 向前偏移量，默认为1
-     * @return 指定偏移位置的字符
-     */
-    NEFORCE_NODISCARD char peek(size_t offset = 1) const noexcept;
-
-    /**
-     * @brief 检查是否已到末尾
-     * @return 是否已到文件末尾
-     */
-    NEFORCE_NODISCARD bool eof() const noexcept;
-
-    /**
-     * @brief 前进一个字符
-     *
-     * 更新位置信息，处理换行符的行列计数。
-     */
-    void advance() noexcept;
-
-    /**
-     * @brief 解析单行内容
-     * @param line 要解析的行
-     * @throws ini_exception 当解析遇到语法错误时抛出
-     *
-     * 根据行类型（注释、节定义、键值对）进行相应处理。
-     * 如果是节定义，创建新节并切换当前节；
-     * 如果是键值对，添加到当前节中。
-     */
-    void parse_line(const string& line);
+    void parse_line(const char* begin, const char* end);
 
 public:
     /**
-     * @brief 构造函数
-     * @param text 待解析的文本内容
-     *
-     * 初始化解析器，创建空的文档对象，并将当前节设置为全局节。
+     * @brief 构造借用输入的解析器
+     * @param text 输入文本，调用方需保证其生命周期不短于解析结果
      */
-    explicit ini_parser(string text) :
-    text_(_NEFORCE move(text)),
-    len_(text_.size()) {
-        root_ = make_unique<ini_document>();
-        current_section_ = root_->get_global_section();
-    }
+    explicit ini_parser(string_view text) noexcept;
+
+    /**
+     * @brief 构造拥有输入的解析器
+     * @param text 输入文本，解析器持有其副本
+     */
+    explicit ini_parser(string text);
+
+    /**
+     * @brief 构造拥有输入的解析器
+     * @param text 输入文本，解析器持有其副本
+     */
+    explicit ini_parser(const char* text);
 
     /**
      * @brief 执行解析
-     * @return 解析完成的文档对象
-     * @throws ini_exception 当解析遇到语法错误时抛出
-     *
-     * 逐行解析整个文本内容，构建INI文档结构。
-     * 解析过程中遇到错误会抛出异常。
+     * @return 解析完成的文档
+     * @throws allocate_exception 内存分配失败时抛出
      */
-    unique_ptr<ini_document> parse();
+    ini_document parse();
 
     /**
      * @brief 尝试执行解析
-     * @return 解析结果的可选对象
-     *
-     * 如果解析成功返回包含文档对象的optional，
-     * 如果解析失败返回空的optional。
+     * @return 成功时返回文档，失败时返回空 optional
      */
-    optional<unique_ptr<ini_document>> try_parse();
+    optional<ini_document> try_parse() noexcept;
 };
 
 /** @} */ // IniConfig

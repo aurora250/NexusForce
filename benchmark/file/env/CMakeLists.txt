@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceEnvBenchmark env_benchmark.cpp)

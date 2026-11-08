@@ -397,13 +397,12 @@ TEST_F(EnvParserTest, ParseOwnedText) {
 }
 
 TEST_F(EnvParserTest, ParseComplexDocument) {
-    const string text =
-            "# app configuration\n"
-            "APP_NAME=\"My App\"\n"
-            "PORT=8080\n"
-            "export DEBUG=true\n"
-            "RATIO=0.75\n"
-            "QUOTED='single value'\n";
+    const string text = "# app configuration\n"
+                        "APP_NAME=\"My App\"\n"
+                        "PORT=8080\n"
+                        "export DEBUG=true\n"
+                        "RATIO=0.75\n"
+                        "QUOTED='single value'\n";
     env_document doc = env_parser(text.view()).parse();
     EXPECT_EQ(doc.get_string("APP_NAME"), "My App");
     EXPECT_EQ(doc.get_int("PORT"), 8080);
@@ -794,16 +793,15 @@ TEST_F(IniParserTest, ParseOwnedText) {
 }
 
 TEST_F(IniParserTest, ParseComplexDocument) {
-    const string text =
-            "global = 1\n"
-            "; comment\n"
-            "[database]\n"
-            "host = localhost\n"
-            "port = 5432\n"
-            "enabled = true\n"
-            "[logging]\n"
-            "level = \"debug\"\n"
-            "path = 'a b'\n";
+    const string text = "global = 1\n"
+                        "; comment\n"
+                        "[database]\n"
+                        "host = localhost\n"
+                        "port = 5432\n"
+                        "enabled = true\n"
+                        "[logging]\n"
+                        "level = \"debug\"\n"
+                        "path = 'a b'\n";
     ini_document doc = ini_parser(text.view()).parse();
     EXPECT_EQ(doc.get_int("", "global"), 1);
     EXPECT_EQ(doc.get_string("database", "host"), "localhost");

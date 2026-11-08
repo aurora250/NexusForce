@@ -3,11 +3,7 @@
 
 /**
  * @file env_parser.hpp
- * @brief ENV配置格式解析器
- *
- * 此文件提供了ENV配置格式的解析器实现。
- * 支持解析ENV格式，包括变量定义、注释、引号处理和转义字符。
- * 提供完整的语法分析和错误处理机制。
+ * @brief ENV 解析器
  */
 
 #include "NeForce/core/file/env/env_value.hpp"
@@ -26,107 +22,62 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @class env_parser
- * @brief 环境变量文件解析器
+ * @brief ENV 配置解析器
  *
- * 解析ENV格式，支持以下特性：
- * - 变量定义（KEY=VALUE格式）
- * - 注释（以#开头的行）
- * - 引号处理（单引号、双引号）
- * - 转义字符处理
- * - export关键字支持
- * - 空白行处理
- *
- * 解析过程会维护行号和列号信息，便于错误定位。
+ * 支持以下特性：
+ * - 变量定义（KEY=VALUE）
+ * - export 前缀
+ * - # 注释与空行
+ * - 单引号、双引号包裹的值
+ * - 双引号值中的 \n、\r、\t、\\、\"、\$、\` 转义
+ * - 单引号值中的 '\'' 转义
+ * - 无引号值在空白或 # 处结束
  */
 class NEFORCE_API env_parser {
 private:
-    string text_;       ///< 待解析的文本内容
-    size_t len_;        ///< 文本长度
-    size_t pos_ = 0;    ///< 当前解析位置
-    size_t line_ = 1;   ///< 当前行号
-    size_t column_ = 1; ///< 当前列号
+    string owned_;                 ///< 拥有模式下的输入文本
+    string_view text_;             ///< 输入视图
+    const char* cursor_ = nullptr; ///< 当前扫描位置
+    const char* end_ = nullptr;    ///< 扫描结束位置
+    bool owning_ = false;          ///< 是否复制键值与注释到文档内存
+    string scratch_;               ///< 转义解码临时缓冲
 
-    unique_ptr<env_document> root_; ///< 解析结果文档
+    env_document document_; ///< 解析结果
 
-    /**
-     * @brief 跳过空白字符
-     *
-     * 跳过空格和制表符，更新位置信息。
-     */
-    void skip_whitespace() noexcept;
-
-    /**
-     * @brief 跳过当前行
-     *
-     * 从当前位置跳过直到行尾，包括换行符。
-     */
-    void skip_line() noexcept;
-
-    /**
-     * @brief 获取当前字符
-     * @return 当前位置的字符，若已到末尾返回'\0'
-     */
-    NEFORCE_NODISCARD char current() const noexcept;
-
-    /**
-     * @brief 预取字符
-     * @param offset 向前偏移量，默认为1
-     * @return 指定偏移位置的字符
-     */
-    NEFORCE_NODISCARD char peek(size_t offset = 1) const noexcept;
-
-    /**
-     * @brief 检查是否已到末尾
-     * @return 是否已到文件末尾
-     */
-    NEFORCE_NODISCARD bool eof() const noexcept;
-
-    /**
-     * @brief 前进一个字符
-     *
-     * 更新位置信息，处理换行符的行列计数。
-     */
-    void advance() noexcept;
-
-    /**
-     * @brief 解析单行内容
-     * @param line 要解析的行
-     *
-     * 根据行类型进行相应处理。
-     */
-    void parse_line(const string& line) const;
+    void parse_line(const char* begin, const char* end);
+    NEFORCE_NODISCARD string_view parse_quoted(const char* begin, const char* end, env_quote& quote, bool& decoded);
 
 public:
     /**
-     * @brief 构造函数
-     * @param text 待解析的文本内容
-     *
-     * 初始化解析器并创建空的文档对象。
+     * @brief 构造借用输入的解析器
+     * @param text 输入文本，调用方需保证其生命周期不短于解析结果
      */
-    explicit env_parser(string text) :
-    text_(_NEFORCE move(text)),
-    len_(text_.size()) {
-        root_ = make_unique<env_document>();
-    }
+    explicit env_parser(string_view text) noexcept;
+
+    /**
+     * @brief 构造拥有输入的解析器
+     * @param text 输入文本，解析器持有其副本
+     */
+    explicit env_parser(string text);
+
+    /**
+     * @brief 构造拥有输入的解析器
+     * @param text 输入文本，解析器持有其副本
+     */
+    explicit env_parser(const char* text);
 
     /**
      * @brief 执行解析
-     * @return 解析完成的文档对象
-     *
-     * 逐行解析整个文本内容。
-     *
-     * @throws env_exception 当解析过程中遇到语法错误时抛出
+     * @return 解析完成的文档
+     * @throws allocate_exception 内存分配失败时抛出
      */
-    unique_ptr<env_document> parse();
+    env_document parse();
 
     /**
      * @brief 尝试执行解析
-     * @return 解析结果的可选对象
-     *
-     * 如果解析成功返回包含文档对象的optional，
-     * 如果解析失败返回空的optional。
+     * @return 成功时返回文档，失败时返回空 optional
      */
-    optional<unique_ptr<env_document>> try_parse();
+    optional<env_document> try_parse() noexcept;
 };
 
 /** @} */ // EnvConfig

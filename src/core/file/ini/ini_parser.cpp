@@ -1,131 +1,92 @@
-#include <NeForce/core/file/ini/ini_parser.hpp>
-#include <NeForce/core/utility/packages.hpp>
+#include "NeForce/core/file/ini/ini_parser.hpp"
+#include "NeForce/core/utility/packages.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    bool is_comment_line(const string_view line) noexcept {
-        const string_view trimmed = line.trim();
-        return trimmed.empty() || trimmed[0] == ';' || trimmed[0] == '#';
-    }
-
-    bool is_section_line(const string_view line, string& section_name) {
-        const string_view trimmed = line.trim();
-        if (trimmed.size() >= 2 && trimmed.front() == '[' && trimmed.back() == ']') {
-            section_name = trimmed.substr(1, trimmed.size() - 2).trim();
-            return true;
-        }
-        return false;
-    }
-
-    bool parse_key_value(const string& line, string& key, string& value) {
-        const size_t pos = line.find('=');
-        if (pos == string::npos) {
-            return false;
-        }
-
-        key = line.head(pos).trim();
-        value = line.tail(pos + 1).trim();
-
-        if (value.size() >= 2 &&
-            ((value.front() == '"' && value.back() == '"') || (value.front() == '\'' && value.back() == '\''))) {
-            value = value.substr(1, value.size() - 2);
-        }
-
-        return !key.empty();
+    NEFORCE_NODISCARD string_view trimmed(const char* begin, const char* end) noexcept {
+        return string_view(begin, static_cast<size_t>(end - begin)).trim();
     }
 } // namespace
 
 
-void ini_parser::skip_whitespace() noexcept {
-    while (pos_ < len_ && is_space(current())) {
-        advance();
-    }
+ini_parser::ini_parser(const string_view text) noexcept :
+text_(text),
+cursor_(text.data()),
+end_(text.data() == nullptr ? nullptr : text.data() + text.size()) {
+    current_ = document_.root_.storage_.ext_.payload_.section_;
 }
 
-void ini_parser::skip_line() noexcept {
-    while (!eof() && current() != '\n') {
-        advance();
-    }
-    if (current() == '\n') {
-        advance();
-    }
+ini_parser::ini_parser(string text) :
+owned_(move(text)),
+text_(owned_.data(), owned_.size()),
+cursor_(owned_.data()),
+end_(owned_.data() + owned_.size()),
+owning_(true) {
+    current_ = document_.root_.storage_.ext_.payload_.section_;
 }
 
-char ini_parser::current() const noexcept {
-    if (pos_ < len_) {
-        return text_[pos_];
-    }
-    return '\0';
-}
+ini_parser::ini_parser(const char* text) :
+ini_parser(string(text)) {}
 
-char ini_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) {
-        return text_[pos_ + offset];
-    }
-    return '\0';
-}
-
-bool ini_parser::eof() const noexcept { return pos_ >= len_; }
-
-void ini_parser::advance() noexcept {
-    if (pos_ < len_) {
-        if (text_[pos_] == '\n') {
-            line_++;
-            column_ = 1;
-        } else {
-            column_++;
-        }
-        pos_++;
-    }
-}
-
-void ini_parser::parse_line(const string& line) {
-    if (is_comment_line(line.view())) {
+void ini_parser::parse_line(const char* begin, const char* end) {
+    const string_view line = trimmed(begin, end);
+    if (line.empty() || line.front() == ';' || line.front() == '#') {
         return;
     }
-
-    string section_name;
-    if (is_section_line(line.view(), section_name)) {
-        auto new_section = make_unique<ini_section>(section_name);
-        current_section_ = new_section.get();
-        root_->add_section(section_name, move(new_section));
+    if (line.size() >= 2 && line.front() == '[' && line.back() == ']') {
+        const string_view name = trimmed(line.data() + 1, line.data() + line.size() - 1);
+        current_ = document_.new_section(name, owning_).data();
         return;
     }
-
-    string key, value;
-    if (parse_key_value(line, key, value)) {
-        if (current_section_ == nullptr) {
-            current_section_ = root_->get_global_section();
-        }
-        current_section_->set_property(key, value);
+    const char* equal = line.data();
+    const char* limit = line.data() + line.size();
+    while (equal < limit && *equal != '=') {
+        ++equal;
     }
+    if (equal == limit) {
+        return;
+    }
+    const string_view key = trimmed(line.data(), equal);
+    if (key.empty()) {
+        return;
+    }
+    string_view value = trimmed(equal + 1, limit);
+    if (value.size() >= 2 &&
+        ((value.front() == '"' && value.back() == '"') || (value.front() == '\'' && value.back() == '\''))) {
+        value = string_view(value.data() + 1, value.size() - 2);
+    }
+    if (current_ == nullptr) {
+        current_ = document_.root_.storage_.ext_.payload_.section_;
+    }
+    document_.append_property(current_, key, value, owning_);
 }
 
-unique_ptr<ini_document> ini_parser::parse() {
-    string line;
-
-    while (!eof()) {
-        line.clear();
-        while (!eof() && current() != '\n') {
-            line += current();
-            advance();
-        }
-
-        if (current() == '\n') {
-            advance();
-        }
-
-        parse_line(line);
+ini_document ini_parser::parse() {
+    if (cursor_ == nullptr) {
+        return move(document_);
     }
-
-    return move(root_);
+    while (cursor_ < end_) {
+        const char* line_begin = cursor_;
+        while (cursor_ < end_ && *cursor_ != '\n') {
+            ++cursor_;
+        }
+        const char* line_end = cursor_;
+        if (cursor_ < end_) {
+            ++cursor_;
+        }
+        if (line_end > line_begin && line_end[-1] == '\r') {
+            --line_end;
+        }
+        parse_line(line_begin, line_end);
+    }
+    return move(document_);
 }
 
-optional<unique_ptr<ini_document>> ini_parser::try_parse() {
+optional<ini_document> ini_parser::try_parse() noexcept {
     try {
-        return parse();
+        return optional<ini_document>(parse());
     } catch (...) {
-        return {};
+        return optional<ini_document>();
     }
 }
 
