@@ -355,7 +355,7 @@ struct NEFORCE_API env_member {
     const char* key_data = nullptr; ///< 键起始地址或内联键本体
     uint32_t key_size = 0;          ///< 键长度，最高位为内联标记
     uint32_t key_prefix = 0;        ///< 键前 4 字节
-    env_value value{};              ///< 变量值
+    env_value value;                ///< 变量值
 
     /**
      * @brief 判断键是否内联

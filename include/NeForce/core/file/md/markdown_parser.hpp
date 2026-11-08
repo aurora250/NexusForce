@@ -83,9 +83,6 @@ public:
     /**
      * @brief 执行解析
      * @return 解析完成的文档模型
-     *
-     * 解析整段文本，返回顶层块序列与收集到的链接引用定义。
-     * 空输入返回空文档。
      */
     NEFORCE_NODISCARD markdown_document parse();
 
@@ -93,8 +90,6 @@ public:
      * @brief 把整段文本作为单段行内内容解析
      * @param document 供引用式链接解析使用的文档，可为 nullptr
      * @return 行内节点列表
-     *
-     * 用于处理富文本片段、标题或表格单元格等不涉及块级结构的内容。
      */
     NEFORCE_NODISCARD md_inlines parse_inline(const markdown_document* document = nullptr);
 

@@ -36,9 +36,12 @@ namespace {
 
     using line_views = md_list<string_view>;
 
+    string_view fence_of(string_view line) noexcept;
+
     struct line_table {
         line_views lines;
         vector<string> owned;
+        md_list<size_t> reference_lines;
     };
 
     string expand_tabs(const string_view line) {
@@ -62,22 +65,6 @@ namespace {
         return expanded;
     }
 
-    size_t count_byte(const string_view text, const char value) {
-        size_t hits = 0;
-        const auto* cursor = reinterpret_cast<const byte_t*>(text.data());
-        const auto* const end = cursor + text.size();
-        while (cursor < end) {
-            const auto* found = static_cast<const byte_t*>(
-                    memory_find(cursor, static_cast<byte_t>(value), static_cast<size_t>(end - cursor)));
-            if (found == nullptr) {
-                break;
-            }
-            ++hits;
-            cursor = found + 1;
-        }
-        return hits;
-    }
-
     string_view arena_copy(const string_view text) {
         if (text.empty()) {
             return string_view();
@@ -91,6 +78,21 @@ namespace {
         return string_view(data, text.size());
     }
 
+    bump_arena& block_arena() {
+        bump_arena* arena = inner::md_arena_slot();
+        return arena != nullptr ? *arena : inner::md_fallback_arena();
+    }
+
+    md_link_data* make_link_data() {
+        bump_arena& arena = block_arena();
+        auto* link = static_cast<md_link_data*>(arena.allocate(1, sizeof(md_link_data), alignof(md_link_data)));
+        link->destination = string_view();
+        link->title = string_view();
+        link->reference = string_view();
+        link->children = md_list<md_inline>();
+        return link;
+    }
+
     line_table split_lines(const string_view text) {
         line_table table;
         if (text.empty()) {
@@ -98,11 +100,13 @@ namespace {
         }
 
         const bool has_tab = text.contains('\t');
-        table.lines.reserve(count_byte(text, '\n') + 1);
+        table.lines.reserve(text.size() / 16 + 1);
         if (has_tab) {
             table.owned.reserve(table.lines.capacity());
         }
 
+        bool in_fence = false;
+        string_view fence;
         const auto* cursor = reinterpret_cast<const byte_t*>(text.data());
         const auto* const end = cursor + text.size();
         while (cursor < end) {
@@ -114,11 +118,32 @@ namespace {
             }
 
             const string_view line(reinterpret_cast<const char*>(cursor), static_cast<size_t>(stop - cursor));
+            string_view stored = line;
             if (has_tab) {
                 table.owned.push_back(expand_tabs(line));
-                table.lines.push_back(table.owned.back().view());
-            } else {
-                table.lines.push_back(line);
+                stored = table.owned.back().view();
+            }
+            table.lines.push_back(stored);
+
+            const char* first = stored.data();
+            const char* const line_end = first + stored.size();
+            while (first < line_end && (*first == ' ' || *first == '\t')) {
+                ++first;
+            }
+            const char first_char = first < line_end ? *first : '\0';
+            if (first_char == '`' || first_char == '~') {
+                const string_view marker = fence_of(stored);
+                if (in_fence) {
+                    if (!marker.empty() && marker.size() >= fence.size() && marker[0] == fence[0] &&
+                        stored.trim_left().substr(marker.size()).trim().empty()) {
+                        in_fence = false;
+                    }
+                } else if (marker.size() >= 3) {
+                    in_fence = true;
+                    fence = marker;
+                }
+            } else if (!in_fence && first_char == '[' && first - stored.data() <= 3) {
+                table.reference_lines.push_back(table.lines.size() - 1);
             }
 
             if (newline == nullptr) {
@@ -466,11 +491,20 @@ namespace {
         if (index + 1 >= lines.size()) {
             return false;
         }
+        const auto delimiter_line = lines[index + 1];
+        const char* cursor = delimiter_line.data();
+        const char* const end = cursor + delimiter_line.size();
+        while (cursor < end && (*cursor == ' ' || *cursor == '\t')) {
+            ++cursor;
+        }
+        if (cursor >= end || (*cursor != '|' && *cursor != ':' && *cursor != '-')) {
+            return false;
+        }
         const auto header = lines[index];
         if (!header.contains('|')) {
             return false;
         }
-        const auto delimiter_cells = split_pipe_row(lines[index + 1]);
+        const auto delimiter_cells = split_pipe_row(delimiter_line);
         if (delimiter_cells.empty()) {
             return false;
         }
@@ -558,13 +592,29 @@ namespace {
         if (needle.empty()) {
             return string_view::npos;
         }
+        const size_t width = needle.size();
         size_t pos = from;
-        while (pos + needle.size() <= end) {
-            if (text[pos] == '\\') {
-                pos += 2;
-                continue;
+        while (pos + width <= end) {
+            const auto* hit =
+                    static_cast<const char*>(memory_find(text.data() + pos, static_cast<byte_t>(needle[0]), end - pos));
+            if (hit == nullptr) {
+                return string_view::npos;
             }
-            if (text.substr(pos, needle.size()) == needle) {
+            pos = static_cast<size_t>(hit - text.data());
+            if (pos + width > end) {
+                return string_view::npos;
+            }
+            if (pos > from && text[pos - 1] == '\\') {
+                size_t backslashes = 0;
+                for (size_t i = pos; i > from && text[i - 1] == '\\'; --i) {
+                    ++backslashes;
+                }
+                if ((backslashes & 1U) != 0U) {
+                    ++pos;
+                    continue;
+                }
+            }
+            if (text.substr(pos, width) == needle) {
                 return pos;
             }
             ++pos;
@@ -573,6 +623,26 @@ namespace {
     }
 
     size_t match_bracket(const string_view text, const size_t open, const size_t end) noexcept {
+        if (open + 1 < end) {
+            const auto* close = static_cast<const char*>(
+                    memory_find(text.data() + open + 1, static_cast<byte_t>(']'), end - open - 1));
+            if (close != nullptr) {
+                const auto candidate = static_cast<size_t>(close - text.data());
+                size_t backslashes = 0;
+                for (size_t i = candidate; i > open && text[i - 1] == '\\'; --i) {
+                    ++backslashes;
+                }
+                if ((backslashes & 1U) == 0U) {
+                    const auto* nested = static_cast<const char*>(
+                            memory_find(text.data() + open + 1, static_cast<byte_t>('['), candidate - open - 1));
+                    const auto* tick = static_cast<const char*>(
+                            memory_find(text.data() + open + 1, static_cast<byte_t>('`'), candidate - open - 1));
+                    if (nested == nullptr && tick == nullptr) {
+                        return candidate;
+                    }
+                }
+            }
+        }
         int depth = 0;
         for (size_t pos = open; pos < end; ++pos) {
             const char c = text[pos];
@@ -762,7 +832,7 @@ namespace {
         return true;
     }
 
-    bool parse_link_destination(const string_view text, size_t& pos, const size_t end, string& destination) {
+    bool parse_link_destination(const string_view text, size_t& pos, const size_t end, string_view& destination) {
         const size_t begin = pos;
         if (pos < end && text[pos] == '<') {
             ++pos;
@@ -778,7 +848,7 @@ namespace {
             if (pos >= end) {
                 return false;
             }
-            destination = string(text.substr(begin + 1, pos - begin - 1));
+            destination = text.substr(begin + 1, pos - begin - 1);
             ++pos;
             return true;
         }
@@ -804,11 +874,11 @@ namespace {
         if (pos == begin) {
             return false;
         }
-        destination = string(text.substr(begin, pos - begin));
+        destination = text.substr(begin, pos - begin);
         return true;
     }
 
-    bool parse_link_title(const string_view text, size_t& pos, const size_t end, string& title) {
+    bool parse_link_title(const string_view text, size_t& pos, const size_t end, string_view& title) {
         if (pos >= end) {
             return false;
         }
@@ -828,7 +898,7 @@ namespace {
         if (pos >= end) {
             return false;
         }
-        title = string(text.substr(begin, pos - begin));
+        title = text.substr(begin, pos - begin);
         ++pos;
         return true;
     }
@@ -870,29 +940,41 @@ namespace {
     struct parse_context {
         markdown_parser::option opt;
         markdown_document* document = nullptr;
+        bool tables_present = true;
     };
 
     bool starts_new_block(const string_view line, const parse_context& ctx, const line_views* lines,
                           const size_t index) {
-        if (fence_of(line).size() >= 3) {
+        const char* cursor = line.data();
+        const char* const end = cursor + line.size();
+        while (cursor < end && (*cursor == ' ' || *cursor == '\t')) {
+            ++cursor;
+        }
+        if (cursor >= end) {
+            return false;
+        }
+        const char first = *cursor;
+        if ((first == '`' || first == '~') && fence_of(line).size() >= 3) {
             return true;
         }
-        if (heading_level(line) > 0) {
+        if (first == '#' && heading_level(line) > 0) {
             return true;
         }
-        if (is_thematic_break(line)) {
+        if ((first == '-' || first == '*' || first == '_' || first == '+') && is_thematic_break(line)) {
             return true;
         }
-        if (line.trim_left().starts_with(">")) {
+        if (first == '>' && line.trim_left().starts_with(">")) {
             return true;
         }
-        if (scan_list_marker(line, ctx.opt.task_lists).valid) {
+        if ((first == '-' || first == '+' || first == '*' || (first >= '0' && first <= '9')) &&
+            scan_list_marker(line, ctx.opt.task_lists).valid) {
             return true;
         }
-        if (ctx.opt.html_blocks && html_block_start(line) > 0) {
+        if (first == '<' && ctx.opt.html_blocks && html_block_start(line) > 0) {
             return true;
         }
-        if (lines != nullptr && ctx.opt.tables && is_table_start(*lines, index)) {
+        if (lines != nullptr && ctx.opt.tables && ctx.tables_present && line.contains('|') &&
+            is_table_start(*lines, index)) {
             return true;
         }
         return false;
@@ -900,13 +982,12 @@ namespace {
 
     md_blocks parse_block_lines(const line_views& lines, parse_context& ctx, int depth);
 
-    bool parse_reference_definition(const line_views& lines, const size_t index, md_reference* reference,
-                                    size_t* consumed) {
+    bool parse_reference_definition(const line_views& lines, const size_t index, const int indent,
+                                    md_reference* reference, size_t* consumed) {
         if (consumed != nullptr) {
             *consumed = 0;
         }
         const auto line = lines[index];
-        const int indent = leading_spaces(line);
         if (indent > 3) {
             return false;
         }
@@ -929,7 +1010,7 @@ namespace {
             ++pos;
         }
 
-        string destination;
+        string_view destination;
         if (!parse_link_destination(body, pos, body.size(), destination)) {
             if (index + 1 >= lines.size()) {
                 return false;
@@ -950,7 +1031,7 @@ namespace {
             if (pos != next.size()) {
                 return false;
             }
-            string next_title;
+            string_view next_title;
             if (index + 2 < lines.size()) {
                 const auto third = lines[index + 2];
                 if (leading_spaces(third) <= 3) {
@@ -959,14 +1040,14 @@ namespace {
                         third.substr(third_pos).trim().empty()) {
                         used_lines = 3;
                     } else {
-                        next_title.clear();
+                        next_title = string_view();
                     }
                 }
             }
             if (reference != nullptr) {
-                reference->label = arena_copy(label);
-                reference->destination = arena_copy(destination.view());
-                reference->title = arena_copy(next_title.view());
+                reference->label = label;
+                reference->destination = destination;
+                reference->title = next_title;
             }
             if (consumed != nullptr) {
                 *consumed = used_lines;
@@ -978,7 +1059,7 @@ namespace {
             ++pos;
         }
 
-        string title;
+        string_view title;
         if (pos < body.size()) {
             if (!parse_link_title(body, pos, body.size(), title)) {
                 return false;
@@ -996,15 +1077,15 @@ namespace {
                 if (parse_link_title(next, next_pos, next.size(), title) && next.substr(next_pos).trim().empty()) {
                     used_lines = 2;
                 } else {
-                    title.clear();
+                    title = string_view();
                 }
             }
         }
 
         if (reference != nullptr) {
-            reference->label = arena_copy(label);
-            reference->destination = arena_copy(destination.view());
-            reference->title = arena_copy(title.view());
+            reference->label = label;
+            reference->destination = destination;
+            reference->title = title;
         }
         if (consumed != nullptr) {
             *consumed = used_lines;
@@ -1012,50 +1093,42 @@ namespace {
         return true;
     }
 
-    void collect_references(const line_views& lines, markdown_document& document) {
-        size_t index = 0;
-        bool in_fence = false;
-        string_view fence;
-        while (index < lines.size()) {
+    void collect_references(const line_views& lines, const md_list<size_t>& candidates, markdown_document& document) {
+        size_t skip_until = 0;
+        for (const auto index: candidates) {
+            if (index < skip_until) {
+                continue;
+            }
             const auto line = lines[index];
-            const auto fence_marker = fence_of(line);
-            if (in_fence) {
-                if (!fence_marker.empty() && fence_marker.size() >= fence.size() && fence_marker[0] == fence[0] &&
-                    line.trim_left().substr(fence_marker.size()).trim().empty()) {
-                    in_fence = false;
-                }
-                ++index;
-                continue;
-            }
-            if (!fence_marker.empty()) {
-                in_fence = true;
-                fence = fence_marker;
-                ++index;
-                continue;
-            }
-            if (leading_spaces(line) >= 4) {
-                ++index;
-                continue;
-            }
             const char* first = line.data();
-            const char* const line_end = first + line.size();
-            while (first < line_end && (*first == ' ' || *first == '\t')) {
+            const char* const end = first + line.size();
+            while (first < end && (*first == ' ' || *first == '\t')) {
                 ++first;
             }
-            if (first >= line_end || *first != '[') {
-                ++index;
+            if (first >= end || *first != '[') {
                 continue;
             }
             md_reference reference;
             size_t consumed = 0;
-            if (parse_reference_definition(lines, index, &reference, &consumed)) {
-                if (md_find_reference(document, reference.label) == nullptr) {
-                    document.references.push_back(move(reference));
-                }
-                index += max<size_t>(1, consumed);
+            if (!parse_reference_definition(lines, index, static_cast<int>(first - line.data()), &reference,
+                                            &consumed)) {
                 continue;
             }
-            ++index;
+            const string normalised = md_normalise_label(reference.label);
+            bool duplicate = false;
+            for (const auto& existing: document.references) {
+                if (existing.normalized == normalised.view()) {
+                    duplicate = true;
+                    break;
+                }
+            }
+            if (!duplicate) {
+                auto* data = static_cast<char*>(document.arena().allocate(normalised.size(), 1, 1));
+                memory_copy(data, normalised.data(), normalised.size());
+                reference.normalized = string_view(data, normalised.size());
+                document.references.push_back(reference);
+            }
+            skip_until = index + max<size_t>(1, consumed);
         }
     }
 
@@ -1067,42 +1140,47 @@ namespace {
             block.inlines = parse_inline_range(line, 0, line.size(), inline_ctx, 0);
             return block;
         }
-        size_t total = 0;
+        size_t total = paragraph.size() - 1;
         for (const auto& line: paragraph) {
             total += line.size();
         }
-        string joined;
-        joined.reserve(total + paragraph.size());
+        auto* data = static_cast<char*>(block_arena().allocate(total, 1, 1));
+        if (data == nullptr) {
+            return block;
+        }
+        char* out = data;
         for (size_t i = 0; i < paragraph.size(); ++i) {
             if (i > 0) {
-                joined += '\n';
+                *out++ = '\n';
             }
-            joined.append(paragraph[i]);
+            memory_copy(out, paragraph[i].data(), paragraph[i].size());
+            out += paragraph[i].size();
         }
-        const string_view paragraph_text = arena_copy(joined.view());
+        const string_view paragraph_text(data, total);
         block.inlines = parse_inline_range(paragraph_text, 0, paragraph_text.size(), inline_ctx, 0);
         return block;
     }
 
-    md_block parse_fenced_code(const line_views& lines, size_t& index) {
+    md_block parse_fenced_code(const line_views& lines, size_t& index, const string_view fence) {
         md_block block;
         block.kind = md_block_kind::code_block;
-        block.fenced = true;
+        md_code_data* code = block.make_code(block_arena());
+        code->fenced = true;
 
-        const auto fence = fence_of(lines[index]);
-        block.fence_char = fence[0];
-        block.fence_length = static_cast<int>(fence.size());
-        block.info = lines[index].trim_left().substr(fence.size()).trim();
+        code->fence_char = fence[0];
+        code->fence_length = static_cast<int>(fence.size());
+        code->info = lines[index].trim_left().substr(fence.size()).trim();
         {
-            const auto info = block.info;
+            const auto info = code->info;
             const auto space = info.find(' ');
-            block.language = space == string_view::npos ? info : info.substr(0, space);
+            code->language = space == string_view::npos ? info : info.substr(0, space);
         }
         ++index;
 
-        string literal;
-        while (index < lines.size()) {
-            const auto line = lines[index];
+        size_t content_end = index;
+        size_t total = 0;
+        while (content_end < lines.size()) {
+            const auto line = lines[content_end];
             const auto trimmed = line.trim_left();
             if (trimmed.size() >= fence.size() && trimmed[0] == fence[0]) {
                 size_t run = 0;
@@ -1110,38 +1188,62 @@ namespace {
                     ++run;
                 }
                 if (run >= fence.size() && trimmed.substr(run).trim().empty()) {
-                    ++index;
                     break;
                 }
             }
-            literal += line;
-            literal += '\n';
+            total += line.size() + 1;
+            ++content_end;
+        }
+        if (total != 0) {
+            auto* data = static_cast<char*>(block_arena().allocate(total, 1, 1));
+            char* out = data;
+            for (size_t i = index; i < content_end; ++i) {
+                const auto line = lines[i];
+                memory_copy(out, line.data(), line.size());
+                out += line.size();
+                *out++ = '\n';
+            }
+            code->literal = string_view(data, total);
+        }
+        index = content_end;
+        if (index < lines.size()) {
             ++index;
         }
-        block.literal = arena_copy(literal.view());
         return block;
     }
 
     md_block parse_html_block(const line_views& lines, size_t& index, const int type) {
         md_block block;
         block.kind = md_block_kind::html_block;
-        block.html_type = type;
+        md_code_data* code = block.make_code(block_arena());
+        code->html_type = type;
 
-        string literal;
-        while (index < lines.size()) {
-            const auto line = lines[index];
+        size_t html_end = index;
+        size_t total = 0;
+        while (html_end < lines.size()) {
+            const auto line = lines[html_end];
             if (type >= 6 && is_blank(line)) {
                 break;
             }
-            literal += line;
-            literal += '\n';
+            total += line.size() + 1;
             const bool ended = html_block_end(type, line);
-            ++index;
+            ++html_end;
             if (type < 6 && ended) {
                 break;
             }
         }
-        block.literal = arena_copy(literal.view());
+        if (total != 0) {
+            auto* data = static_cast<char*>(block_arena().allocate(total, 1, 1));
+            char* out = data;
+            for (size_t i = index; i < html_end; ++i) {
+                const auto line = lines[i];
+                memory_copy(out, line.data(), line.size());
+                out += line.size();
+                *out++ = '\n';
+            }
+            code->literal = string_view(data, total);
+        }
+        index = html_end;
         return block;
     }
 
@@ -1155,7 +1257,7 @@ namespace {
                 if (!rest.empty() && rest[0] == ' ') {
                     rest = rest.substr(1);
                 }
-                inner.push_back(arena_copy(rest));
+                inner.push_back(rest);
                 ++index;
                 continue;
             }
@@ -1163,7 +1265,7 @@ namespace {
                 break;
             }
             if (!inner.empty() && !starts_new_block(line, ctx, &lines, index)) {
-                inner.push_back(arena_copy(line.trim_left()));
+                inner.push_back(line.trim_left());
                 ++index;
                 continue;
             }
@@ -1181,14 +1283,15 @@ namespace {
 
         md_block block;
         block.kind = md_block_kind::table;
+        md_table_data* table = block.make_table(block_arena());
 
         const auto header_cells = split_pipe_row(lines[index]);
         const auto delimiter_cells = split_pipe_row(lines[index + 1]);
         for (const auto& cell: delimiter_cells) {
-            block.alignments.push_back(alignment_of(cell));
+            table->alignments.push_back(alignment_of(cell));
         }
         for (const auto& cell: header_cells) {
-            block.header.push_back(parse_inline_range(cell, 0, cell.size(), inline_ctx, 0));
+            table->header.push_back(parse_inline_range(cell, 0, cell.size(), inline_ctx, 0));
         }
         index += 2;
 
@@ -1202,17 +1305,88 @@ namespace {
             }
             const auto cells = split_pipe_row(line);
             md_list<md_inlines> row;
-            for (size_t i = 0; i < block.alignments.size(); ++i) {
+            for (size_t i = 0; i < table->alignments.size(); ++i) {
                 if (i < cells.size()) {
                     row.push_back(parse_inline_range(cells[i], 0, cells[i].size(), inline_ctx, 0));
                 } else {
                     row.emplace_back();
                 }
             }
-            block.rows.push_back(move(row));
+            table->rows.push_back(move(row));
             ++index;
         }
         return block;
+    }
+
+    bool is_simple_paragraph_item(const line_views& item) {
+        if (item.empty()) {
+            return false;
+        }
+        for (const auto& current: item) {
+            const char* cursor = current.data();
+            const char* const end = cursor + current.size();
+            while (cursor < end && (*cursor == ' ' || *cursor == '\t')) {
+                ++cursor;
+            }
+            if (cursor >= end) {
+                return false;
+            }
+            if (static_cast<size_t>(cursor - current.data()) >= 4) {
+                return false;
+            }
+            const char first = *cursor;
+            switch (first) {
+                case '#':
+                case '`':
+                case '~':
+                case '>':
+                case '<':
+                case '-':
+                case '+':
+                case '*':
+                case '_':
+                case '=':
+                case '[':
+                case '|':
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9': {
+                    return false;
+                }
+                default: {
+                    break;
+                }
+            }
+            if (current.contains('|')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool is_paragraph_line(const string_view line) {
+        const char* cursor = line.data();
+        const char* const end = cursor + line.size();
+        while (cursor < end && (*cursor == ' ' || *cursor == '\t')) {
+            ++cursor;
+        }
+        if (cursor >= end || static_cast<size_t>(cursor - line.data()) >= 4) {
+            return false;
+        }
+        const char first = *cursor;
+        if (first == '#' || first == '`' || first == '~' || first == '>' || first == '<' || first == '-' ||
+            first == '+' || first == '*' || first == '_' || first == '=' || first == '[' || first == '|' ||
+            (first >= '0' && first <= '9')) {
+            return false;
+        }
+        return !line.contains('|');
     }
 
     md_block parse_list(const line_views& lines, size_t& index, parse_context& ctx, const int depth) {
@@ -1255,7 +1429,7 @@ namespace {
 
             const int content_indent = static_cast<int>(marker.content_offset);
             item_views.clear();
-            item_views.push_back(arena_copy(line.substr(marker.content_offset)));
+            item_views.push_back(line.substr(marker.content_offset));
             ++index;
 
             bool item_has_blank = false;
@@ -1289,19 +1463,40 @@ namespace {
 
                 const int indent = leading_spaces(next);
                 if (indent >= content_indent) {
-                    item_views.push_back(arena_copy(next.substr(static_cast<size_t>(content_indent))));
+                    item_views.push_back(next.substr(static_cast<size_t>(content_indent)));
                     ++index;
                     continue;
                 }
-                if (!starts_new_block(next, ctx, &lines, index) && !scan_list_marker(next, ctx.opt.task_lists).valid) {
-                    item_views.push_back(arena_copy(next));
+                if (!starts_new_block(next, ctx, &lines, index)) {
+                    item_views.push_back(next);
                     ++index;
                     continue;
                 }
                 break;
             }
 
-            item.children = parse_block_lines(item_views, ctx, depth + 1);
+            bool parsed_fast = false;
+            if (!item_has_blank && item_views.size() >= 2 && is_paragraph_line(item_views[0]) &&
+                scan_list_marker(item_views[1], ctx.opt.task_lists).valid) {
+                const inline_context inline_ctx{&ctx.opt, ctx.document};
+                line_views first_line;
+                first_line.push_back(item_views[0]);
+                item.children.push_back(make_paragraph(first_line, inline_ctx));
+                size_t sub_index = 1;
+                md_block nested = parse_list(item_views, sub_index, ctx, depth + 1);
+                if (sub_index == item_views.size()) {
+                    item.children.push_back(move(nested));
+                    parsed_fast = true;
+                }
+            }
+            if (!parsed_fast) {
+                if (!item_has_blank && is_simple_paragraph_item(item_views)) {
+                    const inline_context inline_ctx{&ctx.opt, ctx.document};
+                    item.children.push_back(make_paragraph(item_views, inline_ctx));
+                } else {
+                    item.children = parse_block_lines(item_views, ctx, depth + 1);
+                }
+            }
             if (item_has_blank) {
                 loose = true;
             }
@@ -1318,25 +1513,35 @@ namespace {
             return blocks;
         }
         const inline_context inline_ctx{&ctx.opt, ctx.document};
+        if (depth == 0 && lines.size() > 2000) {
+            blocks.reserve(lines.size() / 7);
+        }
         size_t index = 0;
 
         while (index < lines.size()) {
             const auto line = lines[index];
-            if (is_blank(line)) {
+            const char* first_cursor = line.data();
+            const char* const line_end = first_cursor + line.size();
+            while (first_cursor < line_end && (*first_cursor == ' ' || *first_cursor == '\t')) {
+                ++first_cursor;
+            }
+            if (first_cursor >= line_end) {
                 ++index;
                 continue;
             }
+            const char first = *first_cursor;
+            const auto indent = static_cast<uint32_t>(first_cursor - line.data());
 
-            {
+            if (first == '[') {
                 md_reference probe;
                 size_t consumed = 0;
-                if (parse_reference_definition(lines, index, &probe, &consumed)) {
+                if (parse_reference_definition(lines, index, static_cast<int>(indent), &probe, &consumed)) {
                     index += max<size_t>(1, consumed);
                     continue;
                 }
             }
 
-            if (ctx.opt.html_blocks) {
+            if (first == '<' && ctx.opt.html_blocks) {
                 const int html_type = html_block_start(line);
                 if (html_type > 0) {
                     blocks.push_back(parse_html_block(lines, index, html_type));
@@ -1344,12 +1549,15 @@ namespace {
                 }
             }
 
-            if (fence_of(line).size() >= 3) {
-                blocks.push_back(parse_fenced_code(lines, index));
-                continue;
+            if (first == '`' || first == '~') {
+                const string_view fence = fence_of(line);
+                if (fence.size() >= 3) {
+                    blocks.push_back(parse_fenced_code(lines, index, fence));
+                    continue;
+                }
             }
 
-            const int level = heading_level(line);
+            const int level = first == '#' ? heading_level(line) : 0;
             if (level > 0) {
                 md_block block;
                 block.kind = md_block_kind::heading;
@@ -1368,7 +1576,7 @@ namespace {
                 continue;
             }
 
-            if (is_thematic_break(line)) {
+            if ((first == '-' || first == '*' || first == '_' || first == '+') && is_thematic_break(line)) {
                 md_block block;
                 block.kind = md_block_kind::thematic_break;
                 blocks.push_back(move(block));
@@ -1376,48 +1584,55 @@ namespace {
                 continue;
             }
 
-            if (line.trim_left().starts_with(">")) {
+            if (first == '>') {
                 blocks.push_back(parse_block_quote(lines, index, ctx, depth));
                 continue;
             }
 
-            if (ctx.opt.tables && is_table_start(lines, index)) {
+            if (ctx.opt.tables && ctx.tables_present && is_table_start(lines, index)) {
                 blocks.push_back(parse_table(lines, index, ctx));
                 continue;
             }
 
-            if (scan_list_marker(line, ctx.opt.task_lists).valid) {
+            if ((first == '-' || first == '+' || first == '*' || (first >= '0' && first <= '9')) &&
+                scan_list_marker(line, ctx.opt.task_lists).valid) {
                 blocks.push_back(parse_list(lines, index, ctx, depth));
                 continue;
             }
 
-            if (ctx.opt.indented_code && leading_spaces(line) >= 4) {
+            if (ctx.opt.indented_code && indent >= 4) {
                 md_block block;
                 block.kind = md_block_kind::code_block;
-                vector<string> code_lines;
-                while (index < lines.size()) {
-                    const auto current = lines[index];
-                    if (is_blank(current)) {
-                        code_lines.emplace_back();
-                        ++index;
-                        continue;
-                    }
-                    if (leading_spaces(current) < 4) {
+                size_t code_end = index;
+                while (code_end < lines.size()) {
+                    const auto current = lines[code_end];
+                    if (!is_blank(current) && leading_spaces(current) < 4) {
                         break;
                     }
-                    code_lines.emplace_back(current.substr(4));
-                    ++index;
+                    ++code_end;
                 }
-
-                while (!code_lines.empty() && code_lines.back().empty()) {
-                    code_lines.pop_back();
+                while (code_end > index && is_blank(lines[code_end - 1])) {
+                    --code_end;
                 }
-                string literal;
-                for (const auto& code_line: code_lines) {
-                    literal += code_line;
-                    literal += '\n';
+                size_t total = 0;
+                for (size_t i = index; i < code_end; ++i) {
+                    const auto current = lines[i];
+                    total += is_blank(current) ? 1 : current.size() - 3;
                 }
-                block.literal = arena_copy(literal.view());
+                if (total != 0) {
+                    auto* data = static_cast<char*>(block_arena().allocate(total, 1, 1));
+                    char* out = data;
+                    for (size_t i = index; i < code_end; ++i) {
+                        const auto current = lines[i];
+                        if (!is_blank(current)) {
+                            memory_copy(out, current.data() + 4, current.size() - 4);
+                            out += current.size() - 4;
+                        }
+                        *out++ = '\n';
+                    }
+                    block.make_code(block_arena())->literal = string_view(data, total);
+                }
+                index = code_end;
                 blocks.push_back(move(block));
                 continue;
             }
@@ -1426,10 +1641,25 @@ namespace {
             bool promoted = false;
             while (index < lines.size()) {
                 const auto current = lines[index];
-                if (is_blank(current)) {
+                const char* current_first = current.data();
+                const char* const current_end = current_first + current.size();
+                while (current_first < current_end && (*current_first == ' ' || *current_first == '\t')) {
+                    ++current_first;
+                }
+                if (current_first >= current_end) {
                     break;
                 }
-                if (ctx.opt.setext_headings) {
+                const char current_char = *current_first;
+                const auto current_indent = static_cast<size_t>(current_first - current.data());
+                bool candidate = current_indent >= 4 || current_char == '#' || current_char == '`' ||
+                                 current_char == '~' || current_char == '>' || current_char == '<' ||
+                                 current_char == '-' || current_char == '+' || current_char == '*' ||
+                                 current_char == '_' || current_char == '=' || current_char == '[' ||
+                                 current_char == '|' || (current_char >= '0' && current_char <= '9');
+                if (!candidate && ctx.tables_present) {
+                    candidate = current.contains('|');
+                }
+                if (ctx.opt.setext_headings && (current_char == '=' || current_char == '-')) {
                     const int setext = setext_level(current);
                     if (setext > 0 && !paragraph.empty()) {
                         md_block block;
@@ -1443,7 +1673,7 @@ namespace {
                         break;
                     }
                 }
-                if (!paragraph.empty() && starts_new_block(current, ctx, &lines, index)) {
+                if (!paragraph.empty() && candidate && starts_new_block(current, ctx, &lines, index)) {
                     break;
                 }
                 paragraph.push_back(current);
@@ -1459,11 +1689,33 @@ namespace {
 
     md_inlines parse_inline_range(const string_view text, const size_t begin, const size_t end,
                                   const inline_context& ctx, const int depth) {
+        if (depth > 32) {
+            md_inlines deep;
+            string deep_text = text.substr(begin, end - begin);
+            push_text(deep, deep_text);
+            return deep;
+        }
+
+        size_t plain_start = begin;
+        while (plain_start < end && !is_inline_special(text[plain_start])) {
+            ++plain_start;
+        }
+        if (plain_start == end) {
+            md_inlines fast;
+            if (end > begin) {
+                md_inline node;
+                node.text = text.substr(begin, end - begin);
+                fast.push_back(node);
+            }
+            return fast;
+        }
+
         md_inlines out;
+        out.reserve(6);
         string buffer;
-        size_t plain_begin = 0;
-        size_t plain_end = 0;
-        bool plain = false;
+        size_t plain_begin = begin;
+        size_t plain_end = plain_start;
+        bool plain = plain_start > begin;
         const auto materialize = [&]() {
             if (plain) {
                 buffer.append(text.substr(plain_begin, plain_end - plain_begin));
@@ -1479,13 +1731,7 @@ namespace {
                 push_text(out, buffer);
             }
         };
-        size_t pos = begin;
-
-        if (depth > 32) {
-            buffer = text.substr(begin, end - begin);
-            push_text(out, buffer);
-            return out;
-        }
+        size_t pos = plain_start;
 
         while (pos < end) {
             // Fast path: append the longest run of characters without inline
@@ -1537,6 +1783,26 @@ namespace {
             }
 
             if (c == '\n') {
+                if (buffer.empty() && plain) {
+                    size_t trimmed = plain_end;
+                    while (trimmed > plain_begin && text[trimmed - 1] == ' ') {
+                        --trimmed;
+                    }
+                    const bool hard = plain_end - trimmed >= 2;
+                    plain_end = trimmed;
+                    if (hard) {
+                        flush();
+                        md_inline node;
+                        node.kind = md_inline_kind::line_break;
+                        out.push_back(move(node));
+                        ++pos;
+                        continue;
+                    }
+                    materialize();
+                    buffer += ' ';
+                    ++pos;
+                    continue;
+                }
                 materialize();
                 const bool hard =
                         buffer.size() >= 2 && buffer[buffer.size() - 1] == ' ' && buffer[buffer.size() - 2] == ' ';
@@ -1599,7 +1865,7 @@ namespace {
                     md_inline node;
                     node.kind = md_inline_kind::autolink;
                     node.text = inner;
-                    node.destination = email ? arena_copy(("mailto:"_s + inner).view()) : inner;
+                    static_cast<void>(email);
                     flush();
                     out.push_back(move(node));
                     pos = close + 1;
@@ -1631,9 +1897,9 @@ namespace {
                     const size_t label_begin = open + 1;
                     const string_view label = text.substr(label_begin, close - label_begin);
                     size_t cursor = close + 1;
-                    string destination;
-                    string title;
-                    string reference;
+                    string_view destination;
+                    string_view title;
+                    string_view reference;
                     bool resolved = false;
 
                     if (cursor < end && text[cursor] == '(') {
@@ -1661,7 +1927,7 @@ namespace {
                             const auto raw = text.substr(cursor + 1, label_close - cursor - 1).trim();
                             reference = raw.empty() ? label : raw;
                             if (ctx.document != nullptr) {
-                                const auto* definition = md_find_reference(*ctx.document, reference.view());
+                                const auto* definition = md_find_reference(*ctx.document, reference);
                                 if (definition != nullptr) {
                                     destination = definition->destination;
                                     title = definition->title;
@@ -1672,7 +1938,7 @@ namespace {
                         }
                     } else if (ctx.document != nullptr) {
                         reference = label;
-                        const auto* definition = md_find_reference(*ctx.document, reference.view());
+                        const auto* definition = md_find_reference(*ctx.document, reference);
                         if (definition != nullptr) {
                             destination = definition->destination;
                             title = definition->title;
@@ -1682,16 +1948,18 @@ namespace {
 
                     if (resolved) {
                         md_inline node;
-                        node.destination = arena_copy(destination.view());
-                        node.title = arena_copy(title.view());
-                        node.reference = arena_copy(reference.view());
+                        md_link_data* link = make_link_data();
+                        link->destination = destination;
+                        link->title = title;
+                        link->reference = reference;
                         if (image) {
                             node.kind = md_inline_kind::image;
-                            node.text = label;
+                            link->alt = label;
                         } else {
                             node.kind = md_inline_kind::link;
-                            node.children = parse_inline_range(text, label_begin, close, ctx, depth + 1);
+                            link->children = parse_inline_range(text, label_begin, close, ctx, depth + 1);
                         }
+                        node.link = link;
                         flush();
                         out.push_back(move(node));
                         pos = cursor;
@@ -1714,11 +1982,17 @@ namespace {
                     size_t found = string_view::npos;
                     size_t found_length = 0;
                     while (scan < end) {
-                        if (text[scan] == '\\') {
-                            scan += 2;
-                            continue;
+                        const auto* hit = static_cast<const char*>(
+                                memory_find(text.data() + scan, static_cast<byte_t>(c), end - scan));
+                        if (hit == nullptr) {
+                            break;
                         }
-                        if (text[scan] != c) {
+                        scan = static_cast<size_t>(hit - text.data());
+                        size_t backslashes = 0;
+                        for (size_t i = scan; i > pos && text[i - 1] == '\\'; --i) {
+                            ++backslashes;
+                        }
+                        if ((backslashes & 1U) != 0U) {
                             ++scan;
                             continue;
                         }
@@ -1801,18 +2075,19 @@ markdown_parser& markdown_parser::set_options(const option opt) noexcept {
 
 markdown_document markdown_parser::parse() {
     markdown_document document;
-    document.set_source(text_.view());
+    document.set_source(move(text_));
     inner::md_arena_scope scope(&document.arena());
     const line_table table = split_lines(document.source());
     if (table.lines.empty()) {
         return document;
     }
 
-    collect_references(table.lines, document);
+    collect_references(table.lines, table.reference_lines, document);
 
     parse_context ctx;
     ctx.opt = opt_;
     ctx.document = &document;
+    ctx.tables_present = document.source().contains('|');
     document.blocks = parse_block_lines(table.lines, ctx, 0);
     return document;
 }

@@ -104,7 +104,7 @@ namespace {
         return string::repeat('`', max(1, longest + 1));
     }
 
-    string block_fence(const string& literal, const char preferred) {
+    string block_fence(const string_view literal, const char preferred) {
         const char marker = (preferred == '`' || preferred == '~') ? preferred : '`';
         int longest = 0;
         int current = 0;
@@ -166,12 +166,12 @@ namespace {
                 }
                 case md_inline_kind::link: {
                     out += '[';
-                    append_inlines_text(node.children, out, false);
+                    append_inlines_text(node.link_children(), out, false);
                     out += "](";
-                    out += node.destination;
-                    if (!node.title.empty()) {
+                    out += node.destination();
+                    if (!node.title().empty()) {
                         out += " \"";
-                        out += node.title;
+                        out += node.title();
                         out += '"';
                     }
                     out += ')';
@@ -180,12 +180,12 @@ namespace {
                 }
                 case md_inline_kind::image: {
                     out += "![";
-                    append_escaped(node.text, out, false);
+                    append_escaped(node.alt(), out, false);
                     out += "](";
-                    out += node.destination;
-                    if (!node.title.empty()) {
+                    out += node.destination();
+                    if (!node.title().empty()) {
                         out += " \"";
-                        out += node.title;
+                        out += node.title();
                         out += '"';
                     }
                     out += ')';
@@ -218,7 +218,7 @@ namespace {
     void append_table(const md_block& block, const markdown_builder::option& opt, string& out) {
         ignore = opt;
         out += '|';
-        for (const auto& cell: block.header) {
+        for (const auto& cell: block.header()) {
             out += ' ';
             append_inlines_text(cell, out, false);
             out += " |";
@@ -226,7 +226,7 @@ namespace {
         out += '\n';
 
         out += '|';
-        for (const auto& align: block.alignments) {
+        for (const auto& align: block.alignments()) {
             switch (align) {
                 case md_align::left: {
                     out += " :--- |";
@@ -248,9 +248,9 @@ namespace {
         }
         out += '\n';
 
-        for (const auto& row: block.rows) {
+        for (const auto& row: block.rows()) {
             out += '|';
-            for (size_t i = 0; i < block.alignments.size(); ++i) {
+            for (size_t i = 0; i < block.alignments().size(); ++i) {
                 out += ' ';
                 if (i < row.size()) {
                     append_inlines_text(row[i], out, false);
@@ -365,19 +365,19 @@ namespace {
 
     void append_code_block(const md_block& block, const markdown_builder::option& opt, string& out, const int indent) {
         const string pad = string::repeat(' ', indent);
-        if (block.fenced) {
-            const string fence = block_fence(block.literal, block.fence_char);
+        if (block.fenced()) {
+            const string fence = block_fence(block.literal(), block.fence_char());
             out += pad;
             out += fence;
-            if (!block.info.empty()) {
-                out += block.info;
-            } else if (!block.language.empty()) {
-                out += block.language;
+            if (!block.info().empty()) {
+                out += block.info();
+            } else if (!block.language().empty()) {
+                out += block.language();
             }
             out += '\n';
 
             size_t start = 0;
-            const auto& literal = block.literal;
+            const string_view literal = block.literal();
             for (size_t i = 0; i <= literal.size(); ++i) {
                 if (i == literal.size() || literal[i] == '\n') {
                     if (i > start) {
@@ -398,7 +398,7 @@ namespace {
 
         const string code_pad = string::repeat(' ', indent + 4);
         size_t start = 0;
-        const auto& literal = block.literal;
+        const string_view literal = block.literal();
         for (size_t i = 0; i <= literal.size(); ++i) {
             if (i == literal.size() || literal[i] == '\n') {
                 if (i > start) {
@@ -447,7 +447,7 @@ namespace {
             }
             case md_block_kind::html_block: {
                 out += pad;
-                string literal = block.literal;
+                string literal = string(block.literal());
                 if (!literal.empty() && literal.back() == '\n') {
                     literal = literal.substr(0, literal.size() - 1);
                 }
@@ -482,7 +482,7 @@ namespace {
                     append_table(block, opt, out);
                 } else {
                     out += pad;
-                    for (const auto& cell: block.header) {
+                    for (const auto& cell: block.header()) {
                         append_inlines_text(cell, out, false);
                         out += ' ';
                     }
@@ -525,7 +525,14 @@ markdown_builder& markdown_builder::append(const markdown_document& document) {
             }
         }
         if (!duplicate) {
-            document_.references.push_back(reference);
+            md_reference copy;
+            copy.label = builder_copy(document_, reference.label);
+            copy.destination = builder_copy(document_, reference.destination);
+            copy.title = builder_copy(document_, reference.title);
+            copy.normalized = reference.normalized.empty()
+                                      ? builder_copy(document_, md_normalise_label(reference.label).view())
+                                      : builder_copy(document_, reference.normalized);
+            document_.references.push_back(copy);
         }
     }
     return *this;
@@ -546,6 +553,7 @@ markdown_builder& markdown_builder::reference(string label, string destination, 
     entry.label = builder_copy(document_, label.view());
     entry.destination = builder_copy(document_, destination.view());
     entry.title = builder_copy(document_, title.view());
+    entry.normalized = builder_copy(document_, md_normalise_label(entry.label).view());
     document_.references.push_back(entry);
     return *this;
 }

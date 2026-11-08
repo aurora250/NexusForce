@@ -210,7 +210,7 @@ private:
                 const char* chars_;         ///< 属性字符串起始地址
                 ini_section_data* section_; ///< 节载荷
 
-            } payload_{};                   ///< 载荷
+            } payload_{}; ///< 载荷
 
         } ext_; ///< 统一形态
 
@@ -251,7 +251,7 @@ struct NEFORCE_API ini_member {
     const char* key_data = nullptr; ///< 键起始地址，或不超过 8 字节的内联键本体
     uint32_t key_size = 0;          ///< 键长度，最高位为内联标记
     uint32_t key_prefix = 0;        ///< 键前 4 字节，不足 4 字节时高位补 0
-    ini_value value{};              ///< 属性值
+    ini_value value;                ///< 属性值
 
     /**
      * @brief 判断键是否内联存放在成员结构中

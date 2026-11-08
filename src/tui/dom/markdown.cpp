@@ -128,13 +128,13 @@ namespace {
                         st.fg = styles.link.fg;
                     }
                     if (node.kind == md_inline_kind::autolink) {
-                        append_linked_span(out, node.text, st, node.destination);
+                        append_linked_span(out, node.text, st, node.text);
                     } else {
                         vector<text_span> inner;
-                        append_inline_spans(node.children, st, styles, inner);
+                        append_inline_spans(node.link_children(), st, styles, inner);
                         for (auto& span: inner) {
                             if (span.link.empty()) {
-                                span.link = node.destination;
+                                span.link = node.destination();
                             }
                             out.push_back(move(span));
                         }
@@ -144,10 +144,10 @@ namespace {
                 case md_inline_kind::image: {
                     tui::style st = base;
                     st.dim = true;
-                    const string& alt = node.text.empty() ? node.destination : node.text;
+                    const string_view alt = node.alt().empty() ? node.destination() : node.alt();
                     append_span(out, "[img] ", st);
-                    if (!node.destination.empty()) {
-                        append_linked_span(out, alt, st, node.destination);
+                    if (!node.destination().empty()) {
+                        append_linked_span(out, alt, st, node.destination());
                     } else {
                         append_span(out, alt, st);
                     }
@@ -261,7 +261,7 @@ namespace {
     }
 
     element render_table(const md_block& block, const markdown_option& opt, const markdown_styles& styles) {
-        const size_t columns = block.header.size();
+        const size_t columns = block.header().size();
         if (columns == 0) {
             return element::text(string());
         }
@@ -269,9 +269,9 @@ namespace {
         vector<vector<string>> rows_text;
         rows_text.push_back(vector<string>());
         for (size_t c = 0; c < columns; ++c) {
-            rows_text.back().push_back(block.header[c].empty() ? string() : cell_text(block.header[c]));
+            rows_text.back().push_back(block.header()[c].empty() ? string() : cell_text(block.header()[c]));
         }
-        for (const auto& row: block.rows) {
+        for (const auto& row: block.rows()) {
             rows_text.push_back(vector<string>());
             for (size_t c = 0; c < columns; ++c) {
                 rows_text.back().push_back(c < row.size() ? cell_text(row[c]) : string());
@@ -335,7 +335,7 @@ namespace {
         }
 
         const auto align_of = [&block](const size_t c) {
-            return c < block.alignments.size() ? block.alignments[c] : md_align::none;
+            return c < block.alignments().size() ? block.alignments()[c] : md_align::none;
         };
 
         const auto border_row = [&](const char* left, const char* middle, const char* right) {
@@ -405,7 +405,7 @@ namespace {
     }
 
     element render_mermaid_block(const md_block& block, const markdown_option& opt, const markdown_styles& styles) {
-        const optional<mermaid_art> art = render_mermaid(block.literal);
+        const optional<mermaid_art> art = render_mermaid(block.literal());
         if (!art.has_value() || art->lines.empty()) {
             return element::empty();
         }
@@ -526,15 +526,15 @@ namespace {
                 return heading;
             }
             case md_block_kind::code_block: {
-                if (is_mermaid_language(block.language)) {
+                if (is_mermaid_language(block.language())) {
                     element diagram = render_mermaid_block(block, opt, styles);
                     if (diagram.kind() != element::kind::empty) {
                         return diagram;
                     }
                 }
                 code_block_option cb;
-                cb.code = block.literal;
-                cb.language = block.language;
+                cb.code = block.literal();
+                cb.language = block.language();
                 cb.width = opt.width;
                 cb.highlight = opt.highlight_code;
                 cb.style = opt.style;
@@ -546,7 +546,7 @@ namespace {
             }
             case md_block_kind::html_block: {
                 elements lines;
-                const auto& literal = block.literal;
+                const auto& literal = block.literal();
                 size_t start = 0;
                 for (size_t i = 0; i <= literal.size(); ++i) {
                     if (i == literal.size() || literal[i] == '\n') {

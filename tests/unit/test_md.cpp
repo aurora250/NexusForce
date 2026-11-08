@@ -103,7 +103,8 @@ namespace {
             }
             case md_block_kind::code_block: {
                 out += pad + "code(fenced=" + to_string(static_cast<int64_t>(block.fenced())) +
-                       ",lang=" + (block.language()) + ",info=" + (block.info()) + ") [" + escape((block.literal())) + "]\n";
+                       ",lang=" + (block.language()) + ",info=" + (block.info()) + ") [" + escape((block.literal())) +
+                       "]\n";
                 break;
             }
             case md_block_kind::html_block: {
