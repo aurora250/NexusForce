@@ -405,7 +405,7 @@ namespace {
     }
 
     element render_mermaid_block(const md_block& block, const markdown_option& opt, const markdown_styles& styles) {
-        const optional<mermaid_art> art = render_mermaid(block.literal.view());
+        const optional<mermaid_art> art = render_mermaid(block.literal);
         if (!art.has_value() || art->lines.empty()) {
             return element::empty();
         }
@@ -551,7 +551,7 @@ namespace {
                 for (size_t i = 0; i <= literal.size(); ++i) {
                     if (i == literal.size() || literal[i] == '\n') {
                         if (i > start) {
-                            lines.push_back(element::text(string(literal.view().substr(start, i - start)), styles.quote,
+                            lines.push_back(element::text(string(literal.substr(start, i - start)), styles.quote,
                                                           style::wrap_mode::none));
                         }
                         start = i + 1;

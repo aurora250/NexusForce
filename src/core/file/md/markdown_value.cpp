@@ -47,7 +47,7 @@ namespace {
         }
     }
 
-    void append_cells(const vector<md_inlines>& cells, string& out) {
+    void append_cells(const md_list<md_inlines>& cells, string& out) {
         for (size_t i = 0; i < cells.size(); ++i) {
             if (i > 0) {
                 out += '\t';
@@ -93,8 +93,98 @@ namespace {
             }
         }
     }
+
+    string_view copy_string(bump_arena& arena, const string_view text) {
+        if (text.empty()) {
+            return string_view();
+        }
+        auto* data = static_cast<char*>(arena.allocate(text.size(), 1, 1));
+        memory_copy(data, text.data(), text.size());
+        return string_view(data, text.size());
+    }
 } // namespace
 
+
+NEFORCE_BEGIN_INNER__
+
+bump_arena*& md_arena_slot() noexcept {
+    thread_local bump_arena* slot = nullptr;
+    return slot;
+}
+
+bump_arena& md_fallback_arena() noexcept {
+    thread_local bump_arena arena;
+    return arena;
+}
+
+bump_arena& md_inline_arena() noexcept {
+    thread_local bump_arena arena;
+    return arena;
+}
+
+NEFORCE_END_INNER__
+
+
+void markdown_document::set_source(const string_view text) { source_ = copy_string(arena_, text); }
+
+md_inline markdown_document::clone_inline(const md_inline& inline_node) {
+    md_inline result = inline_node;
+    result.text = copy_string(arena_, inline_node.text);
+    result.destination = copy_string(arena_, inline_node.destination);
+    result.title = copy_string(arena_, inline_node.title);
+    result.reference = copy_string(arena_, inline_node.reference);
+    result.children = clone_inlines(inline_node.children);
+    return result;
+}
+
+md_inlines markdown_document::clone_inlines(const md_inlines& inlines) {
+    inner::md_arena_scope scope(&arena_);
+    md_inlines result;
+    result.reserve(inlines.size());
+    for (const auto& node: inlines) {
+        result.push_back(clone_inline(node));
+    }
+    return result;
+}
+
+md_block markdown_document::clone_block(const md_block& block) {
+    inner::md_arena_scope scope(&arena_);
+    md_block result = block;
+    result.info = copy_string(arena_, block.info);
+    result.language = copy_string(arena_, block.language);
+    result.literal = copy_string(arena_, block.literal);
+
+    result.alignments.clear();
+    result.alignments.reserve(block.alignments.size());
+    for (const auto alignment: block.alignments) {
+        result.alignments.push_back(alignment);
+    }
+
+    result.header.clear();
+    result.header.reserve(block.header.size());
+    for (const auto& cell: block.header) {
+        result.header.push_back(clone_inlines(cell));
+    }
+
+    result.rows.clear();
+    result.rows.reserve(block.rows.size());
+    for (const auto& row: block.rows) {
+        md_list<md_inlines> cloned_row;
+        cloned_row.reserve(row.size());
+        for (const auto& cell: row) {
+            cloned_row.push_back(clone_inlines(cell));
+        }
+        result.rows.push_back(cloned_row);
+    }
+
+    result.inlines = clone_inlines(block.inlines);
+    result.children.clear();
+    result.children.reserve(block.children.size());
+    for (const auto& child: block.children) {
+        result.children.push_back(clone_block(child));
+    }
+    return result;
+}
 
 string md_plain_text(const md_inlines& inlines) {
     string result;
@@ -115,7 +205,7 @@ bool md_empty(const markdown_document& document) noexcept {
 const md_reference* md_find_reference(const markdown_document& document, const string_view label) {
     const string normalised = normalise_label(label);
     for (const auto& reference: document.references) {
-        if (normalise_label(reference.label.view()) == normalised.view()) {
+        if (normalise_label(reference.label) == normalised.view()) {
             return &reference;
         }
     }

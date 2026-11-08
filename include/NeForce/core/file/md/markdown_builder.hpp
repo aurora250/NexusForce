@@ -131,9 +131,9 @@ public:
 
     /**
      * @brief 取出已累积的文档
-     * @return 文档副本
+     * @return 文档引用，生命周期与 builder 相同
      */
-    NEFORCE_NODISCARD markdown_document document() const;
+    NEFORCE_NODISCARD const markdown_document& document() const noexcept;
 
     /**
      * @brief 生成 Markdown 文本

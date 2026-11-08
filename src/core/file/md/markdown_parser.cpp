@@ -34,8 +34,10 @@ namespace {
         return true;
     }
 
+    using line_views = md_list<string_view>;
+
     struct line_table {
-        vector<string_view> lines;
+        line_views lines;
         vector<string> owned;
     };
 
@@ -74,6 +76,19 @@ namespace {
             cursor = found + 1;
         }
         return hits;
+    }
+
+    string_view arena_copy(const string_view text) {
+        if (text.empty()) {
+            return string_view();
+        }
+        bump_arena* arena = inner::md_arena_slot();
+        if (arena == nullptr) {
+            arena = &inner::md_fallback_arena();
+        }
+        auto* data = static_cast<char*>(arena->allocate(text.size(), 1, 1));
+        memory_copy(data, text.data(), text.size());
+        return string_view(data, text.size());
     }
 
     line_table split_lines(const string_view text) {
@@ -147,35 +162,44 @@ namespace {
     }
 
     bool is_thematic_break(const string_view line) noexcept {
-        const auto trimmed = line.trim();
-        if (trimmed.size() < 3) {
+        const char* cursor = line.data();
+        const char* const end = cursor + line.size();
+        while (cursor < end && (*cursor == ' ' || *cursor == '\t')) {
+            ++cursor;
+        }
+        if (end - cursor < 3) {
             return false;
         }
-        const char marker = trimmed[0];
+        const char marker = *cursor;
         if (marker != '-' && marker != '*' && marker != '_') {
             return false;
         }
-        int count = 0;
-        for (size_t i = 0; i < trimmed.size(); ++i) {
-            if (trimmed[i] == marker) {
-                ++count;
-            } else if (trimmed[i] != ' ' && trimmed[i] != '\t') {
+        const char* last = end - 1;
+        while (last > cursor && (*last == ' ' || *last == '\t')) {
+            --last;
+        }
+        for (const char* position = cursor; position <= last; ++position) {
+            if (*position != marker && *position != ' ' && *position != '\t') {
                 return false;
             }
         }
-        return count >= 3;
+        return true;
     }
 
     int heading_level(const string_view line) noexcept {
-        const auto trimmed = line.trim_left();
+        const char* cursor = line.data();
+        const char* const end = cursor + line.size();
+        while (cursor < end && (*cursor == ' ' || *cursor == '\t')) {
+            ++cursor;
+        }
         int level = 0;
-        while (compare_less(level, trimmed.size()) && trimmed[static_cast<size_t>(level)] == '#') {
+        while (cursor + level < end && cursor[level] == '#' && level < 7) {
             ++level;
         }
         if (level == 0 || level > 6) {
             return 0;
         }
-        if (compare_less(level, trimmed.size()) && trimmed[static_cast<size_t>(level)] != ' ') {
+        if (cursor + level < end && cursor[level] != ' ') {
             return 0;
         }
         return level;
@@ -199,18 +223,21 @@ namespace {
     }
 
     string_view fence_of(const string_view line) noexcept {
-        const auto trimmed = line.trim_left();
-        if (trimmed.size() >= 3 && (trimmed[0] == '`' || trimmed[0] == '~')) {
-            const char marker = trimmed[0];
-            size_t run = 0;
-            while (run < trimmed.size() && trimmed[run] == marker) {
-                ++run;
-            }
-            if (run >= 3) {
-                return trimmed.substr(0, run);
-            }
+        const char* cursor = line.data();
+        const char* const end = cursor + line.size();
+        while (cursor < end && (*cursor == ' ' || *cursor == '\t')) {
+            ++cursor;
         }
-        return {};
+        if (static_cast<size_t>(end - cursor) < 3 || (*cursor != '`' && *cursor != '~')) {
+            return {};
+        }
+        const char marker = *cursor;
+        const char* start = cursor;
+        while (cursor < end && *cursor == marker) {
+            ++cursor;
+        }
+        const auto run = static_cast<size_t>(cursor - start);
+        return run >= 3 ? string_view(start, run) : string_view();
     }
 
     int html_block_start(const string_view line) noexcept {
@@ -435,7 +462,7 @@ namespace {
         return cells;
     }
 
-    bool is_table_start(const vector<string_view>& lines, const size_t index) {
+    bool is_table_start(const line_views& lines, const size_t index) {
         if (index + 1 >= lines.size()) {
             return false;
         }
@@ -479,20 +506,51 @@ namespace {
             return;
         }
         if (!out.empty() && out.back().kind == md_inline_kind::text) {
-            out.back().text += buffer;
+            const string_view previous = out.back().text;
+            bump_arena* arena = inner::md_arena_slot();
+            if (arena == nullptr) {
+                arena = &inner::md_fallback_arena();
+            }
+            auto* data = static_cast<char*>(arena->allocate(previous.size() + buffer.size(), 1, 1));
+            if (!previous.empty()) {
+                memory_copy(data, previous.data(), previous.size());
+            }
+            if (!buffer.empty()) {
+                memory_copy(data + previous.size(), buffer.data(), buffer.size());
+            }
+            out.back().text = string_view(data, previous.size() + buffer.size());
             buffer.clear();
             return;
         }
         md_inline node;
         node.kind = md_inline_kind::text;
-        node.text = buffer;
+        node.text = arena_copy(buffer.view());
         buffer.clear();
         out.push_back(move(node));
     }
 
-    void push_node(md_inlines& out, string& buffer, md_inline node) {
-        push_text(out, buffer);
-        out.push_back(move(node));
+    void push_text_view(md_inlines& out, const string_view view) {
+        if (view.empty()) {
+            return;
+        }
+        if (!out.empty() && out.back().kind == md_inline_kind::text) {
+            const string_view previous = out.back().text;
+            bump_arena* arena = inner::md_arena_slot();
+            if (arena == nullptr) {
+                arena = &inner::md_fallback_arena();
+            }
+            auto* data = static_cast<char*>(arena->allocate(previous.size() + view.size(), 1, 1));
+            if (!previous.empty()) {
+                memory_copy(data, previous.data(), previous.size());
+            }
+            memory_copy(data + previous.size(), view.data(), view.size());
+            out.back().text = string_view(data, previous.size() + view.size());
+            return;
+        }
+        md_inline node;
+        node.kind = md_inline_kind::text;
+        node.text = view;
+        out.push_back(node);
     }
 
     size_t find_unescaped(const string_view text, const size_t from, const size_t end,
@@ -814,7 +872,7 @@ namespace {
         markdown_document* document = nullptr;
     };
 
-    bool starts_new_block(const string_view line, const parse_context& ctx, const vector<string_view>* lines,
+    bool starts_new_block(const string_view line, const parse_context& ctx, const line_views* lines,
                           const size_t index) {
         if (fence_of(line).size() >= 3) {
             return true;
@@ -840,9 +898,9 @@ namespace {
         return false;
     }
 
-    vector<md_block> parse_block_lines(const vector<string_view>& lines, parse_context& ctx, int depth);
+    md_blocks parse_block_lines(const line_views& lines, parse_context& ctx, int depth);
 
-    bool parse_reference_definition(const vector<string_view>& lines, const size_t index, md_reference* reference,
+    bool parse_reference_definition(const line_views& lines, const size_t index, md_reference* reference,
                                     size_t* consumed) {
         if (consumed != nullptr) {
             *consumed = 0;
@@ -906,9 +964,9 @@ namespace {
                 }
             }
             if (reference != nullptr) {
-                reference->label = label;
-                reference->destination = move(destination);
-                reference->title = move(next_title);
+                reference->label = arena_copy(label);
+                reference->destination = arena_copy(destination.view());
+                reference->title = arena_copy(next_title.view());
             }
             if (consumed != nullptr) {
                 *consumed = used_lines;
@@ -944,9 +1002,9 @@ namespace {
         }
 
         if (reference != nullptr) {
-            reference->label = label;
-            reference->destination = move(destination);
-            reference->title = move(title);
+            reference->label = arena_copy(label);
+            reference->destination = arena_copy(destination.view());
+            reference->title = arena_copy(title.view());
         }
         if (consumed != nullptr) {
             *consumed = used_lines;
@@ -954,7 +1012,7 @@ namespace {
         return true;
     }
 
-    void collect_references(const vector<string_view>& lines, markdown_document& document) {
+    void collect_references(const line_views& lines, markdown_document& document) {
         size_t index = 0;
         bool in_fence = false;
         string_view fence;
@@ -979,10 +1037,19 @@ namespace {
                 ++index;
                 continue;
             }
+            const char* first = line.data();
+            const char* const line_end = first + line.size();
+            while (first < line_end && (*first == ' ' || *first == '\t')) {
+                ++first;
+            }
+            if (first >= line_end || *first != '[') {
+                ++index;
+                continue;
+            }
             md_reference reference;
             size_t consumed = 0;
             if (parse_reference_definition(lines, index, &reference, &consumed)) {
-                if (md_find_reference(document, reference.label.view()) == nullptr) {
+                if (md_find_reference(document, reference.label) == nullptr) {
                     document.references.push_back(move(reference));
                 }
                 index += max<size_t>(1, consumed);
@@ -992,9 +1059,14 @@ namespace {
         }
     }
 
-    md_block make_paragraph(const vector<string_view>& paragraph, const inline_context& inline_ctx) {
+    md_block make_paragraph(const line_views& paragraph, const inline_context& inline_ctx) {
         md_block block;
         block.kind = md_block_kind::paragraph;
+        if (paragraph.size() == 1) {
+            const auto line = paragraph[0];
+            block.inlines = parse_inline_range(line, 0, line.size(), inline_ctx, 0);
+            return block;
+        }
         size_t total = 0;
         for (const auto& line: paragraph) {
             total += line.size();
@@ -1007,11 +1079,12 @@ namespace {
             }
             joined.append(paragraph[i]);
         }
-        block.inlines = parse_inline_range(joined.view(), 0, joined.size(), inline_ctx, 0);
+        const string_view paragraph_text = arena_copy(joined.view());
+        block.inlines = parse_inline_range(paragraph_text, 0, paragraph_text.size(), inline_ctx, 0);
         return block;
     }
 
-    md_block parse_fenced_code(const vector<string_view>& lines, size_t& index) {
+    md_block parse_fenced_code(const line_views& lines, size_t& index) {
         md_block block;
         block.kind = md_block_kind::code_block;
         block.fenced = true;
@@ -1021,9 +1094,9 @@ namespace {
         block.fence_length = static_cast<int>(fence.size());
         block.info = lines[index].trim_left().substr(fence.size()).trim();
         {
-            const auto info = block.info.view();
+            const auto info = block.info;
             const auto space = info.find(' ');
-            block.language = string(space == string_view::npos ? info : info.substr(0, space));
+            block.language = space == string_view::npos ? info : info.substr(0, space);
         }
         ++index;
 
@@ -1045,11 +1118,11 @@ namespace {
             literal += '\n';
             ++index;
         }
-        block.literal = move(literal);
+        block.literal = arena_copy(literal.view());
         return block;
     }
 
-    md_block parse_html_block(const vector<string_view>& lines, size_t& index, const int type) {
+    md_block parse_html_block(const line_views& lines, size_t& index, const int type) {
         md_block block;
         block.kind = md_block_kind::html_block;
         block.html_type = type;
@@ -1068,12 +1141,12 @@ namespace {
                 break;
             }
         }
-        block.literal = move(literal);
+        block.literal = arena_copy(literal.view());
         return block;
     }
 
-    md_block parse_block_quote(const vector<string_view>& lines, size_t& index, parse_context& ctx, const int depth) {
-        vector<string> inner;
+    md_block parse_block_quote(const line_views& lines, size_t& index, parse_context& ctx, const int depth) {
+        line_views inner;
         while (index < lines.size()) {
             const auto line = lines[index];
             const auto trimmed = line.trim_left();
@@ -1082,7 +1155,7 @@ namespace {
                 if (!rest.empty() && rest[0] == ' ') {
                     rest = rest.substr(1);
                 }
-                inner.emplace_back(rest);
+                inner.push_back(arena_copy(rest));
                 ++index;
                 continue;
             }
@@ -1090,26 +1163,20 @@ namespace {
                 break;
             }
             if (!inner.empty() && !starts_new_block(line, ctx, &lines, index)) {
-                inner.emplace_back(line.trim_left());
+                inner.push_back(arena_copy(line.trim_left()));
                 ++index;
                 continue;
             }
             break;
         }
 
-        vector<string_view> inner_views;
-        inner_views.reserve(inner.size());
-        for (const auto& line: inner) {
-            inner_views.push_back(line.view());
-        }
-
         md_block block;
         block.kind = md_block_kind::block_quote;
-        block.children = parse_block_lines(inner_views, ctx, depth + 1);
+        block.children = parse_block_lines(inner, ctx, depth + 1);
         return block;
     }
 
-    md_block parse_table(const vector<string_view>& lines, size_t& index, const parse_context& ctx) {
+    md_block parse_table(const line_views& lines, size_t& index, const parse_context& ctx) {
         const inline_context inline_ctx{&ctx.opt, ctx.document};
 
         md_block block;
@@ -1134,7 +1201,7 @@ namespace {
                 break;
             }
             const auto cells = split_pipe_row(line);
-            vector<md_inlines> row;
+            md_list<md_inlines> row;
             for (size_t i = 0; i < block.alignments.size(); ++i) {
                 if (i < cells.size()) {
                     row.push_back(parse_inline_range(cells[i], 0, cells[i].size(), inline_ctx, 0));
@@ -1148,7 +1215,7 @@ namespace {
         return block;
     }
 
-    md_block parse_list(const vector<string_view>& lines, size_t& index, parse_context& ctx, const int depth) {
+    md_block parse_list(const line_views& lines, size_t& index, parse_context& ctx, const int depth) {
         const auto first = scan_list_marker(lines[index], ctx.opt.task_lists);
         md_block list;
         list.kind = md_block_kind::list;
@@ -1161,10 +1228,7 @@ namespace {
         bool loose = false;
         int counter = list.start;
 
-        // Scratch buffers reused across the items of this list instead of being
-        // allocated once per item.
-        vector<string> item_lines;
-        vector<string_view> item_views;
+        line_views item_views;
 
         while (index < lines.size()) {
             const auto line = lines[index];
@@ -1190,8 +1254,8 @@ namespace {
             }
 
             const int content_indent = static_cast<int>(marker.content_offset);
-            item_lines.clear();
-            item_lines.emplace_back(line.substr(marker.content_offset));
+            item_views.clear();
+            item_views.push_back(arena_copy(line.substr(marker.content_offset)));
             ++index;
 
             bool item_has_blank = false;
@@ -1214,7 +1278,7 @@ namespace {
                         break;
                     }
                     if (leading_spaces(peek_line) >= content_indent) {
-                        item_lines.emplace_back();
+                        item_views.emplace_back();
                         item_has_blank = true;
                         index = peek;
                         continue;
@@ -1225,23 +1289,18 @@ namespace {
 
                 const int indent = leading_spaces(next);
                 if (indent >= content_indent) {
-                    item_lines.emplace_back(next.substr(static_cast<size_t>(content_indent)));
+                    item_views.push_back(arena_copy(next.substr(static_cast<size_t>(content_indent))));
                     ++index;
                     continue;
                 }
                 if (!starts_new_block(next, ctx, &lines, index) && !scan_list_marker(next, ctx.opt.task_lists).valid) {
-                    item_lines.emplace_back(next);
+                    item_views.push_back(arena_copy(next));
                     ++index;
                     continue;
                 }
                 break;
             }
 
-            item_views.clear();
-            item_views.reserve(item_lines.size());
-            for (const auto& item_line: item_lines) {
-                item_views.push_back(item_line.view());
-            }
             item.children = parse_block_lines(item_views, ctx, depth + 1);
             if (item_has_blank) {
                 loose = true;
@@ -1253,8 +1312,8 @@ namespace {
         return list;
     }
 
-    vector<md_block> parse_block_lines(const vector<string_view>& lines, parse_context& ctx, const int depth) {
-        vector<md_block> blocks;
+    md_blocks parse_block_lines(const line_views& lines, parse_context& ctx, const int depth) {
+        md_blocks blocks;
         if (depth > 64) {
             return blocks;
         }
@@ -1358,12 +1417,12 @@ namespace {
                     literal += code_line;
                     literal += '\n';
                 }
-                block.literal = move(literal);
+                block.literal = arena_copy(literal.view());
                 blocks.push_back(move(block));
                 continue;
             }
 
-            vector<string_view> paragraph;
+            line_views paragraph;
             bool promoted = false;
             while (index < lines.size()) {
                 const auto current = lines[index];
@@ -1402,6 +1461,24 @@ namespace {
                                   const inline_context& ctx, const int depth) {
         md_inlines out;
         string buffer;
+        size_t plain_begin = 0;
+        size_t plain_end = 0;
+        bool plain = false;
+        const auto materialize = [&]() {
+            if (plain) {
+                buffer.append(text.substr(plain_begin, plain_end - plain_begin));
+                plain = false;
+            }
+        };
+        const auto flush = [&]() {
+            if (plain) {
+                push_text_view(out, text.substr(plain_begin, plain_end - plain_begin));
+                plain = false;
+            }
+            if (!buffer.empty()) {
+                push_text(out, buffer);
+            }
+        };
         size_t pos = begin;
 
         if (depth > 32) {
@@ -1419,7 +1496,17 @@ namespace {
                     ++pos;
                 }
                 if (pos > run_begin) {
-                    buffer.append(text.substr(run_begin, pos - run_begin));
+                    if (buffer.empty()) {
+                        if (plain) {
+                            plain_end = pos;
+                        } else {
+                            plain_begin = run_begin;
+                            plain_end = pos;
+                            plain = true;
+                        }
+                    } else {
+                        buffer.append(text.substr(run_begin, pos - run_begin));
+                    }
                     if (pos >= end) {
                         break;
                     }
@@ -1430,7 +1517,7 @@ namespace {
 
             if (c == '\\') {
                 if (pos + 1 < end && text[pos + 1] == '\n') {
-                    push_text(out, buffer);
+                    flush();
                     md_inline node;
                     node.kind = md_inline_kind::line_break;
                     out.push_back(move(node));
@@ -1438,23 +1525,26 @@ namespace {
                     continue;
                 }
                 if (pos + 1 < end && is_punct(text[pos + 1])) {
+                    materialize();
                     buffer += text[pos + 1];
                     pos += 2;
                     continue;
                 }
+                materialize();
                 buffer += c;
                 ++pos;
                 continue;
             }
 
             if (c == '\n') {
+                materialize();
                 const bool hard =
                         buffer.size() >= 2 && buffer[buffer.size() - 1] == ' ' && buffer[buffer.size() - 2] == ' ';
                 while (!buffer.empty() && buffer.back() == ' ') {
                     buffer.pop_back();
                 }
                 if (hard) {
-                    push_text(out, buffer);
+                    flush();
                     md_inline node;
                     node.kind = md_inline_kind::line_break;
                     out.push_back(move(node));
@@ -1469,6 +1559,7 @@ namespace {
                 size_t consumed = 0;
                 string decoded;
                 if (decode_entity(text, pos, consumed, decoded)) {
+                    materialize();
                     buffer += decoded;
                     pos += consumed;
                     continue;
@@ -1490,7 +1581,8 @@ namespace {
                     md_inline node;
                     node.kind = md_inline_kind::code;
                     node.text = content;
-                    push_node(out, buffer, move(node));
+                    flush();
+                    out.push_back(move(node));
                     pos = closer + fence;
                     continue;
                 }
@@ -1507,8 +1599,9 @@ namespace {
                     md_inline node;
                     node.kind = md_inline_kind::autolink;
                     node.text = inner;
-                    node.destination = email ? ("mailto:"_s + inner) : inner;
-                    push_node(out, buffer, move(node));
+                    node.destination = email ? arena_copy(("mailto:"_s + inner).view()) : inner;
+                    flush();
+                    out.push_back(move(node));
                     pos = close + 1;
                     continue;
                 }
@@ -1518,11 +1611,13 @@ namespace {
                         md_inline node;
                         node.kind = md_inline_kind::html;
                         node.text = text.substr(pos, consumed);
-                        push_node(out, buffer, move(node));
+                        flush();
+                        out.push_back(move(node));
                         pos += consumed;
                         continue;
                     }
                 }
+                materialize();
                 buffer += c;
                 ++pos;
                 continue;
@@ -1587,9 +1682,9 @@ namespace {
 
                     if (resolved) {
                         md_inline node;
-                        node.destination = move(destination);
-                        node.title = move(title);
-                        node.reference = move(reference);
+                        node.destination = arena_copy(destination.view());
+                        node.title = arena_copy(title.view());
+                        node.reference = arena_copy(reference.view());
                         if (image) {
                             node.kind = md_inline_kind::image;
                             node.text = label;
@@ -1597,11 +1692,13 @@ namespace {
                             node.kind = md_inline_kind::link;
                             node.children = parse_inline_range(text, label_begin, close, ctx, depth + 1);
                         }
-                        push_node(out, buffer, move(node));
+                        flush();
+                        out.push_back(move(node));
                         pos = cursor;
                         continue;
                     }
                 }
+                materialize();
                 buffer += c;
                 ++pos;
                 continue;
@@ -1659,27 +1756,32 @@ namespace {
 
                         if (run.length > use) {
                             string leftover(static_cast<size_t>(run.length - use), c);
+                            materialize();
                             buffer += leftover;
                         }
-                        push_node(out, buffer, move(wrapper));
+                        flush();
+                        out.push_back(move(wrapper));
                         pos = found + found_length;
                         if (found_length > use) {
+                            materialize();
                             buffer += string(static_cast<size_t>(found_length - use), c);
                         }
                         continue;
                     }
                 }
                 const size_t width = max<size_t>(1, run.length);
+                materialize();
                 buffer += string(text.substr(pos, min(width, end - pos)));
                 pos += width;
                 continue;
             }
 
+            materialize();
             buffer += c;
             ++pos;
         }
 
-        push_text(out, buffer);
+        flush();
         return out;
     }
 } // namespace
@@ -1699,7 +1801,9 @@ markdown_parser& markdown_parser::set_options(const option opt) noexcept {
 
 markdown_document markdown_parser::parse() {
     markdown_document document;
-    const line_table table = split_lines(text_.view());
+    document.set_source(text_.view());
+    inner::md_arena_scope scope(&document.arena());
+    const line_table table = split_lines(document.source());
     if (table.lines.empty()) {
         return document;
     }
@@ -1714,10 +1818,19 @@ markdown_document markdown_parser::parse() {
 }
 
 md_inlines markdown_parser::parse_inline(const markdown_document* document) {
+    bump_arena& arena = inner::md_inline_arena();
+    arena = bump_arena();
+    inner::md_arena_scope scope(&arena);
+    const string_view text = text_.view();
+    auto* data = static_cast<char*>(arena.allocate(text.size(), 1, 1));
+    if (!text.empty()) {
+        memory_copy(data, text.data(), text.size());
+    }
+    const string_view source(data, text.size());
     inline_context ctx;
     ctx.opt = &opt_;
     ctx.document = document;
-    return parse_inline_range(text_.view(), 0, text_.size(), ctx, 0);
+    return parse_inline_range(source, 0, source.size(), ctx, 0);
 }
 
 NEFORCE_END_NAMESPACE__

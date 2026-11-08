@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceMdBenchmark md_benchmark.cpp)

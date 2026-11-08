@@ -6,20 +6,13 @@
  * @brief Markdown 文档模型
  *
  * 定义与呈现无关的 Markdown 抽象语法树：块级节点、行内节点、链接引用定义表与文档根。
- * 文档模型不携带任何样式、颜色或终端概念，渲染方自行映射。
- *
- * 支持的块级结构：ATX 与 Setext 标题、段落（含懒惰续行与软/硬换行）、
- * 围栏与缩进代码块、HTML 块（7 类）、引用块（可嵌套）、有序/无序/嵌套
- * 列表（紧凑与松散、起始编号、任务项，列表项内可含任意子块）、分隔线、
- * 管道表格、链接引用定义。
- *
- * 支持的行内结构：文本与实体引用、强调与加粗（含 `***` 三重限定符）、
- * 删除线、行内代码、行内链接/图片（内联式、完整引用式、折叠式、简写式）、
- * 自动链接、行内 HTML、硬换行。
+ * 节点与连续数组都由文档的 bump_arena 持有，字符串以 string_view 引用文档源文本或 arena 副本。
  */
 
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/interface/istringify.hpp"
+#include "NeForce/core/memory/bump_arena.hpp"
+#include "NeForce/core/memory/memory.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -50,14 +43,6 @@ struct md_exception final : value_exception {
 /**
  * @defgroup Markdown Markdown 文档
  * @brief Markdown 文档的解析、文档模型与构建
- *
- * @section standards 参考的规范
- * - **CommonMark 0.31.2**：Markdown 规范
- *   https://spec.commonmark.org/0.31.2/
- * - **GitHub Flavored Markdown Spec**：表格、任务列表与删除线扩展
- *   https://github.github.com/gfm/
- *
- * @note 覆盖规范的完整**结构**，HTML 以原文保留，实体引用只解码常用子集，制表符按 4 列制表位展开。
  * @{
  */
 
@@ -77,22 +62,139 @@ enum class md_inline_kind : uint8_t {
     line_break,    ///< 硬换行
 };
 
+
+/// @cond
+NEFORCE_BEGIN_INNER__
+
+NEFORCE_API bump_arena*& md_arena_slot() noexcept;
+NEFORCE_API bump_arena& md_fallback_arena() noexcept;
+NEFORCE_API bump_arena& md_inline_arena() noexcept;
+
+class md_arena_scope {
+private:
+    bump_arena* previous_;
+
+public:
+    explicit md_arena_scope(bump_arena* arena) noexcept :
+    previous_(md_arena_slot()) {
+        md_arena_slot() = arena;
+    }
+
+    ~md_arena_scope() { md_arena_slot() = previous_; }
+
+    md_arena_scope(const md_arena_scope&) = delete;
+    md_arena_scope& operator=(const md_arena_scope&) = delete;
+};
+
+NEFORCE_END_INNER__
+/// @endcond
+
+
+/**
+ * @class md_list
+ * @brief arena 连续数组
+ * @tparam T 元素类型
+ */
+template <typename T>
+class md_list {
+private:
+    T* data_ = nullptr;
+    uint32_t size_ = 0;
+    uint32_t capacity_ = 0;
+
+    void ensure(const uint32_t needed) {
+        if (needed <= capacity_) {
+            return;
+        }
+        uint32_t capacity = capacity_ == 0 ? 4 : capacity_;
+        while (capacity < needed) {
+            capacity *= 2;
+        }
+        bump_arena* arena = inner::md_arena_slot();
+        if (arena == nullptr) {
+            arena = &inner::md_fallback_arena();
+        }
+        auto* data = static_cast<T*>(arena->allocate(capacity, sizeof(T), alignof(T)));
+        if (size_ != 0) {
+            _NEFORCE memory_copy(data, data_, static_cast<size_t>(size_) * sizeof(T));
+        }
+        data_ = data;
+        capacity_ = capacity;
+    }
+
+public:
+    using value_type = T;
+    using iterator = T*;
+    using const_iterator = const T*;
+
+    md_list() = default;
+
+    NEFORCE_NODISCARD size_t size() const noexcept { return size_; }
+
+    NEFORCE_NODISCARD bool empty() const noexcept { return size_ == 0; }
+
+    NEFORCE_NODISCARD size_t capacity() const noexcept { return capacity_; }
+
+    NEFORCE_NODISCARD T* data() noexcept { return data_; }
+
+    NEFORCE_NODISCARD const T* data() const noexcept { return data_; }
+
+    NEFORCE_NODISCARD T& operator[](const size_t index) noexcept { return data_[index]; }
+
+    NEFORCE_NODISCARD const T& operator[](const size_t index) const noexcept { return data_[index]; }
+
+    NEFORCE_NODISCARD T& back() noexcept { return data_[size_ - 1]; }
+
+    NEFORCE_NODISCARD const T& back() const noexcept { return data_[size_ - 1]; }
+
+    NEFORCE_NODISCARD iterator begin() noexcept { return data_; }
+
+    NEFORCE_NODISCARD const_iterator begin() const noexcept { return data_; }
+
+    NEFORCE_NODISCARD iterator end() noexcept { return data_ + size_; }
+
+    NEFORCE_NODISCARD const_iterator end() const noexcept { return data_ + size_; }
+
+    void reserve(const size_t count) { ensure(static_cast<uint32_t>(count)); }
+
+    void clear() noexcept { size_ = 0; }
+
+    void push_back(const T& value) {
+        ensure(size_ + 1);
+        data_[size_++] = value;
+    }
+
+    void push_back(T&& value) {
+        ensure(size_ + 1);
+        data_[size_++] = _NEFORCE move(value);
+    }
+
+    template <typename... Args>
+    T& emplace_back(Args&&... args) {
+        ensure(size_ + 1);
+        data_[size_] = T(_NEFORCE forward<Args>(args)...);
+        return data_[size_++];
+    }
+
+    void pop_back() noexcept { --size_; }
+};
+
 /**
  * @brief 行内节点
  */
 struct md_inline {
     md_inline_kind kind = md_inline_kind::text; ///< 节点类型
-    string text;                                ///< 文本内容
-    string destination;                         ///< 链接/图片/自动链接地址
-    string title;                               ///< 链接/图片标题
-    string reference;                           ///< 引用式链接的标签（空表示内联）
-    vector<md_inline> children;                 ///< 子节点
+    string_view text;                           ///< 文本内容
+    string_view destination;                    ///< 链接/图片/自动链接地址
+    string_view title;                          ///< 链接/图片标题
+    string_view reference;                      ///< 引用式链接的标签（空表示内联）
+    md_list<md_inline> children;                ///< 子节点
 };
 
 /**
  * @brief 行内节点列表
  */
-using md_inlines = vector<md_inline>;
+using md_inlines = md_list<md_inline>;
 
 /**
  * @brief 表格列对齐
@@ -133,9 +235,9 @@ struct md_block {
     bool fenced = false;   ///< code_block 是否为围栏块
     char fence_char = '`'; ///< code_block 围栏字符
     int fence_length = 0;  ///< code_block 围栏长度
-    string info;           ///< code_block 围栏后的原始信息串
-    string language;       ///< code_block 信息串首词
-    string literal;        ///< code_block/html_block 原始内容
+    string_view info;      ///< code_block 围栏后的原始信息串
+    string_view language;  ///< code_block 信息串首词
+    string_view literal;   ///< code_block/html_block 原始内容
 
     int html_type = 0; ///< html_block 类型（1-7）
 
@@ -148,36 +250,86 @@ struct md_block {
     bool task = false;    ///< list_item 是否为任务项
     bool checked = false; ///< 任务项是否已勾选
 
-    vector<md_align> alignments;     ///< table 列对齐
-    vector<md_inlines> header;       ///< table 表头单元格
-    vector<vector<md_inlines>> rows; ///< table 数据行
+    md_list<md_align> alignments;      ///< table 列对齐
+    md_list<md_inlines> header;        ///< table 表头单元格
+    md_list<md_list<md_inlines>> rows; ///< table 数据行
 
-    md_inlines inlines;        ///< paragraph/heading 的行内内容
-    vector<md_block> children; ///< block_quote/list/list_item 的子块
+    md_inlines inlines;         ///< paragraph/heading 的行内内容
+    md_list<md_block> children; ///< block_quote/list/list_item 的子块
 };
+
+/**
+ * @brief 块级节点列表
+ */
+using md_blocks = md_list<md_block>;
 
 /**
  * @brief 链接引用定义
  */
 struct md_reference {
-    string label;       ///< 引用标签
-    string destination; ///< 目标地址
-    string title;       ///< 标题
+    string_view label;       ///< 引用标签
+    string_view destination; ///< 目标地址
+    string_view title;       ///< 标题
 };
 
 /**
  * @brief Markdown 文档
  */
 class NEFORCE_API markdown_document : public istringify<markdown_document> {
+private:
+    bump_arena arena_;   ///< 节点与字符串分配器
+    string_view source_; ///< 源文本副本视图
+
+    md_block clone_block(const md_block& block);
+    md_inline clone_inline(const md_inline& inline_node);
+    md_inlines clone_inlines(const md_inlines& inlines);
+
 public:
-    vector<md_block> blocks;         ///< 顶层块序列
-    vector<md_reference> references; ///< 链接引用定义
+    md_blocks blocks;                 ///< 顶层块序列
+    md_list<md_reference> references; ///< 链接引用定义
+
+    markdown_document() = default;
+    markdown_document(const markdown_document&) = delete;
+    markdown_document& operator=(const markdown_document&) = delete;
+    markdown_document(markdown_document&&) noexcept = default;
+    markdown_document& operator=(markdown_document&&) noexcept = default;
+    ~markdown_document() = default;
+
+    /**
+     * @brief 获取分配器
+     * @return arena 引用
+     */
+    NEFORCE_NODISCARD bump_arena& arena() noexcept { return arena_; }
+
+    /**
+     * @brief 复制源文本到 arena
+     * @param text 源文本
+     */
+    void set_source(string_view text);
+
+    /**
+     * @brief 获取源文本
+     * @return 源文本视图
+     */
+    NEFORCE_NODISCARD string_view source() const noexcept { return source_; }
+
+    /**
+     * @brief 深拷贝块到本文档 arena
+     * @param block 源块
+     * @return 拷贝后的块
+     */
+    NEFORCE_NODISCARD md_block clone(const md_block& block) { return clone_block(block); }
+
+    /**
+     * @brief 深拷贝行内列表到本文档 arena
+     * @param inlines 源列表
+     * @return 拷贝后的列表
+     */
+    NEFORCE_NODISCARD md_inlines clone(const md_inlines& inlines) { return clone_inlines(inlines); }
 
     /**
      * @brief 序列化为 Markdown 文本
      * @return Markdown 文本
-     *
-     * 等价于 `markdown_builder::dump(*this)`。
      */
     NEFORCE_NODISCARD string to_string() const;
 };
@@ -208,8 +360,6 @@ NEFORCE_NODISCARD NEFORCE_API bool md_empty(const markdown_document& document) n
  * @param document 文档
  * @param label 标签
  * @return 命中定义指针，未命中返回 nullptr
- *
- * 标签比较忽略大小写与多余空白，与解析期的解析规则一致。
  */
 NEFORCE_NODISCARD NEFORCE_API const md_reference* md_find_reference(const markdown_document& document,
                                                                     string_view label);

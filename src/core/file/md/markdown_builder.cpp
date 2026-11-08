@@ -4,10 +4,16 @@
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-string markdown_document::to_string() const { return markdown_builder::dump(*this); }
-
-
 namespace {
+    string_view builder_copy(markdown_document& document, const string_view text) {
+        if (text.empty()) {
+            return string_view();
+        }
+        auto* data = static_cast<char*>(document.arena().allocate(text.size(), 1, 1));
+        memory_copy(data, text.data(), text.size());
+        return string_view(data, text.size());
+    }
+
     bool needs_escape(const char chr) noexcept {
         const auto c = static_cast<byte_t>(chr);
         if (c < 0x21 || c > 0x7E) {
@@ -376,7 +382,7 @@ namespace {
                 if (i == literal.size() || literal[i] == '\n') {
                     if (i > start) {
                         out += pad;
-                        out += string(literal.view().substr(start, i - start));
+                        out += string(literal.substr(start, i - start));
                     }
                     if (i < literal.size()) {
                         out += '\n';
@@ -397,7 +403,7 @@ namespace {
             if (i == literal.size() || literal[i] == '\n') {
                 if (i > start) {
                     out += code_pad;
-                    out += string(literal.view().substr(start, i - start));
+                    out += string(literal.substr(start, i - start));
                 }
                 if (i < literal.size()) {
                     out += '\n';
@@ -489,6 +495,8 @@ namespace {
 } // namespace
 
 
+string markdown_document::to_string() const { return markdown_builder::dump(*this); }
+
 markdown_builder::markdown_builder(option opt) :
 opt_(move(opt)) {}
 
@@ -498,13 +506,15 @@ markdown_builder& markdown_builder::set_options(option opt) {
 }
 
 markdown_builder& markdown_builder::append(const md_block& block) {
-    document_.blocks.push_back(block);
+    inner::md_arena_scope scope(&document_.arena());
+    document_.blocks.push_back(document_.clone(block));
     return *this;
 }
 
 markdown_builder& markdown_builder::append(const markdown_document& document) {
+    inner::md_arena_scope scope(&document_.arena());
     for (const auto& block: document.blocks) {
-        document_.blocks.push_back(block);
+        document_.blocks.push_back(document_.clone(block));
     }
     for (const auto& reference: document.references) {
         bool duplicate = false;
@@ -522,19 +532,21 @@ markdown_builder& markdown_builder::append(const markdown_document& document) {
 }
 
 markdown_builder& markdown_builder::append_inline(const md_inlines& inlines) {
+    inner::md_arena_scope scope(&document_.arena());
     md_block block;
     block.kind = md_block_kind::paragraph;
-    block.inlines = inlines;
+    block.inlines = document_.clone(inlines);
     document_.blocks.push_back(move(block));
     return *this;
 }
 
 markdown_builder& markdown_builder::reference(string label, string destination, string title) {
+    inner::md_arena_scope scope(&document_.arena());
     md_reference entry;
-    entry.label = move(label);
-    entry.destination = move(destination);
-    entry.title = move(title);
-    document_.references.push_back(move(entry));
+    entry.label = builder_copy(document_, label.view());
+    entry.destination = builder_copy(document_, destination.view());
+    entry.title = builder_copy(document_, title.view());
+    document_.references.push_back(entry);
     return *this;
 }
 
@@ -548,7 +560,7 @@ bool markdown_builder::empty() const noexcept { return document_.blocks.empty() 
 
 size_t markdown_builder::block_count() const noexcept { return document_.blocks.size(); }
 
-markdown_document markdown_builder::document() const { return document_; }
+const markdown_document& markdown_builder::document() const noexcept { return document_; }
 
 string markdown_builder::build() const { return dump(document_, opt_); }
 

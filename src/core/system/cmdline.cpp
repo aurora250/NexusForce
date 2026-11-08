@@ -330,11 +330,12 @@ void cmdline::load_config(const string& config_path, const string& section) {
 
     if (ext == ".ini") {
         ini_parser parser(content);
-        auto doc = parser.parse();
-        const ini_section* sec = section.empty() ? doc->get_global_section() : doc->get_section(section);
-        if (sec != nullptr) {
-            for (const auto& entry: sec->get_properties()) {
-                config_values[entry.first] = entry.second->get_value();
+        ini_document doc = parser.parse();
+        const ini_section sec = section.empty() ? doc.get_global_section() : doc.get_section(section);
+        if (sec.valid()) {
+            for (const ini_member& entry: sec) {
+                config_values[string(entry.key().data(), entry.key().size())] =
+                        string(entry.value.as_property().data(), entry.value.as_property().size());
             }
         }
     } else if (ext == ".json") {
@@ -405,9 +406,11 @@ void cmdline::load_config(const string& config_path, const string& section) {
         }
     } else if (ext == ".env") {
         env_parser parser(content);
-        auto doc = parser.parse();
-        for (const auto& entry: doc->get_variables()) {
-            config_values[entry.first] = entry.second->get_value();
+        env_document doc = parser.parse();
+        for (const env_member& entry: doc.get_variables()) {
+            const env_variable variable = entry.variable();
+            config_values[string(entry.key().data(), entry.key().size())] =
+                    string(variable.data(), variable.size());
         }
     } else {
         NEFORCE_THROW_EXCEPTION(cmdline_exception(("Unsupported config file format: " + ext).data()));

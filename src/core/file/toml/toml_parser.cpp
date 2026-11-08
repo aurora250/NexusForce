@@ -104,6 +104,9 @@ namespace {
 
     NEFORCE_NODISCARD const char* scan_single_line(const char* cursor, const char* end, const char separator,
                                                    const bool backslash) noexcept {
+        if (cursor == nullptr || end == nullptr) {
+            return cursor;
+        }
         const uint64_t separator_word = static_cast<uint64_t>(static_cast<unsigned char>(separator)) * k_byte_ones;
         while (end - cursor >= 8) {
             uint64_t word = 0;
@@ -940,9 +943,11 @@ void toml_parser::set_current_table(toml_document& doc, const vector<string_view
 }
 
 toml_document toml_parser::parse() {
-    begin_ = text_.data();
-    cursor_ = text_.data();
-    end_ = text_.data() + text_.size();
+    static constexpr char empty_text[] = "";
+
+    begin_ = text_.data() != nullptr ? text_.data() : empty_text;
+    cursor_ = begin_;
+    end_ = begin_ + text_.size();
 
     if (static_cast<size_t>(end_ - cursor_) >= 3 && static_cast<uint8_t>(cursor_[0]) == 0xEF &&
         static_cast<uint8_t>(cursor_[1]) == 0xBB && static_cast<uint8_t>(cursor_[2]) == 0xBF) {

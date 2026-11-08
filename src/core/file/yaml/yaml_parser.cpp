@@ -84,25 +84,26 @@ namespace {
     }
 } // namespace
 
+
 yaml_parser::yaml_parser(string yaml_str) :
 owned_(move(yaml_str)),
 text_(owned_.data(), owned_.size()),
-begin_(text_.data()),
-cursor_(text_.data()),
-end_(text_.data() + text_.size()),
+begin_(text_.data() != nullptr ? text_.data() : ""),
+cursor_(begin_),
+end_(begin_ + text_.size()),
 owning_(true) {}
 
 yaml_parser::yaml_parser(const string_view yaml_view) noexcept :
 text_(yaml_view),
-begin_(yaml_view.data()),
-cursor_(yaml_view.data()),
-end_(yaml_view.data() + yaml_view.size()) {}
+begin_(yaml_view.data() != nullptr ? yaml_view.data() : ""),
+cursor_(begin_),
+end_(begin_ + yaml_view.size()) {}
 
 yaml_parser::yaml_parser(const char* yaml_str) noexcept :
 text_(yaml_str == nullptr ? string_view() : string_view(yaml_str)),
-begin_(yaml_str == nullptr ? nullptr : yaml_str),
-cursor_(yaml_str == nullptr ? nullptr : yaml_str),
-end_(yaml_str == nullptr ? nullptr : yaml_str + string_view(yaml_str).size()) {}
+begin_(yaml_str != nullptr ? yaml_str : ""),
+cursor_(begin_),
+end_(begin_ + text_.size()) {}
 
 bool yaml_parser::expect(const char ch) {
     if (!match(ch)) {

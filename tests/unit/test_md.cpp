@@ -11,7 +11,7 @@ namespace {
     string dump_node(const md_inline& node) {
         switch (node.kind) {
             case md_inline_kind::text: {
-                return "t(\"" + escape((node.text)) + "\")";
+                return string("t(\"") + escape(node.text) + "\")";
             }
             case md_inline_kind::strong: {
                 return "strong(" + dump(node.children) + ")";
@@ -23,23 +23,23 @@ namespace {
                 return "del(" + dump(node.children) + ")";
             }
             case md_inline_kind::code: {
-                return "code(\"" + escape((node.text)) + "\")";
+                return string("code(\"") + escape(node.text) + "\")";
             }
             case md_inline_kind::link: {
-                string result = "link(" + dump(node.children) + "->" + (node.destination);
+                string result = "link(" + dump(node.children) + "->" + string(node.destination);
                 if (!node.title.empty()) {
-                    result += " \"" + (node.title) + "\"";
+                    result += " \"" + string(node.title) + "\"";
                 }
                 return result + ")";
             }
             case md_inline_kind::image: {
-                return "img(\"" + escape((node.text)) + "\"->" + (node.destination) + ")";
+                return string("img(\"") + escape(node.text) + "\"->" + string(node.destination) + ")";
             }
             case md_inline_kind::autolink: {
-                return "auto(" + (node.text) + ")";
+                return string("auto(") + string(node.text) + ")";
             }
             case md_inline_kind::html: {
-                return "html(" + (node.text) + ")";
+                return string("html(") + string(node.text) + ")";
             }
             case md_inline_kind::line_break: {
                 return "br()";
@@ -78,7 +78,7 @@ namespace {
 
     void dump_block(const md_block& block, string& out, int depth);
 
-    string dump_cells(const vector<md_inlines>& cells) {
+    string dump_cells(const md_list<md_inlines>& cells) {
         string result;
         for (size_t i = 0; i < cells.size(); ++i) {
             if (i > 0) {
