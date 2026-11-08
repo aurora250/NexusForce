@@ -6,8 +6,7 @@
  * @brief JSON DOM 值、视图与文档
  */
 
-#include "NeForce/core/exception/exception.hpp"
-#include "NeForce/core/file/json/json_arena.hpp"
+#include "NeForce/core/memory/bump_arena.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -884,7 +883,7 @@ private:
     friend class json_object_mut;
     friend class json_array_mut;
 
-    json_arena arena_; ///< 文档内存池
+    bump_arena arena_; ///< 文档内存池
     json_value root_;  ///< 根值
 };
 

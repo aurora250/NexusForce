@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.21)
 
+#if(POLICY CMP0218)
+#    cmake_policy(SET CMP0218 NEW)
+#endif()
+
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 file(READ "config.json" JSON_CONTENT)

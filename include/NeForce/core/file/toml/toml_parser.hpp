@@ -5,10 +5,7 @@
  * @file toml_parser.hpp
  * @brief TOML配置文件解析器
  *
- * 此文件提供了TOML格式配置的解析器实现。
- * 提供完整的语法分析和错误处理机制。
- *
- * 支持TOML v1.0.0规范的所有特性：
+ * 完全支持 TOML v1.0.0 规范：
  * - 键值对（Key/Value pairs）
  * - 字符串（Basic, Literal, Multi-line）
  * - 数字（Integer, Float, Special floats）
@@ -40,345 +37,148 @@ NEFORCE_BEGIN_NAMESPACE__
  * @class toml_parser
  * @brief TOML配置解析器
  *
- * 采用递归下降解析算法。
- * 解析过程会维护行号和列号信息，便于错误定位。
+ * 解析错误会携带出错位置的行号与列号。
  */
 class NEFORCE_API toml_parser {
-private:
-    /**
-     * @struct context
-     * @brief 解析上下文结构
-     *
-     * 保存表格解析的上下文信息，用于表格数组的嵌套管理。
-     */
-    struct context {
-        toml_table* table;   ///< 当前表格指针
-        vector<string> path; ///< 当前路径
-    };
-
-    vector<context> context_stack_;  ///< 上下文栈
-    bool is_in_array_table_ = false; ///< 是否在表格数组中
-
-    string text_;       ///< 待解析的TOML文本
-    size_t len_;        ///< 文本长度
-    size_t pos_ = 0;    ///< 当前解析位置
-    size_t line_ = 1;   ///< 当前行号
-    size_t column_ = 1; ///< 当前列号
-
-    unique_ptr<toml_table> root_; ///< 解析结果根表格
-    toml_table* ctb_ = nullptr;   ///< 当前表格指针
-    vector<string> ctp_;          ///< 当前表格路径
-
-    /**
-     * @brief 跳过空白字符
-     *
-     * 跳过空格和制表符。
-     */
-    void skip_whitespace() noexcept;
-
-    /**
-     * @brief 跳过注释
-     *
-     * 跳过以#开头的注释直到行尾。
-     */
-    void skip_comment() noexcept;
-
-    /**
-     * @brief 跳过空白和注释
-     *
-     * 连续跳过空白字符、注释和换行符。
-     */
-    void skip_whitespace_and_comments() noexcept;
-
-    /**
-     * @brief 跳过换行符
-     *
-     * 跳过连续的换行符。
-     */
-    void skip_newlines() noexcept;
-
-    /**
-     * @brief 跳过空白但不包括换行符
-     *
-     * 只跳过空格和制表符，不跳过换行符。
-     */
-    void skip_whitespace_no_newline() noexcept;
-
-    /**
-     * @brief 获取当前字符
-     * @return 当前位置的字符，若已到末尾返回'\0'
-     */
-    NEFORCE_NODISCARD char current() const noexcept;
-
-    /**
-     * @brief 预取字符
-     * @param offset 向前偏移量，默认为1
-     * @return 指定偏移位置的字符
-     */
-    NEFORCE_NODISCARD char peek(size_t offset = 1) const noexcept;
-
-    /**
-     * @brief 检查是否已到末尾
-     * @return 是否已到文件末尾
-     */
-    NEFORCE_NODISCARD bool eof() const noexcept;
-
-    /**
-     * @brief 前进一个字符
-     *
-     * 更新位置信息，处理换行符的行列计数。
-     */
-    void advance() noexcept;
-
-    /**
-     * @brief 批量前进多个字符
-     * @param count 前进的字符数
-     */
-    void advance_bulk(size_t count) noexcept;
-
-    /**
-     * @brief 期望指定字符
-     * @param ch 期望的字符
-     * @return 是否成功匹配
-     * @throws toml_exception 当字符不匹配时抛出
-     *
-     * 如果当前字符与期望字符匹配则前进并返回true，否则抛出异常。
-     */
-    bool expect(char ch);
-
-    /**
-     * @brief 尝试匹配指定字符
-     * @param ch 要匹配的字符
-     * @return 是否匹配成功
-     *
-     * 如果当前字符与指定字符匹配则前进并返回true，否则返回false。
-     */
-    bool match(char ch) noexcept;
-
-    /**
-     * @brief 抛出解析错误
-     * @param message 错误信息
-     * @throws toml_exception 始终抛出异常
-     *
-     * 构造包含行号和列号的错误信息并抛出异常。
-     */
-    void throw_parse_error(string message) const;
-
-    /**
-     * @brief 解析Unicode转义序列
-     * @param digits 十六进制位数（4或8）
-     * @return Unicode码点
-     *
-     * 解析Unicode转义序列。
-     *
-     * @throws toml_exception 当转义序列无效时抛出
-     */
-    codepoint parse_unicode_escape(size_t digits);
-
-    /**
-     * @brief 解析字符串
-     * @return 解析得到的字符串值
-     *
-     * 根据引号类型分派到具体的解析方法。
-     */
-    unique_ptr<toml_string> parse_string();
-
-    /**
-     * @brief 解析基本字符串
-     * @return 解析得到的字符串值
-     *
-     * 格式："string"，支持转义序列。
-     */
-    unique_ptr<toml_string> parse_basic_string();
-
-    /**
-     * @brief 解析字面量字符串
-     * @return 解析得到的字符串值
-     *
-     * 格式：'string'，不支持转义。
-     */
-    unique_ptr<toml_string> parse_literal_string();
-
-    /**
-     * @brief 解析多行基本字符串
-     * @return 解析得到的字符串值
-     *
-     * 格式："""string""" ，支持转义和行延续。
-     */
-    unique_ptr<toml_string> parse_multiline_basic_string();
-
-    /**
-     * @brief 解析多行字面量字符串
-     * @return 解析得到的字符串值
-     *
-     * 格式：'''string'''，不支持转义。
-     */
-    unique_ptr<toml_string> parse_multiline_literal_string();
-
-    /**
-     * @brief 解析数字
-     * @return 解析得到的数字值（整数或浮点数）
-     *
-     * 支持整数、浮点数和特殊浮点数（inf, nan）。
-     */
-    unique_ptr<toml_value> parse_number();
-
-    /**
-     * @brief 解析整数
-     * @param base 进制基数（2, 8, 10, 16）
-     * @return 解析得到的整数值
-     */
-    unique_ptr<toml_integer> parse_integer(int base = 10);
-
-    /**
-     * @brief 解析布尔值
-     * @return 解析得到的布尔值
-     */
-    unique_ptr<toml_boolean> parse_boolean();
-
-    /**
-     * @brief 解析日期时间
-     * @return 解析得到的日期时间值
-     *
-     * 支持四种日期时间格式的自动识别。
-     */
-    unique_ptr<toml_datetime> parse_datetime();
-
-    /**
-     * @brief 解析数组
-     * @return 解析得到的数组
-     *
-     * 格式：[value1, value2, ...]
-     * 要求所有元素类型一致。
-     */
-    unique_ptr<toml_array> parse_array();
-
-    /**
-     * @brief 解析内联表格
-     * @return 解析得到的内联表格
-     *
-     * 格式：{ key = value, key2 = value2 }
-     * 内联表格不能包含换行符。
-     */
-    unique_ptr<toml_table> parse_inline_table();
-
-    /**
-     * @brief 解析键名
-     * @return 键名字符串
-     *
-     * 根据当前字符决定解析裸键或引号键。
-     */
-    string parse_key();
-
-    /**
-     * @brief 解析裸键
-     * @return 裸键字符串
-     *
-     * 格式：[A-Za-z0-9_-]+
-     */
-    string parse_bare_key();
-
-    /**
-     * @brief 解析引号键
-     * @return 引号键字符串
-     *
-     * 使用字符串解析规则。
-     */
-    string parse_quoted_key();
-
-    /**
-     * @brief 解析点分隔键路径
-     * @return 键路径向量
-     *
-     * 格式：key1.key2.key3
-     */
-    vector<string> parse_dotted_key();
-
-    /**
-     * @brief 解析任意值
-     * @return 解析得到的值
-     *
-     * 根据当前字符决定解析的具体类型。
-     */
-    unique_ptr<toml_value> parse_value();
-
-    /**
-     * @brief 解析键值对
-     *
-     * 解析格式：key = value
-     * 支持点分隔键路径。
-     */
-    void parse_key_value();
-
-    /**
-     * @brief 解析表格头
-     *
-     * 格式：[table.path]
-     */
-    void parse_table_header();
-
-    /**
-     * @brief 解析表格数组头
-     *
-     * 格式：[[array.table.path]]
-     */
-    void parse_array_table_header();
-
-    /**
-     * @brief 获取或创建表格
-     * @param path 表格路径
-     * @return 表格指针
-     *
-     * 沿路径获取表格，如果不存在则创建。
-     */
-    NEFORCE_NODISCARD toml_table* get_or_create_table(const vector<string>& path) const;
-
-    /**
-     * @brief 导航到表格
-     * @param path 表格路径
-     * @return 表格指针，不存在返回nullptr
-     */
-    NEFORCE_NODISCARD toml_table* navigate_to_table(const vector<string>& path) const;
-
-    /**
-     * @brief 设置当前表格
-     * @param path 表格路径
-     *
-     * 将当前表格设置为指定路径的表格，必要时创建。
-     */
-    void set_current_table(const vector<string>& path);
-
 public:
     /**
-     * @brief 构造函数
-     * @param text 待解析的TOML文本
-     *
-     * 初始化解析器，创建空的根表格。
+     * @brief 构造零拷贝解析器
+     * @param text 输入文本
+     * @note text 生命周期需覆盖文档使用期
      */
-    explicit toml_parser(string text) :
-    text_(_NEFORCE move(text)),
-    len_(text_.size()) {
-        root_ = make_unique<toml_table>();
-        ctb_ = root_.get();
-    }
+    explicit toml_parser(const string_view text) noexcept :
+    text_(text) {}
+
+    /**
+     * @brief 构造自包含解析器
+     * @param text 输入文本
+     */
+    explicit toml_parser(string text) noexcept :
+    owned_(_NEFORCE move(text)),
+    text_(owned_.data(), owned_.size()),
+    owning_(true) {}
+
+    /**
+     * @brief 构造零拷贝解析器
+     * @param text 以 '\\0' 结尾的输入文本
+     * @note text 生命周期需覆盖文档使用期
+     */
+    explicit toml_parser(const char* text) noexcept :
+    text_(string_view(text)) {}
+
+    ~toml_parser() = default;
+
+    toml_parser(const toml_parser&) = delete;
+    toml_parser& operator=(const toml_parser&) = delete;
 
     /**
      * @brief 执行解析
-     * @return 解析完成的根表格
+     * @return 解析完成的文档，根值为表格
      * @throws toml_exception 当解析过程中遇到语法错误时抛出
-     *
-     * 解析整个TOML文档，构建完整的表格结构。
      */
-    unique_ptr<toml_table> parse();
+    toml_document parse();
 
     /**
      * @brief 尝试执行解析
-     * @return 解析结果的可选对象
-     *
-     * 如果解析成功返回包含根表格的optional，
-     * 如果解析失败返回空的optional。
+     * @return 成功时返回文档，失败时返回空
      */
-    optional<unique_ptr<toml_table>> try_parse();
+    optional<toml_document> try_parse() noexcept;
+
+private:
+    NEFORCE_NODISCARD char current() const noexcept { return cursor_ < end_ ? *cursor_ : '\0'; }
+
+    NEFORCE_NODISCARD char peek(const size_t offset = 1) const noexcept {
+        return compare_greater(end_ - cursor_, offset) ? cursor_[offset] : '\0';
+    }
+
+    NEFORCE_NODISCARD bool eof() const noexcept { return cursor_ >= end_; }
+
+    void advance() noexcept { ++cursor_; }
+
+    void advance_bulk(const size_t count) noexcept { cursor_ += count; }
+
+    void skip_whitespace() noexcept;
+
+    void skip_comment() noexcept;
+
+    void skip_whitespace_and_comments() noexcept;
+
+    void skip_whitespace_no_newline() noexcept;
+
+    bool expect(char ch);
+
+    void throw_parse_error(string message) const;
+
+    NEFORCE_NODISCARD codepoint parse_unicode_escape(size_t digits);
+
+    NEFORCE_NODISCARD toml_value parse_string(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value parse_basic_string(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value parse_basic_escaped(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value parse_multiline_basic_escaped(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value make_text(toml_document& doc, string_view text, toml_string_type type);
+
+    NEFORCE_NODISCARD toml_value parse_literal_string(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value parse_multiline_basic_string(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value parse_multiline_literal_string(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value parse_number();
+
+    NEFORCE_NODISCARD toml_value parse_integer(int base);
+
+    NEFORCE_NODISCARD toml_value parse_boolean();
+
+    NEFORCE_NODISCARD toml_value parse_datetime(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value parse_array(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value parse_inline_table(toml_document& doc);
+
+    NEFORCE_NODISCARD string_view parse_key(toml_document& doc);
+
+    NEFORCE_NODISCARD string_view parse_bare_key();
+
+    NEFORCE_NODISCARD string_view parse_quoted_key(toml_document& doc);
+
+    void parse_dotted_key(toml_document& doc, vector<string_view>& path);
+
+    NEFORCE_NODISCARD toml_value parse_value(toml_document& doc);
+
+    void parse_key_value(toml_document& doc);
+
+    void parse_table_header(toml_document& doc);
+
+    void parse_array_table_header(toml_document& doc);
+
+    NEFORCE_NODISCARD toml_value* get_or_create_table(toml_document& doc, toml_value* base, const string_view* path,
+                                                      size_t count);
+
+    void set_current_table(toml_document& doc, const vector<string_view>& path);
+
+    NEFORCE_NODISCARD string_view clean_number(string_view raw);
+
+    NEFORCE_NODISCARD static bool same(const char* cursor, const char* end, const char* text, size_t size) noexcept;
+
+    vector<toml_value*> context_stack_; ///< 表格数组的上下文栈
+    bool is_in_array_table_ = false;    ///< 是否在表格数组中
+
+    string owned_;          ///< 自包含模式下的输入副本
+    string_view text_;      ///< 待解析的TOML文本视图
+    string decode_scratch_; ///< 转义解码缓冲区
+    string number_scratch_; ///< 数字去下划线缓冲区
+
+    const char* begin_ = nullptr;  ///< 文本起始位置
+    const char* cursor_ = nullptr; ///< 当前解析位置
+    const char* end_ = nullptr;    ///< 文本结束位置
+
+    toml_value* current_table_ = nullptr; ///< 当前表格指针
+    vector<string_view> key_path_;        ///< 键路径复用缓冲
+    bool owning_ = false;                 ///< 是否为自包含模式
 };
 
 /** @} */ // TomlConfig

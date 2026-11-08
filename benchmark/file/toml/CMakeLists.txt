@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceTomlBenchmark toml_benchmark.cpp)

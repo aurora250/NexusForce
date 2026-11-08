@@ -9,7 +9,6 @@
  * 支持链式调用和函数式编程方式构建TOML格式。
  */
 
-#include "NeForce/core/container/stack.hpp"
 #include "NeForce/core/file/toml/toml_value.hpp"
 #include "NeForce/core/functional/function.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -56,64 +55,37 @@ private:
      * 保存当前构建的上下文信息，用于维护表格/数组的嵌套关系。
      */
     struct frame {
-        range_type type = table; ///< 上下文类型
-        union {
-            toml_table* table_ptr = nullptr; ///< 当前表格指针
-            toml_array* array_ptr;           ///< 当前数组指针
-        };
-
-        frame() = default;
-        frame(const range_type t, toml_table* tbl) :
-        type(t),
-        table_ptr(tbl) {}
-        frame(const range_type t, toml_array* arr) :
-        type(t),
-        array_ptr(arr) {}
-
-        frame(const frame&) = default;
-        frame& operator=(const frame&) = default;
-        frame(frame&&) = default;
-        frame& operator=(frame&&) = default;
-        ~frame() = default;
+        range_type type = table;    ///< 上下文类型
+        toml_value* node = nullptr; ///< 当前容器节点
+        string pending_key;         ///< 待写入成员的键
     };
 
-    stack<frame> contexts_;       ///< 上下文栈
-    unique_ptr<toml_table> root_; ///< 根表格
-    string current_key_;          ///< 当前键名
+    vector<frame> frames_;   ///< 上下文栈
+    toml_document document_; ///< 承载 arena 与根值
 
 private:
     /**
-     * @brief 值设置的通用实现
-     * @tparam T TOML值类型
-     * @param value 要设置的值指针
-     * @return 自身引用
-     * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
-     *
-     * 根据当前上下文决定值的放置位置：
-     * - 数组中：作为新元素添加
-     * - 表格中：与当前键名配对添加
+     * @brief 将值写入当前上下文
+     * @param value 要写入的值
+     * @throws toml_exception 当上下文无效或键名缺失、重复时抛出
      */
-    template <typename T>
-    toml_builder& value_impl(unique_ptr<T> value) {
-        if (contexts_.empty()) {
-            NEFORCE_THROW_EXCEPTION(toml_exception("Cannot add value to root (root must be a table)"));
-        }
+    void push_value(toml_value value);
 
-        const auto& top = contexts_.top();
-        if (top.type == array) {
-            top.array_ptr->add_element(_NEFORCE move(value));
-        } else if (top.type == table || top.type == inline_table) {
-            if (current_key_.empty()) {
-                NEFORCE_THROW_EXCEPTION(toml_exception("No key set for value in table"));
-            }
-            if (top.table_ptr->has_member(current_key_)) {
-                NEFORCE_THROW_EXCEPTION(toml_exception(("Duplicate key: " + current_key_).data()));
-            }
-            top.table_ptr->add_member(current_key_, _NEFORCE move(value));
-            current_key_.clear();
-        }
-        return *this;
-    }
+    /**
+     * @brief 打开容器并把容器节点挂到当前上下文
+     * @param is_table 是否为表格
+     * @param is_inline 表格是否内联
+     * @return 容器节点
+     * @throws toml_exception 当上下文无效或键名缺失、重复时抛出
+     */
+    toml_value* open_container(bool is_table, bool is_inline);
+
+    /**
+     * @brief 关闭当前容器
+     * @param expected 期望的上下文类型
+     * @throws toml_exception 上下文类型不匹配或试图关闭根表格时抛出
+     */
+    void close_container(range_type expected);
 
     /**
      * @brief 映射表类型的实现（转换为内联表格）
@@ -152,20 +124,16 @@ private:
      * @param path 表格路径
      * @return 目标表格指针
      * @throws toml_exception 当路径中的键已存在但不是表格时抛出
-     *
-     * 沿路径获取表格，如果不存在则创建。
      */
-    NEFORCE_NODISCARD toml_table* get_or_create_table_path(const vector<string>& path) const;
+    NEFORCE_NODISCARD toml_value* get_or_create_table_path(const vector<string>& path);
 
     /**
      * @brief 获取或创建表格数组
      * @param path 表格数组路径
      * @return 目标数组指针
      * @throws toml_exception 当路径中的键已存在但不是数组时抛出
-     *
-     * 沿路径获取或创建用于表格数组的数组。
      */
-    NEFORCE_NODISCARD toml_array* get_or_create_array_for_array_table(const vector<string>& path) const;
+    NEFORCE_NODISCARD toml_value* get_or_create_array_for_array_table(const vector<string>& path);
 
 public:
     /**
@@ -182,14 +150,14 @@ public:
      * @brief 移动构造函数
      * @param other 源构建器
      */
-    toml_builder(toml_builder&& other) = default;
+    toml_builder(toml_builder&& other) noexcept = default;
 
     /**
      * @brief 移动赋值运算符
      * @param other 源构建器
      * @return 自身引用
      */
-    toml_builder& operator=(toml_builder&& other) = default;
+    toml_builder& operator=(toml_builder&& other) noexcept = default;
 
     /**
      * @brief 设置当前键名
@@ -285,20 +253,26 @@ public:
     toml_builder& end_array_table();
 
     /**
-     * @brief 设置null值
-     * @param np 空指针标记
-     * @return 自身引用，支持链式调用
-     * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
-     */
-    toml_builder& value(nullptr_t np) { return value_impl(make_unique<toml_boolean>(false)); }
-
-    /**
      * @brief 设置布尔值
      * @param value 布尔值
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const bool value) { return value_impl(make_unique<toml_boolean>(value)); }
+    toml_builder& value(const bool value) {
+        push_value(toml_value::make_boolean(value));
+        return *this;
+    }
+
+    /**
+     * @brief 设置空值占位（映射为 false）
+     * @param np 空指针标记
+     * @return 自身引用，支持链式调用
+     * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
+     */
+    toml_builder& value(nullptr_t np) {
+        (void) np;
+        return this->value(false);
+    }
 
     /**
      * @brief 设置64位整数值
@@ -306,7 +280,10 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const int64_t value) { return value_impl(make_unique<toml_integer>(value)); }
+    toml_builder& value(const int64_t value) {
+        push_value(toml_value::make_integer(value));
+        return *this;
+    }
 
     /**
      * @brief 设置整数值
@@ -322,7 +299,10 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const double value) { return value_impl(make_unique<toml_float>(value)); }
+    toml_builder& value(const double value) {
+        push_value(toml_value::make_float(value));
+        return *this;
+    }
 
     /**
      * @brief 设置字符串值（基本字符串类型）
@@ -330,8 +310,9 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(string value) {
-        return value_impl(make_unique<toml_string>(_NEFORCE move(value), toml_string::Basic));
+    toml_builder& value(const string& value) {
+        push_value(document_.make_string_value(string_view(value.data(), value.size()), toml_basic_string));
+        return *this;
     }
 
     /**
@@ -340,7 +321,10 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const char* value) { return this->value(string(value)); }
+    toml_builder& value(const char* value) {
+        push_value(document_.make_string_value(string_view(value), toml_basic_string));
+        return *this;
+    }
 
     /**
      * @brief 设置字符串视图值
@@ -348,15 +332,21 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(const string_view value) { return this->value(string(value)); }
+    toml_builder& value(const string_view value) {
+        push_value(document_.make_string_value(value, toml_basic_string));
+        return *this;
+    }
 
     /**
      * @brief 设置已构建的TOML值
-     * @param value TOML值指针
+     * @param value TOML值
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value(unique_ptr<toml_value> value) { return value_impl(_NEFORCE move(value)); }
+    toml_builder& value(const toml_value value) {
+        push_value(value);
+        return *this;
+    }
 
     /**
      * @brief 设置指定类型的字符串值
@@ -365,8 +355,20 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value_string(string value, toml_string::string_type type) {
-        return value_impl(make_unique<toml_string>(_NEFORCE move(value), type));
+    toml_builder& value_string(const string_view value, const toml_string_type type) {
+        push_value(document_.make_string_value(value, type));
+        return *this;
+    }
+
+    /**
+     * @brief 设置指定类型的字符串值
+     * @param value 字符串值
+     * @param type 字符串类型（Basic, Literal, MultiBasic, MultiLiteral）
+     * @return 自身引用，支持链式调用
+     * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
+     */
+    toml_builder& value_string(const string_view value, const toml_string::string_type type) {
+        return value_string(value, static_cast<toml_string_type>(type));
     }
 
     /**
@@ -376,8 +378,20 @@ public:
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
-    toml_builder& value_datetime(const string_view value, toml_datetime::datetime_type type) {
-        return value_impl(make_unique<toml_datetime>(value, type));
+    toml_builder& value_datetime(const string_view value, const toml_datetime_type type) {
+        push_value(document_.make_datetime_value(value, type));
+        return *this;
+    }
+
+    /**
+     * @brief 设置指定类型的日期时间值
+     * @param value 日期时间字符串
+     * @param type 日期时间类型
+     * @return 自身引用，支持链式调用
+     * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
+     */
+    toml_builder& value_datetime(const string_view value, const toml_datetime::datetime_type type) {
+        return value_datetime(value, static_cast<toml_datetime_type>(type));
     }
 
     /**
@@ -425,13 +439,10 @@ public:
 
     /**
      * @brief 构建TOML文档
-     * @return 构建完成的根表格
+     * @return 构建完成的文档，根值为表格
      * @throws toml_exception 当存在未闭合的上下文时抛出
-     *
-     * 完成构建过程，返回构建好的根表格。
-     * 调用前必须确保所有上下文都已正确闭合。
      */
-    unique_ptr<toml_table> build();
+    toml_document build();
 };
 
 /** @} */ // TomlConfig

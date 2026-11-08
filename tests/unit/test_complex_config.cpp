@@ -1,7 +1,10 @@
+#include <NeForce/core/container/flat_unordered_map.hpp>
 #include <NeForce/core/file/toml/toml_builder.hpp>
 #include <NeForce/core/file/toml/toml_parser.hpp>
 #include <NeForce/core/file/yaml/yaml_builder.hpp>
 #include <NeForce/core/file/yaml/yaml_parser.hpp>
+#include <NeForce/core/numeric/math.hpp>
+#include <NeForce/core/string/to_numerics.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -11,646 +14,448 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TomlValueTest, TomlBooleanType) {
-    toml_boolean bool_true(true);
-    toml_boolean bool_false(false);
-
-    EXPECT_EQ(bool_true.type(), toml_value::Boolean);
-    EXPECT_EQ(bool_false.type(), toml_value::Boolean);
-    EXPECT_TRUE(bool_true.is_boolean());
-    EXPECT_FALSE(bool_true.is_integer());
-    EXPECT_FALSE(bool_true.is_float());
-    EXPECT_FALSE(bool_true.is_string());
-    EXPECT_FALSE(bool_true.is_datetime());
-    EXPECT_FALSE(bool_true.is_array());
-    EXPECT_FALSE(bool_true.is_table());
+TEST_F(TomlValueTest, DefaultValueIsUnset) {
+    toml_value value;
+    EXPECT_EQ(value.kind(), toml_kind::null_);
+    EXPECT_FALSE(value.is_boolean());
+    EXPECT_FALSE(value.is_integer());
+    EXPECT_FALSE(value.is_float());
+    EXPECT_FALSE(value.is_string());
+    EXPECT_FALSE(value.is_datetime());
+    EXPECT_FALSE(value.is_array());
+    EXPECT_FALSE(value.is_table());
+    EXPECT_EQ(value.element_count(), 0u);
 }
 
-TEST_F(TomlValueTest, TomlBooleanGetValue) {
-    toml_boolean bool_true(true);
-    toml_boolean bool_false(false);
-
-    EXPECT_TRUE(bool_true.get_value());
-    EXPECT_FALSE(bool_false.get_value());
+TEST_F(TomlValueTest, BooleanValue) {
+    const toml_value value = toml_value::make_boolean(true);
+    EXPECT_EQ(value.kind(), toml_kind::boolean);
+    EXPECT_TRUE(value.is_boolean());
+    EXPECT_FALSE(value.is_integer());
+    EXPECT_TRUE(value.as_boolean().get_value());
+    EXPECT_FALSE(toml_value::make_boolean(false).as_boolean().get_value());
+    EXPECT_EQ(value.to_string(), "true");
+    EXPECT_EQ(toml_value::make_boolean(false).to_string(), "false");
 }
 
-TEST_F(TomlValueTest, TomlBooleanAsBoolean) {
-    toml_boolean bool_val(true);
-
-    EXPECT_NE(bool_val.as_boolean(), nullptr);
-    EXPECT_EQ(bool_val.as_integer(), nullptr);
-    EXPECT_EQ(bool_val.as_float(), nullptr);
-    EXPECT_EQ(bool_val.as_string(), nullptr);
-    EXPECT_EQ(bool_val.as_datetime(), nullptr);
-    EXPECT_EQ(bool_val.as_array(), nullptr);
-    EXPECT_EQ(bool_val.as_table(), nullptr);
+TEST_F(TomlValueTest, IntegerValue) {
+    const toml_value value = toml_value::make_integer(42);
+    EXPECT_EQ(value.kind(), toml_kind::integer);
+    EXPECT_TRUE(value.is_integer());
+    EXPECT_EQ(value.as_integer().get_value(), 42);
+    EXPECT_EQ(value.to_string(), "42");
+    EXPECT_EQ(toml_value::make_integer(-42).as_integer().get_value(), -42);
+    EXPECT_EQ(toml_value::make_integer(-9223372036854775807LL - 1).to_string(), "-9223372036854775808");
+    EXPECT_EQ(toml_value::make_integer(9223372036854775807LL).to_string(), "9223372036854775807");
 }
 
-TEST_F(TomlValueTest, TomlIntegerType) {
-    toml_integer int_val(42);
-
-    EXPECT_EQ(int_val.type(), toml_value::Integer);
-    EXPECT_TRUE(int_val.is_integer());
-    EXPECT_FALSE(int_val.is_boolean());
-    EXPECT_FALSE(int_val.is_float());
-    EXPECT_FALSE(int_val.is_string());
-    EXPECT_FALSE(int_val.is_datetime());
-    EXPECT_FALSE(int_val.is_array());
-    EXPECT_FALSE(int_val.is_table());
+TEST_F(TomlValueTest, FloatValue) {
+    const toml_value value = toml_value::make_float(3.14);
+    EXPECT_EQ(value.kind(), toml_kind::floating);
+    EXPECT_TRUE(value.is_float());
+    EXPECT_DOUBLE_EQ(value.as_float().get_value(), 3.14);
+    EXPECT_EQ(value.to_string(), "3.14");
+    EXPECT_EQ(toml_value::make_float(2.0).to_string(), "2.0");
+    EXPECT_EQ(toml_value::make_float(-0.5).to_string(), "-0.5");
 }
 
-TEST_F(TomlValueTest, TomlIntegerGetValue) {
-    toml_integer int_pos(42);
-    toml_integer int_neg(-100);
-    toml_integer int_zero(0);
-
-    EXPECT_EQ(int_pos.get_value(), 42);
-    EXPECT_EQ(int_neg.get_value(), -100);
-    EXPECT_EQ(int_zero.get_value(), 0);
+TEST_F(TomlValueTest, StringBasicValue) {
+    const toml_value value = toml_value::make_string("hello");
+    EXPECT_EQ(value.kind(), toml_kind::string);
+    EXPECT_TRUE(value.is_string());
+    EXPECT_EQ(value.as_string().get_value(), "hello");
+    EXPECT_EQ(value.as_string().get_string_type(), toml_string::Basic);
+    EXPECT_EQ(value.element_count(), 5u);
+    EXPECT_EQ(value.to_string(), "\"hello\"");
 }
 
-TEST_F(TomlValueTest, TomlIntegerAsInteger) {
-    toml_integer int_val(0);
+TEST_F(TomlValueTest, StringInlineAndLong) {
+    toml_document doc;
+    const toml_value inlined = doc.make_string_value("short");
+    EXPECT_EQ(inlined.as_string().get_value(), "short");
 
-    EXPECT_NE(int_val.as_integer(), nullptr);
-    EXPECT_EQ(int_val.as_boolean(), nullptr);
-    EXPECT_EQ(int_val.as_float(), nullptr);
-    EXPECT_EQ(int_val.as_string(), nullptr);
-    EXPECT_EQ(int_val.as_datetime(), nullptr);
-    EXPECT_EQ(int_val.as_array(), nullptr);
-    EXPECT_EQ(int_val.as_table(), nullptr);
+    const char* const text = "a string longer than fourteen bytes";
+    const toml_value borrowed = toml_value::make_string(text);
+    EXPECT_EQ(borrowed.as_string().data(), text);
+    EXPECT_EQ(borrowed.as_string().size(), 35u);
+
+    const toml_value copied = doc.make_string_value(text);
+    EXPECT_NE(copied.as_string().data(), text);
+    EXPECT_EQ(copied.as_string().get_value(), text);
 }
 
-TEST_F(TomlValueTest, TomlFloatType) {
-    toml_float float_val(3.14);
+TEST_F(TomlValueTest, StringTypes) {
+    const toml_value basic = toml_value::make_string("basic", toml_basic_string);
+    const toml_value literal = toml_value::make_string("literal", toml_literal_string);
+    const toml_value multi_basic = toml_value::make_string("multi_basic", toml_multi_basic_string);
+    const toml_value multi_literal = toml_value::make_string("multi_literal", toml_multi_literal_string);
 
-    EXPECT_EQ(float_val.type(), toml_value::Float);
-    EXPECT_TRUE(float_val.is_float());
-    EXPECT_FALSE(float_val.is_boolean());
-    EXPECT_FALSE(float_val.is_integer());
-    EXPECT_FALSE(float_val.is_string());
-    EXPECT_FALSE(float_val.is_datetime());
-    EXPECT_FALSE(float_val.is_array());
-    EXPECT_FALSE(float_val.is_table());
+    EXPECT_EQ(basic.as_string().get_string_type(), toml_string::Basic);
+    EXPECT_EQ(literal.as_string().get_string_type(), toml_string::Literal);
+    EXPECT_EQ(multi_basic.as_string().get_string_type(), toml_string::MultiBasic);
+    EXPECT_EQ(multi_literal.as_string().get_string_type(), toml_string::MultiLiteral);
+
+    EXPECT_EQ(basic.to_string(), "\"basic\"");
+    EXPECT_EQ(literal.to_string(), "'literal'");
+    EXPECT_EQ(multi_basic.to_string(), "\"\"\"multi_basic\"\"\"");
+    EXPECT_EQ(multi_literal.to_string(), "'''multi_literal'''");
 }
 
-TEST_F(TomlValueTest, TomlFloatGetValue) {
-    toml_float float_pos(3.14);
-    toml_float float_neg(-0.5);
-    toml_float float_zero(0.0);
-
-    EXPECT_DOUBLE_EQ(float_pos.get_value(), 3.14);
-    EXPECT_DOUBLE_EQ(float_neg.get_value(), -0.5);
-    EXPECT_DOUBLE_EQ(float_zero.get_value(), 0.0);
+TEST_F(TomlValueTest, DatetimeOffsetDateTime) {
+    const toml_value value = toml_value::make_datetime(datetime(1979, 5, 27, 7, 32, 0, 0), toml_offset_datetime);
+    EXPECT_EQ(value.kind(), toml_kind::datetime);
+    EXPECT_TRUE(value.is_datetime());
+    EXPECT_EQ(value.as_datetime().get_datetime_type(), toml_datetime::OffsetDateTime);
+    EXPECT_EQ(value.as_datetime().get_string_value(), "1979-05-27T07:32:00Z");
+    EXPECT_EQ(value.to_string(), "1979-05-27T07:32:00Z");
 }
 
-TEST_F(TomlValueTest, TomlFloatAsFloat) {
-    toml_float float_val(0.0);
-
-    EXPECT_NE(float_val.as_float(), nullptr);
-    EXPECT_EQ(float_val.as_boolean(), nullptr);
-    EXPECT_EQ(float_val.as_integer(), nullptr);
-    EXPECT_EQ(float_val.as_string(), nullptr);
-    EXPECT_EQ(float_val.as_datetime(), nullptr);
-    EXPECT_EQ(float_val.as_array(), nullptr);
-    EXPECT_EQ(float_val.as_table(), nullptr);
+TEST_F(TomlValueTest, DatetimeLocalDateTime) {
+    toml_document doc;
+    const toml_value value = doc.make_datetime_value("1979-05-27T07:32:00", toml_local_datetime);
+    EXPECT_EQ(value.as_datetime().get_datetime_type(), toml_datetime::LocalDateTime);
+    EXPECT_EQ(value.as_datetime().get_string_value(), "1979-05-27T07:32:00");
+    EXPECT_EQ(value.as_datetime().get_value().year(), 1979);
+    EXPECT_EQ(value.as_datetime().get_value().minutes(), 32);
 }
 
-TEST_F(TomlValueTest, TomlStringType) {
-    toml_string str_val("hello");
-
-    EXPECT_EQ(str_val.type(), toml_value::String);
-    EXPECT_TRUE(str_val.is_string());
-    EXPECT_FALSE(str_val.is_boolean());
-    EXPECT_FALSE(str_val.is_integer());
-    EXPECT_FALSE(str_val.is_float());
-    EXPECT_FALSE(str_val.is_datetime());
-    EXPECT_FALSE(str_val.is_array());
-    EXPECT_FALSE(str_val.is_table());
+TEST_F(TomlValueTest, DatetimeLocalDate) {
+    toml_document doc;
+    const toml_value value = doc.make_datetime_value("1979-05-27", toml_local_date);
+    EXPECT_EQ(value.as_datetime().get_datetime_type(), toml_datetime::LocalDate);
+    EXPECT_EQ(value.as_datetime().get_string_value(), "1979-05-27");
+    EXPECT_TRUE(value.as_datetime().get_value().is_valid());
 }
 
-TEST_F(TomlValueTest, TomlStringGetValue) {
-    toml_string str_val("test_string");
-    EXPECT_EQ(str_val.get_value(), "test_string");
+TEST_F(TomlValueTest, DatetimeLocalTime) {
+    toml_document doc;
+    const toml_value value = doc.make_datetime_value("07:32:00", toml_local_time);
+    EXPECT_EQ(value.as_datetime().get_datetime_type(), toml_datetime::LocalTime);
+    EXPECT_EQ(value.as_datetime().get_string_value(), "07:32:00");
 }
 
-TEST_F(TomlValueTest, TomlStringGetStringType) {
-    toml_string basic("basic", toml_string::Basic);
-    toml_string literal("literal", toml_string::Literal);
-    toml_string multi_basic("multi_basic", toml_string::MultiBasic);
-    toml_string multi_literal("multi_literal", toml_string::MultiLiteral);
-
-    EXPECT_EQ(basic.get_string_type(), toml_string::Basic);
-    EXPECT_EQ(literal.get_string_type(), toml_string::Literal);
-    EXPECT_EQ(multi_basic.get_string_type(), toml_string::MultiBasic);
-    EXPECT_EQ(multi_literal.get_string_type(), toml_string::MultiLiteral);
+TEST_F(TomlValueTest, DatetimeOffsetRoundTrip) {
+    toml_document doc;
+    const toml_value value = doc.make_datetime_value("1979-05-27T00:32:00-07:00", toml_offset_datetime);
+    EXPECT_EQ(value.as_datetime().get_value().offset_seconds(), -7 * 3600);
+    EXPECT_EQ(value.as_datetime().get_string_value(), "1979-05-27T00:32:00-07:00");
 }
 
-TEST_F(TomlValueTest, TomlStringAsString) {
-    toml_string str_val("value");
+TEST_F(TomlValueTest, ArrayAddAndGetElement) {
+    toml_document doc;
+    toml_array_mut array = doc.make_array();
+    array.add_element(toml_value::make_integer(1));
+    array.add_element(toml_value::make_integer(2));
+    array.add_element(toml_value::make_string("three"));
 
-    EXPECT_NE(str_val.as_string(), nullptr);
-    EXPECT_EQ(str_val.as_boolean(), nullptr);
-    EXPECT_EQ(str_val.as_integer(), nullptr);
-    EXPECT_EQ(str_val.as_float(), nullptr);
-    EXPECT_EQ(str_val.as_datetime(), nullptr);
-    EXPECT_EQ(str_val.as_array(), nullptr);
-    EXPECT_EQ(str_val.as_table(), nullptr);
+    ASSERT_EQ(doc->as_array().size(), 3u);
+    EXPECT_EQ(doc->as_array().get_element(0)->as_integer().get_value(), 1);
+    EXPECT_EQ(doc->as_array().get_element(1)->as_integer().get_value(), 2);
+    EXPECT_EQ(doc->as_array().get_element(2)->as_string().get_value(), "three");
+    EXPECT_EQ(doc->as_array().get_element(3), nullptr);
+    EXPECT_FALSE(doc->as_array().empty());
 }
 
-TEST_F(TomlValueTest, TomlDatetimeType) {
-    toml_datetime dt_val("1979-05-27T07:32:00Z", toml_datetime::OffsetDateTime);
-
-    EXPECT_EQ(dt_val.type(), toml_value::DateTime);
-    EXPECT_TRUE(dt_val.is_datetime());
-    EXPECT_FALSE(dt_val.is_boolean());
-    EXPECT_FALSE(dt_val.is_integer());
-    EXPECT_FALSE(dt_val.is_float());
-    EXPECT_FALSE(dt_val.is_string());
-    EXPECT_FALSE(dt_val.is_array());
-    EXPECT_FALSE(dt_val.is_table());
+TEST_F(TomlValueTest, ArrayIteration) {
+    toml_document doc;
+    toml_array_mut array = doc.make_array();
+    for (int i = 0; i < 5; ++i) {
+        array.add_element(toml_value::make_integer(i));
+    }
+    int64_t sum = 0;
+    size_t count = 0;
+    for (const toml_value& element: doc->as_array().get_elements()) {
+        sum += element.as_integer().get_value();
+        ++count;
+    }
+    EXPECT_EQ(count, 5u);
+    EXPECT_EQ(sum, 10);
 }
 
-TEST_F(TomlValueTest, TomlDatetimeAsDatetime) {
-    toml_datetime dt_val("1979-05-27T07:32:00Z", toml_datetime::OffsetDateTime);
+TEST_F(TomlValueTest, EmptyArrayAndTable) {
+    toml_document doc;
+    doc.make_array();
+    EXPECT_TRUE(doc->as_array().empty());
+    EXPECT_EQ(doc->to_string(), "[]");
+    EXPECT_EQ(doc->to_document(), "[]");
 
-    EXPECT_NE(dt_val.as_datetime(), nullptr);
-    EXPECT_EQ(dt_val.as_boolean(), nullptr);
-    EXPECT_EQ(dt_val.as_integer(), nullptr);
-    EXPECT_EQ(dt_val.as_float(), nullptr);
-    EXPECT_EQ(dt_val.as_string(), nullptr);
-    EXPECT_EQ(dt_val.as_array(), nullptr);
-    EXPECT_EQ(dt_val.as_table(), nullptr);
+    doc.make_table();
+    EXPECT_TRUE(doc->as_table().empty());
+    EXPECT_EQ(doc->to_string(), "{}");
+    EXPECT_EQ(doc->to_document(), "");
 }
 
-TEST_F(TomlValueTest, TomlDatetimeOffsetDateTime) {
-    toml_datetime dt_val("1979-05-27T07:32:00Z", toml_datetime::OffsetDateTime);
+TEST_F(TomlValueTest, TableAddAndGetMember) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("key1", doc.make_string_value("value1"));
+    table.add_member("key2", toml_value::make_integer(42));
 
-    EXPECT_EQ(dt_val.get_datetime_type(), toml_datetime::OffsetDateTime);
-    EXPECT_EQ(dt_val.get_string_value(), "1979-05-27T07:32:00Z");
-}
-
-TEST_F(TomlValueTest, TomlDatetimeLocalDateTime) {
-    toml_datetime dt_val("1979-05-27T07:32:00", toml_datetime::LocalDateTime);
-
-    EXPECT_EQ(dt_val.get_datetime_type(), toml_datetime::LocalDateTime);
-}
-
-TEST_F(TomlValueTest, TomlDatetimeLocalDate) {
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-
-    EXPECT_EQ(dt_val.get_datetime_type(), toml_datetime::LocalDate);
-    EXPECT_EQ(dt_val.get_string_value(), "1979-05-27");
-}
-
-TEST_F(TomlValueTest, TomlDatetimeLocalTime) {
-    toml_datetime dt_val("07:32:00", toml_datetime::LocalTime);
-
-    EXPECT_EQ(dt_val.get_datetime_type(), toml_datetime::LocalTime);
-    EXPECT_EQ(dt_val.get_string_value(), "07:32:00");
-}
-
-TEST_F(TomlValueTest, TomlDatetimeGetValue) {
-    toml_datetime dt_val("1979-05-27T07:32:00Z", toml_datetime::OffsetDateTime);
-    datetime dt = dt_val.get_value();
-
-    EXPECT_TRUE(dt.is_valid());
-}
-
-TEST_F(TomlValueTest, TomlArrayType) {
-    toml_array arr;
-
-    EXPECT_EQ(arr.type(), toml_value::Array);
-    EXPECT_TRUE(arr.is_array());
-    EXPECT_FALSE(arr.is_boolean());
-    EXPECT_FALSE(arr.is_integer());
-    EXPECT_FALSE(arr.is_float());
-    EXPECT_FALSE(arr.is_string());
-    EXPECT_FALSE(arr.is_datetime());
-    EXPECT_FALSE(arr.is_table());
-}
-
-TEST_F(TomlValueTest, TomlArrayAsArray) {
-    toml_array arr;
-
-    EXPECT_NE(arr.as_array(), nullptr);
-    EXPECT_EQ(arr.as_boolean(), nullptr);
-    EXPECT_EQ(arr.as_integer(), nullptr);
-    EXPECT_EQ(arr.as_float(), nullptr);
-    EXPECT_EQ(arr.as_string(), nullptr);
-    EXPECT_EQ(arr.as_datetime(), nullptr);
-    EXPECT_EQ(arr.as_table(), nullptr);
-}
-
-TEST_F(TomlValueTest, TomlArrayAddAndGetElement) {
-    toml_array arr;
-    arr.add_element(make_unique<toml_integer>(1));
-    arr.add_element(make_unique<toml_integer>(2));
-    arr.add_element(make_unique<toml_integer>(3));
-
-    EXPECT_EQ(arr.size(), 3);
-
-    const toml_value* elem0 = arr.get_element(0);
-    ASSERT_NE(elem0, nullptr);
-    EXPECT_EQ(elem0->as_integer()->get_value(), 1);
-
-    const toml_value* elem1 = arr.get_element(1);
-    ASSERT_NE(elem1, nullptr);
-    EXPECT_EQ(elem1->as_integer()->get_value(), 2);
-
-    const toml_value* elem2 = arr.get_element(2);
-    ASSERT_NE(elem2, nullptr);
-    EXPECT_EQ(elem2->as_integer()->get_value(), 3);
-
-    const toml_value* out_of_bounds = arr.get_element(100);
-    EXPECT_EQ(out_of_bounds, nullptr);
-}
-
-TEST_F(TomlValueTest, TomlArrayGetElements) {
-    toml_array arr;
-    arr.add_element(make_unique<toml_boolean>(true));
-    arr.add_element(make_unique<toml_boolean>(false));
-
-    const auto& elements = arr.get_elements();
-    EXPECT_EQ(elements.size(), 2);
-}
-
-TEST_F(TomlValueTest, TomlArrayMoveConstructor) {
-    toml_array arr;
-    arr.add_element(make_unique<toml_integer>(42));
-
-    toml_array moved_arr(move(arr));
-    EXPECT_EQ(moved_arr.size(), 1);
-    EXPECT_EQ(moved_arr.get_element(0)->as_integer()->get_value(), 42);
-}
-
-TEST_F(TomlValueTest, TomlArrayMoveAssignment) {
-    toml_array arr1;
-    arr1.add_element(make_unique<toml_integer>(1));
-
-    toml_array arr2;
-    arr2.add_element(make_unique<toml_integer>(2));
-
-    arr2 = move(arr1);
-    EXPECT_EQ(arr2.size(), 1);
-    EXPECT_EQ(arr2.get_element(0)->as_integer()->get_value(), 1);
-}
-
-TEST_F(TomlValueTest, TomlTableType) {
-    toml_table table;
-
-    EXPECT_EQ(table.type(), toml_value::Table);
-    EXPECT_TRUE(table.is_table());
-    EXPECT_FALSE(table.is_boolean());
-    EXPECT_FALSE(table.is_integer());
-    EXPECT_FALSE(table.is_float());
-    EXPECT_FALSE(table.is_string());
-    EXPECT_FALSE(table.is_datetime());
-    EXPECT_FALSE(table.is_array());
-}
-
-TEST_F(TomlValueTest, TomlTableAsTable) {
-    toml_table table;
-
-    EXPECT_NE(table.as_table(), nullptr);
-    EXPECT_EQ(table.as_boolean(), nullptr);
-    EXPECT_EQ(table.as_integer(), nullptr);
-    EXPECT_EQ(table.as_float(), nullptr);
-    EXPECT_EQ(table.as_string(), nullptr);
-    EXPECT_EQ(table.as_datetime(), nullptr);
-    EXPECT_EQ(table.as_array(), nullptr);
-}
-
-TEST_F(TomlValueTest, TomlTableAddAndGetMember) {
-    toml_table table;
-    table.add_member("key1", make_unique<toml_string>("value1"));
-    table.add_member("key2", make_unique<toml_integer>(42));
-
-    const toml_value* member1 = table.get_member("key1");
+    const toml_value* member1 = doc->as_table().get_member("key1");
     ASSERT_NE(member1, nullptr);
     EXPECT_TRUE(member1->is_string());
-    EXPECT_EQ(member1->as_string()->get_value(), "value1");
+    EXPECT_EQ(member1->as_string().get_value(), "value1");
 
-    const toml_value* member2 = table.get_member("key2");
+    const toml_value* member2 = doc->as_table().get_member("key2");
     ASSERT_NE(member2, nullptr);
     EXPECT_TRUE(member2->is_integer());
-    EXPECT_EQ(member2->as_integer()->get_value(), 42);
-
-    const toml_value* missing = table.get_member("nonexistent");
-    EXPECT_EQ(missing, nullptr);
+    EXPECT_EQ(member2->as_integer().get_value(), 42);
+    EXPECT_EQ(doc->as_table().get_member("nonexistent"), nullptr);
+    EXPECT_TRUE(doc->as_table().has_member("key1"));
+    EXPECT_FALSE(doc->as_table().has_member("missing"));
 }
 
-TEST_F(TomlValueTest, TomlTableNonConstGetMember) {
-    toml_table table;
-    table.add_member("key", make_unique<toml_float>(3.14));
+TEST_F(TomlValueTest, TableKeyOverloads) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("key", toml_value::make_boolean(true));
 
-    toml_value* member = table.get_member("key");
-    ASSERT_NE(member, nullptr);
-    EXPECT_TRUE(member->is_float());
+    const string key("key");
+    EXPECT_NE(doc->as_table().get_member(key), nullptr);
+    EXPECT_NE(doc->as_table().get_member("key"), nullptr);
+    EXPECT_NE(doc->as_table().get_member(string_view("key")), nullptr);
+    EXPECT_EQ(doc->as_table().get_member(string("other")), nullptr);
+    EXPECT_TRUE(doc->as_table().has_member(key));
+    EXPECT_FALSE(doc->as_table().has_member(string("other")));
 }
 
-TEST_F(TomlValueTest, TomlTableHasMember) {
-    toml_table table;
-    table.add_member("exists", make_unique<toml_boolean>(true));
+TEST_F(TomlValueTest, TableInsertionOrder) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("first", toml_value::make_integer(1));
+    table.add_member("second", toml_value::make_integer(2));
+    table.add_member("third", toml_value::make_integer(3));
 
-    EXPECT_TRUE(table.has_member("exists"));
-    EXPECT_FALSE(table.has_member("does_not_exist"));
+    const toml_table view = doc->as_table();
+    ASSERT_EQ(view.size(), 3u);
+    auto it = view.begin();
+    EXPECT_EQ(it->key(), "first");
+    ++it;
+    EXPECT_EQ(it->key(), "second");
+    ++it;
+    EXPECT_EQ(it->key(), "third");
 }
 
-TEST_F(TomlValueTest, TomlTableGetMembers) {
-    toml_table table;
-    table.add_member("a", make_unique<toml_integer>(1));
-    table.add_member("b", make_unique<toml_integer>(2));
+TEST_F(TomlValueTest, TableInlineFlag) {
+    toml_document doc;
+    toml_table_mut standard = doc.make_table();
+    EXPECT_FALSE(doc->as_table().is_inline());
 
-    const auto& members = table.get_members();
-    EXPECT_EQ(members.size(), 2);
+    toml_table_mut inlined = doc.new_table(true);
+    EXPECT_TRUE(inlined.as_table().is_inline());
+    EXPECT_FALSE(standard.as_table().is_inline());
 }
 
-TEST_F(TomlValueTest, TomlTableInlineFlag) {
-    toml_table standard_table;
-    toml_table inline_table(true);
-
-    EXPECT_FALSE(standard_table.is_inline());
-    EXPECT_TRUE(inline_table.is_inline());
-
-    standard_table.set_inline(true);
-    EXPECT_TRUE(standard_table.is_inline());
-
-    standard_table.set_inline(false);
-    EXPECT_FALSE(standard_table.is_inline());
+TEST_F(TomlValueTest, TableLargeMemberLookup) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    for (int i = 0; i < 600; ++i) {
+        table.add_member(string("key") + to_string(i), toml_value::make_integer(i));
+    }
+    ASSERT_EQ(doc->as_table().size(), 600u);
+    for (int i = 0; i < 600; ++i) {
+        const toml_value* value = doc->as_table().get_member(string("key") + to_string(i));
+        ASSERT_NE(value, nullptr);
+        EXPECT_EQ(value->as_integer().get_value(), i);
+    }
+    EXPECT_EQ(doc->as_table().get_member("key600"), nullptr);
+    EXPECT_EQ(doc->as_table().get_member("key1x"), nullptr);
 }
 
-TEST_F(TomlValueTest, TomlTableMoveConstructor) {
-    toml_table table;
-    table.add_member("key", make_unique<toml_integer>(1));
+TEST_F(TomlValueTest, InlineKeyAndArenaKey) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("short", toml_value::make_integer(1));
+    table.add_member("a_key_longer_than_eight_bytes", toml_value::make_integer(2));
 
-    toml_table moved_table(move(table));
-    const toml_value* member = moved_table.get_member("key");
-    ASSERT_NE(member, nullptr);
-    EXPECT_EQ(member->as_integer()->get_value(), 1);
+    const toml_table view = doc->as_table();
+    auto it = view.begin();
+    EXPECT_TRUE(it->key_inlined());
+    EXPECT_EQ(it->key(), "short");
+    ++it;
+    EXPECT_FALSE(it->key_inlined());
+    EXPECT_EQ(it->key(), "a_key_longer_than_eight_bytes");
+    EXPECT_NE(view.get_member("a_key_longer_than_eight_bytes"), nullptr);
 }
 
-TEST_F(TomlValueTest, TomlTableMoveAssignment) {
-    toml_table table1;
-    table1.add_member("key1", make_unique<toml_integer>(1));
+TEST_F(TomlValueTest, KeyPrefixFiltersLookups) {
+    toml_member member;
+    member.assign_key("hash");
+    EXPECT_EQ(member.key_prefix, toml_member::prefix_of("hash"));
+    EXPECT_NE(member.key_prefix, toml_member::prefix_of("hasj"));
+    EXPECT_FALSE(member.key_equal(toml_member::prefix_of("hasj"), "hasj"));
+    EXPECT_TRUE(member.key_equal(toml_member::prefix_of("hash"), "hash"));
 
-    toml_table table2;
-    table2.add_member("key2", make_unique<toml_integer>(2));
+    toml_member short_key;
+    short_key.assign_key("ab");
+    EXPECT_EQ(short_key.key_prefix, toml_member::prefix_of("ab"));
+    EXPECT_TRUE(short_key.key_equal(toml_member::prefix_of("ab"), "ab"));
+    EXPECT_FALSE(short_key.key_equal(toml_member::prefix_of("ab_"), "ab_"));
 
-    table2 = move(table1);
-    const toml_value* member = table2.get_member("key1");
-    ASSERT_NE(member, nullptr);
-    EXPECT_EQ(member->as_integer()->get_value(), 1);
-    EXPECT_FALSE(table2.has_member("key2"));
+    toml_member long_key;
+    long_key.assign_key("a-longer-key");
+    EXPECT_FALSE(long_key.key_inlined());
+    EXPECT_TRUE(long_key.key_equal(toml_member::prefix_of("a-longer-key"), "a-longer-key"));
+    EXPECT_FALSE(long_key.key_equal(toml_member::prefix_of("a-longer-kez"), "a-longer-kez"));
 }
 
-TEST_F(TomlValueTest, ValueIsTypeBoolean) {
-    toml_boolean bool_val(true);
-    toml_integer int_val(0);
-    toml_float float_val(0.0);
-    toml_string str_val("");
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-    toml_array arr_val;
-    toml_table table_val;
+TEST_F(TomlValueTest, ContainerReserve) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    doc.table_reserve(doc.root(), 8);
+    for (int i = 0; i < 8; ++i) {
+        table.add_member(string("key") + to_string(i), toml_value::make_integer(i));
+    }
+    EXPECT_EQ(table.size(), 8u);
+    table.add_member("extra", toml_value::make_integer(99));
+    EXPECT_EQ(doc->as_table().get_member("extra")->as_integer().get_value(), 99);
+    EXPECT_EQ(doc->as_table().get_member("key7")->as_integer().get_value(), 7);
 
-    EXPECT_TRUE(bool_val.is_boolean());
-    EXPECT_FALSE(int_val.is_boolean());
-    EXPECT_FALSE(float_val.is_boolean());
-    EXPECT_FALSE(str_val.is_boolean());
-    EXPECT_FALSE(dt_val.is_boolean());
-    EXPECT_FALSE(arr_val.is_boolean());
-    EXPECT_FALSE(table_val.is_boolean());
+    doc.make_array();
+    doc.array_reserve(doc.root(), 4);
+    for (int i = 0; i < 6; ++i) {
+        doc.array_append(doc.root(), toml_value::make_integer(i));
+    }
+    EXPECT_EQ(doc->as_array().size(), 6u);
+    EXPECT_EQ(doc->as_array().get_element(5)->as_integer().get_value(), 5);
+
+    doc.table_reserve(doc.root(), 0);
+    doc.array_reserve(doc.root(), 70000);
 }
 
-TEST_F(TomlValueTest, ValueIsTypeInteger) {
-    toml_boolean bool_val(true);
-    toml_integer int_val(0);
-    toml_float float_val(0.0);
-    toml_string str_val("");
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-    toml_array arr_val;
-    toml_table table_val;
+TEST_F(TomlValueTest, ValueTypePredicates) {
+    toml_document doc;
+    const toml_value boolean = toml_value::make_boolean(true);
+    const toml_value integer = toml_value::make_integer(0);
+    const toml_value floating = toml_value::make_float(0.0);
+    const toml_value string_value = doc.make_string_value("");
+    const toml_value datetime_value = doc.make_datetime_value("1979-05-27", toml_local_date);
+    const toml_value array_value = doc.new_array().to_value();
+    const toml_value table_value = doc.new_table().to_value();
 
-    EXPECT_FALSE(bool_val.is_integer());
-    EXPECT_TRUE(int_val.is_integer());
-    EXPECT_FALSE(float_val.is_integer());
-    EXPECT_FALSE(str_val.is_integer());
-    EXPECT_FALSE(dt_val.is_integer());
-    EXPECT_FALSE(arr_val.is_integer());
-    EXPECT_FALSE(table_val.is_integer());
+    EXPECT_TRUE(boolean.is_boolean());
+    EXPECT_TRUE(integer.is_integer());
+    EXPECT_TRUE(floating.is_float());
+    EXPECT_TRUE(string_value.is_string());
+    EXPECT_TRUE(datetime_value.is_datetime());
+    EXPECT_TRUE(array_value.is_array());
+    EXPECT_TRUE(table_value.is_table());
+
+    EXPECT_FALSE(boolean.is_integer());
+    EXPECT_FALSE(integer.is_boolean());
+    EXPECT_FALSE(floating.is_integer());
+    EXPECT_FALSE(string_value.is_table());
+    EXPECT_FALSE(datetime_value.is_string());
+    EXPECT_FALSE(array_value.is_table());
+    EXPECT_FALSE(table_value.is_array());
 }
 
-TEST_F(TomlValueTest, ValueIsTypeFloat) {
-    toml_boolean bool_val(true);
-    toml_integer int_val(0);
-    toml_float float_val(0.0);
-    toml_string str_val("");
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-    toml_array arr_val;
-    toml_table table_val;
-
-    EXPECT_FALSE(bool_val.is_float());
-    EXPECT_FALSE(int_val.is_float());
-    EXPECT_TRUE(float_val.is_float());
-    EXPECT_FALSE(str_val.is_float());
-    EXPECT_FALSE(dt_val.is_float());
-    EXPECT_FALSE(arr_val.is_float());
-    EXPECT_FALSE(table_val.is_float());
+TEST_F(TomlValueTest, StringEscapedToString) {
+    toml_document doc;
+    EXPECT_EQ(doc.make_string_value("a\"b\\c\nd\te").to_string(), "\"a\\\"b\\\\c\\nd\\te\"");
+    const char raw[] = {'a', char(0x01), '\0'};
+    EXPECT_EQ(doc.make_string_value(string_view(raw, 2)).to_string(), "\"a\\u0001\"");
 }
 
-TEST_F(TomlValueTest, ValueIsTypeString) {
-    toml_boolean bool_val(true);
-    toml_integer int_val(0);
-    toml_float float_val(0.0);
-    toml_string str_val("");
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-    toml_array arr_val;
-    toml_table table_val;
-
-    EXPECT_FALSE(bool_val.is_string());
-    EXPECT_FALSE(int_val.is_string());
-    EXPECT_FALSE(float_val.is_string());
-    EXPECT_TRUE(str_val.is_string());
-    EXPECT_FALSE(dt_val.is_string());
-    EXPECT_FALSE(arr_val.is_string());
-    EXPECT_FALSE(table_val.is_string());
+TEST_F(TomlValueTest, StringQuotingFallbacks) {
+    toml_document doc;
+    EXPECT_EQ(doc.make_string_value("it's", toml_literal_string).to_string(), "\"it's\"");
+    EXPECT_EQ(doc.make_string_value("a'''b", toml_multi_literal_string).to_string(), "\"a'''b\"");
+    EXPECT_EQ(doc.make_string_value("say \"hi\"", toml_multi_basic_string).to_string(), "\"\"\"say \\\"hi\\\"\"\"\"");
 }
 
-TEST_F(TomlValueTest, ValueIsTypeDatetime) {
-    toml_boolean bool_val(true);
-    toml_integer int_val(0);
-    toml_float float_val(0.0);
-    toml_string str_val("");
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-    toml_array arr_val;
-    toml_table table_val;
+TEST_F(TomlValueTest, KeyQuoting) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("plain-key_1", toml_value::make_integer(1));
+    table.add_member("needs space", toml_value::make_integer(2));
 
-    EXPECT_FALSE(bool_val.is_datetime());
-    EXPECT_FALSE(int_val.is_datetime());
-    EXPECT_FALSE(float_val.is_datetime());
-    EXPECT_FALSE(str_val.is_datetime());
-    EXPECT_TRUE(dt_val.is_datetime());
-    EXPECT_FALSE(arr_val.is_datetime());
-    EXPECT_FALSE(table_val.is_datetime());
-}
-
-TEST_F(TomlValueTest, ValueIsTypeArray) {
-    toml_boolean bool_val(true);
-    toml_integer int_val(0);
-    toml_float float_val(0.0);
-    toml_string str_val("");
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-    toml_array arr_val;
-    toml_table table_val;
-
-    EXPECT_FALSE(bool_val.is_array());
-    EXPECT_FALSE(int_val.is_array());
-    EXPECT_FALSE(float_val.is_array());
-    EXPECT_FALSE(str_val.is_array());
-    EXPECT_FALSE(dt_val.is_array());
-    EXPECT_TRUE(arr_val.is_array());
-    EXPECT_FALSE(table_val.is_array());
-}
-
-TEST_F(TomlValueTest, ValueIsTypeTable) {
-    toml_boolean bool_val(true);
-    toml_integer int_val(0);
-    toml_float float_val(0.0);
-    toml_string str_val("");
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-    toml_array arr_val;
-    toml_table table_val;
-
-    EXPECT_FALSE(bool_val.is_table());
-    EXPECT_FALSE(int_val.is_table());
-    EXPECT_FALSE(float_val.is_table());
-    EXPECT_FALSE(str_val.is_table());
-    EXPECT_FALSE(dt_val.is_table());
-    EXPECT_FALSE(arr_val.is_table());
-    EXPECT_TRUE(table_val.is_table());
-}
-
-TEST_F(TomlValueTest, ToStringBoolean) {
-    toml_boolean bool_true(true);
-    toml_boolean bool_false(false);
-
-    EXPECT_EQ(bool_true.to_string(), "true");
-    EXPECT_EQ(bool_false.to_string(), "false");
-}
-
-TEST_F(TomlValueTest, ToStringInteger) {
-    toml_integer int_val(42);
-    EXPECT_EQ(int_val.to_string(), "42");
-}
-
-TEST_F(TomlValueTest, ToStringFloat) {
-    toml_float float_val(3.14);
-    EXPECT_EQ(float_val.to_string().head(4), "3.14");
-}
-
-TEST_F(TomlValueTest, ToStringStringBasic) {
-    toml_string str_val("hello", toml_string::Basic);
-    EXPECT_EQ(str_val.to_string(), "\"hello\"");
-}
-
-TEST_F(TomlValueTest, ToStringStringLiteral) {
-    toml_string str_val("hello", toml_string::Literal);
-    EXPECT_EQ(str_val.to_string(), "'hello'");
-}
-
-TEST_F(TomlValueTest, ToStringStringMultiBasic) {
-    toml_string str_val("hello", toml_string::MultiBasic);
-    EXPECT_EQ(str_val.to_string(), "\"\"\"hello\"\"\"");
-}
-
-TEST_F(TomlValueTest, ToStringStringMultiLiteral) {
-    toml_string str_val("hello", toml_string::MultiLiteral);
-    EXPECT_EQ(str_val.to_string(), "'''hello'''");
-}
-
-TEST_F(TomlValueTest, ToStringDatetime) {
-    toml_datetime dt_val("1979-05-27T07:32:00Z", toml_datetime::OffsetDateTime);
-    EXPECT_EQ(dt_val.to_string(), "1979-05-27T07:32:00Z");
+    EXPECT_EQ(doc->to_string(), "{ plain-key_1 = 1, \"needs space\" = 2 }");
 }
 
 TEST_F(TomlValueTest, ToStringArray) {
-    toml_array arr;
-    arr.add_element(make_unique<toml_integer>(1));
-    arr.add_element(make_unique<toml_integer>(2));
-
-    EXPECT_EQ(arr.to_string(), "[1, 2]");
+    toml_document doc;
+    toml_array_mut array = doc.make_array();
+    array.add_element(toml_value::make_integer(1));
+    array.add_element(toml_value::make_string("two"));
+    array.add_element(toml_value::make_boolean(true));
+    EXPECT_EQ(doc->to_string(), "[1, \"two\", true]");
 }
 
-TEST_F(TomlValueTest, ToStringInlineTable) {
-    toml_table table(true);
-    table.add_member("key", make_unique<toml_integer>(42));
+TEST_F(TomlValueTest, ToStringInlineAndStandardTable) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("key", toml_value::make_integer(42));
+    EXPECT_EQ(doc->to_string(), "{ key = 42 }");
 
-    string result = table.to_string();
-    EXPECT_NE(result.find("key = 42"), string::npos);
+    toml_table_mut inlined = doc.new_table(true);
+    inlined.add_member("key", toml_value::make_integer(42));
+    EXPECT_EQ(inlined.to_value().to_string(), "{ key = 42 }");
 }
 
-TEST_F(TomlValueTest, ToStringStandardTable) {
-    toml_table table;
-    table.add_member("key", make_unique<toml_integer>(42));
+TEST_F(TomlValueTest, ToDocument) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("title", doc.make_string_value("Example"));
+    table.add_member("enabled", toml_value::make_boolean(true));
+    table.add_member("ports", doc.new_array().to_value());
 
-    string result = table.to_string();
-    EXPECT_NE(result.find("non-inline table"), string::npos);
+    EXPECT_EQ(doc->to_document(), "title = \"Example\"\nenabled = true\nports = []\n");
 }
 
-TEST_F(TomlValueTest, ToDocumentBoolean) {
-    toml_boolean bool_val(true);
-    EXPECT_EQ(bool_val.to_document(), "true");
+TEST_F(TomlValueTest, ToDocumentNestedTables) {
+    toml_document doc;
+    toml_table_mut root = doc.make_table();
+    root.add_member("title", doc.make_string_value("Example"));
+
+    toml_value* database = doc.new_container(true);
+    doc.table_append(*database, "host", doc.make_string_value("localhost"));
+    doc.table_append(*database, "port", toml_value::make_integer(5432));
+    root.add_member("database", *database);
+
+    toml_value* servers = doc.new_container(false);
+    toml_value* alpha = doc.new_container(true);
+    doc.table_append(*alpha, "ip", doc.make_string_value("10.0.0.1"));
+    doc.array_append(*servers, *alpha);
+    root.add_member("servers", *servers);
+
+    const string text = doc->to_document();
+    EXPECT_NE(text.find("title = \"Example\""), string::npos);
+    EXPECT_NE(text.find("[database]"), string::npos);
+    EXPECT_NE(text.find("host = \"localhost\""), string::npos);
+    EXPECT_NE(text.find("[[servers]]"), string::npos);
+    EXPECT_NE(text.find("ip = \"10.0.0.1\""), string::npos);
 }
 
-TEST_F(TomlValueTest, ToDocumentInteger) {
-    toml_integer int_val(42);
-    EXPECT_EQ(int_val.to_document(), "42");
+TEST_F(TomlValueTest, DocumentMoveConstructor) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("key", toml_value::make_integer(7));
+
+    toml_document moved(move(doc));
+    ASSERT_NE(moved->as_table().get_member("key"), nullptr);
+    EXPECT_EQ(moved->as_table().get_member("key")->as_integer().get_value(), 7);
 }
 
-TEST_F(TomlValueTest, ToDocumentFloat) {
-    toml_float float_val(3.14);
-    EXPECT_EQ(float_val.to_document().head(4), "3.14");
+TEST_F(TomlValueTest, DocumentMoveAssignment) {
+    toml_document doc;
+    doc.make_table().add_member("key", toml_value::make_integer(7));
+
+    toml_document other;
+    other = move(doc);
+    ASSERT_NE(other->as_table().get_member("key"), nullptr);
+    EXPECT_EQ(other->as_table().get_member("key")->as_integer().get_value(), 7);
 }
 
-TEST_F(TomlValueTest, ToDocumentStringBasic) {
-    toml_string str_val("hello", toml_string::Basic);
-    EXPECT_EQ(str_val.to_document(), "\"hello\"");
+TEST_F(TomlValueTest, DocumentBoolAndEmpty) {
+    toml_document doc;
+    EXPECT_FALSE(static_cast<bool>(doc));
+    doc.make_table();
+    EXPECT_TRUE(static_cast<bool>(doc));
+    EXPECT_TRUE(doc.empty());
+    doc.make_table().add_member("key", toml_value::make_integer(1));
+    EXPECT_FALSE(doc.empty());
 }
-
-TEST_F(TomlValueTest, ToDocumentStringLiteral) {
-    toml_string str_val("hello", toml_string::Literal);
-    EXPECT_EQ(str_val.to_document(), "'hello'");
-}
-
-TEST_F(TomlValueTest, ToDocumentDatetime) {
-    toml_datetime dt_val("1979-05-27", toml_datetime::LocalDate);
-    EXPECT_EQ(dt_val.to_document(), "1979-05-27");
-}
-
-TEST_F(TomlValueTest, ToDocumentArray) {
-    toml_array arr;
-    arr.add_element(make_unique<toml_integer>(1));
-    arr.add_element(make_unique<toml_integer>(2));
-
-    EXPECT_EQ(arr.to_document(), "[1, 2]");
-}
-
-TEST_F(TomlValueTest, ToDocumentInlineTable) {
-    toml_table table(true);
-    table.add_member("key", make_unique<toml_integer>(42));
-
-    string result = table.to_document();
-    EXPECT_NE(result.find("key = 42"), string::npos);
-}
-
-TEST_F(TomlValueTest, ToDocumentStandardTable) {
-    toml_table table;
-    table.add_member("key", make_unique<toml_string>("value"));
-
-    string result = table.to_document();
-    EXPECT_NE(result.find("key = \"value\""), string::npos);
-}
-
 
 class TomlParserTest : public ::testing::Test {
 protected:
@@ -658,384 +463,401 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TomlParserTest, ParseBooleanTrue) {
+TEST_F(TomlParserTest, ParseBareValueThrows) {
     toml_parser parser("true");
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueBoolean) {
     toml_parser parser("key = true");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_boolean());
-    EXPECT_TRUE(val->as_boolean()->get_value());
+    EXPECT_TRUE(val->as_boolean().get_value());
 }
 
 TEST_F(TomlParserTest, ParseKeyValueBooleanFalse) {
     toml_parser parser("key = false");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_boolean());
-    EXPECT_FALSE(val->as_boolean()->get_value());
+    EXPECT_FALSE(val->as_boolean().get_value());
 }
 
 TEST_F(TomlParserTest, ParseKeyValueInteger) {
     toml_parser parser("key = 42");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 42);
+    EXPECT_EQ(val->as_integer().get_value(), 42);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueIntegerNegative) {
     toml_parser parser("key = -42");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), -42);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), -42);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueIntegerPositive) {
     toml_parser parser("key = +42");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 42);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 42);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueFloat) {
     toml_parser parser("key = 3.14");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_float());
-    EXPECT_DOUBLE_EQ(val->as_float()->get_value(), 3.14);
+    EXPECT_DOUBLE_EQ(val->as_float().get_value(), 3.14);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueExponentFloat) {
     toml_parser parser("key = 1e10");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_float());
-    EXPECT_DOUBLE_EQ(val->as_float()->get_value(), 1e10);
+    EXPECT_DOUBLE_EQ(val->as_float().get_value(), 1e10);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueStringBasic) {
     toml_parser parser("key = \"hello\"");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_value(), "hello");
-    EXPECT_EQ(val->as_string()->get_string_type(), toml_string::Basic);
+    EXPECT_EQ(val->as_string().get_value(), "hello");
+    EXPECT_EQ(val->as_string().get_string_type(), toml_string::Basic);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueStringLiteral) {
     toml_parser parser("key = 'hello'");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_value(), "hello");
-    EXPECT_EQ(val->as_string()->get_string_type(), toml_string::Literal);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "hello");
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_string_type(), toml_string::Literal);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueStringMultiBasic) {
     toml_parser parser("key = \"\"\"hello\"\"\"");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_value(), "hello");
-    EXPECT_EQ(val->as_string()->get_string_type(), toml_string::MultiBasic);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "hello");
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_string_type(), toml_string::MultiBasic);
 }
 
 TEST_F(TomlParserTest, ParseKeyValueStringMultiLiteral) {
     toml_parser parser("key = '''hello'''");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_value(), "hello");
-    EXPECT_EQ(val->as_string()->get_string_type(), toml_string::MultiLiteral);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "hello");
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_string_type(), toml_string::MultiLiteral);
 }
 
-TEST_F(TomlParserTest, ParseKeyValueArray) {
-    toml_parser parser("key = [1, 2, 3]");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 3);
-    EXPECT_EQ(val->as_array()->get_element(0)->as_integer()->get_value(), 1);
-    EXPECT_EQ(val->as_array()->get_element(1)->as_integer()->get_value(), 2);
-    EXPECT_EQ(val->as_array()->get_element(2)->as_integer()->get_value(), 3);
-}
-
-TEST_F(TomlParserTest, ParseKeyValueInlineTable) {
-    toml_parser parser("key = { a = 1, b = 2 }");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_table());
-    EXPECT_TRUE(val->as_table()->is_inline());
-    EXPECT_EQ(val->as_table()->get_member("a")->as_integer()->get_value(), 1);
-    EXPECT_EQ(val->as_table()->get_member("b")->as_integer()->get_value(), 2);
-}
-
-TEST_F(TomlParserTest, ParseTableHeader) {
-    toml_parser parser("[table]\nkey = 42");
-    auto result = parser.parse();
-
-    const toml_value* table = result->get_member("table");
-    ASSERT_NE(table, nullptr);
-    EXPECT_TRUE(table->is_table());
-    EXPECT_EQ(table->as_table()->get_member("key")->as_integer()->get_value(), 42);
-}
-
-TEST_F(TomlParserTest, ParseNestedTableHeader) {
-    toml_parser parser("[parent.child]\nkey = 42");
-    auto result = parser.parse();
-
-    const toml_value* parent = result->get_member("parent");
-    ASSERT_NE(parent, nullptr);
-    EXPECT_TRUE(parent->is_table());
-
-    const toml_value* child = parent->as_table()->get_member("child");
-    ASSERT_NE(child, nullptr);
-    EXPECT_TRUE(child->is_table());
-    EXPECT_EQ(child->as_table()->get_member("key")->as_integer()->get_value(), 42);
-}
-
-TEST_F(TomlParserTest, ParseArrayTableHeader) {
-    toml_parser parser("[[products]]\nname = \"Hammer\"");
-    auto result = parser.parse();
-
-    const toml_value* products = result->get_member("products");
-    ASSERT_NE(products, nullptr);
-    EXPECT_TRUE(products->is_array());
-    EXPECT_EQ(products->as_array()->size(), 1);
-
-    const toml_value* item = products->as_array()->get_element(0);
-    ASSERT_NE(item, nullptr);
-    EXPECT_TRUE(item->is_table());
-    EXPECT_EQ(item->as_table()->get_member("name")->as_string()->get_value(), "Hammer");
-}
-
-TEST_F(TomlParserTest, ParseMultipleArrayTableHeaders) {
-    toml_parser parser("[[products]]\nname = \"Hammer\"\n[[products]]\nname = \"Nail\"");
-    auto result = parser.parse();
-
-    const toml_value* products = result->get_member("products");
-    ASSERT_NE(products, nullptr);
-    EXPECT_TRUE(products->is_array());
-    EXPECT_EQ(products->as_array()->size(), 2);
-    EXPECT_EQ(products->as_array()->get_element(0)->as_table()->get_member("name")->as_string()->get_value(), "Hammer");
-    EXPECT_EQ(products->as_array()->get_element(1)->as_table()->get_member("name")->as_string()->get_value(), "Nail");
-}
-
-TEST_F(TomlParserTest, ParseDottedKey) {
-    toml_parser parser("a.b.c = 42");
-    auto result = parser.parse();
-
-    const toml_value* a = result->get_member("a");
-    ASSERT_NE(a, nullptr);
-    EXPECT_TRUE(a->is_table());
-
-    const toml_value* b = a->as_table()->get_member("b");
-    ASSERT_NE(b, nullptr);
-    EXPECT_TRUE(b->is_table());
-
-    const toml_value* c = b->as_table()->get_member("c");
-    ASSERT_NE(c, nullptr);
-    EXPECT_EQ(c->as_integer()->get_value(), 42);
-}
-
-TEST_F(TomlParserTest, ParseIntegerWithUnderscores) {
-    toml_parser parser("key = 1_000_000");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 1000000);
-}
-
-TEST_F(TomlParserTest, ParseIntegerHex) {
-    toml_parser parser("key = 0xFF");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 255);
-}
-
-TEST_F(TomlParserTest, ParseIntegerOctal) {
-    toml_parser parser("key = 0o77");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 63);
-}
-
-TEST_F(TomlParserTest, ParseIntegerBinary) {
-    toml_parser parser("key = 0b1010");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 10);
-}
-
-TEST_F(TomlParserTest, ParseDatetimeOffsetDateTime) {
-    toml_parser parser("key = 1979-05-27T07:32:00Z");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_datetime());
-    EXPECT_EQ(val->as_datetime()->get_datetime_type(), toml_datetime::OffsetDateTime);
-}
-
-TEST_F(TomlParserTest, ParseDatetimeLocalDateTime) {
-    toml_parser parser("key = 1979-05-27T07:32:00");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_datetime());
-    EXPECT_EQ(val->as_datetime()->get_datetime_type(), toml_datetime::LocalDateTime);
-}
-
-TEST_F(TomlParserTest, ParseDatetimeLocalDate) {
-    toml_parser parser("key = 1979-05-27");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_datetime());
-    EXPECT_EQ(val->as_datetime()->get_datetime_type(), toml_datetime::LocalDate);
-}
-
-TEST_F(TomlParserTest, ParseDatetimeLocalTime) {
-    toml_parser parser("key = 07:32:00");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_datetime());
-    EXPECT_EQ(val->as_datetime()->get_datetime_type(), toml_datetime::LocalTime);
-}
-
-TEST_F(TomlParserTest, ParseComment) {
-    toml_parser parser("# This is a comment\nkey = 42");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_EQ(val->as_integer()->get_value(), 42);
-}
-
-TEST_F(TomlParserTest, ParseCommentAfterValue) {
-    toml_parser parser("key = 42 # comment");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_EQ(val->as_integer()->get_value(), 42);
-}
-
-TEST_F(TomlParserTest, ParseStringEscapeNewline) {
+TEST_F(TomlParserTest, ParseStringDoesNotEscape) {
     toml_parser parser("key = \"line1\\nline2\"");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    string str_val = val->as_string()->get_value();
-    EXPECT_NE(str_val.find('\n'), string::npos);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "line1\nline2");
 }
 
 TEST_F(TomlParserTest, ParseStringEscapeTab) {
     toml_parser parser("key = \"col1\\tcol2\"");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    string str_val = val->as_string()->get_value();
-    EXPECT_NE(str_val.find('\t'), string::npos);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "col1\tcol2");
 }
 
 TEST_F(TomlParserTest, ParseStringUnicodeEscape) {
     toml_parser parser("key = \"\\u0048\\u0065\\u006C\\u006C\\u006F\"");
-    auto result = parser.parse();
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "Hello");
+}
 
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_EQ(val->as_string()->get_value(), "Hello");
+TEST_F(TomlParserTest, ParseStringUnicodeFullEscape) {
+    toml_parser parser("key = \"\\U0001F600\"");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "\xF0\x9F\x98\x80");
 }
 
 TEST_F(TomlParserTest, ParseMultiLiteralString) {
     toml_parser parser("key = '''line1\nline2'''");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_string_type(), toml_string::MultiLiteral);
+    EXPECT_EQ(val->as_string().get_string_type(), toml_string::MultiLiteral);
+    EXPECT_EQ(val->as_string().get_value(), "line1\nline2");
+}
+
+TEST_F(TomlParserTest, ParseMultiBasicLineContinuation) {
+    toml_parser parser("key = \"\"\"line1 \\\n   line2\"\"\"");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "line1 line2");
+}
+
+TEST_F(TomlParserTest, ParseKeyValueArray) {
+    toml_parser parser("key = [1, 2, 3]");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_array());
+    EXPECT_EQ(val->as_array().size(), 3u);
+    EXPECT_EQ(val->as_array().get_element(0)->as_integer().get_value(), 1);
+    EXPECT_EQ(val->as_array().get_element(1)->as_integer().get_value(), 2);
+    EXPECT_EQ(val->as_array().get_element(2)->as_integer().get_value(), 3);
+    EXPECT_EQ(val->as_array().get_element(3), nullptr);
+}
+
+TEST_F(TomlParserTest, ParseArrayWithComments) {
+    toml_parser parser("key = [1, # first\n 2, # second\n 3]");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_array().size(), 3u);
+}
+
+TEST_F(TomlParserTest, ParseKeyValueInlineTable) {
+    toml_parser parser("key = { a = 1, b = 2 }");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_table());
+    EXPECT_TRUE(val->as_table().is_inline());
+    EXPECT_EQ(val->as_table().get_member("a")->as_integer().get_value(), 1);
+    EXPECT_EQ(val->as_table().get_member("b")->as_integer().get_value(), 2);
+}
+
+TEST_F(TomlParserTest, ParseTableHeader) {
+    toml_parser parser("[table]\nkey = 42");
+    toml_document result = parser.parse();
+    const toml_value* table = result->as_table().get_member("table");
+    ASSERT_NE(table, nullptr);
+    EXPECT_TRUE(table->is_table());
+    EXPECT_EQ(table->as_table().get_member("key")->as_integer().get_value(), 42);
+}
+
+TEST_F(TomlParserTest, ParseNestedTableHeader) {
+    toml_parser parser("[parent.child]\nkey = 42");
+    toml_document result = parser.parse();
+    const toml_value* parent = result->as_table().get_member("parent");
+    ASSERT_NE(parent, nullptr);
+    EXPECT_TRUE(parent->is_table());
+    const toml_value* child = parent->as_table().get_member("child");
+    ASSERT_NE(child, nullptr);
+    EXPECT_TRUE(child->is_table());
+    EXPECT_EQ(child->as_table().get_member("key")->as_integer().get_value(), 42);
+}
+
+TEST_F(TomlParserTest, ParseTableHeaderReopen) {
+    toml_parser parser("[a]\nx = 1\n[b]\ny = 2\n[a]\nz = 3");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("a")->as_table().get_member("x")->as_integer().get_value(), 1);
+    EXPECT_EQ(result->as_table().get_member("b")->as_table().get_member("y")->as_integer().get_value(), 2);
+    EXPECT_EQ(result->as_table().get_member("a")->as_table().get_member("z")->as_integer().get_value(), 3);
+}
+
+TEST_F(TomlParserTest, ParseArrayTableHeader) {
+    toml_parser parser("[[products]]\nname = \"Hammer\"");
+    toml_document result = parser.parse();
+    const toml_value* products = result->as_table().get_member("products");
+    ASSERT_NE(products, nullptr);
+    EXPECT_TRUE(products->is_array());
+    EXPECT_EQ(products->as_array().size(), 1u);
+    const toml_value* item = products->as_array().get_element(0);
+    ASSERT_NE(item, nullptr);
+    EXPECT_TRUE(item->is_table());
+    EXPECT_EQ(item->as_table().get_member("name")->as_string().get_value(), "Hammer");
+}
+
+TEST_F(TomlParserTest, ParseMultipleArrayTableHeaders) {
+    toml_parser parser("[[products]]\nname = \"Hammer\"\n[[products]]\nname = \"Nail\"");
+    toml_document result = parser.parse();
+    const toml_value* products = result->as_table().get_member("products");
+    ASSERT_NE(products, nullptr);
+    EXPECT_EQ(products->as_array().size(), 2u);
+    EXPECT_EQ(products->as_array().get_element(0)->as_table().get_member("name")->as_string().get_value(), "Hammer");
+    EXPECT_EQ(products->as_array().get_element(1)->as_table().get_member("name")->as_string().get_value(), "Nail");
+}
+
+TEST_F(TomlParserTest, ParseNestedArrayTableHeader) {
+    toml_parser parser("[[a.b]]\nkey = 1\n[[a.b]]\nkey = 2");
+    toml_document result = parser.parse();
+    const toml_value* a = result->as_table().get_member("a");
+    ASSERT_NE(a, nullptr);
+    const toml_value* b = a->as_table().get_member("b");
+    ASSERT_NE(b, nullptr);
+    EXPECT_EQ(b->as_array().size(), 2u);
+    EXPECT_EQ(b->as_array().get_element(1)->as_table().get_member("key")->as_integer().get_value(), 2);
+}
+
+TEST_F(TomlParserTest, ParseDottedKey) {
+    toml_parser parser("a.b.c = 42");
+    toml_document result = parser.parse();
+    const toml_value* a = result->as_table().get_member("a");
+    ASSERT_NE(a, nullptr);
+    EXPECT_TRUE(a->is_table());
+    const toml_value* b = a->as_table().get_member("b");
+    ASSERT_NE(b, nullptr);
+    EXPECT_TRUE(b->is_table());
+    EXPECT_EQ(b->as_table().get_member("c")->as_integer().get_value(), 42);
+}
+
+TEST_F(TomlParserTest, ParseDottedKeyRelativeToTable) {
+    toml_parser parser("[root]\na.b = 1");
+    toml_document result = parser.parse();
+    const toml_value* root = result->as_table().get_member("root");
+    ASSERT_NE(root, nullptr);
+    EXPECT_EQ(root->as_table().get_member("a")->as_table().get_member("b")->as_integer().get_value(), 1);
+}
+
+TEST_F(TomlParserTest, ParseQuotedKey) {
+    toml_parser parser("\"key.with.dots\" = 1\n'literal key' = 2\n\"escaped\\u0041\" = 3");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key.with.dots")->as_integer().get_value(), 1);
+    EXPECT_EQ(result->as_table().get_member("literal key")->as_integer().get_value(), 2);
+    EXPECT_EQ(result->as_table().get_member("escapedA")->as_integer().get_value(), 3);
+}
+
+TEST_F(TomlParserTest, ParseIntegerWithUnderscores) {
+    toml_parser parser("key = 1_000_000");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 1000000);
+}
+
+TEST_F(TomlParserTest, ParseFloatWithUnderscores) {
+    toml_parser parser("key = 1_000.5_5");
+    toml_document result = parser.parse();
+    EXPECT_DOUBLE_EQ(result->as_table().get_member("key")->as_float().get_value(), 1000.55);
+}
+
+TEST_F(TomlParserTest, ParseIntegerHex) {
+    toml_parser parser("key = 0xFF");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 255);
+}
+
+TEST_F(TomlParserTest, ParseIntegerOctal) {
+    toml_parser parser("key = 0o77");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 63);
+}
+
+TEST_F(TomlParserTest, ParseIntegerBinary) {
+    toml_parser parser("key = 0b1010");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 10);
+}
+
+TEST_F(TomlParserTest, ParseIntegerMax) {
+    toml_parser parser("key = 9223372036854775807");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 9223372036854775807LL);
+}
+
+TEST_F(TomlParserTest, ParseIntegerOverflowThrows) {
+    toml_parser parser("key = 9223372036854775808");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseDatetimeOffsetDateTime) {
+    toml_parser parser("key = 1979-05-27T07:32:00Z");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_datetime());
+    EXPECT_EQ(val->as_datetime().get_datetime_type(), toml_datetime::OffsetDateTime);
+}
+
+TEST_F(TomlParserTest, ParseDatetimeOffsetWithOffset) {
+    toml_parser parser("key = 1979-05-27T00:32:00-07:00");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_EQ(val->as_datetime().get_datetime_type(), toml_datetime::OffsetDateTime);
+    EXPECT_EQ(val->as_datetime().get_string_value(), "1979-05-27T00:32:00-07:00");
+}
+
+TEST_F(TomlParserTest, ParseDatetimeLocalDateTime) {
+    toml_parser parser("key = 1979-05-27T07:32:00");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_EQ(val->as_datetime().get_datetime_type(), toml_datetime::LocalDateTime);
+}
+
+TEST_F(TomlParserTest, ParseDatetimeSpaceSeparator) {
+    toml_parser parser("key = 1979-05-27 07:32:00");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_EQ(val->as_datetime().get_datetime_type(), toml_datetime::LocalDateTime);
+}
+
+TEST_F(TomlParserTest, ParseDatetimeFractional) {
+    toml_parser parser("key = 1979-05-27T07:32:00.999Z");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_EQ(val->as_datetime().get_datetime_type(), toml_datetime::OffsetDateTime);
+}
+
+TEST_F(TomlParserTest, ParseDatetimeLocalDate) {
+    toml_parser parser("key = 1979-05-27");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_datetime());
+    EXPECT_EQ(val->as_datetime().get_datetime_type(), toml_datetime::LocalDate);
+    EXPECT_EQ(val->as_datetime().get_string_value(), "1979-05-27");
+}
+
+TEST_F(TomlParserTest, ParseDatetimeLocalTime) {
+    toml_parser parser("key = 07:32:00");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_datetime());
+    EXPECT_EQ(val->as_datetime().get_datetime_type(), toml_datetime::LocalTime);
+    EXPECT_EQ(val->as_datetime().get_string_value(), "07:32:00");
+}
+
+TEST_F(TomlParserTest, ParseComment) {
+    toml_parser parser("# This is a comment\nkey = 42");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 42);
+}
+
+TEST_F(TomlParserTest, ParseCommentAfterValue) {
+    toml_parser parser("key = 42 # comment");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 42);
 }
 
 TEST_F(TomlParserTest, ParseFloatSpecialInf) {
     toml_parser parser("key = inf");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_float());
-    EXPECT_TRUE(is_infinity(val->as_float()->get_value()));
+    EXPECT_TRUE(is_infinity(val->as_float().get_value()));
 }
 
 TEST_F(TomlParserTest, ParseFloatSpecialNan) {
     toml_parser parser("key = nan");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_float());
-    EXPECT_TRUE(is_nan(val->as_float()->get_value()));
+    EXPECT_TRUE(is_nan(val->as_float().get_value()));
 }
 
 TEST_F(TomlParserTest, ParseFloatSpecialNegInf) {
     toml_parser parser("key = -inf");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_float());
-    EXPECT_TRUE(is_infinity(val->as_float()->get_value()));
-    EXPECT_LT(val->as_float()->get_value(), 0);
+    EXPECT_TRUE(is_infinity(val->as_float().get_value()));
+    EXPECT_LT(val->as_float().get_value(), 0);
 }
 
 TEST_F(TomlParserTest, ParseComplexDocument) {
@@ -1062,36 +884,37 @@ TEST_F(TomlParserTest, ParseComplexDocument) {
     )";
 
     toml_parser parser(toml_doc);
-    auto result = parser.parse();
+    toml_document result = parser.parse();
 
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->get_member("title")->as_string()->get_value(), "TOML Example");
+    EXPECT_EQ(result->as_table().get_member("title")->as_string().get_value(), "TOML Example");
 
-    const toml_value* owner = result->get_member("owner");
+    const toml_value* owner = result->as_table().get_member("owner");
     ASSERT_NE(owner, nullptr);
-    EXPECT_EQ(owner->as_table()->get_member("name")->as_string()->get_value(), "Tom Preston-Werner");
+    EXPECT_EQ(owner->as_table().get_member("name")->as_string().get_value(), "Tom Preston-Werner");
+    EXPECT_EQ(owner->as_table().get_member("dob")->as_datetime().get_datetime_type(), toml_datetime::OffsetDateTime);
 
-    const toml_value* database = result->get_member("database");
+    const toml_value* database = result->as_table().get_member("database");
     ASSERT_NE(database, nullptr);
-    EXPECT_TRUE(database->as_table()->get_member("enabled")->as_boolean()->get_value());
-    EXPECT_EQ(database->as_table()->get_member("ports")->as_array()->size(), 3);
+    EXPECT_TRUE(database->as_table().get_member("enabled")->as_boolean().get_value());
+    EXPECT_EQ(database->as_table().get_member("ports")->as_array().size(), 3u);
+    EXPECT_EQ(database->as_table().get_member("ports")->as_array().get_element(2)->as_integer().get_value(), 8002);
 
-    const toml_value* servers = result->get_member("servers");
+    const toml_value* servers = result->as_table().get_member("servers");
     ASSERT_NE(servers, nullptr);
-    ASSERT_NE(servers->as_table()->get_member("alpha"), nullptr);
-    ASSERT_NE(servers->as_table()->get_member("beta"), nullptr);
+    ASSERT_NE(servers->as_table().get_member("alpha"), nullptr);
+    ASSERT_NE(servers->as_table().get_member("beta"), nullptr);
 }
 
 TEST_F(TomlParserTest, TryParseValid) {
     toml_parser parser("key = 42");
-    auto result = parser.try_parse();
+    optional<toml_document> result = parser.try_parse();
     EXPECT_TRUE(result.has_value());
-    EXPECT_EQ(result.value()->get_member("key")->as_integer()->get_value(), 42);
+    EXPECT_EQ(result.value()->as_table().get_member("key")->as_integer().get_value(), 42);
 }
 
 TEST_F(TomlParserTest, TryParseInvalid) {
     toml_parser parser("{ invalid");
-    auto result = parser.try_parse();
+    optional<toml_document> result = parser.try_parse();
     EXPECT_FALSE(result.has_value());
 }
 
@@ -1102,16 +925,25 @@ TEST_F(TomlParserTest, ParseDuplicateKeyThrows) {
 
 TEST_F(TomlParserTest, ParseMixedArrayTypes) {
     toml_parser parser("key = [1, \"string\", true, 3.14]");
-    auto result = parser.parse();
-
-    const toml_value* val = result->get_member("key");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 4);
-    EXPECT_EQ(val->as_array()->get_element(0)->as_integer()->get_value(), 1);
-    EXPECT_EQ(val->as_array()->get_element(1)->as_string()->get_value(), "string");
-    EXPECT_TRUE(val->as_array()->get_element(2)->as_boolean()->get_value());
-    EXPECT_DOUBLE_EQ(val->as_array()->get_element(3)->as_float()->get_value(), 3.14);
+    EXPECT_EQ(val->as_array().size(), 4u);
+    EXPECT_EQ(val->as_array().get_element(0)->as_integer().get_value(), 1);
+    EXPECT_EQ(val->as_array().get_element(1)->as_string().get_value(), "string");
+    EXPECT_TRUE(val->as_array().get_element(2)->as_boolean().get_value());
+    EXPECT_DOUBLE_EQ(val->as_array().get_element(3)->as_float().get_value(), 3.14);
+}
+
+TEST_F(TomlParserTest, ParseNestedArrays) {
+    toml_parser parser("key = [[1, 2], [\"a\", \"b\"]]");
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_EQ(val->as_array().size(), 2u);
+    EXPECT_EQ(val->as_array().get_element(0)->as_array().size(), 2u);
+    EXPECT_EQ(val->as_array().get_element(1)->as_array().get_element(0)->as_string().get_value(), "a");
 }
 
 TEST_F(TomlParserTest, ParseUnterminatedStringThrows) {
@@ -1119,8 +951,18 @@ TEST_F(TomlParserTest, ParseUnterminatedStringThrows) {
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
+TEST_F(TomlParserTest, ParseUnterminatedMultilineThrows) {
+    toml_parser parser("key = \"\"\"hello");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
 TEST_F(TomlParserTest, ParseInvalidNumberThrows) {
     toml_parser parser("key = 12.34.56");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseTrailingContentThrows) {
+    toml_parser parser("key = 1 trailing");
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
@@ -1146,11 +988,8 @@ TEST_F(TomlParserTest, ParseLeadingZerosIntegerMultiDigitThrows) {
 
 TEST_F(TomlParserTest, ParseZeroIntegerValid) {
     toml_parser parser("key = 0");
-    auto result = parser.parse();
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 0);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 0);
 }
 
 TEST_F(TomlParserTest, ParseHexIntegerWithSignThrows) {
@@ -1178,60 +1017,36 @@ TEST_F(TomlParserTest, ParseInlineTableTrailingCommaThrows) {
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
-TEST_F(TomlParserTest, ParseUnicodeSurrogatePairThrows) {
+TEST_F(TomlParserTest, ParseArrayMissingSeparatorThrows) {
+    toml_parser parser("key = [1 2]");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseInlineTableMissingSeparatorThrows) {
+    toml_parser parser("key = { a = 1 b = 2 }");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseInlineTableNewlineThrows) {
+    toml_parser parser("key = { a = 1,\n b = 2 }");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseUnicodeSurrogateThrows) {
     toml_parser parser("key = \"\\uD800\"");
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
-TEST_F(TomlParserTest, ParseUnicodeSurrogatePairHighThrows) {
+TEST_F(TomlParserTest, ParseUnicodeSurrogateLowThrows) {
     toml_parser parser("key = \"\\uDFFF\"");
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
 TEST_F(TomlParserTest, ParseUnicodeValidCodepoint) {
     toml_parser parser("key = \"\\u2764\"");
-    auto result = parser.parse();
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_string());
-}
-
-TEST_F(TomlParserTest, ParseBOM) {
-    string doc = "\xEF\xBB\xBFkey = 42";
-    toml_parser parser(doc);
-    auto result = parser.parse();
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 42);
-}
-
-TEST_F(TomlParserTest, ParseBOMWithTableHeaders) {
-    string doc = "\xEF\xBB\xBF[tbl]\nkey = 1";
-    toml_parser parser(doc);
-    auto result = parser.parse();
-    const toml_value* tbl = result->get_member("tbl");
-    ASSERT_NE(tbl, nullptr);
-    EXPECT_TRUE(tbl->is_table());
-    EXPECT_EQ(tbl->as_table()->get_member("key")->as_integer()->get_value(), 1);
-}
-
-TEST_F(TomlParserTest, ParseMixedArrayTypesNested) {
-    toml_parser parser("key = [[1, 2], [\"a\", \"b\"]]");
-    auto result = parser.parse();
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 2);
-}
-
-TEST_F(TomlParserTest, ParseMixedArrayTypesIntegersAndFloats) {
-    toml_parser parser("key = [1, 2.5, -3, 4e1]");
-    auto result = parser.parse();
-    const toml_value* val = result->get_member("key");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 4);
+    toml_document result = parser.parse();
+    EXPECT_TRUE(result->as_table().get_member("key")->is_string());
+    EXPECT_EQ(result->as_table().get_member("key")->as_string().get_value(), "\xE2\x9D\xA4");
 }
 
 TEST_F(TomlParserTest, ParseSurrogatePairInMultibasicStringThrows) {
@@ -1239,27 +1054,91 @@ TEST_F(TomlParserTest, ParseSurrogatePairInMultibasicStringThrows) {
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
+TEST_F(TomlParserTest, ParseBOM) {
+    string doc = "\xEF\xBB\xBFkey = 42";
+    toml_parser parser(doc);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 42);
+}
+
+TEST_F(TomlParserTest, ParseBOMWithTableHeaders) {
+    string doc = "\xEF\xBB\xBF[tbl]\nkey = 1";
+    toml_parser parser(doc);
+    toml_document result = parser.parse();
+    const toml_value* tbl = result->as_table().get_member("tbl");
+    ASSERT_NE(tbl, nullptr);
+    EXPECT_TRUE(tbl->is_table());
+    EXPECT_EQ(tbl->as_table().get_member("key")->as_integer().get_value(), 1);
+}
+
 TEST_F(TomlParserTest, ParseEmptyInput) {
     toml_parser parser("");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->get_members().size(), 0);
+    toml_document result = parser.parse();
+    EXPECT_TRUE(result->is_table());
+    EXPECT_EQ(result->as_table().size(), 0u);
 }
 
 TEST_F(TomlParserTest, ParseOnlyWhitespace) {
     toml_parser parser("   \n   \n  ");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->get_members().size(), 0);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().size(), 0u);
 }
 
 TEST_F(TomlParserTest, ParseOnlyComments) {
     toml_parser parser("# comment1\n# comment2");
-    auto result = parser.parse();
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->get_members().size(), 0);
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().size(), 0u);
 }
 
+TEST_F(TomlParserTest, ParseCRLF) {
+    toml_parser parser("key = 1\r\n[table]\r\nvalue = 2\r\n");
+    toml_document result = parser.parse();
+    EXPECT_EQ(result->as_table().get_member("key")->as_integer().get_value(), 1);
+    EXPECT_EQ(result->as_table().get_member("table")->as_table().get_member("value")->as_integer().get_value(), 2);
+}
+
+TEST_F(TomlParserTest, ParseErrorReportsLine) {
+    toml_parser parser("key = 1\nkey = 2");
+    try {
+        parser.parse();
+        FAIL() << "expected toml_exception";
+    } catch (const toml_exception& e) {
+        const string message(e.what());
+        EXPECT_NE(message.find("Line 2"), string::npos);
+    }
+}
+
+TEST_F(TomlParserTest, ParseBorrowKeepsStringPointers) {
+    const char* text = "key = \"a borrowed string longer than fourteen bytes\"";
+    toml_parser parser{string_view(text)};
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_EQ(val->as_string().data(), text + 7);
+}
+
+TEST_F(TomlParserTest, ParseOwningMaterializesStrings) {
+    string text = "key = \"a borrowed string longer than fourteen bytes\"";
+    const char* const source = text.data();
+    toml_parser parser(move(text));
+    toml_document result = parser.parse();
+    const toml_value* val = result->as_table().get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_EQ(val->as_string().get_value(), "a borrowed string longer than fourteen bytes");
+    EXPECT_NE(val->as_string().data(), source + 7);
+}
+
+TEST_F(TomlParserTest, ParseTimeOnlyIsNotNumber) {
+    toml_parser parser("time = 12:34:56");
+    toml_document result = parser.parse();
+    EXPECT_TRUE(result->as_table().get_member("time")->is_datetime());
+}
+
+TEST_F(TomlParserTest, ParseNumberIsNotTime) {
+    toml_parser parser("value = 123456");
+    toml_document result = parser.parse();
+    EXPECT_TRUE(result->as_table().get_member("value")->is_integer());
+}
 
 class TomlBuilderTest : public ::testing::Test {
 protected:
@@ -1270,123 +1149,100 @@ protected:
 TEST_F(TomlBuilderTest, BuildBoolean) {
     toml_builder builder;
     builder.key("flag").value(true);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("flag");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("flag");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_boolean());
-    EXPECT_TRUE(val->as_boolean()->get_value());
+    EXPECT_TRUE(val->as_boolean().get_value());
 }
 
 TEST_F(TomlBuilderTest, BuildInteger) {
     toml_builder builder;
     builder.key("count").value(static_cast<int64_t>(42));
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("count");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 42);
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("count")->as_integer().get_value(), 42);
 }
 
 TEST_F(TomlBuilderTest, BuildIntAsInteger) {
     toml_builder builder;
     builder.key("count").value(42);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("count");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 42);
+    toml_document result = builder.build();
+    EXPECT_TRUE(result->as_table().get_member("count")->is_integer());
 }
 
 TEST_F(TomlBuilderTest, BuildFloat) {
     toml_builder builder;
     builder.key("pi").value(3.14);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("pi");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_float());
-    EXPECT_DOUBLE_EQ(val->as_float()->get_value(), 3.14);
+    toml_document result = builder.build();
+    EXPECT_DOUBLE_EQ(result->as_table().get_member("pi")->as_float().get_value(), 3.14);
 }
 
 TEST_F(TomlBuilderTest, BuildString) {
     toml_builder builder;
     builder.key("name").value(string("John"));
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("name");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_value(), "John");
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("name")->as_string().get_value(), "John");
 }
 
 TEST_F(TomlBuilderTest, BuildCString) {
     toml_builder builder;
     builder.key("name").value("John");
-    auto result = builder.build();
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("name")->as_string().get_value(), "John");
+}
 
-    const toml_value* val = result->get_member("name");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_value(), "John");
+TEST_F(TomlBuilderTest, BuildStringView) {
+    toml_builder builder;
+    const string text("a long string value beyond inline capacity");
+    builder.key("name").value(string_view(text.data(), text.size()));
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("name")->as_string().get_value(), text);
 }
 
 TEST_F(TomlBuilderTest, BuildStringLiteral) {
     toml_builder builder;
     builder.key("path").value_string("C:\\Users", toml_string::Literal);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("path");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("path");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_value(), "C:\\Users");
-    EXPECT_EQ(val->as_string()->get_string_type(), toml_string::Literal);
+    EXPECT_EQ(val->as_string().get_value(), "C:\\Users");
+    EXPECT_EQ(val->as_string().get_string_type(), toml_string::Literal);
 }
 
 TEST_F(TomlBuilderTest, BuildStringMultiBasic) {
     toml_builder builder;
     builder.key("text").value_string("line1\nline2", toml_string::MultiBasic);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("text");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("text");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_string());
-    EXPECT_EQ(val->as_string()->get_string_type(), toml_string::MultiBasic);
+    EXPECT_EQ(val->as_string().get_string_type(), toml_string::MultiBasic);
+    EXPECT_EQ(val->as_string().get_value(), "line1\nline2");
 }
 
 TEST_F(TomlBuilderTest, BuildDatetime) {
     toml_builder builder;
     builder.key("created").value_datetime("1979-05-27T07:32:00Z", toml_datetime::OffsetDateTime);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("created");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("created");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_datetime());
-    EXPECT_EQ(val->as_datetime()->get_datetime_type(), toml_datetime::OffsetDateTime);
-    EXPECT_EQ(val->as_datetime()->get_string_value(), "1979-05-27T07:32:00Z");
+    EXPECT_EQ(val->as_datetime().get_datetime_type(), toml_datetime::OffsetDateTime);
+    EXPECT_EQ(val->as_datetime().get_string_value(), "1979-05-27T07:32:00Z");
 }
 
 TEST_F(TomlBuilderTest, BuildDatetimeLocalDate) {
     toml_builder builder;
     builder.key("birthday").value_datetime("1979-05-27", toml_datetime::LocalDate);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("birthday");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_datetime());
-    EXPECT_EQ(val->as_datetime()->get_datetime_type(), toml_datetime::LocalDate);
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("birthday")->as_datetime().get_datetime_type(), toml_datetime::LocalDate);
+    EXPECT_EQ(result->as_table().get_member("birthday")->as_datetime().get_string_value(), "1979-05-27");
 }
 
 TEST_F(TomlBuilderTest, BuildNullAsBoolean) {
     toml_builder builder;
     builder.key("nothing").value(nullptr);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("nothing");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_boolean());
+    toml_document result = builder.build();
+    EXPECT_TRUE(result->as_table().get_member("nothing")->is_boolean());
 }
 
 TEST_F(TomlBuilderTest, BuildArray) {
@@ -1396,27 +1252,19 @@ TEST_F(TomlBuilderTest, BuildArray) {
     builder.value(static_cast<int64_t>(2));
     builder.value(static_cast<int64_t>(3));
     builder.end_array();
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("numbers");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("numbers");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 3);
-    EXPECT_EQ(val->as_array()->get_element(0)->as_integer()->get_value(), 1);
-    EXPECT_EQ(val->as_array()->get_element(1)->as_integer()->get_value(), 2);
-    EXPECT_EQ(val->as_array()->get_element(2)->as_integer()->get_value(), 3);
+    EXPECT_EQ(val->as_array().size(), 3u);
+    EXPECT_EQ(val->as_array().get_element(2)->as_integer().get_value(), 3);
 }
 
 TEST_F(TomlBuilderTest, BuildEmptyArray) {
     toml_builder builder;
     builder.key("empty").begin_array();
     builder.end_array();
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("empty");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 0);
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("empty")->as_array().size(), 0u);
 }
 
 TEST_F(TomlBuilderTest, BuildNestedArray) {
@@ -1431,14 +1279,12 @@ TEST_F(TomlBuilderTest, BuildNestedArray) {
     builder.value(static_cast<int64_t>(4));
     builder.end_array();
     builder.end_array();
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("matrix");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("matrix");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 2);
-    EXPECT_TRUE(val->as_array()->get_element(0)->is_array());
-    EXPECT_TRUE(val->as_array()->get_element(1)->is_array());
+    EXPECT_EQ(val->as_array().size(), 2u);
+    EXPECT_TRUE(val->as_array().get_element(0)->is_array());
+    EXPECT_EQ(val->as_array().get_element(1)->as_array().get_element(1)->as_integer().get_value(), 4);
 }
 
 TEST_F(TomlBuilderTest, BuildInlineTable) {
@@ -1447,14 +1293,12 @@ TEST_F(TomlBuilderTest, BuildInlineTable) {
     builder.key("x").value(1.0);
     builder.key("y").value(2.0);
     builder.end_inline_table();
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("point");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("point");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_table());
-    EXPECT_TRUE(val->as_table()->is_inline());
-    EXPECT_DOUBLE_EQ(val->as_table()->get_member("x")->as_float()->get_value(), 1.0);
-    EXPECT_DOUBLE_EQ(val->as_table()->get_member("y")->as_float()->get_value(), 2.0);
+    EXPECT_TRUE(val->as_table().is_inline());
+    EXPECT_DOUBLE_EQ(val->as_table().get_member("x")->as_float().get_value(), 1.0);
+    EXPECT_DOUBLE_EQ(val->as_table().get_member("y")->as_float().get_value(), 2.0);
 }
 
 TEST_F(TomlBuilderTest, BuildTable) {
@@ -1463,14 +1307,12 @@ TEST_F(TomlBuilderTest, BuildTable) {
     builder.key("host").value(string("localhost"));
     builder.key("port").value(static_cast<int64_t>(5432));
     builder.end_table();
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("database");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("database");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_table());
-    EXPECT_FALSE(val->as_table()->is_inline());
-    EXPECT_EQ(val->as_table()->get_member("host")->as_string()->get_value(), "localhost");
-    EXPECT_EQ(val->as_table()->get_member("port")->as_integer()->get_value(), 5432);
+    EXPECT_FALSE(val->as_table().is_inline());
+    EXPECT_EQ(val->as_table().get_member("host")->as_string().get_value(), "localhost");
+    EXPECT_EQ(val->as_table().get_member("port")->as_integer().get_value(), 5432);
 }
 
 TEST_F(TomlBuilderTest, BuildTableWithVectorPath) {
@@ -1479,16 +1321,10 @@ TEST_F(TomlBuilderTest, BuildTableWithVectorPath) {
     builder.begin_table(path);
     builder.key("value").value(static_cast<int64_t>(42));
     builder.end_table();
-    auto result = builder.build();
-
-    const toml_value* parent = result->get_member("parent");
-    ASSERT_NE(parent, nullptr);
-    EXPECT_TRUE(parent->is_table());
-
-    const toml_value* child = parent->as_table()->get_member("child");
+    toml_document result = builder.build();
+    const toml_value* child = result->as_table().get_member("parent")->as_table().get_member("child");
     ASSERT_NE(child, nullptr);
-    EXPECT_TRUE(child->is_table());
-    EXPECT_EQ(child->as_table()->get_member("value")->as_integer()->get_value(), 42);
+    EXPECT_EQ(child->as_table().get_member("value")->as_integer().get_value(), 42);
 }
 
 TEST_F(TomlBuilderTest, BuildArrayTable) {
@@ -1499,14 +1335,12 @@ TEST_F(TomlBuilderTest, BuildArrayTable) {
     builder.begin_array_table("products");
     builder.key("name").value(string("Nail"));
     builder.end_array_table();
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("products");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("products");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 2);
-    EXPECT_EQ(val->as_array()->get_element(0)->as_table()->get_member("name")->as_string()->get_value(), "Hammer");
-    EXPECT_EQ(val->as_array()->get_element(1)->as_table()->get_member("name")->as_string()->get_value(), "Nail");
+    EXPECT_EQ(val->as_array().size(), 2u);
+    EXPECT_EQ(val->as_array().get_element(0)->as_table().get_member("name")->as_string().get_value(), "Hammer");
+    EXPECT_EQ(val->as_array().get_element(1)->as_table().get_member("name")->as_string().get_value(), "Nail");
 }
 
 TEST_F(TomlBuilderTest, BuildArrayTableWithVectorPath) {
@@ -1518,16 +1352,10 @@ TEST_F(TomlBuilderTest, BuildArrayTableWithVectorPath) {
     builder.begin_array_table(path);
     builder.key("id").value(static_cast<int64_t>(2));
     builder.end_array_table();
-    auto result = builder.build();
-
-    const toml_value* section = result->get_member("section");
-    ASSERT_NE(section, nullptr);
-    EXPECT_TRUE(section->is_table());
-
-    const toml_value* items = section->as_table()->get_member("items");
+    toml_document result = builder.build();
+    const toml_value* items = result->as_table().get_member("section")->as_table().get_member("items");
     ASSERT_NE(items, nullptr);
-    EXPECT_TRUE(items->is_array());
-    EXPECT_EQ(items->as_array()->size(), 2);
+    EXPECT_EQ(items->as_array().size(), 2u);
 }
 
 TEST_F(TomlBuilderTest, BuildValueTableFunction) {
@@ -1536,13 +1364,11 @@ TEST_F(TomlBuilderTest, BuildValueTableFunction) {
         inner.key("enabled").value(true);
         inner.key("timeout").value(static_cast<int64_t>(30));
     });
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("settings");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("settings");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_table());
-    EXPECT_TRUE(val->as_table()->get_member("enabled")->as_boolean()->get_value());
-    EXPECT_EQ(val->as_table()->get_member("timeout")->as_integer()->get_value(), 30);
+    EXPECT_TRUE(val->as_table().get_member("enabled")->as_boolean().get_value());
+    EXPECT_EQ(val->as_table().get_member("timeout")->as_integer().get_value(), 30);
 }
 
 TEST_F(TomlBuilderTest, BuildValueInlineTableFunction) {
@@ -1551,14 +1377,11 @@ TEST_F(TomlBuilderTest, BuildValueInlineTableFunction) {
         inner.key("x").value(1.0);
         inner.key("y").value(2.0);
     });
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("point");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("point");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_table());
-    EXPECT_TRUE(val->as_table()->is_inline());
-    EXPECT_DOUBLE_EQ(val->as_table()->get_member("x")->as_float()->get_value(), 1.0);
-    EXPECT_DOUBLE_EQ(val->as_table()->get_member("y")->as_float()->get_value(), 2.0);
+    EXPECT_TRUE(val->as_table().is_inline());
+    EXPECT_DOUBLE_EQ(val->as_table().get_member("y")->as_float().get_value(), 2.0);
 }
 
 TEST_F(TomlBuilderTest, BuildValueArrayFunction) {
@@ -1568,38 +1391,35 @@ TEST_F(TomlBuilderTest, BuildValueArrayFunction) {
         inner.value(static_cast<int64_t>(87));
         inner.value(static_cast<int64_t>(92));
     });
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("scores");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("scores");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 3);
-    EXPECT_EQ(val->as_array()->get_element(0)->as_integer()->get_value(), 95);
-    EXPECT_EQ(val->as_array()->get_element(1)->as_integer()->get_value(), 87);
-    EXPECT_EQ(val->as_array()->get_element(2)->as_integer()->get_value(), 92);
+    EXPECT_EQ(val->as_array().size(), 3u);
+    EXPECT_EQ(val->as_array().get_element(1)->as_integer().get_value(), 87);
 }
 
-TEST_F(TomlBuilderTest, BuildValueUniquePtr) {
+TEST_F(TomlBuilderTest, BuildValueTomlValue) {
     toml_builder builder;
-    builder.key("data").value(make_unique<toml_integer>(42));
-    auto result = builder.build();
+    builder.key("data").value(toml_value::make_integer(42));
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("data")->as_integer().get_value(), 42);
+}
 
-    const toml_value* val = result->get_member("data");
-    ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_integer());
-    EXPECT_EQ(val->as_integer()->get_value(), 42);
+TEST_F(TomlBuilderTest, BuildValueSmallStringNoAllocation) {
+    toml_builder builder;
+    builder.key("data").value("inline");
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("data")->as_string().get_value(), "inline");
 }
 
 TEST_F(TomlBuilderTest, BuildValueIterableArray) {
     toml_builder builder;
     vector<int64_t> vec = {1, 2, 3};
     builder.key("numbers").value_iterable(vec);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("numbers");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("numbers");
     ASSERT_NE(val, nullptr);
-    EXPECT_TRUE(val->is_array());
-    EXPECT_EQ(val->as_array()->size(), 3);
+    EXPECT_EQ(val->as_array().size(), 3u);
 }
 
 TEST_F(TomlBuilderTest, BuildValueIterableMap) {
@@ -1608,17 +1428,16 @@ TEST_F(TomlBuilderTest, BuildValueIterableMap) {
     map["a"] = 1;
     map["b"] = 2;
     builder.key("dict").value_iterable(map);
-    auto result = builder.build();
-
-    const toml_value* val = result->get_member("dict");
+    toml_document result = builder.build();
+    const toml_value* val = result->as_table().get_member("dict");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_table());
-    EXPECT_TRUE(val->as_table()->is_inline());
+    EXPECT_TRUE(val->as_table().is_inline());
+    EXPECT_EQ(val->as_table().size(), 2u);
 }
 
 TEST_F(TomlBuilderTest, BuildComplexDocument) {
     toml_builder builder;
-
     builder.key("title").value(string("TOML Example"));
     builder.key("enabled").value(true);
     builder.key("count").value(static_cast<int64_t>(42));
@@ -1641,24 +1460,27 @@ TEST_F(TomlBuilderTest, BuildComplexDocument) {
     builder.key("name").value(string("Bob"));
     builder.end_array_table();
 
-    auto result = builder.build();
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("title")->as_string().get_value(), "TOML Example");
+    EXPECT_TRUE(result->as_table().get_member("enabled")->as_boolean().get_value());
+    EXPECT_EQ(result->as_table().get_member("count")->as_integer().get_value(), 42);
+    EXPECT_DOUBLE_EQ(result->as_table().get_member("ratio")->as_float().get_value(), 0.75);
+    EXPECT_EQ(result->as_table().get_member("ports")->as_array().size(), 2u);
+    EXPECT_EQ(result->as_table().get_member("database")->as_table().get_member("port")->as_integer().get_value(), 5432);
+    EXPECT_EQ(result->as_table().get_member("users")->as_array().size(), 2u);
+}
 
-    ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->get_member("title")->as_string()->get_value(), "TOML Example");
-    EXPECT_TRUE(result->get_member("enabled")->as_boolean()->get_value());
-    EXPECT_EQ(result->get_member("count")->as_integer()->get_value(), 42);
-    EXPECT_DOUBLE_EQ(result->get_member("ratio")->as_float()->get_value(), 0.75);
-    EXPECT_EQ(result->get_member("ports")->as_array()->size(), 2);
-
-    const toml_value* database = result->get_member("database");
-    ASSERT_NE(database, nullptr);
-    EXPECT_EQ(database->as_table()->get_member("host")->as_string()->get_value(), "localhost");
-    EXPECT_EQ(database->as_table()->get_member("port")->as_integer()->get_value(), 5432);
-
-    const toml_value* users = result->get_member("users");
-    ASSERT_NE(users, nullptr);
-    EXPECT_TRUE(users->is_array());
-    EXPECT_EQ(users->as_array()->size(), 2);
+TEST_F(TomlBuilderTest, BeginTableDiscardsPendingKey) {
+    toml_builder builder;
+    builder.key("ignored");
+    builder.begin_table("table");
+    builder.key("value").value(static_cast<int64_t>(1));
+    builder.end_table();
+    builder.key("real").value(static_cast<int64_t>(2));
+    toml_document result = builder.build();
+    EXPECT_EQ(result->as_table().get_member("ignored"), nullptr);
+    EXPECT_EQ(result->as_table().get_member("real")->as_integer().get_value(), 2);
+    EXPECT_EQ(result->as_table().get_member("table")->as_table().get_member("value")->as_integer().get_value(), 1);
 }
 
 TEST_F(TomlBuilderTest, BuildWithoutEndThrows) {
@@ -1671,6 +1493,11 @@ TEST_F(TomlBuilderTest, BuildKeyOutsideTableThrows) {
     toml_builder builder;
     builder.key("arr").begin_array();
     EXPECT_THROW(builder.key("test"), toml_exception);
+}
+
+TEST_F(TomlBuilderTest, BuildValueWithoutKeyThrows) {
+    toml_builder builder;
+    EXPECT_THROW(builder.value(static_cast<int64_t>(1)), toml_exception);
 }
 
 TEST_F(TomlBuilderTest, BuildEndTableWithoutBeginThrows) {
@@ -1722,6 +1549,73 @@ TEST_F(TomlBuilderTest, BuildEmptyTablePathThrows) {
 TEST_F(TomlBuilderTest, BuildRootTableCannotEndThrows) {
     toml_builder builder;
     EXPECT_THROW(builder.end_table(), toml_exception);
+}
+
+TEST_F(TomlBuilderTest, BuildRoundTripThroughDocument) {
+    toml_builder builder;
+    builder.key("title").value(string("Round Trip"));
+    builder.begin_table("database");
+    builder.key("enabled").value(true);
+    builder.key("ports").begin_array();
+    builder.value(static_cast<int64_t>(8000));
+    builder.value(static_cast<int64_t>(8001));
+    builder.end_array();
+    builder.end_table();
+    toml_document document = builder.build();
+
+    string text = document->to_document();
+    toml_document reparsed = toml_parser(string_view(text.data(), text.size())).parse();
+    EXPECT_EQ(reparsed->as_table().get_member("title")->as_string().get_value(), "Round Trip");
+    EXPECT_TRUE(
+            reparsed->as_table().get_member("database")->as_table().get_member("enabled")->as_boolean().get_value());
+    EXPECT_EQ(reparsed->as_table().get_member("database")->as_table().get_member("ports")->as_array().size(), 2u);
+}
+TEST_F(TomlValueTest, WrongKindViewsAreEmpty) {
+    toml_document doc;
+    const toml_value integer = toml_value::make_integer(7);
+    EXPECT_EQ(integer.as_array().size(), 0u);
+    EXPECT_TRUE(integer.as_table().empty());
+    EXPECT_EQ(integer.as_table().get_member("x"), nullptr);
+
+    const toml_value table = doc.new_table().to_value();
+    EXPECT_EQ(table.as_array().size(), 0u);
+    EXPECT_EQ(table.as_table().size(), 0u);
+}
+
+TEST_F(TomlValueTest, SpecialFloatRoundTrip) {
+    toml_document doc;
+    const double values[] = {to_float64("inf"), to_float64("-inf"), to_float64("nan")};
+    const char* const names[] = {"positive", "negative", "nan"};
+    toml_table_mut table = doc.make_table();
+    for (size_t i = 0; i < 3; ++i) {
+        table.add_member(names[i], toml_value::make_float(values[i]));
+    }
+    EXPECT_EQ(doc->to_document(), "positive = inf\nnegative = -inf\nnan = nan\n");
+
+    const string text = doc->to_document();
+    const toml_document parsed = toml_parser{string_view(text.data(), text.size())}.parse();
+    const toml_table parsed_table = parsed->as_table();
+    EXPECT_TRUE(is_infinity(parsed_table.get_member("positive")->as_float().get_value()));
+    EXPECT_TRUE(is_infinity(parsed_table.get_member("negative")->as_float().get_value()));
+    EXPECT_LT(parsed_table.get_member("negative")->as_float().get_value(), 0.0);
+    EXPECT_TRUE(is_nan(parsed_table.get_member("nan")->as_float().get_value()));
+}
+
+TEST_F(TomlValueTest, InlineRootTable) {
+    toml_document doc;
+    doc.make_table(true);
+    doc.table_append(doc.root(), "key", toml_value::make_integer(1));
+    EXPECT_TRUE(doc->as_table().is_inline());
+    EXPECT_EQ(doc->to_string(), "{ key = 1 }");
+    EXPECT_EQ(doc->to_document(), "{ key = 1 }");
+}
+
+TEST_F(TomlValueTest, DateOnlyTableSerialization) {
+    toml_document doc;
+    toml_table_mut table = doc.make_table();
+    table.add_member("dob", doc.make_datetime_value("1979-05-27", toml_local_date));
+    table.add_member("time", doc.make_datetime_value("07:32:00", toml_local_time));
+    EXPECT_EQ(doc->to_document(), "dob = 1979-05-27\ntime = 07:32:00\n");
 }
 
 class YamlParserTest : public ::testing::Test {
@@ -1785,7 +1679,7 @@ TEST_F(YamlParserTest, ParseBooleanInMapping) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_mapping());
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     EXPECT_TRUE(map->get_member("key")->as_boolean()->get_value());
     EXPECT_FALSE(map->get_member("flag")->as_boolean()->get_value());
     EXPECT_TRUE(map->get_member("enabled")->as_boolean()->get_value());
@@ -2041,7 +1935,7 @@ TEST_F(YamlParserTest, ParseSequenceBlock) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 3);
     EXPECT_EQ(seq->get_element(0)->as_string()->get_value(), "one");
     EXPECT_EQ(seq->get_element(1)->as_string()->get_value(), "two");
@@ -2054,7 +1948,7 @@ TEST_F(YamlParserTest, ParseSequenceFlow) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 3);
     EXPECT_EQ(seq->get_element(0)->as_string()->get_value(), "one");
     EXPECT_EQ(seq->get_element(1)->as_string()->get_value(), "two");
@@ -2075,7 +1969,7 @@ TEST_F(YamlParserTest, ParseSequenceMixedTypes) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 4);
     EXPECT_TRUE(seq->get_element(0)->is_integer());
     EXPECT_TRUE(seq->get_element(1)->is_boolean());
@@ -2088,7 +1982,7 @@ TEST_F(YamlParserTest, ParseSequenceFlowMixedTypes) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 4);
     EXPECT_TRUE(seq->get_element(0)->is_integer());
     EXPECT_TRUE(seq->get_element(1)->is_boolean());
@@ -2101,7 +1995,7 @@ TEST_F(YamlParserTest, ParseMappingBlock) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_mapping());
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     EXPECT_EQ(map->get_member("name")->as_string()->get_value(), "John");
     EXPECT_EQ(map->get_member("age")->as_integer()->get_value(), 30);
     EXPECT_TRUE(map->get_member("active")->as_boolean()->get_value());
@@ -2113,7 +2007,7 @@ TEST_F(YamlParserTest, ParseMappingFlow) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_mapping());
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     EXPECT_EQ(map->get_member("name")->as_string()->get_value(), "John");
     EXPECT_EQ(map->get_member("age")->as_integer()->get_value(), 30);
     EXPECT_TRUE(map->get_member("active")->as_boolean()->get_value());
@@ -2133,7 +2027,7 @@ TEST_F(YamlParserTest, ParseMappingQuotedKeys) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_mapping());
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     EXPECT_EQ(map->get_member("first name")->as_string()->get_value(), "John");
     EXPECT_EQ(map->get_member("last name")->as_string()->get_value(), "Doe");
 }
@@ -2146,7 +2040,7 @@ TEST_F(YamlParserTest, ParseMappingMergeKey) {
     auto* derived = result->as_mapping()->get_member("derived");
     ASSERT_NE(derived, nullptr);
     ASSERT_TRUE(derived->is_mapping());
-    auto* dm = derived->as_mapping();
+    auto dm = derived->as_mapping();
     EXPECT_EQ(dm->get_member("x")->as_integer()->get_value(), 1);
     EXPECT_EQ(dm->get_member("y")->as_integer()->get_value(), 2);
     EXPECT_EQ(dm->get_member("z")->as_integer()->get_value(), 3);
@@ -2160,7 +2054,7 @@ TEST_F(YamlParserTest, ParseMappingMergeKeySequence) {
     auto* merged = result->as_mapping()->get_member("merged");
     ASSERT_NE(merged, nullptr);
     ASSERT_TRUE(merged->is_mapping());
-    auto* mm = merged->as_mapping();
+    auto mm = merged->as_mapping();
     EXPECT_EQ(mm->get_member("x")->as_integer()->get_value(), 1);
     EXPECT_EQ(mm->get_member("y")->as_integer()->get_value(), 2);
     EXPECT_EQ(mm->get_member("z")->as_integer()->get_value(), 3);
@@ -2182,7 +2076,7 @@ TEST_F(YamlParserTest, ParseNestedMappingInSequence) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 2);
     EXPECT_EQ(seq->get_element(0)->as_mapping()->get_member("name")->as_string()->get_value(), "Alice");
     EXPECT_EQ(seq->get_element(1)->as_mapping()->get_member("name")->as_string()->get_value(), "Bob");
@@ -2206,7 +2100,7 @@ TEST_F(YamlParserTest, ParseAnchorAndAlias) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_mapping());
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     EXPECT_EQ(map->get_member("original")->as_string()->get_value(), "value");
     EXPECT_EQ(map->get_member("copy")->as_string()->get_value(), "value");
 }
@@ -2239,7 +2133,7 @@ TEST_F(YamlParserTest, ParseTagLocal) {
     yaml_parser parser("!myscalar value");
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->tag, "myscalar");
+    EXPECT_EQ(result->get_tag(), "myscalar");
     EXPECT_TRUE(result->is_string());
 }
 
@@ -2247,7 +2141,7 @@ TEST_F(YamlParserTest, ParseTagGlobal) {
     yaml_parser parser("!!str value");
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
-    EXPECT_FALSE(result->tag.empty());
+    EXPECT_FALSE(result->get_tag().empty());
     EXPECT_TRUE(result->is_string());
 }
 
@@ -2255,7 +2149,7 @@ TEST_F(YamlParserTest, ParseTagVerbatim) {
     yaml_parser parser("!<tag:example.com,2024:mytype> value");
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
-    EXPECT_EQ(result->tag, "tag:example.com,2024:mytype");
+    EXPECT_EQ(result->get_tag(), "tag:example.com,2024:mytype");
 }
 
 TEST_F(YamlParserTest, ParseCommentInline) {
@@ -2341,7 +2235,7 @@ tags:
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_mapping());
-    auto* root = result->as_mapping();
+    auto root = result->as_mapping();
 
     EXPECT_EQ(root->get_member("name")->as_string()->get_value(), "MyProject");
     EXPECT_EQ(root->get_member("version")->as_integer()->get_value(), 2);
@@ -2491,7 +2385,7 @@ TEST_F(YamlParserTest, ParseSequenceWithNullEntry) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 3);
     EXPECT_TRUE(seq->get_element(0)->is_string());
     EXPECT_TRUE(seq->get_element(1)->is_null());
@@ -2543,7 +2437,7 @@ TEST_F(YamlParserTest, ParseBooleanInFlowSequence) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 6);
     EXPECT_TRUE(seq->get_element(0)->as_boolean()->get_value());
     EXPECT_FALSE(seq->get_element(1)->as_boolean()->get_value());
@@ -2558,11 +2452,11 @@ TEST_F(YamlParserTest, ParseTagsInSequence) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 3);
-    EXPECT_EQ(seq->get_element(0)->tag, "str");
-    EXPECT_FALSE(seq->get_element(1)->tag.empty());
-    EXPECT_TRUE(seq->get_element(2)->tag.empty());
+    EXPECT_EQ(seq->get_element(0)->get_tag(), "str");
+    EXPECT_FALSE(seq->get_element(1)->get_tag().empty());
+    EXPECT_TRUE(seq->get_element(2)->get_tag().empty());
 }
 
 TEST_F(YamlParserTest, ParseAnchorWithTag) {
@@ -2572,8 +2466,8 @@ TEST_F(YamlParserTest, ParseAnchorWithTag) {
     ASSERT_TRUE(result->is_mapping());
     auto* val = result->as_mapping()->get_member("key");
     ASSERT_NE(val, nullptr);
-    EXPECT_EQ(val->anchor, "anchor");
-    EXPECT_EQ(val->tag, "mytag");
+    EXPECT_EQ(val->get_anchor(), "anchor");
+    EXPECT_EQ(val->get_tag(), "mytag");
     EXPECT_EQ(val->as_string()->get_value(), "value");
 }
 
@@ -2598,7 +2492,7 @@ TEST_F(YamlParserTest, ParseNullInFlowSequence) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    auto* seq = result->as_sequence();
+    auto seq = result->as_sequence();
     EXPECT_EQ(seq->size(), 4);
     EXPECT_TRUE(seq->get_element(0)->is_null());
     EXPECT_TRUE(seq->get_element(1)->is_null());
@@ -2820,7 +2714,7 @@ TEST_F(YamlParserTest, ParseTagInMappingValue) {
     ASSERT_TRUE(result->is_mapping());
     auto* val = result->as_mapping()->get_member("key");
     ASSERT_NE(val, nullptr);
-    EXPECT_EQ(val->tag, "mytag");
+    EXPECT_EQ(val->get_tag(), "mytag");
 }
 
 TEST_F(YamlParserTest, ParseTagInSequenceItem) {
@@ -2828,7 +2722,7 @@ TEST_F(YamlParserTest, ParseTagInSequenceItem) {
     auto result = parser.parse();
     ASSERT_NE(result, nullptr);
     ASSERT_TRUE(result->is_sequence());
-    EXPECT_EQ(result->as_sequence()->get_element(0)->tag, "important");
+    EXPECT_EQ(result->as_sequence()->get_element(0)->get_tag(), "important");
 }
 
 TEST_F(YamlParserTest, ParseDocumentStartWithContent) {
@@ -2980,7 +2874,7 @@ content: tagged node
     auto docs = yaml_parser(yaml).parse_documents();
     ASSERT_EQ(docs.size(), 5);
 
-    auto* doc0 = docs[0]->as_mapping();
+    auto doc0 = docs[0]->as_mapping();
     ASSERT_NE(doc0, nullptr);
 
     // Strings
@@ -3022,52 +2916,52 @@ content: tagged node
     EXPECT_EQ(doc0->get_member("timestamp_date")->as_string()->get_value(), "2024-01-15");
 
     // Sequence
-    auto* list_block = doc0->get_member("list_block")->as_sequence();
+    auto list_block = doc0->get_member("list_block")->as_sequence();
     ASSERT_NE(list_block, nullptr);
     EXPECT_EQ(list_block->size(), 5);
     EXPECT_EQ(list_block->get_element(0)->as_string()->get_value(), "apple");
     EXPECT_EQ(list_block->get_element(4)->as_string()->get_value(), "orange");
 
     // Flow sequence
-    auto* list_inline = doc0->get_member("list_inline")->as_sequence();
+    auto list_inline = doc0->get_member("list_inline")->as_sequence();
     ASSERT_NE(list_inline, nullptr);
     EXPECT_EQ(list_inline->size(), 4);
 
     // Mapping
-    auto* map_block = doc0->get_member("map_block")->as_mapping();
+    auto map_block = doc0->get_member("map_block")->as_mapping();
     ASSERT_NE(map_block, nullptr);
     EXPECT_EQ(map_block->get_member("name")->as_string()->get_value(), "John Doe");
     EXPECT_EQ(map_block->get_member("age")->as_integer()->get_value(), 30);
-    auto* address = map_block->get_member("address")->as_mapping();
+    auto address = map_block->get_member("address")->as_mapping();
     ASSERT_NE(address, nullptr);
     EXPECT_EQ(address->get_member("city")->as_string()->get_value(), "Anytown");
 
     // Nested structure
-    auto* nested = doc0->get_member("nested")->as_sequence();
+    auto nested = doc0->get_member("nested")->as_sequence();
     ASSERT_NE(nested, nullptr);
     EXPECT_EQ(nested->size(), 2);
-    auto* alice = nested->get_element(0)->as_mapping();
+    auto alice = nested->get_element(0)->as_mapping();
     EXPECT_EQ(alice->get_member("name")->as_string()->get_value(), "Alice");
-    auto* alice_scores = alice->get_member("scores")->as_sequence();
+    auto alice_scores = alice->get_member("scores")->as_sequence();
     EXPECT_EQ(alice_scores->size(), 3);
 
     // Merge key
-    auto* derived = doc0->get_member("derived")->as_mapping();
+    auto derived = doc0->get_member("derived")->as_mapping();
     ASSERT_NE(derived, nullptr);
     EXPECT_EQ(derived->get_member("name")->as_string()->get_value(), "Derived");
     EXPECT_FLOAT_EQ(derived->get_member("version")->as_float()->get_value(), 1.0f);
 
     // Block scalars
-    auto* lit_keep = doc0->get_member("multiline_literal_keep")->as_string();
+    auto lit_keep = doc0->get_member("multiline_literal_keep")->as_string();
     ASSERT_NE(lit_keep, nullptr);
     EXPECT_TRUE(lit_keep->get_value().find("Literal block with keep.") != neforce::string::npos);
 
-    auto* fold_keep = doc0->get_member("multiline_fold_keep")->as_string();
+    auto fold_keep = doc0->get_member("multiline_fold_keep")->as_string();
     ASSERT_NE(fold_keep, nullptr);
     EXPECT_TRUE(fold_keep->get_value().find("Folded block with keep") != neforce::string::npos);
 
     // Escaped characters
-    auto* escaped = doc0->get_member("escaped_chars")->as_string();
+    auto escaped = doc0->get_member("escaped_chars")->as_string();
     ASSERT_NE(escaped, nullptr);
     EXPECT_TRUE(escaped->get_value().find('\b') != neforce::string::npos);
     EXPECT_TRUE(escaped->get_value().find('\t') != neforce::string::npos);
@@ -3080,25 +2974,25 @@ content: tagged node
     EXPECT_EQ(doc0->get_member("custom_tag")->as_string()->get_value(), "custom data");
     EXPECT_EQ(doc0->get_member("verbatim_tag")->as_string()->get_value(), "verbatim tag value");
 
-    auto* doc1 = docs[1]->as_mapping();
+    auto doc1 = docs[1]->as_mapping();
     ASSERT_NE(doc1, nullptr);
     EXPECT_EQ(doc1->get_member("second_document")->as_boolean()->get_value(), true);
 
-    auto* doc2 = docs[2]->as_mapping();
+    auto doc2 = docs[2]->as_mapping();
     ASSERT_NE(doc2, nullptr);
-    auto* third_doc = doc2->get_member("third_document")->as_sequence();
+    auto third_doc = doc2->get_member("third_document")->as_sequence();
     ASSERT_NE(third_doc, nullptr);
     EXPECT_EQ(third_doc->size(), 2);
 
-    auto* doc3 = docs[3]->as_mapping();
+    auto doc3 = docs[3]->as_mapping();
     ASSERT_NE(doc3, nullptr);
 
     // Empty collections
-    auto* empty_seq = doc3->get_member("empty_seq")->as_sequence();
+    auto empty_seq = doc3->get_member("empty_seq")->as_sequence();
     ASSERT_NE(empty_seq, nullptr);
     EXPECT_EQ(empty_seq->size(), 0);
 
-    auto* empty_map = doc3->get_member("empty_map")->as_mapping();
+    auto empty_map = doc3->get_member("empty_map")->as_mapping();
     ASSERT_NE(empty_map, nullptr);
     EXPECT_EQ(empty_map->get_members().size(), 0);
 
@@ -3109,27 +3003,27 @@ content: tagged node
     EXPECT_EQ(doc3->get_member("{a: 1, b: 2}")->as_string()->get_value(), "another complex value");
 
     // Weird strings
-    auto* weird = doc3->get_member("weird_strings")->as_mapping();
+    auto weird = doc3->get_member("weird_strings")->as_mapping();
     ASSERT_NE(weird, nullptr);
     EXPECT_EQ(weird->get_member("colon_in_value")->as_string()->get_value(), "key: value");
     EXPECT_EQ(weird->get_member("braces")->as_string()->get_value(), "{ not a map }");
     EXPECT_EQ(weird->get_member("brackets")->as_string()->get_value(), "[ not a seq ]");
 
     // Mixed flow and block
-    auto* mixed = doc3->get_member("mixed_flow_and_block")->as_mapping();
+    auto mixed = doc3->get_member("mixed_flow_and_block")->as_mapping();
     ASSERT_NE(mixed, nullptr);
-    auto* flow_seq = mixed->get_member("flow_seq_in_block")->as_sequence();
+    auto flow_seq = mixed->get_member("flow_seq_in_block")->as_sequence();
     ASSERT_NE(flow_seq, nullptr);
     EXPECT_EQ(flow_seq->size(), 3);
-    auto* block_in_flow = mixed->get_member("block_map_in_flow")->as_mapping();
+    auto block_in_flow = mixed->get_member("block_map_in_flow")->as_mapping();
     ASSERT_NE(block_in_flow, nullptr);
-    auto* key_seq = block_in_flow->get_member("key")->as_sequence();
+    auto key_seq = block_in_flow->get_member("key")->as_sequence();
     ASSERT_NE(key_seq, nullptr);
     EXPECT_EQ(key_seq->size(), 3);
 
-    auto* doc4 = docs[4]->as_mapping();
+    auto doc4 = docs[4]->as_mapping();
     ASSERT_NE(doc4, nullptr);
-    EXPECT_EQ(doc4->tag, "my!type");
+    EXPECT_EQ(doc4->get_tag(), "my!type");
     EXPECT_EQ(doc4->get_member("content")->as_string()->get_value(), "tagged node");
 }
 
@@ -3173,7 +3067,7 @@ TEST_F(YamlBuilderTest, BuildNull) {
     b.key("empty").value(nullptr);
     auto result = b.build();
 
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     ASSERT_NE(map, nullptr);
     auto* val = map->get_member("empty");
     ASSERT_NE(val, nullptr);
@@ -3193,7 +3087,7 @@ TEST_F(YamlBuilderTest, BuildBooleanTrue) {
     b.key("enabled").value(true);
     auto result = b.build();
 
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     auto* val = map->get_member("enabled");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_boolean());
@@ -3205,7 +3099,7 @@ TEST_F(YamlBuilderTest, BuildBooleanFalse) {
     b.key("disabled").value(false);
     auto result = b.build();
 
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     auto* val = map->get_member("disabled");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_boolean());
@@ -3217,7 +3111,7 @@ TEST_F(YamlBuilderTest, BuildInteger) {
     b.key("count").value(static_cast<int64_t>(42));
     auto result = b.build();
 
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     auto* val = map->get_member("count");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_integer());
@@ -3248,7 +3142,7 @@ TEST_F(YamlBuilderTest, BuildFloat) {
     b.key("pi").value(3.14159);
     auto result = b.build();
 
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     auto* val = map->get_member("pi");
     ASSERT_NE(val, nullptr);
     EXPECT_TRUE(val->is_float());
@@ -3374,7 +3268,7 @@ TEST_F(YamlBuilderTest, BuildMultipleScalars) {
     b.key("name").value("John").key("age").value(30).key("score").value(98.6).key("active").value(true);
 
     auto result = b.build();
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
 
     EXPECT_EQ(map->get_member("name")->as_string()->get_value(), "John");
     EXPECT_EQ(map->get_member("age")->as_integer()->get_value(), 30);
@@ -3387,7 +3281,7 @@ TEST_F(YamlBuilderTest, BuildBlockSequence) {
     b.key("items").begin_sequence().value(1).value(2).value(3).end_sequence();
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("items")->as_sequence();
+    auto seq = result->as_mapping()->get_member("items")->as_sequence();
     ASSERT_NE(seq, nullptr);
     EXPECT_EQ(seq->size(), 3);
     EXPECT_EQ(seq->get_element(0)->as_integer()->get_value(), 1);
@@ -3401,7 +3295,7 @@ TEST_F(YamlBuilderTest, BuildBlockSequenceMixedTypes) {
     b.key("mixed").begin_sequence().value("string").value(42).value(3.14).value(true).value(nullptr).end_sequence();
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("mixed")->as_sequence();
+    auto seq = result->as_mapping()->get_member("mixed")->as_sequence();
     ASSERT_EQ(seq->size(), 5);
     EXPECT_TRUE(seq->get_element(0)->is_string());
     EXPECT_TRUE(seq->get_element(1)->is_integer());
@@ -3425,12 +3319,12 @@ TEST_F(YamlBuilderTest, BuildNestedSequences) {
             .end_sequence();
     auto result = b.build();
 
-    auto* outer = result->as_mapping()->get_member("matrix")->as_sequence();
+    auto outer = result->as_mapping()->get_member("matrix")->as_sequence();
     ASSERT_EQ(outer->size(), 2);
-    auto* inner1 = outer->get_element(0)->as_sequence();
+    auto inner1 = outer->get_element(0)->as_sequence();
     EXPECT_EQ(inner1->get_element(0)->as_integer()->get_value(), 1);
     EXPECT_EQ(inner1->get_element(1)->as_integer()->get_value(), 2);
-    auto* inner2 = outer->get_element(1)->as_sequence();
+    auto inner2 = outer->get_element(1)->as_sequence();
     EXPECT_EQ(inner2->get_element(0)->as_integer()->get_value(), 3);
     EXPECT_EQ(inner2->get_element(1)->as_integer()->get_value(), 4);
 }
@@ -3440,7 +3334,7 @@ TEST_F(YamlBuilderTest, BuildFlowSequence) {
     b.key("inline").begin_flow_sequence().value("a").value("b").value("c").end_sequence();
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("inline")->as_sequence();
+    auto seq = result->as_mapping()->get_member("inline")->as_sequence();
     ASSERT_NE(seq, nullptr);
     EXPECT_EQ(seq->size(), 3);
     EXPECT_EQ(seq->get_style(), yaml_sequence::Flow);
@@ -3451,7 +3345,7 @@ TEST_F(YamlBuilderTest, BuildEmptySequence) {
     b.key("empty_list").begin_sequence().end_sequence();
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("empty_list")->as_sequence();
+    auto seq = result->as_mapping()->get_member("empty_list")->as_sequence();
     ASSERT_NE(seq, nullptr);
     EXPECT_EQ(seq->size(), 0);
 }
@@ -3461,7 +3355,7 @@ TEST_F(YamlBuilderTest, BuildEmptyFlowSequence) {
     b.key("empty_flow").begin_flow_sequence().end_sequence();
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("empty_flow")->as_sequence();
+    auto seq = result->as_mapping()->get_member("empty_flow")->as_sequence();
     ASSERT_NE(seq, nullptr);
     EXPECT_EQ(seq->size(), 0);
     EXPECT_EQ(seq->get_style(), yaml_sequence::Flow);
@@ -3472,7 +3366,7 @@ TEST_F(YamlBuilderTest, BuildBlockMapping) {
     b.key("person").begin_mapping().key("name").value("Alice").key("age").value(25).end_mapping();
     auto result = b.build();
 
-    auto* person = result->as_mapping()->get_member("person")->as_mapping();
+    auto person = result->as_mapping()->get_member("person")->as_mapping();
     ASSERT_NE(person, nullptr);
     EXPECT_EQ(person->get_style(), yaml_mapping::Block);
     EXPECT_EQ(person->get_member("name")->as_string()->get_value(), "Alice");
@@ -3500,12 +3394,12 @@ TEST_F(YamlBuilderTest, BuildNestedBlockMappings) {
             .end_mapping();
     auto result = b.build();
 
-    auto* config = result->as_mapping()->get_member("config")->as_mapping();
-    auto* db = config->get_member("database")->as_mapping();
+    auto config = result->as_mapping()->get_member("config")->as_mapping();
+    auto db = config->get_member("database")->as_mapping();
     EXPECT_EQ(db->get_member("host")->as_string()->get_value(), "localhost");
     EXPECT_EQ(db->get_member("port")->as_integer()->get_value(), 5432);
 
-    auto* cache = config->get_member("cache")->as_mapping();
+    auto cache = config->get_member("cache")->as_mapping();
     EXPECT_TRUE(cache->get_member("enabled")->as_boolean()->get_value());
     EXPECT_EQ(cache->get_member("ttl")->as_integer()->get_value(), 3600);
 }
@@ -3515,7 +3409,7 @@ TEST_F(YamlBuilderTest, BuildEmptyMapping) {
     b.key("empty_map").begin_mapping().end_mapping();
     auto result = b.build();
 
-    auto* map = result->as_mapping()->get_member("empty_map")->as_mapping();
+    auto map = result->as_mapping()->get_member("empty_map")->as_mapping();
     ASSERT_NE(map, nullptr);
     EXPECT_TRUE(map->get_members().empty());
 }
@@ -3525,7 +3419,7 @@ TEST_F(YamlBuilderTest, BuildFlowMapping) {
     b.key("point").begin_flow_mapping().key("x").value(10).key("y").value(20).end_mapping();
     auto result = b.build();
 
-    auto* point = result->as_mapping()->get_member("point")->as_mapping();
+    auto point = result->as_mapping()->get_member("point")->as_mapping();
     ASSERT_NE(point, nullptr);
     EXPECT_EQ(point->get_style(), yaml_mapping::Flow);
     EXPECT_EQ(point->get_member("x")->as_integer()->get_value(), 10);
@@ -3537,7 +3431,7 @@ TEST_F(YamlBuilderTest, BuildEmptyFlowMapping) {
     b.key("empty_flow_map").begin_flow_mapping().end_mapping();
     auto result = b.build();
 
-    auto* map = result->as_mapping()->get_member("empty_flow_map")->as_mapping();
+    auto map = result->as_mapping()->get_member("empty_flow_map")->as_mapping();
     ASSERT_NE(map, nullptr);
     EXPECT_EQ(map->get_style(), yaml_mapping::Flow);
     EXPECT_TRUE(map->get_members().empty());
@@ -3556,7 +3450,7 @@ TEST_F(YamlBuilderTest, BuildSequenceInMapping) {
             .end_mapping();
     auto result = b.build();
 
-    auto* ports = result->as_mapping()->get_member("server")->as_mapping()->get_member("ports")->as_sequence();
+    auto ports = result->as_mapping()->get_member("server")->as_mapping()->get_member("ports")->as_sequence();
     ASSERT_EQ(ports->size(), 3);
 }
 
@@ -3579,7 +3473,7 @@ TEST_F(YamlBuilderTest, BuildMappingInSequence) {
             .end_sequence();
     auto result = b.build();
 
-    auto* users = result->as_mapping()->get_member("users")->as_sequence();
+    auto users = result->as_mapping()->get_member("users")->as_sequence();
     ASSERT_EQ(users->size(), 2);
     EXPECT_EQ(users->get_element(0)->as_mapping()->get_member("name")->as_string()->get_value(), "Alice");
     EXPECT_EQ(users->get_element(1)->as_mapping()->get_member("name")->as_string()->get_value(), "Bob");
@@ -3604,17 +3498,17 @@ TEST_F(YamlBuilderTest, BuildDeepNesting) {
             .end_mapping();
     auto result = b.build();
 
-    auto* deep = result->as_mapping()
-                         ->get_member("a")
-                         ->as_mapping()
-                         ->get_member("b")
-                         ->as_mapping()
-                         ->get_member("c")
-                         ->as_sequence()
-                         ->get_element(0)
-                         ->as_mapping()
-                         ->get_member("d")
-                         ->as_sequence();
+    auto deep = result->as_mapping()
+                        ->get_member("a")
+                        ->as_mapping()
+                        ->get_member("b")
+                        ->as_mapping()
+                        ->get_member("c")
+                        ->as_sequence()
+                        ->get_element(0)
+                        ->as_mapping()
+                        ->get_member("d")
+                        ->as_sequence();
     ASSERT_EQ(deep->size(), 1);
     EXPECT_EQ(deep->get_element(0)->as_string()->get_value(), "deep");
     EXPECT_EQ(deep->get_style(), yaml_sequence::Flow);
@@ -3626,7 +3520,7 @@ TEST_F(YamlBuilderTest, BuildAnchorOnScalar) {
     auto result = b.build();
 
     auto* val = result->as_mapping()->get_member("first");
-    EXPECT_EQ(val->anchor, "ref");
+    EXPECT_EQ(val->get_anchor(), "ref");
     EXPECT_EQ(val->as_string()->get_value(), "shared value");
 }
 
@@ -3636,7 +3530,7 @@ TEST_F(YamlBuilderTest, BuildAnchorOnSequence) {
     auto result = b.build();
 
     auto* seq = result->as_mapping()->get_member("items");
-    EXPECT_EQ(seq->anchor, "seq_anchor");
+    EXPECT_EQ(seq->get_anchor(), "seq_anchor");
     EXPECT_EQ(seq->as_sequence()->size(), 2);
 }
 
@@ -3646,7 +3540,7 @@ TEST_F(YamlBuilderTest, BuildAnchorOnMapping) {
     auto result = b.build();
 
     auto* map = result->as_mapping()->get_member("config");
-    EXPECT_EQ(map->anchor, "cfg");
+    EXPECT_EQ(map->get_anchor(), "cfg");
     EXPECT_EQ(map->as_mapping()->get_member("k")->as_string()->get_value(), "v");
 }
 
@@ -3660,7 +3554,7 @@ TEST_F(YamlBuilderTest, BuildAlias) {
     auto* copy = result->as_mapping()->get_member("copy");
     EXPECT_EQ(orig->as_string()->get_value(), "reusable");
     EXPECT_EQ(copy->as_string()->get_value(), "reusable");
-    EXPECT_EQ(orig, copy);
+    EXPECT_EQ(orig->as_string().get_value(), copy->as_string().get_value());
 }
 
 TEST_F(YamlBuilderTest, BuildAliasUnknownAnchor) {
@@ -3674,7 +3568,7 @@ TEST_F(YamlBuilderTest, BuildTagOnString) {
     auto result = b.build();
 
     auto* val = result->as_mapping()->get_member("data");
-    EXPECT_EQ(val->tag, "!!str");
+    EXPECT_EQ(val->get_tag(), "!!str");
     EXPECT_EQ(val->as_string()->get_value(), "123");
 }
 
@@ -3684,7 +3578,7 @@ TEST_F(YamlBuilderTest, BuildTagOnSequence) {
     auto result = b.build();
 
     auto* seq = result->as_mapping()->get_member("items");
-    EXPECT_EQ(seq->tag, "!mylist");
+    EXPECT_EQ(seq->get_tag(), "!mylist");
 }
 
 TEST_F(YamlBuilderTest, BuildTagOnMapping) {
@@ -3693,7 +3587,7 @@ TEST_F(YamlBuilderTest, BuildTagOnMapping) {
     auto result = b.build();
 
     auto* map = result->as_mapping()->get_member("obj");
-    EXPECT_EQ(map->tag, "!myobj");
+    EXPECT_EQ(map->get_tag(), "!myobj");
 }
 
 TEST_F(YamlBuilderTest, BuildAnchorAndTag) {
@@ -3702,8 +3596,8 @@ TEST_F(YamlBuilderTest, BuildAnchorAndTag) {
     auto result = b.build();
 
     auto* val = result->as_mapping()->get_member("node");
-    EXPECT_EQ(val->anchor, "n1");
-    EXPECT_EQ(val->tag, "!tagged");
+    EXPECT_EQ(val->get_anchor(), "n1");
+    EXPECT_EQ(val->get_tag(), "!tagged");
     EXPECT_EQ(val->as_string()->get_value(), "both");
 }
 
@@ -3715,7 +3609,7 @@ TEST_F(YamlBuilderTest, BuildValueMapping) {
     });
     auto result = b.build();
 
-    auto* settings = result->as_mapping()->get_member("settings")->as_mapping();
+    auto settings = result->as_mapping()->get_member("settings")->as_mapping();
     EXPECT_EQ(settings->get_member("theme")->as_string()->get_value(), "dark");
     EXPECT_EQ(settings->get_member("font_size")->as_integer()->get_value(), 14);
     EXPECT_EQ(settings->get_style(), yaml_mapping::Block);
@@ -3726,7 +3620,7 @@ TEST_F(YamlBuilderTest, BuildValueBlockMapping) {
     b.key("block").value_block_mapping([](yaml_builder& inner) { inner.key("a").value(1); });
     auto result = b.build();
 
-    auto* map = result->as_mapping()->get_member("block")->as_mapping();
+    auto map = result->as_mapping()->get_member("block")->as_mapping();
     EXPECT_EQ(map->get_style(), yaml_mapping::Block);
 }
 
@@ -3738,7 +3632,7 @@ TEST_F(YamlBuilderTest, BuildValueFlowMapping) {
     });
     auto result = b.build();
 
-    auto* map = result->as_mapping()->get_member("flow")->as_mapping();
+    auto map = result->as_mapping()->get_member("flow")->as_mapping();
     EXPECT_EQ(map->get_style(), yaml_mapping::Flow);
 }
 
@@ -3751,7 +3645,7 @@ TEST_F(YamlBuilderTest, BuildValueSequence) {
     });
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("values")->as_sequence();
+    auto seq = result->as_mapping()->get_member("values")->as_sequence();
     ASSERT_EQ(seq->size(), 3);
     EXPECT_EQ(seq->get_style(), yaml_sequence::Block);
 }
@@ -3761,7 +3655,7 @@ TEST_F(YamlBuilderTest, BuildValueBlockSequence) {
     b.key("bs").value_block_sequence([](yaml_builder& inner) { inner.value(1); });
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("bs")->as_sequence();
+    auto seq = result->as_mapping()->get_member("bs")->as_sequence();
     EXPECT_EQ(seq->get_style(), yaml_sequence::Block);
 }
 
@@ -3770,7 +3664,7 @@ TEST_F(YamlBuilderTest, BuildValueFlowSequence) {
     b.key("fs").value_flow_sequence([](yaml_builder& inner) { inner.value(1).value(2).value(3); });
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("fs")->as_sequence();
+    auto seq = result->as_mapping()->get_member("fs")->as_sequence();
     EXPECT_EQ(seq->get_style(), yaml_sequence::Flow);
 }
 
@@ -3784,8 +3678,8 @@ TEST_F(YamlBuilderTest, BuildNestedFunctional) {
     });
     auto result = b.build();
 
-    auto* root = result->as_mapping()->get_member("root")->as_mapping();
-    auto* list = root->get_member("list")->as_sequence();
+    auto root = result->as_mapping()->get_member("root")->as_mapping();
+    auto list = root->get_member("list")->as_sequence();
     ASSERT_EQ(list->size(), 2);
     EXPECT_EQ(list->get_element(0)->as_mapping()->get_style(), yaml_mapping::Block);
     EXPECT_EQ(list->get_element(1)->as_mapping()->get_style(), yaml_mapping::Flow);
@@ -3917,7 +3811,7 @@ TEST_F(YamlBuilderTest, RoundTripSimpleMapping) {
     yaml_parser parser(doc);
     auto parsed = parser.parse();
 
-    auto* map = parsed->as_mapping();
+    auto map = parsed->as_mapping();
     ASSERT_NE(map, nullptr);
     EXPECT_EQ(map->get_member("name")->as_string()->get_value(), "test");
     EXPECT_EQ(map->get_member("count")->as_integer()->get_value(), 42);
@@ -3936,7 +3830,7 @@ TEST_F(YamlBuilderTest, RoundTripSequence) {
     yaml_parser parser(doc);
     auto parsed = parser.parse();
 
-    auto* seq = parsed->as_mapping()->get_member("items")->as_sequence();
+    auto seq = parsed->as_mapping()->get_member("items")->as_sequence();
     ASSERT_EQ(seq->size(), 3);
     EXPECT_EQ(seq->get_element(0)->as_string()->get_value(), "a");
     EXPECT_EQ(seq->get_element(1)->as_string()->get_value(), "b");
@@ -3953,7 +3847,7 @@ TEST_F(YamlBuilderTest, RoundTripFlowSequence) {
     yaml_parser parser(doc);
     auto parsed = parser.parse();
 
-    auto* seq = parsed->as_mapping()->get_member("tags")->as_sequence();
+    auto seq = parsed->as_mapping()->get_member("tags")->as_sequence();
     ASSERT_EQ(seq->size(), 2);
     EXPECT_EQ(seq->get_style(), yaml_sequence::Flow);
 }
@@ -3968,7 +3862,7 @@ TEST_F(YamlBuilderTest, RoundTripFlowMapping) {
     yaml_parser parser(doc);
     auto parsed = parser.parse();
 
-    auto* point = parsed->as_mapping()->get_member("point")->as_mapping();
+    auto point = parsed->as_mapping()->get_member("point")->as_mapping();
     EXPECT_EQ(point->get_member("x")->as_integer()->get_value(), 1);
     EXPECT_EQ(point->get_member("y")->as_integer()->get_value(), 2);
     EXPECT_EQ(point->get_style(), yaml_mapping::Flow);
@@ -4003,14 +3897,14 @@ TEST_F(YamlBuilderTest, RoundTripNestedStructures) {
     yaml_parser parser(doc);
     auto parsed = parser.parse();
 
-    auto* servers = parsed->as_mapping()->get_member("servers")->as_sequence();
+    auto servers = parsed->as_mapping()->get_member("servers")->as_sequence();
     ASSERT_EQ(servers->size(), 2);
-    auto* srv1 = servers->get_element(0)->as_mapping();
+    auto srv1 = servers->get_element(0)->as_mapping();
     EXPECT_EQ(srv1->get_member("host")->as_string()->get_value(), "srv1");
-    auto* ports1 = srv1->get_member("ports")->as_sequence();
+    auto ports1 = srv1->get_member("ports")->as_sequence();
     EXPECT_EQ(ports1->size(), 2);
 
-    auto* srv2 = servers->get_element(1)->as_mapping();
+    auto srv2 = servers->get_element(1)->as_mapping();
     EXPECT_EQ(srv2->get_member("host")->as_string()->get_value(), "srv2");
 }
 
@@ -4045,7 +3939,7 @@ TEST_F(YamlBuilderTest, RoundTripStringStyles) {
     yaml_parser parser(doc);
     auto parsed = parser.parse();
 
-    auto* map = parsed->as_mapping();
+    auto map = parsed->as_mapping();
     EXPECT_EQ(map->get_member("quoted")->as_string()->get_value(), "it's ok");
     EXPECT_EQ(map->get_member("escaped")->as_string()->get_value(), "has \"quotes\"");
 }
@@ -4055,7 +3949,7 @@ TEST_F(YamlBuilderTest, BuildIterableVector) {
     b.key("numbers").value_iterable(vector<int>{1, 2, 3, 4, 5});
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("numbers")->as_sequence();
+    auto seq = result->as_mapping()->get_member("numbers")->as_sequence();
     ASSERT_EQ(seq->size(), 5);
     EXPECT_EQ(seq->get_element(0)->as_integer()->get_value(), 1);
     EXPECT_EQ(seq->get_element(4)->as_integer()->get_value(), 5);
@@ -4069,7 +3963,7 @@ TEST_F(YamlBuilderTest, BuildIterableMap) {
     b.key("dict").value_iterable(m);
     auto result = b.build();
 
-    auto* map = result->as_mapping()->get_member("dict")->as_mapping();
+    auto map = result->as_mapping()->get_member("dict")->as_mapping();
     EXPECT_EQ(map->get_style(), yaml_mapping::Flow);
     EXPECT_EQ(map->get_member("a")->as_integer()->get_value(), 1);
     EXPECT_EQ(map->get_member("b")->as_integer()->get_value(), 2);
@@ -4080,7 +3974,7 @@ TEST_F(YamlBuilderTest, BuildIterableEmpty) {
     b.key("empty").value_iterable(vector<int>{});
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("empty")->as_sequence();
+    auto seq = result->as_mapping()->get_member("empty")->as_sequence();
     ASSERT_NE(seq, nullptr);
     EXPECT_EQ(seq->size(), 0);
 }
@@ -4090,7 +3984,7 @@ TEST_F(YamlBuilderTest, BuildIterableArray) {
     b.key("chars").value_iterable(array<int, 3>{10, 20, 30});
     auto result = b.build();
 
-    auto* seq = result->as_mapping()->get_member("chars")->as_sequence();
+    auto seq = result->as_mapping()->get_member("chars")->as_sequence();
     ASSERT_EQ(seq->size(), 3);
 }
 
@@ -4105,10 +3999,10 @@ TEST_F(YamlBuilderTest, BeginDocumentSavesPrevious) {
     auto docs = b.build_documents();
     ASSERT_EQ(docs.size(), 2);
 
-    auto* doc1 = docs[0]->as_mapping();
+    auto doc1 = docs[0]->as_mapping();
     EXPECT_EQ(doc1->get_member("doc")->as_string()->get_value(), "first");
 
-    auto* doc2 = docs[1]->as_mapping();
+    auto doc2 = docs[1]->as_mapping();
     EXPECT_EQ(doc2->get_member("doc")->as_string()->get_value(), "second");
 }
 
@@ -4193,7 +4087,7 @@ TEST_F(YamlBuilderTest, BuildSequenceOfSequences) {
             .end_sequence();
     auto result = b.build();
 
-    auto* grid = result->as_mapping()->get_member("grid")->as_sequence();
+    auto grid = result->as_mapping()->get_member("grid")->as_sequence();
     ASSERT_EQ(grid->size(), 2);
     EXPECT_EQ(grid->get_element(0)->as_sequence()->get_style(), yaml_sequence::Block);
     EXPECT_EQ(grid->get_element(1)->as_sequence()->get_style(), yaml_sequence::Flow);
@@ -4216,7 +4110,7 @@ TEST_F(YamlBuilderTest, BuildMappingOfMixedMappings) {
             .end_mapping();
     auto result = b.build();
 
-    auto* container = result->as_mapping()->get_member("container")->as_mapping();
+    auto container = result->as_mapping()->get_member("container")->as_mapping();
     EXPECT_EQ(container->get_member("block_map")->as_mapping()->get_style(), yaml_mapping::Block);
     EXPECT_EQ(container->get_member("flow_map")->as_mapping()->get_style(), yaml_mapping::Flow);
 }
@@ -4235,9 +4129,9 @@ TEST_F(YamlBuilderTest, BuildFlowSequenceInFlowMapping) {
             .end_mapping();
     auto result = b.build();
 
-    auto* obj = result->as_mapping()->get_member("obj")->as_mapping();
+    auto obj = result->as_mapping()->get_member("obj")->as_mapping();
     EXPECT_EQ(obj->get_style(), yaml_mapping::Flow);
-    auto* tags = obj->get_member("tags")->as_sequence();
+    auto tags = obj->get_member("tags")->as_sequence();
     EXPECT_EQ(tags->get_style(), yaml_sequence::Flow);
     EXPECT_EQ(tags->size(), 2);
 }
@@ -4279,7 +4173,7 @@ TEST_F(YamlBuilderTest, BuildNumericEdgeCases) {
             .value(-1.5);
     auto result = b.build();
 
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     EXPECT_EQ(map->get_member("max_int64")->as_integer()->get_value(), INT64_MAX);
     EXPECT_EQ(map->get_member("min_int64")->as_integer()->get_value(), INT64_MIN);
     EXPECT_EQ(map->get_member("zero")->as_integer()->get_value(), 0);
@@ -4357,7 +4251,7 @@ TEST_F(YamlBuilderTest, BuildComplexYaml12Document) {
     // Parse back and verify
     yaml_parser parser(doc);
     auto parsed = parser.parse();
-    auto* map = parsed->as_mapping();
+    auto map = parsed->as_mapping();
 
     ASSERT_NE(map, nullptr);
     EXPECT_EQ(map->get_member("string_plain")->as_string()->get_value(), "Hello, world!");
@@ -4366,26 +4260,26 @@ TEST_F(YamlBuilderTest, BuildComplexYaml12Document) {
     EXPECT_TRUE(map->get_member("bool_true")->as_boolean()->get_value());
     EXPECT_TRUE(map->get_member("null_value")->is_null());
 
-    auto* block_list = map->get_member("block_list")->as_sequence();
+    auto block_list = map->get_member("block_list")->as_sequence();
     ASSERT_EQ(block_list->size(), 3);
 
-    auto* flow_list = map->get_member("flow_list")->as_sequence();
+    auto flow_list = map->get_member("flow_list")->as_sequence();
     ASSERT_EQ(flow_list->size(), 3);
     EXPECT_EQ(flow_list->get_style(), yaml_sequence::Flow);
 
-    auto* person = map->get_member("person")->as_mapping();
+    auto person = map->get_member("person")->as_mapping();
     EXPECT_EQ(person->get_member("name")->as_string()->get_value(), "John Doe");
-    auto* address = person->get_member("address")->as_mapping();
+    auto address = person->get_member("address")->as_mapping();
     EXPECT_EQ(address->get_member("city")->as_string()->get_value(), "New York");
 
-    auto* point = map->get_member("point")->as_mapping();
+    auto point = map->get_member("point")->as_mapping();
     EXPECT_EQ(point->get_style(), yaml_mapping::Flow);
     EXPECT_EQ(point->get_member("x")->as_integer()->get_value(), 10);
 
-    auto* users = map->get_member("users")->as_sequence();
+    auto users = map->get_member("users")->as_sequence();
     ASSERT_EQ(users->size(), 2);
 
-    auto* shared = map->get_member("shared_config")->as_mapping();
+    auto shared = map->get_member("shared_config")->as_mapping();
     EXPECT_EQ(shared->get_member("timeout")->as_integer()->get_value(), 30);
 }
 
@@ -4403,7 +4297,7 @@ TEST_F(YamlBuilderTest, BuildAllStringStyles) {
             .value_string("folded block string", yaml_string::Folded);
     auto result = b.build();
 
-    auto* map = result->as_mapping();
+    auto map = result->as_mapping();
     EXPECT_EQ(map->get_member("plain")->as_string()->get_style(), yaml_string::Plain);
     EXPECT_EQ(map->get_member("single")->as_string()->get_style(), yaml_string::SingleQuoted);
     EXPECT_EQ(map->get_member("double")->as_string()->get_style(), yaml_string::DoubleQuoted);
@@ -4412,17 +4306,13 @@ TEST_F(YamlBuilderTest, BuildAllStringStyles) {
 }
 
 TEST_F(YamlBuilderTest, RawValueSharedPointer) {
-    auto manual = make_shared<yaml_string>("manual value", yaml_string::DoubleQuoted);
-    manual->anchor = "man";
-    manual->tag = "!!str";
-
     yaml_builder b;
-    b.key("manual").value(manual);
+    b.key("manual").anchor("man").tag("!!str").value_string("manual value", yaml_string::DoubleQuoted);
     auto result = b.build();
 
-    auto* val = result->as_mapping()->get_member("manual");
-    EXPECT_EQ(val->as_string()->get_value(), "manual value");
-    EXPECT_EQ(val->as_string()->get_style(), yaml_string::DoubleQuoted);
-    EXPECT_EQ(val->anchor, "man");
-    EXPECT_EQ(val->tag, "!!str");
+    const yaml_value* val = result->as_mapping()->get_member("manual");
+    EXPECT_EQ(val->as_string().get_value(), "manual value");
+    EXPECT_EQ(val->as_string().get_style(), yaml_string::DoubleQuoted);
+    EXPECT_EQ(val->get_anchor(), "man");
+    EXPECT_EQ(val->get_tag(), "!!str");
 }

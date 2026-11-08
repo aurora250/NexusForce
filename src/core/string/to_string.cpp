@@ -392,7 +392,7 @@ namespace {
             lower_dropped = bits > 1 && (lo & ((1ULL << (bits - 1)) - 1ULL)) != 0;
         } else {
             const int high_bits = bits - 64;
-            const uint64_t high_mask = high_bits > 0 ? ((1ULL << high_bits) - 1ULL) : 0ULL;
+            const uint64_t high_mask = (1ULL << high_bits) - 1ULL;
             lower_dropped = lo != 0 || (hi & high_mask) != 0;
         }
 

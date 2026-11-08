@@ -48,7 +48,7 @@
 
 ## Windows
 
-尚无 Windows 侧记录，采集条目与 Linux 段一致：
+尚无 Windows 侧记录
 
 ---
 

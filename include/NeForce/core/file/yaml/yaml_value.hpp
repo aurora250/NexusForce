@@ -3,16 +3,12 @@
 
 /**
  * @file yaml_value.hpp
- * @brief YAML配置格式变量
+ * @brief YAML配置格式值类型
  *
- * 此文件提供了YAML（YAML Ain't Markup Language）配置格式的抽象基类和具体实现类。
- * YAML是一种人类可读的数据序列化语言，常用于配置文件、数据交换和持久化存储。
+ * 此文件提供了 YAML 1.2 配置格式的扁平化值表示、视图以及文档容器。
  */
 
-#include "NeForce/core/container/flat_unordered_map.hpp"
-#include "NeForce/core/container/vector.hpp"
-#include "NeForce/core/interface/istringify.hpp"
-#include "NeForce/core/memory/shared_ptr.hpp"
+#include "NeForce/core/memory/bump_arena.hpp"
 #include "NeForce/core/time/datetime.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -46,148 +42,24 @@ struct yaml_exception final : value_exception {
  */
 
 /**
- * @defgroup YamlConfig YAML配置
- * @brief YAML配置格式支持
- *
- * 本模块提供 YAML 1.2.2 规范的完整实现，包含解析（yaml_parser）、
- * 构建（yaml_builder）和值类型（yaml_value 层次结构）。
- *
- * YAML 1.2 是 JSON 的严格超集（IETF RFC 8259），支持更丰富的数据类型
- * 和更灵活的表达方式，广泛应用于配置文件、数据交换和持久化存储。
- *
- * @section standards 遵循的国际标准
- * 本实现严格遵循以下 YAML 及相关标准规范：
- *
- * **YAML 数据序列化规范：**
- * - **YAML 1.2.2 (2021)**：YAML Ain't Markup Language 规范（第3版）
- *   https://yaml.org/spec/1.2.2/
- * - **YAML 1.2 (2009)**：YAML 1.2 规范（第3版预览）
- *   https://yaml.org/spec/1.2/
- * - **YAML 1.1 (2005)**：YAML 1.1 规范（第2版，已废弃）
- *   https://yaml.org/spec/1.1/
- *
- * **JSON 兼容性标准（YAML 1.2 是 JSON 的超集）：**
- * - **IETF RFC 8259**：JSON 数据交换格式（YAML 1.2 完全兼容）
- *   https://www.rfc-editor.org/rfc/rfc8259.html
- * - **ECMA-404:2017**：JSON 数据交换格式
- *   https://ecma-international.org/publications-and-standards/standards/ecma-404/
- *
- * **时间戳格式标准（YAML 1.2 §10.4.2 引用）：**
- * - **IETF RFC 3339**：互联网日期时间格式
- *   https://www.rfc-editor.org/rfc/rfc3339.html
- * - **ISO 8601-1:2019**：日期和时间表示法
- *   https://www.iso.org/standard/70907.html
- *
- * **Unicode 编码标准：**
- * - **Unicode 15.0.0**：Unicode 字符编码标准（YAML 1.2 §5.1）
- *   https://unicode.org/versions/Unicode15.0.0/
- * - **ISO/IEC 10646:2020**：通用编码字符集（UCS）
- *   https://www.iso.org/standard/76835.html
- *
- * **浮点数标准：**
- * - **IEEE 754-2019**：浮点数算术标准（YAML 数字遵循）
- *   https://standards.ieee.org/ieee/754/6210/
- *
- * @section yaml_types YAML 值类型定义
- * 根据 YAML 1.2.2 规范，支持以下八种核心值类型：
- *
- * | 类型        | YAML 1.2.2 引用 | 本实现类          | 说明                               |
- * |-------------|-----------------|-------------------|------------------------------------|
- * | Null        | §10.2           | yaml_null         | null、Null、NULL、~                 |
- * | Boolean     | §10.3           | yaml_boolean      | true/false、True/False、yes/no等   |
- * | Integer     | §10.4.1         | yaml_integer      | 64位有符号整数（支持十进制、十六进制、八进制） |
- * | Float       | §10.4.1         | yaml_float        | IEEE 754 双精度浮点数（支持 .inf、-.inf、.nan） |
- * | String      | §10.5           | yaml_string       | Unicode 字符串（UTF-8/UTF-16/UTF-32） |
- * | Timestamp   | §10.4.2         | yaml_timestamp    | ISO 8601 / RFC 3339 时间戳         |
- * | Sequence    | §10.1.1         | yaml_sequence     | 有序值列表（数组）                  |
- * | Mapping     | §10.1.2         | yaml_mapping      | 键值对集合（字典/对象）             |
- *
- * @section string_styles 字符串标量样式
- * 根据 YAML 1.2.2 §7.3，支持五种字符串标量样式：
- *
- * | 样式           | 语法示例           | 转义序列 | 换行处理 | 说明                     |
- * |----------------|--------------------|----------|----------|--------------------------|
- * | Plain          | string             | 不支持   | 折叠空格 | 无引号纯文本              |
- * | SingleQuoted   | 'string'           | 有限支持 | 保留     | 单引号字符串              |
- * | DoubleQuoted   | "string"           | 完全支持 | 保留     | 双引号字符串（含转义）    |
- * | Literal        | \|                 | 不支持   | 保留     | 块字面量（保留换行）      |
- * | Folded         | >                  | 不支持   | 折叠     | 块折叠（换行转空格）      |
- *
- * @section collection_styles 集合样式
- * 根据 YAML 1.2.2 §7.4，序列和映射支持两种集合样式：
- *
- * | 类型    | 块样式（Block）        | 流样式（Flow）         |
- * |---------|------------------------|------------------------|
- * | 序列    | - item1\n- item2       | [item1, item2]         |
- * | 映射    | key1: value1\nkey2: value2 | {key1: value1, key2: value2} |
- *
- * @section boolean_synonyms 布尔值同义词
- * 根据 YAML 1.2.2 §10.3.2，支持以下布尔值同义词：
- *
- * | 语义值 | 规范形式 | 同义词                                        |
- * |--------|----------|-----------------------------------------------|
- * | true   | true     | True、TRUE、y、Y、yes、Yes、YES、on、On、ON   |
- * | false  | false    | False、FALSE、n、N、no、No、NO、off、Off、OFF |
- *
- * @section null_synonyms 空值同义词
- * 根据 YAML 1.2.2 §10.2.2，支持以下空值同义词：
- *
- * | 规范形式 | 同义词                              |
- * |----------|-------------------------------------|
- * | null     | Null、NULL、~（空字符串在某些上下文中） |
- *
- * @section implementation_details 实现细节
- * | 特性              | 规范参数                                  |
- * |-------------------|-------------------------------------------|
- * | 编码              | UTF-8（YAML 1.2 §5.1）                     |
- * | 整数范围          | -2^63 到 2^63-1（YAML 1.2 §10.4.1）       |
- * | 浮点数精度        | IEEE 754-2019 双精度（YAML 1.2 §10.4.1）  |
- * | 字符串转义序列    | YAML 1.2 §5.7 定义                         |
- * | 键名唯一性        | YAML 1.2 §3.2.1（映射中键名应唯一）        |
- * | 缩进要求          | 空格字符（YAML 1.2 §6.1），禁止制表符      |
- * | 注释支持          | # 行注释（YAML 1.2 §6.8）                   |
- * | 锚点与别名        | &anchor 和 *alias（YAML 1.2 §3.2.2）       |
- * | 标签系统          | !tag 和 !!type（YAML 1.2 §3.2.3）          |
- *
- * @section string_escape 字符串转义序列
- * 根据 YAML 1.2.2 §5.7，双引号字符串支持以下转义序列：
- *
- * | 转义序列 | 字符          | Unicode 码点 |
- * |----------|---------------|--------------|
- * | \\\"     | 引号          | U+0022       |
- * | \\\\     | 反斜杠        | U+005C       |
- * | \\/      | 斜杠          | U+002F       |
- * | \\b      | 退格          | U+0008       |
- * | \\f      | 换页          | U+000C       |
- * | \\n      | 换行          | U+000A       |
- * | \\r      | 回车          | U+000D       |
- * | \\t      | 制表符        | U+0009       |
- * | \\uXXXX  | Unicode 字符  | U+XXXX       |
- * | \\UXXXXXXXX | Unicode 字符（全范围） | U+XXXXXXXX |
- *
- * @section yaml_vs_json YAML 1.2 与 JSON 兼容性
- * YAML 1.2 是 JSON 的严格超集，所有有效的 JSON 文档也是有效的 YAML 文档。
- * 这意味着 JSON 可以作为 YAML 的子集进行解析。
- *
- * | 特性              | JSON                    | YAML 1.2                      |
- * |-------------------|-------------------------|-------------------------------|
- * | 注释              | 不支持                  | # 行注释                       |
- * | 字符串引号        | 仅双引号                | 五种样式                       |
- * | 尾部逗号          | 不允许                  | 允许（可选）                   |
- * | 键名引号          | 必须引号                | 可选（裸键）                   |
- * | 锚点与别名        | 不支持                  | &anchor 和 *alias              |
- * | 标签              | 不支持                  | !tag 和 !!type                 |
- *
- * @warning 根据 YAML 1.2 §6.1，制表符（tab）不应用于缩进，仅允许在内容中使用。
- *          流样式映射中重复的键名行为未定义，应避免使用。
- * @warning 根据 YAML 1.2 §3.2.1，映射中的键名在 YAML 1.2 中应唯一。
- *
- * @see https://yaml.org/
- * @see https://yaml.org/spec/1.2.2/
- * @see https://json.org/
- * @see https://www.rfc-editor.org/rfc/rfc8259
+ * @addtogroup YamlConfig YAML配置
  * @{
  */
+
+/**
+ * @enum yaml_kind
+ * @brief YAML值类型标签
+ */
+enum class yaml_kind : uint8_t {
+    null_,     ///< 空值
+    boolean,   ///< 布尔值
+    integer,   ///< 64位有符号整数
+    floating,  ///< IEEE 754 双精度浮点数
+    string,    ///< 字符串标量
+    timestamp, ///< 时间戳
+    sequence,  ///< 序列
+    mapping    ///< 映射
+};
 
 class yaml_value;
 class yaml_null;
@@ -198,598 +70,933 @@ class yaml_string;
 class yaml_timestamp;
 class yaml_sequence;
 class yaml_mapping;
+struct yaml_member;
+
+/**
+ * @struct yaml_meta
+ * @brief 锚点与标签元数据
+ */
+struct yaml_meta {
+    string_view anchor; ///< 锚点名
+    string_view tag;    ///< 标签名
+};
+
+/**
+ * @struct yaml_container
+ * @brief 序列或映射的载荷
+ */
+struct yaml_container {
+    uint32_t count = 0;    ///< 元素/成员数量
+    uint32_t capacity = 0; ///< 已分配容量，2 的幂
+
+    union payload {
+        yaml_value* elements; ///< 序列元素数组
+        yaml_member* members; ///< 映射成员数组
+    } data{};
+
+    uint32_t* index = nullptr;   ///< 开放寻址索引，惰性构建
+    uint32_t index_capacity = 0; ///< 索引槽位数量，2 的幂
+    uint32_t flags = 0;          ///< 容器状态标志，bit0 表示排序序已缓存
+};
+
+static_assert(sizeof(yaml_container) == 32, "yaml_container must stay 32 bytes");
 
 
 /**
  * @class yaml_value
- * @brief YAML值的抽象基类
+ * @brief 扁平化 YAML 值
  *
- * 所有YAML值类型的基类，定义了YAML值树的公共接口和类型系统。
- *
- * 每个 yaml_value 节点可携带可选的锚点和标签元数据：
- * - `anchor`：锚点名（对应YAML中的 &anchor 语法）
- * - `tag`：类型标签（对应YAML中的 !tag 语法）
- *
- * @note 此类为抽象基类，不可直接实例化。
- * @note 使用 type() 配合 as_*() 方法进行类型安全的向下转型。
+ * 24 字节固定大小，短字符串内联存储。
  */
-class NEFORCE_API yaml_value : public istringify<yaml_value> {
+class NEFORCE_API yaml_value {
 public:
-    string anchor; ///< 锚点名（YAML &anchor 语法），空字符串表示无锚点
-    string tag;    ///< 类型标签（YAML !tag 语法），空字符串表示无标签
-
     /**
-     * @enum types
-     * @brief YAML值类型枚举
+     * @struct inline_form
+     * @brief 短字符串内联形式
      */
-    enum types {
-        Null,      ///< 空值类型
-        Boolean,   ///< 布尔值类型
-        Integer,   ///< 64位有符号整数类型
-        Float,     ///< 双精度浮点数类型
-        String,    ///< Unicode字符串类型
-        Timestamp, ///< ISO 8601 / RFC 3339 时间戳类型
-        Sequence,  ///< 有序值列表类型
-        Mapping    ///< 键值对集合类型
+    struct inline_form {
+        yaml_kind tag;   ///< 值类型
+        uint8_t flags;   ///< 标志位
+        uint16_t size;   ///< 字符串长度
+        char chars[12];  ///< 内联字符
+        yaml_meta* meta; ///< 锚点/标签
     };
 
-    yaml_value() = default;
-    virtual ~yaml_value() = default;
-
-    yaml_value(const yaml_value&) = default;
-    yaml_value& operator=(const yaml_value&) = default;
-
-    yaml_value(yaml_value&&) noexcept = default;
-    yaml_value& operator=(yaml_value&&) noexcept = default;
-
     /**
-     * @brief 获取值的具体类型
-     * @return 类型枚举值
+     * @struct extended_form
+     * @brief 非内联形式
      */
-    NEFORCE_NODISCARD virtual types type() const noexcept = 0;
+    struct extended_form {
+        yaml_kind tag;     ///< 值类型
+        uint8_t flags;     ///< 标志位
+        uint16_t reserved; ///< 保留
+        uint32_t count;    ///< 字符串长度
 
-    /// @name 类型转换方法
-    /// 安全地向下转型到具体类型，失败时返回 nullptr。
-    /// @{
-    NEFORCE_NODISCARD virtual const yaml_null* as_null() const noexcept { return nullptr; }
-    NEFORCE_NODISCARD virtual const yaml_boolean* as_boolean() const noexcept { return nullptr; }
-    NEFORCE_NODISCARD virtual const yaml_integer* as_integer() const noexcept { return nullptr; }
-    NEFORCE_NODISCARD virtual const yaml_float* as_float() const noexcept { return nullptr; }
-    NEFORCE_NODISCARD virtual const yaml_string* as_string() const noexcept { return nullptr; }
-    NEFORCE_NODISCARD virtual const yaml_timestamp* as_timestamp() const noexcept { return nullptr; }
-    NEFORCE_NODISCARD virtual const yaml_sequence* as_sequence() const noexcept { return nullptr; }
-    NEFORCE_NODISCARD virtual const yaml_mapping* as_mapping() const noexcept { return nullptr; }
-    /// @}
-
-    /// @name 类型检查方法
-    /// 便捷的类型判断方法，等价于 type() == types::Xxx。
-    /// @{
-    NEFORCE_NODISCARD bool is_null() const noexcept { return type() == Null; }
-    NEFORCE_NODISCARD bool is_boolean() const noexcept { return type() == Boolean; }
-    NEFORCE_NODISCARD bool is_integer() const noexcept { return type() == Integer; }
-    NEFORCE_NODISCARD bool is_float() const noexcept { return type() == Float; }
-    NEFORCE_NODISCARD bool is_string() const noexcept { return type() == String; }
-    NEFORCE_NODISCARD bool is_timestamp() const noexcept { return type() == Timestamp; }
-    NEFORCE_NODISCARD bool is_sequence() const noexcept { return type() == Sequence; }
-    NEFORCE_NODISCARD bool is_mapping() const noexcept { return type() == Mapping; }
-    /// @}
+        union payload {
+            bool boolean;              ///< 布尔值
+            int64_t integer;           ///< 整数
+            double floating;           ///< 浮点数
+            uint64_t timestamp;        ///< 打包的时间戳
+            const char* chars;         ///< 字符串指针
+            yaml_value* elements;      ///< 序列元素
+            yaml_member* members;      ///< 映射成员
+            yaml_container* container; ///< 容器指针
+        };
+        payload data;    ///< 载荷
+        yaml_meta* meta; ///< 锚点/标签
+    };
 
     /**
-     * @brief 设置锚点名
-     * @param a 锚点名字符串（对应 &anchor 语法）
+     * @struct storage_form
+     * @brief 存储联合体
      */
-    void set_anchor(const string& a) { this->anchor = a; }
+    union storage_form {
+        inline_form inlined;    ///< 内联形式
+        extended_form extended; ///< 扩展形式
+    };
 
+private:
+    static constexpr uint8_t inline_flag = 0x80;  ///< 内联标志
+    static constexpr uint8_t style_mask = 0x07;   ///< 标量样式掩码
+    static constexpr uint8_t flow_flag = 0x08;    ///< 流式集合标志
+    static constexpr uint8_t time_mask = 0x30;    ///< 时间戳类型掩码
+    static constexpr uint8_t time_shift = 4;      ///< 时间戳类型位移
+    static constexpr size_t inline_capacity = 12; ///< 内联容量
+
+    storage_form form_; ///< 存储
+
+    NEFORCE_NODISCARD extended_form& ext() noexcept { return form_.extended; }
+    NEFORCE_NODISCARD const extended_form& ext() const noexcept { return form_.extended; }
+    NEFORCE_NODISCARD inline_form& inl() noexcept { return form_.inlined; }
+    NEFORCE_NODISCARD const inline_form& inl() const noexcept { return form_.inlined; }
+    NEFORCE_NODISCARD bool is_inline_string() const noexcept { return (form_.extended.flags & inline_flag) != 0; }
+
+    friend class yaml_document;
+    friend class yaml_mapping;
+    friend class yaml_sequence;
+    friend class yaml_string;
+    friend class yaml_timestamp;
+
+public:
     /**
-     * @brief 设置类型标签
-     * @param t 标签字符串（对应 !tag 语法）
+     * @brief 构造空值
      */
-    void set_tag(const string& t) { this->tag = t; }
+    yaml_value() noexcept {
+        form_ = storage_form();
+        form_.extended.tag = yaml_kind::null_;
+    }
 
     /**
-     * @brief 紧凑单行序列化
-     * @return 流样式的YAML字符串表示
+     * @brief 获取值类型
+     * @return 类型标签
+     */
+    NEFORCE_NODISCARD yaml_kind kind() const noexcept { return form_.extended.tag; }
+
+    /**
+     * @brief 判断是否为空值
+     * @return 是否为空值
+     */
+    NEFORCE_NODISCARD bool is_null() const noexcept { return kind() == yaml_kind::null_; }
+
+    /**
+     * @brief 判断是否为布尔值
+     * @return 是否为布尔值
+     */
+    NEFORCE_NODISCARD bool is_boolean() const noexcept { return kind() == yaml_kind::boolean; }
+
+    /**
+     * @brief 判断是否为整数
+     * @return 是否为整数
+     */
+    NEFORCE_NODISCARD bool is_integer() const noexcept { return kind() == yaml_kind::integer; }
+
+    /**
+     * @brief 判断是否为浮点数
+     * @return 是否为浮点数
+     */
+    NEFORCE_NODISCARD bool is_float() const noexcept { return kind() == yaml_kind::floating; }
+
+    /**
+     * @brief 判断是否为字符串
+     * @return 是否为字符串
+     */
+    NEFORCE_NODISCARD bool is_string() const noexcept { return kind() == yaml_kind::string; }
+
+    /**
+     * @brief 判断是否为时间戳
+     * @return 是否为时间戳
+     */
+    NEFORCE_NODISCARD bool is_timestamp() const noexcept { return kind() == yaml_kind::timestamp; }
+
+    /**
+     * @brief 判断是否为序列
+     * @return 是否为序列
+     */
+    NEFORCE_NODISCARD bool is_sequence() const noexcept { return kind() == yaml_kind::sequence; }
+
+    /**
+     * @brief 判断是否为映射
+     * @return 是否为映射
+     */
+    NEFORCE_NODISCARD bool is_mapping() const noexcept { return kind() == yaml_kind::mapping; }
+
+    /**
+     * @brief 判断是否存在锚点或标签
+     * @return 是否存在元数据
+     */
+    NEFORCE_NODISCARD bool has_meta() const noexcept {
+        return (is_inline_string() ? form_.inlined.meta : form_.extended.meta) != nullptr;
+    }
+
+    /**
+     * @brief 获取锚点名
+     * @return 锚点视图，无锚点返回空视图
+     */
+    NEFORCE_NODISCARD string_view get_anchor() const noexcept;
+
+    /**
+     * @brief 获取标签名
+     * @return 标签视图，无标签返回空视图
+     */
+    NEFORCE_NODISCARD string_view get_tag() const noexcept;
+
+    /**
+     * @brief 获取空值视图
+     * @return 空值视图
+     */
+    NEFORCE_NODISCARD yaml_null as_null() const noexcept;
+
+    /**
+     * @brief 获取布尔值视图
+     * @return 布尔值视图
+     */
+    NEFORCE_NODISCARD yaml_boolean as_boolean() const noexcept;
+
+    /**
+     * @brief 获取整数视图
+     * @return 整数视图
+     */
+    NEFORCE_NODISCARD yaml_integer as_integer() const noexcept;
+
+    /**
+     * @brief 获取浮点数视图
+     * @return 浮点数视图
+     */
+    NEFORCE_NODISCARD yaml_float as_float() const noexcept;
+
+    /**
+     * @brief 获取字符串视图
+     * @return 字符串视图
+     */
+    NEFORCE_NODISCARD yaml_string as_string() const noexcept;
+
+    /**
+     * @brief 获取时间戳视图
+     * @return 时间戳视图
+     */
+    NEFORCE_NODISCARD yaml_timestamp as_timestamp() const noexcept;
+
+    /**
+     * @brief 获取序列视图
+     * @return 序列视图
+     */
+    NEFORCE_NODISCARD yaml_sequence as_sequence() const noexcept;
+
+    /**
+     * @brief 获取映射视图
+     * @return 映射视图
+     */
+    NEFORCE_NODISCARD yaml_mapping as_mapping() const noexcept;
+
+    /**
+     * @brief 序列化为单行字符串
+     * @return 单行 YAML 文本
      */
     NEFORCE_NODISCARD string to_string() const;
 
     /**
-     * @brief 格式化文档序列化
-     * @return 块样式的YAML文档表示（以换行结尾）
+     * @brief 序列化为多行文档
+     * @return YAML 文档文本
      */
     NEFORCE_NODISCARD string to_document() const;
 };
 
+static_assert(sizeof(yaml_value) == 24, "yaml_value must stay 24 bytes");
+
+
+/**
+ * @struct yaml_member
+ * @brief 映射成员
+ */
+struct yaml_member {
+    const char* key_data; ///< 键名数据
+    uint32_t key_size;    ///< 键名长度
+    uint32_t key_hash;    ///< 键名哈希
+    yaml_value value;     ///< 成员值
+
+    /**
+     * @brief 获取键名
+     * @return 键名视图
+     */
+    NEFORCE_NODISCARD string_view key() const noexcept { return string_view(key_data, key_size); }
+};
+
+static_assert(sizeof(yaml_member) == 40, "yaml_member must stay 40 bytes");
+
+
 /**
  * @class yaml_null
- * @brief YAML空值类型
- *
- * 表示YAML中的空值（null、Null、NULL、~）。
- * 这是一个简单的标记类型，不包含任何数据。
+ * @brief 空值视图
  */
-class NEFORCE_API yaml_null final : public yaml_value {
+class yaml_null {
 public:
     yaml_null() = default;
-    ~yaml_null() override = default;
 
-    yaml_null(const yaml_null&) = default;
-    yaml_null& operator=(const yaml_null&) = default;
-    yaml_null(yaml_null&&) noexcept = default;
-    yaml_null& operator=(yaml_null&&) noexcept = default;
-
-    NEFORCE_NODISCARD types type() const noexcept override { return Null; }
-    NEFORCE_NODISCARD const yaml_null* as_null() const noexcept override { return this; }
+    /**
+     * @brief 访问视图自身
+     * @return 视图指针
+     */
+    NEFORCE_NODISCARD const yaml_null* operator->() const noexcept { return this; }
 };
 
 /**
  * @class yaml_boolean
- * @brief YAML布尔值类型
- *
- * 表示YAML中的布尔值。支持所有YAML 1.2布尔同义词：
- * true、True、TRUE、y、Y、yes、Yes、YES、on、On、ON
- * false、False、FALSE、n、N、no、No、NO、off、Off、OFF
+ * @brief 布尔值视图
  */
-class NEFORCE_API yaml_boolean final : public yaml_value {
+class yaml_boolean {
 private:
-    bool value; ///< 布尔值存储
+    bool value_ = false;
 
 public:
-    ~yaml_boolean() override = default;
-
-    yaml_boolean(const yaml_boolean&) = default;
-    yaml_boolean& operator=(const yaml_boolean&) = default;
-    yaml_boolean(yaml_boolean&&) noexcept = default;
-    yaml_boolean& operator=(yaml_boolean&&) noexcept = default;
+    yaml_boolean() = default;
 
     /**
-     * @brief 构造布尔值
-     * @param v 布尔值
+     * @brief 构造布尔值视图
+     * @param value 布尔值
      */
-    explicit yaml_boolean(const bool v) :
-    value(v) {}
-
-    NEFORCE_NODISCARD types type() const noexcept override { return Boolean; }
-    NEFORCE_NODISCARD const yaml_boolean* as_boolean() const noexcept override { return this; }
+    explicit yaml_boolean(const bool value) noexcept :
+    value_(value) {}
 
     /**
      * @brief 获取布尔值
-     * @return 存储的布尔值
+     * @return 布尔值
      */
-    NEFORCE_NODISCARD bool get_value() const noexcept { return value; }
+    NEFORCE_NODISCARD bool get_value() const noexcept { return value_; }
+
+    /**
+     * @brief 访问视图自身
+     * @return 视图指针
+     */
+    NEFORCE_NODISCARD const yaml_boolean* operator->() const noexcept { return this; }
 };
 
 /**
  * @class yaml_integer
- * @brief YAML整数值类型
- *
- * 表示YAML中的整数值。存储为64位有符号整数（int64_t），
- * 范围 -2^63 到 2^63-1。支持YAML中的各种整数表示法：
- * - 十进制：42、-17、+99
- * - 十六进制：0x2A、0xFF
- * - 八进制：0o52、0o77
- * - 二进制：0b101010
- * - 支持下划线分隔：1_000_000
+ * @brief 整数值视图
  */
-class NEFORCE_API yaml_integer final : public yaml_value {
+class yaml_integer {
 private:
-    int64_t value; ///< 64位有符号整数存储
+    int64_t value_ = 0;
 
 public:
-    ~yaml_integer() override = default;
-
-    yaml_integer(const yaml_integer&) = default;
-    yaml_integer& operator=(const yaml_integer&) = default;
-    yaml_integer(yaml_integer&&) noexcept = default;
-    yaml_integer& operator=(yaml_integer&&) noexcept = default;
+    yaml_integer() = default;
 
     /**
-     * @brief 构造整数值
-     * @param v 64位有符号整数
+     * @brief 构造整数值视图
+     * @param value 整数值
      */
-    explicit yaml_integer(const int64_t v) :
-    value(v) {}
-
-    NEFORCE_NODISCARD types type() const noexcept override { return Integer; }
-    NEFORCE_NODISCARD const yaml_integer* as_integer() const noexcept override { return this; }
+    explicit yaml_integer(const int64_t value) noexcept :
+    value_(value) {}
 
     /**
      * @brief 获取整数值
-     * @return 存储的64位有符号整数
+     * @return 整数值
      */
-    NEFORCE_NODISCARD int64_t get_value() const noexcept { return value; }
+    NEFORCE_NODISCARD int64_t get_value() const noexcept { return value_; }
+
+    /**
+     * @brief 访问视图自身
+     * @return 视图指针
+     */
+    NEFORCE_NODISCARD const yaml_integer* operator->() const noexcept { return this; }
 };
 
 /**
  * @class yaml_float
- * @brief YAML浮点数值类型
- *
- * 表示YAML中的浮点数值。存储为IEEE 754双精度浮点数（double）。
- * 支持YAML中的特殊浮点值：
- * - 无穷大：.inf、.Inf、.INF
- * - 负无穷大：-.inf、-.Inf、-.INF
- * - 非数字：.nan、.NaN、.NAN
- * - 科学记数法：1.23e+4、5.67E-10
+ * @brief 浮点数值视图
  */
-class NEFORCE_API yaml_float final : public yaml_value {
+class yaml_float {
 private:
-    double value; ///< 双精度浮点数存储
+    double value_ = 0;
 
 public:
-    ~yaml_float() override = default;
-
-    yaml_float(const yaml_float&) = default;
-    yaml_float& operator=(const yaml_float&) = default;
-    yaml_float(yaml_float&&) noexcept = default;
-    yaml_float& operator=(yaml_float&&) noexcept = default;
+    yaml_float() = default;
 
     /**
-     * @brief 构造浮点数值
-     * @param v 双精度浮点数
+     * @brief 构造浮点数值视图
+     * @param value 浮点数值
      */
-    explicit yaml_float(const double v) :
-    value(v) {}
-
-    NEFORCE_NODISCARD types type() const noexcept override { return Float; }
-    NEFORCE_NODISCARD const yaml_float* as_float() const noexcept override { return this; }
+    explicit yaml_float(const double value) noexcept :
+    value_(value) {}
 
     /**
      * @brief 获取浮点数值
-     * @return 存储的双精度浮点数
+     * @return 浮点数值
      */
-    NEFORCE_NODISCARD double get_value() const noexcept { return value; }
+    NEFORCE_NODISCARD double get_value() const noexcept { return value_; }
+
+    /**
+     * @brief 访问视图自身
+     * @return 视图指针
+     */
+    NEFORCE_NODISCARD const yaml_float* operator->() const noexcept { return this; }
 };
 
 /**
  * @class yaml_string
- * @brief YAML字符串值类型
- *
- * 表示YAML中的字符串值。支持YAML 1.2定义的五种标量样式：
- *
- * | 样式        | 枚举值        | 语法示例                | 说明                   |
- * |-------------|---------------|-------------------------|------------------------|
- * | Plain       | Plain         | hello world             | 无引号纯文本            |
- * | SingleQuoted| SingleQuoted  | 'hello world'           | 单引号，'' 表示字面引号 |
- * | DoubleQuoted| DoubleQuoted  | "hello\\nworld"         | 双引号，支持转义序列    |
- * | Literal     | Literal       | \\|\\n  line1\\n  line2 | 块字面量，保留换行      |
- * | Folded      | Folded        | >\\n  line1\\n  line2   | 块折叠，换行转空格      |
+ * @brief 字符串视图
  */
-class NEFORCE_API yaml_string final : public yaml_value {
+class yaml_string {
 public:
     /**
      * @enum string_style
-     * @brief 字符串标量样式枚举
+     * @brief 字符串标量样式
      */
-    enum string_style {
-        Plain,        ///< 纯文本样式（无引号）
-        SingleQuoted, ///< 单引号样式（'string'）
-        DoubleQuoted, ///< 双引号样式（"string"，支持转义）
-        Literal,      ///< 块字面量样式（|，保留换行）
-        Folded        ///< 块折叠样式（>，换行转空格）
+    enum string_style : uint8_t {
+        Plain,        ///< 纯文本
+        SingleQuoted, ///< 单引号
+        DoubleQuoted, ///< 双引号
+        Literal,      ///< 字面量块（|）
+        Folded        ///< 折叠块（>）
     };
 
 private:
-    string value;       ///< 字符串内容
-    string_style style; ///< 标量样式
+    const char* data_ = nullptr;
+    uint32_t size_ = 0;
+    string_style style_ = Plain;
 
 public:
-    ~yaml_string() override = default;
-
-    yaml_string(const yaml_string&) = default;
-    yaml_string& operator=(const yaml_string&) = default;
-    yaml_string(yaml_string&&) noexcept = default;
-    yaml_string& operator=(yaml_string&&) noexcept = default;
+    yaml_string() = default;
 
     /**
-     * @brief 构造字符串值
-     * @param v 字符串内容
-     * @param s 标量样式，默认为纯文本
+     * @brief 构造字符串视图
+     * @param data 字符数据
+     * @param size 长度
+     * @param style 标量样式
      */
-    explicit yaml_string(string v, const string_style s = Plain) :
-    value(_NEFORCE move(v)),
-    style(s) {}
-
-    NEFORCE_NODISCARD types type() const noexcept override { return String; }
-    NEFORCE_NODISCARD const yaml_string* as_string() const noexcept override { return this; }
+    yaml_string(const char* data, const size_t size, const string_style style) noexcept :
+    data_(data),
+    size_(static_cast<uint32_t>(size)),
+    style_(style) {}
 
     /**
-     * @brief 获取字符串内容
-     * @return 字符串常量引用
+     * @brief 获取字符串值
+     * @return 字符串视图
      */
-    NEFORCE_NODISCARD const string& get_value() const noexcept { return value; }
+    NEFORCE_NODISCARD string_view get_value() const noexcept { return string_view(data_, size_); }
 
     /**
      * @brief 获取标量样式
-     * @return 字符串样式枚举值
+     * @return 标量样式
      */
-    NEFORCE_NODISCARD string_style get_style() const noexcept { return style; }
+    NEFORCE_NODISCARD string_style get_style() const noexcept { return style_; }
+
+    /**
+     * @brief 与空指针比较
+     * @param np 空指针
+     * @return 视图是否无效
+     */
+    NEFORCE_NODISCARD bool operator==(nullptr_t np) const noexcept {
+        (void) np;
+        return data_ == nullptr;
+    }
+
+    /**
+     * @brief 与空指针比较
+     * @param np 空指针
+     * @return 视图是否有效
+     */
+    NEFORCE_NODISCARD bool operator!=(nullptr_t np) const noexcept {
+        (void) np;
+        return data_ != nullptr;
+    }
+
+    /**
+     * @brief 访问视图自身
+     * @return 视图指针
+     */
+    NEFORCE_NODISCARD const yaml_string* operator->() const noexcept { return this; }
 };
 
 /**
  * @class yaml_timestamp
- * @brief YAML时间戳值类型
- *
- * 表示YAML中的时间戳值。内部使用 datetime 对象存储，
- * 支持 ISO 8601 和 RFC 3339 格式的解析。
- *
- * 支持的格式示例：
- * - 日期时间：2024-01-15T10:30:00Z
- * - 仅日期：2024-01-15
- * - 带时区偏移：2024-01-15T10:30:00+08:00
- *
- * @see datetime 底层日期时间类型
+ * @brief 时间戳视图
  */
-class NEFORCE_API yaml_timestamp final : public yaml_value {
+class yaml_timestamp {
+public:
+    /**
+     * @enum timestamp_type
+     * @brief 时间戳类型
+     */
+    enum timestamp_type : uint8_t {
+        DateTime,   ///< 日期时间
+        DateTimeTz, ///< 带时区的日期时间
+        Date,       ///< 仅日期
+        Time        ///< 仅时间
+    };
+
 private:
-    datetime value; ///< 日期时间存储
+    uint64_t packed_ = 0;
+    timestamp_type type_ = DateTime;
 
 public:
-    ~yaml_timestamp() override = default;
-
-    yaml_timestamp(const yaml_timestamp&) = default;
-    yaml_timestamp& operator=(const yaml_timestamp&) = default;
-    yaml_timestamp(yaml_timestamp&&) noexcept = default;
-    yaml_timestamp& operator=(yaml_timestamp&&) noexcept = default;
+    yaml_timestamp() = default;
 
     /**
-     * @brief 从字符串构造时间戳（自动检测格式）
-     * @param v ISO 8601 / RFC 3339 格式的字符串
-     * @throws yaml_exception 格式无效时抛出
+     * @brief 构造时间戳视图
+     * @param packed 打包的时间戳
+     * @param type 时间戳类型
      */
-    explicit yaml_timestamp(const string_view v) {
-        datetime dt;
-        if (dt.try_parse_RFC3339(v) || dt.try_parse_ISO8601(v)) {
-            value = dt;
-        } else {
-            NEFORCE_THROW_EXCEPTION(yaml_exception(("Invalid timestamp format: " + string(v)).data()));
-        }
-    }
-
-    /**
-     * @brief 从 datetime 对象构造时间戳
-     * @param dt 日期时间对象
-     */
-    explicit yaml_timestamp(const datetime& dt) :
-    value(dt) {}
-
-    NEFORCE_NODISCARD types type() const noexcept override { return Timestamp; }
-    NEFORCE_NODISCARD const yaml_timestamp* as_timestamp() const noexcept override { return this; }
+    yaml_timestamp(const uint64_t packed, const timestamp_type type) noexcept :
+    packed_(packed),
+    type_(type) {}
 
     /**
      * @brief 获取日期时间值
-     * @return datetime 对象的常量引用
+     * @return 日期时间对象
      */
-    NEFORCE_NODISCARD const datetime& get_value() const noexcept { return value; }
+    NEFORCE_NODISCARD datetime get_value() const noexcept;
 
     /**
-     * @brief 获取 RFC 3339 格式的字符串表示
-     * @return 格式化的时间戳字符串
+     * @brief 获取时间戳类型
+     * @return 时间戳类型
      */
-    NEFORCE_NODISCARD string get_string_value() const { return value.to_RFC3339(); }
+    NEFORCE_NODISCARD timestamp_type get_type() const noexcept { return type_; }
+
+    /**
+     * @brief 获取 RFC 3339 格式字符串
+     * @return 格式化字符串
+     */
+    NEFORCE_NODISCARD string get_string_value() const { return get_value().to_RFC3339(); }
+
+    /**
+     * @brief 访问视图自身
+     * @return 视图指针
+     */
+    NEFORCE_NODISCARD const yaml_timestamp* operator->() const noexcept { return this; }
 };
 
 /**
  * @class yaml_sequence
- * @brief YAML序列值类型（数组）
- *
- * 表示YAML中的有序值列表。支持两种集合样式：
- * - **块样式**（Block）：每行以 - 开头的缩进列表
- * - **流样式**（Flow）：方括号内的逗号分隔列表 [a, b, c]
- *
- * 序列中的元素可以是任意YAML值类型（包括嵌套的序列和映射）。
- *
- * @note 此类禁止拷贝，仅允许移动。
+ * @brief 序列视图
  */
-class NEFORCE_API yaml_sequence final : public yaml_value {
+class yaml_sequence {
 public:
     /**
      * @enum sequence_style
-     * @brief 序列集合样式枚举
+     * @brief 序列集合样式
      */
-    enum sequence_style {
-        Block, ///< 块样式（- item）
-        Flow   ///< 流样式（[item, ...]）
+    enum sequence_style : uint8_t {
+        Block, ///< 块样式
+        Flow   ///< 流样式
     };
 
 private:
-    vector<shared_ptr<yaml_value>> elements; ///< 元素列表
-    sequence_style style;                    ///< 集合样式
+    yaml_value* node_ = nullptr;
+
+    friend class yaml_value;
+    explicit yaml_sequence(yaml_value* node) noexcept :
+    node_(node) {}
 
 public:
-    ~yaml_sequence() override = default;
+    yaml_sequence() = default;
 
     /**
-     * @brief 构造序列
-     * @param s 集合样式，默认为块样式
-     */
-    explicit yaml_sequence(const sequence_style s = Block) :
-    style(s) {}
-
-    yaml_sequence(const yaml_sequence&) = delete;
-    yaml_sequence& operator=(const yaml_sequence&) = delete;
-    yaml_sequence(yaml_sequence&&) noexcept = default;
-    yaml_sequence& operator=(yaml_sequence&&) noexcept = default;
-
-    NEFORCE_NODISCARD types type() const noexcept override { return Sequence; }
-    NEFORCE_NODISCARD const yaml_sequence* as_sequence() const noexcept override { return this; }
-
-    /**
-     * @brief 添加元素到序列末尾
-     * @param value 要添加的YAML值
-     */
-    void add_element(shared_ptr<yaml_value> value) { elements.emplace_back(_NEFORCE move(value)); }
-
-    /**
-     * @brief 获取指定索引的元素（常量版本）
-     * @param index 元素索引（从0开始）
-     * @return 元素指针，索引越界返回 nullptr
-     */
-    NEFORCE_NODISCARD const yaml_value* get_element(const size_t index) const noexcept {
-        if (index < elements.size()) {
-            return elements[index].get();
-        }
-        return nullptr;
-    }
-
-    /**
-     * @brief 获取指定索引的元素（可变版本）
-     * @param index 元素索引（从0开始）
-     * @return 元素指针，索引越界返回 nullptr
-     */
-    NEFORCE_NODISCARD yaml_value* get_element(const size_t index) noexcept {
-        if (index < elements.size()) {
-            return elements[index].get();
-        }
-        return nullptr;
-    }
-
-    /**
-     * @brief 获取序列大小
+     * @brief 获取元素数量
      * @return 元素数量
      */
-    NEFORCE_NODISCARD size_t size() const noexcept { return elements.size(); }
+    NEFORCE_NODISCARD size_t size() const noexcept;
 
     /**
-     * @brief 获取所有元素的常量引用
-     * @return 元素列表的常量引用
+     * @brief 判断序列是否为空
+     * @return 是否为空
      */
-    NEFORCE_NODISCARD const vector<shared_ptr<yaml_value>>& get_elements() const noexcept { return elements; }
+    NEFORCE_NODISCARD bool empty() const noexcept { return size() == 0; }
+
+    /**
+     * @brief 获取指定索引的元素
+     * @param index 元素索引
+     * @return 元素指针，越界返回 nullptr
+     */
+    NEFORCE_NODISCARD const yaml_value* get_element(size_t index) const noexcept;
+
+    /**
+     * @brief 获取所有元素
+     * @return 元素数组指针
+     */
+    NEFORCE_NODISCARD const yaml_value* data() const noexcept;
 
     /**
      * @brief 获取集合样式
-     * @return 序列样式枚举值
+     * @return 集合样式
      */
-    NEFORCE_NODISCARD sequence_style get_style() const noexcept { return style; }
+    NEFORCE_NODISCARD sequence_style get_style() const noexcept;
 
     /**
-     * @brief 设置集合样式
-     * @param s 新的序列样式
+     * @brief 获取锚点名
+     * @return 锚点视图
      */
-    void set_style(const sequence_style s) noexcept { style = s; }
+    NEFORCE_NODISCARD string_view get_anchor() const noexcept {
+        return node_ == nullptr ? string_view() : node_->get_anchor();
+    }
+
+    /**
+     * @brief 获取标签名
+     * @return 标签视图
+     */
+    NEFORCE_NODISCARD string_view get_tag() const noexcept {
+        return node_ == nullptr ? string_view() : node_->get_tag();
+    }
+
+    /**
+     * @brief 与空指针比较
+     * @param np 空指针
+     * @return 视图是否无效
+     */
+    NEFORCE_NODISCARD bool operator==(nullptr_t np) const noexcept {
+        (void) np;
+        return node_ == nullptr;
+    }
+
+    /**
+     * @brief 与空指针比较
+     * @param np 空指针
+     * @return 视图是否有效
+     */
+    NEFORCE_NODISCARD bool operator!=(nullptr_t np) const noexcept {
+        (void) np;
+        return node_ != nullptr;
+    }
+
+    /**
+     * @brief 访问视图自身
+     * @return 视图指针
+     */
+    NEFORCE_NODISCARD const yaml_sequence* operator->() const noexcept { return this; }
 };
 
 /**
  * @class yaml_mapping
- * @brief YAML映射值类型（字典/对象）
- *
- * 表示YAML中的键值对集合。支持两种集合样式：
- * - **块样式**（Block）：每行 key: value 的缩进格式
- * - **流样式**（Flow）：花括号内的逗号分隔格式 {key: value, ...}
- *
- * 映射中的键名为字符串类型，值可以是任意YAML值类型
- * （包括嵌套的序列和映射）。
- *
- * @note 此类禁止拷贝，仅允许移动。
- * @note 键名比较基于字符串相等，不区分YAML标量样式。
+ * @brief 映射视图
  */
-class NEFORCE_API yaml_mapping final : public yaml_value {
+class yaml_mapping {
 public:
     /**
      * @enum mapping_style
-     * @brief 映射集合样式枚举
+     * @brief 映射集合样式
      */
-    enum mapping_style {
-        Block, ///< 块样式（key: value）
-        Flow   ///< 流样式（{key: value}）
+    enum mapping_style : uint8_t {
+        Block, ///< 块样式
+        Flow   ///< 流样式
     };
 
 private:
-    flat_unordered_map<string, shared_ptr<yaml_value>> members; ///< 键值对存储
-    mapping_style style;                                        ///< 集合样式
+    yaml_value* node_ = nullptr;
+
+    friend class yaml_value;
+    explicit yaml_mapping(yaml_value* node) noexcept :
+    node_(node) {}
 
 public:
-    ~yaml_mapping() override = default;
+    yaml_mapping() = default;
 
     /**
-     * @brief 构造映射
-     * @param s 集合样式，默认为块样式
+     * @brief 获取成员数量
+     * @return 成员数量
      */
-    explicit yaml_mapping(const mapping_style s = Block) :
-    style(s) {}
-
-    yaml_mapping(const yaml_mapping&) = delete;
-    yaml_mapping& operator=(const yaml_mapping&) = delete;
-    yaml_mapping(yaml_mapping&&) noexcept = default;
-    yaml_mapping& operator=(yaml_mapping&&) noexcept = default;
-
-    NEFORCE_NODISCARD types type() const noexcept override { return Mapping; }
-    NEFORCE_NODISCARD const yaml_mapping* as_mapping() const noexcept override { return this; }
+    NEFORCE_NODISCARD size_t size() const noexcept;
 
     /**
-     * @brief 添加或覆盖键值对
-     * @param key 键名字符串
-     * @param value 关联的YAML值
+     * @brief 判断映射是否为空
+     * @return 是否为空
      */
-    void add_member(const string& key, shared_ptr<yaml_value> value) { members[key] = _NEFORCE move(value); }
+    NEFORCE_NODISCARD bool empty() const noexcept { return size() == 0; }
 
     /**
-     * @brief 获取指定键名的成员（常量版本）
-     * @param key 键名字符串
-     * @return 值指针，键不存在返回 nullptr
+     * @brief 获取指定键名的成员
+     * @param key 键名
+     * @return 成员值指针，键不存在返回 nullptr
      */
-    NEFORCE_NODISCARD const yaml_value* get_member(const string& key) const {
-        const auto it = members.find(key);
-        if (it != members.end()) {
-            return it->second.get();
-        }
-        return nullptr;
+    NEFORCE_NODISCARD const yaml_value* get_member(string_view key) const noexcept;
+
+    /**
+     * @brief 获取指定键名的成员
+     * @param key 键名
+     * @return 成员值指针，键不存在返回 nullptr
+     */
+    NEFORCE_NODISCARD const yaml_value* get_member(const string& key) const noexcept {
+        return get_member(string_view(key.data(), key.size()));
     }
 
     /**
-     * @brief 获取指定键名的成员（可变版本）
-     * @param key 键名字符串
-     * @return 值指针，键不存在返回 nullptr
+     * @brief 获取指定键名的成员
+     * @param key 键名
+     * @return 成员值指针，键不存在返回 nullptr
      */
-    NEFORCE_NODISCARD yaml_value* get_member(const string& key) {
-        const auto it = members.find(key);
-        if (it != members.end()) {
-            return it->second.get();
-        }
-        return nullptr;
+    NEFORCE_NODISCARD const yaml_value* get_member(const char* key) const noexcept {
+        return get_member(string_view(key));
     }
 
     /**
      * @brief 检查键名是否存在
-     * @param key 键名字符串
-     * @return 键存在返回 true
+     * @param key 键名
+     * @return 键是否存在
      */
-    NEFORCE_NODISCARD bool has_member(const string& key) const { return members.find(key) != members.end(); }
+    NEFORCE_NODISCARD bool has_member(string_view key) const noexcept { return get_member(key) != nullptr; }
 
     /**
-     * @brief 获取所有成员的常量引用
-     * @return 键值对映射表的常量引用
+     * @brief 获取成员数组起始指针
+     * @return 成员数组指针
      */
-    NEFORCE_NODISCARD const flat_unordered_map<string, shared_ptr<yaml_value>>& get_members() const noexcept {
-        return members;
-    }
+    NEFORCE_NODISCARD const yaml_member* data() const noexcept;
+
+    /**
+     * @brief 获取成员数组结束指针
+     * @return 结束指针
+     */
+    NEFORCE_NODISCARD const yaml_member* end_data() const noexcept;
+
+    /**
+     * @brief 获取成员数组的常量引用
+     * @return 视图自身
+     */
+    NEFORCE_NODISCARD const yaml_mapping& get_members() const noexcept { return *this; }
+
+    /**
+     * @brief 获取按键名排序的成员索引
+     * @return 排序索引数组，成员数不大于 1 时返回 nullptr
+     */
+    NEFORCE_NODISCARD const uint32_t* get_sorted_indices() const noexcept;
 
     /**
      * @brief 获取集合样式
-     * @return 映射样式枚举值
+     * @return 集合样式
      */
-    NEFORCE_NODISCARD mapping_style get_style() const noexcept { return style; }
+    NEFORCE_NODISCARD mapping_style get_style() const noexcept;
 
     /**
-     * @brief 设置集合样式
-     * @param s 新的映射样式
+     * @brief 获取锚点名
+     * @return 锚点视图
      */
-    void set_style(const mapping_style s) noexcept { style = s; }
-
-    /**
-     * @brief 合并另一个映射的成员
-     * @param other 源映射指针
-     *
-     * 将 other 中的键值对合并到当前映射中。
-     * 如果键名已存在，保留当前映射中的值（不覆盖）。
-     */
-    void merge_from(const yaml_mapping* other) {
-        if (other == nullptr) {
-            return;
-        }
-        for (const auto& pair: other->get_members()) {
-            if (members.find(pair.first) == members.end()) {
-                members[pair.first] = pair.second;
-            }
-        }
+    NEFORCE_NODISCARD string_view get_anchor() const noexcept {
+        return node_ == nullptr ? string_view() : node_->get_anchor();
     }
+
+    /**
+     * @brief 获取标签名
+     * @return 标签视图
+     */
+    NEFORCE_NODISCARD string_view get_tag() const noexcept {
+        return node_ == nullptr ? string_view() : node_->get_tag();
+    }
+
+    /**
+     * @brief 与空指针比较
+     * @param np 空指针
+     * @return 视图是否无效
+     */
+    NEFORCE_NODISCARD bool operator==(nullptr_t np) const noexcept {
+        (void) np;
+        return node_ == nullptr;
+    }
+
+    /**
+     * @brief 与空指针比较
+     * @param np 空指针
+     * @return 视图是否有效
+     */
+    NEFORCE_NODISCARD bool operator!=(nullptr_t np) const noexcept {
+        (void) np;
+        return node_ != nullptr;
+    }
+
+    /**
+     * @brief 访问视图自身
+     * @return 视图指针
+     */
+    NEFORCE_NODISCARD const yaml_mapping* operator->() const noexcept { return this; }
+
+    /**
+     * @brief 成员迭代器起始
+     * @return 起始指针
+     */
+    NEFORCE_NODISCARD const yaml_member* begin() const noexcept { return data(); }
+
+    /**
+     * @brief 成员迭代器结束
+     * @return 结束指针
+     */
+    NEFORCE_NODISCARD const yaml_member* end() const noexcept { return end_data(); }
+};
+
+/**
+ * @class yaml_document
+ * @brief YAML 文档
+ */
+class NEFORCE_API yaml_document {
+private:
+    bump_arena arena_; ///< 分配器
+    yaml_value root_;  ///< 根值
+
+private:
+    NEFORCE_NODISCARD yaml_value* new_sequence(bool flow);
+    NEFORCE_NODISCARD yaml_value* new_mapping(bool flow);
+
+    void mapping_append(yaml_value& node, string_view key, yaml_value value, bool copy_key);
+    void sequence_append(yaml_value& node, yaml_value value);
+
+    void set_meta(yaml_value& value, string_view anchor, string_view tag, bool copy);
+
+    NEFORCE_NODISCARD yaml_value make_string_value(const string_view text, const uint8_t style, const bool copy) {
+        yaml_value value;
+        value.form_ = yaml_value::storage_form();
+        if (text.size() <= yaml_value::inline_capacity) {
+            yaml_value::inline_form& form = value.form_.inlined;
+            form.tag = yaml_kind::string;
+            form.flags = static_cast<uint8_t>(style | yaml_value::inline_flag);
+            form.size = static_cast<uint16_t>(text.size());
+            form.meta = nullptr;
+            memory_copy(form.chars, text.data(), text.size());
+            return value;
+        }
+        yaml_value::extended_form& form = value.form_.extended;
+        form.tag = yaml_kind::string;
+        form.flags = style;
+        form.count = static_cast<uint32_t>(text.size());
+        if (copy) {
+            auto* data = static_cast<char*>(arena_.allocate(text.size(), 1, 1));
+            memory_copy(data, text.data(), text.size());
+            form.data.chars = data;
+        } else {
+            form.data.chars = text.data();
+        }
+        form.meta = nullptr;
+        return value;
+    }
+
+    NEFORCE_NODISCARD yaml_value make_null_value() const noexcept { return yaml_value(); }
+
+    NEFORCE_NODISCARD yaml_value make_boolean_value(const bool value) const noexcept {
+        yaml_value result;
+        result.form_ = yaml_value::storage_form();
+        result.form_.extended.tag = yaml_kind::boolean;
+        result.form_.extended.data.boolean = value;
+        return result;
+    }
+
+    NEFORCE_NODISCARD yaml_value make_integer_value(const int64_t value) const noexcept {
+        yaml_value result;
+        result.form_ = yaml_value::storage_form();
+        result.form_.extended.tag = yaml_kind::integer;
+        result.form_.extended.data.integer = value;
+        return result;
+    }
+
+    NEFORCE_NODISCARD yaml_value make_float_value(const double value) const noexcept {
+        yaml_value result;
+        result.form_ = yaml_value::storage_form();
+        result.form_.extended.tag = yaml_kind::floating;
+        result.form_.extended.data.floating = value;
+        return result;
+    }
+
+    NEFORCE_NODISCARD yaml_value make_timestamp_value(const datetime& value) noexcept;
+    NEFORCE_NODISCARD string_view store_string(string_view text, bool copy);
+    void append_missing(yaml_value& target, const yaml_mapping& source);
+    void set_size_hint(yaml_value& root, size_t size) noexcept;
+
+    friend class yaml_parser;
+    friend class yaml_builder;
+
+public:
+    /**
+     * @brief 构造空文档
+     */
+    yaml_document() noexcept = default;
+
+    yaml_document(const yaml_document&) = delete;
+    yaml_document& operator=(const yaml_document&) = delete;
+
+    /**
+     * @brief 移动构造函数
+     * @param other 源文档
+     */
+    yaml_document(yaml_document&& other) noexcept = default;
+
+    /**
+     * @brief 移动赋值运算符
+     * @param other 源文档
+     * @return 自身引用
+     */
+    yaml_document& operator=(yaml_document&& other) noexcept = default;
+
+    ~yaml_document() = default;
+
+    /**
+     * @brief 与空指针比较
+     * @param np 空指针
+     * @return 始终为 false
+     */
+    NEFORCE_NODISCARD bool operator==(nullptr_t np) const noexcept {
+        (void) np;
+        return false;
+    }
+
+    /**
+     * @brief 与空指针比较
+     * @param np 空指针
+     * @return 始终为 true
+     */
+    NEFORCE_NODISCARD bool operator!=(nullptr_t np) const noexcept {
+        (void) np;
+        return true;
+    }
+
+    /**
+     * @brief 获取根值
+     * @return 根值引用
+     */
+    NEFORCE_NODISCARD yaml_value& root() noexcept { return root_; }
+
+    /**
+     * @brief 获取根值
+     * @return 根值常量引用
+     */
+    NEFORCE_NODISCARD const yaml_value& root() const noexcept { return root_; }
+
+    /**
+     * @brief 访问根值
+     * @return 根值指针
+     */
+    NEFORCE_NODISCARD yaml_value* operator->() noexcept { return &root_; }
+
+    /**
+     * @brief 访问根值
+     * @return 根值常量指针
+     */
+    NEFORCE_NODISCARD const yaml_value* operator->() const noexcept { return &root_; }
+
+    /**
+     * @brief 访问根值
+     * @return 根值引用
+     */
+    NEFORCE_NODISCARD yaml_value& operator*() noexcept { return root_; }
+
+    /**
+     * @brief 访问根值
+     * @return 根值常量引用
+     */
+    NEFORCE_NODISCARD const yaml_value& operator*() const noexcept { return root_; }
 };
 
 /** @} */ // YamlConfig

@@ -92,7 +92,12 @@ namespace {
             if (units > (1ULL << 53)) {
                 continue;
             }
-            if (static_cast<double>(units) / k_pow10[k] != magnitude) {
+            const double reconstructed = static_cast<double>(units) / k_pow10[k];
+            uint64_t reconstructed_bits = 0;
+            uint64_t magnitude_bits = 0;
+            memory_copy(&reconstructed_bits, &reconstructed, sizeof(reconstructed_bits));
+            memory_copy(&magnitude_bits, &magnitude, sizeof(magnitude_bits));
+            if (reconstructed_bits != magnitude_bits) {
                 continue;
             }
             char digits[k_max_integer_chars];
@@ -499,7 +504,7 @@ string_view json_document::store_string(const string_view text) {
     if (text.empty()) {
         return "";
     }
-    auto* buffer = static_cast<char*>(arena_.allocate(text.size(), sizeof(char)));
+    auto* buffer = static_cast<char*>(arena_.allocate(text.size(), sizeof(char), alignof(char)));
     memory_copy(buffer, text.data(), text.size());
     return string_view(buffer, text.size());
 }
@@ -520,7 +525,7 @@ void json_document::object_append(json_value& node, const string_view key, const
         const size_t old_bytes = static_cast<size_t>(count) * sizeof(json_member);
         const size_t new_bytes = next * sizeof(json_member);
         if (!arena_.try_extend(members, old_bytes, new_bytes)) {
-            auto* grown = static_cast<json_member*>(arena_.allocate(next, sizeof(json_member)));
+            auto* grown = static_cast<json_member*>(arena_.allocate(next, sizeof(json_member), alignof(json_member)));
             if (count != 0) {
                 memory_copy(grown, members, old_bytes);
             }
@@ -546,7 +551,7 @@ void json_document::array_append(json_value& node, const json_value value) {
         const size_t old_bytes = static_cast<size_t>(count) * sizeof(json_value);
         const size_t new_bytes = next * sizeof(json_value);
         if (!arena_.try_extend(elements, old_bytes, new_bytes)) {
-            auto* grown = static_cast<json_value*>(arena_.allocate(next, sizeof(json_value)));
+            auto* grown = static_cast<json_value*>(arena_.allocate(next, sizeof(json_value), alignof(json_value)));
             if (count != 0) {
                 memory_copy(grown, elements, old_bytes);
             }
@@ -563,7 +568,8 @@ void json_document::object_reserve(json_value& node, const size_t count) {
         node.storage_.ext_.payload_.members_ != nullptr) {
         return;
     }
-    node.storage_.ext_.payload_.members_ = static_cast<json_member*>(arena_.allocate(count, sizeof(json_member)));
+    node.storage_.ext_.payload_.members_ =
+            static_cast<json_member*>(arena_.allocate(count, sizeof(json_member), alignof(json_member)));
     set_capacity(node.storage_.ext_.reserved_, count);
 }
 
@@ -572,7 +578,8 @@ void json_document::array_reserve(json_value& node, const size_t count) {
         node.storage_.ext_.payload_.elements_ != nullptr) {
         return;
     }
-    node.storage_.ext_.payload_.elements_ = static_cast<json_value*>(arena_.allocate(count, sizeof(json_value)));
+    node.storage_.ext_.payload_.elements_ =
+            static_cast<json_value*>(arena_.allocate(count, sizeof(json_value), alignof(json_value)));
     set_capacity(node.storage_.ext_.reserved_, count);
 }
 
@@ -591,7 +598,8 @@ json_array_mut json_document::make_array() {
 json_value* json_document::new_container(const bool is_object, const size_t reserve) {
     const size_t slots = reserve == 0 || reserve > k_reserved_limit ? 0 : reserve;
     const size_t slot_size = is_object ? sizeof(json_member) : sizeof(json_value);
-    auto* memory = static_cast<byte_t*>(arena_.allocate(sizeof(json_value) + slots * slot_size, 1));
+    auto* memory =
+            static_cast<byte_t*>(arena_.allocate(sizeof(json_value) + slots * slot_size, 1, alignof(json_value)));
     auto* node = reinterpret_cast<json_value*>(memory);
     *node = json_value::make_null();
     node->storage_.ext_.tag_ = is_object ? json_kind::object : json_kind::array;

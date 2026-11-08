@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceYamlBenchmark yaml_benchmark.cpp)

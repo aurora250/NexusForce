@@ -1,47 +1,136 @@
-#include <NeForce/core/algorithm/remove.hpp>
-#include <NeForce/core/file/toml/toml_parser.hpp>
-#include <NeForce/core/utility/hexadecimal.hpp>
-#include <NeForce/core/utility/packages.hpp>
+#include "NeForce/core/file/toml/toml_parser.hpp"
+#include "NeForce/core/memory/bit.hpp"
+#include "NeForce/core/string/to_numerics.hpp"
+#include "NeForce/core/string/to_string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    NEFORCE_NODISCARD bool digits_at(const char* cursor, const char* end, const size_t count) noexcept {
+        if (static_cast<size_t>(end - cursor) < count) {
+            return false;
+        }
+        for (size_t i = 0; i < count; ++i) {
+            if (!is_digit(cursor[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    NEFORCE_NODISCARD bool date_at(const char* cursor, const char* end) noexcept {
+        return static_cast<size_t>(end - cursor) >= 10 && digits_at(cursor, end, 4) && cursor[4] == '-' &&
+               digits_at(cursor + 5, end, 2) && cursor[7] == '-' && digits_at(cursor + 8, end, 2);
+    }
+
+    NEFORCE_NODISCARD bool time_at(const char* cursor, const char* end) noexcept {
+        return static_cast<size_t>(end - cursor) >= 8 && digits_at(cursor, end, 2) && cursor[2] == ':' &&
+               digits_at(cursor + 3, end, 2) && cursor[5] == ':' && digits_at(cursor + 6, end, 2);
+    }
+
+    NEFORCE_NODISCARD bool offset_at(const char* cursor, const char* end) noexcept {
+        return static_cast<size_t>(end - cursor) >= 5 && digits_at(cursor, end, 2) && cursor[2] == ':' &&
+               digits_at(cursor + 3, end, 2);
+    }
+
+    NEFORCE_NODISCARD bool decimal_integer(const string_view text, int64_t& value) noexcept {
+        size_t index = 0;
+        bool negative = false;
+        if (index < text.size() && (text[index] == '+' || text[index] == '-')) {
+            negative = text[index] == '-';
+            ++index;
+        }
+        if (index == text.size()) {
+            return false;
+        }
+        const uint64_t limit = negative ? static_cast<uint64_t>(9223372036854775807LL) + 1U
+                                        : static_cast<uint64_t>(9223372036854775807LL);
+        uint64_t magnitude = 0;
+        for (; index < text.size(); ++index) {
+            const char c = text[index];
+            if (c < '0' || c > '9') {
+                return false;
+            }
+            const auto digit = static_cast<uint64_t>(c - '0');
+            if (magnitude > (limit - digit) / 10U) {
+                return false;
+            }
+            magnitude = magnitude * 10U + digit;
+        }
+        if (negative) {
+            value = magnitude == static_cast<uint64_t>(9223372036854775807LL) + 1U
+                            ? static_cast<int64_t>(-9223372036854775807LL - 1)
+                            : -static_cast<int64_t>(magnitude);
+        } else {
+            value = static_cast<int64_t>(magnitude);
+        }
+        return true;
+    }
+
+    NEFORCE_NODISCARD bool based_integer(const string_view text, const int base, int64_t& value) noexcept {
+        uint64_t magnitude = 0;
+        for (const char c: text) {
+            uint64_t digit = 0;
+            if (c >= '0' && c <= '9') {
+                digit = static_cast<uint64_t>(c - '0');
+            } else if (c >= 'a' && c <= 'f') {
+                digit = static_cast<uint64_t>(c - 'a') + 10U;
+            } else if (c >= 'A' && c <= 'F') {
+                digit = static_cast<uint64_t>(c - 'A') + 10U;
+            } else {
+                return false;
+            }
+            if (digit >= static_cast<uint64_t>(base)) {
+                return false;
+            }
+            if (magnitude > (static_cast<uint64_t>(9223372036854775807LL) - digit) / static_cast<uint64_t>(base)) {
+                return false;
+            }
+            magnitude = magnitude * static_cast<uint64_t>(base) + digit;
+        }
+        value = static_cast<int64_t>(magnitude);
+        return true;
+    }
+
+    NEFORCE_NODISCARD string text_of(const string_view text) { return string(text.data(), text.size()); }
+
+    constexpr uint64_t k_byte_ones = 0x0101010101010101ULL;
+    constexpr uint64_t k_byte_highs = 0x8080808080808080ULL;
+    constexpr uint64_t k_newline_word = 0x0A0A0A0A0A0A0A0AULL;
+    constexpr uint64_t k_backslash_word = 0x5C5C5C5C5C5C5C5CULL;
+
+    NEFORCE_NODISCARD constexpr uint64_t byte_match(const uint64_t word, const uint64_t target) noexcept {
+        return (word ^ target) - k_byte_ones & ~(word ^ target) & k_byte_highs;
+    }
+
+    NEFORCE_NODISCARD const char* scan_single_line(const char* cursor, const char* end, const char separator,
+                                                   const bool backslash) noexcept {
+        const uint64_t separator_word = static_cast<uint64_t>(static_cast<unsigned char>(separator)) * k_byte_ones;
+        while (end - cursor >= 8) {
+            uint64_t word = 0;
+            memory_copy(&word, cursor, sizeof(word));
+            uint64_t mask = byte_match(word, separator_word) | byte_match(word, k_newline_word);
+            if (backslash) {
+                mask |= byte_match(word, k_backslash_word);
+            }
+            if (mask != 0) {
+                return cursor + (countr_zero(static_cast<uintptr_t>(mask)) >> 3);
+            }
+            cursor += 8;
+        }
+        while (cursor < end) {
+            const char c = *cursor;
+            if (c == separator || c == '\n' || (backslash && c == '\\')) {
+                return cursor;
+            }
+            ++cursor;
+        }
+        return cursor;
+    }
+} // namespace
+
+
 void toml_parser::skip_whitespace() noexcept {
-#ifdef NEFORCE_SIMD_AVX2
-    while (pos_ + 32 <= len_) {
-        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-        simd::vec256_t ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\v')));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\f')));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\r')));
-        const int mask = ::_mm256_movemask_epi8(ws);
-        if (mask == -1) {
-            advance_bulk(32);
-        } else {
-            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
-            return;
-        }
-    }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-    while (pos_ + 16 <= len_) {
-        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-        simd::vec128_t ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\v')));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\f')));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\r')));
-        const int mask = ::_mm_movemask_epi8(ws);
-        if (mask == 0xFFFF) {
-            advance_bulk(16);
-        } else {
-            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
-            return;
-        }
-    }
-#endif
-    while (pos_ < len_ && is_space(text_[pos_])) {
+    while (!eof() && is_space(current())) {
         advance();
     }
 }
@@ -50,30 +139,6 @@ void toml_parser::skip_comment() noexcept {
     if (current() != '#') {
         return;
     }
-#ifdef NEFORCE_SIMD_AVX2
-    while (pos_ + 32 <= len_) {
-        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-        const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
-        if (mask == 0) {
-            advance_bulk(32);
-        } else {
-            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(mask))));
-            return;
-        }
-    }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-    while (pos_ + 16 <= len_) {
-        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-        const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
-        if (mask == 0) {
-            advance_bulk(16);
-        } else {
-            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(mask))));
-            return;
-        }
-    }
-#endif
     while (!eof() && current() != '\n') {
         advance();
     }
@@ -92,441 +157,257 @@ void toml_parser::skip_whitespace_and_comments() noexcept {
     }
 }
 
-void toml_parser::skip_newlines() noexcept {
-    while (!eof() && (current() == '\n' || current() == '\r')) {
+void toml_parser::skip_whitespace_no_newline() noexcept {
+    while (!eof() && (current() == ' ' || current() == '\t')) {
         advance();
     }
 }
 
-void toml_parser::skip_whitespace_no_newline() noexcept {
-#ifdef NEFORCE_SIMD_AVX2
-    while (pos_ + 32 <= len_) {
-        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-        simd::vec256_t ws = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8(' '));
-        ws = ::_mm256_or_si256(ws, ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\t')));
-        const int mask = ::_mm256_movemask_epi8(ws);
-        if (mask == -1) {
-            advance_bulk(32);
-        } else {
-            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
-            return;
-        }
-    }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-    while (pos_ + 16 <= len_) {
-        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-        simd::vec128_t ws = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(' '));
-        ws = ::_mm_or_si128(ws, ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\t')));
-        const int mask = ::_mm_movemask_epi8(ws);
-        if (mask == 0xFFFF) {
-            advance_bulk(16);
-        } else {
-            advance_bulk(static_cast<size_t>(countr_zero(static_cast<unsigned>(~mask))));
-            return;
-        }
-    }
-#endif
-    while (pos_ < len_) {
-        const char ch = text_[pos_];
-        if (ch == ' ' || ch == '\t') {
-            advance();
-        } else {
-            break;
-        }
-    }
-}
-
-char toml_parser::current() const noexcept {
-    if (pos_ < len_) {
-        return text_[pos_];
-    }
-    return '\0';
-}
-
-char toml_parser::peek(const size_t offset) const noexcept {
-    if (pos_ + offset < len_) {
-        return text_[pos_ + offset];
-    }
-    return '\0';
-}
-
-bool toml_parser::eof() const noexcept { return pos_ >= len_; }
-
-void toml_parser::advance() noexcept {
-    if (pos_ < len_) {
-        if (text_[pos_] == '\n') {
-            line_++;
-            column_ = 1;
-        } else {
-            column_++;
-        }
-        pos_++;
-    }
-}
-
-void toml_parser::advance_bulk(const size_t count) noexcept {
-    size_t newlines = 0;
-    size_t last_nl = 0;
-    size_t i = 0;
-
-#ifdef NEFORCE_SIMD_AVX2
-    while (i + 32 <= count) {
-        const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_ + i));
-        const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n')));
-        if (mask != 0) {
-            newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
-            last_nl = i + static_cast<size_t>(31 - countl_zero(static_cast<unsigned>(mask)));
-        }
-        i += 32;
-    }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-    while (i + 16 <= count) {
-        const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_ + i));
-        const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n')));
-        if (mask != 0) {
-            newlines += static_cast<size_t>(popcount64(static_cast<unsigned>(mask)));
-            last_nl = i + static_cast<size_t>(31 - countl_zero(static_cast<unsigned>(mask)));
-        }
-        i += 16;
-    }
-#endif
-    for (; i < count; ++i) {
-        if (text_[pos_ + i] == '\n') {
-            newlines++;
-            last_nl = i;
-        }
-    }
-
-    if (newlines > 0) {
-        line_ += newlines;
-        column_ = count - (last_nl + 1);
-    } else {
-        column_ += count;
-    }
-    pos_ += count;
-}
-
 bool toml_parser::expect(const char ch) {
     if (current() != ch) {
-        throw_parse_error("expected '"_s + ch + "' but got '" + escape(string(1, current())) + "'");
-        return false;
+        throw_parse_error("expected '"_s + ch + "' but got '" + string(1, current()) + "'");
     }
     advance();
     return true;
 }
 
-bool toml_parser::match(const char ch) noexcept {
-    if (current() == ch) {
-        advance();
-        return true;
-    }
-    return false;
-}
-
 void toml_parser::throw_parse_error(string message) const {
-    const string error_msg = "Line " + to_string(line_) + ", Column " + to_string(column_) + ": " + move(message);
+    size_t line = 1;
+    size_t column = 1;
+    for (const char* position = begin_; position < cursor_; ++position) {
+        if (*position == '\n') {
+            ++line;
+            column = 1;
+        } else {
+            ++column;
+        }
+    }
+    const string error_msg =
+            "Line " + to_string(line) + ", Column " + to_string(column) + ": " + _NEFORCE move(message);
     NEFORCE_THROW_EXCEPTION(toml_exception(error_msg.data()));
 }
 
+bool toml_parser::same(const char* cursor, const char* end, const char* text, const size_t size) noexcept {
+    if (static_cast<size_t>(end - cursor) < size) {
+        return false;
+    }
+    for (size_t i = 0; i < size; ++i) {
+        if (cursor[i] != text[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 codepoint toml_parser::parse_unicode_escape(const size_t digits) {
-    const size_t start_pos = pos_;
-    for (size_t i = 0; i < digits; i++) {
+    uint32_t value = 0;
+    for (size_t i = 0; i < digits; ++i) {
         if (eof() || !is_xdigit(current())) {
             throw_parse_error("Invalid unicode escape sequence");
         }
+        const char c = current();
+        uint32_t digit = 0;
+        if (c >= '0' && c <= '9') {
+            digit = static_cast<uint32_t>(c - '0');
+        } else if (c >= 'a' && c <= 'f') {
+            digit = static_cast<uint32_t>(c - 'a') + 10;
+        } else {
+            digit = static_cast<uint32_t>(c - 'A') + 10;
+        }
+        value = (value << 4) | digit;
         advance();
     }
-
-    const string_view hex_str = text_.view(start_pos, digits);
-    int64_t value = 0;
-    try {
-        value = hexadecimal(hex_str).value();
-    } catch (...) {
-        throw_parse_error("Invalid unicode format");
-    }
-    if (!codepoint::is_valid_codepoint(static_cast<uint32_t>(value))) {
+    if (!codepoint::is_valid_codepoint(value)) {
         throw_parse_error("Invalid unicode codepoint");
     }
-    return codepoint{static_cast<uint32_t>(value)};
+    return codepoint{value};
 }
 
-unique_ptr<toml_string> toml_parser::parse_string() {
+toml_value toml_parser::make_text(toml_document& doc, const string_view text, const toml_string_type type) {
+    if (owning_) {
+        return doc.make_string_value(text, type);
+    }
+    return toml_value::make_string(text, type);
+}
+
+toml_value toml_parser::parse_string(toml_document& doc) {
     if (current() == '"') {
-        if (peek(1) == '"' && peek(2) == '"') {
-            return parse_multiline_basic_string();
+        if (peek() == '"' && peek(2) == '"') {
+            return parse_multiline_basic_string(doc);
         }
-        return parse_basic_string();
+        return parse_basic_string(doc);
     }
     if (current() == '\'') {
-        if (peek(1) == '\'' && peek(2) == '\'') {
-            return parse_multiline_literal_string();
+        if (peek() == '\'' && peek(2) == '\'') {
+            return parse_multiline_literal_string(doc);
         }
-        return parse_literal_string();
+        return parse_literal_string(doc);
     }
     throw_parse_error("Expected string");
-    return nullptr;
+    return toml_value();
 }
 
-unique_ptr<toml_string> toml_parser::parse_basic_string() {
+toml_value toml_parser::parse_basic_string(toml_document& doc) {
     expect('"');
-    string result;
-
-    while (pos_ < len_) {
-#ifdef NEFORCE_SIMD_AVX2
-        while (pos_ + 32 <= len_) {
-            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
-            const simd::vec256_t is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
-            const simd::vec256_t is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
-            const simd::vec256_t special = ::_mm256_or_si256(::_mm256_or_si256(is_quote, is_bs), is_nl);
-            const int mask = ::_mm256_movemask_epi8(special);
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 32);
-                column_ += 32;
-                pos_ += 32;
-            } else {
-                const int advance_len = countr_zero(static_cast<unsigned>(mask));
-                if (advance_len > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
-                    column_ += advance_len;
-                    pos_ += static_cast<size_t>(advance_len);
-                }
-                break;
-            }
+    const char* const start = cursor_;
+    while (true) {
+        cursor_ = scan_single_line(cursor_, end_, '"', true);
+        if (cursor_ == end_) {
+            throw_parse_error("Unterminated basic string");
         }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-        while (pos_ + 16 <= len_) {
-            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
-            const simd::vec128_t is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
-            const simd::vec128_t is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
-            const simd::vec128_t special = ::_mm_or_si128(::_mm_or_si128(is_quote, is_bs), is_nl);
-            const int mask = ::_mm_movemask_epi8(special);
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 16);
-                column_ += 16;
-                pos_ += 16;
-            } else {
-                const int advance_len = countr_zero(static_cast<unsigned>(mask));
-                if (advance_len > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
-                    column_ += advance_len;
-                    pos_ += static_cast<size_t>(advance_len);
-                }
-                break;
-            }
-        }
-#endif
-        const char c = text_[pos_];
+        const char c = *cursor_;
         if (c == '"') {
+            const string_view raw(start, static_cast<size_t>(cursor_ - start));
             advance();
-            return make_unique<toml_string>(move(result), toml_string::Basic);
+            return make_text(doc, raw, toml_basic_string);
         }
         if (c == '\n') {
             throw_parse_error("Unescaped newline in basic string");
         }
-        if (c == '\\') {
-            advance();
-            if (eof()) {
-                throw_parse_error("Unexpected end in string escape");
-            }
+        cursor_ = start;
+        return parse_basic_escaped(doc);
+    }
+}
 
-            switch (current()) {
-                case 'b':
-                    result += '\b';
-                    break;
-                case 't':
-                    result += '\t';
-                    break;
-                case 'n':
-                    result += '\n';
-                    break;
-                case 'f':
-                    result += '\f';
-                    break;
-                case 'r':
-                    result += '\r';
-                    break;
-                case '"':
-                    result += '"';
-                    break;
-                case '\\':
-                    result += '\\';
-                    break;
-                case 'u': {
-                    advance();
-                    if (eof()) {
-                        throw_parse_error("Unexpected end after \\u");
-                    }
-                    const codepoint cp = parse_unicode_escape(4);
-                    cp.append_to(result);
-                    continue;
-                }
-                case 'U': {
-                    advance();
-                    if (eof()) {
-                        throw_parse_error("Unexpected end after \\U");
-                    }
-                    const codepoint cp = parse_unicode_escape(8);
-                    cp.append_to(result);
-                    continue;
-                }
-                default:
-                    throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
-            }
+toml_value toml_parser::parse_basic_escaped(toml_document& doc) {
+    decode_scratch_.clear();
+    while (cursor_ < end_) {
+        const char c = *cursor_;
+        if (c == '"') {
+            advance();
+            return doc.make_string_value(string_view(decode_scratch_.data(), decode_scratch_.size()),
+                                         toml_basic_string);
+        }
+        if (c == '\n') {
+            throw_parse_error("Unescaped newline in basic string");
+        }
+        if (c != '\\') {
+            decode_scratch_ += c;
             advance();
             continue;
         }
-        result += c;
+        advance();
+        if (eof()) {
+            throw_parse_error("Unexpected end in string escape");
+        }
+        switch (current()) {
+            case 'b':
+                decode_scratch_ += '\b';
+                break;
+            case 't':
+                decode_scratch_ += '\t';
+                break;
+            case 'n':
+                decode_scratch_ += '\n';
+                break;
+            case 'f':
+                decode_scratch_ += '\f';
+                break;
+            case 'r':
+                decode_scratch_ += '\r';
+                break;
+            case '"':
+                decode_scratch_ += '"';
+                break;
+            case '\\':
+                decode_scratch_ += '\\';
+                break;
+            case 'u': {
+                advance();
+                if (eof()) {
+                    throw_parse_error("Unexpected end after \\u");
+                }
+                const codepoint cp = parse_unicode_escape(4);
+                cp.append_to(decode_scratch_);
+                continue;
+            }
+            case 'U': {
+                advance();
+                if (eof()) {
+                    throw_parse_error("Unexpected end after \\U");
+                }
+                const codepoint cp = parse_unicode_escape(8);
+                cp.append_to(decode_scratch_);
+                continue;
+            }
+            default:
+                throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
+        }
         advance();
     }
-
-    expect('"');
-    return make_unique<toml_string>(move(result), toml_string::Basic);
+    throw_parse_error("Unterminated basic string");
+    return toml_value();
 }
 
-unique_ptr<toml_string> toml_parser::parse_literal_string() {
+toml_value toml_parser::parse_literal_string(toml_document& doc) {
     expect('\'');
-    string result;
-
-    while (pos_ < len_) {
-#ifdef NEFORCE_SIMD_AVX2
-        while (pos_ + 32 <= len_) {
-            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\''));
-            const simd::vec256_t is_nl = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\n'));
-            const simd::vec256_t special = ::_mm256_or_si256(is_quote, is_nl);
-            const int mask = ::_mm256_movemask_epi8(special);
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 32);
-                column_ += 32;
-                pos_ += 32;
-            } else {
-                const int advance_len = countr_zero(static_cast<unsigned>(mask));
-                if (advance_len > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
-                    column_ += advance_len;
-                    pos_ += static_cast<size_t>(advance_len);
-                }
-                break;
-            }
+    const char* const start = cursor_;
+    while (true) {
+        cursor_ = scan_single_line(cursor_, end_, '\'', false);
+        if (cursor_ == end_) {
+            throw_parse_error("Unterminated literal string");
         }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-        while (pos_ + 16 <= len_) {
-            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\''));
-            const simd::vec128_t is_nl = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\n'));
-            const simd::vec128_t special = ::_mm_or_si128(is_quote, is_nl);
-            const int mask = ::_mm_movemask_epi8(special);
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 16);
-                column_ += 16;
-                pos_ += 16;
-            } else {
-                const int advance_len = countr_zero(static_cast<unsigned>(mask));
-                if (advance_len > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
-                    column_ += advance_len;
-                    pos_ += static_cast<size_t>(advance_len);
-                }
-                break;
-            }
-        }
-#endif
-        const char c = text_[pos_];
-        if (c == '\'') {
+        if (*cursor_ == '\'') {
+            const string_view raw(start, static_cast<size_t>(cursor_ - start));
             advance();
-            return make_unique<toml_string>(move(result), toml_string::Literal);
+            return make_text(doc, raw, toml_literal_string);
         }
-        if (c == '\n') {
-            throw_parse_error("Unescaped newline in literal string");
-        }
-        result += c;
-        advance();
+        throw_parse_error("Unescaped newline in literal string");
     }
-
-    expect('\'');
-    return make_unique<toml_string>(move(result), toml_string::Literal);
 }
 
-unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
+toml_value toml_parser::parse_multiline_basic_string(toml_document& doc) {
     expect('"');
     expect('"');
     expect('"');
-
     if (current() == '\n') {
         advance();
     } else if (current() == '\r' && peek() == '\n') {
         advance();
         advance();
     }
+    return parse_multiline_basic_escaped(doc);
+}
 
-    string result;
-
-    while (pos_ < len_) {
-#ifdef NEFORCE_SIMD_AVX2
-        while (pos_ + 32 <= len_) {
-            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-            const simd::vec256_t is_quote = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('"'));
-            const simd::vec256_t is_bs = ::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\\'));
-            const simd::vec256_t special = ::_mm256_or_si256(is_quote, is_bs);
-            const int mask = ::_mm256_movemask_epi8(special);
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 32);
-                advance_bulk(32);
-            } else {
-                const int advance_len = countr_zero(static_cast<unsigned>(mask));
-                if (advance_len > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
-                    advance_bulk(static_cast<size_t>(advance_len));
-                }
-                break;
-            }
-        }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-        while (pos_ + 16 <= len_) {
-            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-            const simd::vec128_t is_quote = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('"'));
-            const simd::vec128_t is_bs = ::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\\'));
-            const simd::vec128_t special = ::_mm_or_si128(is_quote, is_bs);
-            const int mask = ::_mm_movemask_epi8(special);
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 16);
-                advance_bulk(16);
-            } else {
-                const int advance_len = countr_zero(static_cast<unsigned>(mask));
-                if (advance_len > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
-                    advance_bulk(static_cast<size_t>(advance_len));
-                }
-                break;
-            }
-        }
-#endif
-        const char c = text_[pos_];
+toml_value toml_parser::parse_multiline_basic_escaped(toml_document& doc) {
+    decode_scratch_.clear();
+    while (cursor_ < end_) {
+        const char c = *cursor_;
         if (c == '"') {
             if (peek() == '"' && peek(2) == '"') {
                 advance();
                 advance();
                 advance();
-                break;
+                return doc.make_string_value(string_view(decode_scratch_.data(), decode_scratch_.size()),
+                                             toml_multi_basic_string);
             }
-            result += '"';
+            decode_scratch_ += '"';
+            advance();
+            continue;
+        }
+        if (c != '\\') {
+            decode_scratch_ += c;
             advance();
             continue;
         }
 
-        if (c == '\\') {
+        advance();
+        if (eof()) {
+            throw_parse_error("Unexpected end in string escape");
+        }
+        if (current() == '\n') {
             advance();
-            if (eof()) {
-                throw_parse_error("Unexpected end in string escape");
-            }
-
+            skip_whitespace();
+            continue;
+        }
+        if (current() == '\r' && peek() == '\n') {
+            advance();
+            advance();
+            skip_whitespace();
+            continue;
+        }
+        if (current() == ' ' || current() == '\t') {
+            skip_whitespace();
             if (current() == '\n') {
                 advance();
                 skip_whitespace();
@@ -538,133 +419,92 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
                 skip_whitespace();
                 continue;
             }
-            if (current() == ' ' || current() == '\t') {
-                skip_whitespace();
-                if (current() == '\n') {
-                    advance();
-                    skip_whitespace();
-                    continue;
-                }
-                if (current() == '\r' && peek() == '\n') {
-                    advance();
-                    advance();
-                    skip_whitespace();
-                    continue;
-                }
-            }
-
-            switch (current()) {
-                case 'b':
-                    result += '\b';
-                    break;
-                case 't':
-                    result += '\t';
-                    break;
-                case 'n':
-                    result += '\n';
-                    break;
-                case 'f':
-                    result += '\f';
-                    break;
-                case 'r':
-                    result += '\r';
-                    break;
-                case '"':
-                    result += '"';
-                    break;
-                case '\\':
-                    result += '\\';
-                    break;
-                case 'u': {
-                    advance();
-                    const codepoint cp = parse_unicode_escape(4);
-                    cp.append_to(result);
-                    continue;
-                }
-                case 'U': {
-                    advance();
-                    const codepoint cp = parse_unicode_escape(8);
-                    cp.append_to(result);
-                    continue;
-                }
-                default:
-                    throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
-            }
-            advance();
-            continue;
         }
-        result += c;
+
+        switch (current()) {
+            case 'b':
+                decode_scratch_ += '\b';
+                break;
+            case 't':
+                decode_scratch_ += '\t';
+                break;
+            case 'n':
+                decode_scratch_ += '\n';
+                break;
+            case 'f':
+                decode_scratch_ += '\f';
+                break;
+            case 'r':
+                decode_scratch_ += '\r';
+                break;
+            case '"':
+                decode_scratch_ += '"';
+                break;
+            case '\\':
+                decode_scratch_ += '\\';
+                break;
+            case 'u': {
+                advance();
+                const codepoint cp = parse_unicode_escape(4);
+                cp.append_to(decode_scratch_);
+                continue;
+            }
+            case 'U': {
+                advance();
+                const codepoint cp = parse_unicode_escape(8);
+                cp.append_to(decode_scratch_);
+                continue;
+            }
+            default:
+                throw_parse_error(R"(Invalid escape sequence: \)"_s + current());
+        }
         advance();
     }
-
-    return make_unique<toml_string>(move(result), toml_string::MultiBasic);
+    throw_parse_error("Unterminated multi-line basic string");
+    return toml_value();
 }
 
-unique_ptr<toml_string> toml_parser::parse_multiline_literal_string() {
+toml_value toml_parser::parse_multiline_literal_string(toml_document& doc) {
     expect('\'');
     expect('\'');
     expect('\'');
-
     if (current() == '\n') {
         advance();
     } else if (current() == '\r' && peek() == '\n') {
         advance();
         advance();
     }
-
-    string result;
-
-    while (pos_ < len_) {
-#ifdef NEFORCE_SIMD_AVX2
-        while (pos_ + 32 <= len_) {
-            const simd::vec256_t v = ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(text_.data() + pos_));
-            const int mask = ::_mm256_movemask_epi8(::_mm256_cmpeq_epi8(v, ::_mm256_set1_epi8('\'')));
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 32);
-                advance_bulk(32);
-            } else {
-                const int advance_len = countr_zero(static_cast<unsigned>(mask));
-                if (advance_len > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
-                    advance_bulk(static_cast<size_t>(advance_len));
-                }
-                break;
-            }
-        }
-#endif
-#ifdef NEFORCE_SIMD_SSE2
-        while (pos_ + 16 <= len_) {
-            const simd::vec128_t v = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(text_.data() + pos_));
-            const int mask = ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8('\'')));
-            if (mask == 0) {
-                result.append(text_.data() + pos_, 16);
-                advance_bulk(16);
-            } else {
-                const int advance_len = countr_zero(static_cast<unsigned>(mask));
-                if (advance_len > 0) {
-                    result.append(text_.data() + pos_, static_cast<size_t>(advance_len));
-                    advance_bulk(static_cast<size_t>(advance_len));
-                }
-                break;
-            }
-        }
-#endif
-        const char c = text_[pos_];
-        if (c == '\'' && peek() == '\'' && peek(2) == '\'') {
+    const char* const start = cursor_;
+    while (cursor_ + 2 < end_) {
+        if (cursor_[0] == '\'' && cursor_[1] == '\'' && cursor_[2] == '\'') {
+            const string_view raw(start, static_cast<size_t>(cursor_ - start));
             advance();
             advance();
             advance();
-            break;
+            return make_text(doc, raw, toml_multi_literal_string);
         }
-        result += c;
-        advance();
+        ++cursor_;
     }
-
-    return make_unique<toml_string>(move(result), toml_string::MultiLiteral);
+    throw_parse_error("Unterminated multi-line literal string");
+    return toml_value();
 }
 
-unique_ptr<toml_value> toml_parser::parse_number() {
-    const size_t start_pos = pos_;
+string_view toml_parser::clean_number(const string_view raw) {
+    if (!raw.contains('_')) {
+        return raw;
+    }
+    number_scratch_.clear();
+    number_scratch_.reserve(raw.size());
+    for (const char c: raw) {
+        if (c != '_') {
+            number_scratch_ += c;
+        }
+    }
+    return string_view(number_scratch_.data(), number_scratch_.size());
+}
+
+toml_value toml_parser::parse_number() {
+    const char* const start = cursor_;
     bool is_float = false;
 
     const bool has_sign = current() == '+' || current() == '-';
@@ -676,13 +516,11 @@ unique_ptr<toml_value> toml_parser::parse_number() {
         while (!eof() && is_alpha(current())) {
             advance();
         }
-        const string_view num_str = text_.view(start_pos, pos_ - start_pos);
-
+        const string_view raw(start, static_cast<size_t>(cursor_ - start));
         try {
-            double val = float64::parse(num_str).value();
-            return make_unique<toml_float>(val);
+            return toml_value::make_float(to_float64(raw));
         } catch (...) {
-            throw_parse_error("Invalid special float value: "_s + num_str);
+            throw_parse_error("Invalid special float value: " + text_of(raw));
         }
     }
 
@@ -721,7 +559,6 @@ unique_ptr<toml_value> toml_parser::parse_number() {
         }
         advance();
     }
-
     if (!has_digits) {
         throw_parse_error("Expected digit in number");
     }
@@ -751,11 +588,11 @@ unique_ptr<toml_value> toml_parser::parse_number() {
         }
     }
 
-    string num_str = text_.substr(start_pos, pos_ - start_pos);
-    num_str.erase(remove(num_str.begin(), num_str.end(), '_'), num_str.end());
+    const string_view raw(start, static_cast<size_t>(cursor_ - start));
+    const string_view cleaned = clean_number(raw);
 
     if (!is_float) {
-        string_view digits = num_str.view();
+        string_view digits = cleaned;
         if (!digits.empty() && (digits[0] == '+' || digits[0] == '-')) {
             digits = digits.substr(1);
         }
@@ -764,132 +601,135 @@ unique_ptr<toml_value> toml_parser::parse_number() {
         }
     }
 
-    try {
-        if (is_float) {
-            double val = float64::parse(num_str.view()).value();
-            return make_unique<toml_float>(val);
+    if (is_float) {
+        string_view probe = cleaned;
+        if (!probe.empty() && probe[0] == '+') {
+            probe = probe.substr(1);
         }
-        int64_t val = to_int64(num_str.view(), nullptr, 10);
-        return make_unique<toml_integer>(val);
-    } catch (...) {
-        throw_parse_error("Invalid numeric value: " + num_str);
+        double real = 0.0;
+        if (inner::parse_double_exact(probe, real)) {
+            return toml_value::make_float(real);
+        }
+        try {
+            return toml_value::make_float(to_float64(cleaned));
+        } catch (...) {
+            throw_parse_error("Invalid numeric value: " + text_of(cleaned));
+        }
     }
-    return nullptr;
+    int64_t integer = 0;
+    if (!decimal_integer(cleaned, integer)) {
+        throw_parse_error("Invalid numeric value: " + text_of(cleaned));
+    }
+    return toml_value::make_integer(integer);
 }
 
-unique_ptr<toml_integer> toml_parser::parse_integer(const int base) {
-    const size_t start_pos = pos_;
+toml_value toml_parser::parse_integer(const int base) {
+    const char* const start = cursor_;
     bool has_digits = false;
-
     while (!eof()) {
         const char ch = current();
         if (ch == '_') {
             advance();
             continue;
         }
-
         bool valid = false;
         if (base == 2) {
-            valid = (ch == '0' || ch == '1');
+            valid = ch == '0' || ch == '1';
         } else if (base == 8) {
-            valid = (ch >= '0' && ch <= '7');
+            valid = ch >= '0' && ch <= '7';
         } else if (base == 16) {
             valid = is_xdigit(ch);
         } else {
             valid = is_digit(ch);
         }
-
-        if (valid) {
-            has_digits = true;
-            advance();
-        } else {
+        if (!valid) {
             break;
         }
+        has_digits = true;
+        advance();
     }
-
     if (!has_digits) {
         throw_parse_error("Expected digit in integer");
     }
-
-    string num_str = text_.substr(start_pos, pos_ - start_pos);
-    num_str.erase(remove(num_str.begin(), num_str.end(), '_'), num_str.end());
-
-    try {
-        int64_t val = 0;
-        if (base == 2 || base == 8 || base == 16) {
-            val = to_int64(num_str.view(), nullptr, base);
-        } else {
-            val = to_int64(num_str.view(), nullptr, 10);
-        }
-        return make_unique<toml_integer>(val);
-    } catch (...) {
-        throw_parse_error("Invalid integer value: " + num_str);
+    const string_view cleaned = clean_number(string_view(start, static_cast<size_t>(cursor_ - start)));
+    int64_t integer = 0;
+    if (!based_integer(cleaned, base, integer)) {
+        throw_parse_error("Invalid integer value: " + text_of(cleaned));
     }
-    return nullptr;
+    return toml_value::make_integer(integer);
 }
 
-unique_ptr<toml_boolean> toml_parser::parse_boolean() {
-    if (current() == 't' && peek() == 'r' && peek(2) == 'u' && peek(3) == 'e') {
-        advance();
-        advance();
-        advance();
-        advance();
-        return make_unique<toml_boolean>(true);
+toml_value toml_parser::parse_boolean() {
+    if (same(cursor_, end_, "true", 4)) {
+        advance_bulk(4);
+        return toml_value::make_boolean(true);
     }
-    if (current() == 'f' && peek() == 'a' && peek(2) == 'l' && peek(3) == 's' && peek(4) == 'e') {
-        advance();
-        advance();
-        advance();
-        advance();
-        advance();
-        return make_unique<toml_boolean>(false);
+    if (same(cursor_, end_, "false", 5)) {
+        advance_bulk(5);
+        return toml_value::make_boolean(false);
     }
     throw_parse_error("Expected boolean value");
-    return nullptr;
+    return toml_value();
 }
 
-unique_ptr<toml_datetime> toml_parser::parse_datetime() {
-    const size_t start_pos = pos_;
+toml_value toml_parser::parse_datetime(toml_document& doc) {
+    const char* const start = cursor_;
+    const bool has_date = date_at(cursor_, end_);
+    bool has_time = false;
+    bool has_offset = false;
 
-    while (!eof() && (is_digit(current()) || current() == '-' || current() == ':' || current() == 'T' ||
-                      current() == 'Z' || current() == '+' || current() == '.' || current() == ' ')) {
-        advance();
-    }
-
-    const string_view dt_str = text_.view(start_pos, pos_ - start_pos);
-
-    const bool has_date_sep = dt_str.contains('-');
-    const bool has_time_sep = dt_str.contains(':');
-    const bool has_datetime_sep = dt_str.contains('T') || dt_str.contains(' ');
-
-    if (!has_date_sep && !has_time_sep) {
-        throw_parse_error("Not a valid datetime format");
-    }
-
-    toml_datetime::datetime_type dt_type{toml_datetime::LocalDate};
-    if (has_datetime_sep) {
-        if (dt_str.contains('Z') || dt_str.contains('+') || dt_str.rfind('-') > 10) {
-            dt_type = toml_datetime::OffsetDateTime;
-        } else {
-            dt_type = toml_datetime::LocalDateTime;
+    if (has_date) {
+        advance_bulk(10);
+        if (!eof() && (current() == 'T' || current() == 't' || current() == ' ') && time_at(cursor_ + 1, end_)) {
+            advance();
+            advance_bulk(8);
+            has_time = true;
+            if (current() == '.' && is_digit(peek())) {
+                advance();
+                while (!eof() && is_digit(current())) {
+                    advance();
+                }
+            }
+            if (!eof() && (current() == 'Z' || current() == 'z')) {
+                advance();
+                has_offset = true;
+            } else if (!eof() && (current() == '+' || current() == '-') && offset_at(cursor_ + 1, end_)) {
+                advance();
+                advance_bulk(5);
+                has_offset = true;
+            }
         }
-    } else if (has_time_sep) {
-        dt_type = toml_datetime::LocalTime;
+    } else {
+        if (!time_at(cursor_, end_)) {
+            throw_parse_error("Not a valid datetime format");
+        }
+        advance_bulk(8);
+        has_time = true;
+        if (current() == '.' && is_digit(peek())) {
+            advance();
+            while (!eof() && is_digit(current())) {
+                advance();
+            }
+        }
     }
 
-    return make_unique<toml_datetime>(dt_str, dt_type);
+    const string_view raw(start, static_cast<size_t>(cursor_ - start));
+    toml_datetime_type type = toml_local_date;
+    if (!has_date) {
+        type = toml_local_time;
+    } else if (has_time) {
+        type = has_offset ? toml_offset_datetime : toml_local_datetime;
+    }
+    return doc.make_datetime_value(raw, type);
 }
 
-unique_ptr<toml_array> toml_parser::parse_array() {
+toml_value toml_parser::parse_array(toml_document& doc) {
     expect('[');
-    auto arr = make_unique<toml_array>();
+    toml_value* node = doc.new_container(false);
     skip_whitespace_and_comments();
-
     while (!eof() && current() != ']') {
-        auto element = parse_value();
-        arr->add_element(move(element));
+        doc.array_append(*node, parse_value(doc));
         skip_whitespace_and_comments();
-
         if (current() == ',') {
             advance();
             skip_whitespace_and_comments();
@@ -900,31 +740,25 @@ unique_ptr<toml_array> toml_parser::parse_array() {
             throw_parse_error("Expected ',' or ']' in array");
         }
     }
-
     expect(']');
-    return arr;
+    return *node;
 }
 
-unique_ptr<toml_table> toml_parser::parse_inline_table() {
+toml_value toml_parser::parse_inline_table(toml_document& doc) {
     expect('{');
-    auto table = make_unique<toml_table>(true);
-
+    toml_value* node = doc.new_container(true, true);
     skip_whitespace_no_newline();
-
     while (!eof() && current() != '}') {
-        string key = parse_key();
+        const string_view key = parse_key(doc);
         skip_whitespace_no_newline();
         expect('=');
         skip_whitespace_no_newline();
-
-        auto value = parse_value();
-        if (table->has_member(key)) {
-            throw_parse_error("Duplicate key in inline table: " + key);
+        const toml_value value = parse_value(doc);
+        if (node->as_table().has_member(key)) {
+            throw_parse_error("Duplicate key in inline table: " + text_of(key));
         }
-        table->add_member(key, move(value));
-
+        doc.table_append(*node, key, value, owning_);
         skip_whitespace_no_newline();
-
         if (current() == ',') {
             advance();
             skip_whitespace_no_newline();
@@ -935,65 +769,58 @@ unique_ptr<toml_table> toml_parser::parse_inline_table() {
             throw_parse_error("Expected ',' or '}' in inline table");
         }
     }
-
     expect('}');
-    return table;
+    return *node;
 }
 
-string toml_parser::parse_key() {
+string_view toml_parser::parse_key(toml_document& doc) {
     if (current() == '"' || current() == '\'') {
-        return parse_quoted_key();
+        return parse_quoted_key(doc);
     }
     return parse_bare_key();
 }
 
-string toml_parser::parse_bare_key() {
-    const size_t start_pos = pos_;
+string_view toml_parser::parse_bare_key() {
+    const char* const start = cursor_;
     while (!eof() && (is_alpha_or_digit(current()) || current() == '_' || current() == '-')) {
         advance();
     }
-    if (pos_ == start_pos) {
+    if (cursor_ == start) {
         throw_parse_error("Expected key");
     }
-    return text_.substr(start_pos, pos_ - start_pos);
+    return string_view(start, static_cast<size_t>(cursor_ - start));
 }
 
-string toml_parser::parse_quoted_key() {
-    const auto str_value = parse_string();
-    return str_value->get_value();
+string_view toml_parser::parse_quoted_key(toml_document& doc) {
+    const toml_value value = parse_string(doc);
+    return doc.store_string(value.as_string().get_value());
 }
 
-vector<string> toml_parser::parse_dotted_key() {
-    vector<string> keys;
-    keys.push_back(parse_key());
-
+void toml_parser::parse_dotted_key(toml_document& doc, vector<string_view>& path) {
+    path.clear();
+    path.push_back(parse_key(doc));
+    skip_whitespace();
     while (current() == '.') {
         advance();
         skip_whitespace();
-        keys.push_back(parse_key());
+        path.push_back(parse_key(doc));
         skip_whitespace();
     }
-
-    return keys;
 }
 
-unique_ptr<toml_value> toml_parser::parse_value() {
-    skip_whitespace_and_comments();
-
+toml_value toml_parser::parse_value(toml_document& doc) {
     if (eof()) {
         throw_parse_error("Unexpected end of input when expecting a value");
     }
-
     const char ch = current();
-
     if (ch == '"' || ch == '\'') {
-        return parse_string();
+        return parse_string(doc);
     }
     if (ch == '[') {
-        return parse_array();
+        return parse_array(doc);
     }
     if (ch == '{') {
-        return parse_inline_table();
+        return parse_inline_table(doc);
     }
     if (ch == 't' || ch == 'f') {
         return parse_boolean();
@@ -1002,206 +829,161 @@ unique_ptr<toml_value> toml_parser::parse_value() {
         return parse_number();
     }
     if (is_digit(ch)) {
-        const size_t saved_pos = pos_;
-        const size_t saved_line = line_;
-        const size_t saved_column = column_;
-
-        try {
-            return parse_datetime();
-        } catch (...) {
-            pos_ = saved_pos;
-            line_ = saved_line;
-            column_ = saved_column;
-            try {
-                return parse_number();
-            } catch (...) {
-                throw_parse_error("Failed to parse numeric or datetime value");
-            }
+        if (date_at(cursor_, end_) || time_at(cursor_, end_)) {
+            return parse_datetime(doc);
         }
+        return parse_number();
     }
-
     throw_parse_error("Unexpected character '"_s + ch + "' when parsing value");
-    return nullptr;
+    return toml_value();
 }
 
-void toml_parser::parse_key_value() {
-    skip_whitespace_and_comments();
-
-    vector<string> key_path = parse_dotted_key();
-
-    skip_whitespace();
-
+void toml_parser::parse_key_value(toml_document& doc) {
+    parse_dotted_key(doc, key_path_);
     expect('=');
-    skip_whitespace();
-
-    unique_ptr<toml_value> val = parse_value();
-
+    skip_whitespace_and_comments();
+    const toml_value value = parse_value(doc);
     skip_whitespace();
     if (current() == '#') {
         skip_comment();
     }
 
-    toml_table* table = ctb_;
-
-    for (size_t i = 0; i + 1 < key_path.size(); i++) {
-        const auto& k = key_path[i];
-        const toml_value* member = table->get_member(k);
-        toml_table* sub_table = nullptr;
-
+    toml_value* table = current_table_;
+    for (size_t i = 0; i + 1 < key_path_.size(); ++i) {
+        const string_view key = key_path_[i];
+        const toml_value* member = table->as_table().get_member(key);
+        toml_value* sub_table = nullptr;
         if (member != nullptr && member->is_table()) {
-            sub_table = const_cast<toml_table*>(member->as_table());
+            sub_table = const_cast<toml_value*>(member);
         } else if (member == nullptr) {
-            auto new_table = make_unique<toml_table>();
-            sub_table = new_table.get();
-            table->add_member(k, move(new_table));
+            sub_table = doc.new_container(true);
+            doc.table_append(*table, key, *sub_table, owning_);
         } else {
-            throw_parse_error("Key '" + k + "' already exists but is not a table");
+            throw_parse_error("Key '" + text_of(key) + "' already exists but is not a table");
         }
-
         table = sub_table;
     }
 
-    const string& last_key = key_path.back();
-
-    if (table->has_member(last_key)) {
-        throw_parse_error("Duplicate key: " + last_key);
+    const string_view last_key = key_path_.back();
+    if (table->as_table().has_member(last_key)) {
+        throw_parse_error("Duplicate key: " + text_of(last_key));
     }
-    table->add_member(last_key, move(val));
+    doc.table_append(*table, last_key, value, owning_);
 }
 
-void toml_parser::parse_table_header() {
+void toml_parser::parse_table_header(toml_document& doc) {
     expect('[');
-
     if (current() == '[') {
         throw_parse_error("Use [[table]] for array of tables");
     }
-
-    const vector<string> path = parse_dotted_key();
+    parse_dotted_key(doc, key_path_);
     skip_whitespace();
     expect(']');
-
-    set_current_table(path);
+    set_current_table(doc, key_path_);
     is_in_array_table_ = false;
 }
 
-void toml_parser::parse_array_table_header() {
+void toml_parser::parse_array_table_header(toml_document& doc) {
     expect('[');
     expect('[');
-    vector<string> path = parse_dotted_key();
+    parse_dotted_key(doc, key_path_);
     skip_whitespace();
     expect(']');
     expect(']');
-
-    if (path.empty()) {
+    if (key_path_.empty()) {
         throw_parse_error("Empty array table path");
     }
 
-    const vector<string> parent_path(path.begin(), path.end() - 1);
-    toml_table* parent = parent_path.empty() ? root_.get() : get_or_create_table(parent_path);
-
-    const string& array_key = path.back();
-    const toml_value* existing = parent->get_member(array_key);
-
-    toml_array* arr = nullptr;
+    toml_value* parent = get_or_create_table(doc, &doc.root(), key_path_.data(), key_path_.size() - 1);
+    const string_view array_key = key_path_.back();
+    const toml_value* existing = parent->as_table().get_member(array_key);
+    toml_value* array = nullptr;
     if (existing != nullptr) {
         if (!existing->is_array()) {
-            throw_parse_error("Key '" + array_key + "' already exists and is not an array");
+            throw_parse_error("Key '" + text_of(array_key) + "' already exists and is not an array");
         }
-        arr = const_cast<toml_array*>(existing->as_array());
+        array = const_cast<toml_value*>(existing);
     } else {
-        auto new_array = make_unique<toml_array>();
-        arr = new_array.get();
-        parent->add_member(array_key, move(new_array));
+        array = doc.new_container(false);
+        doc.table_append(*parent, array_key, *array, owning_);
     }
 
-    auto new_table = make_unique<toml_table>();
-    toml_table* new_table_ptr = new_table.get();
+    toml_value* new_table = doc.new_container(true);
+    doc.array_append(*array, *new_table);
 
-    arr->add_element(move(new_table));
-    context_stack_.push_back(context{ctb_, ctp_});
-    ctb_ = new_table_ptr;
-    ctp_ = move(path);
+    context_stack_.push_back(current_table_);
+    current_table_ = new_table;
     is_in_array_table_ = true;
 }
 
-toml_table* toml_parser::get_or_create_table(const vector<string>& path) const {
-    toml_table* tbl = root_.get();
-    for (const string& key: path) {
-        const auto* member = tbl->get_member(key);
+toml_value* toml_parser::get_or_create_table(toml_document& doc, toml_value* base, const string_view* path,
+                                             const size_t count) {
+    toml_value* table = base;
+    for (size_t i = 0; i < count; ++i) {
+        const string_view key = path[i];
+        const toml_value* member = table->as_table().get_member(key);
         if (member != nullptr && member->is_table()) {
-            tbl = const_cast<toml_table*>(member->as_table());
+            table = const_cast<toml_value*>(member);
         } else if (member == nullptr) {
-            auto new_table = make_unique<toml_table>();
-            toml_table* new_tbl_ptr = new_table.get();
-            tbl->add_member(key, move(new_table));
-            tbl = new_tbl_ptr;
+            toml_value* created = doc.new_container(true);
+            doc.table_append(*table, key, *created, owning_);
+            table = created;
         } else {
-            throw_parse_error("Key '" + key + "' already exists but is not a table");
+            throw_parse_error("Key '" + text_of(key) + "' already exists but is not a table");
         }
     }
-    return tbl;
+    return table;
 }
 
-toml_table* toml_parser::navigate_to_table(const vector<string>& path) const {
-    toml_table* tbl = root_.get();
-    for (const string& key: path) {
-        const toml_value* member = tbl->get_member(key);
-        if (member == nullptr || !member->is_table()) {
-            return nullptr;
-        }
-        tbl = const_cast<toml_table*>(member->as_table());
+void toml_parser::set_current_table(toml_document& doc, const vector<string_view>& path) {
+    current_table_ = get_or_create_table(doc, &doc.root(), path.data(), path.size());
+}
+
+toml_document toml_parser::parse() {
+    begin_ = text_.data();
+    cursor_ = text_.data();
+    end_ = text_.data() + text_.size();
+
+    if (static_cast<size_t>(end_ - cursor_) >= 3 && static_cast<uint8_t>(cursor_[0]) == 0xEF &&
+        static_cast<uint8_t>(cursor_[1]) == 0xBB && static_cast<uint8_t>(cursor_[2]) == 0xBF) {
+        cursor_ += 3;
     }
-    return tbl;
-}
 
-void toml_parser::set_current_table(const vector<string>& path) {
-    ctp_ = path;
-    ctb_ = get_or_create_table(path);
-}
-
-unique_ptr<toml_table> toml_parser::parse() {
-    if (pos_ + 3 <= len_ && static_cast<uint8_t>(text_[pos_]) == 0xEF &&
-        static_cast<uint8_t>(text_[pos_ + 1]) == 0xBB && static_cast<uint8_t>(text_[pos_ + 2]) == 0xBF) {
-        pos_ += 3;
-        column_ += 3;
-    }
+    toml_document doc;
+    doc.reserve(text_.size() * 2 + 4096);
+    doc.make_table();
+    current_table_ = &doc.root();
+    context_stack_.clear();
+    is_in_array_table_ = false;
 
     while (!eof()) {
         skip_whitespace_and_comments();
         if (eof()) {
             break;
         }
-
         if (current() == '[') {
             if (is_in_array_table_ && !context_stack_.empty()) {
-                const auto& prev_context = context_stack_.back();
-                ctb_ = prev_context.table;
-                ctp_ = prev_context.path;
+                current_table_ = context_stack_.back();
                 context_stack_.pop_back();
                 is_in_array_table_ = false;
             }
-
             if (peek() == '[') {
-                parse_array_table_header();
+                parse_array_table_header(doc);
             } else {
-                parse_table_header();
+                parse_table_header(doc);
             }
         } else {
-            if (ctp_.empty()) {
-                ctb_ = root_.get();
-            }
-
-            parse_key_value();
+            parse_key_value(doc);
         }
     }
-    return move(root_);
+    return doc;
 }
 
-optional<unique_ptr<toml_table>> toml_parser::try_parse() {
+optional<toml_document> toml_parser::try_parse() noexcept {
     try {
-        return parse();
+        return optional<toml_document>(parse());
     } catch (...) {
-        return {};
+        return optional<toml_document>();
     }
 }
 

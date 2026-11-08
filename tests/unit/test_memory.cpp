@@ -3,6 +3,7 @@
 #include <NeForce/core/container/vector.hpp>
 #include <NeForce/core/memory/allocated_ptr.hpp>
 #include <NeForce/core/memory/bit.hpp>
+#include <NeForce/core/memory/bump_arena.hpp>
 #include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/memory/memory.hpp>
 #include <NeForce/core/memory/memory_view.hpp>
@@ -3125,4 +3126,109 @@ TEST(MemoryViewTest, ReverseRangeFor) {
         reversed.push_back(*it);
     }
     EXPECT_EQ(reversed, (vector<int>{30, 20, 10}));
+}
+
+class BumpArenaTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(BumpArenaTest, AllocateHonoursAlignment) {
+    bump_arena arena;
+    const size_t alignments[] = {1, 2, 4, 8, 16, 32, 64, 128};
+    for (const size_t alignment: alignments) {
+        for (int i = 0; i < 8; ++i) {
+            void* pointer = arena.allocate(3, 7, alignment);
+            ASSERT_NE(pointer, nullptr);
+            EXPECT_EQ(reinterpret_cast<uintptr_t>(pointer) % alignment, 0u);
+            memory_set(pointer, 0xAB, 21);
+        }
+    }
+}
+
+TEST_F(BumpArenaTest, AllocateZeroBytesReturnsNull) {
+    bump_arena arena;
+    EXPECT_EQ(arena.allocate(0, 8), nullptr);
+    EXPECT_EQ(arena.allocate(8, 0), nullptr);
+    EXPECT_EQ(arena.allocate(0, 0), nullptr);
+}
+
+TEST_F(BumpArenaTest, InvalidAlignmentThrows) {
+    bump_arena arena;
+    EXPECT_THROW(arena.allocate(1, 1, 0), allocate_exception);
+    EXPECT_THROW(arena.allocate(1, 1, 3), allocate_exception);
+    EXPECT_THROW(arena.reserve(64, 6), allocate_exception);
+}
+
+TEST_F(BumpArenaTest, AllocationSizeOverflowThrows) {
+    bump_arena arena;
+    EXPECT_THROW(arena.allocate(static_cast<size_t>(-1), 2, 8), allocate_exception);
+}
+
+#ifdef NEFORCE_ARCH_BITS_64
+TEST_F(BumpArenaTest, ChunkAboveAllocatorLimitThrows) {
+    bump_arena arena;
+    EXPECT_THROW(arena.reserve(static_cast<size_t>(1) << 40), allocate_exception);
+}
+#endif
+
+TEST_F(BumpArenaTest, AllocationsDoNotOverlap) {
+    bump_arena arena;
+    auto* first = static_cast<unsigned char*>(arena.allocate(16, 1, 1));
+    auto* second = static_cast<unsigned char*>(arena.allocate(16, 1, 64));
+    ASSERT_NE(first, nullptr);
+    ASSERT_NE(second, nullptr);
+    memory_set(first, 0x11, 16);
+    memory_set(second, 0x22, 16);
+    for (int i = 0; i < 16; ++i) {
+        EXPECT_EQ(first[i], 0x11);
+        EXPECT_EQ(second[i], 0x22);
+    }
+}
+
+TEST_F(BumpArenaTest, TryExtendLastAllocation) {
+    bump_arena arena;
+    auto* pointer = static_cast<unsigned char*>(arena.allocate(8, 1, 8));
+    ASSERT_NE(pointer, nullptr);
+    EXPECT_TRUE(arena.try_extend(pointer, 8, 64));
+    memory_set(pointer, 0x5A, 64);
+    EXPECT_EQ(pointer[63], 0x5A);
+    EXPECT_NE(arena.allocate(1, 1, 1), nullptr);
+    EXPECT_FALSE(arena.try_extend(pointer, 64, 128));
+}
+
+TEST_F(BumpArenaTest, TryExtendRejectsForeignPointer) {
+    bump_arena first;
+    bump_arena second;
+    auto* pointer = static_cast<unsigned char*>(first.allocate(8, 1, 8));
+    EXPECT_FALSE(second.try_extend(pointer, 8, 16));
+    EXPECT_FALSE(first.try_extend(nullptr, 8, 16));
+}
+
+TEST_F(BumpArenaTest, ReserveHonoursDefaultAlignment) {
+    bump_arena arena;
+    arena.reserve(1024);
+    void* pointer = arena.allocate(1, 1, bump_arena::natural_alignment);
+    ASSERT_NE(pointer, nullptr);
+    EXPECT_EQ(reinterpret_cast<uintptr_t>(pointer) % bump_arena::natural_alignment, 0u);
+}
+
+TEST_F(BumpArenaTest, MoveTransfersChunks) {
+    bump_arena arena;
+    auto* pointer = static_cast<unsigned char*>(arena.allocate(16, 1, 8));
+    ASSERT_NE(pointer, nullptr);
+    memory_set(pointer, 0x33, 16);
+
+    bump_arena moved(_NEFORCE move(arena));
+    for (int i = 0; i < 16; ++i) {
+        EXPECT_EQ(pointer[i], 0x33);
+    }
+    EXPECT_NE(moved.allocate(8, 1, 16), nullptr);
+
+    bump_arena assigned;
+    assigned = _NEFORCE move(moved);
+    for (int i = 0; i < 16; ++i) {
+        EXPECT_EQ(pointer[i], 0x33);
+    }
 }

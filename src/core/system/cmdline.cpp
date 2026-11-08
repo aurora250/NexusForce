@@ -338,7 +338,7 @@ void cmdline::load_config(const string& config_path, const string& section) {
             }
         }
     } else if (ext == ".json") {
-        json_parser parser(content);
+        json_parser parser(content.view());
         json_document root = parser.parse();
         const json_value* current = root.get();
         if (!section.empty()) {
@@ -362,54 +362,44 @@ void cmdline::load_config(const string& config_path, const string& section) {
             }
         }
     } else if (ext == ".toml") {
-        toml_parser parser(content);
-        auto root = parser.parse();
+        toml_parser parser(content.view());
+        toml_document root = parser.parse();
         const toml_value* current = root.get();
-        if (!section.empty()) {
-            const auto* root_tbl = dynamic_cast<const toml_table*>(current);
-            if (root_tbl != nullptr) {
-                for (const auto& member: root_tbl->get_members()) {
-                    if (member.first == section) {
-                        current = member.second.get();
-                        break;
-                    }
-                }
+        if (!section.empty() && current->is_table()) {
+            const toml_value* member = current->as_table().get_member(section);
+            if (member != nullptr) {
+                current = member;
             }
         }
-        const auto* tbl = dynamic_cast<const toml_table*>(current);
-        if (tbl != nullptr) {
-            for (const auto& member: tbl->get_members()) {
-                const string val_str = member.second->to_string();
+        if (current->is_table()) {
+            for (const toml_member& member: current->as_table()) {
+                string val_str = member.value.to_string();
+                const string key(member.key().data(), member.key().size());
                 if (val_str.size() >= 2 && val_str.front() == '"' && val_str.back() == '"') {
-                    config_values[member.first] = val_str.substr(1, val_str.size() - 2);
+                    config_values[key] = val_str.substr(1, val_str.size() - 2);
                 } else {
-                    config_values[member.first] = val_str;
+                    config_values[key] = move(val_str);
                 }
             }
         }
     } else if (ext == ".yaml" || ext == ".yml") {
-        yaml_parser parser(content);
-        auto root = parser.parse();
-        const yaml_value* current = root.get();
-        if (!section.empty()) {
-            const auto* root_map = dynamic_cast<const yaml_mapping*>(current);
-            if (root_map != nullptr) {
-                for (const auto& member: root_map->get_members()) {
-                    if (member.first == section) {
-                        current = member.second.get();
-                        break;
-                    }
-                }
+        yaml_parser parser(content.view());
+        yaml_document root = parser.parse();
+        const yaml_value* current = &root.root();
+        if (!section.empty() && current->is_mapping()) {
+            const yaml_value* member = current->as_mapping().get_member(section);
+            if (member != nullptr) {
+                current = member;
             }
         }
-        const auto* map_val = dynamic_cast<const yaml_mapping*>(current);
-        if (map_val != nullptr) {
-            for (const auto& member: map_val->get_members()) {
-                const string val_str = member.second->to_string();
+        if (current->is_mapping()) {
+            for (const yaml_member& member: current->as_mapping()) {
+                const string key(member.key().data(), member.key().size());
+                const string val_str = member.value.to_string();
                 if (val_str.size() >= 2 && val_str.front() == '"' && val_str.back() == '"') {
-                    config_values[member.first] = val_str.substr(1, val_str.size() - 2);
+                    config_values[key] = val_str.substr(1, val_str.size() - 2);
                 } else {
-                    config_values[member.first] = val_str;
+                    config_values[key] = val_str;
                 }
             }
         }
