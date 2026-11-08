@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 
-#if(POLICY CMP0218)
-#    cmake_policy(SET CMP0218 NEW)
-#endif()
+if(POLICY CMP0218)
+    cmake_policy(SET CMP0218 NEW)
+endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -64,6 +64,10 @@ endif()
 string(JSON CONFIG_USING_PCLMUL ERROR_VARIABLE _config_pclmul_error GET ${JSON_CONTENT} feature pclmul)
 if(_config_pclmul_error)
     set(CONFIG_USING_PCLMUL ON)
+endif()
+string(JSON CONFIG_USING_VAES ERROR_VARIABLE _config_vaes_error GET ${JSON_CONTENT} feature vaes)
+if(_config_vaes_error)
+    set(CONFIG_USING_VAES OFF)
 endif()
 
 string(JSON CONFIG_BUILD_TESTS       GET ${JSON_CONTENT} build tests)
@@ -249,8 +253,10 @@ if(CMAKE_CROSSCOMPILING AND NEXUSFORCE_USING_IO_URING)
     set(NEXUSFORCE_USING_IO_URING OFF CACHE BOOL "Using io uring" FORCE)
     message(STATUS "io_uring disabled for cross-compilation")
 endif()
+
 option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"                ${CONFIG_USING_AES_NI})
 option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"                  ${CONFIG_USING_PCLMUL})
+option(NEXUSFORCE_USING_VAES        "Using VAES / VPCLMULQDQ"                  ${CONFIG_USING_VAES})
 
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
@@ -344,6 +350,7 @@ message(STATUS "  NEXUSFORCE_USING_SQLCIPHER:     ${NEXUSFORCE_USING_SQLCIPHER}"
 message(STATUS "  NEXUSFORCE_USING_IO_URING:      ${NEXUSFORCE_USING_IO_URING}")
 message(STATUS "  NEXUSFORCE_USING_AES_NI:        ${NEXUSFORCE_USING_AES_NI}")
 message(STATUS "  NEXUSFORCE_USING_PCLMUL:        ${NEXUSFORCE_USING_PCLMUL}")
+message(STATUS "  NEXUSFORCE_USING_VAES:          ${NEXUSFORCE_USING_VAES}")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_USING_MEMORY_POOL:           ${NEXUSFORCE_USING_MEMORY_POOL}")
 message(STATUS "  NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE: ${NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE}")
@@ -451,6 +458,7 @@ set(PACKAGE_VERSION_VARS
         NEXUSFORCE_USING_IO_URING
         NEXUSFORCE_USING_AES_NI
         NEXUSFORCE_USING_PCLMUL
+        NEXUSFORCE_USING_VAES
 
         NEXUSFORCE_SQLCIPHER_LINKED
         NEXUSFORCE_URING_LINKED

@@ -3166,12 +3166,11 @@ TEST_F(BumpArenaTest, AllocationSizeOverflowThrows) {
     EXPECT_THROW(arena.allocate(static_cast<size_t>(-1), 2, 8), allocate_exception);
 }
 
-#ifdef NEFORCE_ARCH_BITS_64
-TEST_F(BumpArenaTest, ChunkAboveAllocatorLimitThrows) {
+TEST_F(BumpArenaTest, ReserveAboveAllocatorLimitThrows) {
     bump_arena arena;
-    EXPECT_THROW(arena.reserve(static_cast<size_t>(1) << 40), allocate_exception);
+    EXPECT_THROW(arena.reserve(standard_allocator<byte_t>::max_size()), allocate_exception);
+    EXPECT_THROW(arena.reserve(standard_allocator<byte_t>::max_size() - 8), allocate_exception);
 }
-#endif
 
 TEST_F(BumpArenaTest, AllocationsDoNotOverlap) {
     bump_arena arena;

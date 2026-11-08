@@ -394,6 +394,9 @@
             defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_PCLMUL 1 ///< PCLMULQDQ指令集可用
 #    endif
+#    if (defined(__VAES__) && defined(__VPCLMULQDQ__)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_VAES 1 ///< VAES 与 VPCLMULQDQ 指令集可用
+#    endif
 #endif
 
 #if defined(NEFORCE_ARCH_ARM)
@@ -649,7 +652,7 @@
  * @brief 为单个函数指定优化级别
  * @param LEVEL 优化级别，如 "O0", "O1", "O2", "O3", "Os", "Ofast"
  */
-#ifdef NEFORCE_COMPILER_GNUC
+#ifdef NEFORCE_COMPILER_GCC
 #    define NEFORCE_OPTIMIZE(LEVEL) __attribute__((optimize(LEVEL)))
 #else
 #    define NEFORCE_OPTIMIZE(LEVEL)

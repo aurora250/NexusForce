@@ -532,7 +532,7 @@ public:
  * @class yaml_timestamp
  * @brief 时间戳视图
  */
-class yaml_timestamp {
+class NEFORCE_API yaml_timestamp {
 public:
     /**
      * @enum timestamp_type
@@ -590,7 +590,7 @@ public:
  * @class yaml_sequence
  * @brief 序列视图
  */
-class yaml_sequence {
+class NEFORCE_API yaml_sequence {
 public:
     /**
      * @enum sequence_style
@@ -689,7 +689,7 @@ public:
  * @class yaml_mapping
  * @brief 映射视图
  */
-class yaml_mapping {
+class NEFORCE_API yaml_mapping {
 public:
     /**
      * @enum mapping_style

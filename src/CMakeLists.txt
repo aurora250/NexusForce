@@ -287,6 +287,10 @@ if(NEXUSFORCE_USING_PCLMUL)
     target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_PCLMUL)
 endif()
 
+if(NEXUSFORCE_USING_VAES)
+    target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_VAES)
+endif()
+
 if(NEXUSFORCE_USING_SQLCIPHER)
     target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_SQLCIPHER)
 endif()

@@ -168,6 +168,7 @@
 - Markdown 解析器删除逐行字符串拼接与拥有式节点：单行段落、表格单元格、纯文本片段与链接地址零拷贝；围栏/缩进代码块、HTML 块直接写入 arena；引用块/列表项行视图不再复制
 - Markdown 解析器新增单行段落与简单列表项快速路径、列表“段落 + 嵌套列表”快速路径、表格分隔行前置判定、围栏标记缓存与代码段/强调闭合的 SIMD 查找
 - Markdown 引用标签缓存规范化键，定义超过 8 个时建立开放寻址索引；`parse_inline()` 使用线程级 arena 并在每次调用前重置
+- AES-256 密钥扩展改用 AES-NI `aeskeygenassist`，无 AES-NI 时保留常量时间回退；CBC 加密改为内联 AES-NI 链，GCM 的 GHASH 改为 8 路聚合，AES-CTR 与 GHASH 以 128 B 为批次错位流水
 - TOML 表格成员超过 16 个时自动建立开放寻址索引，大表格的解析去重、`toml_builder` 构建和 `get_member` 查找保持平均 O(1)；小表格仍用 4 字节键前缀的线性扫描，避免索引开销
 - TOML 序列化热路径重写：输出缓冲按顶层成员数预留、整数两位十进制展开、字符串按整段转义拷贝、`to_document()` 的表头路径复用单个 `string` 缓冲；`toml_value::to_string()` 的标准表格改为输出内联表格语法（此前输出 `{ /* non-inline table */ }` 占位）
 - TOML 解析器删除逐字符维护行列号的 `advance`，改为指针游标，行列号仅在抛错时扫描计算；空白/注释按指针顺序跳过，单行字符串用 8 字节 SWAR 掩码一次定位引号、反斜杠与换行
@@ -415,6 +416,7 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 GCM 计数器递增错误：原 4 路 CTR 内核用 `_mm_add_epi32` 直接修改大端计数字节，从第 2 个块起生成的密钥流与标准实现不一致；改为按大端序递增，并新增 64 B / 144 B 已知答案测试
 - `to_float64` / `to_float32` 的指数缩放由"超出 ±32 直接返回 inf/0"改为按 1e22 分块缩放，修复 `1e239` 被解析为 `inf`、`1.5e-43` 被解析为 `0` 的问题；指针标识符位数超出范围时仍走原有边界判定
 - 修复 macOS arm64 上 `share_memory` 的 `OpenOrCreate` 返回页大小、`grow` 抛异常的问题：header 的 `data_size` 改为通过 header 页映射读写，映射长度和 `munmap` 长度按页对齐，macOS `grow` 改为重建同名 shm 对象、复制旧数据后重新映射
 - 修复 macOS `named_mutex` 的 POSIX 共享内存名超过 `PSHMNAMLEN`（当前测试名约 45 字符）导致 `shm_open` 抛异常：使用稳定 FNV-1a 哈希生成短名

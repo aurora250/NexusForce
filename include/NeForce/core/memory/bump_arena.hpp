@@ -107,7 +107,7 @@ public:
      * @brief 预留首块容量
      * @param bytes 期望的首块可用字节数
      * @param alignment 首块数据的对齐要求，必须是 2 的幂
-     * @throws allocate_exception 分配失败或对齐要求无效时抛出
+     * @throws allocate_exception 分配失败、对齐要求无效或块大小无法表示时抛出
      * @note 只在尚未分配任何块时生效
      */
     void reserve(const size_t bytes, const size_t alignment = natural_alignment) {
