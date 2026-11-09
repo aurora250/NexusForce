@@ -109,6 +109,13 @@ function(_nexusforce_select_simd_flags out_var arch)
     # AES / PCLMUL feature flags, orthogonal to the SIMD level.
     # MSVC-style needs no flags: the intrinsics are always available and the
     # header fallback gate is NEFORCE_USING_AES_NI / NEFORCE_USING_PCLMUL.
+    # Apple x64 CPUs (including macos-*-intel CI runners) do not guarantee
+    # VAES, so keep the instruction set off there and fall back to the 128-bit
+    # AES-NI/PCLMUL kernel.
+    set(_vaes_enabled "${NEXUSFORCE_USING_VAES}")
+    if(APPLE AND arch STREQUAL "x64")
+        set(_vaes_enabled OFF)
+    endif()
     if(NOT _use_msvc_style)
         if(arch STREQUAL "x64")
             if(NEXUSFORCE_USING_AES_NI)
@@ -117,7 +124,7 @@ function(_nexusforce_select_simd_flags out_var arch)
             if(NEXUSFORCE_USING_PCLMUL)
                 list(APPEND _flags -mpclmul)
             endif()
-            if(NEXUSFORCE_USING_VAES)
+            if(_vaes_enabled)
                 list(APPEND _flags -mvaes -mvpclmulqdq)
             endif()
         elseif(arch STREQUAL "aarch64")

@@ -118,7 +118,7 @@ string_view env_parser::parse_quoted(const char* begin, const char* end, env_quo
         if (*cursor == '\\' && cursor + 1 < content_end) {
             const char next = cursor[1];
             const char ch = escaped_char(next);
-            if (static_cast<int>(decoded) != '\0') {
+            if (ch != '\0') {
                 scratch_ += ch;
             } else {
                 scratch_ += '\\';
@@ -170,7 +170,7 @@ void env_parser::parse_line(const char* begin, const char* end) {
         ++value_begin;
     }
 
-    env_quote quote = env_quote::none;
+    auto quote = env_quote::none;
     string_view value;
     bool decoded = false;
     if (value_begin >= limit) {

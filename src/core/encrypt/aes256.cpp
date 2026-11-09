@@ -9,9 +9,9 @@
 #    undef __NEFORCE_TARGET_APS
 #endif
 #if defined(NEFORCE_SIMD_AES_NI) && defined(NEFORCE_SIMD_PCLMUL) && defined(NEFORCE_SIMD_SSE2)
-#    define __NEFORCE_TARGET_APS NEFORCE_TARGET("aes,pclmul,sse2")
+#    define __NEFORCE_TARGET_APS NEFORCE_TARGET("aes,pclmul,sse2") NEFORCE_OPTIMIZE("O3")
 #else
-#    define __NEFORCE_TARGET_APS
+#    define __NEFORCE_TARGET_APS NEFORCE_OPTIMIZE("O3")
 #endif
 #ifdef __NEFORCE_AI
 #    undef __NEFORCE_AI
@@ -122,9 +122,8 @@ namespace {
     }
 
 #if defined(NEFORCE_SIMD_AES_NI)
-    NEFORCE_OPTIMIZE("O3")
-    __NEFORCE_TARGET_APS simd::vec128_t
-            AES256_key_expand_256_assist_1(simd::vec128_t temp1, simd::vec128_t temp2) noexcept {
+    __NEFORCE_TARGET_APS simd::vec128_t AES256_key_expand_256_assist_1(simd::vec128_t temp1,
+                                                                       simd::vec128_t temp2) noexcept {
         temp2 = _mm_shuffle_epi32(temp2, 0xff);
         temp1 = ::_mm_xor_si128(temp1, _mm_slli_si128(temp1, 4));
         temp1 = ::_mm_xor_si128(temp1, _mm_slli_si128(temp1, 4));
@@ -132,9 +131,8 @@ namespace {
         return ::_mm_xor_si128(temp1, temp2);
     }
 
-    NEFORCE_OPTIMIZE("O3")
-    __NEFORCE_TARGET_APS simd::vec128_t
-            AES256_key_expand_256_assist_2(simd::vec128_t temp1, simd::vec128_t temp3) noexcept {
+    __NEFORCE_TARGET_APS simd::vec128_t AES256_key_expand_256_assist_2(simd::vec128_t temp1,
+                                                                       simd::vec128_t temp3) noexcept {
         const auto temp2 = _mm_shuffle_epi32(_mm_aeskeygenassist_si128(temp1, 0x00), 0xaa);
         temp3 = ::_mm_xor_si128(temp3, _mm_slli_si128(temp3, 4));
         temp3 = ::_mm_xor_si128(temp3, _mm_slli_si128(temp3, 4));
@@ -142,7 +140,6 @@ namespace {
         return ::_mm_xor_si128(temp3, temp2);
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS void AES256_key_expansion_aesni(const byte_t* key, byte_t* expanded_key) noexcept {
         simd::vec128_t key_lo = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(key));
         simd::vec128_t key_hi = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(key + 16));
@@ -192,7 +189,6 @@ namespace {
 #endif
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS void AES256_inv_key_expansion(const byte_t* key, byte_t* inv_expanded_key) noexcept {
         AES256_key_expansion(key, inv_expanded_key);
 #if defined(NEFORCE_SIMD_AES_NI)
@@ -281,8 +277,7 @@ namespace {
         }
     }
 
-    __NEFORCE_TARGET_APS NEFORCE_OPTIMIZE("O3") void encrypt_block(byte_t dst[16], const byte_t* src,
-                                                                   const byte_t* expanded_key) noexcept {
+    __NEFORCE_TARGET_APS void encrypt_block(byte_t dst[16], const byte_t* src, const byte_t* expanded_key) noexcept {
 #if defined(NEFORCE_SIMD_AES_NI)
         simd::vec128_t state = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
 
@@ -337,8 +332,8 @@ namespace {
 #endif
     }
 
-    __NEFORCE_TARGET_APS NEFORCE_OPTIMIZE("O3") void decrypt_block(byte_t dst[16], const byte_t* src,
-                                                                   const byte_t* inv_expanded_key) noexcept {
+    __NEFORCE_TARGET_APS void decrypt_block(byte_t dst[16], const byte_t* src,
+                                            const byte_t* inv_expanded_key) noexcept {
 #if defined(NEFORCE_SIMD_AES_NI)
         simd::vec128_t state = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
 
@@ -400,8 +395,7 @@ namespace {
     }
 
 #ifdef NEFORCE_SIMD_AES_NI
-    __NEFORCE_TARGET_APS NEFORCE_OPTIMIZE("O3") void encrypt_blocks4(byte_t* dst, const byte_t* src,
-                                                                     const byte_t* expanded_key) noexcept {
+    __NEFORCE_TARGET_APS void encrypt_blocks4(byte_t* dst, const byte_t* src, const byte_t* expanded_key) noexcept {
         // Four independent AES chains in flight hide the ~4 cycle aesenc latency.
         simd::vec128_t b0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
         simd::vec128_t b1 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 16));
@@ -436,8 +430,7 @@ namespace {
         ::_mm_storeu_si128(reinterpret_cast<simd::vec128_t*>(dst + 48), b3);
     }
 
-    __NEFORCE_TARGET_APS NEFORCE_OPTIMIZE("O3") void decrypt_blocks4(byte_t* dst, const byte_t* src,
-                                                                     const byte_t* inv_expanded_key) noexcept {
+    __NEFORCE_TARGET_APS void decrypt_blocks4(byte_t* dst, const byte_t* src, const byte_t* inv_expanded_key) noexcept {
         simd::vec128_t b0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src));
         simd::vec128_t b1 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 16));
         simd::vec128_t b2 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(src + 32));
@@ -548,17 +541,15 @@ namespace {
     }
 
 #ifdef NEFORCE_SIMD_PCLMUL
-    NEFORCE_OPTIMIZE("O3") __NEFORCE_TARGET_APS simd::vec128_t ghash_byteswap(const simd::vec128_t value) noexcept {
+    __NEFORCE_TARGET_APS simd::vec128_t ghash_byteswap(const simd::vec128_t value) noexcept {
         const simd::vec128_t index = ::_mm_set_epi8(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
         return ::_mm_shuffle_epi8(value, index);
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS void ghash_bk(const simd::vec128_t value, simd::vec128_t& halves) noexcept {
         halves = ::_mm_xor_si128(value, _mm_shuffle_epi32(value, 0x0E));
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS void ghash_product_raw(const simd::vec128_t a, const simd::vec128_t b, simd::vec128_t& t1,
                                                 simd::vec128_t& t2, simd::vec128_t& t3) noexcept {
         simd::vec128_t a_halves;
@@ -570,10 +561,9 @@ namespace {
         t2 = ::_mm_xor_si128(_mm_clmulepi64_si128(a_halves, b_halves, 0x00), ::_mm_xor_si128(t1, t3));
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS
-            void ghash_product_raw_salted(const simd::vec128_t a, const simd::vec128_t b, const simd::vec128_t b_halves,
-                                          simd::vec128_t& t1, simd::vec128_t& t2, simd::vec128_t& t3) noexcept {
+    void ghash_product_raw_salted(const simd::vec128_t a, const simd::vec128_t b, const simd::vec128_t b_halves,
+                                  simd::vec128_t& t1, simd::vec128_t& t2, simd::vec128_t& t3) noexcept {
         simd::vec128_t a_halves;
         ghash_bk(a, a_halves);
         t1 = _mm_clmulepi64_si128(a, b, 0x11);
@@ -581,10 +571,9 @@ namespace {
         t2 = ::_mm_xor_si128(_mm_clmulepi64_si128(a_halves, b_halves, 0x00), ::_mm_xor_si128(t1, t3));
     }
 
-    NEFORCE_OPTIMIZE("O3")
-    __NEFORCE_TARGET_APS __NEFORCE_AI
-            void ghash_accumulate_salted(const simd::vec128_t a, const simd::vec128_t b, const simd::vec128_t b_halves,
-                                         simd::vec128_t& t1, simd::vec128_t& t2, simd::vec128_t& t3) noexcept {
+    __NEFORCE_TARGET_APS __NEFORCE_AI void ghash_accumulate_salted(const simd::vec128_t a, const simd::vec128_t b,
+                                                                   const simd::vec128_t b_halves, simd::vec128_t& t1,
+                                                                   simd::vec128_t& t2, simd::vec128_t& t3) noexcept {
         simd::vec128_t a_halves;
         ghash_bk(a, a_halves);
         const auto p1 = _mm_clmulepi64_si128(a, b, 0x11);
@@ -595,7 +584,6 @@ namespace {
         t3 = ::_mm_xor_si128(t3, p3);
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS void ghash_shift_left_256(simd::vec128_t& x0, simd::vec128_t& x1, simd::vec128_t& x2,
                                                    simd::vec128_t& x3) noexcept {
         x0 = ::_mm_or_si128(::_mm_slli_epi64(x0, 1), ::_mm_srli_epi64(x1, 63));
@@ -604,7 +592,6 @@ namespace {
         x3 = ::_mm_slli_epi64(x3, 1);
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS void ghash_reduce_256(simd::vec128_t& x0, simd::vec128_t& x1, simd::vec128_t& x2,
                                                simd::vec128_t& x3) noexcept {
         x1 = ::_mm_xor_si128(x1, ::_mm_xor_si128(::_mm_xor_si128(x3, ::_mm_srli_epi64(x3, 1)),
@@ -617,7 +604,6 @@ namespace {
                              ::_mm_xor_si128(::_mm_slli_epi64(x2, 62), ::_mm_slli_epi64(x2, 57)));
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS void ghash_product_finish(simd::vec128_t& t1, simd::vec128_t& t2, simd::vec128_t& t3,
                                                    simd::vec128_t& w, simd::vec128_t& x) noexcept {
         auto t0 = _mm_shuffle_epi32(t1, 0x0E);
@@ -629,7 +615,6 @@ namespace {
         x = ::_mm_xor_si128(t1, t0);
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS void ghash_mul_vector(const simd::vec128_t a, const simd::vec128_t b, simd::vec128_t& w,
                                                simd::vec128_t& x) noexcept {
         simd::vec128_t t1;
@@ -639,9 +624,8 @@ namespace {
         ghash_product_finish(t1, t2, t3, w, x);
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS
-            void ghash_square_vector(const simd::vec128_t value, simd::vec128_t& w, simd::vec128_t& x) noexcept {
+    void ghash_square_vector(const simd::vec128_t value, simd::vec128_t& w, simd::vec128_t& x) noexcept {
         simd::vec128_t t1;
         simd::vec128_t t2;
         simd::vec128_t t3;
@@ -697,7 +681,7 @@ namespace {
 #endif
     };
 
-    __NEFORCE_TARGET_APS NEFORCE_OPTIMIZE("O3") void ghash_init(ghash_context& ctx, const byte_t H[16]) noexcept {
+    __NEFORCE_TARGET_APS void ghash_init(ghash_context& ctx, const byte_t H[16]) noexcept {
         ctx.H_hi = endian::read_be64(H);
         ctx.H_lo = endian::read_be64(H + 8);
         ctx.H2_hi = ctx.H2_lo = ctx.H3_hi = ctx.H3_lo = ctx.H4_hi = ctx.H4_lo = 0;
@@ -714,18 +698,19 @@ namespace {
         ghash_mul_vector(ctx.h7w, ctx.h1w, ctx.h8w, ctx.h8x);
 #endif
 #if defined(NEFORCE_SIMD_VAES) && defined(NEFORCE_SIMD_AVX2) && defined(NEFORCE_SIMD_PCLMUL)
-        ctx.h87w = ::_mm256_set_m128i(ctx.h7w, ctx.h8w);
-        ctx.h87x = ::_mm256_set_m128i(ctx.h7x, ctx.h8x);
-        ctx.h65w = ::_mm256_set_m128i(ctx.h5w, ctx.h6w);
-        ctx.h65x = ::_mm256_set_m128i(ctx.h5x, ctx.h6x);
-        ctx.h43w = ::_mm256_set_m128i(ctx.h3w, ctx.h4w);
-        ctx.h43x = ::_mm256_set_m128i(ctx.h3x, ctx.h4x);
-        ctx.h21w = ::_mm256_set_m128i(ctx.h1w, ctx.h2w);
-        ctx.h21x = ::_mm256_set_m128i(ctx.h1x, ctx.h2x);
+        ctx.h87w = _mm256_set_m128i(ctx.h7w, ctx.h8w);
+        ctx.h87x = _mm256_set_m128i(ctx.h7x, ctx.h8x);
+        ctx.h65w = _mm256_set_m128i(ctx.h5w, ctx.h6w);
+        ctx.h65x = _mm256_set_m128i(ctx.h5x, ctx.h6x);
+        ctx.h43w = _mm256_set_m128i(ctx.h3w, ctx.h4w);
+        ctx.h43x = _mm256_set_m128i(ctx.h3x, ctx.h4x);
+        ctx.h21w = _mm256_set_m128i(ctx.h1w, ctx.h2w);
+        ctx.h21x = _mm256_set_m128i(ctx.h1x, ctx.h2x);
 #endif
     }
 
-    NEFORCE_OPTIMIZE("O3")
+#ifdef NEFORCE_SIMD_PCLMUL
+    __NEFORCE_TARGET_APS
     __NEFORCE_AI simd::vec128_t ghash_blocks8(const ghash_context& ctx, simd::vec128_t y, const byte_t* data) noexcept {
         const auto aw0 =
                 ::_mm_xor_si128(ghash_byteswap(::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(data))), y);
@@ -752,8 +737,9 @@ namespace {
         ghash_product_finish(t1, t2, t3, y, ignored);
         return y;
     }
+#endif
 
-    NEFORCE_OPTIMIZE("O3")
+    __NEFORCE_TARGET_APS
     __NEFORCE_AI void ghash_update(const ghash_context& ctx, uint64_t& state_hi, uint64_t& state_lo, const byte_t* data,
                                    size_t len) noexcept {
 #ifdef NEFORCE_SIMD_PCLMUL
@@ -834,7 +820,7 @@ namespace {
             len -= 16;
         }
         if (len > 0) {
-            byte_t padded[16] = {0};
+            byte_t padded[16] = {};
             memory_copy(padded, data, len);
             hi ^= endian::read_be64(padded);
             lo ^= endian::read_be64(padded + 8);
@@ -850,10 +836,9 @@ namespace {
     // so that its loads and CLMUL products are independent of the AES chain currently in
     // flight, which lets the two pipes overlap.
     template <bool Encrypt, bool Ghash>
-    NEFORCE_OPTIMIZE("O3")
-    __NEFORCE_AI
-            void gcm_blocks8(const byte_t* input, byte_t* output, const byte_t* ghash_src, simd::vec128_t& counter_rev,
-                             const byte_t* expanded_key, const ghash_context& ctx, simd::vec128_t& y) noexcept {
+    __NEFORCE_TARGET_APS __NEFORCE_AI void gcm_blocks8(const byte_t* input, byte_t* output, const byte_t* ghash_src,
+                                                       simd::vec128_t& counter_rev, const byte_t* expanded_key,
+                                                       const ghash_context& ctx, simd::vec128_t& y) noexcept {
         const simd::vec128_t rk0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(expanded_key));
         simd::vec128_t a0 = ::_mm_xor_si128(ghash_byteswap(counter_rev), rk0);
         simd::vec128_t a1 = ::_mm_xor_si128(ghash_byteswap(::_mm_add_epi32(counter_rev, ::_mm_cvtsi32_si128(1))), rk0);
@@ -917,48 +902,47 @@ namespace {
     // AES registers. VPCLMULQDQ evaluates two GHASH products per instruction, which
     // leaves enough register space to run AES and GHASH without spilling.
     NEFORCE_OPTIMIZE("O3") __NEFORCE_AI simd::vec256_t ghash_byteswap256(const simd::vec256_t value) noexcept {
-        const simd::vec256_t index = ::_mm256_setr_epi8(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 15, 14,
-                                                        13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
-        return ::_mm256_shuffle_epi8(value, index);
+        const simd::vec256_t index = _mm256_setr_epi8(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13,
+                                                      12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        return _mm256_shuffle_epi8(value, index);
     }
 
     NEFORCE_OPTIMIZE("O3")
     __NEFORCE_AI void ghash_accumulate_pair(const simd::vec256_t c, const simd::vec256_t hw, const simd::vec256_t hx,
                                             simd::vec256_t& t1, simd::vec256_t& t2, simd::vec256_t& t3) noexcept {
-        const simd::vec256_t ah = ::_mm256_xor_si256(c, ::_mm256_shuffle_epi32(c, 0x0E));
-        const simd::vec256_t p1 = ::_mm256_clmulepi64_epi128(c, hw, 0x11);
-        const simd::vec256_t p3 = ::_mm256_clmulepi64_epi128(c, hw, 0x00);
-        const simd::vec256_t p2 =
-                ::_mm256_xor_si256(::_mm256_clmulepi64_epi128(ah, hx, 0x00), ::_mm256_xor_si256(p1, p3));
-        t1 = ::_mm256_xor_si256(t1, p1);
-        t2 = ::_mm256_xor_si256(t2, p2);
-        t3 = ::_mm256_xor_si256(t3, p3);
+        const simd::vec256_t ah = _mm256_xor_si256(c, _mm256_shuffle_epi32(c, 0x0E));
+        const simd::vec256_t p1 = _mm256_clmulepi64_epi128(c, hw, 0x11);
+        const simd::vec256_t p3 = _mm256_clmulepi64_epi128(c, hw, 0x00);
+        const simd::vec256_t p2 = _mm256_xor_si256(_mm256_clmulepi64_epi128(ah, hx, 0x00), _mm256_xor_si256(p1, p3));
+        t1 = _mm256_xor_si256(t1, p1);
+        t2 = _mm256_xor_si256(t2, p2);
+        t3 = _mm256_xor_si256(t3, p3);
     }
 
     NEFORCE_OPTIMIZE("O3")
-    __NEFORCE_AI simd::vec128_t
-            ghash_blocks8_vaes(const ghash_context& ctx, simd::vec128_t y, const byte_t* data) noexcept {
-        const simd::vec256_t c01 = ::_mm256_xor_si256(
-                ghash_byteswap256(::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(data))),
-                ::_mm256_zextsi128_si256(y));
+    __NEFORCE_AI simd::vec128_t ghash_blocks8_vaes(const ghash_context& ctx, simd::vec128_t y,
+                                                   const byte_t* data) noexcept {
+        const simd::vec256_t c01 =
+                _mm256_xor_si256(ghash_byteswap256(_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(data))),
+                                 _mm256_zextsi128_si256(y));
         const simd::vec256_t c23 =
-                ghash_byteswap256(::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(data + 32)));
+                ghash_byteswap256(_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(data + 32)));
         const simd::vec256_t c45 =
-                ghash_byteswap256(::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(data + 64)));
+                ghash_byteswap256(_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(data + 64)));
         const simd::vec256_t c67 =
-                ghash_byteswap256(::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(data + 96)));
+                ghash_byteswap256(_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(data + 96)));
 
-        simd::vec256_t t1 = ::_mm256_setzero_si256();
-        simd::vec256_t t2 = ::_mm256_setzero_si256();
-        simd::vec256_t t3 = ::_mm256_setzero_si256();
+        simd::vec256_t t1 = _mm256_setzero_si256();
+        simd::vec256_t t2 = _mm256_setzero_si256();
+        simd::vec256_t t3 = _mm256_setzero_si256();
         ghash_accumulate_pair(c01, ctx.h87w, ctx.h87x, t1, t2, t3);
         ghash_accumulate_pair(c23, ctx.h65w, ctx.h65x, t1, t2, t3);
         ghash_accumulate_pair(c45, ctx.h43w, ctx.h43x, t1, t2, t3);
         ghash_accumulate_pair(c67, ctx.h21w, ctx.h21x, t1, t2, t3);
 
-        simd::vec128_t r1 = ::_mm_xor_si128(::_mm256_castsi256_si128(t1), ::_mm256_extracti128_si256(t1, 1));
-        simd::vec128_t r2 = ::_mm_xor_si128(::_mm256_castsi256_si128(t2), ::_mm256_extracti128_si256(t2, 1));
-        simd::vec128_t r3 = ::_mm_xor_si128(::_mm256_castsi256_si128(t3), ::_mm256_extracti128_si256(t3, 1));
+        simd::vec128_t r1 = ::_mm_xor_si128(_mm256_castsi256_si128(t1), _mm256_extracti128_si256(t1, 1));
+        simd::vec128_t r2 = ::_mm_xor_si128(_mm256_castsi256_si128(t2), _mm256_extracti128_si256(t2, 1));
+        simd::vec128_t r3 = ::_mm_xor_si128(_mm256_castsi256_si128(t3), _mm256_extracti128_si256(t3, 1));
         simd::vec128_t digest;
         simd::vec128_t ignored;
         ghash_product_finish(r1, r2, r3, digest, ignored);
@@ -970,48 +954,47 @@ namespace {
     __NEFORCE_AI void gcm_blocks8_vaes(const byte_t* input, byte_t* output, const byte_t* ghash_src,
                                        simd::vec128_t& counter_rev, const byte_t* expanded_key,
                                        const ghash_context& ctx, simd::vec128_t& y) noexcept {
-        const simd::vec256_t bswap = ::_mm256_setr_epi8(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 15, 14,
-                                                        13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        const simd::vec256_t bswap = _mm256_setr_epi8(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 15, 14, 13,
+                                                      12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         const simd::vec256_t rev01 =
-                ::_mm256_set_m128i(::_mm_add_epi32(counter_rev, ::_mm_cvtsi32_si128(1)), counter_rev);
-        const simd::vec256_t step2 = ::_mm256_set_epi32(0, 0, 0, 2, 0, 0, 0, 2);
-        const simd::vec256_t step4 = ::_mm256_set_epi32(0, 0, 0, 4, 0, 0, 0, 4);
-        const simd::vec256_t step6 = ::_mm256_set_epi32(0, 0, 0, 6, 0, 0, 0, 6);
+                _mm256_set_m128i(::_mm_add_epi32(counter_rev, ::_mm_cvtsi32_si128(1)), counter_rev);
+        const simd::vec256_t step2 = _mm256_set_epi32(0, 0, 0, 2, 0, 0, 0, 2);
+        const simd::vec256_t step4 = _mm256_set_epi32(0, 0, 0, 4, 0, 0, 0, 4);
+        const simd::vec256_t step6 = _mm256_set_epi32(0, 0, 0, 6, 0, 0, 0, 6);
         const simd::vec256_t rk0 =
-                ::_mm256_broadcastsi128_si256(::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(expanded_key)));
+                _mm256_broadcastsi128_si256(::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(expanded_key)));
 
-        simd::vec256_t a0 = ::_mm256_xor_si256(::_mm256_shuffle_epi8(rev01, bswap), rk0);
-        simd::vec256_t a1 = ::_mm256_xor_si256(::_mm256_shuffle_epi8(::_mm256_add_epi32(rev01, step2), bswap), rk0);
-        simd::vec256_t a2 = ::_mm256_xor_si256(::_mm256_shuffle_epi8(::_mm256_add_epi32(rev01, step4), bswap), rk0);
-        simd::vec256_t a3 = ::_mm256_xor_si256(::_mm256_shuffle_epi8(::_mm256_add_epi32(rev01, step6), bswap), rk0);
+        simd::vec256_t a0 = _mm256_xor_si256(_mm256_shuffle_epi8(rev01, bswap), rk0);
+        simd::vec256_t a1 = _mm256_xor_si256(_mm256_shuffle_epi8(_mm256_add_epi32(rev01, step2), bswap), rk0);
+        simd::vec256_t a2 = _mm256_xor_si256(_mm256_shuffle_epi8(_mm256_add_epi32(rev01, step4), bswap), rk0);
+        simd::vec256_t a3 = _mm256_xor_si256(_mm256_shuffle_epi8(_mm256_add_epi32(rev01, step6), bswap), rk0);
 
         for (int round = 1; round < 14; ++round) {
-            const simd::vec256_t rk = ::_mm256_broadcastsi128_si256(::_mm_loadu_si128(
+            const simd::vec256_t rk = _mm256_broadcastsi128_si256(::_mm_loadu_si128(
                     reinterpret_cast<const simd::vec128_t*>(expanded_key + static_cast<ptrdiff_t>(round * 16))));
-            a0 = ::_mm256_aesenc_epi128(a0, rk);
-            a1 = ::_mm256_aesenc_epi128(a1, rk);
-            a2 = ::_mm256_aesenc_epi128(a2, rk);
-            a3 = ::_mm256_aesenc_epi128(a3, rk);
+            a0 = _mm256_aesenc_epi128(a0, rk);
+            a1 = _mm256_aesenc_epi128(a1, rk);
+            a2 = _mm256_aesenc_epi128(a2, rk);
+            a3 = _mm256_aesenc_epi128(a3, rk);
         }
-        const simd::vec256_t rk14 = ::_mm256_broadcastsi128_si256(::_mm_loadu_si128(
+        const simd::vec256_t rk14 = _mm256_broadcastsi128_si256(::_mm_loadu_si128(
                 reinterpret_cast<const simd::vec128_t*>(expanded_key + static_cast<ptrdiff_t>(14 * 16))));
-        a0 = ::_mm256_aesenclast_epi128(a0, rk14);
-        a1 = ::_mm256_aesenclast_epi128(a1, rk14);
-        a2 = ::_mm256_aesenclast_epi128(a2, rk14);
-        a3 = ::_mm256_aesenclast_epi128(a3, rk14);
+        a0 = _mm256_aesenclast_epi128(a0, rk14);
+        a1 = _mm256_aesenclast_epi128(a1, rk14);
+        a2 = _mm256_aesenclast_epi128(a2, rk14);
+        a3 = _mm256_aesenclast_epi128(a3, rk14);
 
-        ::_mm256_storeu_si256(
-                reinterpret_cast<simd::vec256_t*>(output),
-                ::_mm256_xor_si256(a0, ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(input))));
-        ::_mm256_storeu_si256(
+        _mm256_storeu_si256(reinterpret_cast<simd::vec256_t*>(output),
+                            _mm256_xor_si256(a0, _mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(input))));
+        _mm256_storeu_si256(
                 reinterpret_cast<simd::vec256_t*>(output + 32),
-                ::_mm256_xor_si256(a1, ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(input + 32))));
-        ::_mm256_storeu_si256(
+                _mm256_xor_si256(a1, _mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(input + 32))));
+        _mm256_storeu_si256(
                 reinterpret_cast<simd::vec256_t*>(output + 64),
-                ::_mm256_xor_si256(a2, ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(input + 64))));
-        ::_mm256_storeu_si256(
+                _mm256_xor_si256(a2, _mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(input + 64))));
+        _mm256_storeu_si256(
                 reinterpret_cast<simd::vec256_t*>(output + 96),
-                ::_mm256_xor_si256(a3, ::_mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(input + 96))));
+                _mm256_xor_si256(a3, _mm256_loadu_si256(reinterpret_cast<const simd::vec256_t*>(input + 96))));
 
         if (Ghash) {
             y = ghash_blocks8_vaes(ctx, y, ghash_src);
@@ -1035,8 +1018,8 @@ namespace {
     }
 
     NEFORCE_OPTIMIZE("O3")
-    __NEFORCE_AI simd::vec128_t
-            ghash_blocks8_impl(const ghash_context& ctx, simd::vec128_t y, const byte_t* data) noexcept {
+    __NEFORCE_AI simd::vec128_t ghash_blocks8_impl(const ghash_context& ctx, simd::vec128_t y,
+                                                   const byte_t* data) noexcept {
 #    if defined(NEFORCE_SIMD_VAES) && defined(NEFORCE_SIMD_AVX2) && defined(NEFORCE_SIMD_PCLMUL)
         return ghash_blocks8_vaes(ctx, y, data);
 #    else
@@ -1075,7 +1058,6 @@ namespace {
 
 #ifdef NEFORCE_SIMD_AES_NI
     // Four independent AES chains in flight hide the ~4 cycle aesenc latency.
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS __NEFORCE_AI void AES256_ctr_keystream_x4_vec(byte_t counter[16], const byte_t* expanded_key,
                                                                        simd::vec128_t out[4]) noexcept {
         const simd::vec128_t rk0 = ::_mm_loadu_si128(reinterpret_cast<const simd::vec128_t*>(expanded_key));
@@ -1103,7 +1085,6 @@ namespace {
         out[3] = ::_mm_aesenclast_si128(c3, rk14);
     }
 
-    NEFORCE_OPTIMIZE("O3")
     __NEFORCE_TARGET_APS __NEFORCE_AI void AES256_ctr_keystream_x4(byte_t counter[16], const byte_t* expanded_key,
                                                                    byte_t keystream[64]) noexcept {
         simd::vec128_t out[4];
@@ -1241,7 +1222,7 @@ string AES256::decrypt_ecb_hex(const string_view encrypted_hex, const string_vie
     return {reinterpret_cast<const char*>(decrypted.data()), decrypted.size()};
 }
 
-NEFORCE_OPTIMIZE("O3") byte_vector AES256::encrypt_cbc(cbyte_view data, cbyte_view key, cbyte_view iv) {
+__NEFORCE_TARGET_APS byte_vector AES256::encrypt_cbc(cbyte_view data, cbyte_view key, cbyte_view iv) {
     if (key.size() != 32) {
         NEFORCE_THROW_EXCEPTION(value_exception("AES-256 requires 32-byte key"));
     }
@@ -1286,7 +1267,7 @@ NEFORCE_OPTIMIZE("O3") byte_vector AES256::encrypt_cbc(cbyte_view data, cbyte_vi
     return result;
 }
 
-NEFORCE_OPTIMIZE("O3") byte_vector AES256::decrypt_cbc(cbyte_view data, cbyte_view key, cbyte_view iv) {
+__NEFORCE_TARGET_APS byte_vector AES256::decrypt_cbc(cbyte_view data, cbyte_view key, cbyte_view iv) {
     if (key.size() != 32) {
         NEFORCE_THROW_EXCEPTION(value_exception("AES-256 requires 32-byte key"));
     }

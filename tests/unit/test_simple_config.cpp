@@ -322,6 +322,12 @@ TEST_F(EnvParserTest, ParseDoubleQuotedEscapes) {
     EXPECT_EQ(doc.get_string("KEY"), "a\nb\tc\\d\"e");
 }
 
+TEST_F(EnvParserTest, ParseDoubleQuotedUnknownEscapePreserved) {
+    env_parser parser("KEY=\"a\\qb\"");
+    env_document doc = parser.parse();
+    EXPECT_EQ(doc.get_string("KEY"), "a\\qb");
+}
+
 TEST_F(EnvParserTest, ParseSingleQuotedEscapedQuote) {
     env_parser parser("KEY='it'\\''s'");
     env_document doc = parser.parse();

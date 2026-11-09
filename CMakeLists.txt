@@ -258,6 +258,12 @@ option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"                $
 option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"                  ${CONFIG_USING_PCLMUL})
 option(NEXUSFORCE_USING_VAES        "Using VAES / VPCLMULQDQ"                  ${CONFIG_USING_VAES})
 
+# Apple x64 CPUs (including macos-*-intel CI runners) do not guarantee VAES.
+if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|AMD64)$" AND NEXUSFORCE_USING_VAES)
+    set(NEXUSFORCE_USING_VAES OFF CACHE BOOL "Using VAES / VPCLMULQDQ" FORCE)
+    message(STATUS "VAES disabled on macOS x64 (Apple x64 CPUs do not guarantee VAES)")
+endif()
+
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
 option(NEXUSFORCE_BUILD_BENCHMARKS  "Build benchmark programs"           ${CONFIG_BUILD_BENCHMARKS})

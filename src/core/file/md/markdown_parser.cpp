@@ -218,7 +218,7 @@ namespace {
             ++cursor;
         }
         int level = 0;
-        while (cursor + level < end && cursor[level] == '#' && level < 7) {
+        while (level < 7 && cursor + level < end && cursor[level] == '#') {
             ++level;
         }
         if (level == 0 || level > 6) {

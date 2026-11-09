@@ -29,7 +29,8 @@ namespace {
     }
 
     NEFORCE_NODISCARD uint32_t* index_slots(const yaml_container& container) noexcept {
-        return reinterpret_cast<uint32_t*>(container.data.members + container.capacity);
+        auto* base = reinterpret_cast<byte_t*>(container.data.members);
+        return reinterpret_cast<uint32_t*>(base + static_cast<size_t>(container.capacity) * sizeof(yaml_member));
     }
 
     void build_index(yaml_container& container) noexcept {
@@ -684,8 +685,13 @@ const uint32_t* yaml_mapping::get_sorted_indices() const noexcept {
     if (container->count <= 1) {
         return nullptr;
     }
-    uint32_t* order = reinterpret_cast<uint32_t*>(container->data.members + container->capacity) +
-                      static_cast<size_t>(container->capacity) * 2;
+    if (container->count > container->capacity) {
+        return nullptr;
+    }
+    // Members, hash slots and sort indices share the block allocated by mapping_append().
+    auto* order = reinterpret_cast<uint32_t*>(reinterpret_cast<byte_t*>(container->data.members) +
+                                              static_cast<size_t>(container->capacity) *
+                                                      (sizeof(yaml_member) + 2 * sizeof(uint32_t)));
     if ((container->flags & 1U) == 0) {
         for (uint32_t i = 0; i < container->count; ++i) {
             order[i] = i;
@@ -702,7 +708,7 @@ const uint32_t* yaml_mapping::get_sorted_indices() const noexcept {
                 order[j] = current;
             }
         } else {
-            sort(order, order + container->count,
+            sort(order, &order[container->count],
                  [members](const uint32_t lhs, const uint32_t rhs) { return key_less(members[lhs], members[rhs]); });
         }
         container->flags |= 1U;
