@@ -1,4 +1,4 @@
-#include <NeForce/core/encrypt/base64.hpp>
+#include <NeForce/core/encoding/base64.hpp>
 #include <NeForce/core/system/console.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/string/utf.hpp>

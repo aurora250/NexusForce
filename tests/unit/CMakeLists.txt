@@ -8,13 +8,16 @@ add_executable(NexusForceUnitTests
         test_crash_dump.cpp
         test_db.cpp
         test_dns.cpp
+        test_encoding.cpp
         test_encrypt.cpp
         test_exception.cpp
         test_file.cpp
         test_format.cpp
         test_functional.cpp
+        test_hash.cpp
         test_http.cpp
         test_iterator.cpp
+        test_kdf.cpp
         test_logging.cpp
         test_md.cpp
         test_memory.cpp

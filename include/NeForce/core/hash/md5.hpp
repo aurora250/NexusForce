@@ -1,5 +1,5 @@
-#ifndef NEFORCE_CORE_ENCRYPT_MD5_HPP__
-#define NEFORCE_CORE_ENCRYPT_MD5_HPP__
+#ifndef NEFORCE_CORE_HASH_MD5_HPP__
+#define NEFORCE_CORE_HASH_MD5_HPP__
 
 /**
  * @file md5.hpp
@@ -14,12 +14,13 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Encryption 加密算法
+ * @addtogroup HashCrypto
  * @{
  */
 
 /**
  * @defgroup MD5 MD5
+ * @ingroup HashCrypto
  * @brief MD5消息摘要算法的实现
  *
  * @warning **安全警告**：MD5算法已被证明存在密码学弱点，不再适合用于安全敏感场景。
@@ -130,7 +131,9 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector md5(const byte_vector& data) {
     return MD5::hash(data.view());
 }
 
-/** @} */ // Encryption
+/** @} */ // MD5
+
+/** @} */ // HashCrypto
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_ENCRYPT_MD5_HPP__
+#endif // NEFORCE_CORE_HASH_MD5_HPP__

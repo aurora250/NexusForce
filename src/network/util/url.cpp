@@ -1,21 +1,12 @@
-#include <NeForce/core/utility/hexadecimal.hpp>
+#include <NeForce/core/encoding/percent.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/util/network_exception.hpp>
 #include <NeForce/network/util/url.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-    bool should_encode(const char c, const bool encode_slash) noexcept {
-        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) {
-            return false;
-        }
-        if (c == '-' || c == '_' || c == '.' || c == '~') {
-            return false;
-        }
-        if (!encode_slash && c == '/') {
-            return false;
-        }
-        return true;
+    cbyte_view as_bytes(const string_view text) noexcept {
+        return cbyte_view{reinterpret_cast<const byte_t*>(text.data()), text.size()};
     }
 } // namespace
 
@@ -182,100 +173,23 @@ string url::to_string() const {
 }
 
 string url::encode(const string_view str, const bool encode_slash) {
-    string result;
-    result.reserve(str.size() * 3);
-
-    for (const char c: str) {
-        if (should_encode(c, encode_slash)) {
-            result += '%';
-            const auto uc = static_cast<byte_t>(c);
-            constexpr string_view hex{"0123456789ABCDEF"};
-            result += hex[uc >> 4];
-            result += hex[uc & 0x0F];
-        } else {
-            result += c;
-        }
-    }
-
-    return result;
+    return percent::encode(as_bytes(str), encode_slash);
 }
 
 optional<string> url::decode(const string_view str) {
-    string result;
-    result.reserve(str.size());
-
-    size_t i = 0;
-    while (i < str.size()) {
-        const char c = str[i];
-
-        if (c == '%') {
-            if (i + 2 >= str.size()) {
-                return none;
-            }
-
-            const auto xpair = hexadecimal::xdigit_value(str[i + 1], str[i + 2]);
-            if (!xpair.first) {
-                return none;
-            }
-
-            result += static_cast<char>(xpair.second);
-            i += 3;
-        } else {
-            result += c;
-            ++i;
-        }
+    const optional<byte_vector> decoded = percent::try_decode(str);
+    if (!decoded) {
+        return none;
     }
-
-    return result;
+    if (decoded->empty()) {
+        return string{};
+    }
+    return string{reinterpret_cast<const char*>(decoded->data()), decoded->size()};
 }
 
-string url::encode_form(const string_view str) {
-    string result;
-    result.reserve(str.size() * 3);
-    for (const char c: str) {
-        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '-' || c == '_' ||
-            c == '.' || c == '~') {
-            result += c;
-        } else if (c == ' ') {
-            result += '+';
-        } else {
-            result += '%';
-            const auto uc = static_cast<byte_t>(c);
-            constexpr string_view hex{"0123456789ABCDEF"};
-            result += hex[uc >> 4];
-            result += hex[uc & 0x0F];
-        }
-    }
-    return result;
-}
+string url::encode_form(const string_view str) { return percent::encode_form(as_bytes(str)); }
 
-string url::decode_tolerant(const string_view str) {
-    string result;
-    result.reserve(str.size());
-
-    size_t i = 0;
-    while (i < str.size()) {
-        const char c = str[i];
-
-        if (c == '%' && i + 2 < str.size()) {
-            auto decoded = url::decode(str.substr(i, 3));
-            if (decoded && decoded->size() == 1) {
-                result += (*decoded)[0];
-                i += 3;
-                continue;
-            }
-        }
-
-        if (c == '+') {
-            result += ' ';
-        } else {
-            result += c;
-        }
-        ++i;
-    }
-
-    return result;
-}
+string url::decode_tolerant(const string_view str) { return percent::decode_tolerant(str); }
 
 void url::parse_query(const string_view query, flat_unordered_map<string, string>& params) {
     if (query.empty()) {

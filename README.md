@@ -157,8 +157,15 @@ The core components of NexusForce strictly adhere to relevant international stan
 | **AES-256 Encryption**     | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html)   | Advanced Encryption Standard, supports ECB/CBC/GCM modes ([NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)) |
 | **ChaCha20-Poly1305 AEAD** | [IETF RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html)                                                                                 | ChaCha20 stream cipher + Poly1305 authenticator, AEAD with associated data (AAD) support                                                                                                |
 | **SHA-256 Hashing**        | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)            | Secure Hash Algorithm (SHA-2 family), 256-bit output                                                                                                                                    |
+| **SHA-512 Hashing**        | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)            | Secure Hash Algorithm (SHA-2 family), 512-bit output for 64-bit platforms                                                                                                               |
+| **BLAKE2b / BLAKE2s**      | [IETF RFC 7693](https://www.rfc-editor.org/rfc/rfc7693.html)                                                                                 | Variable-length output (1-64 / 1-32 bytes), keyed hashing, 12 / 10 rounds                                                                                                               |
+| **BLAKE3**                 | [BLAKE3 Specification](https://github.com/BLAKE3-team/BLAKE3-specs/blob/master/blake3.pdf)                                                   | Merkle-tree hashing, XOF, keyed hashing and derive-key mode; AVX2 8-way chunk compression                                                                                               |
+| **HKDF**                   | [IETF RFC 5869](https://www.rfc-editor.org/rfc/rfc5869.html)                                                                                 | HMAC-based extract-and-expand key derivation over SHA-256 / SHA-512                                                                                                                     |
+| **bcrypt**                 | [Provos & Mazières (1999)](https://www.usenix.org/legacy/events/usenix99/provos/provos_html/)                                                | Adaptive password hashing with `$2b$` format, cost 4-31 and constant-time verification                                                                                                  |
 | **SHA-1 Hashing**          | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (historical compatibility)                                     | ⚠️ Marked with security warning ([SHAttered](https://shattered.io/) collision attack)                                                                                                   |
 | **MD5 Hashing**            | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (historical compatibility)                                                                | ⚠️ Marked with security warning, for non-cryptographic checksum scenarios only                                                                                                          |
+| **Percent-Encoding**       | [RFC 3986 §2.1](https://www.rfc-editor.org/rfc/rfc3986.html#section-2.1), [WHATWG URL](https://url.spec.whatwg.org/)                       | URI component percent-encoding and `application/x-www-form-urlencoded` (`+` for space) variants                                                                                          |
+| **Base32 Encoding**        | [RFC 4648 §6](https://www.rfc-editor.org/rfc/rfc4648.html#section-6), [RFC 4648 §7](https://www.rfc-editor.org/rfc/rfc4648.html#section-7)   | Standard and base32hex encoding/decoding, case-insensitive and padding-tolerant                                                                                                         |
 | **Base64 Encoding**        | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5)   | Standard and URL-safe Base64 encoding/decoding, strict padding rules and illegal character detection                                                                                    |
 
 ### 🔤 Character Encoding & Internationalization
@@ -237,9 +244,23 @@ The core components of NexusForce strictly adhere to relevant international stan
 ### 🔐 Encryption & Security
 - **`AES256`** - Advanced Encryption Standard implementation
 - **`ChaCha20Poly1305`** - ChaCha20-Poly1305 AEAD authenticated encryption with AAD support
-- **`SHA1` / `SHA256`** - Secure Hash Algorithm
-- **`MD5`** - Message Digest Algorithm
-- **`base64`** - Binary data encoding
+
+### 🧮 Hashing
+- **`hash` / `hash_combine`** - Container-facing hash function objects, combination helpers and hashability traits
+- **`FNV-1a` / `DJB2` / `MurmurHash3` / `XXH32` / `XXH64` / `XXH3` / `wyhash` / `CityHash64`** - Non-cryptographic hash algorithms
+- **`SHA1` / `SHA256` / `SHA512`** - Cryptographic digests
+- **`BLAKE2b` / `BLAKE2s`** - RFC 7693 BLAKE2 with variable-length output and keyed hashing
+- **`BLAKE3`** - Merkle-tree hash with XOF, keyed hashing and derive-key mode; AVX2 8-way chunk compression
+- **`MD5`** - Message digest algorithm (legacy, non-security use only)
+
+### 🔑 Key Derivation
+- **`HKDF` / `HKDF_SHA512`** - RFC 5869 extract-and-expand key derivation
+- **`bcrypt`** - Adaptive password hashing with `$2b$` output and constant-time verification
+
+### 🔤 Encoding
+- **`percent`** - RFC 3986 percent-encoding and form-urlencoded variants
+- **`base32`** - RFC 4648 standard and base32hex encoding
+- **`base64`** - Binary-to-text encoding, standard and URL-safe variants
 
 ### 📁 File System
 - **Path/File Operations** - Path and file system operations `path` / `path_tree` / `file` / `file_async` / `file_diff` / `file_locker` / `file_mapper`

@@ -1,0 +1,1 @@
+add_nexusforce_benchmark(NexusForceHashBenchmark hash_benchmark.cpp)

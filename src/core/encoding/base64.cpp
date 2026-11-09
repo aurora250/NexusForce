@@ -1,4 +1,4 @@
-#include <NeForce/core/encrypt/base64.hpp>
+#include <NeForce/core/encoding/base64.hpp>
 #include <NeForce/core/memory/memory.hpp>
 #include <NeForce/core/simd/types.hpp>
 NEFORCE_BEGIN_NAMESPACE__

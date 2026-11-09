@@ -1,4 +1,4 @@
-#include <NeForce/core/encrypt/base64.hpp>
+#include <NeForce/core/encoding/base64.hpp>
 #include <NeForce/core/system/process.hpp>
 #include <NeForce/core/time/clocks.hpp>
 #include <NeForce/core/utility/packages.hpp>

@@ -939,7 +939,7 @@ unique_ptr<T, DeleterT> dynamic_pointer_cast(unique_ptr<U, DeleterU>&& ptr) {
 /** @} */ // UniquePointer
 
 /**
- * @addtogroup HashPrimary 哈希模板
+ * @addtogroup HashGeneric
  * @{
  */
 
@@ -956,7 +956,7 @@ struct hash<unique_ptr<T, Deleter>> {
     }
 };
 
-/** @} */ // HashPrimary
+/** @} */ // HashGeneric
 
 /**
  * @defgroup UniquePointer 独占智能指针

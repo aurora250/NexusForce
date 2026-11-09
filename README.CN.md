@@ -155,8 +155,15 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 | **AES-256 加密**           | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html) | 高级加密标准，支持 ECB/CBC/GCM 模式（[NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)） |
 | **ChaCha20-Poly1305 AEAD** | [IETF RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html)                                                                               | ChaCha20 流密码 + Poly1305 认证器，AEAD 认证加密，支持关联数据（AAD）                                                                                               |
 | **SHA-256 哈希**           | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)          | 安全哈希算法（SHA-2 家族），256 位输出                                                                                                                              |
+| **SHA-512 哈希**           | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)          | 安全哈希算法（SHA-2 家族），512 位输出，面向 64 位平台                                                                                                              |
+| **BLAKE2b / BLAKE2s**      | [IETF RFC 7693](https://www.rfc-editor.org/rfc/rfc7693.html)                                                                               | 可变长度输出（1-64 / 1-32 字节），支持密钥化，12 / 10 轮                                                                                                            |
+| **BLAKE3**                 | [BLAKE3 规范](https://github.com/BLAKE3-team/BLAKE3-specs/blob/master/blake3.pdf)                                                          | Merkle 树哈希、可扩展输出、密钥化与密钥派生模式，AVX2 八路并行压缩                                                                                                 |
+| **HKDF**                   | [IETF RFC 5869](https://www.rfc-editor.org/rfc/rfc5869.html)                                                                               | 基于 HMAC-SHA256 / SHA-512 的提取-扩展密钥派生                                                                                                                      |
+| **bcrypt**                 | [Provos & Mazières (1999)](https://www.usenix.org/legacy/events/usenix99/provos/provos_html/)                                              | 自适应口令哈希，`$2b$` 格式，cost 4-31，常数时间校验                                                                                                                |
 | **SHA-1 哈希**             | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (历史兼容)                                                   | ⚠️ 已标注安全警告（[SHAttered](https://shattered.io/) 碰撞攻击）                                                                                                    |
 | **MD5 哈希**               | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (历史兼容)                                                                              | ⚠️ 已标注安全警告，仅用于非安全校验场景                                                                                                                             |
+| **百分号编码**             | [RFC 3986 §2.1](https://www.rfc-editor.org/rfc/rfc3986.html#section-2.1), [WHATWG URL](https://url.spec.whatwg.org/)                       | URI 分量百分号编码与 `application/x-www-form-urlencoded`（空格转 `+`）变体                                                                                          |
+| **Base32 编码**            | [RFC 4648 §6](https://www.rfc-editor.org/rfc/rfc4648.html#section-6), [RFC 4648 §7](https://www.rfc-editor.org/rfc/rfc4648.html#section-7) | 标准与 base32hex 编解码，大小写不敏感且兼容省略填充                                                                                                                 |
 | **Base64 编码**            | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5) | 标准与 URL 安全 Base64 编解码，严格填充规则与非法字符检测                                                                                                           |
 
 ### 🔤 字符编码与国际化
@@ -234,9 +241,23 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ### 🔐 加密与安全 (Encrypt)
 - **`AES256`** - 高级加密标准实现
 - **`ChaCha20Poly1305`** - ChaCha20-Poly1305 AEAD 认证加密，支持 AAD
-- **`SHA1`/`SHA256`** - 安全哈希算法
-- **`MD5`** - 消息摘要算法
-- **`base64`** - 二进制数据编码
+
+### 🧮 哈希 (Hash)
+- **`hash`/`hash_combine`** - 面向容器的哈希函数对象、组合工具与可哈希性 traits
+- **`FNV-1a`/`DJB2`/`MurmurHash3`/`XXH32`/`XXH64`/`XXH3`/`wyhash`/`CityHash64`** - 非加密哈希算法
+- **`SHA1`/`SHA256`/`SHA512`** - 密码学摘要
+- **`BLAKE2b`/`BLAKE2s`** - RFC 7693 BLAKE2，可变长度输出与密钥化哈希
+- **`BLAKE3`** - Merkle 树哈希，支持 XOF、密钥化与密钥派生；AVX2 八路分块压缩
+- **`MD5`** - 消息摘要算法（历史兼容，仅限非安全场景）
+
+### 🔑 密钥派生 (KDF)
+- **`HKDF`/`HKDF_SHA512`** - RFC 5869 提取-扩展密钥派生
+- **`bcrypt`** - 自适应口令哈希，`$2b$` 输出与常数时间校验
+
+### 🔤 编码 (Encoding)
+- **`percent`** - RFC 3986 百分号编码与 form-urlencoded 变体
+- **`base32`** - RFC 4648 标准与 base32hex 编解码
+- **`base64`** - 二进制与文本互转，支持标准与 URL 安全变体
 
 ### 📁 文件系统 (File)
 - **路径/文件操作** - 路径/文件系统操作 `path`/`path_tree`/`file`/`file_async`/`file_diff`/`file_locker`/`file_mapper`

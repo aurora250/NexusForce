@@ -1,5 +1,5 @@
-#ifndef NEFORCE_CORE_ENCRYPT_SHA1_HPP__
-#define NEFORCE_CORE_ENCRYPT_SHA1_HPP__
+#ifndef NEFORCE_CORE_HASH_SHA1_HPP__
+#define NEFORCE_CORE_HASH_SHA1_HPP__
 
 /**
  * @file sha1.hpp
@@ -14,12 +14,13 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Encryption 加密算法
+ * @addtogroup HashCrypto
  * @{
  */
 
 /**
  * @defgroup SHA1 SHA-1
+ * @ingroup HashCrypto
  * @brief SHA-1安全哈希算法实现
  *
  * @warning **安全警告**：SHA-1算法已被证明存在密码学弱点，不再适合用于安全敏感场景。
@@ -134,7 +135,7 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha1(const byte_vector& data) { return 
 
 /** @} */ // SHA1
 
-/** @} */ // Encryption
+/** @} */ // HashCrypto
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_ENCRYPT_SHA1_HPP__
+#endif // NEFORCE_CORE_HASH_SHA1_HPP__

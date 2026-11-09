@@ -1041,8 +1041,8 @@ namespace {
         endian::write_le64(out_tag, state_hi);
         endian::write_le64(out_tag + 8, state_lo);
 #else
-        endian::write_be64(out_tag, state_hi);
-        endian::write_be64(out_tag + 8, state_lo);
+        endian::write_be64(out_tag, endian::read_be64(reinterpret_cast<const byte_t*>(&state_hi)));
+        endian::write_be64(out_tag + 8, endian::read_be64(reinterpret_cast<const byte_t*>(&state_lo)));
 #endif
     }
 

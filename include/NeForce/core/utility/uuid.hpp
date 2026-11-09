@@ -12,6 +12,7 @@
 #include "NeForce/core/memory/memory_view.hpp"
 #include "NeForce/core/numeric/random.hpp"
 #include "NeForce/core/utility/optional.hpp"
+#include "NeForce/core/hash/fnv.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

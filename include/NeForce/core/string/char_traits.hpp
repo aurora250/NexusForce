@@ -11,6 +11,7 @@
  */
 
 #include "NeForce/core/algorithm/compare.hpp"
+#include "NeForce/core/hash/xxhash.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
 #include "NeForce/core/string/charset.hpp"
 NEFORCE_BEGIN_NAMESPACE__

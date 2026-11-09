@@ -16,6 +16,7 @@
 #ifdef NEFORCE_PLATFORM_POSIX
 #    include <pthread.h>
 #endif
+#include "NeForce/core/hash/fnv.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/interface/icommon.hpp"
+#include "NeForce/core/hash/fnv.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

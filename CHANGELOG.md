@@ -4,6 +4,13 @@
 
 ### 🚀 New Features
 
+- 新增 `SHA512` 哈希（FIPS 180-4 / RFC 6234），提供字节与十六进制接口及便捷函数
+- 新增 `BLAKE2b` / `BLAKE2s`（RFC 7693），支持 1-64 / 1-32 字节可变输出与密钥化哈希
+- 新增 `BLAKE3`，支持 256 位输出、可扩展输出、密钥化与 `derive_key` 模式；AVX2 平台启用八路分块并行压缩
+- 新增 `HKDF` / `HKDF_SHA512`（RFC 5869），提供 extract、expand 与组合派生接口
+- 新增 `bcrypt` 口令哈希（`$2b$` 格式，cost 4-31），提供随机盐生成、已知盐重算与常数时间校验
+- 新增 `percent` 百分号编解码（RFC 3986 §2.1 / form-urlencoded），提供严格解码、宽容解码与表单编码
+- 新增 `base32` 编解码（RFC 4648 §6/§7），支持标准字母表与 base32hex、大小写不敏感解码与可选填充
 - 新增 `unique_function`，仅可移动且类型擦除
 - 新增 `rotating_file`，按大小轮转的原始文件写入器，支持 `rollover` 与 `indexed` 两种命名、`max_files` 保留与显式 `rotate()`
 - 新增 `crash_dump` 崩溃转储，统一接管 `terminate`、POSIX 致命信号与 Windows 未处理异常过滤器，写出平台原生转储
@@ -417,6 +424,7 @@
 ### 🐛 Bug Fixes
 
 - 修复 GCM 计数器递增错误：原 4 路 CTR 内核用 `_mm_add_epi32` 直接修改大端计数字节，从第 2 个块起生成的密钥流与标准实现不一致；改为按大端序递增，并新增 64 B / 144 B 已知答案测试
+- 修复无 PCLMUL 平台（ARM64 / 标量回退 / QEMU baseline）的 GCM tag 字节序错误：`ghash_final` 的标量分支直接按主机整数写出状态，导致 tag 反序；改为先从状态字节读取大端值再写出
 - `to_float64` / `to_float32` 的指数缩放由"超出 ±32 直接返回 inf/0"改为按 1e22 分块缩放，修复 `1e239` 被解析为 `inf`、`1.5e-43` 被解析为 `0` 的问题；指针标识符位数超出范围时仍走原有边界判定
 - 修复 macOS arm64 上 `share_memory` 的 `OpenOrCreate` 返回页大小、`grow` 抛异常的问题：header 的 `data_size` 改为通过 header 页映射读写，映射长度和 `munmap` 长度按页对齐，macOS `grow` 改为重建同名 shm 对象、复制旧数据后重新映射
 - 修复 macOS `named_mutex` 的 POSIX 共享内存名超过 `PSHMNAMLEN`（当前测试名约 45 字符）导致 `shm_open` 抛异常：使用稳定 FNV-1a 哈希生成短名

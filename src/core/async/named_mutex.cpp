@@ -13,6 +13,7 @@
 #endif
 #ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/exception/error_code.hpp>
+#    include <NeForce/core/hash/fnv.hpp>
 #    include <NeForce/core/utility/packages.hpp>
 #    include <fcntl.h>
 #    include <pthread.h>

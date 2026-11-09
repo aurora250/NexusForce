@@ -1,5 +1,5 @@
-#ifndef NEFORCE_CORE_ENCRYPT_BASE64_HPP__
-#define NEFORCE_CORE_ENCRYPT_BASE64_HPP__
+#ifndef NEFORCE_CORE_ENCODING_BASE64_HPP__
+#define NEFORCE_CORE_ENCODING_BASE64_HPP__
 
 /**
  * @file base64.hpp
@@ -15,12 +15,14 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Encryption 加密算法
+ * @defgroup Encoding 编码
+ * @brief 可逆但不提供保密性的数据表示转换。
  * @{
  */
 
 /**
  * @defgroup Base64 Base64
+ * @ingroup Encoding
  * @brief Base64编码和解码功能
  *
  * @section standards 遵循的国际标准
@@ -185,7 +187,7 @@ NEFORCE_ALWAYS_INLINE_INLINE string base64_decode(const string& data) {
 
 /** @} */ // Base64
 
-/** @} */ // Encryption
+/** @} */ // Encoding
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_ENCRYPT_BASE64_HPP__
+#endif // NEFORCE_CORE_ENCODING_BASE64_HPP__

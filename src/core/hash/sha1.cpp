@@ -1,4 +1,4 @@
-#include <NeForce/core/encrypt/sha1.hpp>
+#include <NeForce/core/hash/sha1.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 

@@ -55,6 +55,8 @@ jobs:
           image: ubuntu-24.04
 
       - name: Configure and Build
+        # Valgrind 3.x cannot decode VAES/VPCLMULQDQ instructions, so exercise the
+        # AES-NI/PCLMUL fallback here instead of the VAES GCM kernel.
         run: |
           mkdir -p build
           cd build
@@ -63,7 +65,8 @@ jobs:
             -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" \
             -DVCPKG_TARGET_TRIPLET=x64-linux \
             -DNEXUSFORCE_BUILD_DOCS=OFF \
-            -DNEXUSFORCE_BUILD_TESTS=ON
+            -DNEXUSFORCE_BUILD_TESTS=ON \
+            -DNEXUSFORCE_USING_VAES=OFF
           make -j$(nproc) NexusForceUnitTests
 
       - name: Save vcpkg binary cache

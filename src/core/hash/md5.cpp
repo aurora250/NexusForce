@@ -1,4 +1,4 @@
-#include <NeForce/core/encrypt/md5.hpp>
+#include <NeForce/core/hash/md5.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 

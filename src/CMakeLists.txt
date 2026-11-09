@@ -25,13 +25,13 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/timer_scheduler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/virtual_thread.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encoding/base32.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encoding/percent.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encoding/base64.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/kdf/bcrypt.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/kdf/hkdf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/aes256.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/base64.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/chacha20_poly1305.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/md5.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha1.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha256.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/xor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/crash_dump.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/crash_dump_elf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/exception/debug.cpp
@@ -71,7 +71,16 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_builder.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_parser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/file/yaml/yaml_value.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/functional/hash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/blake2.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/blake3.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/city_hash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/md5.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/murmur.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/sha1.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/sha256.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/sha512.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/wyhash.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/hash/xxhash.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/memory_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/engine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/numeric/random/lcg.cpp

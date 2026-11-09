@@ -9,7 +9,7 @@
  * 即可自动获得补全的完整功能。
  */
 
-#include "NeForce/core/functional/hash.hpp"
+#include "NeForce/core/hash/hash.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -46,7 +46,7 @@ public:
 /** @} */ // CRTPInterfaces
 
 /**
- * @addtogroup HashPrimary 哈希模板
+ * @addtogroup HashGeneric
  * @{
  */
 
@@ -61,7 +61,7 @@ struct hash<T, enable_if_t<is_base_of<ihashable<T>, T>::value>> {
     }
 };
 
-/** @} */ // HashPrimary
+/** @} */ // HashGeneric
 
 /**
  * @addtogroup CRTPInterfaces CRTP接口

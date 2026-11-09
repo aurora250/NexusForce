@@ -11,7 +11,7 @@
 
 #include "NeForce/core/config/c++config.hpp"
 #ifdef NEFORCE_STANDARD_20
-#    include "NeForce/core/functional/hash.hpp"
+#    include "NeForce/core/hash/hash.hpp"
 #    include <coroutine>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -73,7 +73,7 @@ using coroutine_handle = std::coroutine_handle<Promise>;
 /** @} */ // Coroutine
 
 /**
- * @addtogroup HashPrimary 哈希模板
+ * @addtogroup HashGeneric
  * @{
  */
 
@@ -88,7 +88,7 @@ struct hash<coroutine_handle<Promise>> {
     }
 };
 
-/** @} */ // HashPrimary
+/** @} */ // HashGeneric
 
 /**
  * @defgroup Coroutine 协程

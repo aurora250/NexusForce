@@ -11,6 +11,7 @@
 
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/string/string_view.hpp"
+#include "NeForce/core/hash/fnv.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_REFLECT__
 

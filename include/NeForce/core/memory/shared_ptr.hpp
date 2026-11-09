@@ -1008,7 +1008,7 @@ shared_ptr<T> dynamic_pointer_cast(const shared_ptr<U>& ptr) {
 /** @} */ // SharedPointer
 
 /**
- * @addtogroup HashPrimary 哈希模板
+ * @addtogroup HashGeneric
  * @{
  */
 
@@ -1024,7 +1024,7 @@ struct hash<shared_ptr<T>> {
     }
 };
 
-/** @} */ // HashPrimary
+/** @} */ // HashGeneric
 
 /// @cond
 NEFORCE_BEGIN_INNER__

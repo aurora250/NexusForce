@@ -1,5 +1,5 @@
-#ifndef NEFORCE_CORE_ENCRYPT_SHA256_HPP__
-#define NEFORCE_CORE_ENCRYPT_SHA256_HPP__
+#ifndef NEFORCE_CORE_HASH_SHA256_HPP__
+#define NEFORCE_CORE_HASH_SHA256_HPP__
 
 /**
  * @file sha256.hpp
@@ -9,17 +9,17 @@
  * 是SHA-2家族的一员，广泛应用于密码存储、数字签名、区块链、证书验证和数据完整性保护。
  */
 
-#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Encryption 加密算法
+ * @addtogroup HashCrypto
  * @{
  */
 
 /**
  * @defgroup SHA256 SHA-256
+ * @ingroup HashCrypto
  * @brief SHA-256安全哈希算法实现。
  *
  * @section standards 遵循的国际标准
@@ -118,9 +118,6 @@ NEFORCE_ALWAYS_INLINE_INLINE string sha256(const string_view data) {
  * @return 64字符的十六进制哈希值
  */
 NEFORCE_ALWAYS_INLINE_INLINE string sha256(const string& data) {
-    if (data.empty()) {
-        SHA256::hash_hex({});
-    }
     return SHA256::hash_hex({reinterpret_cast<const byte_t*>(data.data()), data.size()});
 }
 
@@ -136,14 +133,11 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha256(const cbyte_view data) { return 
  * @param data 输入数据
  * @return 32字节的哈希值
  */
-NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha256(const byte_vector& data) {
-    if (data.empty()) {
-        SHA256::hash({});
-    }
-    return SHA256::hash(data.view());
-}
+NEFORCE_ALWAYS_INLINE_INLINE byte_vector sha256(const byte_vector& data) { return SHA256::hash(data.view()); }
 
-/** @} */ // Encryption
+/** @} */ // SHA256
+
+/** @} */ // HashCrypto
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_ENCRYPT_SHA256_HPP__
+#endif // NEFORCE_CORE_HASH_SHA256_HPP__

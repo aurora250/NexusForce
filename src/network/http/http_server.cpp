@@ -1,6 +1,6 @@
 #include <NeForce/core/algorithm/remove.hpp>
-#include <NeForce/core/encrypt/base64.hpp>
-#include <NeForce/core/encrypt/sha1.hpp>
+#include <NeForce/core/encoding/base64.hpp>
+#include <NeForce/core/hash/sha1.hpp>
 #include <NeForce/core/numeric/random.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/core/utility/scope.hpp>

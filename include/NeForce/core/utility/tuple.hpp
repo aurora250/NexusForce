@@ -9,6 +9,7 @@
  */
 
 #include "NeForce/core/utility/pair.hpp"
+#include "NeForce/core/hash/fnv.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /// @cond

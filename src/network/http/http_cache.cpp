@@ -1,5 +1,5 @@
 #include <NeForce/network/http/http_cache.hpp>
-#include <NeForce/core/encrypt/sha1.hpp>
+#include <NeForce/core/hash/sha1.hpp>
 #include <NeForce/core/numeric/numeric_traits.hpp>
 #include <NeForce/core/time/clocks.hpp>
 NEFORCE_BEGIN_NAMESPACE__

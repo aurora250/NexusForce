@@ -1,4 +1,5 @@
 #include <NeForce/core/file/md/markdown_value.hpp>
+#include <NeForce/core/hash/fnv.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
