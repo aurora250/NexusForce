@@ -366,7 +366,7 @@ TEST(MemoryMove, Nullptr) {
 
 TEST(MemoryMove, LargeOverlapDestBeforeSrc) {
     constexpr size_t n = 100000;
-    std::vector<int> buf(n);
+    vector<int> buf(n);
     for (size_t i = 0; i < n; ++i) {
         buf[i] = static_cast<int>(i);
     }
@@ -383,7 +383,7 @@ TEST(MemoryMove, LargeOverlapDestBeforeSrc) {
 
 TEST(MemoryMove, LargeOverlapDestBeforeSrcUnaligned) {
     constexpr size_t n = 65536;
-    std::vector<char> storage(n + 64);
+    vector<char> storage(n + 64);
     char* const buf = storage.data() + 1;
     for (size_t i = 0; i < n; ++i) {
         buf[i] = static_cast<char>(i & 0x7F);
@@ -401,7 +401,7 @@ TEST(MemoryMove, LargeOverlapDestBeforeSrcUnaligned) {
 
 TEST(MemoryMove, LargeOverlapDestAfterSrc) {
     constexpr size_t n = 100000;
-    std::vector<int> buf(n);
+    vector<int> buf(n);
     for (size_t i = 0; i < n; ++i) {
         buf[i] = static_cast<int>(i);
     }
@@ -412,6 +412,92 @@ TEST(MemoryMove, LargeOverlapDestAfterSrc) {
         if (buf[i] != static_cast<int>(i - 1)) {
             ADD_FAILURE() << "mismatch at " << i;
             break;
+        }
+    }
+}
+
+
+namespace {
+    void reference_move(char* dest, const char* src, const size_t count) {
+        if (dest < src) {
+            for (size_t i = 0; i < count; ++i) {
+                dest[i] = src[i];
+            }
+        } else if (dest > src) {
+            for (size_t i = count; i > 0; --i) {
+                dest[i - 1] = src[i - 1];
+            }
+        }
+    }
+
+    const size_t move_counts[] = {0,    1,    2,    3,    7,    8,    9,    15,   16,   17,   23,   31,
+                                  32,   33,   47,   63,   64,   65,   127,  128,  129,  255,  256,  257,
+                                  1023, 1024, 1025, 2047, 2048, 2049, 4095, 4096, 4097, 8192, 12345};
+
+} // namespace
+
+
+TEST(MemoryMove, LargeDisjointBothDirections) {
+    constexpr size_t n = 40000;
+    vector<char> work(3 * n);
+    vector<char> expect(3 * n);
+
+    for (size_t i = 0; i < work.size(); ++i) {
+        work[i] = static_cast<char>(static_cast<unsigned>(i * 2654435761U) >> 11);
+    }
+
+    expect = work;
+    memory_copy(expect.data() + n, expect.data(), n);
+    memory_move(work.data() + n, work.data(), n);
+    EXPECT_EQ(memory_compare(work.data(), expect.data(), work.size()), 0);
+
+    expect = work;
+    memory_copy(expect.data(), expect.data() + 2 * n, n);
+    memory_move(work.data(), work.data() + 2 * n, n);
+    EXPECT_EQ(memory_compare(work.data(), expect.data(), work.size()), 0);
+}
+
+TEST(MemoryMove, OverlapSweepMatchesReference) {
+    constexpr size_t kSpan = 16384;
+    constexpr size_t kGuard = 64;
+    vector<char> work(kSpan + 2 * kGuard);
+    vector<char> expect(work.size());
+
+    for (size_t i = 0; i < work.size(); ++i) {
+        work[i] = static_cast<char>(static_cast<unsigned>(i * 2654435761U) >> 13);
+    }
+
+    for (size_t pad = 0; pad < 32; ++pad) {
+        for (size_t delta = 1; delta <= 33; ++delta) {
+            for (const size_t count: move_counts) {
+                if (count == 0) {
+                    continue;
+                }
+
+                for (int backward = 0; backward < 2; ++backward) {
+                    const size_t base = kGuard + pad;
+                    const size_t dest_off = backward != 0 ? base + kGuard : base;
+                    const size_t src_off = backward != 0 ? base : base + delta;
+
+                    const size_t lo = dest_off < src_off ? dest_off : src_off;
+                    const size_t hi = (dest_off > src_off ? dest_off : src_off) + count;
+
+                    memory_copy(expect.data() + lo, work.data() + lo, hi - lo);
+                    reference_move(expect.data() + dest_off, expect.data() + src_off, count);
+                    memory_move(work.data() + dest_off, work.data() + src_off, count);
+
+                    if (memory_compare(work.data() + lo, expect.data() + lo, hi - lo) != 0) {
+                        for (size_t i = lo; i < hi; ++i) {
+                            if (work[i] != expect[i]) {
+                                ADD_FAILURE() << "pad=" << pad << " delta=" << delta << " count=" << count
+                                              << " backward=" << backward << " mismatch at " << i;
+                                break;
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
         }
     }
 }

@@ -260,6 +260,74 @@ NEFORCE_ALWAYS_INLINE_INLINE void storeu_si128(void* ptr, vec128_t v) noexcept {
 }
 
 /**
+ * @brief 非对齐加载 64 位
+ * @param ptr 源内存地址
+ * @return 加载的低 64 位向量，高 64 位为零
+ */
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t loadl_epi64(const void* ptr) noexcept {
+#if defined(NEFORCE_SIMD_SSE2)
+    return ::_mm_loadl_epi64(static_cast<const vec128_t*>(ptr));
+#else
+    vec128_t result;
+    const auto* src = static_cast<const byte_t*>(ptr);
+    for (int i = 0; i < 8; ++i) {
+        result.data[i] = src[i];
+    }
+    return result;
+#endif
+}
+
+/**
+ * @brief 非对齐存储 64 位
+ * @param ptr 目标内存地址
+ * @param v 待存储的向量，仅低 64 位被写入
+ */
+NEFORCE_ALWAYS_INLINE_INLINE void storel_epi64(void* ptr, vec128_t v) noexcept {
+#if defined(NEFORCE_SIMD_SSE2)
+    ::_mm_storel_epi64(static_cast<vec128_t*>(ptr), v);
+#else
+    auto* dst = static_cast<byte_t*>(ptr);
+    for (int i = 0; i < 8; ++i) {
+        dst[i] = v.data[i];
+    }
+#endif
+}
+
+/**
+ * @brief 非对齐加载 32 位
+ * @param ptr 源内存地址
+ * @return 加载的低 32 位向量，其余位为零
+ */
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t loadu_si32(const void* ptr) noexcept {
+#if defined(NEFORCE_SIMD_SSE2)
+    return ::_mm_castps_si128(::_mm_load_ss(static_cast<const float*>(ptr)));
+#else
+    vec128_t result;
+    const auto* src = static_cast<const byte_t*>(ptr);
+    for (int i = 0; i < 4; ++i) {
+        result.data[i] = src[i];
+    }
+    return result;
+#endif
+}
+
+/**
+ * @brief 非对齐存储 32 位
+ * @param ptr 目标内存地址
+ * @param v 待存储的向量，仅低 32 位被写入
+ */
+NEFORCE_ALWAYS_INLINE_INLINE void storeu_si32(void* ptr, vec128_t v) noexcept {
+#if defined(NEFORCE_SIMD_SSE2)
+    ::_mm_store_ss(static_cast<float*>(ptr), ::_mm_castsi128_ps(v));
+#else
+    auto* dst = static_cast<byte_t*>(ptr);
+    for (int i = 0; i < 4; ++i) {
+        dst[i] = v.data[i];
+    }
+#endif
+}
+
+/**
  * @brief 非对齐存储 256-bit 向量
  * @param ptr 目标内存地址
  * @param v 待存储的向量
@@ -750,17 +818,13 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE int memory_compare(const void
 }
 
 /**
- * @brief 内存移动
+ * @brief 大范围内存移动
  * @param dest 目标内存指针
  * @param src 源内存指针
- * @param count 字节数
+ * @param count 字节数，调用方保证不小于 1 KiB
  * @return 目标指针
  */
-NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size_t count) noexcept {
-    if (dest == nullptr || src == nullptr) {
-        return nullptr;
-    }
-
+NEFORCE_NOINLINE inline void* memory_move_large(void* dest, const void* src, size_t count) noexcept {
     auto* d = static_cast<byte_t*>(dest);
     const auto* s = static_cast<const byte_t*>(src);
 
@@ -773,6 +837,33 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size
         if (count >= 4096 && (dest_addr + count <= src_addr || src_addr + count <= dest_addr)) {
             return memory_copy_large(dest, src, count);
         }
+#endif
+#if defined(NEFORCE_SIMD_AVX2)
+        const size_t head = (32U - (reinterpret_cast<uintptr_t>(d) & 31U)) & 31U;
+        size_t rest = head;
+        if (rest >= 16) {
+            storeu_si128(d, loadu_si128(s));
+            d += 16;
+            s += 16;
+            rest -= 16;
+        }
+        if (rest >= 8) {
+            storel_epi64(d, loadl_epi64(s));
+            d += 8;
+            s += 8;
+            rest -= 8;
+        }
+        if (rest >= 4) {
+            storeu_si32(d, loadu_si32(s));
+            d += 4;
+            s += 4;
+            rest -= 4;
+        }
+        while (rest > 0) {
+            *d++ = *s++;
+            --rest;
+        }
+        count -= head;
 #endif
 #if defined(NEFORCE_SIMD_AVX512F)
         while (count >= 256) {
@@ -792,6 +883,179 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size
         }
 #endif
 #if defined(NEFORCE_SIMD_AVX2)
+        while (count >= 512) {
+            storeu_si256(d, loadu_si256(s));
+            storeu_si256(d + 32, loadu_si256(s + 32));
+            storeu_si256(d + 64, loadu_si256(s + 64));
+            storeu_si256(d + 96, loadu_si256(s + 96));
+            storeu_si256(d + 128, loadu_si256(s + 128));
+            storeu_si256(d + 160, loadu_si256(s + 160));
+            storeu_si256(d + 192, loadu_si256(s + 192));
+            storeu_si256(d + 224, loadu_si256(s + 224));
+            storeu_si256(d + 256, loadu_si256(s + 256));
+            storeu_si256(d + 288, loadu_si256(s + 288));
+            storeu_si256(d + 320, loadu_si256(s + 320));
+            storeu_si256(d + 352, loadu_si256(s + 352));
+            storeu_si256(d + 384, loadu_si256(s + 384));
+            storeu_si256(d + 416, loadu_si256(s + 416));
+            storeu_si256(d + 448, loadu_si256(s + 448));
+            storeu_si256(d + 480, loadu_si256(s + 480));
+            d += 512;
+            s += 512;
+            count -= 512;
+        }
+        while (count >= 128) {
+            storeu_si256(d, loadu_si256(s));
+            storeu_si256(d + 32, loadu_si256(s + 32));
+            storeu_si256(d + 64, loadu_si256(s + 64));
+            storeu_si256(d + 96, loadu_si256(s + 96));
+            d += 128;
+            s += 128;
+            count -= 128;
+        }
+#endif
+#if defined(NEFORCE_SIMD_AVX)
+        while (count >= 32) {
+            storeu_si256(d, loadu_si256(s));
+            d += 32;
+            s += 32;
+            count -= 32;
+        }
+#endif
+        while (count >= 16) {
+            storeu_si128(d, loadu_si128(s));
+            d += 16;
+            s += 16;
+            count -= 16;
+        }
+        for (; count > 0; --count) {
+            *d++ = *s++;
+        }
+        return dest;
+    }
+
+#if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                                               \
+        (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
+         !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER))
+    if (count >= 4096 && reinterpret_cast<uintptr_t>(s) + count <= reinterpret_cast<uintptr_t>(d)) {
+        return memory_copy_large(dest, src, count);
+    }
+#endif
+#if defined(NEFORCE_SIMD_AVX2)
+    size_t head = (reinterpret_cast<uintptr_t>(d) + count) & 31U;
+    byte_t* dest_end = d + count;
+    const byte_t* src_end = s + count;
+    if (head >= 16) {
+        dest_end -= 16;
+        src_end -= 16;
+        storeu_si128(dest_end, loadu_si128(src_end));
+        head -= 16;
+    }
+    if (head >= 8) {
+        dest_end -= 8;
+        src_end -= 8;
+        storel_epi64(dest_end, loadl_epi64(src_end));
+        head -= 8;
+    }
+    if (head >= 4) {
+        dest_end -= 4;
+        src_end -= 4;
+        storeu_si32(dest_end, loadu_si32(src_end));
+        head -= 4;
+    }
+    while (head > 0) {
+        --head;
+        *--dest_end = *--src_end;
+    }
+    count = static_cast<size_t>(dest_end - d);
+#endif
+    d += count;
+    s += count;
+#if defined(NEFORCE_SIMD_AVX2)
+    while (count >= 128) {
+        d -= 128;
+        s -= 128;
+        const vec256_t blk0 = loadu_si256(s);
+        const vec256_t blk1 = loadu_si256(s + 32);
+        const vec256_t blk2 = loadu_si256(s + 64);
+        const vec256_t blk3 = loadu_si256(s + 96);
+        storeu_si256(d, blk0);
+        storeu_si256(d + 32, blk1);
+        storeu_si256(d + 64, blk2);
+        storeu_si256(d + 96, blk3);
+        count -= 128;
+    }
+#endif
+#if defined(NEFORCE_SIMD_AVX)
+    while (count >= 32) {
+        d -= 32;
+        s -= 32;
+        storeu_si256(d, loadu_si256(s));
+        count -= 32;
+    }
+#endif
+    while (count >= 16) {
+        d -= 16;
+        s -= 16;
+        storeu_si128(d, loadu_si128(s));
+        count -= 16;
+    }
+    while (count > 0) {
+        --count;
+        --d;
+        --s;
+        *d = *s;
+    }
+    return dest;
+}
+
+/**
+ * @brief 内存移动
+ * @param dest 目标内存指针
+ * @param src 源内存指针
+ * @param count 字节数
+ * @return 目标指针
+ */
+NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size_t count) noexcept {
+    if (dest == nullptr || src == nullptr) {
+        return nullptr;
+    }
+    if (count >= 4096) {
+        return memory_move_large(dest, src, count);
+    }
+
+    auto* d = static_cast<byte_t*>(dest);
+    const auto* s = static_cast<const byte_t*>(src);
+
+    if (d < s) {
+#if defined(NEFORCE_SIMD_AVX2)
+        if (count >= 1024) {
+            const size_t head = (32U - (reinterpret_cast<uintptr_t>(d) & 31U)) & 31U;
+            size_t rest = head;
+            if (rest >= 16) {
+                storeu_si128(d, loadu_si128(s));
+                d += 16;
+                s += 16;
+                rest -= 16;
+            }
+            if (rest >= 8) {
+                storel_epi64(d, loadl_epi64(s));
+                d += 8;
+                s += 8;
+                rest -= 8;
+            }
+            if (rest >= 4) {
+                storeu_si32(d, loadu_si32(s));
+                d += 4;
+                s += 4;
+                rest -= 4;
+            }
+            while (rest > 0) {
+                *d++ = *s++;
+                --rest;
+            }
+            count -= head;
+        }
         while (count >= 128) {
             storeu_si256(d, loadu_si256(s));
             storeu_si256(d + 32, loadu_si256(s + 32));
@@ -820,8 +1084,53 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size
             *d++ = *s++;
         }
     } else if (d > s) {
+#if defined(NEFORCE_SIMD_AVX2)
+        if (count >= 1024) {
+            size_t head = (reinterpret_cast<uintptr_t>(d) + count) & 31U;
+            byte_t* dest_end = d + count;
+            const byte_t* src_end = s + count;
+            if (head >= 16) {
+                dest_end -= 16;
+                src_end -= 16;
+                storeu_si128(dest_end, loadu_si128(src_end));
+                head -= 16;
+            }
+            if (head >= 8) {
+                dest_end -= 8;
+                src_end -= 8;
+                storel_epi64(dest_end, loadl_epi64(src_end));
+                head -= 8;
+            }
+            if (head >= 4) {
+                dest_end -= 4;
+                src_end -= 4;
+                storeu_si32(dest_end, loadu_si32(src_end));
+                head -= 4;
+            }
+            while (head > 0) {
+                --head;
+                *--dest_end = *--src_end;
+            }
+            count = static_cast<size_t>(dest_end - d);
+        }
+#endif
         d += count;
         s += count;
+#if defined(NEFORCE_SIMD_AVX2)
+        while (count >= 128) {
+            d -= 128;
+            s -= 128;
+            const vec256_t blk0 = loadu_si256(s);
+            const vec256_t blk1 = loadu_si256(s + 32);
+            const vec256_t blk2 = loadu_si256(s + 64);
+            const vec256_t blk3 = loadu_si256(s + 96);
+            storeu_si256(d, blk0);
+            storeu_si256(d + 32, blk1);
+            storeu_si256(d + 64, blk2);
+            storeu_si256(d + 96, blk3);
+            count -= 128;
+        }
+#endif
 #if defined(NEFORCE_SIMD_AVX)
         while (count >= 32) {
             d -= 32;

@@ -484,24 +484,26 @@ private:
         _NEFORCE swap(pair_.value, other.pair_.value);
     }
 
-    NEFORCE_CONSTEXPR20 void insert_one(const size_type index, const value_type& value, true_type /*unused*/) {
-        _NEFORCE memory_move(start_ + index + 1, start_ + index, (size() - index) * sizeof(value_type));
-        _NEFORCE construct(start_ + index, value);
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void insert_one(const pointer position, const value_type& value,
+                                                              true_type /*unused*/) {
+        _NEFORCE memory_move(position + 1, position, static_cast<size_type>(finish_ - position) * sizeof(value_type));
+        _NEFORCE construct(position, value);
         ++finish_;
     }
 
-    NEFORCE_CONSTEXPR20 void insert_one(const size_type index, value_type&& value, true_type /*unused*/) {
-        _NEFORCE memory_move(start_ + index + 1, start_ + index, (size() - index) * sizeof(value_type));
-        _NEFORCE construct(start_ + index, _NEFORCE move(value));
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void insert_one(const pointer position, value_type&& value,
+                                                              true_type /*unused*/) {
+        _NEFORCE memory_move(position + 1, position, static_cast<size_type>(finish_ - position) * sizeof(value_type));
+        _NEFORCE construct(position, _NEFORCE move(value));
         ++finish_;
     }
 
-    NEFORCE_CONSTEXPR20 void insert_one(const size_type index, const value_type& value, false_type /*unused*/) {
-        vector::emplace(begin() + index, value);
+    NEFORCE_CONSTEXPR20 void insert_one(const pointer position, const value_type& value, false_type /*unused*/) {
+        vector::emplace(iterator(position, this), value);
     }
 
-    NEFORCE_CONSTEXPR20 void insert_one(const size_type index, value_type&& value, false_type /*unused*/) {
-        vector::emplace(begin() + index, _NEFORCE move(value));
+    NEFORCE_CONSTEXPR20 void insert_one(const pointer position, value_type&& value, false_type /*unused*/) {
+        vector::emplace(iterator(position, this), _NEFORCE move(value));
     }
 
     NEFORCE_NOINLINE NEFORCE_COLD NEFORCE_CONSTEXPR20 void insert_slow(iterator position, const value_type& value) {
@@ -512,7 +514,7 @@ private:
         vector::emplace(position, _NEFORCE move(value));
     }
 
-    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void reserve_slow(const size_type n) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void reserve_slow(const size_type n) {
         size_type new_capacity = _NEFORCE max(static_cast<size_type>(capacity() * 1.5), n);
         pointer new_start = pair_.get_base().allocate(new_capacity);
         pointer new_finish = new_start;
@@ -532,13 +534,33 @@ private:
         pair_.value = start_ + new_capacity;
     }
 
-    NEFORCE_NOINLINE NEFORCE_CONSTEXPR20 void emplace_back_slow(value_type value) {
-        vector::emplace(end(), _NEFORCE move(value));
+    template <typename... Args>
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void emplace_back_grow(true_type /*unused*/, Args&&... args) {
+        const size_type old_size = size();
+        const size_type new_capacity = old_size != 0 ? 2 * old_size : 1;
+        pointer new_start = pair_.get_base().allocate(new_capacity);
+        _NEFORCE construct(new_start + old_size, _NEFORCE forward<Args>(args)...);
+        if (old_size != 0) {
+            _NEFORCE uninitialized_move(start_, finish_, new_start);
+            _NEFORCE destroy(start_, finish_);
+        }
+        deallocate();
+        start_ = new_start;
+        finish_ = new_start + old_size + 1;
+        pair_.value = new_start + new_capacity;
     }
 
     template <typename... Args>
-    NEFORCE_NOINLINE NEFORCE_COLD NEFORCE_CONSTEXPR20 void emplace_back_slow(Args&&... args) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void emplace_back_grow(false_type /*unused*/, Args&&... args) {
         vector::emplace(end(), _NEFORCE forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void emplace_back_slow(Args&&... args) {
+        emplace_back_grow(conditional_t < is_nothrow_move_constructible_v<value_type> &&
+                                  is_nothrow_destructible_v<value_type> &&
+                                  is_nothrow_constructible_v<value_type, Args&&...>,
+                          true_type, false_type > {}, _NEFORCE forward<Args>(args)...);
     }
 
 public:
@@ -606,7 +628,9 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        copy_assign_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_copy_assignment{});
+        copy_assign_impl(other,
+                         conditional_t<allocator_traits<allocator_type>::propagate_on_container_copy_assignment::value,
+                                       true_type, false_type>{});
         return *this;
     }
 
@@ -635,7 +659,8 @@ public:
             return *this;
         }
         move_assign_impl(_NEFORCE move(other),
-                         typename allocator_traits<allocator_type>::propagate_on_container_move_assignment{});
+                         conditional_t<allocator_traits<allocator_type>::propagate_on_container_move_assignment::value,
+                                       true_type, false_type>{});
         return *this;
     }
 
@@ -1010,7 +1035,7 @@ public:
      *
      * 确保向量有至少n的容量，如果当前容量不足则重新分配。
      */
-    NEFORCE_CONSTEXPR20 void reserve(const size_type n) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void reserve(const size_type n) {
         NEFORCE_DEBUG_VERIFY(n < max_size(), "vector reserve out of allocate bounds.");
         if (capacity() < n) {
             vector::reserve_slow(n);
@@ -1085,7 +1110,7 @@ public:
         pair_.value = new_start + new_cap;
     }
 
-    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void emplace_back(const value_type& value) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void emplace_back(const value_type& value) {
         if (finish_ == pair_.value) {
             vector::emplace_back_slow(value);
             return;
@@ -1094,7 +1119,7 @@ public:
         ++finish_;
     }
 
-    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void emplace_back(value_type&& value) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void emplace_back(value_type&& value) {
         if (finish_ == pair_.value) {
             vector::emplace_back_slow(_NEFORCE move(value));
             return;
@@ -1109,7 +1134,7 @@ public:
      * @param args 构造参数
      */
     template <typename... Args>
-    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void emplace_back(Args&&... args) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void emplace_back(Args&&... args) {
         if (finish_ != pair_.value) {
             _NEFORCE construct(finish_, _NEFORCE forward<Args>(args)...);
             ++finish_;
@@ -1122,7 +1147,7 @@ public:
      * @brief 在末尾拷贝插入元素
      * @param value 要插入的值
      */
-    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void push_back(const T& value) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void push_back(const T& value) {
         if (finish_ == pair_.value) {
             vector::emplace_back_slow(value);
             return;
@@ -1135,7 +1160,7 @@ public:
      * @brief 在末尾移动插入元素
      * @param value 要插入的值
      */
-    NEFORCE_ALWAYS_INLINE_INLINE NEFORCE_CONSTEXPR20 void push_back(T&& value) {
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void push_back(T&& value) {
         if (finish_ == pair_.value) {
             vector::emplace_back_slow(_NEFORCE move(value));
             return;
@@ -1223,20 +1248,22 @@ public:
      * @param value 要插入的值
      * @return 指向插入元素的迭代器
      */
-    NEFORCE_CONSTEXPR20 iterator insert(iterator position, const value_type& value) {
-        const auto n = static_cast<size_type>(position - begin());
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 iterator insert(iterator position, const value_type& value) {
+        pointer pos = position.base();
         if (finish_ != pair_.value) {
-            if (n == size()) {
+            if (pos == finish_) {
                 _NEFORCE construct(finish_, value);
                 ++finish_;
             } else {
-                vector::insert_one(n, value,
+                vector::insert_one(pos, value,
                                    conditional_t<is_trivially_copyable_v<value_type>, true_type, false_type>{});
             }
         } else {
-            vector::insert_slow(position, value);
+            const size_type offset = start_ == nullptr ? 0 : static_cast<size_type>(pos - start_);
+            vector::insert_slow(iterator(pos, this), value);
+            return iterator(start_ + offset, this);
         }
-        return begin() + n;
+        return iterator(pos, this);
     }
 
     /**
@@ -1245,20 +1272,22 @@ public:
      * @param value 要插入的值
      * @return 指向插入元素的迭代器
      */
-    NEFORCE_CONSTEXPR20 iterator insert(iterator position, value_type&& value) {
-        const auto n = static_cast<size_type>(position - begin());
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 iterator insert(iterator position, value_type&& value) {
+        pointer pos = position.base();
         if (finish_ != pair_.value) {
-            if (n == size()) {
+            if (pos == finish_) {
                 _NEFORCE construct(finish_, _NEFORCE move(value));
                 ++finish_;
             } else {
-                vector::insert_one(n, _NEFORCE move(value),
+                vector::insert_one(pos, _NEFORCE move(value),
                                    conditional_t<is_trivially_copyable_v<value_type>, true_type, false_type>{});
             }
         } else {
-            vector::insert_slow(position, _NEFORCE move(value));
+            const size_type offset = start_ == nullptr ? 0 : static_cast<size_type>(pos - start_);
+            vector::insert_slow(iterator(pos, this), _NEFORCE move(value));
+            return iterator(start_ + offset, this);
         }
-        return begin() + n;
+        return iterator(pos, this);
     }
 
     /**
@@ -1467,7 +1496,8 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return;
         }
-        swap_impl(other, typename allocator_traits<allocator_type>::propagate_on_container_swap{});
+        swap_impl(other, conditional_t<allocator_traits<allocator_type>::propagate_on_container_swap::value, true_type,
+                                       false_type>{});
     }
 
     /**

@@ -2163,16 +2163,15 @@ public:
     NEFORCE_CONSTEXPR20 void clear() noexcept {
 #ifdef NEFORCE_USING_SSO
         if (is_long()) {
-            destroy_long();
-            traits_type::assign(storage_.short_, 1, value_type());
-            size_pair_.value = 0;
+            storage_.long_.ptr[0] = value_type();
+            size_pair_.value = long_flag;
         } else {
-            traits_type::assign(storage_.short_, 1, value_type());
+            storage_.short_[0] = value_type();
             size_pair_.value = 0;
         }
 #else
         size_ = 0;
-        traits_type::assign(data_ + size_, 1, value_type());
+        traits_type::assign(data_, 1, value_type());
 #endif
     }
 

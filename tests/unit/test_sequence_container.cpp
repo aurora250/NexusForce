@@ -2910,6 +2910,27 @@ TEST_F(VectorTest, InsertAtBeginLargeVectorKeepsDataIntact) {
     }
 }
 
+TEST_F(VectorTest, AppendSelfReferenceDuringGrowth) {
+    constexpr size_t n = 1000;
+    vector<int> v;
+    v.reserve(n);
+    for (size_t i = 0; i < n; ++i) {
+        v.push_back(static_cast<int>(i));
+    }
+
+    const int first = v.front();
+    const int last = v[n - 1];
+    v.push_back(v.front());
+    v.push_back(v[n - 1]);
+
+    ASSERT_EQ(v.size(), n + 2);
+    EXPECT_EQ(v[n], first);
+    EXPECT_EQ(v[n + 1], last);
+    for (size_t i = 0; i < n; ++i) {
+        ASSERT_EQ(v[i], static_cast<int>(i)) << "mismatch at " << i;
+    }
+}
+
 TEST_F(VectorTest, ShrinkToFit) {
     vector<int> v;
     v.reserve(100);
@@ -4032,4 +4053,69 @@ TEST_F(VectorTest, CopyAssignmentKeepsNestedBuffersIndependent) {
     ASSERT_EQ(target[0].items.size(), 2U);
     EXPECT_EQ(target[0].items[0], string{"a"});
     EXPECT_EQ(target[0].items[1], string{"b"});
+}
+
+
+namespace {
+    struct incomplete_graph_node;
+
+    struct incomplete_graph_holder {
+        vector<incomplete_graph_node> children;
+        vector<incomplete_graph_node, std::allocator<incomplete_graph_node>> children_std_alloc;
+        incomplete_graph_holder* parent = nullptr;
+    };
+
+    struct incomplete_graph_node {
+        int value = 0;
+        incomplete_graph_holder kids;
+    };
+
+} // namespace
+
+
+TEST_F(VectorTest, AcceptsIncompleteElementType) {
+    incomplete_graph_node parent;
+    parent.value = 1;
+    incomplete_graph_node child;
+    child.value = 2;
+    incomplete_graph_node other;
+    other.value = 3;
+
+    parent.kids.children.push_back(child);
+    parent.kids.children.push_back(other);
+    parent.kids.children.insert(parent.kids.children.begin(), child);
+    parent.kids.children.erase(parent.kids.children.begin() + 1);
+
+    ASSERT_EQ(parent.kids.children.size(), 2U);
+    EXPECT_EQ(parent.kids.children[0].value, 2);
+    EXPECT_EQ(parent.kids.children[1].value, 3);
+
+    parent.kids.children_std_alloc.push_back(child);
+    parent.kids.children_std_alloc.assign(2, other);
+    ASSERT_EQ(parent.kids.children_std_alloc.size(), 2U);
+    EXPECT_EQ(parent.kids.children_std_alloc[1].value, 3);
+}
+
+TEST_F(VectorTest, StdAllocatorAssignmentAndSwap) {
+    vector<int, std::allocator<int>> source;
+    source.push_back(1);
+    source.push_back(2);
+
+    vector<int, std::allocator<int>> moved;
+    moved = static_cast<vector<int, std::allocator<int>>&&>(source);
+    ASSERT_EQ(moved.size(), 2U);
+    EXPECT_EQ(moved[0], 1);
+    EXPECT_EQ(moved[1], 2);
+
+    vector<int, std::allocator<int>> copied;
+    copied = moved;
+    ASSERT_EQ(copied.size(), 2U);
+    EXPECT_EQ(copied[1], 2);
+
+    vector<int, std::allocator<int>> swapped;
+    swapped.push_back(9);
+    swapped.swap(copied);
+    ASSERT_EQ(swapped.size(), 2U);
+    ASSERT_EQ(copied.size(), 1U);
+    EXPECT_EQ(copied[0], 9);
 }

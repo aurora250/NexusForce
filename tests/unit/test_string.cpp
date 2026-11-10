@@ -2438,6 +2438,19 @@ TEST_F(BasicStringCapacityTest, Clear) {
     EXPECT_EQ(s.size(), 0u);
 }
 
+TEST_F(BasicStringCapacityTest, ClearKeepsLongCapacity) {
+    string s(256, 'x');
+    const size_t cap = s.capacity();
+    EXPECT_GE(cap, 256u);
+    s.clear();
+    EXPECT_TRUE(s.empty());
+    EXPECT_EQ(s.capacity(), cap);
+    EXPECT_EQ(s.data()[0], '\0');
+    s.append("abc");
+    EXPECT_EQ(s, "abc");
+    EXPECT_EQ(s.capacity(), cap);
+}
+
 TEST_F(BasicStringCapacityTest, ShrinkToFit) {
     string s("Hello");
     s.reserve(1000);
