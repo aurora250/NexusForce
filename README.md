@@ -360,7 +360,7 @@ See [HTTP/HTTPS performance test records](benchmark/network/http/PERFORMANCE.md)
 - **`compressed_pair`** - EBCO memory optimization
 
 ### 🔍 Reflection System
-- **`NFRS`** - Pre-compile code generator, scans `NEFORCE_REFLECT_*` markers to auto-generate type registration code, with incremental scanning
+- **`NexusRsvp`** - Pre-compile code generator, scans `NEFORCE_REFLECT_*` markers to auto-generate type registration code, with incremental scanning
 - **`registry`** - Global type reflection registry with name/type_id dual lookup, thread-safe registration, and dynamic signal-slot connection `connect_signal_to_slot()`
 - **`meta_type`** - Runtime type metadata: base class list, property/function maps, constructor/clone factory, enum/container info, signal name list, dynamic property registration `add_property()`
 - **`meta_property`** - Property reflection descriptor with annotation flags and change notification signal
@@ -370,7 +370,7 @@ See [HTTP/HTTPS performance test records](benchmark/network/http/PERFORMANCE.md)
 - **JSON Serializer** - Reflection-driven object↔JSON serialization/deserialization, recursive nested types and containers
 - **Binary Serializer** - Big-endian format (Magic "NEBF" + type table + data segment), attribute-controlled serialization behavior
 - **Type Identification** - Hash-based type_id via type_name specialization + compiler function signature, non-intrusive type registration
-- **Reflection Macros** - `NEFORCE_REFLECT_OBJ` / `NEFORCE_REFLECT_PROP` / `NEFORCE_REFLECT_PROP_ATTR` / `NEFORCE_REFLECT_FUNC` / `NEFORCE_REFLECT_SIGNAL` / `NEFORCE_REFLECT_ENUM` / `NEFORCE_REFLECT_ENUM_VAL` in-class markers for NFRS scanner recognition
+- **Reflection Macros** - `NEFORCE_REFLECT_OBJ` / `NEFORCE_REFLECT_PROP` / `NEFORCE_REFLECT_PROP_ATTR` / `NEFORCE_REFLECT_FUNC` / `NEFORCE_REFLECT_SIGNAL` / `NEFORCE_REFLECT_ENUM` / `NEFORCE_REFLECT_ENUM_VAL` in-class markers for NexusRsvp scanner recognition
 
 ### 🖥️ High-Performance Terminal UI Framework (TUI)
 
@@ -560,9 +560,9 @@ target_link_libraries(my_app PRIVATE NexusForce::NexusForce)
 nexusforce_compiler_options(my_app)
 ```
 
-#### Reflection Code Generation (NFRS)
+#### Reflection Code Generation (NexusRsvp)
 
-If your code uses reflection macros such as `NEFORCE_REFLECT_OBJ`, integrate NFRS pre-compile scanning with a single `nexusforce_reflect_scan()` call:
+If your code uses reflection macros such as `NEFORCE_REFLECT_OBJ`, integrate NexusRsvp pre-compile scanning with a single `nexusforce_reflect_scan()` call:
 
 ```cmake
 # Scan headers in src/ directory, auto-generate reflection registration code and inject into target
@@ -574,19 +574,19 @@ nexusforce_reflect_scan(
 
 Parameter description:
 
-| Parameter  | Required | Description                                                                       |
-|------------|----------|-----------------------------------------------------------------------------------|
-| `TARGET`   | Yes      | The target to inject generated code into                                          |
-| `HEADERS`  | Yes      | Directory of headers to scan                                                      |
-| `OUTPUT`   | No       | Generated file path, default `${CMAKE_CURRENT_BINARY_DIR}/_nfrs_gen_<target>.cpp` |
-| `EXCLUDES` | No       | Path fragments to exclude (passed to NFRS `-e` option)                            |
-| `DEPENDS`  | No       | Additional CMake-level dependency files                                           |
+| Parameter  | Required | Description                                                                            |
+|------------|----------|----------------------------------------------------------------------------------------|
+| `TARGET`   | Yes      | The target to inject generated code into                                               |
+| `HEADERS`  | Yes      | Directory of headers to scan                                                           |
+| `OUTPUT`   | No       | Generated file path, default `${CMAKE_CURRENT_BINARY_DIR}/_nexusrsvp_gen_<target>.cpp` |
+| `EXCLUDES` | No       | Path fragments to exclude (passed to NexusRsvp `-e` option)                            |
+| `DEPENDS`  | No       | Additional CMake-level dependency files                                                |
 
 #### Runtime DLL Deployment
 
 Windows has no RPATH: the loader looks for a DLL only in the directory of the module that loads it, in the system directories and on `PATH`. Therefore:
 
-- The install packages every third-party dependency of NexusForce.dll (ICU, PCRE2, OpenSSL, zlib, lz4, hiredis, sqlcipher, libmysql, LIBPQ, ...) into `<prefix>/bin`, so the installed `NFRS.exe` runs from any working directory and `nexusforce_reflect_scan()` needs no further setup.
+- The install packages every third-party dependency of NexusForce.dll (ICU, PCRE2, OpenSSL, zlib, lz4, hiredis, sqlcipher, libmysql, LIBPQ, ...) into `<prefix>/bin`, so the installed `NexusRsvp.exe` runs from any working directory and `nexusforce_reflect_scan()` needs no further setup.
 - Your own executables need those DLLs as well; use `nexusforce_deploy_runtime()` to copy them next to the target:
 
 ```cmake

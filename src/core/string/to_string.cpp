@@ -269,7 +269,7 @@ namespace {
         for (ptrdiff_t i = 4; i >= 0; --i) {
             const auto quotient = static_cast<uint32_t>((static_cast<uint64_t>(value) * 1374389535ULL) >> 37);
             const uint32_t remainder = value - quotient * 100U;
-            out[static_cast<ptrdiff_t>(2) * i] = k_digit_pairs[2UL * remainder];
+            out[static_cast<ptrdiff_t>(2) * i] = k_digit_pairs[static_cast<size_t>(2) * remainder];
             out[static_cast<ptrdiff_t>(2) * i + static_cast<ptrdiff_t>(1)] = k_digit_pairs[2UL * remainder + 1UL];
             value = quotient;
         }

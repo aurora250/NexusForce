@@ -1,12 +1,12 @@
 /**
  * @file reflect_scanner.cpp
- * @brief NeForce Reflection Scanner (MOC-like pre-compile code generator)
+ * @brief NexusRsvp reflection scanner (MOC-like pre-compile code generator)
  *
  * Scans C++ headers for NEFORCE_REFLECT_OBJ markers and generates
  * _neforce_reflect_gen.cpp containing complete type registration code.
  *
  * Usage:
- *   NFRS <input_dir> -o <output_file>
+ *   NexusRsvp <input_dir> -o <output_file>
  *
  *   <input_dir>  Root directory to scan for .hpp files
  *   -o           Output path for generated C++ registration file
@@ -334,7 +334,7 @@ namespace {
     }
 
     void print_usage(const cmdline& cmd) {
-        eprint("Usage: NFRS <input_dir> -o <output_file> [--exclude <path> ...]\n");
+        eprint("Usage: NexusRsvp <input_dir> -o <output_file> [--exclude <path> ...]\n");
         eprint("\n");
         eprint("Scans C++ headers for NEFORCE_REFLECT_OBJ markers and generates\n");
         eprint("a complete type registration file.\n");

@@ -3156,14 +3156,14 @@ TEST_F(BumpArenaTest, AllocateZeroBytesReturnsNull) {
 
 TEST_F(BumpArenaTest, InvalidAlignmentThrows) {
     bump_arena arena;
-    EXPECT_THROW(arena.allocate(1, 1, 0), allocate_exception);
-    EXPECT_THROW(arena.allocate(1, 1, 3), allocate_exception);
+    EXPECT_THROW(ignore = arena.allocate(1, 1, 0), allocate_exception);
+    EXPECT_THROW(ignore = arena.allocate(1, 1, 3), allocate_exception);
     EXPECT_THROW(arena.reserve(64, 6), allocate_exception);
 }
 
 TEST_F(BumpArenaTest, AllocationSizeOverflowThrows) {
     bump_arena arena;
-    EXPECT_THROW(arena.allocate(static_cast<size_t>(-1), 2, 8), allocate_exception);
+    EXPECT_THROW(ignore = arena.allocate(static_cast<size_t>(-1), 2, 8), allocate_exception);
 }
 
 TEST_F(BumpArenaTest, ReserveAboveAllocatorLimitThrows) {

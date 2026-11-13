@@ -40,16 +40,16 @@ NexusForce 是一个**功能健全、风格统一、跨平台兼容**的现代 C
 
 两者的反射系统确实有可比性，但整体定位不同：
 
-| 维度          | NexusForce                                                     | Qt                                        |
-|---------------|----------------------------------------------------------------|-------------------------------------------|
-| 范围          | **库**（你的代码调用它）                                       | **框架**（它的 main 函数调用你的代码）    |
-| 反射机制      | NFRS 预编译扫描器 + 运行时注册表                               | MOC（Meta-Object Compiler）               |
-| 代码生成触发  | CMake 构建阶段，增量扫描（文件修改时间缓存）                   | qmake/CMake AUTOMOC                       |
-| 反射应用      | ORM（sql_mapper + repository）、JSON/二进制序列化、动态信号槽  | 信号槽、QML 绑定、属性动画                |
-| ORM           | **反射驱动 auto-DDL/DML**                                      | Qt SQL 模块（手动 SQL 或 QSqlTableModel） |
-| HTTP 服务器   | HTTP/1.1 + HTTP/2 + WebSocket + 反向代理                       | 需额外组件（Qt HTTP Server 较新）         |
-| GUI           | 无（纯库）                                                     | Qt Widgets / Qt Quick                     |
-| 许可证        | MIT                                                            | LGPL/GPL/商用                             |
+| 维度         | NexusForce                                                    | Qt                                        |
+|--------------|---------------------------------------------------------------|-------------------------------------------|
+| 范围         | **库**（你的代码调用它）                                      | **框架**（它的 main 函数调用你的代码）    |
+| 反射机制     | NexusRsvp 预编译扫描器 + 运行时注册表                         | MOC（Meta-Object Compiler）               |
+| 代码生成触发 | CMake 构建阶段，增量扫描（文件修改时间缓存）                  | qmake/CMake AUTOMOC                       |
+| 反射应用     | ORM（sql_mapper + repository）、JSON/二进制序列化、动态信号槽 | 信号槽、QML 绑定、属性动画                |
+| ORM          | **反射驱动 auto-DDL/DML**                                     | Qt SQL 模块（手动 SQL 或 QSqlTableModel） |
+| HTTP 服务器  | HTTP/1.1 + HTTP/2 + WebSocket + 反向代理                      | 需额外组件（Qt HTTP Server 较新）         |
+| GUI          | 无（纯库）                                                    | Qt Widgets / Qt Quick                     |
+| 许可证       | MIT                                                           | LGPL/GPL/商用                             |
 
 **关键差异**：NexusForce 的反射系统**不依赖任何预处理工具链之外的构建系统耦合**，仅需 CMake 集成即可工作。
 Qt 的 MOC 需要完整的 Qt 构建体系。NexusForce 的反射直接驱动 ORM 和序列化系统。
@@ -125,13 +125,13 @@ NexusForce 的 `neforce::string` 基于 `basic_string<char>` 自研实现，比�
 
 ---
 
-### Q: NFRS 反射系统和 C++26 静态反射（P2996）是什么关系？
+### Q: NexusRsvp 反射系统和 C++26 静态反射（P2996）是什么关系？
 
 C++26 有望引入静态反射（`^` operator），但 NexusForce 现在就需要反射能力来驱动 ORM 和序列化：
 
-- NFRS 宏（`NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` 等）是**编译期标记**，语义接近 C++26 的反射提案
-- 当 C++26 静态反射成熟后，NFRS 可以作为**过渡方案**，逐步将底层实现迁移到标准反射，同时保持宏 API 不变
-- 在 C++14/17/20 上，NFRS 是唯一能提供运行时反射的方案
+- NexusRsvp 宏（`NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` 等）是**编译期标记**，语义接近 C++26 的反射提案
+- 当 C++26 静态反射成熟后，NexusRsvp 可以作为**过渡方案**，逐步将底层实现迁移到标准反射，同时保持宏 API 不变
+- 在 C++14/17/20 上，NexusRsvp 是唯一能提供运行时反射的方案
 
 ---
 
@@ -269,9 +269,9 @@ NexusForce 提供多层次的并发支持：
 
 ---
 
-### Q: NFRS 反射系统如何在没有编译器反射的情况下驱动 ORM？
+### Q: NexusRsvp 反射系统如何在没有编译器反射的情况下驱动 ORM？
 
-- 宏（`NEFORCE_REFLECT_OBJ/PROP/FUNC/SIGNAL/ENUM`）在类体内只留标记；NFRS 扫描头文件，按 mtime 缓存增量生成注册 `.cpp` 并注入目标。
+- 宏（`NEFORCE_REFLECT_OBJ/PROP/FUNC/SIGNAL/ENUM`）在类体内只留标记；NexusRsvp 扫描头文件，按 mtime 缓存增量生成注册 `.cpp` 并注入目标。
 - 运行时 `registry` 以 `type_id` 为主键：`type_id` 是 `type_name` 特化字符串（或编译器函数签名）的 FNV-64 哈希；`meta_type` 保存属性/函数/构造/枚举/容器信息，值经 `meta_any` 类型擦除。
 - `sql_mapper<T>` 读同一份元数据生成 DDL/DML，`repository` 执行；JSON/二进制序列化与动态信号槽也复用该元数据。
 

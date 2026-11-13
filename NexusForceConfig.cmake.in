@@ -84,10 +84,10 @@ include("${CMAKE_CURRENT_LIST_DIR}/NexusForceSanitizer.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/NexusForceCompilerOptions.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/NexusForceTargets.cmake")
 
-if(TARGET NexusForce::NFRS)
-    foreach(__nfrs_cfg IN ITEMS DEBUG RELWITHDEBINFO MINSIZEREL)
-        set_target_properties(NexusForce::NFRS PROPERTIES
-            MAP_IMPORTED_CONFIG_${__nfrs_cfg} Release
+if(TARGET NexusForce::NexusRsvp)
+    foreach(__nexusrsvp_cfg IN ITEMS DEBUG RELWITHDEBINFO MINSIZEREL)
+        set_target_properties(NexusForce::NexusRsvp PROPERTIES
+            MAP_IMPORTED_CONFIG_${__nexusrsvp_cfg} Release
         )
     endforeach()
 endif()

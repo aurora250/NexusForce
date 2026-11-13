@@ -5,7 +5,7 @@
  *
  * 网络：http_server、过滤器链（CORS→限流→日志→CSRF→压缩→健康检查→认证）、WebSocket
  * 数据库：database_pool、scope_transaction、repository、sql_builder
- * 反射：NFRS 标记宏 → 构建时代码生成 → json_serializer 自动序列化
+ * 反射：NexusRsvp 标记宏 → 构建时代码生成 → json_serializer 自动序列化
  * 日志：层级化 Logger、控制台彩色输出、文件轮转、异步模式
  * 工具：uuid、sysinfo、bytesize 字面量、scope_exit、datetime
  */

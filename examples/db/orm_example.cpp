@@ -24,7 +24,7 @@
 using namespace neforce;
 using namespace neforce::reflect;
 
-// 实体定义（实际项目中配合 NFRS 使用宏标记即可自动生成注册代码）
+// 实体定义（实际项目中配合 NexusRsvp 使用宏标记即可自动生成注册代码）
 struct User {
     int id = 0;
     string name;
@@ -33,7 +33,7 @@ struct User {
 };
 
 int main() {
-    // 注册反射元数据（生产项目中由 NFRS 根据 NEFORCE_REFLECT_OBJ 宏自动生成）
+    // 注册反射元数据（生产项目中由 NexusRsvp 根据 NEFORCE_REFLECT_OBJ 宏自动生成）
     reflect::reflect<User>("User")
             .table_name("tbl_users")
             .property("id", &User::id, PROP_PRIMARY_KEY | PROP_AUTO_INC)

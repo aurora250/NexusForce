@@ -769,7 +769,7 @@ jobs:
               handle.write('\n')
           PY
 
-      - name: Build host NFRS
+      - name: Build host NexusRsvp
         run: |
           set -euo pipefail
           cmake -B build-host -G Ninja \
@@ -779,10 +779,10 @@ jobs:
             -DNEXUSFORCE_BUILD_TESTS=OFF \
             -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
             -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
-          cmake --build build-host --target NFRS --parallel 2
-          HOST_NFRS=$(find build-host/bin -type f -name NFRS | head -1)
-          test -n "$HOST_NFRS"
-          echo "NEXUSFORCE_HOST_NFRS=$PWD/$HOST_NFRS" >> "$GITHUB_ENV"
+          cmake --build build-host --target NexusRsvp --parallel 2
+          HOST_NEXUSRSVP=$(find build-host/bin -type f -name NexusRsvp | head -1)
+          test -n "$HOST_NEXUSRSVP"
+          echo "NEXUSFORCE_HOST_NEXUSRSVP=$PWD/$HOST_NEXUSRSVP" >> "$GITHUB_ENV"
 
       - name: Configure FreeBSD cross build
         run: |
@@ -795,7 +795,7 @@ jobs:
             -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }} \
             -DVCPKG_INSTALLED_DIR="$VCPKG_INSTALLED" \
             -DFREEBSD_SYSROOT="$SYSROOT" \
-            -DNEXUSFORCE_HOST_NFRS="$NEXUSFORCE_HOST_NFRS" \
+            -DNEXUSFORCE_HOST_NEXUSRSVP="$NEXUSFORCE_HOST_NEXUSRSVP" \
             -DNEXUSFORCE_BUILD_DOCS=OFF \
             -DNEXUSFORCE_BUILD_EXAMPLES=OFF \
             -DNEXUSFORCE_BUILD_BENCHMARKS=OFF

@@ -25,7 +25,7 @@ add_executable(NexusForceUnitTests
         test_network.cpp
         test_network_ssl_tcp.cpp
         test_network_util.cpp
-        test_nfrs.cpp
+        test_nexusrsvp.cpp
         test_numeric.cpp
         test_plugin.cpp
         test_query.cpp
@@ -97,6 +97,6 @@ add_test(NAME NexusForceUnitTests COMMAND NexusForceUnitTests)
 
 nexusforce_reflect_scan(
     TARGET NexusForceUnitTests
-    HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/nfrs_test_data
+    HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/nexusrsvp_test_data
 )
 set_target_properties(NexusForceUnitTests PROPERTIES FOLDER "tests")

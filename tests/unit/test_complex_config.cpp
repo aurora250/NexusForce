@@ -2326,17 +2326,17 @@ TEST_F(YamlParserTest, ParseTabInContent) {
 
 TEST_F(YamlParserTest, ParseTabIndentationThrows) {
     yaml_parser parser("\tkey: value\n");
-    EXPECT_THROW(parser.parse(), yaml_exception);
+    EXPECT_THROW(ignore = parser.parse(), yaml_exception);
 }
 
 TEST_F(YamlParserTest, ParseDuplicateAnchorThrows) {
     yaml_parser parser("a: &dup 1\nb: &dup 2\n");
-    EXPECT_THROW(parser.parse(), yaml_exception);
+    EXPECT_THROW(ignore = parser.parse(), yaml_exception);
 }
 
 TEST_F(YamlParserTest, ParseUndefinedAliasThrows) {
     yaml_parser parser("a: *undefined\n");
-    EXPECT_THROW(parser.parse(), yaml_exception);
+    EXPECT_THROW(ignore = parser.parse(), yaml_exception);
 }
 
 TEST_F(YamlParserTest, ParseTryParseValid) {
@@ -2704,7 +2704,7 @@ TEST_F(YamlParserTest, ParseStringDoubleQuotedUnicodeMaxCodepoint) {
 
 TEST_F(YamlParserTest, ParseStringDoubleQuotedUnicodeOutOfRangeThrows) {
     yaml_parser parser("\"\\U00110000\"");
-    EXPECT_THROW(parser.parse(), yaml_exception);
+    EXPECT_THROW(ignore = parser.parse(), yaml_exception);
 }
 
 TEST_F(YamlParserTest, ParseTagInMappingValue) {
@@ -3029,22 +3029,22 @@ content: tagged node
 
 TEST_F(YamlParserTest, ParseIntegerLeadingZeroThrows) {
     yaml_parser parser("07\n");
-    EXPECT_THROW(parser.parse(), yaml_exception);
+    EXPECT_THROW(ignore = parser.parse(), yaml_exception);
 }
 
 TEST_F(YamlParserTest, ParseIntegerLeadingZeroNegativeThrows) {
     yaml_parser parser("-07\n");
-    EXPECT_THROW(parser.parse(), yaml_exception);
+    EXPECT_THROW(ignore = parser.parse(), yaml_exception);
 }
 
 TEST_F(YamlParserTest, ParseIntegerLeadingZeroWithUnderscoreThrows) {
     yaml_parser parser("0_7\n");
-    EXPECT_THROW(parser.parse(), yaml_exception);
+    EXPECT_THROW(ignore = parser.parse(), yaml_exception);
 }
 
 TEST_F(YamlParserTest, ParseStringDoubleQuotedInvalidEscapeThrows) {
     yaml_parser parser("\"\\z\"");
-    EXPECT_THROW(parser.parse(), yaml_exception);
+    EXPECT_THROW(ignore = parser.parse(), yaml_exception);
 }
 
 TEST_F(YamlParserTest, ParseStringDoubleQuotedHexEscapeHighByte) {
@@ -4063,7 +4063,7 @@ TEST_F(YamlBuilderTest, ErrorEndRootSequence) {
 TEST_F(YamlBuilderTest, ErrorUnclosedContextInBuild) {
     yaml_builder b;
     b.key("outer").begin_mapping();
-    EXPECT_THROW(b.build(), yaml_exception);
+    EXPECT_THROW(ignore = b.build(), yaml_exception);
 }
 
 TEST_F(YamlBuilderTest, ErrorBeginDocumentWithUnclosed) {

@@ -172,6 +172,7 @@
 
 ### 🔧 Improvements
 
+- 反射代码生成器 `NFRS` 更名为 `NexusRsvp`：导出的 CMake 目标由 `NexusForce::NFRS` 变为 `NexusForce::NexusRsvp`
 - Markdown 解析器删除逐行字符串拼接与拥有式节点：单行段落、表格单元格、纯文本片段与链接地址零拷贝；围栏/缩进代码块、HTML 块直接写入 arena；引用块/列表项行视图不再复制
 - Markdown 解析器新增单行段落与简单列表项快速路径、列表“段落 + 嵌套列表”快速路径、表格分隔行前置判定、围栏标记缓存与代码段/强调闭合的 SIMD 查找
 - Markdown 引用标签缓存规范化键，定义超过 8 个时建立开放寻址索引；`parse_inline()` 使用线程级 arena 并在每次调用前重置
@@ -487,7 +488,7 @@
 - 修复 Windows 下 `pty` 子进程未挂接到伪控制台导致读不到任何输出：`UpdateProcThreadAttribute` 的 `PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE` 需要传 `HPCON` 句柄值本身，原实现传的是变量地址（`&pseudo`），内核据此拿到的句柄无效，子进程虽能执行并返回正确退出码，但输出不进入伪控制台管道；现改为直接传 `pseudo`
 - 修复 Windows 下 `sysinfo::cpu_usage_breakdown()` 依赖 PDH 格式化百分比，短采样间隔下各项之和明显偏离 100（实测低至 89）：改为按原始计数（100ns 累计时间）增量计算，任意间隔下 user/system/idle/irq/softirq 之和恒为 100
 - 修复 Windows 下 `sysinfo::cpu_usage_per_core()` 在短采样间隔下返回空向量或缺失核心（PDH 通配符格式化值在样本不足时 CStatus 无效）：改用 `NtQuerySystemInformation(SystemProcessorPerformanceInformation)` 的原始计数增量，首次调用返回全零、此后始终返回全部核心
-- 修复 NFRS 反射生成器在输出文件被清理后跳过生成：`output_exists` 仅凭构造 `file` 对象就判定存在（构造失败不会抛出），缓存命中后直接返回，导致 clean 构建时 `_nfrs_gen_*.cpp` 缺失、编译报 C1083；现改为检查 `is_opened()`
+- 修复 NexusRsvp 反射生成器在输出文件被清理后跳过生成：`output_exists` 仅凭构造 `file` 对象就判定存在（构造失败不会抛出），缓存命中后直接返回，导致 clean 构建时 `_nexusrsvp_gen_*.cpp` 缺失、编译报 C1083；现改为检查 `is_opened()`
 - 修复 Windows 下 `http_client` 流式响应无法被 `http_stream_handle::abort()` 中断：`shutdown()` 不会唤醒阻塞中的 `recv`，流式读取改为非阻塞套接字 + 就绪轮询（50ms 粒度），空闲超时由读取循环基于 `stream_idle_timeout` 自行约束
 - 修复 Windows 下 `process::current_command_line()` / `process::get_command_line()` 恒为空：`NtQueryInformationProcess(ProcessCommandLineInformation)` 需先查询所需缓冲区大小再二次查询，字符串内联在返回缓冲区中
 - 修复 Windows 下 `process::snapshot()` 中大量进程的 `threads` / `start_time_ms` 为 0：改用 `NtQuerySystemInformation(SystemProcessInformation)` 一次性填充全部进程的线程数与创建时间，不再依赖对每个进程 `OpenProcess` 成功
@@ -566,7 +567,7 @@
 - 修复 Windows `io_context` WSAEVENT 句柄生命周期竞态：`remove_fd()` 在监视线程 `WSAWaitForMultipleEvents` 等待期间直接 `CloseHandle`
 - 修复 `io_context` fd/文件完成回调的 use-after-free：回调执行中调用 `remove_fd()` 或重复注册会销毁正在执行的回调存储
 - 修复 `http_client` 忽略 URL 显式端口导致请求连到错误端口的问题，改用 URL 解析端口
-- 修复 NFRS 被安装后索引 Release 动态库的方案
+- 修复 NexusRsvp 被安装后索引 Release 动态库的方案
 - 修复 Clang 下推断 websocket-deflate 整形符号溢出与 GCC 不同的警告
 - 修复 SIMD `string_length` / `string_find` 跨 16 字节块偏移未累加导致的字符串比较错误
 - 修复 `simd::memory_copy_offset` 尾部循环指针双重偏移导致的内容错乱
@@ -643,7 +644,7 @@
 - 修复 `scripts/install_nexusforce.py` 在 Windows 控制台上因中文提示触发 `UnicodeEncodeError` 而中断安装：脚本启动时把标准输出与标准错误切换到 UTF-8
 - 修复型号字符串中 `GHz` 频率的截断：`2.40GHz` / `3.70GHz` 因十进制不可精确表示又被直接截断，改为四舍五入
 - 修复 valgrind 工作流把单元测试失败误报为内存泄漏：`--error-exitcode=1` 在 valgrind 未发现错误时会透传被测程序的退出码，任一用例失败即表现为"内存泄漏检查失败"，现改用 `99` 作为泄漏专用退出码并分别报错
-- 修复 Windows 上安装包缺失运行时依赖，导致安装前缀的 `NFRS.exe` 与下游消费者的可执行文件以 `0xc0000135`（STATUS_DLL_NOT_FOUND）启动失败：Windows 无 RPATH，安装期解析 NexusForce.dll 的依赖闭包（ICU、PCRE2、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）并随安装包一并复制到 bin 目录
+- 修复 Windows 上安装包缺失运行时依赖，导致安装前缀的 `NexusRsvp.exe` 与下游消费者的可执行文件以 `0xc0000135`（STATUS_DLL_NOT_FOUND）启动失败：Windows 无 RPATH，安装期解析 NexusForce.dll 的依赖闭包（ICU、PCRE2、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）并随安装包一并复制到 bin 目录
 - 修复内存池自旋锁在多线程下丢唤醒导致挂死，其唤醒被自身的等待计数门控，已经抬起竞争标记、尚未进入等待器的线程会错过唤醒而永久停驻，改为等待期望值固定为竞争标记 + 标记清零时无条件唤醒的两阶段协议
 - 修复 `memory_pool` 在线程缓存关闭时仍向线程缓存填充整批块的缺陷，此前这些块既不归还也不复用
 - 修复 `memory_pool` 尺寸类下标缺少边界校验的缺陷：`size_to_class()` 返回的大对象哨兵值在小对象路径被当作数组下标使用，现降级走大对象路径

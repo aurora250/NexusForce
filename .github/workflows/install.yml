@@ -2,7 +2,7 @@ name: "Install Check"
 
 # Verifies the packaged artifacts rather than the build tree: scripts/install_nexusforce.py has to
 # produce a prefix that a third-party project can find, link and use, including every public tool
-# (NFRS) and every installed CMake helper (nexusforce_compiler_options, nexusforce_sanitizer_options,
+# (NexusRsvp) and every installed CMake helper (nexusforce_compiler_options, nexusforce_sanitizer_options,
 # nexusforce_deploy_runtime, nexusforce_reflect_scan).
 #
 # Both the installed prefix and the consumer live outside the checked-out workspace: a prefix inside
@@ -10,9 +10,9 @@ name: "Install Check"
 # would no longer prove that NexusForce is usable as an installed package. Only the consumer project
 # itself is copied out of the repository, so nothing else from the repository is reachable from it.
 #
-# NFRS is installed for Release only, so every job installs Release as well as Debug - in one job,
+# NexusRsvp is installed for Release only, so every job installs Release as well as Debug - in one job,
 # into one prefix - and then configures the consumer once per configuration. Debug is installed and
-# checked first because the Release install is what makes NexusForce::NFRS available to both
+# checked first because the Release install is what makes NexusForce::NexusRsvp available to both
 # consumers.
 
 on:
@@ -155,7 +155,7 @@ jobs:
           PY
 
       # Release is installed after Debug so that one prefix carries both the Debug library and the
-      # Release-only NFRS tool.
+      # Release-only NexusRsvp tool.
       #
       # A multi-configuration generator is required. Every install rewrites the exported target file
       # and deletes the per-configuration files of the configurations it does not install, so two
@@ -265,7 +265,7 @@ jobs:
           fi
 
           if [ "$RUNNER_OS" = "Windows" ]; then
-            require "$NF_PREFIX/bin/NFRS.exe"
+            require "$NF_PREFIX/bin/NexusRsvp.exe"
             require "$NF_PREFIX/bin/NexusForce.dll"
             require "$NF_PREFIX/bin/NexusForced.dll"
 
@@ -314,40 +314,40 @@ jobs:
               fi
             done
           else
-            require "$NF_PREFIX/bin/NFRS"
+            require "$NF_PREFIX/bin/NexusRsvp"
             require "$NF_PREFIX/lib/libNexusForce.so"
             require "$NF_PREFIX/lib/libNexusForced.so"
           fi
 
           exit $status
 
-      - name: Run the installed NFRS
+      - name: Run the installed NexusRsvp
         shell: bash
         run: |
           set -euo pipefail
 
           if [ "$RUNNER_OS" = "Windows" ]; then
-            nfrs="$NF_PREFIX/bin/NFRS.exe"
+            nexusrsvp="$NF_PREFIX/bin/NexusRsvp.exe"
           else
-            nfrs="$NF_PREFIX/bin/NFRS"
+            nexusrsvp="$NF_PREFIX/bin/NexusRsvp"
           fi
 
-          output="$NF_OUTSIDE/nfrs-standalone.cpp"
-          "$nfrs" "$NF_CONSUMER" -o "$output"
+          output="$NF_OUTSIDE/nexusrsvp-standalone.cpp"
+          "$nexusrsvp" "$NF_CONSUMER" -o "$output"
 
           if [ ! -s "$output" ]; then
-            echo "::error::NFRS produced no output"
+            echo "::error::NexusRsvp produced no output"
             exit 1
           fi
 
           for symbol in InstallConsumerColor InstallConsumerOrder InstallConsumerWorker InstallConsumerEmitter; do
             if ! grep -q "$symbol" "$output"; then
-              echo "::error::NFRS output does not mention $symbol"
+              echo "::error::NexusRsvp output does not mention $symbol"
               exit 1
             fi
           done
 
-          echo "NFRS generated $(wc -l < "$output") lines for the consumer's reflected types"
+          echo "NexusRsvp generated $(wc -l < "$output") lines for the consumer's reflected types"
 
       - name: Build and run the consumer (Debug then Release)
         shell: bash
@@ -379,7 +379,7 @@ jobs:
 
             cmake --build "$build_dir" "${build_args[@]}" --parallel 4
 
-            generated="$build_dir/_nfrs_gen_install_consumer.cpp"
+            generated="$build_dir/_nexusrsvp_gen_install_consumer.cpp"
             if [ ! -s "$generated" ]; then
               echo "::error::nexusforce_reflect_scan() generated nothing for the $config consumer"
               exit 1

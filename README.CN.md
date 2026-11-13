@@ -357,7 +357,7 @@ HTTP/HTTPS/WS/WSS/gRPC 性能测试详见 [HTTP/HTTPS 性能测试记录](benchm
 - **`compressed_pair`** - EBCO内存优化
 
 ### 🔍 反射系统 (Reflection)
-- **`NFRS`** - 预编译代码生成器，扫描 `NEFORCE_REFLECT_*` 标记自动生成类型注册代码，支持增量扫描
+- **`NexusRsvp`** - 预编译代码生成器，扫描 `NEFORCE_REFLECT_*` 标记自动生成类型注册代码，支持增量扫描
 - **`registry`** - 全局类型反射注册表，支持名称/type_id 双重查找、线程安全注册、动态信号槽连接 `connect_signal_to_slot()`
 - **`meta_type`** - 运行时类型元数据：基类列表、属性/函数映射、构造/克隆工厂、枚举/容器信息、信号名称列表、动态属性注册 `add_property()`
 - **`meta_property`** - 属性反射描述符，支持注解标志、变更通知信号
@@ -367,7 +367,7 @@ HTTP/HTTPS/WS/WSS/gRPC 性能测试详见 [HTTP/HTTPS 性能测试记录](benchm
 - **JSON 序列化器** - 反射驱动的对象↔JSON 序列化与反序列化，递归处理嵌套类型与容器
 - **二进制序列化器** - 大端格式（Magic "NEBF" + 类型表 + 数据段），属性注解控制序列化行为
 - **类型识别** - 基于 type_name 特化 + 编译器函数签名的 hash-based type_id，非侵入式类型注册
-- **反射宏** - `NEFORCE_REFLECT_OBJ` / `NEFORCE_REFLECT_PROP` / `NEFORCE_REFLECT_PROP_ATTR` / `NEFORCE_REFLECT_FUNC` / `NEFORCE_REFLECT_SIGNAL` / `NEFORCE_REFLECT_ENUM` / `NEFORCE_REFLECT_ENUM_VAL` 类体内标记，供 NFRS 扫描器识别
+- **反射宏** - `NEFORCE_REFLECT_OBJ` / `NEFORCE_REFLECT_PROP` / `NEFORCE_REFLECT_PROP_ATTR` / `NEFORCE_REFLECT_FUNC` / `NEFORCE_REFLECT_SIGNAL` / `NEFORCE_REFLECT_ENUM` / `NEFORCE_REFLECT_ENUM_VAL` 类体内标记，供 NexusRsvp 扫描器识别
 
 ### 🖥️ 高性能终端UI框架 (TUI)
 
@@ -555,9 +555,9 @@ target_link_libraries(my_app PRIVATE NexusForce::NexusForce)
 nexusforce_compiler_options(my_app)
 ```
 
-#### 反射代码生成（NFRS）
+#### 反射代码生成（NexusRsvp）
 
-如果你的代码中使用了 `NEFORCE_REFLECT_OBJ` 等反射标记宏，通过 `nexusforce_reflect_scan()` 一键集成 NFRS 预编译扫描：
+如果你的代码中使用了 `NEFORCE_REFLECT_OBJ` 等反射标记宏，通过 `nexusforce_reflect_scan()` 一键集成 NexusRsvp 预编译扫描：
 
 ```cmake
 # 扫描 src/ 目录下的头文件，自动生成反射注册代码并注入到目标
@@ -569,19 +569,19 @@ nexusforce_reflect_scan(
 
 参数说明：
 
-| 参数       | 必填 | 说明                                                                    |
-|------------|------|-------------------------------------------------------------------------|
-| `TARGET`   | 是   | 要注入生成代码的目标                                                    |
-| `HEADERS`  | 是   | 要扫描的头文件目录                                                      |
-| `OUTPUT`   | 否   | 生成文件路径，默认 `${CMAKE_CURRENT_BINARY_DIR}/_nfrs_gen_<target>.cpp` |
-| `EXCLUDES` | 否   | 排除的路径片段（传递给 NFRS 的 `-e` 选项）                              |
-| `DEPENDS`  | 否   | 额外的 CMake 级依赖文件                                                 |
+| 参数       | 必填 | 说明                                                                         |
+|------------|------|------------------------------------------------------------------------------|
+| `TARGET`   | 是   | 要注入生成代码的目标                                                         |
+| `HEADERS`  | 是   | 要扫描的头文件目录                                                           |
+| `OUTPUT`   | 否   | 生成文件路径，默认 `${CMAKE_CURRENT_BINARY_DIR}/_nexusrsvp_gen_<target>.cpp` |
+| `EXCLUDES` | 否   | 排除的路径片段（传递给 NexusRsvp 的 `-e` 选项）                              |
+| `DEPENDS`  | 否   | 额外的 CMake 级依赖文件                                                      |
 
 #### 运行时 DLL 部署
 
 Windows 没有 RPATH，加载器只会从**加载方模块自身所在目录**、系统目录与 `PATH` 中查找 DLL。因此：
 
-- 安装时会把 NexusForce.dll 的全部第三方依赖（ICU、PCRE2、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）一并打包进 `<prefix>/bin`，安装后的 `NFRS.exe` 在任意工作目录下都能直接运行，`nexusforce_reflect_scan()` 无需额外处理。
+- 安装时会把 NexusForce.dll 的全部第三方依赖（ICU、PCRE2、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）一并打包进 `<prefix>/bin`，安装后的 `NexusRsvp.exe` 在任意工作目录下都能直接运行，`nexusforce_reflect_scan()` 无需额外处理。
 - 你自己的可执行文件同样需要这些 DLL 才能启动，用 `nexusforce_deploy_runtime()` 把它们复制到目标构建目录：
 
 ```cmake

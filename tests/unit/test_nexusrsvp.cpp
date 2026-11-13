@@ -1,4 +1,4 @@
-#include "nfrs_test_data/test_classes.hpp"
+#include "nexusrsvp_test_data/test_classes.hpp"
 #include <NeForce/core/async/signals.hpp>
 #include <NeForce/core/reflect/reflect.hpp>
 #include <gtest/gtest.h>
@@ -6,15 +6,15 @@
 using namespace neforce;
 using namespace neforce::reflect;
 
-TEST(NFRSIntegration, SimpleClassRegistered) {
-    auto* meta = registry::instance().find("NFRSTestSimple");
+TEST(NexusRsvpIntegration, SimpleClassRegistered) {
+    auto* meta = registry::instance().find("NexusRsvpTestSimple");
     ASSERT_NE(meta, nullptr);
-    EXPECT_EQ(meta->name(), string_view("NFRSTestSimple"));
+    EXPECT_EQ(meta->name(), string_view("NexusRsvpTestSimple"));
     EXPECT_GT(meta->size(), 0u);
 }
 
-TEST(NFRSIntegration, SimpleClassPropertiesExist) {
-    auto* meta = registry::instance().find("NFRSTestSimple");
+TEST(NexusRsvpIntegration, SimpleClassPropertiesExist) {
+    auto* meta = registry::instance().find("NexusRsvpTestSimple");
     ASSERT_NE(meta, nullptr);
 
     auto* prop_id = meta->get_property("id");
@@ -30,8 +30,8 @@ TEST(NFRSIntegration, SimpleClassPropertiesExist) {
     EXPECT_EQ(prop_value->name(), string_view("value"));
 }
 
-TEST(NFRSIntegration, SimpleClassCreateAndGetSet) {
-    auto* meta = registry::instance().find("NFRSTestSimple");
+TEST(NexusRsvpIntegration, SimpleClassCreateAndGetSet) {
+    auto* meta = registry::instance().find("NexusRsvpTestSimple");
     ASSERT_NE(meta, nullptr);
 
     auto obj = meta->create();
@@ -46,8 +46,8 @@ TEST(NFRSIntegration, SimpleClassCreateAndGetSet) {
     EXPECT_EQ(val.get<int>(), 42);
 }
 
-TEST(NFRSIntegration, SimpleClassPropertyAttrs) {
-    auto* meta = registry::instance().find("NFRSTestSimple");
+TEST(NexusRsvpIntegration, SimpleClassPropertyAttrs) {
+    auto* meta = registry::instance().find("NexusRsvpTestSimple");
     ASSERT_NE(meta, nullptr);
 
     auto* prop_value = meta->get_property("value");
@@ -55,22 +55,22 @@ TEST(NFRSIntegration, SimpleClassPropertyAttrs) {
     EXPECT_TRUE(prop_value->is_optional());
 }
 
-TEST(NFRSIntegration, BaseClassRegistered) {
-    auto* meta = registry::instance().find("NFRSTestBase");
+TEST(NexusRsvpIntegration, BaseClassRegistered) {
+    auto* meta = registry::instance().find("NexusRsvpTestBase");
     ASSERT_NE(meta, nullptr);
 
     auto* prop = meta->get_property("base_field");
     ASSERT_NE(prop, nullptr);
 }
 
-TEST(NFRSIntegration, DerivedClassRegistered) {
-    auto* derived = registry::instance().find("NFRSTestDerived");
+TEST(NexusRsvpIntegration, DerivedClassRegistered) {
+    auto* derived = registry::instance().find("NexusRsvpTestDerived");
     ASSERT_NE(derived, nullptr);
-    EXPECT_TRUE(derived->is_derived_from("NFRSTestBase"));
+    EXPECT_TRUE(derived->is_derived_from("NexusRsvpTestBase"));
 }
 
-TEST(NFRSIntegration, DerivedClassHasAllProperties) {
-    auto* derived = registry::instance().find("NFRSTestDerived");
+TEST(NexusRsvpIntegration, DerivedClassHasAllProperties) {
+    auto* derived = registry::instance().find("NexusRsvpTestDerived");
     ASSERT_NE(derived, nullptr);
 
     auto props = derived->all_properties();
@@ -81,8 +81,8 @@ TEST(NFRSIntegration, DerivedClassHasAllProperties) {
     EXPECT_EQ(extra->name(), string_view("extra"));
 }
 
-TEST(NFRSIntegration, ClassWithFuncRegistered) {
-    auto* meta = registry::instance().find("NFRSTestWithFunc");
+TEST(NexusRsvpIntegration, ClassWithFuncRegistered) {
+    auto* meta = registry::instance().find("NexusRsvpTestWithFunc");
     ASSERT_NE(meta, nullptr);
 
     auto* prop_count = meta->get_property("count");
@@ -95,15 +95,15 @@ TEST(NFRSIntegration, ClassWithFuncRegistered) {
     EXPECT_NE(func_compute, nullptr);
 }
 
-TEST(NFRSIntegration, EnumRegistered) {
-    auto* meta = registry::instance().find("NFRSTestColor");
+TEST(NexusRsvpIntegration, EnumRegistered) {
+    auto* meta = registry::instance().find("NexusRsvpTestColor");
     ASSERT_NE(meta, nullptr);
     EXPECT_TRUE(meta->is_enum());
     EXPECT_NE(meta->enum_info(), nullptr);
 }
 
-TEST(NFRSIntegration, EnumValueLookup) {
-    auto* meta = registry::instance().find("NFRSTestColor");
+TEST(NexusRsvpIntegration, EnumValueLookup) {
+    auto* meta = registry::instance().find("NexusRsvpTestColor");
     ASSERT_NE(meta, nullptr);
     auto* ei = meta->enum_info();
     ASSERT_NE(ei, nullptr);
@@ -112,13 +112,13 @@ TEST(NFRSIntegration, EnumValueLookup) {
 
     int64_t val = 0;
     EXPECT_TRUE(ei->value_of("Red", val));
-    EXPECT_EQ(val, static_cast<int64_t>(NFRSTestColor::Red));
+    EXPECT_EQ(val, static_cast<int64_t>(NexusRsvpTestColor::Red));
 
-    EXPECT_EQ(ei->name_of(static_cast<int64_t>(NFRSTestColor::Green)), string_view("Green"));
+    EXPECT_EQ(ei->name_of(static_cast<int64_t>(NexusRsvpTestColor::Green)), string_view("Green"));
 }
 
-TEST(NFRSIntegration, SignalNameRegistered) {
-    auto* meta = registry::instance().find("NFRSTestWithSignal");
+TEST(NexusRsvpIntegration, SignalNameRegistered) {
+    auto* meta = registry::instance().find("NexusRsvpTestWithSignal");
     ASSERT_NE(meta, nullptr);
 
     const auto& sigs = meta->signal_names();
@@ -132,8 +132,8 @@ TEST(NFRSIntegration, SignalNameRegistered) {
     EXPECT_TRUE(found);
 }
 
-TEST(NFRSIntegration, SignalBaseTypeErasure) {
-    NFRSTestWithSignal obj;
+TEST(NexusRsvpIntegration, SignalBaseTypeErasure) {
+    NexusRsvpTestWithSignal obj;
     signal_base* base = &obj.onChanged;
     ASSERT_NE(base, nullptr);
     EXPECT_FALSE(base->is_blocked());
@@ -145,11 +145,11 @@ TEST(NFRSIntegration, SignalBaseTypeErasure) {
     EXPECT_FALSE(base->is_blocked());
 }
 
-TEST(NFRSIntegration, FunctionInvoke) {
-    auto* meta = registry::instance().find("NFRSTestWithFunc");
+TEST(NexusRsvpIntegration, FunctionInvoke) {
+    auto* meta = registry::instance().find("NexusRsvpTestWithFunc");
     ASSERT_NE(meta, nullptr);
 
-    NFRSTestWithFunc obj;
+    NexusRsvpTestWithFunc obj;
     obj.count = 10;
 
     auto* func_reset = meta->get_function("reset");
@@ -166,8 +166,8 @@ TEST(NFRSIntegration, FunctionInvoke) {
     EXPECT_EQ(result.get<int>(), 7);
 }
 
-TEST(NFRSIntegration, ClassWithAttrsRegistered) {
-    auto* meta = registry::instance().find("NFRSTestWithAttrs");
+TEST(NexusRsvpIntegration, ClassWithAttrsRegistered) {
+    auto* meta = registry::instance().find("NexusRsvpTestWithAttrs");
     ASSERT_NE(meta, nullptr);
 
     auto* prop_req = meta->get_property("required_id");
@@ -179,20 +179,20 @@ TEST(NFRSIntegration, ClassWithAttrsRegistered) {
     EXPECT_TRUE(prop_trans->is_transient());
 }
 
-TEST(NFRSIntegration, DynamicConnectSignalToSlot) {
-    NFRSTestWithSignal sender;
-    NFRSTestWithFunc receiver;
+TEST(NexusRsvpIntegration, DynamicConnectSignalToSlot) {
+    NexusRsvpTestWithSignal sender;
+    NexusRsvpTestWithFunc receiver;
     receiver.count = 100;
 
-    auto* sender_meta = registry::instance().find("NFRSTestWithSignal");
+    auto* sender_meta = registry::instance().find("NexusRsvpTestWithSignal");
     if (!sender_meta) {
-        FAIL() << "NFRSTestWithSignal not registered";
+        FAIL() << "NexusRsvpTestWithSignal not registered";
         return;
     }
 
-    auto* receiver_meta = registry::instance().find("NFRSTestWithFunc");
+    auto* receiver_meta = registry::instance().find("NexusRsvpTestWithFunc");
     if (!receiver_meta) {
-        FAIL() << "NFRSTestWithFunc not registered";
+        FAIL() << "NexusRsvpTestWithFunc not registered";
         return;
     }
 
@@ -210,8 +210,8 @@ TEST(NFRSIntegration, DynamicConnectSignalToSlot) {
     EXPECT_EQ(receiver.count, 42);
 }
 
-TEST(NFRSIntegration, DynamicProperty) {
-    auto* meta = registry::instance().find("NFRSTestSimple");
+TEST(NexusRsvpIntegration, DynamicProperty) {
+    auto* meta = registry::instance().find("NexusRsvpTestSimple");
     ASSERT_NE(meta, nullptr);
 
     meta_property::getter get = [](const void*) -> meta_any { return meta_any(99); };
@@ -223,6 +223,6 @@ TEST(NFRSIntegration, DynamicProperty) {
     ASSERT_NE(prop, nullptr);
     EXPECT_EQ(prop->name(), string_view("dynamic_val"));
 
-    NFRSTestSimple obj;
+    NexusRsvpTestSimple obj;
     EXPECT_EQ(prop->get(&obj).get<int>(), 99);
 }

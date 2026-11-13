@@ -814,7 +814,7 @@ curl http://localhost:8080/frontend
 # 删表后 table_exists: false
 ```
 
-> **提示：** 生产项目中通过 NFRS 反射扫描器自动生成反射注册代码，无需手动编写 `reflect::reflect<T>()` 注册。
+> **提示：** 生产项目中通过 NexusRsvp 反射扫描器自动生成反射注册代码，无需手动编写 `reflect::reflect<T>()` 注册。
 
 ---
 

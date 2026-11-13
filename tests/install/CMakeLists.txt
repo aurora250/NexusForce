@@ -9,7 +9,7 @@
 #   nexusforce_compiler_options()         the project's own compiler options
 #   nexusforce_sanitizer_options()        sanitizer flags (a no-op unless the consumer enables them)
 #   nexusforce_deploy_runtime()           runtime deployment next to the executable (Windows)
-#   nexusforce_reflect_scan()             NFRS code generation, which also proves NexusForce::NFRS
+#   nexusforce_reflect_scan()             NexusRsvp code generation, which also proves NexusForce::NexusRsvp
 #                                         is installed and runnable in every configuration
 #
 # main.cpp then verifies at runtime that the generated reflection code was compiled, linked and
@@ -42,7 +42,7 @@ if(NEXUSFORCE_EXPECTED_PREFIX)
     message(STATUS "using the installed package from ${NexusForce_DIR}")
 endif()
 
-foreach(_required_target IN ITEMS NexusForce::NexusForce NexusForce::NFRS)
+foreach(_required_target IN ITEMS NexusForce::NexusForce NexusForce::NexusRsvp)
     if(NOT TARGET ${_required_target})
         message(FATAL_ERROR "installed package does not provide the target ${_required_target}")
     endif()

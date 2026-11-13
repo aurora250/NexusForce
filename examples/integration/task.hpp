@@ -1,7 +1,7 @@
 /**
  * @brief 任务实体
  *
- * NEFORCE_REFLECT_* 供 NFRS 扫描器在构建时自动生成反射注册代码。
+ * NEFORCE_REFLECT_* 供 NexusRsvp 扫描器在构建时自动生成反射注册代码。
  */
 
 #ifndef INTEGRATION_TASK_HPP__
