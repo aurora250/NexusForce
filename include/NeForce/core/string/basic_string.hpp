@@ -1722,7 +1722,7 @@ public:
                 pointer p = storage_.long_.ptr;
                 p[old_size] = value;
                 p[old_size + 1] = value_type();
-                size_pair_.value = (old_size + 1) | long_flag;
+                size_pair_.value = raw + 1;
                 return *this;
             }
         }
@@ -1838,18 +1838,19 @@ public:
         }
 
 #ifdef NEFORCE_USING_SSO
-        const size_type old_size = size();
-        if ((size_pair_.value & long_flag) == 0) {
+        const size_type raw = size_pair_.value;
+        const size_type old_size = raw & ~long_flag;
+        if ((raw & long_flag) == 0) {
             if (old_size + n < sso_buffer_size) {
                 traits_type::copy(storage_.short_ + old_size, str, n);
                 traits_type::assign(storage_.short_ + old_size + n, 1, value_type());
-                size_pair_.value = old_size + n;
+                size_pair_.value = raw + n;
                 return *this;
             }
         } else if (storage_.long_.cap >= old_size + n + 1) {
             traits_type::copy(storage_.long_.ptr + old_size, str, n);
             traits_type::assign(storage_.long_.ptr + old_size + n, 1, value_type());
-            size_pair_.value = (old_size + n) | long_flag;
+            size_pair_.value = raw + n;
             return *this;
         }
         return reallocate_append(str, n);

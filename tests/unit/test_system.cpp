@@ -7417,6 +7417,12 @@ TEST_F(DaemonTest, NotifyWatchdog_NoThrow) { EXPECT_NO_THROW(daemon::notify_watc
 
 #endif
 
+namespace {
+    stacktrace capture_stack_from_helper() { return stacktrace::current(0, 8); }
+
+    using stacktrace_capture_fn = stacktrace (*)();
+} // namespace
+
 class StacktraceTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -7443,6 +7449,42 @@ TEST_F(StacktraceTest, SourceFile_NullAddress_ReturnsEmpty) {
 TEST_F(StacktraceTest, SourceLine_NullAddress_ReturnsZero) {
     stacktrace::frame f(nullptr);
     EXPECT_EQ(f.source_line(), 0u);
+}
+
+TEST_F(StacktraceTest, Frame_Name_KnownExportedSymbol_IsReadable) {
+#if !defined(NEFORCE_PLATFORM_WINDOWS)
+    const auto address = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(&neforce::stacktrace::current));
+    stacktrace::frame frame(address);
+    const string name = frame.name();
+    EXPECT_FALSE(name.empty());
+    EXPECT_NE(name, "<unknown>");
+    EXPECT_NE(name.find("stacktrace"), string::npos);
+    EXPECT_NE(frame.to_string().find("stacktrace"), string::npos);
+#endif
+}
+
+TEST_F(StacktraceTest, Frame_InvalidAddress_IsUnknown) {
+    stacktrace::frame frame(reinterpret_cast<void*>(static_cast<uintptr_t>(1)));
+    EXPECT_EQ(frame.name(), "<unknown>");
+    EXPECT_TRUE(frame.source_file().empty());
+    EXPECT_EQ(frame.source_line(), 0u);
+    EXPECT_FALSE(frame.to_string().empty());
+}
+
+TEST_F(StacktraceTest, Frame_NullAddress_NameIsEmptyMarker) {
+    stacktrace::frame frame(nullptr);
+    EXPECT_EQ(frame.name(), "<empty>");
+}
+
+TEST_F(StacktraceTest, Current_FirstFrame_IsDirectCaller) {
+    volatile stacktrace_capture_fn capture = &capture_stack_from_helper;
+    const stacktrace st = capture();
+    ASSERT_FALSE(st.empty());
+    const string name = st[0].name();
+    if (name == "<unknown>" || name == "<empty>") {
+        GTEST_SKIP() << "symbols unavailable";
+    }
+    EXPECT_NE(name.find("capture_stack_from_helper"), string::npos);
 }
 
 TEST_F(StacktraceTest, Current_ReturnsNonEmptyStack) {

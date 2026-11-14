@@ -1,4 +1,6 @@
 #include <NeForce/core/system/stacktrace.hpp>
+#include <NeForce/core/file/file.hpp>
+#include <NeForce/core/system/dynamic_library.hpp>
 #include <NeForce/core/container/flat_unordered_map.hpp>
 #include <NeForce/core/string/format.hpp>
 #include <NeForce/core/utility/packages.hpp>
@@ -39,79 +41,187 @@ namespace {
         return mtx;
     }
 #else
-    mutex& resolve_mutex() {
-        static mutex mtx{};
-        return mtx;
-    }
-
-    struct source_location {
+    struct symbol_info {
+        string name;
         string file;
         size_t line{0};
+        bool source_checked{false};
     };
 
-    flat_unordered_map<void*, source_location>& source_cache() {
-        static flat_unordered_map<void*, source_location> cache;
+    flat_unordered_map<void*, symbol_info>& symbol_cache() {
+        static flat_unordered_map<void*, symbol_info> cache;
         return cache;
     }
 
-    mutex& source_cache_mutex() {
+    mutex& symbol_cache_mutex() {
         static mutex mtx{};
         return mtx;
     }
 
-    source_location resolve_source_location(void* addr) {
-        ::Dl_info info;
-        if (::dladdr(addr, &info) == 0 || info.dli_fname == nullptr) {
+    string demangle_symbol(const char* symbol) {
+        if (symbol == nullptr) {
             return {};
         }
+        int status = 0;
+        char* demangled = ::abi::__cxa_demangle(symbol, nullptr, nullptr, &status);
+        if (status == 0 && demangled != nullptr) {
+            string result(demangled);
+            ::free(demangled);
+            return result;
+        }
+        return symbol;
+    }
 
-        const string command = format("addr2line -e '{}' -f -C 0x{:x} 2>/dev/null", info.dli_fname,
-                                      static_cast<uint64_t>(reinterpret_cast<uintptr_t>(addr)));
+    string shell_quote(const string& value) {
+        string quoted("'");
+        for (const char c: value) {
+            if (c == '\'') {
+                quoted.append("'\\''");
+            } else {
+                quoted.push_back(c);
+            }
+        }
+        quoted.push_back('\'');
+        return quoted;
+    }
 
+#    if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
+    bool elf_is_position_independent(const string& module_path) {
+        const file input(path{module_path}, false, file_access::read, file_shared::share_read_write);
+        if (!input.is_opened()) {
+            return true;
+        }
+        unsigned char header[20] = {};
+        const auto count = input.read_binary(header, sizeof(header));
+        if (count < 18 || header[0] != 0x7F || header[1] != 'E' || header[2] != 'L' || header[3] != 'F') {
+            return true;
+        }
+        const bool little_endian = header[5] == 1;
+        const unsigned char low = little_endian ? header[16] : header[17];
+        const unsigned char high = little_endian ? header[17] : header[16];
+        const auto type = static_cast<uint16_t>(low | (static_cast<uint16_t>(high) << 8U));
+        return type == 3;
+    }
+#    endif
+
+#    if defined(NEFORCE_PLATFORM_LINUX) || defined(NEFORCE_PLATFORM_FREEBSD)
+    void resolve_source_location(void* address, symbol_info& info) {
+        info.source_checked = true;
+        const string module_path = dynamic_library::symbol_location(address);
+        if (module_path.empty()) {
+            return;
+        }
+        ::Dl_info dl{};
+        const uintptr_t base =
+                ::dladdr(address, &dl) != 0 ? reinterpret_cast<uintptr_t>(dl.dli_fbase) : static_cast<uintptr_t>(0);
+        const auto runtime = reinterpret_cast<uintptr_t>(address);
+        const uintptr_t relative =
+                elf_is_position_independent(module_path) && base != 0 && runtime >= base ? runtime - base : runtime;
+        const string command = format("addr2line -e {} -f -C 0x{:x} 2>/dev/null", shell_quote(module_path), relative);
         ::FILE* fp = ::popen(command.data(), "r");
         if (fp == nullptr) {
-            return {};
+            return;
         }
-
-        source_location loc;
-        char func_buf[1024];
-        char file_buf[1024];
-        // addr2line -f -C outputs two lines: function name, then source file:line
-        if (::fgets(func_buf, sizeof(func_buf), fp) != nullptr && ::fgets(file_buf, sizeof(file_buf), fp) != nullptr) {
-            string file_line(file_buf);
-            while (!file_line.empty() && (file_line.back() == '\n' || file_line.back() == '\r')) {
-                file_line.pop_back();
+        char function_buffer[1024] = {};
+        char location_buffer[1024] = {};
+        if (::fgets(function_buffer, sizeof(function_buffer), fp) != nullptr &&
+            ::fgets(location_buffer, sizeof(location_buffer), fp) != nullptr) {
+            string function(function_buffer);
+            while (!function.empty() && (function.back() == '\n' || function.back() == '\r')) {
+                function.pop_back();
             }
-            if (!file_line.empty() && file_line != "??:0") {
-                const size_t colon = file_line.rfind(':');
-                if (colon != string::npos && colon + 1 < file_line.size()) {
-                    loc.file = file_line.substr(0, colon);
-                    loc.line = static_cast<size_t>(::strtoul(file_line.data() + colon + 1, nullptr, 10));
+            if (info.name.empty() && !function.empty() && function != "??") {
+                info.name = move(function);
+            }
+            string location(location_buffer);
+            while (!location.empty() && (location.back() == '\n' || location.back() == '\r')) {
+                location.pop_back();
+            }
+            const size_t colon = location.rfind(':');
+            if (colon != string::npos && colon + 1 < location.size()) {
+                try {
+                    const auto line = to_uint64(location.view().substr(colon + 1));
+                    info.file = location.substr(0, colon);
+                    info.line = static_cast<size_t>(line);
+                } catch (const exception&) {
+                    info.file.clear();
+                    info.line = 0;
                 }
             }
         }
         ::pclose(fp);
-        return loc;
     }
-
-    source_location get_cached_source_location(void* addr) {
-        {
-            lock<mutex> lk(source_cache_mutex());
-            auto& cache = source_cache();
-            const auto it = cache.find(addr);
-            if (it != cache.end()) {
-                return it->second;
+#    elif defined(NEFORCE_PLATFORM_MACOS)
+    void resolve_source_location(void* address, symbol_info& info) {
+        info.source_checked = true;
+        const string module_path = dynamic_library::symbol_location(address);
+        if (module_path.empty()) {
+            return;
+        }
+        ::Dl_info dl{};
+        const uintptr_t base =
+                ::dladdr(address, &dl) != 0 ? reinterpret_cast<uintptr_t>(dl.dli_fbase) : static_cast<uintptr_t>(0);
+        const auto runtime = reinterpret_cast<uintptr_t>(address);
+        const string command =
+                base != 0 ? format("atos -o {} -l 0x{:x} 0x{:x} 2>/dev/null", shell_quote(module_path), base, runtime)
+                          : format("atos -o {} 0x{:x} 2>/dev/null", shell_quote(module_path), runtime);
+        ::FILE* fp = ::popen(command.data(), "r");
+        if (fp == nullptr) {
+            return;
+        }
+        char output[2048] = {};
+        if (::fgets(output, sizeof(output), fp) != nullptr) {
+            string text(output);
+            while (!text.empty() && (text.back() == '\n' || text.back() == '\r')) {
+                text.pop_back();
+            }
+            const size_t in_position = text.find(" (in ");
+            if (in_position != string::npos) {
+                if (info.name.empty()) {
+                    info.name = text.substr(0, in_position);
+                }
+                const size_t close = text.rfind(')');
+                const size_t open = close == string::npos ? string::npos : text.rfind('(', close);
+                if (open != string::npos && close != string::npos && open < close) {
+                    const string location = text.substr(open + 1, close - open - 1);
+                    const size_t colon = location.rfind(':');
+                    if (colon != string::npos && colon + 1 < location.size()) {
+                        try {
+                            const auto line = to_uint64(location.view().substr(colon + 1));
+                            info.file = location.substr(0, colon);
+                            info.line = static_cast<size_t>(line);
+                        } catch (const exception&) {
+                            info.file.clear();
+                            info.line = 0;
+                        }
+                    }
+                }
+            } else if (info.name.empty()) {
+                info.name = move(text);
             }
         }
+        ::pclose(fp);
+    }
+#    else
+    void resolve_source_location(void*, symbol_info& info) { info.source_checked = true; }
+#    endif
 
-        source_location loc = resolve_source_location(addr);
-
-        {
-            lock<mutex> lk(source_cache_mutex());
-            auto& cache = source_cache();
-            cache[addr] = loc;
+    symbol_info get_symbol(void* address, const bool need_source) {
+        lock<mutex> guard(symbol_cache_mutex());
+        auto& cache = symbol_cache();
+        const auto found = cache.find(address);
+        symbol_info info = found != cache.end() ? found->second : symbol_info{};
+        if (info.name.empty() && !info.source_checked) {
+            ::Dl_info dl{};
+            if (::dladdr(address, &dl) != 0 && dl.dli_sname != nullptr) {
+                info.name = demangle_symbol(dl.dli_sname);
+            }
         }
-        return loc;
+        if ((need_source || info.name.empty()) && !info.source_checked) {
+            resolve_source_location(address, info);
+        }
+        cache[address] = info;
+        return info;
     }
 #endif
 } // namespace
@@ -137,19 +247,11 @@ string stacktrace::frame::name() const {
     }
     return "<unknown>";
 #else
-    lock<mutex> lock(resolve_mutex());
-    ::Dl_info info;
-    if (::dladdr(address_, &info) != 0 && info.dli_sname != nullptr) {
-        int status = 0;
-        char* demangled = ::abi::__cxa_demangle(info.dli_sname, nullptr, nullptr, &status);
-        if (status == 0 && demangled != nullptr) {
-            string res(demangled);
-            std::free(demangled);
-            return res;
-        }
-        return {info.dli_sname};
+    const symbol_info info = get_symbol(address_, false);
+    if (info.name.empty()) {
+        return {"<unknown>"};
     }
-    return {"<unknown>"};
+    return info.name;
 #endif
 }
 
@@ -169,8 +271,7 @@ string stacktrace::frame::source_file() const {
         return {line.FileName};
     }
 #else
-    const auto loc = get_cached_source_location(address_);
-    return loc.file;
+    return get_symbol(address_, true).file;
 #endif
     return "";
 }
@@ -191,8 +292,7 @@ size_t stacktrace::frame::source_line() const {
         return static_cast<size_t>(line.LineNumber);
     }
 #else
-    const auto loc = get_cached_source_location(address_);
-    return loc.line;
+    return get_symbol(address_, true).line;
 #endif
     return 0;
 }
@@ -227,11 +327,11 @@ stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
         return;
     }
 
-    const size_t to_skip = min(static_cast<size_t>(captured), skip + 2);
+    const size_t to_skip = min(static_cast<size_t>(captured), skip + 1);
     const size_t valid_frames = captured - to_skip;
 
     frames_.reserve(valid_frames);
-    for (size_t i = to_skip; compare_less(i, captured); ++i) {
+    for (size_t i = to_skip; compare_less(i, captured) && frames_.size() < max_depth; ++i) {
         frames_.emplace_back(buffer[i]);
     }
 #endif

@@ -1285,7 +1285,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_NOINLINE inline const void* memory_find_large(cons
         remaining -= head;
     }
 
-    while (remaining >= 128) {
+    while (remaining >= 256) {
         const vec256_t m0 = ::_mm256_cmpeq_epi8(::_mm256_load_si256(reinterpret_cast<const vec256_t*>(p)), target256);
         const vec256_t m1 =
                 ::_mm256_cmpeq_epi8(::_mm256_load_si256(reinterpret_cast<const vec256_t*>(p + 32)), target256);
@@ -1293,9 +1293,17 @@ NEFORCE_PURE_FUNCTION NEFORCE_NOINLINE inline const void* memory_find_large(cons
                 ::_mm256_cmpeq_epi8(::_mm256_load_si256(reinterpret_cast<const vec256_t*>(p + 64)), target256);
         const vec256_t m3 =
                 ::_mm256_cmpeq_epi8(::_mm256_load_si256(reinterpret_cast<const vec256_t*>(p + 96)), target256);
-        const int joined =
-                inner::to_bitmask256(::_mm256_or_si256(::_mm256_or_si256(m0, m1), ::_mm256_or_si256(m2, m3)));
-        if (joined != 0) {
+        const vec256_t m4 =
+                ::_mm256_cmpeq_epi8(::_mm256_load_si256(reinterpret_cast<const vec256_t*>(p + 128)), target256);
+        const vec256_t m5 =
+                ::_mm256_cmpeq_epi8(::_mm256_load_si256(reinterpret_cast<const vec256_t*>(p + 160)), target256);
+        const vec256_t m6 =
+                ::_mm256_cmpeq_epi8(::_mm256_load_si256(reinterpret_cast<const vec256_t*>(p + 192)), target256);
+        const vec256_t m7 =
+                ::_mm256_cmpeq_epi8(::_mm256_load_si256(reinterpret_cast<const vec256_t*>(p + 224)), target256);
+        const vec256_t lo = ::_mm256_or_si256(::_mm256_or_si256(m0, m1), ::_mm256_or_si256(m2, m3));
+        const vec256_t hi = ::_mm256_or_si256(::_mm256_or_si256(m4, m5), ::_mm256_or_si256(m6, m7));
+        if (inner::to_bitmask256(::_mm256_or_si256(lo, hi)) != 0) {
             const int b0 = inner::to_bitmask256(m0);
             if (b0 != 0) {
                 return p + inner::first_match_offset(b0, 0);
@@ -1308,10 +1316,26 @@ NEFORCE_PURE_FUNCTION NEFORCE_NOINLINE inline const void* memory_find_large(cons
             if (b2 != 0) {
                 return p + inner::first_match_offset(b2, 64);
             }
-            return p + inner::first_match_offset(inner::to_bitmask256(m3), 96);
+            const int b3 = inner::to_bitmask256(m3);
+            if (b3 != 0) {
+                return p + inner::first_match_offset(b3, 96);
+            }
+            const int b4 = inner::to_bitmask256(m4);
+            if (b4 != 0) {
+                return p + inner::first_match_offset(b4, 128);
+            }
+            const int b5 = inner::to_bitmask256(m5);
+            if (b5 != 0) {
+                return p + inner::first_match_offset(b5, 160);
+            }
+            const int b6 = inner::to_bitmask256(m6);
+            if (b6 != 0) {
+                return p + inner::first_match_offset(b6, 192);
+            }
+            return p + inner::first_match_offset(inner::to_bitmask256(m7), 224);
         }
-        p += 128;
-        remaining -= 128;
+        p += 256;
+        remaining -= 256;
     }
     while (remaining >= 32) {
         const int mask = inner::to_bitmask256(

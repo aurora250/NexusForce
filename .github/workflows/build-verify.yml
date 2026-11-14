@@ -873,9 +873,20 @@ jobs:
           set +e
           SSH=(ssh -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -p 2222)
           SCP=(scp -i "$VM_DIR/id_ed25519" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -P 2222)
-          "${SSH[@]}" tester@127.0.0.1 \
-            "cd /tmp/nf && LD_LIBRARY_PATH=/tmp/nf/lib NEFORCE_SNAPSHOT_DIR=/tmp/nf/snapshots timeout 3600 ./bin/NexusForceUnitTests --gtest_color=no --gtest_output=xml:/tmp/nf/results.xml"
-          status=$?
+          status=255
+          for attempt in 1 2 3; do
+            "${SSH[@]}" tester@127.0.0.1 \
+              "cd /tmp/nf && LD_LIBRARY_PATH=/tmp/nf/lib NEFORCE_SNAPSHOT_DIR=/tmp/nf/snapshots timeout 3600 ./bin/NexusForceUnitTests --gtest_color=no --gtest_output=xml:/tmp/nf/results.xml"
+            status=$?
+            # 255 is the SSH transport dying before the remote command returned its own status.
+            # A QEMU guest can lose the connection while a service restarts; rerun instead of
+            # failing the job with no test results at all.
+            if [ "$status" -ne 255 ] || [ "$attempt" -eq 3 ]; then
+              break
+            fi
+            echo "SSH transport closed (255), retrying in 10s (attempt $attempt/3)"
+            sleep 10
+          done
           "${SCP[@]}" tester@127.0.0.1:/tmp/nf/results.xml "freebsd-${{ matrix.arch }}-test-results.xml" || true
           cp "$VM_DIR/serial.log" "freebsd-${{ matrix.arch }}-serial.log" 2>/dev/null || true
           exit $status

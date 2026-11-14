@@ -59,9 +59,7 @@ public:
 
         /**
          * @brief 获取函数符号名称
-         * @return 解析后的函数名称
-         *
-         * 解析还原符号名称。
+         * @return 解析后的函数名称；无法解析时返回 "<unknown>"
          */
         NEFORCE_NODISCARD string name() const;
 

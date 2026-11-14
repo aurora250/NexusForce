@@ -55,6 +55,25 @@ wait_ssh() {
     return 1
 }
 
+wait_cloud_init() {
+    # The seed's runcmd runs in cloud-init's final stage, which can still be in progress when the
+    # first boot answers SSH: its first command installs the root key we probe with. Shutting the
+    # VM down that early leaves the run-once marker unwritten, so the next boot runs runcmd again
+    # and its "service sshd restart" drops whatever session is starting the tests. Waiting here
+    # keeps both the saved image and any later boot from racing an sshd restart.
+    local tries=${1:-40}
+    for ((i = 0; i < tries; i++)); do
+        if ssh "${ssh_opts[@]}" -p "$port" root@127.0.0.1 \
+            'command -v cloud-init >/dev/null 2>&1 && timeout 300 cloud-init status --wait >/dev/null 2>&1; exit 0' \
+            2>/dev/null; then
+            return 0
+        fi
+        sleep 3
+    done
+    echo "warning: could not confirm cloud-init completion on port $port" >&2
+    return 0
+}
+
 prepare() {
     mkdir -p "$vm_dir"
     cd "$vm_dir"
@@ -149,6 +168,7 @@ provision() {
     # would otherwise stall for many minutes before the seed's runcmd executes.
     qemu_command 127.0.0.1
     wait_ssh root
+    wait_cloud_init
     ssh "${ssh_opts[@]}" -p "$port" root@127.0.0.1 \
         'sysrc firstboot_freebsd_update_enable=NO; rm -f /firstboot; rm -rf /var/db/freebsd-update; sync'
     poweroff
@@ -169,6 +189,7 @@ case "$action" in
         ;;
     wait)
         wait_ssh "${6:-tester}"
+        wait_cloud_init
         ;;
     wait-root)
         wait_ssh root

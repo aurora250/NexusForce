@@ -9,15 +9,6 @@
 using namespace neforce;
 
 namespace {
-    uint16_t read_be16(const byte_t* p) {
-        return static_cast<uint16_t>((static_cast<uint16_t>(p[0]) << 8) | static_cast<uint16_t>(p[1]));
-    }
-
-    uint32_t read_be32(const byte_t* p) {
-        return (static_cast<uint32_t>(p[0]) << 24) | (static_cast<uint32_t>(p[1]) << 16) |
-               (static_cast<uint32_t>(p[2]) << 8) | static_cast<uint32_t>(p[3]);
-    }
-
     byte_vector make_header(const uint16_t id, const uint16_t flags, const uint16_t qdcount = 0,
                             const uint16_t ancount = 0, const uint16_t nscount = 0, const uint16_t arcount = 0) {
         byte_vector h(12);
@@ -211,19 +202,19 @@ TEST(DnsMessageBuilding, QueryHeaderFormat) {
 
     ASSERT_GE(q.size(), sizeof(dns_header) + 13 + 4);
 
-    const uint16_t id = read_be16(q.data());
+    const uint16_t id = endian::read_be16(q.data());
     EXPECT_GE(id, 1);
     EXPECT_LE(id, 65535);
 
-    const uint16_t flags = read_be16(q.data() + 2);
+    const uint16_t flags = endian::read_be16(q.data() + 2);
     EXPECT_EQ(flags & 0x8000, 0);
     EXPECT_NE(flags & 0x0100, 0);
 
-    const uint16_t qdcount = read_be16(q.data() + 4);
+    const uint16_t qdcount = endian::read_be16(q.data() + 4);
     EXPECT_EQ(qdcount, 1);
 
-    const uint16_t ancount = read_be16(q.data() + 6);
-    const uint16_t nscount = read_be16(q.data() + 8);
+    const uint16_t ancount = endian::read_be16(q.data() + 6);
+    const uint16_t nscount = endian::read_be16(q.data() + 8);
     EXPECT_EQ(ancount, 0);
     EXPECT_EQ(nscount, 0);
 }
@@ -254,12 +245,12 @@ TEST(DnsMessageBuilding, TrailingDotIsStripped) {
 TEST(DnsMessageBuilding, QueryWithEDNS0) {
     auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, false, 1232);
 
-    const uint16_t arcount = read_be16(q.data() + 10);
+    const uint16_t arcount = endian::read_be16(q.data() + 10);
     EXPECT_EQ(arcount, 1);
 
     bool found_opt = false;
     for (size_t i = q.size() - 11; i < q.size() - 1; ++i) {
-        const uint16_t val = read_be16(&q[i]);
+        const uint16_t val = endian::read_be16(&q[i]);
         if (val == 41) {
             found_opt = true;
             break;
@@ -270,7 +261,7 @@ TEST(DnsMessageBuilding, QueryWithEDNS0) {
 
 TEST(DnsMessageBuilding, QueryWithoutRD) {
     auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, false, false);
-    const uint16_t flags = read_be16(q.data() + 2);
+    const uint16_t flags = endian::read_be16(q.data() + 2);
     EXPECT_EQ(flags & 0x0100, 0);
     EXPECT_EQ(flags & 0x8000, 0);
 }
@@ -278,11 +269,11 @@ TEST(DnsMessageBuilding, QueryWithoutRD) {
 TEST(DnsMessageBuilding, QueryWithDNSsecOK) {
     auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, true, 1232);
 
-    const uint16_t arcount = read_be16(q.data() + 10);
+    const uint16_t arcount = endian::read_be16(q.data() + 10);
     ASSERT_EQ(arcount, 1);
 
     const size_t ttl_offset = q.size() - 6;
-    const uint32_t opt_ttl = read_be32(&q[ttl_offset]);
+    const uint32_t opt_ttl = endian::read_be32(&q[ttl_offset]);
     EXPECT_NE(opt_ttl & 0x8000, 0);
 }
 
@@ -1027,7 +1018,7 @@ TEST(DnsMessageBuilding, CustomEDNSPayloadSize) {
     auto q4096 = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, true, false, 4096);
 
     for (const auto& q: {q512, q1232, q4096}) {
-        const uint16_t arcount = read_be16(q.data() + 10);
+        const uint16_t arcount = endian::read_be16(q.data() + 10);
         EXPECT_EQ(arcount, 1);
     }
 
@@ -1044,7 +1035,7 @@ TEST(DnsMessageBuilding, DNSSECFlagInQuery) {
 
 TEST(DnsMessageBuilding, EDNSDisabledARCountZero) {
     auto q = dns_client::build_query("example.com", dns_record::A, dns_class::internet, true, false);
-    const uint16_t arcount = read_be16(q.data() + 10);
+    const uint16_t arcount = endian::read_be16(q.data() + 10);
     EXPECT_EQ(arcount, 0);
 }
 
@@ -1065,9 +1056,9 @@ TEST(DnsMessageBuilding, QueryIDIsRandom) {
     auto q1 = dns_client::build_query("example.com");
     auto q2 = dns_client::build_query("example.com");
     auto q3 = dns_client::build_query("example.com");
-    const uint16_t id1 = read_be16(q1.data());
-    const uint16_t id2 = read_be16(q2.data());
-    const uint16_t id3 = read_be16(q3.data());
+    const uint16_t id1 = endian::read_be16(q1.data());
+    const uint16_t id2 = endian::read_be16(q2.data());
+    const uint16_t id3 = endian::read_be16(q3.data());
     EXPECT_TRUE(id1 != id2 || id2 != id3 || id1 != id3);
 }
 

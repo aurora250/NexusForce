@@ -426,6 +426,7 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `stacktrace` 帧解析：Linux/FreeBSD 的 `addr2line` 改用模块内相对地址，动态符号缺失时回退 addr2line 的函数名；macOS 使用 `atos` 解析名称与源码位置，Windows 仍走 DbgHelp；ELF 探测改用 `file` 组件，模块路径改用 `dynamic_library::symbol_location()`
 - 修复 `basic_string::clear()` 在长字符串模式下释放堆缓冲并退回 SSO 的问题：清空后容量不应变化，原实现每次 `clear()` 都会 `deallocate` 并在下一次追加时重新分配，既违反语义又使 `clear()` + 追加循环多出一次分配/释放；现仅复位长度并写终止符，容量保留
 - 修复 GCM 计数器递增错误：原 4 路 CTR 内核用 `_mm_add_epi32` 直接修改大端计数字节，从第 2 个块起生成的密钥流与标准实现不一致；改为按大端序递增，并新增 64 B / 144 B 已知答案测试
 - 修复无 PCLMUL 平台（ARM64 / 标量回退 / QEMU baseline）的 GCM tag 字节序错误：`ghash_final` 的标量分支直接按主机整数写出状态，导致 tag 反序；改为先从状态字节读取大端值再写出
