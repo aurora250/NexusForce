@@ -1739,9 +1739,8 @@ public:
      */
     NEFORCE_CONSTEXPR20 void clear() noexcept {
         if (is_long()) {
-            destroy_long();
-            traits_type::assign(storage_.short_, 1, value_type());
-            size_pair_.value = 0;
+            traits_type::assign(storage_.long_.ptr, 1, value_type());
+            size_pair_.value = long_flag;
         } else {
             traits_type::assign(storage_.short_, 1, value_type());
             size_pair_.value = 0;

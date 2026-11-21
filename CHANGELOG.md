@@ -445,6 +445,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 Windows 上 `stacktrace` 多跳过一帧：`current(skip)` 先加 1 再交给构造函数，而构造函数在 Windows 上又用 `CaptureStackBackTrace(skip + 2)`，叠加后 `current(0)` 丢掉直接调用者
+- 修复 `basic_string::clear()` 在长字符串模式下释放缓冲区并退回 SSO：清空后 `capacity()` 从长容量掉回 16，随后的 `append` 又触发扩容；现在保留缓冲区，`clear()` 后容量不变
 - 修复 `crash_dump` 在 Windows 上的编译错误：`<excpt.h>` 把 `exception_code` 定义为 `_exception_code` 内建函数，与 `report::exception_code` 成员冲突；`crash_dump.cpp` 在系统头文件之后再次 `#undef`
 - 修复三角函数对负数实参的符号错误：`reduce_arg_sincos` 把负号并入象限偏移，导致 `sine(-x)` / `cosine(-x)` / `tangent(-x)` 分别返回 `-cos(x)` / `sin(x)` / `-sin(x)`；现象限只由归约倍数决定，符号由各函数的奇偶性单独处理
 - 修复 `cube_root` 在极端量级下的发散：初值取 `x` 或 `x/3` 时，`1e-20`、`1e20` 一类输入会让牛顿迭代在有限步内无法收敛；改为先按 2 的整数次幂阶梯归一化（指数取 3 的倍数）再迭代，并在收敛后补一次迭代

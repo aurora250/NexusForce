@@ -319,7 +319,7 @@ stacktrace stacktrace::current(const size_t skip, const size_t max_depth) { retu
 stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     vector<void*> buffer(max_depth);
-    const ::USHORT captured = ::CaptureStackBackTrace(static_cast<::DWORD>(skip + 2), static_cast<::DWORD>(max_depth),
+    const ::USHORT captured = ::CaptureStackBackTrace(static_cast<::DWORD>(skip + 1), static_cast<::DWORD>(max_depth),
                                                       buffer.data(), nullptr);
     frames_.reserve(captured);
     for (::USHORT i = 0; i < captured; ++i) {

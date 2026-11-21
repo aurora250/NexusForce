@@ -7480,11 +7480,12 @@ TEST_F(StacktraceTest, Current_FirstFrame_IsDirectCaller) {
     volatile stacktrace_capture_fn capture = &capture_stack_from_helper;
     const stacktrace st = capture();
     ASSERT_FALSE(st.empty());
-    const string name = st[0].name();
-    if (name == "<unknown>" || name == "<empty>") {
-        GTEST_SKIP() << "symbols unavailable";
-    }
-    EXPECT_NE(name.find("capture_stack_from_helper"), string::npos);
+    // The first frame is the return address inside the helper; checking it by address keeps the test
+    // independent of symbolization (Release /OPT:ICF may attribute the address to another function).
+    const auto frame_address = reinterpret_cast<uintptr_t>(st[0].address());
+    const auto helper_address = reinterpret_cast<uintptr_t>(&capture_stack_from_helper);
+    ASSERT_GE(frame_address, helper_address);
+    EXPECT_LT(frame_address - helper_address, 256U);
 }
 
 TEST_F(StacktraceTest, Current_ReturnsNonEmptyStack) {
