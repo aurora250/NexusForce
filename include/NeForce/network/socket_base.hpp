@@ -54,6 +54,8 @@ struct socket_exception final : network_exception {
     ~socket_exception() override = default;
 
     NEFORCE_NODISCARD const char* type() const noexcept override { return "socket_exception"; }
+    NEFORCE_NODISCARD exception* clone() const override { return new socket_exception(*this); }
+    NEFORCE_NORETURN void rethrow() const override { throw *this; }
 };
 
 /** @} */ // Exceptions

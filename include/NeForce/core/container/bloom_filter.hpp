@@ -180,8 +180,8 @@ private:
         if (p <= 0.0 || p >= 1.0) {
             return 0;
         }
-        constexpr decimal_t ln2 = logarithm_e(2.);
-        const decimal_t m = -static_cast<decimal_t>(n) * logarithm_e(p) / (ln2 * ln2);
+        constexpr auto ln2 = logarithm_e<decimal_t>(2);
+        const decimal_t m = -static_cast<decimal_t>(n) * logarithm_e(static_cast<decimal_t>(p)) / (ln2 * ln2);
         return static_cast<size_t>(ceil(m));
     }
 
@@ -197,7 +197,7 @@ private:
         if (n == 0 || m == 0) {
             return 0;
         }
-        constexpr decimal_t ln2 = logarithm_e(2.);
+        constexpr auto ln2 = logarithm_e<decimal_t>(2);
         const decimal_t k = (static_cast<decimal_t>(m) / static_cast<decimal_t>(n)) * ln2;
         return static_cast<size_t>(max(static_cast<decimal_t>(1), round(k)));
     }
@@ -286,7 +286,7 @@ public:
      * 基于当前参数计算理论可容纳元素数量。
      */
     NEFORCE_NODISCARD size_t capacity() const noexcept {
-        return static_cast<size_t>(static_cast<double>(m_) * logarithm_e(2.) / k_);
+        return static_cast<size_t>(static_cast<double>(m_) * logarithm_e(static_cast<decimal_t>(2)) / k_);
     }
 
     /**
@@ -328,7 +328,8 @@ public:
             }
         }
         const double x = static_cast<double>(bits_set) / m_;
-        return static_cast<size_t>(-(static_cast<double>(m_) / k_) * logarithm_e(1 - x));
+        return static_cast<size_t>(-(static_cast<double>(m_) / k_) *
+                                   logarithm_e(static_cast<decimal_t>(1) - static_cast<decimal_t>(x)));
     }
 
     /**

@@ -204,7 +204,7 @@ constexpr uint64_t poisson(Engine& engine, const double mean) noexcept {
         const auto u = static_cast<decimal_t>(_NEFORCE uniform_real(engine)) - 0.5L;
         const auto v = static_cast<decimal_t>(_NEFORCE uniform_real(engine));
         const decimal_t us = 0.5L - absolute(u);
-        const int64_t k = safe_trunc(floor((2.0L * a / us + b) * u + mu + 0.43L));
+        const int64_t k = safe_truncate(floor((2.0L * a / us + b) * u + mu + 0.43L));
 
         if (us >= 0.07L && v <= rejection) {
             return static_cast<uint64_t>(k);

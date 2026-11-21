@@ -7,17 +7,7 @@
 #include <initializer_list>
 NEFORCE_BEGIN_NAMESPACE__
 
-struct expected_exception final : exception {
-    explicit expected_exception(const char* info = "Expected Operation Failed.") noexcept :
-    exception(info) {}
-
-    explicit expected_exception(const exception& e) :
-    exception(e) {}
-
-    ~expected_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "expected_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(expected_exception, exception, "Expected Operation Failed.")
 
 
 struct inplace_invoke_tag {

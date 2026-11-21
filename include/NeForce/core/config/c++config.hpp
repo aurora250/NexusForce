@@ -270,15 +270,21 @@
 #if defined(NEFORCE_COMPILER_GNUC)
 /**
  * @def NEFORCE_API_EXPORT
- * @brief 在GNUC编译器下使用空定义，无需显式的导入导出辅助
+ * @brief 在GNUC编译器下使用默认可见性
  */
-#    define NEFORCE_API_EXPORT
+#    if defined(NEFORCE_PLATFORM_WINDOWS)
+#        define NEFORCE_API_EXPORT
+#    else
+#        define NEFORCE_API_EXPORT __attribute__((visibility("default")))
+#    endif
 #endif
 
 #if defined(NEFORCE_COMPILER_GNUC)
 #    define NEFORCE_API NEFORCE_API_EXPORT
 #else
-#    if defined(NEFORCE_DLLEXPORTS)
+#    if defined(NEFORCE_STATIC)
+#        define NEFORCE_API
+#    elif defined(NEFORCE_DLLEXPORTS)
 #        define NEFORCE_API NEFORCE_API_EXPORT_DLL
 #    else
 #        define NEFORCE_API NEFORCE_API_IMPORT_DLL

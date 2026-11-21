@@ -198,6 +198,19 @@ public:
     void async_read(io_context& ctx, dynamic_buffer& buf, size_t n, function<void(error_code, size_t)> handler);
 };
 
+
+/**
+ * @brief 为异步操作组合超时
+ * @param ctx 异步 I/O 执行上下文
+ * @param timeout_ms 超时毫秒数
+ * @param start 启动函数
+ * @param handler 完成回调
+ * @note 操作必须支持取消槽；忽略取消槽的实现无法被超时中断，其完成回调会在操作真正结束时收到实际结果。
+ */
+void NEFORCE_API async_with_timeout(io_context& ctx, uint64_t timeout_ms,
+                                    function<void(cancellation_slot&, function<void(error_code, size_t)>)> start,
+                                    function<void(error_code, size_t)> handler);
+
 /** @} */ // AsyncStream
 
 /** @} */ // AsyncComponents

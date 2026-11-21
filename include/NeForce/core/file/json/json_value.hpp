@@ -20,17 +20,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct json_exception
  * @brief JSON 操作异常
  */
-struct json_exception final : value_exception {
-    explicit json_exception(const char* info = "JSON Operation Failed.") noexcept :
-    value_exception(info) {}
-
-    explicit json_exception(const exception& e) :
-    value_exception(e) {}
-
-    ~json_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "json_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(json_exception, value_exception, "JSON Operation Failed.")
 
 /** @} */ // Exceptions
 

@@ -33,18 +33,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @class future_exception
  * @brief 期望值操作异常
  */
-struct future_exception final : exception {
-    explicit future_exception(const char* info = "Future Operation Failed.") noexcept :
-    exception(info) {}
-
-    explicit future_exception(const exception& e) :
-    exception(e) {}
-
-    ~future_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "future_exception"; }
-};
-
+NEFORCE_ERROR_BUILD_FINAL_CLASS(future_exception, exception, "Future Operation Invalid.")
 
 /** @} */ // Exceptions
 

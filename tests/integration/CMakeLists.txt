@@ -11,6 +11,9 @@ add_executable(NexusForceIntegrationTest
 )
 
 target_link_libraries(NexusForceIntegrationTest PRIVATE NexusForce::NexusForce)
+
+find_package(OpenSSL REQUIRED)
+target_link_libraries(NexusForceIntegrationTest PRIVATE OpenSSL::SSL)
 nexusforce_compiler_options(NexusForceIntegrationTest)
 target_link_libraries(NexusForceIntegrationTest PRIVATE GTest::gtest)
 

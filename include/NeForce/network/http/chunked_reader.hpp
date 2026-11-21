@@ -35,7 +35,7 @@ NEFORCE_BEGIN_HTTP__
  * auto trailers = reader.trailers();
  * @endcode
  */
-class chunked_body_reader {
+class NEFORCE_API chunked_body_reader {
 public:
     byte_size max_chunk_size{1_MB};   ///< 单chunk最大大小
     byte_size max_total_size{100_MB}; ///< 总请求体最大大小

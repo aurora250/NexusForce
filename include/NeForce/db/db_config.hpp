@@ -23,33 +23,13 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct database_typecast_exception
  * @brief 数据库数据类型转换异常
  */
-struct database_typecast_exception final : database_exception {
-    explicit database_typecast_exception(const char* info = "Database Type Mismatch.") noexcept :
-    database_exception(info) {}
-
-    explicit database_typecast_exception(const exception& e) :
-    database_exception(e) {}
-
-    ~database_typecast_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "database_typecast_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(database_typecast_exception, database_exception, "Database Type Mismatch.")
 
 /**
  * @struct database_stmt_exception
  * @brief 数据库处理语句操作异常
  */
-struct database_stmt_exception final : database_exception {
-    explicit database_stmt_exception(const char* info = "Database Statement Operations Error.") noexcept :
-    database_exception(info) {}
-
-    explicit database_stmt_exception(const exception& e) :
-    database_exception(e) {}
-
-    ~database_stmt_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "database_prepared_stmt_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(database_stmt_exception, database_exception, "Database Statement Operations Error.")
 
 /** @} */ // Exceptions
 

@@ -237,6 +237,44 @@ TEST(ExceptionPtrTest, CurrentExceptionWithUnknownType) {
     FAIL() << "Expected exception not thrown";
 }
 
+TEST(ExceptionPtrTest, CurrentExceptionRethrowsOriginalNeForceType) {
+    exception_ptr ep;
+    try {
+        throw math_exception("bad math");
+    } catch (...) {
+        ep = current_exception();
+    }
+    ASSERT_TRUE(ep);
+    try {
+        rethrow_exception(ep);
+        FAIL() << "rethrow_exception should have thrown";
+    } catch (const math_exception& e) {
+        EXPECT_STREQ(e.what(), "bad math");
+    } catch (...) {
+        FAIL() << "wrong exception type rethrown";
+    }
+}
+
+TEST(ExceptionPtrTest, CurrentExceptionPreservesHandWrittenException) {
+    exception_ptr ep;
+    try {
+        throw system_exception("system failure", error_code(42, generic_category()));
+    } catch (...) {
+        ep = current_exception();
+    }
+    ASSERT_TRUE(ep);
+    EXPECT_EQ(ep.exception_type(), typeid(system_exception));
+    try {
+        rethrow_exception(ep);
+        FAIL() << "rethrow_exception should have thrown";
+    } catch (const system_exception& e) {
+        EXPECT_STREQ(e.what(), "system failure");
+        EXPECT_EQ(e.code().value(), 42);
+    } catch (...) {
+        FAIL() << "wrong exception type rethrown";
+    }
+}
+
 TEST(ExceptionPtrTest, RethrowExceptionRethrowsOriginal) {
     auto original = make_exception_ptr(memory_exception("mem"));
     try {

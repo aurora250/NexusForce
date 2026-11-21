@@ -192,6 +192,17 @@ function(nexusforce_compiler_options target)
                 $<$<CONFIG:Release>:-O2>
         )
 
+        if(NOT WIN32)
+            target_compile_options(${target} PRIVATE -fvisibility=hidden)
+        endif()
+
+        if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+            get_target_property(_nexusforce_link_type ${target} TYPE)
+            if(_nexusforce_link_type STREQUAL "SHARED_LIBRARY" OR _nexusforce_link_type STREQUAL "MODULE_LIBRARY")
+                target_link_options(${target} PRIVATE "LINKER:--exclude-libs,ALL")
+            endif()
+        endif()
+
         if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
             target_compile_options(${target} PRIVATE
                     # -Watomic-alignment to atomic_base in Clang X86:

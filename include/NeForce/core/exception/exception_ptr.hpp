@@ -10,6 +10,7 @@
 
 #include <typeinfo>
 #include "NeForce/core/async/atomic.hpp"
+#include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -96,6 +97,44 @@ public:
      */
     NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE unique_ptr<exception_wrapper> clone() const override {
         return _NEFORCE make_unique<typed_exception_wrapper>(exception_);
+    }
+};
+
+/**
+ * @class owned_exception_wrapper
+ * @brief 持有异常对象的包装器
+ */
+class owned_exception_wrapper final : public exception_wrapper {
+    unique_ptr<exception> exception_; ///< 持有的异常对象
+
+public:
+    /**
+     * @brief 构造函数
+     * @param exception 异常对象的所有权
+     */
+    explicit owned_exception_wrapper(unique_ptr<exception> exception) noexcept :
+    exception_(move(exception)) {}
+
+    /**
+     * @brief 重新抛出异常
+     * @note 通过虚函数按原始动态类型抛出
+     */
+    NEFORCE_NORETURN void rethrow() const override { exception_->rethrow(); }
+
+    /**
+     * @brief 获取异常类型信息
+     * @return 异常的动态类型信息
+     */
+    NEFORCE_NODISCARD const std::type_info& type() const noexcept override {
+        return typeid(typename decltype(exception_)::element_type);
+    }
+
+    /**
+     * @brief 克隆异常包装器
+     * @return 持有异常副本的新包装器
+     */
+    NEFORCE_NODISCARD unique_ptr<exception_wrapper> clone() const override {
+        return _NEFORCE make_unique<owned_exception_wrapper>(unique_ptr<exception>(exception_->clone()));
     }
 };
 
@@ -317,9 +356,6 @@ public:
  * @tparam Ex 异常类型
  * @param ex 异常对象
  * @return 异常指针
- *
- * 创建引用指定异常的异常指针。
- * 如果内存分配失败，返回空的异常指针。
  */
 template <typename Ex>
 exception_ptr make_exception_ptr(Ex ex) noexcept {

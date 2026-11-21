@@ -25,17 +25,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct regex_exception
  * @brief 正则操作异常
  */
-struct regex_exception final : value_exception {
-    explicit regex_exception(const char* info = "Regex Operation Failed") noexcept :
-    value_exception(info) {}
-
-    explicit regex_exception(const exception& e) :
-    value_exception(e) {}
-
-    ~regex_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "regex_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(regex_exception, value_exception, "Regex Operation Failed.")
 
 /** @} */ // Exceptions
 

@@ -23,17 +23,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct toml_exception
  * @brief TOML格式操作失败
  */
-struct toml_exception final : value_exception {
-    explicit toml_exception(const char* info = "TOML Operation Failed.") noexcept :
-    value_exception(info) {}
-
-    explicit toml_exception(const exception& e) :
-    value_exception(e) {}
-
-    ~toml_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "toml_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(toml_exception, value_exception, "TOML Operation Failed.")
 
 /** @} */ // Exceptions
 

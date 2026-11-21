@@ -25,7 +25,7 @@ NEFORCE_BEGIN_HTTP__
  * 使用 SETEX 设置 TTL = session.max_age 秒。
  * 序列化格式为简单的 key=value&key=value 字符串。
  */
-class redis_session_store final : public session_store {
+class NEFORCE_API redis_session_store final : public session_store {
 public:
     explicit redis_session_store(redis_connect& conn) :
     conn_(&conn) {}

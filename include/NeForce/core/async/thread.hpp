@@ -91,7 +91,7 @@ public:
          * @return 哈希值
          */
         NEFORCE_NODISCARD size_t to_hash() const noexcept {
-            return _NEFORCE FNV_hash64(reinterpret_cast<const byte_t*>(&id_), sizeof(id));
+            return fnv_hash64(reinterpret_cast<const byte_t*>(&id_), sizeof(id));
         }
 
         /**

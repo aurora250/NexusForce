@@ -94,6 +94,9 @@ NEFORCE_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_SENTINEL =
 
 #endif // NEFORCE_COMPILER_MSVC
 
+// TODO: guard the build-time ABI switches (NEFORCE_USING_MEMORY_POOL here and NEFORCE_USING_SSO in
+// basic_string) with a link-time ABI tag: a consumer compiled with different flags currently
+// corrupts the heap silently instead of failing to link.
 
 #ifdef NEFORCE_USING_MEMORY_POOL
 

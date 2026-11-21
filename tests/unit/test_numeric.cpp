@@ -468,17 +468,17 @@ TEST_F(BoolTypeSpecialTest, BooleanTraitsConsistency) {
 }
 
 TEST(SafeTruncTest, NormalValues) {
-    EXPECT_EQ(safe_trunc(0.0L), 0);
-    EXPECT_EQ(safe_trunc(42.9L), 42);
-    EXPECT_EQ(safe_trunc(-42.9L), -42);
-    EXPECT_EQ(safe_trunc(1.0L), 1);
-    EXPECT_EQ(safe_trunc(-1.0L), -1);
+    EXPECT_EQ(safe_truncate(0.0L), 0);
+    EXPECT_EQ(safe_truncate(42.9L), 42);
+    EXPECT_EQ(safe_truncate(-42.9L), -42);
+    EXPECT_EQ(safe_truncate(1.0L), 1);
+    EXPECT_EQ(safe_truncate(-1.0L), -1);
 }
 
 TEST(SafeTruncTest, SpecialFloats) {
-    EXPECT_EQ(safe_trunc(numeric_traits<decimal_t>::quiet_nan()), 0);
-    EXPECT_EQ(safe_trunc(numeric_traits<decimal_t>::infinity()), 0);
-    EXPECT_EQ(safe_trunc(-numeric_traits<decimal_t>::infinity()), 0);
+    EXPECT_EQ(safe_truncate(numeric_traits<decimal_t>::quiet_nan()), 0);
+    EXPECT_EQ(safe_truncate(numeric_traits<decimal_t>::infinity()), 0);
+    EXPECT_EQ(safe_truncate(-numeric_traits<decimal_t>::infinity()), 0);
 }
 
 TEST(SafeDecimalToUint64Test, NormalValues) {
@@ -525,9 +525,9 @@ TEST(Angular2RadianTest, Conversion) {
 }
 
 TEST(Radian2AngularTest, Conversion) {
-    EXPECT_DOUBLE_EQ(static_cast<double>(radian2angular(constants::PI)), 180.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(radian2angular(constants::pi)), 180.0);
     EXPECT_DOUBLE_EQ(static_cast<double>(radian2angular(0.0L)), 0.0);
-    EXPECT_DOUBLE_EQ(static_cast<double>(radian2angular(constants::PI / 2)), 90.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(radian2angular(constants::pi / 2)), 90.0);
 }
 
 TEST(AbsoluteTest, Signed) {
@@ -629,8 +629,8 @@ TEST(PowerTest, FloatingBase) {
 
 TEST(ExponentialTest, IntegerExponents) {
     EXPECT_DOUBLE_EQ(static_cast<double>(exponential(0)), 1.0);
-    EXPECT_DOUBLE_EQ(static_cast<double>(exponential(1)), static_cast<double>(constants::EULER));
-    EXPECT_DOUBLE_EQ(static_cast<double>(exponential(2)), static_cast<double>(constants::EULER * constants::EULER));
+    EXPECT_DOUBLE_EQ(static_cast<double>(exponential(1)), static_cast<double>(constants::e));
+    EXPECT_DOUBLE_EQ(static_cast<double>(exponential(2)), static_cast<double>(constants::e * constants::e));
 }
 
 TEST(LogarithmETest, SpecialValues) {
@@ -641,7 +641,7 @@ TEST(LogarithmETest, SpecialValues) {
 }
 
 TEST(LogarithmETest, KnownValues) {
-    decimal_t e = constants::EULER;
+    decimal_t e = constants::e;
     EXPECT_NEAR(static_cast<double>(logarithm_e(e)), 1.0, 1e-12);
     EXPECT_NEAR(static_cast<double>(logarithm_e(e * e)), 2.0, 1e-12);
     EXPECT_NEAR(static_cast<double>(logarithm_e(2.0L)), 0.6931471805599453094, 1e-12);
@@ -684,27 +684,27 @@ TEST(SquareRootTest, AccuracyAcrossMagnitudes) {
 }
 
 TEST(SquareRootTest, HonoursPreciseArgument) {
-    EXPECT_NEAR(static_cast<double>(square_root(2.0L, constants::LOOSE_TOLERANCE)), 1.4142135623730950488, 1e-8);
+    EXPECT_NEAR(static_cast<double>(square_root(2.0L, constants::loose_tolerance)), 1.4142135623730950488, 1e-8);
 }
 
 TEST(PowerOfTwoTest, IntegerExponents) {
-    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(0)), 1.0);
-    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(10)), 1024.0);
-    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(52)), 4503599627370496.0);
-    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(-10)), 1.0 / 1024.0);
-    EXPECT_GT(power_of_two(20000), 1e300L);
-    EXPECT_DOUBLE_EQ(static_cast<double>(power_of_two(-20000)), 0.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power2(0)), 1.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power2(10)), 1024.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power2(52)), 4503599627370496.0);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power2(-10)), 1.0 / 1024.0);
+    EXPECT_GT(power2(20000), 1e300L);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power2(-20000)), 0.0);
 }
 
 TEST(NormalizePowerOfTwoTest, RoundTrip) {
     const decimal_t samples[] = {1.0L, 1.5L, 2.0L, 3.0L, 0.001L, 1234.5678L, 1e30L, 1e-30L};
     for (const decimal_t sample: samples) {
         decimal_t value = sample;
-        const int64_t exponent = normalize_power_of_two(value);
+        const int64_t exponent = normalize_power2(value);
 
         EXPECT_GE(static_cast<double>(value), 1.0);
         EXPECT_LT(static_cast<double>(value), 2.0);
-        EXPECT_NEAR(static_cast<double>(value * power_of_two(exponent)) / static_cast<double>(sample), 1.0, 1e-14);
+        EXPECT_NEAR(static_cast<double>(value * power2(exponent)) / static_cast<double>(sample), 1.0, 1e-14);
     }
 }
 
@@ -777,6 +777,15 @@ TEST(CubeRootTest, EdgeCases) {
     EXPECT_TRUE(is_infinity(cube_root(numeric_traits<decimal_t>::infinity())));
     EXPECT_TRUE(is_infinity(cube_root(-numeric_traits<decimal_t>::infinity())) &&
                 cube_root(-numeric_traits<decimal_t>::infinity()) < 0);
+}
+
+TEST(CubeRootTest, AccuracyAcrossMagnitudes) {
+    const decimal_t values[] = {1e-300L, 1e-30L, 1e-3L, 1.0L, 1e3L, 1e30L, 1e300L};
+    for (const decimal_t value: values) {
+        const decimal_t root = cube_root(value);
+        EXPECT_NEAR(static_cast<double>(root * root * root) / static_cast<double>(value), 1.0, 1e-12);
+        EXPECT_NEAR(static_cast<double>(cube_root(-value)), static_cast<double>(-root), 1e-12);
+    }
 }
 
 TEST(FactorialTest, SmallValues) {
@@ -858,9 +867,9 @@ TEST(AroundMultipleTest, Basic) {
 TEST(AroundMultipleTest, ZeroAxis) { EXPECT_THROW(ignore = around_multiple(1.0L, 0.0L), math_exception); }
 
 TEST(AroundPiTest, Basic) {
-    EXPECT_TRUE(around_pi(constants::PI));
-    EXPECT_TRUE(around_pi(2 * constants::PI));
-    EXPECT_FALSE(around_pi(constants::PI / 2));
+    EXPECT_TRUE(around_pi(constants::pi));
+    EXPECT_TRUE(around_pi(2 * constants::pi));
+    EXPECT_FALSE(around_pi(constants::pi / 2));
 }
 
 TEST(AroundZeroTest, Basic) {
@@ -899,66 +908,238 @@ TEST(FloatApartTest, Basic) {
 
 TEST(SineTest, SpecialValues) {
     EXPECT_NEAR(static_cast<double>(sine(0.0L)), 0.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(sine(constants::PI / 2)), 1.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(sine(constants::PI)), 0.0, 1e-10);
-    EXPECT_NEAR(static_cast<double>(sine(3 * constants::PI / 2)), -1.0, 1e-10);
-    EXPECT_NEAR(static_cast<double>(sine(2 * constants::PI)), 0.0, 1e-10);
+    EXPECT_NEAR(static_cast<double>(sine(constants::pi / 2)), 1.0, 1e-12);
+    EXPECT_NEAR(static_cast<double>(sine(constants::pi)), 0.0, 1e-10);
+    EXPECT_NEAR(static_cast<double>(sine(3 * constants::pi / 2)), -1.0, 1e-10);
+    EXPECT_NEAR(static_cast<double>(sine(2 * constants::pi)), 0.0, 1e-10);
     EXPECT_TRUE(is_nan(sine(numeric_traits<decimal_t>::quiet_nan())));
     EXPECT_TRUE(is_nan(sine(numeric_traits<decimal_t>::infinity())));
 }
 
 TEST(CosineTest, SpecialValues) {
     EXPECT_NEAR(static_cast<double>(cosine(0.0L)), 1.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(cosine(constants::PI / 2)), 0.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(cosine(constants::PI)), -1.0, 1e-10);
-    EXPECT_NEAR(static_cast<double>(cosine(3 * constants::PI / 2)), 0.0, 1e-10);
-    EXPECT_NEAR(static_cast<double>(cosine(2 * constants::PI)), 1.0, 1e-10);
+    EXPECT_NEAR(static_cast<double>(cosine(constants::pi / 2)), 0.0, 1e-12);
+    EXPECT_NEAR(static_cast<double>(cosine(constants::pi)), -1.0, 1e-10);
+    EXPECT_NEAR(static_cast<double>(cosine(3 * constants::pi / 2)), 0.0, 1e-10);
+    EXPECT_NEAR(static_cast<double>(cosine(2 * constants::pi)), 1.0, 1e-10);
     EXPECT_TRUE(is_nan(cosine(numeric_traits<decimal_t>::quiet_nan())));
     EXPECT_TRUE(is_nan(cosine(numeric_traits<decimal_t>::infinity())));
 }
 
 TEST(TangentTest, SpecialValues) {
     EXPECT_NEAR(static_cast<double>(tangent(0.0L)), 0.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(tangent(constants::PI / 4)), 1.0, 1e-12);
+    EXPECT_NEAR(static_cast<double>(tangent(constants::pi / 4)), 1.0, 1e-12);
     EXPECT_TRUE(is_nan(tangent(numeric_traits<decimal_t>::quiet_nan())));
     EXPECT_TRUE(is_nan(tangent(numeric_traits<decimal_t>::infinity())));
 }
 
 TEST(TangentTest, Asymptotic) {
-    EXPECT_TRUE(is_infinity(tangent(constants::PI / 2)));
-    EXPECT_NEAR(static_cast<double>(tangent(-constants::PI / 2)), 0.0, 1e-10);
+    EXPECT_TRUE(is_infinity(tangent(constants::pi / 2)));
+    EXPECT_GT(tangent(constants::pi / 2), 0.0L);
+    EXPECT_TRUE(is_infinity(tangent(-constants::pi / 2)));
+    EXPECT_LT(tangent(-constants::pi / 2), 0.0L);
 }
 
 TEST(CotangentTest, Basic) {
-    EXPECT_NEAR(static_cast<double>(cotangent(constants::PI / 4)), 1.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(cotangent(constants::PI / 2)), 0.0, 1e-12);
+    EXPECT_NEAR(static_cast<double>(cotangent(constants::pi / 4)), 1.0, 1e-12);
+    EXPECT_NEAR(static_cast<double>(cotangent(constants::pi / 2)), 0.0, 1e-12);
 }
 
 TEST(ArctangentTest, SpecialValues) {
     EXPECT_NEAR(static_cast<double>(arctangent(0.0L)), 0.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(arctangent(1.0L)), static_cast<double>(constants::PI / 4), 1e-12);
-    EXPECT_NEAR(static_cast<double>(arctangent(-1.0L)), static_cast<double>(-constants::PI / 4), 1e-12);
+    EXPECT_NEAR(static_cast<double>(arctangent(1.0L)), static_cast<double>(constants::pi / 4), 1e-12);
+    EXPECT_NEAR(static_cast<double>(arctangent(-1.0L)), static_cast<double>(-constants::pi / 4), 1e-12);
     EXPECT_NEAR(static_cast<double>(arctangent(numeric_traits<decimal_t>::infinity())),
-                static_cast<double>(constants::PI / 2), 1e-12);
+                static_cast<double>(constants::pi / 2), 1e-12);
     EXPECT_NEAR(static_cast<double>(arctangent(-numeric_traits<decimal_t>::infinity())),
-                static_cast<double>(-constants::PI / 2), 1e-12);
+                static_cast<double>(-constants::pi / 2), 1e-12);
     EXPECT_TRUE(is_nan(arctangent(numeric_traits<decimal_t>::quiet_nan())));
 }
 
 TEST(ArcsineTest, DomainAndValues) {
     EXPECT_NEAR(static_cast<double>(arcsine(0.0L)), 0.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(arcsine(1.0L)), static_cast<double>(constants::PI / 2), 1e-12);
-    EXPECT_NEAR(static_cast<double>(arcsine(-1.0L)), static_cast<double>(-constants::PI / 2), 1e-12);
+    EXPECT_NEAR(static_cast<double>(arcsine(1.0L)), static_cast<double>(constants::pi / 2), 1e-12);
+    EXPECT_NEAR(static_cast<double>(arcsine(-1.0L)), static_cast<double>(-constants::pi / 2), 1e-12);
     EXPECT_TRUE(is_nan(arcsine(2.0L)));
     EXPECT_TRUE(is_nan(arcsine(numeric_traits<decimal_t>::quiet_nan())));
 }
 
 TEST(ArccosineTest, DomainAndValues) {
     EXPECT_NEAR(static_cast<double>(arccosine(1.0L)), 0.0, 1e-12);
-    EXPECT_NEAR(static_cast<double>(arccosine(0.0L)), static_cast<double>(constants::PI / 2), 1e-12);
-    EXPECT_NEAR(static_cast<double>(arccosine(-1.0L)), static_cast<double>(constants::PI), 1e-12);
+    EXPECT_NEAR(static_cast<double>(arccosine(0.0L)), static_cast<double>(constants::pi / 2), 1e-12);
+    EXPECT_NEAR(static_cast<double>(arccosine(-1.0L)), static_cast<double>(constants::pi), 1e-12);
     EXPECT_TRUE(is_nan(arccosine(2.0L)));
     EXPECT_TRUE(is_nan(arccosine(numeric_traits<decimal_t>::quiet_nan())));
+}
+
+TEST(TrigonometrySignTest, NegativeArguments) {
+    constexpr decimal_t samples[] = {0.5L, 1.0L, 1.25L, 3.0L, 7.0L};
+    for (const decimal_t x: samples) {
+        EXPECT_NEAR(static_cast<double>(sine(-x)), static_cast<double>(-sine(x)), 1e-12);
+        EXPECT_NEAR(static_cast<double>(cosine(-x)), static_cast<double>(cosine(x)), 1e-12);
+        EXPECT_NEAR(static_cast<double>(tangent(-x)), static_cast<double>(-tangent(x)), 1e-12);
+        EXPECT_NEAR(static_cast<double>(cotangent(-x)), static_cast<double>(-cotangent(x)), 1e-12);
+    }
+    EXPECT_NEAR(static_cast<double>(sine(-constants::pi / 2)), -1.0, 1e-12);
+    EXPECT_NEAR(static_cast<double>(cosine(-constants::pi)), -1.0, 1e-12);
+    EXPECT_NEAR(static_cast<double>(tangent(-constants::pi / 4)), -1.0, 1e-12);
+    EXPECT_LT(sine(-1.0F), 0.0F);
+    EXPECT_GT(cosine(-1.0F), 0.0F);
+    EXPECT_LT(tangent(-1.0F), 0.0F);
+}
+
+TEST(MathPrecisionTest, ResultTypeFollowsArgumentType) {
+    static_assert(is_same_v<decltype(exponential_e(1.0F)), float>, "exponential_e must keep float");
+    static_assert(is_same_v<decltype(exponential_e(1.0)), double>, "exponential_e must keep double");
+    static_assert(is_same_v<decltype(exponential_e(1.0L)), decimal_t>, "exponential_e must keep decimal_t");
+    static_assert(is_same_v<decltype(logarithm_e(2.0F)), float>, "logarithm_e must keep float");
+    static_assert(is_same_v<decltype(logarithm_1p(0.5)), double>, "logarithm_1p must keep double");
+    static_assert(is_same_v<decltype(square_root(2.0F)), float>, "square_root must keep float");
+    static_assert(is_same_v<decltype(cube_root(8.0)), double>, "cube_root must keep double");
+    static_assert(is_same_v<decltype(sine(1.0F)), float>, "sine must keep float");
+    static_assert(is_same_v<decltype(cosine(1.0)), double>, "cosine must keep double");
+    static_assert(is_same_v<decltype(tangent(1.0L)), decimal_t>, "tangent must keep decimal_t");
+    static_assert(is_same_v<decltype(cotangent(1.0F)), float>, "cotangent must keep float");
+    static_assert(is_same_v<decltype(arctangent(1.0F)), float>, "arctangent must keep float");
+    static_assert(is_same_v<decltype(arcsine(0.5F)), float>, "arcsine must keep float");
+    static_assert(is_same_v<decltype(arccosine(0.5)), double>, "arccosine must keep double");
+    static_assert(is_same_v<decltype(neforce::floor(1.5F)), float>, "floor must keep float");
+    static_assert(is_same_v<decltype(neforce::ceil(1.5)), double>, "ceil must keep double");
+    static_assert(is_same_v<decltype(neforce::round(1.5L)), decimal_t>, "round must keep decimal_t");
+    static_assert(is_same_v<decltype(truncate(1.5F)), float>, "truncate must keep float");
+    static_assert(is_same_v<decltype(neforce::remainder(5.5F, 2.0F)), float>, "remainder must keep float");
+    static_assert(is_same_v<decltype(float_part(1.5)), double>, "float_part must keep double");
+    static_assert(is_same_v<decltype(power(2.0F, 3U)), float>, "power must keep float");
+    static_assert(is_same_v<decltype(angular2radian(90.0F)), float>, "angular2radian must keep float");
+    static_assert(is_same_v<decltype(safe_truncate(1.5F)), int64_t>, "safe_trunc returns int64_t");
+}
+
+TEST(MathPrecisionTest, IntegerArgumentsUseDecimalDefault) {
+    static_assert(is_same_v<decltype(exponential(3U)), decimal_t>, "exponential defaults to decimal_t");
+    static_assert(is_same_v<decltype(power2(4)), decimal_t>, "power_of_two defaults to decimal_t");
+    static_assert(is_same_v<decltype(logarithm_factorial(10U)), decimal_t>,
+                  "logarithm_factorial defaults to decimal_t");
+    static_assert(is_same_v<decltype(exponential<float>(3U)), float>, "exponential accepts explicit type");
+    static_assert(is_same_v<decltype(power2<double>(4)), double>, "power_of_two accepts explicit type");
+
+    EXPECT_NEAR(static_cast<double>(exponential<double>(3U)), 20.085536923187668, 1e-13);
+    EXPECT_DOUBLE_EQ(static_cast<double>(power2<float>(10)), 1024.0);
+    EXPECT_NEAR(logarithm_factorial<double>(10U), 15.1044125730755153, 1e-13);
+    EXPECT_NEAR(static_cast<double>(logarithm_factorial<float>(10U)), 15.1044125730755153, 1e-5);
+}
+
+TEST(MathPrecisionTest, ToleranceConstants) {
+    EXPECT_EQ(constants::machine_epsilon_v<float>, numeric_traits<float>::epsilon());
+    EXPECT_EQ(constants::machine_epsilon_v<double>, numeric_traits<double>::epsilon());
+    EXPECT_EQ(constants::machine_epsilon_v<decimal_t>, numeric_traits<decimal_t>::epsilon());
+    EXPECT_EQ(constants::default_tolerance_v<decimal_t>, constants::default_tolerance);
+    EXPECT_EQ(constants::loose_tolerance_v<decimal_t>, constants::loose_tolerance);
+    EXPECT_GT(constants::default_tolerance_v<float>, constants::machine_epsilon_v<float>);
+    EXPECT_GT(constants::default_tolerance_v<decimal_t>, constants::machine_epsilon_v<decimal_t>);
+    EXPECT_GT(constants::loose_tolerance_v<float>, constants::default_tolerance_v<float>);
+    EXPECT_GT(static_cast<double>(constants::default_tolerance_v<float>),
+              static_cast<double>(constants::default_tolerance));
+}
+
+TEST(MathPrecisionTest, CoefficientTablesArePrecisionNative) {
+    static_assert(constants::exponential_coefficients_table<float>::value[2] == 0.5F, "1/2! must be exact in float");
+    static_assert(constants::exponential_coefficients_table<double>::value[3] == 1.0 / 6.0,
+                  "1/3! must be exact in double");
+    static_assert(constants::logarithm_coefficients_table<decimal_t>::value[0] == 1.0L / 3.0L, "1/3 must be exact");
+    EXPECT_NEAR(constants::logarithm_factorial_table<double>::value[10], 15.1044125730755153, 1e-12);
+    EXPECT_NEAR(constants::logarithm_factorial_table<float>::value[10], 15.1044125730755153, 1e-5);
+}
+
+TEST(MathPrecisionTest, FloatMatchesReference) {
+    const double budget = 8.0 * static_cast<double>(numeric_traits<float>::epsilon());
+    EXPECT_NEAR(static_cast<double>(exponential_e(1.0F)), 2.718281828459045, budget);
+    EXPECT_NEAR(static_cast<double>(logarithm_e(2.0F)), 0.69314718055994531, budget);
+    EXPECT_NEAR(static_cast<double>(logarithm_1p(0.5F)), 0.40546510810816438, budget);
+    EXPECT_NEAR(static_cast<double>(square_root(2.0F)), 1.4142135623730951, budget);
+    EXPECT_NEAR(static_cast<double>(cube_root(2.0F)), 1.2599210498948732, budget);
+    EXPECT_NEAR(static_cast<double>(sine(0.75F)), 0.6816387600233341, budget);
+    EXPECT_NEAR(static_cast<double>(cosine(0.75F)), 0.7316888688738209, budget);
+    EXPECT_NEAR(static_cast<double>(tangent(0.75F)), 0.9315964599440725, budget);
+    EXPECT_NEAR(static_cast<double>(arctangent(0.75F)), 0.6435011087932844, budget);
+    EXPECT_NEAR(static_cast<double>(arcsine(0.75F)), 0.8480620789814810, budget);
+    EXPECT_NEAR(static_cast<double>(arccosine(0.75F)), 0.7227342478134157, budget);
+}
+
+TEST(MathPrecisionTest, DoubleMatchesReference) {
+    EXPECT_NEAR(exponential_e(1.0), 2.718281828459045, 1e-15);
+    EXPECT_NEAR(logarithm_e(10.0), 2.302585092994046, 1e-15);
+    EXPECT_NEAR(logarithm_1p(1e-3), 0.0009995003330835331, 1e-17);
+    EXPECT_NEAR(square_root(3.0), 1.7320508075688772, 1e-15);
+    EXPECT_NEAR(cube_root(2.0), 1.2599210498948732, 1e-15);
+    EXPECT_NEAR(sine(0.75), 0.6816387600233341, 1e-15);
+    EXPECT_NEAR(cosine(0.75), 0.7316888688738209, 1e-15);
+    EXPECT_NEAR(tangent(0.75), 0.9315964599440725, 1e-15);
+    EXPECT_NEAR(arctangent(0.75), 0.6435011087932844, 1e-15);
+    EXPECT_NEAR(arcsine(0.75), 0.8480620789814810, 1e-15);
+    EXPECT_NEAR(arccosine(0.75), 0.7227342478134157, 1e-15);
+}
+
+TEST(MathPrecisionTest, CrossPrecisionConsistency) {
+    const double budget = 8.0 * static_cast<double>(numeric_traits<float>::epsilon());
+    const float samples[] = {-7.0F, -1.25F, -0.5F, 0.25F, 0.5F, 1.0F, 2.5F};
+    for (const float x: samples) {
+        const double exact = static_cast<double>(x);
+        EXPECT_NEAR(static_cast<double>(sine(x)), sine(exact), budget);
+        EXPECT_NEAR(static_cast<double>(cosine(x)), cosine(exact), budget);
+        EXPECT_NEAR(static_cast<double>(arctangent(x)), arctangent(exact), budget);
+        EXPECT_NEAR(static_cast<double>(exponential_e(x)) / exponential_e(exact), 1.0, budget);
+        EXPECT_NEAR(static_cast<double>(logarithm_e(absolute(x))), logarithm_e(absolute(exact)), budget);
+        EXPECT_NEAR(static_cast<double>(square_root(absolute(x))) / square_root(absolute(exact)), 1.0, budget);
+    }
+}
+
+TEST(MathPrecisionTest, SpecialValuesPerType) {
+    EXPECT_TRUE(is_nan(exponential_e(numeric_traits<float>::quiet_nan())));
+    EXPECT_TRUE(is_infinity(exponential_e(numeric_traits<float>::infinity())));
+    EXPECT_EQ(exponential_e(-numeric_traits<float>::infinity()), 0.0F);
+    EXPECT_TRUE(is_nan(logarithm_e(-1.0F)));
+    EXPECT_TRUE(is_infinity(logarithm_e(0.0F)));
+    EXPECT_TRUE(is_nan(square_root(-1.0F)));
+    EXPECT_TRUE(is_infinity(square_root(numeric_traits<float>::infinity())));
+    EXPECT_TRUE(is_infinity(exponential_e(100.0F)));
+    EXPECT_GT(exponential_e(-100.0F), 0.0F);
+    EXPECT_EQ(exponential_e(-150.0F), 0.0F);
+    EXPECT_TRUE(is_infinity(exponential_e(800.0)));
+    EXPECT_EQ(exponential_e(-800.0), 0.0);
+    EXPECT_TRUE(is_nan(arcsine(1.5F)));
+    EXPECT_TRUE(is_nan(arccosine(-1.5F)));
+}
+
+TEST(MathPrecisionTest, RootSolversAcrossMagnitudes) {
+    const float values[] = {1e-37F, 1e-20F, 1e-5F, 1.0F, 1e5F, 1e20F, 1e37F};
+    for (const float value: values) {
+        const float root = cube_root(value);
+        EXPECT_NEAR(static_cast<double>(root * root * root) / static_cast<double>(value), 1.0, 1e-5);
+        EXPECT_NEAR(static_cast<double>(square_root(value) * square_root(value)) / static_cast<double>(value), 1.0,
+                    1e-5);
+    }
+    const double doubles[] = {1e-300, 1e-30, 1e-3, 1.0, 1e3, 1e30, 1e300};
+    for (const double value: doubles) {
+        const double root = cube_root(value);
+        EXPECT_NEAR((root * root * root) / value, 1.0, 1e-15);
+        EXPECT_NEAR((square_root(value) * square_root(value)) / value, 1.0, 1e-15);
+    }
+}
+
+TEST(MathPrecisionTest, RoundingFamilyPerType) {
+    EXPECT_EQ(neforce::floor(2.75F), 2.0F);
+    EXPECT_EQ(neforce::ceil(2.25F), 3.0F);
+    EXPECT_EQ(neforce::floor(-2.75F), -3.0F);
+    EXPECT_EQ(neforce::ceil(-2.75F), -2.0F);
+    EXPECT_EQ(neforce::round(2.5F), 2.0F);
+    EXPECT_EQ(neforce::round(3.5F), 4.0F);
+    EXPECT_EQ(neforce::round(-2.5F), -2.0F);
+    EXPECT_EQ(truncate(-2.75F), -2.0F);
+    EXPECT_EQ(truncate(2.75F), 2.0F);
+    EXPECT_NEAR(static_cast<double>(float_part(-3.25F)), -0.25, 1e-6);
+    int64_t int_part = 0;
+    EXPECT_NEAR(static_cast<double>(float_apart(-3.25F, &int_part)), -0.25, 1e-6);
+    EXPECT_EQ(int_part, -3);
 }
 
 TEST(Uint128ConstructionTest, DefaultConstructor) {

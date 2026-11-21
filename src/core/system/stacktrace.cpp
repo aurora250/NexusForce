@@ -151,6 +151,11 @@ namespace {
         }
         ::pclose(fp);
     }
+
+    // TODO: resolve symbols in-process (libdw, or one batched llvm-symbolizer call) instead of one
+    // popen("addr2line") per unresolved frame; the current path forks once per address and is only
+    // affordable for a crash-time dump.
+
 #    elif defined(NEFORCE_PLATFORM_MACOS)
     void resolve_source_location(void* address, symbol_info& info) {
         info.source_checked = true;

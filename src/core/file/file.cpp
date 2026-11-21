@@ -537,7 +537,7 @@ file::size_type file::read(string& out) const {
         return 0;
     }
     const uint64_t file_sz = size64();
-    if (file_sz < static_cast<uint64_t>(pos)) {
+    if (compare_less(file_sz, pos)) {
         last_error_code_ = errc::invalid_seek;
         return 0;
     }
@@ -1028,7 +1028,7 @@ file::size_type file::size() const {
         return 0;
     }
     // size_type cannot represent more than 4 GiB: return 0 as documented.
-    if (static_cast<uint64_t>(sz.QuadPart) > numeric_traits<size_type>::max()) {
+    if (compare_greater(sz.QuadPart, numeric_traits<size_type>::max())) {
         last_error_code_ = errc::file_too_large;
         return 0;
     }

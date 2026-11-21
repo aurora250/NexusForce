@@ -30,7 +30,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /// @brief 操作已取消的错误码
 inline error_code make_operation_aborted() noexcept {
-    return error_code(static_cast<int>(errc::operation_canceled), error_category::system());
+    return error_code(static_cast<int>(errc::operation_canceled), error_category::generic());
 }
 
 /**
@@ -85,6 +85,11 @@ public:
         callback_ = _NEFORCE make_shared<stop_callback<Handler>>(token_, _NEFORCE forward<Handler>(handler));
         return true;
     }
+
+    /**
+     * @brief 注销已注册的取消回调
+     */
+    void clear() noexcept { callback_.reset(); }
 
     /**
      * @brief 获取关联的 stop_token

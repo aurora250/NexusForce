@@ -23,17 +23,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct zstd_exception
  * @brief Zstandard 操作异常
  */
-struct zstd_exception final : thirdparty_exception {
-    explicit zstd_exception(const char* info = "Zstandard Operation Failed.") noexcept :
-    thirdparty_exception(info) {}
-
-    explicit zstd_exception(const exception& e) :
-    thirdparty_exception(e) {}
-
-    ~zstd_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "zstd_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(zstd_exception, thirdparty_exception, "Zstandard Operation Invalid.")
 
 /** @} */ // Exceptions
 

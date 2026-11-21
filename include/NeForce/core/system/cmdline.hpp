@@ -24,17 +24,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct cmdline_exception
  * @brief 命令行解析异常
  */
-struct cmdline_exception final : value_exception {
-    explicit cmdline_exception(const char* info = "CmdLine Operation Failed.") noexcept :
-    value_exception(info) {}
-
-    explicit cmdline_exception(const exception& e) :
-    value_exception(e) {}
-
-    ~cmdline_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "cmdline_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(cmdline_exception, value_exception, "CmdLine Operation Failed.")
 
 /** @} */ // Exceptions
 

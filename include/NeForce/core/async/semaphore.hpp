@@ -191,11 +191,7 @@ private:
     ::sem_t sem_{};
 #endif
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    bool try_acquire_for_impl(milliseconds timeout) noexcept;
-#else
-    bool try_acquire_for_impl(nanoseconds timeout) noexcept;
-#endif
+    bool try_acquire_for_impl(milliseconds ms, nanoseconds ns) noexcept;
 
 public:
     /**
@@ -239,16 +235,13 @@ public:
      * @tparam Period 时间单位比例
      * @param  relative 相对超时时长
      * @return 成功获取返回true，超时返回false
-     *
-     * 阻塞当前线程，直到成功获取信号量或超时。
-     * 超时时间从调用开始计算。
      */
     template <typename Rep, typename Period>
     bool try_acquire_for(const duration<Rep, Period>& relative) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        return semaphore::try_acquire_for_impl(_NEFORCE time_cast<milliseconds>(relative));
+        return semaphore::try_acquire_for_impl(time_cast<milliseconds>(relative), nanoseconds{});
 #else
-        return semaphore::try_acquire_for_impl(_NEFORCE time_cast<nanoseconds>(relative));
+        return semaphore::try_acquire_for_impl(milliseconds{}, time_cast<nanoseconds>(relative));
 #endif
     }
 
@@ -260,7 +253,6 @@ public:
      * @return 成功获取返回true，超时返回false
      *
      * 阻塞当前线程，直到成功获取信号量或到达指定时间点。
-     * 如果timeout <= now，则立即调用try_acquire()。
      */
     template <typename Clock, typename Dur>
     bool try_acquire_until(const time_point<Clock, Dur>& timeout) noexcept {
@@ -284,8 +276,6 @@ public:
      * @brief 查询当前信号量计数值
      * @return 当前计数值，失败返回-1
      * @warning 返回值仅供参考，不保证时序一致性。
-     *
-     * 查询后立即可能有其他线程改变信号量值。
      */
     NEFORCE_NODISCARD int value() const noexcept;
 };

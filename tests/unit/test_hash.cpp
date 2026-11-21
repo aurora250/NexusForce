@@ -1055,8 +1055,8 @@ TEST_F(HashTest, XXH32Deterministic) {
 }
 
 TEST_F(HashTest, FNVHashPreserved) {
-    EXPECT_EQ(FNV_hash64(nullptr, 0), constants::FNV_OFFSET_BASIS64);
-    EXPECT_EQ(FNV_hash_string64("", 0), constants::FNV_OFFSET_BASIS64);
+    EXPECT_EQ(fnv_hash64(nullptr, 0), constants::fnv_offset_basis64);
+    EXPECT_EQ(fnv_hash_string64("", 0), constants::fnv_offset_basis64);
 }
 
 TEST_F(HashTest, DJB2HashPreserved) { EXPECT_EQ(DJB2_hash("", 0), static_cast<size_t>(5381)); }

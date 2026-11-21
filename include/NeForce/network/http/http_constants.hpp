@@ -907,6 +907,8 @@ struct http_exception final : network_exception {
     ~http_exception() override = default;
 
     NEFORCE_NODISCARD const char* type() const noexcept override { return "http_exception"; }
+    NEFORCE_NODISCARD exception* clone() const override { return new http_exception(*this); }
+    NEFORCE_NORETURN void rethrow() const override { throw *this; }
 };
 
 /** @} */ // Exceptions

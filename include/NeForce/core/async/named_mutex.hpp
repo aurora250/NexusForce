@@ -9,6 +9,7 @@
  */
 
 #include "NeForce/core/async/mutex.hpp"
+#include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -35,15 +36,8 @@ public:
     using native_handle_type = _NEFORCE native_handle_type;
 
 private:
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type handle_{nullptr};
-#else
-    int shm_fd_{-1};
-    void* mapped_addr_{nullptr};
-    string shm_name_;
-    bool owner_{false};
-#endif
-    string name_;
+    struct impl;
+    unique_ptr<impl> impl_;
 
 public:
     /**
@@ -66,11 +60,14 @@ public:
 
     /**
      * @brief 移动构造函数
+     * @param other 源对象
      */
     named_mutex(named_mutex&& other) noexcept;
 
     /**
      * @brief 移动赋值运算符
+     * @param other 源对象
+     * @return 自身引用
      */
     named_mutex& operator=(named_mutex&& other) noexcept;
 
@@ -78,6 +75,7 @@ public:
      * @brief 获取互斥锁
      *
      * 阻塞直到锁可用，支持跨进程同步。
+     * @throws share_memory_exception 未初始化时抛出
      */
     void lock();
 
@@ -94,9 +92,9 @@ public:
 
     /**
      * @brief 获取互斥锁名称
-     * @return 名称
+     * @return 名称，对象未初始化时返回空串
      */
-    NEFORCE_NODISCARD const string& name() const noexcept { return name_; }
+    NEFORCE_NODISCARD string_view name() const noexcept;
 
     /**
      * @brief 检查是否有效

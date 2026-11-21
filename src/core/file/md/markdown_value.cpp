@@ -5,7 +5,7 @@ NEFORCE_BEGIN_NAMESPACE__
 namespace {
     char lower_of(const char c) { return (c >= 'A' && c <= 'Z') ? static_cast<char>(c - 'A' + 'a') : c; }
 
-    uint64_t hash_label(const string_view label) noexcept { return FNV_hash_string64(label.data(), label.size()); }
+    uint64_t hash_label(const string_view label) noexcept { return fnv_hash_string64(label.data(), label.size()); }
 
     uint64_t normalised_hash(const string_view label) noexcept {
         uint64_t hash = 1469598103934665603ULL;

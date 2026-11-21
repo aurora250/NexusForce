@@ -275,7 +275,7 @@ public:
      */
     NEFORCE_NODISCARD static constexpr charset ascii_blank() noexcept {
         charset cs;
-        cs.bits_[0] = constants::BLANK_MASK;
+        cs.bits_[0] = constants::ascii_blank;
         return cs;
     }
 
@@ -285,7 +285,7 @@ public:
      */
     NEFORCE_NODISCARD static constexpr charset ascii_space() noexcept {
         charset cs;
-        cs.bits_[0] = constants::SPACE_MASK;
+        cs.bits_[0] = constants::ascii_space;
         return cs;
     }
 
@@ -295,8 +295,8 @@ public:
      */
     NEFORCE_NODISCARD static constexpr charset ascii_punct() noexcept {
         charset cs;
-        cs.bits_[0] = constants::PUNCT_MASK_LOW;
-        cs.bits_[1] = constants::PUNCT_MASK_HIGH;
+        cs.bits_[0] = constants::ascii_punct_low;
+        cs.bits_[1] = constants::ascii_punct_high;
         return cs;
     }
 
@@ -306,8 +306,8 @@ public:
      */
     NEFORCE_NODISCARD static constexpr charset ascii_cntrl() noexcept {
         charset cs;
-        cs.bits_[0] = constants::CNTRL_MASK_LOW;
-        cs.bits_[1] = constants::CNTRL_MASK_HIGH;
+        cs.bits_[0] = constants::ascii_cntrl_low;
+        cs.bits_[1] = constants::ascii_cntrl_high;
         return cs;
     }
 

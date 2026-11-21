@@ -22,32 +22,29 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_CONSTANTS__
 
 /**
- * @var BLANK_MASK
  * @brief 空白字符位掩码
  *
  * 包含水平制表符(9)和空格(32)。
  */
-NEFORCE_INLINE17 constexpr uint64_t BLANK_MASK = (1ULL << 9) | // \t
-                                                 (1ULL << 32); // space
+NEFORCE_INLINE17 constexpr uint64_t ascii_blank = (1ULL << 9) | // \t
+                                                  (1ULL << 32); // space
 
 /**
- * @var SPACE_MASK
  * @brief 空白字符位掩码
  *
  * 包含所有空白字符：水平制表符(9), 换行符(10), 垂直制表符(11), 换页符(12), 回车符(13), 空格(32)。
  */
-NEFORCE_INLINE17 constexpr uint64_t SPACE_MASK = BLANK_MASK | (1ULL << 10) | // \n
-                                                 (1ULL << 11) |              // \v
-                                                 (1ULL << 12) |              // \f
-                                                 (1ULL << 13);               // \r
+NEFORCE_INLINE17 constexpr uint64_t ascii_space = ascii_blank | (1ULL << 10) | // \n
+                                                  (1ULL << 11) |               // \v
+                                                  (1ULL << 12) |               // \f
+                                                  (1ULL << 13);                // \r
 
 /**
- * @var PUNCT_MASK_LOW
  * @brief 低64位标点符号位掩码
  *
  * 包含ASCII码33-47, 58-63范围内的标点符号。
  */
-NEFORCE_INLINE17 constexpr uint64_t PUNCT_MASK_LOW =
+NEFORCE_INLINE17 constexpr uint64_t ascii_punct_low =
         (1ULL << 33) | (1ULL << 34) | (1ULL << 35) | (1ULL << 36) | // !"#$ (33~36 < 64)
         (1ULL << 37) | (1ULL << 38) | (1ULL << 39) | (1ULL << 40) | // %&'() (37~40 < 64)
         (1ULL << 41) | (1ULL << 42) | (1ULL << 43) | (1ULL << 44) | // *+,- (41~44 < 64)
@@ -56,30 +53,28 @@ NEFORCE_INLINE17 constexpr uint64_t PUNCT_MASK_LOW =
         (1ULL << 63);                                               // ?
 
 /**
- * @var PUNCT_MASK_HIGH
  * @brief 64-127位标点符号位掩码
  *
  * 包含ASCII码64-126范围内的标点符号。
  */
-NEFORCE_INLINE17 constexpr uint64_t PUNCT_MASK_HIGH = (1ULL << (64 - 64)) |  // @(64)
-                                                      (1ULL << (91 - 64)) |  // [(91)
-                                                      (1ULL << (92 - 64)) |  // \(92)
-                                                      (1ULL << (93 - 64)) |  // ](93)
-                                                      (1ULL << (94 - 64)) |  // ^(94)
-                                                      (1ULL << (95 - 64)) |  // _(95)
-                                                      (1ULL << (96 - 64)) |  // `(96)
-                                                      (1ULL << (123 - 64)) | // {(123)
-                                                      (1ULL << (124 - 64)) | // |(124)
-                                                      (1ULL << (125 - 64)) | // }(125)
-                                                      (1ULL << (126 - 64));  // ~(126)
+NEFORCE_INLINE17 constexpr uint64_t ascii_punct_high = (1ULL << (64 - 64)) |  // @(64)
+                                                       (1ULL << (91 - 64)) |  // [(91)
+                                                       (1ULL << (92 - 64)) |  // \(92)
+                                                       (1ULL << (93 - 64)) |  // ](93)
+                                                       (1ULL << (94 - 64)) |  // ^(94)
+                                                       (1ULL << (95 - 64)) |  // _(95)
+                                                       (1ULL << (96 - 64)) |  // `(96)
+                                                       (1ULL << (123 - 64)) | // {(123)
+                                                       (1ULL << (124 - 64)) | // |(124)
+                                                       (1ULL << (125 - 64)) | // }(125)
+                                                       (1ULL << (126 - 64));  // ~(126)
 
 /**
- * @var CNTRL_MASK_LOW
  * @brief 低64位控制字符位掩码
  *
  * 包含ASCII码0-31范围内的控制字符。
  */
-NEFORCE_INLINE17 constexpr uint64_t CNTRL_MASK_LOW =
+NEFORCE_INLINE17 constexpr uint64_t ascii_cntrl_low =
         (1ULL << 0) | (1ULL << 1) | (1ULL << 2) | (1ULL << 3) |     // 0-3 (0~3 < 64)
         (1ULL << 4) | (1ULL << 5) | (1ULL << 6) | (1ULL << 7) |     // 4-7 (4~7 < 64)
         (1ULL << 8) | (1ULL << 9) | (1ULL << 10) | (1ULL << 11) |   // 8-11 (8~11 < 64)
@@ -90,12 +85,11 @@ NEFORCE_INLINE17 constexpr uint64_t CNTRL_MASK_LOW =
         (1ULL << 28) | (1ULL << 29) | (1ULL << 30) | (1ULL << 31);  // 30-31 (30~31 < 64)
 
 /**
- * @var CNTRL_MASK_HIGH
  * @brief 64-127位控制字符位掩码
  *
  * 包含ASCII码127。
  */
-NEFORCE_INLINE17 constexpr uint64_t CNTRL_MASK_HIGH = (1ULL << (127 - 64)); // DEL(127)
+NEFORCE_INLINE17 constexpr uint64_t ascii_cntrl_high = (1ULL << (127 - 64)); // DEL(127)
 
 NEFORCE_END_CONSTANTS__
 /// @endcond
@@ -133,7 +127,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_ctype(const CharT c, uint64_t 
  */
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_punct(const CharT c) noexcept {
-    return _NEFORCE is_ctype(c, constants::PUNCT_MASK_LOW, constants::PUNCT_MASK_HIGH);
+    return _NEFORCE is_ctype(c, constants::ascii_punct_low, constants::ascii_punct_high);
 }
 
 /**
@@ -146,7 +140,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_punct(const CharT c) noexcept 
  */
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_cntrl(const CharT c) noexcept {
-    return _NEFORCE is_ctype(c, constants::CNTRL_MASK_LOW, constants::CNTRL_MASK_HIGH);
+    return _NEFORCE is_ctype(c, constants::ascii_cntrl_low, constants::ascii_cntrl_high);
 }
 
 /**
@@ -175,7 +169,7 @@ template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_blank(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
-    return uc < 64 && (constants::BLANK_MASK & (1ULL << uc)) != 0;
+    return uc < 64 && (constants::ascii_blank & (1ULL << uc)) != 0;
 }
 
 /**
@@ -218,7 +212,7 @@ template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_space(const CharT c) noexcept {
     static_assert(is_character_v<CharT>, "character required");
     const auto uc = static_cast<make_unsigned_t<CharT>>(c);
-    return uc < 64 && (constants::SPACE_MASK & (1ULL << uc)) != 0;
+    return uc < 64 && (constants::ascii_space & (1ULL << uc)) != 0;
 }
 
 /**

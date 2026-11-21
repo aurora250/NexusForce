@@ -8589,3 +8589,20 @@ TEST_F(NamedMutexTest, MoveSemantics) {
     EXPECT_TRUE(mtx2.is_valid());
     EXPECT_FALSE(mtx1.is_valid());
 }
+
+TEST_F(NamedMutexTest, MovedFromIsInvalidAndUnnamed) {
+    named_mutex mtx1(mutex_name_, true);
+    named_mutex mtx2(move(mtx1));
+
+    EXPECT_FALSE(mtx1.is_valid());
+    EXPECT_TRUE(mtx1.name().empty());
+    EXPECT_EQ(mtx2.name(), mutex_name_);
+}
+
+TEST_F(NamedMutexTest, DefaultConstructedIsInvalidAndUnnamed) {
+    named_mutex mtx;
+
+    EXPECT_FALSE(mtx.is_valid());
+    EXPECT_TRUE(mtx.name().empty());
+    EXPECT_FALSE(mtx.try_lock());
+}

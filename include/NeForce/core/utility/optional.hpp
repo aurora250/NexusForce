@@ -26,17 +26,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct optional_exception
  * @brief optional访问异常
  */
-struct optional_exception final : memory_exception {
-    explicit optional_exception(const char* info = "Access the Null Value of Optional.") noexcept :
-    memory_exception(info) {}
-
-    explicit optional_exception(const exception& e) :
-    memory_exception(e) {}
-
-    ~optional_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "optional_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(optional_exception, memory_exception, "Access the Null Value of Optional.")
 
 /** @} */ // Exceptions
 
@@ -788,7 +778,7 @@ public:
      * @return 哈希值
      */
     NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
-        return have_value_ ? hash<T>()(*get_ptr()) : constants::FNV_OFFSET_BASIS64;
+        return have_value_ ? hash<T>()(*get_ptr()) : constants::fnv_offset_basis64;
     }
 
     /**
@@ -1293,7 +1283,7 @@ public:
      * @return 哈希值
      */
     NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
-        return ptr_ ? hash<remove_cvref_t<T>>()(*ptr_) : constants::FNV_OFFSET_BASIS64;
+        return ptr_ ? hash<remove_cvref_t<T>>()(*ptr_) : constants::fnv_offset_basis64;
     }
 
     /**

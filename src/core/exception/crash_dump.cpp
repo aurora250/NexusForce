@@ -118,7 +118,7 @@ namespace {
         do {
             digits[count++] = static_cast<char>('0' + value % 10U);
             value /= 10U;
-        } while (value != 0U && count < static_cast<int>(sizeof(digits)));
+        } while (value != 0U && compare_less(count, sizeof(digits)));
         size_t position = offset;
         for (int padding = count; padding < width && position + 1 < capacity; ++padding) {
             buffer[position++] = '0';

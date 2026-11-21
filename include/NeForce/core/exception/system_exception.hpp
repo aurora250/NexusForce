@@ -31,6 +31,8 @@ struct system_exception : exception {
     ~system_exception() override = default;
 
     NEFORCE_NODISCARD const char* type() const noexcept override { return "system_exception"; }
+    NEFORCE_NODISCARD exception* clone() const override { return new system_exception(*this); }
+    NEFORCE_NORETURN void rethrow() const override { throw *this; }
 
     NEFORCE_NODISCARD virtual const error_code& code() const noexcept { return code_; }
 
@@ -53,6 +55,8 @@ protected:
         system_exception(e) {}                                                                  \
         ~THIS() override = default;                                                             \
         NEFORCE_NODISCARD const char* type() const noexcept override { return #THIS; }          \
+        NEFORCE_NODISCARD exception* clone() const override { return new THIS(*this); }         \
+        NEFORCE_NORETURN void rethrow() const override { throw *this; }                         \
     };
 
 

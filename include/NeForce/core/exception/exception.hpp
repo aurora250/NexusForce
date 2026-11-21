@@ -23,14 +23,14 @@ NEFORCE_BEGIN_NAMESPACE__
     BASE(info) {}                                     \
                                                       \
     explicit THIS(const exception& e) :               \
-    BASE(e) {}
+    BASE(e) {}                                        \
+                                                      \
+    ~THIS() override = default;
 
-#define __NEFORCE_ERROR_DERIVED_DESTRUCTOR(CLASS) ~CLASS() override = default;
-
-#define __NEFORCE_ERROR_FINAL_DESTRUCTOR(CLASS) ~CLASS() override = default;
-
-#define __NEFORCE_ERROR_TYPE(CLASS) \
-    NEFORCE_NODISCARD const char* type() const noexcept override { return #CLASS; }
+#define __NEFORCE_ERROR_TYPE(CLASS)                                                  \
+    NEFORCE_NODISCARD const char* type() const noexcept override { return #CLASS; }  \
+    NEFORCE_NODISCARD exception* clone() const override { return new CLASS(*this); } \
+    NEFORCE_NORETURN void rethrow() const override { throw *this; }
 
 /**
  * @def NEFORCE_ERROR_BUILD_DERIVED_CLASS
@@ -44,7 +44,6 @@ NEFORCE_BEGIN_NAMESPACE__
 #define NEFORCE_ERROR_BUILD_DERIVED_CLASS(THIS, BASE, INFO) \
     struct THIS : BASE {                                    \
         __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, INFO)       \
-        __NEFORCE_ERROR_DERIVED_DESTRUCTOR(THIS)            \
         __NEFORCE_ERROR_TYPE(THIS)                          \
     };
 
@@ -60,7 +59,6 @@ NEFORCE_BEGIN_NAMESPACE__
 #define NEFORCE_ERROR_BUILD_FINAL_CLASS(THIS, BASE, INFO) \
     struct THIS final : BASE {                            \
         __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, INFO)     \
-        __NEFORCE_ERROR_FINAL_DESTRUCTOR(THIS)            \
         __NEFORCE_ERROR_TYPE(THIS)                        \
     };
 
@@ -159,6 +157,17 @@ public:
      * @return 异常类型字符串
      */
     NEFORCE_NODISCARD virtual const char* type() const noexcept { return "exception"; }
+
+    /**
+     * @brief 克隆当前动态类型的异常
+     * @return 新分配的异常对象，调用方负责释放
+     */
+    NEFORCE_NODISCARD virtual exception* clone() const { return new exception(*this); }
+
+    /**
+     * @brief 按当前动态类型重新抛出异常
+     */
+    NEFORCE_NORETURN virtual void rethrow() const { throw *this; }
 };
 
 /**

@@ -874,7 +874,7 @@ opt_(move(opt)) {}
 
 const element& markdown_cache::render(const string_view text, const int width) {
     const int effective_width = (width > 0) ? width : opt_.width;
-    const size_t hash = FNV_hash_string32(text.data(), text.size());
+    const size_t hash = fnv_hash_string32(text.data(), text.size());
     const uint64_t stamp = ++stamp_;
 
     for (size_t i = 0; i < count_; ++i) {

@@ -192,6 +192,14 @@ public:
     void restart() { stopped_.store(false, memory_order_release); }
 
     /**
+     * @brief 排空已排队的工作后停止
+     * @return 执行的 handler 数量
+     * @note 只处理已排队的工作，不等待 fd 事件。
+     * @note 应在没有线程运行事件循环时调用。
+     */
+    size_t drain();
+
+    /**
      * @brief 调度一次性定时器
      * @param delay_ms 延迟毫秒数
      * @param handler 到期时执行的回调（在 run() 线程中执行）

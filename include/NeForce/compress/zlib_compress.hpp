@@ -37,6 +37,8 @@ struct zlib_exception final : thirdparty_exception {
     ~zlib_exception() override = default;
 
     NEFORCE_NODISCARD const char* type() const noexcept override { return "zlib_exception"; }
+    NEFORCE_NODISCARD exception* clone() const override { return new zlib_exception(*this); }
+    NEFORCE_NORETURN void rethrow() const override { throw *this; }
 
 private:
     int code_{0};

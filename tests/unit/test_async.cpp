@@ -4252,6 +4252,8 @@ TEST(CancellationSlotTest, MakeOperationAborted) {
     error_code ec = make_operation_aborted();
     EXPECT_TRUE(ec);
     EXPECT_EQ(ec.value(), static_cast<int>(errc::operation_canceled));
+    EXPECT_EQ(ec, errc::operation_canceled);
+    EXPECT_EQ(ec.category(), error_category::generic());
 }
 
 TEST(CancellationSlotTest, CancellationBeforeAsyncOp) {
@@ -5553,4 +5555,164 @@ TEST(ThreadPool, WaitForAllAssistsWhileWaitingForChildren) {
         f.get();
     }
     pool.stop();
+}
+TEST(IoContextTest, DrainRunsQueuedHandlersIncludingNewlyPosted) {
+    io_context ctx;
+    int count = 0;
+    ctx.post([&] { ++count; });
+    ctx.post([&] {
+        ++count;
+        ctx.post([&] { ++count; });
+    });
+
+    EXPECT_EQ(ctx.drain(), 3u);
+    EXPECT_EQ(count, 3);
+    EXPECT_TRUE(ctx.stopped());
+    EXPECT_EQ(ctx.poll(), 0u);
+}
+
+TEST(IoContextTest, DrainRunsExpiredTimers) {
+    io_context ctx;
+    int fired = 0;
+    ctx.schedule_timer(0, [&] { ++fired; });
+    this_thread::sleep_for(milliseconds(5));
+
+    EXPECT_EQ(ctx.drain(), 1u);
+    EXPECT_EQ(fired, 1);
+}
+
+TEST(IoContextTest, DrainLeavesFutureTimersUntouched) {
+    io_context ctx;
+    bool fired = false;
+    ctx.schedule_timer(10000, [&] { fired = true; });
+
+    EXPECT_EQ(ctx.drain(), 0u);
+    EXPECT_FALSE(fired);
+}
+
+TEST(IoContextTest, DrainStopsLoopEvenWithOutstandingWork) {
+    io_context ctx;
+    io_context::work work(ctx);
+
+    EXPECT_EQ(ctx.drain(), 0u);
+    EXPECT_TRUE(ctx.stopped());
+    EXPECT_EQ(ctx.run(), 0u);
+}
+
+namespace {
+    // Mirrors a real operation: the completion lives in an operation object that keeps itself
+    // alive while the handler runs, and the cancellation callback only holds that object.
+    class timeout_probe_stream final : public async_stream {
+        struct operation : enable_shared_from_this<operation> {
+            function<void(error_code, size_t)> handler;
+            bool fired{false};
+
+            void complete(const error_code ec, const size_t bytes) {
+                if (fired) {
+                    return;
+                }
+                fired = true;
+                const auto self = shared_from_this();
+                handler(ec, bytes);
+            }
+        };
+
+    public:
+        explicit timeout_probe_stream(const bool completes_immediately) :
+        completes_immediately_(completes_immediately) {}
+
+        void async_read(io_context&, memory_view<char>, function<void(error_code, size_t)> handler) override {
+            handler(error_code{}, 0);
+        }
+
+        void async_read(io_context&, memory_view<char>, cancellation_slot& slot,
+                        function<void(error_code, size_t)> handler) override {
+            bind(slot, move(handler));
+        }
+
+        void async_write(io_context&, memory_view<const char>, function<void(error_code, size_t)> handler) override {
+            handler(error_code{}, 0);
+        }
+
+        void async_write(io_context&, memory_view<const char>, cancellation_slot& slot,
+                         function<void(error_code, size_t)> handler) override {
+            bind(slot, move(handler));
+        }
+
+    private:
+        void bind(cancellation_slot& slot, function<void(error_code, size_t)> handler) {
+            auto op = make_shared<operation>();
+            op->handler = move(handler);
+
+            if (completes_immediately_) {
+                op->complete(error_code{}, 7);
+                return;
+            }
+            if (slot.is_cancelled()) {
+                op->complete(make_operation_aborted(), 0);
+                return;
+            }
+            slot.assign([op] { op->complete(make_operation_aborted(), 0); });
+        }
+
+        bool completes_immediately_;
+    };
+} // namespace
+
+TEST(AsyncTimeoutTest, CompletesBeforeTimeoutRunsHandlerOnce) {
+    io_context ctx;
+    timeout_probe_stream stream(true);
+    int calls = 0;
+    int result = -1;
+    size_t bytes = 0;
+
+    async_with_timeout(
+            ctx, 50,
+            [&](cancellation_slot& slot, function<void(error_code, size_t)> handler) {
+                stream.async_read(ctx, memory_view<char>{}, slot, move(handler));
+            },
+            [&](const error_code ec, const size_t n) {
+                ++calls;
+                result = ec.value();
+                bytes = n;
+            });
+
+    ctx.run();
+
+    EXPECT_EQ(calls, 1);
+    EXPECT_EQ(result, 0);
+    EXPECT_EQ(bytes, 7u);
+}
+
+TEST(AsyncTimeoutTest, TimesOutAndReportsTimedOut) {
+    io_context ctx;
+    timeout_probe_stream stream(false);
+    int calls = 0;
+    int result = 0;
+
+    async_with_timeout(
+            ctx, 5,
+            [&](cancellation_slot& slot, function<void(error_code, size_t)> handler) {
+                stream.async_read(ctx, memory_view<char>{}, slot, move(handler));
+            },
+            [&](const error_code ec, const size_t) {
+                ++calls;
+                result = ec.value();
+            });
+
+    ctx.run();
+
+    EXPECT_EQ(calls, 1);
+    EXPECT_EQ(result, static_cast<int>(errc::timed_out));
+}
+
+TEST(CancellationSlotTest, ClearReleasesRegisteredCallback) {
+    stop_source src;
+    cancellation_slot slot(src.get_token());
+    int count = 0;
+    EXPECT_TRUE(slot.assign([&] { ++count; }));
+
+    slot.clear();
+    EXPECT_TRUE(src.request_stop());
+    EXPECT_EQ(count, 0);
 }

@@ -269,6 +269,9 @@ option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFI
 option(NEXUSFORCE_BUILD_BENCHMARKS  "Build benchmark programs"           ${CONFIG_BUILD_BENCHMARKS})
 option(NEXUSFORCE_BUILD_DOCS        "Build documentation with Doxygen"   ${CONFIG_BUILD_DOCS})
 
+# TODO: ship a "server" build profile for config.json — database drivers, ICU, compression and
+# tests/benchmarks off with a BASELINE SIMD level — so backend services do not hand-edit the
+# defaults to get a lean build.
 
 option(NEXUSFORCE_USING_MEMORY_POOL
         "Using memory pool as the allocator of library containers"            ${CONFIG_USING_MEMORY_POOL})
@@ -504,6 +507,94 @@ install(EXPORT NexusForceTargets
         NAMESPACE NexusForce::
         DESTINATION ${INSTALL_CONFIGDIR}
 )
+
+# pkg-config 元数据，供 Makefile / Meson 等非 CMake 构建直接使用
+if(IS_ABSOLUTE "${CMAKE_INSTALL_LIBDIR}")
+    set(NEXUSFORCE_PC_PREFIX "${CMAKE_INSTALL_PREFIX}")
+    set(NEXUSFORCE_PC_LIBDIR "${CMAKE_INSTALL_LIBDIR}")
+else()
+    string(REPLACE "/" ";" _nf_pc_libdir_parts "${CMAKE_INSTALL_LIBDIR}")
+    list(LENGTH _nf_pc_libdir_parts _nf_pc_libdir_depth)
+    set(NEXUSFORCE_PC_PREFIX "\${pcfiledir}")
+    foreach(_nf_pc_index RANGE 1 ${_nf_pc_libdir_depth})
+        string(APPEND NEXUSFORCE_PC_PREFIX "/..")
+    endforeach()
+    string(APPEND NEXUSFORCE_PC_PREFIX "/..")
+    set(NEXUSFORCE_PC_LIBDIR "\${prefix}/${CMAKE_INSTALL_LIBDIR}")
+endif()
+if(IS_ABSOLUTE "${CMAKE_INSTALL_INCLUDEDIR}")
+    set(NEXUSFORCE_PC_INCLUDEDIR "${CMAKE_INSTALL_INCLUDEDIR}")
+else()
+    set(NEXUSFORCE_PC_INCLUDEDIR "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
+endif()
+
+get_target_property(_nf_pc_interface_defs NexusForce INTERFACE_COMPILE_DEFINITIONS)
+if(NOT _nf_pc_interface_defs)
+    set(_nf_pc_interface_defs "")
+endif()
+set(NEXUSFORCE_PC_DEFINES "")
+foreach(_nf_pc_def IN LISTS _nf_pc_interface_defs)
+    if(_nf_pc_def MATCHES "\\$<" OR _nf_pc_def MATCHES "^NEXUSFORCE_VERSION")
+        continue()
+    endif()
+    string(APPEND NEXUSFORCE_PC_DEFINES " -D${_nf_pc_def}")
+endforeach()
+
+set(NEXUSFORCE_PC_LIBS_PRIVATE "")
+if(NEXUSFORCE_POSTGRESQL_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lpq")
+endif()
+if(NEXUSFORCE_MYSQL_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lmysqlclient")
+endif()
+if(NEXUSFORCE_SQLITE_LINKED AND NOT NEXUSFORCE_SQLCIPHER_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lsqlite3")
+endif()
+if(NEXUSFORCE_SQLCIPHER_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lsqlcipher")
+endif()
+if(NEXUSFORCE_REDIS_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lhiredis")
+endif()
+if(NEXUSFORCE_ZLIB_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lz")
+endif()
+if(NEXUSFORCE_LZ4_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -llz4")
+endif()
+if(NEXUSFORCE_ZSTD_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lzstd")
+endif()
+if(NEXUSFORCE_ICU_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -licui18n -licuuc -licudata")
+endif()
+if(NEXUSFORCE_URING_LINKED)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -luring")
+endif()
+string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lpcre2-8 -lssl -lcrypto")
+if(WIN32)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE
+            " -lws2_32 -lwsock32 -lbcrypt -lcrypt32 -ldbghelp -liphlpapi -lpsapi"
+            " -lpdh -lpowrprof -lsetupapi -lshell32 -lsynchronization -lwbemuuid -lcfgmgr32")
+elseif(APPLE)
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -framework Security")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lpthread -lexecinfo -ldevstat")
+else()
+    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lpthread -latomic")
+endif()
+
+string(STRIP "${NEXUSFORCE_PC_LIBS_PRIVATE}" NEXUSFORCE_PC_LIBS_PRIVATE)
+string(STRIP "${NEXUSFORCE_PC_DEFINES}" NEXUSFORCE_PC_DEFINES)
+
+configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/nexusforce.pc.in
+        ${CMAKE_CURRENT_BINARY_DIR}/nexusforce.pc
+        @ONLY
+)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/nexusforce.pc
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
 nexusforce_install_runtime_dependencies(NexusForce)
 

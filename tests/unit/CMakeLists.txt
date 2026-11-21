@@ -64,6 +64,14 @@ add_executable(NexusForceUnitTests
 )
 
 target_link_libraries(NexusForceUnitTests PRIVATE NexusForce::NexusForce)
+
+find_package(OpenSSL REQUIRED)
+target_link_libraries(NexusForceUnitTests PRIVATE OpenSSL::SSL)
+if(NEXUSFORCE_ENABLE_ZLIB)
+    find_package(ZLIB REQUIRED)
+    target_link_libraries(NexusForceUnitTests PRIVATE ZLIB::ZLIB)
+endif()
+
 if(MSVC)
     target_compile_options(NexusForceUnitTests PRIVATE /bigobj)
 else()
@@ -94,6 +102,15 @@ target_compile_definitions(NexusForceUnitTests PRIVATE
 
 enable_testing()
 add_test(NAME NexusForceUnitTests COMMAND NexusForceUnitTests)
+
+add_executable(NexusForceStaticLinkTest
+        main.cpp
+        test_static_link.cpp
+)
+target_link_libraries(NexusForceStaticLinkTest PRIVATE NexusForce::NexusForceStatic GTest::gtest)
+nexusforce_compiler_options(NexusForceStaticLinkTest)
+add_test(NAME NexusForceStaticLinkTest COMMAND NexusForceStaticLinkTest)
+set_target_properties(NexusForceStaticLinkTest PROPERTIES FOLDER "tests")
 
 nexusforce_reflect_scan(
     TARGET NexusForceUnitTests

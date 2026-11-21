@@ -778,6 +778,25 @@ size_t io_context::poll() {
     return total;
 }
 
+size_t io_context::drain() {
+    // Enter the stopped state first:
+    // no iteration of run() may start a new fd wait while the queues below are being emptied.
+    stopped_.store(true, memory_order_release);
+
+    size_t total = 0;
+    for (;;) {
+        const size_t handlers = drain_handlers(numeric_traits<size_t>::max());
+        size_t timers = 0;
+        while (fire_expired_timer()) {
+            ++timers;
+        }
+        total += handlers + timers;
+        if (handlers == 0 && timers == 0) {
+            return total;
+        }
+    }
+}
+
 void io_context::run_pool(const size_t n) {
     {
         lock<mutex> lk(pool_mutex_);

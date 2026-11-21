@@ -26,17 +26,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct md_exception
  * @brief Markdown 格式操作失败
  */
-struct md_exception final : value_exception {
-    explicit md_exception(const char* info = "Markdown Operation Failed.") noexcept :
-    value_exception(info) {}
-
-    explicit md_exception(const exception& e) :
-    value_exception(e) {}
-
-    ~md_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "md_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(md_exception, value_exception, "Markdown Operation Failed.")
 
 /** @} */ // Exceptions
 

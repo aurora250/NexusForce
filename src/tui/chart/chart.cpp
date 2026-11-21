@@ -11,7 +11,7 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_TUI__
 
 namespace {
-    constexpr double chart_pi = static_cast<double>(constants::PI);
+    constexpr double chart_pi = constants::pi_v<double>;
     constexpr int default_chart_width = 60;
     constexpr int default_chart_height = 16;
 

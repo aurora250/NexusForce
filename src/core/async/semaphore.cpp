@@ -36,16 +36,17 @@ namespace {
 } // namespace
 
 
+bool semaphore::try_acquire_for_impl(const milliseconds ms, nanoseconds ns) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-bool semaphore::try_acquire_for_impl(const milliseconds timeout) noexcept {
-    const auto ms = max(timeout.count(), 0LL);
-    const ::DWORD result = ::WaitForSingleObjectEx(handle_, static_cast<::DWORD>(ms), FALSE);
+    (void) ns;
+    const auto ms_count = max(ms.count(), 0LL);
+    const ::DWORD result = ::WaitForSingleObjectEx(handle_, static_cast<::DWORD>(ms_count), FALSE);
     return result == WAIT_OBJECT_0;
-}
 #else
+    (void) ms;
+    const ::timespec deadline = relative_to_timespec(ns);
+
 #    ifdef NEFORCE_PLATFORM_MACOS
-bool semaphore::try_acquire_for_impl(const nanoseconds timeout) noexcept {
-    const ::timespec deadline = relative_to_timespec(timeout);
     for (;;) {
         if (::sem_trywait(&sem_) == 0) {
             return true;
@@ -61,25 +62,22 @@ bool semaphore::try_acquire_for_impl(const nanoseconds timeout) noexcept {
         const ::timespec pause{0, 1'000'000L};
         ::nanosleep(&pause, nullptr);
     }
-}
 #    else
-bool semaphore::try_acquire_for_impl(const nanoseconds timeout) noexcept {
-    const ::timespec ts = relative_to_timespec(timeout);
     int ret = 0;
     do {
-        ret = ::sem_timedwait(&sem_, &ts);
+        ret = ::sem_timedwait(&sem_, &deadline);
     } while (ret == -1 && errno == EINTR);
     return ret == 0;
-}
 #    endif
 #endif
+}
 
 semaphore::semaphore(const long initial, const long maximum) {
     NEFORCE_CONSTEXPR_ASSERT(initial >= 0);
     NEFORCE_CONSTEXPR_ASSERT(maximum >= initial);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    handle_ = ::CreateSemaphoreA(nullptr, initial, maximum, nullptr);
+    handle_ = ::CreateSemaphoreW(nullptr, initial, maximum, nullptr);
     if (handle_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(system_exception("CreateSemaphoreW failed"));
     }

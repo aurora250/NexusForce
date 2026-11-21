@@ -199,8 +199,8 @@ TEST_F(ToDecimalTest, BasicConversion) {
 }
 
 TEST_F(ToDecimalTest, Fractional) {
-    EXPECT_TRUE(absolute(to_decimal("3.14") - decimal_t(3.14)) < constants::LOOSE_TOLERANCE);
-    EXPECT_TRUE(absolute(to_decimal("-0.5") - decimal_t(-0.5)) < constants::LOOSE_TOLERANCE);
+    EXPECT_TRUE(absolute(to_decimal("3.14") - decimal_t(3.14)) < constants::loose_tolerance);
+    EXPECT_TRUE(absolute(to_decimal("-0.5") - decimal_t(-0.5)) < constants::loose_tolerance);
 }
 
 TEST_F(ToDecimalTest, ScientificNotation) {

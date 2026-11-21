@@ -169,9 +169,18 @@
 - `file_watcher` 新增基于 kqueue 的后端，提供创建/删除/修改事件与递归目录监视
 - `arp` 新增基于 BPF 的原始套接字实现，可发送 ARP 请求并解析应答
 - `sysinfo::probe_hardware()` 通过 `sysctl(3)` 与 CPUID 采集 CPU 型号、频率、缓存以及 SMBIOS 中的 BIOS/主板信息
+- 新增 `io_context::drain()`：先执行所有已入队 handler 与已经到期的定时器（含这些 handler 新投递的工作）再进入停止状态，用于优雅关停；`stop()` 仍是丢弃未执行工作的语义
+- 新增 `async_with_timeout()`：为任意接受取消槽的异步操作组合超时，超时经取消槽终止操作并以 `errc::timed_out` 回调，正常完成时撤销定时器，回调至多一次
+- 新增 `cancellation_slot::clear()`：注销已注册的取消回调，供自行持有取消槽的场景断开回调与操作之间的相互引用
+- 新增按精度实例化的常量 `machine_epsilon_v<T>` / `default_tolerance_v<T>` / `loose_tolerance_v<T>`，级数系数表改为 `exponential_coefficients_table<T>` 等结构体模板
+- 新增 `NexusForce::NexusForceStatic` 静态库目标，与动态库共用同一份源文件并随同一份 CMake 包导出，用于单文件部署；
 
 ### 🔧 Improvements
 
+- `current_exception()` 改为按 `exception` 基类统一捕获，通过 `exception::clone()` / `exception::rethrow()` 虚函数保留动态类型
+- 第三方依赖链接改为 `PRIVATE`，消费方不再继承 include 路径
+- 安装 `nexusforce.pc`，非 CMake 构建可通过 `pkg-config --cflags/--libs nexusforce` 取得头文件路径、ABI 相关的编译宏与链接参数，静态链接使用 `--static`；第三方依赖只在 `Libs.private` 中给出，不污染 `--cflags`
+- 启用 `-fvisibility=hidden`，ELF 共享库链接加 `--exclude-libs,ALL`，静态链入的第三方符号不再进入动态符号表
 - 反射代码生成器 `NFRS` 更名为 `NexusRsvp`：导出的 CMake 目标由 `NexusForce::NFRS` 变为 `NexusForce::NexusRsvp`
 - Markdown 解析器删除逐行字符串拼接与拥有式节点：单行段落、表格单元格、纯文本片段与链接地址零拷贝；围栏/缩进代码块、HTML 块直接写入 arena；引用块/列表项行视图不再复制
 - Markdown 解析器新增单行段落与简单列表项快速路径、列表“段落 + 嵌套列表”快速路径、表格分隔行前置判定、围栏标记缓存与代码段/强调闭合的 SIMD 查找
@@ -426,8 +435,9 @@
 
 ### 🐛 Bug Fixes
 
-- 修复 `stacktrace` 帧解析：Linux/FreeBSD 的 `addr2line` 改用模块内相对地址，动态符号缺失时回退 addr2line 的函数名；macOS 使用 `atos` 解析名称与源码位置，Windows 仍走 DbgHelp；ELF 探测改用 `file` 组件，模块路径改用 `dynamic_library::symbol_location()`
-- 修复 `basic_string::clear()` 在长字符串模式下释放堆缓冲并退回 SSO 的问题：清空后容量不应变化，原实现每次 `clear()` 都会 `deallocate` 并在下一次追加时重新分配，既违反语义又使 `clear()` + 追加循环多出一次分配/释放；现仅复位长度并写终止符，容量保留
+- 修复三角函数对负数实参的符号错误：`reduce_arg_sincos` 把负号并入象限偏移，导致 `sine(-x)` / `cosine(-x)` / `tangent(-x)` 分别返回 `-cos(x)` / `sin(x)` / `-sin(x)`；现象限只由归约倍数决定，符号由各函数的奇偶性单独处理
+- 修复 `cube_root` 在极端量级下的发散：初值取 `x` 或 `x/3` 时，`1e-20`、`1e20` 一类输入会让牛顿迭代在有限步内无法收敛；改为先按 2 的整数次幂阶梯归一化（指数取 3 的倍数）再迭代，并在收敛后补一次迭代
+- 修复 `make_operation_aborted()` 用 `system` 类别承载 POSIX `errc` 值：Windows 上 `ec == errc::operation_canceled` 恒为假、`message()` 也返回无关的系统错误串，现改用 `generic` 类别
 - 修复 GCM 计数器递增错误：原 4 路 CTR 内核用 `_mm_add_epi32` 直接修改大端计数字节，从第 2 个块起生成的密钥流与标准实现不一致；改为按大端序递增，并新增 64 B / 144 B 已知答案测试
 - 修复无 PCLMUL 平台（ARM64 / 标量回退 / QEMU baseline）的 GCM tag 字节序错误：`ghash_final` 的标量分支直接按主机整数写出状态，导致 tag 反序；改为先从状态字节读取大端值再写出
 - `to_float64` / `to_float32` 的指数缩放由"超出 ±32 直接返回 inf/0"改为按 1e22 分块缩放，修复 `1e239` 被解析为 `inf`、`1.5e-43` 被解析为 `0` 的问题；指针标识符位数超出范围时仍走原有边界判定

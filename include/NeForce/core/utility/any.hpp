@@ -46,17 +46,7 @@ NEFORCE_END_INNER__
  * @struct anycast_exception
  * @brief any转换异常
  */
-struct anycast_exception final : typecast_exception {
-    explicit anycast_exception(const char* info = "Cast From any Type Failed.") noexcept :
-    typecast_exception(info) {}
-
-    explicit anycast_exception(const exception& e) :
-    typecast_exception(e) {}
-
-    ~anycast_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "anycast_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(anycast_exception, typecast_exception, "Cast From any Type Failed.")
 
 /** @} */ // Exceptions
 

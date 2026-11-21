@@ -23,20 +23,8 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @struct lz4_exception
  * @brief lz4操作异常类
- *
- * lz4操作异常。
  */
-struct lz4_exception final : thirdparty_exception {
-    explicit lz4_exception(const char* info = "LZ4 Operation Failed.") noexcept :
-    thirdparty_exception(info) {}
-
-    explicit lz4_exception(const exception& e) :
-    thirdparty_exception(e) {}
-
-    ~lz4_exception() override = default;
-
-    NEFORCE_NODISCARD const char* type() const noexcept override { return "lz4_exception"; }
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(lz4_exception, thirdparty_exception, "LZ4 Operation Invalid.")
 
 /** @} */ // Exceptions
 

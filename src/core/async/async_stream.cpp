@@ -113,4 +113,46 @@ void async_stream::async_read(io_context& ctx, dynamic_buffer& buf, size_t n,
     });
 }
 
+void async_with_timeout(io_context& ctx, const uint64_t timeout_ms,
+                        function<void(cancellation_slot&, function<void(error_code, size_t)>)> start,
+                        function<void(error_code, size_t)> handler) {
+
+    using result_handler = function<void(error_code, size_t)>;
+
+    struct state {
+        io_context* ctx{nullptr};
+        stop_source source;
+        unique_ptr<cancellation_slot> slot;
+        size_t timer_id{0};
+        bool timed_out{false};
+        bool completed{false};
+        result_handler handler;
+    };
+
+    auto shared = make_shared<state>();
+    shared->ctx = &ctx;
+    shared->slot = make_unique<cancellation_slot>(shared->source.get_token());
+    shared->handler = move(handler);
+
+    shared->timer_id = ctx.schedule_timer(timeout_ms, [shared] {
+        shared->timed_out = true;
+        shared->source.request_stop();
+    });
+
+    start(*shared->slot, result_handler([shared](const error_code ec, const size_t bytes) {
+        if (shared->completed) {
+            return;
+        }
+        shared->completed = true;
+        shared->ctx->cancel_timer(shared->timer_id);
+        shared->ctx->schedule_timer(0, [shared] { shared->slot->clear(); });
+
+        error_code result = ec;
+        if (shared->timed_out) {
+            result = error_code(static_cast<int>(errc::timed_out), error_category::system());
+        }
+        shared->handler(result, bytes);
+    }));
+}
+
 NEFORCE_END_NAMESPACE__

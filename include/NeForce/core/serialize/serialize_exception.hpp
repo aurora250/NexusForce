@@ -20,10 +20,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct serialize_exception
  * @brief 序列化异常
  */
-struct serialize_exception final : value_exception {
-    explicit serialize_exception(const char* info = "Serialization failed.") noexcept :
-    value_exception(info) {}
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(serialize_exception, value_exception, "Serialization failed.")
 
 /**
  * @struct deserialize_exception
@@ -35,25 +32,28 @@ struct deserialize_exception : value_exception {
     explicit deserialize_exception(const char* info = "Deserialization failed.", string path = "") noexcept :
     value_exception(info),
     property_path(move(path)) {}
+
+    explicit deserialize_exception(const exception& e) :
+    value_exception(e) {}
+
+    ~deserialize_exception() override = default;
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "deserialize_exception"; }
+    NEFORCE_NODISCARD exception* clone() const override { return new deserialize_exception(*this); }
+    NEFORCE_NORETURN void rethrow() const override { throw *this; }
 };
 
 /**
  * @struct missing_required_exception
  * @brief 反序列化时缺少必填属性异常
  */
-struct missing_required_exception final : deserialize_exception {
-    explicit missing_required_exception(const char* property_name) :
-    deserialize_exception("Missing required property.", property_name) {}
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(missing_required_exception, deserialize_exception, "Missing required property.")
 
 /**
  * @struct type_mismatch_exception
  * @brief 序列化类型不匹配异常
  */
-struct type_mismatch_exception final : deserialize_exception {
-    explicit type_mismatch_exception(const char* expected_type) :
-    deserialize_exception("Type mismatch.", expected_type) {}
-};
+NEFORCE_ERROR_BUILD_FINAL_CLASS(type_mismatch_exception, deserialize_exception, "Type mismatch.")
 
 /** @} */ // Exceptions
 

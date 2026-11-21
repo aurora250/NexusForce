@@ -266,7 +266,7 @@ NEFORCE_BEGIN_CONSTANTS__
  *
  * 用于确定哈希表大小的一系列素数，减少哈希冲突。
  */
-NEFORCE_INLINE17 constexpr size_t HASH_PRIME_LIST[] = {101,
+NEFORCE_INLINE17 constexpr size_t hash_prime_list[] = {101,
                                                        173,
                                                        263,
                                                        397,
@@ -368,15 +368,12 @@ NEFORCE_INLINE17 constexpr size_t HASH_PRIME_LIST[] = {101,
 /**
  * @brief 哈希表素数列表（32位系统）
  */
-NEFORCE_INLINE17 constexpr size_t HASH_PRIME_LIST[] = {
+NEFORCE_INLINE17 constexpr size_t hash_prime_list[] = {
         53,       97,       193,      389,       769,       1543,      3079,      6151,      12289,
         24593,    49157,    98317,    196613,    393241,    786433,    1572869,   3145739,   6291469,
         12582917, 25165843, 50331653, 100663319, 201326611, 402653189, 805306457, 1610612741};
 
 #endif
-
-/// 素数列表长度
-NEFORCE_INLINE17 constexpr size_t HASH_PRIMER_COUNT = extent_v<decltype(HASH_PRIME_LIST)>;
 
 NEFORCE_END_CONSTANTS__
 
@@ -440,8 +437,9 @@ private:
      * @return 素数
      */
     NEFORCE_NODISCARD static size_type next_size(const size_type n) noexcept {
-        const size_t* first = constants::HASH_PRIME_LIST;
-        const size_t* last = constants::HASH_PRIME_LIST + constants::HASH_PRIMER_COUNT;
+        constexpr size_t hash_primer_count = extent_v<decltype(constants::hash_prime_list)>;
+        const size_t* first = constants::hash_prime_list;
+        const size_t* last = constants::hash_prime_list + hash_primer_count;
         const size_t* pos = _NEFORCE lower_bound(first, last, n);
         return pos == last ? *(last - 1) : *pos;
     }
@@ -1267,7 +1265,8 @@ public:
      * @return 最大桶数量
      */
     NEFORCE_NODISCARD static size_type buckets_max_size() noexcept {
-        return constants::HASH_PRIME_LIST[constants::HASH_PRIMER_COUNT - 1];
+        constexpr size_t hash_primer_count = extent_v<decltype(constants::hash_prime_list)>;
+        return constants::hash_prime_list[hash_primer_count - 1];
     }
 
     /**

@@ -1,0 +1,12 @@
+prefix=@NEXUSFORCE_PC_PREFIX@
+exec_prefix=${prefix}
+libdir=@NEXUSFORCE_PC_LIBDIR@
+includedir=@NEXUSFORCE_PC_INCLUDEDIR@
+
+Name: NexusForce
+Description: A rigorously engineered full-stack C++ backend library
+URL: https://github.com/aurora250/NexusForce
+Version: @NEXUSFORCE_VERSION@
+Cflags: -I${includedir} -DNEXUSFORCE_VERSION_MAJOR=@NEXUSFORCE_VERSION_MAJOR@ -DNEXUSFORCE_VERSION_MINOR=@NEXUSFORCE_VERSION_MINOR@ -DNEXUSFORCE_VERSION_PATCH=@NEXUSFORCE_VERSION_PATCH@ @NEXUSFORCE_PC_DEFINES@
+Libs: -L${libdir} -lNexusForce
+Libs.private: @NEXUSFORCE_PC_LIBS_PRIVATE@

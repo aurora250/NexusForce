@@ -94,7 +94,6 @@ struct file_watcher::impl {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     native_handle_type dir_handle_ = INVALID_HANDLE_VALUE;
     native_handle_type completion_port_ = INVALID_HANDLE_VALUE;
-    ::OVERLAPPED overlapped_{};
 #elif defined(NEFORCE_PLATFORM_LINUX)
     native_handle_type inotify_fd_ = -1;
     native_handle_type watch_descriptor_ = -1;
@@ -102,7 +101,7 @@ struct file_watcher::impl {
     uint32_t watch_mask_ = 0;
     flat_unordered_map<int, string> linux_watch_map_;
 #else
-    int kq_fd_ = -1;
+    native_handle_type kq_fd_ = -1;
 
     struct kqueue_watch {
         string relative;
