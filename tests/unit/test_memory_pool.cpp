@@ -614,21 +614,21 @@ TEST(PoolAllocator, AllocateAndDeallocateRoundTrip) {
     EXPECT_TRUE(pool.verify());
 }
 
-TEST(MemoryPool, LibraryContainersAreServedByTheSystemPool) {
-#ifdef NEFORCE_USING_MEMORY_POOL
+TEST(MemoryPool, LibraryContainersStayOnTheCrtAllocator) {
+#if defined(NEFORCE_USING_MEMORY_POOL_OVERRIDE)
+    GTEST_SKIP() << "the process wide allocator override is enabled";
+#else
     memory_pool& pool = system_memory_pool();
     {
         string text(96, 'x');
-        EXPECT_TRUE(pool.owns(text.data()));
+        EXPECT_FALSE(pool.owns(text.data()));
         vector<int> values;
         values.reserve(4096);
-        EXPECT_TRUE(pool.owns(values.data()));
+        EXPECT_FALSE(pool.owns(values.data()));
         EXPECT_EQ(values.capacity(), 4096U);
     }
     pool.flush_thread_cache();
     EXPECT_TRUE(pool.verify());
-#else
-    GTEST_SKIP() << "NEXUSFORCE_USING_MEMORY_POOL is disabled";
 #endif
 }
 

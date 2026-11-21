@@ -112,6 +112,15 @@ nexusforce_compiler_options(NexusForceStaticLinkTest)
 add_test(NAME NexusForceStaticLinkTest COMMAND NexusForceStaticLinkTest)
 set_target_properties(NexusForceStaticLinkTest PROPERTIES FOLDER "tests")
 
+add_executable(NexusForceComponentLinkTest
+        main.cpp
+        test_component_link.cpp
+)
+target_link_libraries(NexusForceComponentLinkTest PRIVATE NexusForce::core NexusForce::logging NexusForce::net GTest::gtest)
+nexusforce_compiler_options(NexusForceComponentLinkTest)
+add_test(NAME NexusForceComponentLinkTest COMMAND NexusForceComponentLinkTest)
+set_target_properties(NexusForceComponentLinkTest PROPERTIES FOLDER "tests")
+
 nexusforce_reflect_scan(
     TARGET NexusForceUnitTests
     HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/nexusrsvp_test_data

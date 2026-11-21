@@ -337,8 +337,9 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 #### 分配器模型
 
-- 打开 `NEXUSFORCE_USING_MEMORY_POOL`（默认）时，库容器（`basic_string`、`vector` 等）的分配统一由全局内存池承担
-- 显式打开 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` 并让每个会跨模块传递所有权的 C++ 模块链接 `NexusForceMemoryPoolOverrideStatic` 以使全进程使用全局内存池
+- 库容器（`basic_string`、`vector` 等）默认经 C 运行时分配：`standard_allocator` 不会自行路由到内存池
+- 需要内存池时按容器显式使用 `pool_allocator`，它是内存池唯一的分配器入口
+- 显式打开 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` 并让每个会跨模块传递所有权的 C++ 模块链接 `NexusForceMemoryPoolOverrideStatic` 以使全进程使用全局内存池；此时默认分配器经被覆盖的全局 `operator new` / `delete` 进入内存池
 
 ### 📦 压缩 (Compress)
 - **lz4 压缩** - `lz4_compressor` 高速数据压缩/解压

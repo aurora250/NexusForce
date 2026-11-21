@@ -2,7 +2,7 @@
 
 ## Linux
 
-> 测试平台: i9-13980HX (8 P-core + 16 E-core = 32 逻辑 CPU), Linux 7.0.0-42, Clang 20 Release (`-mavx2`, 生效优化级别 `-O2`)，`NEXUSFORCE_USING_MEMORY_POOL=ON`
+> 测试平台: i9-13980HX (8 P-core + 16 E-core = 32 逻辑 CPU), Linux 7.0.0-42, Clang 20 Release (`-mavx2`, 生效优化级别 `-O2`)，`NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE=ON`
 
 ### 追加 (`push_back`，已预留容量)
 

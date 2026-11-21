@@ -177,10 +177,20 @@
 
 ### 🔧 Improvements
 
+- 删除 `NEXUSFORCE_USING_SSO` 选项、`NEFORCE_USING_SSO` 宏与 `basic_string` 的非 SSO 实现：`basic_string` 固定使用 SSO 布局，`sizeof` 与修饰名随之固定，消费端需要重新编译
+- 删除 `NEXUSFORCE_USING_MEMORY_POOL` 选项与 `NEFORCE_USING_MEMORY_POOL` 宏：`standard_allocator` 不再把库容器路由到内存池，默认使用 C 运行时 `operator new` / `delete`；内存池改为仅经 `pool_allocator` 显式使用，或在 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` 覆盖全局 `operator new` / `delete` 时被动进入
+- `standard_allocator` 与内存池完全解耦：删除 `standard_allocator.hpp` 中的池路由分支与 ABI 开关 TODO，分配路径恒为 `operator new` / `delete`，`pool_allocator` 成为内存池唯一的分配器入口；安装消费端与单元测试增加“库容器留在 CRT 分配器”的断言
+- `basic_string` 移除约 300 行非 SSO 实现分支与相关条件编译，对象布局路径唯一
 - `current_exception()` 改为按 `exception` 基类统一捕获，通过 `exception::clone()` / `exception::rethrow()` 虚函数保留动态类型
 - 第三方依赖链接改为 `PRIVATE`，消费方不再继承 include 路径
 - 安装 `nexusforce.pc`，非 CMake 构建可通过 `pkg-config --cflags/--libs nexusforce` 取得头文件路径、ABI 相关的编译宏与链接参数，静态链接使用 `--static`；第三方依赖只在 `Libs.private` 中给出，不污染 `--cflags`
 - 启用 `-fvisibility=hidden`，ELF 共享库链接加 `--exclude-libs,ALL`，静态链入的第三方符号不再进入动态符号表
+- 静态库按模块拆分为 `NexusForce::core` / `logging` / `db` / `compress` / `net` / `plugin` / `tui` 组件库，第三方依赖按模块裁剪并随包导出，单体 `NexusForceStatic` 保留
+- 显式 `-DNEXUSFORCE_SIMD_LEVEL=...` 现在优先于 config.json 并在后续 configure 中保持，未指定时仍以 config.json 为准
+- `config.json` 的 `simd` 段重构为按架构的 `isa` 段（`level` + `extensions`），`aes-ni` / `pclmul` / `vaes` / `intel-tsx` 从 `feature` 移入 `isa.<arch>.extensions`；旧 `simd` 与 `feature` 键不再兼容
+- `feature.sqlcipher` 移入 `dependency.sqlite3.cipher`，SQLCipher 作为 SQLite3 的加密子选项
+- 新增 `isa.aarch64.extensions.aes`：控制 ARMv8 Crypto Extensions（`-march=...+crypto`），关闭后 AES 走标量回退；aarch64 不再借用 x86 的 `aes-ni`/`pclmul` 开关
+- 新增 `NEFORCE_SIMD_AES` 聚合宏：x86 AES-NI 或 ARMv8 Crypto Extensions 任一可用时定义，与 `sysinfo::simd_instruction::aes` 的运行时语义一致；选择具体 intrinsic 仍用 `NEFORCE_SIMD_AES_NI` / `NEFORCE_SIMD_AES_ARM`
 - 反射代码生成器 `NFRS` 更名为 `NexusRsvp`：导出的 CMake 目标由 `NexusForce::NFRS` 变为 `NexusForce::NexusRsvp`
 - Markdown 解析器删除逐行字符串拼接与拥有式节点：单行段落、表格单元格、纯文本片段与链接地址零拷贝；围栏/缩进代码块、HTML 块直接写入 arena；引用块/列表项行视图不再复制
 - Markdown 解析器新增单行段落与简单列表项快速路径、列表“段落 + 嵌套列表”快速路径、表格分隔行前置判定、围栏标记缓存与代码段/强调闭合的 SIMD 查找
@@ -435,6 +445,7 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `crash_dump` 在 Windows 上的编译错误：`<excpt.h>` 把 `exception_code` 定义为 `_exception_code` 内建函数，与 `report::exception_code` 成员冲突；`crash_dump.cpp` 在系统头文件之后再次 `#undef`
 - 修复三角函数对负数实参的符号错误：`reduce_arg_sincos` 把负号并入象限偏移，导致 `sine(-x)` / `cosine(-x)` / `tangent(-x)` 分别返回 `-cos(x)` / `sin(x)` / `-sin(x)`；现象限只由归约倍数决定，符号由各函数的奇偶性单独处理
 - 修复 `cube_root` 在极端量级下的发散：初值取 `x` 或 `x/3` 时，`1e-20`、`1e20` 一类输入会让牛顿迭代在有限步内无法收敛；改为先按 2 的整数次幂阶梯归一化（指数取 3 的倍数）再迭代，并在收敛后补一次迭代
 - 修复 `make_operation_aborted()` 用 `system` 类别承载 POSIX `errc` 值：Windows 上 `ec == errc::operation_canceled` 恒为假、`message()` 也返回无关的系统错误串，现改用 `generic` 类别

@@ -22,6 +22,9 @@
 #    ifdef NEFORCE_COMPILER_MSVC
 #        include <intrin.h>
 #    endif
+#    ifdef exception_code
+#        undef exception_code
+#    endif
 #endif
 #ifdef NEFORCE_PLATFORM_POSIX
 #    include <cerrno>

@@ -2824,7 +2824,7 @@ TEST(IntroSortTest, Basic) {
     auto v = random_vector(200, 999);
     auto expected = v;
     sort(expected.begin(), expected.end());
-    int depth = 2 * static_cast<int>(logarithm_2(v.size())) + 1;
+    int depth = 2 * static_cast<int>(logarithm_2(static_cast<double>(v.size()))) + 1;
     introspective_sort(v.begin(), v.end(), depth);
     EXPECT_EQ(v, expected);
 }

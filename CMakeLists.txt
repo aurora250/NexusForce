@@ -42,32 +42,18 @@ if(_config_locale_error)
     set(CONFIG_ENABLE_LOCALE ON)
 endif()
 
-string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
-string(JSON CONFIG_USING_INTEL_TSX   GET ${JSON_CONTENT} feature intel-tsx)
-string(JSON CONFIG_USING_SQLCIPHER   GET ${JSON_CONTENT} feature sqlcipher)
+string(JSON CONFIG_USING_SQLCIPHER ERROR_VARIABLE _config_sqlcipher_error
+        GET ${JSON_CONTENT} dependency sqlite3 cipher)
+if(_config_sqlcipher_error)
+    set(CONFIG_USING_SQLCIPHER OFF)
+endif()
 string(JSON CONFIG_USING_IO_URING    GET ${JSON_CONTENT} feature io_uring)
-string(JSON CONFIG_USING_MEMORY_POOL GET ${JSON_CONTENT} feature memory-pool)
 
 # The global allocator override is a process wide decision and stays off unless config.json asks for it.
 string(JSON CONFIG_MEMORY_POOL_OVERRIDE ERROR_VARIABLE _config_pool_override_error
         GET ${JSON_CONTENT} feature memory-pool-global-override)
 if(_config_pool_override_error)
     set(CONFIG_MEMORY_POOL_OVERRIDE OFF)
-endif()
-
-# Missing keys default to ON: keeps AES-NI/PCLMUL enabled on Linux/GCC by
-# default, aligned with the MSVC-always-available assumption.
-string(JSON CONFIG_USING_AES_NI ERROR_VARIABLE _config_aes_ni_error GET ${JSON_CONTENT} feature aes-ni)
-if(_config_aes_ni_error)
-    set(CONFIG_USING_AES_NI ON)
-endif()
-string(JSON CONFIG_USING_PCLMUL ERROR_VARIABLE _config_pclmul_error GET ${JSON_CONTENT} feature pclmul)
-if(_config_pclmul_error)
-    set(CONFIG_USING_PCLMUL ON)
-endif()
-string(JSON CONFIG_USING_VAES ERROR_VARIABLE _config_vaes_error GET ${JSON_CONTENT} feature vaes)
-if(_config_vaes_error)
-    set(CONFIG_USING_VAES OFF)
 endif()
 
 string(JSON CONFIG_BUILD_TESTS       GET ${JSON_CONTENT} build tests)
@@ -184,18 +170,56 @@ endif()
 include(cmake/NexusForceSanitizer.cmake)
 include(cmake/NexusForceCompilerOptions.cmake)
 
-string(JSON CONFIG_SIMD_TYPE ERROR_VARIABLE _config_simd_type_error TYPE ${JSON_CONTENT} simd)
-if(_config_simd_type_error)
-    message(FATAL_ERROR "config.json: missing \"simd\" entry")
-elseif(CONFIG_SIMD_TYPE STREQUAL "STRING")
-    string(JSON CONFIG_SIMD_LEVEL GET ${JSON_CONTENT} simd)
-elseif(CONFIG_SIMD_TYPE STREQUAL "OBJECT")
-    string(JSON CONFIG_SIMD_LEVEL ERROR_VARIABLE _config_simd_arch_error GET ${JSON_CONTENT} simd ${NEXUSFORCE_ARCH})
-    if(_config_simd_arch_error)
-        message(FATAL_ERROR "config.json: \"simd\" has no entry for architecture \"${NEXUSFORCE_ARCH}\"")
+string(JSON CONFIG_ISA_TYPE ERROR_VARIABLE _config_isa_type_error TYPE ${JSON_CONTENT} isa)
+if(_config_isa_type_error)
+    message(FATAL_ERROR "config.json: missing \"isa\" entry")
+elseif(NOT CONFIG_ISA_TYPE STREQUAL "OBJECT")
+    message(FATAL_ERROR "config.json: \"isa\" must be an object keyed by architecture")
+endif()
+
+string(JSON CONFIG_ISA_ARCH_TYPE ERROR_VARIABLE _config_isa_arch_type_error TYPE ${JSON_CONTENT} isa ${NEXUSFORCE_ARCH})
+if(_config_isa_arch_type_error)
+    message(FATAL_ERROR "config.json: \"isa\" has no entry for architecture \"${NEXUSFORCE_ARCH}\"")
+elseif(NOT CONFIG_ISA_ARCH_TYPE STREQUAL "OBJECT")
+    message(FATAL_ERROR "config.json: \"isa.${NEXUSFORCE_ARCH}\" must be an object with \"level\" and \"extensions\"")
+endif()
+
+string(JSON CONFIG_SIMD_LEVEL ERROR_VARIABLE _config_isa_level_error GET ${JSON_CONTENT} isa ${NEXUSFORCE_ARCH} level)
+if(_config_isa_level_error)
+    message(FATAL_ERROR "config.json: \"isa.${NEXUSFORCE_ARCH}.level\" is missing")
+endif()
+
+# ISA 扩展项
+string(JSON CONFIG_USING_AES_NI ERROR_VARIABLE _config_aes_ni_error
+        GET ${JSON_CONTENT} isa ${NEXUSFORCE_ARCH} extensions aes-ni)
+if(_config_aes_ni_error)
+    set(CONFIG_USING_AES_NI ON)
+endif()
+string(JSON CONFIG_USING_PCLMUL ERROR_VARIABLE _config_pclmul_error
+        GET ${JSON_CONTENT} isa ${NEXUSFORCE_ARCH} extensions pclmul)
+if(_config_pclmul_error)
+    set(CONFIG_USING_PCLMUL ON)
+endif()
+string(JSON CONFIG_USING_VAES ERROR_VARIABLE _config_vaes_error
+        GET ${JSON_CONTENT} isa ${NEXUSFORCE_ARCH} extensions vaes)
+if(_config_vaes_error)
+    set(CONFIG_USING_VAES OFF)
+endif()
+string(JSON CONFIG_USING_INTEL_TSX ERROR_VARIABLE _config_tsx_error
+        GET ${JSON_CONTENT} isa ${NEXUSFORCE_ARCH} extensions intel-tsx)
+if(_config_tsx_error)
+    set(CONFIG_USING_INTEL_TSX OFF)
+endif()
+
+# ARMv8 Crypto Extensions 只在 aarch64 上有意义
+if(NEXUSFORCE_ARCH STREQUAL "aarch64")
+    string(JSON CONFIG_USING_AES_ARM ERROR_VARIABLE _config_aes_arm_error
+            GET ${JSON_CONTENT} isa ${NEXUSFORCE_ARCH} extensions aes)
+    if(_config_aes_arm_error)
+        set(CONFIG_USING_AES_ARM ON)
     endif()
 else()
-    message(FATAL_ERROR "config.json: \"simd\" must be a string or a per-architecture object")
+    set(CONFIG_USING_AES_ARM OFF)
 endif()
 
 set(VCPKG_TARGET_TRIPLET ${NEXUSFORCE_VCPKG_TRIPLET} CACHE STRING "vcpkg triplet")
@@ -242,7 +266,6 @@ if(NOT NEXUSFORCE_ENABLE_LOCALE AND NEXUSFORCE_ENABLE_ICU)
     set(NEXUSFORCE_ENABLE_ICU OFF)
 endif()
 
-option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"                   ${CONFIG_USING_SSO})
 option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                          ${CONFIG_USING_INTEL_TSX})
 option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher"                          ${CONFIG_USING_SQLCIPHER})
 option(NEXUSFORCE_USING_IO_URING    "Using io uring"                           ${CONFIG_USING_IO_URING})
@@ -257,6 +280,7 @@ endif()
 option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"                ${CONFIG_USING_AES_NI})
 option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"                  ${CONFIG_USING_PCLMUL})
 option(NEXUSFORCE_USING_VAES        "Using VAES / VPCLMULQDQ"                  ${CONFIG_USING_VAES})
+option(NEXUSFORCE_USING_AES_ARM     "Using ARMv8 Crypto Extensions (AES)"       ${CONFIG_USING_AES_ARM})
 
 # Apple x64 CPUs (including macos-*-intel CI runners) do not guarantee VAES.
 if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|AMD64)$" AND NEXUSFORCE_USING_VAES)
@@ -269,12 +293,6 @@ option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFI
 option(NEXUSFORCE_BUILD_BENCHMARKS  "Build benchmark programs"           ${CONFIG_BUILD_BENCHMARKS})
 option(NEXUSFORCE_BUILD_DOCS        "Build documentation with Doxygen"   ${CONFIG_BUILD_DOCS})
 
-# TODO: ship a "server" build profile for config.json — database drivers, ICU, compression and
-# tests/benchmarks off with a BASELINE SIMD level — so backend services do not hand-edit the
-# defaults to get a lean build.
-
-option(NEXUSFORCE_USING_MEMORY_POOL
-        "Using memory pool as the allocator of library containers"            ${CONFIG_USING_MEMORY_POOL})
 option(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE
         "Replace the process wide operator new / delete with the memory pool" ${CONFIG_MEMORY_POOL_OVERRIDE})
 
@@ -283,10 +301,21 @@ option(NEXUSFORCE_OVERRIDE_TEST_WITH_SHARED_GTEST
 
 
 # NEXUSFORCE_SIMD_LEVEL is cached and architecture-specific (AVX2 for x64, BASELINE/SVE for
-# aarch64). Reusing a build directory after an architecture switch must not carry the old level
-# over; drop it once the detected architecture actually changes.
+# aarch64). A level passed explicitly with -DNEXUSFORCE_SIMD_LEVEL=... wins over config.json and
+# stays in effect on later configure runs; otherwise config.json is authoritative.
+# CMake marks cache entries created from -D with this help string, which is how an explicit value
+# is told apart from the default this file wrote on an earlier run.
+get_property(_nexusforce_simd_cache_help CACHE NEXUSFORCE_SIMD_LEVEL PROPERTY HELPSTRING)
+if(_nexusforce_simd_cache_help STREQUAL "No help, variable specified on the command line.")
+    set(NEXUSFORCE_SIMD_LEVEL_EXPLICIT TRUE CACHE INTERNAL
+        "SIMD level was supplied with -DNEXUSFORCE_SIMD_LEVEL" FORCE)
+    set(_nexusforce_simd_explicit_value "${NEXUSFORCE_SIMD_LEVEL}")
+endif()
+
+# Reusing a build directory after an architecture switch must not carry the old level over.
 if(DEFINED NEXUSFORCE_LAST_ARCH AND NOT NEXUSFORCE_LAST_ARCH STREQUAL NEXUSFORCE_ARCH)
     unset(NEXUSFORCE_SIMD_LEVEL CACHE)
+    unset(NEXUSFORCE_SIMD_LEVEL_EXPLICIT CACHE)
 endif()
 set(NEXUSFORCE_LAST_ARCH "${NEXUSFORCE_ARCH}" CACHE INTERNAL
     "architecture used when the cached SIMD level was last validated")
@@ -297,9 +326,20 @@ else()
     set(NEXUSFORCE_SIMD_LEVEL_DEFAULT "AUTO")
 endif()
 
-# FORCE keeps config.json authoritative; a command-line
-# -DNEXUSFORCE_SIMD_LEVEL=... is therefore not honored.
-set(NEXUSFORCE_SIMD_LEVEL "${NEXUSFORCE_SIMD_LEVEL_DEFAULT}" CACHE STRING "SIMD level for ${NEXUSFORCE_ARCH}" FORCE)
+# Re-apply the explicit value after the architecture check above, which may have dropped it.
+if(DEFINED _nexusforce_simd_explicit_value)
+    set(NEXUSFORCE_SIMD_LEVEL "${_nexusforce_simd_explicit_value}" CACHE STRING
+        "SIMD level for ${NEXUSFORCE_ARCH}" FORCE)
+    set(NEXUSFORCE_SIMD_LEVEL_EXPLICIT TRUE CACHE INTERNAL
+        "SIMD level was supplied with -DNEXUSFORCE_SIMD_LEVEL" FORCE)
+endif()
+
+if(NEXUSFORCE_SIMD_LEVEL_EXPLICIT)
+    message(STATUS "SIMD level '${NEXUSFORCE_SIMD_LEVEL}' comes from -DNEXUSFORCE_SIMD_LEVEL")
+else()
+    set(NEXUSFORCE_SIMD_LEVEL "${NEXUSFORCE_SIMD_LEVEL_DEFAULT}" CACHE STRING
+        "SIMD level for ${NEXUSFORCE_ARCH}" FORCE)
+endif()
 _nexusforce_arch_levels(_simd_levels ${NEXUSFORCE_ARCH})
 set_property(CACHE NEXUSFORCE_SIMD_LEVEL PROPERTY STRINGS ${_simd_levels})
 if(NOT NEXUSFORCE_SIMD_LEVEL IN_LIST _simd_levels)
@@ -322,15 +362,12 @@ _nexusforce_sanitizer_summary(NEXUSFORCE_SANITIZER_SUMMARY)
 
 # AddressSanitizer and ThreadSanitizer install their own operator new / delete,
 # and a second replacement in the same process makes both of them unreliable.
-# The pool itself stays available, only the allocator substitution is dropped,
-# so the sanitizer workflows keep working as documented.
-if((NEXUSFORCE_USING_MEMORY_POOL OR NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE) AND
-   (NEXUSFORCE_ENABLE_ASAN OR NEXUSFORCE_ENABLE_TSAN))
+# The pool itself stays available through pool_allocator, only the process wide
+# operator substitution is dropped, so the sanitizer workflows keep working.
+if(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE AND (NEXUSFORCE_ENABLE_ASAN OR NEXUSFORCE_ENABLE_TSAN))
     message(WARNING
             "NEXUSFORCE_ENABLE_ASAN / NEXUSFORCE_ENABLE_TSAN own the allocation path; disabling "
-            "NEXUSFORCE_USING_MEMORY_POOL and NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE for this build "
-            "(memory_pool itself stays available).")
-    set(NEXUSFORCE_USING_MEMORY_POOL OFF)
+            "NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE for this build (memory_pool itself stays available).")
     set(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE OFF)
 endif()
 
@@ -353,7 +390,6 @@ message(STATUS "  NEXUSFORCE_ENABLE_ICU:          ${NEXUSFORCE_ENABLE_ICU}")
 message(STATUS "  NEXUSFORCE_ENABLE_OPENSSL:      ON (NECESSARY)")
 message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON (NECESSARY)")
 message(STATUS "")
-message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
 message(STATUS "  NEXUSFORCE_USING_INTEL_TSX:     ${NEXUSFORCE_USING_INTEL_TSX}")
 message(STATUS "  NEXUSFORCE_USING_SQLCIPHER:     ${NEXUSFORCE_USING_SQLCIPHER}")
 message(STATUS "  NEXUSFORCE_USING_IO_URING:      ${NEXUSFORCE_USING_IO_URING}")
@@ -361,7 +397,6 @@ message(STATUS "  NEXUSFORCE_USING_AES_NI:        ${NEXUSFORCE_USING_AES_NI}")
 message(STATUS "  NEXUSFORCE_USING_PCLMUL:        ${NEXUSFORCE_USING_PCLMUL}")
 message(STATUS "  NEXUSFORCE_USING_VAES:          ${NEXUSFORCE_USING_VAES}")
 message(STATUS "")
-message(STATUS "  NEXUSFORCE_USING_MEMORY_POOL:           ${NEXUSFORCE_USING_MEMORY_POOL}")
 message(STATUS "  NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE: ${NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE}")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
@@ -461,7 +496,6 @@ set(PACKAGE_VERSION_VARS
         NEXUSFORCE_ENABLE_ICU
         NEXUSFORCE_ENABLE_LOCALE
 
-        NEXUSFORCE_USING_SSO
         NEXUSFORCE_USING_INTEL_TSX
         NEXUSFORCE_USING_SQLCIPHER
         NEXUSFORCE_USING_IO_URING

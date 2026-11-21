@@ -16,7 +16,8 @@
       "switch": true
     },
     "sqlite3": {
-      "switch": true
+      "switch": true,
+      "cipher": true
     },
     "hiredis": {
       "switch": true
@@ -36,14 +37,7 @@
   },
   "feature": {
     "locale": true,
-    "sso": true,
-    "intel-tsx": false,
-    "aes-ni": true,
-    "pclmul": true,
-    "vaes": true,
-    "sqlcipher": true,
     "io_uring": true,
-    "memory-pool": true,
     "memory-pool-global-override": true
   },
   "build": {
@@ -52,10 +46,29 @@
     "benchmarks": true,
     "docs": true
   },
-  "simd": {
-    "x64": "AVX2",
-    "aarch64": "BASELINE",
-    "riscv64": "BASELINE",
-    "loongarch64": "BASELINE"
+  "isa": {
+    "x64": {
+      "level": "AVX2",
+      "extensions": {
+        "aes-ni": true,
+        "pclmul": true,
+        "vaes": true,
+        "intel-tsx": false
+      }
+    },
+    "aarch64": {
+      "level": "BASELINE",
+      "extensions": {
+        "aes": true
+      }
+    },
+    "riscv64": {
+      "level": "BASELINE",
+      "extensions": {}
+    },
+    "loongarch64": {
+      "level": "BASELINE",
+      "extensions": {}
+    }
   }
 }

@@ -198,7 +198,6 @@ public:
     static constexpr size_type npos = string_view::npos;
 
 private:
-#ifdef NEFORCE_USING_SSO
     /// SSO缓冲区字节数
     static constexpr size_type sso_buffer_bytes = MEMORY_ALIGN_THRESHHOLD;
     /// SSO缓冲区可容纳的字符数
@@ -218,15 +217,8 @@ private:
         } long_;
         CharT short_[sso_buffer_size]; ///< 短字符串缓冲区
     } storage_;
-#else
-    pointer data_ = nullptr; ///< 数据指针
-    size_type size_ = 0;     ///< 当前大小
-    /// 压缩存储：分配器和容量
-    compressed_pair<allocator_type, size_type> capacity_pair_{default_construct_tag{}, 0};
-#endif
 
 private:
-#ifdef NEFORCE_USING_SSO
     /**
      * @brief 判断是否为长字符串模式
      * @return 是否为长字符串
@@ -267,7 +259,6 @@ private:
             storage_.long_.cap = 0;
         }
     }
-#endif
 
     /**
      * @brief 从迭代器范围构造
@@ -279,7 +270,6 @@ private:
     NEFORCE_CONSTEXPR20 void construct_from_iter(Iterator first, Iterator last) {
         const size_type n = _NEFORCE distance(first, last);
 
-#ifdef NEFORCE_USING_SSO
         if (n < sso_buffer_size) {
             pointer dest = storage_.short_;
             for (size_type i = 0; i < n; ++i) {
@@ -300,28 +290,6 @@ private:
             storage_.long_.cap = init_cap;
             size_pair_.value = n | long_flag;
         }
-#else
-        const size_type init_size = _NEFORCE max(MEMORY_ALIGN_THRESHHOLD, n + 1);
-        pointer temp_data = nullptr;
-        try {
-            temp_data = capacity_pair_.get_base().allocate(init_size);
-            size_ = n;
-            capacity_pair_.value = init_size;
-            _NEFORCE uninitialized_copy(first, last, temp_data);
-
-            data_ = temp_data;
-            size_ = n;
-            capacity_pair_.value = init_size;
-            traits_type::assign(data_ + size_, 1, value_type());
-        } catch (...) {
-            if (temp_data) {
-                _NEFORCE destroy(temp_data, temp_data + n);
-                capacity_pair_.get_base().deallocate(temp_data, capacity_pair_.value);
-            }
-            destroy_buffer();
-            throw;
-        }
-#endif
     }
 
     /**
@@ -332,7 +300,6 @@ private:
      */
     NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 void construct_from_ptr(const_pointer str, size_type position,
                                                                       size_type n) {
-#ifdef NEFORCE_USING_SSO
         if (n < sso_buffer_size) {
             traits_type::copy(storage_.short_, str + position, n);
             traits_type::assign(storage_.short_ + n, 1, value_type());
@@ -347,50 +314,17 @@ private:
             storage_.long_.cap = init_cap;
             size_pair_.value = n | long_flag;
         }
-#else
-        pointer temp_data = nullptr;
-        size_type temp_capacity = 0;
-        try {
-            temp_capacity = _NEFORCE max(MEMORY_ALIGN_THRESHHOLD, n + 1);
-            temp_data = capacity_pair_.get_base().allocate(temp_capacity);
-            traits_type::copy(temp_data, str + position, n);
-
-            data_ = temp_data;
-            size_ = n;
-            capacity_pair_.value = temp_capacity;
-            traits_type::assign(data_ + size_, 1, value_type());
-        } catch (...) {
-            if (temp_data) {
-                capacity_pair_.get_base().deallocate(temp_data, capacity_pair_.value);
-            }
-            data_ = nullptr;
-            size_ = 0;
-            capacity_pair_.value = 0;
-            throw;
-        }
-#endif
     }
 
     /**
      * @brief 销毁缓冲区
      */
     NEFORCE_CONSTEXPR20 void destroy_buffer() noexcept {
-#ifdef NEFORCE_USING_SSO
         if (is_long()) {
             destroy_long();
         }
         size_pair_.value = 0;
         traits_type::assign(storage_.short_, 1, value_type());
-#else
-        if (data_) {
-            if (capacity_pair_.value > 0) {
-                capacity_pair_.get_base().deallocate(data_, capacity_pair_.value);
-            }
-            data_ = nullptr;
-        }
-        capacity_pair_.value = 0;
-        size_ = 0;
-#endif
     }
 
     /**
@@ -403,7 +337,6 @@ private:
      */
     NEFORCE_CONSTEXPR20 basic_string& replace_fill(iterator first, size_type n1, const size_type n2,
                                                    const value_type value) {
-#ifdef NEFORCE_USING_SSO
         const difference_type offset = first - begin();
         const size_type old_size = size();
         const size_type actual_n1 = _NEFORCE min(n1, old_size - offset);
@@ -445,32 +378,6 @@ private:
         traits_type::assign(storage_.long_.ptr + new_size, 1, value_type());
 
         return *this;
-#else
-        if (static_cast<size_type>(end() - first) < n1) {
-            n1 = static_cast<size_type>(end() - first);
-        }
-
-        if (n1 < n2) {
-            const size_type diff = n2 - n1;
-            NEFORCE_DEBUG_VERIFY(size_ + diff < max_size(), "basic_string index out of range.");
-            if (size_ > capacity_pair_.value - diff) {
-                reallocate(diff);
-            }
-
-            pointer raw_ptr = &*first;
-            traits_type::move(raw_ptr + n2, raw_ptr + n1, end() - (first + n1));
-            traits_type::assign(raw_ptr, n2, value);
-            size_ += diff;
-        } else {
-            pointer raw_ptr = &*first;
-            traits_type::move(raw_ptr + n2, raw_ptr + n1, end() - (first + n1));
-            traits_type::assign(raw_ptr, n2, value);
-            size_ -= n1 - n2;
-        }
-
-        traits_type::assign(data_ + size_, 1, value_type());
-        return *this;
-#endif
     }
 
     /**
@@ -489,7 +396,6 @@ private:
         size_type len1 = _NEFORCE distance(first1, last1);
         size_type len2 = _NEFORCE distance(first2, last2);
 
-#ifdef NEFORCE_USING_SSO
         const difference_type offset = first1 - begin();
         const size_type old_size = size();
         const size_type new_size = old_size - len1 + len2;
@@ -528,28 +434,6 @@ private:
         traits_type::assign(storage_.long_.ptr + new_size, 1, value_type());
 
         return *this;
-#else
-        if (len1 < len2) {
-            const size_type diff = len2 - len1;
-            NEFORCE_DEBUG_VERIFY(size_ + diff < max_size(), "basic_string replace_copy index out of range.");
-            if (size_ > capacity_pair_.value - diff) {
-                reallocate(diff);
-            }
-
-            pointer raw_ptr = &*first1;
-            traits_type::move(raw_ptr + len2, raw_ptr + len1, end() - (first1 + len1));
-            traits_type::copy(raw_ptr, &*first2, len2);
-            size_ += diff;
-        } else {
-            pointer raw_ptr = &*first1;
-            traits_type::move(raw_ptr + len2, raw_ptr + len1, end() - (first1 + len1));
-            traits_type::copy(raw_ptr, &*first2, len2);
-            size_ -= len1 - len2;
-        }
-
-        traits_type::assign(data_ + size_, 1, value_type());
-        return *this;
-#endif
     }
 
     /**
@@ -572,7 +456,6 @@ private:
      * @param n 需要增加的空间
      */
     NEFORCE_CONSTEXPR20 void reallocate(size_type n) {
-#ifdef NEFORCE_USING_SSO
         if (!is_long()) {
             const size_type new_cap = _NEFORCE max(sso_buffer_size, size() + n + 1);
             switch_to_long(new_cap);
@@ -590,25 +473,6 @@ private:
         destroy_long();
         storage_.long_.ptr = new_ptr;
         storage_.long_.cap = new_cap;
-#else
-        pointer new_buffer = nullptr;
-        try {
-            const size_t new_cap =
-                    _NEFORCE max(capacity_pair_.value + n, capacity_pair_.value + (capacity_pair_.value >> 1)) + 1;
-            new_buffer = capacity_pair_.get_base().allocate(new_cap);
-            traits_type::move(new_buffer, data_, size_);
-
-            capacity_pair_.get_base().deallocate(data_, capacity_pair_.value);
-            data_ = new_buffer;
-            capacity_pair_.value = new_cap;
-            traits_type::assign(data_ + size_, 1, value_type());
-        } catch (...) {
-            if (new_buffer) {
-                capacity_pair_.get_base().deallocate(new_buffer, capacity_pair_.value);
-            }
-            throw;
-        }
-#endif
     }
 
     /**
@@ -619,7 +483,6 @@ private:
      * @return 指向插入起始的迭代器
      */
     NEFORCE_CONSTEXPR20 iterator reallocate_fill(iterator position, size_type n, value_type value) {
-#ifdef NEFORCE_USING_SSO
         const size_type offset = position - begin();
         if (!is_long() && size() + n < sso_buffer_size) {
             pointer p = storage_.short_ + offset;
@@ -652,21 +515,6 @@ private:
         traits_type::assign(storage_.long_.ptr + size(), 1, value_type());
 
         return iterator(storage_.long_.ptr + offset, this);
-#else
-        const difference_type diff = (&*position) - data_;
-        const size_t old_cap = capacity_pair_.value;
-        const size_t new_cap = _NEFORCE max(old_cap + n, old_cap + (old_cap >> 1));
-        pointer new_buffer = capacity_pair_.get_base().allocate(new_cap);
-        pointer end1 = traits_type::move(new_buffer, data_, diff) + diff;
-        pointer end2 = traits_type::assign(end1, n, value) + n;
-        traits_type::move(end2, data_ + diff, size_ - diff);
-        capacity_pair_.get_base().deallocate(data_, old_cap);
-        data_ = new_buffer;
-        size_ += n;
-        capacity_pair_.value = new_cap;
-        traits_type::assign(data_ + size_, 1, value_type());
-        return iterator(data_ + diff, this);
-#endif
     }
 
     /**
@@ -679,7 +527,6 @@ private:
      */
     template <typename Iterator>
     NEFORCE_CONSTEXPR20 iterator reallocate_copy(iterator position, Iterator first, Iterator last) {
-#ifdef NEFORCE_USING_SSO
         const size_type offset = position - begin();
         const size_type n = _NEFORCE distance(first, last);
         const size_type old_size = size();
@@ -716,22 +563,6 @@ private:
         traits_type::assign(storage_.long_.ptr + size(), 1, value_type());
 
         return iterator(storage_.long_.ptr + offset, this);
-#else
-        const difference_type diff = position - begin();
-        const size_type old_cap = capacity_pair_.value;
-        const size_type n = _NEFORCE distance(first, last);
-        const size_t new_cap = _NEFORCE max(old_cap + n, old_cap + (old_cap >> 1));
-        pointer new_buffer = capacity_pair_.get_base().allocate(new_cap);
-        pointer end1 = traits_type::move(new_buffer, data_, diff) + diff;
-        pointer end2 = _NEFORCE uninitialized_copy_n(first, n, end1) + n;
-        traits_type::move(end2, data_ + diff, size_ - diff);
-        capacity_pair_.get_base().deallocate(data_, old_cap);
-        data_ = new_buffer;
-        size_ += n;
-        capacity_pair_.value = new_cap;
-        traits_type::assign(data_ + size_, 1, value_type());
-        return iterator(data_ + diff, this);
-#endif
     }
 
     /**
@@ -741,19 +572,12 @@ private:
      * @note 仅在现有容量不足以容纳该字符时调用。
      */
     NEFORCE_COLD NEFORCE_CONSTEXPR20 basic_string& reallocate_append(const value_type value) {
-#ifdef NEFORCE_USING_SSO
         const size_type old_size = size();
         reallocate(1);
         pointer p = data();
         p[old_size] = value;
         p[old_size + 1] = value_type();
         size_pair_.value = (old_size + 1) | long_flag;
-#else
-        reallocate(1);
-        data_[size_] = value;
-        ++size_;
-        data_[size_] = value_type();
-#endif
         return *this;
     }
 
@@ -765,18 +589,11 @@ private:
      * @note 仅在现有容量不足以容纳这些字符时调用。
      */
     NEFORCE_COLD NEFORCE_CONSTEXPR20 basic_string& reallocate_append(const size_type n, const value_type value) {
-#ifdef NEFORCE_USING_SSO
         const size_type old_size = size();
         reallocate(n);
         traits_type::assign(data() + old_size, n, value);
         size_pair_.value = (old_size + n) | long_flag;
         traits_type::assign(data() + size(), 1, value_type());
-#else
-        reallocate(n);
-        traits_type::assign(data_ + size_, n, value);
-        size_ += n;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return *this;
     }
 
@@ -788,18 +605,11 @@ private:
      * @note 仅在现有容量不足以容纳这些字符时调用。
      */
     NEFORCE_COLD NEFORCE_CONSTEXPR20 basic_string& reallocate_append(const_pointer str, const size_type n) {
-#ifdef NEFORCE_USING_SSO
         const size_type old_size = size();
         reallocate(n);
         traits_type::copy(data() + old_size, str, n);
         size_pair_.value = (old_size + n) | long_flag;
         traits_type::assign(data() + size(), 1, value_type());
-#else
-        reallocate(n);
-        traits_type::copy(data_ + size_, str, n);
-        size_ += n;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return *this;
     }
 
@@ -810,12 +620,8 @@ public:
      * 构造一个空字符串。
      */
     NEFORCE_CONSTEXPR20 basic_string() {
-#ifdef NEFORCE_USING_SSO
         traits_type::assign(storage_.short_, 1, value_type());
         size_pair_.value = 0;
-#else
-        basic_string::reserve(MEMORY_ALIGN_THRESHHOLD);
-#endif
     }
 
     /**
@@ -847,7 +653,6 @@ public:
      * @param value 填充字符
      */
     NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 explicit basic_string(size_type n, value_type value) {
-#ifdef NEFORCE_USING_SSO
         if (n < sso_buffer_size) {
             traits_type::assign(storage_.short_, n, value);
             traits_type::assign(storage_.short_ + n, 1, value_type());
@@ -862,14 +667,6 @@ public:
             storage_.long_.cap = init_cap;
             size_pair_.value = n | long_flag;
         }
-#else
-        const size_type init_size = _NEFORCE max(MEMORY_ALIGN_THRESHHOLD, n + 1);
-        data_ = capacity_pair_.get_base().allocate(init_size);
-        traits_type::assign(data_, n, value);
-        size_ = n;
-        capacity_pair_.value = init_size;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
     }
 
     /**
@@ -877,7 +674,6 @@ public:
      * @param other 源字符串
      */
     NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string(const basic_string& other) {
-#ifdef NEFORCE_USING_SSO
         const size_type len = other.size();
         if (len < sso_buffer_size) {
             if (!other.is_long()) {
@@ -898,9 +694,6 @@ public:
             storage_.long_.cap = cap;
             size_pair_.value = len | long_flag;
         }
-#else
-        construct_from_ptr(other.data(), 0, other.size());
-#endif
     }
 
     /**
@@ -913,7 +706,6 @@ public:
             return *this;
         }
 
-#ifdef NEFORCE_USING_SSO
         const size_type len = other.size();
 
         if (len < sso_buffer_size) {
@@ -943,10 +735,6 @@ public:
             storage_.long_.cap = cap;
             size_pair_.value = len | long_flag;
         }
-#else
-        destroy_buffer();
-        construct_from_ptr(other.data(), 0, other.size());
-#endif
         return *this;
     }
 
@@ -954,9 +742,7 @@ public:
      * @brief 移动构造函数
      * @param other 源字符串
      */
-    NEFORCE_CONSTEXPR20 basic_string(basic_string&& other) noexcept
-#ifdef NEFORCE_USING_SSO
-    :
+    NEFORCE_CONSTEXPR20 basic_string(basic_string&& other) noexcept :
     size_pair_(_NEFORCE move(other.size_pair_)) {
         if (other.is_long()) {
             storage_.long_.ptr = other.storage_.long_.ptr;
@@ -972,15 +758,6 @@ public:
             traits_type::assign(other.storage_.short_, 1, value_type());
             other.size_pair_.value = 0;
         }
-#else
-    :
-    data_(other.data_),
-    size_(other.size_),
-    capacity_pair_(_NEFORCE move(other.capacity_pair_)) {
-        other.data_ = nullptr;
-        other.size_ = 0;
-        other.capacity_pair_.value = 0;
-#endif
     }
 
     /**
@@ -993,7 +770,6 @@ public:
             return *this;
         }
 
-#ifdef NEFORCE_USING_SSO
         destroy_buffer();
 
         size_pair_ = _NEFORCE move(other.size_pair_);
@@ -1012,20 +788,6 @@ public:
             traits_type::assign(other.storage_.short_, 1, value_type());
             other.size_pair_.value = 0;
         }
-#else
-        pointer new_data = other.data_;
-        const size_type new_size = other.size_;
-        auto new_capacity_pair = _NEFORCE move(other.capacity_pair_);
-
-        other.data_ = nullptr;
-        other.size_ = 0;
-        other.capacity_pair_.value = 0;
-
-        destroy_buffer();
-        data_ = new_data;
-        size_ = new_size;
-        capacity_pair_ = _NEFORCE move(new_capacity_pair);
-#endif
 
         return *this;
     }
@@ -1055,7 +817,6 @@ public:
     NEFORCE_CONSTEXPR20 basic_string& operator=(view_type view) {
         const size_type len = view.size();
 
-#ifdef NEFORCE_USING_SSO
         if (len < sso_buffer_size) {
             if (is_long()) {
                 destroy_long();
@@ -1083,18 +844,6 @@ public:
             storage_.long_.cap = new_cap;
             size_pair_.value = len | long_flag;
         }
-#else
-        if (capacity_pair_.value < len) {
-            pointer new_buffer = capacity_pair_.get_base().allocate(len + 1);
-            capacity_pair_.get_base().deallocate(data_);
-            data_ = new_buffer;
-            capacity_pair_.value = len + 1;
-        }
-
-        traits_type::copy(data_, view.data(), len);
-        size_ = len;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return *this;
     }
 
@@ -1148,7 +897,6 @@ public:
      */
     NEFORCE_CONSTEXPR20 basic_string& operator=(const_pointer str) {
         const size_type len = traits_type::length(str);
-#ifdef NEFORCE_USING_SSO
         if (len < sso_buffer_size) {
             if (is_long()) {
                 destroy_long();
@@ -1176,17 +924,6 @@ public:
             storage_.long_.cap = new_cap;
             size_pair_.value = len | long_flag;
         }
-#else
-        if (capacity_pair_.value < len) {
-            pointer new_buffer = capacity_pair_.get_base().allocate(len + 1);
-            capacity_pair_.get_base().deallocate(data_);
-            data_ = new_buffer;
-            capacity_pair_.value = len + 1;
-        }
-        traits_type::copy(data_, str, len);
-        size_ = len;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return *this;
     }
 
@@ -1304,26 +1041,15 @@ public:
      * @brief 获取字符数
      * @return 字符串长度
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type size() const noexcept {
-#ifdef NEFORCE_USING_SSO
-        return size_pair_.value & ~long_flag;
-#else
-        return size_;
-#endif
-    }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type size() const noexcept { return size_pair_.value & ~long_flag; }
 
     /**
      * @brief 获取最大可能大小
      * @return 最大长度
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type max_size() const noexcept {
-#ifdef NEFORCE_USING_SSO
         constexpr size_type flag_mask = ~long_flag;
         const size_type alloc_max = size_pair_.get_base().max_size();
-#else
-        constexpr size_type flag_mask = npos;
-        const size_type alloc_max = capacity_pair_.get_base().max_size();
-#endif
         return _NEFORCE min(alloc_max - 1, npos & flag_mask);
     }
 
@@ -1332,11 +1058,7 @@ public:
      * @return 当前分配的存储可容纳的字符数
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type capacity() const noexcept {
-#ifdef NEFORCE_USING_SSO
         return is_long() ? storage_.long_.cap : sso_buffer_size;
-#else
-        return capacity_pair_.value;
-#endif
     }
 
     /**
@@ -1370,7 +1092,6 @@ public:
      * @note 仅在现有容量不足时调用。
      */
     NEFORCE_COLD NEFORCE_CONSTEXPR20 void reserve_grow(const size_type new_cap) {
-#ifdef NEFORCE_USING_SSO
         if (!is_long()) {
             switch_to_long(new_cap);
         } else {
@@ -1381,15 +1102,6 @@ public:
             storage_.long_.ptr = new_ptr;
             storage_.long_.cap = new_cap;
         }
-#else
-        pointer new_buffer = capacity_pair_.get_base().allocate(new_cap);
-        traits_type::move(new_buffer, data_, size_);
-        capacity_pair_.get_base().deallocate(data_, capacity_pair_.value);
-
-        data_ = new_buffer;
-        capacity_pair_.value = new_cap;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
     }
 
     /**
@@ -1467,14 +1179,10 @@ public:
      * @return 指向底层字符数组的指针
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer data() noexcept {
-#ifdef NEFORCE_USING_SSO
         if (!is_long()) {
             return storage_.short_;
         }
         return storage_.long_.ptr;
-#else
-        return data_;
-#endif
     }
 
     /**
@@ -1482,14 +1190,10 @@ public:
      * @return 指向底层字符数组的常量指针
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 const_pointer data() const noexcept {
-#ifdef NEFORCE_USING_SSO
         if (!is_long()) {
             return storage_.short_;
         }
         return storage_.long_.ptr;
-#else
-        return data_;
-#endif
     }
 
     /**
@@ -1499,7 +1203,6 @@ public:
      * @return 指向插入字符的迭代器
      */
     NEFORCE_CONSTEXPR20 iterator insert(iterator position, value_type value) {
-#ifdef NEFORCE_USING_SSO
         const size_type offset = position - begin();
         if (!is_long() && size() + 1 < sso_buffer_size) {
             pointer p = storage_.short_ + offset;
@@ -1510,23 +1213,6 @@ public:
             return iterator(p, this);
         }
         return basic_string::reallocate_fill(position, 1, value);
-#else
-        if (size_ == capacity_pair_.value) {
-            return basic_string::reallocate_fill(position, 1, value);
-        }
-
-        size_type offset = position - begin();
-        pointer p = data_ + offset;
-        size_type chars_after = size_ - offset;
-        if (chars_after > 0) {
-            traits_type::move(p + 1, p, chars_after);
-        }
-
-        *p = value;
-        ++size_;
-        traits_type::assign(data_ + size_, 1, value_type());
-        return iterator(p, this);
-#endif
     }
 
     /**
@@ -1546,7 +1232,6 @@ public:
             return position;
         }
 
-#ifdef NEFORCE_USING_SSO
         if (!is_long() && size() + n < sso_buffer_size) {
             const size_type offset = position - begin();
             pointer p = storage_.short_ + offset;
@@ -1558,24 +1243,6 @@ public:
         }
 
         return basic_string::reallocate_fill(position, n, value);
-#else
-        if (capacity_pair_.value - size_ < n) {
-            return basic_string::reallocate_fill(position, n, value);
-        }
-
-        const size_type offset = position - begin();
-        pointer p = data_ + offset;
-        const size_type chars_after = size_ - offset;
-
-        if (chars_after > 0) {
-            traits_type::move(p + n, p, chars_after);
-        }
-        traits_type::assign(p, n, value);
-
-        size_ += n;
-        traits_type::assign(data_ + size_, 1, value_type());
-        return iterator(p, this);
-#endif
     }
 
     /**
@@ -1593,7 +1260,6 @@ public:
             return position;
         }
 
-#ifdef NEFORCE_USING_SSO
         if (!is_long() && size() + len < sso_buffer_size) {
             const size_type offset = position - begin();
             pointer p = storage_.short_ + offset;
@@ -1606,27 +1272,6 @@ public:
             return iterator(p, this);
         }
         return basic_string::reallocate_copy(position, first, last);
-#else
-        if (capacity_pair_.value - size_ < len) {
-            return basic_string::reallocate_copy(position, first, last);
-        }
-
-        const size_type offset = position - begin();
-        pointer p = data_ + offset;
-        const size_type chars_after = size_ - offset;
-
-        if (chars_after > 0) {
-            traits_type::move(p + len, p, chars_after);
-        }
-        pointer curr = p;
-        for (Iterator it = first; it != last; ++it, ++curr) {
-            *curr = *it;
-        }
-
-        size_ += len;
-        traits_type::assign(data_ + size_, 1, value_type());
-        return position;
-#endif
     }
 
     /**
@@ -1640,7 +1285,6 @@ public:
      */
     NEFORCE_CONSTEXPR20 void pop_back() noexcept {
         NEFORCE_DEBUG_VERIFY(!empty(), "pop_back called on empty basic_string");
-#ifdef NEFORCE_USING_SSO
         const size_type new_size = size() - 1;
         if (is_long()) {
             size_pair_.value = new_size | long_flag;
@@ -1649,10 +1293,6 @@ public:
             size_pair_.value = new_size;
             traits_type::assign(storage_.short_ + new_size, 1, value_type());
         }
-#else
-        --size_;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
     }
 
     /**
@@ -1670,7 +1310,6 @@ public:
         }
         NEFORCE_DEBUG_VERIFY(size() + n < max_size(), "basic_string append iterator out of ranges.");
 
-#ifdef NEFORCE_USING_SSO
         const size_type old_size = size();
         if ((size_pair_.value & long_flag) == 0) {
             if (old_size + n < sso_buffer_size) {
@@ -1688,15 +1327,6 @@ public:
             return *this;
         }
         return reallocate_append(n, value);
-#else
-        if (capacity_pair_.value - size_ <= n) {
-            return reallocate_append(n, value);
-        }
-        traits_type::assign(data_ + size_, n, value);
-        size_ += n;
-        traits_type::assign(data_ + size_, 1, value_type());
-        return *this;
-#endif
     }
 
     /**
@@ -1707,7 +1337,6 @@ public:
     NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR20 basic_string& append(value_type value) {
         NEFORCE_DEBUG_VERIFY(size() + 1 < max_size(), "basic_string::append single char out of ranges.");
 
-#ifdef NEFORCE_USING_SSO
         const size_type raw = size_pair_.value;
         if ((raw & long_flag) == 0) {
             if (raw + 1 < sso_buffer_size) {
@@ -1722,20 +1351,11 @@ public:
                 pointer p = storage_.long_.ptr;
                 p[old_size] = value;
                 p[old_size + 1] = value_type();
-                size_pair_.value = raw + 1;
+                size_pair_.value = (old_size + 1) | long_flag;
                 return *this;
             }
         }
         return reallocate_append(value);
-#else
-        if (capacity_pair_.value - size_ < 2) {
-            return reallocate_append(value);
-        }
-        data_[size_] = value;
-        ++size_;
-        data_[size_] = value_type();
-        return *this;
-#endif
     }
 
     /**
@@ -1837,32 +1457,21 @@ public:
             return *this;
         }
 
-#ifdef NEFORCE_USING_SSO
-        const size_type raw = size_pair_.value;
-        const size_type old_size = raw & ~long_flag;
-        if ((raw & long_flag) == 0) {
+        const size_type old_size = size();
+        if ((size_pair_.value & long_flag) == 0) {
             if (old_size + n < sso_buffer_size) {
                 traits_type::copy(storage_.short_ + old_size, str, n);
                 traits_type::assign(storage_.short_ + old_size + n, 1, value_type());
-                size_pair_.value = raw + n;
+                size_pair_.value = old_size + n;
                 return *this;
             }
         } else if (storage_.long_.cap >= old_size + n + 1) {
             traits_type::copy(storage_.long_.ptr + old_size, str, n);
             traits_type::assign(storage_.long_.ptr + old_size + n, 1, value_type());
-            size_pair_.value = raw + n;
+            size_pair_.value = (old_size + n) | long_flag;
             return *this;
         }
         return reallocate_append(str, n);
-#else
-        if (capacity_pair_.value - size_ <= n) {
-            return reallocate_append(str, n);
-        }
-        traits_type::copy(data_ + size_, str, n);
-        size_ += n;
-        traits_type::assign(data_ + size_, 1, value_type());
-        return *this;
-#endif
     }
 
     /**
@@ -1891,7 +1500,6 @@ public:
             return *this;
         }
 
-#ifdef NEFORCE_USING_SSO
         const size_type old_size = size();
         if (!is_long() && old_size + n < sso_buffer_size) {
             pointer p = storage_.short_ + old_size;
@@ -1920,14 +1528,6 @@ public:
         }
         size_pair_.value = (old_size + n) | long_flag;
         traits_type::assign(data() + size(), 1, value_type());
-#else
-        if (capacity_pair_.value - size_ <= n) {
-            reallocate(n);
-        }
-        _NEFORCE uninitialized_copy_n(first, n, data_ + size_);
-        size_ += n;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return *this;
     }
 
@@ -2040,7 +1640,6 @@ public:
     NEFORCE_CONSTEXPR20 iterator erase(iterator position) noexcept {
         NEFORCE_DEBUG_VERIFY(position != end(), "erase: cannot erase end() iterator");
 
-#ifdef NEFORCE_USING_SSO
         const size_type offset = position - begin();
         pointer p = data() + offset;
         const size_type chars_after = size() - offset - 1;
@@ -2054,16 +1653,6 @@ public:
             size_pair_.value = size() - 1;
             traits_type::assign(storage_.short_ + size(), 1, value_type());
         }
-#else
-        pointer ptr = &*position;
-        const size_type chars_after = end() - position - 1;
-        if (chars_after > 0) {
-            traits_type::move(ptr, ptr + 1, chars_after);
-        }
-
-        --size_;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return position;
     }
 
@@ -2109,7 +1698,6 @@ public:
 
         const size_type erase_count = last - first;
 
-#ifdef NEFORCE_USING_SSO
         const size_type offset = first - begin();
         pointer p = data() + offset;
         const size_type chars_after = end() - last;
@@ -2123,18 +1711,6 @@ public:
             size_pair_.value = size() - erase_count;
             traits_type::assign(storage_.short_ + size(), 1, value_type());
         }
-#else
-        const size_type chars_after = end() - last;
-
-        if (chars_after > 0) {
-            pointer p_first = data_ + (first - begin());
-            pointer p_last = data_ + (last - begin());
-            traits_type::move(p_first, p_last, chars_after);
-        }
-
-        size_ -= erase_count;
-        traits_type::assign(data_ + size_, 1, value_type());
-#endif
         return first;
     }
 
@@ -2162,25 +1738,20 @@ public:
      * @brief 清空字符串
      */
     NEFORCE_CONSTEXPR20 void clear() noexcept {
-#ifdef NEFORCE_USING_SSO
         if (is_long()) {
-            storage_.long_.ptr[0] = value_type();
-            size_pair_.value = long_flag;
+            destroy_long();
+            traits_type::assign(storage_.short_, 1, value_type());
+            size_pair_.value = 0;
         } else {
-            storage_.short_[0] = value_type();
+            traits_type::assign(storage_.short_, 1, value_type());
             size_pair_.value = 0;
         }
-#else
-        size_ = 0;
-        traits_type::assign(data_, 1, value_type());
-#endif
     }
 
     /**
      * @brief 收缩容量以适应当前大小
      */
     NEFORCE_CONSTEXPR20 void shrink_to_fit() {
-#ifdef NEFORCE_USING_SSO
         if (!is_long()) {
             return;
         }
@@ -2203,17 +1774,6 @@ public:
                 size_pair_.value = len | long_flag;
             }
         }
-#else
-        const size_type new_cap = size_ + 1;
-        if (new_cap >= capacity_pair_.value) {
-            return;
-        }
-
-        basic_string temp;
-        temp.reserve(new_cap);
-        temp.append(*this);
-        basic_string::swap(temp);
-#endif
     }
 
     /**
@@ -3211,14 +2771,8 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return;
         }
-#ifdef NEFORCE_USING_SSO
         _NEFORCE swap(storage_, other.storage_);
         _NEFORCE swap(size_pair_, other.size_pair_);
-#else
-        _NEFORCE swap(data_, other.data_);
-        _NEFORCE swap(size_, other.size_);
-        _NEFORCE swap(capacity_pair_, other.capacity_pair_);
-#endif
     }
 
     /// 小于比较操作符
@@ -3479,7 +3033,6 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator>=(const basic_string<CharT, 
 }
 
 #ifndef NEFORCE_STANDARD_17
-#    ifdef NEFORCE_USING_SSO
 template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::sso_buffer_bytes;
 template <typename CharT, typename Traits, typename Alloc>
@@ -3488,7 +3041,6 @@ template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::sso_capacity;
 template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::long_flag;
-#    endif
 template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::npos;
 #endif

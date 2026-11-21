@@ -8,7 +8,7 @@ nexusforce_compiler_options(NexusRsvp)
 set_target_properties(NexusRsvp PROPERTIES
     INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
 )
-set_target_properties(NexusRsvp PROPERTIES FOLDER "tools")
+set_target_properties(NexusRsvp PROPERTIES FOLDER "toolkits")
 
 install(TARGETS NexusRsvp
         EXPORT NexusForceTargets

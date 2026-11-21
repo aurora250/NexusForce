@@ -258,22 +258,113 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/tui/terminal_protocol.cpp
 )
 
-# 编译为动态库
-add_library(NexusForce SHARED ${CPP_SOURCES})
+# 按模块拆分源文件
+set(NEXUSFORCE_MODULES core logging db compress network plugin tui)
+set(NEXUSFORCE_SHARED_OBJECT_TARGETS "")
+set(NEXUSFORCE_STATIC_OBJECT_TARGETS "")
+set(NEXUSFORCE_SHARED_OBJECTS "")
+set(NEXUSFORCE_STATIC_OBJECTS "")
+set(NEXUSFORCE_COMPONENT_TARGETS "")
+set(_nf_partitioned_count 0)
+
+foreach(_module IN LISTS NEXUSFORCE_MODULES)
+    set(_module_sources "")
+    foreach(_source IN LISTS CPP_SOURCES)
+        if(_source MATCHES "/${_module}/")
+            list(APPEND _module_sources "${_source}")
+        endif()
+    endforeach()
+    if(NOT _module_sources)
+        message(FATAL_ERROR "NexusForce: no sources found for module '${_module}'")
+    endif()
+    list(LENGTH _module_sources _module_count)
+    math(EXPR _nf_partitioned_count "${_nf_partitioned_count} + ${_module_count}")
+
+    string(SUBSTRING "${_module}" 0 1 _first)
+    string(TOUPPER "${_first}" _first)
+    string(SUBSTRING "${_module}" 1 -1 _rest)
+    set(_name "${_first}${_rest}")
+
+    add_library(NexusForce${_name}SharedObjects OBJECT ${_module_sources})
+    add_library(NexusForce${_name}StaticObjects OBJECT ${_module_sources})
+    set_target_properties(NexusForce${_name}SharedObjects PROPERTIES FOLDER "src/shared")
+    set_target_properties(NexusForce${_name}StaticObjects PROPERTIES FOLDER "src/static")
+    list(APPEND NEXUSFORCE_SHARED_OBJECT_TARGETS NexusForce${_name}SharedObjects)
+    list(APPEND NEXUSFORCE_STATIC_OBJECT_TARGETS NexusForce${_name}StaticObjects)
+    list(APPEND NEXUSFORCE_SHARED_OBJECTS $<TARGET_OBJECTS:NexusForce${_name}SharedObjects>)
+    list(APPEND NEXUSFORCE_STATIC_OBJECTS $<TARGET_OBJECTS:NexusForce${_name}StaticObjects>)
+
+    add_library(NexusForce${_name} STATIC $<TARGET_OBJECTS:NexusForce${_name}StaticObjects>)
+    if(_module STREQUAL "network")
+        set(_component net)
+    else()
+        set(_component "${_module}")
+    endif()
+    add_library(NexusForce::${_component} ALIAS NexusForce${_name})
+    set_target_properties(NexusForce${_name} PROPERTIES EXPORT_NAME ${_component})
+    list(APPEND NEXUSFORCE_COMPONENT_TARGETS NexusForce${_name})
+endforeach()
+
+list(LENGTH CPP_SOURCES _nf_total_count)
+if(NOT _nf_partitioned_count EQUAL _nf_total_count)
+    message(FATAL_ERROR "NexusForce: ${_nf_total_count} sources but only ${_nf_partitioned_count} assigned to modules")
+endif()
+
+# 模块间链接关系
+target_link_libraries(NexusForceLogging PUBLIC NexusForceCore)
+target_link_libraries(NexusForceDb PUBLIC NexusForceCore)
+target_link_libraries(NexusForceCompress PUBLIC NexusForceCore)
+target_link_libraries(NexusForceNetwork PUBLIC NexusForceCore NexusForceLogging NexusForceDb NexusForceCompress)
+target_link_libraries(NexusForcePlugin PUBLIC NexusForceCore)
+target_link_libraries(NexusForceTui PUBLIC NexusForceCore)
+
+# 单体动态库 / 静态库
+add_library(NexusForce SHARED ${NEXUSFORCE_SHARED_OBJECTS})
 add_library(NexusForce::NexusForce ALIAS NexusForce)
 
-# 编译为静态库
-add_library(NexusForceStatic STATIC ${CPP_SOURCES})
+add_library(NexusForceStatic STATIC ${NEXUSFORCE_STATIC_OBJECTS})
 add_library(NexusForce::NexusForceStatic ALIAS NexusForceStatic)
 
-set(NEXUSFORCE_LIB_TARGETS NexusForce NexusForceStatic)
+set(NEXUSFORCE_COMPILE_TARGETS ${NEXUSFORCE_SHARED_OBJECT_TARGETS} ${NEXUSFORCE_STATIC_OBJECT_TARGETS})
+set(NEXUSFORCE_MONOLITHIC_TARGETS NexusForce NexusForceStatic)
+set(NEXUSFORCE_LINK_TARGETS ${NEXUSFORCE_MONOLITHIC_TARGETS} ${NEXUSFORCE_COMPONENT_TARGETS})
+set(NEXUSFORCE_LIB_TARGETS ${NEXUSFORCE_COMPILE_TARGETS} ${NEXUSFORCE_LINK_TARGETS})
 
+set(_nf_static_def_targets ${NEXUSFORCE_STATIC_OBJECT_TARGETS} ${NEXUSFORCE_COMPONENT_TARGETS})
+foreach(_lib IN LISTS _nf_static_def_targets)
+    target_compile_definitions(${_lib} PUBLIC NEFORCE_STATIC)
+endforeach()
 target_compile_definitions(NexusForceStatic PUBLIC NEFORCE_STATIC)
 
-function(nexusforce_link_both mode)
-    foreach(_lib IN LISTS NEXUSFORCE_LIB_TARGETS)
+if(WIN32)
+    foreach(_lib IN LISTS NEXUSFORCE_SHARED_OBJECT_TARGETS)
+        target_compile_definitions(${_lib} PRIVATE NEFORCE_DLLEXPORTS)
+    endforeach()
+endif()
+
+# 共享库的对象需要 PIC
+if(WIN32 OR UNIX)
+    set_target_properties(${NEXUSFORCE_SHARED_OBJECT_TARGETS} PROPERTIES POSITION_INDEPENDENT_CODE ON)
+endif()
+
+function(nexusforce_link_all mode)
+    foreach(_lib IN LISTS NEXUSFORCE_LINK_TARGETS)
         target_link_libraries(${_lib} ${mode} ${ARGN})
     endforeach()
+endfunction()
+
+function(nexusforce_link_module module mode)
+    foreach(_lib IN LISTS NEXUSFORCE_MONOLITHIC_TARGETS)
+        target_link_libraries(${_lib} ${mode} ${ARGN})
+    endforeach()
+    target_link_libraries(NexusForce${module} ${mode} ${ARGN})
+    foreach(_obj IN ITEMS NexusForce${module}SharedObjects NexusForce${module}StaticObjects)
+        target_link_libraries(${_obj} PRIVATE ${ARGN})
+    endforeach()
+endfunction()
+
+function(nexusforce_link_both mode)
+    nexusforce_link_all(${mode} ${ARGN})
 endfunction()
 
 function(nexusforce_define_both mode)
@@ -289,19 +380,6 @@ nexusforce_define_both(PUBLIC
         NEXUSFORCE_VERSION_PATCH=${NEXUSFORCE_VERSION_PATCH}
         NEXUSFORCE_VERSION="${NEXUSFORCE_VERSION}"
 )
-
-if(NEXUSFORCE_USING_MEMORY_POOL)
-    # The pool backs the library's own containers through standard_allocator,
-    # which reaches the exported system_memory_pool() singleton.
-    # The shared library no longer replaces the global operator new / delete, so consumers,
-    # other DLLs and the library itself all stay on one allocator by construction;
-    # a process wide replacement is a separate, explicit opt-in (NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE).
-    nexusforce_define_both(PUBLIC NEFORCE_USING_MEMORY_POOL)
-endif()
-
-if(NEXUSFORCE_USING_SSO)
-    nexusforce_define_both(PUBLIC NEFORCE_USING_SSO)
-endif()
 
 if(NEXUSFORCE_USING_INTEL_TSX)
     nexusforce_define_both(PUBLIC NEFORCE_USING_INTEL_TSX)
@@ -330,16 +408,18 @@ if(WIN32 OR UNIX)
             CXX_STANDARD ${CMAKE_CXX_STANDARD}
             CXX_STANDARD_REQUIRED ON
             CXX_EXTENSIONS OFF
-            LINKER_LANGUAGE CXX
     )
+    set_target_properties(${NEXUSFORCE_LINK_TARGETS} PROPERTIES LINKER_LANGUAGE CXX)
     set_target_properties(NexusForce PROPERTIES
             VERSION ${NEXUSFORCE_VERSION}
             SOVERSION ${NEXUSFORCE_VERSION_MAJOR}
     )
 endif()
 
-set_target_properties(${NEXUSFORCE_LIB_TARGETS} PROPERTIES DEBUG_POSTFIX "d")
-set_target_properties(NexusForceStatic PROPERTIES FOLDER "src")
+set_target_properties(${NEXUSFORCE_LINK_TARGETS} PROPERTIES DEBUG_POSTFIX "d")
+set_target_properties(NexusForce PROPERTIES FOLDER "src/shared")
+set_target_properties(NexusForceStatic PROPERTIES FOLDER "src/static")
+set_target_properties(${NEXUSFORCE_COMPONENT_TARGETS} PROPERTIES FOLDER "src/static/components")
 
 # 链接头文件
 foreach(_lib IN LISTS NEXUSFORCE_LIB_TARGETS)
@@ -352,15 +432,16 @@ foreach(_lib IN LISTS NEXUSFORCE_LIB_TARGETS)
     )
 endforeach()
 
-# 定义宏
-if(WIN32)
-    target_compile_definitions(NexusForce PRIVATE NEFORCE_DLLEXPORTS)
-endif()
-
 # 编译选项
 foreach(_lib IN LISTS NEXUSFORCE_LIB_TARGETS)
     nexusforce_compiler_options(${_lib})
 endforeach()
+
+if(MSVC)
+    foreach(_lib IN LISTS NEXUSFORCE_LINK_TARGETS)
+        target_compile_options(${_lib} INTERFACE /utf-8)
+    endforeach()
+endif()
 
 # 链接系统库
 if(WIN32)
@@ -397,14 +478,14 @@ elseif(UNIX)
     if(NEXUSFORCE_USING_IO_URING)
         find_package(uring QUIET)
         if(TARGET uring::uring)
-            nexusforce_link_both(PRIVATE uring::uring)
+            nexusforce_link_module(Core PRIVATE uring::uring)
             nexusforce_define_both(PUBLIC NEFORCE_USING_IO_URING)
             set(NEXUSFORCE_URING_LINKED TRUE PARENT_SCOPE)
             message(STATUS "io_uring linked successfully")
         else()
             find_library(LIBURING NAMES uring)
             if(LIBURING)
-                nexusforce_link_both(PRIVATE ${LIBURING})
+                nexusforce_link_module(Core PRIVATE ${LIBURING})
                 nexusforce_define_both(PUBLIC NEFORCE_USING_IO_URING)
                 message(STATUS "io_uring library found: ${LIBURING}")
             else()
@@ -423,7 +504,7 @@ if(NEXUSFORCE_ENABLE_POSTGRESQL)
     find_package(PostgreSQL QUIET)
 
     if(TARGET PostgreSQL::PostgreSQL)
-        nexusforce_link_both(PRIVATE PostgreSQL::PostgreSQL)
+        nexusforce_link_module(Db PRIVATE PostgreSQL::PostgreSQL)
         nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_POSTGRESQL NEFORCE_SUPPORT_DB)
         set(NEXUSFORCE_POSTGRESQL_LINKED TRUE PARENT_SCOPE)
         message(STATUS "PostgreSQL linked successfully")
@@ -437,7 +518,7 @@ endif()
 if(NEXUSFORCE_ENABLE_MYSQL)
     find_package(unofficial-libmysql CONFIG QUIET)
     if(TARGET unofficial::libmysql::libmysql)
-        nexusforce_link_both(PRIVATE unofficial::libmysql::libmysql)
+        nexusforce_link_module(Db PRIVATE unofficial::libmysql::libmysql)
         nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_MYSQL NEFORCE_SUPPORT_DB)
         set(NEXUSFORCE_MYSQL_LINKED TRUE PARENT_SCOPE)
         message(STATUS "MySQL linked successfully")
@@ -452,7 +533,7 @@ if(NEXUSFORCE_ENABLE_SQLITE3)
     if(WIN32 AND NEXUSFORCE_USING_SQLCIPHER)
         find_package(sqlcipher CONFIG QUIET)
         if(TARGET sqlcipher::sqlcipher)
-            nexusforce_link_both(PRIVATE sqlcipher::sqlcipher)
+            nexusforce_link_module(Db PRIVATE sqlcipher::sqlcipher)
             nexusforce_define_both(PUBLIC
                 NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_SQLCIPHER NEFORCE_SUPPORT_DB
                 SQLITE_HAS_CODEC SQLITE_TEMP_STORE=2)
@@ -463,7 +544,7 @@ if(NEXUSFORCE_ENABLE_SQLITE3)
             message(WARNING "SQLCipher not found - falling back to SQLite3 without encryption")
             find_package(unofficial-sqlite3 CONFIG QUIET)
             if(TARGET unofficial::sqlite3::sqlite3)
-                nexusforce_link_both(PRIVATE unofficial::sqlite3::sqlite3)
+                nexusforce_link_module(Db PRIVATE unofficial::sqlite3::sqlite3)
                 nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_DB)
                 set(NEXUSFORCE_SQLITE_LINKED TRUE PARENT_SCOPE)
                 message(STATUS "SQLite3 linked successfully")
@@ -474,7 +555,7 @@ if(NEXUSFORCE_ENABLE_SQLITE3)
     else()
         find_package(unofficial-sqlite3 CONFIG QUIET)
         if(TARGET unofficial::sqlite3::sqlite3)
-            nexusforce_link_both(PRIVATE unofficial::sqlite3::sqlite3)
+            nexusforce_link_module(Db PRIVATE unofficial::sqlite3::sqlite3)
             nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_DB)
             set(NEXUSFORCE_SQLITE_LINKED TRUE PARENT_SCOPE)
             message(STATUS "SQLite3 linked successfully")
@@ -489,7 +570,7 @@ endif()
 if(NEXUSFORCE_ENABLE_REDIS)
     find_package(hiredis CONFIG QUIET)
     if(TARGET hiredis::hiredis)
-        nexusforce_link_both(PRIVATE hiredis::hiredis)
+        nexusforce_link_module(Db PRIVATE hiredis::hiredis)
         nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_HIREDIS NEFORCE_SUPPORT_DB)
         set(NEXUSFORCE_REDIS_LINKED TRUE PARENT_SCOPE)
         message(STATUS "hiredis linked successfully")
@@ -503,7 +584,8 @@ endif()
 if(NEXUSFORCE_ENABLE_ZLIB)
     find_package(ZLIB QUIET)
     if(TARGET ZLIB::ZLIB)
-        nexusforce_link_both(PRIVATE ZLIB::ZLIB)
+        nexusforce_link_module(Compress PRIVATE ZLIB::ZLIB)
+        nexusforce_link_module(Tui PRIVATE ZLIB::ZLIB)
         nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_ZLIB)
         set(NEXUSFORCE_ZLIB_LINKED TRUE PARENT_SCOPE)
         message(STATUS "ZLIB linked successfully")
@@ -515,7 +597,7 @@ endif()
 if(NEXUSFORCE_ENABLE_LZ4)
     find_package(lz4 CONFIG QUIET)
     if(TARGET lz4::lz4)
-        nexusforce_link_both(PRIVATE lz4::lz4)
+        nexusforce_link_module(Compress PRIVATE lz4::lz4)
         nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_LZ4)
         set(NEXUSFORCE_LZ4_LINKED TRUE PARENT_SCOPE)
         message(STATUS "lz4 linked successfully")
@@ -526,7 +608,7 @@ endif()
 
 
 find_package(OpenSSL REQUIRED)
-nexusforce_link_both(PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+nexusforce_link_module(Network PRIVATE OpenSSL::SSL OpenSSL::Crypto)
 nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_OPENSSL)
 message(STATUS "OpenSSL linked successfully")
 
@@ -537,7 +619,7 @@ if(NEXUSFORCE_ENABLE_ZSTD)
         foreach(_lib IN LISTS NEXUSFORCE_LIB_TARGETS)
             target_include_directories(${_lib} PRIVATE ${NEFORCE_ZSTD_INCLUDE_DIR})
         endforeach()
-        nexusforce_link_both(PRIVATE ${NEFORCE_ZSTD_LIBRARY})
+        nexusforce_link_module(Compress PRIVATE ${NEFORCE_ZSTD_LIBRARY})
         nexusforce_define_both(PRIVATE NEFORCE_SUPPORT_ZSTD)
         set(NEXUSFORCE_ZSTD_LINKED TRUE PARENT_SCOPE)
         message(STATUS "zstd linked successfully")
@@ -547,7 +629,7 @@ else()
 endif()
 
 find_package(pcre2 CONFIG REQUIRED COMPONENTS 8BIT)
-nexusforce_link_both(PRIVATE PCRE2::8BIT)
+nexusforce_link_module(Core PRIVATE PCRE2::8BIT)
 nexusforce_define_both(PUBLIC
         NEFORCE_SUPPORT_PCRE2
         PCRE2_CODE_UNIT_WIDTH=8
@@ -556,7 +638,7 @@ message(STATUS "PCRE2 with JIT linked successfully")
 
 
 if(NEXUSFORCE_ENABLE_LOCALE)
-    foreach(_lib IN LISTS NEXUSFORCE_LIB_TARGETS)
+    foreach(_lib IN ITEMS NexusForceCoreSharedObjects NexusForceCoreStaticObjects)
         target_sources(${_lib} PRIVATE
                 ${CMAKE_CURRENT_SOURCE_DIR}/core/locale/locale.cpp
                 ${CMAKE_CURRENT_SOURCE_DIR}/core/locale/locale_data.cpp
@@ -569,7 +651,7 @@ if(NEXUSFORCE_ENABLE_LOCALE)
     if(NEXUSFORCE_ENABLE_ICU)
         find_package(ICU QUIET COMPONENTS uc i18n)
         if(TARGET ICU::uc AND TARGET ICU::i18n)
-            nexusforce_link_both(PRIVATE ICU::uc ICU::i18n)
+            nexusforce_link_module(Core PRIVATE ICU::uc ICU::i18n)
             nexusforce_define_both(PUBLIC NEFORCE_SUPPORT_ICU)
             set(NEXUSFORCE_ICU_LINKED TRUE PARENT_SCOPE)
             message(STATUS "ICU linked successfully")
@@ -592,8 +674,8 @@ message(STATUS "")
 if(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE)
     add_library(NexusForceMemoryPoolOverride OBJECT ${CMAKE_CURRENT_SOURCE_DIR}/core/memory/new.cpp)
     target_link_libraries(NexusForceMemoryPoolOverride PUBLIC NexusForce::NexusForce)
-    target_compile_definitions(NexusForceMemoryPoolOverride PRIVATE NEFORCE_USING_MEMORY_POOL NEFORCE_USING_MEMORY_POOL_OVERRIDE)
-    set_target_properties(NexusForceMemoryPoolOverride PROPERTIES FOLDER "src")
+    target_compile_definitions(NexusForceMemoryPoolOverride PRIVATE NEFORCE_USING_MEMORY_POOL_OVERRIDE)
+    set_target_properties(NexusForceMemoryPoolOverride PROPERTIES FOLDER "src/static/override")
     nexusforce_compiler_options(NexusForceMemoryPoolOverride)
 
     add_library(NexusForceMemoryPoolOverrideStatic STATIC $<TARGET_OBJECTS:NexusForceMemoryPoolOverride>)
@@ -601,12 +683,12 @@ if(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE)
     target_compile_definitions(NexusForceMemoryPoolOverrideStatic INTERFACE NEFORCE_USING_MEMORY_POOL_OVERRIDE)
 
     set_target_properties(NexusForceMemoryPoolOverrideStatic PROPERTIES
-            FOLDER "src"
+            FOLDER "src/static/override"
             DEBUG_POSTFIX "d")
 endif()
 
 # 安装库文件
-install(TARGETS NexusForce NexusForceStatic
+install(TARGETS NexusForce NexusForceStatic ${NEXUSFORCE_COMPONENT_TARGETS}
         EXPORT NexusForceTargets
 
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}

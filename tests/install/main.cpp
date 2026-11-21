@@ -1,4 +1,5 @@
 #include "install_consumer.hpp"
+#include <NeForce/core/container/vector.hpp>
 #include <NeForce/core/memory/memory_pool.hpp>
 #include <NeForce/core/reflect/reflect.hpp>
 #include <NeForce/core/system/console.hpp>
@@ -162,10 +163,11 @@ int main() {
 
     // --- the allocator model --------------------------------------------------------------------
     memory_pool& pool = system_memory_pool();
-#ifdef NEFORCE_USING_MEMORY_POOL
-    string pooled(96, 'x');
-    check(pool.owns(pooled.data()), "the installed package routes library containers to the memory pool");
-#endif
+    const string container_text(96, 'x');
+    check(!pool.owns(container_text.data()), "library containers stay on the C runtime allocator");
+    vector<int, pool_allocator<int>> pooled;
+    pooled.reserve(64);
+    check(pool.owns(pooled.data()), "pool_allocator routes containers through the memory pool");
     check(pool.foreign_release_count() == 0, "no allocation crossed the allocator boundary");
 
     println(string("checks: ") + to_string(checks) + ", failures: " + to_string(failures));

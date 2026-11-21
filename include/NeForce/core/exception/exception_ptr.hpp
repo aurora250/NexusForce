@@ -125,9 +125,7 @@ public:
      * @brief 获取异常类型信息
      * @return 异常的动态类型信息
      */
-    NEFORCE_NODISCARD const std::type_info& type() const noexcept override {
-        return typeid(typename decltype(exception_)::element_type);
-    }
+    NEFORCE_NODISCARD const std::type_info& type() const noexcept override { return typeid(*exception_); }
 
     /**
      * @brief 克隆异常包装器

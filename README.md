@@ -423,8 +423,9 @@ See [TUI performance test records](benchmark/tui/PERFORMANCE.md) for TUI renderi
 
 #### Allocator Model
 
-- With `NEXUSFORCE_USING_MEMORY_POOL` enabled (the default), allocations of library containers (`basic_string`, `vector`, etc.) are served by the global memory pool
-- Enable `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` explicitly and link every C++ module that passes ownership across modules against `NexusForceMemoryPoolOverrideStatic` to make the whole process use the global memory pool
+- Library containers (`basic_string`, `vector`, etc.) allocate through the C runtime by default: `standard_allocator` never routes to the pool on its own
+- Opt into the pool per container with `pool_allocator` (e.g. `vector<int, pool_allocator<int>>`), which is the pool's only allocator entry
+- Enable `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` explicitly and link every C++ module that passes ownership across modules against `NexusForceMemoryPoolOverrideStatic` to make the whole process use the global memory pool; the default allocator then reaches the pool through the replaced global `operator new` / `delete`
 
 ### 📦 Compression
 - **lz4 Compression** - `lz4_compressor` high-speed data compression/decompression

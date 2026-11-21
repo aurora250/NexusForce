@@ -8,7 +8,7 @@ namespace {
     using value_t = int;
     using blob_t = neforce::basic_string<char>;
 
-    /// NeForce vector with the default allocator (pool-backed when NEXUSFORCE_USING_MEMORY_POOL is on)
+    /// NeForce vector with the default allocator (pool-backed when the global operator new is overridden)
     using nf_vec_t = neforce::vector<value_t>;
     /// NeForce vector with std::allocator, so the container overhead can be separated from the allocator
     using nf_sa_vec_t = neforce::vector<value_t, std::allocator<value_t>>;

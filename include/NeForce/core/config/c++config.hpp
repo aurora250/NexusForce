@@ -411,6 +411,10 @@
 #    endif
 #endif
 
+#if defined(NEFORCE_SIMD_AES_NI) || defined(NEFORCE_SIMD_AES_ARM) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    define NEFORCE_SIMD_AES 1 ///< 硬件 AES 指令集可用
+#endif
+
 /** @} */ // SimdDetection
 
 /**
