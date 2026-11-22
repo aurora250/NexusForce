@@ -17,6 +17,22 @@
 #elif defined(NEFORCE_SIMD_NEON)
 #    include <arm_neon.h>
 #endif
+#if defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)
+#    include <intrin.h>
+#endif
+
+
+#if defined(NEFORCE_SIMD_SSE2) || defined(NEFORCE_SIMD_AVX) || defined(NEFORCE_SIMD_AVX2) || \
+        defined(NEFORCE_SIMD_AVX512F)
+#    define NEFORCE_SIMD_BRANCH_X86
+#endif
+#if defined(NEFORCE_SIMD_NEON) || defined(NEFORCE_SIMD_SVE) || defined(NEFORCE_SIMD_SVE2)
+#    define NEFORCE_SIMD_BRANCH_ARM
+#endif
+#if !(defined(NEFORCE_SIMD_BRANCH_X86) || defined(NEFORCE_SIMD_BRANCH_ARM))
+#    define NEFORCE_SIMD_BRANCH_PORTABLE
+#endif
+
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
 

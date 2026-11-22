@@ -177,6 +177,7 @@
 
 ### 🔧 Improvements
 
+- `simd` 头文件按重构：`simd/<module>.hpp` 成为分发表，实现移入后端内部保留自身的条件编译，未覆盖的架构自动使用 `portable/`。
 - 删除 `NEXUSFORCE_USING_SSO` 选项、`NEFORCE_USING_SSO` 宏与 `basic_string` 的非 SSO 实现：`basic_string` 固定使用 SSO 布局，`sizeof` 与修饰名随之固定，消费端需要重新编译
 - 删除 `NEXUSFORCE_USING_MEMORY_POOL` 选项与 `NEFORCE_USING_MEMORY_POOL` 宏：`standard_allocator` 不再把库容器路由到内存池，默认使用 C 运行时 `operator new` / `delete`；内存池改为仅经 `pool_allocator` 显式使用，或在 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` 覆盖全局 `operator new` / `delete` 时被动进入
 - `standard_allocator` 与内存池完全解耦：删除 `standard_allocator.hpp` 中的池路由分支与 ABI 开关 TODO，分配路径恒为 `operator new` / `delete`，`pool_allocator` 成为内存池唯一的分配器入口；安装消费端与单元测试增加“库容器留在 CRT 分配器”的断言
