@@ -43,7 +43,7 @@ public:
     /**
      * @brief 默认构造函数
      */
-    named_mutex() noexcept = default;
+    named_mutex() noexcept;
 
     /**
      * @brief 构造函数，创建或打开命名互斥锁

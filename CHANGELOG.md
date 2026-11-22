@@ -446,6 +446,7 @@
 
 ### 🐛 Bug Fixes
 
+- 修复隐藏可见性构建（`-fvisibility=hidden` 的 Debug 配置）下链接 `NexusForceUnitTests` 报 `undefined reference to typeinfo for neforce::tui::component_base`：组件基类未导出，typeinfo 被编译为局部符号，派生组件的 RTTI 在测试/插件 TU 中无法解析；`component_base` 现标记 `NEFORCE_API`
 - 修复 Windows 上 `stacktrace` 多跳过一帧：`current(skip)` 先加 1 再交给构造函数，而构造函数在 Windows 上又用 `CaptureStackBackTrace(skip + 2)`，叠加后 `current(0)` 丢掉直接调用者
 - 修复 `basic_string::clear()` 在长字符串模式下释放缓冲区并退回 SSO：清空后 `capacity()` 从长容量掉回 16，随后的 `append` 又触发扩容；现在保留缓冲区，`clear()` 后容量不变
 - 修复 `crash_dump` 在 Windows 上的编译错误：`<excpt.h>` 把 `exception_code` 定义为 `_exception_code` 内建函数，与 `report::exception_code` 成员冲突；`crash_dump.cpp` 在系统头文件之后再次 `#undef`

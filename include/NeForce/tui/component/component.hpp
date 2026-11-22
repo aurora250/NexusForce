@@ -35,7 +35,7 @@ struct empty_props {};
 /**
  * @brief 组件基类
  */
-class component_base {
+class NEFORCE_API component_base {
 public:
     /**
      * @brief 构造组件基类

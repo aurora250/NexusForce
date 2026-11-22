@@ -135,7 +135,7 @@ public:
      */
     template <typename Ret, typename... Args>
     type_builder& function(string_view name, Ret (T::*func)(Args...)) {
-        auto invoker = _NEFORCE inner::make_member_invoker(func);
+        auto invoker = inner::make_member_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         if (meta_func) {
             meta_func->set_arg_hints(sizeof...(Args), sizeof...(Args));
@@ -153,7 +153,7 @@ public:
      */
     template <typename Ret, typename... Args>
     type_builder& function(string_view name, Ret (T::*func)(Args...) const) {
-        auto invoker = _NEFORCE inner::make_const_member_invoker(func);
+        auto invoker = inner::make_const_member_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         if (meta_func) {
             meta_func->set_arg_hints(sizeof...(Args), sizeof...(Args));
@@ -171,7 +171,7 @@ public:
      */
     template <typename Ret, typename... Args>
     type_builder& static_function(string_view name, Ret (*func)(Args...)) {
-        auto invoker = _NEFORCE inner::make_static_invoker(func);
+        auto invoker = inner::make_static_invoker(func);
         auto* meta_func = meta_.function(name, _NEFORCE move(invoker));
         meta_func->set_arg_hints(sizeof...(Args), sizeof...(Args));
         return *this;
@@ -209,13 +209,6 @@ public:
     }
 
     /**
-     * @brief 注册信号成员
-     * @param name 信号名称
-     * @return 自身引用
-     *
-     * 将信号名称记录在类型的元数据中，供动态连接查询使用。
-     */
-    /**
      * @brief 设置数据库表名
      * @param table 表名
      * @return 自身引用
@@ -227,6 +220,13 @@ public:
         return *this;
     }
 
+    /**
+     * @brief 注册信号成员
+     * @param name 信号名称
+     * @return 自身引用
+     *
+     * 将信号名称记录在类型的元数据中，供动态连接查询使用。
+     */
     type_builder& signal(string_view name) {
         meta_.register_signal(name);
         return *this;

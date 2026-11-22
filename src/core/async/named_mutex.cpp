@@ -128,6 +128,8 @@ struct named_mutex::impl {
 };
 
 
+named_mutex::named_mutex() noexcept = default;
+
 named_mutex::named_mutex(const string& name, const bool create) :
 impl_(make_unique<impl>(name, create)) {}
 
