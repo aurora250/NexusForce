@@ -6,7 +6,6 @@
  * @brief 异步文件I/O操作类
  *
  * 提供通过 io_context 驱动的异步文件读写操作。
- * Windows 使用 IOCP，Linux 使用 io_uring（内核 5.1+）。
  */
 
 #include "NeForce/core/async/cancellation_slot.hpp"

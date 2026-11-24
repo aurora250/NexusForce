@@ -28,6 +28,10 @@
 #    include <unistd.h>
 #    include <fcntl.h>
 #endif
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <NeForce/core/system/io_queue.hpp>
+#    include <poll.h>
+#endif
 using namespace neforce;
 
 #if defined(NEFORCE_PLATFORM_LINUX) && defined(NEFORCE_ARCH_LOONGARCH)
@@ -8607,3 +8611,202 @@ TEST_F(NamedMutexTest, DefaultConstructedIsInvalidAndUnnamed) {
     EXPECT_TRUE(mtx.name().empty());
     EXPECT_FALSE(mtx.try_lock());
 }
+
+#ifdef NEFORCE_PLATFORM_LINUX
+namespace {
+    int drain_with_poll(io_queue& queue, const int timeout_ms) {
+        ::pollfd entry{};
+        entry.fd = queue.native_handle();
+        entry.events = POLLIN;
+        if (::poll(&entry, 1, timeout_ms) <= 0) {
+            return 0;
+        }
+        return static_cast<int>(queue.drain());
+    }
+} // namespace
+
+class LinuxIoQueueTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        char name[] = "/tmp/nf_linux_io_queue_XXXXXX";
+        fd_ = ::mkstemp(name);
+        ASSERT_GE(fd_, 0);
+        const string content = "abcdefghijklmnopqrstuvwxyz";
+        ASSERT_EQ(::write(fd_, content.data(), content.size()), static_cast<::ssize_t>(content.size()));
+    }
+
+    void TearDown() override {
+        if (fd_ >= 0) {
+            ::close(fd_);
+            fd_ = -1;
+        }
+    }
+
+    int fd_{-1};
+};
+
+TEST_F(LinuxIoQueueTest, OpensWithPollableHandle) {
+    if (!io_queue::available()) {
+        GTEST_SKIP();
+    }
+
+    io_queue queue;
+    EXPECT_TRUE(queue.is_open());
+    EXPECT_GE(queue.native_handle(), 0);
+    EXPECT_EQ(queue.pending(), 0u);
+}
+
+TEST_F(LinuxIoQueueTest, ReadCompletesOnDrain) {
+    if (!io_queue::available()) {
+        GTEST_SKIP();
+    }
+
+    io_queue queue;
+    ASSERT_TRUE(queue.is_open());
+
+    char buffer[9]{};
+    error_code ec{make_error_code(errc::io_error)};
+    size_t bytes = 0;
+    const auto token = queue.submit_read(fd_, buffer, 8, 2, [&](const error_code error, const size_t count) {
+        ec = error;
+        bytes = count;
+    });
+    ASSERT_NE(token, 0u);
+    EXPECT_EQ(queue.pending(), 1u);
+    ASSERT_EQ(drain_with_poll(queue, 2000), 1);
+    EXPECT_FALSE(ec);
+    EXPECT_EQ(bytes, 8u);
+    EXPECT_EQ(string(buffer), "cdefghij");
+    EXPECT_EQ(queue.pending(), 0u);
+}
+
+TEST_F(LinuxIoQueueTest, WriteCompletesOnDrain) {
+    if (!io_queue::available()) {
+        GTEST_SKIP();
+    }
+
+    io_queue queue;
+    ASSERT_TRUE(queue.is_open());
+
+    const string payload = "XYZ";
+    error_code ec{make_error_code(errc::io_error)};
+    size_t bytes = 0;
+    const auto token =
+            queue.submit_write(fd_, payload.data(), payload.size(), 0, [&](const error_code error, const size_t count) {
+                ec = error;
+                bytes = count;
+            });
+    ASSERT_NE(token, 0u);
+    ASSERT_EQ(drain_with_poll(queue, 2000), 1);
+    EXPECT_FALSE(ec);
+    EXPECT_EQ(bytes, 3u);
+
+    char check[4]{};
+    EXPECT_EQ(::pread(fd_, check, 3, 0), 3);
+    EXPECT_EQ(string(check), "XYZ");
+}
+
+TEST_F(LinuxIoQueueTest, ReadOnInvalidFdReportsError) {
+    if (!io_queue::available()) {
+        GTEST_SKIP();
+    }
+
+    io_queue queue;
+    ASSERT_TRUE(queue.is_open());
+
+    char buffer[4]{};
+    bool called = false;
+    error_code ec;
+    size_t bytes = 99;
+    const auto token =
+            queue.submit_read(-1, buffer, sizeof(buffer), 0, [&](const error_code error, const size_t count) {
+                called = true;
+                ec = error;
+                bytes = count;
+            });
+    ASSERT_NE(token, 0u);
+    ASSERT_EQ(drain_with_poll(queue, 2000), 1);
+    EXPECT_TRUE(called);
+    EXPECT_TRUE(ec);
+    EXPECT_EQ(bytes, 0u);
+}
+
+TEST_F(LinuxIoQueueTest, ZeroSizeIsRejected) {
+    if (!io_queue::available()) {
+        GTEST_SKIP();
+    }
+
+    io_queue queue;
+    ASSERT_TRUE(queue.is_open());
+
+    char buffer[1]{};
+    const auto token = queue.submit_read(fd_, buffer, 0, 0, [](error_code, size_t) {});
+    EXPECT_EQ(token, 0u);
+    EXPECT_EQ(queue.pending(), 0u);
+}
+
+TEST_F(LinuxIoQueueTest, DrainWithoutCompletionsReturnsZero) {
+    if (!io_queue::available()) {
+        GTEST_SKIP();
+    }
+
+    io_queue queue;
+    ASSERT_TRUE(queue.is_open());
+    EXPECT_EQ(queue.drain(), 0u);
+}
+
+TEST_F(LinuxIoQueueTest, CancelInFlightReadReportsAborted) {
+    if (!io_queue::available()) {
+        GTEST_SKIP();
+    }
+
+    int fds[2]{};
+    ASSERT_EQ(::pipe(fds), 0);
+
+    io_queue queue;
+    ASSERT_TRUE(queue.is_open());
+
+    char buffer[16]{};
+    int calls = 0;
+    error_code ec;
+    size_t bytes = 99;
+    const auto token =
+            queue.submit_read(fds[0], buffer, sizeof(buffer), 0, [&](const error_code error, const size_t count) {
+                ++calls;
+                ec = error;
+                bytes = count;
+            });
+    ASSERT_NE(token, 0u);
+    EXPECT_TRUE(queue.cancel(token));
+    for (int i = 0; i < 50 && calls == 0; ++i) {
+        drain_with_poll(queue, 100);
+    }
+    EXPECT_EQ(calls, 1);
+    EXPECT_EQ(ec.value(), static_cast<int>(errc::operation_canceled));
+    EXPECT_EQ(bytes, 0u);
+
+    ::close(fds[0]);
+    ::close(fds[1]);
+}
+
+TEST_F(LinuxIoQueueTest, CloseDropsPendingWork) {
+    if (!io_queue::available()) {
+        GTEST_SKIP();
+    }
+
+    io_queue queue;
+    ASSERT_TRUE(queue.is_open());
+
+    char buffer[8]{};
+    int calls = 0;
+    const auto token = queue.submit_read(fd_, buffer, sizeof(buffer), 0, [&](error_code, size_t) { ++calls; });
+    ASSERT_NE(token, 0u);
+    EXPECT_EQ(queue.pending(), 1u);
+
+    queue.close();
+    EXPECT_FALSE(queue.is_open());
+    EXPECT_EQ(queue.pending(), 0u);
+    EXPECT_EQ(queue.drain(), 0u);
+    EXPECT_EQ(calls, 0);
+}
+#endif // NEFORCE_PLATFORM_LINUX

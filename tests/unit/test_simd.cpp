@@ -1745,3 +1745,96 @@ TEST_F(SimdGuardPageTest, BoundedPrimitivesAcrossGuardStrings) {
 }
 
 #endif
+
+TEST(SimdScalarBackendTest, ScalarNamespaceMatchesActiveBackend) {
+    char lhs[96];
+    char rhs[96];
+    simd::memory_set(lhs, 'x', sizeof(lhs));
+    simd::scalar::memory_set(rhs, 'x', sizeof(rhs));
+    EXPECT_EQ(0, simd::memory_compare(lhs, rhs, sizeof(lhs)));
+    EXPECT_EQ(0, simd::scalar::memory_compare(lhs, rhs, sizeof(lhs)));
+
+    lhs[37] = 'q';
+    rhs[37] = 'q';
+    EXPECT_EQ(static_cast<const void*>(lhs + 37), simd::memory_find(lhs, 'q', sizeof(lhs)));
+    EXPECT_EQ(static_cast<const void*>(rhs + 37), simd::scalar::memory_find(rhs, 'q', sizeof(rhs)));
+
+    char text[32];
+    simd::memory_set(text, 'a', sizeof(text) - 1);
+    text[31] = '\0';
+    EXPECT_EQ(31u, simd::string_length(text));
+    EXPECT_EQ(31u, simd::scalar::string_length(text));
+}
+
+TEST(SimdBackendDifferentialTest, ElementWiseKernelsMatchScalarBackend) {
+    uint32_t state = 0x9e3779b9U;
+    auto next = [&state]() {
+        state ^= state << 13;
+        state ^= state >> 17;
+        state ^= state << 5;
+        return state;
+    };
+
+    for (int iter = 0; iter < 512; ++iter) {
+        alignas(16) byte_t raw_a[16];
+        alignas(16) byte_t raw_b[16];
+        for (int i = 0; i < 16; ++i) {
+            raw_a[i] = static_cast<byte_t>(next());
+            raw_b[i] = static_cast<byte_t>(next());
+        }
+        simd::vec128_t a;
+        simd::vec128_t b;
+        simd::memory_copy(&a, raw_a, 16);
+        simd::memory_copy(&b, raw_b, 16);
+
+        auto same = [](simd::vec128_t lhs, simd::vec128_t rhs) {
+            byte_t l[16];
+            byte_t r[16];
+            neforce::memory_copy(l, &lhs, 16);
+            neforce::memory_copy(r, &rhs, 16);
+            return neforce::memory_compare(l, r, 16) == 0;
+        };
+
+        EXPECT_TRUE(same(simd::add_i8(a, b), simd::scalar::add_i8(a, b)));
+        EXPECT_TRUE(same(simd::sub_i8(a, b), simd::scalar::sub_i8(a, b)));
+        EXPECT_TRUE(same(simd::add_i16(a, b), simd::scalar::add_i16(a, b)));
+        EXPECT_TRUE(same(simd::sub_i16(a, b), simd::scalar::sub_i16(a, b)));
+        EXPECT_TRUE(same(simd::add_i32(a, b), simd::scalar::add_i32(a, b)));
+        EXPECT_TRUE(same(simd::sub_i32(a, b), simd::scalar::sub_i32(a, b)));
+        EXPECT_TRUE(same(simd::mullo_i16(a, b), simd::scalar::mullo_i16(a, b)));
+        EXPECT_TRUE(same(simd::mullo_i32(a, b), simd::scalar::mullo_i32(a, b)));
+        EXPECT_TRUE(same(simd::mulhi_i16(a, b), simd::scalar::mulhi_i16(a, b)));
+        EXPECT_TRUE(same(simd::madds_i8x16(a, b), simd::scalar::madds_i8x16(a, b)));
+        EXPECT_TRUE(same(simd::abs_i8(a), simd::scalar::abs_i8(a)));
+        EXPECT_TRUE(same(simd::abs_i16(a), simd::scalar::abs_i16(a)));
+        EXPECT_TRUE(same(simd::min_i8(a, b), simd::scalar::min_i8(a, b)));
+        EXPECT_TRUE(same(simd::max_i8(a, b), simd::scalar::max_i8(a, b)));
+        EXPECT_TRUE(same(simd::min_u16(a, b), simd::scalar::min_u16(a, b)));
+        EXPECT_TRUE(same(simd::max_u16(a, b), simd::scalar::max_u16(a, b)));
+        EXPECT_TRUE(same(simd::avg_u8(a, b), simd::scalar::avg_u8(a, b)));
+        EXPECT_TRUE(same(simd::avg_u16(a, b), simd::scalar::avg_u16(a, b)));
+        EXPECT_TRUE(same(simd::saturated_add_i8(a, b), simd::scalar::saturated_add_i8(a, b)));
+        EXPECT_TRUE(same(simd::saturated_sub_i8(a, b), simd::scalar::saturated_sub_i8(a, b)));
+        EXPECT_TRUE(same(simd::saturated_add_u8(a, b), simd::scalar::saturated_add_u8(a, b)));
+        EXPECT_TRUE(same(simd::saturated_sub_u8(a, b), simd::scalar::saturated_sub_u8(a, b)));
+        EXPECT_TRUE(same(simd::bit_and(a, b), simd::scalar::bit_and(a, b)));
+        EXPECT_TRUE(same(simd::bit_or(a, b), simd::scalar::bit_or(a, b)));
+        EXPECT_TRUE(same(simd::bit_xor(a, b), simd::scalar::bit_xor(a, b)));
+        EXPECT_TRUE(same(simd::bit_not(a), simd::scalar::bit_not(a)));
+        EXPECT_TRUE(same(simd::bit_andnot(a, b), simd::scalar::bit_andnot(a, b)));
+        EXPECT_TRUE(same(simd::cmpeq_i8(a, b), simd::scalar::cmpeq_i8(a, b)));
+        EXPECT_TRUE(same(simd::cmpgt_i8(a, b), simd::scalar::cmpgt_i8(a, b)));
+        EXPECT_TRUE(same(simd::cmpeq_i16(a, b), simd::scalar::cmpeq_i16(a, b)));
+        EXPECT_TRUE(same(simd::cmpgt_i16(a, b), simd::scalar::cmpgt_i16(a, b)));
+        EXPECT_TRUE(same(simd::cmpeq_i32(a, b), simd::scalar::cmpeq_i32(a, b)));
+        EXPECT_TRUE(same(simd::cmpgt_i32(a, b), simd::scalar::cmpgt_i32(a, b)));
+        EXPECT_TRUE(same(simd::match_bytes(a, b), simd::scalar::match_bytes(a, b)));
+        EXPECT_TRUE(same(simd::fill_i8(raw_a[0]), simd::scalar::fill_i8(raw_a[0])));
+        EXPECT_TRUE(same(simd::load_unaligned(raw_a), simd::scalar::load_unaligned(raw_a)));
+        EXPECT_EQ(simd::to_bitmask(a), simd::scalar::to_bitmask(a));
+        EXPECT_EQ(simd::contains_byte(a, raw_b[3]), simd::scalar::contains_byte(a, raw_b[3]));
+        EXPECT_EQ(simd::find_first_byte(a, raw_b[5]), simd::scalar::find_first_byte(a, raw_b[5]));
+        EXPECT_EQ(simd::is_all_zero(a), simd::scalar::is_all_zero(a));
+        EXPECT_EQ(simd::has_any_zero(a), simd::scalar::has_any_zero(a));
+    }
+}

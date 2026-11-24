@@ -1,14 +1,9 @@
-#ifndef NEFORCE_CORE_SIMD_BITWISE_PORTABLE_HPP__
-#define NEFORCE_CORE_SIMD_BITWISE_PORTABLE_HPP__
-#include "NeForce/core/simd/types.hpp"
-#ifdef NEFORCE_SIMD_BRANCH_PORTABLE
+#ifndef NEFORCE_CORE_SIMD_BITWISE_RISCV_HPP__
+#define NEFORCE_CORE_SIMD_BITWISE_RISCV_HPP__
+#include "NeForce/core/simd/scalar/bitwise.hpp"
+#ifdef NEFORCE_SIMD_BRANCH_RISCV
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
-
-/**
- * @addtogroup SIMD
- * @{
- */
 
 /**
  * @brief 按位与
@@ -19,7 +14,7 @@ NEFORCE_BEGIN_SIMD__
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_and(vec128_t a, vec128_t b) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] & b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] & scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -33,7 +28,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_and(vec128_t a, vec128_t b) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_or(vec128_t a, vec128_t b) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] | b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] | scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -47,7 +42,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_or(vec128_t a, vec128_t b) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_xor(vec128_t a, vec128_t b) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] ^ b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] ^ scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -60,7 +55,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_xor(vec128_t a, vec128_t b) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_not(vec128_t v) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = static_cast<byte_t>(~v.data[i]);
+        scalar::lane_bytes(result)[i] = static_cast<byte_t>(~scalar::lane_bytes(v)[i]);
     }
     return result;
 }
@@ -74,7 +69,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_not(vec128_t v) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_andnot(vec128_t a, vec128_t b) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] & static_cast<byte_t>(~b.data[i]);
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] & static_cast<byte_t>(~scalar::lane_bytes(b)[i]);
     }
     return result;
 }
@@ -88,7 +83,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_andnot(vec128_t a, vec128_t b) noexcep
 NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_and(vec256_t a, vec256_t b) noexcept {
     vec256_t result;
     for (int i = 0; i < 32; ++i) {
-        result.data[i] = a.data[i] & b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] & scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -102,7 +97,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_and(vec256_t a, vec256_t b) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_or(vec256_t a, vec256_t b) noexcept {
     vec256_t result;
     for (int i = 0; i < 32; ++i) {
-        result.data[i] = a.data[i] | b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] | scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -116,7 +111,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_or(vec256_t a, vec256_t b) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_xor(vec256_t a, vec256_t b) noexcept {
     vec256_t result;
     for (int i = 0; i < 32; ++i) {
-        result.data[i] = a.data[i] ^ b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] ^ scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -130,7 +125,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_xor(vec256_t a, vec256_t b) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec512_t bit_and(vec512_t a, vec512_t b) noexcept {
     vec512_t result;
     for (int i = 0; i < 64; ++i) {
-        result.data[i] = a.data[i] & b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] & scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -144,7 +139,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec512_t bit_and(vec512_t a, vec512_t b) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec512_t bit_or(vec512_t a, vec512_t b) noexcept {
     vec512_t result;
     for (int i = 0; i < 64; ++i) {
-        result.data[i] = a.data[i] | b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] | scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -158,7 +153,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec512_t bit_or(vec512_t a, vec512_t b) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec512_t bit_xor(vec512_t a, vec512_t b) noexcept {
     vec512_t result;
     for (int i = 0; i < 64; ++i) {
-        result.data[i] = a.data[i] ^ b.data[i];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(a)[i] ^ scalar::lane_bytes(b)[i];
     }
     return result;
 }
@@ -174,17 +169,12 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_left_bytes(vec128_t v) noexcept {
     static_assert(Bytes >= 0 && Bytes <= 16, "shift_left_bytes: Bytes must be in [0, 16]");
     vec128_t result;
     for (int i = 0; i < Bytes; ++i) {
-        result.data[i] = 0;
+        scalar::lane_bytes(result)[i] = 0;
     }
     for (int i = Bytes; i < 16; ++i) {
-        result.data[i] = v.data[i - Bytes];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(v)[i - Bytes];
     }
     return result;
-}
-
-template <>
-NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_left_bytes<0>(vec128_t v) noexcept {
-    return v;
 }
 
 /**
@@ -198,17 +188,12 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes(vec128_t v) noexcept {
     static_assert(Bytes >= 0 && Bytes <= 16, "shift_right_bytes: Bytes must be in [0, 16]");
     vec128_t result;
     for (int i = 0; i < 16 - Bytes; ++i) {
-        result.data[i] = v.data[i + Bytes];
+        scalar::lane_bytes(result)[i] = scalar::lane_bytes(v)[i + Bytes];
     }
     for (int i = 16 - Bytes; i < 16; ++i) {
-        result.data[i] = 0;
+        scalar::lane_bytes(result)[i] = 0;
     }
     return result;
-}
-
-template <>
-NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes<0>(vec128_t v) noexcept {
-    return v;
 }
 
 /**
@@ -219,16 +204,14 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes<0>(vec128_t v) noexcept 
 NEFORCE_ALWAYS_INLINE_INLINE int popcount(vec128_t v) noexcept {
     int total = 0;
     for (int i = 0; i < 16; ++i) {
-        byte_t b = v.data[i];
+        byte_t b = scalar::lane_bytes(v)[i];
         total += (b & 1) + ((b >> 1) & 1) + ((b >> 2) & 1) + ((b >> 3) & 1) + ((b >> 4) & 1) + ((b >> 5) & 1) +
                  ((b >> 6) & 1) + ((b >> 7) & 1);
     }
     return total;
 }
 
-/** @} */ // SIMD
-
 NEFORCE_END_SIMD__
 NEFORCE_END_NAMESPACE__
-#endif
-#endif // NEFORCE_CORE_SIMD_BITWISE_PORTABLE_HPP__
+#endif // NEFORCE_SIMD_BRANCH_RISCV
+#endif // NEFORCE_CORE_SIMD_BITWISE_RISCV_HPP__

@@ -1,9 +1,9 @@
-#ifndef NEFORCE_CORE_SIMD_COMPARE_PORTABLE_HPP__
-#define NEFORCE_CORE_SIMD_COMPARE_PORTABLE_HPP__
-#include "NeForce/core/simd/types.hpp"
-#ifdef NEFORCE_SIMD_BRANCH_PORTABLE
+#ifndef NEFORCE_CORE_SIMD_COMPARE_SCALAR_HPP__
+#define NEFORCE_CORE_SIMD_COMPARE_SCALAR_HPP__
+#include "NeForce/core/simd/scalar/lane.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
+NEFORCE_BEGIN_SCALAR__
 
 /**
  * @addtogroup SIMD
@@ -19,7 +19,7 @@ NEFORCE_BEGIN_SIMD__
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpeq_i8(vec128_t a, vec128_t b) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = (a.data[i] == b.data[i]) ? 0xFF : 0x00;
+        lane_bytes(result)[i] = (lane_bytes(a)[i] == lane_bytes(b)[i]) ? 0xFF : 0x00;
     }
     return result;
 }
@@ -31,10 +31,10 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpeq_i8(vec128_t a, vec128_t b) noexcept 
  * @return a == b 位置为全 1，否则全 0
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpeq_i16(vec128_t a, vec128_t b) noexcept {
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
+    const auto* sa = reinterpret_cast<const int16_t*>(lane_bytes(a));
+    const auto* sb = reinterpret_cast<const int16_t*>(lane_bytes(b));
     vec128_t result;
-    auto* rd = reinterpret_cast<uint16_t*>(result.data);
+    auto* rd = reinterpret_cast<uint16_t*>(lane_bytes(result));
     for (int i = 0; i < 8; ++i) {
         rd[i] = (sa[i] == sb[i]) ? 0xFFFF : 0;
     }
@@ -48,10 +48,10 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpeq_i16(vec128_t a, vec128_t b) noexcept
  * @return a == b 位置为全 1，否则全 0
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpeq_i32(vec128_t a, vec128_t b) noexcept {
-    const auto* sa = reinterpret_cast<const int32_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int32_t*>(b.data);
+    const auto* sa = reinterpret_cast<const int32_t*>(lane_bytes(a));
+    const auto* sb = reinterpret_cast<const int32_t*>(lane_bytes(b));
     vec128_t result;
-    auto* rd = reinterpret_cast<uint32_t*>(result.data);
+    auto* rd = reinterpret_cast<uint32_t*>(lane_bytes(result));
     for (int i = 0; i < 4; ++i) {
         rd[i] = (sa[i] == sb[i]) ? 0xFFFFFFFF : 0;
     }
@@ -65,10 +65,10 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpeq_i32(vec128_t a, vec128_t b) noexcept
  * @return a == b 位置为全 1，否则全 0
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpeq_i64(vec128_t a, vec128_t b) noexcept {
-    const auto* sa = reinterpret_cast<const int64_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int64_t*>(b.data);
+    const auto* sa = reinterpret_cast<const int64_t*>(lane_bytes(a));
+    const auto* sb = reinterpret_cast<const int64_t*>(lane_bytes(b));
     vec128_t result;
-    auto* rd = reinterpret_cast<uint64_t*>(result.data);
+    auto* rd = reinterpret_cast<uint64_t*>(lane_bytes(result));
     for (int i = 0; i < 2; ++i) {
         rd[i] = (sa[i] == sb[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
     }
@@ -84,7 +84,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpeq_i64(vec128_t a, vec128_t b) noexcept
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i8(vec128_t a, vec128_t b) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = (static_cast<int8_t>(a.data[i]) > static_cast<int8_t>(b.data[i])) ? 0xFF : 0x00;
+        lane_bytes(result)[i] =
+                (static_cast<int8_t>(lane_bytes(a)[i]) > static_cast<int8_t>(lane_bytes(b)[i])) ? 0xFF : 0x00;
     }
     return result;
 }
@@ -96,10 +97,10 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i8(vec128_t a, vec128_t b) noexcept 
  * @return a > b 位置为全 1，否则全 0
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i16(vec128_t a, vec128_t b) noexcept {
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
+    const auto* sa = reinterpret_cast<const int16_t*>(lane_bytes(a));
+    const auto* sb = reinterpret_cast<const int16_t*>(lane_bytes(b));
     vec128_t result;
-    auto* rd = reinterpret_cast<uint16_t*>(result.data);
+    auto* rd = reinterpret_cast<uint16_t*>(lane_bytes(result));
     for (int i = 0; i < 8; ++i) {
         rd[i] = (sa[i] > sb[i]) ? 0xFFFF : 0;
     }
@@ -113,10 +114,10 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i16(vec128_t a, vec128_t b) noexcept
  * @return a > b 位置为全 1，否则全 0
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i32(vec128_t a, vec128_t b) noexcept {
-    const auto* sa = reinterpret_cast<const int32_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int32_t*>(b.data);
+    const auto* sa = reinterpret_cast<const int32_t*>(lane_bytes(a));
+    const auto* sb = reinterpret_cast<const int32_t*>(lane_bytes(b));
     vec128_t result;
-    auto* rd = reinterpret_cast<uint32_t*>(result.data);
+    auto* rd = reinterpret_cast<uint32_t*>(lane_bytes(result));
     for (int i = 0; i < 4; ++i) {
         rd[i] = (sa[i] > sb[i]) ? 0xFFFFFFFF : 0;
     }
@@ -130,10 +131,10 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i32(vec128_t a, vec128_t b) noexcept
  * @return a > b 位置为全 1，否则全 0
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i64(vec128_t a, vec128_t b) noexcept {
-    const auto* sa = reinterpret_cast<const int64_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int64_t*>(b.data);
+    const auto* sa = reinterpret_cast<const int64_t*>(lane_bytes(a));
+    const auto* sb = reinterpret_cast<const int64_t*>(lane_bytes(b));
     vec128_t result;
-    auto* rd = reinterpret_cast<uint64_t*>(result.data);
+    auto* rd = reinterpret_cast<uint64_t*>(lane_bytes(result));
     for (int i = 0; i < 2; ++i) {
         rd[i] = (sa[i] > sb[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
     }
@@ -149,7 +150,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i64(vec128_t a, vec128_t b) noexcept
 NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpeq_f32(vec128f_t a, vec128f_t b) noexcept {
     vec128f_t result;
     for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(result.data[i]) = (a.data[i] == b.data[i]) ? 0xFFFFFFFF : 0;
+        reinterpret_cast<uint32_t&>(lane_view<float>(result)[i]) =
+                (lane_view<float>(a)[i] == lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
     }
     return result;
 }
@@ -163,7 +165,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpeq_f32(vec128f_t a, vec128f_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpgt_f32(vec128f_t a, vec128f_t b) noexcept {
     vec128f_t result;
     for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(result.data[i]) = (a.data[i] > b.data[i]) ? 0xFFFFFFFF : 0;
+        reinterpret_cast<uint32_t&>(lane_view<float>(result)[i]) =
+                (lane_view<float>(a)[i] > lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
     }
     return result;
 }
@@ -177,7 +180,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpgt_f32(vec128f_t a, vec128f_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpge_f32(vec128f_t a, vec128f_t b) noexcept {
     vec128f_t result;
     for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(result.data[i]) = (a.data[i] >= b.data[i]) ? 0xFFFFFFFF : 0;
+        reinterpret_cast<uint32_t&>(lane_view<float>(result)[i]) =
+                (lane_view<float>(a)[i] >= lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
     }
     return result;
 }
@@ -191,7 +195,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpge_f32(vec128f_t a, vec128f_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmplt_f32(vec128f_t a, vec128f_t b) noexcept {
     vec128f_t result;
     for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(result.data[i]) = (a.data[i] < b.data[i]) ? 0xFFFFFFFF : 0;
+        reinterpret_cast<uint32_t&>(lane_view<float>(result)[i]) =
+                (lane_view<float>(a)[i] < lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
     }
     return result;
 }
@@ -205,7 +210,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmplt_f32(vec128f_t a, vec128f_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmple_f32(vec128f_t a, vec128f_t b) noexcept {
     vec128f_t result;
     for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(result.data[i]) = (a.data[i] <= b.data[i]) ? 0xFFFFFFFF : 0;
+        reinterpret_cast<uint32_t&>(lane_view<float>(result)[i]) =
+                (lane_view<float>(a)[i] <= lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
     }
     return result;
 }
@@ -219,7 +225,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmple_f32(vec128f_t a, vec128f_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpeq_f64(vec128d_t a, vec128d_t b) noexcept {
     vec128d_t result;
     for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(result.data[i]) = (a.data[i] == b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
+        reinterpret_cast<uint64_t&>(lane_view<double>(result)[i]) =
+                (lane_view<double>(a)[i] == lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
     }
     return result;
 }
@@ -233,7 +240,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpeq_f64(vec128d_t a, vec128d_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpgt_f64(vec128d_t a, vec128d_t b) noexcept {
     vec128d_t result;
     for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(result.data[i]) = (a.data[i] > b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
+        reinterpret_cast<uint64_t&>(lane_view<double>(result)[i]) =
+                (lane_view<double>(a)[i] > lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
     }
     return result;
 }
@@ -247,7 +255,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpgt_f64(vec128d_t a, vec128d_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpge_f64(vec128d_t a, vec128d_t b) noexcept {
     vec128d_t result;
     for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(result.data[i]) = (a.data[i] >= b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
+        reinterpret_cast<uint64_t&>(lane_view<double>(result)[i]) =
+                (lane_view<double>(a)[i] >= lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
     }
     return result;
 }
@@ -261,7 +270,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpge_f64(vec128d_t a, vec128d_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmplt_f64(vec128d_t a, vec128d_t b) noexcept {
     vec128d_t result;
     for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(result.data[i]) = (a.data[i] < b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
+        reinterpret_cast<uint64_t&>(lane_view<double>(result)[i]) =
+                (lane_view<double>(a)[i] < lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
     }
     return result;
 }
@@ -275,14 +285,15 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmplt_f64(vec128d_t a, vec128d_t b) noexc
 NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmple_f64(vec128d_t a, vec128d_t b) noexcept {
     vec128d_t result;
     for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(result.data[i]) = (a.data[i] <= b.data[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
+        reinterpret_cast<uint64_t&>(lane_view<double>(result)[i]) =
+                (lane_view<double>(a)[i] <= lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
     }
     return result;
 }
 
 /** @} */ // SIMD
 
+NEFORCE_END_SCALAR__
 NEFORCE_END_SIMD__
 NEFORCE_END_NAMESPACE__
-#endif
-#endif // NEFORCE_CORE_SIMD_COMPARE_PORTABLE_HPP__
+#endif // NEFORCE_CORE_SIMD_COMPARE_SCALAR_HPP__

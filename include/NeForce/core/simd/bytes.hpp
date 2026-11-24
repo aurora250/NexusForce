@@ -10,6 +10,15 @@
 
 #include "NeForce/core/simd/arch/x86/bytes.hpp"
 #include "NeForce/core/simd/arch/arm/bytes.hpp"
-#include "NeForce/core/simd/portable/bytes.hpp"
+#include "NeForce/core/simd/arch/riscv/bytes.hpp"
+#include "NeForce/core/simd/arch/loongarch/bytes.hpp"
+#ifdef NEFORCE_SIMD_BRANCH_NOT_SUPPORTED
+NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_SIMD__
 
+using namespace scalar;
+
+NEFORCE_END_SIMD__
+NEFORCE_END_NAMESPACE__
+#endif
 #endif // NEFORCE_CORE_SIMD_BYTES_HPP__

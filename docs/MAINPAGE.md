@@ -192,7 +192,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📁 文件系统 (File)
 - **路径/文件操作** - 路径/文件系统操作 `path`/`path_tree`/`file`/`file_async`/`file_diff`/`file_locker`/`file_mapper`
-- **`file_async`** - 基于 `io_context` 与 `io_uring` 的异步文件 I/O，支持指定偏移量与取消槽
+- **`file_async`** - 基于 `io_context` 与 I/O 队列的异步文件 I/O
 - **`file_watcher`** - 实时文件系统变更监控
 - **配置文件解析** - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建
 - **`temp_file`** - 安全的临时文件管理
@@ -260,6 +260,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`environment`** - 环境变量操作
 - **`system_signal_manager`** - 系统信号控制
 - **`system_event`** - 系统事件管理
+- **`linux_io_queue`** - Linux 原生异步 I/O 提交/完成队列
 
 ### ⏰ 时间处理 (Time)
 - **`steady_clock` / `system_clock`** - 多种时钟源高精度时钟

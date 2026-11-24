@@ -16,6 +16,13 @@
 #    include <emmintrin.h>
 #elif defined(NEFORCE_SIMD_NEON)
 #    include <arm_neon.h>
+#elif defined(NEFORCE_SIMD_LSX) || defined(NEFORCE_SIMD_LASX)
+#    include <lsxintrin.h>
+#    if defined(NEFORCE_SIMD_LASX)
+#        include <lasxintrin.h>
+#    endif
+#elif defined(NEFORCE_SIMD_RVV)
+#    include <riscv_vector.h>
 #endif
 #if defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)
 #    include <intrin.h>
@@ -25,12 +32,17 @@
 #if defined(NEFORCE_SIMD_SSE2) || defined(NEFORCE_SIMD_AVX) || defined(NEFORCE_SIMD_AVX2) || \
         defined(NEFORCE_SIMD_AVX512F)
 #    define NEFORCE_SIMD_BRANCH_X86
-#endif
-#if defined(NEFORCE_SIMD_NEON) || defined(NEFORCE_SIMD_SVE) || defined(NEFORCE_SIMD_SVE2)
+#elif defined(NEFORCE_SIMD_NEON) || defined(NEFORCE_SIMD_SVE) || defined(NEFORCE_SIMD_SVE2)
 #    define NEFORCE_SIMD_BRANCH_ARM
+#elif defined(NEFORCE_SIMD_RVV)
+#    define NEFORCE_SIMD_BRANCH_RISCV
+#elif defined(NEFORCE_SIMD_LSX) || defined(NEFORCE_SIMD_LASX)
+#    define NEFORCE_SIMD_BRANCH_LOONGARCH
 #endif
-#if !(defined(NEFORCE_SIMD_BRANCH_X86) || defined(NEFORCE_SIMD_BRANCH_ARM))
-#    define NEFORCE_SIMD_BRANCH_PORTABLE
+
+#if !(defined(NEFORCE_SIMD_BRANCH_X86) || defined(NEFORCE_SIMD_BRANCH_ARM) || defined(NEFORCE_SIMD_BRANCH_RISCV) || \
+      defined(NEFORCE_SIMD_BRANCH_LOONGARCH))
+#    define NEFORCE_SIMD_BRANCH_NOT_SUPPORTED
 #endif
 
 NEFORCE_BEGIN_NAMESPACE__
@@ -43,6 +55,13 @@ NEFORCE_BEGIN_SIMD__
  */
 
 #ifdef NEFORCE_SIMD_SSE2
+/// @brief 128-bit 整型向量（16×i8 / 8×i16 / 4×i32 / 2×i64）
+using vec128_t = ::__m128i;
+/// @brief 128-bit 单精度浮点向量（4×f32）
+using vec128f_t = ::__m128;
+/// @brief 128-bit 双精度浮点向量（2×f64）
+using vec128d_t = ::__m128d;
+#elif defined(NEFORCE_SIMD_LSX) || defined(NEFORCE_SIMD_LASX)
 /// @brief 128-bit 整型向量（16×i8 / 8×i16 / 4×i32 / 2×i64）
 using vec128_t = ::__m128i;
 /// @brief 128-bit 单精度浮点向量（4×f32）
@@ -78,7 +97,14 @@ struct vec128d_t {
 };
 #endif
 
-#if defined(NEFORCE_SIMD_AVX2) || defined(NEFORCE_SIMD_AVX)
+#if defined(NEFORCE_SIMD_LASX)
+/// @brief 256-bit 整型向量（32×i8 / 16×i16 / 8×i32 / 4×i64）
+using vec256_t = ::__m256i;
+/// @brief 256-bit 单精度浮点向量（8×f32）
+using vec256f_t = ::__m256;
+/// @brief 256-bit 双精度浮点向量（4×f64）
+using vec256d_t = ::__m256d;
+#elif defined(NEFORCE_SIMD_AVX2) || defined(NEFORCE_SIMD_AVX)
 /// @brief 256-bit 整型向量（32×i8 / 16×i16 / 8×i32 / 4×i64，需 AVX2）
 #    ifdef NEFORCE_SIMD_AVX2
 using vec256_t = ::__m256i;
@@ -127,6 +153,37 @@ struct vec512f_t {
 struct vec512d_t {
     double data[8];
 };
+#endif
+
+#if defined(NEFORCE_SIMD_RVV)
+/**
+ * @brief RVV 字节向量
+ */
+using vec_rvv8_t = ::vuint8m1_t;
+/**
+ * @brief RVV 16-bit 向量（可伸缩长度）
+ */
+using vec_rvv16_t = ::vuint16m1_t;
+/**
+ * @brief RVV 32-bit 向量（可伸缩长度）
+ */
+using vec_rvv32_t = ::vuint32m1_t;
+/**
+ * @brief RVV 64-bit 向量（可伸缩长度）
+ */
+using vec_rvv64_t = ::vuint64m1_t;
+/**
+ * @brief RVV 宽字节向量（LMUL=8，用于大块内存流）
+ */
+using vec_rvv8_wide_t = ::vuint8m8_t;
+/**
+ * @brief RVV 字节掩码（LMUL=1 对应的掩码类型）
+ */
+using vec_rvv8_mask_t = ::vbool8_t;
+/**
+ * @brief RVV 宽字节掩码（LMUL=8）
+ */
+using vec_rvv8_wide_mask_t = ::vbool1_t;
 #endif
 
 /** @} */ // SIMD

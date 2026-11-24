@@ -37,7 +37,6 @@
   },
   "feature": {
     "locale": true,
-    "io_uring": true,
     "memory-pool-global-override": true
   },
   "build": {
@@ -57,18 +56,21 @@
       }
     },
     "aarch64": {
-      "level": "BASELINE",
+      "level": "SVE",
       "extensions": {
         "aes": true
-      }
+      },
+      "vector-bytes": 0
     },
     "riscv64": {
-      "level": "BASELINE",
-      "extensions": {}
+      "level": "RVV",
+      "extensions": {},
+      "vector-bytes": 0
     },
     "loongarch64": {
-      "level": "BASELINE",
-      "extensions": {}
+      "level": "LASX",
+      "extensions": {},
+      "vector-bytes": 0
     }
   }
 }

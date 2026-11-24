@@ -1,11 +1,11 @@
 #include <NeForce/core/file/file_async.hpp>
 #include <NeForce/core/container/flat_unordered_map.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <NeForce/core/system/io_queue.hpp>
+#endif
 #ifdef NEFORCE_PLATFORM_POSIX
 #    include <NeForce/core/async/thread.hpp>
 #    include <unistd.h>
-#endif
-#ifdef NEFORCE_USING_IO_URING
-#    include <liburing.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -17,7 +17,7 @@ namespace {
             -1;
 #endif
 
-    constexpr size_t g_ring_entries = 512; ///< io_uring 环容量
+    constexpr size_t g_queue_entries = io_queue::default_entries;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     struct win_io_op {
@@ -83,34 +83,6 @@ namespace {
         }
     }
 #endif
-
-#ifdef NEFORCE_USING_IO_URING
-    struct io_uring_op {
-        static constexpr uint64_t MAGIC = 0x4E464F504F5F4F50ULL;
-        function<void(error_code, file_async::size_type)> handler;
-        string* buffer = nullptr;
-        shared_ptr<string> write_data;
-        bool cancelled = false;
-        uint64_t magic = MAGIC;
-    };
-
-    ::io_uring_sqe* get_sqe_or_submit(::io_uring& ring) {
-        for (int attempt = 0; attempt < 2; ++attempt) {
-            if (::io_uring_sqe* const sqe = ::io_uring_get_sqe(&ring)) {
-                return sqe;
-            }
-            if (::io_uring_submit(&ring) < 0) {
-                return nullptr;
-            }
-        }
-        return nullptr;
-    }
-#endif
-
-#ifdef __NEFORCE_ASYNC_STATE_DEFINED
-#    undef __NEFORCE_ASYNC_STATE_DEFINED
-#endif
-#define __NEFORCE_ASYNC_STATE_DEFINED
 } // namespace
 
 
@@ -120,29 +92,8 @@ struct file_async::state {
     flat_unordered_map<::OVERLAPPED*, shared_ptr<win_io_op>> ops;
     bool overlapped_capable = false;
     io_context* ctx = nullptr;
-#elif defined(NEFORCE_USING_IO_URING)
-    ::io_uring ring;
-    bool initialized = false;
-    mutex ops_mutex;
-    flat_unordered_map<void*, shared_ptr<io_uring_op>> ops;
-
-    ~state() {
-        if (initialized) {
-            ::io_uring_queue_exit(&ring);
-        }
-    }
-
-    bool init(unsigned entries) {
-        if (::io_uring_queue_init(entries, &ring, 0) != 0) {
-            return false;
-        }
-        initialized = true;
-        return true;
-    }
-
-    NEFORCE_NODISCARD int ring_fd() const { return ring.ring_fd; }
-#else
-#    undef __NEFORCE_ASYNC_STATE_DEFINED
+#elif defined(NEFORCE_PLATFORM_LINUX)
+    unique_ptr<io_queue> queue;
 #endif
 };
 
@@ -188,7 +139,6 @@ bool file_async::complete_state(state& state, void* ov, const error_code ec, con
     return true;
 }
 
-
 file_async::file_async(const native_handle_type handle) :
 handle_(handle) {}
 
@@ -201,9 +151,7 @@ file_async::file_async(file_async&& other) noexcept {
     other.handle_ = invalid_handle;
     ctx_ = other.ctx_;
     other.ctx_ = nullptr;
-#ifdef __NEFORCE_ASYNC_STATE_DEFINED
     state_ = move(other.state_);
-#endif
 }
 
 file_async& file_async::operator=(file_async&& other) noexcept {
@@ -218,9 +166,7 @@ file_async& file_async::operator=(file_async&& other) noexcept {
     other.handle_ = invalid_handle;
     ctx_ = other.ctx_;
     other.ctx_ = nullptr;
-#ifdef __NEFORCE_ASYNC_STATE_DEFINED
     state_ = move(other.state_);
-#endif
     return *this;
 }
 
@@ -230,12 +176,10 @@ void file_async::release_binding() noexcept {
     }
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ctx_->unregister_file_completion(reinterpret_cast<uintptr_t>(this));
-#else
-#    ifdef NEFORCE_USING_IO_URING
-    if (state_ != nullptr) {
-        ctx_->remove_fd(state_->ring_fd());
+#elif defined(NEFORCE_PLATFORM_LINUX)
+    if (state_ != nullptr && state_->queue != nullptr) {
+        ctx_->remove_fd(state_->queue->native_handle());
     }
-#    endif
 #endif
     ctx_ = nullptr;
 }
@@ -264,75 +208,23 @@ void file_async::ensure_state(io_context& ctx) {
         }
         complete_state(*state_, static_cast<::OVERLAPPED*>(overlapped), ec, static_cast<file_async::size_type>(bytes));
     });
-#else
-#    ifdef NEFORCE_USING_IO_URING
+#elif defined(NEFORCE_PLATFORM_LINUX)
     if (state_ == nullptr) {
-        auto ring_holder = make_unique<state>();
-        if (ring_holder->init(g_ring_entries)) {
-            state_ = move(ring_holder);
+        auto queue = make_unique<io_queue>(g_queue_entries);
+        if (queue->is_open()) {
+            state_ = make_unique<state>();
+            state_->queue = move(queue);
         }
     }
 
-    if (state_ != nullptr) {
-        const int uring_fd = state_->ring_fd();
-        ctx_->add_fd(uring_fd, epoll_event::in, [this](int /*fd*/, epoll_event /*events*/, error_code /*ec*/) {
-            if (state_ == nullptr) {
-                return;
-            }
-
-            struct reaped_op {
-                shared_ptr<io_uring_op> op;
-                int res;
-            };
-            vector<reaped_op> done;
-            {
-                lock<mutex> lk(state_->ops_mutex);
-                ::io_uring_cqe* cqe = nullptr;
-                while (::io_uring_peek_cqe(&state_->ring, &cqe) == 0) {
-                    auto* const raw_op = reinterpret_cast<io_uring_op*>(cqe->user_data);
-                    if (raw_op == nullptr || raw_op->magic != io_uring_op::MAGIC) {
-                        ::io_uring_cqe_seen(&state_->ring, cqe);
-                        continue;
-                    }
-                    const auto it = state_->ops.find(raw_op);
-                    if (it == state_->ops.end()) {
-                        ::io_uring_cqe_seen(&state_->ring, cqe);
-                        continue;
-                    }
-                    done.push_back({it->second, cqe->res});
-                    state_->ops.erase(it);
-                    ::io_uring_cqe_seen(&state_->ring, cqe);
-                }
-            }
-
-            for (auto& entry: done) {
-                const auto& op = entry.op;
-                op->magic = 0;
-                // Balance the work_started() issued at submission.
-                if (ctx_ != nullptr) {
-                    ctx_->work_finished();
-                }
-                if (op->cancelled || entry.res == -ECANCELED) {
-                    if (op->buffer != nullptr) {
-                        op->buffer->resize(0);
-                    }
-                    op->handler(make_operation_aborted(), 0);
-                } else if (entry.res < 0) {
-                    if (op->buffer != nullptr) {
-                        op->buffer->resize(0);
-                    }
-                    op->handler(error_code(-entry.res, error_category::system()), 0);
-                } else {
-                    const auto n = static_cast<file_async::size_type>(entry.res);
-                    if (op->buffer != nullptr) {
-                        op->buffer->resize(n);
-                    }
-                    op->handler(error_code{}, n);
-                }
-            }
-        });
+    if (state_ != nullptr && state_->queue != nullptr) {
+        ctx_->add_fd(state_->queue->native_handle(), epoll_event::in,
+                     [this](int /*fd*/, epoll_event /*events*/, error_code /*ec*/) {
+                         if (state_ != nullptr && state_->queue != nullptr) {
+                             state_->queue->drain();
+                         }
+                     });
     }
-#    endif
 #endif
 }
 
@@ -425,61 +317,41 @@ void file_async::do_async_read(io_context& ctx, string& buffer, const size_type 
         });
     }
 #else
-#    ifdef NEFORCE_USING_IO_URING
-    if (state_ != nullptr) {
-        auto op = make_shared<io_uring_op>();
-        op->handler = move(handler);
-        op->buffer = &buffer;
-        buffer.resize(size);
+#    ifdef NEFORCE_PLATFORM_LINUX
+    if (state_ != nullptr && state_->queue != nullptr) {
         const uint64_t resolved_offset =
                 offset >= 0 ? static_cast<uint64_t>(offset) : static_cast<uint64_t>(::lseek(handle_, 0, SEEK_CUR));
+        buffer.resize(size);
 
-        {
-            lock<mutex> lk(state_->ops_mutex);
-            state_->ops[op.get()] = op;
-        }
-
-        ::io_uring_sqe* sqe = nullptr;
-        {
-            lock<mutex> lk(state_->ops_mutex);
-            sqe = get_sqe_or_submit(state_->ring);
-            if (sqe != nullptr) {
-                ::io_uring_prep_read(sqe, handle_, buffer.data(), static_cast<unsigned>(size), resolved_offset);
-                sqe->user_data = reinterpret_cast<uint64_t>(op.get());
-                if (::io_uring_submit(&state_->ring) < 0) {
-                    sqe = nullptr;
-                }
-            }
-        }
-        if (sqe == nullptr) {
-            {
-                lock<mutex> lk(state_->ops_mutex);
-                state_->ops.erase(op.get());
-            }
+        auto* const queue = state_->queue.get();
+        auto* const ctx_ptr = ctx_;
+        auto handler_holder = make_shared<function<void(error_code, size_type)>>(move(handler));
+        const auto token = queue->submit_read(handle_, buffer.data(), size, resolved_offset,
+                                              [ctx_ptr, &buffer, handler_holder](const error_code ec, const size_t n) {
+                                                  if (ec) {
+                                                      buffer.resize(0);
+                                                  } else {
+                                                      buffer.resize(n);
+                                                  }
+                                                  if (ctx_ptr != nullptr) {
+                                                      ctx_ptr->work_finished();
+                                                  }
+                                                  (*handler_holder)(ec, static_cast<size_type>(n));
+                                              });
+        if (token == 0) {
             buffer.resize(0);
-            op->handler(error_code(static_cast<int>(errc::resource_unavailable_try_again), error_category::system()),
-                        0);
+            (*handler_holder)(
+                    error_code(static_cast<int>(errc::resource_unavailable_try_again), error_category::system()), 0);
             return;
         }
 
-        // Submitted: count as outstanding work; the reaper balances it.
+        // Submitted: count as outstanding work; the completion reaper balances it.
         ctx.work_started();
 
         if (slot != nullptr) {
-            slot->assign([this, op]() {
-                if (state_ == nullptr) {
-                    return;
-                }
-                lock<mutex> lk(state_->ops_mutex);
-                const auto it = state_->ops.find(op.get());
-                if (it == state_->ops.end()) {
-                    return;
-                }
-                it->second->cancelled = true;
-                if (::io_uring_sqe* const cancel_sqe = get_sqe_or_submit(state_->ring)) {
-                    ::io_uring_prep_cancel(cancel_sqe, op.get(), 0);
-                    cancel_sqe->user_data = 0;
-                    ::io_uring_submit(&state_->ring);
+            slot->assign([this, token]() {
+                if (state_ != nullptr && state_->queue != nullptr) {
+                    state_->queue->cancel(token);
                 }
             });
         }
@@ -590,60 +462,36 @@ void file_async::do_async_write(io_context& ctx, string data, size_type size, co
         });
     }
 #else
-#    ifdef NEFORCE_USING_IO_URING
-    if (state_ != nullptr) {
-        const auto write_data = make_shared<string>(move(data));
-        auto op = make_shared<io_uring_op>();
-        op->handler = move(handler);
-        op->write_data = write_data;
+#    ifdef NEFORCE_PLATFORM_LINUX
+    if (state_ != nullptr && state_->queue != nullptr) {
         const uint64_t resolved_offset =
                 offset >= 0 ? static_cast<uint64_t>(offset) : static_cast<uint64_t>(::lseek(handle_, 0, SEEK_CUR));
+        const auto write_data = make_shared<string>(move(data));
 
-        {
-            lock<mutex> lk(state_->ops_mutex);
-            state_->ops[op.get()] = op;
-        }
-
-        ::io_uring_sqe* sqe = nullptr;
-        {
-            lock<mutex> lk(state_->ops_mutex);
-            sqe = get_sqe_or_submit(state_->ring);
-            if (sqe != nullptr) {
-                ::io_uring_prep_write(sqe, handle_, write_data->data(), static_cast<unsigned>(size), resolved_offset);
-                sqe->user_data = reinterpret_cast<uint64_t>(op.get());
-                if (::io_uring_submit(&state_->ring) < 0) {
-                    sqe = nullptr;
-                }
-            }
-        }
-        if (sqe == nullptr) {
-            {
-                lock<mutex> lk(state_->ops_mutex);
-                state_->ops.erase(op.get());
-            }
-            op->handler(error_code(static_cast<int>(errc::resource_unavailable_try_again), error_category::system()),
-                        0);
+        auto* const queue = state_->queue.get();
+        auto* const ctx_ptr = ctx_;
+        auto handler_holder = make_shared<function<void(error_code, size_type)>>(move(handler));
+        const auto token =
+                queue->submit_write(handle_, write_data->data(), size, resolved_offset,
+                                    [ctx_ptr, write_data, handler_holder](const error_code ec, const size_t n) {
+                                        if (ctx_ptr != nullptr) {
+                                            ctx_ptr->work_finished();
+                                        }
+                                        (*handler_holder)(ec, static_cast<size_type>(n));
+                                    });
+        if (token == 0) {
+            (*handler_holder)(
+                    error_code(static_cast<int>(errc::resource_unavailable_try_again), error_category::system()), 0);
             return;
         }
 
-        // Submitted: count as outstanding work; the reaper balances it.
+        // Submitted: count as outstanding work; the completion reaper balances it.
         ctx.work_started();
 
         if (slot != nullptr) {
-            slot->assign([this, op]() {
-                if (state_ == nullptr) {
-                    return;
-                }
-                lock<mutex> lk(state_->ops_mutex);
-                const auto it = state_->ops.find(op.get());
-                if (it == state_->ops.end()) {
-                    return;
-                }
-                it->second->cancelled = true;
-                if (::io_uring_sqe* const cancel_sqe = get_sqe_or_submit(state_->ring)) {
-                    ::io_uring_prep_cancel(cancel_sqe, op.get(), 0);
-                    cancel_sqe->user_data = 0;
-                    ::io_uring_submit(&state_->ring);
+            slot->assign([this, token]() {
+                if (state_ != nullptr && state_->queue != nullptr) {
+                    state_->queue->cancel(token);
                 }
             });
         }

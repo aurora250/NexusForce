@@ -1,10 +1,9 @@
-#ifndef NEFORCE_CORE_SIMD_BYTES_PORTABLE_HPP__
-#define NEFORCE_CORE_SIMD_BYTES_PORTABLE_HPP__
-#include "NeForce/core/simd/types.hpp"
-#include "NeForce/core/memory/bit.hpp"
-#ifdef NEFORCE_SIMD_BRANCH_PORTABLE
+#ifndef NEFORCE_CORE_SIMD_BYTES_SCALAR_HPP__
+#define NEFORCE_CORE_SIMD_BYTES_SCALAR_HPP__
+#include "NeForce/core/simd/scalar/lane.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
+NEFORCE_BEGIN_SCALAR__
 
 /**
  * @addtogroup SIMD
@@ -19,7 +18,7 @@ NEFORCE_BEGIN_SIMD__
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i8(uint8_t c) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = c;
+        lane_bytes(result)[i] = c;
     }
     return result;
 }
@@ -31,7 +30,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i8(uint8_t c) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i16(const uint16_t v) noexcept {
     vec128_t result;
-    auto* d = reinterpret_cast<uint16_t*>(result.data);
+    auto* d = reinterpret_cast<uint16_t*>(lane_bytes(result));
     for (int i = 0; i < 8; ++i) {
         d[i] = v;
     }
@@ -45,7 +44,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i16(const uint16_t v) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i32(const uint32_t v) noexcept {
     vec128_t result;
-    auto* d = reinterpret_cast<uint32_t*>(result.data);
+    auto* d = reinterpret_cast<uint32_t*>(lane_bytes(result));
     for (int i = 0; i < 4; ++i) {
         d[i] = v;
     }
@@ -63,7 +62,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i(const T v) noexcept {
     static_assert(sizeof(T) <= 4, "fill_i not supports value types upper than 4 bytes");
     NEFORCE_IF_CONSTEXPR(sizeof(T) == 1) { return fill_i8(static_cast<byte_t>(v)); }
     NEFORCE_IF_CONSTEXPR(sizeof(T) == 2) { return fill_i16(static_cast<uint16_t>(v)); }
-    return fill_i32(static_cast<uint32_t>(v));
+    return scalar::fill_i32(static_cast<uint32_t>(v));
 }
 
 
@@ -76,7 +75,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_unaligned(const void* ptr) noexcept {
     vec128_t result;
     const auto* src = static_cast<const byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = src[i];
+        lane_bytes(result)[i] = src[i];
     }
     return result;
 }
@@ -90,7 +89,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_unaligned(const void* ptr) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t match_bytes(vec128_t a, vec128_t b) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = (a.data[i] == b.data[i]) ? 0xFF : 0x00;
+        lane_bytes(result)[i] = (lane_bytes(a)[i] == lane_bytes(b)[i]) ? 0xFF : 0x00;
     }
     return result;
 }
@@ -103,7 +102,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t match_bytes(vec128_t a, vec128_t b) noexce
 NEFORCE_ALWAYS_INLINE_INLINE int to_bitmask(vec128_t v) noexcept {
     int mask = 0;
     for (int i = 0; i < 16; ++i) {
-        if (v.data[i] & 0x80) {
+        if ((lane_bytes(v)[i] & 0x80) != 0) {
             mask |= (1 << i);
         }
     }
@@ -118,7 +117,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int to_bitmask(vec128_t v) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE bool contains_byte(vec128_t v, byte_t c) noexcept {
     for (int i = 0; i < 16; ++i) {
-        if (v.data[i] == c) {
+        if (lane_bytes(v)[i] == c) {
             return true;
         }
     }
@@ -133,7 +132,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool contains_byte(vec128_t v, byte_t c) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE int find_first_byte(vec128_t v, byte_t c) noexcept {
     for (int i = 0; i < 16; ++i) {
-        if (v.data[i] == c) {
+        if (lane_bytes(v)[i] == c) {
             return i;
         }
     }
@@ -148,7 +147,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int find_first_byte(vec128_t v, byte_t c) noexcept 
  */
 NEFORCE_ALWAYS_INLINE_INLINE int find_last_byte(vec128_t v, byte_t c) noexcept {
     for (int i = 15; i >= 0; --i) {
-        if (v.data[i] == c) {
+        if (lane_bytes(v)[i] == c) {
             return i;
         }
     }
@@ -164,7 +163,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int find_last_byte(vec128_t v, byte_t c) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE int count_byte(vec128_t v, byte_t c) noexcept {
     int count = 0;
     for (int i = 0; i < 16; ++i) {
-        if (v.data[i] == c) {
+        if (lane_bytes(v)[i] == c) {
             ++count;
         }
     }
@@ -178,7 +177,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int count_byte(vec128_t v, byte_t c) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE bool is_all_zero(vec128_t v) noexcept {
     for (int i = 0; i < 16; ++i) {
-        if (v.data[i] != 0) {
+        if (lane_bytes(v)[i] != 0) {
             return false;
         }
     }
@@ -192,7 +191,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool is_all_zero(vec128_t v) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE bool has_any_zero(vec128_t v) noexcept {
     for (int i = 0; i < 16; ++i) {
-        if (v.data[i] == 0) {
+        if (lane_bytes(v)[i] == 0) {
             return true;
         }
     }
@@ -207,7 +206,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool has_any_zero(vec128_t v) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t reverse_bytes(vec128_t v) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[15 - i] = v.data[i];
+        lane_bytes(result)[15 - i] = lane_bytes(v)[i];
     }
     return result;
 }
@@ -222,8 +221,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t reverse_bytes(vec128_t v) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t shuffle_bytes(vec128_t v, vec128_t indices) noexcept {
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        const int index = indices.data[i] & 0x0F;
-        result.data[i] = v.data[index];
+        const int index = lane_bytes(indices)[i] & 0x0F;
+        lane_bytes(result)[i] = lane_bytes(v)[index];
     }
     return result;
 }
@@ -236,21 +235,11 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shuffle_bytes(vec128_t v, vec128_t indices
  * @return 混合后的向量
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t blend_bytes(vec128_t a, vec128_t b, vec128_t mask) noexcept {
-#    ifdef NEFORCE_SIMD_SSE4_1
-    return ::_mm_blendv_epi8(a, b, mask);
-#    elif defined(NEFORCE_SIMD_SSE2)
-    const ::__m128i sel = ::_mm_cmpgt_epi8(::_mm_setzero_si128(), mask);
-    return ::_mm_or_si128(::_mm_and_si128(sel, b), ::_mm_andnot_si128(sel, a));
-#    elif defined(NEFORCE_SIMD_NEON)
-    const ::int8x16_t sel = vshrq_n_s8(::vreinterpretq_s8_u8(mask), 7);
-    return ::vbslq_u8(::vreinterpretq_u8_s8(sel), b, a);
-#    else
     vec128_t result;
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = (mask.data[i] & 0x80) ? b.data[i] : a.data[i];
+        lane_bytes(result)[i] = ((lane_bytes(mask)[i] & 0x80) != 0) ? lane_bytes(b)[i] : lane_bytes(a)[i];
     }
     return result;
-#    endif
 }
 
 /**
@@ -262,7 +251,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t blend_bytes(vec128_t a, vec128_t b, vec128
  */
 NEFORCE_ALWAYS_INLINE_INLINE void store_bytes_n(void* ptr, vec128_t v, int n) noexcept {
     for (int i = 0; i < n; ++i) {
-        static_cast<byte_t*>(ptr)[i] = v.data[i];
+        static_cast<byte_t*>(ptr)[i] = lane_bytes(v)[i];
     }
 }
 
@@ -277,14 +266,14 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_bytes_n(const void* ptr, int n) noexc
     vec128_t result = {};
     const auto* src = static_cast<const byte_t*>(ptr);
     for (int i = 0; i < n; ++i) {
-        result.data[i] = src[i];
+        lane_bytes(result)[i] = src[i];
     }
     return result;
 }
 
 /** @} */ // SIMD
 
+NEFORCE_END_SCALAR__
 NEFORCE_END_SIMD__
 NEFORCE_END_NAMESPACE__
-#endif
-#endif // NEFORCE_CORE_SIMD_BYTES_PORTABLE_HPP__
+#endif // NEFORCE_CORE_SIMD_BYTES_SCALAR_HPP__

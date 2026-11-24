@@ -1,10 +1,10 @@
-#ifndef NEFORCE_CORE_SIMD_MEMORY_PORTABLE_HPP__
-#define NEFORCE_CORE_SIMD_MEMORY_PORTABLE_HPP__
+#ifndef NEFORCE_CORE_SIMD_MEMORY_SCALAR_HPP__
+#define NEFORCE_CORE_SIMD_MEMORY_SCALAR_HPP__
 #include "NeForce/core/simd/bytes.hpp"
 #include "NeForce/core/simd/compare.hpp"
-#ifdef NEFORCE_SIMD_BRANCH_PORTABLE
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
+NEFORCE_BEGIN_SCALAR__
 
 /**
  * @addtogroup SIMD
@@ -17,15 +17,15 @@ template <size_t Size>
 vec128_t match_lanes(vec128_t a, vec128_t b) noexcept;
 template <>
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t match_lanes<1>(vec128_t a, vec128_t b) noexcept {
-    return match_bytes(a, b);
+    return scalar::match_bytes(a, b);
 }
 template <>
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t match_lanes<2>(vec128_t a, vec128_t b) noexcept {
-    return cmpeq_i16(a, b);
+    return scalar::cmpeq_i16(a, b);
 }
 template <>
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t match_lanes<4>(vec128_t a, vec128_t b) noexcept {
-    return cmpeq_i32(a, b);
+    return scalar::cmpeq_i32(a, b);
 }
 NEFORCE_END_INNER__
 /// @endcond
@@ -41,7 +41,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_aligned(const void* ptr) noexcept {
     vec128_t result;
     const auto* src = static_cast<const byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = src[i];
+        lane_bytes(result)[i] = src[i];
     }
     return result;
 }
@@ -55,7 +55,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t loadu_si128(const void* ptr) noexcept {
     vec128_t result;
     const auto* src = static_cast<const byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {
-        result.data[i] = src[i];
+        lane_bytes(result)[i] = src[i];
     }
     return result;
 }
@@ -69,7 +69,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec256_t loadu_si256(const void* ptr) noexcept {
     vec256_t result;
     const auto* src = static_cast<const byte_t*>(ptr);
     for (int i = 0; i < 32; ++i) {
-        result.data[i] = src[i];
+        lane_bytes(result)[i] = src[i];
     }
     return result;
 }
@@ -83,7 +83,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec512_t loadu_si512(const void* ptr) noexcept {
     vec512_t result;
     const auto* src = static_cast<const byte_t*>(ptr);
     for (int i = 0; i < 64; ++i) {
-        result.data[i] = src[i];
+        lane_bytes(result)[i] = src[i];
     }
     return result;
 }
@@ -97,7 +97,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128f_t loadu_ps(const void* ptr) noexcept {
     vec128f_t result;
     const auto* src = static_cast<const float*>(ptr);
     for (int i = 0; i < 4; ++i) {
-        result.data[i] = src[i];
+        lane_view<float>(result)[i] = src[i];
     }
     return result;
 }
@@ -111,7 +111,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128d_t loadu_pd(const void* ptr) noexcept {
     vec128d_t result;
     const auto* src = static_cast<const double*>(ptr);
     for (int i = 0; i < 2; ++i) {
-        result.data[i] = src[i];
+        lane_view<double>(result)[i] = src[i];
     }
     return result;
 }
@@ -125,7 +125,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128d_t loadu_pd(const void* ptr) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE void store_aligned(void* ptr, vec128_t v) noexcept {
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {
-        dst[i] = v.data[i];
+        dst[i] = lane_bytes(v)[i];
     }
 }
 
@@ -137,7 +137,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_aligned(void* ptr, vec128_t v) noexcept 
 NEFORCE_ALWAYS_INLINE_INLINE void storeu_si128(void* ptr, vec128_t v) noexcept {
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {
-        dst[i] = v.data[i];
+        dst[i] = lane_bytes(v)[i];
     }
 }
 
@@ -154,7 +154,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t loadl_epi64(const void* ptr) noexcept {
         dst[i] = src[i];
     }
     for (int i = 8; i < 16; ++i) {
-        dst[i] = byte_t(0);
+        dst[i] = static_cast<byte_t>(0);
     }
     return result;
 }
@@ -185,7 +185,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t loadu_si32(const void* ptr) noexcept {
         dst[i] = src[i];
     }
     for (int i = 4; i < 16; ++i) {
-        dst[i] = byte_t(0);
+        dst[i] = static_cast<byte_t>(0);
     }
     return result;
 }
@@ -211,7 +211,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void storeu_si32(void* ptr, vec128_t v) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE void storeu_si256(void* ptr, vec256_t v) noexcept {
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 32; ++i) {
-        dst[i] = v.data[i];
+        dst[i] = lane_bytes(v)[i];
     }
 }
 
@@ -223,7 +223,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void storeu_si256(void* ptr, vec256_t v) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE void storeu_si512(void* ptr, vec512_t v) noexcept {
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 64; ++i) {
-        dst[i] = v.data[i];
+        dst[i] = lane_bytes(v)[i];
     }
 }
 
@@ -237,7 +237,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void storeu_si512(void* ptr, vec512_t v) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE void store_stream(void* ptr, vec128_t v) noexcept {
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 16; ++i) {
-        dst[i] = v.data[i];
+        dst[i] = lane_bytes(v)[i];
     }
 }
 
@@ -250,7 +250,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_stream(void* ptr, vec128_t v) noexcept {
 NEFORCE_ALWAYS_INLINE_INLINE void store_stream256(void* ptr, vec256_t v) noexcept {
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 32; ++i) {
-        dst[i] = v.data[i];
+        dst[i] = lane_bytes(v)[i];
     }
 }
 
@@ -263,7 +263,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_stream256(void* ptr, vec256_t v) noexcep
 NEFORCE_ALWAYS_INLINE_INLINE void store_stream512(void* ptr, vec512_t v) noexcept {
     auto* dst = static_cast<byte_t*>(ptr);
     for (int i = 0; i < 64; ++i) {
-        dst[i] = v.data[i];
+        dst[i] = lane_bytes(v)[i];
     }
 }
 
@@ -273,13 +273,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_stream512(void* ptr, vec512_t v) noexcep
  * @return 加载的向量
  * @note 适用于一次性读取后不会再次访问的数据流，ptr 建议 16 字节对齐以获得最佳性能
  */
-NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_stream(const void* ptr) noexcept {
-#    if defined(NEFORCE_SIMD_SSE4_1)
-    return ::_mm_stream_load_si128(const_cast<vec128_t*>(static_cast<const vec128_t*>(ptr)));
-#    else
-    return loadu_si128(ptr);
-#    endif
-}
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_stream(const void* ptr) noexcept { return loadu_si128(ptr); }
 
 /**
  * @brief 预取数据到所有缓存层级以供读取
@@ -325,16 +319,9 @@ NEFORCE_NOINLINE NEFORCE_COLD inline void* memory_copy_large(void* dest, const v
     auto* d = static_cast<byte_t*>(dest);
     const auto* s = static_cast<const byte_t*>(src);
     size_t remaining = count;
-#    if defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)
-    ::__movsb(d, s, remaining);
-#    elif defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
-            !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER)
-    __asm__ __volatile__("rep movsb" : "+D"(d), "+S"(s), "+c"(remaining) : : "memory");
-#    else
     for (size_t i = 0; i < remaining; ++i) {
         d[i] = s[i];
     }
-#    endif
     return dest;
 }
 
@@ -349,17 +336,9 @@ NEFORCE_NOINLINE NEFORCE_COLD inline void* memory_copy_large(void* dest, const v
 NEFORCE_NOINLINE NEFORCE_COLD inline void* memory_set_large(void* dest, const byte_t value,
                                                             const size_t count) noexcept {
     auto* d = static_cast<byte_t*>(dest);
-#    if defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)
-    ::__stosb(d, value, count);
-#    elif defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
-            !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER)
-    size_t remaining = count;
-    __asm__ __volatile__("rep stosb" : "+D"(d), "+c"(remaining) : "a"(value) : "memory");
-#    else
     for (size_t i = 0; i < count; ++i) {
         d[i] = value;
     }
-#    endif
     return dest;
 }
 
@@ -380,18 +359,9 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_copy(void* dest, const void* src, size
 
     auto* d = static_cast<byte_t*>(dest);
     const auto* s = static_cast<const byte_t*>(src);
-    const size_t total = count;
-
-#    if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                                               \
-            (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
-             !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER))
-    if (count >= 4096) {
-        return memory_copy_large(dest, src, count);
-    }
-#    endif
 
     while (count >= 16) {
-        storeu_si128(d, loadu_si128(s));
+        scalar::storeu_si128(d, scalar::loadu_si128(s));
         d += 16;
         s += 16;
         count -= 16;
@@ -450,7 +420,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_copy_offset(void* dest, const void* sr
     const auto* s = static_cast<const byte_t*>(src);
 
     while (count >= 16) {
-        storeu_si128(d, loadu_si128(s));
+        scalar::storeu_si128(d, scalar::loadu_si128(s));
         d += 16;
         s += 16;
         count -= 16;
@@ -487,10 +457,10 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE int memory_compare(const void
     const auto* r = static_cast<const byte_t*>(rhs);
 
     while (count >= 16) {
-        const vec128_t vl = loadu_si128(l);
-        const vec128_t vr = loadu_si128(r);
-        const vec128_t neq = match_bytes(vl, vr);
-        const int mask = to_bitmask(neq);
+        const vec128_t vl = scalar::loadu_si128(l);
+        const vec128_t vr = scalar::loadu_si128(r);
+        const vec128_t neq = scalar::match_bytes(vl, vr);
+        const int mask = scalar::to_bitmask(neq);
         if (mask != 0xFFFF) {
             const int pos = countr_zero(static_cast<unsigned>(~mask));
             return static_cast<int>(l[pos]) - static_cast<int>(r[pos]);
@@ -519,17 +489,8 @@ NEFORCE_NOINLINE inline void* memory_move_large(void* dest, const void* src, siz
     const auto* s = static_cast<const byte_t*>(src);
 
     if (d < s) {
-#    if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                                               \
-            (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
-             !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER))
-        const auto dest_addr = reinterpret_cast<uintptr_t>(d);
-        const auto src_addr = reinterpret_cast<uintptr_t>(s);
-        if (count >= 4096 && (dest_addr + count <= src_addr || src_addr + count <= dest_addr)) {
-            return memory_copy_large(dest, src, count);
-        }
-#    endif
         while (count >= 16) {
-            storeu_si128(d, loadu_si128(s));
+            scalar::storeu_si128(d, scalar::loadu_si128(s));
             d += 16;
             s += 16;
             count -= 16;
@@ -540,19 +501,12 @@ NEFORCE_NOINLINE inline void* memory_move_large(void* dest, const void* src, siz
         return dest;
     }
 
-#    if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                                               \
-            (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
-             !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER))
-    if (count >= 4096 && reinterpret_cast<uintptr_t>(s) + count <= reinterpret_cast<uintptr_t>(d)) {
-        return memory_copy_large(dest, src, count);
-    }
-#    endif
     d += count;
     s += count;
     while (count >= 16) {
         d -= 16;
         s -= 16;
-        storeu_si128(d, loadu_si128(s));
+        scalar::storeu_si128(d, scalar::loadu_si128(s));
         count -= 16;
     }
     while (count > 0) {
@@ -576,7 +530,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size
         return nullptr;
     }
     if (count >= 4096) {
-        return memory_move_large(dest, src, count);
+        return scalar::memory_move_large(dest, src, count);
     }
 
     auto* d = static_cast<byte_t*>(dest);
@@ -584,7 +538,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size
 
     if (d < s) {
         while (count >= 16) {
-            storeu_si128(d, loadu_si128(s));
+            scalar::storeu_si128(d, scalar::loadu_si128(s));
             d += 16;
             s += 16;
             count -= 16;
@@ -598,7 +552,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_move(void* dest, const void* src, size
         while (count >= 16) {
             d -= 16;
             s -= 16;
-            storeu_si128(d, loadu_si128(s));
+            scalar::storeu_si128(d, scalar::loadu_si128(s));
             count -= 16;
         }
         while (count > 0) {
@@ -627,17 +581,10 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_set(void* dest, const byte_t value, si
     }
 
     auto* d = static_cast<byte_t*>(dest);
-#    if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                                               \
-            (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
-             !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER))
-    if (count >= 4096) {
-        return memory_set_large(dest, value, count);
-    }
-#    endif
-    const vec128_t pattern = fill_i8(value);
+    const vec128_t pattern = scalar::fill_i8(value);
 
     while (count >= 16) {
-        storeu_si128(d, pattern);
+        scalar::storeu_si128(d, pattern);
         d += 16;
         count -= 16;
     }
@@ -684,11 +631,11 @@ NEFORCE_ALWAYS_INLINE_INLINE void memory_zero(void* dest, const size_t count) no
     }
 
     auto* d = static_cast<byte_t*>(dest);
-    const vec128_t zero = fill_i8(0);
+    const vec128_t zero = scalar::fill_i8(0);
     size_t remaining = count;
 
     while (remaining >= 16) {
-        storeu_si128(d, zero);
+        scalar::storeu_si128(d, zero);
         d += 16;
         remaining -= 16;
     }
@@ -723,8 +670,8 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const void* memory_find(const
     }
 
     while (count >= 16) {
-        const vec128_t v = loadu_si128(p);
-        const int offset = find_first_byte(v, value);
+        const vec128_t v = scalar::loadu_si128(p);
+        const int offset = scalar::find_first_byte(v, value);
         if (offset >= 0) {
             return p + offset;
         }
@@ -756,19 +703,19 @@ NEFORCE_ALWAYS_INLINE_INLINE const void* memory_find_pattern(const void* data, c
     const auto* pattern_ptr = static_cast<const byte_t*>(pattern);
 
     if (pattern_len == 1) {
-        return memory_find(data, pattern_ptr[0], data_len);
+        return scalar::memory_find(data, pattern_ptr[0], data_len);
     }
 
     const byte_t first_byte = pattern_ptr[0];
     const size_t last_possible = data_len - pattern_len + 1;
-    const vec128_t target = fill_i8(first_byte);
+    const vec128_t target = scalar::fill_i8(first_byte);
 
     size_t pos = 0;
     const byte_t* search_start = data_ptr;
 
     while (pos + 16 <= last_possible) {
-        const vec128_t v = loadu_si128(search_start + pos);
-        int bits = to_bitmask(match_bytes(v, target));
+        const vec128_t v = scalar::loadu_si128(search_start + pos);
+        int bits = scalar::to_bitmask(scalar::match_bytes(v, target));
         while (bits != 0) {
             const int off = countr_zero(bits);
             const size_t candidate = pos + static_cast<size_t>(off);
@@ -851,13 +798,13 @@ NEFORCE_ALWAYS_INLINE_INLINE block_scan_anchor anchor_of(const CharT* const ptr)
 template <typename CharT>
 NEFORCE_PURE_FUNCTION NEFORCE_NOINLINE size_t string_length_tail(const CharT* str) noexcept {
     const size_t stride = sizeof(CharT);
-    const block_scan_anchor anchor = anchor_of(str);
-    const vec128_t zero = fill_i(CharT(0));
+    const block_scan_anchor anchor = inner::anchor_of(str);
+    const vec128_t zero = scalar::fill_i(CharT(0));
     size_t char_offset = 0;
 
     while (true) {
-        const vec128_t v = load_aligned(anchor.base + (char_offset * stride));
-        int mask = to_bitmask(match_lanes<sizeof(CharT)>(v, zero));
+        const vec128_t v = scalar::load_aligned(anchor.base + (char_offset * stride));
+        int mask = scalar::to_bitmask(match_lanes<sizeof(CharT)>(v, zero));
         if (char_offset == 0) {
             mask &= static_cast<int>(anchor.prefix_mask);
         }
@@ -888,13 +835,13 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE size_t string_length(const Ch
         return 0;
     }
 
-#    ifdef NEFORCE_SANITIZED_SCAN
+#ifdef NEFORCE_SANITIZED_SCAN
     size_t scalar_length = 0;
     while (str[scalar_length] != CharT(0)) {
         ++scalar_length;
     }
     return scalar_length;
-#    else
+#else
     constexpr size_t prefix_chars = 8;
 
     for (size_t i = 0; i < prefix_chars; ++i) {
@@ -903,7 +850,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE size_t string_length(const Ch
         }
     }
     return prefix_chars + inner::string_length_tail(str + prefix_chars);
-#    endif
+#endif
 }
 
 /**
@@ -921,24 +868,24 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const CharT* string_find(cons
         return nullptr;
     }
 
-#    ifdef NEFORCE_SANITIZED_SCAN
+#ifdef NEFORCE_SANITIZED_SCAN
     for (const CharT* cursor = str; *cursor != CharT(0); ++cursor) {
         if (*cursor == chr) {
             return cursor;
         }
     }
     return nullptr;
-#    else
+#else
     const size_t stride = sizeof(CharT);
     const inner::block_scan_anchor anchor = inner::anchor_of(str);
-    const vec128_t target = simd::fill_i(chr);
-    const vec128_t zero = simd::fill_i(CharT(0));
+    const vec128_t target = scalar::fill_i(chr);
+    const vec128_t zero = scalar::fill_i(CharT(0));
     size_t char_offset = 0;
 
     while (true) {
-        const vec128_t v = load_aligned(anchor.base + (char_offset * stride));
-        int mask_target = simd::to_bitmask(inner::match_lanes<sizeof(CharT)>(v, target));
-        int mask_zero = simd::to_bitmask(inner::match_lanes<sizeof(CharT)>(v, zero));
+        const vec128_t v = scalar::load_aligned(anchor.base + (char_offset * stride));
+        int mask_target = scalar::to_bitmask(inner::match_lanes<sizeof(CharT)>(v, target));
+        int mask_zero = scalar::to_bitmask(inner::match_lanes<sizeof(CharT)>(v, zero));
         if (char_offset == 0) {
             mask_target &= static_cast<int>(anchor.prefix_mask);
             mask_zero &= static_cast<int>(anchor.prefix_mask);
@@ -963,7 +910,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const CharT* string_find(cons
 
         char_offset += 16 / stride;
     }
-#    endif
+#endif
 }
 
 
@@ -988,14 +935,14 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE const CharT* string_find(cons
     const size_t byte_limit = count * stride;
     size_t offset = 0;
 
-    const vec128_t target = fill_i(chr);
-    const vec128_t zero = fill_i(CharT(0));
+    const vec128_t target = scalar::fill_i(chr);
+    const vec128_t zero = scalar::fill_i(CharT(0));
 
     while (byte_limit - offset >= 16) {
-        const vec128_t v = loadu_si128(p + offset);
+        const vec128_t v = scalar::loadu_si128(p + offset);
 
-        int mask_target = simd::to_bitmask(inner::match_lanes<sizeof(CharT)>(v, target));
-        const int mask_zero = simd::to_bitmask(inner::match_lanes<sizeof(CharT)>(v, zero));
+        int mask_target = scalar::to_bitmask(inner::match_lanes<sizeof(CharT)>(v, target));
+        const int mask_zero = scalar::to_bitmask(inner::match_lanes<sizeof(CharT)>(v, zero));
 
         if (mask_zero != 0) {
             const int first_null_bit = countr_zero(static_cast<unsigned>(mask_zero));
@@ -1047,11 +994,11 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE int string_compare(const Char
         return 1;
     }
 
-    const size_t length1 = string_length(s1);
-    const size_t length2 = string_length(s2);
+    const size_t length1 = scalar::string_length(s1);
+    const size_t length2 = scalar::string_length(s2);
     const size_t common = (length1 < length2) ? length1 : length2;
 
-    if (common != 0 && memory_compare(s1, s2, common * sizeof(CharT)) != 0) {
+    if (common != 0 && scalar::memory_compare(s1, s2, common * sizeof(CharT)) != 0) {
         for (size_t i = 0; i < common; ++i) {
             if (s1[i] != s2[i]) {
                 return s1[i] < s2[i] ? -1 : 1;
@@ -1096,15 +1043,15 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE int string_compare(const Char
     const size_t byte_limit = count * stride;
     size_t offset = 0;
 
-    const vec128_t zero = simd::fill_i(CharT(0));
+    const vec128_t zero = scalar::fill_i(CharT(0));
 
     while (byte_limit - offset >= 16) {
-        const vec128_t v1 = loadu_si128(p1 + offset);
-        const vec128_t v2 = loadu_si128(p2 + offset);
+        const vec128_t v1 = scalar::loadu_si128(p1 + offset);
+        const vec128_t v2 = scalar::loadu_si128(p2 + offset);
 
-        const int eq_mask = to_bitmask(inner::match_lanes<sizeof(CharT)>(v1, v2));
-        const int null_mask = to_bitmask(inner::match_lanes<sizeof(CharT)>(v1, zero)) |
-                              to_bitmask(inner::match_lanes<sizeof(CharT)>(v2, zero));
+        const int eq_mask = scalar::to_bitmask(inner::match_lanes<sizeof(CharT)>(v1, v2));
+        const int null_mask = scalar::to_bitmask(inner::match_lanes<sizeof(CharT)>(v1, zero)) |
+                              scalar::to_bitmask(inner::match_lanes<sizeof(CharT)>(v2, zero));
 
         if (null_mask != 0 || (eq_mask & 0xFFFF) != 0xFFFF) {
             const auto* const cs1 = reinterpret_cast<const CharT*>(p1 + offset);
@@ -1137,7 +1084,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_ALWAYS_INLINE_INLINE int string_compare(const Char
 
 /** @} */ // SIMD
 
+NEFORCE_END_SCALAR__
 NEFORCE_END_SIMD__
 NEFORCE_END_NAMESPACE__
-#endif
-#endif // NEFORCE_CORE_SIMD_MEMORY_PORTABLE_HPP__
+#endif // NEFORCE_CORE_SIMD_MEMORY_SCALAR_HPP__

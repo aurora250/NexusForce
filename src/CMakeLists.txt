@@ -103,6 +103,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/hardware.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/io_queue.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pty.cpp
@@ -461,9 +462,6 @@ elseif(APPLE)
     # libSystem already provides pthread, dl and the backtrace symbols; there
     # is no separate libatomic or librt to link.
     nexusforce_link_both(PUBLIC "-framework Security")
-    if(NEXUSFORCE_USING_IO_URING)
-        message(STATUS "io_uring is Linux-only; related functionality is disabled on macOS")
-    endif()
 elseif(UNIX)
     if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
         # FreeBSD's libc already provides the atomic builtins; there is no libatomic.
@@ -473,27 +471,6 @@ elseif(UNIX)
         nexusforce_link_both(PUBLIC
                 atomic pthread
         )
-    endif()
-
-    if(NEXUSFORCE_USING_IO_URING)
-        find_package(uring QUIET)
-        if(TARGET uring::uring)
-            nexusforce_link_module(Core PRIVATE uring::uring)
-            nexusforce_define_both(PUBLIC NEFORCE_USING_IO_URING)
-            set(NEXUSFORCE_URING_LINKED TRUE PARENT_SCOPE)
-            message(STATUS "io_uring linked successfully")
-        else()
-            find_library(LIBURING NAMES uring)
-            if(LIBURING)
-                nexusforce_link_module(Core PRIVATE ${LIBURING})
-                nexusforce_define_both(PUBLIC NEFORCE_USING_IO_URING)
-                message(STATUS "io_uring library found: ${LIBURING}")
-            else()
-                message(WARNING "io_uring not found - related functionality will be disabled")
-            endif()
-        endif()
-    else()
-        message(STATUS "io_uring support disabled")
     endif()
 else()
     message(FATAL_ERROR "This system is NOT SUPPORTED!")

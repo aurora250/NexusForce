@@ -261,7 +261,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📁 文件系统 (File)
 - **路径/文件操作** - 路径/文件系统操作 `path`/`path_tree`/`file`/`file_async`/`file_diff`/`file_locker`/`file_mapper`
-- **`file_async`** - 基于 `io_context` 与 `io_uring` 的异步文件 I/O，支持指定偏移量与取消槽
+- **`file_async`** - 基于 `io_context` 与 I/O 队列的异步文件 I/O
 - **`file_watcher`** - 实时文件系统变更监控
 - **配置文件解析** - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建
 - **`temp_file`** - 安全的临时文件管理
@@ -335,6 +335,7 @@ HTTP/HTTPS/WS/WSS/gRPC 性能测试详见 [HTTP/HTTPS 性能测试记录](benchm
 - **`environment`** - 环境变量操作
 - **`system_signal_manager`** - 系统信号控制
 - **`system_event`** - 系统事件管理
+- **`io_queue`** - Linux 异步 I/O 队列
 
 ### ⏰ 时间处理 (Time)
 - **`steady_clock` / `system_clock`** - 多种时钟源高精度时钟
@@ -488,10 +489,61 @@ TUI 渲染性能测试详见 [TUI 性能测试记录](benchmark/tui/PERFORMANCE.
 
 > 💡 您可以在项目根目录的 `config.json` (编译项配置) 与 `vcpkg.json` (包管理配置) 中更改配置项以进行个性化编译
 >
-> **本项目在 linux 系统中静默依赖 liburing-dev，如您需要 io_uring 功能，请在构建前确保您已经安装，否则相关功能将被禁用回退**
->
 > 实测 linux 系统中，vcpkg 构建 libmysql 需要 libtirpc-dev 库，libpq 需要 bison、flex、autoconf 库，且这些库不会由系统包管理器默认安装。
 > 如果您需要对应依赖，您可以通过系统包管理器提前安装以免 cmake 构建失败
+
+### ⚙️ config.json
+
+项目根目录的 `config.json` 是构建选项的权威来源，所有键在 configure 阶段读取并转为 CMake 缓存变量。
+
+| 分组 | 键 | 取值 | 行为 | 缓存变量 |
+|---|---|---|---|---|
+| 通用 | `standard` | `14` / `17` / `20` | 所有目标使用的 C++ 标准；不支持的值会被忽略并按 C++20 构建 | `CMAKE_CXX_STANDARD` |
+| 通用 | `vcpkg.windows` / `vcpkg.linux` | 路径 | vcpkg 根目录，用于定位 `vcpkg.cmake` | `CMAKE_TOOLCHAIN_FILE` |
+| 通用 | `graphviz.windows` / `graphviz.linux` | 路径 | Doxygen 使用的 Graphviz 根目录 | `NEXUSFORCE_GRAPHVIZ_ROOT` |
+| 依赖 | `dependency.postgresql.switch` | `true` / `false` | 是否构建 PostgreSQL 驱动 | `NEXUSFORCE_ENABLE_POSTGRESQL` |
+| 依赖 | `dependency.mysql.switch` | `true` / `false` | 是否构建 MySQL 驱动 | `NEXUSFORCE_ENABLE_MYSQL` |
+| 依赖 | `dependency.sqlite3.switch` | `true` / `false` | 是否构建 SQLite3 驱动 | `NEXUSFORCE_ENABLE_SQLITE3` |
+| 依赖 | `dependency.sqlite3.cipher` | `true` / `false` | 是否编译 SQLCipher 加密 | `NEXUSFORCE_USING_SQLCIPHER` |
+| 依赖 | `dependency.hiredis.switch` | `true` / `false` | 是否构建 Redis 客户端 | `NEXUSFORCE_ENABLE_REDIS` |
+| 依赖 | `dependency.zlib.switch` | `true` / `false` | 是否构建 zlib 编解码 | `NEXUSFORCE_ENABLE_ZLIB` |
+| 依赖 | `dependency.lz4.switch` | `true` / `false` | 是否构建 LZ4 编解码 | `NEXUSFORCE_ENABLE_LZ4` |
+| 依赖 | `dependency.zstd.switch` | `true` / `false` | 是否构建 Zstandard 编解码 | `NEXUSFORCE_ENABLE_ZSTD` |
+| 依赖 | `dependency.icu.switch` | `true` / `false` | 是否构建 ICU4C 本地化后端 | `NEXUSFORCE_ENABLE_ICU` |
+| 特性 | `feature.locale` | `true` / `false` | 是否构建本地化组件；为 `false` 时 ICU 同时被强制关闭 | `NEXUSFORCE_ENABLE_LOCALE` |
+| 特性 | `feature.memory-pool-global-override` | `true` / `false` | 是否用内存池替换进程级 `new` / `delete` | `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` |
+| 构建 | `build.tests` | `true` / `false` | 是否构建单元测试 | `NEXUSFORCE_BUILD_TESTS` |
+| 构建 | `build.examples` | `true` / `false` | 是否构建示例程序 | `NEXUSFORCE_BUILD_EXAMPLES` |
+| 构建 | `build.benchmarks` | `true` / `false` | 是否构建 Google Benchmark 基准 | `NEXUSFORCE_BUILD_BENCHMARKS` |
+| 构建 | `build.docs` | `true` / `false` | 是否构建 Doxygen 文档 | `NEXUSFORCE_BUILD_DOCS` |
+| ISA | `isa.<arch>.level` | 见 [ISA](#ISA) | 目标架构的 SIMD 等级；工具链不支持时自动回退 | `NEXUSFORCE_SIMD_LEVEL` |
+| ISA | `isa.<arch>.extensions.aes-ni` / `pclmul` / `vaes` / `intel-tsx` | `true` / `false` | x86_64 加密扩展；`vaes` 会隐含生成 AVX2 指令 | `NEXUSFORCE_USING_AES_NI` / `_PCLMUL` / `_VAES` / `_INTEL_TSX` |
+| ISA | `isa.<arch>.extensions.aes` | `true` / `false` | aarch64 加密扩展 | `NEXUSFORCE_USING_AES_ARM` |
+| ISA | `isa.<arch>.vector-bytes` | `0` 表示自动，或具体字节数 | 固定 SVE / RVV 向量位宽 | `NEXUSFORCE_VECTOR_BYTES` |
+
+#### ISA
+
+| arch          | `level`  | options                                                 | 检测到的宏                          | 后端                           |
+|---------------|----------|----------------------------------------------------------|-------------------------------------|--------------------------------|
+| x86_64        | `AUTO`   | `-march=native`                                          | 构建机实际支持的全部                 | `arch/x86`                     |
+| x86_64        | `BASELINE` | —                                                      | `SSE2`                              | `arch/x86`（仅 SSE2）          |
+| x86_64        | `SSE2`   | `-msse2`                                                 | `SSE2`                              | `arch/x86`（仅 SSE2）          |
+| x86_64        | `AVX`    | `-mavx`                                                  | `SSE2` · `SSSE3` · `SSE4.1` · `AVX` | `arch/x86`（+ AVX）            |
+| x86_64        | `AVX2`   | `-mavx2`                                                 | 上述 + `AVX2`                        | `arch/x86`（+ AVX2）           |
+| x86_64        | `AVX512` | `-mavx512f -mavx512cd -mavx512bw -mavx512dq`              | 上述 + `AVX512F`                     | `arch/x86`（+ AVX-512）        |
+| aarch64       | `AUTO`   | —                                                        | `NEON`                              | `arch/arm`                     |
+| aarch64       | `BASELINE` | —                                                      | `NEON`                              | `arch/arm`                     |
+| aarch64       | `SVE`    | `-march=armv8.2-a+sve`                                   | `NEON` + `SVE`                       | `arch/arm` + SVE 内存内核      |
+| aarch64       | `SVE2`   | `-march=armv8.2-a+sve2`                                  | `NEON` + `SVE` + `SVE2`              | 同 `SVE`                        |
+| riscv64       | `AUTO`   | —                                                        | —                                   | `scalar`                       |
+| riscv64       | `BASELINE` | —                                                      | —                                   | `scalar`                       |
+| riscv64       | `RVV`    | `-march=rv64gcv_zihintpause`                             | `RVV`（RVV 1.0 内建函数）             | `arch/riscv`                   |
+| loongarch64   | `AUTO`   | —                                                        | —                                   | `scalar`                       |
+| loongarch64   | `BASELINE` | —                                                      | —                                   | `scalar`                       |
+| loongarch64   | `LSX`    | `-mlsx`                                                  | `LSX`                               | `arch/loongarch`               |
+| loongarch64   | `LASX`   | `-mlasx`                                                 | `LSX` + `LASX`                       | `arch/loongarch`（+ 256 位）   |
+
+> 工具链不支持所请求的等级时构建会自动回退
 
 #### 🪟 Windows
 

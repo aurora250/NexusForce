@@ -21,10 +21,16 @@ elseif(NOT DEFINED CMAKE_TOOLCHAIN_FILE AND NOT CMAKE_HOST_APPLE)
 endif()
 
 if(WIN32)
-    string(JSON CONFIG_DOT_EXECUTABLE GET ${JSON_CONTENT} graphviz windows)
+    string(JSON CONFIG_GRAPHVIZ_ROOT ERROR_VARIABLE _config_graphviz_error GET ${JSON_CONTENT} graphviz windows)
 else()
-    string(JSON CONFIG_DOT_EXECUTABLE GET ${JSON_CONTENT} graphviz linux)
+    string(JSON CONFIG_GRAPHVIZ_ROOT ERROR_VARIABLE _config_graphviz_error GET ${JSON_CONTENT} graphviz linux)
 endif()
+if(_config_graphviz_error)
+    set(CONFIG_GRAPHVIZ_ROOT "")
+endif()
+set(NEXUSFORCE_GRAPHVIZ_ROOT "${CONFIG_GRAPHVIZ_ROOT}" CACHE PATH "Graphviz root directory used by Doxygen")
+set(CONFIG_DOT_EXECUTABLE "${NEXUSFORCE_GRAPHVIZ_ROOT}")
+
 string(JSON CONFIG_CPP_STANDARD      GET ${JSON_CONTENT} standard)
 string(JSON CONFIG_ENABLE_POSTGRESQL GET ${JSON_CONTENT} dependency postgresql switch)
 string(JSON CONFIG_ENABLE_MYSQL      GET ${JSON_CONTENT} dependency mysql      switch)
@@ -47,7 +53,6 @@ string(JSON CONFIG_USING_SQLCIPHER ERROR_VARIABLE _config_sqlcipher_error
 if(_config_sqlcipher_error)
     set(CONFIG_USING_SQLCIPHER OFF)
 endif()
-string(JSON CONFIG_USING_IO_URING    GET ${JSON_CONTENT} feature io_uring)
 
 # The global allocator override is a process wide decision and stays off unless config.json asks for it.
 string(JSON CONFIG_MEMORY_POOL_OVERRIDE ERROR_VARIABLE _config_pool_override_error
@@ -233,15 +238,18 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(NEXUSFORCE_VALID_STANDARDS 20 17 14)
 
-
-if(CONFIG_CPP_STANDARD IN_LIST NEXUSFORCE_VALID_STANDARDS)
-    set(CMAKE_CXX_STANDARD ${CONFIG_CPP_STANDARD})
+if(NOT CONFIG_CPP_STANDARD IN_LIST NEXUSFORCE_VALID_STANDARDS)
+    message(WARNING "config.json: \"standard\": ${CONFIG_CPP_STANDARD} is not supported, using 20")
+    set(CONFIG_CPP_STANDARD 20)
 endif()
-
 if(NOT DEFINED CMAKE_CXX_STANDARD)
-    set(CMAKE_CXX_STANDARD 20 CACHE STRING "C++ standard 20 used by NexusForce in default")
-elseif(CMAKE_CXX_STANDARD LESS 14)
-    message(FATAL_ERROR "NexusForce can only be compiled with C++ standard 14 or higher standard")
+    set(CMAKE_CXX_STANDARD ${CONFIG_CPP_STANDARD} CACHE STRING "C++ standard used by NexusForce")
+endif()
+if(NOT CMAKE_CXX_STANDARD IN_LIST NEXUSFORCE_VALID_STANDARDS)
+    list(JOIN NEXUSFORCE_VALID_STANDARDS ", " _nexusforce_standards_joined)
+    message(FATAL_ERROR
+            "NexusForce: CMAKE_CXX_STANDARD='${CMAKE_CXX_STANDARD}' is not supported. "
+            "Valid standards: ${_nexusforce_standards_joined}")
 endif()
 
 if(CMAKE_CONFIGURATION_TYPES)
@@ -268,14 +276,6 @@ endif()
 
 option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                          ${CONFIG_USING_INTEL_TSX})
 option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher"                          ${CONFIG_USING_SQLCIPHER})
-option(NEXUSFORCE_USING_IO_URING    "Using io uring"                           ${CONFIG_USING_IO_URING})
-
-# io_uring is a Linux host facility and is not available in cross sysroots. Linking the host
-# liburing.so into a foreign-architecture library fails with "file in wrong format".
-if(CMAKE_CROSSCOMPILING AND NEXUSFORCE_USING_IO_URING)
-    set(NEXUSFORCE_USING_IO_URING OFF CACHE BOOL "Using io uring" FORCE)
-    message(STATUS "io_uring disabled for cross-compilation")
-endif()
 
 option(NEXUSFORCE_USING_AES_NI      "Using AES-NI / AES crypto"                ${CONFIG_USING_AES_NI})
 option(NEXUSFORCE_USING_PCLMUL      "Using PCLMULQDQ / PMULL"                  ${CONFIG_USING_PCLMUL})
@@ -299,6 +299,13 @@ option(NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE
 option(NEXUSFORCE_OVERRIDE_TEST_WITH_SHARED_GTEST
         "Build the allocator override test against a shared GTest (rejected by the Windows debug heap)" OFF)
 
+
+string(JSON CONFIG_VECTOR_BYTES ERROR_VARIABLE _config_vector_bytes_error
+        GET ${JSON_CONTENT} isa ${NEXUSFORCE_ARCH} vector-bytes)
+if(_config_vector_bytes_error)
+    set(CONFIG_VECTOR_BYTES "0")
+endif()
+set(NEXUSFORCE_VECTOR_BYTES "${CONFIG_VECTOR_BYTES}" CACHE STRING "SVE/RVV vector bytes (0=auto)")
 
 # NEXUSFORCE_SIMD_LEVEL is cached and architecture-specific (AVX2 for x64, BASELINE/SVE for
 # aarch64). A level passed explicitly with -DNEXUSFORCE_SIMD_LEVEL=... wins over config.json and
@@ -392,7 +399,6 @@ message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON (NECESSARY)")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_USING_INTEL_TSX:     ${NEXUSFORCE_USING_INTEL_TSX}")
 message(STATUS "  NEXUSFORCE_USING_SQLCIPHER:     ${NEXUSFORCE_USING_SQLCIPHER}")
-message(STATUS "  NEXUSFORCE_USING_IO_URING:      ${NEXUSFORCE_USING_IO_URING}")
 message(STATUS "  NEXUSFORCE_USING_AES_NI:        ${NEXUSFORCE_USING_AES_NI}")
 message(STATUS "  NEXUSFORCE_USING_PCLMUL:        ${NEXUSFORCE_USING_PCLMUL}")
 message(STATUS "  NEXUSFORCE_USING_VAES:          ${NEXUSFORCE_USING_VAES}")
@@ -422,7 +428,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/lib/$<CONFIG>")
 
 
 set(NEXUSFORCE_SQLCIPHER_LINKED FALSE)
-set(NEXUSFORCE_URING_LINKED FALSE)
 set(NEXUSFORCE_ICU_LINKED FALSE)
 
 
@@ -498,13 +503,11 @@ set(PACKAGE_VERSION_VARS
 
         NEXUSFORCE_USING_INTEL_TSX
         NEXUSFORCE_USING_SQLCIPHER
-        NEXUSFORCE_USING_IO_URING
         NEXUSFORCE_USING_AES_NI
         NEXUSFORCE_USING_PCLMUL
         NEXUSFORCE_USING_VAES
 
         NEXUSFORCE_SQLCIPHER_LINKED
-        NEXUSFORCE_URING_LINKED
         NEXUSFORCE_ICU_LINKED
 )
 
@@ -601,9 +604,6 @@ if(NEXUSFORCE_ZSTD_LINKED)
 endif()
 if(NEXUSFORCE_ICU_LINKED)
     string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -licui18n -licuuc -licudata")
-endif()
-if(NEXUSFORCE_URING_LINKED)
-    string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -luring")
 endif()
 string(APPEND NEXUSFORCE_PC_LIBS_PRIVATE " -lpcre2-8 -lssl -lcrypto")
 if(WIN32)

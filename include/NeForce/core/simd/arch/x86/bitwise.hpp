@@ -1,6 +1,6 @@
 #ifndef NEFORCE_CORE_SIMD_BITWISE_X86_HPP__
 #define NEFORCE_CORE_SIMD_BITWISE_X86_HPP__
-#include "NeForce/core/simd/types.hpp"
+#include "NeForce/core/simd/scalar/bitwise.hpp"
 #ifdef NEFORCE_SIMD_BRANCH_X86
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
@@ -20,11 +20,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_and(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_and_si128(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] & b.data[i];
-    }
-    return result;
+    return scalar::bit_and(a, b);
 #    endif
 }
 
@@ -38,11 +34,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_or(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_or_si128(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] | b.data[i];
-    }
-    return result;
+    return scalar::bit_or(a, b);
 #    endif
 }
 
@@ -56,11 +48,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_xor(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_xor_si128(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] ^ b.data[i];
-    }
-    return result;
+    return scalar::bit_xor(a, b);
 #    endif
 }
 
@@ -73,11 +61,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_not(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_andnot_si128(v, ::_mm_set1_epi8(static_cast<char>(0xFF)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = static_cast<byte_t>(~v.data[i]);
-    }
-    return result;
+    return scalar::bit_not(v);
 #    endif
 }
 
@@ -91,11 +75,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_andnot(vec128_t a, vec128_t b) noexcep
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_andnot_si128(b, a);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] & static_cast<byte_t>(~b.data[i]);
-    }
-    return result;
+    return scalar::bit_andnot(a, b);
 #    endif
 }
 
@@ -109,11 +89,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_and(vec256_t a, vec256_t b) noexcept {
 #    if defined(NEFORCE_SIMD_AVX2)
     return ::_mm256_and_si256(a, b);
 #    else
-    vec256_t result;
-    for (int i = 0; i < 32; ++i) {
-        result.data[i] = a.data[i] & b.data[i];
-    }
-    return result;
+    return scalar::bit_and(a, b);
 #    endif
 }
 
@@ -127,11 +103,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_or(vec256_t a, vec256_t b) noexcept {
 #    if defined(NEFORCE_SIMD_AVX2)
     return ::_mm256_or_si256(a, b);
 #    else
-    vec256_t result;
-    for (int i = 0; i < 32; ++i) {
-        result.data[i] = a.data[i] | b.data[i];
-    }
-    return result;
+    return scalar::bit_or(a, b);
 #    endif
 }
 
@@ -145,11 +117,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec256_t bit_xor(vec256_t a, vec256_t b) noexcept {
 #    if defined(NEFORCE_SIMD_AVX2)
     return ::_mm256_xor_si256(a, b);
 #    else
-    vec256_t result;
-    for (int i = 0; i < 32; ++i) {
-        result.data[i] = a.data[i] ^ b.data[i];
-    }
-    return result;
+    return scalar::bit_xor(a, b);
 #    endif
 }
 
@@ -163,11 +131,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec512_t bit_and(vec512_t a, vec512_t b) noexcept {
 #    if defined(NEFORCE_SIMD_AVX512F)
     return ::_mm512_and_si512(a, b);
 #    else
-    vec512_t result;
-    for (int i = 0; i < 64; ++i) {
-        result.data[i] = a.data[i] & b.data[i];
-    }
-    return result;
+    return scalar::bit_and(a, b);
 #    endif
 }
 
@@ -181,11 +145,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec512_t bit_or(vec512_t a, vec512_t b) noexcept {
 #    if defined(NEFORCE_SIMD_AVX512F)
     return ::_mm512_or_si512(a, b);
 #    else
-    vec512_t result;
-    for (int i = 0; i < 64; ++i) {
-        result.data[i] = a.data[i] | b.data[i];
-    }
-    return result;
+    return scalar::bit_or(a, b);
 #    endif
 }
 
@@ -199,11 +159,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec512_t bit_xor(vec512_t a, vec512_t b) noexcept {
 #    if defined(NEFORCE_SIMD_AVX512F)
     return ::_mm512_xor_si512(a, b);
 #    else
-    vec512_t result;
-    for (int i = 0; i < 64; ++i) {
-        result.data[i] = a.data[i] ^ b.data[i];
-    }
-    return result;
+    return scalar::bit_xor(a, b);
 #    endif
 }
 
@@ -219,14 +175,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_left_bytes(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return _mm_bslli_si128(v, Bytes);
 #    else
-    vec128_t result;
-    for (int i = 0; i < Bytes; ++i) {
-        result.data[i] = 0;
-    }
-    for (int i = Bytes; i < 16; ++i) {
-        result.data[i] = v.data[i - Bytes];
-    }
-    return result;
+    return scalar::shift_left_bytes(v);
 #    endif
 }
 
@@ -247,14 +196,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return _mm_bsrli_si128(v, Bytes);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16 - Bytes; ++i) {
-        result.data[i] = v.data[i + Bytes];
-    }
-    for (int i = 16 - Bytes; i < 16; ++i) {
-        result.data[i] = 0;
-    }
-    return result;
+    return scalar::shift_right_bytes(v);
 #    endif
 }
 
@@ -288,13 +230,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int popcount(vec128_t v) noexcept {
     }
     return total;
 #    else
-    int total = 0;
-    for (int i = 0; i < 16; ++i) {
-        byte_t b = v.data[i];
-        total += (b & 1) + ((b >> 1) & 1) + ((b >> 2) & 1) + ((b >> 3) & 1) + ((b >> 4) & 1) + ((b >> 5) & 1) +
-                 ((b >> 6) & 1) + ((b >> 7) & 1);
-    }
-    return total;
+    return scalar::popcount(v);
 #    endif
 }
 

@@ -79,7 +79,6 @@ licenses apply to those libraries themselves.
 | libmysql         | MySQL client                             | GPL-2.0-only WITH Universal-FOSS-exception-1.0 |
 | GoogleTest       | Unit and integration tests (not shipped) | BSD-3-Clause                                   |
 | Google Benchmark | Benchmarks (not shipped)                 | Apache-2.0                                     |
-| liburing         | io_uring bindings (Linux)                | MIT                                            |
 
 ### Note on libmysql
 

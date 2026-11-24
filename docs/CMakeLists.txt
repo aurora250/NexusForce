@@ -11,7 +11,7 @@ endif()
 
 find_program(DOT_EXECUTABLE dot
         HINTS
-        "${CONFIG_DOT_EXECUTABLE}/bin"
+        "${NEXUSFORCE_GRAPHVIZ_ROOT}/bin"
         "C:/Program Files/Graphviz/bin"
         "C:/Program Files (x86)/Graphviz/bin"
         "/usr/bin"

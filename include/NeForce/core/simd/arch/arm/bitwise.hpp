@@ -1,6 +1,6 @@
 #ifndef NEFORCE_CORE_SIMD_BITWISE_ARM_HPP__
 #define NEFORCE_CORE_SIMD_BITWISE_ARM_HPP__
-#include "NeForce/core/simd/types.hpp"
+#include "NeForce/core/simd/scalar/bitwise.hpp"
 #ifdef NEFORCE_SIMD_BRANCH_ARM
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
@@ -20,11 +20,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_and(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vandq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] & b.data[i];
-    }
-    return result;
+    return scalar::bit_and(a, b);
 #    endif
 }
 
@@ -38,11 +34,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_or(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vorrq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] | b.data[i];
-    }
-    return result;
+    return scalar::bit_or(a, b);
 #    endif
 }
 
@@ -56,11 +48,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_xor(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::veorq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] ^ b.data[i];
-    }
-    return result;
+    return scalar::bit_xor(a, b);
 #    endif
 }
 
@@ -73,11 +61,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_not(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vmvnq_u8(v);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = static_cast<byte_t>(~v.data[i]);
-    }
-    return result;
+    return scalar::bit_not(v);
 #    endif
 }
 
@@ -91,11 +75,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t bit_andnot(vec128_t a, vec128_t b) noexcep
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vbicq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] & static_cast<byte_t>(~b.data[i]);
-    }
-    return result;
+    return scalar::bit_andnot(a, b);
 #    endif
 }
 
@@ -195,14 +175,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_left_bytes(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return vextq_u8(::vdupq_n_u8(0), v, static_cast<int>(16 - Bytes));
 #    else
-    vec128_t result;
-    for (int i = 0; i < Bytes; ++i) {
-        result.data[i] = 0;
-    }
-    for (int i = Bytes; i < 16; ++i) {
-        result.data[i] = v.data[i - Bytes];
-    }
-    return result;
+    return scalar::shift_left_bytes(v);
 #    endif
 }
 
@@ -223,14 +196,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return vextq_u8(v, ::vdupq_n_u8(0), static_cast<int>(Bytes));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16 - Bytes; ++i) {
-        result.data[i] = v.data[i + Bytes];
-    }
-    for (int i = 16 - Bytes; i < 16; ++i) {
-        result.data[i] = 0;
-    }
-    return result;
+    return scalar::shift_right_bytes(v);
 #    endif
 }
 
@@ -261,13 +227,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int popcount(vec128_t v) noexcept {
     return total;
 #        endif
 #    else
-    int total = 0;
-    for (int i = 0; i < 16; ++i) {
-        byte_t b = v.data[i];
-        total += (b & 1) + ((b >> 1) & 1) + ((b >> 2) & 1) + ((b >> 3) & 1) + ((b >> 4) & 1) + ((b >> 5) & 1) +
-                 ((b >> 6) & 1) + ((b >> 7) & 1);
-    }
-    return total;
+    return scalar::popcount(v);
 #    endif
 }
 

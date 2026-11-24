@@ -10,6 +10,15 @@
 
 #include "NeForce/core/simd/arch/x86/memory.hpp"
 #include "NeForce/core/simd/arch/arm/memory.hpp"
-#include "NeForce/core/simd/portable/memory.hpp"
+#include "NeForce/core/simd/arch/riscv/memory.hpp"
+#include "NeForce/core/simd/arch/loongarch/memory.hpp"
+#ifdef NEFORCE_SIMD_BRANCH_NOT_SUPPORTED
+NEFORCE_BEGIN_NAMESPACE__
+NEFORCE_BEGIN_SIMD__
 
+using namespace scalar;
+
+NEFORCE_END_SIMD__
+NEFORCE_END_NAMESPACE__
+#endif
 #endif // NEFORCE_CORE_SIMD_MEMORY_HPP__

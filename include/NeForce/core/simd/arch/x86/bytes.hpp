@@ -1,7 +1,7 @@
 #ifndef NEFORCE_CORE_SIMD_BYTES_X86_HPP__
 #define NEFORCE_CORE_SIMD_BYTES_X86_HPP__
-#include "NeForce/core/simd/types.hpp"
 #include "NeForce/core/memory/bit.hpp"
+#include "NeForce/core/simd/scalar/bytes.hpp"
 #ifdef NEFORCE_SIMD_BRANCH_X86
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
@@ -20,11 +20,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i8(uint8_t c) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_set1_epi8(static_cast<char>(c));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = c;
-    }
-    return result;
+    return scalar::fill_i8(c);
 #    endif
 }
 
@@ -37,12 +33,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i16(const uint16_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_set1_epi16(static_cast<short>(v));
 #    else
-    vec128_t result;
-    auto* d = reinterpret_cast<uint16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        d[i] = v;
-    }
-    return result;
+    return scalar::fill_i16(v);
 #    endif
 }
 
@@ -55,12 +46,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i32(const uint32_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_set1_epi32(static_cast<int>(v));
 #    else
-    vec128_t result;
-    auto* d = reinterpret_cast<uint32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        d[i] = v;
-    }
-    return result;
+    return scalar::fill_i32(v);
 #    endif
 }
 
@@ -88,12 +74,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_unaligned(const void* ptr) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_loadu_si128(static_cast<const vec128_t*>(ptr));
 #    else
-    vec128_t result;
-    const auto* src = static_cast<const byte_t*>(ptr);
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = src[i];
-    }
-    return result;
+    return scalar::load_unaligned(ptr);
 #    endif
 }
 
@@ -107,11 +88,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t match_bytes(vec128_t a, vec128_t b) noexce
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_cmpeq_epi8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = (a.data[i] == b.data[i]) ? 0xFF : 0x00;
-    }
-    return result;
+    return scalar::match_bytes(a, b);
 #    endif
 }
 
@@ -124,13 +101,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int to_bitmask(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_movemask_epi8(v);
 #    else
-    int mask = 0;
-    for (int i = 0; i < 16; ++i) {
-        if (v.data[i] & 0x80) {
-            mask |= (1 << i);
-        }
-    }
-    return mask;
+    return scalar::to_bitmask(v);
 #    endif
 }
 
@@ -144,12 +115,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool contains_byte(vec128_t v, byte_t c) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_set1_epi8(static_cast<char>(c)))) != 0;
 #    else
-    for (int i = 0; i < 16; ++i) {
-        if (v.data[i] == c) {
-            return true;
-        }
-    }
-    return false;
+    return scalar::contains_byte(v, c);
 #    endif
 }
 
@@ -167,12 +133,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int find_first_byte(vec128_t v, byte_t c) noexcept 
     }
     return countr_zero(mask);
 #    else
-    for (int i = 0; i < 16; ++i) {
-        if (v.data[i] == c) {
-            return i;
-        }
-    }
-    return -1;
+    return scalar::find_first_byte(v, c);
 #    endif
 }
 
@@ -190,12 +151,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int find_last_byte(vec128_t v, byte_t c) noexcept {
     }
     return highest_set_bit_pos(static_cast<intptr_t>(mask));
 #    else
-    for (int i = 15; i >= 0; --i) {
-        if (v.data[i] == c) {
-            return i;
-        }
-    }
-    return -1;
+    return scalar::find_last_byte(v, c);
 #    endif
 }
 
@@ -212,13 +168,7 @@ NEFORCE_ALWAYS_INLINE_INLINE int count_byte(vec128_t v, byte_t c) noexcept {
     const ::__m128i sums = ::_mm_sad_epu8(ones, ::_mm_setzero_si128());
     return _mm_extract_epi16(sums, 0) + _mm_extract_epi16(sums, 4);
 #    else
-    int count = 0;
-    for (int i = 0; i < 16; ++i) {
-        if (v.data[i] == c) {
-            ++count;
-        }
-    }
-    return count;
+    return scalar::count_byte(v, c);
 #    endif
 }
 
@@ -231,12 +181,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool is_all_zero(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_setzero_si128())) == 0xFFFF;
 #    else
-    for (int i = 0; i < 16; ++i) {
-        if (v.data[i] != 0) {
-            return false;
-        }
-    }
-    return true;
+    return scalar::is_all_zero(v);
 #    endif
 }
 
@@ -249,12 +194,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool has_any_zero(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
     return ::_mm_movemask_epi8(::_mm_cmpeq_epi8(v, ::_mm_setzero_si128())) != 0;
 #    else
-    for (int i = 0; i < 16; ++i) {
-        if (v.data[i] == 0) {
-            return true;
-        }
-    }
-    return false;
+    return scalar::has_any_zero(v);
 #    endif
 }
 
@@ -275,11 +215,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t reverse_bytes(vec128_t v) noexcept {
     }
     return ::_mm_loadu_si128(reinterpret_cast<const ::__m128i*>(buf));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[15 - i] = v.data[i];
-    }
-    return result;
+    return scalar::reverse_bytes(v);
 #    endif
 }
 
@@ -305,12 +241,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shuffle_bytes(vec128_t v, vec128_t indices
     }
     return ::_mm_load_si128(reinterpret_cast<const ::__m128i*>(result));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        const int index = indices.data[i] & 0x0F;
-        result.data[i] = v.data[index];
-    }
-    return result;
+    return scalar::shuffle_bytes(v, indices);
 #    endif
 }
 
@@ -327,15 +258,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t blend_bytes(vec128_t a, vec128_t b, vec128
 #    elif defined(NEFORCE_SIMD_SSE2)
     const ::__m128i sel = ::_mm_cmpgt_epi8(::_mm_setzero_si128(), mask);
     return ::_mm_or_si128(::_mm_and_si128(sel, b), ::_mm_andnot_si128(sel, a));
-#    elif defined(NEFORCE_SIMD_NEON)
-    const ::int8x16_t sel = vshrq_n_s8(::vreinterpretq_s8_u8(mask), 7);
-    return ::vbslq_u8(::vreinterpretq_u8_s8(sel), b, a);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = (mask.data[i] & 0x80) ? b.data[i] : a.data[i];
-    }
-    return result;
+    return scalar::blend_bytes(a, b, mask);
 #    endif
 }
 
@@ -354,9 +278,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_bytes_n(void* ptr, vec128_t v, int n) no
         static_cast<byte_t*>(ptr)[i] = buf[i];
     }
 #    else
-    for (int i = 0; i < n; ++i) {
-        static_cast<byte_t*>(ptr)[i] = v.data[i];
-    }
+    return scalar::store_bytes_n(ptr, v, n);
 #    endif
 }
 
@@ -376,12 +298,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_bytes_n(const void* ptr, int n) noexc
     }
     return ::_mm_load_si128(reinterpret_cast<const ::__m128i*>(buf));
 #    else
-    vec128_t result = {};
-    const auto* src = static_cast<const byte_t*>(ptr);
-    for (int i = 0; i < n; ++i) {
-        result.data[i] = src[i];
-    }
-    return result;
+    return scalar::load_bytes_n(ptr, n);
 #    endif
 }
 

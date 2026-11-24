@@ -12,6 +12,7 @@
 - 新增 `percent` 百分号编解码（RFC 3986 §2.1 / form-urlencoded），提供严格解码、宽容解码与表单编码
 - 新增 `base32` 编解码（RFC 4648 §6/§7），支持标准字母表与 base32hex、大小写不敏感解码与可选填充
 - 新增 `unique_function`，仅可移动且类型擦除
+- 新增 `linux_io_queue`：基于 io_uring 内核接口实现提交队列（SQ）与完成队列（CQ），环形缓冲映射、SQE 发布、内存屏障与 `io_uring_setup` / `io_uring_enter` 系统调用
 - 新增 `rotating_file`，按大小轮转的原始文件写入器，支持 `rollover` 与 `indexed` 两种命名、`max_files` 保留与显式 `rotate()`
 - 新增 `crash_dump` 崩溃转储，统一接管 `terminate`、POSIX 致命信号与 Windows 未处理异常过滤器，写出平台原生转储
 - `ssl_context` 新增 `enable_session_reuse()` 与 `share()`，`ssl_client` 新增 `ssl_session_cache` 跨连接会话重用；启用 TLS 1.3 session ticket/PSK 缩写握手
@@ -174,6 +175,10 @@
 - 新增 `cancellation_slot::clear()`：注销已注册的取消回调，供自行持有取消槽的场景断开回调与操作之间的相互引用
 - 新增按精度实例化的常量 `machine_epsilon_v<T>` / `default_tolerance_v<T>` / `loose_tolerance_v<T>`，级数系数表改为 `exponential_coefficients_table<T>` 等结构体模板
 - 新增 `NexusForce::NexusForceStatic` 静态库目标，与动态库共用同一份源文件并随同一份 CMake 包导出，用于单文件部署；
+- 新增 `vec_rvv_t` 一族 RVV 可伸缩长度类型，仅用于流式内核
+- 新增 ARM SVE 内存内核使用 `svwhilelt` 谓词循环，运行期自适应向量长度
+- 新增构建配置项 `isa.<arch>.vector-bytes`
+- 新增指令集检测：`NEFORCE_SIMD_SVE` / `SVE2`、`NEFORCE_SIMD_RVV`、`NEFORCE_SIMD_LSX` / `LASX`
 
 ### 🔧 Improvements
 
@@ -446,6 +451,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `scalar` 后端浮点通道访问：`cmpeq_f32/f64`、`cmpgt/ge/lt/le_f32/f64`、`loadu_ps/pd`、`storeu_ps/pd` 原先按字节读写浮点通道导致结果错误，改为按 `float` / `double` 通道访问
+- 修复 RVV 与 SVE 的 `string_length` 跨页读取：按当前页剩余字节数限制单次载入长度，避免读入相邻保护页
 - 修复隐藏可见性构建（`-fvisibility=hidden` 的 Debug 配置）下链接 `NexusForceUnitTests` 报 `undefined reference to typeinfo for neforce::tui::component_base`：组件基类未导出，typeinfo 被编译为局部符号，派生组件的 RTTI 在测试/插件 TU 中无法解析；`component_base` 现标记 `NEFORCE_API`
 - 修复 Windows 上 `stacktrace` 多跳过一帧：`current(skip)` 先加 1 再交给构造函数，而构造函数在 Windows 上又用 `CaptureStackBackTrace(skip + 2)`，叠加后 `current(0)` 丢掉直接调用者
 - 修复 `basic_string::clear()` 在长字符串模式下释放缓冲区并退回 SSO：清空后 `capacity()` 从长容量掉回 16，随后的 `append` 又触发扩容；现在保留缓冲区，`clear()` 后容量不变

@@ -264,7 +264,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 ### 📁 File System
 - **Path/File Operations** - Path and file system operations `path` / `path_tree` / `file` / `file_async` / `file_diff` / `file_locker` / `file_mapper`
-- **`file_async`** - `io_context`- and `io_uring`-driven async file I/O, with offset specification and cancellation slot support
+- **`file_async`** - `io_context`-driven async file I/O backed by the self-contained Linux I/O queue
 - **`file_watcher`** - Real-time file system change monitoring
 - **Config File Parsing** - JSON/TOML/YAML/INI/ENV value system, format parsing and streaming builder
 - **`temp_file`** - Secure temporary file management
@@ -338,6 +338,7 @@ See [HTTP/HTTPS performance test records](benchmark/network/http/PERFORMANCE.md)
 - **`environment`** - Environment variable manipulation
 - **`system_signal_manager`** - System signal control
 - **`system_event`** - System event management
+- **`io_queue`** - Linux native async I/O submission/completion queue
 
 ### ⏰ Time Utilities
 - **`steady_clock` / `system_clock`** - High-resolution clocks with multiple clock sources
@@ -491,11 +492,60 @@ Ensure that you have correctly installed and configured the prerequisites before
 
 > 💡 You can modify the configuration items in `config.json` (build options) and `vcpkg.json` (package management configuration) in the project root directory for personalized builds.
 >
-> **This project implicitly depends on liburing-dev on Linux systems. If you need `io_uring` functionality,
-> please ensure it is installed before building; otherwise, the related features will be disabled and fall back to alternatives.**
->
 > In actual testing, on Linux, vcpkg requires libtirpc-dev libraries to build libmysql, libpq requires bison, flex, and autoconf libraries, and these libraries are not installed by default by the package manager.
 > If you need corresponding dependencies, you can install them in advance using the package manager to prevent cmake build failures.
+
+### ⚙️ config.json Options
+
+`config.json` in the project root is the authoritative source of build options,
+Every key is read during configure and turned into a CMake cache variable.
+
+| Group | Key | Value | Behavior | Cache variable |
+|---|---|---|---|---|
+| General | `standard` | `14` / `17` / `20` | C++ standard used for every target; unsupported values are ignored and C++20 is used | `CMAKE_CXX_STANDARD` |
+| General | `vcpkg.windows` / `vcpkg.linux` | path | vcpkg root, used to locate `vcpkg.cmake` | `CMAKE_TOOLCHAIN_FILE` |
+| General | `graphviz.windows` / `graphviz.linux` | path | Graphviz root used by Doxygen | `NEXUSFORCE_GRAPHVIZ_ROOT` |
+| Dependency | `dependency.postgresql.switch` | `true` / `false` | build the PostgreSQL driver | `NEXUSFORCE_ENABLE_POSTGRESQL` |
+| Dependency | `dependency.mysql.switch` | `true` / `false` | build the MySQL driver | `NEXUSFORCE_ENABLE_MYSQL` |
+| Dependency | `dependency.sqlite3.switch` | `true` / `false` | build the SQLite3 driver | `NEXUSFORCE_ENABLE_SQLITE3` |
+| Dependency | `dependency.sqlite3.cipher` | `true` / `false` | compile SQLCipher encryption | `NEXUSFORCE_USING_SQLCIPHER` |
+| Dependency | `dependency.hiredis.switch` | `true` / `false` | build the Redis client | `NEXUSFORCE_ENABLE_REDIS` |
+| Dependency | `dependency.zlib.switch` | `true` / `false` | build the zlib codec | `NEXUSFORCE_ENABLE_ZLIB` |
+| Dependency | `dependency.lz4.switch` | `true` / `false` | build the LZ4 codec | `NEXUSFORCE_ENABLE_LZ4` |
+| Dependency | `dependency.zstd.switch` | `true` / `false` | build the Zstandard codec | `NEXUSFORCE_ENABLE_ZSTD` |
+| Dependency | `dependency.icu.switch` | `true` / `false` | build the ICU4C locale backend | `NEXUSFORCE_ENABLE_ICU` |
+| Feature | `feature.locale` | `true` / `false` | build the locale component; `false` also forces ICU off | `NEXUSFORCE_ENABLE_LOCALE` |
+| Feature | `feature.memory-pool-global-override` | `true` / `false` | replace the process wide `operator new` / `delete` with the memory pool | `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` |
+| Build | `build.tests` | `true` / `false` | build unit tests (GTest) | `NEXUSFORCE_BUILD_TESTS` |
+| Build | `build.examples` | `true` / `false` | build example programs | `NEXUSFORCE_BUILD_EXAMPLES` |
+| Build | `build.benchmarks` | `true` / `false` | build Google Benchmark suites | `NEXUSFORCE_BUILD_BENCHMARKS` |
+| Build | `build.docs` | `true` / `false` | build Doxygen documentation | `NEXUSFORCE_BUILD_DOCS` |
+| ISA | `isa.<arch>.level` | see [ISA](#ISA) | SIMD level of the target architecture; unsupported levels fall back automatically | `NEXUSFORCE_SIMD_LEVEL` |
+| ISA | `isa.<arch>.extensions.aes-ni` / `pclmul` / `vaes` / `intel-tsx` | `true` / `false` | x86_64 crypto extensions; `vaes` implies AVX2 code generation | `NEXUSFORCE_USING_AES_NI` / `_PCLMUL` / `_VAES` / `_INTEL_TSX` |
+| ISA | `isa.<arch>.extensions.aes` | `true` / `false` | aarch64 crypto extensions | `NEXUSFORCE_USING_AES_ARM` |
+| ISA | `isa.<arch>.vector-bytes` | `0` = auto, or a byte count | pin the SVE / RVV vector width | `NEXUSFORCE_VECTOR_BYTES` |
+
+### ISA
+
+| Architecture  | `level`  | Compiler flags                                          | Detected macros                    | Backend                       |
+|---------------|----------|---------------------------------------------------------|------------------------------------|-------------------------------|
+| x86_64        | `AUTO`   | `-march=native`                                         | whatever the build host provides    | `arch/x86`                    |
+| x86_64        | `BASELINE` | —                                                     | `SSE2`                             | `arch/x86` (SSE2 only)        |
+| x86_64        | `SSE2`   | `-msse2`                                                | `SSE2`                             | `arch/x86` (SSE2 only)        |
+| x86_64        | `AVX`    | `-mavx`                                                 | `SSE2` · `SSSE3` · `SSE4.1` · `AVX` | `arch/x86` (+ AVX)           |
+| x86_64        | `AVX2`   | `-mavx2`                                                | above + `AVX2`                     | `arch/x86` (+ AVX2)           |
+| x86_64        | `AVX512` | `-mavx512f -mavx512cd -mavx512bw -mavx512dq`             | above + `AVX512F`                  | `arch/x86` (+ AVX-512)        |
+| aarch64       | `AUTO`   | —                                                       | `NEON`                             | `arch/arm`                    |
+| aarch64       | `BASELINE` | —                                                     | `NEON`                             | `arch/arm`                    |
+| aarch64       | `SVE`    | `-march=armv8.2-a+sve`                                  | `NEON` + `SVE`                     | `arch/arm` + SVE memory kernels |
+| aarch64       | `SVE2`   | `-march=armv8.2-a+sve2`                                 | `NEON` + `SVE` + `SVE2`            | same as `SVE`                 |
+| riscv64       | `AUTO`   | —                                                       | —                                  | `scalar`                      |
+| riscv64       | `BASELINE` | —                                                     | —                                  | `scalar`                      |
+| riscv64       | `RVV`    | `-march=rv64gcv_zihintpause`                            | `RVV` (RVV 1.0 intrinsics)         | `arch/riscv`                  |
+| loongarch64   | `AUTO`   | —                                                       | —                                  | `scalar`                      |
+| loongarch64   | `BASELINE` | —                                                     | —                                  | `scalar`                      |
+| loongarch64   | `LSX`    | `-mlsx`                                                 | `LSX`                              | `arch/loongarch`              |
+| loongarch64   | `LASX`   | `-mlasx`                                                | `LSX` + `LASX`                     | `arch/loongarch` (+ 256-bit)  |
 
 #### 🪟 Windows
 

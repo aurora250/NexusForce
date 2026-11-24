@@ -366,39 +366,69 @@
 
 #if defined(NEFORCE_ARCH_X86)
 #    if defined(__SSE2__) || defined(_M_X64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#        define NEFORCE_SIMD_SSE2 1 ///< SSE2指令集可用
+#        define NEFORCE_SIMD_SSE2 1 ///< SSE2 指令集可用
 #    endif
 #    if defined(__AVX__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#        define NEFORCE_SIMD_AVX 1 ///< AVX指令集可用
+#        define NEFORCE_SIMD_AVX 1 ///< AVX 指令集可用
 #    endif
 #    if defined(__AVX2__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#        define NEFORCE_SIMD_AVX2 1 ///< AVX2指令集可用
+#        define NEFORCE_SIMD_AVX2 1 ///< AVX2 指令集可用
 #    endif
 #    if defined(__AVX512F__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#        define NEFORCE_SIMD_AVX512F 1 ///< AVX-512F指令集可用
+#        define NEFORCE_SIMD_AVX512F 1 ///< AVX-512F 指令集可用
 #    endif
 #    if (defined(NEFORCE_COMPILER_MSVC) && (defined(__AVX__) || defined(__AVX2__) || defined(__AVX512F__))) || \
             defined(__SSSE3__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#        define NEFORCE_SIMD_SSSE3 1 ///< SSSE3指令集可用
+#        define NEFORCE_SIMD_SSSE3 1 ///< SSSE3 指令集可用
+#    endif
+#    if (defined(NEFORCE_COMPILER_MSVC) && (defined(__AVX__) || defined(__AVX2__) || defined(__AVX512F__))) || \
+            defined(__SSE4_1__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_SSE4_1 1 ///< SSE4.1 指令集可用
 #    endif
 #elif (defined(NEFORCE_ARCH_ARM) && defined(__ARM_NEON)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#    define NEFORCE_SIMD_NEON 1 ///< ARM NEON指令集可用
+#    define NEFORCE_SIMD_NEON 1 ///< ARM NEON 指令集可用
 #endif
 
-#if defined(NEFORCE_SIMD_SSE2) || defined(NEFORCE_SIMD_AVX2) || defined(NEFORCE_SIMD_NEON)
+#if defined(NEFORCE_ARCH_ARM)
+#    if defined(__ARM_FEATURE_SVE) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_SVE 1 ///< ARM SVE 指令集可用
+#    endif
+#    if defined(__ARM_FEATURE_SVE2) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_SVE2 1 ///< ARM SVE2 指令集可用
+#    endif
+#endif
+
+#if defined(NEFORCE_ARCH_RISCV)
+#    if (defined(__riscv_v_intrinsic) && (__riscv_v_intrinsic >= 11000)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_RVV 1 ///< RISC-V RVV 指令集可用
+#    endif
+#endif
+
+#if defined(NEFORCE_ARCH_LOONGARCH)
+#    if defined(__loongarch_sx) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_LSX 1 ///< LoongArch LSX 指令集可用
+#    endif
+#    if defined(__loongarch_asx) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_LASX 1 ///< LoongArch LASX 指令集可用
+#    endif
+#endif
+
+#if defined(NEFORCE_SIMD_SSE2) || defined(NEFORCE_SIMD_AVX2) || defined(NEFORCE_SIMD_NEON) ||  \
+        defined(NEFORCE_SIMD_SVE) || defined(NEFORCE_SIMD_RVV) || defined(NEFORCE_SIMD_LSX) || \
+        defined(NEFORCE_SIMD_LASX)
 #    define NEFORCE_SUPPORT_SIMD 1 ///< SIMD 指令集可用
 #endif
 
 #if defined(NEFORCE_ARCH_X86)
 #    if defined(__AES__) || (defined(_MSC_VER) && defined(NEFORCE_USING_AES_NI)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#        define NEFORCE_SIMD_AES_NI 1 ///< Intel AES-NI指令集可用
+#        define NEFORCE_SIMD_AES_NI 1 ///< Intel AES-NI 指令集可用
 #    endif
 #endif
 
 #if defined(NEFORCE_ARCH_X86)
 #    if defined(__PCLMUL__) || (defined(_MSC_VER) && defined(NEFORCE_USING_PCLMUL)) || \
             defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#        define NEFORCE_SIMD_PCLMUL 1 ///< PCLMULQDQ指令集可用
+#        define NEFORCE_SIMD_PCLMUL 1 ///< PCLMULQDQ 指令集可用
 #    endif
 #    if (defined(__VAES__) && defined(__VPCLMULQDQ__)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #        define NEFORCE_SIMD_VAES 1 ///< VAES 与 VPCLMULQDQ 指令集可用
@@ -407,7 +437,7 @@
 
 #if defined(NEFORCE_ARCH_ARM)
 #    if defined(__ARM_FEATURE_AES) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#        define NEFORCE_SIMD_AES_ARM 1 ///< ARM AES指令集可用
+#        define NEFORCE_SIMD_AES_ARM 1 ///< ARM AES 指令集可用
 #    endif
 #endif
 
@@ -536,6 +566,14 @@
 #define __NEFORCE_SIMD_NAMESPACE__ simd
 #define NEFORCE_BEGIN_SIMD__ namespace __NEFORCE_SIMD_NAMESPACE__ {
 #define NEFORCE_END_SIMD__ }
+
+#define __NEFORCE_SCALAR_NAMESPACE__ scalar
+#define NEFORCE_BEGIN_SCALAR__ namespace __NEFORCE_SCALAR_NAMESPACE__ {
+#define NEFORCE_END_SCALAR__ }
+
+#define __NEFORCE_SVE_NAMESPACE__ sve
+#define NEFORCE_BEGIN_SVE__ namespace __NEFORCE_SVE_NAMESPACE__ {
+#define NEFORCE_END_SVE__ }
 
 #define __NEFORCE_CONSTANTS_NAMESPACE__ constants
 #define NEFORCE_BEGIN_CONSTANTS__ namespace __NEFORCE_CONSTANTS_NAMESPACE__ {

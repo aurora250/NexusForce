@@ -1,7 +1,6 @@
 #ifndef NEFORCE_CORE_SIMD_ARITHMETIC_ARM_HPP__
 #define NEFORCE_CORE_SIMD_ARITHMETIC_ARM_HPP__
-#include "NeForce/core/numeric/numeric_traits.hpp"
-#include "NeForce/core/simd/types.hpp"
+#include "NeForce/core/simd/scalar/arithmetic.hpp"
 #ifdef NEFORCE_SIMD_BRANCH_ARM
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
@@ -21,11 +20,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t add_i8(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s8(::vaddq_s8(::vreinterpretq_s8_u8(a), ::vreinterpretq_s8_u8(b)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = static_cast<byte_t>(static_cast<int8_t>(a.data[i]) + static_cast<int8_t>(b.data[i]));
-    }
-    return result;
+    return scalar::add_i8(a, b);
 #    endif
 }
 
@@ -39,14 +34,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t add_i16(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s16(::vaddq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = static_cast<int16_t>(sa[i] + sb[i]);
-    }
-    return result;
+    return scalar::add_i16(a, b);
 #    endif
 }
 
@@ -60,14 +48,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t add_i32(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s32(::vaddq_s32(::vreinterpretq_s32_u8(a), ::vreinterpretq_s32_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int32_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int32_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        rd[i] = sa[i] + sb[i];
-    }
-    return result;
+    return scalar::add_i32(a, b);
 #    endif
 }
 
@@ -81,14 +62,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t add_i64(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s64(::vaddq_s64(::vreinterpretq_s64_u8(a), ::vreinterpretq_s64_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int64_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int64_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int64_t*>(result.data);
-    for (int i = 0; i < 2; ++i) {
-        rd[i] = sa[i] + sb[i];
-    }
-    return result;
+    return scalar::add_i64(a, b);
 #    endif
 }
 
@@ -102,11 +76,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t sub_i8(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s8(::vsubq_s8(::vreinterpretq_s8_u8(a), ::vreinterpretq_s8_u8(b)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = static_cast<byte_t>(static_cast<int8_t>(a.data[i]) - static_cast<int8_t>(b.data[i]));
-    }
-    return result;
+    return scalar::sub_i8(a, b);
 #    endif
 }
 
@@ -120,14 +90,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t sub_i16(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s16(::vsubq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = static_cast<int16_t>(sa[i] - sb[i]);
-    }
-    return result;
+    return scalar::sub_i16(a, b);
 #    endif
 }
 
@@ -141,14 +104,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t sub_i32(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s32(::vsubq_s32(::vreinterpretq_s32_u8(a), ::vreinterpretq_s32_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int32_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int32_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        rd[i] = sa[i] - sb[i];
-    }
-    return result;
+    return scalar::sub_i32(a, b);
 #    endif
 }
 
@@ -162,14 +118,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t sub_i64(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s64(::vsubq_s64(::vreinterpretq_s64_u8(a), ::vreinterpretq_s64_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int64_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int64_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int64_t*>(result.data);
-    for (int i = 0; i < 2; ++i) {
-        rd[i] = sa[i] - sb[i];
-    }
-    return result;
+    return scalar::sub_i64(a, b);
 #    endif
 }
 
@@ -183,14 +132,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t mullo_i16(vec128_t a, vec128_t b) noexcept
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s16(::vmulq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = static_cast<int16_t>(sa[i] * sb[i]);
-    }
-    return result;
+    return scalar::mullo_i16(a, b);
 #    endif
 }
 
@@ -204,14 +146,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t mullo_i32(vec128_t a, vec128_t b) noexcept
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s32(::vmulq_s32(::vreinterpretq_s32_u8(a), ::vreinterpretq_s32_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int32_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int32_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        rd[i] = static_cast<int32_t>(sa[i] * sb[i]);
-    }
-    return result;
+    return scalar::mullo_i32(a, b);
 #    endif
 }
 
@@ -235,14 +170,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t mulhi_i16(vec128_t a, vec128_t b) noexcept
     const ::int16x4_t hi_hi = vshrn_n_s32(prod_hi, 16);
     return ::vreinterpretq_u8_s16(::vcombine_s16(hi_lo, hi_hi));
 #    else
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = static_cast<int16_t>((static_cast<int32_t>(sa[i]) * static_cast<int32_t>(sb[i])) >> 16);
-    }
-    return result;
+    return scalar::mulhi_i16(a, b);
 #    endif
 }
 
@@ -260,17 +188,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t madds_i8x16(vec128_t a, vec128_t b) noexce
     const ::int16x8_t prod_hi = ::vmull_s8(::vget_high_s8(sa), ::vget_high_s8(sb));
     return ::vreinterpretq_u8_s16(::vpaddq_s16(prod, prod_hi));
 #    else
-    const auto* sa = reinterpret_cast<const int8_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int8_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = static_cast<int16_t>(static_cast<int16_t>(sa[static_cast<ptrdiff_t>(2 * i)]) *
-                                             static_cast<int16_t>(sb[static_cast<ptrdiff_t>(2 * i)]) +
-                                     static_cast<int16_t>(sa[static_cast<ptrdiff_t>(2 * i + 1)]) *
-                                             static_cast<int16_t>(sb[static_cast<ptrdiff_t>(2 * i + 1)]));
-    }
-    return result;
+    return scalar::madds_i8x16(a, b);
 #    endif
 }
 
@@ -284,18 +202,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_add_i8(vec128_t a, vec128_t b) n
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s8(::vqaddq_s8(::vreinterpretq_s8_u8(a), ::vreinterpretq_s8_u8(b)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        const int val = static_cast<int8_t>(a.data[i]) + static_cast<int8_t>(b.data[i]);
-        if (val > 127) {
-            result.data[i] = 127;
-        } else if (val < -128) {
-            result.data[i] = 128;
-        } else {
-            result.data[i] = static_cast<byte_t>(static_cast<int8_t>(val));
-        }
-    }
-    return result;
+    return scalar::saturated_add_i8(a, b);
 #    endif
 }
 
@@ -309,21 +216,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_add_i16(vec128_t a, vec128_t b) 
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s16(::vqaddq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        const int val = sa[i] + sb[i];
-        if (val > 32767) {
-            rd[i] = 32767;
-        } else if (val < -32768) {
-            rd[i] = -32768;
-        } else {
-            rd[i] = static_cast<int16_t>(val);
-        }
-    }
-    return result;
+    return scalar::saturated_add_i16(a, b);
 #    endif
 }
 
@@ -337,12 +230,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_add_u8(vec128_t a, vec128_t b) n
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vqaddq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        const int val = static_cast<int>(a.data[i]) + static_cast<int>(b.data[i]);
-        result.data[i] = static_cast<byte_t>(val > 255 ? 255 : val);
-    }
-    return result;
+    return scalar::saturated_add_u8(a, b);
 #    endif
 }
 
@@ -356,13 +244,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_add_u16(vec128_t a, vec128_t b) 
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_u16(::vqaddq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 8; ++i) {
-        const int val = static_cast<int>(reinterpret_cast<const uint16_t*>(a.data)[i]) +
-                        static_cast<int>(reinterpret_cast<const uint16_t*>(b.data)[i]);
-        reinterpret_cast<uint16_t*>(result.data)[i] = static_cast<uint16_t>(val > 65535 ? 65535 : val);
-    }
-    return result;
+    return scalar::saturated_add_u16(a, b);
 #    endif
 }
 
@@ -376,18 +258,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_sub_i8(vec128_t a, vec128_t b) n
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s8(::vqsubq_s8(::vreinterpretq_s8_u8(a), ::vreinterpretq_s8_u8(b)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        const int val = static_cast<int8_t>(a.data[i]) - static_cast<int8_t>(b.data[i]);
-        if (val > 127) {
-            result.data[i] = 127;
-        } else if (val < -128) {
-            result.data[i] = 128;
-        } else {
-            result.data[i] = static_cast<byte_t>(static_cast<int8_t>(val));
-        }
-    }
-    return result;
+    return scalar::saturated_sub_i8(a, b);
 #    endif
 }
 
@@ -401,21 +272,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_sub_i16(vec128_t a, vec128_t b) 
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s16(::vqsubq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        const int val = sa[i] - sb[i];
-        if (val > 32767) {
-            rd[i] = 32767;
-        } else if (val < -32768) {
-            rd[i] = -32768;
-        } else {
-            rd[i] = static_cast<int16_t>(val);
-        }
-    }
-    return result;
+    return scalar::saturated_sub_i16(a, b);
 #    endif
 }
 
@@ -429,12 +286,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_sub_u8(vec128_t a, vec128_t b) n
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vqsubq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        const int val = static_cast<int>(a.data[i]) - static_cast<int>(b.data[i]);
-        result.data[i] = static_cast<byte_t>(val < 0 ? 0 : val);
-    }
-    return result;
+    return scalar::saturated_sub_u8(a, b);
 #    endif
 }
 
@@ -448,13 +300,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t saturated_sub_u16(vec128_t a, vec128_t b) 
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_u16(::vqsubq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 8; ++i) {
-        const int val = static_cast<int>(reinterpret_cast<const uint16_t*>(a.data)[i]) -
-                        static_cast<int>(reinterpret_cast<const uint16_t*>(b.data)[i]);
-        reinterpret_cast<uint16_t*>(result.data)[i] = static_cast<uint16_t>(val < 0 ? 0 : val);
-    }
-    return result;
+    return scalar::saturated_sub_u16(a, b);
 #    endif
 }
 
@@ -468,15 +314,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t abs_i8(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s8(::vabsq_s8(::vreinterpretq_s8_u8(v)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        const auto val = static_cast<int8_t>(v.data[i]);
-        // Use unsigned negation to avoid UB, matches x86 PABSB wrap-around behavior
-        result.data[i] =
-                val < 0 ? static_cast<byte_t>(static_cast<int8_t>(-static_cast<unsigned>(static_cast<uint8_t>(val))))
-                        : static_cast<byte_t>(val);
-    }
-    return result;
+    return scalar::abs_i8(v);
 #    endif
 }
 
@@ -490,14 +328,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t abs_i16(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s16(::vabsq_s16(::vreinterpretq_s16_u8(v)));
 #    else
-    const auto* sv = reinterpret_cast<const int16_t*>(v.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        const int16_t val = sv[i];
-        rd[i] = val < 0 ? static_cast<int16_t>(-static_cast<int>(static_cast<uint16_t>(val))) : val;
-    }
-    return result;
+    return scalar::abs_i16(v);
 #    endif
 }
 
@@ -511,14 +342,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t abs_i32(vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s32(::vabsq_s32(::vreinterpretq_s32_u8(v)));
 #    else
-    const auto* sv = reinterpret_cast<const int32_t*>(v.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        const int32_t val = sv[i];
-        rd[i] = val < 0 ? static_cast<int32_t>(-static_cast<int64_t>(static_cast<uint32_t>(val))) : val;
-    }
-    return result;
+    return scalar::abs_i32(v);
 #    endif
 }
 
@@ -532,13 +356,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t min_i8(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s8(::vminq_s8(::vreinterpretq_s8_u8(a), ::vreinterpretq_s8_u8(b)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        const auto va = static_cast<int8_t>(a.data[i]);
-        const auto vb = static_cast<int8_t>(b.data[i]);
-        result.data[i] = static_cast<byte_t>(va < vb ? va : vb);
-    }
-    return result;
+    return scalar::min_i8(a, b);
 #    endif
 }
 
@@ -552,14 +370,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t min_i16(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s16(::vminq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = sa[i] < sb[i] ? sa[i] : sb[i];
-    }
-    return result;
+    return scalar::min_i16(a, b);
 #    endif
 }
 
@@ -573,14 +384,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t min_i32(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s32(::vminq_s32(::vreinterpretq_s32_u8(a), ::vreinterpretq_s32_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int32_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int32_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        rd[i] = sa[i] < sb[i] ? sa[i] : sb[i];
-    }
-    return result;
+    return scalar::min_i32(a, b);
 #    endif
 }
 
@@ -594,11 +398,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t min_u8(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vminq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] < b.data[i] ? a.data[i] : b.data[i];
-    }
-    return result;
+    return scalar::min_u8(a, b);
 #    endif
 }
 
@@ -612,14 +412,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t min_u16(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_u16(::vminq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #    else
-    const auto* ua = reinterpret_cast<const uint16_t*>(a.data);
-    const auto* ub = reinterpret_cast<const uint16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<uint16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = ua[i] < ub[i] ? ua[i] : ub[i];
-    }
-    return result;
+    return scalar::min_u16(a, b);
 #    endif
 }
 
@@ -633,14 +426,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t min_u32(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_u32(::vminq_u32(::vreinterpretq_u32_u8(a), ::vreinterpretq_u32_u8(b)));
 #    else
-    const auto* ua = reinterpret_cast<const uint32_t*>(a.data);
-    const auto* ub = reinterpret_cast<const uint32_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<uint32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        rd[i] = ua[i] < ub[i] ? ua[i] : ub[i];
-    }
-    return result;
+    return scalar::min_u32(a, b);
 #    endif
 }
 
@@ -654,13 +440,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t max_i8(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s8(::vmaxq_s8(::vreinterpretq_s8_u8(a), ::vreinterpretq_s8_u8(b)));
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        const auto va = static_cast<int8_t>(a.data[i]);
-        const auto vb = static_cast<int8_t>(b.data[i]);
-        result.data[i] = static_cast<byte_t>(va > vb ? va : vb);
-    }
-    return result;
+    return scalar::max_i8(a, b);
 #    endif
 }
 
@@ -674,14 +454,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t max_i16(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s16(::vmaxq_s16(::vreinterpretq_s16_u8(a), ::vreinterpretq_s16_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int16_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = sa[i] > sb[i] ? sa[i] : sb[i];
-    }
-    return result;
+    return scalar::max_i16(a, b);
 #    endif
 }
 
@@ -695,14 +468,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t max_i32(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_s32(::vmaxq_s32(::vreinterpretq_s32_u8(a), ::vreinterpretq_s32_u8(b)));
 #    else
-    const auto* sa = reinterpret_cast<const int32_t*>(a.data);
-    const auto* sb = reinterpret_cast<const int32_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<int32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        rd[i] = sa[i] > sb[i] ? sa[i] : sb[i];
-    }
-    return result;
+    return scalar::max_i32(a, b);
 #    endif
 }
 
@@ -716,11 +482,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t max_u8(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vmaxq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = a.data[i] > b.data[i] ? a.data[i] : b.data[i];
-    }
-    return result;
+    return scalar::max_u8(a, b);
 #    endif
 }
 
@@ -734,14 +496,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t max_u16(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_u16(::vmaxq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #    else
-    const auto* ua = reinterpret_cast<const uint16_t*>(a.data);
-    const auto* ub = reinterpret_cast<const uint16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<uint16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = ua[i] > ub[i] ? ua[i] : ub[i];
-    }
-    return result;
+    return scalar::max_u16(a, b);
 #    endif
 }
 
@@ -755,14 +510,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t max_u32(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_u32(::vmaxq_u32(::vreinterpretq_u32_u8(a), ::vreinterpretq_u32_u8(b)));
 #    else
-    const auto* ua = reinterpret_cast<const uint32_t*>(a.data);
-    const auto* ub = reinterpret_cast<const uint32_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<uint32_t*>(result.data);
-    for (int i = 0; i < 4; ++i) {
-        rd[i] = ua[i] > ub[i] ? ua[i] : ub[i];
-    }
-    return result;
+    return scalar::max_u32(a, b);
 #    endif
 }
 
@@ -776,11 +524,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t avg_u8(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vrhaddq_u8(a, b);
 #    else
-    vec128_t result;
-    for (int i = 0; i < 16; ++i) {
-        result.data[i] = static_cast<byte_t>((static_cast<int>(a.data[i]) + static_cast<int>(b.data[i]) + 1) >> 1);
-    }
-    return result;
+    return scalar::avg_u8(a, b);
 #    endif
 }
 
@@ -794,14 +538,7 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t avg_u16(vec128_t a, vec128_t b) noexcept {
 #    if defined(NEFORCE_SIMD_NEON)
     return ::vreinterpretq_u8_u16(::vrhaddq_u16(::vreinterpretq_u16_u8(a), ::vreinterpretq_u16_u8(b)));
 #    else
-    const auto* ua = reinterpret_cast<const uint16_t*>(a.data);
-    const auto* ub = reinterpret_cast<const uint16_t*>(b.data);
-    vec128_t result;
-    auto* rd = reinterpret_cast<uint16_t*>(result.data);
-    for (int i = 0; i < 8; ++i) {
-        rd[i] = static_cast<uint16_t>((static_cast<int>(ua[i]) + static_cast<int>(ub[i]) + 1) >> 1);
-    }
-    return result;
+    return scalar::avg_u16(a, b);
 #    endif
 }
 
