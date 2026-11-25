@@ -2,7 +2,6 @@
 #define NEFORCE_CORE_SIMD_COMPARE_LOONGARCH_HPP__
 #include "NeForce/core/simd/scalar/compare.hpp"
 #ifdef NEFORCE_SIMD_BRANCH_LOONGARCH
-#    include <lsxintrin.h>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
 

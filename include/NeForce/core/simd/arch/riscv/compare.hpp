@@ -1,5 +1,15 @@
 #ifndef NEFORCE_CORE_SIMD_COMPARE_RISCV_HPP__
 #define NEFORCE_CORE_SIMD_COMPARE_RISCV_HPP__
+
+/**
+ * @file compare.hpp
+ * @brief RISC-V 比较后端
+ *
+ * 整型比较在 RVV 上可映射为单条向量比较指令，故保留原生实现；
+ * 定长浮点向量 vec128f_t/vec128d_t 在 RVV 上只能逐通道处理，
+ * 其逐通道算法与 scalar 后端完全一致，因此直接复用 scalar 后端。
+ */
+
 #include "NeForce/core/simd/scalar/compare.hpp"
 #ifdef NEFORCE_SIMD_BRANCH_RISCV
 NEFORCE_BEGIN_NAMESPACE__
@@ -143,155 +153,17 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t cmpgt_i64(vec128_t a, vec128_t b) noexcept
     return result;
 }
 
-/**
- * @brief 4 路单精度浮点相等比较
- * @param a 左操作数（4×f32）
- * @param b 右操作数（4×f32）
- * @return a == b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpeq_f32(vec128f_t a, vec128f_t b) noexcept {
-    vec128f_t result;
-    for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(scalar::lane_view<float>(result)[i]) =
-                (scalar::lane_view<float>(a)[i] == scalar::lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
-    }
-    return result;
-}
 
-/**
- * @brief 4 路单精度浮点大于比较
- * @param a 左操作数（4×f32）
- * @param b 右操作数（4×f32）
- * @return a > b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpgt_f32(vec128f_t a, vec128f_t b) noexcept {
-    vec128f_t result;
-    for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(scalar::lane_view<float>(result)[i]) =
-                (scalar::lane_view<float>(a)[i] > scalar::lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
-    }
-    return result;
-}
-
-/**
- * @brief 4 路单精度浮点大于等于比较
- * @param a 左操作数（4×f32）
- * @param b 右操作数（4×f32）
- * @return a >= b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmpge_f32(vec128f_t a, vec128f_t b) noexcept {
-    vec128f_t result;
-    for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(scalar::lane_view<float>(result)[i]) =
-                (scalar::lane_view<float>(a)[i] >= scalar::lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
-    }
-    return result;
-}
-
-/**
- * @brief 4 路单精度浮点小于比较
- * @param a 左操作数（4×f32）
- * @param b 右操作数（4×f32）
- * @return a < b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmplt_f32(vec128f_t a, vec128f_t b) noexcept {
-    vec128f_t result;
-    for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(scalar::lane_view<float>(result)[i]) =
-                (scalar::lane_view<float>(a)[i] < scalar::lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
-    }
-    return result;
-}
-
-/**
- * @brief 4 路单精度浮点小于等于比较
- * @param a 左操作数（4×f32）
- * @param b 右操作数（4×f32）
- * @return a <= b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128f_t cmple_f32(vec128f_t a, vec128f_t b) noexcept {
-    vec128f_t result;
-    for (int i = 0; i < 4; ++i) {
-        reinterpret_cast<uint32_t&>(scalar::lane_view<float>(result)[i]) =
-                (scalar::lane_view<float>(a)[i] <= scalar::lane_view<float>(b)[i]) ? 0xFFFFFFFF : 0;
-    }
-    return result;
-}
-
-/**
- * @brief 2 路双精度浮点相等比较
- * @param a 左操作数（2×f64）
- * @param b 右操作数（2×f64）
- * @return a == b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpeq_f64(vec128d_t a, vec128d_t b) noexcept {
-    vec128d_t result;
-    for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(scalar::lane_view<double>(result)[i]) =
-                (scalar::lane_view<double>(a)[i] == scalar::lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
-    }
-    return result;
-}
-
-/**
- * @brief 2 路双精度浮点大于比较
- * @param a 左操作数（2×f64）
- * @param b 右操作数（2×f64）
- * @return a > b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpgt_f64(vec128d_t a, vec128d_t b) noexcept {
-    vec128d_t result;
-    for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(scalar::lane_view<double>(result)[i]) =
-                (scalar::lane_view<double>(a)[i] > scalar::lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
-    }
-    return result;
-}
-
-/**
- * @brief 2 路双精度浮点大于等于比较
- * @param a 左操作数（2×f64）
- * @param b 右操作数（2×f64）
- * @return a >= b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmpge_f64(vec128d_t a, vec128d_t b) noexcept {
-    vec128d_t result;
-    for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(scalar::lane_view<double>(result)[i]) =
-                (scalar::lane_view<double>(a)[i] >= scalar::lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
-    }
-    return result;
-}
-
-/**
- * @brief 2 路双精度浮点小于比较
- * @param a 左操作数（2×f64）
- * @param b 右操作数（2×f64）
- * @return a < b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmplt_f64(vec128d_t a, vec128d_t b) noexcept {
-    vec128d_t result;
-    for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(scalar::lane_view<double>(result)[i]) =
-                (scalar::lane_view<double>(a)[i] < scalar::lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
-    }
-    return result;
-}
-
-/**
- * @brief 2 路双精度浮点小于等于比较
- * @param a 左操作数（2×f64）
- * @param b 右操作数（2×f64）
- * @return a <= b 位置为全 1，否则全 0
- */
-NEFORCE_ALWAYS_INLINE_INLINE vec128d_t cmple_f64(vec128d_t a, vec128d_t b) noexcept {
-    vec128d_t result;
-    for (int i = 0; i < 2; ++i) {
-        reinterpret_cast<uint64_t&>(scalar::lane_view<double>(result)[i]) =
-                (scalar::lane_view<double>(a)[i] <= scalar::lane_view<double>(b)[i]) ? 0xFFFFFFFFFFFFFFFFULL : 0;
-    }
-    return result;
-}
+using scalar::cmpeq_f32;
+using scalar::cmpeq_f64;
+using scalar::cmpge_f32;
+using scalar::cmpge_f64;
+using scalar::cmpgt_f32;
+using scalar::cmpgt_f64;
+using scalar::cmple_f32;
+using scalar::cmple_f64;
+using scalar::cmplt_f32;
+using scalar::cmplt_f64;
 
 NEFORCE_END_SIMD__
 NEFORCE_END_NAMESPACE__

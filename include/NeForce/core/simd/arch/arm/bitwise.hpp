@@ -205,6 +205,16 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes<0>(vec128_t v) noexcept 
     return v;
 }
 
+template <>
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t shift_right_bytes<16>(vec128_t v) noexcept {
+#    if defined(NEFORCE_SIMD_NEON)
+    (void) v;
+    return ::vdupq_n_u8(0);
+#    else
+    return scalar::shift_right_bytes<16>(v);
+#    endif
+}
+
 /**
  * @brief 统计 128-bit 向量中置位比特总数
  * @param v 输入向量

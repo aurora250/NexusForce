@@ -2,10 +2,6 @@
 #define NEFORCE_CORE_SIMD_MEMORY_LOONGARCH_HPP__
 #include "NeForce/core/simd/scalar/memory.hpp"
 #ifdef NEFORCE_SIMD_BRANCH_LOONGARCH
-#    include <lsxintrin.h>
-#    if defined(NEFORCE_SIMD_LASX)
-#        include <lasxintrin.h>
-#    endif
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
 

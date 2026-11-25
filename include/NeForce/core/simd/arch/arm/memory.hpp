@@ -398,13 +398,14 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_copy(void* dest, const void* src, size
     const auto* s = static_cast<const byte_t*>(src);
     const size_t total = count;
 
-#    if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                                               \
-            (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
-             !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER))
+#        if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                          \
+                (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) &&                       \
+                 !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && !defined(NEFORCE_HAS_MEMORY_SANITIZER) && \
+                 !defined(NEFORCE_HAS_THREAD_SANITIZER))
     if (count >= 4096) {
         return memory_copy_large(dest, src, count);
     }
-#    endif
+#        endif
 
     while (count >= 16) {
         storeu_si128(d, loadu_si128(s));
@@ -651,13 +652,14 @@ NEFORCE_ALWAYS_INLINE_INLINE void* memory_set(void* dest, const byte_t value, si
     }
 
     auto* d = static_cast<byte_t*>(dest);
-#    if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                                               \
-            (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) && !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && \
-             !defined(NEFORCE_HAS_MEMORY_SANITIZER) && !defined(NEFORCE_HAS_THREAD_SANITIZER))
+#        if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_ARCH_X86)) ||                          \
+                (defined(NEFORCE_COMPILER_GNUC) && defined(NEFORCE_ARCH_X86) &&                       \
+                 !defined(NEFORCE_HAS_ADDRESS_SANITIZER) && !defined(NEFORCE_HAS_MEMORY_SANITIZER) && \
+                 !defined(NEFORCE_HAS_THREAD_SANITIZER))
     if (count >= 4096) {
         return memory_set_large(dest, value, count);
     }
-#    endif
+#        endif
     const vec128_t pattern = fill_i8(value);
 
     while (count >= 16) {

@@ -182,7 +182,8 @@
 
 ### 🔧 Improvements
 
-- `simd` 头文件按重构：`simd/<module>.hpp` 成为分发表，实现移入后端内部保留自身的条件编译，未覆盖的架构自动使用 `portable/`。
+- `simd` 头文件按后端重构：`simd/<module>.hpp` 成为分发表，实现移入 `arch/<isa>/<module>.hpp` 并各自保留自身的条件编译，未覆盖的架构自动使用 `scalar/` 后端
+- `scalar` 后端新增 `lane_get` / `lane_set`：按字节拷贝读写任意通道，跨通道类型访问不触发严格别名规则
 - 删除 `NEXUSFORCE_USING_SSO` 选项、`NEFORCE_USING_SSO` 宏与 `basic_string` 的非 SSO 实现：`basic_string` 固定使用 SSO 布局，`sizeof` 与修饰名随之固定，消费端需要重新编译
 - 删除 `NEXUSFORCE_USING_MEMORY_POOL` 选项与 `NEFORCE_USING_MEMORY_POOL` 宏：`standard_allocator` 不再把库容器路由到内存池，默认使用 C 运行时 `operator new` / `delete`；内存池改为仅经 `pool_allocator` 显式使用，或在 `NEXUSFORCE_MEMORY_POOL_GLOBAL_OVERRIDE` 覆盖全局 `operator new` / `delete` 时被动进入
 - `standard_allocator` 与内存池完全解耦：删除 `standard_allocator.hpp` 中的池路由分支与 ABI 开关 TODO，分配路径恒为 `operator new` / `delete`，`pool_allocator` 成为内存池唯一的分配器入口；安装消费端与单元测试增加“库容器留在 CRT 分配器”的断言
@@ -196,6 +197,7 @@
 - `config.json` 的 `simd` 段重构为按架构的 `isa` 段（`level` + `extensions`），`aes-ni` / `pclmul` / `vaes` / `intel-tsx` 从 `feature` 移入 `isa.<arch>.extensions`；旧 `simd` 与 `feature` 键不再兼容
 - `feature.sqlcipher` 移入 `dependency.sqlite3.cipher`，SQLCipher 作为 SQLite3 的加密子选项
 - 新增 `isa.aarch64.extensions.aes`：控制 ARMv8 Crypto Extensions（`-march=...+crypto`），关闭后 AES 走标量回退；aarch64 不再借用 x86 的 `aes-ni`/`pclmul` 开关
+- `simd` 标量回退结构体按位宽加 `alignas(16/32/64)`，与内建向量类型对齐方式一致：按通道类型读写向量表示不再产生非对齐访问
 - 新增 `NEFORCE_SIMD_AES` 聚合宏：x86 AES-NI 或 ARMv8 Crypto Extensions 任一可用时定义，与 `sysinfo::simd_instruction::aes` 的运行时语义一致；选择具体 intrinsic 仍用 `NEFORCE_SIMD_AES_NI` / `NEFORCE_SIMD_AES_ARM`
 - 反射代码生成器 `NFRS` 更名为 `NexusRsvp`：导出的 CMake 目标由 `NexusForce::NFRS` 变为 `NexusForce::NexusRsvp`
 - Markdown 解析器删除逐行字符串拼接与拥有式节点：单行段落、表格单元格、纯文本片段与链接地址零拷贝；围栏/缩进代码块、HTML 块直接写入 arena；引用块/列表项行视图不再复制
@@ -451,6 +453,8 @@
 
 ### 🐛 Bug Fixes
 
+- 修复 `store_stream` / `store_stream256` / `store_stream512` / `load_stream` 在 x86 上对非对齐指针触发 `#GP`（直接崩溃）：`movntdq` / `movntdqa` 要求 16/32/64 字节对齐，此前文档只写“建议对齐”；现在对齐时仍走非临时指令，非对齐时退化为 `storeu_*` / `loadu_*`，与标量、ARM 后端语义一致
+- 修复 ARM 后端 `shift_right_bytes<16>` 无法编译：`vextq_u8` 的立即数只允许 0-15，而接口声明允许 `[0, 16]`；新增 `<16>` 特化返回全零向量，与 x86 / 标量后端一致
 - 修复 `scalar` 后端浮点通道访问：`cmpeq_f32/f64`、`cmpgt/ge/lt/le_f32/f64`、`loadu_ps/pd`、`storeu_ps/pd` 原先按字节读写浮点通道导致结果错误，改为按 `float` / `double` 通道访问
 - 修复 RVV 与 SVE 的 `string_length` 跨页读取：按当前页剩余字节数限制单次载入长度，避免读入相邻保护页
 - 修复隐藏可见性构建（`-fvisibility=hidden` 的 Debug 配置）下链接 `NexusForceUnitTests` 报 `undefined reference to typeinfo for neforce::tui::component_base`：组件基类未导出，typeinfo 被编译为局部符号，派生组件的 RTTI 在测试/插件 TU 中无法解析；`component_base` 现标记 `NEFORCE_API`

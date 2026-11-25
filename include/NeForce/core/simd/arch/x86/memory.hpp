@@ -277,7 +277,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void storeu_si512(void* ptr, vec512_t v) noexcept {
 #    if defined(NEFORCE_SIMD_AVX512F)
     ::_mm512_storeu_si512(ptr, v);
 #    else
-    return scalar::storeu_si512(ptr, v);
+    scalar::storeu_si512(ptr, v);
 #    endif
 }
 
@@ -285,14 +285,17 @@ NEFORCE_ALWAYS_INLINE_INLINE void storeu_si512(void* ptr, vec512_t v) noexcept {
  * @brief 流式存储 128-bit 向量，绕过缓存
  * @param ptr 目标内存地址
  * @param v 待存储的向量
- * @note 适用于一次性写入后不会立即读取的大块数据，ptr 建议 16 字节对齐以获得最佳性能
- *
+ * @note 16 字节对齐时使用非临时存储，非对齐时退化为普通存储
  */
 NEFORCE_ALWAYS_INLINE_INLINE void store_stream(void* ptr, vec128_t v) noexcept {
 #    if defined(NEFORCE_SIMD_SSE2)
-    ::_mm_stream_si128(static_cast<vec128_t*>(ptr), v);
+    if ((reinterpret_cast<uintptr_t>(ptr) & 15U) == 0U) {
+        ::_mm_stream_si128(static_cast<vec128_t*>(ptr), v);
+    } else {
+        ::_mm_storeu_si128(static_cast<vec128_t*>(ptr), v);
+    }
 #    else
-    return scalar::store_stream(ptr, v);
+    scalar::store_stream(ptr, v);
 #    endif
 }
 
@@ -300,13 +303,17 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_stream(void* ptr, vec128_t v) noexcept {
  * @brief 流式存储 256-bit 向量，绕过缓存
  * @param ptr 目标内存地址
  * @param v 待存储的向量
- * @note ptr 建议 32 字节对齐以获得最佳性能
+ * @note 32 字节对齐时使用非临时存储，非对齐时退化为普通存储
  */
 NEFORCE_ALWAYS_INLINE_INLINE void store_stream256(void* ptr, vec256_t v) noexcept {
 #    if defined(NEFORCE_SIMD_AVX)
-    ::_mm256_stream_si256(static_cast<vec256_t*>(ptr), v);
+    if ((reinterpret_cast<uintptr_t>(ptr) & 31U) == 0U) {
+        ::_mm256_stream_si256(static_cast<vec256_t*>(ptr), v);
+    } else {
+        ::_mm256_storeu_si256(static_cast<vec256_t*>(ptr), v);
+    }
 #    else
-    return scalar::store_stream256(ptr, v);
+    scalar::store_stream256(ptr, v);
 #    endif
 }
 
@@ -314,13 +321,17 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_stream256(void* ptr, vec256_t v) noexcep
  * @brief 流式存储 512-bit 向量，绕过缓存
  * @param ptr 目标内存地址
  * @param v 待存储的向量
- * @note ptr 建议 64 字节对齐以获得最佳性能
+ * @note 64 字节对齐时使用非临时存储，非对齐时退化为普通存储
  */
 NEFORCE_ALWAYS_INLINE_INLINE void store_stream512(void* ptr, vec512_t v) noexcept {
 #    if defined(NEFORCE_SIMD_AVX512F)
-    ::_mm512_stream_si512(ptr, v);
+    if ((reinterpret_cast<uintptr_t>(ptr) & 63U) == 0U) {
+        ::_mm512_stream_si512(ptr, v);
+    } else {
+        ::_mm512_storeu_si512(ptr, v);
+    }
 #    else
-    return scalar::store_stream512(ptr, v);
+    scalar::store_stream512(ptr, v);
 #    endif
 }
 
@@ -328,11 +339,14 @@ NEFORCE_ALWAYS_INLINE_INLINE void store_stream512(void* ptr, vec512_t v) noexcep
  * @brief 流式加载 128-bit 向量
  * @param ptr 源内存地址
  * @return 加载的向量
- * @note 适用于一次性读取后不会再次访问的数据流，ptr 建议 16 字节对齐以获得最佳性能
+ * @note 16 字节对齐时使用非临时加载，非对齐时退化为普通加载
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t load_stream(const void* ptr) noexcept {
 #    if defined(NEFORCE_SIMD_SSE4_1)
-    return ::_mm_stream_load_si128(const_cast<vec128_t*>(static_cast<const vec128_t*>(ptr)));
+    if ((reinterpret_cast<uintptr_t>(ptr) & 15U) == 0U) {
+        return ::_mm_stream_load_si128(const_cast<vec128_t*>(static_cast<const vec128_t*>(ptr)));
+    }
+    return ::_mm_loadu_si128(static_cast<const vec128_t*>(ptr));
 #    else
     return scalar::load_stream(ptr);
 #    endif

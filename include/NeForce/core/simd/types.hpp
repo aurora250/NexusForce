@@ -78,21 +78,21 @@ using vec128f_t = ::float32x4_t;
 using vec128d_t = ::float64x2_t;
 #    else
 /// @brief 128-bit 双精度浮点向量（2×f64，ARMv7 标量回退）
-struct vec128d_t {
+struct alignas(16) vec128d_t {
     double data[2];
 };
 #    endif
 #else
 /// @brief 128-bit 整型向量（标量回退）
-struct vec128_t {
+struct alignas(16) vec128_t {
     byte_t data[16];
 };
 /// @brief 128-bit 单精度浮点向量（标量回退）
-struct vec128f_t {
+struct alignas(16) vec128f_t {
     float data[4];
 };
 /// @brief 128-bit 双精度浮点向量（标量回退）
-struct vec128d_t {
+struct alignas(16) vec128d_t {
     double data[2];
 };
 #endif
@@ -110,7 +110,7 @@ using vec256d_t = ::__m256d;
 using vec256_t = ::__m256i;
 #    else
 /// @brief 256-bit 整型向量（标量回退，AVX 不含整型操作）
-struct vec256_t {
+struct alignas(32) vec256_t {
     byte_t data[32];
 };
 #    endif
@@ -120,15 +120,15 @@ using vec256f_t = ::__m256;
 using vec256d_t = ::__m256d;
 #else
 /// @brief 256-bit 整型向量（标量回退）
-struct vec256_t {
+struct alignas(32) vec256_t {
     byte_t data[32];
 };
 /// @brief 256-bit 单精度浮点向量（标量回退）
-struct vec256f_t {
+struct alignas(32) vec256f_t {
     float data[8];
 };
 /// @brief 256-bit 双精度浮点向量（标量回退）
-struct vec256d_t {
+struct alignas(32) vec256d_t {
     double data[4];
 };
 #endif
@@ -142,15 +142,15 @@ using vec512f_t = ::__m512;
 using vec512d_t = ::__m512d;
 #else
 /// @brief 512-bit 整型向量（标量回退）
-struct vec512_t {
+struct alignas(64) vec512_t {
     byte_t data[64];
 };
 /// @brief 512-bit 单精度浮点向量（标量回退）
-struct vec512f_t {
+struct alignas(64) vec512f_t {
     float data[16];
 };
 /// @brief 512-bit 双精度浮点向量（标量回退）
-struct vec512d_t {
+struct alignas(64) vec512d_t {
     double data[8];
 };
 #endif

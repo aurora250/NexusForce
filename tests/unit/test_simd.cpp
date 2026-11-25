@@ -1766,6 +1766,154 @@ TEST(SimdScalarBackendTest, ScalarNamespaceMatchesActiveBackend) {
     EXPECT_EQ(31u, simd::scalar::string_length(text));
 }
 
+TEST(SimdBackendTest, VectorTypesAreNaturallyAligned) {
+    static_assert(alignof(simd::vec128_t) == 16, "vec128_t must be 16-byte aligned");
+    static_assert(alignof(simd::vec128f_t) == 16, "vec128f_t must be 16-byte aligned");
+    static_assert(alignof(simd::vec128d_t) == 16, "vec128d_t must be 16-byte aligned");
+    static_assert(alignof(simd::vec256_t) == 32, "vec256_t must be 32-byte aligned");
+    static_assert(alignof(simd::vec256f_t) == 32, "vec256f_t must be 32-byte aligned");
+    static_assert(alignof(simd::vec256d_t) == 32, "vec256d_t must be 32-byte aligned");
+    static_assert(alignof(simd::vec512_t) == 64, "vec512_t must be 64-byte aligned");
+    static_assert(alignof(simd::vec512f_t) == 64, "vec512f_t must be 64-byte aligned");
+    static_assert(alignof(simd::vec512d_t) == 64, "vec512d_t must be 64-byte aligned");
+    EXPECT_EQ(sizeof(simd::vec128_t), 16u);
+    EXPECT_EQ(sizeof(simd::vec256_t), 32u);
+    EXPECT_EQ(sizeof(simd::vec512_t), 64u);
+}
+
+TEST_F(SimdUtilTest, StreamLoadStoreAcceptsUnalignedPointers) {
+    alignas(64) byte_t source[96];
+    alignas(64) byte_t target[96];
+    for (int i = 0; i < 96; ++i) {
+        source[i] = static_cast<byte_t>((i * 29) + 3);
+    }
+    simd::vec128_t v128 = simd::loadu_si128(source);
+    simd::vec256_t v256 = simd::loadu_si256(source);
+    simd::vec512_t v512 = simd::loadu_si512(source);
+
+    simd::store_stream(target + 1, v128);
+    EXPECT_EQ(simd::memory_compare(target + 1, source, 16), 0);
+    simd::store_stream256(target + 17, v256);
+    EXPECT_EQ(simd::memory_compare(target + 17, source, 32), 0);
+    simd::store_stream512(target + 33, v512);
+    EXPECT_EQ(simd::memory_compare(target + 33, source, 64), 0);
+
+    simd::vec128_t reloaded = simd::load_stream(source + 5);
+    EXPECT_EQ(simd::to_bitmask(simd::match_bytes(reloaded, simd::loadu_si128(source + 5))), 0xFFFF);
+}
+
+TEST(SimdScalarBackendTest, LaneGetSetRoundTrip) {
+    simd::vec128_t v;
+    for (int i = 0; i < 8; ++i) {
+        simd::scalar::lane_set<int16_t>(v, static_cast<size_t>(i), static_cast<int16_t>((i * 3) - 7));
+    }
+    for (int i = 0; i < 8; ++i) {
+        EXPECT_EQ(simd::scalar::lane_get<int16_t>(v, static_cast<size_t>(i)), static_cast<int16_t>((i * 3) - 7));
+    }
+    for (int i = 0; i < 2; ++i) {
+        simd::scalar::lane_set<int64_t>(v, static_cast<size_t>(i), static_cast<int64_t>(i) - 0x0123456789ABCDEFLL);
+    }
+    for (int i = 0; i < 2; ++i) {
+        EXPECT_EQ(simd::scalar::lane_get<int64_t>(v, static_cast<size_t>(i)),
+                  static_cast<int64_t>(i) - 0x0123456789ABCDEFLL);
+    }
+    const simd::vec128_t bytes = simd::fill_i8(0x5A);
+    EXPECT_EQ(simd::scalar::lane_get<uint8_t>(bytes, 5), 0x5Au);
+    EXPECT_EQ(simd::scalar::lane_get<byte_t>(bytes, 15), 0x5Au);
+}
+
+TEST(SimdScalarBackendTest, FloatCompareMasksMatchLanePredicates) {
+    float lhs[4] = {1.0F, 2.0F, 3.0F, 4.0F};
+    float rhs[4] = {4.0F, 3.0F, 2.0F, 1.0F};
+    simd::vec128f_t a;
+    simd::vec128f_t b;
+    neforce::memory_copy(&a, lhs, sizeof(lhs));
+    neforce::memory_copy(&b, rhs, sizeof(rhs));
+
+    uint32_t lanes[4];
+    simd::vec128f_t r = simd::scalar::cmpeq_f32(a, b);
+    neforce::memory_copy(lanes, &r, sizeof(lanes));
+    EXPECT_EQ(lanes[0], 0u);
+    EXPECT_EQ(lanes[1], 0u);
+    EXPECT_EQ(lanes[2], 0u);
+    EXPECT_EQ(lanes[3], 0u);
+
+    r = simd::scalar::cmpgt_f32(a, b);
+    neforce::memory_copy(lanes, &r, sizeof(lanes));
+    EXPECT_EQ(lanes[0], 0u);
+    EXPECT_EQ(lanes[1], 0u);
+    EXPECT_EQ(lanes[2], 0xFFFFFFFFu);
+    EXPECT_EQ(lanes[3], 0xFFFFFFFFu);
+
+    r = simd::scalar::cmpge_f32(a, b);
+    neforce::memory_copy(lanes, &r, sizeof(lanes));
+    EXPECT_EQ(lanes[0], 0u);
+    EXPECT_EQ(lanes[1], 0u);
+    EXPECT_EQ(lanes[2], 0xFFFFFFFFu);
+    EXPECT_EQ(lanes[3], 0xFFFFFFFFu);
+
+    r = simd::scalar::cmplt_f32(a, b);
+    neforce::memory_copy(lanes, &r, sizeof(lanes));
+    EXPECT_EQ(lanes[0], 0xFFFFFFFFu);
+    EXPECT_EQ(lanes[1], 0xFFFFFFFFu);
+    EXPECT_EQ(lanes[2], 0u);
+    EXPECT_EQ(lanes[3], 0u);
+
+    r = simd::scalar::cmple_f32(a, b);
+    neforce::memory_copy(lanes, &r, sizeof(lanes));
+    EXPECT_EQ(lanes[0], 0xFFFFFFFFu);
+    EXPECT_EQ(lanes[1], 0xFFFFFFFFu);
+    EXPECT_EQ(lanes[2], 0u);
+    EXPECT_EQ(lanes[3], 0u);
+
+    double wide_lhs[2] = {1.0, 2.0};
+    double wide_rhs[2] = {4.0, 3.0};
+    simd::vec128d_t da;
+    simd::vec128d_t db;
+    neforce::memory_copy(&da, wide_lhs, sizeof(wide_lhs));
+    neforce::memory_copy(&db, wide_rhs, sizeof(wide_rhs));
+
+    uint64_t wide_lanes[2];
+    simd::vec128d_t dr = simd::scalar::cmpeq_f64(da, db);
+    neforce::memory_copy(wide_lanes, &dr, sizeof(wide_lanes));
+    EXPECT_EQ(wide_lanes[0], 0u);
+    EXPECT_EQ(wide_lanes[1], 0u);
+
+    dr = simd::scalar::cmpgt_f64(da, db);
+    neforce::memory_copy(wide_lanes, &dr, sizeof(wide_lanes));
+    EXPECT_EQ(wide_lanes[0], 0u);
+    EXPECT_EQ(wide_lanes[1], 0u);
+
+    dr = simd::scalar::cmpge_f64(da, db);
+    neforce::memory_copy(wide_lanes, &dr, sizeof(wide_lanes));
+    EXPECT_EQ(wide_lanes[0], 0u);
+    EXPECT_EQ(wide_lanes[1], 0u);
+
+    dr = simd::scalar::cmplt_f64(da, db);
+    neforce::memory_copy(wide_lanes, &dr, sizeof(wide_lanes));
+    EXPECT_EQ(wide_lanes[0], 0xFFFFFFFFFFFFFFFFULL);
+    EXPECT_EQ(wide_lanes[1], 0xFFFFFFFFFFFFFFFFULL);
+
+    dr = simd::scalar::cmple_f64(da, db);
+    neforce::memory_copy(wide_lanes, &dr, sizeof(wide_lanes));
+    EXPECT_EQ(wide_lanes[0], 0xFFFFFFFFFFFFFFFFULL);
+    EXPECT_EQ(wide_lanes[1], 0xFFFFFFFFFFFFFFFFULL);
+}
+
+TEST_F(SimdUtilTest, ShiftBytesByFullWidthYieldsZero) {
+    byte_t raw[16];
+    for (int i = 0; i < 16; ++i) {
+        raw[i] = static_cast<byte_t>((i * 37) + 1);
+    }
+    simd::vec128_t v = simd::load_unaligned(raw);
+    simd::vec128_t shifted_left = simd::shift_left_bytes<16>(v);
+    simd::vec128_t shifted_right = simd::shift_right_bytes<16>(v);
+    EXPECT_TRUE(simd::is_all_zero(shifted_left));
+    EXPECT_TRUE(simd::is_all_zero(shifted_right));
+    EXPECT_EQ(simd::to_bitmask(simd::match_bytes(shifted_left, simd::scalar::shift_left_bytes<16>(v))), 0xFFFF);
+    EXPECT_EQ(simd::to_bitmask(simd::match_bytes(shifted_right, simd::scalar::shift_right_bytes<16>(v))), 0xFFFF);
+}
+
 TEST(SimdBackendDifferentialTest, ElementWiseKernelsMatchScalarBackend) {
     uint32_t state = 0x9e3779b9U;
     auto next = [&state]() {
@@ -1786,6 +1934,13 @@ TEST(SimdBackendDifferentialTest, ElementWiseKernelsMatchScalarBackend) {
         simd::vec128_t b;
         simd::memory_copy(&a, raw_a, 16);
         simd::memory_copy(&b, raw_b, 16);
+
+        alignas(16) byte_t raw_indices[16];
+        for (int i = 0; i < 16; ++i) {
+            raw_indices[i] = static_cast<byte_t>(next() & 0x0FU);
+        }
+        simd::vec128_t indices;
+        simd::memory_copy(&indices, raw_indices, 16);
 
         auto same = [](simd::vec128_t lhs, simd::vec128_t rhs) {
             byte_t l[16];
@@ -1836,5 +1991,15 @@ TEST(SimdBackendDifferentialTest, ElementWiseKernelsMatchScalarBackend) {
         EXPECT_EQ(simd::find_first_byte(a, raw_b[5]), simd::scalar::find_first_byte(a, raw_b[5]));
         EXPECT_EQ(simd::is_all_zero(a), simd::scalar::is_all_zero(a));
         EXPECT_EQ(simd::has_any_zero(a), simd::scalar::has_any_zero(a));
+        EXPECT_TRUE(same(simd::blend_bytes(a, b, indices), simd::scalar::blend_bytes(a, b, indices)));
+        EXPECT_TRUE(same(simd::shuffle_bytes(a, indices), simd::scalar::shuffle_bytes(a, indices)));
+        EXPECT_TRUE(same(simd::reverse_bytes(a), simd::scalar::reverse_bytes(a)));
+        EXPECT_TRUE(same(simd::shift_left_bytes<8>(a), simd::scalar::shift_left_bytes<8>(a)));
+        EXPECT_TRUE(same(simd::shift_right_bytes<8>(a), simd::scalar::shift_right_bytes<8>(a)));
+        EXPECT_TRUE(same(simd::shift_left_bytes<16>(a), simd::scalar::shift_left_bytes<16>(a)));
+        EXPECT_TRUE(same(simd::shift_right_bytes<16>(a), simd::scalar::shift_right_bytes<16>(a)));
+        EXPECT_EQ(simd::popcount(a), simd::scalar::popcount(a));
+        EXPECT_EQ(simd::count_byte(a, raw_b[3]), simd::scalar::count_byte(a, raw_b[3]));
+        EXPECT_EQ(simd::find_last_byte(a, raw_a[9]), simd::scalar::find_last_byte(a, raw_a[9]));
     }
 }

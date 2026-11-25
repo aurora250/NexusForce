@@ -42,6 +42,42 @@ NEFORCE_ALWAYS_INLINE_INLINE const byte_t* lane_bytes(const V& v) noexcept {
 }
 
 /**
+ * @brief 读取向量中指定通道
+ * @tparam Lane 通道类型
+ * @tparam V 向量类型
+ * @param v 向量对象
+ * @param index 通道下标
+ * @return 该通道的值
+ */
+template <typename Lane, typename V>
+NEFORCE_ALWAYS_INLINE_INLINE Lane lane_get(const V& v, const size_t index) noexcept {
+    const byte_t* src = lane_bytes(v) + (index * sizeof(Lane));
+    Lane value{};
+    auto* dst = reinterpret_cast<byte_t*>(&value);
+    for (size_t i = 0; i < sizeof(Lane); ++i) {
+        dst[i] = src[i];
+    }
+    return value;
+}
+
+/**
+ * @brief 写入向量中指定通道
+ * @tparam Lane 通道类型
+ * @tparam V 向量类型
+ * @param v 向量对象
+ * @param index 通道下标
+ * @param value 待写入的值
+ */
+template <typename Lane, typename V>
+NEFORCE_ALWAYS_INLINE_INLINE void lane_set(V& v, const size_t index, const Lane value) noexcept {
+    auto* dst = lane_bytes(v) + (index * sizeof(Lane));
+    const auto* src = reinterpret_cast<const byte_t*>(&value);
+    for (size_t i = 0; i < sizeof(Lane); ++i) {
+        dst[i] = src[i];
+    }
+}
+
+/**
  * @brief 按指定 lane 类型取得向量的可写视图
  * @tparam Lane 通道类型
  * @tparam V 向量类型

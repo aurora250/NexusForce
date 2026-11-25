@@ -30,9 +30,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i8(uint8_t c) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i16(const uint16_t v) noexcept {
     vec128_t result;
-    auto* d = reinterpret_cast<uint16_t*>(lane_bytes(result));
     for (int i = 0; i < 8; ++i) {
-        d[i] = v;
+        lane_set<uint16_t>(result, i, v);
     }
     return result;
 }
@@ -44,9 +43,8 @@ NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i16(const uint16_t v) noexcept {
  */
 NEFORCE_ALWAYS_INLINE_INLINE vec128_t fill_i32(const uint32_t v) noexcept {
     vec128_t result;
-    auto* d = reinterpret_cast<uint32_t*>(lane_bytes(result));
     for (int i = 0; i < 4; ++i) {
-        d[i] = v;
+        lane_set<uint32_t>(result, i, v);
     }
     return result;
 }
