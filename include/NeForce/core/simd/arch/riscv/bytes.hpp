@@ -6,6 +6,36 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_SIMD__
 
 /**
+ * @brief 按掩码逐字节混合两个向量
+ * @param a 掩码位为 0 时选取的向量
+ * @param b 掩码位为 1 时选取的向量
+ * @param mask 字节掩码，每字节最高位为 1 则选取 b，否则选取 a
+ * @return 混合后的向量
+ */
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t blend_bytes(vec128_t a, vec128_t b, vec128_t mask) noexcept {
+    const vuint8m1_t va = __riscv_vle8_v_u8m1(scalar::lane_bytes(a), 16);
+    const vuint8m1_t vb = __riscv_vle8_v_u8m1(scalar::lane_bytes(b), 16);
+    const vint8m1_t vm = __riscv_vle8_v_i8m1(reinterpret_cast<const int8_t*>(scalar::lane_bytes(mask)), 16);
+    const vbool8_t select = __riscv_vmslt_vx_i8m1_b8(vm, 0, 16);
+    vec128_t result;
+    __riscv_vse8_v_u8m1(scalar::lane_bytes(result), __riscv_vmerge_vvm_u8m1(va, vb, select, 16), 16);
+    return result;
+}
+
+/**
+ * @brief 反转向量中 16 字节的顺序
+ * @param v 输入向量
+ * @return 字节逆序排列的向量
+ */
+NEFORCE_ALWAYS_INLINE_INLINE vec128_t reverse_bytes(vec128_t v) noexcept {
+    const vuint8m1_t src = __riscv_vle8_v_u8m1(scalar::lane_bytes(v), 16);
+    const vuint8m1_t index = __riscv_vrsub_vx_u8m1(__riscv_vid_v_u8m1(16), 15, 16);
+    vec128_t result;
+    __riscv_vse8_v_u8m1(scalar::lane_bytes(result), __riscv_vrgather_vv_u8m1(src, index, 16), 16);
+    return result;
+}
+
+/**
  * @brief 将单 8-bit 值广播到 128-bit SIMD 向量的全部 16 个位置
  * @param c 源字节值
  * @return 所有字节均为 c 的向量
@@ -123,15 +153,25 @@ NEFORCE_ALWAYS_INLINE_INLINE bool has_any_zero(vec128_t v) noexcept {
     return __riscv_vfirst_m_b8(__riscv_vmseq_vx_u8m1_b8(x, 0, 16), 16) >= 0;
 }
 
+/**
+ * @brief 提取向量中每个字节的最高位，组成 16-bit 掩码
+ * @param v 输入向量
+ * @return 16-bit 掩码，bit i 对应字节 i 的最高位
+ */
+NEFORCE_ALWAYS_INLINE_INLINE int to_bitmask(vec128_t v) noexcept {
+    const vuint8m1_t x = __riscv_vle8_v_u8m1(scalar::lane_bytes(v), 16);
+    const vbool8_t negative = __riscv_vmslt_vx_i8m1_b8(__riscv_vreinterpret_v_u8m1_i8m1(x), 0, 16);
+    uint16_t bits = 0;
+    __riscv_vsm_v_b8(reinterpret_cast<uint8_t*>(&bits), negative, 16);
+    return static_cast<int>(bits);
+}
 
-using scalar::blend_bytes;
+
 using scalar::count_byte;
 using scalar::find_last_byte;
 using scalar::load_bytes_n;
-using scalar::reverse_bytes;
 using scalar::shuffle_bytes;
 using scalar::store_bytes_n;
-using scalar::to_bitmask;
 
 NEFORCE_END_SIMD__
 NEFORCE_END_NAMESPACE__

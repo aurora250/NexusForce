@@ -3,6 +3,7 @@
 #include <NeForce/core/simd/bitwise.hpp>
 #include <NeForce/core/simd/arithmetic.hpp>
 #include <NeForce/core/simd/compare.hpp>
+#include <NeForce/core/simd/block.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -2002,4 +2003,276 @@ TEST(SimdBackendDifferentialTest, ElementWiseKernelsMatchScalarBackend) {
         EXPECT_EQ(simd::count_byte(a, raw_b[3]), simd::scalar::count_byte(a, raw_b[3]));
         EXPECT_EQ(simd::find_last_byte(a, raw_a[9]), simd::scalar::find_last_byte(a, raw_a[9]));
     }
+}
+
+namespace {
+
+    template <typename RefFn>
+    void reference_block_binary(byte_t* want, const byte_t* lhs, const byte_t* rhs, size_t elems, size_t elem_bytes,
+                                RefFn ref) {
+        const size_t lanes = 16 / elem_bytes;
+        alignas(16) byte_t left[16];
+        alignas(16) byte_t right[16];
+        for (size_t i = 0; i < elems; ++i) {
+            const size_t lane = i % lanes;
+            const size_t base = (i - lane) * elem_bytes;
+            neforce::memory_set(left, 0, sizeof(left));
+            neforce::memory_set(right, 0, sizeof(right));
+            neforce::memory_copy(left, lhs + base, 16);
+            neforce::memory_copy(right, rhs + base, 16);
+            const simd::vec128_t out = ref(simd::loadu_si128(left), simd::loadu_si128(right));
+            byte_t lanes_bytes[16];
+            simd::storeu_si128(lanes_bytes, out);
+            neforce::memory_copy(want + (i * elem_bytes), lanes_bytes + (lane * elem_bytes), elem_bytes);
+        }
+    }
+
+    template <typename RefFn>
+    void reference_block_unary(byte_t* want, const byte_t* src, size_t elems, size_t elem_bytes, RefFn ref) {
+        const size_t lanes = 16 / elem_bytes;
+        alignas(16) byte_t input[16];
+        for (size_t i = 0; i < elems; ++i) {
+            const size_t lane = i % lanes;
+            const size_t base = (i - lane) * elem_bytes;
+            neforce::memory_set(input, 0, sizeof(input));
+            neforce::memory_copy(input, src + base, 16);
+            const simd::vec128_t out = ref(simd::loadu_si128(input));
+            byte_t lanes_bytes[16];
+            simd::storeu_si128(lanes_bytes, out);
+            neforce::memory_copy(want + (i * elem_bytes), lanes_bytes + (lane * elem_bytes), elem_bytes);
+        }
+    }
+
+    void check_block_binary(const char* name, void (*block)(void*, const void*, const void*, size_t),
+                            simd::vec128_t (*ref)(simd::vec128_t, simd::vec128_t), size_t elem_bytes) {
+        static const size_t sizes[] = {0, 1, 2, 3, 7, 8, 9, 15, 16, 17, 31, 33, 48};
+        byte_t lhs[512];
+        byte_t rhs[512];
+        byte_t got[512];
+        byte_t want[512];
+        for (size_t i = 0; i < sizeof(lhs); ++i) {
+            lhs[i] = static_cast<byte_t>((i * 37) + 11);
+            rhs[i] = static_cast<byte_t>((i * 53) + 7);
+        }
+        for (size_t size: sizes) {
+            const size_t bytes = size * elem_bytes;
+            neforce::memory_set(got, 0xCD, sizeof(got));
+            neforce::memory_set(want, 0xCD, sizeof(want));
+            block(got, lhs, rhs, size);
+            reference_block_binary(want, lhs, rhs, size, elem_bytes, ref);
+            EXPECT_EQ(neforce::memory_compare(got, want, bytes), 0) << name << " size=" << size;
+            EXPECT_EQ(got[bytes], static_cast<byte_t>(0xCD)) << name << " overflow size=" << size;
+        }
+        block(got, lhs, rhs, 0);
+        block(nullptr, lhs, rhs, 8);
+        block(got, nullptr, rhs, 8);
+        block(got, lhs, nullptr, 8);
+    }
+
+    void check_block_unary(const char* name, void (*block)(void*, const void*, size_t),
+                           simd::vec128_t (*ref)(simd::vec128_t), size_t elem_bytes) {
+        static const size_t sizes[] = {0, 1, 2, 3, 7, 8, 9, 15, 16, 17, 31, 33, 48};
+        byte_t src[512];
+        byte_t got[512];
+        byte_t want[512];
+        for (size_t i = 0; i < sizeof(src); ++i) {
+            src[i] = static_cast<byte_t>((i * 29) + 5);
+        }
+        for (size_t size: sizes) {
+            const size_t bytes = size * elem_bytes;
+            neforce::memory_set(got, 0xCD, sizeof(got));
+            neforce::memory_set(want, 0xCD, sizeof(want));
+            block(got, src, size);
+            reference_block_unary(want, src, size, elem_bytes, ref);
+            EXPECT_EQ(neforce::memory_compare(got, want, bytes), 0) << name << " size=" << size;
+            EXPECT_EQ(got[bytes], static_cast<byte_t>(0xCD)) << name << " overflow size=" << size;
+        }
+        block(got, src, 0);
+        block(nullptr, src, 8);
+        block(got, nullptr, 8);
+    }
+
+} // namespace
+
+TEST(SimdBlockTest, KernelsMatchElementWiseScalar) {
+    check_block_binary("add_i8_block", simd::add_i8_block, simd::scalar::add_i8, 1);
+    check_block_binary("add_i16_block", simd::add_i16_block, simd::scalar::add_i16, 2);
+    check_block_binary("add_i32_block", simd::add_i32_block, simd::scalar::add_i32, 4);
+    check_block_binary("add_i64_block", simd::add_i64_block, simd::scalar::add_i64, 8);
+    check_block_binary("sub_i8_block", simd::sub_i8_block, simd::scalar::sub_i8, 1);
+    check_block_binary("sub_i16_block", simd::sub_i16_block, simd::scalar::sub_i16, 2);
+    check_block_binary("sub_i32_block", simd::sub_i32_block, simd::scalar::sub_i32, 4);
+    check_block_binary("sub_i64_block", simd::sub_i64_block, simd::scalar::sub_i64, 8);
+    check_block_binary("mullo_i16_block", simd::mullo_i16_block, simd::scalar::mullo_i16, 2);
+    check_block_binary("mullo_i32_block", simd::mullo_i32_block, simd::scalar::mullo_i32, 4);
+    check_block_binary("mulhi_i16_block", simd::mulhi_i16_block, simd::scalar::mulhi_i16, 2);
+    check_block_binary("madds_i8x16_block", simd::madds_i8x16_block, simd::scalar::madds_i8x16, 2);
+    check_block_binary("saturated_add_i8_block", simd::saturated_add_i8_block, simd::scalar::saturated_add_i8, 1);
+    check_block_binary("saturated_add_i16_block", simd::saturated_add_i16_block, simd::scalar::saturated_add_i16, 2);
+    check_block_binary("saturated_add_u8_block", simd::saturated_add_u8_block, simd::scalar::saturated_add_u8, 1);
+    check_block_binary("saturated_add_u16_block", simd::saturated_add_u16_block, simd::scalar::saturated_add_u16, 2);
+    check_block_binary("saturated_sub_i8_block", simd::saturated_sub_i8_block, simd::scalar::saturated_sub_i8, 1);
+    check_block_binary("saturated_sub_i16_block", simd::saturated_sub_i16_block, simd::scalar::saturated_sub_i16, 2);
+    check_block_binary("saturated_sub_u8_block", simd::saturated_sub_u8_block, simd::scalar::saturated_sub_u8, 1);
+    check_block_binary("saturated_sub_u16_block", simd::saturated_sub_u16_block, simd::scalar::saturated_sub_u16, 2);
+    check_block_unary("abs_i8_block", simd::abs_i8_block, simd::scalar::abs_i8, 1);
+    check_block_unary("abs_i16_block", simd::abs_i16_block, simd::scalar::abs_i16, 2);
+    check_block_unary("abs_i32_block", simd::abs_i32_block, simd::scalar::abs_i32, 4);
+    check_block_binary("min_i8_block", simd::min_i8_block, simd::scalar::min_i8, 1);
+    check_block_binary("min_i16_block", simd::min_i16_block, simd::scalar::min_i16, 2);
+    check_block_binary("min_i32_block", simd::min_i32_block, simd::scalar::min_i32, 4);
+    check_block_binary("min_u8_block", simd::min_u8_block, simd::scalar::min_u8, 1);
+    check_block_binary("min_u16_block", simd::min_u16_block, simd::scalar::min_u16, 2);
+    check_block_binary("min_u32_block", simd::min_u32_block, simd::scalar::min_u32, 4);
+    check_block_binary("max_i8_block", simd::max_i8_block, simd::scalar::max_i8, 1);
+    check_block_binary("max_i16_block", simd::max_i16_block, simd::scalar::max_i16, 2);
+    check_block_binary("max_i32_block", simd::max_i32_block, simd::scalar::max_i32, 4);
+    check_block_binary("max_u8_block", simd::max_u8_block, simd::scalar::max_u8, 1);
+    check_block_binary("max_u16_block", simd::max_u16_block, simd::scalar::max_u16, 2);
+    check_block_binary("max_u32_block", simd::max_u32_block, simd::scalar::max_u32, 4);
+    check_block_binary("avg_u8_block", simd::avg_u8_block, simd::scalar::avg_u8, 1);
+    check_block_binary("avg_u16_block", simd::avg_u16_block, simd::scalar::avg_u16, 2);
+    check_block_binary("bit_and_block", simd::bit_and_block, simd::scalar::bit_and, 1);
+    check_block_binary("bit_or_block", simd::bit_or_block, simd::scalar::bit_or, 1);
+    check_block_binary("bit_xor_block", simd::bit_xor_block, simd::scalar::bit_xor, 1);
+    check_block_binary("bit_andnot_block", simd::bit_andnot_block, simd::scalar::bit_andnot, 1);
+    check_block_unary("bit_not_block", simd::bit_not_block, simd::scalar::bit_not, 1);
+    check_block_binary("cmpeq_i8_block", simd::cmpeq_i8_block, simd::scalar::cmpeq_i8, 1);
+    check_block_binary("cmpeq_i16_block", simd::cmpeq_i16_block, simd::scalar::cmpeq_i16, 2);
+    check_block_binary("cmpeq_i32_block", simd::cmpeq_i32_block, simd::scalar::cmpeq_i32, 4);
+    check_block_binary("cmpeq_i64_block", simd::cmpeq_i64_block, simd::scalar::cmpeq_i64, 8);
+    check_block_binary("cmpgt_i8_block", simd::cmpgt_i8_block, simd::scalar::cmpgt_i8, 1);
+    check_block_binary("cmpgt_i16_block", simd::cmpgt_i16_block, simd::scalar::cmpgt_i16, 2);
+    check_block_binary("cmpgt_i32_block", simd::cmpgt_i32_block, simd::scalar::cmpgt_i32, 4);
+    check_block_binary("cmpgt_i64_block", simd::cmpgt_i64_block, simd::scalar::cmpgt_i64, 8);
+    check_block_binary(
+            "cmpeq_f32_block", simd::cmpeq_f32_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128f_t fa;
+                simd::vec128f_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128f_t r = simd::scalar::cmpeq_f32(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            4);
+    check_block_binary(
+            "cmpgt_f32_block", simd::cmpgt_f32_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128f_t fa;
+                simd::vec128f_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128f_t r = simd::scalar::cmpgt_f32(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            4);
+    check_block_binary(
+            "cmpge_f32_block", simd::cmpge_f32_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128f_t fa;
+                simd::vec128f_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128f_t r = simd::scalar::cmpge_f32(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            4);
+    check_block_binary(
+            "cmplt_f32_block", simd::cmplt_f32_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128f_t fa;
+                simd::vec128f_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128f_t r = simd::scalar::cmplt_f32(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            4);
+    check_block_binary(
+            "cmple_f32_block", simd::cmple_f32_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128f_t fa;
+                simd::vec128f_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128f_t r = simd::scalar::cmple_f32(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            4);
+    check_block_binary(
+            "cmpeq_f64_block", simd::cmpeq_f64_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128d_t fa;
+                simd::vec128d_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128d_t r = simd::scalar::cmpeq_f64(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            8);
+    check_block_binary(
+            "cmpgt_f64_block", simd::cmpgt_f64_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128d_t fa;
+                simd::vec128d_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128d_t r = simd::scalar::cmpgt_f64(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            8);
+    check_block_binary(
+            "cmpge_f64_block", simd::cmpge_f64_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128d_t fa;
+                simd::vec128d_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128d_t r = simd::scalar::cmpge_f64(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            8);
+    check_block_binary(
+            "cmplt_f64_block", simd::cmplt_f64_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128d_t fa;
+                simd::vec128d_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128d_t r = simd::scalar::cmplt_f64(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            8);
+    check_block_binary(
+            "cmple_f64_block", simd::cmple_f64_block,
+            [](simd::vec128_t a, simd::vec128_t b) {
+                simd::vec128d_t fa;
+                simd::vec128d_t fb;
+                neforce::memory_copy(&fa, &a, 16);
+                neforce::memory_copy(&fb, &b, 16);
+                const simd::vec128d_t r = simd::scalar::cmple_f64(fa, fb);
+                simd::vec128_t out;
+                neforce::memory_copy(&out, &r, 16);
+                return out;
+            },
+            8);
 }
