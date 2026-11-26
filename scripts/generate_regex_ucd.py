@@ -124,7 +124,7 @@ def main():
     lines.append("#endif // NEFORCE_CORE_STRING_REGEX_UCD_TABLES_HPP__")
     lines.append("")
 
-    with open("src/core/string/regex_ucd_tables.hpp", "w", encoding="utf-8", newline="\n") as handle:
+    with open("src/core/string/regex/ucd_tables.hpp", "w", encoding="utf-8", newline="\n") as handle:
         handle.write("\n".join(lines) + "\n")
 
     sys.stderr.write("ranges=%d lower=%d upper=%d lines=%d\n" % (len(ranges), len(lower), len(upper), len(lines)))

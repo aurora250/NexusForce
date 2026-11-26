@@ -1,7 +1,7 @@
 #include <NeForce/core/string/regex.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/utility/scope.hpp>
-#include "regex_builtin.hpp"
+#include "regex/engine_bridge.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 match_result::match_result(const string& subject, const size_t pos, const size_t len, vector<string> groups,

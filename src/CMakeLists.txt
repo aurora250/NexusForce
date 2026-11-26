@@ -92,7 +92,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/json_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/codepoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex_builtin.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/to_numerics.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/to_string.cpp
