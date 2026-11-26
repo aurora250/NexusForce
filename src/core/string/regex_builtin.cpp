@@ -6,7 +6,8 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     constexpr size_t invalid_offset = numeric_traits<size_t>::max();
-    constexpr int maximum_steps = 20000000;
+    constexpr ssize_t maximum_steps = 20000000;
+    constexpr ssize_t attempt_steps = 1000000;
     constexpr int maximum_recursion = 1000;
 
     enum : uint32_t {
@@ -319,6 +320,9 @@ namespace {
             group,
             look,
             atomic,
+            keep,
+            begin_search,
+            conditional,
             backref,
             begin_line,
             end_line,
@@ -376,6 +380,9 @@ namespace {
         atomic,
         call,
         cluster,
+        keep,
+        begin_search,
+        branch_group,
         loop_enter,
         loop_check,
     };
@@ -769,6 +776,9 @@ namespace {
                 if (entry.type == node::kind::call && entry.group > capture_count) {
                     fail(err_unknown_group_reference, entry.offset);
                 }
+                if (entry.type == node::kind::conditional && entry.group > capture_count) {
+                    fail(err_unknown_group_reference, entry.offset);
+                }
             }
 
             return root;
@@ -890,6 +900,8 @@ namespace {
 
             return string(pattern_ + start, pos_ - start);
         }
+
+        NEFORCE_NODISCARD int find_name(const string& name) const noexcept { return find_name(name.view()); }
 
         NEFORCE_NODISCARD int find_name(const string_view name) const noexcept {
             for (size_t index = 1; index < names.size(); ++index) {
@@ -1600,9 +1612,67 @@ namespace {
                 case 'v':
                     advance();
                     return escape_value(0x0B, in_class);
-                case 'G':
-                case 'K':
-                case 'R':
+                case 'G': {
+                    if (in_class) {
+                        fail(err_bad_escape, start);
+                    }
+
+                    advance();
+                    node entry;
+                    entry.type = node::kind::begin_search;
+                    return add_node(entry);
+                }
+                case 'K': {
+                    if (in_class) {
+                        fail(err_bad_escape, start);
+                    }
+
+                    advance();
+                    node entry;
+                    entry.type = node::kind::keep;
+                    return add_node(entry);
+                }
+                case 'R': {
+                    if (in_class) {
+                        fail(err_bad_escape, start);
+                    }
+
+                    advance();
+
+                    char_class newline_class;
+                    newline_class.add(0x0A, 0x0D);
+                    newline_class.add(0x85, 0x85);
+                    newline_class.add(0x2028, 0x2029);
+                    newline_class.normalize();
+                    classes.push_back(move(newline_class));
+
+                    node carriage;
+                    carriage.type = node::kind::literal;
+                    carriage.code_point = '\r';
+
+                    node line_feed;
+                    line_feed.type = node::kind::literal;
+                    line_feed.code_point = '\n';
+
+                    node crlf;
+                    crlf.type = node::kind::concat;
+                    crlf.children.push_back(add_node(carriage));
+                    crlf.children.push_back(add_node(line_feed));
+
+                    node single;
+                    single.type = node::kind::char_class;
+                    single.class_index = static_cast<int32_t>(classes.size() - 1);
+
+                    node alternative;
+                    alternative.type = node::kind::alternate;
+                    alternative.children.push_back(add_node(crlf));
+                    alternative.children.push_back(add_node(single));
+
+                    node wrapped;
+                    wrapped.type = node::kind::atomic;
+                    wrapped.children.push_back(add_node(alternative));
+                    return add_node(wrapped);
+                }
                 case 'C':
                     fail(err_unsupported_feature, start);
                 default:
@@ -1765,6 +1835,12 @@ namespace {
             bool closed = false;
 
             while (!eof()) {
+                if (peek() == ']' && first && pos_ + 1 >= length_) {
+                    advance();
+                    closed = true;
+                    break;
+                }
+
                 if (peek() == ']' && !first) {
                     advance();
                     closed = true;
@@ -1858,6 +1934,78 @@ namespace {
             entry.children.push_back(body);
             return add_node(entry);
         }
+        int32_t parse_conditional(const size_t start) {
+            advance(2);
+
+            bool define_block = false;
+            int32_t number = -1;
+
+            if (!eof() && is_digit_char(peek())) {
+                number = 0;
+
+                while (!eof() && is_digit_char(peek())) {
+                    number = number * 10 + (peek() - '0');
+                    advance();
+                }
+            } else if (!eof() && is_name_char(peek())) {
+                const size_t begin = pos_;
+
+                while (!eof() && is_name_char(peek())) {
+                    advance();
+                }
+
+                const string name(pattern_ + begin, pos_ - begin);
+
+                if (name == "DEFINE") {
+                    define_block = true;
+                } else {
+                    number = find_name(name.view());
+
+                    if (number < 0) {
+                        fail(err_unknown_group_reference, start);
+                    }
+                }
+            } else {
+                fail(err_unrecognized_group, start);
+            }
+
+            expect(')', err_unrecognized_group);
+
+            if (define_block) {
+                const int32_t body = parse_alternation();
+                expect(')', err_missing_parenthesis);
+
+                node entry;
+                entry.type = node::kind::conditional;
+                entry.group = -1;
+                entry.offset = start;
+                entry.children.push_back(body);
+                return add_node(entry);
+            }
+
+            const int32_t yes_branch = parse_concat();
+            int32_t no_branch = -1;
+
+            if (!eof() && peek() == '|') {
+                advance();
+                no_branch = parse_concat();
+            }
+
+            expect(')', err_missing_parenthesis);
+
+            node entry;
+            entry.type = node::kind::conditional;
+            entry.group = number;
+            entry.offset = start;
+            entry.children.push_back(yes_branch);
+
+            if (no_branch >= 0) {
+                entry.children.push_back(no_branch);
+            }
+
+            return add_node(entry);
+        }
+
         int32_t parse_group() {
             const size_t start = pos_;
             advance();
@@ -1904,6 +2052,10 @@ namespace {
             }
 
             const char kind = peek(1);
+
+            if (kind == '(') {
+                return parse_conditional(start);
+            }
 
             switch (kind) {
                 case '#': {
@@ -2221,10 +2373,22 @@ namespace {
         }
 
         void compile(const int32_t root) {
+            bool first_bytes[256] = {};
+            start_valid_ = collect_first(root, first_bytes);
+
+            if (start_valid_) {
+                memory_copy(start_bytes_, first_bytes, sizeof(first_bytes));
+            }
+
+            prepare_follow(root);
+
             emit(op::save, 0);
             compile_node(root);
             emit(op::save, 1);
             emit(op::match);
+
+            risk_state state;
+            scan_risk(root, state);
 
             for (const auto& fixup: call_fixups_) {
                 int32_t target = 0;
@@ -2279,6 +2443,8 @@ namespace {
                 case node::kind::non_word_boundary:
                 case node::kind::look:
                 case node::kind::atomic:
+                case node::kind::keep:
+                case node::kind::begin_search:
                     return;
                 case node::kind::literal:
                     minimum = 1;
@@ -2347,6 +2513,36 @@ namespace {
                 case node::kind::group:
                     measure(entry.children[0], minimum, maximum);
                     return;
+                case node::kind::conditional: {
+                    bool first = true;
+
+                    for (const int32_t child: entry.children) {
+                        int64_t child_minimum = 0;
+                        int64_t child_maximum = 0;
+                        measure(child, child_minimum, child_maximum);
+
+                        if (first || child_minimum < minimum) {
+                            minimum = child_minimum;
+                        }
+
+                        if (first || maximum < 0 || child_maximum < 0) {
+                            maximum = child_maximum;
+                        } else if (child_maximum > maximum) {
+                            maximum = child_maximum;
+                        }
+
+                        first = false;
+                    }
+
+                    if (entry.group < 0) {
+                        minimum = 0;
+                        maximum = 0;
+                    } else if (entry.children.size() == 1) {
+                        minimum = 0;
+                    }
+
+                    return;
+                }
             }
         }
 
@@ -2474,7 +2670,9 @@ namespace {
                         break;
                     }
 
-                    if (entry.mode == node::repeat_mode::possessive) {
+                    if (entry.mode == node::repeat_mode::possessive ||
+                        (entry.mode == node::repeat_mode::greedy && can_possessify(index))) {
+                        final_possessive_[static_cast<size_t>(index)] = 1;
                         const auto wrapper = emit(op::atomic);
                         emit(op::jump);
                         const auto body = static_cast<int32_t>(code.size());
@@ -2517,7 +2715,7 @@ namespace {
                     emit(op::begin_line, entry.multiline ? 1 : 0, multiline_circumflex_ ? 1 : 0);
                     break;
                 case node::kind::end_line:
-                    emit(op::end_line, entry.multiline ? 1 : 0, dollar_endonly_ ? 1 : 0);
+                    emit(op::end_line, entry.multiline ? 1 : 0, 0, dollar_endonly_ ? 1 : 0);
                     break;
                 case node::kind::begin_subject:
                     emit(op::begin_subject);
@@ -2537,12 +2735,379 @@ namespace {
                 case node::kind::cluster:
                     emit(op::cluster);
                     break;
+                case node::kind::keep:
+                    emit(op::keep);
+                    break;
+                case node::kind::begin_search:
+                    emit(op::begin_search);
+                    break;
+                case node::kind::conditional: {
+                    if (entry.group < 0) {
+                        const auto jump = emit(op::jump);
+                        compile_node(entry.children[0]);
+                        emit(op::match);
+                        code[static_cast<size_t>(jump)].a = static_cast<int32_t>(code.size());
+                        break;
+                    }
+
+                    const auto branch = emit(op::branch_group, entry.group);
+                    emit(op::jump);
+                    const auto yes_start = static_cast<int32_t>(code.size());
+                    compile_node(entry.children[0]);
+                    const auto yes_jump = emit(op::jump);
+                    const auto no_start = static_cast<int32_t>(code.size());
+
+                    if (entry.children.size() > 1) {
+                        compile_node(entry.children[1]);
+                    }
+
+                    const auto after = static_cast<int32_t>(code.size());
+                    code[static_cast<size_t>(branch)].b = yes_start;
+                    code[static_cast<size_t>(branch)].c = no_start;
+                    code[static_cast<size_t>(branch) + 1UL].a = after;
+                    code[static_cast<size_t>(yes_jump)].a = after;
+                    break;
+                }
                 case node::kind::call: {
                     const int32_t slot = emit(op::call);
                     call_fixups_.push_back(call_fixup{slot, entry.group});
                     break;
                 }
             }
+        }
+
+    public:
+        bool start_valid_ = false;
+        bool start_anchored_ = false;
+        bool start_bytes_[256] = {};
+        bool nested_quantifier_ = false;
+        bool exponential_risk_ = false;
+
+    private:
+        struct follow_set {
+            bool valid = false;
+            bool bytes[256] = {};
+        };
+
+        struct risk_state {
+            bool has_repeat = false;
+            bool backtracking_repeat = false;
+        };
+
+        vector<follow_set> follow_;
+        vector<uint8_t> final_possessive_;
+
+        bool first_set_of(const int32_t index, bool* const set) {
+            const bool saved = start_anchored_;
+            start_anchored_ = false;
+            const bool result = collect_first(index, set);
+            start_anchored_ = saved;
+            return result;
+        }
+
+        NEFORCE_NODISCARD bool can_possessify(const int32_t index) {
+            const node& entry = nodes_[static_cast<size_t>(index)];
+
+            if (entry.type != node::kind::repeat || entry.mode != node::repeat_mode::greedy) {
+                return false;
+            }
+
+            if (static_cast<size_t>(index) >= follow_.size() || !follow_[static_cast<size_t>(index)].valid) {
+                return false;
+            }
+
+            if (node_nullable(entry.children[0])) {
+                return false;
+            }
+
+            bool child_first[256] = {};
+
+            if (!first_set_of(entry.children[0], child_first)) {
+                return false;
+            }
+
+            const follow_set& follow = follow_[static_cast<size_t>(index)];
+
+            for (size_t byte = 0; byte < 256; ++byte) {
+                if (child_first[byte] && follow.bytes[byte]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        void prepare_follow(const int32_t root) {
+            follow_.assign(nodes_.size(), follow_set{});
+            final_possessive_.assign(nodes_.size(), 0);
+
+            bool end_of_pattern[256] = {};
+            propagate_follow(root, end_of_pattern, true);
+        }
+
+        void propagate_follow(const int32_t index, const bool* const follow, const bool follow_valid) {
+            const node& entry = nodes_[static_cast<size_t>(index)];
+
+            follow_[static_cast<size_t>(index)].valid = follow_valid;
+
+            if (follow_valid) {
+                memory_copy(follow_[static_cast<size_t>(index)].bytes, follow,
+                            sizeof(follow_[static_cast<size_t>(index)].bytes));
+            }
+
+            switch (entry.type) {
+                case node::kind::concat: {
+                    bool pending[256] = {};
+                    bool pending_valid = follow_valid;
+
+                    if (pending_valid) {
+                        memory_copy(pending, follow, sizeof(pending));
+                    }
+
+                    for (size_t position = entry.children.size(); position > 0; --position) {
+                        const int32_t child = entry.children[position - 1];
+                        propagate_follow(child, pending, pending_valid);
+
+                        bool child_first[256] = {};
+                        const bool child_first_valid = first_set_of(child, child_first);
+
+                        if (child_first_valid && pending_valid) {
+                            for (size_t byte = 0; byte < 256; ++byte) {
+                                pending[byte] = pending[byte] || child_first[byte];
+                            }
+                        } else if (child_first_valid) {
+                            memory_copy(pending, child_first, sizeof(pending));
+                            pending_valid = true;
+                        } else {
+                            pending_valid = false;
+                        }
+
+                        if (!node_nullable(child)) {
+                            if (child_first_valid) {
+                                memory_copy(pending, child_first, sizeof(pending));
+                                pending_valid = true;
+                            } else {
+                                pending_valid = false;
+                            }
+                        }
+                    }
+                    break;
+                }
+                case node::kind::alternate:
+                    for (const int32_t child: entry.children) {
+                        propagate_follow(child, follow, follow_valid);
+                    }
+                    break;
+                case node::kind::capture:
+                case node::kind::group:
+                case node::kind::atomic:
+                    propagate_follow(entry.children[0], follow, follow_valid);
+                    break;
+                case node::kind::repeat: {
+                    bool child_first[256] = {};
+                    const bool child_first_valid = first_set_of(entry.children[0], child_first);
+
+                    if (child_first_valid && follow_valid) {
+                        for (size_t byte = 0; byte < 256; ++byte) {
+                            child_first[byte] = child_first[byte] || follow[byte];
+                        }
+                        propagate_follow(entry.children[0], child_first, true);
+                    } else if (child_first_valid) {
+                        propagate_follow(entry.children[0], child_first, true);
+                    } else {
+                        propagate_follow(entry.children[0], follow, follow_valid);
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+
+        void scan_risk(const int32_t index, risk_state& state) {
+            const node& entry = nodes_[static_cast<size_t>(index)];
+
+            if (entry.type == node::kind::repeat) {
+                risk_state child;
+                scan_risk(entry.children[0], child);
+
+                const bool possessive = final_possessive_[static_cast<size_t>(index)] != 0;
+
+                if (child.has_repeat) {
+                    nested_quantifier_ = true;
+
+                    if (!possessive) {
+                        exponential_risk_ = true;
+                    }
+                }
+
+                state.has_repeat = true;
+                state.backtracking_repeat = !possessive || child.backtracking_repeat;
+                return;
+            }
+
+            for (const int32_t child: entry.children) {
+                risk_state branch;
+                scan_risk(child, branch);
+                state.has_repeat = state.has_repeat || branch.has_repeat;
+                state.backtracking_repeat = state.backtracking_repeat || branch.backtracking_repeat;
+            }
+        }
+        NEFORCE_NODISCARD bool node_nullable(const int32_t index) const {
+            int64_t minimum = 0;
+            int64_t maximum = 0;
+            measure(index, minimum, maximum);
+            return minimum == 0;
+        }
+
+        NEFORCE_NODISCARD uint8_t lead_byte(const uint32_t code_point) const noexcept {
+            if (!utf_) {
+                return static_cast<uint8_t>(code_point & 0xFFU);
+            }
+            if (code_point < 0x80U) {
+                return static_cast<uint8_t>(code_point);
+            }
+            if (code_point < 0x800U) {
+                return static_cast<uint8_t>(0xC0U | (code_point >> 6U));
+            }
+            if (code_point < 0x10000U) {
+                return static_cast<uint8_t>(0xE0U | (code_point >> 12U));
+            }
+            return static_cast<uint8_t>(0xF0U | (code_point >> 18U));
+        }
+
+        void add_range(const uint32_t first, const uint32_t last, bool* const set) const {
+            const uint8_t low = lead_byte(first);
+            const uint8_t high = lead_byte(last);
+
+            for (uint32_t value = low; value <= high; ++value) {
+                set[value] = true;
+            }
+
+            if (first < 0x80U && last >= 0x80U) {
+                const uint32_t end = last < 0x7FU ? last : 0x7FU;
+
+                for (uint32_t value = first; value <= end; ++value) {
+                    set[value] = true;
+                }
+            }
+        }
+
+        bool collect_first(const int32_t index, bool* const set) {
+            const node& entry = nodes_[static_cast<size_t>(index)];
+
+            switch (entry.type) {
+                case node::kind::empty:
+                case node::kind::cluster:
+                case node::kind::backref:
+                case node::kind::call:
+                case node::kind::word_boundary:
+                case node::kind::non_word_boundary:
+                case node::kind::begin_line:
+                case node::kind::end_line:
+                case node::kind::begin_subject:
+                case node::kind::end_subject:
+                case node::kind::end_subject_final:
+                case node::kind::look:
+                    return false;
+                case node::kind::literal:
+                    set[lead_byte(entry.code_point)] = true;
+
+                    if (entry.caseless) {
+                        set[lead_byte(to_lower(entry.code_point))] = true;
+                        set[lead_byte(to_upper(entry.code_point))] = true;
+                    }
+
+                    return true;
+                case node::kind::any: {
+                    const uint32_t upper = utf_ ? 0x7FU : 0xFFU;
+
+                    for (uint32_t value = 0; value <= upper; ++value) {
+                        if (value != '\n') {
+                            set[value] = true;
+                        }
+                    }
+
+                    if (utf_) {
+                        for (uint32_t value = 0xC2U; value <= 0xF4U; ++value) {
+                            set[value] = true;
+                        }
+                    }
+
+                    return true;
+                }
+                case node::kind::char_class: {
+                    const char_class& cls = classes_[static_cast<size_t>(entry.class_index)];
+
+                    if (cls.negate || cls.caseless) {
+                        return false;
+                    }
+
+                    for (const auto& range: cls.ranges) {
+                        add_range(range.first, range.last, set);
+                    }
+
+                    return !cls.ranges.empty();
+                }
+                case node::kind::capture:
+                case node::kind::group:
+                case node::kind::atomic:
+                    return collect_first(entry.children[0], set);
+                case node::kind::repeat: {
+                    if (entry.minimum == 0) {
+                        return false;
+                    }
+
+                    if (node_nullable(entry.children[0])) {
+                        return false;
+                    }
+
+                    return collect_first(entry.children[0], set);
+                }
+                case node::kind::alternate: {
+                    bool any = false;
+
+                    for (const int32_t child: entry.children) {
+                        if (!collect_first(child, set)) {
+                            return false;
+                        }
+                        any = true;
+                    }
+
+                    return any;
+                }
+                case node::kind::concat: {
+                    for (const int32_t child: entry.children) {
+                        const node& item = nodes_[static_cast<size_t>(child)];
+
+                        if (item.type == node::kind::begin_subject ||
+                            (item.type == node::kind::begin_line && !item.multiline)) {
+                            start_anchored_ = true;
+                            continue;
+                        }
+
+                        if (item.type == node::kind::look || item.type == node::kind::word_boundary ||
+                            item.type == node::kind::non_word_boundary || item.type == node::kind::end_line ||
+                            item.type == node::kind::end_subject || item.type == node::kind::end_subject_final) {
+                            continue;
+                        }
+
+                        if (!collect_first(child, set)) {
+                            return false;
+                        }
+
+                        if (!node_nullable(child)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+                default:
+                    break;
+            }
+
+            return false;
         }
 
         const vector<node>& nodes_;
@@ -2558,6 +3123,7 @@ namespace {
         const vector<char_class>* classes = nullptr;
         const char* subject = nullptr;
         size_t length = 0;
+        size_t search_start = 0;
         bool utf = false;
         bool ucp = false;
         bool match_unset_backref = false;
@@ -2573,7 +3139,8 @@ namespace {
         vector<call_frame> calls;
         vector<size_t> undo_index;
         vector<size_t> undo_value;
-        long long steps = 0;
+        ssize_t steps = 0;
+        ssize_t attempt_limit = attempt_steps;
         int error = 0;
 
         struct frame {
@@ -2778,7 +3345,7 @@ namespace {
         size_t pos = start_pos;
 
         for (;;) {
-            if (++state.steps > maximum_steps) {
+            if (++state.steps > state.attempt_limit || state.steps > maximum_steps) {
                 state.error = match_result_too_complex;
                 break;
             }
@@ -3036,6 +3603,19 @@ namespace {
                     ++ip;
                     break;
                 }
+                case op::keep:
+                    assign_slot(state, 0, pos);
+                    ++ip;
+                    break;
+                case op::begin_search:
+                    if (pos != state.search_start) {
+                        goto backtrack;
+                    }
+                    ++ip;
+                    break;
+                case op::branch_group:
+                    ip = state.slots[static_cast<size_t>(current.a) * 2] != invalid_offset ? current.b : current.c;
+                    break;
                 case op::loop_enter:
                     assign_slot(state, state.slots.size() + static_cast<size_t>(current.a), pos);
                     ++ip;
@@ -3073,13 +3653,24 @@ namespace {
     }
 } // namespace
 
+
 struct regex_program {
     vector<instruction> code;
     vector<char_class> classes;
     int capture_count = 0;
     int loop_count = 0;
     uint32_t options = 0;
+    bool has_nested_quantifier = false;
+    bool may_backtrack_exponentially = false;
+    vector<string> names;
+    bool anchored_start = false;
+    bool has_start_bitmap = false;
+    uint8_t start_bitmap[32] = {};
 };
+
+NEFORCE_NODISCARD bool start_bit_set(const regex_program* program, const unsigned char byte) noexcept {
+    return (program->start_bitmap[byte >> 3] & static_cast<uint8_t>(1U << (byte & 7U))) != 0;
+}
 
 struct regex_match {
     vector<size_t> ovector;
@@ -3110,8 +3701,21 @@ regex_program* regex_compile(const char* pattern, const size_t length, const uin
         program->code = move(builder.code);
         program->classes = move(parsed.classes);
         program->capture_count = parsed.capture_count;
+        program->names = move(parsed.names);
         program->loop_count = builder.loop_count;
         program->options = options;
+        program->has_nested_quantifier = builder.nested_quantifier_;
+        program->may_backtrack_exponentially = builder.exponential_risk_;
+        program->anchored_start = builder.start_anchored_;
+        program->has_start_bitmap = builder.start_valid_ && !builder.start_anchored_;
+
+        if (program->has_start_bitmap) {
+            for (size_t index = 0; index < 256; ++index) {
+                if (builder.start_bytes_[index]) {
+                    program->start_bitmap[index >> 3] |= static_cast<uint8_t>(1U << (index & 7U));
+                }
+            }
+        }
         return program;
     } catch (const compile_failure& failure) {
         if (error_code != nullptr) {
@@ -3140,6 +3744,32 @@ regex_program* regex_compile(const char* pattern, const size_t length, const uin
 
 void regex_free(regex_program* program) noexcept { delete program; }
 
+int regex_group_index(const regex_program* program, const char* const name, const size_t length) noexcept {
+    if (program == nullptr || name == nullptr || length == 0) {
+        return -1;
+    }
+
+    for (size_t index = 1; index < program->names.size(); ++index) {
+        const string& candidate = program->names[index];
+
+        if (candidate.size() == length && memory_compare(candidate.data(), name, length) == 0) {
+            return static_cast<int>(index);
+        }
+    }
+
+    return -1;
+}
+
+void regex_analysis_of(const regex_program* program, bool* const nested, bool* const risk) noexcept {
+    if (nested != nullptr) {
+        *nested = program != nullptr && program->has_nested_quantifier;
+    }
+
+    if (risk != nullptr) {
+        *risk = program != nullptr && program->may_backtrack_exponentially;
+    }
+}
+
 int regex_capture_count(const regex_program* program) noexcept {
     return program != nullptr ? program->capture_count : 0;
 }
@@ -3149,12 +3779,18 @@ regex_match* regex_match_create(const regex_program* program) {
         return nullptr;
     }
 
-    auto* data = new regex_match;
-    data->ovector.assign((static_cast<size_t>(program->capture_count) + 1) * 2, invalid_offset);
-    return data;
+    thread_local regex_match cached_match;
+
+    const size_t slots = (static_cast<size_t>(program->capture_count) + 1) * 2;
+
+    if (cached_match.ovector.size() < slots) {
+        cached_match.ovector.resize(slots, invalid_offset);
+    }
+
+    return &cached_match;
 }
 
-void regex_match_free(regex_match* data) noexcept { delete data; }
+void regex_match_free(regex_match* /*unused*/) noexcept {}
 
 int regex_exec(const regex_program* program, const char* subject, const size_t length, const size_t start_offset,
                const uint32_t options, regex_match* data) {
@@ -3164,24 +3800,47 @@ int regex_exec(const regex_program* program, const char* subject, const size_t l
 
     const size_t capture_slots = (static_cast<size_t>(program->capture_count) + 1) * 2;
 
-    match_state state;
+    thread_local match_state cached_state;
+
+    match_state& state = cached_state;
     state.code = &program->code;
     state.classes = &program->classes;
     state.subject = subject;
     state.length = length;
+    state.search_start = start_offset <= length ? start_offset : length;
     state.utf = (program->options & opt_utf) != 0;
     state.ucp = (program->options & opt_ucp) != 0;
     state.match_unset_backref = (program->options & opt_match_unset_backref) != 0;
     state.slots.assign(capture_slots, invalid_offset);
     state.loops.assign(static_cast<size_t>(program->loop_count), 0);
+    state.undo_index.clear();
+    state.undo_value.clear();
+    state.calls.clear();
+    state.steps = 0;
+    state.error = 0;
 
     const bool anchored = (options & match_anchored) != 0;
     const bool end_anchored = (options & match_end_anchored) != 0;
     const bool first_line = (program->options & opt_firstline) != 0;
+    const bool single_start = anchored || program->anchored_start;
 
     size_t start = start_offset <= length ? start_offset : length;
 
-    while (!anchored || start == start_offset) {
+    if (program->anchored_start && start_offset != 0) {
+        return match_result_nomatch;
+    }
+
+    while (!single_start || start == start_offset) {
+        if (program->has_start_bitmap) {
+            while (start < length && !start_bit_set(program, static_cast<unsigned char>(subject[start]))) {
+                ++start;
+            }
+
+            if (start >= length) {
+                break;
+            }
+        }
+
         if (first_line) {
             bool stopped = false;
 
@@ -3196,6 +3855,8 @@ int regex_exec(const regex_program* program, const char* subject, const size_t l
                 break;
             }
         }
+
+        state.attempt_limit = state.steps + attempt_steps;
 
         if (!state.utf || is_boundary(state, start)) {
             const size_t mark = state.undo_index.size();

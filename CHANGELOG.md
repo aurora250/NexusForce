@@ -4,6 +4,9 @@
 
 ### 🚀 New Features
 
+- 新增正则 `\R`（通用换行，CRLF 作为一个整体）、`\K`（重置匹配起点）、`\G`（搜索起点锚点）、条件组 `(?(1)yes|no)` / `(?(name)yes|no)` 与 `(?(DEFINE)...)` 子程序定义块
+- 新增 `regex::group_index(name)` 按名取组、`regex::analysis()` 供注册期筛查不可信模式
+- 新增正则编译期自动占有化：贪婪量词后接字符集与原子不相交时转换为原子量词，`(a+)+b` 一类嵌套量词从步数超限异常变为线性时间
 - 新增 `SHA512` 哈希（FIPS 180-4 / RFC 6234），提供字节与十六进制接口及便捷函数
 - 新增 `BLAKE2b` / `BLAKE2s`（RFC 7693），支持 1-64 / 1-32 字节可变输出与密钥化哈希
 - 新增 `BLAKE3`，支持 256 位输出、可扩展输出、密钥化与 `derive_key` 模式；AVX2 平台启用八路分块并行压缩
@@ -183,6 +186,9 @@
 
 ### 🔧 Improvements
 
+- `match_result` 不再复制原始字符串：`find_all` / 迭代器结果以视图引用输入，捕获组按需构造
+- `replace_all` / `replace_all_callback` / `split` 改为流式匹配
+- 引擎新增起始字节位图与起始锚定分析，匹配状态与 ovector 改为线程局部复用，减少每次匹配的堆分配
 - `simd` 头文件按后端重构：`simd/<module>.hpp` 成为分发表，实现移入 `arch/<isa>/<module>.hpp` 并各自保留自身的条件编译，未覆盖的架构自动使用 `scalar/` 后端
 - `scalar` 后端新增 `lane_get` / `lane_set`：按字节拷贝读写任意通道，跨通道类型访问不触发严格别名规则
 - 删除 `NEXUSFORCE_USING_SSO` 选项、`NEFORCE_USING_SSO` 宏与 `basic_string` 的非 SSO 实现：`basic_string` 固定使用 SSO 布局，`sizeof` 与修饰名随之固定，消费端需要重新编译

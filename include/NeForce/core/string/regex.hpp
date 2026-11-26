@@ -12,6 +12,7 @@
 
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
+#include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -84,24 +85,32 @@ NEFORCE_ERROR_BUILD_FINAL_CLASS(regex_exception, value_exception, "Regex Operati
  * - `(?|...)` 分支重置、`(?>...)` 原子组、`(?R)` / `(?N)` 递归、`(?&name)` 子程序
  * - 占有量词 `*+ ++ ?+ {n,m}+`、`\\Q...\\E` 字面量引用
  * - 内联选项 `(?imsxU)`、`(?i:...)`、`(?-i)`
- * - `\\A \\z \\Z` 锚点
+ * - `\\A \\z \\Z` 锚点、`\\G`（搜索起点锚点）、`\\K`（重置匹配起点）
+ * - `\\R` 通用换行：CRLF 作为一个整体，或 LF / VT / FF / CR / NEL / LS / PS
+ * - 条件组 `(?(1)yes|no)`、`(?(name)yes|no)`、`(?(DEFINE)...)` 子程序定义块
  *
  * @section unsupported 未实现的构造
  *
  * 下列语法在编译期抛出 `regex_exception`，不会静默降级为其他语义：
  *
  * - 回溯控制动词 `(*SKIP)`、`(*PRUNE)`、`(*THEN)`、`(*COMMIT)`
- * - `\\K`（重置匹配起点）、`\\G`（匹配起点锚点）、`\\R`（通用换行）、`\\C`（单字节）
+ * - `\\C`（单字节）、`\\N{U+XXXX}`（按码位字面量）
  * - callout `(?C...)`
+ * - 断言作为条件的条件组 `(?(?=...)yes|no)`
  * - 长度无界的后顾断言
  *
  * @section limits 运行期约束
  *
- * - 回溯步数上限 20,000,000 步，递归深度上限 1000 层，超出时抛出 `regex_exception`
+ * - 单次匹配尝试的回溯上限 1,000,000 步、整次调用的总上限 20,000,000 步、递归深度上限 1000 层，超出时抛出 `regex_exception`
+ * - 编译期自动占有化：贪婪量词后接的字符集与量词原子不相交时，转换为原子量词
+ * - 无法占有化的嵌套量词会触发指数级回溯，优先使用锚点与具体字符类缩窄起点，或改写为等价的无嵌套形式，可用 regex::analysis() 在注册期识别这类模式
  * - 后顾断言的匹配窗口上限 32767 字节
  * - 位置与长度以 UTF-8 **字节**为单位，不是码位索引
  * @{
  */
+
+class NEFORCE_API regex_iterator;
+class NEFORCE_API regex_token_iterator;
 
 /**
  * @class match_result
@@ -109,17 +118,24 @@ NEFORCE_ERROR_BUILD_FINAL_CLASS(regex_exception, value_exception, "Regex Operati
  *
  * 存储一次正则表达式匹配的结果，包括匹配到的文本、捕获组、
  * 匹配位置等信息。支持格式化输出和迭代器访问。
+ *
+ * @warning 调用方必须保证该字符串在结果使用期间保持存活且未被修改。
  */
 class NEFORCE_API match_result {
 public:
     using iterator = vector<string>::const_iterator; ///< 捕获组迭代器类型
 
 private:
+    friend class regex;
+    friend class regex_iterator;
+    friend class regex_token_iterator;
+
     vector<string> groups_;                        ///< 捕获组文本
     vector<pair<size_t, size_t>> group_positions_; ///< 捕获组位置和长度
     size_t position_ = string::npos;               ///< 匹配起始位置
     size_t length_ = 0;                            ///< 匹配长度
-    string subject_;                               ///< 原始字符串
+    shared_ptr<string> owner_;                     ///< 原始字符串所有者
+    string_view subject_;                          ///< 原始字符串视图
 
 public:
     /**
@@ -128,14 +144,25 @@ public:
     match_result() = default;
 
     /**
-     * @brief 构造函数
+     * @brief 原始字符串构造函数
      * @param subject 原始字符串
      * @param pos 匹配起始位置
      * @param len 匹配长度
      * @param groups 捕获组文本列表
      * @param group_positions 捕获组位置列表
      */
-    match_result(string subject, size_t pos, size_t len, const vector<string>& groups,
+    match_result(const string& subject, size_t pos, size_t len, vector<string> groups,
+                 vector<pair<size_t, size_t>> group_positions);
+
+    /**
+     * @brief 字符串视图构造函数
+     * @param subject 字符串视图
+     * @param pos 匹配起始位置
+     * @param len 匹配长度
+     * @param groups 捕获组文本列表
+     * @param group_positions 捕获组位置列表
+     */
+    match_result(string_view subject, size_t pos, size_t len, vector<string> groups,
                  vector<pair<size_t, size_t>> group_positions);
 
     /**
@@ -160,7 +187,7 @@ public:
      * @brief 获取完整匹配的文本
      * @return 匹配到的完整字符串
      */
-    NEFORCE_NODISCARD string_view data() const noexcept { return matched() ? groups_[0].view() : ""; }
+    NEFORCE_NODISCARD string_view data() const noexcept { return matched() ? subject_.view(position_, length_) : ""; }
 
     /**
      * @brief 获取捕获组数量
@@ -226,6 +253,10 @@ public:
      * @return 捕获组迭代器
      */
     NEFORCE_NODISCARD iterator end() const noexcept { return groups_.end(); }
+
+private:
+    void attach_owner(const string& subject);
+    void rebind(string_view subject) noexcept { subject_ = subject; }
 };
 
 
@@ -277,10 +308,23 @@ NEFORCE_NODISCARD constexpr regex_option operator&(regex_option lhs, regex_optio
  * @note `$` 默认匹配串尾或串尾换行符之前；需要严格串尾语义时使用 `regex_option::dollar_endonly`。
  */
 class NEFORCE_API regex {
+public:
+    /**
+     * @struct analysis_result
+     * @brief 正则模式的结构分析结果
+     *
+     * 在编译期计算，用于调用方决定是否接受不受信任的模式。
+     */
+    struct analysis_result {
+        bool has_nested_quantifier = false;       ///< 是否存在量词嵌套量词的结构
+        bool may_backtrack_exponentially = false; ///< 嵌套结构是否可能触发指数级回溯
+    };
+
 private:
     void* code_{nullptr};                      ///< 正则表达式
     string pattern_;                           ///< 原始正则表达式模式
     regex_option options_{regex_option::none}; ///< 编译选项
+    analysis_result analysis_{};               ///< 编译期结构分析
     int capture_count_ = 0;                    ///< 捕获组数量
 
     friend class regex_iterator;
@@ -289,8 +333,17 @@ private:
 private:
     void compile(const string& pattern, regex_option options);
 
+    // NOLINTNEXTLINE(modernize-use-nodiscard)
     match_result do_match(const void* subject, size_t length, size_t start_offset, uint32_t options,
                           const string& subject_str) const;
+
+    // NOLINTNEXTLINE(modernize-use-nodiscard)
+    match_result do_match_borrowed(const void* subject, size_t length, size_t start_offset, uint32_t options,
+                                   string_view subject_view) const;
+
+    // NOLINTNEXTLINE(modernize-use-nodiscard)
+    match_result do_match_owned(const shared_ptr<string>& owner, size_t length, size_t start_offset,
+                                uint32_t options) const;
 
 public:
     /**
@@ -404,6 +457,19 @@ public:
     NEFORCE_NODISCARD bool valid() const noexcept { return code_ != nullptr; }
 
     /**
+     * @brief 获取模式的结构分析结果
+     * @return 编译期计算的分析结果
+     */
+    NEFORCE_NODISCARD const analysis_result& analysis() const noexcept { return analysis_; }
+
+    /**
+     * @brief 按名称查找命名捕获组的编号
+     * @param name 捕获组名称
+     * @return 捕获组编号（从 1 开始），未找到或对象未编译时返回 -1
+     */
+    NEFORCE_NODISCARD int group_index(string_view name) const noexcept;
+
+    /**
      * @brief 获取匹配结果迭代器起始位置
      * @param str 待遍历的字符串
      * @return 匹配迭代器起始位置
@@ -439,7 +505,7 @@ public:
 
 private:
     const regex* regex_ = nullptr; ///< 关联的正则表达式
-    string subject_;               ///< 待遍历的字符串
+    shared_ptr<string> subject_;   ///< 待遍历的字符串
 
     match_result current_; ///< 当前匹配结果
     size_t next_pos_ = 0;  ///< 下一次搜索的起始位置
@@ -520,7 +586,7 @@ public:
     static regex_iterator end(const regex* re, const string& str) {
         regex_iterator it;
         it.regex_ = re;
-        it.subject_ = str;
+        it.subject_ = make_shared<string>(str);
         it.done_ = true;
         return it;
     }

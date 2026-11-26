@@ -992,6 +992,21 @@ gdb ./build/bin/NexusForceCrashDumpExample /tmp/nexusforce_crash_dump_example/ex
 
 ---
 
+## 字符串与正则模块
+
+`NeForce/core/string/regex.hpp` 提供自包含的回溯式正则引擎，示例见 `examples/string/regex_example.cpp`。
+
+```cpp
+const regex expression(R"((?<user>[\w.+-]+)@(?<host>[\w.-]+\.[a-z]{2,}))");
+
+const auto match = expression.search("Contact dev@nexusforce.dev");
+if (match.matched()) {
+    println(match[expression.group_index("user")], " @ ", match[expression.group_index("host")]);
+}
+
+expression.replace_all(text, "[$2]");
+```
+
 ## 文件路径说明
 
 | 示例                   | 源文件                                                           |

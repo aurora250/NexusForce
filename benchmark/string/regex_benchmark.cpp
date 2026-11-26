@@ -176,4 +176,76 @@ static void BM_StdRegex_Match(benchmark::State& state) {
 }
 BENCHMARK(BM_StdRegex_Match);
 
+// ============================================================
+// 7. Large text scanning (start-optimization and allocation behaviour)
+// ============================================================
+
+static const string& large_text() {
+    static const string text = [] {
+        string buffer;
+
+        while (buffer.size() < 1024 * 1024) {
+            buffer += "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor ";
+        }
+
+        return buffer;
+    }();
+
+    return text;
+}
+
+static void BM_NfRegex_SearchLargeAbsent(benchmark::State& state) {
+    regex re("needle");
+
+    for (auto _: state) {
+        benchmark::DoNotOptimize(re.search(large_text()));
+    }
+}
+BENCHMARK(BM_NfRegex_SearchLargeAbsent);
+
+static void BM_NfRegex_FindAllLarge(benchmark::State& state) {
+    regex re("\\w+");
+
+    for (auto _: state) {
+        benchmark::DoNotOptimize(re.find_all(large_text()));
+    }
+}
+BENCHMARK(BM_NfRegex_FindAllLarge);
+
+static void BM_NfRegex_ReplaceAllLarge(benchmark::State& state) {
+    regex re("\\w+");
+
+    for (auto _: state) {
+        benchmark::DoNotOptimize(re.replace_all(large_text(), "x"));
+    }
+}
+BENCHMARK(BM_NfRegex_ReplaceAllLarge);
+
+// ============================================================
+// 8. Worst case backtracking under the per-attempt budget
+// ============================================================
+
+static void BM_NfRegex_NestedQuantifier(benchmark::State& state) {
+    regex re("(a+)+ab");
+    const string subject(24, 'a');
+
+    for (auto _: state) {
+        try {
+            benchmark::DoNotOptimize(re.match(subject));
+        } catch (const regex_exception&) {
+        }
+    }
+}
+BENCHMARK(BM_NfRegex_NestedQuantifier);
+
+static void BM_NfRegex_NestedPossessified(benchmark::State& state) {
+    regex re("(a+)+b");
+    const string subject(24, 'a');
+
+    for (auto _: state) {
+        benchmark::DoNotOptimize(re.match(subject));
+    }
+}
+BENCHMARK(BM_NfRegex_NestedPossessified);
+
 BENCHMARK_MAIN();

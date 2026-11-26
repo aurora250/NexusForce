@@ -1785,7 +1785,7 @@ TEST(SimdBackendTest, VectorTypesAreNaturallyAligned) {
 
 TEST_F(SimdUtilTest, StreamLoadStoreAcceptsUnalignedPointers) {
     alignas(64) byte_t source[96];
-    alignas(64) byte_t target[96];
+    alignas(64) byte_t target[128];
     for (int i = 0; i < 96; ++i) {
         source[i] = static_cast<byte_t>((i * 29) + 3);
     }

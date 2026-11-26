@@ -16,6 +16,7 @@ add_subdirectory(iterator)
 add_subdirectory(logging)
 add_subdirectory(memory)
 add_subdirectory(network)
+add_subdirectory(string)
 add_subdirectory(tui)
 
 add_subdirectory(integration)

@@ -32,6 +32,9 @@ add_executable(NexusForceUnitTests
         test_random.cpp
         test_ranges.cpp
         test_regex.cpp
+        test_regex_conformance.cpp
+        test_regex_fuzz.cpp
+        test_regex_advanced.cpp
         test_reflect.cpp
         test_rotating_file.cpp
         test_simd.cpp
