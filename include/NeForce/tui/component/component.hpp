@@ -40,12 +40,12 @@ public:
     /**
      * @brief 构造组件基类
      */
-    NEFORCE_API component_base();
+    component_base();
 
     /**
      * @brief 析构组件基类
      */
-    virtual NEFORCE_API ~component_base();
+    virtual ~component_base();
 
     component_base(const component_base&) = delete;
     component_base& operator=(const component_base&) = delete;

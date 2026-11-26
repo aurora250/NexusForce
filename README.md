@@ -320,7 +320,7 @@ See [HTTP/HTTPS performance test records](benchmark/network/http/PERFORMANCE.md)
 - **`logger`** - Thread-pool-driven async logger, supports `block`/`discard`/`overrun_oldest` overflow strategies, bounded ring buffer, auto drain scheduling
 
 ### 🔤 String Processing
-- **PCRE2 Regular Expressions** - Efficient regex matching with JIT support `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`, supports copy
+- **Regular Expressions** - regex matching through `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`
 - **Unicode Support** - UTF conversion system, codepoint operation class `codepoint`, UTF-8 codepoint iterator `utf8_iterator` / `utf8_view`
 - **`formatter`/`format`** - Type-safe formatted output, supports positional params `{0}` `{1}` and named params `format_named()`, see [format performance test records](benchmark/string/format/PERFORMANCE.md)
 - **`string_view`** - Extensive use of string views for optimized operations
@@ -473,8 +473,7 @@ See [TUI performance test records](benchmark/tui/PERFORMANCE.md) for TUI renderi
 | 📦 Package Manager                | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest              |
 | 🎨 Code Formatter                 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19.0                |
 | 🔍 Static Analyzer                | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19.0                |
-| ⚠️ Mandatory Dependencies (vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.0                |
-|                                   | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0               |
+| ⚠️ Mandatory Dependencies (vcpkg) | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0               |
 | 📦 Optional Dependencies (vcpkg)  | [libpq](https://www.postgresql.org/)                                | 16.0                |
 |                                   | [libmysql](https://www.mysql.com/)                                  | 8.0                 |
 |                                   | [sqlite3](https://sqlite.org/index.html)                            | 3.0                 |
@@ -637,7 +636,7 @@ Parameter description:
 
 Windows has no RPATH: the loader looks for a DLL only in the directory of the module that loads it, in the system directories and on `PATH`. Therefore:
 
-- The install packages every third-party dependency of NexusForce.dll (ICU, PCRE2, OpenSSL, zlib, lz4, hiredis, sqlcipher, libmysql, LIBPQ, ...) into `<prefix>/bin`, so the installed `NexusRsvp.exe` runs from any working directory and `nexusforce_reflect_scan()` needs no further setup.
+- The install packages every third-party dependency of NexusForce.dll (ICU, OpenSSL, zlib, lz4, hiredis, sqlcipher, libmysql, LIBPQ, ...) into `<prefix>/bin`, so the installed `NexusRsvp.exe` runs from any working directory and `nexusforce_reflect_scan()` needs no further setup.
 - Your own executables need those DLLs as well; use `nexusforce_deploy_runtime()` to copy them next to the target:
 
 ```cmake

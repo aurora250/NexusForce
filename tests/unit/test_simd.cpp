@@ -4,6 +4,7 @@
 #include <NeForce/core/simd/arithmetic.hpp>
 #include <NeForce/core/simd/compare.hpp>
 #include <NeForce/core/simd/block.hpp>
+#include <NeForce/core/memory/memory.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 

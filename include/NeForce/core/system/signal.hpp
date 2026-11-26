@@ -15,6 +15,9 @@
 #include "NeForce/core/time/clocks.hpp"
 #include "NeForce/core/utility/optional.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
+#    include "NeForce/core/config/windef.hpp"
+#    include <minwindef.h>
+#    include <winnt.h>
 #    include <consoleapi.h>
 #    ifdef NEFORCE_COMPILER_MINGW
 #        include <windef.h>

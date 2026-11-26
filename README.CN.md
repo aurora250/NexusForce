@@ -317,7 +317,7 @@ HTTP/HTTPS/WS/WSS/gRPC 性能测试详见 [HTTP/HTTPS 性能测试记录](benchm
 - **`logger`** - 线程池驱动的异步日志，支持 `block`/`discard`/`overrun_oldest` 三种溢出策略，有界环形队列、自动 drain 调度
 
 ### 🔤 字符串处理 (String)
-- **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`，支持拷贝
+- **正则表达式** - 正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`
 - **Unicode 支持** - UTF 转换系统、码点操作类 `codepoint`、UTF-8 码点迭代器 `utf8_iterator` / `utf8_view`
 - **`formatter`/`format`** - 高性能的类型安全格式化输出，支持位置参数 `{0}` `{1}` 和命名参数 `format_named()`，性能测试详见 [格式化性能测试记录](benchmark/string/format/PERFORMANCE.md)
 - **`string_view`** - 大量使用字符串视图优化操作
@@ -470,8 +470,7 @@ TUI 渲染性能测试详见 [TUI 性能测试记录](benchmark/tui/PERFORMANCE.
 | 📦 包管理器        | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest       |
 | 🎨 代码格式化      | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19.0         |
 | 🔍 静态分析        | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19.0         |
-| ⚠️ 必选依赖(vcpkg) | [pcre2](https://www.pcre.org/)                                      | 10.0         |
-|                    | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0        |
+| ⚠️ 必选依赖(vcpkg) | [OpenSSL](https://www.openssl.org/)                                 | 3.6.0        |
 | 📦 可选依赖(vcpkg) | [libpq](https://www.postgresql.org/)                                | 16.0         |
 |                    | [libmysql](https://www.mysql.com/)                                  | 8.0          |
 |                    | [sqlite3](https://sqlite.org/index.html)                            | 3.0          |
@@ -634,7 +633,7 @@ nexusforce_reflect_scan(
 
 Windows 没有 RPATH，加载器只会从**加载方模块自身所在目录**、系统目录与 `PATH` 中查找 DLL。因此：
 
-- 安装时会把 NexusForce.dll 的全部第三方依赖（ICU、PCRE2、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）一并打包进 `<prefix>/bin`，安装后的 `NexusRsvp.exe` 在任意工作目录下都能直接运行，`nexusforce_reflect_scan()` 无需额外处理。
+- 安装时会把 NexusForce.dll 的全部第三方依赖（ICU、OpenSSL、zlib、lz4、hiredis、sqlcipher、libmysql、LIBPQ 等）一并打包进 `<prefix>/bin`，安装后的 `NexusRsvp.exe` 在任意工作目录下都能直接运行，`nexusforce_reflect_scan()` 无需额外处理。
 - 你自己的可执行文件同样需要这些 DLL 才能启动，用 `nexusforce_deploy_runtime()` 把它们复制到目标构建目录：
 
 ```cmake

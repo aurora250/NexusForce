@@ -189,7 +189,7 @@ NexusForce 的 ORM（`sql_mapper` + `repository`）**不是编译期代码生成
 | CLI 工具 / 系统工具     | ⭐⭐⭐⭐   | cmdline 解析，console 交互，进程管理，管道，信号      |
 | 配置管理 / 文件处理     | ⭐⭐⭐⭐   | 5 种配置格式，文件监控，异步 IO，路径操作             |
 | 加密/安全相关           | ⭐⭐⭐⭐   | AES-256/SHA-256 自研实现，SSL/TLS 集成，CSRF/CORS     |
-| 嵌入式系统              | ⭐⭐⭐     | 必须依赖 OpenSSL/PCRE2，对资源受限环境需评估          |
+| 嵌入式系统              | ⭐⭐⭐     | 必须依赖 OpenSSL，对资源受限环境需评估                |
 | GUI 应用                | ⭐         | 无 GUI 组件，纯库定位                                 |
 
 ---

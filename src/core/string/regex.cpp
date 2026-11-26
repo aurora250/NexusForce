@@ -1,7 +1,7 @@
 #include <NeForce/core/string/regex.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/core/utility/scope.hpp>
-#include <pcre2.h>
+#include "regex_builtin.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 match_result::match_result(string subject, const size_t pos, const size_t len, const vector<string>& groups,
@@ -74,20 +74,20 @@ string match_result::format(const string_view fmt) const {
 }
 
 void regex::compile(const string& pattern, const regex_option options) {
-    int error_code = 0;
-    ::PCRE2_SIZE error_offset = 0;
-
     reset();
-    code_ = ::pcre2_compile(reinterpret_cast<::PCRE2_SPTR>(pattern.data()), pattern.length(),
-                            static_cast<uint32_t>(options), &error_code, &error_offset, nullptr);
+
+    int error_code = 0;
+    size_t error_offset = 0;
+    char error_message[256] = {};
+
+    code_ = regex_compile(pattern.data(), pattern.length(), static_cast<uint32_t>(options), &error_code, &error_offset,
+                          error_message, sizeof(error_message));
 
     if (code_ == nullptr) {
-        char error_message[256];
-        ::pcre2_get_error_message(error_code, reinterpret_cast<::PCRE2_UCHAR*>(error_message), sizeof(error_message));
         NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
     }
 
-    ::pcre2_pattern_info(static_cast<::pcre2_code*>(code_), PCRE2_INFO_CAPTURECOUNT, &capture_count_);
+    capture_count_ = regex_capture_count(static_cast<const regex_program*>(code_));
 
     pattern_ = pattern;
     options_ = options;
@@ -95,31 +95,35 @@ void regex::compile(const string& pattern, const regex_option options) {
 
 match_result regex::do_match(const void* subject, const size_t length, const size_t start_offset,
                              const uint32_t options, const string& subject_str) const {
+    constexpr auto unset_offset = numeric_traits<size_t>::max();
+
     if (code_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(regex_exception("Uninitialized regex object"));
     }
 
-    ::pcre2_match_data* match_data = ::pcre2_match_data_create_from_pattern(static_cast<::pcre2_code*>(code_), nullptr);
+    const auto* const subject_bytes = static_cast<const char*>(subject);
+
+    auto* match_data = regex_match_create(static_cast<const regex_program*>(code_));
 
     if (match_data == nullptr) {
         NEFORCE_THROW_EXCEPTION(regex_exception("Failed to create match data"));
     }
-    const scope_exit match_data_guard([match_data]() noexcept { ::pcre2_match_data_free(match_data); });
+    const scope_exit match_data_guard([match_data]() noexcept { regex_match_free(match_data); });
 
-    const auto* const subject_sptr = static_cast<::PCRE2_SPTR>(subject);
-    const int rc = ::pcre2_match(static_cast<::pcre2_code*>(code_), subject_sptr, length, start_offset, options,
-                                 match_data, nullptr);
+    const int rc = regex_exec(static_cast<const regex_program*>(code_), subject_bytes, length, start_offset, options,
+                              match_data);
 
     if (rc < 0) {
-        if (rc == PCRE2_ERROR_NOMATCH) {
+        if (rc == match_result_nomatch) {
             return {};
         }
-        char error_message[256];
-        ::pcre2_get_error_message(rc, reinterpret_cast<::PCRE2_UCHAR*>(error_message), sizeof(error_message));
-        NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
+
+        NEFORCE_THROW_EXCEPTION(regex_exception(rc == match_result_bad_utf
+                                                        ? "Invalid UTF-8 sequence in subject"
+                                                        : "Regular expression match limit exceeded"));
     }
 
-    const ::PCRE2_SIZE* ovector = ::pcre2_get_ovector_pointer(match_data);
+    const size_t* const ovector = regex_ovector(match_data);
 
     vector<string> groups;
     vector<pair<size_t, size_t>> group_positions;
@@ -127,10 +131,10 @@ match_result regex::do_match(const void* subject, const size_t length, const siz
     group_positions.reserve(rc);
 
     for (ptrdiff_t i = 0; i < rc; ++i) {
-        if (ovector[i * 2] != PCRE2_UNSET) {
+        if (ovector[i * 2] != unset_offset) {
             const size_t start = ovector[i * 2];
             const size_t end = ovector[i * 2 + 1];
-            groups.emplace_back(reinterpret_cast<const char*>(subject_sptr + start), end - start);
+            groups.emplace_back(subject_bytes + start, end - start);
             group_positions.emplace_back(start, end - start);
         } else {
             groups.emplace_back();
@@ -193,23 +197,20 @@ regex& regex::operator=(const regex& other) {
 regex::~regex() { reset(); }
 
 match_result regex::do_match(const string& str) const {
-    return do_match(reinterpret_cast<::PCRE2_SPTR>(str.data()), str.length(), 0, PCRE2_ANCHORED | PCRE2_ENDANCHORED,
-                    str);
+    return do_match(str.data(), str.length(), 0, match_anchored | match_end_anchored, str);
 }
 
 bool regex::match(const string& str) const {
-    return do_match(reinterpret_cast<::PCRE2_SPTR>(str.data()), str.length(), 0, PCRE2_ANCHORED | PCRE2_ENDANCHORED,
-                    str)
-            .matched();
+    return do_match(str.data(), str.length(), 0, match_anchored | match_end_anchored, str).matched();
 }
 
 match_result regex::search(const string& str, const size_t pos) const {
-    return do_match(reinterpret_cast<::PCRE2_SPTR>(str.data()), str.length(), pos, 0, str);
+    return do_match(str.data(), str.length(), pos, 0, str);
 }
 
 vector<match_result> regex::find_all(const string& str) const {
     vector<match_result> results;
-    const auto* subject = reinterpret_cast<::PCRE2_SPTR>(str.data());
+    const auto* const subject = str.data();
     const size_t length = str.length();
     size_t start_offset = 0;
 
@@ -311,7 +312,7 @@ vector<string> regex::split(const string& str, const int max_splits) const {
 
 void regex::reset() noexcept {
     if (code_ != nullptr) {
-        ::pcre2_code_free(static_cast<::pcre2_code*>(code_));
+        regex_free(static_cast<regex_program*>(code_));
     }
     code_ = nullptr;
     pattern_.clear();

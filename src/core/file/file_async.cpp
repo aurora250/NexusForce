@@ -17,7 +17,7 @@ namespace {
             -1;
 #endif
 
-    constexpr size_t g_queue_entries = io_queue::default_entries;
+    constexpr size_t g_queue_entries = 512;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     struct win_io_op {

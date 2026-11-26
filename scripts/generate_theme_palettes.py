@@ -2,7 +2,7 @@
 """Generate NeForce theme palettes from dsh-TUI's src/theme.ts.
 
 Usage:
-    python3 scripts/gen_theme_palettes.py [path/to/dsh-TUI/src/theme.ts] \
+    python3 scripts/generate_theme_palettes.py [path/to/dsh-TUI/src/theme.ts] \
         [--out src/tui/dom/theme_palettes.cpp] [--header include/NeForce/tui/dom/theme_roles.inc]
 
 The source file is MIT licensed; only color values and role names are extracted.

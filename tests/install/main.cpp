@@ -6,8 +6,7 @@
 #include <NeForce/core/locale/locale.hpp>
 #include <NeForce/core/time/datetime.hpp>
 
-#if !defined(NEXUSFORCE_VERSION) || !defined(NEXUSFORCE_VERSION_MAJOR) || !defined(NEFORCE_SUPPORT_OPENSSL) || \
-        !defined(NEFORCE_SUPPORT_PCRE2)
+#if !defined(NEXUSFORCE_VERSION) || !defined(NEXUSFORCE_VERSION_MAJOR) || !defined(NEFORCE_SUPPORT_OPENSSL)
 #    error "the installed NexusForce package did not propagate its interface compile definitions"
 #endif
 

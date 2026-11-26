@@ -92,6 +92,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/serialize/json_serializer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/codepoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex_builtin.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/to_numerics.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/to_string.cpp
@@ -604,14 +605,6 @@ if(NEXUSFORCE_ENABLE_ZSTD)
 else()
     message(STATUS "zstd support disabled")
 endif()
-
-find_package(pcre2 CONFIG REQUIRED COMPONENTS 8BIT)
-nexusforce_link_module(Core PRIVATE PCRE2::8BIT)
-nexusforce_define_both(PUBLIC
-        NEFORCE_SUPPORT_PCRE2
-        PCRE2_CODE_UNIT_WIDTH=8
-)
-message(STATUS "PCRE2 with JIT linked successfully")
 
 
 if(NEXUSFORCE_ENABLE_LOCALE)

@@ -5,7 +5,7 @@
  * @file regex.hpp
  * @brief 正则表达式引擎封装
  *
- * 此文件提供了基于PCRE2的正则表达式。
+ * 此文件提供了内置正则引擎的封装。
  * 支持正则表达式的编译、匹配、查找、替换、分割等操作，
  * 并提供迭代器接口用于遍历匹配结果。
  */
@@ -32,6 +32,74 @@ NEFORCE_ERROR_BUILD_FINAL_CLASS(regex_exception, value_exception, "Regex Operati
 /**
  * @defgroup Regex 正则表达式
  * @brief 正则表达式操作实现
+ *
+ * 提供一个自包含的回溯式正则引擎。
+ *
+ * 模式在构造时编译为字节码，匹配在显式栈上执行。
+ * 引擎直接处理 UTF-8 字节序列，提供编译、匹配、查找、替换、分割与遍历迭代器。
+ *
+ * @section standards 参照的国际标准
+ *
+ * **正则语法产生式：**
+ * - **ECMA-262 §22.2**：ECMAScript Pattern（Disjunction / Alternative / Term / Assertion / Quantifier / CharacterClass / AtomEscape）
+ *   https://tc39.es/ecma262/#sec-patterns
+ * - **IEEE POSIX.1-2017 (ISO/IEC 9945) §9**：BRE / ERE 的元字符、括号表达式与区间
+ *   https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html
+ *
+ * **Unicode 支持：**
+ * - **Unicode UTS #18**：Unicode Regular Expressions（Level 1 字符类与 \\p{...}）
+ *   https://www.unicode.org/reports/tr18/
+ * - **Unicode UAX #29**：Unicode Text Segmentation（\\X 扩展字素簇）
+ *   https://www.unicode.org/reports/tr29/
+ * - **Unicode UAX #44**：Unicode Character Database（通用类别）
+ *   https://www.unicode.org/reports/tr44/
+ *
+ * **文本编码：**
+ * - **IETF RFC 3629**：UTF-8 的字节序列与合法性约束
+ *   https://www.rfc-editor.org/rfc/rfc3629.html
+ *
+ * @section support 支持的语法
+ *
+ * **ECMAScript Pattern（ECMA-262 §22.2）**
+ * - 字面量、`.`、`^ $`、`\\b` `\\B`、分支 `|`
+ * - 字符类 `[...]`：区间、取反、`]` 作为首字符、`\\d \\D \\w \\W \\s \\S`
+ * - 捕获组 `(...)`、非捕获组 `(?:...)`、命名组 `(?<name>...)`
+ * - 前瞻 `(?=...)` `(?!...)`、后顾 `(?<=...)` `(?<!...)`
+ * - 量词 `* + ? {n} {n,} {n,m}` 及其惰性形式（尾部 `?`）
+ * - 反向引用 `\\1`..`\\9`、`\\k<name>`
+ * - 属性转义 `\\p{Lu}` `\\P{L}`（Unicode 通用类别与少量脚本）
+ * - 转义 `\\n \\r \\t \\f \\v \\0nn \\xHH \\uHHHH \\cX`
+ *
+ * **POSIX ERE（ISO/IEC 9945 §9.4）**
+ * - 括号表达式与区间、`[:alpha:]` `[:digit:]` 等字符类、`^ $` 锚点、`|` 分支
+ * - 差异：启用 `utf` 后 `.` 与字符类按码位而不是字节匹配
+ *
+ * **Unicode（UTS #18 Level 1 / UAX #29）**
+ * - `\\p{L}` 等 30 个通用类别；`\\p{Han}` `\\p{Hiragana}` `\\p{Katakana}` `\\p{Hangul}`
+ * - 属性别名 `\\p{Any}` `\\p{ASCII}` `\\p{Alnum}` `\\p{Word}` `\\p{Space}` 等
+ * - `\\X` 扩展字素簇：组合符、ZWJ 序列、CRLF、Hangul 音节
+ * - 字符数据版本 Unicode 13.0.0，由 `scripts/generate_regex_ucd.py` 生成
+ *
+ * **Perl 扩展（不属于标准）**
+ * - `(?|...)` 分支重置、`(?>...)` 原子组、`(?R)` / `(?N)` 递归、`(?&name)` 子程序
+ * - 占有量词 `*+ ++ ?+ {n,m}+`、`\\Q...\\E` 字面量引用
+ * - 内联选项 `(?imsxU)`、`(?i:...)`、`(?-i)`
+ * - `\\A \\z \\Z` 锚点
+ *
+ * @section unsupported 未实现的构造
+ *
+ * 下列语法在编译期抛出 `regex_exception`，不会静默降级为其他语义：
+ *
+ * - 回溯控制动词 `(*SKIP)`、`(*PRUNE)`、`(*THEN)`、`(*COMMIT)`
+ * - `\\K`（重置匹配起点）、`\\G`（匹配起点锚点）、`\\R`（通用换行）、`\\C`（单字节）
+ * - callout `(?C...)`
+ * - 长度无界的后顾断言
+ *
+ * @section limits 运行期约束
+ *
+ * - 回溯步数上限 20,000,000 步，递归深度上限 1000 层，超出时抛出 `regex_exception`
+ * - 后顾断言的匹配窗口上限 32767 字节
+ * - 位置与长度以 UTF-8 **字节**为单位，不是码位索引
  * @{
  */
 
@@ -172,34 +240,22 @@ class NEFORCE_API regex_token_iterator;
  */
 enum class regex_option : uint32_t {
     none = 0x00000000U,                ///< 无选项
-    allow_empty_class = 0x00000001U,   ///< 允许空字符类，如 []
-    alt_bsux = 0x00000002U,            ///< 允许 \\u 和 \\x 作为 \\u 和 \\x 替代 PCRE 的 \\u 语法
-    auto_callout = 0x00000004U,        ///< 自动插入调用点
+    allow_empty_class = 0x00000001U,   ///< 允许空字符类 []，空类不匹配任何字符
+    alt_bsux = 0x00000002U,            ///< 允许 \\uHHHH 形式的 Unicode 转义（ECMAScript 风格）
     caseless = 0x00000008U,            ///< 大小写不敏感匹配
-    dollar_endonly = 0x00000010U,      ///< $ 仅匹配字符串末尾，不匹配换行前
+    dollar_endonly = 0x00000010U,      ///< $ 仅匹配字符串末尾，不匹配末尾换行符之前
     dotall = 0x00000020U,              ///< 点号 . 匹配任意字符，包括换行符
     dupnames = 0x00000040U,            ///< 允许重复的命名捕获组
-    extended = 0x00000080U,            ///< 扩展模式，忽略空白和注释
+    extended = 0x00000080U,            ///< 扩展模式，忽略空白与 # 注释
     firstline = 0x00000100U,           ///< 仅在第一行内进行匹配
-    match_unset_backref = 0x00000200U, ///< 允许匹配未设置的反向引用
+    match_unset_backref = 0x00000200U, ///< 反向引用指向未参与匹配的组时按空串处理
     multiline = 0x00000400U,           ///< 多行模式，^ 和 $ 匹配行首行尾
-    never_ucp = 0x00000800U,           ///< 禁止使用 Unicode 字符属性
-    never_utf = 0x00001000U,           ///< 禁止使用 UTF 模式
     no_auto_capture = 0x00002000U,     ///< 禁止自动捕获组，() 不作为捕获组
-    no_auto_possess = 0x00004000U,     ///< 禁止自动优化量词的所有格化
-    no_dotstar_anchor = 0x00008000U,   ///< 禁止对 .* 自动锚定优化
-    no_start_optimize = 0x00010000U,   ///< 禁止起始优化
-    ucp = 0x00020000U,                 ///< 启用 Unicode 字符属性支持
+    ucp = 0x00020000U,                 ///< 启用 Unicode 属性语义（\\d \\w \\s 与大小写折叠）
     ungreedy = 0x00040000U,            ///< 量词默认非贪婪模式
-    utf = 0x00080000U,                 ///< 启用 UTF 模式
-    never_backslash_c = 0x00100000U,   ///< 禁止使用 \\C 转义序列
-    alt_circumflex = 0x00200000U,      ///< ^ 在 UTF 模式下匹配字符串开头
-    alt_verbnames = 0x00400000U,       ///< 允许使用替代动词名称
-    use_offset_limit = 0x00800000U,    ///< 使用起始偏移限制
-    extended_more = 0x01000000U,       ///< 更严格的扩展模式，忽略空格和 # 注释
-    literal = 0x02000000U,             ///< 将模式视为字面量字符串
-    match_invalid_utf = 0x04000000U,   ///< 允许匹配无效的 UTF 序列
-    alt_extended_class = 0x08000000U,  ///< 使用替代的扩展字符类语法
+    utf = 0x00080000U,                 ///< 启用 UTF-8 模式，按码位匹配
+    alt_circumflex = 0x00200000U,      ///< 多行模式下 ^ 仅匹配字符串开头
+    literal = 0x02000000U,             ///< 将整个模式视为字面量字符串
 };
 
 NEFORCE_NODISCARD constexpr regex_option operator|(regex_option lhs, regex_option rhs) noexcept {
@@ -215,8 +271,10 @@ NEFORCE_NODISCARD constexpr regex_option operator&(regex_option lhs, regex_optio
  * @class regex
  * @brief 正则表达式类
  *
- * PCRE2正则表达式引擎，提供编译、匹配、查找、替换、分割等操作。
- * 支持正则表达式的完整功能，包括捕获组、向后引用、断言等。
+ * 内置回溯式正则引擎，提供编译、匹配、查找、替换、分割等操作。
+ *
+ * @note 匹配采用左最先（leftmost-first）回溯语义，不提供 POSIX 的最长匹配（leftmost-longest）语义。
+ * @note `$` 默认匹配串尾或串尾换行符之前；需要严格串尾语义时使用 `regex_option::dollar_endonly`。
  */
 class NEFORCE_API regex {
 private:

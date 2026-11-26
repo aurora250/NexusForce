@@ -69,7 +69,6 @@ licenses apply to those libraries themselves.
 |------------------|------------------------------------------|------------------------------------------------|
 | OpenSSL          | TLS, X.509, crypto primitives            | Apache-2.0                                     |
 | ICU (ICU4C)      | Locale and Unicode support               | Unicode-DFS-2016                               |
-| PCRE2            | Regular expressions                      | BSD-3-Clause                                   |
 | zlib             | Deflate compression                      | Zlib                                           |
 | LZ4              | Fast compression                         | BSD-2-Clause                                   |
 | SQLite3          | Embedded database                        | Public Domain                                  |

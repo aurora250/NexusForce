@@ -240,7 +240,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`logger`** - 线程池驱动的异步日志，支持 `block`/`discard`/`overrun_oldest` 三种溢出策略，有界环形队列、自动 drain 调度
 
 ### 🔤 字符串处理 (String)
-- **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`，支持拷贝
+- **正则表达式** - 正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`
 - **Unicode 支持** - UTF 转换系统、码点操作类 `codepoint`、UTF-8 码点迭代器 `utf8_iterator` / `utf8_view`
 - **`formatter`/`format`** - 类型安全的格式化输出，支持位置参数 `{0}` `{1}` 和命名参数 `format_named()`
 - **`string_view`** - 大量使用字符串视图优化操作

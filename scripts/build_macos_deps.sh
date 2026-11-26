@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #
 # Build the target dependencies required by the macOS cross build:
-# OpenSSL (static), PCRE2 (static, 8-bit, JIT), zlib (static) and GTest.
 #
 # The output prefix defaults to <repo>/build-macos-deps for arm64 and
 # <repo>/build-macos-deps-x86_64 for x86_64.
@@ -40,10 +39,8 @@ esac
 DEPS="${1:-${DEPS_DEFAULT}}"
 SRC_DIR="${ROOT}/build-macos-deps-src-${ARCH}"
 OPENSSL_VERSION="3.6.1"
-PCRE2_VERSION="10.47"
 ZLIB_VERSION="1.3.1"
 GTEST_VERSION="1.17.0"
-SLJIT_COMMIT="45f910b78c6605ebf5b53d3ec7cb00f2312fe417"
 DEPLOYMENT_TARGET="${NEXUSFORCE_MACOS_DEPLOYMENT_TARGET:-11.0}"
 JOBS="${JOBS:-$(nproc)}"
 
@@ -112,24 +109,15 @@ fetch() {
 
 fetch "openssl-openssl-openssl-${OPENSSL_VERSION}.tar.gz" \
     "https://github.com/openssl/openssl/releases/download/openssl-${OPENSSL_VERSION}/openssl-${OPENSSL_VERSION}.tar.gz"
-fetch "PCRE2Project-pcre2-pcre2-${PCRE2_VERSION}.tar.gz" \
-    "https://github.com/PCRE2Project/pcre2/releases/download/pcre2-${PCRE2_VERSION}/pcre2-${PCRE2_VERSION}.tar.gz"
-fetch "sljit-${SLJIT_COMMIT}.tar.gz" \
-    "https://github.com/zherczeg/sljit/archive/${SLJIT_COMMIT}.tar.gz"
 fetch "madler-zlib-v${ZLIB_VERSION}.tar.gz" \
     "https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}/zlib-${ZLIB_VERSION}.tar.gz"
 fetch "google-googletest-v${GTEST_VERSION}.tar.gz" \
     "https://github.com/google/googletest/archive/refs/tags/v${GTEST_VERSION}.tar.gz"
 
-rm -rf "${SRC_DIR}/openssl" "${SRC_DIR}/pcre2" "${SRC_DIR}/zlib" "${SRC_DIR}/googletest"
-mkdir -p "${SRC_DIR}/openssl" "${SRC_DIR}/pcre2" "${SRC_DIR}/zlib" "${SRC_DIR}/googletest"
+rm -rf "${SRC_DIR}/openssl" "${SRC_DIR}/zlib" "${SRC_DIR}/googletest"
+mkdir -p "${SRC_DIR}/openssl" "${SRC_DIR}/zlib" "${SRC_DIR}/googletest"
 tar -xzf "${SRC_DIR}/openssl-openssl-openssl-${OPENSSL_VERSION}.tar.gz" -C "${SRC_DIR}/openssl" --strip-components=1
-tar -xzf "${SRC_DIR}/PCRE2Project-pcre2-pcre2-${PCRE2_VERSION}.tar.gz" -C "${SRC_DIR}/pcre2" --strip-components=1
 
-# PCRE2's release tarball does not bundle sljit; JIT needs the sljit sources.
-rm -rf "${SRC_DIR}/pcre2/deps/sljit"
-mkdir -p "${SRC_DIR}/pcre2/deps/sljit"
-tar -xzf "${SRC_DIR}/sljit-${SLJIT_COMMIT}.tar.gz" -C "${SRC_DIR}/pcre2/deps/sljit" --strip-components=1
 tar -xzf "${SRC_DIR}/madler-zlib-v${ZLIB_VERSION}.tar.gz" -C "${SRC_DIR}/zlib" --strip-components=1
 tar -xzf "${SRC_DIR}/google-googletest-v${GTEST_VERSION}.tar.gz" -C "${SRC_DIR}/googletest" --strip-components=1
 
@@ -142,27 +130,6 @@ echo "building OpenSSL ${OPENSSL_VERSION} for ${TRIPLE}"
     make -j"${JOBS}"
     make install_sw
 )
-
-echo "building PCRE2 ${PCRE2_VERSION} for ${TRIPLE}"
-cmake -S "${SRC_DIR}/pcre2" -B "${SRC_DIR}/pcre2/build" -G Ninja \
-    -DCMAKE_SYSTEM_NAME=Darwin \
-    -DCMAKE_SYSTEM_PROCESSOR="${ARCH}" \
-    -DCMAKE_OSX_ARCHITECTURES="${ARCH}" \
-    -DCMAKE_OSX_SYSROOT="${SDK}" \
-    -DCMAKE_C_COMPILER="${WORK}/macos-clang" \
-    -DCMAKE_CXX_COMPILER="${WORK}/macos-clang++" \
-    -DCMAKE_AR="${CROSS_AR}" \
-    -DCMAKE_RANLIB="${CROSS_RANLIB}" \
-    -DCMAKE_INSTALL_PREFIX="${DEPS}" \
-    -DBUILD_SHARED_LIBS=OFF \
-    -DPCRE2_BUILD_PCRE2_8=ON \
-    -DPCRE2_BUILD_PCRE2_16=OFF \
-    -DPCRE2_BUILD_PCRE2_32=OFF \
-    -DPCRE2_BUILD_TESTS=OFF \
-    -DPCRE2_BUILD_PCRE2GREP=OFF \
-    -DPCRE2_SUPPORT_JIT=ON
-cmake --build "${SRC_DIR}/pcre2/build" -j"${JOBS}"
-cmake --install "${SRC_DIR}/pcre2/build"
 
 echo "building zlib ${ZLIB_VERSION} for ${TRIPLE}"
 cmake -S "${SRC_DIR}/zlib" -B "${SRC_DIR}/zlib/build" -G Ninja \

@@ -5,7 +5,7 @@
 #   - clang / clang++ with lld
 #   - a FreeBSD sysroot extracted from base.txz:
 #       sudo tar -xJpf base.txz -C /opt/freebsd/sysroot
-#   - target dependencies (OpenSSL, PCRE2, ...) available for FreeBSD, either
+#   - target dependencies (OpenSSL, ...) available for FreeBSD, either
 #     from the sysroot or from the vcpkg triplet x64-freebsd
 #
 # Usage A - dependencies already built for FreeBSD (no vcpkg):

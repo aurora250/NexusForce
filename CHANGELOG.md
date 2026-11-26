@@ -56,7 +56,7 @@
 - 添加 `reconciler::set_copy_on_select()`：拖选结束即写入剪贴板并保留高亮；`reconciler::selection_text()` 取选区文本
 - 添加 `application::request_quit()`：组件内部（如 `/quit`）可正常退出事件循环并恢复终端
 - 添加 TUI 主题角色系统 `tui::theme_role`：把界面颜色收敛为 81 个语义角色（品牌/焦点、文本、表面、状态、diff、工具点、语法、图表、chrome、子代理），`theme` 新增 `get()` / `set()` 与 `has_palette`
-- 添加六套内置调色板 `tui::make_palette()`：雾蓝 `dark` / `light` / `dark-ansi`、樱 `pink-night` / `pink-day` / `pink-ansi`，颜色值逐条取自 dsh-TUI 的 `theme.ts`（MIT），并提供生成脚本 `scripts/gen_theme_palettes.py`
+- 添加六套内置调色板 `tui::make_palette()`：雾蓝 `dark` / `light` / `dark-ansi`、樱 `pink-night` / `pink-day` / `pink-ansi`，颜色值逐条取自 dsh-TUI 的 `theme.ts`（MIT），并提供生成脚本 `scripts/generate_theme_palettes.py`
 - 添加主题目录 `tui::theme_catalog`：用户主题 JSON（`{name, base, colors}`）加载与局部覆盖、`auto` 伪主题按终端背景明暗解析、同名主题覆盖、坏文档跳过
 - 添加颜色工具 `tui::lighten` / `darken` / `parse_color`（`#rgb`、`#rrggbb`、`#rrggbbaa`、`rgb()`、`ansi256()`、`ansi:name`）
 - 添加动效原语 `tui::frame_clock`（进程级共享帧时钟，`application` 每帧推进）、`shimmer_color` / `shimmer_sweep`（移动高亮扫光）、`reveal`（平滑揭示，`max(3, 积压/8)` 步长）、旋转动画帧集 `find_spinner` / `spinner_frame`
@@ -179,6 +179,7 @@
 - 新增 ARM SVE 内存内核使用 `svwhilelt` 谓词循环，运行期自适应向量长度
 - 新增构建配置项 `isa.<arch>.vector-bytes`
 - 新增指令集检测：`NEFORCE_SIMD_SVE` / `SVE2`、`NEFORCE_SIMD_RVV`、`NEFORCE_SIMD_LSX` / `LASX`
+- 新增内置正则引擎：递归下降解析器、字节码编译器与显式栈回溯虚拟机，支持惰性/占有量词、原子组、前向与后向断言、反向引用、递归 `(?R)`/`(?N)`、`(?|)` 分支重置、内联选项、`\p{...}` 与 `\X`；编译错误以 `regex_exception` 报告并按 `match_limit` 语义限制回溯步数
 
 ### 🔧 Improvements
 

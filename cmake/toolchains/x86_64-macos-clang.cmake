@@ -10,7 +10,7 @@
 #   - osxcross built with a macOS SDK, e.g.
 #       /home/user/osxcross/target/SDK/MacOSX26.5.sdk
 #   - clang >= 19 on the host (the SDK's libc++ uses builtins added in clang 19)
-#   - target OpenSSL, PCRE2, zlib and GTest installed into a prefix, built once
+#   - target OpenSSL, zlib and GTest installed into a prefix, built once
 #       with: NEXUSFORCE_MACOS_ARCH=x86_64 scripts/build_macos_deps.sh
 #
 # Usage (the dependencies default to <repo>/build-macos-deps-x86_64):
@@ -36,7 +36,7 @@ set(NEXUSFORCE_MACOS_OSXCROSS_ROOT "" CACHE PATH "osxcross target directory (con
 set(NEXUSFORCE_MACOS_SDK "" CACHE PATH "macOS SDK used for the target")
 get_filename_component(_nexusforce_repo_root "${CMAKE_CURRENT_LIST_DIR}/../.." ABSOLUTE)
 set(NEXUSFORCE_MACOS_DEPS "${_nexusforce_repo_root}/build-macos-deps-x86_64" CACHE PATH
-        "prefix holding the target OpenSSL, PCRE2, zlib and GTest")
+        "prefix holding the target OpenSSL, zlib and GTest")
 set(NEXUSFORCE_MACOS_DEPLOYMENT_TARGET "11.0" CACHE STRING "minimum macOS version of the produced binaries")
 set(NEXUSFORCE_MACOS_TARGET_TRIPLE "x86_64-apple-darwin25.5" CACHE STRING "clang target triple")
 
