@@ -1,5 +1,6 @@
 #ifndef NEFORCE_CORE_STRING_REGEX_ENGINE_COMMON_SRC__
 #define NEFORCE_CORE_STRING_REGEX_ENGINE_COMMON_SRC__
+#include <NeForce/core/memory/bit.hpp>
 #include <NeForce/core/numeric/numeric_traits.hpp>
 #include "ucd_tables.hpp"
 NEFORCE_BEGIN_NAMESPACE__

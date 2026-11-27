@@ -1,5 +1,6 @@
 #ifndef NEFORCE_CORE_STRING_REGEX_ENGINE_PARSER_SRC__
 #define NEFORCE_CORE_STRING_REGEX_ENGINE_PARSER_SRC__
+#include <NeForce/core/memory/bump_arena.hpp>
 #include "engine_property.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -15,7 +16,10 @@ public:
     extended_((options & opt_extended) != 0),
     ungreedy_((options & opt_ungreedy) != 0),
     ucp_((options & opt_ucp) != 0),
-    utf_((options & opt_utf) != 0) {}
+    utf_((options & opt_utf) != 0) {
+        nodes.reserve(16);
+        classes.reserve(4);
+    }
 
     int32_t parse() {
         if ((options_ & opt_literal) != 0) {
@@ -53,6 +57,7 @@ public:
 private:
     int32_t parse_literal_pattern() {
         vector<int32_t> items;
+        items.reserve(8);
 
         while (!eof()) {
             node entry;
@@ -101,9 +106,24 @@ private:
         }
     }
 
+    bump_arena arena_;
+
+    child_list make_children(const int32_t* const items, const size_t count) {
+        if (count == 0) {
+            return child_list{};
+        }
+
+        void* raw = arena_.allocate(count, sizeof(int32_t), alignof(int32_t));
+        auto* data = static_cast<int32_t*>(raw);
+        memory_copy(data, items, count * sizeof(int32_t));
+        return child_list{data, static_cast<int32_t>(count)};
+    }
+
+    child_list make_children(const vector<int32_t>& items) { return make_children(items.data(), items.size()); }
+
     int32_t add_node(node entry) {
         entry.offset = entry.offset == invalid_offset ? pos_ : entry.offset;
-        nodes.push_back(entry);
+        nodes.push_back(move(entry));
         return static_cast<int32_t>(nodes.size() - 1);
     }
 
@@ -118,7 +138,7 @@ private:
 
         node entry;
         entry.type = node::kind::concat;
-        entry.children = move(items);
+        entry.children = make_children(items);
         return add_node(entry);
     }
 
@@ -187,6 +207,7 @@ private:
 
     int32_t parse_alternation() {
         vector<int32_t> branches;
+        branches.reserve(2);
         branches.push_back(parse_concat());
 
         while (!eof() && peek() == '|') {
@@ -200,12 +221,13 @@ private:
 
         node entry;
         entry.type = node::kind::alternate;
-        entry.children = move(branches);
+        entry.children = make_children(branches);
         return add_node(entry);
     }
 
     int32_t parse_concat() {
         vector<int32_t> items;
+        items.reserve(4);
 
         for (;;) {
             skip_ignored();
@@ -286,7 +308,8 @@ private:
         entry.minimum = minimum;
         entry.maximum = maximum;
         entry.mode = mode;
-        entry.children.push_back(atom);
+        const int32_t atom_item[1] = {atom};
+        entry.children = make_children(atom_item, 1);
         return add_node(entry);
     }
 
@@ -917,8 +940,8 @@ private:
 
                 node crlf;
                 crlf.type = node::kind::concat;
-                crlf.children.push_back(add_node(carriage));
-                crlf.children.push_back(add_node(line_feed));
+                const int32_t crlf_items[2] = {add_node(carriage), add_node(line_feed)};
+                crlf.children = make_children(crlf_items, 2);
 
                 node single;
                 single.type = node::kind::char_class;
@@ -926,12 +949,13 @@ private:
 
                 node alternative;
                 alternative.type = node::kind::alternate;
-                alternative.children.push_back(add_node(crlf));
-                alternative.children.push_back(add_node(single));
+                const int32_t alternative_items[2] = {add_node(crlf), add_node(single)};
+                alternative.children = make_children(alternative_items, 2);
 
                 node wrapped;
                 wrapped.type = node::kind::atomic;
-                wrapped.children.push_back(add_node(alternative));
+                const int32_t wrapped_item[1] = {add_node(alternative)};
+                wrapped.children = make_children(wrapped_item, 1);
                 return add_node(wrapped);
             }
             case 'C':
@@ -1086,6 +1110,7 @@ private:
 
         char_class entry;
         entry.caseless = caseless_;
+        entry.ranges.reserve(16);
 
         if (!eof() && peek() == '^') {
             entry.negate = true;
@@ -1192,7 +1217,8 @@ private:
         entry.type = type;
         entry.look_kind = look_kind;
         entry.offset = start;
-        entry.children.push_back(body);
+        const int32_t body_item[1] = {body};
+        entry.children = make_children(body_item, 1);
         return add_node(entry);
     }
     int32_t parse_conditional(const size_t start) {
@@ -1240,7 +1266,8 @@ private:
             entry.type = node::kind::conditional;
             entry.group = -1;
             entry.offset = start;
-            entry.children.push_back(body);
+            const int32_t body_item[1] = {body};
+            entry.children = make_children(body_item, 1);
             return add_node(entry);
         }
 
@@ -1258,11 +1285,15 @@ private:
         entry.type = node::kind::conditional;
         entry.group = number;
         entry.offset = start;
-        entry.children.push_back(yes_branch);
+        int32_t branches[2] = {yes_branch, -1};
+        int32_t branch_count = 1;
 
         if (no_branch >= 0) {
-            entry.children.push_back(no_branch);
+            branches[1] = no_branch;
+            branch_count = 2;
         }
+
+        entry.children = make_children(branches, static_cast<size_t>(branch_count));
 
         return add_node(entry);
     }
@@ -1304,7 +1335,8 @@ private:
             entry.type = node::kind::capture;
             entry.capture = capture;
             entry.offset = start;
-            entry.children.push_back(body);
+            const int32_t body_item[1] = {body};
+            entry.children = make_children(body_item, 1);
             return add_node(entry);
         }
 
@@ -1374,7 +1406,7 @@ private:
                 node entry;
                 entry.type = node::kind::alternate;
                 entry.offset = start;
-                entry.children = move(branches);
+                entry.children = make_children(branches);
                 return add_node(entry);
             }
             case '<': {
@@ -1403,7 +1435,8 @@ private:
                 entry.type = node::kind::capture;
                 entry.capture = number;
                 entry.offset = start;
-                entry.children.push_back(body);
+                const int32_t body_item[1] = {body};
+                entry.children = make_children(body_item, 1);
                 return add_node(entry);
             }
             case '\'': {
@@ -1422,7 +1455,8 @@ private:
                 entry.type = node::kind::capture;
                 entry.capture = number;
                 entry.offset = start;
-                entry.children.push_back(body);
+                const int32_t body_item[1] = {body};
+                entry.children = make_children(body_item, 1);
                 return add_node(entry);
             }
             case 'P': {
@@ -1448,7 +1482,8 @@ private:
                     entry.type = node::kind::capture;
                     entry.capture = number;
                     entry.offset = start;
-                    entry.children.push_back(body);
+                    const int32_t body_item[1] = {body};
+                    entry.children = make_children(body_item, 1);
                     return add_node(entry);
                 }
 

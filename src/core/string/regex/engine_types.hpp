@@ -13,6 +13,8 @@ struct code_range {
 struct char_class {
     bool negate = false;
     bool caseless = false;
+    bool ascii_ready = false;
+    uint8_t ascii[32] = {}; // TODO: use charset instead
     vector<code_range> ranges;
 
     void add(const uint32_t first, const uint32_t last) { ranges.push_back(code_range{first, last}); }
@@ -21,7 +23,20 @@ struct char_class {
     void add_categories(uint32_t mask);
     void add_script(int script);
     void normalize();
+    void build_ascii() noexcept;
     NEFORCE_NODISCARD bool contains(uint32_t code_point) const noexcept;
+};
+
+struct child_list {
+    const int32_t* data = nullptr;
+    int32_t count = 0;
+
+    NEFORCE_NODISCARD size_t size() const noexcept { return static_cast<size_t>(count); }
+    NEFORCE_NODISCARD bool empty() const noexcept { return count == 0; }
+    NEFORCE_NODISCARD int32_t operator[](const size_t index) const noexcept { return data[index]; }
+    NEFORCE_NODISCARD int32_t back() const noexcept { return data[count - 1]; }
+    NEFORCE_NODISCARD const int32_t* begin() const noexcept { return data; }
+    NEFORCE_NODISCARD const int32_t* end() const noexcept { return data + count; }
 };
 
 struct node {
@@ -72,7 +87,7 @@ struct node {
     int32_t look_kind = 0;
     int32_t group = 0;
     size_t offset = 0;
-    vector<int32_t> children;
+    child_list children;
 };
 
 enum class op : uint8_t {
@@ -82,6 +97,8 @@ enum class op : uint8_t {
     char_match,
     any,
     char_class,
+    run_char,
+    repeat_char,
     split,
     jump,
     save,
@@ -133,7 +150,48 @@ inline void char_class::normalize() {
     ranges.resize(merged);
 }
 
-NEFORCE_NODISCARD inline bool char_class::contains(const uint32_t code_point) const noexcept {
+inline void char_class::build_ascii() noexcept {
+    for (size_t index = 0; index < sizeof(ascii); ++index) {
+        ascii[index] = 0;
+    }
+
+    for (const code_range& range: ranges) {
+        if (range.first >= 0x80U) {
+            continue;
+        }
+
+        const uint32_t last = range.last < 0x7FU ? range.last : 0x7FU;
+
+        for (uint32_t value = range.first; value <= last; ++value) {
+            ascii[value >> 3] |= static_cast<uint8_t>(1U << (value & 7U));
+        }
+    }
+
+    if (caseless) {
+        for (uint32_t value = 'a'; value <= 'z'; ++value) {
+            if ((ascii[value >> 3] & static_cast<uint8_t>(1U << (value & 7U))) != 0) {
+                const uint32_t upper = value - 32U;
+                ascii[upper >> 3] |= static_cast<uint8_t>(1U << (upper & 7U));
+            }
+        }
+
+        for (uint32_t value = 'A'; value <= 'Z'; ++value) {
+            if ((ascii[value >> 3] & static_cast<uint8_t>(1U << (value & 7U))) != 0) {
+                const uint32_t lower = value + 32U;
+                ascii[lower >> 3] |= static_cast<uint8_t>(1U << (lower & 7U));
+            }
+        }
+    }
+
+    ascii_ready = true;
+}
+
+inline bool char_class::contains(const uint32_t code_point) const noexcept {
+    if (ascii_ready && code_point < 0x80U) {
+        const bool hit = (ascii[code_point >> 3] & static_cast<uint8_t>(1U << (code_point & 7U))) != 0;
+        return negate ? !hit : hit;
+    }
+
     const auto search = [this](const uint32_t value) noexcept -> bool {
         size_t low = 0;
         size_t high = ranges.size();

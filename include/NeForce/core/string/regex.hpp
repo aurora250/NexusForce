@@ -130,18 +130,99 @@ private:
     friend class regex_iterator;
     friend class regex_token_iterator;
 
-    vector<string> groups_;                        ///< 捕获组文本
-    vector<pair<size_t, size_t>> group_positions_; ///< 捕获组位置和长度
-    size_t position_ = string::npos;               ///< 匹配起始位置
-    size_t length_ = 0;                            ///< 匹配长度
-    shared_ptr<string> owner_;                     ///< 原始字符串所有者
-    string_view subject_;                          ///< 原始字符串视图
+    struct group_block {
+        size_t count = 0;
+        vector<pair<size_t, size_t>> entries;
+        mutable vector<string> texts;
+    };
+
+    mutable group_block* groups_ = nullptr; ///< 捕获组存储块，只有第 0 组时为空
+    size_t position_ = string::npos;        ///< 匹配起始位置
+    size_t length_ = 0;                     ///< 匹配长度
+    shared_ptr<string> owner_;              ///< 原始字符串所有者
+    string_view subject_;                   ///< 原始字符串视图
 
 public:
     /**
      * @brief 默认构造函数
      */
     match_result() = default;
+
+    /**
+     * @brief 析构函数
+     */
+    ~match_result() { delete groups_; }
+
+    /**
+     * @brief 拷贝构造函数
+     * @param other 源对象
+     */
+    match_result(const match_result& other) :
+    groups_(other.groups_ != nullptr ? new group_block(*other.groups_) : nullptr),
+    position_(other.position_),
+    length_(other.length_),
+    owner_(other.owner_),
+    subject_(other.subject_) {}
+
+    /**
+     * @brief 拷贝赋值运算符
+     * @param other 源对象
+     * @return 自身引用
+     */
+    match_result& operator=(const match_result& other) {
+        if (&other == this) {
+            return *this;
+        }
+
+        auto* const block = other.groups_ != nullptr ? new group_block(*other.groups_) : nullptr;
+        delete groups_;
+        groups_ = block;
+        position_ = other.position_;
+        length_ = other.length_;
+        owner_ = other.owner_;
+        subject_ = other.subject_;
+        return *this;
+    }
+
+    /**
+     * @brief 移动构造函数
+     * @param other 源对象，构造后被置空
+     */
+    match_result(match_result&& other) noexcept :
+    groups_(other.groups_),
+    position_(other.position_),
+    length_(other.length_),
+    owner_(move(other.owner_)),
+    subject_(other.subject_) {
+        other.groups_ = nullptr;
+        other.position_ = string::npos;
+        other.length_ = 0;
+        other.subject_ = string_view{};
+    }
+
+    /**
+     * @brief 移动赋值运算符
+     * @param other 源对象，赋值后被置空
+     * @return 自身引用
+     */
+    match_result& operator=(match_result&& other) noexcept {
+        if (&other == this) {
+            return *this;
+        }
+
+        delete groups_;
+        groups_ = other.groups_;
+        position_ = other.position_;
+        length_ = other.length_;
+        owner_ = move(other.owner_);
+        subject_ = other.subject_;
+
+        other.groups_ = nullptr;
+        other.position_ = string::npos;
+        other.length_ = 0;
+        other.subject_ = string_view{};
+        return *this;
+    }
 
     /**
      * @brief 原始字符串构造函数
@@ -164,6 +245,26 @@ public:
      */
     match_result(string_view subject, size_t pos, size_t len, vector<string> groups,
                  vector<pair<size_t, size_t>> group_positions);
+
+    /**
+     * @brief 仅位置信息的构造函数
+     * @param subject 字符串视图
+     * @param pos 匹配起始位置
+     * @param len 匹配长度
+     * @param group_positions 捕获组位置列表（为空表示只有第 0 组）
+     */
+    match_result(string_view subject, size_t pos, size_t len, vector<pair<size_t, size_t>> group_positions);
+
+    /**
+     * @brief 无捕获组的位置构造函数
+     * @param subject 字符串视图
+     * @param pos 匹配起始位置
+     * @param len 匹配长度
+     */
+    match_result(string_view subject, size_t pos, size_t len) noexcept :
+    position_(pos),
+    length_(len),
+    subject_(subject) {}
 
     /**
      * @brief 检查是否匹配成功
@@ -193,7 +294,12 @@ public:
      * @brief 获取捕获组数量
      * @return 捕获组总数（包括第0组完整匹配）
      */
-    NEFORCE_NODISCARD size_t size() const noexcept { return groups_.size(); }
+    NEFORCE_NODISCARD size_t size() const noexcept {
+        if (!matched()) {
+            return 0;
+        }
+        return groups_ == nullptr ? 1 : groups_->count;
+    }
 
     /**
      * @brief 获取指定捕获组
@@ -201,7 +307,16 @@ public:
      * @return 捕获组文本，越界返回空字符串
      */
     NEFORCE_NODISCARD string_view operator[](const size_t idx) const noexcept {
-        return idx < groups_.size() ? groups_[idx].view() : "";
+        if (!matched()) {
+            return "";
+        }
+        if (idx == 0) {
+            return data();
+        }
+        if (groups_ == nullptr || idx >= groups_->count || groups_->entries[idx].first == string::npos) {
+            return "";
+        }
+        return subject_.view(groups_->entries[idx].first, groups_->entries[idx].second);
     }
 
     /**
@@ -210,7 +325,14 @@ public:
      * @return 包含起始位置和长度的pair
      */
     NEFORCE_NODISCARD pair<size_t, size_t> position(const size_t idx) const noexcept {
-        return idx < group_positions_.size() ? group_positions_[idx] : pair<size_t, size_t>{string::npos, 0};
+        if (!matched()) {
+            return {string::npos, 0};
+        }
+        if (idx == 0) {
+            return {position_, length_};
+        }
+        return groups_ != nullptr && idx < groups_->count ? groups_->entries[idx]
+                                                          : pair<size_t, size_t>{string::npos, 0};
     }
 
     /**
@@ -246,16 +368,27 @@ public:
      * @brief 获取捕获组迭代器起始位置
      * @return 捕获组迭代器
      */
-    NEFORCE_NODISCARD iterator begin() const noexcept { return groups_.begin(); }
+    NEFORCE_NODISCARD iterator begin() const {
+        materialize_groups();
+        const vector<string>& texts = groups_ != nullptr ? groups_->texts : empty_texts();
+        return texts.begin();
+    }
 
     /**
      * @brief 获取捕获组迭代器结束位置
      * @return 捕获组迭代器
      */
-    NEFORCE_NODISCARD iterator end() const noexcept { return groups_.end(); }
+    NEFORCE_NODISCARD iterator end() const {
+        materialize_groups();
+        const vector<string>& texts = groups_ != nullptr ? groups_->texts : empty_texts();
+        return texts.end();
+    }
 
 private:
+    static const vector<string>& empty_texts() noexcept;
+    void assign_groups(const vector<pair<size_t, size_t>>& positions);
     void attach_owner(const string& subject);
+    void materialize_groups() const;
     void rebind(string_view subject) noexcept { subject_ = subject; }
 };
 
@@ -580,13 +713,12 @@ public:
     /**
      * @brief 获取结束迭代器
      * @param re 正则表达式对象
-     * @param str 待遍历的字符串
      * @return 结束迭代器
+     * @note 结束迭代器不持有字符串
      */
-    static regex_iterator end(const regex* re, const string& str) {
+    static regex_iterator end(const regex* re, const string& /*str*/) {
         regex_iterator it;
         it.regex_ = re;
-        it.subject_ = make_shared<string>(str);
         it.done_ = true;
         return it;
     }

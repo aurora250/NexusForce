@@ -17,12 +17,8 @@ public:
     }
 
     void compile(const int32_t root) {
-        bool first_bytes[256] = {};
-        start_valid_ = collect_first(root, first_bytes);
-
-        if (start_valid_) {
-            memory_copy(start_bytes_, first_bytes, sizeof(first_bytes));
-        }
+        code.reserve(48);
+        start_valid_ = collect_first(root, start_bits_);
 
         prepare_follow(root);
 
@@ -33,6 +29,9 @@ public:
 
         risk_state state;
         scan_risk(root, state);
+
+        finish_required(root);
+        detect_start_run(root);
 
         for (const auto& fixup: call_fixups_) {
             int32_t target = 0;
@@ -72,6 +71,24 @@ private:
     }
 
     void measure(const int32_t index, int64_t& minimum, int64_t& maximum) const {
+        const auto slot = static_cast<size_t>(index);
+
+        if (slot < measure_cache_.size() && measure_cache_[slot].state == 2) {
+            minimum = measure_cache_[slot].minimum;
+            maximum = measure_cache_[slot].maximum;
+            return;
+        }
+
+        measure_raw(index, minimum, maximum);
+
+        if (slot < measure_cache_.size()) {
+            measure_cache_[slot].minimum = minimum;
+            measure_cache_[slot].maximum = maximum;
+            measure_cache_[slot].state = 2;
+        }
+    }
+
+    void measure_raw(const int32_t index, int64_t& minimum, int64_t& maximum) const {
         const node& entry = nodes_[static_cast<size_t>(index)];
         minimum = 0;
         maximum = 0;
@@ -313,9 +330,19 @@ private:
                     break;
                 }
 
+                if (entry.minimum == entry.maximum && entry.minimum >= 1 && entry.minimum <= 16 &&
+                    emit_fixed_run(entry)) {
+                    break;
+                }
+
                 if (entry.mode == node::repeat_mode::possessive ||
                     (entry.mode == node::repeat_mode::greedy && can_possessify(index))) {
                     final_possessive_[static_cast<size_t>(index)] = 1;
+
+                    if (entry.maximum < 0 && entry.minimum <= 1 && emit_single_char_run(entry)) {
+                        break;
+                    }
+
                     const auto wrapper = emit(op::atomic);
                     emit(op::jump);
                     const auto body = static_cast<int32_t>(code.size());
@@ -325,6 +352,10 @@ private:
                     code[static_cast<size_t>(wrapper)].a = body;
                     code[static_cast<size_t>(wrapper)].e = after;
                     code[static_cast<size_t>(wrapper) + 1UL].a = after;
+                    break;
+                }
+
+                if (entry.mode == node::repeat_mode::greedy && entry.maximum < 0 && emit_greedy_char_loop(entry)) {
                     break;
                 }
 
@@ -420,31 +451,431 @@ private:
     }
 
 public:
+    struct byte_bits {
+        uint8_t bits[32] = {};
+
+        void set(const uint32_t byte) noexcept { bits[byte >> 3] |= static_cast<uint8_t>(1U << (byte & 7U)); }
+
+        NEFORCE_NODISCARD bool test(const uint32_t byte) const noexcept {
+            return (bits[byte >> 3] & static_cast<uint8_t>(1U << (byte & 7U))) != 0;
+        }
+
+        void merge(const byte_bits& other) noexcept {
+            for (size_t index = 0; index < sizeof(bits); ++index) {
+                bits[index] = static_cast<uint8_t>(bits[index] | other.bits[index]);
+            }
+        }
+
+        NEFORCE_NODISCARD bool intersects(const byte_bits& other) const noexcept {
+            for (size_t index = 0; index < sizeof(bits); ++index) {
+                if ((bits[index] & other.bits[index]) != 0) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    };
+
+    byte_bits start_bits_;
     bool start_valid_ = false;
     bool start_anchored_ = false;
-    bool start_bytes_[256] = {};
     bool nested_quantifier_ = false;
     bool exponential_risk_ = false;
+    int required_count_ = 0;
+    int start_run_class_ = -1;
+    int start_run_literal_ = -1;
+    uint8_t required_masks_[2][32] = {};
 
 private:
+    struct byte_mask {
+        uint8_t bits[32] = {};
+
+        void set(const uint32_t byte) noexcept { bits[byte >> 3] |= static_cast<uint8_t>(1U << (byte & 7U)); }
+
+        NEFORCE_NODISCARD int popcount() const noexcept {
+            int total = 0;
+
+            for (size_t index = 0; index < sizeof(bits); ++index) {
+                uint8_t value = bits[index];
+
+                while (value != 0) {
+                    value &= static_cast<uint8_t>(value - 1U);
+                    ++total;
+                }
+            }
+
+            return total;
+        }
+
+        NEFORCE_NODISCARD bool has_data() const noexcept { return popcount() != 0; }
+
+        NEFORCE_NODISCARD bool same_as(const byte_mask& other) const noexcept {
+            return memory_compare(bits, other.bits, sizeof(bits)) == 0;
+        }
+    };
+
+    struct mask_list {
+        byte_mask items[8] = {};
+        int count = 0;
+
+        void push(const byte_mask& mask) {
+            if (count < 8) {
+                items[count] = mask;
+                ++count;
+            }
+        }
+
+        void clear() { count = 0; }
+    };
+
+    void collect_required(const int32_t index, mask_list& out) {
+        const node& entry = nodes_[static_cast<size_t>(index)];
+
+        switch (entry.type) {
+            case node::kind::literal: {
+                const auto code_point = static_cast<uint32_t>(entry.code_point);
+                byte_mask mask;
+
+                if (code_point < 0x80U) {
+                    mask.set(code_point);
+
+                    if (entry.caseless) {
+                        if (code_point >= 'a' && code_point <= 'z') {
+                            mask.set(code_point - 32U);
+                        } else if (code_point >= 'A' && code_point <= 'Z') {
+                            mask.set(code_point + 32U);
+                        }
+                    }
+                } else if (code_point <= 0x7FFU) {
+                    mask.set(0xC0U | (code_point >> 6U));
+                } else if (code_point <= 0xFFFFU) {
+                    mask.set(0xE0U | (code_point >> 12U));
+                } else {
+                    mask.set(0xF0U | (code_point >> 18U));
+                }
+
+                out.push(mask);
+                break;
+            }
+            case node::kind::char_class: {
+                const char_class& cls = classes_[static_cast<size_t>(entry.class_index)];
+
+                if (cls.negate || cls.caseless) {
+                    return;
+                }
+
+                byte_mask mask;
+                bool ascii_only = true;
+
+                for (const code_range& range: cls.ranges) {
+                    if (range.last >= 0x80U) {
+                        ascii_only = false;
+                        break;
+                    }
+
+                    for (uint32_t value = range.first; value <= range.last; ++value) {
+                        mask.set(value);
+                    }
+                }
+
+                if (ascii_only && mask.has_data() && mask.popcount() <= 64) {
+                    out.push(mask);
+                }
+                break;
+            }
+            case node::kind::concat:
+                for (const int32_t child: entry.children) {
+                    collect_required(child, out);
+                }
+                break;
+            case node::kind::alternate: {
+                if (entry.children.empty()) {
+                    return;
+                }
+
+                mask_list common;
+                collect_required(entry.children[0], common);
+
+                for (size_t branch = 1; branch < entry.children.size() && common.count > 0; ++branch) {
+                    mask_list others;
+                    collect_required(entry.children[branch], others);
+                    mask_list kept;
+
+                    for (int candidate_index = 0; candidate_index < common.count; ++candidate_index) {
+                        const byte_mask& candidate = common.items[candidate_index];
+
+                        for (int other_index = 0; other_index < others.count; ++other_index) {
+                            if (candidate.same_as(others.items[other_index])) {
+                                kept.push(candidate);
+                                break;
+                            }
+                        }
+                    }
+
+                    common = kept;
+                }
+
+                for (int mask_index = 0; mask_index < common.count; ++mask_index) {
+                    out.push(common.items[mask_index]);
+                }
+                break;
+            }
+            case node::kind::capture:
+            case node::kind::group:
+            case node::kind::atomic:
+                collect_required(entry.children[0], out);
+                break;
+            case node::kind::look:
+                if (entry.look_kind == 1 || entry.look_kind == 3) {
+                    collect_required(entry.children[0], out);
+                }
+                break;
+            case node::kind::repeat:
+                if (entry.minimum >= 1) {
+                    collect_required(entry.children[0], out);
+                }
+                break;
+            case node::kind::conditional: {
+                if (entry.group < 0 || entry.children.size() < 2) {
+                    return;
+                }
+
+                mask_list common;
+                collect_required(entry.children[0], common);
+                mask_list others;
+                collect_required(entry.children[1], others);
+
+                for (int candidate_index = 0; candidate_index < common.count; ++candidate_index) {
+                    for (int other_index = 0; other_index < others.count; ++other_index) {
+                        if (common.items[candidate_index].same_as(others.items[other_index])) {
+                            out.push(common.items[candidate_index]);
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    bool emit_single_char_run(const node& repeat) {
+        const node& atom = nodes_[static_cast<size_t>(repeat.children[0])];
+        const int32_t minimum = repeat.minimum > 0 ? 1 : 0;
+
+        switch (atom.type) {
+            case node::kind::literal:
+                emit(op::run_char, 0, static_cast<int32_t>(atom.code_point), atom.caseless ? 1 : 0, minimum);
+                return true;
+            case node::kind::char_class:
+                emit(op::run_char, 1, atom.class_index, 0, minimum);
+                return true;
+            case node::kind::any:
+                emit(op::run_char, 2, 0, atom.dotall ? 2 : 0, minimum);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    bool emit_greedy_char_loop(const node& repeat) {
+        const node& atom = nodes_[static_cast<size_t>(repeat.children[0])];
+        int32_t kind = 0;
+        int32_t value = 0;
+        int32_t flags = 0;
+
+        switch (atom.type) {
+            case node::kind::literal:
+                kind = 0;
+                value = static_cast<int32_t>(atom.code_point);
+                flags = atom.caseless ? 1 : 0;
+                break;
+            case node::kind::char_class:
+                kind = 1;
+                value = atom.class_index;
+                break;
+            case node::kind::any:
+                kind = 2;
+                flags = atom.dotall ? 2 : 0;
+                break;
+            default:
+                return false;
+        }
+
+        if (repeat.minimum > 0) {
+            emit(op::run_char, kind, value, flags | 4, 1);
+        }
+
+        const auto loop = emit(op::repeat_char, 0, 0, flags, kind, value);
+        code[static_cast<size_t>(loop)].a = loop;
+        const auto after = static_cast<int32_t>(code.size());
+        code[static_cast<size_t>(loop)].b = after;
+        return true;
+    }
+
+    bool emit_fixed_run(const node& repeat) {
+        const node& atom = nodes_[static_cast<size_t>(repeat.children[0])];
+        const int32_t count = repeat.minimum;
+
+        switch (atom.type) {
+            case node::kind::literal:
+                emit(op::run_char, 0, static_cast<int32_t>(atom.code_point),
+                     static_cast<int32_t>((atom.caseless ? 1 : 0) | 4), count);
+                return true;
+            case node::kind::char_class:
+                emit(op::run_char, 1, atom.class_index, 4, count);
+                return true;
+            case node::kind::any:
+                emit(op::run_char, 2, 0, static_cast<int32_t>((atom.dotall ? 2 : 0) | 4), count);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    int32_t unwrap_node(int32_t index) const noexcept {
+        for (;;) {
+            const node& entry = nodes_[static_cast<size_t>(index)];
+
+            if (entry.type != node::kind::capture && entry.type != node::kind::group &&
+                entry.type != node::kind::atomic) {
+                return index;
+            }
+
+            index = entry.children[0];
+        }
+    }
+
+    void detect_start_run(const int32_t root) {
+        const int32_t body = unwrap_node(root);
+        const node& top = nodes_[static_cast<size_t>(body)];
+
+        if (top.type != node::kind::concat || top.children.size() < 2) {
+            return;
+        }
+
+        const int32_t repeat_index = unwrap_node(top.children[0]);
+        const node& repeat = nodes_[static_cast<size_t>(repeat_index)];
+
+        if (repeat.type != node::kind::repeat || repeat.minimum < 1 || repeat.maximum == 0) {
+            return;
+        }
+
+        const int32_t atom_index = unwrap_node(repeat.children[0]);
+        const node& atom = nodes_[static_cast<size_t>(atom_index)];
+
+        if (atom.type != node::kind::char_class) {
+            return;
+        }
+
+        const int32_t literal_index = unwrap_node(top.children[1]);
+        const node& literal = nodes_[static_cast<size_t>(literal_index)];
+
+        if (literal.type != node::kind::literal || literal.caseless || literal.code_point >= 0x80U) {
+            return;
+        }
+
+        const char_class& cls = classes_[static_cast<size_t>(atom.class_index)];
+
+        if (cls.contains(literal.code_point)) {
+            return;
+        }
+
+        start_run_class_ = atom.class_index;
+        start_run_literal_ = static_cast<int>(literal.code_point);
+    }
+
+    void finish_required(const int32_t root) {
+        mask_list masks;
+        collect_required(root, masks);
+        mask_list unique;
+
+        for (int mask_index = 0; mask_index < masks.count; ++mask_index) {
+            bool duplicate = false;
+
+            for (int kept_index = 0; kept_index < unique.count; ++kept_index) {
+                if (unique.items[kept_index].same_as(masks.items[mask_index])) {
+                    duplicate = true;
+                    break;
+                }
+            }
+
+            if (!duplicate) {
+                unique.push(masks.items[mask_index]);
+            }
+        }
+
+        for (int i = 1; i < unique.count; ++i) {
+            const byte_mask key = unique.items[i];
+            int position = i;
+
+            while (position > 0 && unique.items[position - 1].popcount() > key.popcount()) {
+                unique.items[position] = unique.items[position - 1];
+                --position;
+            }
+
+            unique.items[position] = key;
+        }
+
+        required_count_ = unique.count < 2 ? unique.count : 2;
+
+        for (int index = 0; index < required_count_; ++index) {
+            memory_copy(required_masks_[index], unique.items[index].bits, sizeof(required_masks_[index]));
+        }
+    }
+
     struct follow_set {
         bool valid = false;
-        bool bytes[256] = {};
+        byte_bits bits;
     };
+
 
     struct risk_state {
         bool has_repeat = false;
         bool backtracking_repeat = false;
     };
 
+    struct measure_entry {
+        int64_t minimum = 0;
+        int64_t maximum = 0;
+        int8_t state = 0;
+    };
+
     vector<follow_set> follow_;
     vector<uint8_t> final_possessive_;
+    mutable vector<measure_entry> measure_cache_;
+    vector<byte_bits> first_bits_;
+    vector<int8_t> first_state_;
 
-    bool first_set_of(const int32_t index, bool* const set) {
+    bool first_set_of(const int32_t index, byte_bits& set) {
+        const auto slot = static_cast<size_t>(index);
+
+        if (slot < first_state_.size()) {
+            if (first_state_[slot] == 2) {
+                set = first_bits_[slot];
+                return true;
+            }
+
+            if (first_state_[slot] == 1) {
+                return false;
+            }
+        }
+
         const bool saved = start_anchored_;
         start_anchored_ = false;
         const bool result = collect_first(index, set);
         start_anchored_ = saved;
+
+        if (slot < first_state_.size()) {
+            first_state_[slot] = result ? 2 : 1;
+
+            if (result) {
+                first_bits_[slot] = set;
+            }
+        }
+
         return result;
     }
 
@@ -463,63 +894,55 @@ private:
             return false;
         }
 
-        bool child_first[256] = {};
+        byte_bits child_first;
 
         if (!first_set_of(entry.children[0], child_first)) {
             return false;
         }
 
-        const follow_set& follow = follow_[static_cast<size_t>(index)];
-
-        for (size_t byte = 0; byte < 256; ++byte) {
-            if (child_first[byte] && follow.bytes[byte]) {
-                return false;
-            }
-        }
-
-        return true;
+        return !child_first.intersects(follow_[static_cast<size_t>(index)].bits);
     }
 
     void prepare_follow(const int32_t root) {
         follow_.assign(nodes_.size(), follow_set{});
         final_possessive_.assign(nodes_.size(), 0);
+        measure_cache_.assign(nodes_.size(), measure_entry{});
+        first_bits_.assign(nodes_.size(), byte_bits{});
+        first_state_.assign(nodes_.size(), 0);
 
-        bool end_of_pattern[256] = {};
+        byte_bits end_of_pattern;
         propagate_follow(root, end_of_pattern, true);
     }
 
-    void propagate_follow(const int32_t index, const bool* const follow, const bool follow_valid) {
+    void propagate_follow(const int32_t index, const byte_bits& follow, const bool follow_valid) {
         const node& entry = nodes_[static_cast<size_t>(index)];
 
         follow_[static_cast<size_t>(index)].valid = follow_valid;
 
         if (follow_valid) {
-            memory_copy(follow_[static_cast<size_t>(index)].bytes, follow,
-                        sizeof(follow_[static_cast<size_t>(index)].bytes));
+            follow_[static_cast<size_t>(index)].bits = follow;
         }
 
         switch (entry.type) {
             case node::kind::concat: {
-                bool pending[256] = {};
+                byte_bits pending;
                 bool pending_valid = follow_valid;
 
                 if (pending_valid) {
-                    memory_copy(pending, follow, sizeof(pending));
+                    pending = follow;
                 }
 
                 for (size_t position = entry.children.size(); position > 0; --position) {
                     const int32_t child = entry.children[position - 1];
                     propagate_follow(child, pending, pending_valid);
 
-                    bool child_first[256] = {};
+                    byte_bits child_first;
                     const bool child_first_valid = first_set_of(child, child_first);
 
                     if (child_first_valid && pending_valid) {
-                        for (size_t byte = 0; byte < 256; ++byte) {
-                            pending[byte] = pending[byte] || child_first[byte];
-                        }
+                        pending.merge(child_first);
                     } else if (child_first_valid) {
-                        memory_copy(pending, child_first, sizeof(pending));
+                        pending = child_first;
                         pending_valid = true;
                     } else {
                         pending_valid = false;
@@ -527,7 +950,7 @@ private:
 
                     if (!node_nullable(child)) {
                         if (child_first_valid) {
-                            memory_copy(pending, child_first, sizeof(pending));
+                            pending = child_first;
                             pending_valid = true;
                         } else {
                             pending_valid = false;
@@ -547,13 +970,11 @@ private:
                 propagate_follow(entry.children[0], follow, follow_valid);
                 break;
             case node::kind::repeat: {
-                bool child_first[256] = {};
+                byte_bits child_first;
                 const bool child_first_valid = first_set_of(entry.children[0], child_first);
 
                 if (child_first_valid && follow_valid) {
-                    for (size_t byte = 0; byte < 256; ++byte) {
-                        child_first[byte] = child_first[byte] || follow[byte];
-                    }
+                    child_first.merge(follow);
                     propagate_follow(entry.children[0], child_first, true);
                 } else if (child_first_valid) {
                     propagate_follow(entry.children[0], child_first, true);
@@ -619,24 +1040,24 @@ private:
         return static_cast<uint8_t>(0xF0U | (code_point >> 18U));
     }
 
-    void add_range(const uint32_t first, const uint32_t last, bool* const set) const {
+    void add_range(const uint32_t first, const uint32_t last, byte_bits& set) const {
         const uint8_t low = lead_byte(first);
         const uint8_t high = lead_byte(last);
 
         for (uint32_t value = low; value <= high; ++value) {
-            set[value] = true;
+            set.set(value);
         }
 
         if (first < 0x80U && last >= 0x80U) {
             const uint32_t end = last < 0x7FU ? last : 0x7FU;
 
             for (uint32_t value = first; value <= end; ++value) {
-                set[value] = true;
+                set.set(value);
             }
         }
     }
 
-    bool collect_first(const int32_t index, bool* const set) {
+    bool collect_first(const int32_t index, byte_bits& set) {
         const node& entry = nodes_[static_cast<size_t>(index)];
 
         switch (entry.type) {
@@ -654,11 +1075,11 @@ private:
             case node::kind::look:
                 return false;
             case node::kind::literal:
-                set[lead_byte(entry.code_point)] = true;
+                set.set(lead_byte(entry.code_point));
 
                 if (entry.caseless) {
-                    set[lead_byte(to_lower(entry.code_point))] = true;
-                    set[lead_byte(to_upper(entry.code_point))] = true;
+                    set.set(lead_byte(to_lower(entry.code_point)));
+                    set.set(lead_byte(to_upper(entry.code_point)));
                 }
 
                 return true;
@@ -667,13 +1088,13 @@ private:
 
                 for (uint32_t value = 0; value <= upper; ++value) {
                     if (value != '\n') {
-                        set[value] = true;
+                        set.set(value);
                     }
                 }
 
                 if (utf_) {
                     for (uint32_t value = 0xC2U; value <= 0xF4U; ++value) {
-                        set[value] = true;
+                        set.set(value);
                     }
                 }
 

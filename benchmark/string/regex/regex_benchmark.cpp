@@ -1,4 +1,5 @@
 #include <benchmark/benchmark.h>
+#include <NeForce/core/string/format.hpp>
 #include <NeForce/core/string/string.hpp>
 #include <NeForce/core/string/regex.hpp>
 #include <regex>
@@ -36,6 +37,24 @@ static void BM_NfRegex_Compile(benchmark::State& state) {
     }
 }
 BENCHMARK(BM_NfRegex_Compile);
+
+// Rotates through more patterns than the compile cache holds, so every iteration compiles cold. The pattern set
+// is built up front so the measurement covers compilation only.
+static void BM_NfRegex_CompileCold(benchmark::State& state) {
+    string patterns[32];
+
+    for (size_t index = 0; index < 32; ++index) {
+        patterns[index] = format("([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{{2,}}|v{})", index);
+    }
+
+    size_t counter = 0;
+
+    for (auto _: state) {
+        regex re(patterns[counter++ % 32]);
+        benchmark::DoNotOptimize(re);
+    }
+}
+BENCHMARK(BM_NfRegex_CompileCold);
 
 static void BM_StdRegex_Compile(benchmark::State& state) {
     for (auto _: state) {

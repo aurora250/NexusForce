@@ -541,8 +541,8 @@ TEST_F(RegexSemanticsTest, PropertyEscapeWorksWithoutUcp) {
 }
 
 TEST_F(RegexSemanticsTest, BacktrackingLimitRaises) {
-    regex re("(a+)+ab");
-    EXPECT_THROW((void) re.match("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"), regex_exception);
+    regex re("^(a+)+ab$");
+    EXPECT_THROW((void) re.match(string(40, 'a') + "ba"), regex_exception);
 }
 
 TEST_F(RegexSemanticsTest, NestedQuantifierIsPossessifiedWhenSafe) {
@@ -1349,6 +1349,23 @@ TEST_F(RegexFindAllTest, FindAllOverlapping) {
     EXPECT_EQ(results.size(), 3u);
 }
 
+TEST_F(RegexFindAllTest, FindAllManyMatchesKeepsOrder) {
+    string text;
+
+    for (int index = 0; index < 2000; ++index) {
+        text += "ab";
+    }
+
+    regex re("a");
+    auto results = re.find_all(text);
+    ASSERT_EQ(results.size(), 2000u);
+
+    for (size_t index = 0; index < results.size(); ++index) {
+        EXPECT_EQ(results[index].position(), index * 2);
+        EXPECT_EQ(results[index].data(), "a");
+    }
+}
+
 TEST_F(RegexFindAllTest, FindAllWithGroups) {
     regex re("(\\w+)=(\\d+)");
     auto results = re.find_all("name=123 age=456");
@@ -1411,6 +1428,24 @@ TEST_F(RegexReplaceTest, ReplaceAllWithGroups) {
     regex re("(\\w+)=(\\d+)");
     string result = re.replace_all("name=123 age=456", "$2=$1");
     EXPECT_EQ(result, "123=name 456=age");
+}
+
+TEST_F(RegexReplaceTest, ReplaceAllLiteralReplacementRepeats) {
+    regex re("\\d+");
+    string result = re.replace_all("a1b22c333", "N");
+    EXPECT_EQ(result, "aNbNcN");
+}
+
+TEST_F(RegexReplaceTest, ReplaceAllLiteralReplacementWithEscapes) {
+    regex re("\\d+");
+    string result = re.replace_all("a1b22c333", "$$");
+    EXPECT_EQ(result, "a$b$c$");
+}
+
+TEST_F(RegexReplaceTest, ReplaceAllLiteralReplacementEmpty) {
+    regex re("\\d+");
+    string result = re.replace_all("a1b22c", "");
+    EXPECT_EQ(result, "abc");
 }
 
 TEST_F(RegexReplaceTest, ReplaceAllCallback) {
@@ -1629,6 +1664,99 @@ TEST_F(MatchResultTest, IteratorBeginEnd) {
     EXPECT_EQ(groups[0], "name=123");
     EXPECT_EQ(groups[1], "name");
     EXPECT_EQ(groups[2], "123");
+}
+
+TEST_F(MatchResultTest, CopyConstructorKeepsGroups) {
+    regex re("(\\w+)=(\\d+)");
+    auto source = re.search("name=123");
+    match_result copied(source);
+    EXPECT_TRUE(copied.matched());
+    EXPECT_EQ(copied.size(), 3u);
+    EXPECT_EQ(copied[0], "name=123");
+    EXPECT_EQ(copied[1], "name");
+    EXPECT_EQ(copied[2], "123");
+    EXPECT_EQ(copied.position(), source.position());
+}
+
+TEST_F(MatchResultTest, CopyIsIndependent) {
+    regex re("(\\w+)-(\\w+)");
+    auto source = re.search("left-right");
+    match_result copied;
+    copied = source;
+    const match_result reassigned(source);
+    EXPECT_EQ(reassigned[2], "right");
+    EXPECT_EQ(copied[2], "right");
+    EXPECT_EQ(source[1], "left");
+}
+
+TEST_F(MatchResultTest, CopyAssignmentOverwritesGroups) {
+    regex re("(a)(b)");
+    auto wide = re.search("ab");
+    auto narrow = regex("\\d+").search("42");
+    EXPECT_EQ(narrow.size(), 1u);
+    narrow = wide;
+    EXPECT_EQ(narrow.size(), 3u);
+    EXPECT_EQ(narrow[2], "b");
+}
+
+TEST_F(MatchResultTest, MoveConstructorTransfersGroups) {
+    regex re("(\\w+)=(\\d+)");
+    auto source = re.search("key=456");
+    match_result moved(move(source));
+    EXPECT_TRUE(moved.matched());
+    EXPECT_EQ(moved.size(), 3u);
+    EXPECT_EQ(moved[2], "456");
+    EXPECT_FALSE(source.matched());
+    EXPECT_EQ(source.size(), 0u);
+}
+
+TEST_F(MatchResultTest, MoveAssignmentTransfersGroups) {
+    regex re("(\\w+)=(\\d+)");
+    auto source = re.search("k=7");
+    auto target = regex("x").search("x");
+    target = move(source);
+    EXPECT_EQ(target.size(), 3u);
+    EXPECT_EQ(target[1], "k");
+    EXPECT_FALSE(source.matched());
+}
+
+TEST_F(MatchResultTest, NoGroupResultHasSingleEntry) {
+    regex re("\\d+");
+    auto result = re.search("abc 123");
+    EXPECT_EQ(result.size(), 1u);
+    EXPECT_EQ(result[0], "123");
+    EXPECT_TRUE(result[1].empty());
+    EXPECT_EQ(result.position(1).first, string::npos);
+
+    size_t count = 0;
+
+    for (const auto& group: result) {
+        EXPECT_EQ(group, "123");
+        ++count;
+    }
+
+    EXPECT_EQ(count, 1u);
+}
+
+TEST_F(MatchResultTest, UnmatchedIteratorIsEmpty) {
+    auto result = regex("z").search("abc");
+    EXPECT_FALSE(result.matched());
+    EXPECT_EQ(result.begin(), result.end());
+}
+
+TEST_F(MatchResultTest, FindAllResultsAreIndependent) {
+    regex re("(\\w+)-(\\d+)");
+    auto results = re.find_all("a-1 b-2 c-3");
+    ASSERT_EQ(results.size(), 3u);
+    auto copied = results;
+
+    for (size_t index = 0; index < results.size(); ++index) {
+        EXPECT_EQ(results[index][1], copied[index][1]);
+        EXPECT_EQ(results[index][2], copied[index][2]);
+    }
+
+    EXPECT_EQ(copied[2][1], "c");
+    EXPECT_EQ(copied[2][2], "3");
 }
 
 TEST_F(RegexMoveTest, MoveConstructor) {

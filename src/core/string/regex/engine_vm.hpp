@@ -22,19 +22,20 @@ struct match_state {
         size_t saved_end;
     };
 
-    vector<call_frame> calls;
-    vector<size_t> undo_index;
-    vector<size_t> undo_value;
-    ssize_t steps = 0;
-    ssize_t attempt_limit = attempt_steps;
-    int error = 0;
-
     struct frame {
         int32_t ip;
         size_t pos;
         size_t undo;
         size_t ret;
     };
+
+    vector<call_frame> calls;
+    vector<size_t> undo_index;
+    vector<size_t> undo_value;
+    vector<frame> frames;
+    ssize_t steps = 0;
+    ssize_t attempt_limit = attempt_steps;
+    int error = 0;
 };
 
 NEFORCE_NODISCARD inline size_t decode_at(const match_state& state, const size_t pos, uint32_t& code_point) noexcept {
@@ -186,10 +187,10 @@ NEFORCE_NODISCARD inline size_t cluster_length(const match_state& state, const s
     return end - pos;
 }
 
-bool run(match_state& state, int32_t entry_ip, size_t start_pos, size_t& end_pos);
+bool run(match_state& state, int32_t entry_ip, size_t start_pos, size_t& end_pos, ssize_t& steps);
 
 inline bool lookbehind_check(match_state& state, const size_t pos, const int32_t kind, const int32_t sub,
-                             const size_t minimum, const size_t maximum) {
+                             const size_t minimum, const size_t maximum, ssize_t& steps) {
     if (pos < minimum) {
         return kind == 4;
     }
@@ -202,7 +203,7 @@ inline bool lookbehind_check(match_state& state, const size_t pos, const int32_t
             const size_t mark = state.undo_index.size();
             size_t end = 0;
 
-            if (run(state, sub, start, end) && end == pos) {
+            if (run(state, sub, start, end, steps) && end == pos) {
                 if (kind == 4) {
                     rollback(state, mark);
                     return false;
@@ -221,10 +222,12 @@ inline bool lookbehind_check(match_state& state, const size_t pos, const int32_t
     return kind == 4;
 }
 
-inline bool run(match_state& state, const int32_t entry_ip, const size_t start_pos, size_t& end_pos) {
-    const vector<instruction>& code = *state.code;
+inline bool run(match_state& state, const int32_t entry_ip, const size_t start_pos, size_t& end_pos, ssize_t& steps) {
+    // Hoisted out of the dispatch loop: the bytecode array never moves while an attempt is running.
+    const instruction* const code = state.code->data();
+    const ssize_t limit = state.attempt_limit;
 
-    vector<match_state::frame> stack;
+    const size_t base = state.frames.size();
     const size_t entry_undo = state.undo_index.size();
     const size_t entry_calls = state.calls.size();
 
@@ -232,7 +235,7 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
     size_t pos = start_pos;
 
     for (;;) {
-        if (++state.steps > state.attempt_limit || state.steps > maximum_steps) {
+        if (++steps > limit) {
             state.error = match_result_too_complex;
             break;
         }
@@ -252,12 +255,14 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
                     state.loops = move(frame.saved_loops);
                 } else {
                     end_pos = pos;
+                    state.frames.resize(base);
                     return true;
                 }
                 break;
             case op::accept:
                 end_pos = pos;
                 unwind_calls(state, entry_calls);
+                state.frames.resize(base);
                 return true;
             case op::char_match: {
                 uint32_t code_point = 0;
@@ -298,6 +303,101 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
                 ++ip;
                 break;
             }
+            case op::run_char: {
+                size_t count = 0;
+                const bool exact = (current.c & 4) != 0;
+
+                while (count < (exact ? static_cast<size_t>(current.d) : state.length) && pos < state.length) {
+                    uint32_t code_point = 0;
+                    const size_t used = decode_at(state, pos, code_point);
+
+                    if (used == 0) {
+                        break;
+                    }
+
+                    bool hit = false;
+
+                    switch (current.a) {
+                        case 0: {
+                            const auto expected = static_cast<uint32_t>(current.b);
+                            hit = code_point == expected;
+
+                            if (!hit && (current.c & 1) != 0) {
+                                hit = fold_code_point(state, code_point) == fold_code_point(state, expected);
+                            }
+                            break;
+                        }
+                        case 1: {
+                            const char_class& cls = (*state.classes)[static_cast<size_t>(current.b)];
+                            hit = cls.contains(code_point);
+                            break;
+                        }
+                        default:
+                            hit = (current.c & 2) != 0 || code_point != '\n';
+                            break;
+                    }
+
+                    if (!hit) {
+                        break;
+                    }
+
+                    pos += used;
+                    ++count;
+                }
+
+                if (exact ? count != static_cast<size_t>(current.d) : (current.d != 0 && count == 0)) {
+                    goto backtrack;
+                }
+
+                ++ip;
+                break;
+            }
+            case op::repeat_char: {
+                if (pos >= state.length) {
+                    ip = current.b;
+                    break;
+                }
+
+                uint32_t code_point = 0;
+                const size_t used = decode_at(state, pos, code_point);
+
+                if (used == 0) {
+                    ip = current.b;
+                    break;
+                }
+
+                bool hit = false;
+
+                switch (current.d) {
+                    case 0: {
+                        const auto expected = static_cast<uint32_t>(current.e);
+                        hit = code_point == expected;
+
+                        if (!hit && (current.c & 1) != 0) {
+                            hit = fold_code_point(state, code_point) == fold_code_point(state, expected);
+                        }
+                        break;
+                    }
+                    case 1: {
+                        const char_class& cls = (*state.classes)[static_cast<size_t>(current.e)];
+                        hit = cls.contains(code_point);
+                        break;
+                    }
+                    default:
+                        hit = (current.c & 2) != 0 || code_point != '\n';
+                        break;
+                }
+
+                if (!hit) {
+                    ip = current.b;
+                    break;
+                }
+
+                state.frames.push_back(match_state::frame{current.b, pos, state.undo_index.size(), state.calls.size()});
+                pos += used;
+                ip = current.a;
+                break;
+            }
             case op::char_class: {
                 uint32_t code_point = 0;
                 const size_t used = decode_at(state, pos, code_point);
@@ -315,7 +415,7 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
                 break;
             }
             case op::split:
-                stack.push_back(match_state::frame{current.b, pos, state.undo_index.size(), state.calls.size()});
+                state.frames.push_back(match_state::frame{current.b, pos, state.undo_index.size(), state.calls.size()});
                 ip = current.a;
                 break;
             case op::jump:
@@ -442,7 +542,7 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
                 if (kind == 1 || kind == 2) {
                     const size_t mark = state.undo_index.size();
                     size_t end = 0;
-                    const bool matched = run(state, current.a, pos, end);
+                    const bool matched = run(state, current.a, pos, end, steps);
 
                     if (kind == 1) {
                         if (!matched) {
@@ -453,7 +553,7 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
                         goto backtrack;
                     }
                 } else if (!lookbehind_check(state, pos, kind, current.a, static_cast<size_t>(current.c),
-                                             static_cast<size_t>(current.d))) {
+                                             static_cast<size_t>(current.d), steps)) {
                     goto backtrack;
                 }
 
@@ -463,7 +563,7 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
             case op::atomic: {
                 size_t end = 0;
 
-                if (!run(state, current.a, pos, end)) {
+                if (!run(state, current.a, pos, end, steps)) {
                     goto backtrack;
                 }
 
@@ -519,14 +619,14 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
         continue;
 
     backtrack:
-        if (stack.empty()) {
+        if (state.frames.size() <= base) {
             rollback(state, entry_undo);
             unwind_calls(state, entry_calls);
             return false;
         }
 
-        const match_state::frame frame = stack.back();
-        stack.pop_back();
+        const match_state::frame frame = state.frames.back();
+        state.frames.pop_back();
         rollback(state, frame.undo);
         unwind_calls(state, frame.ret);
         ip = frame.ip;
@@ -536,6 +636,7 @@ inline bool run(match_state& state, const int32_t entry_ip, const size_t start_p
 abort:
     rollback(state, entry_undo);
     unwind_calls(state, entry_calls);
+    state.frames.resize(base);
     return false;
 }
 

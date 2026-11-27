@@ -4,22 +4,91 @@
 #include "regex/engine_bridge.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    constexpr size_t maximum_initial_reserve = 1U << 18;
+}
+
+
 match_result::match_result(const string& subject, const size_t pos, const size_t len, vector<string> groups,
                            vector<pair<size_t, size_t>> group_positions) :
-groups_(move(groups)),
-group_positions_(move(group_positions)),
 position_(pos),
 length_(len),
 owner_(make_shared<string>(subject)),
-subject_(owner_->view()) {}
+subject_(owner_->view()) {
+    assign_groups(group_positions);
+
+    if (!groups.empty()) {
+        if (groups_ == nullptr) {
+            groups_ = new group_block;
+            groups_->count = groups.size();
+        }
+
+        groups_->texts = move(groups);
+    }
+}
 
 match_result::match_result(const string_view subject, const size_t pos, const size_t len, vector<string> groups,
                            vector<pair<size_t, size_t>> group_positions) :
-groups_(move(groups)),
-group_positions_(move(group_positions)),
 position_(pos),
 length_(len),
-subject_(subject) {}
+subject_(subject) {
+    assign_groups(group_positions);
+
+    if (!groups.empty()) {
+        if (groups_ == nullptr) {
+            groups_ = new group_block;
+            groups_->count = groups.size();
+        }
+
+        groups_->texts = move(groups);
+    }
+}
+
+match_result::match_result(const string_view subject, const size_t pos, const size_t len,
+                           vector<pair<size_t, size_t>> group_positions) :
+position_(pos),
+length_(len),
+subject_(subject) {
+    assign_groups(group_positions);
+}
+
+const vector<string>& match_result::empty_texts() noexcept {
+    static const vector<string> empty;
+    return empty;
+}
+
+void match_result::assign_groups(const vector<pair<size_t, size_t>>& positions) {
+    if (positions.empty()) {
+        return;
+    }
+
+    groups_ = new group_block;
+    groups_->count = positions.size();
+    groups_->entries = positions;
+}
+
+void match_result::materialize_groups() const {
+    if (!matched()) {
+        return;
+    }
+
+    if (groups_ == nullptr) {
+        groups_ = new group_block;
+        groups_->count = 1;
+    }
+
+    if (!groups_->texts.empty()) {
+        return;
+    }
+
+    const size_t count = groups_->count;
+    groups_->texts.reserve(count);
+
+    for (size_t index = 0; index < count; ++index) {
+        const string_view group = (*this)[index];
+        groups_->texts.emplace_back(group.data(), group.size());
+    }
+}
 
 void match_result::attach_owner(const string& subject) {
     owner_ = make_shared<string>(subject);
@@ -40,7 +109,7 @@ string match_result::format(const string_view fmt) const {
                 result += '$';
                 i += 2;
             } else if (next == '&') {
-                result += groups_[0];
+                result += (*this)[0];
                 i += 2;
             } else if (next == '`') {
                 result += prefix();
@@ -50,8 +119,8 @@ string match_result::format(const string_view fmt) const {
                 i += 2;
             } else if (next >= '0' && next <= '9') {
                 const int group = next - '0';
-                if (group < static_cast<int>(groups_.size())) {
-                    result += groups_[group];
+                if (group < static_cast<int>(size())) {
+                    result += (*this)[static_cast<size_t>(group)];
                 }
                 i += 2;
             } else if (next == '{') {
@@ -63,8 +132,8 @@ string match_result::format(const string_view fmt) const {
                     const string_view group_ref = fmt.view(i + 2, j - (i + 2));
                     try {
                         const int group = integer32::parse(group_ref).value();
-                        if (group >= 0 && group < static_cast<int>(groups_.size())) {
-                            result += groups_[group];
+                        if (group >= 0 && group < static_cast<int>(size())) {
+                            result += (*this)[static_cast<size_t>(group)];
                         }
                         // NOLINTNEXTLINE(bugprone-empty-catch)
                     } catch (...) {
@@ -94,8 +163,8 @@ void regex::compile(const string& pattern, const regex_option options) {
     size_t error_offset = 0;
     char error_message[256] = {};
 
-    code_ = regex_compile(pattern.data(), pattern.length(), static_cast<uint32_t>(options), &error_code, &error_offset,
-                          error_message, sizeof(error_message));
+    code_ = regex_compile_cached(pattern.data(), pattern.length(), static_cast<uint32_t>(options), &error_code,
+                                 &error_offset, error_message, sizeof(error_message));
 
     if (code_ == nullptr) {
         string message(error_message);
@@ -114,6 +183,11 @@ void regex::compile(const string& pattern, const regex_option options) {
 
 match_result regex::do_match(const void* subject, const size_t length, const size_t start_offset,
                              const uint32_t options, const string& subject_str) const {
+    if (!regex_required_present(static_cast<const regex_program*>(code_), static_cast<const char*>(subject), length,
+                                start_offset)) {
+        return {};
+    }
+
     match_result result = do_match_borrowed(subject, length, start_offset, options, subject_str.view());
 
     if (result.matched()) {
@@ -166,25 +240,23 @@ match_result regex::do_match_borrowed(const void* subject, const size_t length, 
 
     const size_t* const ovector = regex_ovector(match_data);
 
-    vector<string> groups;
+    if (rc <= 1) {
+        return match_result{subject_view, ovector[0], ovector[1] - ovector[0], {}};
+    }
+
     vector<pair<size_t, size_t>> group_positions;
-    groups.reserve(rc);
-    group_positions.reserve(rc);
+    group_positions.reserve(static_cast<size_t>(rc));
 
     for (ptrdiff_t i = 0; i < rc; ++i) {
         if (ovector[i * 2] != unset_offset) {
             const size_t start = ovector[i * 2];
-            const size_t end = ovector[i * 2 + 1];
-            groups.emplace_back(subject_bytes + start, end - start);
-            group_positions.emplace_back(start, end - start);
+            group_positions.emplace_back(start, ovector[i * 2 + 1] - start);
         } else {
-            groups.emplace_back();
             group_positions.emplace_back(string::npos, 0);
         }
     }
 
-    const match_result res{subject_view, ovector[0], ovector[1] - ovector[0], move(groups), move(group_positions)};
-    return move(res);
+    return match_result{subject_view, ovector[0], ovector[1] - ovector[0], move(group_positions)};
 }
 
 int regex::group_index(const string_view name) const noexcept {
@@ -246,7 +318,11 @@ match_result regex::do_match(const string& str) const {
 }
 
 bool regex::match(const string& str) const {
-    return do_match(str.data(), str.length(), 0, match_anchored | match_end_anchored, str).matched();
+    if (!regex_required_present(static_cast<const regex_program*>(code_), str.data(), str.length(), 0)) {
+        return false;
+    }
+
+    return do_match_borrowed(str.data(), str.length(), 0, match_anchored | match_end_anchored, str.view()).matched();
 }
 
 match_result regex::search(const string& str, const size_t pos) const {
@@ -254,25 +330,90 @@ match_result regex::search(const string& str, const size_t pos) const {
 }
 
 vector<match_result> regex::find_all(const string& str) const {
+    constexpr auto unset_offset = numeric_traits<size_t>::max();
+
     vector<match_result> results;
+    const auto* const program = static_cast<const regex_program*>(code_);
+
+    if (program == nullptr) {
+        NEFORCE_THROW_EXCEPTION(regex_exception("Uninitialized regex object"));
+    }
+
+    const size_t length = str.length();
+
+    if (!regex_required_present(program, str.data(), length, 0)) {
+        return results;
+    }
+
     const auto owner = make_shared<string>(str);
-    const size_t length = owner->size();
+    const string_view subject = owner->view();
+    const char* const bytes = owner->data();
+
+    auto* const match_data = regex_match_create(program);
+
+    if (match_data == nullptr) {
+        NEFORCE_THROW_EXCEPTION(regex_exception("Failed to create match data"));
+    }
+
+    const scope_exit match_data_guard([match_data]() noexcept { regex_match_free(match_data); });
+
+    // Reserve for a typical match density so that dense subjects avoid a reallocation copy, while the cap keeps
+    // large subjects from reserving address space they never touch.
+    const size_t initial_reserve =
+            length / 4 + 16 < maximum_initial_reserve ? length / 4 + 16 : maximum_initial_reserve;
+    results.reserve(initial_reserve);
+
     size_t start_offset = 0;
 
     while (start_offset <= length) {
-        auto result = do_match_owned(owner, length, start_offset, 0);
+        const int rc = regex_exec(program, bytes, length, start_offset, 0, match_data);
 
-        if (!result.matched()) {
-            break;
+        if (rc < 0) {
+            if (rc == match_result_nomatch) {
+                break;
+            }
+
+            NEFORCE_THROW_EXCEPTION(regex_exception(rc == match_result_bad_utf
+                                                            ? "Invalid UTF-8 sequence in subject"
+                                                            : "Regular expression match limit exceeded"));
         }
 
-        results.push_back(result);
+        const size_t* const ovector = regex_ovector(match_data);
 
-        if (result.length() == 0) {
-            start_offset++;
-        } else {
-            start_offset = result.position() + result.length();
+        if (results.size() == results.capacity()) {
+            const size_t consumed = start_offset > 0 ? start_offset : 1;
+            const size_t density = length / consumed;
+            const size_t limit = length + 8;
+            size_t estimate = density > 0 ? results.size() * density + 16 : results.capacity() * 2;
+            estimate = min(estimate, limit);
+            if (estimate > results.capacity()) {
+                results.reserve(estimate);
+            }
         }
+
+        results.emplace_back(subject, ovector[0], ovector[1] - ovector[0]);
+        match_result& slot = results.back();
+
+        if (rc > 1) {
+            auto* const block = new match_result::group_block;
+            block->count = static_cast<size_t>(rc);
+            block->entries.reserve(static_cast<size_t>(rc));
+
+            for (int group = 0; group < rc; ++group) {
+                if (ovector[static_cast<ptrdiff_t>(group) * 2L] != unset_offset) {
+                    block->entries.emplace_back(ovector[static_cast<ptrdiff_t>(group) * 2L],
+                                                ovector[static_cast<ptrdiff_t>(group) * 2L + 1L] -
+                                                        ovector[static_cast<ptrdiff_t>(group) * 2L]);
+                } else {
+                    block->entries.emplace_back(string::npos, 0);
+                }
+            }
+
+            slot.groups_ = block;
+        }
+
+        slot.owner_ = owner;
+        start_offset = ovector[1] == ovector[0] ? ovector[0] + 1 : ovector[1];
 
         if (start_offset > length) {
             break;
@@ -305,6 +446,20 @@ string regex::replace_all(const string& str, const string_view fmt) const {
     size_t last_pos = 0;
     size_t start_offset = 0;
 
+    if (!regex_required_present(static_cast<const regex_program*>(code_), subject, length, 0)) {
+        return str;
+    }
+
+    // A replacement without any "$" escape is copied verbatim, which avoids building one string per match.
+    bool literal_format = true;
+
+    for (size_t index = 0; index < fmt.length(); ++index) {
+        if (fmt[index] == '$') {
+            literal_format = false;
+            break;
+        }
+    }
+
     while (start_offset <= length) {
         auto match = do_match_borrowed(subject, length, start_offset, 0, str.view());
 
@@ -313,7 +468,12 @@ string regex::replace_all(const string& str, const string_view fmt) const {
         }
 
         result.append(str, last_pos, match.position() - last_pos);
-        result.append(match.format(fmt));
+
+        if (literal_format) {
+            result.append(fmt);
+        } else {
+            result.append(match.format(fmt));
+        }
 
         last_pos = match.position() + match.length();
         start_offset = last_pos + (match.length() == 0 ? 1 : 0);
@@ -329,6 +489,10 @@ string regex::replace_all_callback(const string& str, function<string(const matc
     const size_t length = str.length();
     size_t last_pos = 0;
     size_t start_offset = 0;
+
+    if (!regex_required_present(static_cast<const regex_program*>(code_), subject, length, 0)) {
+        return str;
+    }
 
     while (start_offset <= length) {
         auto match = do_match_borrowed(subject, length, start_offset, 0, str.view());
@@ -355,6 +519,11 @@ vector<string> regex::split(const string& str, const int max_splits) const {
     size_t last_pos = 0;
     size_t start_offset = 0;
     int splits = 0;
+
+    if (!regex_required_present(static_cast<const regex_program*>(code_), subject, length, 0)) {
+        parts.push_back(str);
+        return parts;
+    }
 
     while (start_offset <= length) {
         if (max_splits >= 0 && splits >= max_splits) {
@@ -419,6 +588,13 @@ regex_(re),
 subject_(make_shared<string>(move(str))),
 next_pos_(pos),
 done_(false) {
+    if (re == nullptr || !re->valid() ||
+        !regex_required_present(static_cast<const regex_program*>(re->code_), subject_->data(), subject_->size(),
+                                pos)) {
+        done_ = true;
+        return;
+    }
+
     find_next();
 }
 
